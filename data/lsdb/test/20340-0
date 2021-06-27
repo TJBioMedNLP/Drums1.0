@@ -1,0 +1,162 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html> <!-- xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> -->
+<head>
+    <meta name="Keywords" content="DNA, extraction, biomedical, bioinformatics, tool, database, index, research">
+    <!--<meta name="Description" content="">-->
+    <title>
+        Biomedical Informatics Group : PubDNA Finder
+    </title>
+
+    <script type="text/javascript" src="jscripts/ajax.js"></script>
+    <script type="text/javascript" src="jscripts/jquery-1.4.2.js"></script>
+    <script type="text/javascript" src="jscripts/jquery-jtemplates.js"></script>
+    <script type="text/javascript" src="jscripts/jquery.xml2json.js"></script>
+    <script type="text/javascript" src="jscripts/utils.js"></script>
+    <link rel="stylesheet" href="styles/mainStyle.css">
+    <!--[if  IE]>
+   <link rel="stylesheet" href="styles/ieStyle.css">
+    <![endif]-->
+
+   <link rel="shortcut icon" href="images/GIB_favicon.ico">
+
+</head>
+<body>
+<div id="back">
+<!--header with title and logos-->
+<div id="top">
+    <div id="left">
+        <a href="http://www.upm.es" rel="external">
+            <img id="leftImg" class="logo" src="images/logoUpm.gif" alt="">
+        </a>
+    </div>
+    <div id="centered">
+        <h1>PubDNA Finder</h1>
+        <h4>A web database linking <a href="http://www.ncbi.nlm.nih.gov/pmc/">PubMed Central</a> full-text articles to
+            sequences of nucleic acids</h4>
+    </div>
+    <div id="right">
+        <a href="http://www.gib.fi.upm.es/en" rel="external" id="rightImgContainer">
+            <img id="rightImg" class="logo" src="images/LogoGIB.gif" alt="">
+        </a>
+    </div>
+    <div id="sub">
+        <span id="subtitle"><br><br></span>
+    </div>
+</div>
+
+<div id="middle">
+
+<!--Search form & Fieldsets-->
+<form action="index.jsp" id="queryForm">
+    <fieldset id="fieldsetL">
+        <legend>Sequences</legend>
+        <label>Operator: </label>
+        <select id="seqSelect" name="seqSelect">
+
+            
+            <option value="AND" selected="selected">AND</option>
+            <option value="OR">OR</option>
+            <option value="LUCENE">LUCENE</option>
+            
+
+        </select>
+
+        <textarea rows="10" cols="36" id="seqText" name="seqText"></textarea>
+        <label class="seqTextChk"><input type="checkbox" id="isNLSeparators">New lines as separators</label>
+        <label class="seqTextChk"><input type="checkbox" id="isBSeparators">Blanks as separators</label>
+        <input type="button" value="Detect Sequences" onclick="javascript:detectSequences()">
+        <img class= "waitHidden" id="waitImg" src="images/loading.gif" alt="Loading...">
+
+
+
+    </fieldset>
+
+    <fieldset id="fieldsetR">
+        <legend>Free Text</legend>
+        <label style="display:none">Operator: </label>
+		<label>Search text:</label>
+        <select id="textSelect" name="textSelect" style="display:none">
+            
+			<option value="AND">AND</option>
+            <option value="OR">OR</option>
+            <option value="LUCENE" selected="selected">LUCENE</option>
+            
+        </select>
+
+        <textarea rows="10" cols="36" id="freeText" name="freeText"></textarea>
+        <a class="helpLogo" href="index.jsp?url=help.html"><img src="images/qmark.png" class="qMarkImg" alt="help"></a>
+    </fieldset>
+    <div class="buttonBar">
+        <input type="submit"/>
+        <input type="reset"/>
+        <input type="button" value="Clear fields" onclick="resetFields()"/>
+    </div>
+</form>
+
+
+<!-- APP BODY -->
+<div id="contentsDiv">
+    <div id="resultsDiv">
+
+        
+
+
+    </div>
+</div>
+</div>
+</div>
+
+
+<div id="footer">
+    <a href="http://validator.w3.org/check?uri=referer" rel="external">
+        <img src="images/valid-html401-blue.png" alt="Valid HTML 4.01 Strict" height="31" width="88">
+    </a>
+    <a href="http://jigsaw.w3.org/css-validator/check?uri=referer" rel="external">
+        <img style="border:0;width:88px;height:31px" src="images/valid-css-blue.png" alt="¡CSS Válido!">
+    </a>
+
+
+    <p> Proudly Powered by
+        <a href="http://gib.fi.upm.es/PrimerXtractor" rel="external">
+            PrimerXtractor
+        </a> and <a href="http://lucene.apache.org/" rel="external">
+            Apache Lucene
+        </a> &copy; 2010 Biomedical Informatics Group
+    </p>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-939785-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+</body>
+</html>

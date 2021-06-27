@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+  <title>ARNold, finding terminators at IGM - Web Server</title>
+  <meta http-equiv = "content-type" content = "text/html; charset=iso-8859-1" />
+  <meta http-equiv = "content-language" content = "en" />
+  <meta name = "author" content = "Adrien GUILHOT-GAUDEFFROY" />
+  <meta name = "copyright" content = "December 2009" />
+  <meta name = "description" lang = "en" content = "ARNold, finding terminators, predicts Rho-independent transcription terminators, using RNAmotif, ERPIN and RNAfold. " />
+  <meta name = "robots" content = "index, nofollow" />
+  <meta name = "keywords" content = "ARNold, transcription, Rho, rho, independent, terminator, terminators, IGM, ERPIN, RNAmotif, RNAfold, terminateur, terminateurs, independant, independants, server Web, Web server" />
+  <link rel = "stylesheet" type = "text/css" href = "http://rna.igmors.u-psud.fr/style.css" charset = "iso-8859-1" />
+  <link rel = "icon" type = "image/png" href = "http://rna.igmors.u-psud.fr/img/favicon.png" />
+</head>
+
+
+<body>
+<!-- 
+     Commentaire pour la maintenance. 
+     Objectif : cette page est dédiée au maintien d'un Server Web. 
+     Langue : anglais pour l'utilisateur. Principalement français pour la programmation 
+     et les commentaires. 
+     Description générale : il s'agit de proposer via un formulaire l'utilisation d'une 
+     procédure basée sur un ensemble de programmes permettant de prédire dans une 
+     séquence nucléotidique la présence et la localisation de terminateurs de 
+     transcription. 
+     Fonctionnement : le Server nécessite en entrée une liste d'une ou plusieurs 
+     séquences nucléotidiques, en FASTA, inscrite dans un champ de texte ou dans un 
+     fichier joint. L'utilisateur peut aussi choisir un certain nombre d'options (pour 
+     chacune, il existe un choix par défaut) afin de moduler le résultat de la requête. 
+     Conventions : la page en elle-même doit conserver un aspect semblable à celui des 
+     autres pages du site. L'ensemble des fichiers utilisés par ce Server Web porte un 
+     tag en début de nom, à savoir 'TTP' pour Transcription Terminators Predictor, le 
+     nom originel du Server Web. Ce nom a été modifié pour des soucis d'esthétique en 
+     ARNold, finding terminators. 
+     Compatibilité : théoriquement, toutes les balises utilisées sont compatibles au 
+     moins avec IE et Firefox. 
+     
+     Fin du commentaire pour la maintenance. 
+
+     Modifs DG:
+     - remplace les espaces du fichier de sortie par des nbsp 
+     - elimine option Overlap
+  -->
+
+
+
+<!-- Traitement de la requête par le Server Web, si une requête est demandée. -->
+
+
+
+<!--- En-tête, menus et sous-menus. --->
+<div id = "header">
+  <a href = "http://rna.igmors.u-psud.fr"><img class = "logo1" src = "http://rna.igmors.u-psud.fr/img/logo-igm-mod_original.gif" alt = "IGM" /></a>
+  <h1><span class = "minuscule">Institut de G&eacute;n&eacute;tique et Microbiologie</span><br />
+    RNA Sequence, Structure &amp; Function Lab</h1>
+  <div class = "logo2">
+    <a href = "http://www.u-psud.fr/"><img src = "http://rna.igmors.u-psud.fr/img/logo_univ_paris_sud.gif" alt = "Universit&eacute; Paris Sud" /></a>
+    <a href = "http://www.cnrs.fr/"><img src = "http://rna.igmors.u-psud.fr/img/CNRSfilaire-Npetit.jpg" alt = "CNRS" /></a>
+  </div>
+</div>
+<div id = "menu">
+  <ul>
+    <li class = "onglet"><a href = "http://rna.igmors.u-psud.fr">Home</a></li>
+    <li class = "onglet"><a href = "http://rna.igmors.u-psud.fr/erpin/">Erpin</a></li>
+    <li class = "onglet-actif"><a href = "http://rna.igmors.u-psud.fr/toolbox/">Web Services</a></li>
+    <li class = "onglet"><a href = "http://rna.igmors.u-psud.fr/suppl_data/">Suppl. Data</a></li>
+    <li class = "onglet"><a href = "http://rna.igmors.u-psud.fr/download/">Download</a></li>
+  </ul>
+  <div id = "sous-menu"></div>
+</div>
+    <div id = "main">
+      <div id = "content">
+
+
+
+<!-- Formulaire de demande de requête au Server Web. -->
+<h2><img src = "http://rna.igmors.u-psud.fr/img/ARNold.png" width = 300 height = 77 alt = "ARNold, finding terminators">
+  <span style = "font-size: 10pt; font-weight: none">(<a href = "#Principles">principles</a>, <a href = "#Help">help</a>)</span></h2>
+<span style = "font-size: 10pt; font-weight: bold">Easy identification of Rho&#8211;independent transcription terminators</span>
+<br /><br />
+<form method = "POST" action = "index.php#Results" enctype = "multipart/form-data">
+  <fieldset name = "datas" id = "datas"><legend>Insert sequence data</legend>
+    <p><label for = "TTPfasta">Paste one or more nucleic acid sequences in FASTA format (max 2Mb): </label><br />
+    <textarea style = "font-family: 'Courier New', 'Courier', 'monospace';" 
+      rows = "13" cols = "60" name = "TTPfasta" id = "TTPfasta" value = "">>gi</textarea><br />
+<!-- La fonction htmlentities permet d'éviter que le texte $fasta, rentré par l'utilisateur, 
+     ne soit interprété comme du code html ou, pire, du code php. 
+     Fonction à conserver pour des raisons de sécurité ! -->
+    <input type = "file" name = "TTPfile" id = "TTPfile" /></p>
+  </fieldset>
+  
+  <p><input type = "submit" name = "Run" value = "Run" /></p>
+  
+  <fieldset name = "options" id = "options"><legend>Select options</legend>
+    <p>Search strand: <br />
+    <input type = "radio" name = "strands" id = "2strands" value = "2" 
+      checked />
+      <label for = "2strands">Both</label><br />
+    <input type = "radio" name = "strands" id = "5prime" value = "5" 
+       />
+      <label for = "5prime">Forward</label><br />
+    <input type = "radio" name = "strands" id = "3prime" value = "3"  
+       />
+      <label for = "3prime">Reverse</label>
+    </p>
+    
+    <p>Color terminator stem and loop: <br />
+    <input type = "radio" name = "graphic" id = "graphicsOn" value = "1" 
+      checked />
+      <label for = "graphicsOn">Yes</label><br />
+    <input type = "radio" name = "graphic" id = "graphicsOff" value = "0" 
+       />
+      <label for = "graphicsOff">No</label>
+    </p>
+    
+    <p>Inverse U and T &#8211; select whether or not you want to keep Us (or Ts) as in input sequence or change them to Ts (or Us): <br />
+    <input type = "radio" name = "changeUT" id = "keep" value = "0" 
+      checked />
+      <label for = "keep">Keep</label><br />
+    <input type = "radio" name = "changeUT" id = "change" value = "1" 
+       />
+      <label for = "change">Change</label>
+    </p>
+  </fieldset>
+  
+  <input type = "hidden" name = "MAX_FILE_SIZE" value = 2048 />
+</form>
+
+<form method = "POST" action = "index.php">
+  <p><input type = "submit" name = "clear" value = "Clear page" /></p>
+</form>
+
+<a name = "Results"><hr /></a>
+
+
+
+<!-- Si une requête vient d'être effectuée, on affiche le résultat ici. -->
+
+
+
+<!-- Aide à l'utilisation du Server Web. -->
+<a name = "Principles"><h2>Principles</h2></a>
+<p>
+
+  ARNold finds rho-independent terminators in nucleic acid sequences. 
+  The search procedure uses two complementary programs, Erpin and RNAmotif. 
+
+  <ul>
+<li> Erpin (Gautheret & Lambert, 2001) is given 
+  a structure-annotated alignment of 1200 terminator sequences from Bacillus subtilis and Escherichia coli 
+  as a training set. It builds a lod-score profile from this alignment and seeks high scoring instances of the 
+  profile in the user's sequence.  
+ <li>RNAmotif (Macke et al. 2001) uses a descriptor developed by Lesnik et al. (2001) to recognize E. coli terminators, 
+ however it can be applied to find terminators from any species. Essentially, the descriptor consists 
+  of a 4-18 bp helix, a 0-2 nt spacer and a 12 nt T-rich region. 
+  RNAmotif matches are scored using the sequence contents of the T-rich region and stability of the stem loop region 
+  and an emprirical score cutoff is defined to accept or reject matches. 
+  </ul>
+
+  To provide a uniform scoring scheme for Erpin and RNAmotif hits, we compute the free energy of the predicted 
+  terminator stem-loop structure using RNAfold (Hofacker et al. 1994). 
+  This free energy value may be used as a confidence value for predicted terminators.
+  
+</p>
+
+<br />
+
+
+
+<a name = "Help"><h2>User's Manual </h2></a>
+<p>
+  Input sequences to be analyzed in the text area or upload from a local file. 
+  DNA or RNA sequences are accepted. Format is Fasta. <br />
+  
+  Options: <br />
+  <ul>
+    <li>Search strand: perform analysis on forward, reverse, or both strands. </li>
+    <li>Colored secondary structures: transforms the parenthesis in colored secondary 
+    structures, where loops are in <span style = 'color: red'>this 
+    color</span> and stems in <span style = 'color: blue'>this 
+    one</span>. </li>
+    <li>Inverse U and T: keeps U/T as in input, or reverse. </li>
+  </ul>
+  
+  Submit request using the &#8217;Run&#8217; button. <br />  
+  Results are displayed in a single page, with the following information given for each predicted terminator:<br>
+
+<ul>
+<li> 5' end position of predicted transcription terminator (for terminators on minus strand, position is given in plus strand coordinates, end of terminator first).  
+<li> Program that produced prediction
+<li> Strand (+/-)
+<li> Sequence (parenthesis or colors indicate terminator stem). Lowercase letters in RNAmotif predictions
+indicate the spacer element, between the stem-loop and T-rich region.
+<li> Free energy of stem-loop region (kcal/mol)
+</ul>
+</p>
+
+<br>
+
+<h2>References</h2>
+<p>
+  <ul>
+    
+    <li>Gautheret D, Lambert A. (2001) Direct RNA Motif Definition and Identification 
+    from Multiple Sequence Alignments using Secondary Structure Profiles. <i>J Mol 
+    Biol.</i> <b>313</b>:1003&#8211;11 (<a href = 
+    "http://www.ncbi.nlm.nih.gov/pubmed/11700055?dopt=Abstract">abstract</a>). 
+    </li>
+
+    <li>Hofacker IL, Fontana W, Stadler PF, Bonhoeffer LS, Tacker M and Schuster P. (1994) Fast Folding and comparison of RNA 
+    secondary structures. <i>Monastch. Chem.</i>, <b>125</b>:167-188 (<a href = "">abstract</a>). 
+    
+    <li> Lesnik EA et al. (2001) Prediction of rho-independent transcriptional terminators 
+   in Escherichia coli. <i>Nucleic Acids Research</i>, 29: 3583-3594.
+
+    <li>Macke T, Ecker D, Gutell R, Gautheret D, Case DA and Sampath R. (2001) 
+    RNAMotif &#8211; A new RNA secondary structure definition and discovery algorithm. 
+    <i>Nucleic Acids Res.</i> <b>29</b>:4724&#8211;4735 (<a href = 
+    "http://nar.oxfordjournals.org/cgi/content/abstract/29/22/4724">abstract</a>). 
+    </li>
+    
+  </ul>
+</p>
+
+<br>
+
+<h2>Credits</h2>
+<p>
+  <ul>
+    <li>Magali Naville </li>
+    <li>Antonin Marchais</li>
+    <li>Adrien Gilhot Gaudeffroy </li>
+  </ul>
+  <!-- Ne pas oublier les remerciements aux différents programmeurs des logiciels utilisés. -->
+</p>
+
+<br />
+  
+  
+  
+  </div> <!--- Fin du content. --->
+</div> <!--- Fin du main. --->
+</body>
+</html>
+
+
+
+<!-- 
+Ne pas oublier lors de la maintenance de conserver une structure conforme au reste du site. 
+
+Une fois que cette page sera déplacée vers toolbox/ARNold/index.php et le reste en 
+place, rajouter ce paragraphe dans toolbox/index.html : 
+
+<p>
+  <li><a href = "ARNold/index.php">ARNold, finding terminators</a> : <br />
+  This Web Server predicts the existence and location of rho-independent transcription 
+  terminators, by using RNAmotif, ERPIN and RNAfold programs. </li>
+</p>
+
+  -->
+
+

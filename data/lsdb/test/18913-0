@@ -1,0 +1,93 @@
+<!DOCTYPE>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml-stylesheet href="styles-res2.css" type="text/css"?> -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- Meta TAG Start-->
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-Script-Type" content="text/javascript; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="VITCOMIC web page" />
+<meta name="keywords" content="metagenome, genome, microbial, bacteria, phylogenetic tree, 16S, VITCOMIC" />
+<meta name="author" content="Hiroshi Mori, Tokyo Institute of Technology" />                         
+<!-- Meta TAG Finish-->
+<link rel="stylesheet" href="vitcomic.css" type="text/css" media="all" />
+</head>
+
+<body>
+<div id="wrap">  
+<div id="header">
+	<p class="logo">VITCOMIC <img src="VITCOMIC_Sample1_Small.png" alt="" width="150" height="150" vspace=0 /><img src="VITCOMIC_Sample2_Small.png" alt="" width="150" height="150" vspace=0 /><img src="VITCOMIC_Sample3_Small.png" alt="" width="150" height="150" vspace=0 /><img src="VITCOMIC_Sample4_Small.png" alt="" width="150" height="150" vspace=0 /></p>
+<br />
+<hr class="top" />
+</div> 
+
+<div id="inner">  
+<div id="mainWrap">
+<p class="short">VITCOMIC is a VIsualization tool for Taxonomic COmpositions of MIcrobial Community that can analyze millions of bacterial 16S rRNA gene sequences and calculate the overall taxonomic composition for a microbial community.</p>
+<p class="normal">The 16S rRNA gene sequences of genome-sequenced species were used as references to identify the nearest relative of each sample sequence. VITCOMIC plots all sequences in a single figure and indicates relative evolutionary distances. VITCOMIC yields a clear representation of the overall taxonomic composition of each sample and facilitates an intuitive understanding of differences in community structure between samples. If you want to know detailed descriptions of the VITCOMIC algorithm, please read our paper.</p>
+
+<p class="howto">Try VITCOMIC</p>
+<!-- Data Submit -->
+<form method="post" enctype="multipart/form-data" action="/cgi-bin/vitcomic/upload_VITCOMIC.pl" />
+Input data: <input type="file" name="uploaded_file" /><br />
+File format1: <input type="radio" name="blafas" value="2" checked = "checked">FASTA file (less than 100,000 sequences)
+<input type="radio" name="blafas" value="1">BLASTed file (-m 8)<br />
+File format2: <input type="radio" name="formats" value="1" checked = "checked">flat file
+<input type="radio" name="formats" value="2">.gz
+<br />
+Tag: <input type="text" name="tag">(use [A-Za-z0-9-_])<br />
+Email: <input type="text" name="email"><br />
+Color of dots: <input type="radio" name="dots" value="1" checked = "checked">Red
+<input type="radio" name="dots" value="2">Orange
+<input type="radio" name="dots" value="3">Green
+<input type="radio" name="dots" value="4">Blue<br />
+<input type="submit" value="upload&calculate" />
+<input type="reset" value="clear" />
+</form>
+<!-- End of Data Submit -->
+<br />
+
+<p class="howto">How to use</p>
+<dl>
+<dt>1. Input data</dt>
+<dd>Both of a BLAST result and a Multi-FASTA file are acceptable for the input data in VITCOMIC. The BLAST result is the result of BLASTN against <a class="normal" href="RefDB.fasta">our reference 16S rRNA gene sequence database</a> with -m 8 options. The Multi-FASTA file is the "unaligned" set of 16S rRNA gene sequences obtained from your sample. In case of the Multi-FASTA file, we conduct the BLASTN search against our reference 16S rRNA gene sequence database with -m 8 -e 1e-8 -F F -b 10 -v 10 options before constructing the plot. Since our server has small number of cpu, in case of the Multi-FASTA file, the file that contain less than 100,000 sequences is currently acceptable. Both of the BLAST result and the Multi-FASTA file, the file that is smaller than 1GB is acceptable because of difficulties of the file transfer. If you want to analyze much more sequences, download VITCOMIC <a class="normal" href="Download.html">sourcecode</a> and analyze locally.<br />Here is the Sample data of <a class="normal" href="VITCOMIC_Blast.txt.gz">BLAST result</a> and <a class="normal" href="VITCOMIC_FASTA.fasta.gz">FASTA file</a> obtained and calculated from <a class="normal" href="http://www.ncbi.nlm.nih.gov/pubmed/18502944">(Grice EA. et al. 2008, Genome Res.)</a></dd>
+<dt>2. File format1</dt>
+<dd>File format1 is a file format identifier of your upload file. You need to choose the corresponding identifier with your file format. If you want to upload a multi-FASTA file, you should choose FASTA file. If you want to upload a BLAST result against our reference database, you should choose BLASTed file.</dd>
+<dt>3. File format2</dt>
+<dd>File format2 is also a file format identifier of your upload file. To reduce the size of your upload file, we strongly recommend that you compress your file with gzip format. If you don't compress your file, please choose "flat file".</dd>
+<dt>4. Tag</dt>
+<dd>Tag is a identifier of your upload file. Please input any alfabet and number such as "Sample1".</dd>
+<dt>5. Email</dt>
+<dd>Please input your Email address. This Email address is very important because the URL of your VITCOMIC result is send by the Email after calculation (usually less than one day).</dd>
+<dt>6. Color of dots</dt>
+<dd>If you want to compare some VITCOMIC results, you should choose different color of dots among samples. Comparing VITCOMIC results can be conducted by the <a class="normal" href="Comparison.html">Comparison</a> page using the taxonomic composition files of two samples.</dd>
+<dt>7. Output files</dt>
+<dd>There are three output files that are provided from VITCOMIC.<br /><br />*.ps<br /> A Postscript file that is the main result of VITCOMIC program. The order of reference species in the plot is described <a class="normal" href="Species_List.txt">this</a>. Detailed description of the plot is described in our paper.<br /><br />*.cluster<br />A text file that describes the taxonomic composition of the sample. Using this file, the comparison of taxonomic composition between samples is able to conduct in the <a class="normal" href="Comparison.html">Comparison</a> page. Detailed description of this taxonomic composition file is in the <a class="normal" href="Comparison.html">Comparison</a> page.<br /><br />*.query_hit<br />A text file that decribes the result of taxonomic assignment of each sequence. Each row describes<br />"the_query_sequence_name" "assigned reference species name" "average similarity".<br />This file contains only taxonomically assigned query sequences in VITCOMIC.</dd>
+</dl>
+<p class="howto">Reference</p>
+<p class="normal">Mori H., Maruyama F. and Kurokawa K., VITCOMIC: visualization tool for taxonomic compositions of microbial communities based on 16S rRNA gene sequences. BMC Bioinformatics 2010, 11:332.<a class="normal" href="http://www.biomedcentral.com/1471-2105/11/332/abstract">Journal Link</a>.</p>
+<p class="howto">Acknowledgement</p>
+<p class="normal">This work has been supported by BIRD of Japan Science and Technology Agency (JST).</p>
+
+</div>
+
+<div id="sideWrap">  
+	<a class="side" href="index.html">Home</a>
+<a class="side" href="Comparison.html">Comparison</a>
+<a class="side" href="Download.html">Download</a>
+              
+		  </div>
+	  </div>
+	  <div class="clear"><hr /></div>
+	  <div id="footer">  
+		 <p class="contact">Contact: hmori_at_bio.titech.ac.jp (please replace _at_ with @).</p>
+     </div>  
+ </div>
+
+
+
+</body>
+</html>

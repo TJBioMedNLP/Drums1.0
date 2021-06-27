@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html style="direction: ltr;" lang="en"><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Arcadia - a visualisation tool for metabolic pathways</title>
+
+<meta content="Alice Villéger" name="author">
+<style type="text/css">
+h1 {
+border-style: double;
+border-width: medium;
+padding: 10px;
+background-color: #663366;
+display: inline;
+margin-right: 10px;
+color: #ffffcc;
+}
+h2 {
+color: #336666;
+display: inline;
+}
+body {
+font-family: Arial,Helvetica,sans-serif;
+font-size: small;
+text-align: justify;
+margin-top: 0px;
+margin-bottom: 0px;
+background-color: #cccccc;
+}
+#header {
+padding-top: 10px;
+padding-bottom: 15px;
+}
+.authors {
+color: #555555;
+padding-bottom: 10px;
+}
+.menu {
+border-right-width: medium;
+padding-top: 8px;
+padding-bottom: 8px;
+}
+.menu a {
+border: medium outset white;
+padding: 5px;
+text-decoration: none;
+color: #336666;
+}
+.menu a:hover {
+border-style: inset;
+border-color: white;
+background-color: #336666;
+color: white;
+}
+h3 {
+margin-top: 25px;
+}
+#center_block {
+border-left: medium groove #999999;
+border-right: medium groove #999999;
+padding: 20px 40px;
+margin-right: auto;
+margin-left: auto;
+width: 700px;
+background-color: white;
+}
+</style></head>
+<body>
+<div style="float:right;">
+<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=249829&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo" /></a>
+</div>
+<div id="center_block">
+<div id="header">
+<h1><a name="Arcadia"></a>Arcadia</h1>
+<h2>A visualisation tool for metabolic pathways</h2>
+</div>
+<p class="authors"><a href="http://personalpages.manchester.ac.uk/staff/Alice.Villeger/">Alice
+Villéger</a><sup>1,2</sup>,
+Steve Pettifer<sup>2</sup>,
+Douglas Kell<sup>1</sup><br>
+<small>[1] School of Chemistry, [2] School of Computer Science</small><br>
+at <!--the Manchester Interdisciplinary Biocentre,--> the University of
+Manchester, United Kingdom</p>
+
+<p class="menu"><a href="#QuickStart">Quick start</a><a href="#Purpose">Purpose</a><a href="#Design_principle">Design principle</a><a href="#Implementation">Implementation</a><a href="#Features">Features</a><a href="#Current_results">Current results</a><a href="#Future_plans">Future plans</a></p>
+<h3><a name="QuickStart"></a>Quick start</h3>
+
+<h4>Where to download?</h4>
+<p>
+<a href="https://sourceforge.net/projects/arcadiapathways/">https://sourceforge.net/projects/arcadiapathways/</a>
+</p>
+
+<h4>How to use?</h4>
+<p>
+Follow the <a href="demo.html">tour guide</a>. The SBML file used in the screenshots can be downloaded <a href="arcadia_files/yeast.sbml">here</a>.<br>
+For more SBML files, you can visit <a href="http://www.ebi.ac.uk/biomodels-main/">Biomodels.net</a>.
+</p>
+
+<h4>How to cite?</h4>
+<p>Please refer to:
+<div style="margin-left: 10px; border-left: 3px double black; padding-left: 10px;">
+Alice C. Villéger, Stephen R. Pettifer, Douglas B. Kell (2010)
+Arcadia: a visualization tool for metabolic pathways,
+<i>Bioinformatics</i> 2010 26(11):1470-1471;
+<a href="http://bioinformatics.oxfordjournals.org/cgi/content/short/26/11/1470">doi:10.1093/bioinformatics/btq154</a>
+</div>
+</p>
+
+<p class="menu"><a href="#Arcadia">Top</a></p>
+
+<h3><a name="Purpose"></a>Purpose</h3>
+<p>As the amount of data available on biological systems
+increases, so does the need for <span style="font-weight: bold;">computing
+tools</span> supporting their analysis.<br>
+In
+particular, by enabling the interactive exploration on various kind
+of&nbsp;pathways, visualisation software provides considerable
+assistance in <span style="font-weight: bold;">making
+sense</span> of&nbsp;complex networks.<br>
+Unfortunately, existing tools struggle to address adequately the
+specific case of <span style="font-weight: bold;">metabolic
+pathways</span>: automatic layouts computed by generic
+graph-drawing algorithms&nbsp;usually require time-consuming manual
+adjustments.</p>
+<p>Arcadia has been designed specifically to&nbsp;provide
+relevant&nbsp;visualisation options for metabolic pathways.</p>
+<p class="menu"><a href="#Arcadia">Top</a></p>
+<h3><a name="Design_principle"></a>Design
+principle</h3>
+<p>Arcadia is a <span style="font-weight: bold;">viewer</span>,
+not an editor: this means a simpler interface, offering multiple
+perspectives on the same data, with a focus on navigation.</p>
+<p>As a light-weight, standalone component, Arcadia is easy to
+deploy and maintain. In order to ensure <span style="font-weight: bold;">interoperability</span>
+with other tools, an effort is made to support existing or emerging
+standards such as <a href="http://www.sbml.org">SBML</a> and <a href="http://www.sbgn.org">SBGN</a>.</p>
+<p>A&nbsp;reference framework for the development of Arcadia
+is Utopia: an <span style="font-weight: bold;">open-source</span>,
+interoperable set of desktop tools for protein analysis, built
+according to the Model/View/Controller pattern. This approach, along
+with Object Oriented Programming, makes up for flexible, evolutive
+software.</p>
+<p class="menu"><a href="#Arcadia">Top</a></p>
+<h3><a name="Implementation"></a>Implementation</h3>
+<p>Written in C++, Arcadia makes use of powerful existing
+open-source libraries:</p>
+<ul>
+<li>LibSBML =&gt; an interface to SBML pathway files</li>
+<li>the Boost Graph Library =&gt; an efficient graph
+structure</li>
+<li>GraphViz =&gt; classic layout algorithms</li>
+<li>libavoid =&gt; dynamic edge routing</li>
+<li>Qt =&gt; the Graphical User Interface</li>
+</ul>
+<p><span style="font-weight: bold;">Cross-platform</span>,
+the code can be compiled to run on Mac, UNIX or Windows systems.</p>
+<p class="menu"><a href="#Arcadia">Top</a></p>
+<h3><a name="Features"></a>Features</h3>
+<p>Arcadia enables navigation between <span style="font-weight: bold;">multiple interconnected views</span>
+of the same model:</p>
+<ul>
+<li>sorted lists of reactions and biochemical species</li>
+<li>detailed properties of selected elements</li>
+<li>graphic representations of the whole network</li>
+<li>local maps&nbsp;for groups of neighbouring molecules</li>
+</ul>
+<p>Metadata annotations identifying different types
+of&nbsp;species and reactions are used to
+define their visual appearance, in accordance with the <a href="http://www.sbgn.org">SBGN</a>
+recommendations.</p>
+<img src="arcadia_files/sbgndemo.png" title="Partial screenshot of an SBGN diagram rendered in Arcadia" alt="Partial screenshot of an SBGN diagram rendered in Arcadia" />
+<p>Intuitive, context-sensitive mouse-controls&nbsp;can be
+used to apply <span style="font-weight: bold;">local
+layout strategies</span>
+to particular subsets of the network. Default behaviours have been
+defined for typical domain-specific concepts (e.g. "modifier",
+"cofactor", etc.) resulting in a semi-automated layout.</p>
+<h4>Guided tour</h4>
+<p><a href="demo.html"><img style="border: 0px solid ; width: 696px; height: 492px;" src="arcadia_files/demo.png" alt=""></a></p>
+<p class="menu"><a href="#Arcadia">Top</a></p>
+<h3><a name="Current_results"></a>Current
+results</h3>
+<p>The prototype has been successfully tested on a dozen of
+small-scale models (&lt; 500 nodes = species + reactions).<br>
+The layouts obtained after a few quick and easy steps are very similar
+to the hand-drawn diagram used as a reference.</p>
+<p><a href="arcadia_files/reference.png"><img style="border: 0px solid ; width: 172px; height: 374px;" src="arcadia_files/mini_reference.png" alt=""></a><a href="arcadia_files/output.pdf"><img style="border: 0px solid ; width: 127px; height: 391px;" src="arcadia_files/output.png" alt=""></a></p>
+<p>The source code of the current version is available on <a href="https://sourceforge.net/projects/arcadiapathways/">sourceforge.net</a></p>
+<p class="menu"><a href="#Arcadia">Top</a></p>
+<h3><a name="Future_plans"></a>Future plans</h3>
+<h4>Fully automated layout</h4>
+<p>driven by&nbsp;semantic information extracted from:</p>
+<ul>
+<li>meaningful patterns (e.g. cycles) detected through graph
+analysis.</li>
+<li>metadata annotations (e.g. automatically clone currency
+molecules)</li>
+</ul>
+<h4>Advanced network navigation:</h4>
+<ul>
+<li>hierarchical display strategies for genome-scale models</li>
+<li>visual comparison of several similar models<br>
+</li>
+</ul>
+<h4>Interaction with other tools:</h4>
+<ul>
+<li>visual interface to text mining queries</li>
+<li>visualisation of simulation results (SBRML support)</li>
+<li>seamless integration of heterogeneous tools and resources
+through the Utopia framework</li>
+<li>integration into Taverna workflows as a web service</li>
+</ul>
+<p class="menu"><a href="#Arcadia">Top</a></p>
+</div>
+</body></html>

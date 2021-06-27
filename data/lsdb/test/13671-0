@@ -1,0 +1,540 @@
+<html><!-- #BeginTemplate "/Templates/utilities_template.dwt" --><!-- DW6 -->
+<head>
+<script language="JavaScript" type="text/javascript">
+if (top != self)
+   {
+    top.location.href = location.href;
+   }
+function messageReveal() { 
+		var messageindex = document.Form.threshold.selectedIndex 
+		document.Form.messageField.value = messages[messageindex]; 
+	}
+</script>
+<!-- #BeginEditable "doctitle" --> 
+<title>Immunomedicine Group: Tools >> Proteasome Cleavage Prediction Server</title>
+<META name="Keywords" content="tools, utilities, bioinformatics, molecular, genetics, immunology software, databases, genomics, sequencing, protein, computational biology, nucleotide, FASTA, BLAST, SRS,ClustalW, ">
+<META name="Description" content="Bioinformatics">
+</script>
+<!-- #EndEditable -->
+<link rel="stylesheet" href="../../../../stylesheet.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- <script language="javascript" src="../../../../capas.js" type="text/javascript"></script> -->
+<script language="javascript" src="../../../../master.js" type="text/javascript"></script>
+<script language="javascript" src="js/misc.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/yahoo-dom-event.js"></script>
+	<script type="text/javascript" src="js/connection-min.js"></script>
+	<script type="text/javascript">
+	function replaceAll(text, strA, strB)
+	{
+    	while ( text.indexOf(strA) != -1)
+    	{
+        	text = text.replace(strA,strB);
+    	}
+    	return text;
+	}
+
+	function init(){
+	  document.getElementById('loader').style.visibility = 'hidden';
+	  document.miForm.protein.value = "";
+	  
+	  var onProteinUploadButtonClick = function(e){
+	        document.getElementById('loader').style.visibility = 'visible';
+		    YAHOO.util.Connect.setForm('uploadForm', true);
+		    var uploadHandlerProtein = {
+		      upload: function(response) {
+		      	var content = replaceAll(response.responseText,"&gt;",">");
+		      	document.getElementById('loader').style.visibility = 'hidden';
+		        document.getElementById('txt_protein').value = content;
+			    document.miForm.protein.value = content;
+		      }
+		   };
+		   YAHOO.util.Connect.asyncRequest('POST', 'uploadProtein.php', uploadHandlerProtein);
+		};
+
+		  YAHOO.util.Event.on('uploadProtein', 'click', onProteinUploadButtonClick);
+	}
+	YAHOO.util.Event.on(window, 'load', init);
+	</script>
+</head>
+
+<body onLoad="document.getElementById('task1').checked='true'; MM_preloadImages('../../images/dark_home3.jpg','../../images/dark_research3.jpg','../../images/dark_services3.jpg','../../images/dark_technology3.jpg','../../images/dark_support3.jpg','../../images/dark_spanish3.jpg')">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td align="left" valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabletop">
+<tr>
+	<td><a href="http://www.ucm.es" target="_new"><img src="/icons/ucm_logo.png" border="0" ></a></td>
+	<td><a href="http://www.ucm.es/centros/webs/fmed" target="_new"><img src="/icons/med_logo.png" border="0"></a></td>
+	<td width="440"><img alt="" src="/icons/ig_logo.png" width="440" height="85"></td>
+	<td valign="top" align="right" width="100%">
+	<table border="0" cellspacing="0" cellpadding="0" class = "tabletop" width = "100%">
+              <tr> 
+                <td valign = "top" align = "right" colspan="2"> 
+                  <table border="0" cellspacing="0" cellpadding="0" class="tablehead2">
+                    <tr> 
+                      <td align="left" valign="bottom">
+                      <img alt="" src="../../images/top_corner_new3.jpg" width="28" height="28"></td>
+                      <td><img alt="" src="../../images/google.png" width="66" height="28"></td>
+                      
+                      <form action="http://www.google.com/search" method="GET" target="_new">
+                      <td align="center" valign="middle" class="small" nowrap>
+                      	<span class = "smallwhite">
+                      	<a HREF="http://www.google.com/" target="_new"></a>&nbsp;</span></td>
+                      <td align = "center" valign = "middle" class="small"><span class="small">
+                          <input TYPE="text" name="q" size="8" maxlength="255" value="">
+                  	  </span></td>
+                      <td align = "center" valign = "middle" class = "small" nowrap>
+                      	 <span class =" small">&nbsp;
+                      	  <input type="submit" name="btnG" VALUE="WWW Search" class="small">&nbsp;</span></td>
+                      </form>
+                        
+                      <form action="http://www.google.com/search" method="GET" target="_new">
+                      <td align = "center" valign = "middle" class = "small" nowrap>
+                     	 <span class = "smallwhite">
+                      	   <a HREF="http://www.google.com/" target="_new"></a>&nbsp;
+                      	 </span></td>
+                        </form>
+	
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+            </table>
+ 
+ </td>
+</tr>
+<tr><td colspan = "2"><img alt="" src="../../images/trans_new.jpg" width = "1" height = "5"></td></tr>
+</table> 
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width = "100%">
+<table width="645" border="0" cellspacing="0" cellpadding="0">
+        <td width="129" height="23"><a href="../../Home/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image8','','../../images/darkgreenhome.jpg',1)"><img alt="" name="Image8" border="0" src="../../images/button_greenhome.jpg" width="129" height="23"> </a></td>
+   
+        <td width="129" height="23"><a href="../../Research/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','../../images/darkgreenresearch.jpg',1)"><img alt="" name="Image10" border="0" src="../../images/button_greenresearch.jpg" width="129" height="23"></a></td>
+       <td width="129" height="23"><a href="../../Services/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image11','','../../images/darkgreenservices.jpg',1)"><img alt="" name="Image11" border="0" src="../../images/button_greenservices.jpg" width="129" height="23"></a></td>
+        <td width="129" height="23"><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image12','','../../images/button_greentechnology.jpg',1)"><img alt="" name="Image12" border="0" src="../../images/darkgreentechnology.jpg" width="129" height="23"></a></td>
+        <td width="129" height="23"><a href="../../Contact/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image13','','../../images/darkgreencontact.jpg',1)"><img alt="" name="Image13" border="0" src="../../images/button_greencontact.jpg" width="129" height="23"></a></td>
+        </tr>
+                      
+</table></td></tr>
+      <tr>
+          <td width="100%" height="5" class="tablehead2">
+		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr> 
+                <td width = "100%" height="20" align="center"><!-- #BeginEditable "topnav" --> 
+                  <!-- TOP LINK HERE -->
+                  <a href="index.html" class="white">Tools</a> 
+                  <!-- TOP LINK HERE -->
+                  <!-- #EndEditable --></td>
+              </tr>
+            </table>
+		  </td>
+     </tr>
+	 <tr>
+	   <td  class = "tableborder"><img alt="" src="../../images/trans.gif" height =  "3" width = "1"></td>
+	 </tr>
+	 </table>
+      <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+    <td colspan = "6"  class = "tablebody3"  height = "6"><img alt="" src="../../images/trans.gif" width = "1" height = "6"></td>
+	</tr>
+  <tr>
+    <td class = "tablebody3"  width = "1%" height = "20" ><img alt="" src="../../images/trans.gif" height = "20" width = "160"></td>
+          <td width = "20" height = "20" valign = "top" align = "left" bgcolor = "#ffffff"><img alt="" src="../../images/corner_new2.gif" width="20" height="20"></td>
+    <td>&nbsp;</td>
+    <td width = "100%" colspan = "3"><img alt="" src="../../images/trans.gif" height = "1" width = "1"></td>
+
+  </tr>
+  <tr>
+    <td  width = "180" valign = "top" align = "left"> <!-- #BeginEditable "leftnav" -->
+    <table width="180" border="0" cellspacing="0" cellpadding="4"  class = "tablebody3"  >
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../analysis.html" class = "large">Alignment Analysis </a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../databases.html" class = "large">Databases </a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../immunology.html" class = "large">Computational Immunology</a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../structure.html" class = "large">Modeling & 3D-structure &nbsp;&nbsp;&nbsp;&nbsp;Analysis</a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../manipulation.html" class = "large">Sequence Manipulation & &nbsp;&nbsp;&nbsp;&nbsp;Analysis </a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../searches.html" class = "large">Similarity Searches</a></td> 
+              </tr>
+			  <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../index.html" class = "large">View all Tools</a></td>
+              </tr>   </table>
+            <!-- #EndEditable -->
+<table width="180" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td  class = "tablebody3"  valign = "top" width="160" height="20"><img alt="" src="../../images/trans.gif" height = "20" width = "140"></td>
+    <td align = "right" valign = "top" width="20" height="20"><img alt="" src="../../images/right_new2.jpg" width="20" height="20"></td>
+  </tr>
+  <tr>
+    <td colspan = "2" bgcolor = "#ffffff"><!-- #BeginEditable "explanation" --><!-- #EndEditable --></td>
+</tr>
+</table>
+	</td>
+    <td width="20">&nbsp;</td>
+          <td align = "left" valign = "top" width="750"> 
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+ 		 <tr>
+                <td valign = "top"> <!-- #BeginEditable "content" --> 
+                 
+                  <table width="750" border="0" cellspacing="0" cellpadding="4">
+                     <tr> 
+                      <td class = "tablegreen" nowrap width="1%">&nbsp;<span class = "whitetitle">Tools</span>&nbsp;</td>
+                     <td> <span class="pagetitle2">&nbsp; >> Proteasome Cleavage Prediction Server</span></td>
+                    </tr>
+                  </table>
+               
+                  <table width="750" border="0" cellspacing="0" cellpadding="0">
+                    <tr> 
+                      <td height="3" background="../../images/hor.gif"><img alt="" src="../../images/trans.gif" width="25" height="3"></td>
+                    </tr>
+                  </table>
+
+<!-- END OF FRAMES -->
+<style>
+	label {
+		float:left;
+		width:10em;
+		text-align:right;
+		margin-right:1em;
+	}
+	legend {
+		color:#566C30;
+		font-size:1.2em;
+		background: #fff;
+		border: 1px solid #566C30;
+		padding: 2px 6px
+	}
+	legend span {
+		width:10em;
+		text-align:right;
+	}
+	/*input {
+		padding:0.15em;
+		width:10em;
+		border:1px solid #ddd;
+		background:#fafafa;
+		font:bold 0.95em arial, sans-serif;
+		-moz-border-radius:0.4em;
+		-khtml-border-radius:0.4em;
+	}*/
+	input:hover, input:focus {
+		border-color:#c5c5c5;
+		background:#FFD399;
+	} 
+	fieldset {
+		border:1px solid #ddd;
+		padding:5 0.5em 0.5em;
+		background-color:#F1F2F0;
+		margin-bottom:20px;
+	}
+	.email {
+		width:25em;
+	}
+	input.default {
+		color:#bbb;
+	}
+	.btn {
+		background-color:#566C30;
+		color: #FFFFFF;
+	}
+	.summary{
+		padding:8px;
+		font: 14px "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		color: #5A5A5A;
+	}
+	select { 
+		font-family: Verdana, Arial, Helvetica, sans-serif; 
+		font-size: 12px; 
+		border: #000000; 
+		border: 1px 1px 1px 1px solid; 
+		width: 300px;
+	}
+	table .input {
+		border:1px solid #ddd;
+		padding:5 0.5em 0.5em;
+		background-color:#F6F7F5;
+	}
+
+	input.btn { 
+		padding:0.15em;
+		border:1px solid #ddd;
+		font:bold 0.95em arial, sans-serif;
+		-moz-border-radius:0.4em;
+		-khtml-border-radius:0.4em;
+	
+	}
+
+</style>
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center" valign="baseline">
+			<img src="img/Proteasome4.png" width="300px" height="200px"> 
+		</td>
+		<td>
+			<p class="summary">
+				<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus felis purus, viverra vel, sollicitudin sit amet, facilisis ut, tortor. Nulla auctor consequat ipsum. Ut sem velit, bibendum in, egestas a, semper et, eros.
+				<br><br> -->
+				<!-- >seq<br/>
+				HRSGETEDTFAADLVVGLRTGQIKT -->
+			</p>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" src="js/bio.js" ></script>
+<!-- <script type="text/javascript" src="validateTaprank.js" ></script> -->
+<script type="text/javascript" src="js/validateTaprank.js" ></script>
+<!-- Main Content Table -->
+<form name="miForm" id="miForm" name="miForm" method="POST" action="/cgi-bin/Pcp/pcp.cgi" enctype="multipart/form-data" target="_blank">
+	<input type="hidden" id="protein" name="protein" />
+	<input type="hidden" id="idtask" name="idtask" />
+<table width="750" cellspacing="0" width="100%" border="0">
+<tr>
+	<td colspan="2" align="left">
+		<fieldset>
+		    <legend>
+		    	Cleavage models
+		    	<a class="red" href="pcp_help.html#models" target="_new">
+	    		<img alt="Help about email" src="/icons/info.gif" border="0">
+	    	</a>
+		    </legend>
+		    <table width="100%">
+				<tr>
+        			<td>
+        				<table class="input"> 
+        					<tr>
+        						<td>
+									<input type="checkbox" name="task1" id="task1">Proteasome
+									<br/>
+									<SELECT NAME="model_p" size="3">
+										<option VALUE="1" selected="selected">model 1 (SE 0.874 SP 0.534)  </option> 
+										<option VALUE="2">model 2 (SE 0.855 SP 0.603)</option> 
+										<option VALUE="3">model 3 (SE 0.792 SP 0.723)</option>  
+									</SELECT>
+								</td>
+							</tr>
+						</table>
+                    </td>
+        			<td>
+        				<table class="input"> 
+        					<tr>
+        						<td>
+									<input type="checkbox" name="task2" id="task2">Immunoproteasome
+									<br/>
+									<SELECT NAME="model_i" size="3">
+										<option VALUE="1">model 1 (SE 0.903 SP 0.407)</option> 
+										<option VALUE="2">model 2 (SE 0.906 SP 0.545)</option> 
+										<option VALUE="3">model 3 (SE 0.763 SP 0.708)</option>  
+									</SELECT>
+								</td>
+							</tr>
+						</table>
+                    </td>
+    		    </tr>
+             </table>
+	    </fieldset>
+	</td>
+	</tr>
+	<!-- E-MAIL TABLE -->
+	<tr>
+	<td colspan="2" align="left">
+		<fieldset>
+		    <legend>
+		    	E-mail
+		    	<a class="red" href="pcp_help.html#email" target="_new">
+	    		<img alt="Help about email" src="/icons/info.gif" border="0">
+	    	</a>
+		    </legend>
+		    <input type="text" name="mail" class="email">
+		    &nbsp;(optional)
+	    </fieldset>
+	</td>
+</tr>
+</form>
+ <SCRIPT SRC="js/inputs.js"></SCRIPT>
+<form action="upload.php" enctype="multipart/form-data" method="post" id="uploadForm" name="uploadForm">
+<tr>
+	<td colspan="2" align="left">
+		<fieldset>
+		    <legend>
+		    	Input
+		    	<a class="red" href="pcp_help.html#inp" target="_new">
+	    		<img alt="Help about input" src="/icons/info.gif" border="0">
+	    	</a>
+		    </legend>
+		    <table width="100%" id="table_protein">
+				<tr>
+					<td colspan="2"><font size="-1"> 
+						<!--Replace example sequence with your sequence(s)-->
+						Paste your sequence(s)
+						<acronym title="Load fasta sequence"><input type="button" name="Example fasta" value="Fasta Example" onClick='setInput (this.value)'/></acronym>
+					
+						<input type="reset" value="Clear Input" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+<textarea id="txt_protein" name="txt_protein" rows="6" cols="75"></textarea>
+
+
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" ><font size="-1"> 
+						or Upload sequence(s) from local file <br> 1. Browse File: 
+						<input type="file" size="20" id="proteinfile" name="proteinfile" />
+						2: Load File <input type="button" id="uploadProtein" value="Upload" />
+						 <a class="red" href="pcp_help.html#upload" target="_new">
+						 	<img alt="Help about upload" src="/icons/info.gif" border="0">
+						 </a>
+						<br><br>
+						</font>
+					</td>
+				</tr>
+			</table>
+	    </fieldset>
+	</td>
+</tr>	
+</form>
+<tr>
+	<td colspan="2" align="center" style="padding:10px;">
+		<!-- Muestra un mensaje previo avisando de que no hay datos de entrada -->
+		<input class="btn" type="submit" name="submit" value="Run Analysis" onclick="if(validate(document.miForm)){document.miForm.submit();}">
+		<!-- <input class="btn" type="submit" name="submit" value="Run Analysis">-->
+</tr>
+</table>
+<!--BOTTOM HEADER -->
+
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+<tr><td height="3" background="../../images/hor.gif"><img alt="" src="../../images/trans.gif" width="25" height="3"></td></tr>
+</table>
+<table width="750" border="0">
+    <tr>
+    <td width="33%" colspan ="2">
+    	<font size=-1>Hits since May/2009 </font>
+	    <img alt="" src="../../cgi-bin/count.pl?countfile=counter/pcps_job&style=digits" align="middle">
+    </td>
+    <td align="center" width="33%">
+    	<img src="img/loader.gif" id="loader">
+    </td>
+    <td  width="33%" align="right" valign="top"><font size = -1>Last updated:
+    <script language="JavaScript" type="text/javascript">
+    <!--  Copy this code into the BODY of your HTML document  -->
+    <!-- This script and many more are available free online at -->
+    <!-- The JavaScript Source!! http://javascript.internet.com -->
+    <!-- Begin
+        var days = new Array(8);
+        days[1] = "Sunday";
+        days[2] = "Monday";
+        days[3] = "Tuesday";
+        days[4] = "Wednesday";
+        days[5] = "Thursday";
+        days[6] = "Friday";
+        days[7] = "Saturday";
+        var months = new Array(13);
+        months[1] = "January";
+        months[2] = "February";
+        months[3] = "March";
+        months[4] = "April";
+        months[5] = "May";
+        months[6] = "June";
+        months[7] = "July";
+        months[8] = "August";
+        months[9] = "September";
+        months[10] = "October";
+        months[11] = "November";
+        months[12] = "December";
+        var dateObj = new Date(document.lastModified)
+        var wday = days[dateObj.getDay() + 1]
+        var lmonth = months[dateObj.getMonth() + 1]
+        var date = dateObj.getDate()
+        var fyear = dateObj.getYear()
+        if (fyear < 2000)
+        fyear = fyear + 1900
+        document.write(date + " " + lmonth + " " + fyear)
+        // End -->
+        </script>
+    </font> </td></tr>
+    <!-- mail icon
+    <tr><td align="middle" valign="top"><a href="mailto:parecheg@med.ucm.es"> <img SRC="/icons/anim_mail.gif" border="0"></a></td></tr>
+    -->
+    </table>
+</td>
+
+<tr><td height="3" background="../../images/hor.gif"><img alt="" src="../../images/trans.gif" width="25" height="3"></td></tr>
+</tr>
+</table>
+
+<table BORDER="0" WIDTH="670">
+	<tr>
+		<td colspan = 3><font size = -1><b>Citation:</b><br>
+              	<ul><li>
+               Diez-Rivero CM, Lafuente EM and Reche PA (2010)
+		Computational analysis and modeling of cleavage by the immunoproteasome and the constitutive proteasome. 
+		<i>BMC Bioinformatics<i>, <b>11:</b> 479 <a href ="../../pdfs/41.diezrivero_etla_BMCBio_2010.pdf" target=_blank>
+		<img src ="/icons/pdf.png"></a> 
+                </li>
+                </font> </ul>
+<font size = -1><b>Complaints:</b> Pedro A. Reche <img align ="absmiddle" src ="/icons/reche_email.png" width="110" height="20">
+
+</td>
+</tr>
+</table>
+
+
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td height="3" background="../../images/hor.gif">
+<img alt="" src="../../images/trans.gif" width="25" height="3"></td>
+</tr>
+</table>
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="750" class = "tablebody3" background = "../../images/hor.gif" height="3"></td>
+<td colspan = "2"><img alt="" src="../../images/trans_new.jpg" height="1" width="1"></td>
+</tr>
+<tr>
+<td height="25" class = "tablehead2" align="center">
+<script language="javascript" type="text/javascript">
+<!--
+var Days = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+var d = new Date();
+var tmonth = "0" + (d.getMonth()+1).toString();
+var tmins = "0" + (d.getMinutes()).toString();
+var zmonth = tmonth.substring((tmonth.length-2), (tmonth.length))
+var zmins = tmins.substring((tmins.length-2), (tmins.length))
+var output = Days[d.getDay()] + ', ' + zmonth + '/'+ d.getDate() + '/' + d.getFullYear()+ ' ' +d.getHours()+ ':' +zmins;
+//-->
+</script>
+<span class="white">
+<a href="mailto:parecheg@med.ucm.es" class="footer"> Contact Us</a>
+&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp<a href="../../Home/" class="footer">Immunomedicine Group</a>
+&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp<script language="JavaScript" type="text/javascript"> document.write(output); 
+</script></span>
+</td></tr>
+<tr><td height="25"></td></tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+
+</center>
+</body>
+</html>

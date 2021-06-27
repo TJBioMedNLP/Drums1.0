@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+/**
+ *    Copyright 2005 The Regents of the University of Michigan
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ Authors: James "Augie" Hill - augman85@gmail.com, Mark Gjukich  - markgj@umich.edu, Bryan E. Smith - bryanesmith@gmail.com
+-->
+<html>
+<head>
+    <title>FASTA - Tranche - Proteome Commons</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Language" content="English">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="https://proteomecommons.org/images/favicon.png">
+    <meta name="author" content="The Tranche Development Team. James 'Augie' Hill, Bryan Smith,  and Mark Gjukich. Based out of the Phil Andrews Lab at the University of Michigan">
+    <meta name="description" content="Summary of the FASTA file format information available on ProteomeCommons.org.">
+        <meta name="verify-v1" content="OdgF/LNOYu3sDBcP+XcmuM3OqWTqqAKrE0rt2Z55dsE=">
+    <link rel="stylesheet" type="text/css" href="https://proteomecommons.org/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="https://proteomecommons.org/styles/popups.css">
+    <link rel="stylesheet" type="text/css" href="https://proteomecommons.org/styles/annotations.css">
+    <link rel="stylesheet" type="text/css" media="all" href="https://proteomecommons.org/styles/rounded-all.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://proteomecommons.org/styles/rounded-screen.css">
+    <link rel="stylesheet" type="text/css" href="https://proteomecommons.org/styles/tranche.css">
+    <script type="text/javascript" src="https://proteomecommons.org/js/google_mini_ajax.js"></script>
+    <script type="text/javascript" src="https://proteomecommons.org/js/general.js"></script>
+    <script type="text/javascript" src="https://proteomecommons.org/js/popups.js"></script>
+    <script type="text/javascript" src="https://proteomecommons.org/js/menu.js"></script>
+    <script type="text/javascript" src="https://proteomecommons.org/js/annotations.js"></script>
+    <script type="text/javascript" src="https://proteomecommons.org/js/forgotPassword.js"></script>
+    
+</head>
+<body onscroll="handleScroll()" onresize="handleResize()">
+<!-- require no "www" -->
+<script type="text/javascript" language="javascript">
+    if (document.location.href.length >= 12) {
+        if (document.location.href.substring(0,11) == 'http://www.') {
+            document.location.href = 'http://' + document.location.href.substring(11);
+        } else if (document.location.href.substring(0,12) == 'https://www.') {
+            document.location.href = 'https://' + document.location.href.substring(12);
+        }
+    }
+</script>
+<!-- forward mousemodels -->
+<script type="text/javascript" language="javascript">
+    if (document.location.href == 'http://mousemodels.tranche.proteomecommons.org/' || document.location.href == 'http://mousemodels.tranche.proteomecommons.org' || document.location.href == 'https://mousemodels.tranche.proteomecommons.org' || document.location.href == 'https://mousemodels.tranche.proteomecommons.org/' || document.location.href == 'http://www.mousemodels.tranche.proteomecommons.org/' || document.location.href == 'www.http://mousemodels.tranche.proteomecommons.org' || document.location.href == 'https://www.mousemodels.tranche.proteomecommons.org' || document.location.href == 'https://www.mousemodels.tranche.proteomecommons.org/') {
+        document.location.href = 'https://proteomecommons.org/tranche/examples/nci-mouse-models/';
+    }
+</script>
+<!-- require SSL -->
+<script type="text/javascript" language="javascript">
+    if (document.location.href.substring(0,7) == 'http://' && document.location.href.substring(0,11) != 'http://dev.') {
+        document.location.href = 'https://' + document.location.href.substring(7);
+    }
+</script>
+<!-- google analytics -->
+<script type="text/javascript" language="javascript">
+    document.write(unescape("%3Cscript src='https://ssl.google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript" language="javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-7181084-2");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+<div id="pageHeader">
+    <div id="top">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                <td><a href="https://proteomecommons.org/"><img src="https://proteomecommons.org/images/pc-header.gif" id="pc-icon" alt="ProteomeCommons.org Science Community" title="ProteomeCommons.org Science Community" border="0"></a></td>
+                <td><div id="rightLinks"><span onclick="goTo('https://proteomecommons.org/index.jsp')" class="right">Home</span>|<span onclick="showFrameTopRight('searchFrame', this, -250, 0);" class="right">Search</span>|<span onclick="showFrameTopRight('signInFrame', this, -300, 0);" class="right">Sign In</span>|<span onclick="goTo('https://proteomecommons.org/signup.jsp');" class="right">Sign Up</span></div></td>
+        </tr></table>
+        <div id="searchFrame" class="frame">
+            <form action="https://proteomecommons.org/search.jsp" id="cse-search-box">
+                <div>
+                    <input type="hidden" name="cx" value="008840402475713285167:6a1eleoehly">
+                    <input type="hidden" name="cof" value="FORID:9">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div style="text-align: center;"><input type="text" name="q" size="30"></div>
+                    <div style="padding-top: 2px; text-align: right;"><input type="button" onclick="hide('searchFrame');" value="Cancel">&nbsp;<input type="submit" name="sa" value="Search"></div>
+                </div>
+            </form>
+            <script type="text/javascript" src="https://proteomecommons.org/js/google_search.js"></script>
+        </div>
+        <div id="signInFrame" class="frame">
+            <form action="https://proteomecommons.org/signin.jsp" method="post" id="pageSignInForm" onsubmit="return checkSignInForm('header_signinemail', 'header_signinpass')">
+                <table cellpadding="0" cellspacing="5" border="0" width="100%">
+                    <tr><td>Email</td><td align="right"><input type="text" size="20" name="header_signinemail" id="header_signinemail"></td></tr>
+                    <tr><td>Password</td><td align="right"><input type="password" size="20" name="header_signinpass" id="header_signinpass"></td></tr>
+                    <tr>
+                        <td>
+                            <a href="" onclick="openForgotPassword()">Forgot Password</a><br>
+                            <a href="https://proteomecommons.org/signup.jsp">Sign Up</a>
+                        </td><td valign="top" align="right">
+                            <input type="button" value="Cancel" onclick="hide('signInFrame')">&nbsp;<input type="submit" value="Sign In">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="menuBar">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td width="13" valign="top"><img src="https://proteomecommons.org/images/menu-left.gif" border="0"></td>
+                <td valign="top" id="menuBarContainer">
+                    <div style="height: 39px; overflow: hidden; background-image: url('https://proteomecommons.org/images/menu-middle.gif'); background-repeat: repeat-x; padding-top: 7px;">
+                        
+                        <!-- This wrapper prevents contents from overflowing to next line -->
+                        <div style="height: 28px; width: 860px; padding: 0; overflow: hidden; background: transparent;"><span id="newsMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/news-browse.jsp');" onmouseover="showMenu('newsMenu',this,'newsMenuBarOptionImage','https://proteomecommons.org/images/news-over.png');" onmouseout="hideMenu('newsMenu', 'newsMenuBarOption', 'newsMenuBarOptionImage', 'https://proteomecommons.org/images/news.png');"><img id="newsMenuBarOptionImage" src="https://proteomecommons.org/images/news.png"></span><span id="toolsMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/tools-browse.jsp');" onmouseover="showMenu('toolsMenu',this,'toolsMenuBarOptionImage','https://proteomecommons.org/images/tools-over.png');" onmouseout="hideMenu('toolsMenu', 'toolsMenuBarOption', 'toolsMenuBarOptionImage', 'https://proteomecommons.org/images/tools.png');"><img id="toolsMenuBarOptionImage" src="https://proteomecommons.org/images/tools.png"></span><span id="dataMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/data-browse.jsp');" onmouseover="showMenu('dataMenu',this,'dataMenuBarOptionImage','https://proteomecommons.org/images/data-over.png');" onmouseout="hideMenu('dataMenu', 'dataMenuBarOption', 'dataMenuBarOptionImage', 'https://proteomecommons.org/images/data.png');"><img id="dataMenuBarOptionImage" src="https://proteomecommons.org/images/data.png"></span><span id="pubMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/publications-browse.jsp');" onmouseover="showMenu('pubMenu',this,'pubMenuBarOptionImage','https://proteomecommons.org/images/publications-over.png');" onmouseout="hideMenu('pubMenu', 'pubMenuBarOption', 'pubMenuBarOptionImage', 'https://proteomecommons.org/images/publications.png');"><img id="pubMenuBarOptionImage" src="https://proteomecommons.org/images/publications.png"></span><span id="linksMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/links-browse.jsp');" onmouseover="showMenu('linksMenu',this,'linksMenuBarOptionImage','https://proteomecommons.org/images/links-over.png');" onmouseout="hideMenu('linksMenu', 'linksMenuBarOption', 'linksMenuBarOptionImage', 'https://proteomecommons.org/images/links.png');"><img id="linksMenuBarOptionImage" src="https://proteomecommons.org/images/links.png"></span><span id="groupsMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/groups-browse.jsp');" onmouseover="showMenu('groupsMenu',this,'groupsMenuBarOptionImage','https://proteomecommons.org/images/groups-over.png');" onmouseout="hideMenu('groupsMenu', 'groupsMenuBarOption', 'groupsMenuBarOptionImage', 'https://proteomecommons.org/images/groups.png');"><img id="groupsMenuBarOptionImage" src="https://proteomecommons.org/images/groups.png"></span><span id="membersMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/members-browse.jsp');" onmouseover="showMenu('membersMenu',this,'membersMenuBarOptionImage','https://proteomecommons.org/images/members-over.png');" onmouseout="hideMenu('membersMenu', 'membersMenuBarOption', 'membersMenuBarOptionImage', 'https://proteomecommons.org/images/members.png');"><img id="membersMenuBarOptionImage" src="https://proteomecommons.org/images/members.png"></span><span id="memberMenuBarOption" class="menuBarOption" onclick="goTo('https://proteomecommons.org/member-home.jsp');" onmouseover="showMenu('memberMenu',this,'memberMenuBarOptionImage','https://proteomecommons.org/images/my-account-over.png');" onmouseout="hideMenu('memberMenu', 'memberMenuBarOption', 'memberMenuBarOptionImage', 'https://proteomecommons.org/images/my-account.png');"><img id="memberMenuBarOptionImage" src="https://proteomecommons.org/images/my-account.png"></span></div>
+                        <div id="newsMenu" class="menu" onmouseover="keepMenuOpen('newsMenu');" onmouseout="hideMenu('newsMenu', 'newsMenuBarOption', 'newsMenuBarOptionImage','https://proteomecommons.org/images/news.png');">
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/news-browse.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/news-home.png">&nbsp;Browse News</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/news-search.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/advanced-search.png">&nbsp;Search News</div>
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to add news."><img src="https://proteomecommons.org/images/news-add-noclick.png">&nbsp;Add News</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/news-home-noclick.png">&nbsp;My News</div>
+                            
+                        </div>
+                        <div id="toolsMenu" class="menu" onmouseover="keepMenuOpen('toolsMenu');" onmouseout="hideMenu('toolsMenu', 'toolsMenuBarOption', 'toolsMenuBarOptionImage','https://proteomecommons.org/images/tools.png');">
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/tools-browse.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/tools-home.png">&nbsp;Browse Tools</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/tools-search.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/advanced-search.png">&nbsp;Search Tools</div>
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to add a tool."><img src="https://proteomecommons.org/images/tools-add-noclick.png">&nbsp;Add Tool</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/tools-home-noclick.png">&nbsp;My Tools</div>
+                            
+                        </div>
+                        <div id="dataMenu" class="menu" onmouseover="keepMenuOpen('dataMenu');" onmouseout="hideMenu('dataMenu', 'dataMenuBarOption', 'dataMenuBarOptionImage','https://proteomecommons.org/images/data.png');">
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/data-browse.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/data-home.png">&nbsp;Browse Data</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/data-search.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/advanced-search.png">&nbsp;Search Data</div>
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to upload data."><img src="https://proteomecommons.org/images/data-upload-noclick.png">&nbsp;Upload Data</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/data-home-noclick.png">&nbsp;My Data</div>
+                            
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/tranche/');" class="menuOption"><img src="https://proteomecommons.org/images/tranche-logo-16.png">&nbsp;Tranche Network</div>
+                        </div>
+                        <div id="pubMenu" class="menu" onmouseover="keepMenuOpen('pubMenu');" onmouseout="hideMenu('pubMenu', 'pubMenuBarOption', 'pubMenuBarOptionImage','https://proteomecommons.org/images/publications.png');">
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/publications-browse.jsp');" class="menuOption"><img src="https://proteomecommons.org/images/publications-home.png">&nbsp;Browse Publications</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/publications-search.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/advanced-search.png">&nbsp;Search Publications</div>
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to add a publication."><img src="https://proteomecommons.org/images/publications-add-noclick.png">&nbsp;Add Publication</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/publications-home-noclick.png">&nbsp;My Publications</div>
+                            
+                        </div>
+                        <div id="linksMenu" class="menu" onmouseover="keepMenuOpen('linksMenu');" onmouseout="hideMenu('linksMenu', 'linksMenuBarOption', 'linksMenuBarOptionImage','https://proteomecommons.org/images/links.png');">
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/links-browse.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/links-home.png">&nbsp;Browse Links</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/links-search.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/advanced-search.png">&nbsp;Search Links</div>
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to add a link."><img src="https://proteomecommons.org/images/links-add-noclick.png">&nbsp;Add Link</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/links-home-noclick.png">&nbsp;My Links</div>
+                            
+                        </div>
+                        <div id="groupsMenu" class="menu" onmouseover="keepMenuOpen('groupsMenu');" onmouseout="hideMenu('groupsMenu', 'groupsMenuBarOption', 'groupsMenuBarOptionImage','https://proteomecommons.org/images/groups.png');">
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/groups-browse.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/group-icon-16.png">&nbsp;Browse Groups &amp; Projects</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/groups-search.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/advanced-search.png">&nbsp;Search Groups &amp; Projects</div>
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to create a group."><img src="https://proteomecommons.org/images/group-add-noclick.png">&nbsp;Create a Group</div>
+                            <div class="menuOptionNoClick" title="You must sign in to create a project."><img src="https://proteomecommons.org/images/project-new-noclick.png">&nbsp;Create a Project</div> 
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/group-icon-16-noclick.png">&nbsp;My Groups &amp; Projects</div>
+                            
+                        </div>
+                        <div id="membersMenu" class="menu" onmouseover="keepMenuOpen('membersMenu');" onmouseout="hideMenu('membersMenu', 'membersMenuBarOption', 'membersMenuBarOptionImage','https://proteomecommons.org/images/members.png');">
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/members-browse.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/members-icon-16.png">&nbsp;Browse Members</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/members-search.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/advanced-search.png">&nbsp;Search Members</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/blog/browse.jsp');" class="menuOption"><img src="https://proteomecommons.org/images/blog-16.png">&nbsp;Browse Community Blog</div>
+                            <div onmouseover="menuOptionOver(this);" onmouseout="menuOptionOut(this);" onclick="goTo('https://proteomecommons.org/signup.jsp')" class="menuOption"><img src="https://proteomecommons.org/images/sign-up-16.png">&nbsp;Sign Up</div>
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to invite colleagues."><img src="https://proteomecommons.org/images/invite-16-noclick.png">&nbsp;Invite Colleagues</div>
+                            
+                        </div>
+                        <div id="memberMenu" class="menu" onmouseover="keepMenuOpen('memberMenu');" onmouseout="hideMenu('memberMenu', 'memberMenuBarOption', 'memberMenuBarOptionImage', 'https://proteomecommons.org/images/my-account.png');">
+                            
+                            <div class="menuOptionNoClick" title="You must sign in to view your content.">My Home</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/message-icon-16-noclick.png">&nbsp;Messages</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/blog-16-noclick.png">&nbsp;My Blog</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/news-home-noclick.png">&nbsp;My News</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/tools-home-noclick.png">&nbsp;My Tools</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/data-home-noclick.png">&nbsp;My Data</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/publications-home-noclick.png">&nbsp;My Publications</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/links-home-noclick.png">&nbsp;My Links</div>
+                            <div class="menuOptionNoClick" title="You must sign in to view your content."><img src="https://proteomecommons.org/images/group-icon-16-noclick.png">&nbsp;My Groups &amp; Projects</div>
+                            
+                        </div>
+                    </div>
+                </td>
+                <td width="17" valign="top"><img src="https://proteomecommons.org/images/menu-right.gif" border="0"></td>
+            </tr>
+        </table>      
+    </div>
+</div>
+<div id="pageBody">
+
+<div class="twoColumnLayout"><div class="twoColumnLayoutRow">
+<div class="leftColumn">
+    <!-- HTML yuck for rounded borders -->
+    <div class="rounded_borders_green">
+        <div class="top">
+            <div class="right">
+                <div class="bottom">
+                    <div class="left">
+                        <div class="top_right">
+                            <div class="right_bottom">
+                                <div class="bottom_left">
+                                    <div class="left_top">
+                                        <div class="rounded_header">
+                                            <div class="title"><img src="https://proteomecommons.org/images/tranche-logo-16.png" /> <a href="https://proteomecommons.org/tranche/">Our Tranche Network</a></div>
+                                        </div>        
+                                        <div class="rounded_body" style="padding-left: 30px;">
+                                            <div><a href="https://proteomecommons.org/tranche/about.jsp">About</a></div>
+                                            <div><a href="http://code.google.com/p/proteomecommons-tranche/wiki/FAQ">FAQ</a></div>
+                                            <div><a href="https://proteomecommons.org/tranche/examples/">Collaborations</a></div>
+                                            <div><a href="https://proteomecommons.org/tranche/downloads.jsp">Downloads</a></div>
+                                            <div><a href="https://proteomecommons.org/tranche/servers.jsp">Servers</a></div>
+                                            <div><a href="https://trancheproject.org" target="_blank">Tranche Project</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- HTML yuck for rounded borders -->
+    <div class="rounded_borders_orange">
+        <div class="top">
+            <div class="right">
+                <div class="bottom">
+                    <div class="left">
+                        <div class="top_right">
+                            <div class="right_bottom">
+                                <div class="bottom_left">
+                                    <div class="left_top">
+                                        <div class="rounded_body">                                                            
+                                            <div style="text-align: center;">
+                                                <div><a href="https://proteomecommons.org/tranche/advanced.jsp"><img src="https://proteomecommons.org/tranche/images/button_off.png" id="launch-tranche-image" onmouseover="this.src = 'https://proteomecommons.org/tranche/images/button_hover.png';" onmouseout="this.src = 'https://proteomecommons.org/tranche/images/button_off.png';" alt="Launch Tranche" title="Launch Tranche" border="0" width="100%"></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="rightColumn">
+<div class="rightColumnBody">
+<table width="800" cellpadding="5">
+	<tr>
+		<td width="125" valign="top">
+<div style="padding-top: 20px; font-size: 9pt;">
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/index.jsp">&gt;Home</a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/fasta.jsp">&gt;About|FASTA</a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/download.jsp">&gt;Downloads</a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/upload.jsp">&gt;Upload</a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/module.jsp">&gt;Tranche|Module</a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/links.jsp">&gt;Links</a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/process.jsp">&gt;Archive|Process</a>
+</div></td>
+		<td valign="top">
+	
+
+<h2>FASTA and ProteomeCommons</h2>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/fasta.jsp" style="border-bottom-width: 0px"><img src="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/home1.jpg" border="0" alt="About FASTA - Background & Standardization Efforts - DESCRIBES THE FASTA FILE FORMAT AND METHODS OF DISTRIBUTION. COVERS FORMATS FROM THE TRADITIONAL METHOD OF VARIOUS FILE FORMATS TO THE HUPO-PSI STANDARDIZED FORMAT."></a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/download.jsp" style="border-bottom-width: 0px"><img src="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/home2.jpg" border="0" alt="Download FASTA files - Available From Tranche - WE HAVE MADE AVAILABLE SEVERAL FASTA DATABASES THROUGH TRANCHE. THIS IS A LIST OF THESE FILES AND SOME INFORMATION ABOUT THEM."></a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/upload.jsp" style="border-bottom-width: 0px"><img src="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/home3.jpg" border="0" alt="Upload FASTA files - Archive On Tranche - WE ENCOURAGE YOUR INSTITUTION TO SHARE YOUR FASTA FOR PUBLIC ACCESS AND PUBLICATION."></a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/module.jsp" style="border-bottom-width: 0px"><img src="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/home4.jpg" border="0" alt="Tranche FASTA Module - A SOFTWARE MODULE IS AVAILABLE FROM WITHIN TRANCHE THAT ALLOWS USERS TO MANIPULATE FASTA FILES. THIS PAGE DESCRIBES HOW TO INSTALL AND USE THE MODULE."></a><br>
+<a href="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/links.jsp" style="border-bottom-width: 0px"><img src="https://proteomecommons.org/tranche/examples/proteomecommons-fasta/home5.jpg" border="0" alt="Links - Related Resources - A LIST OF WEB PAGES THAT CONTAIN INFORMATION PERTINENT TO FASTA."></a><br>
+
+		
+            </td>
+	</tr>
+</table>
+
+</div></div><div class="table-row-next"></div></div></div>
+    </div>
+    <div id="pageFooter">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td width="14" valign="top"><img src="https://proteomecommons.org/images/bottom-bar-left.png" border="0"></td>
+                <td valign="top">
+                    <div style="height: 31px; overflow: hidden; background-image: url('https://proteomecommons.org/images/bottom-bar-middle.png'); background-repeat: repeat-x; padding-top: 5px;">
+                        <a href="https://proteomecommons.org/about/terms.jsp">Terms of Service</a>&bull;<!--<a href="https://proteomecommons.org/statistics.jsp">Statistics</a>&bull;--><a href="https://proteomecommons.org/about/">About</a>&bull;<a href="https://proteomecommons.org/about/faq.jsp">FAQ</a>&bull;<a href="https://proteomecommons.org/contact.jsp">Contact Us</a>&bull;<a href="https://proteomecommons.org/about/credits.jsp">Credits</a>
+                    </div>
+                </td>
+                <td width="14" valign="top"><img src="https://proteomecommons.org/images/bottom-bar-right.png" border="0"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="pagePopupContainer"><div id="pagePopup" onscroll="relocateSuggestionPopup()"></div></div>
+    <div id="pageErrorPopupContainer"><div id="pageErrorPopup" onscroll="relocateSuggestionPopup()"></div></div>
+    <div id="pageGeneralPopupContainer"><div id="pageGeneralPopup" onscroll="relocateSuggestionPopup()"></div></div>
+    <div id="pageInfoPopup" onmouseover="keepInfoPopupOpen();" onmouseout="hideInfoPopup();"></div>
+    <div id="pageSuggestionPopup" class="frame" onfocus="setSuggestionPopupFocus(true)" onblur="setSuggestionPopupFocus(false)"></div>
+</body>
+</html>

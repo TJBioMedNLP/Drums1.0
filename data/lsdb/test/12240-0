@@ -1,0 +1,476 @@
+ 
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3c.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<meta name="Generator" content="PEAR HTML_Page" />
+		<meta name="Author" content="Jan Wildenhain" />
+		<meta name="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="Description" content="BioGRID webgraph is a gene function and gene network lookup tool extending BIOGRID. The graph output uses different colors and shapes to visualize major gene functions selected from Gene Ontology (GO) terms." />
+		<meta name="Keywords" content="Yeast, S. cerevisiae, interaction, protein, gene, synthetic, genetics, protein complexes, BioGRID, Cytoscape" />
+		<title>BioGRID webgraph</title>
+		<style type="text/css">
+			<!--
+
+			p, h1, pre {
+				margin: 0px 10px 0px 10px;
+			}
+
+			body {
+				font: normal 11px auto Verdana, Arial, Helvetica, sans-serif;
+				color: #FFFFFF;
+				//background: #E6EAE9;
+				background: #FFFFFF;
+				text-decoration: none;
+				margin: 1;
+				padding: 2;
+				vertical-align: top;
+			}
+
+			table.header {
+				margin-left: auto;
+				margin-right: auto;
+				width: 675px;
+				border-spacing: 0px;
+				border-padding: 0;
+				border-width: 1px 1px 1px 1px;
+				border-style: solid solid solid solid;
+				border-color: #0033FF #0033FF #0033FF #0033FF;
+				border-collapse: separate;
+				background-color: #2b5386;
+			}
+
+			table.header th {
+				border-width: 1px 1px 1px 1px;
+				padding: 1px 1px 1px 1px;
+				border-style: none none none none;
+				border-color: #0033FF #0033FF #0033FF #0033FF;
+				background-color: #2b5386;
+				-moz-border-radius: 0px 0px 0px 0px;
+			}
+
+			table.header td {
+				border-width: 1px 1px 1px 1px;
+				padding: 1px 1px 1px 1px;
+				border-style: none none none none;
+				border-color: #0033FF #0033FF #0033FF #0033FF;
+				background-color: #CED8E0;
+				-moz-border-radius: 0px 0px 0px 0px;
+				text-align: center;
+				font-size: 12px;
+				font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+			}
+
+			table.header a {
+				text-decoration: none;
+				color: #0000FF;
+				font-size: 12px;
+			}
+
+			table.incenter {
+				margin-left: auto;
+				margin-right: auto;
+				width: 675px;
+				border-spacing: 0px;
+				border-padding: 0;
+				border-width: 0px 1px 0px 1px;
+				border-style: solid solid solid solid;
+				border-color: #000000 #000000 #000000 #000000;
+				border-collapse: separate;
+				background-color: #666666;
+			}
+
+			table.incenter th {
+				border-width: 1px 1px 1px 1px;
+				padding: 1px 1px 1px 1px;
+				border-style: none none none none;
+				border-color: #000000 #000000 #000000 #000000;
+				background-color: rgb(250, 240, 230);
+				-moz-border-radius: 0px 0px 0px 0px;
+			}
+
+			table.incenter td {
+				border-width: 1px 1px 1px 1px;
+				padding: 1px 1px 1px 1px;
+				border-style: none none none none;
+				border-color: #000000 #000000 #000000 #000000;
+				background-color: #F6F6F6;
+				-moz-border-radius: 0px 0px 0px 0px;
+			}
+
+			table.display_four_images {
+				margin-left: auto;
+				margin-right: auto;
+				width: 660px;
+				border-spacing: 0px;
+				border-padding: 0;
+				border-width: 0px 0px 0px 0px;
+				border-style: solid solid solid solid;
+				border-color: #000000 #000000 #000000 #000000;
+				border-collapse: separate;
+				background-color: #CED8E0;
+			}
+
+			table.display_four_images td {
+				border-width: 0px 0px 0px 0px;
+				padding: 0px 0px 0px 0px;
+				border-style: none none none none;
+				border-color: #000000 #000000 #000000 #000000;
+				background-color: #CED8E0;
+				-moz-border-radius: 0px 0px 0px 0px;
+			}
+
+			table.footer {
+				margin-left: auto;
+				margin-right: auto;
+				width: 675px;
+				border-spacing: 0px;
+				border-padding: 0;
+				border-width: 1px 1px 1px 1px;
+				border-style: solid solid solid solid;
+				border-color: #000000 #000000 #000000 #000000;
+				border-collapse: separate;
+				background-color: #AEBDC9;
+			}
+
+			table.footer td {
+				border-width: 1px 1px 1px 1px;
+				padding: 2px 2px 2px 2px;
+				border-style: none none none none;
+				border-color: #000000 #000000 #000000 #000000;
+				background-color: #AEBDC9;
+				text-align: center;
+				font-size: 10px;
+				-moz-border-radius: 0px 0px 0px 0px;
+				font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+			}
+
+			table.simpletype {
+				border-left: solid 1px #D3D3D3;
+				border-top: solid 1px #D3D3D3;
+				border-bottom: solid 1px #D3D3D3;
+				font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				border-collapse: collapse;
+				width: 57em;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			table.simpletype th {
+				text-align: center;
+				border-right: solid 1px #D3D3D3;
+				border-bottom: solid 1px #D3D3D3;
+				background: #AEBDC9;
+				padding: 2px;
+				color: white;
+				padding-left: 1em;
+				padding-right: 1em;
+			}
+
+			table.simpletype th a {
+				color: white;
+				text-decoration: none;
+			}
+
+			table.simpletype th a:hover {
+				color: #EEEEEE;
+			}
+
+			table.simpletype td {
+				text-align: right;
+				border-right: solid 1px #D3D3D3;
+				padding: 2px;
+			}
+
+			table.simpletype tr.odd {
+				background: #F4F4F4;
+			}
+
+			table.geneform tr {
+				align: top;
+				font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+				text-align: top;
+				border: 0;
+				padding: 2px;
+			}
+
+			table.geneform td {
+				valign: top;
+				font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+				text-align: top;
+				border: 0;
+				padding: 2px;
+			}
+
+			p.paging {
+				text-align: center;
+				font-weight: bold;
+			}
+
+			p.paging a {
+				color: #990033;
+			}
+
+			a {
+				text-decoration: none;
+				color: #0000FF;
+			}
+
+			#mytable {
+				width: 700px;
+				padding: 0;
+				margin: 0;
+			}
+
+			caption {
+				padding: 0 0 5px 0;
+				width: 700px;
+				font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+				text-align: right;
+			}
+
+			th {
+				font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+				color: #4f6b72;
+				border-right: 1px solid #C1DAD7;
+				border-bottom: 1px solid #C1DAD7;
+				border-top: 1px solid #C1DAD7;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				text-align: left;
+				padding: 6px 6px 6px 12px;
+				background: #CAE8EA url(images/bg_header.jpg) no-repeat;
+			}
+
+			th.nobg {
+				border-top: 0;
+				border-left: 0;
+				border-right: 1px solid #C1DAD7;
+				background: none;
+			}
+
+			td {
+				border-right: 1px solid #C1DAD7;
+				border-bottom: 1px solid #C1DAD7;
+				background: #fff;
+				padding: 6px 6px 6px 12px;
+				color: #4f6b72;
+			}
+
+			td.alt {
+				background: #F5FAFA;
+				color: #797268;
+			}
+
+			th.spec {
+				border-left: 1px solid #C1DAD7;
+				border-top: 0;
+				background: #fff url(images/bullet1.gif) no-repeat;
+				font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+			}
+
+			th.specalt {
+				border-left: 1px solid #C1DAD7;
+				border-top: 0;
+				background: #f5fafa url(images/bullet2.gif) no-repeat;
+				font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+				color: #797268;
+			}
+
+			h1 {
+				font-size: 14px;
+				padding-top: 10px;
+			}
+
+			#centercontent {
+				background: #fff;
+				margin-left: 11px;
+				margin-right: 11px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				border: 0px solid #000;
+				voice-family: inherit;
+			}
+
+			#centercontenttable {
+				background: #F6F6F6;
+				margin-left: 10px;
+				margin-right: 10px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				border: 0px solid #000;
+				#
+		padding-top: 10px;
+				padding-bottom: 10px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			img.imageleft {
+				float: left;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				margin-top: 10px;
+			}
+
+			img.imagecenter {
+				float: center;
+				text-align: center;
+			}
+
+			div#tipdiv {
+				position: absolute;
+				visibility: hidden;
+				left: 0;
+				top: 0;
+				z-index: 10000;
+				background-color: #dee7f7;
+				border: 1px solid #336;
+				width: 260px;
+				padding: 6px;
+				color: #000;
+				font-size: 11px;
+				line-height: 1.3;
+			}
+
+			div#tipdiv a:link {
+				color: #33b;
+			}
+
+			div#tipdiv a:visited {
+				color: #339;
+			}
+
+			div#tipdiv div.img {
+				text-align: center;
+			}
+
+			div#tipdiv div.txt {
+				text-align: center;
+				margin-top: 4px;
+			}
+
+			-->
+		</style>
+		<script type="text/javascript" src="../lisa/libjs/google_webtracker_part1_jstag.js"></script>
+		<script type="text/javascript" src="../lisa/libjs/google_webtracker_part2_jstag.js"></script>
+	</head>
+	<body>
+		
+
+  <table class="header">
+    <tr>
+       <th> <img src="./images/banner_biogrid_webgraph.jpg" width="670" height="61"></th>
+    </tr>
+    <tr>
+       <td >
+           
+                          | <a href="http://tyerslab.bio.ed.ac.uk/tools/../lisa/index.php">tyerslab</a> 
+                          | <a href="http://tyerslab.bio.ed.ac.uk/tools/BioGRID_webgraph.php">search</a> 
+                          | <a href="http://tyerslab.bio.ed.ac.uk/tools/user.php">register</a> 
+                          | <a href="http://tyerslab.bio.ed.ac.uk/tools/user_login.php">login</a> 
+                          | <a href="http://tyerslab.bio.ed.ac.uk/tools/../lisa/tmpPage.php?project=57&cat=software">help</a> 
+                  </td>
+    </tr>
+  </table>    
+     
+        
+
+		
+  <table class="incenter">
+    <tr><td>
+  <div id="centercontenttable">
+  
+
+		
+<span id="BioGridWebgraph">
+
+  <h2>
+    BioGRID Webgraph
+  </h2>
+ <form  action="genelookupresultset.php" method="post" name="BioGridWebgraph" id="BioGridWebgraph">
+    <!-- Display the fields -->
+
+    <table class="geneform">
+      <tr>
+        <td>Gene list</td>
+        <td>Settings</td>
+      </tr>
+      <tr>
+        <td><textarea rows="20" cols="14" name="symbol"></textarea></td>
+        <td valign = "top">
+            <table class="geneform">
+
+           <!-- <tr>
+                    <td>Name your Job</td>
+                    <td><input size="25" name="sym_title" type="text" /></td>
+                </tr> 
+                <tr>
+                    <td>PMID IDs</td>
+                    <td><textarea rows="3" cols="20" name="sym_paperIDs"></textarea></td>
+                </tr> 
+            -->
+               <tr>
+                    <td>species:</td>
+                    <td><select name="sym_species">
+	<option value="4932">Saccharomyces cerevisiae</option>
+	<option value="9606">Homo sapiens</option>
+	<option value="6239">Caenorhabditis elegans</option>
+	<option value="3702">Arabidopsis thaliana</option>
+	<option value="4896">Schizosaccharomyces pombe</option>
+	<option value="7227">Drosophila melanogaster</option>
+	<option value="10090">Mus Musculus</option>
+	<option value="-1">Any -- !connected graphs wont work! --</option>
+</select></td>
+               </tr>
+           <!--
+               <tr>
+                    <td>genetic:</td>
+                    <td><input name="sym_select_genetic" type="checkbox" value="1" id="qf_d962bb" /></td>
+                    <td>physical:</td>
+                    <td><input name="sym_select_physical" type="checkbox" value="1" id="qf_8828bc" /></td>
+               </tr>
+               <tr>
+                    <td>If genelist has scores tick box</td>
+                    <td><input name="sym_select_scores" type="checkbox" value="1" id="qf_ec2011" /></td>
+               </tr>
+            -->
+               <tr>
+                    <td style="font-size: 0.8em; width: 250px; color: red;"></td>
+               </tr>
+            </table>
+        </td>
+      </tr>
+      <!-- Display the buttons -->
+      <tr>
+        <td align="center" colspan="4">
+          <input name="btnSubmit" value="Submit" type="submit" />
+        </td>
+      </tr>
+    </table>
+  </form>
+
+</span>
+  
+
+		
+     </div>
+   </td> </tr>
+  </table> 
+
+
+		
+
+  <table class="footer">
+    <tr>
+       <td> Wellcome Trust Centre for Cell Biology, Institute of Cell Biology, University of Edinburgh Jan Wildenhain</td>
+    </tr>
+  </table> 
+
+
+	</body>
+</html>

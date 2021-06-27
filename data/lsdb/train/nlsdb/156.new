@@ -1,0 +1,393 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="BioInfoBank Sp. z o.o." />
+  <meta name="description" content="Polish Bioinformatics Site" />
+  <meta name="keywords" content="bioinformatics, biotech, biology, medicine, drugs, pharmacology, gene, genome, peptide, protein, proteome, blast, alignment, threading, fold, folding, structure, function, prediction, seed, capital, investment, startup, spinoff" />
+  <meta name="keywords" content="Genomic Sequence, Sequence Data, Sequence Blast, DNA Sequence, Coding Regions, DNA Sequence, Gene Expression, Genomic Database, Protein Structure, Membrane Protein, Protein-Protein, Protein Atlas, Protein Interaction, Protein Binding, Sequence Assembly, Blast DNA, Human Proteins, Sequence Alignment, DNA Sequence Analysis, Protein Sequence Analysis" />
+  <link rel="stylesheet" type="text/css" href="style.v2.css" />
+  <script type="text/javascript" src="include/javascript.js"></script>
+
+  <title>Guide to the &#39;Upload and score your model&#39; feature</title>
+  <style type="text/css">/*<!--*/
+#nm1 {
+  display:inline;
+  padding:0;
+  border:0;
+  margin:0;
+}
+
+/*.menu_nav a:hover span, .menu_nav a:visited:hover span {
+  color:#DB9525;
+}
+
+.menu_nav a:hover span.active_menuitem, .menu_nav a:visited:hover span.active_menuitem {
+  color:#FFCC00;
+}*/
+
+#nm1 ul {
+  display:inline;
+  list-style-type:none;
+  padding:0;
+  border:0;
+  margin:0;
+}
+
+#nm1 ul li {
+  display:inline;
+  padding:0;
+  border:0;
+  margin:0;
+  padding-left:1ex;
+  padding-right:1ex;
+  position:relative;
+  white-space:nowrap;
+}
+
+/*.menu_nav ul ul li:hover {
+  background-color:#8CAB15;
+}
+
+.menu_nav ul ul a:hover span {
+  color:#003C00;
+}*/
+
+#nm1 ul ul {
+  display:block;
+  padding:0;
+  margin:0;
+  padding-top:1ex;
+  /*border:1px outset;*/
+  position:absolute;
+  left:0ex;
+  /*width:14ex;*/
+  /*top:0;*/ /* FF */
+  background-color:#003C00;
+  visibility:hidden;
+}
+
+#nm1 ul ul li {
+  display:list-item;
+  padding:0;
+  padding-left:1ex;
+  padding-top:0.25ex; /* may be necessary to change for IE <= 6 */
+  padding-bottom:0.5ex;
+  /*margin:0.2ex;*/
+  margin:0;
+}
+
+#nm1 ul ul ul {
+  /*top:-0.2ex;*/
+  top:0;
+  padding:0;
+  /*left:13.8ex;*/ /* dynamically change for IE <= 6 */
+  /*width:12ex;*/
+  margin:0;
+}
+
+  /*-->*/</style>
+</head>
+
+  <body><!--body-->
+  <table width="100%" border="0" cellpadding="10" cellspacing="0">
+    <tr>
+      <td id="td_left_top" align="center" valign="middle"><a href="."><img src="jpg/metaserver.jpg" width="120" height="26" alt="BioInfoBank Metaserver" /></a></td>
+
+      <td align="left" valign="middle" id="td_top_legend">
+        <!-- LEGEND_HEADER -->
+Guide to the &#39;Upload and score your model&#39; feature
+
+      </td>
+    </tr>
+
+    <tr class="menu">
+      <!-- MENU_ROW -->
+
+      <td class="left_column" align="center"><span class="auth_username"></span></td>
+      <td>
+        
+        <div id="nm1" class="menu_nav">
+          <ul>
+            
+            <li id="nm1_0l" style="padding-left:0"
+               class="normal_menuitem"
+              onmouseover="document.getElementById('nm1_0s').style.color='#FFFFFF';"
+              onmouseout="document.getElementById('nm1_0s').style.color='';"
+                ><a href="submit_wizard.pl"><span id="nm1_0s">Submit</span></a> </li>
+      
+            <li id="nm1_1l" 
+               class="normal_menuitem"
+              onmouseover="document.getElementById('nm1_1s').style.color='#FFFFFF';"
+              onmouseout="document.getElementById('nm1_1s').style.color='';"
+                ><a href="queue.pl"><span id="nm1_1s">Queue</span></a> </li>
+      
+            <li id="nm1_2l" 
+               class="normal_menuitem"
+              onmouseover="document.getElementById('nm1_2s').style.color='#FFFFFF';"
+              onmouseout="document.getElementById('nm1_2s').style.color='';"
+                ><a href="servers.pl"><span id="nm1_2s">Servers</span></a> </li>
+      
+            <li id="nm1_3l" 
+               class="normal_menuitem"
+              onmouseover="document.getElementById('nm1_3s').style.color='#FFFFFF';document.getElementById('nm1_3m').style.visibility='visible'"
+              onmouseout="document.getElementById('nm1_3s').style.color='';document.getElementById('nm1_3m').style.visibility='hidden'"
+                ><a href="3dbench.pl"><span id="nm1_3s">Benchmarks&darr;</span></a><div style="display:inline;position:absolute;visibility:hidden;left:0;top:0;"><br/>
+              <ul id="nm1_3m" style="left:0;width:20ex">
+              
+                <li id="nm1_3m_0l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_0s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_0s').style.color='';"
+                    ><a href="results.pl?comp_name=livebench-2009.2"><span id="nm1_3m_0s">Livebench-2009.2</span></a>    </li>
+                
+                <li id="nm1_3m_1l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_1s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_1s').style.color='';"
+                    ><a href="results.pl?comp_name=pdb-cafasp-2009.2"><span id="nm1_3m_1s">PDB-Cafasp-2009.2</span></a>    </li>
+                
+                <li id="nm1_3m_2l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_2s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_2s').style.color='';"
+                    ><a href="results.pl?comp_name=livebench-2008.2"><span id="nm1_3m_2s">Livebench-2008.2</span></a>    </li>
+                
+                <li id="nm1_3m_3l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_3s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_3s').style.color='';"
+                    ><a href="results.pl?comp_name=pdb-cafasp-2008.2"><span id="nm1_3m_3s">PDB-Cafasp-2008.2</span></a>    </li>
+                
+                <li id="nm1_3m_4l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_4s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_4s').style.color='';"
+                    ><a href="results.pl?comp_name=livebench-2008.1"><span id="nm1_3m_4s">Livebench-2008.1</span></a>    </li>
+                
+                <li id="nm1_3m_5l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_5s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_5s').style.color='';"
+                    ><a href="results.pl?comp_name=pdb-cafasp-2008.1"><span id="nm1_3m_5s">PDB-Cafasp-2008.1</span></a>    </li>
+                
+                <li id="nm1_3m_6l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_6s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_6s').style.color='';"
+                    ><a href="results.pl?comp_name=livebench-2007.2"><span id="nm1_3m_6s">Livebench-2007.2</span></a>    </li>
+                
+                <li id="nm1_3m_7l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_7s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_7s').style.color='';"
+                    ><span id="nm1_3m_7s"></span>    </li>
+                
+                <li id="nm1_3m_8l"
+                   class="normal_menuitem"
+                  onmouseover="document.getElementById('nm1_3m_8s').style.color='#FFFFFF';"
+                  onmouseout="document.getElementById('nm1_3m_8s').style.color='';"
+                    ><a href="competitions.pl"><span id="nm1_3m_8s">Submission Status</span></a>    </li>
+                
+              </ul>
+            </div> </li>
+      
+            <li id="nm1_4l" 
+               class="normal_menuitem"
+              onmouseover="document.getElementById('nm1_4s').style.color='#FFFFFF';"
+              onmouseout="document.getElementById('nm1_4s').style.color='';"
+                ><a href="pdb-preview.pl"><span id="nm1_4s">PDB-Preview</span></a> </li>
+      
+            <li id="nm1_5l" 
+               class="normal_menuitem"
+              onmouseover="document.getElementById('nm1_5s').style.color='#FFFFFF';"
+              onmouseout="document.getElementById('nm1_5s').style.color='';"
+                ><a href="join.pl"><span id="nm1_5s">Join</span></a> </li>
+      
+            <li id="nm1_6l" 
+               class="normal_menuitem"
+              onmouseover="document.getElementById('nm1_6s').style.color='#FFFFFF';"
+              onmouseout="document.getElementById('nm1_6s').style.color='';"
+                ><a href="help.html"><span id="nm1_6s">Help</span></a> </li>
+      
+          </ul>
+        </div>
+      
+      </td>
+  
+    </tr>
+
+    <tr>
+      <td id="td_left_google" valign="top" align="center">
+
+<table class="localadd" cellpadding=0 cellspacing=0>
+<a class="localaddlink" href="http://bioinfo.pl/fp7.html">
+        <tr><td class="localadd">
+                <div class="localaddtitle">FP7 Partner</div>
+                <div class="localaddtext">Add BioInfo.PL bioinformatics lab to Your FP7 application</div>
+                <div class="localaddlink">bioinfo.pl</div>
+        </td></tr>
+</a>
+</table>
+
+        <!-- Google Ads -->
+        <script type="text/javascript">
+//<![CDATA[
+//<!--
+google_ad_client = "pub-7801953657056869";
+//google_ad_width = 100;
+google_ad_width = 120;
+google_ad_height = 700;
+google_ad_format = "120x600_as";
+google_ad_type = "text";
+google_ad_channel ="2074162787";
+google_color_border = "EBEBE1";
+google_color_bg = "EBEBE1";
+google_color_link = "000000";
+google_color_url = "666666";
+google_color_text = "333333";
+//-->
+//]]>
+</script> <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script> <!-- Google Ads -->
+      </td>
+
+      <td align="left" valign="top">
+        <!-- CONTENT_AREA -->
+
+  <form id="form1" action="compare_your_model_example.pl" method="post">
+    <h1>Guide to the &#39;Upload and score your model&#39; feature</h1>
+    <p>This feature allows you to have your model scored by <a href="#3djury">3D-Jury</a> with respect to a chosen target.</p>
+    <ol>
+      <li>
+        <p>Choose a target on the <a href="queue.pl"><span class="normal_menuitem">Queue</span></a> page - or -
+          <a href="submit_wizard.pl"><span class="normal_menuitem">Submit</span></a> your job for prediction.</p>
+        <p><a href="#3djury">3D-Jury</a> evaluation can only be performed against processed Meta Server jobs.
+        In case you submit a new job for subsequent model evaluation, please make sure you choose all the
+        Meta Server member servers and allow the Meta Server enough time to collect predictions.</p>
+        <p>Choosing a target from the <a href="queue.pl"><span class="normal_menuitem">Queue</span></a> takes you to the <a href="#3djury">3D-Jury</a> page.</p>
+      </li>
+      <li>
+        <p>Click the <input type="button" value="Browse..."/> button on the <a href="#3djury">3D-Jury</a> page and choose a model for upload.</p>
+        <div>Make sure the file is:
+          <ul>
+            <li>in <a href="http://www.predictioncenter.org/casp7/doc/casp7-format.html#TS">CASP TS</a> format</li>
+            <li>has exactly one model in it</li>
+            <li>has at least 20 C-alpha atoms in the model</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <p>Click the <input type="button" value="Submit"/> button on the <a href="#3djury">3D-Jury</a> page</p>
+        <p>The input fields &#39;Compute 3D-Jury using ... model(s) per server&#39;, &#39;similarity cutoff&#39; and the left list box control <a href="#3djury">3D-Jury</a> score calculation.
+        Follow <a href="#3djury">this link</a> to find out more about these input fields.<br/>
+        The right listbox selects models of the highlighted servers to display.</p>
+        <p>Clicking the &#39;Submit&#39; button on the <a href="#3djury">3D-Jury</a> page takes you to the model-centered 3D-Jury page.</p>
+      </li>
+      <li>
+        <p>The model-centered <a href="#3djury">3D-Jury</a> page displays evaluation results for your model designated &#39;<span class="uploadedmodel">USER_01</span>&#39;.</p>
+        <p>
+          The input fields function as described in point 3. However, the &#39;Submit&#39;
+          button takes you <span style="text-decoration:underline">back</span> to the job <a href="#3djury">3D-Jury</a> page
+          while the <input type="button" value="USER_01"/> button updates the page to reflect your changes to the input fields.
+        </p>
+      </li>
+    </ol>
+    <h3>Hands-on tutorial</h3>
+    <p>This tutorial will show you how to upload and evaluate a model against a Meta Server job.</p>
+    <ol>
+      <li>Download <a href="model.txt">model.txt</a> by right-clicking on the link and saving the target.</li>
+      <li>Open job <a href="3djury.pl?meta=v2&id=2743" onclick="window.open('3djury.pl?meta=v2&id=2743', '_blank');
+        event.returnValue = false; if( event.preventDefault ){ event.preventDefault(); }">2743: T0288 - PRKCAB</a> from the
+        <a href="queue.pl"><span class="normal_menuitem">Queue</span></a> or simply click the job's name here.
+      </li>
+      <li>Click the &#39;Browse...&#39; button on the <a href="#3djury">3D-Jury</a> page showing <b>Job 2743: T0288 - PRKCAB</b> and open the file you have saved in point 1.</li>
+      <li>Click <input type="button" value="Defaults"/> on the <a href="#3djury">3D-Jury</a> page to fill the input fields with their default values.</li>
+      <li>Click <input type="button" value="Submit"/> to proceed to the model centered <a href="#3djury">3D-Jury</a> page.
+        <p>The calculation may take over 90 seconds, please wait.</p>
+      </li>
+      <li>Your model is displayed in the row <span class="uploadedmodel">USER_01</span>. Under default parameters its 3D-Jury score (<b>Jscore</b> column)
+        is <span class="jscore_modelinfocus">61.60</span> (at the time of writing this tutorial).</li>
+      <li>Click the <span class="bold">[<a>mqap</a>]</span> button to see the residue-wise quality of your model: the values shown are Verify3D scores multiplied by 10. Negative values are coloured red.<br/>
+        Click on <span class="bold">[<a>2D</a>]</span> to return to the alignment.
+      </li>
+      <li>
+        Areas of <span style="background:#D0D0D0">gray background</span> in the alignment indicate regions of high structural similarity between your model and those collected by the Meta Server.
+        (<a href="#3djury">Details of structural similarity detection</a>)
+      </li>
+      <li>Click the third radio button on the top left: <span style="padding-left:1ex;padding-right:1ex"><input type="radio"/>all</span>
+        , then add HHpred1, HHpred2, HHpred3 to the selection in the left listbox (hold the CTRL key down while clicking), finally click the button <input type="button" value="USER_01"/>.
+        <div>
+          <ul>
+            <li>
+          Many member servers return multiple models. The first is considered best.
+          By clicking the radio button you have selected all the models of the member servers to be used for calculating the <a href="#3djury">3D-Jury</a> score.
+            </li><li>
+          By selecting HHpred1, 2 and 3 you included these servers' models in the <a href="#3djury">3D-Jury</a> score calculation.
+            </li><li>
+          Clicking the &#39;USER_01&#39; button refreshed the page in order to show results corresponding to your new settings.
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>Notice how your score has changed to <span class="jscore_modelinfocus">65.86</span> (at the time of writing this tutorial). Also notice that much fewer (or no) models have <span class="notincludedmodel">gray <b>Jscore</b></span>
+      values (indicating exclusion from <a href="#3djury">3D-Jury</a> calculations), since you chose to include all models of the selected servers.</li>
+      <li>Try other combinations of servers, models and similarity cutoffs.</li>
+    </ol>
+    <h3><a id="3djury" name="3djury"></a>3D-Jury</h3>
+    <div>
+    
+  <p>
+    3D-Jury scores models by their similarity to other models.
+    Similarity is computed as the number of C-alpha atoms within 3.5A after superposition of the models, and is set to 0 if it drops below the specified cutoff.
+    The 3D-Jury score (Jscore) is the sum of the number of proximal C-alpha atoms in the superpositioned models divided by the number of superpositions + 1.
+    Similarity is evaluated only for the specified models of the selected servers.
+    During evaluation, from each server the <b>first</b> (top) model, the <b>one</b> most similar model or <b>all</b> models are used.
+    When default settings are applied and results for most servers are available, the 3D-Jury score corresponds roughly to the number of C-alpha atoms of the model within 3.5A from the native structure.
+    If a particular model (links in the <B>Model</b> column) is selected, the scores of all other models represent the number of their superposed C-alpha atoms within 3.5A and these structurally
+    aligned proximal residues are marked with gray background.
+    Silver background in the <b>Jscore</b> column indicates that the model was not included in 3D-Jury calculations.
+    Jscore values less than 50 are coloured gray.
+  </p>
+  <h4>
+    Legend:
+  </h4>
+  <dl>
+    <dd><b>Model</b>: model id</dd>
+    <dd><b>Jscore</b>: 3D-Jury score</dd>
+    <dd><b>Jsim</b>: number of proximal residue pairs between model on line and first (base) model. <b>Jscore</b> of base model is shown in green.</dd>
+    <dd><b>Rscore</b>: raw score returned by server</dd>
+    <dd><b>Fssp</b>: fssp mapping of the hit</dd>
+    <dd><b>Scop</b>: scop mapping of the hit</dd>
+    <dd><b>Hit</b>: hit name</dd>
+    <dd><b>Protein sequence</b>: helix=<pre style="display:inline;color:red">RED</pre>, strand=<pre style="display:inline;color:blue">BLUE</pre>, insertion=<pre style="display:inline">BLACK</pre>.</dd>
+  </dl>
+  <h4>
+    More on 3D-Jury scores:
+  </h4>
+  <div>
+    KajÃ¡n L, Rychlewski L. <br />
+    <a href="http://www.biomedcentral.com/1471-2105/8/304">Evaluation of 3D-Jury on CASP7 models.</a><br />
+    BMC Bioinformatics. 2007 Aug 21;8:304. <br />
+  </div>
+  <p>
+    Buttons <span class="bold">[<a>2D</a>]</span> and <span class="bold">[<a>mqap</a>]</span> enable switching between alignment view and mqap (model quality alignment program) view.
+    The latter shows Verify3D values multiplied by 10 for each residue. Negative values are coloured red.
+  </p>
+  
+    </div>
+    <div><input type="button" name="btn1" value="Close window" onclick="window.close()"/></div>
+  </form>
+  
+      </td>
+    </tr>
+
+    <tr class="menu">
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</body>
+</html>

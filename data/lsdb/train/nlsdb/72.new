@@ -1,0 +1,342 @@
+<html><head><title>TreeFam</title>
+<link rel="stylesheet" type="text/css" href="/treefam.css" />
+</head><body >
+<table border=0 width="100%" cellspacing=0 cellpadding=6>
+<font face="verdana, arial, sans-serif">
+<tr bgcolor='#FFFFFF' style='color:002000'>
+	<td width="20%">
+		<a href="/"><img src="/images/logo1.png" height="60" border="0" alt="TreeFam"></a>
+		<br><b><font size="3">TreeFam</font></b><br>
+	</td>
+	<td width="60%" align='center'>
+			<font size="5"><b><font color="green">Tree fam</font>ilies database</b></font></td>
+	<td width="15%">
+	<a href="http://www.sanger.ac.uk/">
+		<img src="/images/sanger_logo.gif" border="0" width="137" height="40" alt="The Sanger Institute">
+	</a></td>
+	<td width="5%">
+	<a href="http://www.genomics.org.cn/bgi_new/english/platforms/bioinfo.htm">
+		<img src="/images/bgi_logo.jpg" border="0" height="40" alt="Beijing Genomics Institute">
+	</a></td>
+</tr>
+</table>
+<table border=0 cellspacing=0 cellpadding=3>
+<tr bgcolor='darkgreen' align=left>
+	<td><a href="/"><font color='#FFFFFF' size=1><b>[Home]</b></font></a>
+	<td><a href="/cgi-bin/search2.pl"><font color='#FFFFFF' size=1><b>[Search]</b></font></a>
+	<td><a href="/cgi-bin/TFinfo.pl?all"><font color='#FFFFFF' size=1><b>[Browse]</b></font></a>
+	<td><a href="/cgi-bin/TFspec.pl"><font color='#FFFFFF' size=1><b>[TaxaView]</b></font></a>
+	<td><a href="/cgi-bin/misc_page.pl?download"><font color='#FFFFFF' size=1><b>[Download]</b></font></a>
+	<td><a href="/cgi-bin/misc_page.pl?faq"><font color='#FFFFFF' size=1><b>[FAQ]</b></font></a>
+	<td  width='100%'></td>
+</tr>
+</font>
+</table>
+
+<style type="text/css">.sidebar{font-family:sans-serif,arial,helvetica;}</style>
+<table cellspacing="5" cellpadding="15" width=100%><tr>
+<td COLSPAN="2" align="left" valign="top" BGCOLOR="#eeeeee" width=20% class="sidebar">
+<h3>Navigation</h3>
+<a href="#introduction">Introductions</a><br>
+<a href="#pub">Publications</a><br>
+<a href="#news">News</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#release70">Release 7.0</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#release60">Release 6.0</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#release50">Release 5.0</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#release40">Release 4.0</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#treesoft">TreeSoft Project</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#hgnc">HGNC and TreeFam</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xrefsearch">Xref Search</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#release30">Release 3.0</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#linktreefam">Link to TreeFam Pages</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#release20">Release 2.0</a><br>
+<hr><h3>Quick Search<font size="1"><br>
+<a href="javascript:window.document.fam.f.value='A cyclin';window.document.gene.q.value='cyclin human mouse';void(0);">example</a>
+</font></h3>
+<form name="fam" method="get" action="/cgi-bin/search2.pl">
+<table>
+	<tr><td size=100%><input name="f"></tr>
+	<tr><td><input type="submit" value="Go for families"></tr>
+</table></form>
+<form name="gene" method="get" action="/cgi-bin/search2.pl">
+<table>
+	<tr><td size=100%><input name="q"></tr>
+	<tr><td><input type="submit" value="Go for genes"></tr>
+</table></form>
+<hr>
+
+</td><td>
+<h2><a name="introduction">Introductions</a></h2>
+<p>TreeFam (Tree families database) is a database of phylogenetic trees
+of animal genes. It aims at developing a curated resource that gives reliable
+information about ortholog and paralog assignments, and
+evolutionary history of various gene families.</p>
+
+<p>TreeFam defines a gene family as a group of genes that evolved after
+the speciation of single-metazoan animals. It also tries to include
+outgroup genes like yeast (<i>S. cerevisiae</i> and <i>S. pombe</i>) and plant
+(<i>A. thaliana</i>) to reveal these distant members.</p>
+
+<p>TreeFam is also an ortholog database. Unlike other pairwise alignment based ones,
+TreeFam infers orthologs by means of gene trees. It fits a gene tree into
+the universal species tree and finds historical duplications, speciations
+and losses events. TreeFam uses this information to evaluate tree building,
+guide manual curation, and infer complex ortholog and paralog relations.</p>
+
+<p>The basic elements of TreeFam are gene families that can be divided into
+two parts: TreeFam-A and TreeFam-B families. TreeFam-B families
+are automatically created. They might contain errors given complex
+phylogenies. TreeFam-A families are manually curated from TreeFam-B ones.
+Family names and node names are assigned at the same time.
+The ultimate goal of TreeFam is to present a curated resource for
+all the families.</p>
+<br>
+
+<h2><a name="pub">Publications and Methods</a></h2>
+
+<p>TreeFam was published in
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Retrieve&list_uids=16381935">Li
+et al, <i>Nucleic Acids Res.</i> 2006 Jan 1;34(Database issue):D572-80
+</a>.  We have also published a TreeFam Update paper in
+<a href="http://nar.oxfordjournals.org/cgi/content/full/gkm1005v1">Ruan et al, <i>Nucleic Acids Res.</i>
+ 2008 (Database issue)</a>. Please cite these publications if you use TreeFam.  
+ </p>
+
+ <p>The main software used to build TreeFam, treeBeST (previously called NJTREE), is available from SourceForge
+ at <a href="http://treesoft.sourceforge.net">treesoft.sourceforge.net</a>.
+ Many of the methods used in treeBeST are described
+ in <a href="http://www.sanger.ac.uk/Users/lh3/PhD-thesis-liheng-2006-English.pdf">a PhD
+ thesis</a>.  We intend to provide further web pages describing the
+ methods used to build TreeFam in the near future.</p>
+
+ <h2><a name="data">How to get the TreeFam data</a></h2>
+
+ <p>There are several ways to access the TreeFam data: 
+ <ul>
+ <li>Firstly, you can browse
+ the data on the TreeFam website, by searching for your favourite genes on the
+ <a href="http://www.treefam.org/cgi-bin/search2.pl">TreeFam search page</a>. 
+ <li>Secondly, we provide flat files of the data in the TreeFam mysql database such as sequences, alignments,
+ trees, and orthologs and paralogs, on the <a href="http://www.treefam.org/cgi-bin/misc_page.pl?download">TreeFam download page</a>.
+ <li>Thirdly, if you have knowledge of perl, you can use the <a href="http://treesoft.sourceforge.net/tf-perl-api.shtml">TreeFam perl api</a>
+ to extract data such as sequences, alignments, trees and orthologs from the TreeFam mysql database. We provide many
+ example perl scripts that use the TreeFam api on the TreeFam perl api website. 
+ <li>Fourthly, if you have knowledge of mysql, you can connect to our publicly accessible TreeFam mysql database by using
+ the command: <pre>mysql -uanonymous -P3308 -hdb.treefam.org</pre>
+ <li>Fifthly, if you have no knowledge of perl or mysql, but would like to extract a large data set from TreeFam for
+ your experiments, please contact the TreeFam mailing list, using the mailing list: <b>treefam@sanger.ac.uk</b>.
+ </ul>
+ <b><a href="http://www.sanger.ac.uk/Users/alc/treefam.html">Need more detailed instructions?</a></b>
+ </p>
+
+ <h2><a name="contact">Contact</a></h2>
+
+ <p>If you need help, or have a question about TreeFam, please feel welcome to contact us
+ at the email address: <b>treefam@sanger.ac.uk</b>.
+ </p>
+
+<h2><a name="news">News</a></h2>
+
+<h3><a name="release70">TreeFam 7.0 Released</a>
+<font size="2" color="gray"> - 2009.02.10</font></h3>
+
+TreeFam 7.0 is released today. 
+Gene sets were updated as usual. TreeFam-7 is mainly based 
+on Ensembl v50. 17 species were added in this new 
+release. They are: Cavia porcellus (guinea pig), Oryctolagus 
+cuniculus (rabbit), Equus caballus (horse), Dasypus 
+novemcinctus (armadillo), Sorex araneus (Eurasian shrew),  
+Ochotona princeps (American pika), Otolemur garnettii 
+(galago), Erinaceus europaeus (hedgehog), Microcebus murinus 
+(mouse lemur), Loxodonta africana (elephant), Echinops telfairi 
+(tenrec), Felis catus (cat), Myotis lucifugus (bat), Pongo 
+pygmaeus (orangutan), Spermophilus tridecemlineatus (squirrel),
+Bombyx mori (silkworm), and Tupaia belangeri (common tree 
+shrew). Gene sets of all species were updated in Sep. 2008.
+There are now 777,321 genes in total in 16,141 different 
+TreeFam families.
+
+<h3><a name="release60">TreeFam 6.0 Released</a>
+<font size="2" color="gray"> - 2008.06.06</font></h3>
+Main geneset sources of release-6.0 came from EnsEMBL v47, the total number of genes in families come to 697,829.<p>
+We introduced a new method to integrate Family A/B with Family C, by comparing gene overlaps between families from two sets, 
+we increased threshold step by step to merge families or delete weak connections. As a result, Family C dispeared since this release.
+
+<h3><s><a name="release50">TreeFam 5.0 Released</a></s>
+<font size="2" color="gray"> - 2007.12.04</font></h3>
+<p>TreeFam 5.0 was released. Gene sets were updated. 
+TreeFam-5 wa mainly based on <a href="http://www.ensembl.org">Ensembl</a>
+<a href="http://dec2006.archive.ensembl.org/">v42</a>. We included many low coverage genomes from ensembl v42, there were <i>Dasypus novemcinctus
+, Echinops telfairi, 
+Erinaceus europaeus,
+Felis catus,
+Myotis lucifugus,
+Loxodonta africana,
+Cavia porcellus,
+Oryctolagus cuniculus,
+Otolemur garnettii,
+Spermophilus tridecemlineatus and
+Tupaia belangeri</i>, and added
+<i><a href="http://dictybase.org/">Dictyostelium discoideum</a></i> from dictyBase, added ten flys from <a href="http://flybase.org">flyBase</a>.</p>
+<p>
+We promoted about 1000 family C into familyB, because they were new gene families for family A/B.
+To avoid confusing with family C and A/B, we separated family C from family A/B in the list of search results.
+</p>
+<p>We begin to provide HMMER files for family A/B, they can be found in "Plain File" list at the left side of family page, TreeFam Perl API supports it too.
+</p>
+
+<h3><a name="release40">TreeFam 4.0 Released</a>
+<font size="2" color="gray"> - 2007.03.07</font></h3>
+<p>TreeFam 4.0 is released today. In this new release, we introduce clustering based families (TF5 families)
+to give a more complete coverage of all annotated genes.
+Previously, building automated TreeFam families always started from the orginal PhIGs clusters.
+However, as the number of fully sequences species is growing rapidly and gene annotations become
+more and more accurate with years, sticking to old clusters made TreeFam miss many genes.
+To increase the coverage of all annotated genes, we decide to do clustering for each new release.
+The resultant clusters become TF5 families. Consequently, each TreeFam gene is classified in two ways:
+the conventional competitive method used in <a href="#release20">TreeFam-2</a> and the
+<a href="/cgi-bin/misc_page.pl?faq#cluster">new clustering method</a>.
+Searching for one gene usually leads to two results, representing the two classifying methods.</p>
+
+<p>Gene sets were updated as usual. TreeFam-4 is mainly based on <a href="http://www.ensembl.org">Ensembl</a>
+<a href="http://oct2006.archive.ensembl.org/">v41</a>. Four species were added in this new release. They are:
+<i><a href="http://www.ensembl.org/Ciona_savignyi/">Ciona savignyi</a></i>,
+<i><a href="http://www.ensembl.org/Gasterosteus_aculeatus/">Gasterosteus aculeatus</a></i>,
+<i><a href="http://www.ensembl.org/Oryzias_latipes/">Oryzias latipes</a></i> and
+<i><a href="http://www.ensembl.org/Aedes_aegypti/">Aedes aegypti</a></i>.
+<i>Apis mellifera</i> genes have been dropped since Ensembl did not provide the annotations any more.
+Gene sets of all the other species were also updated in October, 2006.
+</p>
+
+<h3><a name="treesoft">TreeSoft Project Launched</a>
+<font size="2" color="gray"> - 2006.11.01</font></h3>
+<p><a href="http://treesoft.sourceforge.net/">TreeSoft</a> was registered at <a href="http://sourceforge.net">SourceForge.net</a>.
+TreeSoft is a collection of softwares that build, display or manipulate phylogenetic trees. It is also
+the code base for softwares that are developed for the <a href="http://www.treefam.org/">TreeFam</a>
+(<font color="darkgreen">Tree Fam</font>ilies database). At the same time, TreeSoft provides brief introductions
+and links to other softwares, databases or web services for phylogenetic trees. TreeSoft is an open source project hosted by
+<a href="http://sourceforge.net">SourceForge.net</a>. The SourceForge.net project page is
+at <a href="http://sourceforge.net/projects/treesoft/">http://sourceforge.net/projects/treesoft/</a>.
+TreeSoft provides downloads and documentations for most of source codes developed for TreeFam.
+</p>
+
+<h3><a name="hgnc">HGNC Links to TreeFam</a>
+<font size="2" color="gray"> - 2006.10.24</font></h3>
+<p>HUGO Gene Nomenclature Committee (<a href="http://www.gene.ucl.ac.uk/nomenclature/index.html">HGNC</a>)
+started to provide cross-reference links to TreeFam. These links are available in
+both gene pages and <a href="http://www.gene.ucl.ac.uk/cgi-bin/nomenclature/hcop.pl">HOCP</a>
+(HGNC Comparison of Orthology Predictions) pages. Examples are provided
+<a href="http://www.gene.ucl.ac.uk/nomenclature/data/get_data.php?hgnc_id=1582">here</a>
+and also <a href="http://www.gene.ucl.ac.uk/cgi-bin/nomenclature/hcop.pl?species_pair=Human+and+Any+species&column=symbol&query=CCND1&Search=Search">here</a>.
+</p>
+
+<h3><a name="xrefsearch">Search for External Accessions</a>
+<font size="2" color="gray"> - 2006.10.22</font></h3>
+<p>The search page has been updated to support search of external accessions from GenBank,
+UniProt, PDB and even Pfam, GO and so on. The cross-reference table was imported from
+Ensembl. Although early version also supports this function, the new one is more flexible
+when Xref table become a part of TreeFam MySQL.</p>
+<p>Link to TreeFam pages by cross-references have been updated accordingly. Now people
+can link to TreeFam family pages in a new way, for example:
+<ul>
+	<li><a href="/cgi-bin/TFinfo.pl?xref=1733&dbid=hgnc&spec=human">http://www.treefam.org/cgi-bin/TFinfo.pl?xref=1733&dbid=hgnc&spec=human</a>
+	<li><a href="/cgi-bin/TFinfo.pl?xref=CCNE1&spec=9606">http://www.treefam.org/cgi-bin/TFinfo.pl?xref=CCNE1&spec=9606</a>
+	<li><a href="/cgi-bin/TFinfo.pl?xref=CCNE1">http://www.treefam.org/cgi-bin/TFinfo.pl?xref=CCNE1</a>
+</ul>
+For a complete list of <u>dbid</u>, please refer to <a href="/cgi-bin/misc_page.pl?faq#u1">this</a> page.
+Usually detailed information <u>dbid</u> and <u>spec</u> should be applied whenever possible. One <u>xref</u>,
+especially an integer accession, may exist in several databases. In this case, only one result can be seen.
+</p>
+
+<h3><a name="release30">TreeFam 3.0 Released</a>
+<font size="2" color="gray"> - 2006.06.26</font></h3>
+<p>It has been over half a year since the last release. Although TreeFam 3.0 looks
+pretty like TreeFam 2.0, we do bring a number of new features that may interest you.
+During this period, we stablized the automatic pipeline, which will make it possible
+to update TreeFam more swiftly. We also bring back the ortholog table that was missed
+in 2.0. In comparison to the old ortholog table of TreeFam 1.0, the new
+version is more complete and much more accrate by utilizing sophisticated algorithms.
+Other notable new features or improvements are:
+<ul>
+	<li>New sequence set from <a href="http://www.ensembl.org">Ensembl</a> <a href="http://apr2006.archive.ensembl.org/">v38</a>;
+	<li>Seven new species: <i><a href="http://www.ensembl.org/Macaca_mulatta/">Macaca mulatta</a>,
+		<a href="http://www.ensembl.org/Bos_taurus">Bos taurus</a>,
+		<a href='http://www.ensembl.org/Monodelphis_domestica'>Monodelphis domestica</a>,
+		<a href='http://flybase.bio.indiana.edu'>Drosophila pseudoobscura</a>,
+		<a href='http://www.genome.wustl.edu/genome.cgi?GENOME=Caenorhabditis%20remanei'>Caenorhabditis remanei</a>,
+		<a href='http://www.genedb.org'>Schistosoma mansoni</a> and
+		<a href='http://rise.genomics.org.cn'>Oryza sativa</a></i>;
+	<li><a target='_blank' href="/cgi-bin/treeview.pl?ac=TF105085&stype=clean&misc=exp&subspec=HUMAN">Expressional profile</a>
+		for human and mouse, imported from <a href='http://genome.ucsc.edu'>UCSC genome browser</a>;
+	<li>Improvements on <a target='_blank' href='/cgi-bin/treeview.pl?ac=ENST00000340828.1&stype=clean&misc=aln&subspec=selected'>treeview</a>:
+		subtree display, tree-coupled alignment sketch, external nodes colorizing and leaf highlighting;
+	<li>Accessing to TreeFam using external gene identifiers (see <a href="#linktreefam">below</a>);
+	<li>A preliminary <a target='_blank' href='/cgi-bin/TFspec.pl'>taxonomy browser</a>;
+	<li>Anonymous MySQL access at db.treefam.org, port 3308 (anonymous@db.treefam.org:3308).
+</ul>
+</p>
+<h3><a name="linktreefam">Link to TreeFam Pages</a>
+<font size="2" color="gray"> - 2006.06.02</font></h3>
+<p>Now various TreeFam pages can be accessed by providing TreeFam gene identifiers or external
+gene accessions that are stored by other databases such as <a href="http://www.gene.ucl.ac.uk/nomenclature/">HGNC</a>,
+<a href="http://www.informatics.jax.org/">MGI</a>, <a href="http://www.ncbi.nih.gov/Genbank/index.html">GenBank</a>, etc.
+The following are some examples. Details are provided <a href="/cgi-bin/misc_page.pl?faq#d1">here</a>.
+<ul>
+	<a href="/cgi-bin/TFinfo.pl?ac=C14B9.4a.1">http://www.treefam.org/cgi-bin/TFinfo.pl?ac=C14B9.4a.1</a> (by WormBase transcript ID)<br>
+	<a href="/cgi-bin/treeview.pl?&ac=ENST00000262643&stype=full">http://www.treefam.org/cgi-bin/treeview.pl?ac=ENST00000262643&stype=full</a> (full tree)<br>
+	<a href="/cgi-bin/alnview.pl?ac=CG32417">http://www.treefam.org/cgi-bin/alnview.pl?ac=CG32417</a> (link to alignment picture)<br>
+	<a href="/cgi-bin/TFinfo.pl?extac=cdc2&spec=human">http://www.treefam.org/cgi-bin/TFinfo.pl?extac=cdc2&spec=mouse</a> (link by MGI gene symbol)<br>
+</ul>
+</p>
+<h3><a name="release20">TreeFam 2.0 Released</a>
+<font size="2" color="gray"> - 2005.12.30</font></h3>
+<p>TreeFam 2.0 comes as a new year's present. Several essential improvements were
+developed in this new release: pipelines rewritten, bugs fixed, more species added,
+new features introduced, and web pages updated accordingly.
+Notable improvements are:</p>
+<ul><li>Data Sets:<ul>
+		<li>New species added:<i>
+			<a href="http://www.ensembl.org/Pan_troglodytes/">Pan troglodytes</a>,
+			<a href="http://www.ensembl.org/Canis_familiaris/">Canis familiaris</a>,
+			<a href="http://www.ensembl.org/Xenopus_tropicalis/">Xenopus tropicalis</a>,
+			<a href="http://www.ensembl.org/Tetraodon_nigroviridis/">Tetraodon nigroviridis</a>,
+			<a href="http://www.ensembl.org/Ciona_intestinalis/">Ciona intestinalis</a>,
+			<a href="http://www.ensembl.org/Apis_mellifera/">Apis mellifera</a>,</i>
+			and <i><a href="http://www.ensembl.org/Anopheles_gambiae/">Anopheles gambiae</a></i>.
+		<li>Gene sets updated. TreeFam 2.0 was mainly built on
+			<a href="http://www.ensembl.org/">Ensembl</a> <a href="http://sep2005.archive.ensembl.org/">v33</a>.
+	</ul>
+	<li>Pipelines:<ul>
+		<li>Competitive method. In TreeFam 2.0, one sequence is arbitrarily assigned to
+			one family that gives the sequence the highest HMMer score. Overlapping
+			families, which is the main problem with TreeFam 1.0, will not make troubles
+			any more.
+		<li>Clean tree. A clean tree was built by merging several trees together, including
+			<a href="http://atgc.lirmm.fr/phyml/">Phyml</a>-AA-WAG tree,
+			<a href="http://atgc.lirmm.fr/phyml/">Phyml</a>-NT-HKY, NJ-dS and NJ-dN tree.
+			Our preliminary tests suggest this is the most accurate automatic method for building trees that we have tried.
+		</ul>
+	<li>Web Pages:<ul>
+		<li>Alignment View was added to the family page.
+			<a href="http://www.sanger.ac.uk/Software/Pfam/">Pfam</a> domains and
+			splicing sites are visualized in a mapped picture.
+		<li>Sidebar was introduced. Look-and-feel were improved.
+		</ul>
+</ul>
+At present, TreeFam 2.0 has not been completely finalized. As we hope users can experience
+the new features after they read
+<a href="http://nar.oxfordjournals.org/cgi/content/full/34/suppl_1/D572">our paper</a> published today,
+we bring v2.0 out in a hurry. Sorry for the
+inconvenience and we will update remaining parts in the next few days. In the mean time,
+older release v1.x is still temporarily available at
+<a href="http://platform.humgen.au.dk:8080">http://platform.humgen.au.dk:8080/</a>,
+hosted by the <a href="http://www.humgen.au.dk/en">Insitute of Human Genetics of Aarhus University</a>.
+</td>
+</td></tr></table>
+<table border=0 cellspacing=0 cellpadding=3 width="100%">
+		<tr bgcolor='darkgreen'>
+			<td width="50%" align="left"><font color='white' size=1>Last Modified Thu Dec 06 09:48:01 2007</font></td>
+			<td width="50%" align="right">
+				<a href="mailto:treefam@sanger.ac.uk"><font color='white' size=1>treefam@sanger.ac.uk</font></a></td>
+		</tr>
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <title>PAST - Polypeptide Angle Suffix Tree</title>
+    <link rel="stylesheet" href="PAST.css" type="text/css">
+  </head>
+
+  <body>
+    <table width="100%" cellspacing=4 class="header">
+      <colgroup>
+	<col width=105>
+	<col width=40>
+	<col width=300>
+	<col>
+<!--
+	<col width=91>
+	<col width=10>
+-->
+	<col>
+	<col width=25>
+	<col width=70>
+      </colgroup>
+	<tr>
+	  <td><a href="http://www.tu-muenchen.de/"><img src="tumlogo_105x22.gif" width=105 height=22 alt="TUM" style="border: 0px;"></a></td>
+	  <td><a href="http://www14.informatik.tu-muenchen.de/"><img src="http://www14.informatik.tu-muenchen.de/images/logo.gif" width=40 height=40 alt="LEA" style="border: 0px;"></a></td>
+	  <td>
+	    <a href="http://www.informatik.tu-muenchen.de/"><span style="color: #a1a1a1;">Department of </span><span style="color: #0075cf;">Computer Science</span></a><br>
+	    <a href="http://www14.informatik.tu-muenchen.de/"><span style="color: #0075cf;">Efficient Algorithms</span><span style="color: #a1a1a1;"> Group</span></a>
+	  </td>
+
+	  <td align=center>
+   	    Database: PDB as of May 25, 2010<br>
+	    (183.504 chains from 56.371 files)
+	  </td>
+
+	  <td align=right>supported<br>by</td>
+
+	  <td align=center><img src="BFAM-23x35.gif" width=23 height=35 alt="BFAM"></td>
+	  <td><a href="http://bfam.bio.wzw.tum.de/" style="font-size:14pt; color: #003366; text-decoration:none;"><b>BFAM</b></a></td>
+	  <!--
+	  <td align=center><font face="Arial,Helvetica" size=2>and</font></td>
+	  <td width=70 align=right><img src="NGFN.gif" width=70 height=22 alt="NGFN"></td>
+	  -->
+	</tr>
+    </table>
+
+    <h1 style="text-align: center;">PAST - Polypeptide Angles Suffix Tree</h1>
+
+    <table>
+      <colgroup>
+	<col>
+	<col>
+	<col>
+      </colgroup>
+	<tr>
+	  <td valign=top>
+	    <table class="navbar">
+		<tr>
+		  <td><a href="/">Home</a></td>
+		</tr>
+		<tr>
+		  <td><a href="people.php">People</a>
+		    <ul>
+		      <li><a href="people.php#team">Team</a></li>
+		      <li><a href="people.php#partners">Partners</a></li>
+		    </ul>
+		  </td>
+		</tr>
+		<tr>
+		  <td><a href="query.php">Search</a>
+		    <ul>
+		      <li><a href="query.php">Query</a></li>
+		    </ul>
+		  </td>
+		</tr>
+		<tr>
+		  <td><a href="download.php">Download</a>
+		    <ul>
+		      <li><a href="download.php#application">Application</a></li>
+		      <li><a href="download.php#data">Data</a></li>
+		    </ul>
+		  </td>
+		</tr>
+		<tr>
+		  <td><a href="references.php">References</a></td>
+		</tr>
+		<tr>
+		  <td><a href="related.php">Related</a>
+		    <ul>
+		      <li><a href="related.php#groups">Groups</a></li>
+		      <li><a href="related.php#tools">Tools</a></li>
+		      <li><a href="related.php#databases">Databases</a></li>
+		    </ul>
+		  </td>
+		</tr>
+	    </table>
+	  </td>
+
+	  <td valign=top>
+	    <a name="intro"></a>
+	    <h3>Introduction</h3>
+
+	    <p>
+	      The Polypeptide Angles Suffix Tree (PAST) is a data structure
+	      that provides fast methods for
+	    </p>
+	    <ul>
+	      <li><b>searching three-dimensional polypeptide (protein) structures</b> and</li>
+	      <li><b>identifying frequent common substructures (structural motifs)</b></li>
+	    </ul>
+	    <p>
+	      in a protein structure database like the <a
+	      href="http://www.rcsb.org/pdb/">PDB</a>.  Unlike former
+	      approaches in this topic our approach does not consider
+	      the sequence of amino acids (i.e. the primary
+	      structure).  Instead of that it uses a coding of the
+	      backbone torsion angles which is invariant to
+	      translation and rotation of the molecule in the actual
+	      coordinate system.<br>
+
+	      By applying structural queries to a suffix tree (or
+	      suffix array) that was build for the polypeptides in the
+	      Protein Data Bank (PDB) it is shown that the method
+	      works in practice and that it might be a very useful
+	      tool for future research in proteomics.
+	    </p>
+
+	    <h4>How it works</h4>
+
+	    <ol>
+	      <li>
+		Proteins consist of one or several polypeptides,
+		i.e. chains of many amino acids that are tied together
+		by so called peptide bonds.  Depending on the actual
+		sequence of amino acid residues that are bound to the
+		main chain (also called backbone), each polypeptide
+		folds into a certain three-dimensional shape.  In
+		order to make the structures comparable we forget
+		about the residues and restrict our considerations to
+		the main chain.  To represent the structure of a
+		polypeptide backbone in a form that is independent of
+		the current coordinate system, we calculate angles
+		that describe the structure in a translation- and
+		rotation-invariant way.  There are mainly two options
+		possible:
+		<ul>
+		  <li>using the phi and psi torsion angles, or</li>
+		  <li>using the alpha and tau virtual bond angles</li>
+		</ul>
+	      </li>
+
+	      <li>
+		The sequence of the respective angles is encoded into
+		a sequence of characters by discretizing the whole
+		circle into fixed intervals.  Thus each polypeptide
+		structure of the protein database (e.g. <a
+		href="http://www.rcsb.org/pdb/">PDB</a>) is now
+		represented by a sequence of angle characters.
+	      </li>
+
+	      <li>
+		These angle sequences are stored in a generalized
+		suffix tree (or suffix array), a data structure that
+		provides fast searching after the initial construction
+		step.  A linear time construction of the suffix tree
+		can be performed by a variant of the Ukkonen algorithm
+		that is also capable of adding sequences on-line.
+	      </li>
+
+	      <li>
+		To search a structure in the database, the main chain
+		is encoded the same way into a sequence of angle
+		characters as before.  This sequence can be searched
+		using the standard suffix tree search method, but in
+		order to get all similar structures, one needs to
+		consider neighboring angle codes too.  Although this
+		means to give up the linear worst case lookup time,
+		this is not a restriction in practice (as has been
+		demonstrated by our experiments).  The advantage of
+		using a suffix tree compared to simply scanning the
+		database again and again is that the search time does
+		not depend on the size of the database, the complexity
+		of the respond time only depends on the length of the
+		query and the number of hits.  This means that even in
+		the case of a huge database like the PDB, you will get
+		the answer within seconds!  This makes PAST a most
+		favorable tool for searching protein structures.
+	      </li>
+	    </ol>
+    
+	  </td>
+
+	  <td valign=top>
+	    <table class="news" cellspacing=0>
+		<tr>
+		  <th>Events</th>
+		</tr>
+
+		<tr>
+		  <td>
+		    <a href="http://psb.stanford.edu/"><b>PSB'11</b></a>:<br>
+		    Pacific Symp. on Biocomputing,
+	            Jan&nbsp;3-7,&nbsp;2011,<br>
+		    Big Island of Hawaii<br>
+		    <a href="http://psb.stanford.edu/">&raquo; read more</a>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td>
+		    <a href="http://sysbio.kribb.re.kr/APBC2011/"><b>APBC'11</b></a>:<br>
+		    9<sup>th</sup> Asia Pacific Bioinformatics Conf.,
+	            Jan&nbsp;11-14,&nbsp;2011,<br>
+		    Inchon, Korea<br>
+		    <a href="http://sysbio.kribb.re.kr/APBC2011/">&raquo; read more</a>
+		  </td>
+		</tr>
+
+	    </table>
+	  </td>
+	</tr>
+    </table>
+
+    <p>
+    <hr>
+    <address><a href="http://www14.informatik.tu-muenchen.de/personen/taeubig/">Hanjo T&auml;ubig</a></address>
+    <p>
+<!-- Created: Tue Nov 11 14:18:39 CET 2003 -->
+<!-- hhmts start -->
+Last modified: Thu Feb 15 01:22:50 CET 2007
+<!-- hhmts end -->
+    </p>
+  </body>
+</html>

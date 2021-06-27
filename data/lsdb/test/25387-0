@@ -1,0 +1,308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><!-- Tspd.html Sequence Pattern Discovery -->
+<!-- (C) Copyright IBM Corp. 2001 - 2002 All Rights Reserved. -->
+<!--
+invisible TABLE BORDERS (<TABLE border="0") can be grouped activated (vs: border = "1")
+
+last upload: Mar 19, 2002 (trireme)
+last update: Mar 19, 2002
+-->
+
+<META name="GENERATOR" content="IBM WebSphere Homepage Builder V5.0.1 for Windows">
+<meta name="Keywords" content="ibm,international business machines,bioinformatics,pattern discovery,association discovery,pattern discovery tools,data mining,data mining tools,biological data mining,association discovery tools,bioinformatics tools,sequence pattern discovery,motif discovery,pattern recognition,pattern detection,motif recognition,motif detection,motif discovery,protein annotation,protein function prediction,functional annotation,structural annotation,integer pattern discovery,g-protein coupled receptors,genome annotation, genome annotations,text mining,gene identification,gene discovery,gene finding,gene recognition,multiple sequence alignment, teiresias,musca,gene expression analysis,bio-dictionary,BDGF,Comma,molecular moment analyis,dna repeat,functional genomics,proteomics,computational biology"/>
+<TITLE>IBM Computational Biology Center / TEIRESIAS: Sequence Pattern Discovery</TITLE>
+
+<LINK REL="stylesheet" href="fonts.css" type="text/css">
+
+<SCRIPT src = "javascript/localnames.js"></SCRIPT>
+<SCRIPT src = "javascript/diagnose.js"></SCRIPT>
+<SCRIPT src = "javascript/equiv.js"></SCRIPT>
+<SCRIPT src = "javascript/params.js"></SCRIPT>
+<SCRIPT src = "javascript/tspdmenu.js"></SCRIPT>
+<SCRIPT src = "javascript/fasta.js"></SCRIPT>
+<SCRIPT src = "javascript/rowcol.js"></SCRIPT>
+<SCRIPT src = "javascript/flagchar.js"></SCRIPT>
+<SCRIPT src = "javascript/tspd.js"></SCRIPT>
+<SCRIPT src = "javascript/validate.js"></SCRIPT>
+<SCRIPT src = "javascript/srvname.js"></SCRIPT>
+<SCRIPT src = "javascript/annotate.js"></SCRIPT>
+<SCRIPT src = "javascript/toolsmenu.js"></SCRIPT>
+
+
+<SCRIPT langauge="JavaScript">
+menus[0]='<table width="100%" bgcolor="#DEDEDE" style="color:black"><tr><td align="center"><br><b>Sequence Pattern Discovery</b>&nbsp<a href="Help/aboutTspd.htm" TARGET="_blank"><font size="-2">HELP</font></a><br><br></td></tr></table>'
+
+function tspdValidate(form)
+{
+if (!validate(form)) return false;
+if (!checkTspdSpecific(form)) return false;
+
+//popUpMessage("Tspd");
+}
+</SCRIPT>
+
+<SCRIPT language="JavaScript">
+<!--HPB_SCRIPT_ROV_50
+//
+// Licensed Materials - Property of IBM
+// 5639-L89, 11K8359
+// (C) Copyright IBM Corp. 1995, 2000  All Rights Reserved.
+//
+// Version: 5.0.1
+//
+
+// HpbImgPreload:
+//
+function HpbImgPreload()
+{
+  var appVer=parseInt(navigator.appVersion);
+  var isNC=((appVer >= 4));
+  var isIE=(document.all    && (appVer >= 4));
+  if (isNC || isIE)
+  {
+    if (document.images)
+    {
+      var imgName = HpbImgPreload.arguments[0];
+      var cnt;
+      swImg[imgName] = new Array;
+      for (cnt = 1; cnt < HpbImgPreload.arguments.length; cnt++)
+      {
+        swImg[imgName][HpbImgPreload.arguments[cnt]] = new Image();
+        swImg[imgName][HpbImgPreload.arguments[cnt]].src = HpbImgPreload.arguments[cnt];
+      }
+    }
+  }
+}
+// HpbImgFind:
+//
+function HpbImgFind(doc, imgName)
+{
+  for (var i=0; i < doc.layers.length; i++)
+  {
+    var img = doc.layers[i].document.images[imgName];
+    if (!img) img = HpbImgFind(doc.layers[i], imgName);
+    if (img) return img;
+  }
+  return null;
+}
+// HpbImgSwap:
+//
+function HpbImgSwap(imgName, imgSrc)
+{
+  var appVer=parseInt(navigator.appVersion);
+  var isNC=((appVer >= 4));
+  var isIE=(document.all    && (appVer >= 4));
+  if (isNC || isIE)
+  {
+    if (document.images)
+    {
+      var img = document.images[imgName];
+      if (!img) img = HpbImgFind(document, imgName);
+      if (img) img.src = imgSrc;
+    }
+  }
+}
+var swImg; swImg=new Array;
+//-->
+</SCRIPT>
+
+<SCRIPT language="JavaScript">
+<!--HPB_SCRIPT_PLD_50
+HpbImgPreload('_HPB_ROLLOVER1', 'compute.gif', 'compute2.gif');
+//-->
+</SCRIPT>
+</HEAD>
+<BODY bgcolor="white" onload="goToMenu(0)">
+<CENTER>
+<NOSCRIPT>
+<b>This site works best with Javascript "enabled" browsers, but your browser has Javascript "disabled".</b><br>
+<b>All searches using this tool will be performed on an <FONT COLOR = "#FF0000">IBM Computational Biology Center</FONT> server.</b>
+</NOSCRIPT>
+<SCRIPT>
+document.write('<FORM method="POST" action="' + srvname + '" name="thisform" onsubmit="return tspdValidate(thisform)">');
+</SCRIPT>
+<NOSCRIPT>
+<FORM method="POST" action="http://cbcsrv.watson.ibm.com:8080/teiresias/Teiresias" name="thisform" onsubmit="return tspdValidate(thisform)">
+</FORM></NOSCRIPT>
+<CAPTION><FONT size="+2" color="#8080ff" face="Arial">IBM Computational Biology Center - Tools &amp; Content</FONT><BR><BR></CAPTION>
+<TABLE border="3" style="border-style:groove" cellpadding="3" cellspacing="12" width="715">
+<THEAD>
+<TR><TH></TH><TH bgcolor="#dadcda">
+<SCRIPT language="Javascript">
+if(!document.layers){
+document.write(niceGui);
+}
+else{
+boringGui("Sequence Pattern Discovery","/Help/aboutTspd.htm");
+}
+</SCRIPT>
+</TH></TR>
+</THEAD>
+  <TBODY onmouseover="unTab();goToMenu(0)">
+      <TR>
+        <TD bgcolor="#aeaeff" width ="90" nowrap valign="top" height="431">
+<SCRIPT language="Javascript">sideMenu(localAdminEmailHtml);</SCRIPT>
+      </TD>
+      <TH align="center" valign="top" height="431" nowrap bgcolor="white">
+      <TABLE border= "1" height="128">
+          <TR>
+            <TH nowrap align="center"><A href="Tutorial/helps.html#options" target="_blank">Options</A></TH>
+            <TH align="center" nowrap><A href="Tutorial/helps.html#parameters" target="_blank">Parameters</A></TH>
+            <TH nowrap>
+            <TABLE border="0" cellpadding = "0">
+                <TR>
+<TD>
+<TABLE border="0">
+<TR><TD><B><A href="Tutorial/helps.html#equivalency" target="_blank">Equivalency&nbsp;Sets</A>&nbsp;(type&nbsp;or&nbsp;paste)</B></TD></TR>
+<TR><TD><SELECT name = "equivalence_set"><OPTION value = "clear_equiv">SELECT A SET TO USE<OPTION value = "chemical_AA">Chemical nature of AA<!-- preserved--><OPTION value = "structural_AA">Structural character of AA<!-- preserved-->
+</SELECT></TD></TR>
+</TABLE>
+</TD>
+                </TR>
+            </TABLE>
+            </TH>
+          </TR>
+          <TR>
+            <TD valign = "top">
+            <TABLE border="0" cellpadding="0" cellspacing="0">
+                <TR >
+                  <TD align="right" nowrap><b>&nbsp;Discovery&nbsp;Using&nbsp;Equivalences&nbsp;</b><INPUT type="radio" name="bracketedOption" value="on" checked></TD>
+                </TR>
+                <TR>
+                  <TD align="right" nowrap><b>Exact&nbsp;Discovery&nbsp;</b><INPUT type="radio" name="bracketedOption" value="off"></TD>
+                </TR>
+           </TABLE>
+            </TD>
+            <TD rowspan = "3"  valign = "top">
+<TABLE border="0" cellpadding="0" cellspacing="0">
+<TR>
+<TD>
+<CENTER>
+<TABLE border="0" cellpadding="0" cellspacing="0">
+                <TR>
+                  <TH nowrap align="right">&nbsp;Max Brackets:&nbsp;</TH>
+                  <TD align="left" nowrap><INPUT size="10" type="text" name="maximumBrackets" value="100" class="mono"></TD>
+                </TR>
+                <TR>
+                  <TH nowrap align="right">L:&nbsp;</TH>
+                  <TD nowrap align="left"><INPUT size="10" type="text" name="L" value="3" class="mono"></TD>
+                </TR>
+                <TR>
+                  <TH nowrap align="right">W:&nbsp;</TH>
+                  <TD align="left" nowrap><INPUT size="10" type="text" name="W" value="5" class="mono"></TD>
+                </TR>
+                <TR>
+                  <TH nowrap align="right">K:&nbsp;</TH>
+                  <TD nowrap><INPUT size="10" type="text" name="K" value="2" class="mono"></TD>
+                </TR>
+                <TR>
+                  <TH nowrap align="right">Q:&nbsp;</TH>
+                  <TD align="left" nowrap><INPUT size="10" type="text" name="M" value="2147483647" class="mono"></TD>
+                </TR>
+</TABLE>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+<TD rowspan="3" valign = "top">
+<CENTER>
+<TABLE border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
+<TR>
+<TD valign="middle" align="center"><b>Case sensitive!</b><br><FONT CLASS="mono"><TEXTAREA rows="5" cols="23" name="matrix"></TEXTAREA></FONT><!--cols="32"-->
+<p><CENTER><INPUT type="button" class=equivbutton name = "clear_equiv" value="CLEAR EQUIVALENCY SET" onClick="clearTspdEquivalency();"></CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</TD>
+</TR>
+<TR>
+<TD align="right">
+<TABLE border="0" cellpadding="0" cellspacing="0">
+                <TR>
+                  <TH align="right" nowrap>Seq Version&nbsp;<INPUT type="checkbox" name="seqVersionOption" value="on"></TH>
+                </TR>
+                <TR>
+                  <TH align="right" nowrap>Remove Overlaps&nbsp;<INPUT type="checkbox" name="removeOverlapsOption" value="on"></TH>
+                </TR>
+                <TR>
+                  <TH align="right" nowrap>Upper Case&nbsp;<INPUT type="checkbox" name="upperCaseOption" value="on"></TH>
+                </TR>
+</TABLE>
+</TD>
+</TR>
+<TR>
+<TD align="right">
+<TABLE border="0" cellpadding="0" cellspacing="0">
+                <TR>
+                  <TD align="right" nowrap><b>Only amino acid characters&nbsp;</b><INPUT type="radio" name="validCharOption" value="on" checked></TD>
+                </TR>
+                <TR>
+                  <TD align="right" nowrap><b>Only nucleic acid characters&nbsp;</b><INPUT type="radio" name="validCharOption" value="off"></TD>
+                </TR>
+                <TR>
+                  <TD align="right"><b>&nbsp;Accept all characters&nbsp;</b><INPUT type="radio" name="validCharOption" value="off"></TD>
+                </TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+      <TABLE border="0" cellpadding="0" cellspacing="0">
+          <TR>
+            <TD>
+            <TABLE border="0" cellpadding = '3'>
+                <TR>
+                  <TD><B><A href="Tutorial/helps.html#sequences" target="_blank">Input Sequences</A> (type or paste) <FONT size="-1" color="#000000">30K Netscape limit</FONT><FONT color="#000000"> </FONT></B></TD>
+<TD nowrap><SELECT name = "data_set"><OPTION value = "directions">SELECT A SAMPLE<OPTION value = "toy_set">Toy data set<OPTION value = "hemoglobin_set">Hemoglobin set<OPTION value = "FTP_set">Zurich FTP set
+</SELECT></TD>
+                </TR>
+            </TABLE>
+            </TD>
+          </TR>
+          <TR>
+            <TD nowrap><FONT CLASS="mono"><TEXTAREA wrap="off" rows="5" cols="67" name="sequences"></TEXTAREA></FONT></TD>
+          </TR>
+          <TR>
+            <TD nowrap align="center"><A HREF="Help/aboutTspd.htm" TARGET="_blank"><IMG alt="powered by the Teiresias algorithm" src="powerT.gif" width="109" height="31" border="0"></A>&nbsp;
+<A href="javascript:document.thisform.submit()" id="_HPB_ROLLOVER1" onmouseout="HpbImgSwap('_HPB_ROLLOVER1','compute.gif');" onmouseover="HpbImgSwap('_HPB_ROLLOVER1','compute2.gif');" onclick="return tspdValidate(thisform)">
+<IMG src="compute.gif" width="155" height="32" border="0" name="_HPB_ROLLOVER1"></A>
+<A href="javascript:document.thisform.reset()"> <IMG src="reset.gif" width="155" height="32" border="0"> </A>
+</TD>
+          </TR>
+      </TABLE>
+      <TABLE border="0" bgcolor="#ffffff">
+          <TR>
+            <TDvalign="top" align="left" height="97"></TR></TABLE>
+      <TABLE border="0" bgcolor="#ffffff" cellpadding="0" cellspacing="0" height="90">
+          <TR>
+            <TD><FONT size="2"><A href = "http://www.research.ibm.com/bioinformatics/publications.phtml.html" alt="References"><B>References:</B></A></FONT></TD>
+          </TR>
+          <TR>
+            <TD width = "550">
+            <UL>
+              <LI><FONT size="2">Rigoutsos, I. and A. Floratos, <b>Combinatorial Pattern Discovery in Biological
+              Sequences: the TEIRESIAS Algorithm.</b> <I>Bioinformatics,</I> 14(1), January 1998.</FONT>
+              <LI><FONT size="2">Rigoutsos, I. and A. Floratos. <b>Motif Discovery Without Alignment Or Enumeration.</b> 
+	      <I>Proceedings 2nd Annual ACM International Conference on Computational Molecular Biology
+              (RECOMB '98),</I> New York, NY. March 1998.</FONT>
+            </UL>
+            <INPUT type="hidden" name="engine" value="sequencePatternDiscovery"></TD>
+          </TR>
+      </TABLE>
+      <TABLE border="0" bgcolor="#ffffff">
+        <TBODY>
+          <TR></TR>
+        </TBODY>
+      </TABLE>
+      </TH>
+    </TR>
+</TBODY></TABLE><INPUT type="hidden" name="engine" value="sequencePatternDiscovery">
+<SCRIPT>
+addAllHandlers(document.thisform);
+</SCRIPT>
+</CENTER>
+</BODY>
+</HTML>
+

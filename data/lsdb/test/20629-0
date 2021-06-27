@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Finding Motif for Subcellular Localization</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#ffffff" vlink="#0000ff">
+<center>
+<h2>Supporting Website for the Paper:<br/>
+Discriminative Motif Finding for Subcellular Localization based on Profile Hidden Markov Models</h2>
+<h4><a href="http://www.cs.cmu.edu/~thlin/">Tien-ho Lin</a>, <a href="http://www.andrew.cmu.edu/user/murphy/">Robert F. Murphy</a>, and <a href="http://www.cs.cmu.edu/~zivbj/">Ziv Bar-Joseph</a></h4>
+<img src="tree.png" alt="Compartments and HMM motifs">
+</center>
+<h4>Abstract</h4>
+<p>
+  Knowing the subcellular location of proteins is important for understanding their functions. Many methods have been described to predict subcellular locaiton from sequence information. However, most of these methods either rely on global sequence properties or use a set of known protein targeting motifs to predict protein localization. Here we develop and test a novel method that identifies potential targeting motifs using a discriminative approach based on Hidden Markov models (discriminative HMMs). These models search for motifs that are present in a compartment but absent in other, nearby, compartments by utilizing an hierarchical structure that mimics the protein sorting mechanism. We show that both discriminative motif finding and the hierarchical structure improves localization prediction on a benchmark dataset of yeast proteins. The motifs identified can be mapped to known targeting motifs and they are more conserved than the average protein sequence. Using our motif-based predictions we can identify what we believe are annotation errors in public databases for the location of some of the proteins.
+</p>
+
+<h4>Prediction of all yeast proteins</h4>
+<ul>
+  <li><a href="yeast6782.prediction">Click here to download prediction of localization of all yeast proteins</a>.</li>
+  <li>Sequence of 6,782 proteins are downloaded from SwissProt.</li>
+  <li>The file is in plain text format (tab-seperated table) and straightforward to understand. The confidence of all protein-location pairs is provided.</li>
+  <li>Prediction method: Based on a dataset of 1,521 proteins with verified localization on SwissProt, we extract discriminative HMM motifs for each location and train a SVM classifier using motifs as features. Both procedure are performed on every split on a protein sorting tree structure. Confidence is estimated using SVM margins. See the paper for details, and comparison to other methods.</li>
+</ul>
+
+<h4>Software download</h4>
+<ul>
+  <li>
+    <a href="subloc-dist.zip">Click here to download software and dataset</a> (34MB).
+  </li>
+  <li>
+    See README in the package for documentation.
+  </li>
+</ul>
+
+<p>Please email <a href="http://www.cs.cmu.edu/~thlin/">Tien-ho Lin</a> for any questions.</p>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7396301-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

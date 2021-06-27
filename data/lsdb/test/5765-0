@@ -1,0 +1,108 @@
+
+<html>
+<head>
+<title>XcisClique Home Page</title>
+<link rel="stylesheet" href="stylesheet.css" type="text/css" />
+</head>
+
+<body>
+<div class="Header"><table width="630" align="left" valign="middle" border="0"><tr><td align=right valign=top><font color="#990000" size=5>&nbsp;&nbsp;&nbsp;<b>XcisClique</b></font><br><b><font color="#666666">Integrating Gene Expression and Motif Combinations in Arabidopsis thaliana</font></b></td></tr><tr><td align=left valign=bottom><font color="#990000" size=5><br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://bioinformatics.cs.vt.edu/~expresso">EXPRESSO</a></b></font><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font color="#666666">A Bioinformatics Research Group</font></b></td></tr></table></div><div class="NavMenu">
+<table><tr>
+<td class="NavMenuTDcurr"><a href="index.php">Home</a></td>
+<td class="NavMenuTD"><a href="query.php">Query</a></td>
+<td class="NavMenuTD"><a href="results.php">Existing Results</a></td>
+<td class="NavMenuTD"><a href="help.php">Help</a></td>
+<td class="NavMenuTD"><a href="about-us.php">About Us</a></td>
+<td class="NavMenuTD"><a href="delete.php">Clear Session</a></td>
+</tr></table>
+</div>
+
+<div class="Content">
+<a name=top></a>
+<table align="center" width="98%" border="0">
+<tr><td align="justify">
+1. <a href="#intro">Introduction</a><br>
+2. <a href="#sch">Process Flow</a><br>
+3. <a href="#ref">References</a><br>
+4. <a href="XcisClique.tar.gz">Download XcisClique</a><br>
+5. <a href="#req">Requirements</a><br><br>
+
+<hr>
+<a name=intro></a>
+<font color=blue size=4><b>1. Introduction</b></font><br><br>
+<img src="./images/logo.png" width=200 height=220 align=left>
+'XcisClique' is a system for the analysis of upstream regions of <i>Arabidopsis thaliana (AT)</i> genes and relating these results with gene expression data. The system takes a list of AT genes and a list of known cis-elements (regulatory motifs) as input and identifies statistically significant individual cis-elements as well combinations of cis-elements. <br><br>
+The infrastructure for XcisClique includes a comprehensive local database of AT sequence and expression data. This database stores sequence and position information about all AT genes and their upstream regions. Details about plant cis-acting regulatory elements are also stored locally with information taken from PLACE and various literature sources. Matches of each of these cis-elements found in the upstream regions of all AT genes are also stored.<br><br>
+Expression Data for all AT genes when subjected to 9 abiotic stress treatments (Heat, Cold, Osmotic, Salt, Genotoxic, Drought, Oxidative, UV-B and Wounding) with 5 time points per treatments have been curated from the Nottingham Database. This data has been intensively tested statistically to verify the quality of biological replicates. Genewise expression vectors correponding to all treatments and time-points have been computed. <br><br>
+A typical analysis consists of a set of genes and a set of cis-elements as input. The cis-elements can be perl regular expressions. The web-interface for XcisClique provides a selection menu for all cis-elements curated so far. Individual motifs that are statistically significant are identified by a Chi-Square test of independence. Combinations of motifs are identified by the Apriori algorithm and statistically significant combinations are identified by the Hypergeometric distribution.<br><br>
+In the complete XcisClique system correlations between all pairs of genes in a combination are calculated and the random probability of obtaining the resulting distribution of correlation coefficients when sampled from the entire genome is calculated. This probability is coupled with the probability from sequence analysis to give a final p-value associated with an biclique.This feature is not available in the online version because it requires genomewide calculations which take time. Complete results with the expression data are available on request.<BR><br>
+<a href="#top">Top of Page</a>
+
+<hr>
+<a name="sch"></a>
+<font color=blue size=4><b>2. Schematic</b></font><br><br>
+<p align=center>
+<img src="images/XCC_Schema.png"><br>
+Fig: The XcisClique Schematic</p><br><br>
+<a href="#top">Top of Page</a>
+
+<hr>
+<a name="ref"></a>
+<font color=blue size=4><b>3. References</b></font><br><br>
+1. Amrita Pati, Modeling and Analysis of Regulatory Elements in <i>Arabidopsis thaliana</i> from Annotated Genomes and Gene Expression Data, Master's Thesis, Virginia Tech, July 2005. (<a href=Thesis.pdf>Download</a>)<br>
+2. Amrita Pati, Lenwood S. Heath, Cecilia Vasquez-Robinet, Ruth Grene, and T. M. Murali. XcisClique: Analyzing regulatory bicliques in <i>Arabidopsis thaliana</i>, Technical Report, Virginia Tech. (<a href=paper.pdf>Download</a>)<br><br>
+<a href="#top">Top of Page</a>
+
+<hr>
+<a name="req"></a>
+<font color=blue size=4><b>5. Requirements</b></font><br><br>
+The following software components are required to install and run the command line version of
+XcisClique.<br>
+1. Perl 5.8.5 or higher.<br>
+2. Perl Modules.<br>
+(a) LWP::Simple This Perl module provides a simple, procedural interface to LWP, which is
+the World-Wide Web library for Perl, a set of Perl modules which provides a sample
+and consistent application programming interface (API) to the World-Wide Web.
+(CPAN)<br>
+(b) Shell Perl module to run shell commands transparently within Perl. (CPAN)<br>
+(c) DBI Perl module for database access. It defines a set of methods, variables, and
+conventions that provide a consistent database interface, independent of the actual
+database being used. (CPAN)<br>
+(d) DBD::Pg This is the PostgreSQL database driver for the DBI module. (CPAN)<br>
+(e) Test::Simple Pre-requisite for DBD::Pg. (CPAN)<br>
+(f) Time::localtime Perl module with interfaces to Perl's built-in localtime() function.
+(CPAN)<br>
+(g) Math::Matrix Perl module with functions for multiplication, inversion, and other
+common matrix operations. (CPAN)<br>
+(h) Statistics::Distributions Perl module for calculating critical values and upper
+probabilities of common statistical distributions such as the Normal distribution, the
+chi-square distribution, the t distribution, and the F distribution. (CPAN)<br>
+(i) PDF Perl module with functions for calculating critical values and probabilities of
+various statistical distributions, such as the Binomial distribution, the Hypergeometric
+distribution, and the Gaussian distribution. (Packaged with XcisClique)<br>
+(j) Vector Perl module for common vector operations and calculation of Pearson and
+Spearman correlation coefficients between vectors. (Packaged with XcisClique)<br>
+(k) Utilities Perl module with common text processing utility functions such as
+removing white space from a string. (Packaged with XcisClique)<br>
+3. Matlab 7.0.4 with Statistics toolbox.<br>
+<a href="#top">Top of Page</a>
+
+</td></tr>
+</table>
+<br>
+<HR>
+<table width="100%" border=0>
+<tr>
+<td align=left>Copyright &copy 2003-2006 Expresso Research Group</td>
+<td align=right>Last updated on: Tuesday, August 29 2006 EDT</td>
+</tr>
+<tr>
+<td align=left>All Rights Reserved</td>
+<td align=right>Email comments to <a href=mailto:apati@vt.edu>webmaster</a>
+</tr>
+</table>
+</div>
+
+
+</body>
+</html>

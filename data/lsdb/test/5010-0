@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<TITLE>MACSIMS</TITLE>
+</HEAD>
+
+<BODY bgcolor="white">
+<P align="center">
+<IMG src="./macsim_small.gif" width="60" height="100" align="left">
+<font color="#ffc750" size="7" face="Comic Sans MS">MACSIMS</font>
+</P>
+<SCRIPT LANGUAGE="JavaScript">
+screen_width = screen.width;
+screen_height = screen.height;
+if ((screen_width < 1024) || (screen_height < 768)) {
+        document.write("<CENTER>");
+        document.write("<STRONG>Beware:</STRONG> ");
+	document.write("This site is best viewed in 1024x768; your screen resolution is only "+screen_width+"x"+screen_height+".");
+        document.write("</CENTER>");
+}
+
+</SCRIPT>
+<P>
+<H2><A Href="Documentation/" TARGET="HELP">Help</A> is available here.</H2>
+</P>
+<P>
+<H2><A Href="ftp://ftp-igbmc.u-strasbg.fr/pub/MACSIMS/">The source code</A> can be found here.</H2>
+<HR>
+<P align=center>
+<FONT face="Comic Sans MS">
+<H2>New session</H2>
+</FONT>
+<P> If you do not have a multiple alignment of complete (full-length) sequences with suitable Uniprot or PDB accession numbers, an alignment can be constructed with the PipeAlign toolkit, available <a href=http://bips.u-strasbg.fr/PipeAlign/>here</a>.
+</P>
+
+<FORM ACTION="load_alignment.php" METHOD=POST>
+Paste your <strong>protein</strong> multiple sequence alignment in :<BR>
+<TEXTAREA name="Sequence" rows=6 cols=60></TEXTAREA>
+<BR><input type="submit" value="Submit pasted sequence">
+<BR>
+</FORM>
+or upload a multiple sequence alignment file <a href="test.fasta">(see example file format)</a>:<BR>
+<FORM ACTION="load_alignment.php" method="POST" enctype="multipart/form-data">
+<input type="file" name="Upfile" size=40><BR>
+<input type="submit" value="Submit Uploaded File">
+<input type="hidden" name="format" value="fasta">
+</FORM>
+<HR>
+<CENTER>
+<FONT face="Comic Sans MS">
+<H2>View previous session results</H2>
+</FONT>
+<I>Previous sessions are identified by an ID number in order to let you retrieve their results later on.
+Please, note that session results are kept only for a week.</I>
+<FORM ACTION="load_session.php" METHOD="GET">
+Enter previous <A HREF=/PipeAlign/Documentation/search_id.html>session ID</A> : <INPUT NAME=id TYPE="TEXT" SIZE=16>
+<INPUT TYPE="submit" Value=" View results ">
+</FORM>
+<HR>
+<I>
+If you have any problem or question, please, feel free to contact us at <A href=mailto:pipealign_support@igbmc.u-strasbg.fr>pipealign_support@igbmc.u-strasbg.fr</A>
+</I>
+<HR>
+</CENTER>
+
+<!-- >Google Analytics Code <-->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-7122549-1");
+pageTracker._trackPageview();
+</script>
+</BODY>
+</HTML>

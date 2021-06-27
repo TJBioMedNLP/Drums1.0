@@ -1,0 +1,2403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<html>
+<head>
+	<meta http-equiv="expires" content="0" />
+	<title>EdgeDB</title>
+	<link rel="STYLESHEET" type="text/css" href="/common/css/screen.css" />
+	<script type="text/javascript" language="Javascript1.1"> 
+
+<!-- Begin 
+
+     var bCancel = false; 
+
+    function validateDataSetActionForm(form) {                                                                   
+        if (bCancel) 
+      return true; 
+        else 
+ var formValidationResult;
+       formValidationResult = validateRequired(form) && validateMinLength(form) && validateMask(form); 
+     return (formValidationResult == 1);
+   } 
+
+    function DataSetActionForm_required () { 
+     this.a0 = new Array("titles", "Title is required.", new Function ("varName", "this.minlength='2';  return this[varName];"));
+    } 
+
+    function DataSetActionForm_minlength () { 
+     this.a0 = new Array("titles", "Title can not be less than 2 characters.", new Function ("varName", "this.minlength='2';  return this[varName];"));
+     this.a1 = new Array("pubdate", "Year can not be less than 4 characters.", new Function ("varName", "this.mask=/^[0123456789]*$/; this.minlength='4';  return this[varName];"));
+    } 
+
+    function DataSetActionForm_mask () { 
+     this.a0 = new Array("pubdate", "Year is invalid.", new Function ("varName", "this.mask=/^[0123456789]*$/; this.minlength='4';  return this[varName];"));
+    } 
+
+
+
+
+   /*$RCSfile: validateFloatRange.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are in a valid float range.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateFloatRange(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oRange = eval('new ' + formName.value + '_floatRange()');
+        for (x in oRange) {
+            var field = form[oRange[x][0]];
+            
+            if ((field.type == 'hidden' ||
+                field.type == 'text' || field.type == 'textarea') &&
+                (field.value.length > 0)  &&
+                 field.disabled == false) {
+        
+                var fMin = parseFloat(oRange[x][2]("min"));
+                var fMax = parseFloat(oRange[x][2]("max"));
+                var fValue = parseFloat(field.value);
+                if (!(fValue >= fMin && fValue <= fMax)) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oRange[x][1];
+                    isValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+    /*$RCSfile: validateUtilities.js,v $ $Revision: 1.2 $ $Date: 2004/03/28 16:53:21 $ */
+
+  /**
+  * This is a place holder for common utilities used across the javascript validation
+  *
+  **/
+
+
+    /*$RCSfile: validateByte.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid byte.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateByte(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+        oByte = eval('new ' + formName.value + '_ByteValidations()');
+
+        for (x in oByte) {
+            var field = form[oByte[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio')  &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (value.length > 0) {
+                    if (!isAllDigits(value)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oByte[x][1];
+
+                    } else {
+
+                        var iValue = parseInt(value);
+                        if (isNaN(iValue) || !(iValue >= -128 && iValue <= 127)) {
+                            if (i == 0) {
+                                focusField = field;
+                            }
+                            fields[i++] = oByte[x][1];
+                            bValid = false;
+                        }
+                    }
+                }
+
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+
+    /*$RCSfile: validateMaxLength.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * A field is considered valid if less than the specified maximum.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * <strong>Caution:</strong> Using <code>validateMaxLength</code> on a password field in a 
+    *  login page gives unnecessary information away to hackers. While it only slightly
+    *  weakens security, we suggest using it only when modifying a password.</p>
+    * @param form The form validation is taking place on.
+    */
+    function validateMaxLength(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oMaxLength = eval('new ' + formName.value + '_maxlength()');        
+        for (x in oMaxLength) {
+            var field = form[oMaxLength[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'password' ||
+                field.type == 'textarea') &&
+                field.disabled == false) {
+
+                var iMax = parseInt(oMaxLength[x][2]("maxlength"));
+                if (field.value.length > iMax) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oMaxLength[x][1];
+                    isValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+
+    /*$RCSfile: validateRequired.js,v $ $Revision: 1.13 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    *  Check to see if fields must contain a value.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+
+    function validateRequired(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+        oRequired = eval('new ' + formName.value + '_required()');
+
+        for (x in oRequired) {
+            var field = form[oRequired[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'file' ||
+                field.type == 'checkbox' ||
+                field.type == 'select-one' ||
+                field.type == 'password') &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else if (field.type == 'checkbox') {
+                    if (field.checked) {
+                        value = field.value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (trim(value).length == 0) {
+
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oRequired[x][1];
+                    isValid = false;
+                }
+            } else if (field.type == "select-multiple") { 
+                var numOptions = field.options.length;
+                lastSelected=-1;
+                for(loop=numOptions-1;loop>=0;loop--) {
+                    if(field.options[loop].selected) {
+                        lastSelected = loop;
+                        value = field.options[loop].value;
+                        break;
+                    }
+                }
+                if(lastSelected < 0 || trim(value).length == 0) {
+                    if(i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oRequired[x][1];
+                    isValid=false;
+                }
+            } else if ((field.length > 0) && (field[0].type == 'radio' || field[0].type == 'checkbox')) {
+                isChecked=-1;
+                for (loop=0;loop < field.length;loop++) {
+                    if (field[loop].checked) {
+                        isChecked=loop;
+                        break; // only one needs to be checked
+                    }
+                }
+                if (isChecked < 0) {
+                    if (i == 0) {
+                        focusField = field[0];
+                    }
+                    fields[i++] = oRequired[x][1];
+                    isValid=false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+    
+    // Trim whitespace from left and right sides of s.
+    function trim(s) {
+        return s.replace( /^\s*/, "" ).replace( /\s*$/, "" );
+    }
+
+
+    /*$RCSfile: validateInteger.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid integer.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateInteger(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oInteger = eval('new ' + formName.value + '_IntegerValidations()');
+        for (x in oInteger) {
+            var field = form[oInteger[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio') &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (value.length > 0) {
+
+                    if (!isAllDigits(value)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oInteger[x][1];
+
+                    } else {
+                        var iValue = parseInt(value);
+                        if (isNaN(iValue) || !(iValue >= -2147483648 && iValue <= 2147483647)) {
+                            if (i == 0) {
+                                focusField = field;
+                            }
+                            fields[i++] = oInteger[x][1];
+                            bValid = false;
+                       }
+                   }
+               }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+    function isAllDigits(argvalue) {
+        argvalue = argvalue.toString();
+        var validChars = "0123456789";
+        var startFrom = 0;
+        if (argvalue.substring(0, 2) == "0x") {
+           validChars = "0123456789abcdefABCDEF";
+           startFrom = 2;
+        } else if (argvalue.charAt(0) == "0") {
+           validChars = "01234567";
+           startFrom = 1;
+        } else if (argvalue.charAt(0) == "-") {
+            startFrom = 1;
+        }
+
+        for (var n = startFrom; n < argvalue.length; n++) {
+            if (validChars.indexOf(argvalue.substring(n, n+1)) == -1) return false;
+        }
+        return true;
+    }
+
+
+    /*$RCSfile: validateCreditCard.js,v $ $Revision: 1.8 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid creditcard number based on Luhn checksum.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateCreditCard(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+        oCreditCard = eval('new ' + formName.value + '_creditCard()');
+
+        for (x in oCreditCard) {
+            if ((form[oCreditCard[x][0]].type == 'text' ||
+                 form[oCreditCard[x][0]].type == 'textarea') &&
+                (form[oCreditCard[x][0]].value.length > 0)  &&
+                 form[oCreditCard[x][0]].disabled == false) {
+                if (!luhnCheck(form[oCreditCard[x][0]].value)) {
+                    if (i == 0) {
+                        focusField = form[oCreditCard[x][0]];
+                    }
+                    fields[i++] = oCreditCard[x][1];
+                    bValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+    /**
+     * Checks whether a given credit card number has a valid Luhn checksum.
+     * This allows you to spot most randomly made-up or garbled credit card numbers immediately.
+     * Reference: http://www.speech.cs.cmu.edu/~sburke/pub/luhn_lib.html
+     */
+    function luhnCheck(cardNumber) {
+        if (isLuhnNum(cardNumber)) {
+            var no_digit = cardNumber.length;
+            var oddoeven = no_digit & 1;
+            var sum = 0;
+            for (var count = 0; count < no_digit; count++) {
+                var digit = parseInt(cardNumber.charAt(count));
+                if (!((count & 1) ^ oddoeven)) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                };
+                sum += digit;
+            };
+            if (sum == 0) return false;
+            if (sum % 10 == 0) return true;
+        };
+        return false;
+    }
+
+    function isLuhnNum(argvalue) {
+        argvalue = argvalue.toString();
+        if (argvalue.length == 0) {
+            return false;
+        }
+        for (var n = 0; n < argvalue.length; n++) {
+            if ((argvalue.substring(n, n+1) < "0") ||
+                (argvalue.substring(n,n+1) > "9")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+   /*$RCSfile: validateDate.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid date.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateDate(form) {
+       var bValid = true;
+       var focusField = null;
+       var i = 0;
+       var fields = new Array();
+       var formName = form.getAttributeNode("name"); 
+
+       oDate = eval('new ' + formName.value + '_DateValidations()');
+
+       for (x in oDate) {
+           var field = form[oDate[x][0]];
+           var value = field.value;
+           var datePattern = oDate[x][2]("datePatternStrict");
+           // try loose pattern
+           if (datePattern == null)
+               datePattern = oDate[x][2]("datePattern");
+           if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea') &&
+               (value.length > 0) && (datePattern.length > 0) &&
+                field.disabled == false) {
+                 var MONTH = "MM";
+                 var DAY = "dd";
+                 var YEAR = "yyyy";
+                 var orderMonth = datePattern.indexOf(MONTH);
+                 var orderDay = datePattern.indexOf(DAY);
+                 var orderYear = datePattern.indexOf(YEAR);
+                 if ((orderDay < orderYear && orderDay > orderMonth)) {
+                     var iDelim1 = orderMonth + MONTH.length;
+                     var iDelim2 = orderDay + DAY.length;
+                     var delim1 = datePattern.substring(iDelim1, iDelim1 + 1);
+                     var delim2 = datePattern.substring(iDelim2, iDelim2 + 1);
+                     if (iDelim1 == orderDay && iDelim2 == orderYear) {
+                        dateRegexp = new RegExp("^(\\d{2})(\\d{2})(\\d{4})$");
+                     } else if (iDelim1 == orderDay) {
+                        dateRegexp = new RegExp("^(\\d{2})(\\d{2})[" + delim2 + "](\\d{4})$");
+                     } else if (iDelim2 == orderYear) {
+                        dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})(\\d{4})$");
+                     } else {
+                        dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})[" + delim2 + "](\\d{4})$");
+                     }
+                     var matched = dateRegexp.exec(value);
+                     if(matched != null) {
+                        if (!isValidDate(matched[2], matched[1], matched[3])) {
+                           if (i == 0) {
+                               focusField = field;
+                           }
+                           fields[i++] = oDate[x][1];
+                           bValid =  false;
+                        }
+                     } else {
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oDate[x][1];
+                        bValid =  false;
+                     }
+                 } else if ((orderMonth < orderYear && orderMonth > orderDay)) {
+                     var iDelim1 = orderDay + DAY.length;
+                     var iDelim2 = orderMonth + MONTH.length;
+                     var delim1 = datePattern.substring(iDelim1, iDelim1 + 1);
+                     var delim2 = datePattern.substring(iDelim2, iDelim2 + 1);
+                     if (iDelim1 == orderMonth && iDelim2 == orderYear) {
+                         dateRegexp = new RegExp("^(\\d{2})(\\d{2})(\\d{4})$");
+                     } else if (iDelim1 == orderMonth) {
+                         dateRegexp = new RegExp("^(\\d{2})(\\d{2})[" + delim2 + "](\\d{4})$");
+                     } else if (iDelim2 == orderYear) {
+                         dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})(\\d{4})$");
+                     } else {
+                         dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})[" + delim2 + "](\\d{4})$");
+                     }
+                     var matched = dateRegexp.exec(value);
+                     if(matched != null) {
+                         if (!isValidDate(matched[1], matched[2], matched[3])) {
+                             if (i == 0) {
+                         focusField = field;
+                             }
+                             fields[i++] = oDate[x][1];
+                             bValid =  false;
+                          }
+                     } else {
+                         if (i == 0) {
+                             focusField = field;
+                         }
+                         fields[i++] = oDate[x][1];
+                         bValid =  false;
+                     }
+                 } else if ((orderMonth > orderYear && orderMonth < orderDay)) {
+                     var iDelim1 = orderYear + YEAR.length;
+                     var iDelim2 = orderMonth + MONTH.length;
+                     var delim1 = datePattern.substring(iDelim1, iDelim1 + 1);
+                     var delim2 = datePattern.substring(iDelim2, iDelim2 + 1);
+                     if (iDelim1 == orderMonth && iDelim2 == orderDay) {
+                         dateRegexp = new RegExp("^(\\d{4})(\\d{2})(\\d{2})$");
+                     } else if (iDelim1 == orderMonth) {
+                         dateRegexp = new RegExp("^(\\d{4})(\\d{2})[" + delim2 + "](\\d{2})$");
+                     } else if (iDelim2 == orderDay) {
+                         dateRegexp = new RegExp("^(\\d{4})[" + delim1 + "](\\d{2})(\\d{2})$");
+                     } else {
+                         dateRegexp = new RegExp("^(\\d{4})[" + delim1 + "](\\d{2})[" + delim2 + "](\\d{2})$");
+                     }
+                     var matched = dateRegexp.exec(value);
+                     if(matched != null) {
+                         if (!isValidDate(matched[3], matched[2], matched[1])) {
+                             if (i == 0) {
+                                 focusField = field;
+                             }
+                             fields[i++] = oDate[x][1];
+                             bValid =  false;
+                         }
+                     } else {
+                          if (i == 0) {
+                              focusField = field;
+                          }
+                          fields[i++] = oDate[x][1];
+                          bValid =  false;
+                     }
+                 } else {
+                     if (i == 0) {
+                         focusField = field;
+                     }
+                     fields[i++] = oDate[x][1];
+                     bValid =  false;
+                 }
+          }
+       }
+       if (fields.length > 0) {
+          focusField.focus();
+          alert(fields.join('\n'));
+       }
+       return bValid;
+    }
+    
+    function isValidDate(day, month, year) {
+	    if (month < 1 || month > 12) {
+            return false;
+        }
+        if (day < 1 || day > 31) {
+            return false;
+        }
+        if ((month == 4 || month == 6 || month == 9 || month == 11) &&
+            (day == 31)) {
+            return false;
+        }
+        if (month == 2) {
+            var leap = (year % 4 == 0 &&
+               (year % 100 != 0 || year % 400 == 0));
+            if (day>29 || (day == 29 && !leap)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /*$RCSfile: validateIntRange.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields is in a valid integer range.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateIntRange(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oRange = eval('new ' + formName.value + '_intRange()');        
+        for (x in oRange) {
+            var field = form[oRange[x][0]];
+            if (field.disabled == false)  {
+                var value = '';
+                if (field.type == 'hidden' ||
+                    field.type == 'text' || field.type == 'textarea' ||
+                    field.type == 'radio' ) {
+                    value = field.value;
+                }
+                if (field.type == 'select-one') {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                }
+                if (value.length > 0) {
+                    var iMin = parseInt(oRange[x][2]("min"));
+                    var iMax = parseInt(oRange[x][2]("max"));
+                    var iValue = parseInt(value);
+                    if (!(iValue >= iMin && iValue <= iMax)) {
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oRange[x][1];
+                        isValid = false;
+                    }
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+
+    /*$RCSfile: validateShort.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    *  Check to see if fields are a valid short.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateShort(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+        oShort = eval('new ' + formName.value + '_ShortValidations()');
+
+        for (x in oShort) {
+            var field = form[oShort[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio')  &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (value.length > 0) {
+                    if (!isAllDigits(value)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oShort[x][1];
+
+                    } else {
+
+                        var iValue = parseInt(value);
+                        if (isNaN(iValue) || !(iValue >= -32768 && iValue <= 32767)) {
+                            if (i == 0) {
+                                focusField = field;
+                            }
+                            fields[i++] = oShort[x][1];
+                            bValid = false;
+                        }
+                   }
+               }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+
+    /*$RCSfile: validateFloat.js,v $ $Revision: 1.11 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid float.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateFloat(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+         var formName = form.getAttributeNode("name");
+
+        oFloat = eval('new ' + formName.value + '_FloatValidations()');
+        for (x in oFloat) {
+        	var field = form[oFloat[x][0]];
+        	
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio') &&
+                field.disabled == false) {
+        
+            	var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+        
+                if (value.length > 0) {
+                    // remove '.' before checking digits
+                    var tempArray = value.split('.');
+                    //Strip off leading '0'
+                    var zeroIndex = 0;
+                    var joinedString= tempArray.join('');
+                    while (joinedString.charAt(zeroIndex) == '0') {
+                        zeroIndex++;
+                    }
+                    var noZeroString = joinedString.substring(zeroIndex,joinedString.length);
+
+                    if (!isAllDigits(noZeroString)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oFloat[x][1];
+
+                    } else {
+	                var iValue = parseFloat(value);
+	                if (isNaN(iValue)) {
+	                    if (i == 0) {
+	                        focusField = field;
+	                    }
+	                    fields[i++] = oFloat[x][1];
+	                    bValid = false;
+	                }
+                    }
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+
+   /*$RCSfile: validateEmail.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid email address.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateEmail(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+
+        oEmail = eval('new ' + formName.value + '_email()');
+
+        for (x in oEmail) {
+            var field = form[oEmail[x][0]];
+            if ((field.type == 'hidden' || 
+                 field.type == 'text' ||
+                 field.type == 'textarea') &&
+                (field.value.length > 0) &&
+                field.disabled == false) {
+                if (!checkEmail(field.value)) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oEmail[x][1];
+                    bValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+    /**
+     * Reference: Sandeep V. Tamhankar (stamhankar@hotmail.com),
+     * http://javascript.internet.com
+     */
+    function checkEmail(emailStr) {
+       if (emailStr.length == 0) {
+           return true;
+       }
+       var emailPat=/^(.+)@(.+)$/;
+       var specialChars="\\(\\)<>@,;:\\\\\\\"\\.\\[\\]";
+       var validChars="\[^\\s" + specialChars + "\]";
+       var quotedUser="(\"[^\"]*\")";
+       var ipDomainPat=/^(\d{1,3})[.](\d{1,3})[.](\d{1,3})[.](\d{1,3})$/;
+       var atom=validChars + '+';
+       var word="(" + atom + "|" + quotedUser + ")";
+       var userPat=new RegExp("^" + word + "(\\." + word + ")*$");
+       var domainPat=new RegExp("^" + atom + "(\\." + atom + ")*$");
+       var matchArray=emailStr.match(emailPat);
+       if (matchArray == null) {
+           return false;
+       }
+       var user=matchArray[1];
+       var domain=matchArray[2];
+       if (user.match(userPat) == null) {
+           return false;
+       }
+       var IPArray = domain.match(ipDomainPat);
+       if (IPArray != null) {
+           for (var i = 1; i <= 4; i++) {
+              if (IPArray[i] > 255) {
+                 return false;
+              }
+           }
+           return true;
+       }
+       var domainArray=domain.match(domainPat);
+       if (domainArray == null) {
+           return false;
+       }
+       var atomPat=new RegExp(atom,"g");
+       var domArr=domain.match(atomPat);
+       var len=domArr.length;
+       if ((domArr[domArr.length-1].length < 2) ||
+           (domArr[domArr.length-1].length > 3)) {
+           return false;
+       }
+       if (len < 2) {
+           return false;
+       }
+       return true;
+    }
+
+  
+
+
+    /*$RCSfile: validateMask.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid using a regular expression.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateMask(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oMasked = eval('new ' + formName.value + '_mask()');      
+        for (x in oMasked) {
+            var field = form[oMasked[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                 field.type == 'textarea' ||
+				 field.type == 'file') &&
+                 (field.value.length > 0) &&
+                 field.disabled == false) {
+
+                if (!matchPattern(field.value, oMasked[x][2]("mask"))) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oMasked[x][1];
+                    isValid = false;
+                }
+            }
+        }
+
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+    function matchPattern(value, mask) {
+       return mask.exec(value);
+    }
+
+
+    /*$RCSfile: validateMinLength.js,v $ $Revision: 1.11 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * A field is considered valid if greater than the specified minimum.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * <strong>Caution:</strong> Using <code>validateMinLength</code> on a password field in a 
+    *  login page gives unnecessary information away to hackers. While it only slightly
+    *  weakens security, we suggest using it only when modifying a password.</p>
+    * @param form The form validation is taking place on.
+    */
+    function validateMinLength(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+
+        oMinLength = eval('new ' + formName.value + '_minlength()');
+
+        for (x in oMinLength) {
+            var field = form[oMinLength[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'password' ||
+                field.type == 'textarea') &&
+                field.disabled == false) {
+
+                var iMin = parseInt(oMinLength[x][2]("minlength"));
+                if ((trim(field.value).length > 0) && (field.value.length < iMin)) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oMinLength[x][1];
+                    isValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+
+//End --> 
+</script>
+
+
+	<script type="text/javascript" language="Javascript1.1"> 
+
+<!-- Begin 
+
+     var bCancel = false; 
+
+    function validateSearchActionForm(form) {                                                                   
+        if (bCancel) 
+      return true; 
+        else 
+ var formValidationResult;
+       formValidationResult = validateRequired(form) && validateMinLength(form); 
+     return (formValidationResult == 1);
+   } 
+
+    function SearchActionForm_required () { 
+     this.a0 = new Array("search", "Writing at least one word is required.", new Function ("varName", "this.minlength='2';  return this[varName];"));
+    } 
+
+    function SearchActionForm_minlength () { 
+     this.a0 = new Array("search", "Writing at least one word can not be less than 2 characters.", new Function ("varName", "this.minlength='2';  return this[varName];"));
+    } 
+
+
+
+
+   /*$RCSfile: validateFloatRange.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are in a valid float range.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateFloatRange(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oRange = eval('new ' + formName.value + '_floatRange()');
+        for (x in oRange) {
+            var field = form[oRange[x][0]];
+            
+            if ((field.type == 'hidden' ||
+                field.type == 'text' || field.type == 'textarea') &&
+                (field.value.length > 0)  &&
+                 field.disabled == false) {
+        
+                var fMin = parseFloat(oRange[x][2]("min"));
+                var fMax = parseFloat(oRange[x][2]("max"));
+                var fValue = parseFloat(field.value);
+                if (!(fValue >= fMin && fValue <= fMax)) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oRange[x][1];
+                    isValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+    /*$RCSfile: validateUtilities.js,v $ $Revision: 1.2 $ $Date: 2004/03/28 16:53:21 $ */
+
+  /**
+  * This is a place holder for common utilities used across the javascript validation
+  *
+  **/
+
+
+    /*$RCSfile: validateByte.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid byte.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateByte(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+        oByte = eval('new ' + formName.value + '_ByteValidations()');
+
+        for (x in oByte) {
+            var field = form[oByte[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio')  &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (value.length > 0) {
+                    if (!isAllDigits(value)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oByte[x][1];
+
+                    } else {
+
+                        var iValue = parseInt(value);
+                        if (isNaN(iValue) || !(iValue >= -128 && iValue <= 127)) {
+                            if (i == 0) {
+                                focusField = field;
+                            }
+                            fields[i++] = oByte[x][1];
+                            bValid = false;
+                        }
+                    }
+                }
+
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+
+    /*$RCSfile: validateMaxLength.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * A field is considered valid if less than the specified maximum.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * <strong>Caution:</strong> Using <code>validateMaxLength</code> on a password field in a 
+    *  login page gives unnecessary information away to hackers. While it only slightly
+    *  weakens security, we suggest using it only when modifying a password.</p>
+    * @param form The form validation is taking place on.
+    */
+    function validateMaxLength(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oMaxLength = eval('new ' + formName.value + '_maxlength()');        
+        for (x in oMaxLength) {
+            var field = form[oMaxLength[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'password' ||
+                field.type == 'textarea') &&
+                field.disabled == false) {
+
+                var iMax = parseInt(oMaxLength[x][2]("maxlength"));
+                if (field.value.length > iMax) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oMaxLength[x][1];
+                    isValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+
+    /*$RCSfile: validateRequired.js,v $ $Revision: 1.13 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    *  Check to see if fields must contain a value.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+
+    function validateRequired(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+        oRequired = eval('new ' + formName.value + '_required()');
+
+        for (x in oRequired) {
+            var field = form[oRequired[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'file' ||
+                field.type == 'checkbox' ||
+                field.type == 'select-one' ||
+                field.type == 'password') &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else if (field.type == 'checkbox') {
+                    if (field.checked) {
+                        value = field.value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (trim(value).length == 0) {
+
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oRequired[x][1];
+                    isValid = false;
+                }
+            } else if (field.type == "select-multiple") { 
+                var numOptions = field.options.length;
+                lastSelected=-1;
+                for(loop=numOptions-1;loop>=0;loop--) {
+                    if(field.options[loop].selected) {
+                        lastSelected = loop;
+                        value = field.options[loop].value;
+                        break;
+                    }
+                }
+                if(lastSelected < 0 || trim(value).length == 0) {
+                    if(i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oRequired[x][1];
+                    isValid=false;
+                }
+            } else if ((field.length > 0) && (field[0].type == 'radio' || field[0].type == 'checkbox')) {
+                isChecked=-1;
+                for (loop=0;loop < field.length;loop++) {
+                    if (field[loop].checked) {
+                        isChecked=loop;
+                        break; // only one needs to be checked
+                    }
+                }
+                if (isChecked < 0) {
+                    if (i == 0) {
+                        focusField = field[0];
+                    }
+                    fields[i++] = oRequired[x][1];
+                    isValid=false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+    
+    // Trim whitespace from left and right sides of s.
+    function trim(s) {
+        return s.replace( /^\s*/, "" ).replace( /\s*$/, "" );
+    }
+
+
+    /*$RCSfile: validateInteger.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid integer.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateInteger(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oInteger = eval('new ' + formName.value + '_IntegerValidations()');
+        for (x in oInteger) {
+            var field = form[oInteger[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio') &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (value.length > 0) {
+
+                    if (!isAllDigits(value)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oInteger[x][1];
+
+                    } else {
+                        var iValue = parseInt(value);
+                        if (isNaN(iValue) || !(iValue >= -2147483648 && iValue <= 2147483647)) {
+                            if (i == 0) {
+                                focusField = field;
+                            }
+                            fields[i++] = oInteger[x][1];
+                            bValid = false;
+                       }
+                   }
+               }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+    function isAllDigits(argvalue) {
+        argvalue = argvalue.toString();
+        var validChars = "0123456789";
+        var startFrom = 0;
+        if (argvalue.substring(0, 2) == "0x") {
+           validChars = "0123456789abcdefABCDEF";
+           startFrom = 2;
+        } else if (argvalue.charAt(0) == "0") {
+           validChars = "01234567";
+           startFrom = 1;
+        } else if (argvalue.charAt(0) == "-") {
+            startFrom = 1;
+        }
+
+        for (var n = startFrom; n < argvalue.length; n++) {
+            if (validChars.indexOf(argvalue.substring(n, n+1)) == -1) return false;
+        }
+        return true;
+    }
+
+
+    /*$RCSfile: validateCreditCard.js,v $ $Revision: 1.8 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid creditcard number based on Luhn checksum.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateCreditCard(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+        oCreditCard = eval('new ' + formName.value + '_creditCard()');
+
+        for (x in oCreditCard) {
+            if ((form[oCreditCard[x][0]].type == 'text' ||
+                 form[oCreditCard[x][0]].type == 'textarea') &&
+                (form[oCreditCard[x][0]].value.length > 0)  &&
+                 form[oCreditCard[x][0]].disabled == false) {
+                if (!luhnCheck(form[oCreditCard[x][0]].value)) {
+                    if (i == 0) {
+                        focusField = form[oCreditCard[x][0]];
+                    }
+                    fields[i++] = oCreditCard[x][1];
+                    bValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+    /**
+     * Checks whether a given credit card number has a valid Luhn checksum.
+     * This allows you to spot most randomly made-up or garbled credit card numbers immediately.
+     * Reference: http://www.speech.cs.cmu.edu/~sburke/pub/luhn_lib.html
+     */
+    function luhnCheck(cardNumber) {
+        if (isLuhnNum(cardNumber)) {
+            var no_digit = cardNumber.length;
+            var oddoeven = no_digit & 1;
+            var sum = 0;
+            for (var count = 0; count < no_digit; count++) {
+                var digit = parseInt(cardNumber.charAt(count));
+                if (!((count & 1) ^ oddoeven)) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                };
+                sum += digit;
+            };
+            if (sum == 0) return false;
+            if (sum % 10 == 0) return true;
+        };
+        return false;
+    }
+
+    function isLuhnNum(argvalue) {
+        argvalue = argvalue.toString();
+        if (argvalue.length == 0) {
+            return false;
+        }
+        for (var n = 0; n < argvalue.length; n++) {
+            if ((argvalue.substring(n, n+1) < "0") ||
+                (argvalue.substring(n,n+1) > "9")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+   /*$RCSfile: validateDate.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid date.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateDate(form) {
+       var bValid = true;
+       var focusField = null;
+       var i = 0;
+       var fields = new Array();
+       var formName = form.getAttributeNode("name"); 
+
+       oDate = eval('new ' + formName.value + '_DateValidations()');
+
+       for (x in oDate) {
+           var field = form[oDate[x][0]];
+           var value = field.value;
+           var datePattern = oDate[x][2]("datePatternStrict");
+           // try loose pattern
+           if (datePattern == null)
+               datePattern = oDate[x][2]("datePattern");
+           if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea') &&
+               (value.length > 0) && (datePattern.length > 0) &&
+                field.disabled == false) {
+                 var MONTH = "MM";
+                 var DAY = "dd";
+                 var YEAR = "yyyy";
+                 var orderMonth = datePattern.indexOf(MONTH);
+                 var orderDay = datePattern.indexOf(DAY);
+                 var orderYear = datePattern.indexOf(YEAR);
+                 if ((orderDay < orderYear && orderDay > orderMonth)) {
+                     var iDelim1 = orderMonth + MONTH.length;
+                     var iDelim2 = orderDay + DAY.length;
+                     var delim1 = datePattern.substring(iDelim1, iDelim1 + 1);
+                     var delim2 = datePattern.substring(iDelim2, iDelim2 + 1);
+                     if (iDelim1 == orderDay && iDelim2 == orderYear) {
+                        dateRegexp = new RegExp("^(\\d{2})(\\d{2})(\\d{4})$");
+                     } else if (iDelim1 == orderDay) {
+                        dateRegexp = new RegExp("^(\\d{2})(\\d{2})[" + delim2 + "](\\d{4})$");
+                     } else if (iDelim2 == orderYear) {
+                        dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})(\\d{4})$");
+                     } else {
+                        dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})[" + delim2 + "](\\d{4})$");
+                     }
+                     var matched = dateRegexp.exec(value);
+                     if(matched != null) {
+                        if (!isValidDate(matched[2], matched[1], matched[3])) {
+                           if (i == 0) {
+                               focusField = field;
+                           }
+                           fields[i++] = oDate[x][1];
+                           bValid =  false;
+                        }
+                     } else {
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oDate[x][1];
+                        bValid =  false;
+                     }
+                 } else if ((orderMonth < orderYear && orderMonth > orderDay)) {
+                     var iDelim1 = orderDay + DAY.length;
+                     var iDelim2 = orderMonth + MONTH.length;
+                     var delim1 = datePattern.substring(iDelim1, iDelim1 + 1);
+                     var delim2 = datePattern.substring(iDelim2, iDelim2 + 1);
+                     if (iDelim1 == orderMonth && iDelim2 == orderYear) {
+                         dateRegexp = new RegExp("^(\\d{2})(\\d{2})(\\d{4})$");
+                     } else if (iDelim1 == orderMonth) {
+                         dateRegexp = new RegExp("^(\\d{2})(\\d{2})[" + delim2 + "](\\d{4})$");
+                     } else if (iDelim2 == orderYear) {
+                         dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})(\\d{4})$");
+                     } else {
+                         dateRegexp = new RegExp("^(\\d{2})[" + delim1 + "](\\d{2})[" + delim2 + "](\\d{4})$");
+                     }
+                     var matched = dateRegexp.exec(value);
+                     if(matched != null) {
+                         if (!isValidDate(matched[1], matched[2], matched[3])) {
+                             if (i == 0) {
+                         focusField = field;
+                             }
+                             fields[i++] = oDate[x][1];
+                             bValid =  false;
+                          }
+                     } else {
+                         if (i == 0) {
+                             focusField = field;
+                         }
+                         fields[i++] = oDate[x][1];
+                         bValid =  false;
+                     }
+                 } else if ((orderMonth > orderYear && orderMonth < orderDay)) {
+                     var iDelim1 = orderYear + YEAR.length;
+                     var iDelim2 = orderMonth + MONTH.length;
+                     var delim1 = datePattern.substring(iDelim1, iDelim1 + 1);
+                     var delim2 = datePattern.substring(iDelim2, iDelim2 + 1);
+                     if (iDelim1 == orderMonth && iDelim2 == orderDay) {
+                         dateRegexp = new RegExp("^(\\d{4})(\\d{2})(\\d{2})$");
+                     } else if (iDelim1 == orderMonth) {
+                         dateRegexp = new RegExp("^(\\d{4})(\\d{2})[" + delim2 + "](\\d{2})$");
+                     } else if (iDelim2 == orderDay) {
+                         dateRegexp = new RegExp("^(\\d{4})[" + delim1 + "](\\d{2})(\\d{2})$");
+                     } else {
+                         dateRegexp = new RegExp("^(\\d{4})[" + delim1 + "](\\d{2})[" + delim2 + "](\\d{2})$");
+                     }
+                     var matched = dateRegexp.exec(value);
+                     if(matched != null) {
+                         if (!isValidDate(matched[3], matched[2], matched[1])) {
+                             if (i == 0) {
+                                 focusField = field;
+                             }
+                             fields[i++] = oDate[x][1];
+                             bValid =  false;
+                         }
+                     } else {
+                          if (i == 0) {
+                              focusField = field;
+                          }
+                          fields[i++] = oDate[x][1];
+                          bValid =  false;
+                     }
+                 } else {
+                     if (i == 0) {
+                         focusField = field;
+                     }
+                     fields[i++] = oDate[x][1];
+                     bValid =  false;
+                 }
+          }
+       }
+       if (fields.length > 0) {
+          focusField.focus();
+          alert(fields.join('\n'));
+       }
+       return bValid;
+    }
+    
+    function isValidDate(day, month, year) {
+	    if (month < 1 || month > 12) {
+            return false;
+        }
+        if (day < 1 || day > 31) {
+            return false;
+        }
+        if ((month == 4 || month == 6 || month == 9 || month == 11) &&
+            (day == 31)) {
+            return false;
+        }
+        if (month == 2) {
+            var leap = (year % 4 == 0 &&
+               (year % 100 != 0 || year % 400 == 0));
+            if (day>29 || (day == 29 && !leap)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /*$RCSfile: validateIntRange.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields is in a valid integer range.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateIntRange(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oRange = eval('new ' + formName.value + '_intRange()');        
+        for (x in oRange) {
+            var field = form[oRange[x][0]];
+            if (field.disabled == false)  {
+                var value = '';
+                if (field.type == 'hidden' ||
+                    field.type == 'text' || field.type == 'textarea' ||
+                    field.type == 'radio' ) {
+                    value = field.value;
+                }
+                if (field.type == 'select-one') {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                }
+                if (value.length > 0) {
+                    var iMin = parseInt(oRange[x][2]("min"));
+                    var iMax = parseInt(oRange[x][2]("max"));
+                    var iValue = parseInt(value);
+                    if (!(iValue >= iMin && iValue <= iMax)) {
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oRange[x][1];
+                        isValid = false;
+                    }
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+
+    /*$RCSfile: validateShort.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    *  Check to see if fields are a valid short.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateShort(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+        oShort = eval('new ' + formName.value + '_ShortValidations()');
+
+        for (x in oShort) {
+            var field = form[oShort[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio')  &&
+                field.disabled == false) {
+
+                var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+
+                if (value.length > 0) {
+                    if (!isAllDigits(value)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oShort[x][1];
+
+                    } else {
+
+                        var iValue = parseInt(value);
+                        if (isNaN(iValue) || !(iValue >= -32768 && iValue <= 32767)) {
+                            if (i == 0) {
+                                focusField = field;
+                            }
+                            fields[i++] = oShort[x][1];
+                            bValid = false;
+                        }
+                   }
+               }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+
+    /*$RCSfile: validateFloat.js,v $ $Revision: 1.11 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid float.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateFloat(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+         var formName = form.getAttributeNode("name");
+
+        oFloat = eval('new ' + formName.value + '_FloatValidations()');
+        for (x in oFloat) {
+        	var field = form[oFloat[x][0]];
+        	
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'textarea' ||
+                field.type == 'select-one' ||
+                field.type == 'radio') &&
+                field.disabled == false) {
+        
+            	var value = '';
+                // get field's value
+                if (field.type == "select-one") {
+                    var si = field.selectedIndex;
+                    if (si >= 0) {
+                        value = field.options[si].value;
+                    }
+                } else {
+                    value = field.value;
+                }
+        
+                if (value.length > 0) {
+                    // remove '.' before checking digits
+                    var tempArray = value.split('.');
+                    //Strip off leading '0'
+                    var zeroIndex = 0;
+                    var joinedString= tempArray.join('');
+                    while (joinedString.charAt(zeroIndex) == '0') {
+                        zeroIndex++;
+                    }
+                    var noZeroString = joinedString.substring(zeroIndex,joinedString.length);
+
+                    if (!isAllDigits(noZeroString)) {
+                        bValid = false;
+                        if (i == 0) {
+                            focusField = field;
+                        }
+                        fields[i++] = oFloat[x][1];
+
+                    } else {
+	                var iValue = parseFloat(value);
+	                if (isNaN(iValue)) {
+	                    if (i == 0) {
+	                        focusField = field;
+	                    }
+	                    fields[i++] = oFloat[x][1];
+	                    bValid = false;
+	                }
+                    }
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+
+   /*$RCSfile: validateEmail.js,v $ $Revision: 1.9 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid email address.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateEmail(form) {
+        var bValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+
+        oEmail = eval('new ' + formName.value + '_email()');
+
+        for (x in oEmail) {
+            var field = form[oEmail[x][0]];
+            if ((field.type == 'hidden' || 
+                 field.type == 'text' ||
+                 field.type == 'textarea') &&
+                (field.value.length > 0) &&
+                field.disabled == false) {
+                if (!checkEmail(field.value)) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oEmail[x][1];
+                    bValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+            focusField.focus();
+            alert(fields.join('\n'));
+        }
+        return bValid;
+    }
+
+    /**
+     * Reference: Sandeep V. Tamhankar (stamhankar@hotmail.com),
+     * http://javascript.internet.com
+     */
+    function checkEmail(emailStr) {
+       if (emailStr.length == 0) {
+           return true;
+       }
+       var emailPat=/^(.+)@(.+)$/;
+       var specialChars="\\(\\)<>@,;:\\\\\\\"\\.\\[\\]";
+       var validChars="\[^\\s" + specialChars + "\]";
+       var quotedUser="(\"[^\"]*\")";
+       var ipDomainPat=/^(\d{1,3})[.](\d{1,3})[.](\d{1,3})[.](\d{1,3})$/;
+       var atom=validChars + '+';
+       var word="(" + atom + "|" + quotedUser + ")";
+       var userPat=new RegExp("^" + word + "(\\." + word + ")*$");
+       var domainPat=new RegExp("^" + atom + "(\\." + atom + ")*$");
+       var matchArray=emailStr.match(emailPat);
+       if (matchArray == null) {
+           return false;
+       }
+       var user=matchArray[1];
+       var domain=matchArray[2];
+       if (user.match(userPat) == null) {
+           return false;
+       }
+       var IPArray = domain.match(ipDomainPat);
+       if (IPArray != null) {
+           for (var i = 1; i <= 4; i++) {
+              if (IPArray[i] > 255) {
+                 return false;
+              }
+           }
+           return true;
+       }
+       var domainArray=domain.match(domainPat);
+       if (domainArray == null) {
+           return false;
+       }
+       var atomPat=new RegExp(atom,"g");
+       var domArr=domain.match(atomPat);
+       var len=domArr.length;
+       if ((domArr[domArr.length-1].length < 2) ||
+           (domArr[domArr.length-1].length > 3)) {
+           return false;
+       }
+       if (len < 2) {
+           return false;
+       }
+       return true;
+    }
+
+  
+
+
+    /*$RCSfile: validateMask.js,v $ $Revision: 1.10 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * Check to see if fields are a valid using a regular expression.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * @param form The form validation is taking place on.
+    */
+    function validateMask(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name"); 
+
+        oMasked = eval('new ' + formName.value + '_mask()');      
+        for (x in oMasked) {
+            var field = form[oMasked[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                 field.type == 'textarea' ||
+				 field.type == 'file') &&
+                 (field.value.length > 0) &&
+                 field.disabled == false) {
+
+                if (!matchPattern(field.value, oMasked[x][2]("mask"))) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oMasked[x][1];
+                    isValid = false;
+                }
+            }
+        }
+
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+    function matchPattern(value, mask) {
+       return mask.exec(value);
+    }
+
+
+    /*$RCSfile: validateMinLength.js,v $ $Revision: 1.11 $ $Date: 2004/03/28 16:53:21 $ */
+    /**
+    * A field is considered valid if greater than the specified minimum.
+    * Fields are not checked if they are disabled.
+    * <p>
+    * <strong>Caution:</strong> Using <code>validateMinLength</code> on a password field in a 
+    *  login page gives unnecessary information away to hackers. While it only slightly
+    *  weakens security, we suggest using it only when modifying a password.</p>
+    * @param form The form validation is taking place on.
+    */
+    function validateMinLength(form) {
+        var isValid = true;
+        var focusField = null;
+        var i = 0;
+        var fields = new Array();
+        var formName = form.getAttributeNode("name");
+
+
+        oMinLength = eval('new ' + formName.value + '_minlength()');
+
+        for (x in oMinLength) {
+            var field = form[oMinLength[x][0]];
+
+            if ((field.type == 'hidden' ||
+                field.type == 'text' ||
+                field.type == 'password' ||
+                field.type == 'textarea') &&
+                field.disabled == false) {
+
+                var iMin = parseInt(oMinLength[x][2]("minlength"));
+                if ((trim(field.value).length > 0) && (field.value.length < iMin)) {
+                    if (i == 0) {
+                        focusField = field;
+                    }
+                    fields[i++] = oMinLength[x][1];
+                    isValid = false;
+                }
+            }
+        }
+        if (fields.length > 0) {
+           focusField.focus();
+           alert(fields.join('\n'));
+        }
+        return isValid;
+    }
+
+
+//End --> 
+</script>
+
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+<!-- WRAPPER --> 
+<div id="wrapper">
+
+<!-- HEADER -->
+
+<div id="header"><a href="/"><img src="/common/images/header1.jpg" width="636" height="122" border="0" alt="EDGE db" /></a><a href="http://www.modul-bio.com/" target="_blank"><img src="/common/images/header2.gif" width="184" height="122" border="0" alt="Powered by: Modul Bio" /></a></div>
+
+
+
+
+
+<!-- TOOLBAR-->
+<!-- TOOLBAR -->
+<div id="toolbar">
+	<div id="user"><span class="greenText">Welcome:</span>
+
+
+	<strong>Guest</strong></div>
+
+
+<!-- controls -->	
+	<table cellpadding="0" cellspacing="0" border="0" class="fr">
+		<tr>
+			
+
+			
+				<td class="tab1" width="100" align="center" valign="top">&nbsp;
+					<a onclick="login=window.open('/Logon/Users/User_login.jsp', 'login',
+						 'height=360,width=450,resizable=no,scrollbars=no');
+						 login.focus();return false;" href="">Log on</a>
+				</td>
+			
+			<td class="tab2" width="140" align="center" valign="top">&nbsp; <a href="/" target="_top">Go to homepage</a></td>			
+			<td width="5" align="right"><img src="/common/images/cap-right.gif" width="5" height="25" alt="*" /></td>
+		</tr>	
+	</table>
+<!-- End controls -->
+
+</div>
+
+
+<!-- MAIN -->
+<div id="main">
+
+	
+	<div id="cookie">
+		
+		Home
+	</div>
+	
+
+
+
+	
+
+<!-- LAYOUT TABLE -->	
+<table cellpadding="0" cellspacing="5" border="0">
+	<tr>
+		<td valign="top">
+
+<!-- project -->	
+<table cellpadding="0" cellspacing="0" class="greenTbl">
+	
+	<tr>
+		<td valign="top"><p>
+<p class="largeText" align="justify">&nbsp;&nbsp;The <i>C. elegans</i> genome contains ~20,000 protein-coding genes and many
+non-coding RNA genes, including more than 100 microRNAs. Most of these genes
+are differentially expressed; i.e. at different times and in different cells.
+As a result, each cell/tissue/organ expresses a different subset of the total
+transcriptome. Differential gene expression is governed by regulatory
+transcription factors (TFs) that bind to <i>cis</i>-regulatory elements located in
+their target genes.
+In addition, gene expression can be regulated through the action of microRNAs
+that inhibit mRNA stability and/or translation.</p>
+<p class="largeText" align="justify">&nbsp;&nbsp;We predict that ~934 of the ~20,000 worm genes encode TFs (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=16420670&query_hl=3&itool=pubmed_docsum" target="blank">Reece-Hoyes et al, 2005</a>).
+To gain insight into <i>C. elegans</i> differential gene expression at a systems level,
+we systematically identify protein-DNA interactions (PDIs) between TFs and their
+target genes. To do so, we have developed a Gateway-compatible yeast one-hybrid (Y1H)
+system (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15489331" target="blank">Deplancke et al, 2004</a>).
+This Y1H system is compatible with the <i>C. elegans</i>
+promoterome (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15489340" target="blank">Dupuy et al, 2004</a>)
+for the creation of DNA baits, and the ORFeome for
+the creation of TF resources (i.e. Y1H “preys”). Using the Y1H system we have found several novel putative TFs (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=16777607" target="blank">Deplancke et al, 2006</a>). We are also mapping protein-protein
+interactions (PPIs) between TFs to identify TF homo- and heterodimers. To do so we
+employ high-throughput yeast two-hybrid (Y2H) assays. Finally, we are determining
+where TFs and their targets are expressed and how target expression is affected in the absence of a regulating TF. To do so, we fuse promoters to the green
+fluorescent protein (GFP) and examine GFP expression in living animals.
+This localization of expression mapping project is a collaboration between our
+laboratory and the groups of Marc Vidal (Dana-Farber Center for Cancer Systems Biology)
+and Ian Hope (University of Leeds, UK).</p>
+<p class="largeText" align="justify">&nbsp;&nbsp;PDI, PPI and gene expression data generated by the Walhout laboratory and by other laboratories are
+collected and made available to the community through EDGEdb
+(<u>e</u>legans <u>d</u>ifferential <u>g</u>ene <u>e</u>xpression <u>d</u>ata<u>b</u>ase). We encourage the C. elegans community to send us their PDI and TF dimerization PPI data to keep the database current. For more information on
+<i>C. elegans</i> genes and biology, please visit <a href="http://www.wormbase.org/" target="blank">WormBase</a>. For more information on
+the worm PPI interactome, the ORFeome and Promoterome, please visit the <a href="http://vidal.dfci.harvard.edu/" target="blank">Vidal lab</a>
+website. For more information regarding gene expression patterns, please
+visit the <a href="http://bgypc059.leeds.ac.uk/~web/" target="blank">Hope lab</a> website. For more information about the Walhout laboratory,
+please visit the <a href="http://www.umassmed.edu/pgfe/faculty/walhout.cfm" target="blank">lab website</a>.</p><br/>
+<p class="largeText">Contact information:</p>
+<p class="largeText">
+&nbsp;&nbsp;&nbsp;A.J. Marian Walhout<br/>
+&nbsp;&nbsp;&nbsp;Program in Gene Function and Expression<br/>
+&nbsp;&nbsp;&nbsp;Program in Molecular Medicine<br/>
+&nbsp;&nbsp;&nbsp;University of Massachusetts Medical School<br/>
+&nbsp;&nbsp;&nbsp;364 Plantation Street<br/>
+&nbsp;&nbsp;&nbsp;Lazare Research Building, Room 605<br/>
+&nbsp;&nbsp;&nbsp;Worcester, MA 01605
+</p>
+<p class="largeText">
+&nbsp;&nbsp;&nbsp;Phone: 508-856-4364<br/>
+&nbsp;&nbsp;&nbsp;Email: <a href="mailto:marian.walhout@umassmed.edu?subject=EDGEdb">marian.walhout@umassmed.edu</a>
+</p>
+
+		</p></td>
+	</tr>	
+</table>
+<!-- End project -->
+		
+		</td>
+		<td valign="top">
+
+
+
+<!-- DNA bait -->	
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th><i>C. elegans</i> gene or ORF</th>
+	</tr>
+	<tr>
+		<td valign="top">
+			<form name="SearchActionForm" method="POST" action="/SearchAction.do;jsessionid=131FD764E95BC3359596355DFF3C16DF" onsubmit="return validateSearchActionForm(this)">
+				<input type="hidden" name="searchType" value="search1">
+				<input type="text" name="search" value="" class="txt">
+				<input type="submit" value="Search" class="but">
+			</form>
+			<br/><br/>e.g. :&nbsp;one word&nbsp;(C18D1.1, c18d1.1, or die-1), or several words separated by space.
+		</td>
+	</tr>	
+</table>
+<!-- End DNA bait -->
+<br />
+
+<!-- Promoters -->
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th>DNA bait</th>
+	</tr>
+	<tr>
+		<td valign="top">
+			<form name="SearchActionForm" method="post" action="/SearchAction.do;jsessionid=131FD764E95BC3359596355DFF3C16DF" onsubmit="return validateSearchActionForm(this)">
+				<input type="hidden" name="searchType" value="searchPromName">
+					<input type="text" name="search" value="" class="txt">
+					<input type="submit" value="Search" class="but">
+			</form>
+			<br/><br/>e.g. :&nbsp;one word&nbsp;(Pztf-4, pZTF-4, or pz*-4), or several words separated by space.
+		</td>
+	</tr>	
+</table>
+<!-- End Promoters -->
+<br />
+
+<!-- TransFactors -->
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th>DNA Binding Domain</th>
+	</tr>
+	<tr>
+		<td valign="top">
+			<form name="SearchActionForm" method="post" action="/SearchAction.do;jsessionid=131FD764E95BC3359596355DFF3C16DF" onsubmit="return validateSearchActionForm(this)">
+				<input type="hidden" name="searchType" value="searchTransFactorFromDomain">
+					
+					<select name="search"><option value="AP-2">AP-2</option>
+<option value="ARID/BRIGHT">ARID/BRIGHT</option>
+<option value="AT HOOK">AT HOOK</option>
+<option value="BHLH">BHLH</option>
+<option value="BZIP">BZIP</option>
+<option value="CBF">CBF</option>
+<option value="COLD BOX">COLD BOX</option>
+<option value="CP2">CP2</option>
+<option value="HD">HD</option>
+<option value="HMG">HMG</option>
+<option value="HTH">HTH</option>
+<option value="IPT/TIG">IPT/TIG</option>
+<option value="MADF">MADF</option>
+<option value="MADS box">MADS box</option>
+<option value="MH1">MH1</option>
+<option value="MYB">MYB</option>
+<option value="Novel">Novel</option>
+<option value="PD-CPAX">PD-CPAX</option>
+<option value="PD-FULL">PD-FULL</option>
+<option value="PD-NPAX">PD-NPAX</option>
+<option value="PD-UNDEFINED">PD-UNDEFINED</option>
+<option value="RNT">RNT</option>
+<option value="RPEL">RPEL</option>
+<option value="RUNT">RUNT</option>
+<option value="SAND">SAND</option>
+<option value="STAT">STAT</option>
+<option value="T-BOX">T-BOX</option>
+<option value="TEA/ATTS">TEA/ATTS</option>
+<option value="TSC-22/DIP/BUN">TSC-22/DIP/BUN</option>
+<option value="UNKNOWN">UNKNOWN</option>
+<option value="WH-DAC">WH-DAC</option>
+<option value="WH-ETS">WH-ETS</option>
+<option value="WH-FH">WH-FH</option>
+<option value="WH-HSF">WH-HSF</option>
+<option value="WH-RFX">WH-RFX</option>
+<option value="WH-TDP">WH-TDP</option>
+<option value="WH-UNDEFINED">WH-UNDEFINED</option>
+<option value="WT1">WT1</option>
+<option value="YL1">YL1</option>
+<option value="ZF-A20">ZF-A20</option>
+<option value="ZF-BED">ZF-BED</option>
+<option value="ZF-C2H2">ZF-C2H2</option>
+<option value="ZF-C2HC">ZF-C2HC</option>
+<option value="ZF-CCCH">ZF-CCCH</option>
+<option value="ZF-DHHC">ZF-DHHC</option>
+<option value="ZF-DM">ZF-DM</option>
+<option value="ZF-FLYWCH">ZF-FLYWCH</option>
+<option value="ZF-GATA">ZF-GATA</option>
+<option value="ZF-MIZ">ZF-MIZ</option>
+<option value="ZF-NF-X1">ZF-NF-X1</option>
+<option value="ZF-NHR/C4">ZF-NHR/C4</option>
+<option value="ZF-THAP">ZF-THAP</option>
+<option value="p53">p53</option></select>
+					<input type="submit" value="Search" class="but">
+			</form>
+			
+		</td>
+	</tr>	
+</table>
+<!-- End TransFactors -->
+<br />
+
+
+<!-- Papers -->	
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th>Publications</th>
+	</tr>
+	<tr>
+		<td valign="top">
+			<form name="DataSetActionForm" method="post" action="/SearchPaperAction.do;jsessionid=131FD764E95BC3359596355DFF3C16DF" onsubmit="return validateDataSetActionForm(this)">
+				
+				<select name="titles"><option value="A gateway-compatible yeast one-hybrid system">A gateway-compatible yeast one-hybr...</option>
+<option value="A gene-centered C. elegans protein-DNA interaction network.">A gene-centered C. elegans protein-...</option>
+<option value="A compendium of Caenorhabditis elegans regulatory transcription factors: a resource for mapping transcription regulatory networks.">A compendium of Caenorhabditis eleg...</option>
+<option value="Gateway-Compatible Yeast One-Hybrid Screens">Gateway-Compatible Yeast One-Hybrid...</option>
+<option value="Unraveling transcription regulatory networks by protein-DNA and protein-protein interaction mapping">Unraveling transcription regulatory...</option>
+<option value="Networking at the second Interactome Meeting">Networking at the second Interactom...</option>
+<option value="Matrix and Steiner-triple-system smart pooling assays for high-performance transcription regulatory network mapping">Matrix and Steiner-triple-system sm...</option>
+<option value="Transcription factor modularity in a gene-centered C. elegans core neuronal protein–DNA interaction network">Transcription factor modularity in ...</option>
+<option value="A C. elegans genome-scale microRNA network contains composite feedback motifs with high flux capacity">A C. elegans genome-scale microRNA ...</option>
+<option value="The FLYWCH transcription factors FLH-1, FLH-2, and FLH-3 repress embryonic expression of microRNA genes in C. elegans">The FLYWCH transcription factors FL...</option></select>
+				<input type="submit" value="Search" class="but">
+			</form>
+			
+		</td>
+	</tr>	
+</table>
+<!-- End Papers -->
+
+<!-- TF Files -->
+<br/>
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th align="center">
+			<a href="/TFFilesListingAction.do">Get transcription factors files</a>
+		</th>
+	</tr>
+</table>
+<!-- End TF Files -->
+
+<!-- Y1H Files Only -->
+<!--<br/>
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th align="center">
+			<a href="/Y1HFilesListingAction.do">Get data Y1H sets</a>
+		</th>
+	</tr>
+</table>-->
+<!-- End Y1H Files -->
+
+<!-- Publications/Y1H -->
+<br/>
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th align="center">
+			<a href="/PubliY1HFilesListingAction.do">Get Publications / data sets</a>
+		</th>
+	</tr>
+</table>
+<!-- End Publications/Y1H -->
+
+<!-- Interaction Browser -->
+<br/>
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th align="center">
+			<a href="/InteractionsBrowserAction.do?opt=getTFs">Interaction browser</a>
+		</th>
+	</tr>
+</table>
+<!-- End Interaction Browser -->
+
+<!-- Export Interaction for Guest -->
+<br/>
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th align="center">
+			<a href="/PublicExport/PublicInterExport.jsp">Interaction export</a>
+		</th>
+	</tr>
+</table>
+<!-- End Export Interaction for Guest -->
+
+<!-- Export All Public Interactions -->
+<br/>
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th align="center">
+			<a href="/servlet/DataExport?dataType=11&pubAvailable=Y">Export all interactions</a>
+		</th>
+	</tr>
+</table>
+<!-- End Export All Public Interactions -->
+
+<!-- Outside Imports -->
+<br/>
+<table cellpadding="0" cellspacing="0" class="blueTbl">
+	<tr>
+		<th align="center">
+			<a href="/OutsideImport/OutsideImport.jsp">Import interactions (outside user)</a>
+		</th>
+	</tr>
+</table>
+<!-- End Outside Imports -->
+
+
+		</td>
+	</tr>
+
+	<tr><td valign="bottom" align="left">
+		<!-- version -->
+		
+			
+				<p class="largeText">
+					Worm Base Release :180
+				</p>
+			
+		
+		<!-- end version -->
+		<p class="largeText">
+			<a href="/about.jsp">About</a>
+		</p>
+	
+	</td><td valign="bottom">
+		<!-- LOGO UMASS -->
+		<p align="right">
+			<a href="http://www.umassmed.edu" target="_blank"><img src="/common/images/umasslogo.gif" border="0" alt="Link to UMASS"/></a>
+		</p>
+		<!-- END LOGO UMASS -->
+	</td></tr>	
+</table>
+<!-- End LAYOUT TABLE -->
+ 
+
+
+ 
+
+
+
+		
+</div>
+<!-- End MAIN --> 
+<!-- FOOTER -->
+<img src="/common/images/footer.gif" width="820" height="43" alt="C. elegans Differential Gene Expression database" /></div>
+<!-- End WRAPPER --> 
+
+<br />
+
+</body>
+</html>
+

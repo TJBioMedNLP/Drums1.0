@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Using a Site Transition Network to Map the Genetic Evolution of H3N2 Influenza Virus Supplementary Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="scc_styles.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.STYLE1 {
+	font-size: x-large;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.STYLE2 {
+	color: #006699;
+	font-style: italic;
+}
+.STYLE3 {
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+	color: #666666;
+	font-size: large;
+}
+.STYLE4 {
+	font-size: large;
+	font-weight: bold;
+	color: #666666;
+}
+.STYLE5 {font-family: "Times New Roman", Times, serif}
+.STYLE17 {font-size: x-large; font-family: "Times New Roman", Times, serif;}
+.STYLE18 {
+	color: #666666;
+	font-weight: bold;
+}
+.STYLE19 {
+	color: #666685;
+	font-weight: bold;
+}
+.STYLE20 {font-family: "Times New Roman", Times, serif; font-weight: bold; }
+-->
+</style>
+</head>
+
+<body>
+<font color="#000000" face="Arial" size="1">
+<table width="79%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr><td><div align="center" class="STYLE1">
+    <p class="STYLE17">Using a Site Transition Network to Map </p>
+    <p class="STYLE17">the Genetic Evolution of H3N2  Influenza Virus</p>
+    <p class="STYLE2">Supplementary Data </p>
+    </div></td>
+  </tr>
+</table>
+
+<table width="79%" border="0" align="center" cellpadding="0" cellspacing="0" dir="ltr">
+  <tr>
+    <td valign="top"><div align="center">
+      <p><img width="1061" height="568" src="images/net.jpg"></p>
+      <table width="1050" height="967" border="0">
+        <tr>
+          <th width="597" scope="row"><div align="left"><span class="STYLE3">Data Sources:</span></div></th>
+        </tr>
+        <tr>
+          <td scope="row"><div align="left">
+            <p class="STYLE5">All sequences of the  H3N2 were downloaded from <a href="http://www.flu.lanl.gov/">Influenza sequence database (ISD)</a> up to November 1,  2008.</p>
+            <p>&nbsp;</p>
+          </div></td>
+        </tr>
+        <tr>
+          <th scope="row"><div align="left"><span class="STYLE3">Download Instructions:</span></div></th>
+        </tr>
+        <tr>
+          <td scope="row"><ol>
+            <li>
+              <div align="left">Download the archive file into a folder of your choice. <a href="H3N2_prediction_packakge.rar">Rar file </a></div>
+            </li>
+            <li>
+              <div align="left">Unzip and extract all its files (unzip  <a href="H3N2_prediction_packakge.rar">H3N2_prediction_packakge.rar</a>) Last updated at 2010.3.10!</div>
+            </li>
+            </ol></td>
+        </tr>
+        <tr>
+          <td height="800" scope="row"><p align="left" class="STYLE5">The download zip file contains files: </p>
+            <p align="left" class="STYLE5"><span class="STYLE19">Scripts:</span><br>
+              <strong>MInetworkcalculate.pl</strong><br>
+              Random select sequences from each year sequence data source, create all 312 H3N2 sites substitution profile, residue same with last year give value 0, otherwise value 10.<br>A total of 2,000  repeats were calculated to ensure that enough statistics were obtained.<br>
+              MI(Mutual Information) values were calculated by software CLR.</p>
+            <p align="left" class="STYLE5">The Main parameters of CLR: bins = 12, spline = 3 . <br>
+            </p>
+            <p align="left" class="STYLE5"><strong>predict.pl</strong><br>
+              Find out sites mutated in the &quot;induction year&quot; and belonged to positive selection sites. According to the network information, compute the number of links among candidate sites.<br>
+            </p>
+            <p align="left" class="STYLE5"><span class="STYLE18">Data files:</span><br>
+              <strong>H3N2pro</strong><br>
+              Directory with protein sequences of H3N2 in different year</p>
+            <p align="left" class="STYLE5"><strong>H5N1pro</strong><br>
+              Directory with protein sequences of H5N1 in different year</p>
+            <p align="left" class="STYLE5"><strong>H3N2allfrequence.txt</strong><br>
+              Annual frequency of each site in H3N2</p>
+            <p align="left" class="STYLE5"><strong>H5N1allfrequence.txt</strong><br>
+              Annual frequency of each site in H5N1</p>
+            <p align="left" class="STYLE5"><strong>MImatrix2009.list</strong><br>
+              MI value matrix list(site transition network) calculated by Aracne used the sequence information from 1968 to 2007.</p>
+            <p align="left" class="STYLE5"><strong>clrmatrix</strong><br>
+              Change sequences to mutation matrix<br>
+              Residue same with last year as 0<br>
+              Residue different with last year as 10</p>
+            <p align="left"><span class="STYLE20">predict_result_2009.txt<br>
+            </span><span class="STYLE5">Predicted result from 1972 to 2009</span>. Format: [Fixed_year]	[Predict_year]	[Residue]	[Predict_score] </p>
+            <p align="left" class="STYLE5"><span class="STYLE18">Software used:</span><br>
+                <a href="http://gardnerlab.bu.edu/software&tools.html">CLR</a>(Context Likelihood of Relatedness)<br>
+               The CLR algorithm infers regulatory interactions between transcription factors and their targets using a compendium of gene expression profiles.</p>
+		<p align="left" class="STYLE5">Faith JJ, Hayete B, Thaden JT, Mogno I, Wierzbowski J, Cottarel G, Kasif S, Collins JJ, Gardner TS. 2007. Large-scale mapping and validation of Escherichia coli transcriptional regulation from a compendium of expression profiles. PLoS biology 5:e8.</p>
+            <p align="left" class="STYLE5">The Main parameters of CLR: bins = 12, spline = 3. In our network the threshold is 2</p>
+            <p align="left" class="STYLE5"></p></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      </div></td>
+  </tr>
+</table>
+<font/>
+</body>
+</html>

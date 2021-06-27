@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="http://www.fernandes.org/txp/css.php?n=default" type="text/css" media="screen" />
+	<title>fernandes.org: Site-Specific Relative Evolutionary Rates</title>
+<!-- fernandes.org -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2749983-1";
+urchinTracker();
+</script>
+<script type="text/javascript" src="/MathJax/MathJax.js"></script>
+</head>
+<body>
+<div id="accessibility">
+  <a href="#content" title="Go to content">Go to content</a> 
+  <a href="#sidebar-1" title="Go to navigation">Go to navigation</a> 
+  <a href="#sidebar-2" title="Go to search">Go to search</a> 
+</div> <!-- /accessibility -->
+<div id="container">
+
+<!-- head -->
+<div id="head">
+<h1><a rel="home" href="http://www.fernandes.org/txp/">fernandes.org</a></h1>
+
+</div>
+
+<!-- left -->
+<div id="sidebar-1">
+
+	<p class="linklist"><a href="http://textpattern.net">TextBook</a><br /><a href="http://textpattern.com">Textpattern</a><br /><a href="http://textpattern.org">Txp Resources</a><br /></p>
+
+	<p>
+		<a href="http://promote.pair.com/direct.pl?fernandes.org+59846"><img src="http://promote.pair.com/88x31.pl" border=0 height=31 width=88 alt="Site hosted by pair Networks" /></a>
+	</p>
+
+</div>
+
+<!-- right -->
+<div id="sidebar-2">
+
+		<form method="get" action="http://www.fernandes.org/txp/">
+<p class="search_input">Search<br /><input type="text" value="" name="q" size="15" /></p>
+</form>
+		<form method="get" action="http://www.fernandes.org/txp/"><div>
+<p>Browse<br />
+<select name="c" onchange="submit(this.form);">
+	<option value="" selected="selected">&nbsp;</option>
+	<option value="code">code</option>
+	<option value="mac">mac</option>
+	<option value="math">math</option>
+	<option value="misc">misc</option>
+	<option value="tips">tips</option>
+</select></p>
+<noscript><div><input type="submit" value="Go" /></div></noscript>
+</div>
+</form>
+		<p><a href="http://www.fernandes.org/txp/rss/?section=article" title="RSS Feed">RSS</a> / <a href="http://www.fernandes.org/txp/atom/?section=article" title="Atom Feed">Atom</a></p>
+
+		<p><img src="http://www.fernandes.org/txp/textpattern/txp_img/txp_slug105x45.gif" alt="" /></p>
+
+
+</div>
+
+<!-- center -->
+<div id="content">
+
+	<h3><a rel="bookmark" href="http://www.fernandes.org/txp/article/9/site-specific-relative-evolutionary-rates">Site-Specific Relative Evolutionary&#160;Rates</a> &#183; 2008-01-03 11:13 by Andrew Fernandes</h3>
+	<p>Given a multiple sequence alignment, a phylogenetic tree, and an evolutionary model, this program calculates site-specific <strong>relative</strong> evolutionary rates.</p>
+
+	<p>A detailed manuscript describing its theory, implementation, and testing has been published in Oxford&#8217;s <a href="http://dx.doi.org/10.1093/bioinformatics/btn395"><em>Bioinformatics</em></a> (<a href="http://www.ncbi.nlm.nih.gov/pubmed/18662926">PubMed 18662926</a>)</p>
+
+	<p><strong>Note:</strong> there is a missing sentence in the <em>Methods</em> section of the original version of the article linked above! Silly me, but I accidentally left off a sentence giving the Hastings-ratio of my <a href="http://en.wikipedia.org/wiki/Metropolis-Hastings_algorithm">Metropolis-Hastings</a> <a href="http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo" title="MCMC">Markov chain Monte Carlo</a> procedure to sample the unit-simplex. The <em>correct</em> procedure can be found on the entry I added to <a href="http://en.wikipedia.org/wiki/Simplex#Random_walk">wikipedia</a> on performing a random-walk on the simplex.</p>
+
+	<ul>
+		<li>Version 35 (16 February 2009)
+	<ul>
+		<li><a href="http://www.fernandes.org/txp/file_download/14/bRate-r35.tgz&#38;">bRate-r35.tgz [415.66KB]</a></li>
+		<li>Minor bugfixes in the likelihood engine</li>
+		<li>Included a tool to create your own substitution matrices</li>
+		<li>Includes all the matrices from <span class="caps">PAML</span> 4.2a</li>
+		<li>Added a hack to increase numeric stability on long <span class="caps">MCMC</span> runs</li>
+		<li>Completely verified the likelihood engine against <span class="caps">PHYML</span> 3.0</li>
+		<li>The only thing we don&#8217;t do is tree rearrangements</li>
+		<li>I&#8217;ll probably still twiddle with the rate-proposal function</li>
+		<li>Something is odd about the summarized &#8220;expected rate&#8221; value. It is correctly calculated (carefully verified) but it gives a surprisingly high and anomalous likelihood. I&#8217;ll have to track this down.</li>
+	</ul></li>
+	</ul>
+
+	<ul>
+		<li>Version 25 (30 January 2009)
+	<ul>
+		<li>Complete rewrite of the recursive likelihood engine</li>
+		<li>Can now start the likelihood calculation from arbitrary tree nodes
+	<ul>
+		<li>This will be useful later on when we compute probabalistic ancestors</li>
+		<li>In the future we will compute marginals at each tree node</li>
+	</ul></li>
+		<li><strong>New!</strong> We now integrate over all possible branch lengths, making <em>bRate</em> the first system to treat rates and branch lengths as completely <a href="http://en.wikipedia.org/wiki/Identifiability_condition">identifiable</a>!</li>
+		<li>The last line printed upon quitting is the expected rates, branch lengths, and tree, averaged over the appropriate manifold (the geometric mean)</li>
+		<li>Switched to <a href="http://www.cmake.org/">CMake</a> for the build system</li>
+	</ul></li>
+	</ul>
+
+	<ul>
+		<li>Version 19 (26 August 2008)
+	<ul>
+		<li>Minor bugfixes in the likelihood code</li>
+	</ul></li>
+	</ul>
+
+	<ul>
+		<li>Version 18.38M (03 January 2008)
+	<ul>
+		<li>Initial release</li>
+	</ul></li>
+	</ul>
+
+<div align="center"><img src="http://www.fernandes.org/txp/images/1.gif" style="height:1px;width:400px" class="divider" alt="" /></div>
+
+<p>
+<a rel="prev" href="http://www.fernandes.org/txp/article/7/my-winscard-apdu-view-utility">My WinSCard &#34;APDU View&#34; Utility</a>
+<a rel="next" href="http://www.fernandes.org/txp/article/12/windows-7-and-the-oem-slp-master-product-key-slip-up">Windows 7 and the OEM SLP Master Product Key Slip-Up</a>
+</p>
+
+
+</div>
+
+<!-- footer -->
+<div id="foot">&nbsp;</div>
+
+</div>
+
+</body>
+</html>

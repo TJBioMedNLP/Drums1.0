@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Vlad</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="Homepage of Vlad Popovici" content="Professional webpage of Vlad Popovici (bioinformatician)" />
+	<meta name="keywords" content="bioinformatics Vlad Popovici microarray analysis machine learning pattern recognition DNA face detection face recognition data mining statistical analysis" />
+
+	<style type="text/css">
+		@import "../main.css";
+	</style>
+	
+	<!--[if IE]>
+		<style>
+		#content
+		{
+			margin-top: -5px;
+		}
+		
+		ul.heading_info
+		{
+			margin-left: 5px;
+		}
+		
+		hr.hr
+		{
+			margin-top: -5px;
+		}
+		
+		ul.heading_info
+		{
+			margin-top: -5px;
+		}
+		
+		</style>
+	<![endif]-->
+	
+</head>
+
+<body>
+
+	<div id="outline">
+		<div id="header">
+			<h1>Vlad Popovici's homepage</h1>
+			<!--<h2>Your slogan here...</h2>-->
+		</div>
+		
+		<table id="inner">
+			<tr>
+				<td>
+				<div id="navigation">
+					<br />
+					<ul>
+						<li><a href="../index.html">Home</a></li>
+						<li id="current_tab">Research</li>
+						<li><a href="../papers/index.html">Papers</a></li>
+						<li><a href="../teach/index.html">Teaching</a></li>
+						<li><a href="../contact.html">Contact</a></li>
+					</ul>
+				</div>
+				
+				<div id="content">
+					I am concerned with all the aspects of genomic data analysis. However, most frequently, data
+					originates from either microarray or quantitative PCR experiments. My domain of predilection
+					remains statistical pattern recognition and its applications to life sciences.
+					
+					<h2>Current research projects and themes</h2>
+					<ul>
+					<li><h3>TSP family of classifiers</h3>
+					Top Scoring Pairs (TSPs) are simple bivariate classifiers that predict the class label based
+					on the relative ordering of the two variables. As the ranking is more stable and reproducible
+					across data sets and, more importantly, microarray platforms, the TSPs are attractive solutions
+					to various classification problems.
+					<br/>
+					However, obtaining the list of TSPs requires computing some scores for all pairs of features,
+					a task that is time consuming in the case of high dimensional data. To solve this problem, we
+					provide a C++ implementation that makes use of the OpenMP libraries that exist on most modern
+					multi-core machines.
+					<br/><br/>
+					We also extend the original TSP algorithm by allowing weighted scoring shemes, different ways
+					of combining the individual predictions of the TSPs and providing a solution to the <strong>multi-class
+					problems</strong>. For this, we decompose the problem in a series of binary classification problems:
+					let 1,..., C be the original labels, then for any pair of labels i, j, such that 1 <= i < j <= C,
+					we construct the TSP classifier for discriminating i (re-labelled as 0) from j (re-labelled as 1).
+					We collect all the TSPs, corresponding to all the C(C-1)/2 pairs (i,j), and their predictions
+					into a 0/1 matrix with n (number of samples) rows and m (number of TSPs) columns. This matrix
+					is fed into ctree() classifier, together with the original labels 1,2,...,C, to produce a
+					classification tree. This tree has as its nodes individual TSPs (single pairs of the original variables),
+					with branches corresponding to the 0 or 1 predicted labels (by the TSPs). The leaves will be the
+					original 1,2,...,C labels. This process can be seen as a transformation of the original
+					feature space (e.g. gene expression levels) into a binary feature space, given by the predictions
+					of the TSPs.
+					
+					
+					<br/><br/>
+					<b>Software:</b> The development platform is Linux (Ubuntu 9.10, GCC 4.4.1, R-2.11.1), and is the
+					only one on which we can actively support our software. 
+					The Windows binaries were obtained from the source package and
+					compiled using GCC/G++ (from <a href=http://www.mingw.org>MinGW</a> distribution) with
+					the corresponding GOMP (GNU OpenMP) and pthreads libraries (included in the distribution).
+					<br/>
+					Please note that the package depends on <b>party</b> package, available from
+					<a href=http://cran.r-project.org/>CRAN</a> repository.
+					<br/><br/>
+					<strong>Before installing</strong>, you might want to check if OpenMP is supported on your system. For this,
+					download the file <a href=./test_openmp.cpp>test_openmp.cpp</a> and compile it using
+					<br/><br/><code>
+					g++ -o test_openmp -fopenmp test_openmp.cpp -lgomp
+					</code><br/><br/>
+					Note that <code>-lgomp</code> might not be needed anymore for the newer versions of gcc.
+					If OpenMP is supported (both by your compiler and operating system), running the program
+					should print something like (for 8 cores):<br/><br/>
+					<code>
+					Using OpenMP!<br/>
+	---> Maximum number of threads available: 8<br/>
+	---> Number of processing units: 8<br/>
+	---> Using dynamic thread allocation strategy.<br/>
+Running 80 iterations.<br/>
+					</code><br/>
+						followed by a number of lines of the form <code>Iteration: n</code>
+						
+				<br/>
+				If OpenMP is supported, you should have no troubles installing the Rgtsp packge.
+				<br/>
+					<ul>
+						<li>for Unix-like systems: <a href=./Rgtsp_0.0-4.tar.gz>Rgtsp package</a></li>
+						<li>for Windows systems: <a href=./Rgtsp_0.0-4.zip>binary Rgtsp package</a>.</li>
+					</ul>
+					
+					
+					<li><h3>MAQC-II</h3>
+					MAQC-II is an FDA-led initiative for the standardization of methodology for biomarker identification
+					studies. There is a lack of accepted standards for biomarker validation, for biological interpretation 
+					of results and for demonstrating comparability of conclusions. The initiative compares methods for 
+					selection and validation of biomarkers from microarray data, paying particular attention to 
+					robustness, flexibility and reproducibility of the classification system.
+					
+					Besides the contribution to the mainstream effort of the project, by designing and implementing
+					a data analysis plan compliant with FDA's requirements, I focussed also on more specific issues
+					like the study of the effect of classification problem complexity/difficulty on the optimal combination
+					of feature selection and classification methods.
+					
+					<li><h3>Selection of control genes</h3>
+					We propose a meta-analysis approach to selecting candidate control genes. This has the
+					advantage of being platform- and normalization-independent and of being able to integrate
+					predefined list of genes as well. The first step is to score the genes from a dataset and to
+					rank them accordingly. Here is a plot showing the scores (color-coded) from a dataset:
+					<br>
+					<img src="EXPO-BR-scores.jpeg" width="300" height="300" />
+					<br>
+					<a href="http://www.r-project.org">R</a> code for scoring and aggregating the gene
+					ranks from several datasets is available <a href="./CGRS.r">here.</a>
+					
+					<li/><h3>Segmentation of tiling array data</h3>
+					Segmenting the tiling array data is a challenging task due to high level of noise 
+					that affects the measurements. We introduce a wavelet–based denoising step in the 
+					process of segmentation and we prove its efficiency on simulated and real–world data. 
+					This denoising step has the advantage of improving the accuracy of the segmentation 
+					while also reducing the execution time and memory requirements.
+					Here is an example of such segmentation of yeast's 1st chromosome:
+					<a href="chr1-nw-030000-130000.jpeg" type="image/jpeg">
+					<img src="chr1-nw-030000-130000-small.jpeg" width="360" height="216" /></a>
+					</li>
+					<li><h3>Tumor scoring using qPCR/microarray analysis</h3>
+					This is a long term project whose goal is to design one or several molecular
+					signatures with prognostic value in breast cancer survival and treatment
+					prediction.
+					</li>
+					<li><h3>Breast cancer data analysis</h3>
+					I am involved in a number of projects concerned with analysis of the breast cancer
+					microarray data. One of these projects is MAQC-II, a US project aimed at validating
+					classifiers built on microarray predictors.
+					</li>
+					</ul>
+					
+				</div>
+				</td>
+				
+				<td style="vertical-align: top;">
+				<div id="sidebar">
+				</div>
+				</td>
+			</tr>
+		</table>
+
+		<p><a href="http://jigsaw.w3.org/css-validator/check/referer">CSS Valid</a> &amp; <a href="http://validator.w3.org/check?uri=referer">XHTML 1.0 Strict Valid</a></p>
+	</div>
+
+</body>
+</html>

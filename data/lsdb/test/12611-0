@@ -1,0 +1,177 @@
+<html>
+    <head>
+        <title>UbPred: predictor of protein ubiquitination sites</title>
+        <link rel="stylesheet" href="ubpred.css" type="text/css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    </head>
+
+    <body>
+        <table width="880" cellpadding="0" cellspacing="0" border="0" align="center">
+        <tr>
+            <td width="127">
+<img src="images/ubpred_logo_60px.png" width="127" height="60" border="0">
+            </td>
+            <td valign="middle" width="626" align="center">
+<font face="Arial" size="5">UbPred: predictor of protein ubiquitination sites</font>
+            </td>
+            <td width="127">
+<a href="http://www.rockefeller.edu"><img src="images/ru_logo_60px.png" width="58" height="60" hspace="0" vspace="1" border="0" align="right"></a>
+<a href="http://www.indiana.edu"><img src="images/iu_logo_50px.png" width="39" height="50" hspace="5" vspace="6" border="0" align="right"></a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><hr size="1" noshade>
+        </tr>
+        <tr>
+            <td colspan="3" align="middle">
+<a href="help.html#usage">Usage instructions</a> |
+<a href="help.html#datasets">Datasets</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><hr size="1" noshade>
+        </tr>
+        </table>
+
+        <form name="form" action="cgi-bin/ubpred/ubpred.cgi" method="post" enctype="multipart/form-data">
+
+        <table width="880" cellpadding="0" cellspacing="16" border="0" align="center" bgcolor="#EEEEEE">
+        <tr>
+            <td valign="top">
+            Paste the protein sequence (one at a time):
+            <a href="help.html#usage"><img src="images/info.gif" width="12" height="12" border="0" alt="help"></a><br><br>            
+            <textarea name="query_sequence" rows="8" cols="80"></textarea><br><br>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+            Or upload a sequence file: <input type="file" name="query_file">
+            <a href="help.html#usage"><img src="images/info.gif" width="12" height="12" border="0" alt="help"></a>
+
+<br><br>
+<hr size=1 noshade>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+            E-mail address: <input type="text" name="e_mail">
+<br><br>
+<hr size=1 noshade>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <br>
+            <input type="hidden" name="command" value="predict">
+            <input type="submit" name="submit"  value="Predict">
+            <input type="reset"  name="reset"   value="Reset">
+            </td>
+        </tr>
+        </table>
+        </form>
+
+        <table width="880" cellpadding="0" cellspacing="16" border="0" align="center">
+        <tr>
+            <td>
+
+<p>
+UbPred is a random forest-based predictor of potential ubiquitination sites
+in proteins. It was trained on a combined set of 266 non-redundant 
+experimentally verified ubiquitination sites available from our experiments
+and from two large-scale proteomics studies (Hitchcock, <i>et al.</i>, 2003;
+Peng, <i>et al.</i>, 2003). Class-balanced accuracy of UbPred reached 72%,
+whereas the AUC (area under the ROC curve) was estimated to be ~80%.  
+</p>
+
+<p>
+Supplementary information, usage instractions and more about the datasets  
+can be found on the <font size="+1"><a href="help.html">help</a></font> page.
+</p>
+
+<hr noshade size="1">
+
+<p>
+UbPred executable files are available for download:
+</p>
+
+<table>
+<tr>
+<td>OS</td>
+<td>Installer</td>
+<td>Data files</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><a href="MCRInstaller.bin">MCRInstaller.bin</a></td>
+<td><a href="UbPredDTFileLinux.zip">UbPredDTFileLinux.zip</a></td>
+</tr>
+<tr>
+<td>Windows (64-bit)</td>
+<td><a href="MCRInstallerWin64.exe">MCRInstallerWin64.exe</a></td>
+<td><a href="UbPredDTFileWin64.zip">UbPredDTFileWin64.zip</a></td></tr>
+<tr>
+<td>Windows (32-bit)</td>
+<td><a href="MCRInstallerWin32.exe">MCRInstallerWin32.exe</a></td>
+<td><a href="UbPredDTFileWin32.zip">UbPredDTFileWin32.zip</a></td></tr>
+</table>
+
+<p>
+Installation guide can be downloaded <a href="README.txt">here</a>.
+</p>
+
+
+<hr noshade size="1">
+
+<p>
+<img src="images/yeast16px.png" width="16" height="16" align="left" border="1">
+&nbsp; Pre-computed ubiquitination predictions on the whole yeast proteome can
+be downloaded <a href="sgd_predictions.txt.gz">here</a>.
+</p>
+
+<hr noshade size="1">
+
+<p>
+UbPred was developed by 
+<a href="http://www.informatics.indiana.edu/predrag">Predrag Radivojac</a>
+(Indiana University, School of Informatics), 
+<a href="http://www.cs.columbia.edu/~vladimir">Vladimir Vacic</a>
+(Columbia University) and 
+<a href="http://linkage.rockefeller.edu">Lilia Iakoucheva</a>
+(The Rockefeller University, Laboratory for Statistical Genetics).
+</p>
+
+<p>
+In citing the UbPred software, please refer to:
+
+<blockquote>
+Radivojac, P., Vacic, V., Haynes, C., Cocklin, R. R., Mohan, A., Heyen, J. W., Goebl, M. G., and Iakoucheva, L. M. 
+Identification, Analysis and Prediction of Protein Ubiquitination Sites.
+<i>Proteins: Structure, Function, and Bioinformatics.</i> 78(2):365-380. (2010) 
+<a href="http://www.ncbi.nlm.nih.gov/pubmed/19722269"><img src="images/pubmed.gif" width="47" height="15" border="0"></a>
+</blockquote>
+</p>
+
+<p>
+Please direct all comments and suggestions to 
+<a href="mailto:predrag%40indiana.edu">predrag<!---->@indiana.edu</a> or
+<a href="mailto:lilia%40rockefeller.edu">lilia<!---->@rockefeller.edu</a>.
+</p>
+
+<hr noshade size="3">
+            </td>
+        </tr>
+        </table>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7779072-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+    </body>
+</html>

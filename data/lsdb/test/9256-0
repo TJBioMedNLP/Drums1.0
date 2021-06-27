@@ -1,0 +1,157 @@
+<html>
+
+<head>
+<title>Bioinformatics Paper</title>
+</head>
+
+<body>
+
+<h3 style="line-height:150%" align="center"><b>Understanding Protein Dispensability
+through Machine-Learning Analysis of High-Throughput Data<o:p></o:p></b></h3>
+
+<p style="line-height:150%" align="center"><span
+style="mso-fareast-font-family:
+&quot;MS Song&quot;">Yu Chen&nbsp; and Dong Xu</span></p>
+<div align="center"><center>
+
+<address style="line-height:150%">
+  <span style="font-size:11.0pt;
+mso-bidi-font-size:16.0pt">Digital Biology Laboratory,
+  Computer Science Department, <span style="mso-spacerun:
+yes">&nbsp;</span>201 Engineering
+  Building West,<o:p></o:p> University of Missouri, Columbia, MO, 65211 </span><span
+  style="font-size:11.0pt;mso-bidi-font-size:10.5pt;mso-text-raise:3.0pt"><span
+  style="mso-spacerun: yes">&nbsp;</span><o:p></o:p></span>
+</address>
+</center></div>
+
+<p><strong>&nbsp;</strong></p>
+
+<h2><strong>Supplement Data</strong></h2>
+
+<p>1.&nbsp; Data&nbsp; used in integrated analysis of protein dispensability:
+&nbsp; <a href = "Dataset.txt"> Dataset.txt </a>  </p>
+
+<p><strong>Format:</strong>&nbsp; column 1:&nbsp; Yeast ORF name;&nbsp; column 2:
+&nbsp; number of&nbsp; neighbors in gene expression graph;&nbsp; column 3:
+&nbsp;&nbsp; number of&nbsp; paralogs; column 4: number of interacting partners in protein
+interaction network;&nbsp; column 5:&nbsp; number of species where yeast ORF has ortholog;
+&nbsp;&nbsp;&nbsp; column 6:&nbsp; fitness value.</p>
+
+<p>2:&nbsp; Data used in&nbsp; neural network and SVM for protein dispensability
+prediction:&nbsp;&nbsp; <a href= "NNandSVMdata.txt"> NNandSVMdata.txt </a></p>
+
+<p><strong>Format:</strong>&nbsp; column 1: Yeast ORF name;&nbsp; column 2: number of
+species where yeast ORF has ortholog; column 3:&nbsp; sequence&nbsp; identity of ortholog
+paris in <i><span
+style="font-size:10.0pt;mso-bidi-font-size:
+11.0pt;font-family:Times;mso-fareast-font-family:SimSun;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+mso-bidi-language:AR-SA">S.
+cerevisiae</span></i><span
+style="font-size:10.0pt;
+mso-bidi-font-size:11.0pt;font-family:Times;mso-fareast-font-family:SimSun;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:AR-SA">
+&nbsp; and&nbsp; </span><span
+style="font-size:10.0pt;font-family:Times;
+mso-fareast-font-family:SimSun;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA"><i>Arabidopsis
+thaliana; </i>&nbsp; </span>column 4:&nbsp; sequence&nbsp; identity of ortholog paris in <i><span
+style="font-size:10.0pt;mso-bidi-font-size:
+11.0pt;font-family:Times;mso-fareast-font-family:SimSun;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+mso-bidi-language:AR-SA">
+S. cerevisiae</span></i><span
+style="font-size:10.0pt;
+mso-bidi-font-size:11.0pt;font-family:Times;mso-fareast-font-family:SimSun;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:AR-SA">
+&nbsp; and </span><i><span
+style="font-size:10.0pt;font-family:Times;
+mso-fareast-font-family:SimSun;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">Schizosaccharomyces
+pombe </span></i><span
+style="font-size:10.0pt;
+mso-bidi-font-size:11.0pt;font-family:Times;mso-fareast-font-family:SimSun;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:AR-SA">
+</span><span
+style="font-size:10.0pt;font-family:Times;
+mso-fareast-font-family:SimSun;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA"><i>;
+</i>&nbsp; </span>column 5:&nbsp; sequence&nbsp; identity of ortholog paris in <i><span
+style="font-size:10.0pt;mso-bidi-font-size:
+11.0pt;font-family:Times;mso-fareast-font-family:SimSun;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+mso-bidi-language:AR-SA">S.
+cerevisiae</span></i><span
+style="font-size:10.0pt;
+mso-bidi-font-size:11.0pt;font-family:Times;mso-fareast-font-family:SimSun;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:AR-SA">
+&nbsp; and&nbsp; </span><i><span
+style="font-size:10.0pt;font-family:Times;
+mso-fareast-font-family:SimSun;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">Drosophila
+melanogaster ;&nbsp; </span></i> column 6:&nbsp; sequence&nbsp; identity of ortholog paris
+in <i><span
+style="font-size:10.0pt;mso-bidi-font-size:
+11.0pt;font-family:Times;mso-fareast-font-family:SimSun;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+mso-bidi-language:AR-SA">S.
+cerevisiae</span></i><span
+style="font-size:10.0pt;
+mso-bidi-font-size:11.0pt;font-family:Times;mso-fareast-font-family:SimSun;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:AR-SA">
+&nbsp; and </span><i><span
+style="font-size:10.0pt;font-family:Times;
+mso-fareast-font-family:SimSun;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">Caenorhabditis
+elegans ; </span></i> column 7:&nbsp; protein size ( the length of peptide);&nbsp; column
+8: number of&nbsp; neighbors in gene expression graph;&nbsp; column 9:&nbsp;&nbsp; number
+of&nbsp; paralogs; column 10: number of interacting partners in protein interaction
+network;&nbsp; column 11:&nbsp; fitness value.</p>
+
+<p> The data were randomly splitted into  <a href ="TrainingSet.txt"> traning data(normalized) </a> and <a href = "TestSet.txt"> test data (normalized) </a>. </p>
+ 
+
+<p>3. Dataset with different feature combinations used for&nbsp; protein dispensability
+prediction:</p>
+
+<p> <a href ="EvolutionandPI.txt">EvolutonandandProteinInteraction.txt;</a>  &nbsp; &nbsp; <strong>Format:&nbsp; </strong> column 1:
+Yeast ORF name;&nbsp; column 2: number of species where yeast ORF has ortholog;
+&nbsp; column 3:&nbsp; the average sequence&nbsp; identity of ortholog paris in <i>S. cerevisiae</span></i>
+and <i> Arabidopsis thaliana, Schizosaccharomyces pombe, Drosophila melanogaste, Caenorhabditis elegans;
+</i> column 4: number of interacting partners in protein interaction network; column 5: fitness value.</p>
+
+<p> <a href ="EvolutionandDuplicaiton.txt">Evolutonandandduplication.txt;</a>  &nbsp; &nbsp; <strong>Format:&nbsp; </strong> column 1:
+Yeast ORF name;&nbsp; column 2: number of species where yeast ORF has ortholog;
+&nbsp; column 3:&nbsp; the average sequence&nbsp; identity of ortholog paris in <i>S. cerevisiae</span></i>
+and <i> Arabidopsis thaliana, Schizosaccharomyces pombe, Drosophila melanogaste, Caenorhabditis elegans;
+</i> column 4: number of paralogs; column 5: fitness value.</p>
+
+<p> <a href ="EvolutionandMicroarray.txt">EvolutonandMicroarray.txt;</a>  &nbsp; &nbsp; <strong>Format:&nbsp; </strong> column 1:
+Yeast ORF name;&nbsp; column 2: number of species where yeast ORF has ortholog;
+&nbsp; column 3:&nbsp; the average sequence&nbsp; identity of ortholog paris in <i>S. cerevisiae</span></i>
+and <i> Arabidopsis thaliana, Schizosaccharomyces pombe, Drosophila melanogaste, Caenorhabditis elegans;
+</i> column 4: Number of neighbors in gene expression graph ; column 5: fitness value.</p>
+
+<p> <a href ="DuplicationandMicroarray.txt"> DuplicationandMicroarray.txt;</a>  &nbsp; &nbsp; <strong>Format:&nbsp; </strong> column 1:
+Yeast ORF name;&nbsp; column 2: number of paralogs; &nbsp; column 3:&nbsp; Number of neighbors in gene expression graph ; column 4: fitness value.</p>
+
+
+<p> <a href ="DuplicationPI.txt"> DuplicationandProteinInteraction.txt;</a>  &nbsp; &nbsp; <strong>Format:&nbsp; </strong> column 1:
+Yeast ORF name;&nbsp; column 2: number of paralogs; &nbsp; column 3:&nbsp; Number of interating parters in protein interaction network; column 4: fitness value.</p>
+
+<p> <a href ="MicorarrayPI.txt"> MicroarraydataandProteinInteraction.txt;</a>  &nbsp; &nbsp; <strong>Format:&nbsp; </strong> column 1:
+Yeast ORF name;&nbsp; column 2: number of neighbors in gene expression network; &nbsp; column 3:&nbsp; Number of interating parters in protein interaction network; column 4: fitness value.</p>
+
+
+<br>
+Contact:  <b><a href = "mailto: xudong@missouri.edu">  xudong@missouri.edu </a> </b>
+
+
+</body>
+</html>

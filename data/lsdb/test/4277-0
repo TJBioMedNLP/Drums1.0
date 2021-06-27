@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Malin: maximum likelihood analysis of intron evolution</title>
+
+<base href="http://www.iro.umontreal.ca/~csuros/introns/malin/malin.html" />
+
+<link rel="stylesheet" href="http://www.iro.umontreal.ca/~csuros/csurosv2.css" type="text/css" />
+<style type="text/css">
+	/* introns */
+html, body 
+{
+        background-color: white;
+        color: rgb(80,40,80);
+        font-size: 11pt;
+}
+h2
+{
+	/*	color: white;
+	background-color: rgb(80,40,80);*/
+	margin-right: 75%;
+	border-top: groove;
+	border-left: groove;
+}
+.partitle
+{
+	  font-weight: bold;
+	  color: rgb(30,10,30);
+	  background-color: rgb(220,180,220);
+
+}
+blockquote
+{
+	color: black;
+	background-color: rgb(255,220,255);
+}
+
+
+</style>
+
+
+</head>
+<body>
+<div id="header">
+<p><img src="images/malin_logo.jpg" width="100%" alt="Malin"/></p>
+</div>
+
+<div id="content">
+<h1>Intro</h1>
+<p>Malin is a software package for the analysis of eukaryotic 
+gene structure evolution. 
+It provides a graphical user interface for various tasks 
+commonly used
+to infer the evolution of exon-intron structure 
+in protein-coding orthologs. 
+The implemented tasks include the following.</p>
+<ul>
+<li> Identification of homologous splice sites in annotated 
+	protein sequence alignments.</li>
+<li>Computation of primary statistics about introns in 
+	homologous sites (<q>shared introns</q>).</li>
+<li>Estimation of ancestral intron content, intron losses and 
+	gains by Dollo parsimony.</li>
+<li>Estimation of intron loss and gain rates in a probabilistic model.</li>
+<li>Estimation of ancestral intron content, intron losses and gains 
+	in a probabilistic model.</li>
+<li>Inference of evolutionary histories at individual sites.</li>
+<li>Error estimation for rates and histories by bootstrap.</li>
+</ul>
+<h2>Related stuff</h2>
+<p>My other related computer programs (including a program for multiple 
+	alignment of intron-annotated protein sequences) and information is 
+	accessible through <a href="../index.html">my research page</a> on intron evolution.
+</p>
+<p>Liran Carmel wrote a spiffy software 
+	package called EREM (Evolutionary Reconstruction by Expectation-Maximization), 
+	which implements his results on analyzing gene structure evolution. 
+	See <a href="http://www.ncbi.nlm.nih.gov/CBBresearch/Fellows/Carmel/software/EREM/erem.html">his webpage</a>
+	about it.
+</p>
+
+<h1>Availability</h1>
+<p>Malin is written entirely in Java, and, thus, can be used 
+in different operating systems, including Mac OS X, Microsoft Windows, 
+and various Unix/Linux versions. 
+The software is packaged in a JAR file, and can be executed 
+in Java versions 1.5 and above.
+The distributed platform-specific packages, described below, 
+include the JAR file with the necessary 
+bundling for execution, as well as 
+the User's Guide and a <tt>test</tt> directory.
+</p>
+
+<h2>Version history</h2>
+<ul>
+<li>2008 April 13 (<b>current</b>) version adds 
+	the option of closing a session, and 
+	improves the Help information.</li>
+<li>2008 February 29 version fixed 
+a bug from the previous version that prevented the proper 
+saving of intron site mapping information in intron tables. 
+</li>
+</ul>
+
+<h2>Mac OS X</h2>
+<p>I have written the software using a Mac, and 
+went to some extent to integrate the Java executable into a native-looking 
+application. The JAR file is bundled as <tt>Malin.app</tt>, which you can just 
+run directly by double-clicking on it. Please note that the 
+application attempts to set the memory usage for the Java Virtual Machine 
+by enabling a maximum heap size of 1000 Megabytes. If your computer does not have 
+that much memory (i.e., at least 1G), the application may not function properly. 
+One solution is to follow the instructions for Unix/Linux below, 
+and launch Malin from a Terminal window. Alternatively, you can send me an e-mail 
+and I will gladly prepare a small-memory version of the application  for you.</p>
+<p><span class="partitle">Installation:</span> 
+Download the disk image <a href="./Malin.dmg"><tt>Malin.dmg</tt></a>, open it, 
+and place the application <tt>Malin.app</tt> 
+into an appropriate directory. For convenience, you may want to copy it to the 
+<tt>Applications</tt> folder, either at the system level, 
+or in your own home directory.</p>
+
+<h2>Microsoft Windows</h2>
+<p>
+You need to have a Java Virtual Machine 
+on your computer in order to run Malin. You could download, for instance, 
+Sun's Java Runtime Environment from <a href="http://www.java.com/">http://www.java.com/</a>, 
+which is 
+the JRE I used in the testing. 
+You will probably need to enable larger memory usage for the 
+JVM than the default setting, which you get by double-clicking on the JAR file. 
+You can launch Malin via the provided MS-DOS batch file that sets the 
+heap space for the JVM to 1000 Megabytes. Edit the batch file manually, 
+if necessary.</p>
+<p>
+<span class="partitle">Installation:</span>  
+Download the ZIP file <a href="./Malin.zip"><tt>Malin.zip</tt></a>. The 
+archive contains the 
+JAR file <a href="./Malin.jar"><tt>Malin.jar</tt></a> and the batch file 
+<tt>Malin.bat</tt>.
+</p>
+
+<h2>Unix/Linux</h2>
+<p>You can launch Malin from the command line, 
+by the command <kbd>java -jar Malin.jar</kbd>. 
+You will probably need to enable larger memory usage for the 
+JVM than the default setting, which you can do by 
+launching Malin as <kbd>java -Xmx1024M -jar Malin.jar</kbd>. 
+The <tt>-Xmx</tt> option here sets the Java heap space to 1 Gigabytes: you
+can experiment with other settings appropriate  for your computer and 
+data set.</p>
+
+<p>
+<span class="partitle">Installation:</span>  
+Download the gzipped TAR file <a href="./Malin.tgz"><tt>Malin.tgz</tt></a> into an 
+appropriate directory. You can extract the files from the archive
+with the command <kbd>tar -zxf Malin.tgz</kbd>.
+</p>
+
+<h2>User's Guide</h2>
+<p>The User's Guide is available in PDF format
+as <a href="./malin_guide.pdf">malin_guide.pdf</a>. 
+Relevant information is available also through the Help menu of the 
+software package.</p>
+
+<h1>Licensing</h1>
+<p>Malin is distributed under the terms of a <a href="http://en.wikipedia.org/wiki/BSD_Licenses" title="Wikipedia entry for BSD licenses">BSD-style</a> license, as shown below</p>
+<blockquote>
+<p>Copyright &copy; 2008, Mikl&oacute;s Cs&#369;r&ouml;s</p> 
+
+<p>All rights reserved. Redistribution and use in source and
+binary forms, with or without modification, are permitted
+provided that the following conditions are met:</p>
+<ol>
+<li>	Redistributions of source code must retain the above
+copyright notice, this list of conditions and the following
+disclaimer. </li>
+
+<li> Redistributions in binary form must
+reproduce the above copyright notice, this list of
+conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</li>
+
+<li> Neither the name of the <em>Universit&eacute; de Montr&eacute;al</em> 
+nor the names of
+its contributors may be used to endorse or promote products
+derived from this software without specific prior written
+permission.</li>
+</ol>
+<p>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+<q>AS IS</q> AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+</blockquote>
+
+<p>I would be very grateful if you could send me a note 
+in case you decide to use Malin. (Aside from making me happy, 
+you'd have my promise of notifying you about future updates.)
+</p> 
+
+<h1>Screen shots</h1>
+<p>Alignment panel <a href="images/alignment-panel.png"><img src="images/alignment-panel-small.png" height="200px" alt="Alignment panel screenshot"/></a></p>
+<p>Rates panel <a href="images/rates-panel.png"><img src="images/rates-panel-small.png" height="200px" alt="Rates panel screenshot"/></a></p>
+<p>Site histories <a href="images/histories.jpg"><img src="images/histories-small.jpg" height="200px" alt="Site histories screenshot"/></a></p>
+<p>Bootstrapping <a href="images/bootstrap-run.jpg"><img src="images/bootstrap-run-small.jpg" height="200px" alt="Bootstrapping screenshot"/></a></p>
+
+</div> <!-- content -->
+
+<div id="footer">
+<p><a href="./">&lt;&lt; Mikl&oacute;s Cs&#369;r&ouml;s</a>
+&nbsp;&nbsp;&nbsp;last modified: April 15, 2008.</p>
+<p class="validate">
+<a href="http://validator.w3.org/check/referer" title="validate XHTML">v</a>
+<!--
+<a href="http://validator.w3.org/checklink?uri=http%3A%2F%2Fwww.iro.umontreal.ca%2F%7Ecsuros%2Fintrons.html" title="check links">l</a>
+-->
+</p>
+</div>
+
+</body> 
+</html>

@@ -1,0 +1,672 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/ag3-projects.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>D3: Computational Biology &amp; Applied Algorithmics: Software: DASMIweb</title>
+<script type="text/javascript" src="http://dasmi.de/dasmij/dwr/interface/Dasmi.js"></script>
+<script type="text/javascript" src="http://dasmi.de/dasmij/dwr/interface/UserSettings.js"></script>
+<script type="text/javascript" src="http://dasmi.de/dasmij/dwr/engine.js"></script>
+<script type="text/javascript" src="http://dasmi.de/dasmij/dwr/util.js"></script>
+<script type="text/javascript" src="dasmi.js"></script>
+<script type="text/javascript" src="util.js"></script>
+<script type="text/javascript" src="webtoolkit.aim.js"></script>
+<script type="text/javascript" src="validation.js"></script>
+<script type="text/javascript" src="help.js"></script>
+
+<script>
+  		
+		// remote scripting library
+		// (c) copyright 2005 modernmethod, inc
+		var sajax_debug_mode = false;
+		var sajax_request_type = "GET";
+		var sajax_target_id = "";
+		var sajax_failure_redirect = "";
+		
+		function sajax_debug(text) {
+			if (sajax_debug_mode)
+				alert(text);
+		}
+		
+ 		function sajax_init_object() {
+ 			sajax_debug("sajax_init_object() called..")
+ 			
+ 			var A;
+ 			
+ 			var msxmlhttp = new Array(
+				'Msxml2.XMLHTTP.5.0',
+				'Msxml2.XMLHTTP.4.0',
+				'Msxml2.XMLHTTP.3.0',
+				'Msxml2.XMLHTTP',
+				'Microsoft.XMLHTTP');
+			for (var i = 0; i < msxmlhttp.length; i++) {
+				try {
+					A = new ActiveXObject(msxmlhttp[i]);
+				} catch (e) {
+					A = null;
+				}
+			}
+ 			
+			if(!A && typeof XMLHttpRequest != "undefined")
+				A = new XMLHttpRequest();
+			if (!A)
+				sajax_debug("Could not create connection object.");
+			return A;
+		}
+		
+		var sajax_requests = new Array();
+		
+		function sajax_cancel() {
+			for (var i = 0; i < sajax_requests.length; i++) 
+				sajax_requests[i].abort();
+		}
+		
+		function sajax_do_call(func_name, args) {
+			var i, x, n;
+			var uri;
+			var post_data;
+			var target_id;
+			
+			sajax_debug("in sajax_do_call().." + sajax_request_type + "/" + sajax_target_id);
+			target_id = sajax_target_id;
+			if (typeof(sajax_request_type) == "undefined" || sajax_request_type == "") 
+				sajax_request_type = "GET";
+			
+			uri = "/dasmiweb.php";
+			if (sajax_request_type == "GET") {
+			
+				if (uri.indexOf("?") == -1) 
+					uri += "?rs=" + escape(func_name);
+				else
+					uri += "&rs=" + escape(func_name);
+				uri += "&rst=" + escape(sajax_target_id);
+				uri += "&rsrnd=" + new Date().getTime();
+				
+				for (i = 0; i < args.length-1; i++) 
+					uri += "&rsargs[]=" + escape(args[i]);
+
+				post_data = null;
+			} 
+			else if (sajax_request_type == "POST") {
+				post_data = "rs=" + escape(func_name);
+				post_data += "&rst=" + escape(sajax_target_id);
+				post_data += "&rsrnd=" + new Date().getTime();
+				
+				for (i = 0; i < args.length-1; i++) 
+					post_data = post_data + "&rsargs[]=" + escape(args[i]);
+			}
+			else {
+				alert("Illegal request type: " + sajax_request_type);
+			}
+			
+			x = sajax_init_object();
+			if (x == null) {
+				if (sajax_failure_redirect != "") {
+					location.href = sajax_failure_redirect;
+					return false;
+				} else {
+					sajax_debug("NULL sajax object for user agent:\n" + navigator.userAgent);
+					return false;
+				}
+			} else {
+				x.open(sajax_request_type, uri, true);
+				// window.open(uri);
+				
+				sajax_requests[sajax_requests.length] = x;
+				
+				if (sajax_request_type == "POST") {
+					x.setRequestHeader("Method", "POST " + uri + " HTTP/1.1");
+					x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				}
+			
+				x.onreadystatechange = function() {
+					if (x.readyState != 4) 
+						return;
+
+					sajax_debug("received " + x.responseText);
+				
+					var status;
+					var data;
+					var txt = x.responseText.replace(/^\s*|\s*$/g,"");
+					status = txt.charAt(0);
+					data = txt.substring(2);
+
+					if (status == "") {
+						// let's just assume this is a pre-response bailout and let it slide for now
+					} else if (status == "-") 
+						alert("Error: " + data);
+					else {
+						if (target_id != "") 
+							document.getElementById(target_id).innerHTML = eval(data);
+						else {
+							try {
+								var callback;
+								var extra_data = false;
+								if (typeof args[args.length-1] == "object") {
+									callback = args[args.length-1].callback;
+									extra_data = args[args.length-1].extra_data;
+								} else {
+									callback = args[args.length-1];
+								}
+								callback(eval(data), extra_data);
+							} catch (e) {
+								sajax_debug("Caught error " + e + ": Could not eval " + data );
+							}
+						}
+					}
+				}
+			}
+			
+			sajax_debug(func_name + " uri = " + uri + "/post = " + post_data);
+			x.send(post_data);
+			sajax_debug(func_name + " waiting..");
+			delete x;
+			return true;
+		}
+		
+				
+		// wrapper for createAndStoreImage		
+		function x_createAndStoreImage() {
+			sajax_do_call("createAndStoreImage",
+				x_createAndStoreImage.arguments);
+		}
+		
+		</script>
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+
+<!-- InstanceEndEditable -->
+<link rel="SHORTCUT ICON" href="/favicon.ico" />
+<link rel="stylesheet" type="text/css" media="screen" href="/c/mpi-inf.css" />
+<link rel="stylesheet" type="text/css" media="print" href="/c/print.css" />
+<style type="text/css" media="screen">
+a#d3-home, a:link#d3-home, a:visited#d3-home {background: rgb(80%,85%,90%);}
+a#d3-software, a:link#d3-software, a:visited#d3-software {background: rgb(80%,85%,90%);}
+
+a#dasmiweb, a:link#dasmiweb, a:visited#dasmiweb {background: rgb(80%,85%,90%);}
+
+
+</style><meta name="keywords" content="Max-Planck-Institut
+Max Planck Institute
+MPII
+MPI
+Bioinformatik
+Bioinformatics
+Informatik
+Computer Science
+Saarbr&uuml;cken
+Algorithms
+Complexity
+Research Units
+Arbeitsgruppen
+Useful Links
+Department D3
+Projects
+AG3 Software" />
+
+</head>
+<body onLoad="dasmiInit('http://dasmi.de/sources')"><script type="text/javascript" src="wz_tooltip.js"></script>
+
+<!--body onLoad="dasmiInit()"-->
+<div id="head1o2">
+  <div id="mpiidotspacer"></div>
+  <div id="mpiidot"></div>
+  <!-- InstanceBeginEditable name="nav1" -->
+<ul id="nav1"><li><a href="http://www.mpi-inf.mpg.de/index_d.html" title="Deutsche Startseite: Max-Planck-Institut f&uuml;r Informatik" id="n1-deutsch">Deutsch</a></li></ul>  <!-- InstanceEndEditable --> </div>
+<div id="head2o2">
+  <div id="deco"><!-- InstanceBeginEditable name="decoration" -->
+  <img src="dasmi.jpg" width="180" height="100" alt="DASMI" />
+  <!-- InstanceEndEditable --></div>
+  <div id="mpiitext">max planck institut<br/>
+    informatik</div>
+  <img id="mpiilogo" src="/g/mpii.jpg" alt="mpii" usemap="#Map" width="300" height="100"/>
+  <map name="Map" id="Map">
+    <area shape="rect" coords="97,14,296,70" href="/" alt="mpii logo" />
+    <area shape="circle" coords="41,49,40" href="http://www.mpg.de/" alt="Minerva of the Max Planck Society" />
+  </map>
+</div>
+<div id="headerspacer">&nbsp;</div>
+<div id="col2o2">
+  <div id="col2o2content"> <!-- InstanceBeginEditable name="col2o2" --> 
+  <h1><span style="color:#003366;">DASMIweb</span> - dynamic online integration and annotation of molecular interaction data</h1> 
+    
+  
+  <div id="wrapper">
+
+  <div id="searchArea">
+   <!--script type="text/javascript">Rico.Corner.round('searchArea');</script-->
+    <h1>Query</h1>
+    <div style="padding-left: 10px; padding-right:10px; padding-top: 5px">
+        <div id="searchQuery">
+            <input type="text" onKeyPress="submitEnter(event)" onClick="this.focus();this.select();" id="userQuery"/> 
+            <input type="button" onClick=
+		"querySources('http://dasmi.de/sources')" 
+			value="Query"></input>
+						
+        </div>
+				<div id="searchExamples">
+					e.g. <!--a href="javascript:setUserQuery('CLCB_HUMAN')">UniProt ID</a--> 
+					<!--a href="javascript:setUserQuery('ENSG00000196776')">Ensembl</a-->
+					<a href="javascript:setUserQuery('961')">Entrez Gene</a>, 
+					<a href="javascript:setUserQuery('21336196')">GI</a>,
+					<a href="javascript:setUserQuery('PF00049')">Pfam</a>,  
+					<a href="javascript:setUserQuery('NP_001768.1')">RefSeq</a>
+					<a href="javascript:setUserQuery('Q08722')">UniProtKB</a>
+				</div>
+				<div id="batch">
+					<a href="javascript:showBatch()">Batch retrieval</a>	
+					<!--u>Batch retrieval (very soon)</u-->	
+					
+					
+					
+				
+				</div>
+        <div id="searchConfig">
+            <!--input type="button" value="Query" onClick="querySources()"/-->
+            <!--input type="button" name="closeConfig" value="Configure sources" onClick="toggleConfig()"/-->
+            <input type="button" id="confButton" onClick="toggleConfig()" value="Sources Configuration" onmouseover="Tip(tt('sources'))"></input>
+           
+        </div>
+        <div id="statusArea">
+		   	<img id="statusImage" style="visibility:hidden" src="loading.gif"/>
+			<div id="statusText">&nbsp;</div>
+        </div>
+    </div>
+  </div>
+
+  <div id="infoArea">
+    <h1 id="infoH1">General Information</h1>
+	<!--p style="color:red; font-weight:bold">We know about the incredibly bad timing, but DASMIweb is currently not available due to database maintenance work. We are working hard on beeing back online as soon as possible. We are very sorry for this downtime and any inconveniences caused by this. Please try again later. </p-->
+	<!--div><strong><span style="color:red;">Due to an unexpected databases shutdown DASMIweb is currently not available. We are very sorry for any inconveniences. Please try again later.</span></strong></div-->
+	
+    <div id="infoContent">
+
+		<p>
+       		As long as you can read this text, DASMIweb is not properly initialized. If this is a steady-state, please ensure that you have enabled JavaScript and do not block cookies from our domain. Please also try to reload the page in your browser. If that does not help, please <a href="contact.php">contact us</a>! <br/><!--strong><span style="color:red;">Due to an unscheduled power outage yesterday we are still experiencing server errors. DASMI will hopefully be back in a few hours. Sorry for any inconveniences.</span></strong-->
+		</p>
+		
+	</div>
+  </div>
+  		<noscript id="noScript">
+		  		<p>
+		  		  We are sorry, but at the moment it is not possible to use <span class="dasmiweb">DASMIweb</span> without JavaScript. <a href="faq.php#javascript">Here</a> you can read why. Please activate JavaScript in your browser or if you use a FireFox extension like NoScript please permit the Max-Planck servers!
+			  </p>
+		</noscript>
+
+<div id="configArea" style="display:none;">
+    <h1 id="configH1">Interaction source selection<img id="downloadClose" src="close.gif" onclick="closeArea('configArea')"></img></h1>
+    <div id="coordiateSystems">
+        <ul id ="csList"></ul>
+	</div> 
+	<table summary="Choose the DAS interaction sources you want DASMI to include" id="sources">
+	<thead id="serverhead">
+	<tr>
+		<th class="domemall" scope="col"><img id="allUnactive" src="unchecked.png" ></img>&nbsp;<img id="allActive" src="checked.png"></img> <!--input id="allIsActive" type="checkbox" onmouseover="Tip(tt('allIsActive'))"></input-->
+		<!--input id="allIsActive" type="checkbox" onmouseover="Tip(tt('allIsActive'))"></input--></th>
+		<th style="display:none;" scope="col">ID</th>
+		<th scope="col">Name</th>
+		<th scope="col">Description</th>
+		<th scope="col">URL</th>
+		<!--th scope="col">Maintainer</th-->
+		<!--th scope="col">Capabilities</th-->
+		<!--th scope="col">Coordinate Systems</th-->
+		<th scope="col">Labels</th>
+	</tr>
+	</thead>
+	<tbody id="serverbody">
+	<tr id="pattern" style="display:none;">
+		<td class="doemall">
+      		<input type="checkbox" id="tisActive" onClick="switchSourceIsActive(this.id)" onmouseover="Tip(tt('tisActive'))"/>
+			
+      	</td>
+      	<td style="display:none;">
+      		<div id="tid">Id</div>
+      	</td>
+      	<td>
+      		<div id="tnickname">Nickname</div>
+      	</td>
+      	<td>
+      		<div id="tdescription">Description</div>
+      	</td>
+      	<td>
+      		<div id="turl">Url</div>
+      	</td>
+      	<!--td>
+      		<div id="tadminemail">Admin</div>
+      	</td-->
+      	<!--td>
+      		<ul id="tcapabilities" class="newDot"></ul>
+      	</td-->
+      	<!--td>
+      		<ul id="tcoordinateSystem" class="newDot"></ul>
+      	</td-->
+      	<td>
+      		<ul id="tlabels" class="newDot"></ul>
+      	</td>
+	</tr>
+	<!--tr id="buttonRow" class="buttonRow">
+      <td colspan="9" class="buttons">
+         <button onClick="clearSources()" onmouseover="Tip(tt('clearSources'))">Remove All Sources</button>
+         <button onClick="loadSources('http://dasmi.de/sources')" onmouseover="Tip(tt('loadSources'))">Load Sources From Registry</button>         <button onClick="toggleConfig()" onmouseover="Tip(tt('closeConfig'))">Close Configuration</button>
+      </td>
+    </tr-->
+  	</tbody>
+    </table>
+	
+	<div id="newEntrySelection" onclick="getNewSource('file')" style="display:none;">
+		Click here if you want to upload a PSI-MI XML2.5 file and turn it into a DASMI server.
+	</div>
+	
+
+	<form id="sourcesForm" name="sourcesForm" enctype="multipart/form-data" action="fileload.php" method="post" onsubmit="return validateInput()">
+	<table id="newEntry" style="display:none;" class="newEntry">
+	
+	
+	</table>
+	</form>
+	
+	<table id="newEntryButtons" class="newEntry">
+		
+		<tr id="buttonRow" class="buttonRow">
+	      <td colspan="3" class="buttons">
+         <button onClick="clearSources()">Remove All Sources</button>
+         <button onClick="loadSources('http://dasmi.de/sources')">Load Sources From Registry</button>         <button onClick="toggleConfig()">Close Configuration</button>
+		</td>
+		</tr-->  
+	
+	</table>
+
+	
+	<!--div id="capabilitiesHelp"></div-->
+	
+	<!--div id="newEntryFile" style="display:none">
+	<p>Please select a PSI-MI XML2.5 file from your local drive and upload it to the DASMIweb server. DASMIweb will generate a DASMI server from the interaction data in this file and add the new server to your current selection. </p>
+	<p>
+		<form enctype="multipart/form-data" action="fileload.php" method="post" onsubmit="return AIM.submit(this, {'onStart' : startCallback, 'onComplete' : completeCallback})">
+		<label for="file">File:</label> <input type="file" name="file" id="file" size="70"/><input type="submit" value="Submit" /></form>
+	</p>
+	<p>
+		<div id="uploadMessage"></div>
+	</p>
+
+	</div-->
+	
+ </div>
+ 
+   <div id="choiceArea" class="mainHide">
+    <h1 id="choiceH1">Potential interactors</h1>
+	<table id="choiceTable">
+		<thead id = "choicehead">
+			<th></th>
+			<th>ID</th>
+			<th>Description</th>
+			<th>Database links</th>
+			<th>Other details</th>
+		</thead>
+			
+		<tbody id="choicebody">
+		
+		</tbody>
+    </table>
+  </div>
+ 
+ <div id="batchArea" class="mainHide">
+    <h1 id="batchH1">Batch retrieval</h1>
+	<p> 
+		We offer a <a href="tutorial_c_01.php" target="_blank">step-by-step HTML tutorial</a> on the usage of the batch export feature. 
+		<ol>
+		<li>Insert the identifiers of your query proteins in the <b>left 'Input' text box</b> below, one identifier per line (<a href="javascript:loadBatchExample();">Load examplary query list</a>). The 'Identified' box in the middle will list all identifiers that DASMIweb correctly assigned to an identifier system, the 'Unknown' text box right will contain all identifiers that were not identifieable by DASMIweb. You can define the <a href="faq.php#mydasmi" target="_blank">search mode</a> (exact or partial matching) in the myDASMI rectangle at the right border of the screen. </li>
+		<li>Select the <b>data export format.</b></li>
+		<li>Press the <b>'Batch query'</b> button.</li>
+		<li>Right after all data sources have returned their interactions, you will be provided with a link to the resulting interaction data file.</li>
+		</ol>
+	</p>
+	
+	
+	<hr/>
+
+	<table>
+	<tbody>
+	<tr>
+	<td>1. </td>
+	<td>
+		<table>
+		<thead>
+		<th>
+		
+		Input (<a href="javascript:loadBatchExample();">Example</a>)
+		</th>
+		<th>
+		Identified
+		</th>
+		<th>
+		Unknown
+		</th>
+		</thead>
+		<tbody>
+		<tr>
+		<td>
+		<textarea id="batchbox" cols="20" rows="10"></textarea><br/>
+		
+		</td>
+		<td>
+		<textarea id="okbox" cols="40" rows="10" readonly="readonly"></textarea>
+		</td>
+		<td>
+		<textarea id="unknownbox" cols="20" rows="10" readonly="readonly"></textarea>
+		</td>
+		</tr>
+		
+		</tbody>
+		</table>
+	</td>
+	</tr>
+	<tr>
+	<td>2. </td>
+	<td>
+	<input type="radio" name="batchexport" value="mitab" checked="checked">MITAB2.5</input> (<a href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?tool=pubmed&pubmedid=17925023"target="_blank">format definition)</a><br/>
+    <input type="radio" name="batchexport" value="sif">Simple Interaction Format (SIF)</input> (<a href="http://www.cytoscape.org/cgi-bin/moin.cgi/Cytoscape_User_Manual/Network_Formats"target="_blank">format definition)</a>
+	</td>
+	</tr>
+	<tr>
+	<td>3. </td>
+	<td>
+	<input type="button" onClick=
+		"queryBatch('http://dasmi.de/sources')" 
+			value="Batch query"></input>
+			<input type="button" onclick="javascript:showBatch()" value="Reset input"/>
+	</td>
+
+	</tr>
+	<tr>
+	<td>
+	4.
+	</td>
+	<td>
+	<span style="font-weight:bold;">Status: </span>
+	<div id="batchstatus"></div>
+	</td>
+	</tr>
+	</table>
+	
+
+	
+  </div>
+ 
+
+  
+ 
+
+  <div id="mainArea" class="mainHide">
+    <h1 id="mainH1">Interactions</h1>
+	<div id="qm"> 
+		<img src="qm.png" /> 
+		<select id="qmList" size="1" onchange="getQM()" onmouseover="Tip(tt('qm'))">
+		<option value="nil">Select confidence measure ...</option>
+		</select> 
+		<input type="button" value="Query Confidence Sources" onclick="javascript:queryQmSources()"></input>
+	</div>
+	<div id="export" >
+		<img src="export.png" />
+		<select id="expList" size="1" onchange="exportToFile()" onmouseover="Tip(tt('export'))">
+		<option value="nil" >Export as ...</option> 
+		<option value="sif" >SIF</option> 
+		<option value="mitab" >MITAB2.5</option> 
+		</select> 
+	</div>
+	<div id="downloadArea">
+	</div>
+    <table id="interactionsTable">
+    <thead id="interactionshead">
+		
+        <tr id="intheadpattern" style="display:none">
+            <th scope="col" class="nameClass">
+                <div id="headname">Name</div>
+            </th>
+            <th scope="col" class="idClass">
+                <div id="headid">ID</div>
+            </th>
+            <th scope="col" class="description">
+                <div id="headdescription">Description</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="interactionsbody">
+	    <tr id="intpattern" style="display:none;">
+            <td>
+                <div id="name" class="nameClass"></div>
+            </td>
+            <td class="idClass">
+                <div id="dbaccession" class="idClass"></div>
+            </td>
+            <td>
+                <div id="description" class="description"></div>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+  </div>
+  
+ 
+  
+
+
+</div>
+
+<iframe id="upload_target" name="upload_target" src="" style="display:none;width:100px;height:10px;border:1px solid #eeeeee;"></iframe>
+
+<div id="quickConfig" style="right:-210px">
+	<div id="quickConfigHead">Quick Configuration<!--span id="quickConfigClose">x</span--></div>
+	
+	<div id="quickConfigHide" onClick="javascript:toggleQuickConfig();" style="background-image: url(open.jpg);" onmouseover="Tip(tt('mydasmi'))">
+	
+	<div id="quickToggleQuick"></div>
+	</div>
+	<div id="quickConfigBody">
+	<ul>
+		<li><a href="javascript:toggleSearchMode()" id="quickToggleSearch" onmouseover="Tip(tt('exactSearch'))">Search Mode: <span id="searchMode"></span></a></li>
+		<li id="toggleText"><a href="javascript:toggleEmptyCols();" id="quickToggleCols" onmouseover="Tip(tt('emptysources'))">Show Empty Sources: <span id="emptyColsStatus"></span></a></li>
+		<li onmouseover="Tip(tt('tabbing'))">Set tabbing width:  
+		<select id="tabbingList" style="font-size: 10px;" size="1" onchange="javascript:setTabbingWidth()" onmouseover="Tip(tt('tabbing'))">
+			<option>5</option>
+			<option>10</option>
+			<option>20</option>
+			<option>50</option>
+			<option>100</option>
+		</select> 
+		</li>
+		<li><b><input type="button" value="Sort" style="font-size: 10px;" onmousedown="javascript:sort()" onmouseover="Tip(tt('sorting'))"/>:</b> 
+			<select id="sortRef" style="font-size: 10px;" size="1"  onmouseover="Tip(tt('sorting'))">
+			
+			</select> 
+			<select id="sortMode" style="font-size: 10px;" size="1" onmouseover="Tip(tt('sorting'))">
+			
+		</select> 
+		</li>
+		<!--li><a href="javascript:toggleAutoMapping();" onmouseover="Tip(tt('idmapping'))">Allow Automatic ID Mapping: <span id="autoMappingStatus"></span></a></li-->
+		<li><a href="javascript:clearCache();" onmouseover="Tip(tt('clearInter'))"><span id="clearInteractions">Clear Interactions</a></li>
+		
+        <!--li><a href="javascript:clearSources()">Clear Sources</a></li-->
+        <!--li><a href="javascript:loadSources('http://dasmi.de/sources')">Load Sources from Registry</a></li-->
+	</ul>
+	</div>
+</div>
+
+<div id="sourceDetailsArea" style="display:none">
+	<div id="sourceDetailsHead"><span id="sourceDetailsHeadText"></span><img onClick="javascript:closeArea('sourceDetailsArea');" src="close.gif" alt="X"/></div>
+	
+	
+	<div id="sourceDetailsBody">
+	
+	</div>
+</div>
+  
+  
+  <!-- InstanceEndEditable -->
+    <div id="footer">
+	<center> 
+	<small>
+	Copyright &#169; 2008 by 
+	<a href="http://www.mpi-inf.mpg.de/" title="Home Page of the Max-Planck-Institute Informatik">Max-Planck-Institut&nbsp;Informatik</a> | 
+	<a href="http://www.mpi-inf.mpg.de/impressum.html" title="Impressum and legal notices, Umsatzsteuer ID, Swift Code, BIC">Impressum</a><br />
+Document was last modified on March 04 2011 06:08:52.	<br>
+	
+	</small>
+
+</center>
+
+	</div>
+  </div>
+</div>
+<div id="col1o2">
+  <div id="col1o2content"> 
+<ul class="linklist">
+<li><a href="http://www.mpi-inf.mpg.de" title="Homepage Max-Planck-Institut Informatik, Saarbr&uuml;cken" id="n2-homepage">Homepage</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/about/index.html" title="Mission, Structure, Address, Executive Board, Directorate, Scientific Advisory Board, Curatorship" id="n2-about">About the Institute</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/departments/d3/index.html" title="D3: Computational Biology &amp; Applied Algorithmics" id="d3-home">Computational Biology &amp; Applied Algorithmics</a>
+<ul><li><a href="http://www.mpi-inf.mpg.de/departments/d3/people.html" title="People working in Department 3: Computational Biology &amp; Applied Algorithmics" id="d3-people">People</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/departments/d3/projects.html" title="Research Areas - Department 3:  Computational Biology &amp; Applied Algorithmics" id="d3-areas">Research Areas</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/departments/d3/offers.html" title="Offers - Department 3:  Computational Biology &amp; Applied Algorithmics" id="d3-offers">Offers</a>
+</li><li><a href="http://bioinf.mpi-inf.mpg.de/teaching" title="Teaching - Department 3:  Computational Biology &amp; Applied Algorithmics" id="d3-teaching">Teaching</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/departments/d3/talks.html" title="Talks&nbsp;&amp;&nbsp;Events Department 3:  Computational Biology &amp; Applied Algorithmics" id="d3-talks">Talks&nbsp;&amp;&nbsp;Events</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/departments/d3/publications.html" title="Publications - Department 3: Computational Biology &amp; Applied Algorithmics" id="d3-publications">Publications</a>
+</li><li><a href="http://bioinf.mpi-inf.mpg.de/software.php" title="Software - Department 3: Computational Biology &amp; Applied Algorithmics" id="d3-software">Software &amp; Web Services</a>
+<ul><li><a href="http://dasmi.de/index.php" title="DASMI overview" id="dasmi">DASMI</a>
+</li><li><a href="http://dasmi.de/dasmiweb.php" title="DASMIweb" id="dasmiweb">DASMIweb</a>
+</li><li><a href="http://dasmi.de/documents.php" title="DASMI documentation" id="dasmi-manual">Documentation</a>
+</li><li><a href="http://dasmi.de/download.php" title="Download DASMI" id="dasmi-download">Download</a>
+</li><li><a href="http://dasmi.de/contact.php" title="Contact" id="dasmi-contact">Contact</a>
+</li>
+</ul>
+</li><li><a href="http://www.mpi-inf.mpg.de/departments/d3/software2.html" title="Software whose development started before the establishment of Computational Biology at MPI" id="d3-software2">more Software</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/departments/d3/links.html" title="Useful Links - Department 3: Computational Biology &amp; Applied Algorithmics" id="d3-links">Useful Links</a>
+</li>
+</ul>
+</li><li><a href="http://domino.mpi-inf.mpg.de/internet/news.nsf" title="Press releases, spotlights, campus events, conferences, cooperations, guest information" id="n2-news">News &amp; Activities</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/location/index.html" title="Where you can find us, campus map, travel guide" id="n2-location">Location</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/people/index.html" title="People, Rooms, EMail Addresses, Phone Numbers" id="n2-people"><span class="ak">P</span>eople</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/services/index.html" title="Administration, Research Coordination, Hard- and Software Computer Support Group, Library, Building Administration" id="n2-services">Services</a>
+</li><li><a href="http://www.imprs-cs.de/index.html" title="The International Max Planck Research School for Computer Science (IMPRS-CS)" id="n2-imprs">Research School</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/mpc" title="Max Planck Center for Visual Computing and Communication" id="n2-mpc">Max Planck <span class="ak">C</span>enter</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/cluster.html" title="Kaiserslautern-Saarbr&uuml;cken Computer Science Cluster" id="n2-cluster">C<span class="ak">o</span>mputer Science Cluster</a>
+</li><li><a href="http://www.mpi-inf.mpg.de/sitemap.html" title="All webpages of the Institute at a glance" id="n2-sitemap">Sitemap</a>
+</li></ul>
+<script type="text/javascript" src="/i/search.js"></script>
+<div id="search">
+  <br/>
+  <input id="query" onkeyup="processInputKey(event)" type="text" value="" autocomplete="off"/>
+  <input name="database" id="database" type="hidden" value="mpi-webpages"/>
+  <input id="hitsdiv" type="hidden" value="col2o2content"/>
+  <input id="completionsdiv" type="hidden" value="completions"/>
+  <input id="hitsperpage" type="hidden" value="7"/>
+  <input id="queryURL" type="hidden" value=""/>
+</div>
+<div id="subtitle" align="center">Search MPII (type <b>?</b> for help)</div>
+<div id="completions" align="center"></div>
+<iframe id="bufferFrame" name="bufferFrame" width="100%" height="0px" style="visibility:hidden"></iframe>
+
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

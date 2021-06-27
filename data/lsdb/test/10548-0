@@ -1,0 +1,1475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  	<title>Diploid Human Genome Browser&nbsp;|&nbsp;HuRef 1.0 | Home</title>
+        <link rel="icon" href="images/favicon.ico" type="images/favicon.ico">
+	<script language="JavaScript">
+		function openBrowser(){
+			window.location="browse.html?search="+document.getElementById('searchInput').value;
+		}
+		function searchBrowser(e){
+			e = (e) ? e : ((window.event) ? event : null);
+			if(e){
+				var keyNum = (window.event)? e.keyCode : e.which;
+				if(keyNum == 13)
+					window.location="browse.html?search="+document.getElementById('searchInput').value;
+			}
+		}
+	</script>
+	<style text="text/css">
+	body,
+	html {
+	    margin:0;
+	    padding:0;
+	    background:#fff;
+	    color:#000;
+	    height:100%;
+	}
+	
+	body {
+	    min-width:950px;
+	}
+	
+	* {
+		color:#505559;
+		font-family:Verdana,Arial,Helvetica,sans-serif;
+		font-size:11px;
+		line-height:18px;
+		margin:0pt;
+		padding:0pt;
+	}
+	a { 
+		text-decoration: underline;
+		color:#0081B3;
+	}
+	img { border: none; }
+	a img { border: none; }
+	html body a:hover {
+		background-color:#efefef;
+	}
+	 
+	p.header1 {
+		clear:both;
+		color:#0081B3;
+		font-size:1.5em;
+		font-weight:500;
+		margin-bottom:0.5em;
+		margin-top:1em;
+	}
+	p {
+		font-size:11px;
+		margin-bottom:1em;
+	}
+
+	.genericTextInput {
+		background:#fff url(images/bkgd-generic-text-input.gif) repeat-x;
+		border:1px solid #999999;
+		padding:2px 10px 0px 5px;
+		height:16px;
+	}
+	
+	#wrap {
+	    background:#fff;
+	    clear:both;
+	    margin:0 auto;
+	    width:950px;
+	}
+	
+	#header {
+	    background:#ddd;
+	}
+	#nav {
+		width:100%;
+		background:#E8E1CF url(../../turbo/widgets/themes/default/images/grid_dx_gradient.gif) repeat-x scroll center top;
+		border-bottom:1px solid #CFCFCF;
+		color:#505559;
+		font-family:Geneva,Arial,Helvetica,sans-serif;
+		font-size:11px;
+		padding:4px;
+		float:right;
+		margin-bottom: 10px;
+	}
+	#nav ul{
+		margin:0;
+		padding:0;
+		list-style:none;
+		float:right;
+	}
+	#nav li{
+	    display:inline;
+	    margin:0;
+	}
+	#nav a:hover{
+		background-color:lightBlue;
+	}
+	
+	#logo {
+		float:left;
+		width:250px;
+	}
+	#search {
+		float:right;
+		width:690px;
+		min-height:50px;
+		background:#fff;
+	}
+	
+	#main {
+		background:#fff;
+		float:left;
+		width:550px;
+		margin-top:8px;
+	}
+	#mainInner { padding:0 10px; width: 530px; }
+	
+	#main ul { margin-bottom:0; padding: 0 15px; }
+
+	#sidebar {
+		background:#fff;
+		float:right;
+		width:390px;
+		margin-top:8px;
+	}
+	#sidebarInner { padding:0 10px; }
+	
+	#sidebar ul { margin-bottom:0; padding: 0 15px; }
+	#sidebar h3, #sidebar p { padding: 0 10px 0 0; }
+	#clearBar { clear:both; }
+	
+	#footer {
+		background:#efefef url(images/title_bar.gif) repeat-x center top;
+		background-color:transparent;
+		text-align:center;
+		color:#555;
+		clear:both;
+		line-height:24px;
+		height:24px;
+		bottom:0px;
+		width:100%;
+		position: fixed;
+		margin-top:10px;
+		float:center;
+	}
+	
+	.headerBar {
+		color:#CC3333;
+		font-family:Geneva,Arial,Helvetica,sans-serif;
+		font-size:11px;
+		font-weight:bold;
+		line-height:24px;
+		padding-left: 10px;
+		Top: 6px;
+	}
+	table.karyotype {
+		margin:15px auto;
+		width:100%;
+	}
+	td.chr_label {
+		border-bottom:1px solid white;
+		font-family:helvetica,sans-serif;
+		font-size:10px;
+		font-weight:normal;
+		text-align:left;
+		padding-left:3px;
+	}	
+	td.ideogram {
+		vertical-align:top;
+	}
+	
+	#tableList {
+		background:#fff;
+		font-size:11px;
+		text-align: left;
+		width:100%;
+		line-height:30px;
+	}
+	
+	.rowTitle {
+		background:#0081B3;
+		color:#ffffff;
+		font-weight:bold;
+	}
+	
+	.rowLt {
+		background-color:#EFEFEF;
+		padding:3px;
+		height:22px;
+	}
+	.rowDk {
+		background-color:#E8E1CF;
+		color:#fff;
+		padding:3px;
+		height:22px;
+	}
+	td.rowTitle {
+		color:#fff;
+	}
+
+	.searchWrapper {
+		margin-top:20px;
+		position:relative;
+		float:left;
+	}
+	
+	.leftSearchImg {
+		background:transparent url(images/searchbar_leftcap.gif) no-repeat;
+		position: absolute; 
+		left: 0; 
+		top: 0; 
+		width: 20px; 
+		height: 24px;
+		
+	}
+	
+	.rightSearchImg {
+		background:transparent url(images/searchbar_rightbutton.gif);
+		position: absolute; 
+		left: 490px; 
+		top: 0; 
+		width: 59px; 
+		height: 24px;
+	
+	}
+	
+	
+	
+	.generic {
+		font-family: Geneva,Arial,Helvetica,sans-serif;
+		font-size: 11px;
+		text-decoration: none;
+		color: #444;
+		width: 100%;
+	}
+	
+	
+	.searchInput {
+		background:transparent url(images/searchbar_repeat.gif) repeat-x;
+		position: absolute;
+		background-color: transparent;
+		border: 0px none;
+		height:24px;
+		left:20px;
+		width:460px;
+		vertical-align: middle;
+		line-height:normal;
+		margin:0pt;
+		padding:5px 10px 0px 5px;
+		
+	
+	}
+	
+	
+	.searchHelp{
+		clear:both;
+		width:450px;
+		height:24px;
+		
+	}
+	
+	.super{
+		vertical-align:super;
+		font-size:5px;
+		line-height:normal;
+		font-weight: normal;
+	}
+	
+	.annotation{
+		font-size:5px;
+		line-height:normal;
+		font-weight: normal;
+		padding: 3px 0px;
+	}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div id="nav">
+	<ul>
+		<li>Home | </li>
+		<li><a href='browse.html' alt='HuRef Genome Browser' title='HuRef Genome Browser'>Browser</a> | </li>
+		<li><a href='about.html' alt='About the browser' title='About the browser'>About</a> | </li>
+		<li><a href='faq.html' alt='Frequently-Asked Questions' title='Frequently-Asked Questions'>FAQ</a> | </li>
+		<li><a href='help.html' alt='Browser help' title='Browser help'>Help</a> | </li>
+		<li><a href='mailto:hurefhelp@jcvi.org' alt='E-mail hurefhelp@jcvi.org' title='E-mail hurefhelp@jcvi.org'>Contact Us</a></li>
+	</ul>
+</div>
+<br/><br/><br/>
+
+<noscript>
+<div align="center" style="color:red; font-weight: bold; font-size: 14px">The HuRef genome browser requires Javascript. Please turn on Javascript and reload this page.<br/></div>
+</noscript>
+
+<div id="wrap">
+	<div id="logo"><a href="http://www.venterinstitute.org" target="new"><img src="images/JCVI_logo_transparent2.gif" width="173" height="45" border="0"></a></div>
+	<div id="search">
+		<div class="searchWrapper">
+			<table cellspacing="0" cellpadding="0">
+			<tr >
+				<td>
+				<div style="position: relative; top: -10px">
+				<span class="leftSearchImg"></span>
+				<input id="searchInput" type='text' class="searchInput generic" value="APOE" onkeydown="javascript:searchBrowser(event)"></input>
+				<span class="rightSearchImg" onclick="javascript:openBrowser();"></span>
+				</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="generic">
+				<div  style="position: relative; top: 15px">
+				<nobr>
+				<b>Examples:</b>
+				<a  title="Show KLKB1 gene plus 1kb of flanking region" href="browse.html?search=KLKB1^1000">KLKB1^1000</a>,  
+				<a  title="Show dbSNP rs2691286 (plus 20bp flank by default)" href="browse.html?search=rs2691286">rs2691286</a>,  
+				<a  title="Show any Ensembl human annotation by its identifier" href="browse.html?search=ENSG00000118519">ENSG00000118519</a>,  
+				<a title="Shows 40kb region on chr19 starting at 57.5MB" href="browse.html?search=chr19:57550000+40000">chr19:57550000+40000</a>
+				</nobr>
+				</div>
+				</td>
+			</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div id="clearBar"></div>
+	
+	<div id="main" style="margin-top: 20px">
+	    	<div style="height:24px;background:transparent url(images/title_bar.gif) repeat-x scroll center top;">
+			<div class="headerBar">About the HuRef Project</div>
+		</div>
+		<div id="mainInner">
+			<br/><h2>HuRef Genome Browser</h2>
+			<p>This browser enables access to the diploid genome sequence of J. Craig Venter 
+			as recently published in <a href="http://biology.plosjournals.org/perlserv/?request=get-document&doi=10.1371/journal.pbio.0050254&ct=1" target="new">PLoS Biology</a>. The graphical interface depicts the haploid sequence 
+			with SNP and insertion/deletion DNA variants as identified by genome assembly and comparison methods.  
+			The interface also represents the haplotype blocks from which diploid genome sequence can be inferred and 
+			gene annotations. This work was done at the J. Craig Venter Institute, with collaborators from The Hospital for 
+			Sick Children in Toronto, Canada,  University of California, San Diego, and Universidad de Barcelona, 
+			Spain.<br/>
+			</p>
+		</div>
+	</div>
+	<div id="sidebar" style="margin-top: 20px">
+	    	<div style="height:24px;background:transparent url(images/title_bar.gif) repeat-x scroll center top;">
+			<div class="headerBar">Publications</div>
+		</div>
+		<br/>
+		<div id="sidebarInner">
+			<ul type="square">
+				<li><a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkn939v1" target="_blank">The HuRef Browser: a web resource for individual human genomics</a> Axelrod N, Lin Y, Ng PC, Stockwell TB, et al.</li>
+				<li><a href="http://biology.plosjournals.org/perlserv/?request=get-document&doi=10.1371/journal.pbio.0050254" target="_blank">The Diploid Genome Sequence of an Individual Human</a>. Levy S, Sutton G, Ng PC, Feuk L, Halpern AL, et al.</li>
+				<li><a href="http://journals.plos.org/plosbiology/suppinfo/pbio.0050254/sd001.php" target="_blank">The Diploid Genome Sequence of an Individual Human</a> (supplemental poster).</li>
+				<li><a href="http://biology.plosjournals.org/perlserv/?request=get-document&doi=10.1371/journal.pbio.0050266" target="_blank">A New Human Genome Sequence Paves the Way for Individualized Genomics</a> by Liza Gross.</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="clearBar"></div>
+	
+	<div id="main">
+	    	<div style="height:24px;background:transparent url(images/title_bar.gif) repeat-x scroll center top;">
+			<div class="headerBar">Browse by Karyotype</div>
+		</div>
+		<div id="mainInner">
+<map name="cm1">
+<area coords="1,2,13,4" alt="1p36.33" title="1p36.33" href="browse.html?search=1p36.33">
+<area coords="1,4,13,7" alt="1p36.32" title="1p36.32" href="browse.html?search=1p36.32">
+<area coords="1,7,13,8" alt="1p36.31" title="1p36.31" href="browse.html?search=1p36.31">
+<area coords="1,8,13,10" alt="1p36.23" title="1p36.23" href="browse.html?search=1p36.23">
+<area coords="1,10,13,13" alt="1p36.22" title="1p36.22" href="browse.html?search=1p36.22">
+<area coords="1,13,13,16" alt="1p36.21" title="1p36.21" href="browse.html?search=1p36.21">
+<area coords="1,16,13,20" alt="1p36.13" title="1p36.13" href="browse.html?search=1p36.13">
+<area coords="1,20,13,23" alt="1p36.12" title="1p36.12" href="browse.html?search=1p36.12">
+<area coords="1,23,13,27" alt="1p36.11" title="1p36.11" href="browse.html?search=1p36.11">
+<area coords="1,27,13,29" alt="1p35.3" title="1p35.3" href="browse.html?search=1p35.3">
+<area coords="1,29,13,31" alt="1p35.2" title="1p35.2" href="browse.html?search=1p35.2">
+<area coords="1,31,13,33" alt="1p35.1" title="1p35.1" href="browse.html?search=1p35.1">
+<area coords="1,33,13,38" alt="1p34.3" title="1p34.3" href="browse.html?search=1p34.3">
+<area coords="1,38,13,42" alt="1p34.2" title="1p34.2" href="browse.html?search=1p34.2">
+<area coords="1,42,13,44" alt="1p34.1" title="1p34.1" href="browse.html?search=1p34.1">
+<area coords="1,44,13,48" alt="1p33" title="1p33" href="browse.html?search=1p33">
+<area coords="1,48,13,53" alt="1p32.3" title="1p32.3" href="browse.html?search=1p32.3">
+<area coords="1,53,13,55" alt="1p32.2" title="1p32.2" href="browse.html?search=1p32.2">
+<area coords="1,55,13,57" alt="1p32.1" title="1p32.1" href="browse.html?search=1p32.1">
+<area coords="1,57,13,64" alt="1p31.3" title="1p31.3" href="browse.html?search=1p31.3">
+<area coords="1,64,13,65" alt="1p31.2" title="1p31.2" href="browse.html?search=1p31.2">
+<area coords="1,65,13,78" alt="1p31.1" title="1p31.1" href="browse.html?search=1p31.1">
+<area coords="1,78,13,81" alt="1p22.3" title="1p22.3" href="browse.html?search=1p22.3">
+<area coords="1,81,13,85" alt="1p22.2" title="1p22.2" href="browse.html?search=1p22.2">
+<area coords="1,85,13,87" alt="1p22.1" title="1p22.1" href="browse.html?search=1p22.1">
+<area coords="1,87,13,91" alt="1p21.3" title="1p21.3" href="browse.html?search=1p21.3">
+<area coords="1,91,13,94" alt="1p21.2" title="1p21.2" href="browse.html?search=1p21.2">
+<area coords="1,94,13,98" alt="1p21.1" title="1p21.1" href="browse.html?search=1p21.1">
+<area coords="1,98,13,102" alt="1p13.3" title="1p13.3" href="browse.html?search=1p13.3">
+<area coords="1,102,13,106" alt="1p13.2" title="1p13.2" href="browse.html?search=1p13.2">
+<area coords="1,106,13,108" alt="1p13.1" title="1p13.1" href="browse.html?search=1p13.1">
+<area coords="1,108,13,111" alt="1p12" title="1p12" href="browse.html?search=1p12">
+<area coords="1,111,13,111" alt="1p11.2" title="1p11.2" href="browse.html?search=1p11.2">
+<area coords="1,111,13,114" alt="1p11.1" title="1p11.1" href="browse.html?search=1p11.1">
+<area coords="1,114,13,117" alt="1q11" title="1q11" href="browse.html?search=1q11">
+<area coords="1,117,13,130" alt="1q12" title="1q12" href="browse.html?search=1q12">
+<area coords="1,130,13,135" alt="1q21.1" title="1q21.1" href="browse.html?search=1q21.1">
+<area coords="1,135,13,137" alt="1q21.2" title="1q21.2" href="browse.html?search=1q21.2">
+<area coords="1,137,13,140" alt="1q21.3" title="1q21.3" href="browse.html?search=1q21.3">
+<area coords="1,140,13,141" alt="1q22" title="1q22" href="browse.html?search=1q22">
+<area coords="1,141,13,144" alt="1q23.1" title="1q23.1" href="browse.html?search=1q23.1">
+<area coords="1,144,13,145" alt="1q23.2" title="1q23.2" href="browse.html?search=1q23.2">
+<area coords="1,145,13,149" alt="1q23.3" title="1q23.3" href="browse.html?search=1q23.3">
+<area coords="1,149,13,151" alt="1q24.1" title="1q24.1" href="browse.html?search=1q24.1">
+<area coords="1,151,13,154" alt="1q24.2" title="1q24.2" href="browse.html?search=1q24.2">
+<area coords="1,154,13,156" alt="1q24.3" title="1q24.3" href="browse.html?search=1q24.3">
+<area coords="1,156,13,159" alt="1q25.1" title="1q25.1" href="browse.html?search=1q25.1">
+<area coords="1,159,13,163" alt="1q25.2" title="1q25.2" href="browse.html?search=1q25.2">
+<area coords="1,163,13,168" alt="1q25.3" title="1q25.3" href="browse.html?search=1q25.3">
+<area coords="1,168,13,172" alt="1q31.1" title="1q31.1" href="browse.html?search=1q31.1">
+<area coords="1,172,13,175" alt="1q31.2" title="1q31.2" href="browse.html?search=1q31.2">
+<area coords="1,175,13,180" alt="1q31.3" title="1q31.3" href="browse.html?search=1q31.3">
+<area coords="1,180,13,187" alt="1q32.1" title="1q32.1" href="browse.html?search=1q32.1">
+<area coords="1,187,13,191" alt="1q32.2" title="1q32.2" href="browse.html?search=1q32.2">
+<area coords="1,191,13,193" alt="1q32.3" title="1q32.3" href="browse.html?search=1q32.3">
+<area coords="1,193,13,202" alt="1q41" title="1q41" href="browse.html?search=1q41">
+<area coords="1,202,13,202" alt="1q42.11" title="1q42.11" href="browse.html?search=1q42.11">
+<area coords="1,202,13,205" alt="1q42.12" title="1q42.12" href="browse.html?search=1q42.12">
+<area coords="1,205,13,208" alt="1q42.13" title="1q42.13" href="browse.html?search=1q42.13">
+<area coords="1,208,13,211" alt="1q42.2" title="1q42.2" href="browse.html?search=1q42.2">
+<area coords="1,211,13,213" alt="1q42.3" title="1q42.3" href="browse.html?search=1q42.3">
+<area coords="1,213,13,220" alt="1q43" title="1q43" href="browse.html?search=1q43">
+<area coords="1,220,13,225" alt="1q44" title="1q44" href="browse.html?search=1q44">
+</map>
+
+<map name="cm2">
+<area coords="1,2,13,6" alt="2p25.3" title="2p25.3" href="browse.html?search=2p25.3">
+<area coords="1,6,13,8" alt="2p25.2" title="2p25.2" href="browse.html?search=2p25.2">
+<area coords="1,8,13,14" alt="2p25.1" title="2p25.1" href="browse.html?search=2p25.1">
+<area coords="1,14,13,17" alt="2p24.3" title="2p24.3" href="browse.html?search=2p24.3">
+<area coords="1,17,13,19" alt="2p24.2" title="2p24.2" href="browse.html?search=2p24.2">
+<area coords="1,19,13,24" alt="2p24.1" title="2p24.1" href="browse.html?search=2p24.1">
+<area coords="1,24,13,27" alt="2p23.3" title="2p23.3" href="browse.html?search=2p23.3">
+<area coords="1,27,13,29" alt="2p23.2" title="2p23.2" href="browse.html?search=2p23.2">
+<area coords="1,29,13,31" alt="2p23.1" title="2p23.1" href="browse.html?search=2p23.1">
+<area coords="1,31,13,35" alt="2p22.3" title="2p22.3" href="browse.html?search=2p22.3">
+<area coords="1,35,13,37" alt="2p22.2" title="2p22.2" href="browse.html?search=2p22.2">
+<area coords="1,37,13,39" alt="2p22.1" title="2p22.1" href="browse.html?search=2p22.1">
+<area coords="1,39,13,45" alt="2p21" title="2p21" href="browse.html?search=2p21">
+<area coords="1,45,13,49" alt="2p16.3" title="2p16.3" href="browse.html?search=2p16.3">
+<area coords="1,49,13,51" alt="2p16.2" title="2p16.2" href="browse.html?search=2p16.2">
+<area coords="1,51,13,57" alt="2p16.1" title="2p16.1" href="browse.html?search=2p16.1">
+<area coords="1,57,13,60" alt="2p15" title="2p15" href="browse.html?search=2p15">
+<area coords="1,60,13,65" alt="2p14" title="2p14" href="browse.html?search=2p14">
+<area coords="1,65,13,67" alt="2p13.3" title="2p13.3" href="browse.html?search=2p13.3">
+<area coords="1,67,13,69" alt="2p13.2" title="2p13.2" href="browse.html?search=2p13.2">
+<area coords="1,69,13,70" alt="2p13.1" title="2p13.1" href="browse.html?search=2p13.1">
+<area coords="1,70,13,77" alt="2p12" title="2p12" href="browse.html?search=2p12">
+<area coords="1,77,13,84" alt="2p11.2" title="2p11.2" href="browse.html?search=2p11.2">
+<area coords="1,84,13,86" alt="2p11.1" title="2p11.1" href="browse.html?search=2p11.1">
+<area coords="1,86,13,88" alt="2q11.1" title="2q11.1" href="browse.html?search=2q11.1">
+<area coords="1,88,13,94" alt="2q11.2" title="2q11.2" href="browse.html?search=2q11.2">
+<area coords="1,94,13,97" alt="2q12.1" title="2q12.1" href="browse.html?search=2q12.1">
+<area coords="1,97,13,98" alt="2q12.2" title="2q12.2" href="browse.html?search=2q12.2">
+<area coords="1,98,13,100" alt="2q12.3" title="2q12.3" href="browse.html?search=2q12.3">
+<area coords="1,100,13,104" alt="2q13" title="2q13" href="browse.html?search=2q13">
+<area coords="1,104,13,109" alt="2q14.1" title="2q14.1" href="browse.html?search=2q14.1">
+<area coords="1,109,13,112" alt="2q14.2" title="2q14.2" href="browse.html?search=2q14.2">
+<area coords="1,112,13,119" alt="2q14.3" title="2q14.3" href="browse.html?search=2q14.3">
+<area coords="1,119,13,121" alt="2q21.1" title="2q21.1" href="browse.html?search=2q21.1">
+<area coords="1,121,13,123" alt="2q21.2" title="2q21.2" href="browse.html?search=2q21.2">
+<area coords="1,123,13,125" alt="2q21.3" title="2q21.3" href="browse.html?search=2q21.3">
+<area coords="1,125,13,130" alt="2q22.1" title="2q22.1" href="browse.html?search=2q22.1">
+<area coords="1,130,13,132" alt="2q22.2" title="2q22.2" href="browse.html?search=2q22.2">
+<area coords="1,132,13,136" alt="2q22.3" title="2q22.3" href="browse.html?search=2q22.3">
+<area coords="1,136,13,137" alt="2q23.1" title="2q23.1" href="browse.html?search=2q23.1">
+<area coords="1,137,13,137" alt="2q23.2" title="2q23.2" href="browse.html?search=2q23.2">
+<area coords="1,137,13,141" alt="2q23.3" title="2q23.3" href="browse.html?search=2q23.3">
+<area coords="1,141,13,146" alt="2q24.1" title="2q24.1" href="browse.html?search=2q24.1">
+<area coords="1,146,13,149" alt="2q24.2" title="2q24.2" href="browse.html?search=2q24.2">
+<area coords="1,149,13,155" alt="2q24.3" title="2q24.3" href="browse.html?search=2q24.3">
+<area coords="1,155,13,162" alt="2q31.1" title="2q31.1" href="browse.html?search=2q31.1">
+<area coords="1,162,13,164" alt="2q31.2" title="2q31.2" href="browse.html?search=2q31.2">
+<area coords="1,164,13,166" alt="2q31.3" title="2q31.3" href="browse.html?search=2q31.3">
+<area coords="1,166,13,172" alt="2q32.1" title="2q32.1" href="browse.html?search=2q32.1">
+<area coords="1,172,13,174" alt="2q32.2" title="2q32.2" href="browse.html?search=2q32.2">
+<area coords="1,174,13,179" alt="2q32.3" title="2q32.3" href="browse.html?search=2q32.3">
+<area coords="1,179,13,185" alt="2q33.1" title="2q33.1" href="browse.html?search=2q33.1">
+<area coords="1,185,13,187" alt="2q33.2" title="2q33.2" href="browse.html?search=2q33.2">
+<area coords="1,187,13,190" alt="2q33.3" title="2q33.3" href="browse.html?search=2q33.3">
+<area coords="1,190,13,196" alt="2q34" title="2q34" href="browse.html?search=2q34">
+<area coords="1,196,13,201" alt="2q35" title="2q35" href="browse.html?search=2q35">
+<area coords="1,201,13,204" alt="2q36.1" title="2q36.1" href="browse.html?search=2q36.1">
+<area coords="1,204,13,205" alt="2q36.2" title="2q36.2" href="browse.html?search=2q36.2">
+<area coords="1,205,13,210" alt="2q36.3" title="2q36.3" href="browse.html?search=2q36.3">
+<area coords="1,210,13,214" alt="2q37.1" title="2q37.1" href="browse.html?search=2q37.1">
+<area coords="1,214,13,215" alt="2q37.2" title="2q37.2" href="browse.html?search=2q37.2">
+<area coords="1,215,13,221" alt="2q37.3" title="2q37.3" href="browse.html?search=2q37.3">
+</map>
+
+<map name="cm3">
+<area coords="1,2,13,5" alt="3p26.3" title="3p26.3" href="browse.html?search=3p26.3">
+<area coords="1,5,13,7" alt="3p26.2" title="3p26.2" href="browse.html?search=3p26.2">
+<area coords="1,7,13,10" alt="3p26.1" title="3p26.1" href="browse.html?search=3p26.1">
+<area coords="1,10,13,12" alt="3p25.3" title="3p25.3" href="browse.html?search=3p25.3">
+<area coords="1,12,13,13" alt="3p25.2" title="3p25.2" href="browse.html?search=3p25.2">
+<area coords="1,13,13,15" alt="3p25.1" title="3p25.1" href="browse.html?search=3p25.1">
+<area coords="1,15,13,23" alt="3p24.3" title="3p24.3" href="browse.html?search=3p24.3">
+<area coords="1,23,13,26" alt="3p24.2" title="3p24.2" href="browse.html?search=3p24.2">
+<area coords="1,26,13,30" alt="3p24.1" title="3p24.1" href="browse.html?search=3p24.1">
+<area coords="1,30,13,31" alt="3p23" title="3p23" href="browse.html?search=3p23">
+<area coords="1,31,13,35" alt="3p22.3" title="3p22.3" href="browse.html?search=3p22.3">
+<area coords="1,35,13,37" alt="3p22.2" title="3p22.2" href="browse.html?search=3p22.2">
+<area coords="1,37,13,41" alt="3p22.1" title="3p22.1" href="browse.html?search=3p22.1">
+<area coords="1,41,13,42" alt="3p21.33" title="3p21.33" href="browse.html?search=3p21.33">
+<area coords="1,42,13,42" alt="3p21.32" title="3p21.32" href="browse.html?search=3p21.32">
+<area coords="1,42,13,48" alt="3p21.31" title="3p21.31" href="browse.html?search=3p21.31">
+<area coords="1,48,13,49" alt="3p21.2" title="3p21.2" href="browse.html?search=3p21.2">
+<area coords="1,49,13,51" alt="3p21.1" title="3p21.1" href="browse.html?search=3p21.1">
+<area coords="1,51,13,55" alt="3p14.3" title="3p14.3" href="browse.html?search=3p14.3">
+<area coords="1,55,13,59" alt="3p14.2" title="3p14.2" href="browse.html?search=3p14.2">
+<area coords="1,59,13,67" alt="3p14.1" title="3p14.1" href="browse.html?search=3p14.1">
+<area coords="1,67,13,69" alt="3p13" title="3p13" href="browse.html?search=3p13">
+<area coords="1,69,13,76" alt="3p12.3" title="3p12.3" href="browse.html?search=3p12.3">
+<area coords="1,76,13,77" alt="3p12.2" title="3p12.2" href="browse.html?search=3p12.2">
+<area coords="1,77,13,80" alt="3p12.1" title="3p12.1" href="browse.html?search=3p12.1">
+<area coords="1,80,13,82" alt="3p11.2" title="3p11.2" href="browse.html?search=3p11.2">
+<area coords="1,82,13,85" alt="3p11.1" title="3p11.1" href="browse.html?search=3p11.1">
+<area coords="1,85,13,86" alt="3q11.1" title="3q11.1" href="browse.html?search=3q11.1">
+<area coords="1,86,13,92" alt="3q11.2" title="3q11.2" href="browse.html?search=3q11.2">
+<area coords="1,92,13,93" alt="3q12.1" title="3q12.1" href="browse.html?search=3q12.1">
+<area coords="1,93,13,94" alt="3q12.2" title="3q12.2" href="browse.html?search=3q12.2">
+<area coords="1,94,13,96" alt="3q12.3" title="3q12.3" href="browse.html?search=3q12.3">
+<area coords="1,96,13,99" alt="3q13.11" title="3q13.11" href="browse.html?search=3q13.11">
+<area coords="1,99,13,101" alt="3q13.12" title="3q13.12" href="browse.html?search=3q13.12">
+<area coords="1,101,13,104" alt="3q13.13" title="3q13.13" href="browse.html?search=3q13.13">
+<area coords="1,104,13,106" alt="3q13.2" title="3q13.2" href="browse.html?search=3q13.2">
+<area coords="1,106,13,109" alt="3q13.31" title="3q13.31" href="browse.html?search=3q13.31">
+<area coords="1,109,13,110" alt="3q13.32" title="3q13.32" href="browse.html?search=3q13.32">
+<area coords="1,110,13,113" alt="3q13.33" title="3q13.33" href="browse.html?search=3q13.33">
+<area coords="1,113,13,115" alt="3q21.1" title="3q21.1" href="browse.html?search=3q21.1">
+<area coords="1,115,13,117" alt="3q21.2" title="3q21.2" href="browse.html?search=3q21.2">
+<area coords="1,117,13,120" alt="3q21.3" title="3q21.3" href="browse.html?search=3q21.3">
+<area coords="1,120,13,124" alt="3q22.1" title="3q22.1" href="browse.html?search=3q22.1">
+<area coords="1,124,13,126" alt="3q22.2" title="3q22.2" href="browse.html?search=3q22.2">
+<area coords="1,126,13,128" alt="3q22.3" title="3q22.3" href="browse.html?search=3q22.3">
+<area coords="1,128,13,132" alt="3q23" title="3q23" href="browse.html?search=3q23">
+<area coords="1,132,13,137" alt="3q24" title="3q24" href="browse.html?search=3q24">
+<area coords="1,137,13,140" alt="3q25.1" title="3q25.1" href="browse.html?search=3q25.1">
+<area coords="1,140,13,143" alt="3q25.2" title="3q25.2" href="browse.html?search=3q25.2">
+<area coords="1,143,13,144" alt="3q25.31" title="3q25.31" href="browse.html?search=3q25.31">
+<area coords="1,144,13,146" alt="3q25.32" title="3q25.32" href="browse.html?search=3q25.32">
+<area coords="1,146,13,147" alt="3q25.33" title="3q25.33" href="browse.html?search=3q25.33">
+<area coords="1,147,13,154" alt="3q26.1" title="3q26.1" href="browse.html?search=3q26.1">
+<area coords="1,154,13,157" alt="3q26.2" title="3q26.2" href="browse.html?search=3q26.2">
+<area coords="1,157,13,162" alt="3q26.31" title="3q26.31" href="browse.html?search=3q26.31">
+<area coords="1,162,13,165" alt="3q26.32" title="3q26.32" href="browse.html?search=3q26.32">
+<area coords="1,165,13,168" alt="3q26.33" title="3q26.33" href="browse.html?search=3q26.33">
+<area coords="1,168,13,169" alt="3q27.1" title="3q27.1" href="browse.html?search=3q27.1">
+<area coords="1,169,13,171" alt="3q27.2" title="3q27.2" href="browse.html?search=3q27.2">
+<area coords="1,171,13,172" alt="3q27.3" title="3q27.3" href="browse.html?search=3q27.3">
+<area coords="1,172,13,176" alt="3q28" title="3q28" href="browse.html?search=3q28">
+<area coords="1,176,13,182" alt="3q29" title="3q29" href="browse.html?search=3q29">
+</map>
+
+<map name="cm4">
+<area coords="1,2,13,5" alt="4p16.3" title="4p16.3" href="browse.html?search=4p16.3">
+<area coords="1,5,13,7" alt="4p16.2" title="4p16.2" href="browse.html?search=4p16.2">
+<area coords="1,7,13,12" alt="4p16.1" title="4p16.1" href="browse.html?search=4p16.1">
+<area coords="1,12,13,16" alt="4p15.33" title="4p15.33" href="browse.html?search=4p15.33">
+<area coords="1,16,13,19" alt="4p15.32" title="4p15.32" href="browse.html?search=4p15.32">
+<area coords="1,19,13,23" alt="4p15.31" title="4p15.31" href="browse.html?search=4p15.31">
+<area coords="1,23,13,27" alt="4p15.2" title="4p15.2" href="browse.html?search=4p15.2">
+<area coords="1,27,13,34" alt="4p15.1" title="4p15.1" href="browse.html?search=4p15.1">
+<area coords="1,34,13,39" alt="4p14" title="4p14" href="browse.html?search=4p14">
+<area coords="1,39,13,43" alt="4p13" title="4p13" href="browse.html?search=4p13">
+<area coords="1,43,13,46" alt="4p12" title="4p12" href="browse.html?search=4p12">
+<area coords="1,46,13,48" alt="4p11" title="4p11" href="browse.html?search=4p11">
+<area coords="1,48,13,49" alt="4q11" title="4q11" href="browse.html?search=4q11">
+<area coords="1,49,13,55" alt="4q12" title="4q12" href="browse.html?search=4q12">
+<area coords="1,55,13,62" alt="4q13.1" title="4q13.1" href="browse.html?search=4q13.1">
+<area coords="1,62,13,65" alt="4q13.2" title="4q13.2" href="browse.html?search=4q13.2">
+<area coords="1,65,13,71" alt="4q13.3" title="4q13.3" href="browse.html?search=4q13.3">
+<area coords="1,71,13,73" alt="4q21.1" title="4q21.1" href="browse.html?search=4q21.1">
+<area coords="1,73,13,76" alt="4q21.21" title="4q21.21" href="browse.html?search=4q21.21">
+<area coords="1,76,13,78" alt="4q21.22" title="4q21.22" href="browse.html?search=4q21.22">
+<area coords="1,78,13,80" alt="4q21.23" title="4q21.23" href="browse.html?search=4q21.23">
+<area coords="1,80,13,81" alt="4q21.3" title="4q21.3" href="browse.html?search=4q21.3">
+<area coords="1,81,13,87" alt="4q22.1" title="4q22.1" href="browse.html?search=4q22.1">
+<area coords="1,87,13,88" alt="4q22.2" title="4q22.2" href="browse.html?search=4q22.2">
+<area coords="1,88,13,91" alt="4q22.3" title="4q22.3" href="browse.html?search=4q22.3">
+<area coords="1,91,13,94" alt="4q23" title="4q23" href="browse.html?search=4q23">
+<area coords="1,94,13,99" alt="4q24" title="4q24" href="browse.html?search=4q24">
+<area coords="1,99,13,105" alt="4q25" title="4q25" href="browse.html?search=4q25">
+<area coords="1,105,13,111" alt="4q26" title="4q26" href="browse.html?search=4q26">
+<area coords="1,111,13,114" alt="4q27" title="4q27" href="browse.html?search=4q27">
+<area coords="1,114,13,118" alt="4q28.1" title="4q28.1" href="browse.html?search=4q28.1">
+<area coords="1,118,13,120" alt="4q28.2" title="4q28.2" href="browse.html?search=4q28.2">
+<area coords="1,120,13,128" alt="4q28.3" title="4q28.3" href="browse.html?search=4q28.3">
+<area coords="1,128,13,130" alt="4q31.1" title="4q31.1" href="browse.html?search=4q31.1">
+<area coords="1,130,13,133" alt="4q31.21" title="4q31.21" href="browse.html?search=4q31.21">
+<area coords="1,133,13,135" alt="4q31.22" title="4q31.22" href="browse.html?search=4q31.22">
+<area coords="1,135,13,138" alt="4q31.23" title="4q31.23" href="browse.html?search=4q31.23">
+<area coords="1,138,13,142" alt="4q31.3" title="4q31.3" href="browse.html?search=4q31.3">
+<area coords="1,142,13,147" alt="4q32.1" title="4q32.1" href="browse.html?search=4q32.1">
+<area coords="1,147,13,150" alt="4q32.2" title="4q32.2" href="browse.html?search=4q32.2">
+<area coords="1,150,13,155" alt="4q32.3" title="4q32.3" href="browse.html?search=4q32.3">
+<area coords="1,155,13,157" alt="4q33" title="4q33" href="browse.html?search=4q33">
+<area coords="1,157,13,161" alt="4q34.1" title="4q34.1" href="browse.html?search=4q34.1">
+<area coords="1,161,13,162" alt="4q34.2" title="4q34.2" href="browse.html?search=4q34.2">
+<area coords="1,162,13,166" alt="4q34.3" title="4q34.3" href="browse.html?search=4q34.3">
+<area coords="1,166,13,171" alt="4q35.1" title="4q35.1" href="browse.html?search=4q35.1">
+<area coords="1,171,13,174" alt="4q35.2" title="4q35.2" href="browse.html?search=4q35.2">
+</map>
+
+<map name="cm5">
+<area coords="1,2,13,6" alt="5p15.33" title="5p15.33" href="browse.html?search=5p15.33">
+<area coords="1,6,13,7" alt="5p15.32" title="5p15.32" href="browse.html?search=5p15.32">
+<area coords="1,7,13,9" alt="5p15.31" title="5p15.31" href="browse.html?search=5p15.31">
+<area coords="1,9,13,16" alt="5p15.2" title="5p15.2" href="browse.html?search=5p15.2">
+<area coords="1,16,13,19" alt="5p15.1" title="5p15.1" href="browse.html?search=5p15.1">
+<area coords="1,19,13,23" alt="5p14.3" title="5p14.3" href="browse.html?search=5p14.3">
+<area coords="1,23,13,24" alt="5p14.2" title="5p14.2" href="browse.html?search=5p14.2">
+<area coords="1,24,13,28" alt="5p14.1" title="5p14.1" href="browse.html?search=5p14.1">
+<area coords="1,28,13,33" alt="5p13.3" title="5p13.3" href="browse.html?search=5p13.3">
+<area coords="1,33,13,37" alt="5p13.2" title="5p13.2" href="browse.html?search=5p13.2">
+<area coords="1,37,13,40" alt="5p13.1" title="5p13.1" href="browse.html?search=5p13.1">
+<area coords="1,40,13,43" alt="5p12" title="5p12" href="browse.html?search=5p12">
+<area coords="1,43,13,45" alt="5p11" title="5p11" href="browse.html?search=5p11">
+<area coords="1,45,13,47" alt="5q11.1" title="5q11.1" href="browse.html?search=5q11.1">
+<area coords="1,47,13,55" alt="5q11.2" title="5q11.2" href="browse.html?search=5q11.2">
+<area coords="1,55,13,59" alt="5q12.1" title="5q12.1" href="browse.html?search=5q12.1">
+<area coords="1,59,13,59" alt="5q12.2" title="5q12.2" href="browse.html?search=5q12.2">
+<area coords="1,59,13,62" alt="5q12.3" title="5q12.3" href="browse.html?search=5q12.3">
+<area coords="1,62,13,64" alt="5q13.1" title="5q13.1" href="browse.html?search=5q13.1">
+<area coords="1,64,13,68" alt="5q13.2" title="5q13.2" href="browse.html?search=5q13.2">
+<area coords="1,68,13,71" alt="5q13.3" title="5q13.3" href="browse.html?search=5q13.3">
+<area coords="1,71,13,75" alt="5q14.1" title="5q14.1" href="browse.html?search=5q14.1">
+<area coords="1,75,13,77" alt="5q14.2" title="5q14.2" href="browse.html?search=5q14.2">
+<area coords="1,77,13,85" alt="5q14.3" title="5q14.3" href="browse.html?search=5q14.3">
+<area coords="1,85,13,90" alt="5q15" title="5q15" href="browse.html?search=5q15">
+<area coords="1,90,13,95" alt="5q21.1" title="5q21.1" href="browse.html?search=5q21.1">
+<area coords="1,95,13,96" alt="5q21.2" title="5q21.2" href="browse.html?search=5q21.2">
+<area coords="1,96,13,101" alt="5q21.3" title="5q21.3" href="browse.html?search=5q21.3">
+<area coords="1,101,13,102" alt="5q22.1" title="5q22.1" href="browse.html?search=5q22.1">
+<area coords="1,102,13,104" alt="5q22.2" title="5q22.2" href="browse.html?search=5q22.2">
+<area coords="1,104,13,106" alt="5q22.3" title="5q22.3" href="browse.html?search=5q22.3">
+<area coords="1,106,13,111" alt="5q23.1" title="5q23.1" href="browse.html?search=5q23.1">
+<area coords="1,111,13,117" alt="5q23.2" title="5q23.2" href="browse.html?search=5q23.2">
+<area coords="1,117,13,119" alt="5q23.3" title="5q23.3" href="browse.html?search=5q23.3">
+<area coords="1,119,13,124" alt="5q31.1" title="5q31.1" href="browse.html?search=5q31.1">
+<area coords="1,124,13,127" alt="5q31.2" title="5q31.2" href="browse.html?search=5q31.2">
+<area coords="1,127,13,131" alt="5q31.3" title="5q31.3" href="browse.html?search=5q31.3">
+<area coords="1,131,13,134" alt="5q32" title="5q32" href="browse.html?search=5q32">
+<area coords="1,134,13,139" alt="5q33.1" title="5q33.1" href="browse.html?search=5q33.1">
+<area coords="1,139,13,142" alt="5q33.2" title="5q33.2" href="browse.html?search=5q33.2">
+<area coords="1,142,13,146" alt="5q33.3" title="5q33.3" href="browse.html?search=5q33.3">
+<area coords="1,146,13,153" alt="5q34" title="5q34" href="browse.html?search=5q34">
+<area coords="1,153,13,157" alt="5q35.1" title="5q35.1" href="browse.html?search=5q35.1">
+<area coords="1,157,13,161" alt="5q35.2" title="5q35.2" href="browse.html?search=5q35.2">
+<area coords="1,161,13,165" alt="5q35.3" title="5q35.3" href="browse.html?search=5q35.3">
+</map>
+
+<map name="cm6">
+<area coords="1,2,13,4" alt="6p25.3" title="6p25.3" href="browse.html?search=6p25.3">
+<area coords="1,4,13,6" alt="6p25.2" title="6p25.2" href="browse.html?search=6p25.2">
+<area coords="1,6,13,8" alt="6p25.1" title="6p25.1" href="browse.html?search=6p25.1">
+<area coords="1,8,13,12" alt="6p24.3" title="6p24.3" href="browse.html?search=6p24.3">
+<area coords="1,12,13,12" alt="6p24.2" title="6p24.2" href="browse.html?search=6p24.2">
+<area coords="1,12,13,14" alt="6p24.1" title="6p24.1" href="browse.html?search=6p24.1">
+<area coords="1,14,13,16" alt="6p23" title="6p23" href="browse.html?search=6p23">
+<area coords="1,16,13,23" alt="6p22.3" title="6p22.3" href="browse.html?search=6p22.3">
+<area coords="1,23,13,25" alt="6p22.2" title="6p22.2" href="browse.html?search=6p22.2">
+<area coords="1,25,13,29" alt="6p22.1" title="6p22.1" href="browse.html?search=6p22.1">
+<area coords="1,29,13,31" alt="6p21.33" title="6p21.33" href="browse.html?search=6p21.33">
+<area coords="1,31,13,32" alt="6p21.32" title="6p21.32" href="browse.html?search=6p21.32">
+<area coords="1,32,13,35" alt="6p21.31" title="6p21.31" href="browse.html?search=6p21.31">
+<area coords="1,35,13,39" alt="6p21.2" title="6p21.2" href="browse.html?search=6p21.2">
+<area coords="1,39,13,43" alt="6p21.1" title="6p21.1" href="browse.html?search=6p21.1">
+<area coords="1,43,13,48" alt="6p12.3" title="6p12.3" href="browse.html?search=6p12.3">
+<area coords="1,48,13,49" alt="6p12.2" title="6p12.2" href="browse.html?search=6p12.2">
+<area coords="1,49,13,53" alt="6p12.1" title="6p12.1" href="browse.html?search=6p12.1">
+<area coords="1,53,13,55" alt="6p11.2" title="6p11.2" href="browse.html?search=6p11.2">
+<area coords="1,55,13,56" alt="6p11.1" title="6p11.1" href="browse.html?search=6p11.1">
+<area coords="1,56,13,59" alt="6q11.1" title="6q11.1" href="browse.html?search=6q11.1">
+<area coords="1,59,13,59" alt="6q11.2" title="6q11.2" href="browse.html?search=6q11.2">
+<area coords="1,59,13,65" alt="6q12" title="6q12" href="browse.html?search=6q12">
+<area coords="1,65,13,70" alt="6q13" title="6q13" href="browse.html?search=6q13">
+<area coords="1,70,13,78" alt="6q14.1" title="6q14.1" href="browse.html?search=6q14.1">
+<area coords="1,78,13,78" alt="6q14.2" title="6q14.2" href="browse.html?search=6q14.2">
+<area coords="1,78,13,81" alt="6q14.3" title="6q14.3" href="browse.html?search=6q14.3">
+<area coords="1,81,13,85" alt="6q15" title="6q15" href="browse.html?search=6q15">
+<area coords="1,85,13,91" alt="6q16.1" title="6q16.1" href="browse.html?search=6q16.1">
+<area coords="1,91,13,92" alt="6q16.2" title="6q16.2" href="browse.html?search=6q16.2">
+<area coords="1,92,13,96" alt="6q16.3" title="6q16.3" href="browse.html?search=6q16.3">
+<area coords="1,96,13,105" alt="6q21" title="6q21" href="browse.html?search=6q21">
+<area coords="1,105,13,107" alt="6q22.1" title="6q22.1" href="browse.html?search=6q22.1">
+<area coords="1,107,13,109" alt="6q22.2" title="6q22.2" href="browse.html?search=6q22.2">
+<area coords="1,109,13,116" alt="6q22.31" title="6q22.31" href="browse.html?search=6q22.31">
+<area coords="1,116,13,117" alt="6q22.32" title="6q22.32" href="browse.html?search=6q22.32">
+<area coords="1,117,13,119" alt="6q22.33" title="6q22.33" href="browse.html?search=6q22.33">
+<area coords="1,119,13,120" alt="6q23.1" title="6q23.1" href="browse.html?search=6q23.1">
+<area coords="1,120,13,124" alt="6q23.2" title="6q23.2" href="browse.html?search=6q23.2">
+<area coords="1,124,13,127" alt="6q23.3" title="6q23.3" href="browse.html?search=6q23.3">
+<area coords="1,127,13,131" alt="6q24.1" title="6q24.1" href="browse.html?search=6q24.1">
+<area coords="1,131,13,133" alt="6q24.2" title="6q24.2" href="browse.html?search=6q24.2">
+<area coords="1,133,13,136" alt="6q24.3" title="6q24.3" href="browse.html?search=6q24.3">
+<area coords="1,136,13,139" alt="6q25.1" title="6q25.1" href="browse.html?search=6q25.1">
+<area coords="1,139,13,142" alt="6q25.2" title="6q25.2" href="browse.html?search=6q25.2">
+<area coords="1,142,13,147" alt="6q25.3" title="6q25.3" href="browse.html?search=6q25.3">
+<area coords="1,147,13,150" alt="6q26" title="6q26" href="browse.html?search=6q26">
+<area coords="1,150,13,156" alt="6q27" title="6q27" href="browse.html?search=6q27">
+</map>
+
+<map name="cm7">
+<area coords="1,2,13,4" alt="7p22.3" title="7p22.3" href="browse.html?search=7p22.3">
+<area coords="1,4,13,6" alt="7p22.2" title="7p22.2" href="browse.html?search=7p22.2">
+<area coords="1,6,13,8" alt="7p22.1" title="7p22.1" href="browse.html?search=7p22.1">
+<area coords="1,8,13,14" alt="7p21.3" title="7p21.3" href="browse.html?search=7p21.3">
+<area coords="1,14,13,16" alt="7p21.2" title="7p21.2" href="browse.html?search=7p21.2">
+<area coords="1,16,13,20" alt="7p21.1" title="7p21.1" href="browse.html?search=7p21.1">
+<area coords="1,20,13,24" alt="7p15.3" title="7p15.3" href="browse.html?search=7p15.3">
+<area coords="1,24,13,27" alt="7p15.2" title="7p15.2" href="browse.html?search=7p15.2">
+<area coords="1,27,13,31" alt="7p15.1" title="7p15.1" href="browse.html?search=7p15.1">
+<area coords="1,31,13,34" alt="7p14.3" title="7p14.3" href="browse.html?search=7p14.3">
+<area coords="1,34,13,36" alt="7p14.2" title="7p14.2" href="browse.html?search=7p14.2">
+<area coords="1,36,13,41" alt="7p14.1" title="7p14.1" href="browse.html?search=7p14.1">
+<area coords="1,41,13,44" alt="7p13" title="7p13" href="browse.html?search=7p13">
+<area coords="1,44,13,47" alt="7p12.3" title="7p12.3" href="browse.html?search=7p12.3">
+<area coords="1,47,13,48" alt="7p12.2" title="7p12.2" href="browse.html?search=7p12.2">
+<area coords="1,48,13,51" alt="7p12.1" title="7p12.1" href="browse.html?search=7p12.1">
+<area coords="1,51,13,54" alt="7p11.2" title="7p11.2" href="browse.html?search=7p11.2">
+<area coords="1,54,13,55" alt="7p11.1" title="7p11.1" href="browse.html?search=7p11.1">
+<area coords="1,55,13,57" alt="7q11.1" title="7q11.1" href="browse.html?search=7q11.1">
+<area coords="1,57,13,61" alt="7q11.21" title="7q11.21" href="browse.html?search=7q11.21">
+<area coords="1,61,13,67" alt="7q11.22" title="7q11.22" href="browse.html?search=7q11.22">
+<area coords="1,67,13,72" alt="7q11.23" title="7q11.23" href="browse.html?search=7q11.23">
+<area coords="1,72,13,80" alt="7q21.11" title="7q21.11" href="browse.html?search=7q21.11">
+<area coords="1,80,13,81" alt="7q21.12" title="7q21.12" href="browse.html?search=7q21.12">
+<area coords="1,81,13,84" alt="7q21.13" title="7q21.13" href="browse.html?search=7q21.13">
+<area coords="1,84,13,85" alt="7q21.2" title="7q21.2" href="browse.html?search=7q21.2">
+<area coords="1,85,13,90" alt="7q21.3" title="7q21.3" href="browse.html?search=7q21.3">
+<area coords="1,90,13,96" alt="7q22.1" title="7q22.1" href="browse.html?search=7q22.1">
+<area coords="1,96,13,97" alt="7q22.2" title="7q22.2" href="browse.html?search=7q22.2">
+<area coords="1,97,13,98" alt="7q22.3" title="7q22.3" href="browse.html?search=7q22.3">
+<area coords="1,98,13,105" alt="7q31.1" title="7q31.1" href="browse.html?search=7q31.1">
+<area coords="1,105,13,107" alt="7q31.2" title="7q31.2" href="browse.html?search=7q31.2">
+<area coords="1,107,13,111" alt="7q31.31" title="7q31.31" href="browse.html?search=7q31.31">
+<area coords="1,111,13,113" alt="7q31.32" title="7q31.32" href="browse.html?search=7q31.32">
+<area coords="1,113,13,116" alt="7q31.33" title="7q31.33" href="browse.html?search=7q31.33">
+<area coords="1,116,13,118" alt="7q32.1" title="7q32.1" href="browse.html?search=7q32.1">
+<area coords="1,118,13,119" alt="7q32.2" title="7q32.2" href="browse.html?search=7q32.2">
+<area coords="1,119,13,121" alt="7q32.3" title="7q32.3" href="browse.html?search=7q32.3">
+<area coords="1,121,13,126" alt="7q33" title="7q33" href="browse.html?search=7q33">
+<area coords="1,126,13,131" alt="7q34" title="7q34" href="browse.html?search=7q34">
+<area coords="1,131,13,135" alt="7q35" title="7q35" href="browse.html?search=7q35">
+<area coords="1,135,13,139" alt="7q36.1" title="7q36.1" href="browse.html?search=7q36.1">
+<area coords="1,139,13,141" alt="7q36.2" title="7q36.2" href="browse.html?search=7q36.2">
+<area coords="1,141,13,145" alt="7q36.3" title="7q36.3" href="browse.html?search=7q36.3">
+</map>
+
+<map name="cm8">
+<area coords="1,2,13,4" alt="8p23.3" title="8p23.3" href="browse.html?search=8p23.3">
+<area coords="1,4,13,8" alt="8p23.2" title="8p23.2" href="browse.html?search=8p23.2">
+<area coords="1,8,13,13" alt="8p23.1" title="8p23.1" href="browse.html?search=8p23.1">
+<area coords="1,13,13,19" alt="8p22" title="8p22" href="browse.html?search=8p22">
+<area coords="1,19,13,23" alt="8p21.3" title="8p21.3" href="browse.html?search=8p21.3">
+<area coords="1,23,13,27" alt="8p21.2" title="8p21.2" href="browse.html?search=8p21.2">
+<area coords="1,27,13,29" alt="8p21.1" title="8p21.1" href="browse.html?search=8p21.1">
+<area coords="1,29,13,37" alt="8p12" title="8p12" href="browse.html?search=8p12">
+<area coords="1,37,13,38" alt="8p11.23" title="8p11.23" href="browse.html?search=8p11.23">
+<area coords="1,38,13,38" alt="8p11.22" title="8p11.22" href="browse.html?search=8p11.22">
+<area coords="1,38,13,41" alt="8p11.21" title="8p11.21" href="browse.html?search=8p11.21">
+<area coords="1,41,13,43" alt="8p11.1" title="8p11.1" href="browse.html?search=8p11.1">
+<area coords="1,43,13,45" alt="8q11.1" title="8q11.1" href="browse.html?search=8q11.1">
+<area coords="1,45,13,47" alt="8q11.21" title="8q11.21" href="browse.html?search=8q11.21">
+<area coords="1,47,13,50" alt="8q11.22" title="8q11.22" href="browse.html?search=8q11.22">
+<area coords="1,50,13,52" alt="8q11.23" title="8q11.23" href="browse.html?search=8q11.23">
+<area coords="1,52,13,58" alt="8q12.1" title="8q12.1" href="browse.html?search=8q12.1">
+<area coords="1,58,13,58" alt="8q12.2" title="8q12.2" href="browse.html?search=8q12.2">
+<area coords="1,58,13,61" alt="8q12.3" title="8q12.3" href="browse.html?search=8q12.3">
+<area coords="1,61,13,63" alt="8q13.1" title="8q13.1" href="browse.html?search=8q13.1">
+<area coords="1,63,13,66" alt="8q13.2" title="8q13.2" href="browse.html?search=8q13.2">
+<area coords="1,66,13,69" alt="8q13.3" title="8q13.3" href="browse.html?search=8q13.3">
+<area coords="1,69,13,73" alt="8q21.11" title="8q21.11" href="browse.html?search=8q21.11">
+<area coords="1,73,13,74" alt="8q21.12" title="8q21.12" href="browse.html?search=8q21.12">
+<area coords="1,74,13,78" alt="8q21.13" title="8q21.13" href="browse.html?search=8q21.13">
+<area coords="1,78,13,80" alt="8q21.2" title="8q21.2" href="browse.html?search=8q21.2">
+<area coords="1,80,13,86" alt="8q21.3" title="8q21.3" href="browse.html?search=8q21.3">
+<area coords="1,86,13,91" alt="8q22.1" title="8q22.1" href="browse.html?search=8q22.1">
+<area coords="1,91,13,93" alt="8q22.2" title="8q22.2" href="browse.html?search=8q22.2">
+<area coords="1,93,13,97" alt="8q22.3" title="8q22.3" href="browse.html?search=8q22.3">
+<area coords="1,97,13,102" alt="8q23.1" title="8q23.1" href="browse.html?search=8q23.1">
+<area coords="1,102,13,103" alt="8q23.2" title="8q23.2" href="browse.html?search=8q23.2">
+<area coords="1,103,13,108" alt="8q23.3" title="8q23.3" href="browse.html?search=8q23.3">
+<area coords="1,108,13,109" alt="8q24.11" title="8q24.11" href="browse.html?search=8q24.11">
+<area coords="1,109,13,112" alt="8q24.12" title="8q24.12" href="browse.html?search=8q24.12">
+<area coords="1,112,13,117" alt="8q24.13" title="8q24.13" href="browse.html?search=8q24.13">
+<area coords="1,117,13,120" alt="8q24.21" title="8q24.21" href="browse.html?search=8q24.21">
+<area coords="1,120,13,125" alt="8q24.22" title="8q24.22" href="browse.html?search=8q24.22">
+<area coords="1,125,13,128" alt="8q24.23" title="8q24.23" href="browse.html?search=8q24.23">
+<area coords="1,128,13,134" alt="8q24.3" title="8q24.3" href="browse.html?search=8q24.3">
+</map>
+
+<map name="cm9">
+<area coords="1,2,13,4" alt="9p24.3" title="9p24.3" href="browse.html?search=9p24.3">
+<area coords="1,4,13,6" alt="9p24.2" title="9p24.2" href="browse.html?search=9p24.2">
+<area coords="1,6,13,10" alt="9p24.1" title="9p24.1" href="browse.html?search=9p24.1">
+<area coords="1,10,13,15" alt="9p23" title="9p23" href="browse.html?search=9p23">
+<area coords="1,15,13,17" alt="9p22.3" title="9p22.3" href="browse.html?search=9p22.3">
+<area coords="1,17,13,19" alt="9p22.2" title="9p22.2" href="browse.html?search=9p22.2">
+<area coords="1,19,13,20" alt="9p22.1" title="9p22.1" href="browse.html?search=9p22.1">
+<area coords="1,20,13,25" alt="9p21.3" title="9p21.3" href="browse.html?search=9p21.3">
+<area coords="1,25,13,27" alt="9p21.2" title="9p21.2" href="browse.html?search=9p21.2">
+<area coords="1,27,13,32" alt="9p21.1" title="9p21.1" href="browse.html?search=9p21.1">
+<area coords="1,32,13,35" alt="9p13.3" title="9p13.3" href="browse.html?search=9p13.3">
+<area coords="1,35,13,36" alt="9p13.2" title="9p13.2" href="browse.html?search=9p13.2">
+<area coords="1,36,13,38" alt="9p13.1" title="9p13.1" href="browse.html?search=9p13.1">
+<area coords="1,38,13,40" alt="9p12" title="9p12" href="browse.html?search=9p12">
+<area coords="1,40,13,44" alt="9p11.2" title="9p11.2" href="browse.html?search=9p11.2">
+<area coords="1,44,13,49" alt="9p11.1" title="9p11.1" href="browse.html?search=9p11.1">
+<area coords="1,49,13,56" alt="9q11" title="9q11" href="browse.html?search=9q11">
+<area coords="1,56,13,65" alt="9q12" title="9q12" href="browse.html?search=9q12">
+<area coords="1,65,13,65" alt="9q13" title="9q13" href="browse.html?search=9q13">
+<area coords="1,65,13,67" alt="9q21.11" title="9q21.11" href="browse.html?search=9q21.11">
+<area coords="1,67,13,68" alt="9q21.12" title="9q21.12" href="browse.html?search=9q21.12">
+<area coords="1,68,13,73" alt="9q21.13" title="9q21.13" href="browse.html?search=9q21.13">
+<area coords="1,73,13,74" alt="9q21.2" title="9q21.2" href="browse.html?search=9q21.2">
+<area coords="1,74,13,77" alt="9q21.31" title="9q21.31" href="browse.html?search=9q21.31">
+<area coords="1,77,13,79" alt="9q21.32" title="9q21.32" href="browse.html?search=9q21.32">
+<area coords="1,79,13,83" alt="9q21.33" title="9q21.33" href="browse.html?search=9q21.33">
+<area coords="1,83,13,84" alt="9q22.1" title="9q22.1" href="browse.html?search=9q22.1">
+<area coords="1,84,13,86" alt="9q22.2" title="9q22.2" href="browse.html?search=9q22.2">
+<area coords="1,86,13,88" alt="9q22.31" title="9q22.31" href="browse.html?search=9q22.31">
+<area coords="1,88,13,90" alt="9q22.32" title="9q22.32" href="browse.html?search=9q22.32">
+<area coords="1,90,13,93" alt="9q22.33" title="9q22.33" href="browse.html?search=9q22.33">
+<area coords="1,93,13,98" alt="9q31.1" title="9q31.1" href="browse.html?search=9q31.1">
+<area coords="1,98,13,101" alt="9q31.2" title="9q31.2" href="browse.html?search=9q31.2">
+<area coords="1,101,13,105" alt="9q31.3" title="9q31.3" href="browse.html?search=9q31.3">
+<area coords="1,105,13,107" alt="9q32" title="9q32" href="browse.html?search=9q32">
+<area coords="1,107,13,112" alt="9q33.1" title="9q33.1" href="browse.html?search=9q33.1">
+<area coords="1,112,13,115" alt="9q33.2" title="9q33.2" href="browse.html?search=9q33.2">
+<area coords="1,115,13,118" alt="9q33.3" title="9q33.3" href="browse.html?search=9q33.3">
+<area coords="1,118,13,121" alt="9q34.11" title="9q34.11" href="browse.html?search=9q34.11">
+<area coords="1,121,13,122" alt="9q34.12" title="9q34.12" href="browse.html?search=9q34.12">
+<area coords="1,122,13,123" alt="9q34.13" title="9q34.13" href="browse.html?search=9q34.13">
+<area coords="1,123,13,125" alt="9q34.2" title="9q34.2" href="browse.html?search=9q34.2">
+<area coords="1,125,13,128" alt="9q34.3" title="9q34.3" href="browse.html?search=9q34.3">
+</map>
+
+<map name="cm10">
+<area coords="1,2,13,5" alt="10p15.3" title="10p15.3" href="browse.html?search=10p15.3">
+<area coords="1,5,13,5" alt="10p15.2" title="10p15.2" href="browse.html?search=10p15.2">
+<area coords="1,5,13,8" alt="10p15.1" title="10p15.1" href="browse.html?search=10p15.1">
+<area coords="1,8,13,13" alt="10p14" title="10p14" href="browse.html?search=10p14">
+<area coords="1,13,13,18" alt="10p13" title="10p13" href="browse.html?search=10p13">
+<area coords="1,18,13,20" alt="10p12.33" title="10p12.33" href="browse.html?search=10p12.33">
+<area coords="1,20,13,20" alt="10p12.32" title="10p12.32" href="browse.html?search=10p12.32">
+<area coords="1,20,13,23" alt="10p12.31" title="10p12.31" href="browse.html?search=10p12.31">
+<area coords="1,23,13,24" alt="10p12.2" title="10p12.2" href="browse.html?search=10p12.2">
+<area coords="1,24,13,27" alt="10p12.1" title="10p12.1" href="browse.html?search=10p12.1">
+<area coords="1,27,13,30" alt="10p11.23" title="10p11.23" href="browse.html?search=10p11.23">
+<area coords="1,30,13,33" alt="10p11.22" title="10p11.22" href="browse.html?search=10p11.22">
+<area coords="1,33,13,37" alt="10p11.21" title="10p11.21" href="browse.html?search=10p11.21">
+<area coords="1,37,13,38" alt="10p11.1" title="10p11.1" href="browse.html?search=10p11.1">
+<area coords="1,38,13,40" alt="10q11.1" title="10q11.1" href="browse.html?search=10q11.1">
+<area coords="1,40,13,43" alt="10q11.21" title="10q11.21" href="browse.html?search=10q11.21">
+<area coords="1,43,13,47" alt="10q11.22" title="10q11.22" href="browse.html?search=10q11.22">
+<area coords="1,47,13,50" alt="10q11.23" title="10q11.23" href="browse.html?search=10q11.23">
+<area coords="1,50,13,57" alt="10q21.1" title="10q21.1" href="browse.html?search=10q21.1">
+<area coords="1,57,13,60" alt="10q21.2" title="10q21.2" href="browse.html?search=10q21.2">
+<area coords="1,60,13,66" alt="10q21.3" title="10q21.3" href="browse.html?search=10q21.3">
+<area coords="1,66,13,69" alt="10q22.1" title="10q22.1" href="browse.html?search=10q22.1">
+<area coords="1,69,13,72" alt="10q22.2" title="10q22.2" href="browse.html?search=10q22.2">
+<area coords="1,72,13,76" alt="10q22.3" title="10q22.3" href="browse.html?search=10q22.3">
+<area coords="1,76,13,81" alt="10q23.1" title="10q23.1" href="browse.html?search=10q23.1">
+<area coords="1,81,13,83" alt="10q23.2" title="10q23.2" href="browse.html?search=10q23.2">
+<area coords="1,83,13,86" alt="10q23.31" title="10q23.31" href="browse.html?search=10q23.31">
+<area coords="1,86,13,87" alt="10q23.32" title="10q23.32" href="browse.html?search=10q23.32">
+<area coords="1,87,13,90" alt="10q23.33" title="10q23.33" href="browse.html?search=10q23.33">
+<area coords="1,90,13,91" alt="10q24.1" title="10q24.1" href="browse.html?search=10q24.1">
+<area coords="1,91,13,94" alt="10q24.2" title="10q24.2" href="browse.html?search=10q24.2">
+<area coords="1,94,13,95" alt="10q24.31" title="10q24.31" href="browse.html?search=10q24.31">
+<area coords="1,95,13,96" alt="10q24.32" title="10q24.32" href="browse.html?search=10q24.32">
+<area coords="1,96,13,97" alt="10q24.33" title="10q24.33" href="browse.html?search=10q24.33">
+<area coords="1,97,13,103" alt="10q25.1" title="10q25.1" href="browse.html?search=10q25.1">
+<area coords="1,103,13,105" alt="10q25.2" title="10q25.2" href="browse.html?search=10q25.2">
+<area coords="1,105,13,109" alt="10q25.3" title="10q25.3" href="browse.html?search=10q25.3">
+<area coords="1,109,13,112" alt="10q26.11" title="10q26.11" href="browse.html?search=10q26.11">
+<area coords="1,112,13,113" alt="10q26.12" title="10q26.12" href="browse.html?search=10q26.12">
+<area coords="1,113,13,117" alt="10q26.13" title="10q26.13" href="browse.html?search=10q26.13">
+<area coords="1,117,13,119" alt="10q26.2" title="10q26.2" href="browse.html?search=10q26.2">
+<area coords="1,119,13,124" alt="10q26.3" title="10q26.3" href="browse.html?search=10q26.3">
+</map>
+
+<map name="cm11">
+<area coords="1,2,13,5" alt="11p15.5" title="11p15.5" href="browse.html?search=11p15.5">
+<area coords="1,5,13,12" alt="11p15.4" title="11p15.4" href="browse.html?search=11p15.4">
+<area coords="1,12,13,13" alt="11p15.3" title="11p15.3" href="browse.html?search=11p15.3">
+<area coords="1,13,13,16" alt="11p15.2" title="11p15.2" href="browse.html?search=11p15.2">
+<area coords="1,16,13,21" alt="11p15.1" title="11p15.1" href="browse.html?search=11p15.1">
+<area coords="1,21,13,25" alt="11p14.3" title="11p14.3" href="browse.html?search=11p14.3">
+<area coords="1,25,13,26" alt="11p14.2" title="11p14.2" href="browse.html?search=11p14.2">
+<area coords="1,26,13,30" alt="11p14.1" title="11p14.1" href="browse.html?search=11p14.1">
+<area coords="1,30,13,35" alt="11p13" title="11p13" href="browse.html?search=11p13">
+<area coords="1,35,13,41" alt="11p12" title="11p12" href="browse.html?search=11p12">
+<area coords="1,41,13,46" alt="11p11.2" title="11p11.2" href="browse.html?search=11p11.2">
+<area coords="1,46,13,48" alt="11p11.12" title="11p11.12" href="browse.html?search=11p11.12">
+<area coords="1,48,13,50" alt="11p11.11" title="11p11.11" href="browse.html?search=11p11.11">
+<area coords="1,50,13,53" alt="11q11" title="11q11" href="browse.html?search=11q11">
+<area coords="1,53,13,56" alt="11q12.1" title="11q12.1" href="browse.html?search=11q12.1">
+<area coords="1,56,13,57" alt="11q12.2" title="11q12.2" href="browse.html?search=11q12.2">
+<area coords="1,57,13,59" alt="11q12.3" title="11q12.3" href="browse.html?search=11q12.3">
+<area coords="1,59,13,62" alt="11q13.1" title="11q13.1" href="browse.html?search=11q13.1">
+<area coords="1,62,13,64" alt="11q13.2" title="11q13.2" href="browse.html?search=11q13.2">
+<area coords="1,64,13,66" alt="11q13.3" title="11q13.3" href="browse.html?search=11q13.3">
+<area coords="1,66,13,69" alt="11q13.4" title="11q13.4" href="browse.html?search=11q13.4">
+<area coords="1,69,13,71" alt="11q13.5" title="11q13.5" href="browse.html?search=11q13.5">
+<area coords="1,71,13,79" alt="11q14.1" title="11q14.1" href="browse.html?search=11q14.1">
+<area coords="1,79,13,81" alt="11q14.2" title="11q14.2" href="browse.html?search=11q14.2">
+<area coords="1,81,13,85" alt="11q14.3" title="11q14.3" href="browse.html?search=11q14.3">
+<area coords="1,85,13,89" alt="11q21" title="11q21" href="browse.html?search=11q21">
+<area coords="1,89,13,93" alt="11q22.1" title="11q22.1" href="browse.html?search=11q22.1">
+<area coords="1,93,13,94" alt="11q22.2" title="11q22.2" href="browse.html?search=11q22.2">
+<area coords="1,94,13,101" alt="11q22.3" title="11q22.3" href="browse.html?search=11q22.3">
+<area coords="1,101,13,104" alt="11q23.1" title="11q23.1" href="browse.html?search=11q23.1">
+<area coords="1,104,13,106" alt="11q23.2" title="11q23.2" href="browse.html?search=11q23.2">
+<area coords="1,106,13,111" alt="11q23.3" title="11q23.3" href="browse.html?search=11q23.3">
+<area coords="1,111,13,113" alt="11q24.1" title="11q24.1" href="browse.html?search=11q24.1">
+<area coords="1,113,13,117" alt="11q24.2" title="11q24.2" href="browse.html?search=11q24.2">
+<area coords="1,117,13,119" alt="11q24.3" title="11q24.3" href="browse.html?search=11q24.3">
+<area coords="1,119,13,123" alt="11q25" title="11q25" href="browse.html?search=11q25">
+</map>
+
+<map name="cm12">
+<area coords="1,2,13,5" alt="12p13.33" title="12p13.33" href="browse.html?search=12p13.33">
+<area coords="1,5,13,7" alt="12p13.32" title="12p13.32" href="browse.html?search=12p13.32">
+<area coords="1,7,13,11" alt="12p13.31" title="12p13.31" href="browse.html?search=12p13.31">
+<area coords="1,11,13,13" alt="12p13.2" title="12p13.2" href="browse.html?search=12p13.2">
+<area coords="1,13,13,15" alt="12p13.1" title="12p13.1" href="browse.html?search=12p13.1">
+<area coords="1,15,13,20" alt="12p12.3" title="12p12.3" href="browse.html?search=12p12.3">
+<area coords="1,20,13,21" alt="12p12.2" title="12p12.2" href="browse.html?search=12p12.2">
+<area coords="1,21,13,26" alt="12p12.1" title="12p12.1" href="browse.html?search=12p12.1">
+<area coords="1,26,13,27" alt="12p11.23" title="12p11.23" href="browse.html?search=12p11.23">
+<area coords="1,27,13,30" alt="12p11.22" title="12p11.22" href="browse.html?search=12p11.22">
+<area coords="1,30,13,32" alt="12p11.21" title="12p11.21" href="browse.html?search=12p11.21">
+<area coords="1,32,13,34" alt="12p11.1" title="12p11.1" href="browse.html?search=12p11.1">
+<area coords="1,34,13,35" alt="12q11" title="12q11" href="browse.html?search=12q11">
+<area coords="1,35,13,42" alt="12q12" title="12q12" href="browse.html?search=12q12">
+<area coords="1,42,13,45" alt="12q13.11" title="12q13.11" href="browse.html?search=12q13.11">
+<area coords="1,45,13,46" alt="12q13.12" title="12q13.12" href="browse.html?search=12q13.12">
+<area coords="1,46,13,50" alt="12q13.13" title="12q13.13" href="browse.html?search=12q13.13">
+<area coords="1,50,13,52" alt="12q13.2" title="12q13.2" href="browse.html?search=12q13.2">
+<area coords="1,52,13,53" alt="12q13.3" title="12q13.3" href="browse.html?search=12q13.3">
+<area coords="1,53,13,57" alt="12q14.1" title="12q14.1" href="browse.html?search=12q14.1">
+<area coords="1,57,13,59" alt="12q14.2" title="12q14.2" href="browse.html?search=12q14.2">
+<area coords="1,59,13,61" alt="12q14.3" title="12q14.3" href="browse.html?search=12q14.3">
+<area coords="1,61,13,65" alt="12q15" title="12q15" href="browse.html?search=12q15">
+<area coords="1,65,13,69" alt="12q21.1" title="12q21.1" href="browse.html?search=12q21.1">
+<area coords="1,69,13,73" alt="12q21.2" title="12q21.2" href="browse.html?search=12q21.2">
+<area coords="1,73,13,79" alt="12q21.31" title="12q21.31" href="browse.html?search=12q21.31">
+<area coords="1,79,13,81" alt="12q21.32" title="12q21.32" href="browse.html?search=12q21.32">
+<area coords="1,81,13,84" alt="12q21.33" title="12q21.33" href="browse.html?search=12q21.33">
+<area coords="1,84,13,87" alt="12q22" title="12q22" href="browse.html?search=12q22">
+<area coords="1,87,13,92" alt="12q23.1" title="12q23.1" href="browse.html?search=12q23.1">
+<area coords="1,92,13,94" alt="12q23.2" title="12q23.2" href="browse.html?search=12q23.2">
+<area coords="1,94,13,99" alt="12q23.3" title="12q23.3" href="browse.html?search=12q23.3">
+<area coords="1,99,13,101" alt="12q24.11" title="12q24.11" href="browse.html?search=12q24.11">
+<area coords="1,101,13,102" alt="12q24.12" title="12q24.12" href="browse.html?search=12q24.12">
+<area coords="1,102,13,104" alt="12q24.13" title="12q24.13" href="browse.html?search=12q24.13">
+<area coords="1,104,13,106" alt="12q24.21" title="12q24.21" href="browse.html?search=12q24.21">
+<area coords="1,106,13,107" alt="12q24.22" title="12q24.22" href="browse.html?search=12q24.22">
+<area coords="1,107,13,109" alt="12q24.23" title="12q24.23" href="browse.html?search=12q24.23">
+<area coords="1,109,13,114" alt="12q24.31" title="12q24.31" href="browse.html?search=12q24.31">
+<area coords="1,114,13,118" alt="12q24.32" title="12q24.32" href="browse.html?search=12q24.32">
+<area coords="1,118,13,121" alt="12q24.33" title="12q24.33" href="browse.html?search=12q24.33">
+</map>
+
+<map name="cm13">
+<area coords="1,2,13,5" alt="13p13" title="13p13" href="browse.html?search=13p13">
+<area coords="3,5,11,9" alt="13p12" title="13p12" href="browse.html?search=13p12">
+<area coords="1,9,13,14" alt="13p11.2" title="13p11.2" href="browse.html?search=13p11.2">
+<area coords="1,14,13,16" alt="13p11.1" title="13p11.1" href="browse.html?search=13p11.1">
+<area coords="1,16,13,19" alt="13q11" title="13q11" href="browse.html?search=13q11">
+<area coords="1,19,13,22" alt="13q12.11" title="13q12.11" href="browse.html?search=13q12.11">
+<area coords="1,22,13,24" alt="13q12.12" title="13q12.12" href="browse.html?search=13q12.12">
+<area coords="1,24,13,26" alt="13q12.13" title="13q12.13" href="browse.html?search=13q12.13">
+<area coords="1,26,13,27" alt="13q12.2" title="13q12.2" href="browse.html?search=13q12.2">
+<area coords="1,27,13,30" alt="13q12.3" title="13q12.3" href="browse.html?search=13q12.3">
+<area coords="1,30,13,32" alt="13q13.1" title="13q13.1" href="browse.html?search=13q13.1">
+<area coords="1,32,13,33" alt="13q13.2" title="13q13.2" href="browse.html?search=13q13.2">
+<area coords="1,33,13,38" alt="13q13.3" title="13q13.3" href="browse.html?search=13q13.3">
+<area coords="1,38,13,42" alt="13q14.11" title="13q14.11" href="browse.html?search=13q14.11">
+<area coords="1,42,13,43" alt="13q14.12" title="13q14.12" href="browse.html?search=13q14.12">
+<area coords="1,43,13,44" alt="13q14.13" title="13q14.13" href="browse.html?search=13q14.13">
+<area coords="1,44,13,46" alt="13q14.2" title="13q14.2" href="browse.html?search=13q14.2">
+<area coords="1,46,13,49" alt="13q14.3" title="13q14.3" href="browse.html?search=13q14.3">
+<area coords="1,49,13,54" alt="13q21.1" title="13q21.1" href="browse.html?search=13q21.1">
+<area coords="1,54,13,56" alt="13q21.2" title="13q21.2" href="browse.html?search=13q21.2">
+<area coords="1,56,13,60" alt="13q21.31" title="13q21.31" href="browse.html?search=13q21.31">
+<area coords="1,60,13,62" alt="13q21.32" title="13q21.32" href="browse.html?search=13q21.32">
+<area coords="1,62,13,67" alt="13q21.33" title="13q21.33" href="browse.html?search=13q21.33">
+<area coords="1,67,13,69" alt="13q22.1" title="13q22.1" href="browse.html?search=13q22.1">
+<area coords="1,69,13,70" alt="13q22.2" title="13q22.2" href="browse.html?search=13q22.2">
+<area coords="1,70,13,72" alt="13q22.3" title="13q22.3" href="browse.html?search=13q22.3">
+<area coords="1,72,13,80" alt="13q31.1" title="13q31.1" href="browse.html?search=13q31.1">
+<area coords="1,80,13,82" alt="13q31.2" title="13q31.2" href="browse.html?search=13q31.2">
+<area coords="1,82,13,86" alt="13q31.3" title="13q31.3" href="browse.html?search=13q31.3">
+<area coords="1,86,13,89" alt="13q32.1" title="13q32.1" href="browse.html?search=13q32.1">
+<area coords="1,89,13,90" alt="13q32.2" title="13q32.2" href="browse.html?search=13q32.2">
+<area coords="1,90,13,92" alt="13q32.3" title="13q32.3" href="browse.html?search=13q32.3">
+<area coords="1,92,13,95" alt="13q33.1" title="13q33.1" href="browse.html?search=13q33.1">
+<area coords="1,95,13,97" alt="13q33.2" title="13q33.2" href="browse.html?search=13q33.2">
+<area coords="1,97,13,100" alt="13q33.3" title="13q33.3" href="browse.html?search=13q33.3">
+<area coords="1,100,13,105" alt="13q34" title="13q34" href="browse.html?search=13q34">
+</map>
+
+<map name="cm14">
+<area coords="1,2,13,5" alt="14p13" title="14p13" href="browse.html?search=14p13">
+<area coords="3,5,11,8" alt="14p12" title="14p12" href="browse.html?search=14p12">
+<area coords="1,8,13,14" alt="14p11.2" title="14p11.2" href="browse.html?search=14p11.2">
+<area coords="1,14,13,16" alt="14p11.1" title="14p11.1" href="browse.html?search=14p11.1">
+<area coords="1,16,13,19" alt="14q11.1" title="14q11.1" href="browse.html?search=14q11.1">
+<area coords="1,19,13,23" alt="14q11.2" title="14q11.2" href="browse.html?search=14q11.2">
+<area coords="1,23,13,31" alt="14q12" title="14q12" href="browse.html?search=14q12">
+<area coords="1,31,13,33" alt="14q13.1" title="14q13.1" href="browse.html?search=14q13.1">
+<area coords="1,33,13,34" alt="14q13.2" title="14q13.2" href="browse.html?search=14q13.2">
+<area coords="1,34,13,35" alt="14q13.3" title="14q13.3" href="browse.html?search=14q13.3">
+<area coords="1,35,13,39" alt="14q21.1" title="14q21.1" href="browse.html?search=14q21.1">
+<area coords="1,39,13,41" alt="14q21.2" title="14q21.2" href="browse.html?search=14q21.2">
+<area coords="1,41,13,45" alt="14q21.3" title="14q21.3" href="browse.html?search=14q21.3">
+<area coords="1,45,13,49" alt="14q22.1" title="14q22.1" href="browse.html?search=14q22.1">
+<area coords="1,49,13,51" alt="14q22.2" title="14q22.2" href="browse.html?search=14q22.2">
+<area coords="1,51,13,52" alt="14q22.3" title="14q22.3" href="browse.html?search=14q22.3">
+<area coords="1,52,13,57" alt="14q23.1" title="14q23.1" href="browse.html?search=14q23.1">
+<area coords="1,57,13,60" alt="14q23.2" title="14q23.2" href="browse.html?search=14q23.2">
+<area coords="1,60,13,62" alt="14q23.3" title="14q23.3" href="browse.html?search=14q23.3">
+<area coords="1,62,13,64" alt="14q24.1" title="14q24.1" href="browse.html?search=14q24.1">
+<area coords="1,64,13,68" alt="14q24.2" title="14q24.2" href="browse.html?search=14q24.2">
+<area coords="1,68,13,73" alt="14q24.3" title="14q24.3" href="browse.html?search=14q24.3">
+<area coords="1,73,13,76" alt="14q31.1" title="14q31.1" href="browse.html?search=14q31.1">
+<area coords="1,76,13,78" alt="14q31.2" title="14q31.2" href="browse.html?search=14q31.2">
+<area coords="1,78,13,82" alt="14q31.3" title="14q31.3" href="browse.html?search=14q31.3">
+<area coords="1,82,13,83" alt="14q32.11" title="14q32.11" href="browse.html?search=14q32.11">
+<area coords="1,83,13,86" alt="14q32.12" title="14q32.12" href="browse.html?search=14q32.12">
+<area coords="1,86,13,88" alt="14q32.13" title="14q32.13" href="browse.html?search=14q32.13">
+<area coords="1,88,13,92" alt="14q32.2" title="14q32.2" href="browse.html?search=14q32.2">
+<area coords="1,92,13,94" alt="14q32.31" title="14q32.31" href="browse.html?search=14q32.31">
+<area coords="1,94,13,95" alt="14q32.32" title="14q32.32" href="browse.html?search=14q32.32">
+<area coords="1,95,13,98" alt="14q32.33" title="14q32.33" href="browse.html?search=14q32.33">
+</map>
+
+<map name="cm15">
+<area coords="1,2,13,5" alt="15p13" title="15p13" href="browse.html?search=15p13">
+<area coords="3,5,11,9" alt="15p12" title="15p12" href="browse.html?search=15p12">
+<area coords="1,9,13,15" alt="15p11.2" title="15p11.2" href="browse.html?search=15p11.2">
+<area coords="1,15,13,17" alt="15p11.1" title="15p11.1" href="browse.html?search=15p11.1">
+<area coords="1,17,13,19" alt="15q11.1" title="15q11.1" href="browse.html?search=15q11.1">
+<area coords="1,19,13,23" alt="15q11.2" title="15q11.2" href="browse.html?search=15q11.2">
+<area coords="1,23,13,25" alt="15q12" title="15q12" href="browse.html?search=15q12">
+<area coords="1,25,13,27" alt="15q13.1" title="15q13.1" href="browse.html?search=15q13.1">
+<area coords="1,27,13,28" alt="15q13.2" title="15q13.2" href="browse.html?search=15q13.2">
+<area coords="1,28,13,30" alt="15q13.3" title="15q13.3" href="browse.html?search=15q13.3">
+<area coords="1,30,13,36" alt="15q14" title="15q14" href="browse.html?search=15q14">
+<area coords="1,36,13,39" alt="15q15.1" title="15q15.1" href="browse.html?search=15q15.1">
+<area coords="1,39,13,39" alt="15q15.2" title="15q15.2" href="browse.html?search=15q15.2">
+<area coords="1,39,13,40" alt="15q15.3" title="15q15.3" href="browse.html?search=15q15.3">
+<area coords="1,40,13,45" alt="15q21.1" title="15q21.1" href="browse.html?search=15q21.1">
+<area coords="1,45,13,48" alt="15q21.2" title="15q21.2" href="browse.html?search=15q21.2">
+<area coords="1,48,13,52" alt="15q21.3" title="15q21.3" href="browse.html?search=15q21.3">
+<area coords="1,52,13,53" alt="15q22.1" title="15q22.1" href="browse.html?search=15q22.1">
+<area coords="1,53,13,57" alt="15q22.2" title="15q22.2" href="browse.html?search=15q22.2">
+<area coords="1,57,13,60" alt="15q22.31" title="15q22.31" href="browse.html?search=15q22.31">
+<area coords="1,60,13,61" alt="15q22.32" title="15q22.32" href="browse.html?search=15q22.32">
+<area coords="1,61,13,61" alt="15q22.33" title="15q22.33" href="browse.html?search=15q22.33">
+<area coords="1,61,13,65" alt="15q23" title="15q23" href="browse.html?search=15q23">
+<area coords="1,65,13,68" alt="15q24.1" title="15q24.1" href="browse.html?search=15q24.1">
+<area coords="1,68,13,69" alt="15q24.2" title="15q24.2" href="browse.html?search=15q24.2">
+<area coords="1,69,13,70" alt="15q24.3" title="15q24.3" href="browse.html?search=15q24.3">
+<area coords="1,70,13,74" alt="15q25.1" title="15q25.1" href="browse.html?search=15q25.1">
+<area coords="1,74,13,77" alt="15q25.2" title="15q25.2" href="browse.html?search=15q25.2">
+<area coords="1,77,13,80" alt="15q25.3" title="15q25.3" href="browse.html?search=15q25.3">
+<area coords="1,80,13,85" alt="15q26.1" title="15q26.1" href="browse.html?search=15q26.1">
+<area coords="1,85,13,89" alt="15q26.2" title="15q26.2" href="browse.html?search=15q26.2">
+<area coords="1,89,13,92" alt="15q26.3" title="15q26.3" href="browse.html?search=15q26.3">
+</map>
+
+<map name="cm16">
+<area coords="1,2,13,8" alt="16p13.3" title="16p13.3" href="browse.html?search=16p13.3">
+<area coords="1,8,13,11" alt="16p13.2" title="16p13.2" href="browse.html?search=16p13.2">
+<area coords="1,11,13,13" alt="16p13.13" title="16p13.13" href="browse.html?search=16p13.13">
+<area coords="1,13,13,15" alt="16p13.12" title="16p13.12" href="browse.html?search=16p13.12">
+<area coords="1,15,13,17" alt="16p13.11" title="16p13.11" href="browse.html?search=16p13.11">
+<area coords="1,17,13,20" alt="16p12.3" title="16p12.3" href="browse.html?search=16p12.3">
+<area coords="1,20,13,22" alt="16p12.2" title="16p12.2" href="browse.html?search=16p12.2">
+<area coords="1,22,13,27" alt="16p12.1" title="16p12.1" href="browse.html?search=16p12.1">
+<area coords="1,27,13,33" alt="16p11.2" title="16p11.2" href="browse.html?search=16p11.2">
+<area coords="1,33,13,36" alt="16p11.1" title="16p11.1" href="browse.html?search=16p11.1">
+<area coords="1,36,13,39" alt="16q11.1" title="16q11.1" href="browse.html?search=16q11.1">
+<area coords="1,39,13,43" alt="16q11.2" title="16q11.2" href="browse.html?search=16q11.2">
+<area coords="1,43,13,48" alt="16q12.1" title="16q12.1" href="browse.html?search=16q12.1">
+<area coords="1,48,13,51" alt="16q12.2" title="16q12.2" href="browse.html?search=16q12.2">
+<area coords="1,51,13,53" alt="16q13" title="16q13" href="browse.html?search=16q13">
+<area coords="1,53,13,61" alt="16q21" title="16q21" href="browse.html?search=16q21">
+<area coords="1,61,13,64" alt="16q22.1" title="16q22.1" href="browse.html?search=16q22.1">
+<area coords="1,64,13,65" alt="16q22.2" title="16q22.2" href="browse.html?search=16q22.2">
+<area coords="1,65,13,68" alt="16q22.3" title="16q22.3" href="browse.html?search=16q22.3">
+<area coords="1,68,13,72" alt="16q23.1" title="16q23.1" href="browse.html?search=16q23.1">
+<area coords="1,72,13,74" alt="16q23.2" title="16q23.2" href="browse.html?search=16q23.2">
+<area coords="1,74,13,76" alt="16q23.3" title="16q23.3" href="browse.html?search=16q23.3">
+<area coords="1,76,13,79" alt="16q24.1" title="16q24.1" href="browse.html?search=16q24.1">
+<area coords="1,79,13,80" alt="16q24.2" title="16q24.2" href="browse.html?search=16q24.2">
+<area coords="1,80,13,82" alt="16q24.3" title="16q24.3" href="browse.html?search=16q24.3">
+</map>
+
+<map name="cm17">
+<area coords="1,2,13,5" alt="17p13.3" title="17p13.3" href="browse.html?search=17p13.3">
+<area coords="1,5,13,8" alt="17p13.2" title="17p13.2" href="browse.html?search=17p13.2">
+<area coords="1,8,13,12" alt="17p13.1" title="17p13.1" href="browse.html?search=17p13.1">
+<area coords="1,12,13,16" alt="17p12" title="17p12" href="browse.html?search=17p12">
+<area coords="1,16,13,22" alt="17p11.2" title="17p11.2" href="browse.html?search=17p11.2">
+<area coords="1,22,13,22" alt="17p11.1" title="17p11.1" href="browse.html?search=17p11.1">
+<area coords="1,22,13,23" alt="17q11.1" title="17q11.1" href="browse.html?search=17q11.1">
+<area coords="1,23,13,28" alt="17q11.2" title="17q11.2" href="browse.html?search=17q11.2">
+<area coords="1,28,13,34" alt="17q12" title="17q12" href="browse.html?search=17q12">
+<area coords="1,34,13,34" alt="17q21.1" title="17q21.1" href="browse.html?search=17q21.1">
+<area coords="1,34,13,36" alt="17q21.2" title="17q21.2" href="browse.html?search=17q21.2">
+<area coords="1,36,13,40" alt="17q21.31" title="17q21.31" href="browse.html?search=17q21.31">
+<area coords="1,40,13,42" alt="17q21.32" title="17q21.32" href="browse.html?search=17q21.32">
+<area coords="1,42,13,45" alt="17q21.33" title="17q21.33" href="browse.html?search=17q21.33">
+<area coords="1,45,13,51" alt="17q22" title="17q22" href="browse.html?search=17q22">
+<area coords="1,51,13,52" alt="17q23.1" title="17q23.1" href="browse.html?search=17q23.1">
+<area coords="1,52,13,55" alt="17q23.2" title="17q23.2" href="browse.html?search=17q23.2">
+<area coords="1,55,13,56" alt="17q23.3" title="17q23.3" href="browse.html?search=17q23.3">
+<area coords="1,56,13,57" alt="17q24.1" title="17q24.1" href="browse.html?search=17q24.1">
+<area coords="1,57,13,60" alt="17q24.2" title="17q24.2" href="browse.html?search=17q24.2">
+<area coords="1,60,13,64" alt="17q24.3" title="17q24.3" href="browse.html?search=17q24.3">
+<area coords="1,64,13,67" alt="17q25.1" title="17q25.1" href="browse.html?search=17q25.1">
+<area coords="1,67,13,68" alt="17q25.2" title="17q25.2" href="browse.html?search=17q25.2">
+<area coords="1,68,13,73" alt="17q25.3" title="17q25.3" href="browse.html?search=17q25.3">
+</map>
+
+<map name="cm18">
+<area coords="1,2,13,5" alt="18p11.32" title="18p11.32" href="browse.html?search=18p11.32">
+<area coords="1,5,13,8" alt="18p11.31" title="18p11.31" href="browse.html?search=18p11.31">
+<area coords="1,8,13,10" alt="18p11.23" title="18p11.23" href="browse.html?search=18p11.23">
+<area coords="1,10,13,12" alt="18p11.22" title="18p11.22" href="browse.html?search=18p11.22">
+<area coords="1,12,13,16" alt="18p11.21" title="18p11.21" href="browse.html?search=18p11.21">
+<area coords="1,16,13,16" alt="18p11.1" title="18p11.1" href="browse.html?search=18p11.1">
+<area coords="1,16,13,18" alt="18q11.1" title="18q11.1" href="browse.html?search=18q11.1">
+<area coords="1,18,13,23" alt="18q11.2" title="18q11.2" href="browse.html?search=18q11.2">
+<area coords="1,23,13,30" alt="18q12.1" title="18q12.1" href="browse.html?search=18q12.1">
+<area coords="1,30,13,34" alt="18q12.2" title="18q12.2" href="browse.html?search=18q12.2">
+<area coords="1,34,13,40" alt="18q12.3" title="18q12.3" href="browse.html?search=18q12.3">
+<area coords="1,40,13,44" alt="18q21.1" title="18q21.1" href="browse.html?search=18q21.1">
+<area coords="1,44,13,49" alt="18q21.2" title="18q21.2" href="browse.html?search=18q21.2">
+<area coords="1,49,13,51" alt="18q21.31" title="18q21.31" href="browse.html?search=18q21.31">
+<area coords="1,51,13,53" alt="18q21.32" title="18q21.32" href="browse.html?search=18q21.32">
+<area coords="1,53,13,56" alt="18q21.33" title="18q21.33" href="browse.html?search=18q21.33">
+<area coords="1,56,13,60" alt="18q22.1" title="18q22.1" href="browse.html?search=18q22.1">
+<area coords="1,60,13,62" alt="18q22.2" title="18q22.2" href="browse.html?search=18q22.2">
+<area coords="1,62,13,66" alt="18q22.3" title="18q22.3" href="browse.html?search=18q22.3">
+<area coords="1,66,13,71" alt="18q23" title="18q23" href="browse.html?search=18q23">
+</map>
+
+<map name="cm19">
+<area coords="1,2,13,8" alt="19p13.3" title="19p13.3" href="browse.html?search=19p13.3">
+<area coords="1,8,13,13" alt="19p13.2" title="19p13.2" href="browse.html?search=19p13.2">
+<area coords="1,13,13,14" alt="19p13.13" title="19p13.13" href="browse.html?search=19p13.13">
+<area coords="1,14,13,16" alt="19p13.12" title="19p13.12" href="browse.html?search=19p13.12">
+<area coords="1,16,13,20" alt="19p13.11" title="19p13.11" href="browse.html?search=19p13.11">
+<area coords="1,20,13,26" alt="19p12" title="19p12" href="browse.html?search=19p12">
+<area coords="1,26,13,28" alt="19p11" title="19p11" href="browse.html?search=19p11">
+<area coords="1,28,13,29" alt="19q11" title="19q11" href="browse.html?search=19q11">
+<area coords="1,29,13,35" alt="19q12" title="19q12" href="browse.html?search=19q12">
+<area coords="1,35,13,38" alt="19q13.11" title="19q13.11" href="browse.html?search=19q13.11">
+<area coords="1,38,13,41" alt="19q13.12" title="19q13.12" href="browse.html?search=19q13.12">
+<area coords="1,41,13,41" alt="19q13.13" title="19q13.13" href="browse.html?search=19q13.13">
+<area coords="1,41,13,45" alt="19q13.2" title="19q13.2" href="browse.html?search=19q13.2">
+<area coords="1,45,13,47" alt="19q13.31" title="19q13.31" href="browse.html?search=19q13.31">
+<area coords="1,47,13,50" alt="19q13.32" title="19q13.32" href="browse.html?search=19q13.32">
+<area coords="1,50,13,54" alt="19q13.33" title="19q13.33" href="browse.html?search=19q13.33">
+<area coords="1,54,13,55" alt="19q13.41" title="19q13.41" href="browse.html?search=19q13.41">
+<area coords="1,55,13,57" alt="19q13.42" title="19q13.42" href="browse.html?search=19q13.42">
+<area coords="1,57,13,59" alt="19q13.43" title="19q13.43" href="browse.html?search=19q13.43">
+</map>
+
+<map name="cm20">
+<area coords="1,2,13,7" alt="20p13" title="20p13" href="browse.html?search=20p13">
+<area coords="1,7,13,10" alt="20p12.3" title="20p12.3" href="browse.html?search=20p12.3">
+<area coords="1,10,13,13" alt="20p12.2" title="20p12.2" href="browse.html?search=20p12.2">
+<area coords="1,13,13,18" alt="20p12.1" title="20p12.1" href="browse.html?search=20p12.1">
+<area coords="1,18,13,21" alt="20p11.23" title="20p11.23" href="browse.html?search=20p11.23">
+<area coords="1,21,13,22" alt="20p11.22" title="20p11.22" href="browse.html?search=20p11.22">
+<area coords="1,22,13,25" alt="20p11.21" title="20p11.21" href="browse.html?search=20p11.21">
+<area coords="1,25,13,26" alt="20p11.1" title="20p11.1" href="browse.html?search=20p11.1">
+<area coords="1,26,13,28" alt="20q11.1" title="20q11.1" href="browse.html?search=20q11.1">
+<area coords="1,28,13,30" alt="20q11.21" title="20q11.21" href="browse.html?search=20q11.21">
+<area coords="1,30,13,33" alt="20q11.22" title="20q11.22" href="browse.html?search=20q11.22">
+<area coords="1,33,13,35" alt="20q11.23" title="20q11.23" href="browse.html?search=20q11.23">
+<area coords="1,35,13,39" alt="20q12" title="20q12" href="browse.html?search=20q12">
+<area coords="1,39,13,39" alt="20q13.11" title="20q13.11" href="browse.html?search=20q13.11">
+<area coords="1,39,13,43" alt="20q13.12" title="20q13.12" href="browse.html?search=20q13.12">
+<area coords="1,43,13,46" alt="20q13.13" title="20q13.13" href="browse.html?search=20q13.13">
+<area coords="1,46,13,51" alt="20q13.2" title="20q13.2" href="browse.html?search=20q13.2">
+<area coords="1,51,13,52" alt="20q13.31" title="20q13.31" href="browse.html?search=20q13.31">
+<area coords="1,52,13,54" alt="20q13.32" title="20q13.32" href="browse.html?search=20q13.32">
+<area coords="1,54,13,58" alt="20q13.33" title="20q13.33" href="browse.html?search=20q13.33">
+</map>
+
+<map name="cm21">
+<area coords="1,2,13,5" alt="21p13" title="21p13" href="browse.html?search=21p13">
+<area coords="3,5,11,8" alt="21p12" title="21p12" href="browse.html?search=21p12">
+<area coords="1,8,13,11" alt="21p11.2" title="21p11.2" href="browse.html?search=21p11.2">
+<area coords="1,11,13,13" alt="21p11.1" title="21p11.1" href="browse.html?search=21p11.1">
+<area coords="1,13,13,14" alt="21q11.1" title="21q11.1" href="browse.html?search=21q11.1">
+<area coords="1,14,13,16" alt="21q11.2" title="21q11.2" href="browse.html?search=21q11.2">
+<area coords="1,16,13,23" alt="21q21.1" title="21q21.1" href="browse.html?search=21q21.1">
+<area coords="1,23,13,25" alt="21q21.2" title="21q21.2" href="browse.html?search=21q21.2">
+<area coords="1,25,13,29" alt="21q21.3" title="21q21.3" href="browse.html?search=21q21.3">
+<area coords="1,29,13,33" alt="21q22.11" title="21q22.11" href="browse.html?search=21q22.11">
+<area coords="1,33,13,35" alt="21q22.12" title="21q22.12" href="browse.html?search=21q22.12">
+<area coords="1,35,13,37" alt="21q22.13" title="21q22.13" href="browse.html?search=21q22.13">
+<area coords="1,37,13,39" alt="21q22.2" title="21q22.2" href="browse.html?search=21q22.2">
+<area coords="1,39,13,44" alt="21q22.3" title="21q22.3" href="browse.html?search=21q22.3">
+</map>
+
+<map name="cm22">
+<area coords="1,2,13,5" alt="22p13" title="22p13" href="browse.html?search=22p13">
+<area coords="3,5,11,8" alt="22p12" title="22p12" href="browse.html?search=22p12">
+<area coords="1,8,13,11" alt="22p11.2" title="22p11.2" href="browse.html?search=22p11.2">
+<area coords="1,11,13,13" alt="22p11.1" title="22p11.1" href="browse.html?search=22p11.1">
+<area coords="1,13,13,17" alt="22q11.1" title="22q11.1" href="browse.html?search=22q11.1">
+<area coords="1,17,13,20" alt="22q11.21" title="22q11.21" href="browse.html?search=22q11.21">
+<area coords="1,20,13,22" alt="22q11.22" title="22q11.22" href="browse.html?search=22q11.22">
+<area coords="1,22,13,24" alt="22q11.23" title="22q11.23" href="browse.html?search=22q11.23">
+<area coords="1,24,13,27" alt="22q12.1" title="22q12.1" href="browse.html?search=22q12.1">
+<area coords="1,27,13,29" alt="22q12.2" title="22q12.2" href="browse.html?search=22q12.2">
+<area coords="1,29,13,34" alt="22q12.3" title="22q12.3" href="browse.html?search=22q12.3">
+<area coords="1,34,13,37" alt="22q13.1" title="22q13.1" href="browse.html?search=22q13.1">
+<area coords="1,37,13,40" alt="22q13.2" title="22q13.2" href="browse.html?search=22q13.2">
+<area coords="1,40,13,44" alt="22q13.31" title="22q13.31" href="browse.html?search=22q13.31">
+<area coords="1,44,13,45" alt="22q13.32" title="22q13.32" href="browse.html?search=22q13.32">
+<area coords="1,45,13,47" alt="22q13.33" title="22q13.33" href="browse.html?search=22q13.33">
+</map>
+
+<map name="cmX">
+<area coords="1,2,13,6" alt="Xp22.33" title="Xp22.33" href="browse.html?search=Xp22.33">
+<area coords="1,6,13,7" alt="Xp22.32" title="Xp22.32" href="browse.html?search=Xp22.32">
+<area coords="1,7,13,11" alt="Xp22.31" title="Xp22.31" href="browse.html?search=Xp22.31">
+<area coords="1,11,13,17" alt="Xp22.2" title="Xp22.2" href="browse.html?search=Xp22.2">
+<area coords="1,17,13,19" alt="Xp22.13" title="Xp22.13" href="browse.html?search=Xp22.13">
+<area coords="1,19,13,22" alt="Xp22.12" title="Xp22.12" href="browse.html?search=Xp22.12">
+<area coords="1,22,13,24" alt="Xp22.11" title="Xp22.11" href="browse.html?search=Xp22.11">
+<area coords="1,24,13,28" alt="Xp21.3" title="Xp21.3" href="browse.html?search=Xp21.3">
+<area coords="1,28,13,30" alt="Xp21.2" title="Xp21.2" href="browse.html?search=Xp21.2">
+<area coords="1,30,13,36" alt="Xp21.1" title="Xp21.1" href="browse.html?search=Xp21.1">
+<area coords="1,36,13,40" alt="Xp11.4" title="Xp11.4" href="browse.html?search=Xp11.4">
+<area coords="1,40,13,45" alt="Xp11.3" title="Xp11.3" href="browse.html?search=Xp11.3">
+<area coords="1,45,13,47" alt="Xp11.23" title="Xp11.23" href="browse.html?search=Xp11.23">
+<area coords="1,47,13,51" alt="Xp11.22" title="Xp11.22" href="browse.html?search=Xp11.22">
+<area coords="1,51,13,53" alt="Xp11.21" title="Xp11.21" href="browse.html?search=Xp11.21">
+<area coords="1,53,13,56" alt="Xp11.1" title="Xp11.1" href="browse.html?search=Xp11.1">
+<area coords="1,56,13,61" alt="Xq11.1" title="Xq11.1" href="browse.html?search=Xq11.1">
+<area coords="1,61,13,61" alt="Xq11.2" title="Xq11.2" href="browse.html?search=Xq11.2">
+<area coords="1,61,13,63" alt="Xq12" title="Xq12" href="browse.html?search=Xq12">
+<area coords="1,63,13,67" alt="Xq13.1" title="Xq13.1" href="browse.html?search=Xq13.1">
+<area coords="1,67,13,68" alt="Xq13.2" title="Xq13.2" href="browse.html?search=Xq13.2">
+<area coords="1,68,13,70" alt="Xq13.3" title="Xq13.3" href="browse.html?search=Xq13.3">
+<area coords="1,70,13,78" alt="Xq21.1" title="Xq21.1" href="browse.html?search=Xq21.1">
+<area coords="1,78,13,80" alt="Xq21.2" title="Xq21.2" href="browse.html?search=Xq21.2">
+<area coords="1,80,13,85" alt="Xq21.31" title="Xq21.31" href="browse.html?search=Xq21.31">
+<area coords="1,85,13,86" alt="Xq21.32" title="Xq21.32" href="browse.html?search=Xq21.32">
+<area coords="1,86,13,90" alt="Xq21.33" title="Xq21.33" href="browse.html?search=Xq21.33">
+<area coords="1,90,13,94" alt="Xq22.1" title="Xq22.1" href="browse.html?search=Xq22.1">
+<area coords="1,94,13,95" alt="Xq22.2" title="Xq22.2" href="browse.html?search=Xq22.2">
+<area coords="1,95,13,101" alt="Xq22.3" title="Xq22.3" href="browse.html?search=Xq22.3">
+<area coords="1,101,13,107" alt="Xq23" title="Xq23" href="browse.html?search=Xq23">
+<area coords="1,107,13,111" alt="Xq24" title="Xq24" href="browse.html?search=Xq24">
+<area coords="1,111,13,119" alt="Xq25" title="Xq25" href="browse.html?search=Xq25">
+<area coords="1,119,13,119" alt="Xq26.1" title="Xq26.1" href="browse.html?search=Xq26.1">
+<area coords="1,119,13,122" alt="Xq26.2" title="Xq26.2" href="browse.html?search=Xq26.2">
+<area coords="1,122,13,126" alt="Xq26.3" title="Xq26.3" href="browse.html?search=Xq26.3">
+<area coords="1,126,13,128" alt="Xq27.1" title="Xq27.1" href="browse.html?search=Xq27.1">
+<area coords="1,128,13,130" alt="Xq27.2" title="Xq27.2" href="browse.html?search=Xq27.2">
+<area coords="1,130,13,134" alt="Xq27.3" title="Xq27.3" href="browse.html?search=Xq27.3">
+<area coords="1,134,13,141" alt="Xq28" title="Xq28" href="browse.html?search=Xq28">
+</map>
+
+<map name="cmY">
+<area coords="1,2,13,4" alt="Yp11.32" title="Yp11.32" href="browse.html?search=Yp11.32">
+<area coords="1,4,13,5" alt="Yp11.31" title="Yp11.31" href="browse.html?search=Yp11.31">
+<area coords="1,5,13,12" alt="Yp11.2" title="Yp11.2" href="browse.html?search=Yp11.2">
+<area coords="1,12,13,12" alt="Yp11.1" title="Yp11.1" href="browse.html?search=Yp11.1">
+<area coords="1,12,13,13" alt="Yq11.1" title="Yq11.1" href="browse.html?search=Yq11.1">
+<area coords="1,13,13,15" alt="Yq11.21" title="Yq11.21" href="browse.html?search=Yq11.21">
+<area coords="1,15,13,19" alt="Yq11.221" title="Yq11.221" href="browse.html?search=Yq11.221">
+<area coords="1,19,13,21" alt="Yq11.222" title="Yq11.222" href="browse.html?search=Yq11.222">
+<area coords="1,21,13,25" alt="Yq11.223" title="Yq11.223" href="browse.html?search=Yq11.223">
+<area coords="1,25,13,26" alt="Yq11.23" title="Yq11.23" href="browse.html?search=Yq11.23">
+<area coords="1,26,13,54" alt="Yq12" title="Yq12" href="browse.html?search=Yq12">
+</map>
+
+
+ <table class="karyotype">
+<tbody>
+<tr>
+ <td id="td1" name="td1" class="chr_label">1</td>
+ <td id="td2" name="td2" class="chr_label">2</td>
+ <td id="td3" name="td3" class="chr_label">3</td>
+ <td id="td4" name="td4" class="chr_label">4</td>
+ <td id="td5" name="td5" class="chr_label">5</td>
+ <td id="td6" name="td6" class="chr_label">6</td>
+ <td id="td7" name="td7" class="chr_label">7</td>
+ <td id="td8" name="td8" class="chr_label">8</td>
+ <td id="td9" name="td9" class="chr_label">9</td>
+ <td id="td10" name="td10" class="chr_label">10</td>
+ <td id="td11" name="td11" class="chr_label">11</td>
+ <td id="td12" name="td12" class="chr_label">12</td>
+ <td id="td13" name="td13" class="chr_label">13</td>
+ <td id="td14" name="td14" class="chr_label">14</td>
+ <td id="td15" name="td15" class="chr_label">15</td>
+ <td id="td16" name="td16" class="chr_label">16</td>
+ <td id="td17" name="td17" class="chr_label">17</td>
+ <td id="td18" name="td18" class="chr_label">18</td>
+ <td id="td19" name="td19" class="chr_label">19</td>
+ <td id="td20" name="td20" class="chr_label">20</td>
+ <td id="td21" name="td21" class="chr_label">21</td>
+ <td id="td22" name="td22" class="chr_label">22</td>
+ <td id="tdX" name="tdX" class="chr_label">X</td>
+ <td id="tdY" name="tdY" class="chr_label">Y</td>
+</tr>
+<tr>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr1.z1.rev.png" usemap="#cm1"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr2.z1.rev.png" usemap="#cm2"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr3.z1.rev.png" usemap="#cm3"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr4.z1.rev.png" usemap="#cm4"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr5.z1.rev.png" usemap="#cm5"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr6.z1.rev.png" usemap="#cm6"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr7.z1.rev.png" usemap="#cm7"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr8.z1.rev.png" usemap="#cm8"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr9.z1.rev.png" usemap="#cm9"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr10.z1.rev.png" usemap="#cm10"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr11.z1.rev.png" usemap="#cm11"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr12.z1.rev.png" usemap="#cm12"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr13.z1.rev.png" usemap="#cm13"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr14.z1.rev.png" usemap="#cm14"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr15.z1.rev.png" usemap="#cm15"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr16.z1.rev.png" usemap="#cm16"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr17.z1.rev.png" usemap="#cm17"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr18.z1.rev.png" usemap="#cm18"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr19.z1.rev.png" usemap="#cm19"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr20.z1.rev.png" usemap="#cm20"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr21.z1.rev.png" usemap="#cm21"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chr22.z1.rev.png" usemap="#cm22"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chrX.z1.rev.png" usemap="#cmX"></td>
+ <td class="ideogram"><img class="ideogram" src="images/ideogram/chrY.z1.rev.png" usemap="#cmY"></td>
+</tr>
+</tbody></table>
+
+<center>Click on a chromosome band to view this region in the browser.</center><br/>
+
+		</div>
+	</div>
+	<div id="sidebar">
+	    	<div style="height:24px;background:transparent url(images/title_bar.gif) repeat-x scroll center top;">
+			<div class="headerBar">Assembly &amp; Annotation</div>
+		</div>
+		<table id="tableList" cellspacing="1" cellpadding="3" width="100%" border="0" bgcolor="#ffffff" style="margin-top:1px"> 
+			<tr class="rowDk">
+				<td>&nbsp;<b>HuRef Assembly</b></td>
+				<td>&nbsp;HuRef version 6</td>
+			</tr>
+			<tr class="rowLt">
+				<td>&nbsp;<b>NCBI Assembly</b></td>
+				<td>&nbsp;NCBI 36/hg18, Oct 2005</td>
+			</tr>
+			<tr class="rowDk">
+				<td>&nbsp;<b>Genebuild</b></td>
+				<td>&nbsp;Ensembl,version 41</td>
+			</tr>
+			<tr class="rowLt">
+				<td>&nbsp;<b>Ensembl Database version</b></td>
+				<td>&nbsp;41.36c</td>
+			</tr>
+			
+			<tr class="rowDk">
+				<td>&nbsp;<b>HuRef SNPs</b></td>
+				<td>&nbsp;3,213,401</td>
+			</tr>
+			<tr class="rowLt">
+				<td>&nbsp;<b>HuRef Indels</b></td>
+				<td>&nbsp;905,398</td>
+			</tr>
+			<tr class="rowDk">
+				<td>&nbsp;<b>HuRef Inversions</b></td>
+				<td>&nbsp;90</td>
+			</tr>
+			<tr class="rowLt">
+				<td>&nbsp;<b>Number of Scaffold in Chromosomes</b></td>
+				<td>&nbsp;1,408</td>
+			</tr>
+			<tr class="rowDk">
+				<td>&nbsp;<b>ACGT Bases in Chromosomes</b></td>
+				<td>&nbsp;2,782,357,138</td>
+			</tr>
+			<tr class="rowLt">
+				<td>&nbsp;<b>Scaffolds (&ge;100kb)</b></td>
+				<td>&nbsp;553</td>
+			</tr>
+			<tr class="rowDk">
+				<td>&nbsp;<b>ACGT Bases in Scaffolds(&ge;100kb)</b></td>
+				<td>&nbsp;2,779,929,229</td>
+			</tr>
+			
+			<tr class="rowLt">
+				<td>&nbsp;<b>Scaffolds (&ge;3kb)</b></td>
+				<td>&nbsp;4,528</td>
+			</tr>
+			<tr class="rowDk">
+				<td>&nbsp;<b>ACGT Bases in Scaffolds(&ge;3kb)</b></td>
+				<td>&nbsp;2,809,774,459</td>
+			</tr>
+		</table>
+		<hr noshade size=1/>
+	</div>
+
+	<div id="main">
+	    	<div style="height:24px;background:transparent url(images/title_bar.gif) repeat-x scroll center top;">
+			<div class="headerBar">Press Releases</div>
+		</div>
+		<br/>
+		<div id="mainInner">
+			<ul type="square">
+				<li><a href="http://www.jcvi.org/cms/research/projects/huref/overview/" target="new">Diploid Human Genome Project Website</a></li>
+				<li><a href="http://www.jcvi.org/cms/press/press-releases/full-text/article/first-individual-diploid-human-genome-published-by-researchers-at-j-craig-venter-institute/?tx_ttnews%5BbackPid%5D=67&cHash=86cff9f104" target="new">First Individual Diploid Human Genome Published By Researchers at J. Craig Venter Institute</a></li>
+				<li><a href="http://www.sickkids.ca/mediaroom/custom/humangenome07.asp" target="new">Hospital for Sick Children Press Release</a></li>
+				<li><a href="http://www.jcvi.org/cms/nc/research/projects/huref/video/" target="new">Video</a> and <a href="http://www.jcvi.org/cms/research/projects/huref/photos/" target="new">Photos</a></li>
+				<li><a href="http://www.jcvi.org/cms/fileadmin/site/research/projects/huref/huref-fact-sheet.pdf" target="new">Fact Sheet</a></li>
+			</ul>
+			<br/><br/>
+		</div>
+	</div>
+	<div id="sidebar">
+	    	<div style="height:24px;background:transparent url(images/title_bar.gif) repeat-x scroll center top;">
+			<div class="headerBar">Data &amp; Tools</div>
+		</div>
+		<br/>
+		<div id="sidebarInner">
+			<ul type="square">
+				<li><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=148192284" target="new">Genome Sequence in Genbank</a></li>
+				<li><a href="http://www.ncbi.nlm.nih.gov/Traces/trace.cgi?cmd=retrieve&size=14637892&val=CENTER_NAME+%3D+%22JCVI%22+and+SPECIES_CODE+%3D+%22HOMO+SAPIENS%22+and+center_project+%3D+%22GENOMIC-SEQUENCING-DIPLOID-HUMAN-REFERENCE-GENOME%22&file=trace&fasta=on&dopt=info&dispmax=50&page=100000" target="new">Traces from the NCBI Trace Archive</a></li>
+				<li><a href="ftp://ftp.ncbi.nih.gov/pub/TraceDB/Personal_Genomics/Venter/" target="new">Read Data (fasta sequence, quality and xml meta data)</a></li>
+				<li><a href="ftp://ftp.jcvi.org/pub/data/huref/" target="new">Additional Data (variants, microarray genotypes, and haplotypes)</a></li>
+				<li><a href="ftp://ftp.jcvi.org/pub/data/huref/databases/" target="new">Download HuRef databases</a></li>
+				<li><a href="http://www.jcvi.org/cms/research/software/celera-assembler/overview/" target="new">Celera Assembler</a></li>
+			</ul>
+			<br/><br/>
+		</div>
+	</div>
+	
+</div>
+
+<div id="footer">© J. Craig Venter Institute 2007-2008.</div>
+
+</body>
+</html>
+

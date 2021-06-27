@@ -1,0 +1,93 @@
+
+R version 2.9.0 (2009-04-17)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> taskid = 15;
+> 
+> pdf("./tmp/rsca.pdf") 
+> 
+> library(RSQLite);
+> #Begin time
+> date();
+[1] "Sun May 17 14:38:42 2009"
+> 
+> #############################Database Initiation##########3
+> #initdb();
+> 	#Open database named :mutationdb.sqlite
+> 	dbid<-"/home/zuofeng/projects/mutation/workspace/rsca/AV_DB/mutationdb.sqlite";
+> 
+> 	#Get database driver
+> 	driver<-dbDriver("SQLite");
+> 	#创建连接
+> 	connect_mutdb<-dbConnect(driver,dbname=dbid);
+> 	
+> 	sql<-paste("SELECT  AV_SIZE, RSCA  FROM RSCA_REPORT WHERE TASK_ID=",taskid, sep="");
+> 	dbQuery<-dbSendQuery(connect_mutdb, statement=sql);
+> 	rlt<-fetch(dbQuery, -1);
+> 	sqliteCloseResult(dbQuery);
+[1] TRUE
+> 	# CLOSE THE CONNECTION  
+> 	sqliteCloseConnection(connect_mutdb);
+[1] TRUE
+> 	#
+> 	uni_size<-unique(rlt[,1]);
+> 	
+> 	#To get
+> 	#av_size    rsca_p_sum    rsca_n_sum
+> 	av_size <- c();
+> 	rsca_p_sum <- c();#rsca = 1
+> 	rsca_n_sum <- c(); #rsca = 0
+> 
+> 	#interating through all the Allelic Variance size of OMIM
+> 	for(i in 1:length(uni_size))
++ 	{
++ 		p_number<-0;#rsca = 1
++ 		n_number<-0;#rsca = 0
++ 		
++ 		##interating through all the OMIM RSCA analysis results
++ 		for(j in 1:length(rlt[,1]))
++ 		{
++ 			if(uni_size[i] == rlt[j,1])
++ 			{
++ 				if(rlt[j,2] > 0)
++ 				{
++                  	p_number<-p_number+1;
++ 				}
++ 				else
++ 				{
++ 					n_number<-n_number+1;
++ 				}
++ 			}
++       }
++ 	  av_size[i] <- uni_size[i];
++ 	  rsca_p_sum[i] <- p_number;
++ 	  rsca_n_sum[i] <- n_number;
++ 	}
+> 	crlt<-cbind(av_size, rsca_p_sum, rsca_n_sum);
+> 
+> 	write.table(crlt, file="rlt.txt", sep="\t");
+> 	
+> 	plot(crlt[,1], log(crlt[,2], 10));
+> 	plot(crlt[,1], crlt[,2]/(crlt[,2]+ crlt[,3]));
+> dev.off() 
+null device 
+          1 
+> 	
+> 
+> 	
+> 

@@ -1,0 +1,134 @@
+<head>
+
+<link rel="stylesheet" href="./style.css" type="text/css">
+<style>
+a ,a:visited
+{
+	color:#010101;
+	text-decoration:none;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"><title>HSEpred: predict half-sphere exposure from protein sequences</title></head>
+
+<body>
+
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+
+  <!--DWLayoutTable-->
+
+  <tr valign="middle" bgcolor="#FFFFCC"> 
+
+    <td height="70" colspan="5"> 
+
+      <div align="center"><strong><font color="#660033" size="6" face="Times New Roman, Times, serif">HSEpred: 
+        predict half-sphere exposure from protein sequences</font></strong></div></td>
+
+  </tr>
+
+  <tr valign="middle"> 
+
+    <td width="20%" height="56" valign="middle" bgcolor="#99FFCC" > 
+
+      <div align="center"><a href="introduction.html" style="color:#0000ff"><font face="Times New Roman, Times, serif">Introduction</font></a></div></td>
+
+    <td width="20%" valign="middle" bgcolor="#99FFCC" > 
+
+      <div align="center" ><a href="webserver.html"  style="color:#0000ff"><font face="Times New Roman, Times, serif">Webserver</font></a></div></td>
+
+    <td width="20%" valign="middle" bgcolor="#99FFCC" > 
+
+      <div align="center" ><a href="help.html"  style="color:#0000ff"><font face="Times New Roman, Times, serif">Help</font></a></div></td>
+
+    <td width="20%" valign="middle" bgcolor="#99FFCC" > 
+
+      <div align="center"><a href="links.html"  style="color:#0000ff"><font face="Times New Roman, Times, serif">Links</font></a></div></td>
+
+    <td width="20%" valign="middle" bgcolor="#99FFCC" > 
+
+      <div align="center"><a href="contact.html"  style="color:#0000ff"><font face="Times New Roman, Times, serif">Contact</font></a></div></td>
+
+  </tr>
+
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <!--DWLayoutTable-->
+  <tr> 
+    <td width="100%" height="474" valign="top"><p>&nbsp;</p>
+      <p><font size="+2" face="Times New Roman, Times, serif"><strong>Introduction</strong></font></p>
+      <p align="justify"><font face="Times New Roman, Times, serif">Solvent exposure 
+        measures describe to what extent a residue in a protein interacts with 
+        its surrounding solvent molecules and hence could provide important information 
+        for understanding and predicting many aspects of protein structure and 
+        function (Yuan and Huang, 2004; Hamelryck, 2005) and for identifying uncharacterized 
+        evolutionary mechanism of novel protein folds from existing folds (Cordes 
+        et al., 1999). In other investigations, the solvent accessibility has 
+        been successfully utilized to improve the prediction of flexible/rigid 
+        residues (Schlessinger et al., 2006) and DNA-binding residues (Ofran et 
+        al., 2007) in proteins. Therefore, knowledge of solvent exposure is of 
+        great biological importance, which is not only useful for predicting structural 
+        and functional features of proteins and predicting the three-dimensional 
+        structures of proteins, but also helpful for our deep understanding of 
+        the sequence-structure-function relationship.</font></p>
+      <p align="justify"><font face="Times New Roman, Times, serif">In the last 
+        two decades, several solvent exposure measures have been developed, for 
+        example, solvent accessible surface area (ASA) (Connolly, 1983; Miller 
+        et al., 1987), relative accessible surface area (rASA) (Rost and Sander, 
+        1994), residue depth (RD) (Chakravarty and Varadarajan, 1999), and contact 
+        number (CN) (Nishikawa and Ooi, 1980; Pollastri et al., 2001). Despite 
+        their contributive knowledge provided by these solvent exposure measures, 
+        they all have some intrinsic drawbacks. For example, it is impossible 
+        to apply ASA measure to determine to what extent a residue is buried, 
+        or it is difficult to distinguish a deeply buried residue from a partially 
+        buried residue, while for these two kinds of residues their ASA values 
+        would be zeros or close to zeros. In the case of RD measure, it is difficult 
+        to compare residues with different sizes and calculating RD suffers from 
+        high computational complexity and inefficiency. While in the case of CN 
+        measure, it could only provide a rather coarse-grained and insensitive 
+        illustration of a residue's solvent exposure, in comparison with ASA 
+        and RD.</font></p>
+      <p align="justify"><font face="Times New Roman, Times, serif">In this context, 
+        half-sphere exposure (HSE) defined by Hamelryck is a new kind of two-dimensional 
+        solvent exposure measure (Hamelryck, 2005), which is of particular interest 
+        in this study. Compared with other solvent exposure measures, HSE has 
+        a superior performance with respect to protein stability, conservation 
+        among different folds, computational speed and predictability (Hamelryck, 
+        2005). HSE separates a residue's sphere into two half spheres: HSE-up 
+        corresponds to the upper sphere in the direction of the chain side of 
+        the residue, while HSE-down points to the lower sphere in the direction 
+        of the opposite side. As the two half spheres described by HSE-up and 
+        HSE-down are distinct in terms of geometry and energy, they possess different 
+        interesting properties that are related to the characterization of the 
+        residue's spatial neighborhood. Hence, this new measure holds advantageous 
+        potentials that can be applied in many aspects of protein structure studies.</font></p>
+      <p align="justify"><font face="Times New Roman, Times, serif">However, it 
+        is not clear so far to what extent HSE can predicted from protein sequences. 
+        In this article, we propose a novel approach to quantify the HSE-sequence 
+        relationship and predict the HSE measures from protein primary sequences 
+        based on support vector regression (SVR). As an implementation of our 
+        method, we (cooperated with <a href="http://sysman.net.au">melbourne web design</a> company) have created a publicly available webserver called HSEpred 
+        to facilitate the HSE prediction. This webserver allows users to perform 
+        rapid exploratory analysis of protein sequences of their interest. It 
+        allows users to submit a protein sequence in the FASTA format and select 
+        one of the three models derived from three sequence encoding schemes to 
+        predict the HSE-up, HSE-down and CN values for all residues in the query 
+        sequence.</font><br>
+      </p>
+      <p>&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td height="62" valign="middle"><!--DWLayoutEmptyCell-->&nbsp;</td>
+  </tr>
+  <tr> 
+    <td height="49" valign="top"><hr></td>
+  </tr>
+  <tr> 
+    <td height="55" valign="top"><font face="Arial, Helvetica, sans-serif">Copyright 
+      &copy; 2008 Jiangning Song and  <a href="http://sysman.net.au"><img src="../Prodepth/img/melbourne-web-design.jpg" alt="melbourne web design" /></a>. All rights reserved.</font></td>
+  </tr>
+  <tr> 
+    <td height="51">&nbsp;</td>
+  </tr>
+</table>
+
+</body>

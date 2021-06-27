@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>UniPROBE Database</title>
+    <link rel="stylesheet" type="text/css" href="css_lib/main.css" />
+    <script type="text/javascript" src="./js_lib/events.js"></script>
+    <script type="text/javascript" src="./js_lib/advsearchform.js"></script>
+    <script type="text/javascript" src="./js_lib/index.js"></script>
+  </head>
+  
+  <body>
+
+    <div id="topbar">
+<!--      <h2>UniPROBE Database</h2> -->
+    </div>
+
+    <div id="navbar">
+      <!-- the horizontal menu bar -->
+      <ul>
+	<li><a href="index.php">Home</a></li>
+	<li><a href="browse.php">Browse</a></li>
+	<li><a href="downloads.php">Downloads</a></li>
+	<li><a href="about.php">About</a></li>
+	<li><a href="references.php">References</a></li>
+      </ul>
+
+      <!-- the search form in the nav bar -->
+      <form action="browse.php" method="post">
+	  <label for="searchParam" accesskey="F">Quick Search: </label>
+	  <input type="hidden" name="opt" id="opt" value="smart" />
+	  <input type="text" name="searchParam" id="searchParam" value="" maxlength=36 />
+	  <input type="submit" value="go" />
+      </form>
+    
+    </div>
+  <div id="advsearch">
+    <h3>Advanced Search</h3>
+
+  <!-- Text Search Menu -->
+  <div class="advFormContainer">
+    <form id="advSearchForm" name="advSearchForm" action="browse.php" method="post">
+    <fieldset>
+      <legend>Text Search</legend>
+      <div class="help"><a id="text_search_help" href="helpfiles/text_search.html">Help</a></div>
+
+      <p>
+        <select name='opt0'>
+          <option value='all'>All</option>
+          <option value='protein'>By Protein</option>
+          <option value='domain'>By Domain</option>
+          <option value='species'>By Species</option>
+          <option value='publication'>By Pub.</option>
+          <option value='fulltext'>Full-Text</option>
+        </select>
+        <input type='text' name='searchParam0' value='' maxlength='36' />&nbsp;<button class='add' type='button'>+</button>&nbsp;<button class='remove' type='button'>-</button>
+      </p>
+
+      <p>
+        <select name='opt1'>
+          <option value='all'>All</option>
+          <option value='protein'>By Protein</option>
+          <option value='domain'>By Domain</option>
+          <option value='species'>By Species</option>
+          <option value='publication'>By Pub.</option>
+          <option value='fulltext'>Full-Text</option>
+        </select>
+        <input type='text' name='searchParam1' value='' maxlength='36' />&nbsp;<button class='add' type='button'>+</button>&nbsp;<button class='remove' type='button'>-</button>
+      </p>
+
+      <p>
+        <select name='opt2'>
+          <option value='all'>All</option>
+          <option value='protein'>By Protein</option>
+          <option value='domain'>By Domain</option>
+          <option value='species'>By Species</option>
+          <option value='publication'>By Pub.</option>
+          <option value='fulltext'>Full-Text</option>
+        </select>
+        <input type='text' name='searchParam2' value='' maxlength='36' />&nbsp;<button class='add' type='button'>+</button>&nbsp;<button class='remove' type='button'>-</button>
+      </p>
+
+
+      <ul>
+	<li>Match All <input type="radio" name="logicRad" value="all" checked="yes" /></li>
+	<li>Match Any <input type="radio" name="logicRad" value="any"  /></li>
+	<li><input type="submit" value="Submit" /></li>
+      </ul>
+
+
+    </fieldset>
+    <input type="hidden" name="searchParam" id="searchParam" value="" />
+    </form>
+  </div>
+
+
+
+
+    <!-- Motif Comparison Menu -->
+  <div class="advFormContainer">
+    <form id="motifSearchForm" name="motifSearchForm" action="browse.php" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Search for Similar Motifs</legend>
+        <div class="help"><a id="motif_search_help" href="helpfiles/motif_search.html">Help</a></div>
+<!--        <p><span style="color: red;">UNDER CONSTRUCTION</span></p> -->
+        <p>Load Motif from:
+	  <ul>
+	    <li>
+	      <input type="radio" name="motifFormat" value="file" /><label for="motifFile">File: </label>
+	      <input type="file" name="motifFile" />
+	      <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+	    </li>
+	    <li>
+	      <input type="radio" name="motifFormat" value="textarea"  /><label for="motifTextarea">Text Area: </label>
+	      <br />
+	      <textarea name="motifTextarea" 
+                 onfocus="if(this.value=='Enter Motif Here')value='';"
+                 onblur ="if(this.value=='')value='Enter Motif Here';"
+                 cols="40" rows="6">Enter Motif Here</textarea>
+	    </li>
+	  </ul>
+	</p>
+	<p><a class="not-link" href=>Advanced Options</a></p>
+	<div class="optdiv">
+	  <p>
+	    E-value Threshold:&nbsp;&nbsp;&nbsp;
+	    <input type="text" name="motifThreshold" maxlength="4" size="6" value="0.5" />
+	  </p>
+	  <p>
+	    Minimum Overlap:&nbsp;&nbsp;&nbsp;
+	    <input type="text" name="minOverlap" maxlength="4" size="6" value="5" />
+	  </p>
+	  <p>
+	    Comparison Method:&nbsp;&nbsp;&nbsp;
+	    <select name="compMeth">
+	      <option value="ED" >ED</option>
+	      <option value="PCC" >PCC</option>
+	      <option value="KLD" >KLD</option>
+	      <option value="SW" >SW</option>
+	    </select>
+	  </p>
+	  <p>
+	    Species:&nbsp;&nbsp;&nbsp;
+	    <select name="motifSpecies">
+	      	        <option value='All'>All</option>
+	        <option value='Caenorhabditis elegans'>Caenorhabditis elegans</option>
+	        <option value='Cryptosporidium parvum'>Cryptosporidium parvum</option>
+	        <option value='Homo sapiens'>Homo sapiens</option>
+	        <option value='Mus musculus'>Mus musculus</option>
+	        <option value='Plasmodium falciparum'>Plasmodium falciparum</option>
+	        <option value='Saccharomyces cerevisiae'>Saccharomyces cerevisiae</option>
+	        <option value='Vibrio harveyi'>Vibrio harveyi</option>
+	    </select>
+	  </p>
+
+	  <hr />
+	  <p style="font-size:smaller; color: red;">Please read help file before entering values here:</p>
+	  <p>
+	    Pseudocount:&nbsp;&nbsp;&nbsp;
+	    <input type="text" name="motifPseudo" maxlength="4" size="6" value="" />
+	  </p>
+	  <p>
+	    &#37; GC Content:&nbsp;&nbsp;&nbsp;
+	    <input type="text" name="motifGC" maxlength="4" size="6" value="50" />
+	  </p>												     
+	</div>
+	<p class="align-right"><input type="reset" value="Reset" /> <input type="submit" value="Submit" /></p>
+
+      </fieldset>
+      <input type="hidden" name="searchParam" id="searchParam" value="" />
+    </form>
+  </div>
+
+
+  <!-- Transcription Factor Binding Site Discovery Menu -->
+  <div class="advFormContainer">
+    <form id="dnaSearchForm" name="dnaSearchForm" action="browse.php" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Search for TF Binding Sites</legend>
+        <div class="help"><a id="dna_search_help" href="helpfiles/dna_search.html">Help</a></div>
+        <p>Load DNA sequence from:
+	  <ul>
+	    <li>
+	      <input type="radio" name="dnaFormat" value="file" /><label for="dnaFile">File: </label>
+	      <input type="file" name="dnaFile" />
+	      <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+	    </li>
+	    <li>
+	      <input type="radio" name="dnaFormat" value="textarea"  /><label for="dnaTextarea">Text Area: </label>
+	      <br />
+	      <textarea name="dnaTextarea" 
+                 onfocus="if(this.value=='Enter DNA Sequence Here')value='';"
+                 onblur ="if(this.value=='')value='Enter DNA Sequence Here';"
+                 cols="40" rows="6">Enter DNA Sequence Here</textarea>
+	    </li>
+	  </ul>
+	</p>
+	<p><a class="not-link" href=>Advanced Options</a></p>
+	<div class="optdiv">
+	  <p>
+	    Score Threshold:&nbsp;&nbsp;&nbsp;
+	    <input type="text" name="dnaThreshold" maxlength="4" size="6" value="0.45" />
+	  </p>
+	  <p>
+	    Species:&nbsp;&nbsp;&nbsp;
+	    <select name="dnaSpecies">
+	      	        <option value='All'>All</option>
+	        <option value='Caenorhabditis elegans'>Caenorhabditis elegans</option>
+	        <option value='Cryptosporidium parvum'>Cryptosporidium parvum</option>
+	        <option value='Homo sapiens'>Homo sapiens</option>
+	        <option value='Mus musculus'>Mus musculus</option>
+	        <option value='Plasmodium falciparum'>Plasmodium falciparum</option>
+	        <option value='Saccharomyces cerevisiae'>Saccharomyces cerevisiae</option>
+	        <option value='Vibrio harveyi'>Vibrio harveyi</option>
+	    </select>
+	  </p>
+        </div>
+        <p class="align-right"><input type="reset" value="Reset" /> <input type="submit" value="Submit" /></p>
+      </fieldset>
+      <input type="hidden" name="searchParam" id="searchParam" value="" />
+    </form>
+  </div>
+
+
+    <!-- blastp Comparison Menu -->
+  <div class="advFormContainer">
+    <form id="blastpSearchForm" name="blastpSearchForm" action="browse.php" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Run blastp Against Proteins in UniPROBE</legend>
+        <div class="help"><a id="blastp_search_help" href="helpfiles/blastp_search.html">Help</a></div>
+        <p>Load Protein Sequence from:
+	  <ul>
+	    <li>
+	      <input type="radio" name="blastpFormat" value="file" /><label for="blastpFile">File: </label>
+	      <input type="file" name="blastpFile" />
+	      <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+	    </li>
+	    <li>
+
+
+	      <input type="radio" name="blastpFormat" value="textarea"  /><label for="blastpTextarea">Text Area: </label>
+	      <br />
+	      <textarea name="blastpTextarea" 
+                 onfocus="if(this.value=='Enter Protein Sequence Here')value='';"
+                 onblur ="if(this.value=='')value='Enter Protein Sequence Here';"
+                 cols="40" rows="6" >Enter Protein Sequence Here</textarea>
+
+	    </li>
+	  </ul>
+	</p>
+	<p><a class="not-link" href=>Advanced Options</a></p>
+	<div class="optdiv">
+	  <p>
+	    Species:&nbsp;&nbsp;&nbsp;
+	    <select name="blastpSpecies">
+	      	        <option value='All'>All</option>
+	        <option value='Caenorhabditis elegans'>Caenorhabditis elegans</option>
+	        <option value='Cryptosporidium parvum'>Cryptosporidium parvum</option>
+	        <option value='Homo sapiens'>Homo sapiens</option>
+	        <option value='Mus musculus'>Mus musculus</option>
+	        <option value='Plasmodium falciparum'>Plasmodium falciparum</option>
+	        <option value='Saccharomyces cerevisiae'>Saccharomyces cerevisiae</option>
+	        <option value='Vibrio harveyi'>Vibrio harveyi</option>
+	    </select>
+	  </p>
+	  <p>
+	    E-value Threshold:&nbsp;&nbsp;&nbsp;
+	    <input type="text" name="blastpThreshold" maxlength="10" size="6" value="0.001" />
+	  </p>
+	  <p>
+	       Matrix:&nbsp;&nbsp;&nbsp
+	    <select name="blastpMatrix">
+	       	        <option value='BLOSUM45'>BLOSUM45</option>
+	        <option value='BLOSUM50'>BLOSUM50</option>
+	        <option value='BLOSUM62' selected="selected">BLOSUM62</option>
+	        <option value='BLOSUM80'>BLOSUM80</option>
+	        <option value='BLOSUM90'>BLOSUM90</option>
+	        <option value='PAM250'>PAM250</option>
+	        <option value='PAM30'>PAM30</option>
+	        <option value='PAM70'>PAM70</option>
+	    </select>
+	  </p>
+	  <p>
+	     Word Size:&nbsp;&nbsp;&nbsp;
+	    <input type="text" name="blastpWordSize" maxlength="4" size="6" value="3" />
+	  </p>
+
+	</div>
+	<p class="align-right"><input type="reset" value="Reset" /> <input type="submit" value="Submit" /></p>
+
+      </fieldset>
+      <input type="hidden" name="searchParam" id="searchParam" value="" />
+    </form>
+  </div>
+
+  </div>     
+    <div id="content">
+      <h3>Welcome to UniPROBE</h3>
+
+      <p>The UniPROBE (Universal PBM Resource for Oligonucleotide Binding Evaluation) database hosts data generated by <a href="http://the_brain.bwh.harvard.edu/pbm.html">universal protein binding microarray (PBM)</a> technology on the <i>in vitro</i> DNA binding specificities of proteins. This initial release of the UniPROBE database provides a centralized resource for accessing comprehensive data on the preferences of proteins for all possible sequence variants ('words') of length k ('k-mers'), as well as position weight matrix (PWM) and graphical sequence logo representations of the k-mer data. In total, the database currently hosts DNA binding data for <a href="browse.php">
+406
+ nonredundant proteins</a> from a diverse collection of organisms, including the prokaryote <a href="#" onClick="setSearch('Vibrio harveyi')"><i>Vibrio harveyi</i></a>, the eukaryotic malarial parasite <a href="#" onClick="setSearch('Plasmodium falciparum')"><i>Plasmodium falciparum</i></a>, the parasitic Apicomplexan <a href="#" onClick="setSearch('Cryptosporidium parvum')"><i>Cryptosporidium parvum</i></a>, the yeast <a href="#" onClick="setSearch('Saccharomyces cerevisiae')"><i>Saccharomyces cerevisiae</i></a>, the worm <a href="#" onClick="setSearch('Caenorhabditis elegans')"><i>Caenorhabditis elegans</i></a>, <a href="#" onClick="setSearch('Mus musculus')">mouse</a>, and <a href="#" onClick="setSearch('Homo sapiens')">human</a>. The database's web tools (on the right) include a text-based search, a function for assessing motif similarity between user-entered data and database PWMs, and a function for locating putative binding sites along user-entered nucleotide sequences.  Please click on each tool's "help" link for more information.</p>
+
+      <h3>News and Updates</h3>
+
+      <dl>
+
+      <dt><b>08/14/10</b></dt>
+  <dd>New mouse PBM data for ETS domain TFs have been integrated into UniPROBE.  These data are described in <a href="http://thebrain.bwh.harvard.edu/pubs/Wei_EMBOJ2010_online.pdf">Genome-wide analysis of ETS family DNA-binding in vitro and in vivo</a>, which has been published in <a href="http://www.emboj.org">The EMBO Journal</a>.</dd>
+	<br />
+
+      <dt><b>07/24/09</b></dt>
+      <dd>New worm PBM data for bHLH domain TFs have been integrated into UniPROBE.  These data are described in <a href="http://thebrain.bwh.harvard.edu/pubs/Cell2009-wormbHLHs.pdf">A multi-parameter network reveals extensive divergence between C. elegans bHLH transcription factors</a>, which has been published in <a href="http://www.cell.com">Cell</a>.</dd>
+	<br />
+
+      <dt><b>05/25/09</b></dt>
+      <dd>Data have been added for the Nsy-7 TF (Caenorhabditis elegans) as described in <a href="http://thebrain.bwh.harvard.edu/pubs/Lesch_GD2009.pdf">Transcriptional regulation and stabilization of left-right neuronal identity in C. elegans</a>, and published in <a href="http://genesdev.cshlp.org">Genes and Development</a>.</dd>
+	<br />
+
+        <dt><b>04/14/09</b></dt>
+	<dd>New mouse PBM data for 104 TFs have been integrated into UniPROBE.  These data are described in <i>Diversity
+and Complexity in DNA Recognition by Transcription Factors</i>, which have been accepted for publication in <a href="http://sciencemag.org/">Science</a>.</dd>
+	<br />
+
+        <dt><b>02/18/09</b></dt>
+	<dd>Data have been added for the SOX4 TF (homo sapiens) as described in <a href="http://thebrain.bwh.harvard.edu/pubs/Scharer-SOX4.pdf">Genome-wide promoter analysis of the SOX4 transcriptional network in prostate cancer</a>, and published in <a href="http://cancerres.aacrjournals.org">Cancer Research</a>. Please <a href="http://morenolab.whitehead.emory.edu/pubs/SOX4-network/">click here</a> to visit the  supplementary materials website for this publication.</dd>
+	<br />
+
+        <dt><b>01/17/09</b></dt>
+	<dd>Due to an oversight made during the addition of the 89 yeast TFs to UniPROBE, these data were not incorporated into the .zip files in the "All Data" section of the <a href="downloads.php">downloads page</a>.  The .zip files are now fully up to date, and we apologize for this inconvenience.</dd>
+	<br />
+
+        <dt><b>01/15/09</b></dt>
+	<dd>New yeast PBM data for 89 TFs have been integrated into UniPROBE.  These data are described in <i>High-Resolution DNA Binding Specificity Analysis of Yeast Transcription Factors</i>, which is in press at <a href="http://genome.cshlp.org/">Genome Research</a>.  Please click <a href="http://thebrain.bwh.harvard.edu/f1yPm/">here</a> to visit the supplementary materials website for this publication.</dd>
+	<br />
+
+        <dt><b>10/11/08</b></dt>
+	<dd>A bug in the <i>Search for TF Binding Sites</i> tool has been corrected.  Previously, the tool was incorrectly generating the reverse complement of the user entered sequence, which prevented it from finding reverse complement matches.  Although the problem did not give rise to any false positive matches, many true positives may have been missed.  We apologize for the inconvenience.</dd>
+	<br />
+
+        <dt><b>09/14/08</b></dt>
+	<dd>The <a href="downloads.php">Downloads</a> section now contains zip files holding data for every protein in the database (whereas before the files were segregated by publication), and it also now contains a zip file holding documentation and SQL code for generating many of the database's tables.</dd>
+	<br />
+
+        <dt><b>08/16/08</b></dt>
+	<dd>The PBM Database has been updated, renamed, and relocated!  This current version of the database is now called the UniPROBE (Universal PBM Resource for Oligonucleotide Binding Evaluation) Database, and the &quot;Search for Similar Motifs&quot; and &quot;Search for TF Binding Sites&quot; tools are fully implemented.
+	</dd>
+	<br />
+
+        <dt><b>05/16/08</b></dt>
+	<dd>The PBM database is now public for the mouse homeodomains data!  We recommend that you use either Firefox or Internet Explorer for browsing this site.  Questions, comments, and suggestions are most welcome at the database help address (
+ <SCRIPT TYPE="text/javascript">
+<!-- 
+// protected email script by Joe Maller
+// JavaScripts available at http://www.joemaller.com
+// this script is free to use and distribute
+// but please credit me and/or link to my site
+//
+// Modified by DN 07/30/08
+
+emailD=('rics.bwh.harvard.edu')
+emailL=('PBMdatabase_help')
+document.write('<a href="mailto:' + emailL + '@' + emailD + '">' + emailL + '@' + emailD + '</a>')
+ //-->
+</script>
+<NOSCRIPT>
+  <img src="imgs/address.jpg" />
+</NOSCRIPT> 
+).
+	  <br /><br />
+	    If you wish to receive PBM Database updates, which will include the addition of new datasets and data analyses, you are encouraged to register for the website <a href="register.php">here</a>.
+	</dd>
+      <br />
+
+      </dl>
+
+    </div>
+
+
+
+
+  <font size='1'><center><b>Supported Browsers:</b>IE 7.0.6001.18000, Firefox 3.5.11, Google Chrome 5.0.375.125 beta</center></font>
+
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=3998990; 
+var sc_invisible=1; 
+var sc_partition=48; 
+var sc_click_stat=1; 
+var sc_security="fbecbd0a"; 
+</script>
+
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a href="http://www.statcounter.com/free_hit_counter.html" target="_blank"><img class="statcounter" src="http://c.statcounter.com/3998990/0/fbecbd0a/1/" alt="hits counter" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+
+  </body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>BioTop - A Top-Domain Ontology for the Life Sciences</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <div id="header-left">
+          <a href="."><h1><em>BioTop</em></h1><img src="gfx/blank.gif" width="20" height="1">A Top-Domain Ontology for the Life Sciences</a>
+        </div>
+        <div id="header-right">
+          <a href="http://www.uniklinik-freiburg.de">University Medical Center Freiburg</a> - <a href="http://www.imbi.uni-freiburg.de">Institute for Medical Biometry and Medical Informatics (IMBI)</a><br/>
+          <a href="http://www.uni-jena.de">Jena University</a> <a href="http://www.julielab.de">Language &amp Information Engineering (JULIE) Lab</a>
+        </div>
+        <div id="menu"><a href="#overview">Overview</a> | <a href="#implementation">Implementation</a> | <a href="#usersandexamples">Users and Examples</a> | <a href="#publications">Publications</a> | <a href="#feedback">Feedback</a></div>
+      </div>
+      <div id="content">
+<a name="overview"></a><h3>Overview</h3>
+
+<p>
+ The flood of data and factual knowledge in biology and medicine requires 
+principled approaches to their 
+proper analysis and management. A cornerstone in this effort constitutes 
+the precise and complete description 
+of the fundamental entities within this domain in terms of formal ontologies.
+</p>
+
+<p>
+However, biomedical ontology development often still do not adhere to 
+basic design principles: For example, even very low-level domain terms 
+often lack precise and unambiguous (logical) definitions. This impedes the 
+move towards semantic standardization that is needed for their intended 
+knowledge management task. Rather, it 
+leads to inconsistencies, fragmentation and overlap both within and 
+inbetween different ontologies. 
+</p>
+
+<p>
+In light of this we introduce <em>BioTop</em>, a top-domain ontology that 
+provides definitions for the foundational entities of biomedicine as a basic 
+vocabulary to unambiguously describe facts in this domain. 
+<em>BioTop</em> can furthermore serve as top-level model for creating 
+new ontologies for more specific domains or as aid for aligning or improving existing ones.
+</p>
+
+<p>
+<em>BioTop</em> is founded upon formal design principles (as propagated by the <a 
+href="http://www.obofoundry.org">OBO 
+Foundry</a> initiative) and implemented in 
+<a href="http://www.w3.org/TR/owl-guide">OWL-DL</a>, the standard ontology language 
+on the Semantic Web. <em>BioTop</em> makes use of the whole range of constructors 
+of OWL-DL.  
+The use of OWL-DL makes it possible to apply description logics 
+reasoners for maintaining consistency by continuous classficiation during development 
+and to automatically infer its hierarchical structure. 
+To this end, we try to fully define as much classes as possible (in terms of necessary 
+and sufficient conditions).
+</p>
+
+<p>
+The initial version of <em>BioTop</em> rested upon the idea to create a  
+formally-based redesign and expansion of <a href="http://www-tsujii.is.s.u-tokyo.ac.jp/GENIA">GENIA</a>, 
+an ontology applied for corpus annotation in molecular biology. 
+After that, <em>BioTop</em> has been continuously expanded, now also providing upper-level categories for 
+clinical medicine and health care. 
+</p>
+
+<table>
+  <tr>
+    <td>
+      <p>
+        Recently <em>BioTop</em> has been re-engineered towards systematic modularization 
+        in order to clearly highlight its biomedical focus. To this end, a significant amount of axioms 
+        originally found in <em>BioTop</em> have been migrated into a newly created ontology, 
+        called <em>ChemTop</em>.
+      </p>
+  
+      <p>
+        In the modularization process, the following principles have been obeyed:
+      </p>
+
+      <ul>
+        <li>The boundary of all modules should coincide with a given particular subdomain, e.g. 
+               biology vs. chemistry proper.</li>
+        <li>All modules have to follow the same principles as the top-level arrangement.</li>
+        <li>The size of each modules should be such that it can be handled easily by (human) editors 
+            and tools, e.g. reasoners.</li>
+        <li>Modules covering neighbor subdomains may exhibit a limited (and documented) degree of overlap.</li>
+        <li>Bridging files link modules between themselves as well as with the top-level ontology.</li>
+      </ul>
+    </td>
+    <td>
+      <img src="gfx/overview.png"/>
+    </td>
+  </tr>
+</table>
+ 
+<p>
+  In connection with this modularization efforts we have further carried out some other alignment efforts:
+</p>
+
+<ul>
+  <li>top-level ontology <a href="http://www.ifomis.org/bfo">Basic Formal Ontology (BFO)</a>: 
+     Some difficulties were encountered in regard to granularity-dependent classes such as "FiatObjectPart" as 
+well as the mapping of immaterial entities such as "Mind" (cf. <a href="http://purl.org/biotop/publications/mie08.pdf">MIE paper</a>)
+  </li>
+  <li>
+    <a href="http://www.loa-cnr.it">Descriptive Ontology for Linguistic and Cognitive Engineering (DOLCE)</a> 
+  </li>
+  <li>
+     <a href="http://www.obofoundry.org/ro">OBO Relation Ontology (RO)</a>
+   </li>
+  <li>
+     <a href="http://semanticnetwork.nlm.nih.gov">UMLS Semantic Network (SN)</a>: This mapping required a substantial extension of the original <em>BioTop</em> role hierarchy and the representation of many SN relations as kinds of <em>BioTop</em> processual entities (cf. <a href="http://purl.org/biotop/umls-mapping">UMLS-Mapping</a>)
+   </li> 
+</ul>
+
+<a name="implementation"></a><h3>Implementation</h3>
+
+<p>
+  To access the latest release version (29. March 2010) you can download the following files:
+</p>
+
+<table>
+  <tr>
+    <td>
+      <a href="http://purl.org/biotop/biotop.owl">biotop</a>
+    </td>
+    <td>
+      self-standing <em>BioTop</em> ontology (without special chemistry classes or reference to external top-level ontologies)
+    </td>
+ </tr>
+  <tr>
+    <td>
+      <a href="http://purl.org/biotop/chemtop.owl">chemtop</a>
+    </td>
+    <td>
+      self-standing <em>ChemTop</em> ontology (special chemistry classes without reference to external top-level ontologies)
+    </td>
+  </tr>
+  <tr>
+    <td>  
+      <a href="http://purl.org/biotop/biotop-chemtop.owl">biotop-chemtop</a>
+    </td>
+    <td>
+      bridge <em>BioTop</em>-<em>ChemTop</em> - connects both ontologies (without reference to external top-level ontologies)
+    </td>
+  </tr>
+  <tr>
+    <td>  
+      <a href="http://purl.org/biotop/biotop-bfo-ro.owl">biotop-bfo-ro</a>
+    </td>
+    <td>
+      bridge <em>BioTop</em>-BFO/RO - connects BFO, RO and <em>BioTop</em>
+    </td>
+  </tr>
+  <tr>
+    <td>  
+      <a href="http://purl.org/biotop/biotop/chemtop-bfo-ro.owl">chemtop-bfo-ro</a>
+     </td>
+     <td>
+      bridge <em>ChemTop</em>-BFO/RO - connects BFO, RO and <em>ChemTop</em>
+    </td>  
+  </tr>
+  <tr>
+    <td style="white-space: nowrap">
+      <a href="http://purl.org/biotop/biotop-chemtop-bfo-ro.owl">biotop-chemtop-bfo-ro</a>
+    </td>
+    <td>
+      bridge file including <a href="bfo-ro/dev">biotop-bfo-ro</a> and <a href="bfo-chemtop/dev">biotop-chemtop</a> - connects <em>BioTop</em> with the top-level ontologies BFO and RO on the one hand and <em>ChemTop</em> on the other.
+    </td>
+  </tr>
+</table>
+
+<p/>
+<p>
+  Older versions are also available from the <a href="http://code.google.com/p/biotop/source/list">versioning repository</a>. (<a href="http://code.google.com/p/biotop/source">additional information on Subversion and Google Code</a>)<br/>
+</p>
+
+<p>
+  <img src="gfx/attention.gif" align="bottom" alt="Attention!"/> Attention:
+</p>
+
+<ul>
+  <li>
+    <em>BioTop</em> is distributed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons - Attribution License</a>.
+  </li>
+  <li>
+    <em>BioTop is work in progress!</em> So its implementation is <em>constantly</em> changing and most likely contains bugs and rough edges!
+  </li>
+  
+  <li>
+    If you work offline or behind a firewall you should additionally download <a href="http://www.ifomis.org/bfo/1.1">BFO 1.1</a> and <a href="http://www.ifomis.org/obo/ro/1.0/light">RO 1.0 light</a><br/>
+  </li>
+  <li>
+    The downloaded OWL files need to be classified by a reasoner to infer all class relations inferrable from the source class definitions. (The developers are currently using <a href="http://protege.stanford.edu">Prot&eacute;g&eacute; 4 beta</a> with its integrated <a href="http://pellet.owldl.com">Pellet</a> and <ai href="http://owl.man.ac.uk/factplusplus">Fact++</a>.)
+  </li>
+</ul>
+
+
+<a name="implementation"></a><h3>Users and Examples</h3>
+
+<ul>
+  <li><a href="src/biodeno.owl">The Biomedical Denotation Ontology (BioDenO)</a>. An extension of <em>BioTop</em> that formally describes categories used in text mining.</li>
+  <li> <a href= "src/umls-mapping.zip">UMLS-Mapping</a>. A stable version of <em>BioTop</em>, together with an OWL-DL version of the UMLS Semantic Network and a brigding ontology [zipped].</li>
+  <li><a href="http://www.bootstrep.org">BOOTStrep</a>: Bootstrapping Of Ontologies and Terminologies STrategic REsearch Project</li>
+  <li>taxdemo: A <em>small</em> and <em>demonstrative</em> ontology of how biological taxa can be based on <em>BioTop</em> and described in the <a href="publications/ismb08.pdf">ISMB paper</a> (You can download the <a href="taxdemo/dev">implementation</a> or get either a <a href="http://www.mygrid.org.uk/OWL/Presentation?url=http%3A%2F%2Fpurl.org%2Fbiotop%2Ftaxdemo%2Fdev" target="_blank">HTML view</a> or a <a href="gfx/taxdemo.png" target="_blank">graphical view</a> of it.)</li>
+</ul>
+<a name="publications"></a><h3>Publications</h3>
+
+<p>
+  <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,11/Itemid,36">Elena Bei&szlig;wanger</a>, <a href="http://www.imbi.uni-freiburg.de/medinf/schulz">Stefan Schulz</a>, <a href="http://purl.org/holger">Holger Stenzhorn</a> and <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,1/Itemid,36">Udo Hahn</a><br/>
+  <a href="publications/ao08.pdf">BioTop: An Upper Domain Ontology for the Life Sciences - A Description of its Current Structure, Contents, and Interfaces to OBO Ontologies</a><br/>
+  in Applied Ontology, Volume 3, Issue 4, Pages 205-212, IOS Press, Amsterdam, The Netherlands, December 2008
+</p>
+
+<p>
+  <a href="http://purl.org/holger">Holger Stenzhorn</a>, <a href="http://www.imbi.uni-freiburg.de/medinf/schulz">Stefan Schulz</a>, <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,11/Itemid,36">Elena Bei&szlig;wanger</a>, <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,1/Itemid,36">Udo Hahn</a>, L&aacute;szl&oacute; van den Hoek and Erik van Mulligen<br/>
+  <a href="publications/iswc08.pdf">BioTop and ChemTop - Top-Domain Ontologies for Biology and Chemistry</a> (<a href="publications/iswc08-poster.pdf">Poster</a>)<br/>
+  in Proc. of the 7th International Semantic Web Conference (<a href="http://iswc2008.semanticweb.org">ISWC 2008</a>), Karlsruhe, Germany, October 2008
+</p>
+
+<p>
+  <a href="http://www.imbi.uni-freiburg.de/medinf/schulz">Stefan Schulz</a>, <a href="http://www.imbi.uni-freiburg.de/medinf/mitarbeiter-neu/boeker.htm">Martin Boeker</a> and <a href="http://purl.org/holger">Holger Stenzhorn</a><br/>
+  <a href="publications/ismb08.pdf">The Ontology of Biological Taxa</a><br/> 
+  in Proc. of the 16th International Conference on Intelligent Systems for Molecular Biology (<a href="http://www.iscb.org/ismb2008">ISMB 2008</a>), Toronto, Canada, July 2008<br/>
+  <img src="gfx/comment.gif" alt="Comment!"/> See also the <a href="#usersandexamples">Users and Examples</a> section for an implementation of the <em>BioTax</em> demonstrative ontology from the paper.
+</p>
+
+<p>
+  <a href="http://www.imbi.uni-freiburg.de/medinf/schulz">Stefan Schulz</a>, <a href="http://www.imbi.uni-freiburg.de/medinf/mitarbeiter-neu/boeker.htm">Martin Boeker</a> and <a href="http://purl.org/holger">Holger Stenzhorn</a><br/>
+  <a href="publications/mie08.pdf">How Granularity Issues Concern Biomedical Ontology Integration</a><br/>
+  in Proc. of the International Congress of the European Federation for Medical Informatics (<a href="http://www.mie2008.org">MIE 2008</a>), G&ouml;teborg, Sweden, Mai 2008
+</p>
+
+<p>
+  <a href="http://www.imbi.uni-freiburg.de/medinf/schulz">Stefan Schulz</a>, <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,11/Itemid,36">Elena Bei&szlig;wanger</a>, <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,1/Itemid,36">Udo Hahn</a>, <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,3/Itemid,36">Joachim Wermter</a>, <a href="http://purl.org/holger">Holger Stenzhorn</a> and Anand Kumar<br/>
+  <a href="publications/fois06.pdf">From GENIA to <em>BioTop</em> - Towards a top-level Ontology for Biology</a><br/>
+  in Proc. of the Internat. Conference on Formal Ontology in Information Systems (<a href="http://www.formalontology.org/fois-2006/fois-2006.htm">FOIS 2006</a>), Baltimore, USA, November 2006
+</p>
+
+<p>
+  <a href="http://www.imbi.uni-freiburg.de/medinf/schulz">Stefan Schulz</a>, <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,11/Itemid,36">Elena Bei&szlig;wanger</a>, <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,3/Itemid,36">Joachim Wermter</a> and <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,1/Itemid,36">Udo Hahn</a><br/>
+  <a href="publications/amia06.pdf">Towards an Upper Level Ontology for Molecular Biology</a><br/>
+  in Proc. of the American Medical Informatics Association Annual Conference (<a href="http://www.amia.org/meetings/f06">AMIA 2006</a>), Washington, November 2006
+</p>
+
+<p>
+  <a href="http://purl.org/holger">Holger Stenzhorn</a>, <a href="http://www.imbi.uni-freiburg.de/medinf/schulz">Stefan Schulz</a> and <a href="http://www.julielab.de/component/option,com_contact/task,view/contact_id,11/Itemid,36">Elena Bei&szlig;wanger</a><br/>
+  <a href="http://purl.org/holger/publications/medinfo07.pdf">Towards a Top-Domain Ontology for Linking Biomedical Ontologies</a><br/>
+  in Proc. of the 12th World Congress on Health (Medical) Informatics (<a href="http://www.medinfo2007.org">Medinfo 2007</a>), Brisbane, Australia, August 2007
+</p>
+<a name="feedback"></a><h3>Feedback</h3>
+
+<p>
+  You can discuss all topics on the theroretical background or implementation issues of <em>BioTop</em> in its own <a href="http://groups.google.com/group/biotop">discussion group</a>.
+</p>
+      </div>
+    </div>
+  </body>
+</html>

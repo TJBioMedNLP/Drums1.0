@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- $Id: index.html,v 1.29.2.2 2007/11/05 19:43:13 crystal Exp $ -->
+<head> 
+<LINK HREF="/includes/Xstyle.css" REL="STYLESHEET" TYPE="text/css">
+
+<title>PlantsP: Functional Genomics of Plant Phosphorylation</title>
+
+<SCRIPT TYPE = "text/javascript">
+<!--
+function changeText(text) {
+  if (document.getElementById("changingText")) {
+    document.getElementById("changingText").innerHTML = "<p>" + text
+  }
+  return true
+}
+function changeBack(text) {
+  changeText("\
+        <b>Welcome to PlantsP!<\/b><br><br>\
+        Find proteins by name or keyword using <b>Quick Search<\/b>.<br>\
+        Browse our data in <b>Protein Families<\/b>.<br>\
+        Run BLAST and scan for protein features in <b>DB Search<\/b>.<br>\
+")
+}
+function changeTextReg() {
+  changeText("\
+    <b>Registration<\/b><br><br>Register with PlantsP to be alerted to\
+    changes in the database and to share your knowledge with the plant\
+    community in your field of expertise by annotating your favorite\
+    proteins!<p>You will only need to register if you want to add your own\
+    comments and annotations.\
+")
+}
+function changeTextQS() {
+  changeText("\
+    <b>Quick Search<\/b><br><br>Enter protein names, synonyms, keywords\
+    or PlantsP IDs.<br><br>Search results page provides a form for you to\
+    refine your search and to display information and diagrams for one\
+    or more proteins on the same web page.\
+")
+}
+-->
+</SCRIPT>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+
+<!-- Green bar at very top of page -->
+
+<div class="rev" style="height: 20px;">
+</div>
+
+<!-- Big PlantsP image -->
+
+<div class="header" style="width:850px; height:150px;">
+	<img src="/images/plantsp_logo.jpg"  alt = "PlantsP Logo">
+</div>
+
+<div class="light" style="border: thin solid #033804;padding:10px;margin:10px;width:808px;">
+
+      <!-- QUICK SEARCH FORM -->
+
+	<div class="tltext" style="width: 300px;">
+	<form name="db_search" method="get" action="/cgi-bin/search.cgi">
+		<a href="/html/advanced_search.html"
+		  onMouseOver="changeTextQS()"
+		  onMouseOut="changeBack()" style="text-decoration: none;color:#000000;"><b>Quick Search</b>
+		</a>
+		<input type="text"  name="k" size=12> &nbsp;
+		<input type="submit" value="Search" class="button_c3"
+		  onMouseOver="changeTextQS()"
+		  onMouseOut="changeBack()" style="text-decoration: none">
+		<br>  
+		(<span class="small">Enter keywords, accession numbers or PlantsP IDs)</span>
+	</form>
+	</div>
+	<!-- END QUICK SEARCH FORM -->
+
+<!--REGISTRATION -->
+
+	<div class="trtext" style="width:400px;margin-left:50px;">
+	<form name="registration" method="post" action="/plantsp/cgi-bin/signup.cgi" enctype="multipart/form-data">
+		<a href="/cgi-bin/signup.cgi?step=1&amp;db=plantsp" class="plain"
+	    	onMouseOver="changeTextReg()"
+	    	onMouseOut="changeBack()" style="text-decoration: none;color: black;">
+	    	<b>Registration</b>
+	    </a>
+	    <input type="hidden" NAME="db" VALUE="plantsp">
+	    <input type="hidden" NAME="step" VALUE="1">
+	    <input type="text"  name="email" size="12">
+	    <input type="submit" value="Register"  class="button_c3"
+	    	onMouseOver="changeTextReg()"
+	    	onMouseOut="changeBack()">
+	    <br>
+	    
+	    <span class="small">
+		    (Enter your email address, i.e. john@university.edu)<br>
+		    This is needed only to contribute comments<br>
+	    </span>
+	</form>
+	</div>
+
+	<!-- END REGISTRATION -->
+</div>
+
+<!-- begin main content; two panels left in reverse, right in light -->
+
+<!-- Left column dark green menubar -->
+
+<div class="rev" style="width:140px;margin:10px;padding:5px;height:671px;clear:both;">
+
+	<div class='menu_title'>About</div>	
+	
+      <a href="/html/project.html" class="menu_item"
+	  onMouseOver="changeText('<b>Background</b><br><br>Describes why we are interested in phosphorylation.')"
+	  onMouseOut="changeBack()" style="text-decoration: none"
+      >Background</a>
+	<br>
+	<a href="/html/participants.html"  class="menu_item"
+	  onMouseOver="changeText('<b>Participants</b><br><br>Participating laboratories and researchers.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Participants
+	</a>
+	
+	<div class='menu_title'>Resources</div>	
+	
+	<a href="/html/advanced_search.html" class="menu_item"
+	  onMouseOver="changeText('<b>DB Search</b><br><br>Find information about specific proteins, view protein motif/domain diagrams and exon/intron digrams, or run BLAST searches of both PlantsP, Arabidopsis genome, and all of our plant sequences.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  DB Search
+	</a>
+	<br>
+	<a href="/html/families.html" class="menu_item"
+	  onMouseOver="changeText('<b>Protein Families</b><br><br>Classification schemes for kinases and phosphatases.  Includes our PlantsP classification system, CDPK and histidine kinase families.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Protein Families
+	</a>
+	<br>
+	<a href="/cgi-bin/lexisearch.cgi" class="menu_item"
+	  onMouseOver="changeText('<b>Lexicon</b><br><br>Provides definitions for abmenu_itemiations, gene sysmbols, and families')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Lexicon
+	</a>
+	<br>
+	<!-- <a href="/html/knockouts.html"
+	  onMouseOver="changeText('<b>Knockouts</b><br><br>Browse and Search for Arabidopsis knockouts.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Knockouts
+	</a>
+	<br>
+	-->
+	<a href="/html/papers.html" class="menu_item"
+	  onMouseOver="changeText('<b>New Papers</b><br><br>Links to recent papers about protein kinases and phosphatases.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  New Papers
+	</a>
+	<br>
+	<a href="/html/feature_scan.html" class="menu_item"
+	  onMouseOver="changeText('<b>Feature Scan</b><br><br>Scan your protein sequence for motifs and domains.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+        Feature Scan
+	</a>
+	<br>
+	<a href="/html/myrist.html" class="menu_item"
+	  onMouseOver="changeText('<b>Myristoylation Predictor</b><br><br>Find out if your protein has a site for N-terminal myristoylation, an irreversible, post-translational protein modification, using our new plant-specific algorithm.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Myrist Predictor
+	</a>
+	<br>
+	<a href="/html/resources.html" class="menu_item"
+	  onMouseOver="changeText('<b>Plant Resources</b><br><br>Links to related information.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Plant Resources
+	</a>
+	
+      <div class='menu_title'>My PlantsP</div>	
+	
+	<a href="/cgi-bin/signup.cgi?step=1&amp;db=plantsp" class="menu_item"
+	  onMouseOver="changeTextReg()"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Registration
+	</a>
+	<br>
+	<a href="/cgi-bin/secure/user_preferences.cgi?db=plantsp" class="menu_item"
+	  onMouseOver="changeText('<b>User Preferences</b><br><br>Log in and change your information, such as password, address, phone numbers and favorite proteins.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  User Preferences
+	</a>
+	<br>
+	<a href="mailto:compbio@purdue.edu" class="menu_item"
+	  onMouseOver="changeText('<b>Feedback</b><br><br>Questions or comments about PlantsP? Please contact our staff.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Feedback
+	</a>
+	
+	<div class='menu_title'>Other Projects</div>	
+	
+	<a href="projects/rice_interact/050714_interaction_map_descrip.html" class="menu_item"
+	  onMouseOver="changeText('<b>Rice</b><br><br>A Protein Interaction Database For Rice Protein Kinases.  NSF Plant Genomics program indentifying and classifying Oryza sative protein kinases, and deteriming protin-protein interactions for a subset of 275.  ')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Rice
+	</a>
+	<br>
+	<a href="projects/lrr/Clouse2010.htm" class="menu_item"
+	  onMouseOver="changeText('<b>CDPK 2010</b><br><br>Functional Analysis and Phosphorylation Site Mapping of Leucine-Rich Repeat Receptor-Like Kinases in Arabidopsis')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  LRR 2010
+	</a>
+	<br>
+	<a href="projects/cpk_2010/cdpk_project.html" class="menu_item"
+	  onMouseOver="changeText('<b>CDPK 2010</b><br><br>Developing Paradigms for Functional Genomics of Protein Kinases and Phosphoproteins Using the CDPK Superfamily')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  CDPK 2010
+	</a>
+	<br>
+	<a href="http://genetics.mgh.harvard.edu/sheenweb/mapk_project.html" class="menu_item"
+	  onMouseOver="changeText('<b>MAPK Project</b><br><br>Functional Analysis of Plant MAPK Cascades in Stress and Hormonal Signaling')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  MAPK Project
+	</a>
+	<br>
+	<a href="http://plantst.genomics.purdue.edu" class="menu_item"
+	  onMouseOver="changeText('<b>PlantsT</b><br><br>PlantsT is devoted to the study of plant transporters.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  PlantsT
+	</a>
+	<br>
+	<a href="http://plantsubq.genomics.purdue.edu" class="menu_item"
+	  onMouseOver="changeText('<b>PlantsUBQ</b><br><br>PlantsUBQ is devoted to the study of the 26S proteosome and ubiquitination pathways in plants.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  PlantsUBQ
+	</a>
+	<br>
+	<a href="http://pkr.sdsc.edu" class="menu_item"
+	  onMouseOver="changeText('<b>Protein Kinase Resource</b><br><br>The Protein Kinase Resource (PKR) aims to become a web accessible compendium of information on the protein kinase family of enzymes.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  PKR
+	</a>
+	<br>
+	<a href="/html/secure/workshop2002/index.html"  class="menu_item"
+	  onMouseOver="changeText('<b>Workshops</b><br><br>Presentations made in 2002 phosphorylation workshops. Includes protocols shared by PlantsP collaborators.<br><br>Requires PlantsP registration.')"
+	  onMouseOut="changeBack()" style="text-decoration: none">
+	  Workshops
+	</a>
+	
+</div>
+
+<!-- Left column menubar end -->
+
+<!-- Right column start -->
+
+	<div id = "changingText" class="tltext" style='width:650px;
+                                                     height:140px;
+                                                     border-top: thick solid;border-color:#033804; 
+                                                     border-bottom: thick solid;border-color:#033804; '
+      >
+	 <b>Welcome to PlantsP!</b><br><br>
+	  Find proteins by name or keyword using <b>Quick Search</b>.<br>
+	  Browse our data in <b>Protein Families</b>.<br>
+	  Run BLAST and scan for protein features in <b>DB Search</b>.<br>
+	</div>
+
+	<div id="news" class="tltext" style='width:650px;height:503px; background: #FFFFFF; border: thin solid #033804;'>
+	
+	      <p><B>News</B></p>
+            <p><b>14 July 2008</B> TAIR8 release - updated all relevant PlantsP entries. Search by keyword "arabidopsis-genome8" to see
+            those entries.
+
+            <p><b>25 June 2007</B> TAIR7 release - updated all relevant PlantsP entries. Search by keyword "arabidopsis-genome7" to see
+            those entries.
+		
+            <p><b>23 January 2007</B> Enhanced ability to make custom motif diagrams - see any detail page.
+
+            <p><b>5 January 2007</B> New loaded Rice release 4 data merged to curated entries.
+
+            <p><b>19 December 2006</B> Added ability to search for proteins by molecular weight, see 
+            <A HREF="/html/advanced_search.html">search page</A>.
+
+            <p> <B>15 December 2006</B>
+			Microarray data by organ distribution and age distribution are available 
+			for Arabadopsis genes on the detail page. More information can be found in the 
+			<a href="https://www.genevestigator.ethz.ch/at/">genevestigator</a> database.  
+			
+			
+            <p> <B>15 December 2006</B>
+			Link to TAIR stocks and strains added for valid <I>Arabidopsis thaliana</I> entries in
+			the multiple results page and detail page.
+			
+            <p> <B>17 November 2006</B>
+			Simple Motif Search added to the 
+            <A HREF="/html/advanced_search.html">search page</A>
+            - find matching proteins from database for a user-defined regular expression or prosite pattern.
+			
+            <p> <B>17 October 2006</B>
+			<a href = "/cgi-bin/geneGC.cgi">GeneGC</a> link added to the advanced search page and RNA/DNA detail page.
+			 GC content of a DNA or RNA sequence can be calculated with a specified window size and a step size.
+
+    </div>
+
+<!-- END NEWS -->
+
+<!-- Right column end -->
+
+<!-- This gives us the green bar along the bottom above disclaimer -->
+
+<div class="rev" style="clear: both; height:25px;width:850px; margin: 5px 0px 5px 0px;">
+</div>
+
+<!-- /includes/Xfooter start -->
+<!-- $Id: Xfooter.html,v 1.18 2007/09/28 19:22:57 hjiang Exp $ -->
+
+<IMG WIDTH=850 SRC="/images/titles/rule.gif" ALT="dividing line" style="margin:5px 0px 5px 0px;">
+
+<DIV class="footer" style="margin:0px; padding: 0px;" >
+
+    <DIV class="small-em" STYLE="width:840px; background-color:#FFFFFF; margin-left:10px;" >
+        <DIV STYLE="width:630px; background-color: #FFFFFF; color: #555555; float:left; text-align: left; vertical-align: middle;" >
+            Send questions to 
+            <A HREF="mailto:compbio@purdue.edu"><IMG SRC="/images/email.gif" BORDER="0" ALT="compbio@purdue.edu" style="vertical-align: middle;"></A>
+            <BR>
+            &copy; 2004-2007, Purdue University<BR>
+            portions &copy; 2000-2004, <BR>Regents of Univ. of California
+        </DIV>
+ 
+	    <DIV STYLE="width:210px; float:right; background-color:#FFFFFF; color: #555555;" >
+	        <A HREF="http://www.purdue.edu" target="purdue"><IMG SRC="/images/Purdue_logo.gif" BORDER="0" ALT="Purdue University" style="vertical-align: top;"></A>
+	        <A HREF="http://www.nsf.gov" target="NSF"><IMG SRC="/images/nsf_logo.gif" BORDER="0" ALT="NSF"></A>
+	    </DIV>
+    </DIV>
+
+
+</DIV>
+
+<IMG WIDTH=850 SRC="/images/titles/rule.gif" ALT="dividing line" style="margin:5px 0px 5px 0px;">
+
+<!-- /includes/Xfooter end -->
+
+
+<!-- /includes/Site_acknowledgment.html start -->
+<!-- $Id: Site_acknowledgment.html,v 1.8 2007/09/28 19:56:13 crystal Exp $ -->
+
+<DIV STYLE="border: thin solid #033804; font-size: 7pt; background-color: #CFD9D0; text-align:left; width:830px; padding: 10px;">
+A distributed project investigating the biology of protein kinases and protein 
+phosphatases in <em>Arabidopsis thaliana</em> and other plants.  Funded by the 
+plant genome program of the National Science Foundation (awards DBI-9975808,
+DBI-0077378, and  DBI-0217312).
+<br>
+Any opinions, findings, and conclusions or recommendations expressed in this 
+material are those of the authors and do not necessarily reflect the views of 
+the National Science Foundation.
+
+<!-- /includes/Site_acknowledgment.html end -->
+</DIV>
+
+<span class="small-em">Last update by $Author: crystal $ on $Date: 2007/11/05 19:43:13 $</span>
+
+</body>
+</html>
+

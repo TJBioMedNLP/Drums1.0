@@ -1,0 +1,516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="KEYWORDS" content="BiGCaT Annotation Manual">
+	<meta name="robots" content="index,follow"><title>BiGCaT Annotation Manual</title>
+	
+	<link href="BiGCaT%20Annotation%20Manual_files/bigcat-01.css" rel="stylesheet" type="text/css">
+
+<script language="JavaScript" type="text/javascript">
+<!--
+  function breadcrumbs(){
+    sURL = new String;
+    sep = "/";
+    bits = new Object;
+    var x = 0;
+    var stop = 0;
+    
+    var output = "<A HREF=\"/\">Home</A> "+sep+" ";
+
+    sURL = location.href;
+    sURL = sURL.slice(8,sURL.length);
+    chunkStart = sURL.indexOf("/");
+    sURL = sURL.slice(chunkStart+1,sURL.length)
+
+    while(!stop){
+      chunkStart = sURL.indexOf("/");
+      if (chunkStart != -1){
+        bits[x] = sURL.slice(0,chunkStart)
+        sURL = sURL.slice(chunkStart+1,sURL.length);
+      }else{
+        stop = 1;
+      }
+      x++;
+    }
+
+    for(var i=0; i<x-2; i++){
+      output += "<A HREF=\"";
+      for(y=1;y<x-i;y++){
+        output += "../";
+      }
+      output += bits[i] + "/\">" + bits[i] + "</A> "+sep+" ";
+    }
+    output += bits[i];
+    document.write(output);
+  }
+// -->
+</script></head><body>
+
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr valign="bottom">
+		<td width="15"><div class="header">&nbsp;</div></td>
+		<td align="center" width="80"><img src="BiGCaT%20Annotation%20Manual_files/logo_05-header.jpg"></td>
+		<td height="1"><div class="header">&nbsp;</div></td>
+	</tr>
+	<tr><td height="1"><img src="BiGCaT%20Annotation%20Manual_files/space-1px-header.gif"></td></tr>
+</tbody></table>
+<div class="menu">
+	<table class="menu" cellpadding="0" cellspacing="0" width="100%">
+		<tbody><tr bgcolor="#000082">
+			<td width="10">&nbsp;</td>
+			<td width="45"><a href="http://www.bigcat.nl/index.html" accesskey="H" tabindex="1" hreflang="en" title="The BiGCaT Bioinformatics group home page">Home</a></td>
+			<td width="50"><a href="http://www.bigcat.nl/events/index.html" accesskey="E" tabindex="2" hreflang="en" title="Events at BiGCaT Bioinformatics and events in which members of the BiGCaT Bioinformatics group participate">Events</a></td>
+			<td width="50"><a href="http://www.bigcat.nl/public/index.html" accesskey="P" tabindex="3" hreflang="en" title="Abstracts, Publications, Presentations by members of the BiGCaT Bioinformatics group">Output</a></td>
+			<td width="60"><a href="http://www.bigcat.nl/services/index.html" accesskey="S" tabindex="4" hreflang="en" title="The BiGCaT Bioinformatics group services">Services</a></td>
+			<td width="65"><a href="http://www.bigcat.nl/research/index.html" accesskey="R" tabindex="5" hreflang="en" title="An overview of research at the BiGCaT Bioinformatics group">Research</a></td>
+			<td width="67"><a href="http://www.bigcat.nl/education/index.html" accesskey="E" tabindex="6" hreflang="en" title="Teaching and Courses at the BiGCaT Bioinformatics group">Education</a></td>
+			<td width="50"><a href="http://www.bigcat.nl/people/index.html" accesskey="O" tabindex="7" hreflang="en" title="People at the BiGCaT Bioinformatics group">People</a></td>
+			<td width="68"><a href="http://www.bigcat.nl/projects/Vacancies.html" accesskey="V" tabindex="8" hreflang="en" title="Job Opportunities/Vacancies and future/planned projects at the BiGCaT Bioinformatics group">Vacancies</a></td>
+			<td width="62"><a href="http://www.bigcat.nl/affiliates/index.html" accesskey="A" tabindex="9" hreflang="en" title="Affiliates UNDER CONSTRUCTION">Affiliates</a></td>
+			<td width="56"><a href="http://www.bigcat.nl/contact/index.html" accesskey="C" tabindex="10" hreflang="en" title="Contact the BiGCaT Bioinformatics group">Contact</a></td>
+			<td width="46"><a href="http://www.bigcat.nl/about/index.html" accesskey="B" tabindex="11" hreflang="en" title="About the BiGCaT Bioinformatics group">About</a></td>
+			<td>&nbsp;</td>
+		</tr>
+  </tbody></table>
+</div>
+<div class="breadcrumbs">
+<script language="JavaScript" type="text/javascript">
+breadcrumbs();
+</script><a href="http://www.bigcat.unimaas.nl/">Home</a> / <a href="http://www.bigcat.unimaas.nl/public/">public</a> / <a href="http://www.bigcat.unimaas.nl/public/publications/">publications</a> / Gaj_Annotation
+
+
+</div>
+<br>
+
+<div align="center"> <h2>BiGCaT BioInformatics Annotation Manual</h2></div><br>
+<table id="toc" align="center" border="1" cellpadding="0" cellspacing="0" width="550">
+	<tbody><tr><td align="center">
+		<div class="h1"><h1>Table of Content</h1></div>
+	</td></tr>
+	<tr><td>
+	<div class="h2">
+	<ul><li><a href="#Introduction">Introduction</a><br><br>
+	    </li><li><a href="#Necessary_files">Necessary files</a><br><br>
+	    </li><li>Part 1: Databases
+	    <ul><li><a href="#Creating_a_cleaned_up_EMBL_datbase">Creating a cleaned up EMBL datbase</a>
+		<ul><font size="2"><li><a href="#Background">Background</a>
+		    </li><li><a href="#Requirements">Requirements</a>
+		    </li><li><a href="#Practical">Practical</a>
+		    </li></font>
+		</ul>
+	    	</li><li><a href="#Preparing_Alternative_Approach">Preparing Alternative Approach</a><br>
+	    </li></ul>
+	<br>
+	    </li><li>Part 2: BLAST
+	    <ul><li><a href="#Requirements_2">Requirements</a>
+	    	</li><li><a href="#Preparing_the_BLAST_database">Preparing the BLAST database</a>
+		</li><li><a href="#Performing_BLAST">Performing BLAST</a>
+		</li><li><a href="#BLAST_Mining">Mining BLAST Output for High Quality results</a>
+		</li><li><a href="#Converting_BLAST_Output">Converting BLAST Output to UniProt IDs</a>
+		    </li></font>
+	    </li></ul>
+	    <br>
+	    </li><li><a href="#Part_3:_Combine_Annotation">Part 3: Combine Annotation</a>
+	    <br><br>
+	    </li><li><a href="http://ftp2.bigcat.unimaas.nl/~stan.gaj/annotation/">Example cEMBL/EnsEMBL database, output files, etc.</a>
+	    <br><br>
+	    </li><li><a href="http://ftp2.bigcat.unimaas.nl/~stan.gaj/publication/AnnotationScripts.zip">Download the Scripts</a>
+	</li></ul>	
+	</div>
+	</td></tr>
+	</tbody>
+</table>
+
+
+<a name="Introduction"></a><h1> Introduction </h1> 
+<p>A microarray study yields an enormous bulk of data with a lot of
+relevant biological information. This huge amount of data can be
+visualized as ten thousands of puzzle pieces that fit perfectly in a
+big puzzle (i.e. a biological system). Each puzzle can be solved by
+aligning the puzzle pieces by it's random border shape. This process will be a whole
+lot faster if each of these puzzle pieces contain a correct image, allowing us to divide
+all pieces into specific groups. One possible solution to solve this puzzle
+is trying to fitting pieces to each other based on their random borders. 
+If then all correct images are placed on this puzzle, it is quite common to see that
+the final image may be distorted. It is therefore of great importance to have the image
+of each puzzle piece clear before interpreting the solution.
+Relating this back to a microarray study, finding the best puzzle image consists of
+finding the most usefull and current description for a given reporter
+sequence. In our point of view, the best possible description one can find about a given
+reporter sequence is their final protein product.
+</p><p>The methods described on this webpage uses Perl scripts that facilitates
+the sequential annotation of microarray reporters with their more
+meaningfull protein (translated) counterparts. Improving the quality of
+the reporter annotation will result in a better biological
+understanding by, for instance, improving the amount of reporters
+visualized in pathway visualization tools (e.g. GenMAPP, the last part
+of the document adds an option to prepare your data for the GenMAPP 2.0
+program).
+</p><p>This practical user manual documents all the necessary steps to
+make use of the generated Perl scripts. All commands that should be put
+in a shell-environment are put in a different font:
+</p>
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>Example of the command line input lay-out</pre>
+	</td></tr>
+</tbody></table>
+<p>Note that most scripts contain an built-in help function that
+contain the same information as found in this manual. This help can be
+activated by using:
+</p><table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>perl &lt;script.pl&gt; -help</pre></td>
+	</tr>
+</tbody></table>
+<p>For any comments and or suggestions, feel free to mail me (Stan dot Gaj at BiGCaT dot unimaas point nl)</p>
+
+
+<a name="Necessary_Files"></a><div align="center"><h1>Necessary files</h1></div>
+<p>For executing these scripts, you need to have the following programs installed:
+</p>
+<div style="font-size: 12px;"><ul><li>Perl Interpreter (<a href="http://www.activestate.com/Products/ActivePerl/" class="external" rel="nofollow">http://www.activestate.com/Products/ActivePerl/</a> for windows users)
+</li><li>BLAST Binaries (<a href="ftp://ftp.ncbi.nih.gov/blast/" class="external" rel="nofollow">ftp://ftp.ncbi.nih.gov/blast/</a>)
+</li></ul>
+</div>
+<p>Please refer to their product documentation for proper installation.
+</p><p><b>Note</b>: Windows users should make sure that both the Perl and the BLAST bin directory is added to your PATH variable.
+</p>
+<div align="center"><h1>Part 1: Databases</h1></div>
+<p>The following databases will be used to convert all found IDs towards a valid UniProt ID:
+</p>
+<table border="0" cellpadding="5" cellspacing="2">
+<tbody><tr>
+	<td style="background: rgb(204, 153, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; font-size: 12px;" align="center" valign="center" width="120"> Database</td>
+	<td style="background: rgb(204, 153, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; font-size: 12px;" align="center" valign="center" width="80"> Type</td>
+	<td style="background: rgb(204, 153, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; font-size: 12px;" align="center" valign="center" width="120"> Maintained by</td>
+	<td style="background: rgb(204, 153, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; font-size: 12px;" align="center" valign="center" width="330"> Downloadable at</td>
+	<td style="background: rgb(204, 153, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; font-size: 12px;" align="center" valign="center" width="120"> Files Needed</td>
+	<td style="background: rgb(204, 153, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-weight: bold; font-size: 12px;" align="center" valign="center" width="120"> Example</td>
+</tr>
+<tr>
+	<th style="background: rgb(204, 204, 153) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 12px;" valign="center"> EMBL </th>
+	<td align="center"> <div style="font-size: 12px;">Nucleotide</div></td>
+	<td align="center" valign="center"> <div style="font-size: 12px;">EBI</div></td>
+	<td valign="center"> <div style="font-size: 12px;"><a href="ftp://ftp.ebi.ac.uk/pub/databases/embl/release/" class="external" rel="nofollow">ftp://ftp.ebi.ac.uk/pub/databases/embl/release/</a></div></td>
+	<td valign="top"> <div style="font-size: 12px;">rel_std_<i>name</i>_r<b>XX</b>.dat.gz</div></td>
+	<td valign="top"> <div style="font-size: 12px;">rel_std_mus_01_r87.dat.gz<br>rel_std_mus_02_r87.dat.gz</div></td>
+</tr>
+<tr>
+<th style="background: rgb(204, 204, 153) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 12px;" valign="center"> LocusLink</th>
+	<td align="center"><div style="font-size: 12px;"> Nucleotide<br>(Curated)</div></td>
+	<td align="center"><div style="font-size: 12px;"><valign="center"> NCBI</valign="center"></div></td>
+	<td valign="center"><div style="font-size: 12px;"><a href="ftp://ftp.ncbi.nih.gov/refseq/LocusLink/" class="external" rel="nofollow">ftp://ftp.ncbi.nih.gov/refseq/LocusLink/</a></div></td>
+	<td valign="top"><div style="font-size: 12px;">LL_tmpl.gz</div></td>
+	<td valign="top"><div style="font-size: 12px;">LL_tmpl.gz</div></td>
+</tr>
+<tr>
+<th style="background: rgb(204, 204, 153) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 12px;" valign="center"> UniProt</th>
+	<td align="center"> <div style="font-size: 12px;">Protein<br>(Curated)</div></td>
+	<td align="center" valign="center"> <div style="font-size: 12px;">EBI</div></td>
+	<td valign="center"> <div style="font-size: 12px;"><a href="ftp://ftp.expasy.org/databases/uniprot/current_release/" class="external" rel="nofollow">ftp://ftp.expasy.org/databases/uniprot/current_release/</a></div></td>
+	<td valign="top"> <div style="font-size: 12px;">uniprot_sprot.dat.gz<br>reldate.txt</div></td>
+	<td valign="top"> <div style="font-size: 12px;">uniprot_sprot.dat.gz<br>reldate.txt</div></td>
+</tr>
+</tbody></table>
+
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<div style="font-size: 12px;"><dl><i>name</i>
+	<dd>Replace this with the species of interest
+	</dd></dl>
+	<dl><strong>XX</strong>
+	<dd>Replace this with the current release version of that database
+	</dd></dl>
+	</div>
+	</td></tr>
+</tbody></table>
+
+<a name="Creating_a_cleaned_up_EMBL_datbase"></a><h2> Creating a cleaned up EMBL datbase</h2>
+<a name="Background"></a><h4> Background </h4>
+<p>The cleaned EMBL database (cEMBL) is essentially a filtered,
+species-specific subset of the EMBL database where nucleotide sequences
+that can be translated into existing protein counterparts are stored.
+One of the major problems with current nucleotide databases, such as EMBL and GenBank, 
+is that they are very redundant and contain a very low curation level, since it is possible
+to deposit new sequence information without any trouble at all. Thus using these databases
+in their current form is not the wisest choice. </p>
+
+<p>By making use of the crosslink information present in the
+highly curated UniProt database, the references from each protein
+towards EMBL can be retrieved and written away to a new database, a
+cleaned EMBL subset (cEMBL). During this database creation, each EMBL 
+database entry will be screened for a returning reference towards UniProt. 
+If this reference is not present, then this information will be added to 
+the corresponding EMBL entry before adding the entry to the cEMBL database.
+This ensures that the crosslinking between both UniProt and cEMBL remains as
+curated as possible</p>
+
+<img src="BiGCaT%20Annotation%20Manual_files/Part_Cleaning_EMBL.jpg" style="margin-left: 15em;">
+
+<p>While performing our initial runs, we noticed that UniProt also
+put cross-references towards large genomic cDNA sequences.
+These sequences contain a lot of excessive (junk?) sequence that can faultly
+align against a given reporter sequence. To prevent this, an extra
+filter was added excluding all EMBL sequences with a length of
+&gt;10.000 nucleotides. To make sure that no actual large genes were
+thrown out, the description of the sequence was checked for
+the term <i>Genomic cDNA</i>.
+</p>
+
+<a name="Requirements"></a><h4> Requirements </h4>
+<ul>	<li> UniProt Knowledgebase database
+	</li><li> EMBL database files of your main species of interest
+	</li><li> SP_Splitter.pl
+	</li><li> EMBLSwissDR.pl
+	</li><li> EMBL2FASTA.pl
+</li></ul><a name="Practical"></a><h4> Practical </h4>
+<ol>	<li> Download and unpack both UniProt and EMBL database files on your local harddrive.
+	</li><li> Put SP_Splitter.pl EMBLSwissDR.pl and EMBL2FASTA.pl into your working directory.
+	</li><li> Extract the database entries of your species of interest from the UniProt database by executing:
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>perl SP_Splitter.pl</pre>
+	</td></tr>
+</tbody></table>
+	</li><li> Make your choice in the menu.
+	</li><li> Prepare the cleaned EMBL database by executing:
+	<br>
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>perl EMBLSwissDR.pl [<i>filename1</i>] [<i>filename2</i>]
+	<i>filename1</i>  
+        	 Input file containing species-specific entries from UniProt.
+	<i>filename2</i>  
+         	Output file that will be used to name the new cEMBL database.
+	</pre></td></tr>
+</tbody></table>
+	</li><li> In a final step, the database needs to be converted to a FASTA format that can be read by the BLAST program. This is done by
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>perl EMBL2FASTA.pl [<i>filename1</i>] [<i>filename2</i>]
+	<i>filename1</i>
+         	Input file that contains the new cEMBL database.
+	<i>filename2</i>
+         	Output file that will contain the cEMBL database in FASTA format.</pre>
+         </td></tr>
+</tbody></table></li></ol>
+
+
+<a name="Preparing_Alternative_Approach"></a><h2> Preparing Alternative Approach </h2>
+For our paper, we used the EnsEMBL cDNA database (ftp://ftp.ensembl/pub/RELEASE BUILD/SPECIES/data/fasta/cdna/)
+
+
+<div align="center"><h1> Part 2: BLAST </h1></div>
+<p>The Basic Local Alignment Tool (BLAST) program aligns a given
+sequence with sequences present in a database. If you choose to align
+small reporter sequences (&lt;30bp), then the BLAT program is
+recommender for faster results.</p>
+<img src="BiGCaT%20Annotation%20Manual_files/Part_BLAST.jpg" style="margin-left: 15em;">
+
+<a name="Requirements_2"></a><h2> Requirements </h2>
+<ul>	 <li> formatdb (Creates a BLAST-compatible database to BLAST against)
+	</li><li> blastall (actual BLAST program)
+	</li><li> Reporter sequence file that will be BLASTed
+	</li><li> Database FASTA files generated in Step 1
+	</li><li> Win32 users should add the %DRIVE%:\blast\bin\ to their PATH
+</li></ul>
+<a name="Preparing_the_BLAST_database"></a><h2> Preparing the BLAST database </h2>
+<p>In order for BLAST to work properly, you need to make a database BLAST-compatible.
+</p>
+<ul>	<li> For <b>cEMBL</b>: 
+	<ul><li> Use the FASTA file generated in Part 1 
+	<dl><dd>(e.g. cEMBL86_Fasta.mus)</dd></dl>
+	</li></ul>
+	</li><li> For <b>EnsEMBL</b>: 
+<ul><li> Download the FASTA file as described in the step
+	<a href="#Preparing_Alternative_Approach">Preparing Alternative Approach</a>
+	</li></ul>
+</li></ul>
+<ol>	<li> Put all the necessary files in the same directory.
+	</li><li> Execute formatdb:
+</li></ol>
+
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>formatdb [-i <i>filename</i>] [-t <i>str</i>]  [-p F/T]
+  	-i   <i>filename</i>
+        	 Input file(s) for formatting
+  	-t   <i>string</i>
+       	         Title for database file.
+  	-p   F   Input is a nucleotide database, not a protein database.
+       	     T   Input is a protein database, not a nucleotide database.</pre>
+	<br>
+	<pre>example: formatdb -i Rattus_norvegicus.RGSC3.4.45.cdna.all.fa -t EnsEMBL_Rat_4_45_All_cDNA -p F</pre>
+	</td></tr>
+</tbody></table>
+
+
+
+
+<a name="Performing_BLAST"></a><h2> Performing BLAST </h2>
+<p>Execute the BLAST by the following command:
+</p>
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>blastall [-p <i>str</i>]] [-d <i>filename</i>] [-i <i>filename</i>] [-o <i>filename</i>] [-e <i>str</i>] [-W <i>str</i>]...
+  	-p   <i>string</i>
+         	Program name (blastn, blastx, blastp) (blastn here)
+  	-d   <i>filename</i>
+        	BLAST Database formatted with formatdb
+  	-i   <i>filename</i>
+        	Query file (containing sequences to BLAST in FASTA format)
+  	-o   <i>filename</i>
+         	Output file generated by the blastall-program
+  	-e   <i>string</i>
+         	Expectation-value cutoff point (Default: 10; Our choice: 0.000001)
+  	-W   <i>string</i>
+         	Minimum Word Size (Default blastn: 11; Our choice: 8)
+  	For a more detailed description and other parameters, please refer to the blastall manual.</pre></td></tr>
+</tbody></table>
+<p><i><b><u>Note</u>:</b> To ensure that your BLAST will run correctly, we strongly encourage to put ONLY the
+the reporter ID in the comment row of your FASTA file you want to BLAST: e.g. </i>
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre>>P52_P0894759847
+CGCATGCGGAGCTAGCAGTCGATGCTAGCTAGCTAGTCGTTTCAGGCAGCGACGATCGATGCATGCTAGCTAG
+>P52_P0894759850
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCGGGGTTTTGGGCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</pre></td></tr>
+</tbody></table>
+
+
+
+
+<a name="BLAST_Mining"></a><h2> Mining the BLAST Output for High Quality Results </h2>
+<p>After completing the BLAST procedure, the generated report-file
+needs to be screened for high-quality alignments. This is done with the
+<i>BlastMiner.pl</i> script, that will retrieve the accession number
+of the high quality alignments (&gt;90% similarity) and write this
+towards a tab-delimited text file.
+</p>
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre> perl BlastMiner.pl [-blast <i>filename</i>] [-fasta <i>filename</i>] [-rhits <i>str</i>] 
+                    [-hits <i>str</i>] [-targetdb <i>str</i>] [-source <i>str</i>] 
+                    [-program <i>str</i>] [-blatdb <i>filename</i>]
+  	-blast    <i>filename</i>
+              	     BLAST Report File that will be used as input.
+  	-fasta    <i>filename</i>
+              	     Input file that contains the sequences BLASTed.
+  	-rhits    <i>string</i>
+              	     Output file containing the raw data of the high quality hits.
+  	-hits     <i>string</i>
+              	     Output file containing the high quality hits (tab-delimited)
+  	-targetdb <i>string</i>
+              	     Database which was blasted against (Currently only 'UniGene',
+              	     'EMBL' and 'ENSEMBL' are supported)
+  	-source   <i>string</i>
+              	     Specific parameter for Affymetrix FASTA files, set it to 
+              	     'Affy' if an Affymetrix FASTA file was used, else leave it
+              	     alone.
+  	-program  <i>string</i>
+              	     BLAST/BLAT program used
+  	-blatdb   <i>filename</i>
+              	     Name of the BLAT database. Only to use when BLAT was used.</pre></td></tr>
+</tbody></table>
+<p>The BlastMiner script creates a few output files by default:
+</p>
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+<pre>  	<i>hits.good</i>		Tab-delimited textfile containing detailed information about 
+				each high-quality hit.
+  	<i>hits.possiblybad</i>	Contains the raw BLAST hit of alignments that MIGHT possibly 
+				have gone wrong. Manual input is needed here.
+  	<i>hits.other</i>		Tab-delimited textfile containing more information about each
+				non-high quality hit.
+  	<i>no_hits.fasta</i>		Contains all reporter sequences that did not pass the high
+				quality alignment in FASTA format. These might be used to
+				initiate another BLAST against a related species.
+  	<i>reporterlist.txt</i>	List of all individual reporters BLASTed. Necessary for
+				combining the annotation of both approaches!</tbody></table>
+
+<a name="Converting_BLAST_Output"></a><h2> Converting BLAST Output </h2>
+<p>The output of the BlastMiner part now shows for each BLASTed probe
+all related EnsEMBL genes or cEMBL identifiers. The next step would
+be to a) filter all query reporters by finding their high quality
+alignments b) convert those identifiers towards their UniProt counterparts.
+</p>
+<p>To convert your IDs towards UniProt you need to have the following files:
+</p>
+<ul>	<li> blast2sp.pl
+	</li><li> BlastMiner output of the EnsEMBL / cEMBL / Custom Approach BLAST
+	</li><li> Database table containing conversion information between UniProt and EnsEMBL
+</li></ul>
+<p>Execute the blast2sp.pl script by:
+</p>
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre> perl blast2sp.pl [-uptable <i>filename</i>] [-enstable <i>filename</i>] [-cembltable <i>filename</i>] 
+		  [-hits <i>filename</i>] [-output <i>filename</i>]  [-db <i>parameter</i>] 
+ 	-uptable	<i>filename</i>
+			   Input File; UniProt Annotation Table (e.g. uniprot_sprot_all.dat) (*)
+ 	-enstable	<i>filename</i>
+			   Input File; EnsEMBL Annotation Table (exported from ENSMART)
+ 	-cembltable	<i>filename</i>
+			   Input File; cEMBL Crosslink Table
+			   !! Use this parameter ONLY if you're converting filtered cEMBL BLAST output !!
+ 	-hits		<i>filename</i>
+			   Input File; Filtered BLAST hits generated by BlastMiner (e.g. hits.good) (*)
+ 	-output		<i>filename</i>
+			   Output File; Default: blast_hits_ensembl2sp.txt / blast_hits_cembl2sp.txt
+ 	-db		<i>parameter</i>
+			   Parameter; Use -db EnsEMBL to distinguish between normal BLAST
+			   filtered output and EnsEMBL filtered output.
+</tbody></table>
+<p>(*) Required before the script can execute!</p>
+
+<div align="center"><a name="Part_3:_Combine_Annotation"></a><h1> Part 3: Combine Annotation </h1></div>
+<p>The last annotation step is to combine the annotation derived from
+both approaches. The CombineAnnotation script tries
+to compare both BLAST-results for each individual reporter with each
+other. The end-goal would be to end up with a UniProt ID. Some criteria
+were added to each reporter to indicate the annotation quality of the
+reporter:</p>
+<p></p><div style="font-size: 12px; margin-left: 5em;">(1) No BLAST results were found for this reporter ID (XXX in this set)<br>
+(2) cEMBL SP found; no other approach results at all (XXX in this set)<br>
+(3) cEMBL SP found; other approach resulted in a non-convertable ID (XXX in this set)<br>
+(4) No cEMBL SP found; other approach resulted in SP (XXX in this set)<br>
+(5) No cEMBL SP found; other approach resulted in a non-convertable ID (XXX in this set)<br>
+(6) cEMBL SP found; other approach SP found (1+ ID Matches) (XXX in this set)<br>
+(7a) cEMBL SP found; other approach SP found (0 ID Matches) - cEMBL SP IDs taken (XXX in this set)<br>
+(7b) cEMBL SP found; other approach SP found (0 ID Matches) - other SP IDs taken (XXX in this set)<br></div>
+
+<p><b>Steps</b>:
+</p>
+<ol>	<li> Put all filtered BLAST-Output files in the same working directory
+	</li><li> Execute:
+
+<table style="margin-left: 5em;" border="0"><tbody><tr><td>
+	<pre> perl CombineAnnotation.pl [-default <i>filename</i>] [-cembl <i>filename</i>] [-list
+        	           <i>filename</i>] [-output <i>filename</i>] [-species
+                           <i>string</i>]
+  	-default	<i>filename</i>
+			   Input File; Filtered BLAST-output against the custom approach (*)
+  	-cembl		<i>filename</i>
+			   Input File; Filtered BLAST-output against cEMBL (*)
+  	-list		<i>filename</i>
+			   Input File; Lookup list containing Reporter IDs blasted (i.e. reporterlist.txt) (*)
+  	-output		<i>filename</i>
+			   Output File; Results will be written in here (default Annotation_Table.txt)
+  	-species	<i>string</i>
+			   String; Name of the Main Species
+	</pre></td></tr>
+</tbody></table>
+<p>(*) Required before the script can execute!</p>
+</li></ol>
+
+<p>The output is a tab-delimited text file where for each reporter
+both the cEMBL and the other approach results are stored, followed by
+comparing the found UniProt IDs of the two methods. Only proteins that
+were found in both methods will be stored in the last column. If no
+UniProt ID overlaps between the two methods, then we opt for the cEMBL
+approach annotation. If a reporter aligns to more than one protein, all
+protein/gene identifiers and description will be given. It is then up
+to the researcher to decide to include or exclude the probe from his
+analysis.
+</p>
+
+<div align="center"><a name="Examples"></a><h1>Download + Examples</h1></div>
+<p>All scripts can be downloaded <a href="http://ftp2.bigcat.unimaas.nl/~stan.gaj/publication/annotationscripts.zip"> here</a>.<br><br>
+For some examples, I recommend you to visit <a href="http://ftp2.bigcat.unimaas.nl/~stan.gaj/annotation/">this URL</a> which contains example files for most of the scripts.
+Note that the example files are for illustration purpose only.</p>
+
+<p>If any questions remain, you can directly contact me at:<br>
+	<i>Stan dot Gaj at BiGCaT dot unimaas dot nl</i>
+
+</body></html>

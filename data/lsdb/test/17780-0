@@ -1,0 +1,627 @@
+<html>
+<head>
+<title>Phospho3D</title>
+
+<style type="text/css">
+
+<!--
+
+.Stile2 {font-size: 14px; font-weight: bold; }
+
+.Stile3 {font-size: 15px}
+
+.Stile4 {font-size: 13px}
+
+.Stile5 {font-face: courier; font-size: 13px}
+
+.Stile6 {font-size: 13px; color:blue}
+
+.Stile7 {font-size: 13px; color:orange}
+
+.Stile8 {font-size: 16px; font-weight: bold; }
+
+.Stile9 {color:#514fca}
+
+-->
+
+</style>
+
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript"> function check_one() {var error=''; if (document.form_1.query_string.value =='') {error += 'Please, insert a PDB code.';} if(error!='')  {alert (error); return (false);} } </SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript"> function check_two() {var error=''; if (document.form_2.query_string.value =='') {error += 'Please, insert a keyword.';} if(error!='')  {alert (error); return (false);} } </SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript"> function check_three() {var error=''; if (document.form_3.query_string.value =='') {error += 'Please, insert a UniprotKB accession number.';} if(error!='')  {alert (error); return (false);} } </SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript"> function check_five() {var error=''; if (document.form_5.query_string.value =='') {error += 'Please, select an instance type.';} if(error!='')  {alert (error); return (false);} } </SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript"> function check_six() {var error=''; if (document.form_6.query_string.value =='') {error += 'Please, select a kinase type.';} if(error!='')  {alert (error); return (false);} } </SCRIPT>
+</head>
+
+<body bgcolor="#FFFFFF">
+<body>
+
+<table width="700" border="0" align="center" cellpadding="2" cellspacing="2">
+
+<tr>
+
+<td width="507"><div align="center"><img src="phospho_title.jpg" width="325" height="80"><img src="ptr.jpg" width="120" height="80"></div></td>
+
+</tr>
+
+<tr>
+
+<td colspan="2"><div align="center">
+
+<hr>
+
+<div class="Stile2"><a href="usr_search.py">P3Dscan</a> | <a href="documentation.py">Documentation</a> | <a href="stats.py">Statistics</a> | <a href="links.py">Links</a> | <a href="contacts.py">Contacts</a></div>
+<hr><p><div align="justify">
+
+<b><i>Phospho3D</i></b> is a database of three-dimensional structures of
+phosphorylation sites which stores information retrieved from the
+<a href="http://phospho.elm.eu.org" target="top">Phospho.ELM</a> database and which is enriched with structural information and
+annotations at the residue level. The database also collects the results of
+a large-scale structural comparison procedure providing clues for the
+identification of new putative phosphorylation sites.
+<p>
+<b><i>Phospho3D 2.0</i></b> also includes <a href=usr_search.py>P3Dscan</a>, which allows to compare your own protein structure 
+against the set of 3D phosphorylation sites collected in the database.
+<p>
+The complete dataset of 3D phosphorylation sites, as well as non-redundant subsets, are available <a href=contacts.py> on request</a>.
+<p>
+<u>Last data update: August 2010</u>
+<p>
+<font size=-1><i>
+Zanzoni A., Carbajo D., Diella F., Gherardini P.F., Tramontano A., Helmer-Citterich M., Via
+A.<br>Phospho3D 2.0: An enhanced database of three-dimensional structures of phosphorylation
+sites.<br>Nucleic Acids Res. 2011 Jan;39(Database issue):D268-271; PMID:
+20965970.
+</i>
+</font>
+
+<p>
+
+</div>
+
+</div>
+
+     Search Phospho3D by one of the following criteria:<p>
+
+      <div align="center">
+
+        <table width="650" border="0" cellspacing="2" cellpadding="2">
+
+          <tr>
+
+          <form name="form_1" method="post" action="search.py" onSubmit="return check_one()">
+
+            <td width="290">PDB code (i.e.: 1a52):</td>
+
+            <td width="150">
+
+            <div align="center">
+
+                <input type="hidden" name="flag" value="1">
+
+               <input name="query_string" type="text" id="query_string" size="15" MAXLENGTH="4">
+
+            </div>
+
+            </td>
+
+            <td width="110"><input type="submit" name="Submit" value="Search"></td>
+
+            </form>
+
+          </tr>
+
+          <tr>
+
+          <form name="form_2" method="post" action="search.py" onSubmit="return check_two()">
+
+            <td width="320">PDB description (i.e.: estrogen receptor):</td>
+
+            <td width="150">
+
+            <div align="center">
+
+                <input type="hidden" name="flag" value="2"> 
+
+               <input name="query_string" type="text" id="query_string" size="15">
+
+            </div>
+
+            </td>
+
+            <td width="190">
+
+<select name="redundancy" size="1" id="redundancy">
+
+<option value="all">Whole set</option>
+
+<option value="20">PDB20</option>
+
+<option value="30">PDB30</option>
+
+<option value="40">PDB40</option>
+
+<option value="70">PDB70</option>
+
+<option value="90">PDB90</option>
+
+<option value="100">PDB100</option>
+
+</select>
+
+<input type="submit" name="Submit" value="Search">
+
+</td>
+
+            </form>
+
+          </tr>
+
+          <tr>
+
+          <form name="form_6" method="post" action="search.py" onSubmit="return check_six()">
+
+            <td>Kinase name (i.e.: Src)</td>
+
+            <td width="150"><div align="center">
+
+                <input type="hidden" name="flag" value="6"> 
+
+              <select name="query_string" size="1" id="query_string">
+
+<option value=""></option>
+
+<option value="AAK1">AAK1</option>
+
+<option value="Abl">Abl</option>
+
+<option value="Abl2">Abl2</option>
+
+<option value="AFK">AFK</option>
+
+<option value="ALK">ALK</option>
+
+<option value="AMPK_group">AMPK_group</option>
+
+<option value="ATM">ATM</option>
+
+<option value="AuroraA">AuroraA</option>
+
+<option value="AuroraB">AuroraB</option>
+
+<option value="BMPR1B">BMPR1B</option>
+
+<option value="BTK">BTK</option>
+
+<option value="CaM-KIIalpha">CaM-KIIalpha</option>
+
+<option value="CaM-KIIdelta">CaM-KIIdelta</option>
+
+<option value="CaM-KII_group">CaM-KII_group</option>
+
+<option value="CCDPK">CCDPK</option>
+
+<option value="CDK1">CDK1</option>
+
+<option value="CDK2">CDK2</option>
+
+<option value="CDK4">CDK4</option>
+
+<option value="CDK5">CDK5</option>
+
+<option value="CDK7">CDK7</option>
+
+<option value="CDK_group">CDK_group</option>
+
+<option value="Chak1">Chak1</option>
+
+<option value="CHK2">CHK2</option>
+
+<option value="CK1alpha">CK1alpha</option>
+
+<option value="CK1delta">CK1delta</option>
+
+<option value="CK1_group">CK1_group</option>
+
+<option value="CK2alpha">CK2alpha</option>
+
+<option value="CK2beta">CK2beta</option>
+
+<option value="CK2_group">CK2_group</option>
+
+<option value="CLK1">CLK1</option>
+
+<option value="Csk">Csk</option>
+
+<option value="DAPK1">DAPK1</option>
+
+<option value="DAPK3">DAPK3</option>
+
+<option value="DAPK_group">DAPK_group</option>
+
+<option value="DMPK_group">DMPK_group</option>
+
+<option value="DNA-PK">DNA-PK</option>
+
+<option value="DYRK1A">DYRK1A</option>
+
+<option value="DYRK1B">DYRK1B</option>
+
+<option value="DYRK2">DYRK2</option>
+
+<option value="EGFR">EGFR</option>
+
+<option value="EIF2AK2">EIF2AK2</option>
+
+<option value="EIF2AK3">EIF2AK3</option>
+
+<option value="EphA3">EphA3</option>
+
+<option value="EphA4">EphA4</option>
+
+<option value="EphB2">EphB2</option>
+
+<option value="FAK">FAK</option>
+
+<option value="Fes">Fes</option>
+
+<option value="FGFR1">FGFR1</option>
+
+<option value="FGFR_group">FGFR_group</option>
+
+<option value="Fgr">Fgr</option>
+
+<option value="Fyn">Fyn</option>
+
+<option value="GRK-1">GRK-1</option>
+
+<option value="GRK-2">GRK-2</option>
+
+<option value="GRK-5">GRK-5</option>
+
+<option value="GSK-3beta">GSK-3beta</option>
+
+<option value="GSK-3_group">GSK-3_group</option>
+
+<option value="HCK">HCK</option>
+
+<option value="HIPK2">HIPK2</option>
+
+<option value="HRI">HRI</option>
+
+<option value="IGF1R">IGF1R</option>
+
+<option value="IKK-epsilon">IKK-epsilon</option>
+
+<option value="IKK_group">IKK_group</option>
+
+<option value="ILK">ILK</option>
+
+<option value="InsR">InsR</option>
+
+<option value="ITK">ITK</option>
+
+<option value="JAK1">JAK1</option>
+
+<option value="JAK2">JAK2</option>
+
+<option value="JAK3">JAK3</option>
+
+<option value="KDR">KDR</option>
+
+<option value="Lck">Lck</option>
+
+<option value="LIMK1">LIMK1</option>
+
+<option value="LIMK2">LIMK2</option>
+
+<option value="LKB1">LKB1</option>
+
+<option value="LOK">LOK</option>
+
+<option value="Lyn">Lyn</option>
+
+<option value="MAP2K1">MAP2K1</option>
+
+<option value="MAP2K2">MAP2K2</option>
+
+<option value="MAP2K3">MAP2K3</option>
+
+<option value="MAP2K4">MAP2K4</option>
+
+<option value="MAP2K6">MAP2K6</option>
+
+<option value="MAP2K7">MAP2K7</option>
+
+<option value="MAP2K_group">MAP2K_group</option>
+
+<option value="MAP3K8">MAP3K8</option>
+
+<option value="MAP3K_group">MAP3K_group</option>
+
+<option value="MAPK1">MAPK1</option>
+
+<option value="MAPK14">MAPK14</option>
+
+<option value="MAPK3">MAPK3</option>
+
+<option value="MAPK6">MAPK6</option>
+
+<option value="MAPK7">MAPK7</option>
+
+<option value="MAPK8">MAPK8</option>
+
+<option value="MAPKAPK2">MAPKAPK2</option>
+
+<option value="MAPKAPK5">MAPKAPK5</option>
+
+<option value="MAPK_group">MAPK_group</option>
+
+<option value="MARK_group">MARK_group</option>
+
+<option value="Met">Met</option>
+
+<option value="Mnk1">Mnk1</option>
+
+<option value="Mnk2">Mnk2</option>
+
+<option value="MST1">MST1</option>
+
+<option value="NEK2">NEK2</option>
+
+<option value="NEK6">NEK6</option>
+
+<option value="p70S6K_group">p70S6K_group</option>
+
+<option value="PAK1">PAK1</option>
+
+<option value="PAK2">PAK2</option>
+
+<option value="PAK3">PAK3</option>
+
+<option value="PAK5">PAK5</option>
+
+<option value="PASK">PASK</option>
+
+<option value="PCTAIRE1">PCTAIRE1</option>
+
+<option value="PDGFRbeta">PDGFRbeta</option>
+
+<option value="PDHK1">PDHK1</option>
+
+<option value="PDHK2">PDHK2</option>
+
+<option value="PDHK3">PDHK3</option>
+
+<option value="PDHK4">PDHK4</option>
+
+<option value="PDK-1">PDK-1</option>
+
+<option value="PDK-2">PDK-2</option>
+
+<option value="PHK_group">PHK_group</option>
+
+<option value="PIK3CA">PIK3CA</option>
+
+<option value="PKAalpha">PKAalpha</option>
+
+<option value="PKA_group">PKA_group</option>
+
+<option value="PKA_group_drome">PKA_group_drome</option>
+
+<option value="PKBbeta">PKBbeta</option>
+
+<option value="PKB_group">PKB_group</option>
+
+<option value="PKCalpha">PKCalpha</option>
+
+<option value="PKCbeta">PKCbeta</option>
+
+<option value="PKCdelta">PKCdelta</option>
+
+<option value="PKCepsilon">PKCepsilon</option>
+
+<option value="PKCeta">PKCeta</option>
+
+<option value="PKCgamma">PKCgamma</option>
+
+<option value="PKC_group">PKC_group</option>
+
+<option value="PKCzeta">PKCzeta</option>
+
+<option value="PKG/cGK_group">PKG/cGK_group</option>
+
+<option value="PLK1">PLK1</option>
+
+<option value="RAF1">RAF1</option>
+
+<option value="Ret">Ret</option>
+
+<option value="ROCK1">ROCK1</option>
+
+<option value="RSK-2">RSK-2</option>
+
+<option value="RSK-5">RSK-5</option>
+
+<option value="RSK_group">RSK_group</option>
+
+<option value="SDK1">SDK1</option>
+
+<option value="SGK_group">SGK_group</option>
+
+<option value="Src">Src</option>
+
+<option value="Src_group">Src_group</option>
+
+<option value="Syk">Syk</option>
+
+<option value="TBK1">TBK1</option>
+
+<option value="TESK1">TESK1</option>
+
+<option value="TESK2">TESK2</option>
+
+<option value="TGFbR1">TGFbR1</option>
+
+<option value="Tie2">Tie2</option>
+
+<option value="TNK2">TNK2</option>
+
+<option value="tropomyosin kinase">tropomyosin kinase</option>
+
+<option value="TTK">TTK</option>
+
+<option value="Tyk2">Tyk2</option>
+
+<option value="VRK1">VRK1</option>
+
+<option value="ZAP70">ZAP70</option>
+
+</select>
+
+            </div></td>
+
+            <td>
+
+<select name="redundancy" size="1" id="redundancy">
+
+<option value="all">Whole set</option>
+
+<option value="20">PDB20</option>
+
+<option value="30">PDB30</option>
+
+<option value="40">PDB40</option>
+
+<option value="70">PDB70</option>
+
+<option value="90">PDB90</option>
+
+<option value="100">PDB100</option>
+
+</select>
+
+		<input type="submit" name="Submit" value="Search"></td>
+
+            </form>
+
+          </tr>
+
+	<tr>
+
+	<form name="form_3" method="post" action="search.py" onSubmit="return check_three()">
+
+	<td>UniprotKB accession (i.e: P51452)</td>
+
+<td width="150"><div align="center">
+
+<input type="hidden" name="flag" value="3"> 
+
+<input name="query_string" type="text" id="query_string" size="6" MAXLENGTH="6">
+
+</div></td>
+
+            <td width="190">
+
+<select name="redundancy" size="1" id="redundancy">
+
+<option value="all">Whole set</option>
+
+<option value="20">PDB20</option>
+
+<option value="30">PDB30</option>
+
+<option value="40">PDB40</option>
+
+<option value="70">PDB70</option>
+
+<option value="90">PDB90</option>
+
+<option value="100">PDB100</option>
+
+</select>
+
+<input type="submit" name="Submit" value="Search">
+
+</td>
+
+</form>
+
+</tr>
+
+        </table><p>
+
+Otherwise, you can browse Phospho3D:
+<p>
+<form name="browse_form" method="post" action="browse.py">
+
+<input type="hidden" name="flag" value="1">
+
+<input type="submit" name="Submit" value="Browse by PDB code">
+
+</form>
+
+<form name="browse_form_ac" method="post" action="browse_uniprot.py">
+
+<input type="hidden" name="flag" value="1">
+
+<input type="submit" name="Submit" value="Browse by UniprotKB AC">
+
+</form>
+
+<table width="650" border="0" cellspacing="2" cellpadding="2">
+
+<tr>
+
+<form name="browse_form_organism" method="post" action="browse_organism.py">
+
+<td>
+
+</td>
+
+<td><div align="center">
+
+<input type="hidden" name="flag" value="1">
+
+<select name="organism_flag" size="1" id="organism_flag">
+
+<option value="human">Human</option>
+
+<option value="mouse">Mouse</option>
+
+<option value="others">Others</option>
+
+</select>
+
+<input type="submit" name="Submit" value="Browse by Organism">
+
+</div></td>
+
+</tr>
+
+</table>
+
+</form>
+
+    </div></td>
+
+  </tr>
+
+</table>
+
+<hr width="700" align=center>
+<div align=center>
+<!-- <i><a href="http://www.biocomputing.it/" target="_blank">BioComputing Group</a></i> -->
+<a href="http://www-aloy.irbbarcelona.org/index.html" target="_blank" title="Structural Bioinformatics & Network Biology">
+<img src="./images/irb_horizontal_web.jpg" alt="IRB_logo"  border="0" height="70"></a>
+<a href="http://www.biocomputing.it/" target="_blank" title="Biocomputing Group">
+<img src="./images/biocomp_logo.jpg" alt="biocomputing_logo"  border="0" height="70"></a>
+<a href="http://www.kaust.edu.sa/" target="_blank" title="King Abdullah University of Science and Technology">
+<img src="./images/Kaust_logo.png" alt="logo" border="0" height="70"></a>
+<a href="http://cbm.bio.uniroma2.it/" target="_blank" title="Centre for Molecular Bioinformatics">
+<img src="http://cbm.bio.uniroma2.it/p3d/cbm1.jpg" alt="cbm_logo" border="0" height="65"> </a>
+ </div>
+<hr width="700" align=center>
+<div class="Stile4" align="center"><i>September 2010</i></div>
+</body>
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en">
+
+<head>
+
+
+<meta http-equiv="Content-Type"
+      content="text/html;charset=utf-8" />
+
+<meta name="robots" content="index, follow" />
+<meta name="generator" content="icoya OpenContent" />
+<meta name="title" content="MicekiPred" />
+
+
+  <meta name="description" content="" />
+
+
+  <meta name="keywords" content="" />
+
+<meta name="author" content="hlin" />
+<meta name="copyright" content="" />
+<meta name="email" content="chem.wang@gmail.com" />
+
+<title>COBI: Center of Bioinformatics @ UESTC - MicekiPred</title>
+
+
+    
+      <base href="http://cobi.uestc.edu.cn/people/hlin/tools/MicekiPred" />
+    
+ 
+
+<!-- fav icon -->
+<link rel="shortcut icon"
+      href="http://cobi.uestc.edu.cn/favicon.ico"
+      type="image/x-icon" />
+
+<!-- Style sheets for CSS2 capable browsers (Mozilla, Opera, IE, Netscape6+, Konqueror etc. -->
+
+  <style type="text/css" media="all"> 
+		@import "http://cobi.uestc.edu.cn/icoya.css";
+  </style> 
+
+<!-- Style sheet used for printing -->
+<link rel="stylesheet" type="text/css" media="print"
+      href="http://cobi.uestc.edu.cn/plonePrint.css" />
+
+
+    
+  
+
+<!-- External script from Apple(!), will need to move into code and tweak.
+(No problem licence-wise, it's free and modifiable) -->
+<script language="JavaScript" type="text/javascript"
+        src="http://cobi.uestc.edu.cn/styley.js"></script>
+<script language="JavaScript" type="text/javascript"
+        src="http://cobi.uestc.edu.cn/ieemu.js"></script>
+
+<!-- Consolidation of all javascript into 1 call -->
+<script language="Javascript" type="text/javascript" >
+  
+   
+ 
+    if (moz) {
+    extendElementModel();
+    extendEventObject();
+    emulateEventHandlers(["mouseover", "mouseout"]);
+  }
+
+  function showDay(date) {
+    tempX = document.body.offsetWidth - event.x;
+    tempY = event.clientY + document.body.scrollTop;
+
+    document.getElementById('day' + date).style.pixelTop = tempY - 20;
+    document.getElementById('day' + date).style.pixelRight = tempX + 12;
+    document.getElementById('day' + date).style.visibility = 'visible';
+    return true;
+  }
+
+  function hideDay(date) {
+    document.getElementById('day' + date).style.visibility = 'hidden';
+    return true;
+  }
+
+  function formtooltip(el,flag){
+    elem = document.getElementById(el);
+    if (flag) { 
+      elem.parentNode.parentNode.style.zIndex=1000;
+      elem.parentNode.parentNode.style.borderRight='0px solid #000';
+      // ugly , yes .. but neccesary to avoid a small but very annoying bug in IE6
+      elem.style.visibility='visible';
+    }
+    else {
+      elem.parentNode.parentNode.style.zIndex=1;
+      elem.parentNode.parentNode.style.border='none';
+      elem.style.visibility='hidden' };
+  }
+
+</script>
+
+<link rel="home" href="http://cobi.uestc.edu.cn"
+      title="Home" />
+<link rel="search"
+      href="http://cobi.uestc.edu.cn/search_form"
+      title="Search this site" />
+<link rel="help" href="http://cobi.uestc.edu.cn/help"
+      title="Help" />
+<link rel="contents" href="http://cobi.uestc.edu.cn/sitemap"
+      title="Site Map" />
+<link rel="up" title="Up one level" />
+
+<meta http-equiv="imagetoolbar" content="no" /> <!-- Disable IE6 image toolbar -->
+
+</head>
+
+
+
+<body>
+
+<div>
+
+<!-- layout head start -->
+<!-- meta start -->
+  <table cellpadding="0" cellspacing="0" border="0" class="TopTable">
+	<tr>
+        <td width="211" rowspan="2" id="logocell"><a name="top"></a><a
+    href="http://cobi.uestc.edu.cn" title="Home"><img src="http://cobi.uestc.edu.cn/expospace_logo.gif" alt="" title="UESTC Logo" height="184" width="211" /></a></td>
+
+        <td class="searchformCell">
+          <form name="searchform"
+                action="http://cobi.uestc.edu.cn/search">
+            <span>Search</span>&nbsp;<input
+    id="searchGadget" name="SearchableText" type="text"
+    size="12" value="" class="search" />
+            &nbsp;<input type="image" src="searchButton.gif"
+                         class="search" id="searchSubmit"
+                         value="Search" />
+            
+          </form>
+
+
+          <div class="portalLinks">
+
+                
+
+                    <a href="http://cobi.uestc.edu.cn">Welcome</a>&nbsp;|
+
+                    
+
+                            
+
+                            
+                                
+                            
+                            <a
+    href="http://cobi.uestc.edu.cn/recent_news">News</a>&nbsp;|&nbsp;
+                    
+                    
+
+                            
+                                
+                                    
+                                        <a
+    href="http://cobi.uestc.edu.cn/login_form">Login</a>&nbsp;|
+                                        
+                                    
+                                
+
+                            
+
+                            
+                                
+                            
+                            <a
+    href="http://cobi.uestc.edu.cn/search_form">Search</a>&nbsp;|&nbsp;
+                    
+                    
+
+                            
+
+                            
+                                
+                            
+                            <a
+    href="http://cobi.uestc.edu.cn/sitemap">SiteMap</a>
+                    
+                
+
+          </div>
+
+        </td>
+        </tr>
+        <tr>
+            <td class="MainMenu">
+              <table class="MainMenuTable">
+                <tr>
+                  <!-- main menu start -->
+                  
+    <!-- toplevel menu start -->
+    
+
+
+
+
+<td class="MainMenu MainMenuSelected"><a
+    href="http://cobi.uestc.edu.cn/people/">
+<span>People</span>
+</a></td>
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/research/">
+<span>Research</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/pub/">
+<span>Publication</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/resource/">
+<span>Resource</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/services/">
+<span>Services</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/events/">
+<span>Events</span>
+</a></td>
+
+
+
+
+
+    <!-- toplevel menu end -->
+    
+                  <!-- main menu end -->
+                  <td></td>
+                </tr>
+              </table>
+
+            </td>
+
+        </tr>
+ </table>
+
+<!-- layout head end -->
+</div>
+
+<!-- main table start -->
+<table border="0" width="100%" cellspacing="0"
+       cellpadding="0" class="mainTable"
+       summary="Main content">
+    <tr>
+        
+            
+                <!-- left column start -->
+                <td width="212" valign="top" class="leftBarCell" rowspan="2">
+                    
+                        
+                            
+                                
+    <!-- menu start -->
+    <div class="VerticalMenu">
+      
+    
+        
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+        
+            
+    
+        
+            
+                
+                        
+                            
+                                <a class="parent"
+    href="http://cobi.uestc.edu.cn/people/">&raquo;&nbsp;&nbsp;<span>People</span></a><br class="netscape4" />
+                                <br class="netscape4" />
+                            
+                            <!--<tal:block tal:condition="python: test((URL1 != URL2), 0, 1)">
+
+                                <a i18n:translate="" tal:condition="not: parent/hasSubItems" tal:attributes="href string:${parent/getVirtualURL}" href="#" class="MenuSelected">&raquo;&nbsp;&nbsp;<span tal:replace="python:test(parent.title,parent.title,parent.id)" /></a><br class="netscape4" />
+                            </tal:block>-->
+                        
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/zguo/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Zheng Guo</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/nrao/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Nini Rao</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/jhuang/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Jian Huang</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/fbguo/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Feng-Biao Guo</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                        
+                            
+                            
+                                <a
+    href="http://cobi.uestc.edu.cn/people/hlin/"
+    class="SubMenuSelected">&raquo;&nbsp;&nbsp;<span>Hao Lin</span></a><br class="netscape4" />
+                            
+                        
+                
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/xwang/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Xianlong Wang</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/HDing/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Hui Ding</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+    
+
+
+
+
+    </div>
+    <!-- menu end -->
+
+    <br /><br />
+
+                            
+                        
+                        
+                            
+                                
+    
+
+                            
+                        
+                        
+                            
+                                
+                            
+                        
+                    
+                </td>
+                <!-- left column end -->
+            
+        
+
+        <!-- main column start -->
+        <td valign="top" class="mainTableCell">
+
+            
+                
+            
+
+            <div>
+                <!-- document start -->
+                <div class="document">
+                        
+                        <div>
+
+      <div class="contentHeader">
+          <h1>MicekiPred</h1>
+      </div>
+
+
+      <div class="description"></div>
+        
+        
+      
+        
+      <H1 align=center><FONT color=#3300cc>MicekiPred</FONT></H1>
+<H2 align=left><FONT color=#0066ff>What is MicekiPred?</FONT></H2>
+<H5 align=left><FONT color=#9966ff>The purpose of MicekiPred is to develop a computational system for predicting three kinds of proteins in cell division/mitosis: midbody, centrosome and kinetochore, respectively. To our knowledge, MicekiPred is the first predictor for this problem.</FONT> <FONT color=#9966ff>Any proteins with known gene ontology (GO) annotations can be predicted by MicekiPred.&nbsp;&nbsp;The shortcoming of this Server is not able to predict a new sequenced protein which have not annotated in GO terms.</FONT></H5>
+<H4 align=left><FONT color=#9966ff><FONT color=#6633ff>Database:</FONT> The protein sequences&nbsp;were extracted from <A href="http://microkit.biocuckoo.org/search.php">MiCroKit 3.0</A>. </FONT><FONT color=#9966ff>To avoid any homology bias, the <A href="http://bioinformatics.ljcrf.edu/cd-hi/">CD-HIT </A>program&nbsp;was utilized to remove the highly similar sequences. The identity between any two sequences was less than 40% in processed dataset.&nbsp;As a result, <A href="http://cobi.uestc.edu.cn/people/hlin/data/MicekiPred/midbody.zip/">236 midbody proteins</A>, <A href="http://cobi.uestc.edu.cn/people/hlin/data/MicekiPred/centrosome.zip/">438 centrosome proteins </A>and <A href="http://cobi.uestc.edu.cn/people/hlin/data/MicekiPred/kinetochore.zip/">331 kinetochore proteins</A> were obtained. </FONT></H4>
+<H4 align=left><FONT color=#9966ff><FONT color=#6633ff>Feature Selection:<FONT color=#555753> </FONT><FONT color=#9966ff>The&nbsp;parameters of this server were derived from gene ontology (GO) information. Each protein could be represented as a <A href="http://cobi.uestc.edu.cn/people/hlin/data/MicekiPred/GOinfor.zip/">1738 Dimension vector</A>.&nbsp;</FONT></FONT></FONT></H4>
+<H4 align=left><FONT color=#9966ff><FONT color=#6633ff>Machine Learning Method:</FONT> The core algorithm of this server was support vector machine. The software used to implement SVM&nbsp;was <A href="http://www.csie.ntu.edu.tw/~cjlin/libsvm">LibSVM</A> written by Lin’s lab. </FONT><FONT color=#9966ff>The radial basis function was used to perform prediction.</FONT>&nbsp;</H4>
+<H4 align=left><FONT color=#6633ff>Predictive Model:</FONT> <FONT color=#9966ff>We used program grid.py and jackknife cross-validation to optimize the&nbsp;regularization parameter <EM>C</EM> and the kernel parameter&nbsp;<EM>g.</EM>&nbsp;Here, the&nbsp;optimized parameter <EM>C</EM> and <EM>g</EM> were 32 and 0.00048828125, respectively. The overall accuracy is achieved over 75%. The predictive model&nbsp;built by&nbsp;"svmtrain.exe"&nbsp;can be <A href="http://cobi.uestc.edu.cn/people/hlin/data/MicekiPred/model.zip/">downloaded</A>.</FONT></H4>
+<H4 align=left><FONT color=#0066ff>How to use MicekiPred?</FONT></H4>
+<H4 align=left><FONT color=#9966ff>First,&nbsp;the annotations of GO for each protein to be predicted must be obtained. If there is a hit corresponding to the <EM>i-</EM>th number of the GO database,&nbsp;the <EM>i</EM>-th component of the protein in the 1738-D space is assigned 1; otherwise, 0.</FONT></H4>
+<H4 align=left><FONT color=#9966ff>Second, the format of input file must accord with the request of libsvm, such as, 1:0.2&nbsp;&nbsp; 2:0.4&nbsp; ......&nbsp; <EM>n</EM>-th feature: parameter value. Every protein lies one line. </FONT></H4>
+<H4 align=left><FONT color=#9966ff>Third, the libsvm soft package and predictive model must be downloaded. The input file is required to scale by using command "svmscale -r <A href="http://cobi.uestc.edu.cn/people/hlin/data/MicekiPred/mck.zip/">traindata</A> filename".</FONT></H4>
+<H4 align=left><FONT color=#9966ff>Fourth,&nbsp;prediction is performed by use of t</FONT><FONT color=#9966ff>he command "svmpredict test_file model_file out_file". You may achieve result from out_file.</FONT></H4>
+<H4 align=left><FONT color=#0066ff>Reference</FONT></H4>
+<H4 align=left><FONT color=#9966ff>Wei Chen, Hao Lin. Prediction of midbody, centrosome and kinetochore proteins using gene ontology.&nbsp;<EM>Biochemical and Biophysical Research Communications</EM>,&nbsp;2010, 401(3): 382-384.</FONT><FONT color=#9966ff><BR>&nbsp;</H4></FONT>
+    
+  </div>
+                        
+                            
+                        
+                </div>
+                <!-- document end -->
+            </div>
+
+            
+                
+            
+
+            <br />
+            
+        </td>
+
+        
+            
+        
+    </tr>
+
+    <tr>
+        <td>
+            <!-- footer start -->
+            <div>
+
+  <div class="Footer">
+      <div class="footerlinks">
+        <a href="http://cobi.uestc.edu.cn/people/hlin/tools/MicekiPred#top"><span>Top of page</span></a>
+        
+         |
+         <a href="javascript:this.print()">Print this page</a>
+         
+
+        
+
+        
+      </div>
+
+      <div class="icoyaCopyright">
+
+        Last modified: 01.12.2010, 14:31:14&nbsp;&nbsp;-&nbsp;&nbsp;Created by: hlin&nbsp;&nbsp;-&nbsp;&nbsp;Copyright &copy; 2009-2010, Center of Bioinformatics, University of Electronic Science and Technology of China. All rights reserved. 
+
+      </div>
+
+
+      <br />
+      <hr class="netscape4" />
+      <strong class="netscape4">
+        If you can read this text, it means you are not experiencing the Plone design at its best.
+        Plone makes heavy use of CSS, which means it is accessible to any internet browser,
+        but the design needs a
+        <a href="http://www.webstandards.org/upgrade/">standards-compliant browser to look like we intended it</a>.
+        Just so you know ;)
+      </strong>
+
+  </div>
+
+  <!-- set encoding -->
+  
+
+</div>
+            <!-- footer end -->
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

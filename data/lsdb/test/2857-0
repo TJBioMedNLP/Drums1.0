@@ -1,0 +1,337 @@
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<base href="http://bioinfo.mc.vanderbilt.edu:80/SZGR/">
+
+		<title>SchiZophrenia Gene Resource</title>
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="Schizophrenia gene, Schizophrenia, database, association, linkage, network, microRNA">
+		<meta http-equiv="description" content="Schizophrenia gene database">
+		<META NAME="DESCRIPTION" CONTENT="SZGR, Schizophrenia gene resource database">
+		<META NAME="KEYWORDS" CONTENT="Schizophrenia gene, Schizophrenia, database, association, linkage, network, microRNA" >
+		<!--
+	<td><a href="/SZGR/browseBySection.do?section=Linkage">Linkage</a></td>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/dropdowntabs.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<div id="container">
+		<table width="1000px" align="center" border="0" >
+			<tr align="center">
+				<td>
+					<img src="/SZGR/img/Header.jpg" width="1000" height="120px" style='border-style: none'>
+				</td>
+			</tr>
+			<tr bgcolor="#E6E6E6">
+				<td valign="middle">
+					<table border="0" width="100%" height="30px">
+						
+						<tr><td colspan="6" NOWRAP >
+							<div id="bluemenu" class="bluetabs">
+								<ul>
+									<li><a href="/SZGR/index.jsp" >Home</a></li>
+									<li><a href="/SZGR/introAllGs.do" rel="dropmenugs_a" >Datasets</a></li>
+									<li><a href="/SZGR/form/searchGene.jsp" >Search</a></li>
+									<li><a href="/SZGR/form/weightDice.jsp" rel="dropmenugs_s">Analysis & Tools</a></li>
+									<li><a href="/SZGR/index.jsp" rel="dropmenudoc_b" >Documents</a></li>
+									<li><a href="/SZGR/index.jsp" rel="dropmenucon_c">About SZGR</a></li>
+									<li style="border: 0px;">&nbsp;&nbsp;<form name="simpleSearchForm" method="post" action="/SZGR/simpleSearch.do;jsessionid=E9B7B6A655261B8BBD0F88F6E92A9968" style="display:inline;">
+										<b>Quick search:</b> <font size=2px>(e.g. 207 or AKT)</font><input type="text" name="item" size="10" value=""> <input type="submit" value="GO"></form>
+									</li>
+								</ul>
+							</div>
+							<div id="dropmenugs_a" class="dropmenudiv_b">
+								<a href="/SZGR/showGeneset.do?gsname=Association" >Association</a>
+								<a href="/SZGR/showLinkageStudies.do" >Linkage</a>
+								<a href="/SZGR/showGeneset.do?gsname=Expression" >Expression</a>
+								<a href="/SZGR/showGeneset.do?gsname=Literature" >Literature</a>
+								<a href="/SZGR/showGeneset.do?gsname=GO_Annotation" >GO_Annotation</a>
+								<a href="/SZGR/showGeneset.do?gsname=Network" >Gene Network</a>
+								<a href="/SZGR/displaymiRNA.do">miRNA Targets</a>
+							</div>
+							<div id="dropmenugs_s" class="dropmenudiv_b">
+								<a href="/SZGR/form/weightDice.jsp" >Gene Ranking</a>
+								<a href="/SZGR/form/integration.jsp" >Integration</a>
+							</div>
+							<div id="dropmenudoc_b" class="dropmenudiv_b">
+								<a href="/SZGR/html/associationdoc.jsp">Association</a>
+								<a href="/SZGR/html/linkagedoc.jsp" >Linkage</a>
+								<a href="/SZGR/html/expressiondoc.jsp" >Expression</a>
+								<a href="/SZGR/html/literaturedoc.jsp" >Literature</a>
+								<a href="/SZGR/html/godoc.jsp" >GO_Annotation</a>
+								<a href="/SZGR/html/netdoc.jsp" >Gene Network</a>
+								<a href="/SZGR/html/miRNAdoc.jsp">miRNA Targets</a>
+								<a href="/SZGR/html/grsdoc.jsp" >Datasets</a>
+								<a href="/SZGR/html/doc.jsp" >Gene Ranking</a>
+							</div>
+							<div id="dropmenucon_c" class="dropmenudiv_b">
+								<a href="/SZGR/html/release.jsp" >Release</a>
+								<a href="/SZGR/html/szgrmap.jsp" >Site Map</a>
+								<a href="/SZGR/html/support.jsp" >Support</a>
+								<a href="/SZGR/html/contact.jsp" >Contact us</a>
+							</div>
+							<script type="text/javascript">tabdropdown.init("bluemenu")</script>
+							
+						</td></tr>
+					</table>
+				</td>
+			</tr>
+		<!-- 	<tr><td align="right">
+				<form name="simpleSearchForm" method="post" action="/SZGR/simpleSearch.do;jsessionid=E9B7B6A655261B8BBD0F88F6E92A9968">
+					<font size=3px>Quick Search: </font><font size=2px>(e.g. 84062 or DTNBP1)</font>
+					<input type="text" name="item" value=""> <input type="submit" value="Submit"> <input type="submit" name="org.apache.struts.taglib.html.CANCEL" value="Cancel" onclick="bCancel=true;">
+				</form>
+			</td></tr>
+		-->
+		</table>
+		
+		
+		<br><br>
+		<table width="1000px" align="center" border="0">
+			<tr align="left">
+				<td>
+					<p style="line-height: 150%"><b><u>S</u></b>chi<b><u>z</u></b>ophrenia <b><u>G</u></b>ene <b><u>R</u></b>esource (<b><u>SZGR</u></b>) provides a comprehensive online resource for schizophrenia genetics studies. Currently, <b>SZGR</b> collected and integrated genes related to schizophrenia from the following data sources and annotations: <b>association studies, linkage analysis, gene expression, literature search, Gene Ontology annotations, protein-protein interaction networks, KEGG pathways, and microRNAs and their target sites</b>. <b>SZGR</b> also provides an online candidate gene ranking tool to help the user prioritize candidate genes by pre-optimized or custom weight schemes. Click here for a summary table of <a href="/SZGR/introAllGs.do">all gene sets</a>.
+				</td>
+			</tr>
+			<tr align="left">
+				<th>
+					<br><br><u>Browse genes by data category:</u><br>
+				</th>
+			</tr>
+			<tr align="center">
+				<td><br>
+					<table width="1000" align="center">
+						<tr align="center">
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Association"><img src="img/association.gif" width="125" height="125"  class="block"></a>
+							</td>
+							<td>
+								<a href="/SZGR/showLinkageStudies.do"><img src="img/linkage.gif" width="125" height="125"  class="block"></a>
+							</td>
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Expression"><img src="img/microarray.jpg" width="125" height="125"  class="block"></a>
+							</td>
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Literature"><img src="img/pmclogo.gif" width="125" height="125"  class="block"></a>
+							</td>
+							<td>
+								<a href="/SZGR/browseBySection.do?section=go"><img src="img/GO-head.gif" width="125" height="125"  class="block"></a>
+							</td>
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Network"><img src="img/shortpath.gif" width="125" height="125"  class="block"></a>
+							</td>
+							
+							<td>
+								<a href="/SZGR/showAllKpath.do"><img src="img/kegg.jpg" width="125" height="125"  class="block"></a>
+							</td>
+							<td>
+								<a href="/SZGR/displaymiRNA.do"><img src="img/microRNA.jpg" width="125" height="125"  class="block"></a>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Association">Association</a>
+							</td>
+							<td>
+								<a href="/SZGR/showLinkageStudies.do">Linkage</a>
+							</td>
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Expression">Expression</a>
+							</td>
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Literature">Literature</a>
+							</td>
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=GO_Annotation">GO_Annotation</a>
+							</td>
+							<td>
+								<a href="/SZGR/showGeneset.do?gsname=Network">Gene Network</a>
+							</td>
+							<td>
+								<a href="/SZGR/showAllKpath.do">KEGG Pathway</a>
+							</td>
+							<td>
+								<a href="/SZGR/displaymiRNA.do">miRNA Target</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+			<tr align="left"><th align="left"><br><br><u>Browse by human chromosome</u></th></tr>
+			<tr align="center"><td><br>
+				<table border=0 align="left">
+					<tr><td valign="bottom" width="40px" align="center"><a href="/SZGR/browseByChr.do?Chr=1"><img src="img/Chr1.gif" class="block"></a></td>
+						<td valign="bottom" width="40px" align="center"><a href="/SZGR/browseByChr.do?Chr=2"><img src="img/Chr2.gif" class="block"></a></td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=3"><img src="img/Chr3.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=4"><img src="img/Chr4.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=5"><img src="img/Chr5.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=6"><img src="img/Chr6.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=7"><img src="img/Chr7.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=8"><img src="img/Chr8.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=9"><img src="img/Chr9.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=10"><img src="img/Chr10.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=11"><img src="img/Chr11.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=12"><img src="img/Chr12.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=13"><img src="img/Chr13.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=14"><img src="img/Chr14.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=15"><img src="img/Chr15.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=16"><img src="img/Chr16.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=17"><img src="img/Chr17.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=18"><img src="img/Chr18.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=19"><img src="img/Chr19.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=20"><img src="img/Chr20.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=21"><img src="img/Chr21.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=22"><img src="img/Chr22.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=X"><img src="img/ChrX.gif" class="block"></a>
+				</td>
+				<td valign="bottom" width="40px" align="center">
+					<a href="/SZGR/browseByChr.do?Chr=Y"><img src="img/ChrY.gif" class="block"></a>
+				</td>
+			</tr>
+			<tr align="left" align="center">
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=1">1</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=2">2</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=3">3</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=4">4</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=5">5</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=6">6</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=7">7</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=8">8</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=9">9</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=10">10</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=11">11</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=12">12</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=13">13</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=14">14</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=15">15</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=16">16</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=17">17</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=18">18</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=19">19</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=20">20</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=21">21</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=22">22</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=X">X</a>
+				</td>
+				<td align="center">
+					<a href="/SZGR/browseByChr.do?Chr=Y">Y</a>
+				</td>
+			</tr></table>
+			</td></tr>
+			<tr align="left"><th align="left"><br><br><u>Use online gene ranking tool <a href="/SZGR/form/weightDice.jsp" >here</a></u><br></th></tr>
+			<tr align="left"><th align="left"><br><br><u>Prioritized candidate gene lists:</u> <br></th></tr>
+			<tr><td>
+    		<ul style="margin-bottom: 0px">
+    			<li><font face="trebuchet ms" size=2px><a href="/SZGR/showGeneset.do?gsname=Core" >Core gene list</a></font></li>
+		    	<li><font face="trebuchet ms" size=2px><a href="/SZGR/showGeneset.do?gsname=GR_COR" >75 genes by COR</a></font></li>
+	    		<li><font face="trebuchet ms" size=2px><a href="/SZGR/showGeneset.do?gsname=GR_WM" >160 by Lewis et al.</a></font></li>
+    			<li><font face="trebuchet ms" size=2px><a href="/SZGR/showGeneset.do?gsname=GR_Ng" >173 by Ng et al.</a></font></li>
+    		</ul>
+	    	</td></tr>
+	    	<tr align="left"><th align="left"><br><br><u>Please contact us if you would like to deposit your data to SZGR</u> <br></th></tr>
+		</table>
+		<br><br><br>
+		<table width="1000px" align="center" border="0" >
+			<tr bgcolor="#E6E6E6" align="center"><td><font size=2px><b>Copyright &copy;</b> <a href="http://www.bioinfo.vipbg.vcu.edu/" target=_blank style="text-decoration: none">Bioinformatics Lab @ VIPBG, VCU</a> <b>All Rights Reserved</b>.</font></td></tr>
+		</table>
+		</div>
+	</body>
+</html>

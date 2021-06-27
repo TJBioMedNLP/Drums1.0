@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<base href="http://bayesweb.wadsworth.org/alignmentSignificanceV1/index.html" />
+<title>
+Significance of Pairwise Sequence Alignment Scores
+</title>
+</head>
+<body>
+<h1>Significance of Pairwise Sequence Alignment Scores</h1>
+<p>
+<strong><em>This web site is under construction.</em></strong> If you
+get an unexpected error, please try again in a few minutes.  Also,
+note this web server is built from prototype software and will likely
+be <strong>100 times faster</strong> when it is converted to
+production quality code.
+</p>
+<p>
+<strong>Objective:</strong> Measuring the statistical significance of
+extreme sequence alignment scores is key to many important
+applications, but it is difficult.  To precisely approximate alignment
+score significance, we draw random samples directly from a well
+chosen, importance-sampling probability distribution.
+</p>
+<p>
+<strong>Inputs and Run Time:</strong> This server allows application
+of our technique to pairwise sequence alignment of nucleic acid and
+amino acid sequences.  To keep the run-time short, the precision for
+larger sequence lengths will not be as good as that for shorter
+sequence lengths.  Specifically, runtime is approximately
+<em>O(mns)</em>, where <em>m</em> and <em>n</em> are the sequence
+lengths and <em>s</em> is the number of samples.  The run-time is
+capped at <em>mns</em> = 1 &times; 10<sup>9</sup>, approximately 1
+hour, by reducing the number of samples as necessary.  Please examine
+the output to discover how many samples were permitted.
+</p>
+<p>
+Default values are 1000 samples for a 40 &times; 40 local sequence
+alignment of amino acid sequences using the BLOSUM62 scoring matrix,
+SWISSPROT residue frequencies, an insertion start score of -12, and an
+insertion extension cost of -1; this set of values has a run-time of
+about 10 seconds.
+</p>
+<p>
+<strong>Outputs and Temperature:</strong> The temperature that
+parameterizes the importance sampling distribution will be chosen so
+that approximately half the generated importance samples contribute a
+non-zero value to the importance sampling sum that determines the
+<em>p</em>-value of the specified target score.  The server provides
+<em>p</em>-values for scores near the target score.
+</p>
+<p>
+To find the <em>p</em>-value that interests you, find the row
+beginning with the text "RESULT" followed by your score of interest,
+and read across the line to discover the estimate of the score's
+<em>p</em>-value, as well as various statistics to help you evaluate
+your confidence in the estimate.  If the number of samples is not
+large enough, there may be some scores for which no <em>p</em>-value
+is computed.  In this case, the mathematics indicates use of the
+<em>p</em>-value for the first higher score with an available
+<em>p</em>-value, but instead we recommend rerunning the simulation
+with more samples or a more appropriate target score.
+</p>
+<p>
+Be aware that the <em>p</em>-value estimates for scores outside the
+central range of the displayed scores can be imprecise.  Also note
+that some of the listed <em>p</em>-values in the 3<sup>rd</sup> output
+column will underflow double-precision floating point numbers; to
+avoid this problem it may behoove you to manipulate the logarithm
+(base 10) in the 6<sup>th</sup> output column.
+</p>
+<p>
+<strong>Citing:</strong> If you use this technique or this server in
+your work, in your publications please cite:
+</p>
+<blockquote>
+<p>
+Lee&nbsp;A. Newberg (2008) Significance of gapped sequence
+alignments. <em>J Comput Biol</em>, <strong>15</strong>(9),
+1187-1194. <a href="http://dx.doi.org/10.1089/cmb.2008.0125">doi:
+10.1089/cmb.2008.0125</a>. <a href="http://bayesweb.wadsworth.org/alignmentSignificanceV1/">http://bayesweb.wadsworth.org/alignmentSignificanceV1/</a>.
+</p>
+</blockquote>
+<hr />
+<form action="http:/cgi-bin/alignmentSignificanceV1/alignmentSignificanceV1.sh" method="get">
+<p><input type="hidden" name="version" value="1" />Target score: (less than maximum possible score) <input type="text" name="target" value="350" /></p> <p>Alignment type: <input type="radio" name="local" value="1" checked="checked" />local (Smith-Waterman) &nbsp; &nbsp; <input type="radio" name="local" value="0" />global (Needleman-Wunsch)</p>
+<p>Length of first sequence: <input type="text" name="m" value="40" /></p>
+<p>Length of second sequence: <input type="text" name="n" value="40" /></p>
+<p>Number of samples: <input type="text" name="cSamples" value="1000" /></p>
+<p>Insertion start score (enter as negative): <input type="text" name="open" value="-12" /></p>
+<p>Insertion extension score (enter as negative): <input type="text" name="extend" value="-1" /></p>
+<p>Number of letters (<i>e.g.</i>, dna=4, proteins=20): <input type="text" name="cLetters" value="20" /></p>
+<p>Equilibrium distribution of nucleotides/residues: <textarea name="equilibrium" rows="2" cols="75">
+0.0809 0.0549 0.0404 0.0539 0.0144 0.0395 0.0672 0.0702 0.0229 0.0590
+0.0967 0.0588 0.0241 0.0389 0.0480 0.0670 0.0536 0.0110 0.0295 0.0680</textarea></p>
+<p>Scoring Matrix: <textarea name="matrix" rows="20" cols="75">
+  4 -1 -2 -2  0 -1 -1  0 -2 -1 -1 -1 -1 -2 -1  1  0 -3 -2  0
+ -1  5  0 -2 -3  1  0 -2  0 -3 -2  2 -1 -3 -2 -1 -1 -3 -2 -3
+ -2  0  6  1 -3  0  0  0  1 -3 -3  0 -2 -3 -2  1  0 -4 -2 -3
+ -2 -2  1  6 -3  0  2 -1 -1 -3 -4 -1 -3 -3 -1  0 -1 -4 -3 -3
+  0 -3 -3 -3  9 -3 -4 -3 -3 -1 -1 -3 -1 -2 -3 -1 -1 -2 -2 -1
+ -1  1  0  0 -3  5  2 -2  0 -3 -2  1  0 -3 -1  0 -1 -2 -1 -2
+ -1  0  0  2 -4  2  5 -2  0 -3 -3  1 -2 -3 -1  0 -1 -3 -2 -2
+  0 -2  0 -1 -3 -2 -2  6 -2 -4 -4 -2 -3 -3 -2  0 -2 -2 -3 -3
+ -2  0  1 -1 -3  0  0 -2  8 -3 -3 -1 -2 -1 -2 -1 -2 -2  2 -3
+ -1 -3 -3 -3 -1 -3 -3 -4 -3  4  2 -3  1  0 -3 -2 -1 -3 -1  3
+ -1 -2 -3 -4 -1 -2 -3 -4 -3  2  4 -2  2  0 -3 -2 -1 -2 -1  1
+ -1  2  0 -1 -3  1  1 -2 -1 -3 -2  5 -1 -3 -1  0 -1 -3 -2 -2
+ -1 -1 -2 -3 -1  0 -2 -3 -2  1  2 -1  5  0 -2 -1 -1 -1 -1  1
+ -2 -3 -3 -3 -2 -3 -3 -3 -1  0  0 -3  0  6 -4 -2 -2  1  3 -1
+ -1 -2 -2 -1 -3 -1 -1 -2 -2 -3 -3 -1 -2 -4  7 -1 -1 -4 -3 -2
+  1 -1  1  0 -1  0  0  0 -1 -2 -2  0 -1 -2 -1  4  1 -3 -2 -2
+  0 -1  0 -1 -1 -1 -1 -2 -2 -1 -1 -1 -1 -2 -1  1  5 -2 -2  0
+ -3 -3 -4 -4 -2 -2 -3 -2 -2 -3 -2 -3 -1  1 -4 -3 -2 11  2 -3
+ -2 -2 -2 -3 -2 -1 -2 -3  2 -1 -1 -2 -1  3 -3 -2 -2  2  7 -1
+  0 -3 -3 -3 -1 -2 -2 -3 -3  3  1 -2  1 -1 -2 -2  0 -3 -1  4
+</textarea></p>
+<p>
+<input type="submit" name="submit" value="Compute" />
+<input type="reset" value="Restore Defaults" />
+</p>
+</form>
+</body>
+</html>

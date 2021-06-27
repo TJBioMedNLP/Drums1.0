@@ -1,0 +1,187 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>DILIMOT server</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<form method="post" action="/" enctype="multipart/form-data">
+<BODY bgcolor="#A1ADEC" text="#5E5E5E" style="font-family:Helvetica, 'Univers', sans-serif"><center>
+<META name="author" content="Victor Neduva">
+<META name="description" content="DiLiMoT discovery of linear motifs">
+<META name="keywords" content="protein, protein motifs, motifs, peptide, evolution,Victor Neduva, EMBL, biocomputing">
+<script language="JavaScript" type="text/javascript">
+    function WinOpen(url) {
+    var param='"toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width='+640+',height='+250+',screenX=75,screenY=40"';
+    // url='http://dilimot.embl.de/'+url;
+    msg=open(url,'',param);
+    }
+</script>
+<STYLE>
+<!--
+a{text-decoration:none}
+-->
+</STYLE>
+<DIV>
+<a onmouseover="this.style.backgroundColor='gold';"
+   onMouseOut="this.style.backgroundColor='#A1ADEC';">
+</DIV>
+<link rel="shortcut icon" href="images/DiLiMoT.ico" />
+<table  bgcolor="#A1ADEC">
+<tr>
+<td valign="top" width="500" align="center" colspan="6">
+<img height=60 width=185 src = "images/DILIMOT.png" align = "top" vspace =5 hspace=0>
+</td>
+</tr>
+<tr>
+<td width="500" align="center" colspan="6" valign="bottom">
+<font face="optima" size="5" color="gold">Discovery of Linear Motifs</font>
+</td>
+</tr>
+<tr valign="bottom">
+<td width = "130" align="left" nowrap>
+<font face="optima" size="3" color="blue">
+<a href="help_mission.html"
+      onclick="WinOpen('help_mission.html');return false;"
+      onmouseover="this.style.backgroundColor='gold';"
+      onMouseOut="this.style.backgroundColor='#A1ADEC';">
+What it does...</a></font>
+</td>
+<td width = "100" align="left">
+<font face="optima" size="3" color="blue"><a href="help_server.html"
+      onclick="WinOpen('help_server.html');return false;"
+      onmouseover="this.style.backgroundColor='gold';"
+      onMouseOut="this.style.backgroundColor='#A1ADEC';">
+Help</a></font>
+</td>
+<td width="100" align="left">
+<font face="optima" size="3" color="blue"><a href="help_examples.html"
+      onclick="WinOpen('help_examples.html');return false;"
+      onLoad="this.style.backgroundColor='red';"
+      onmouseover="this.style.backgroundColor='gold';"
+      onMouseOut="this.style.backgroundColor='#A1ADEC';">
+Examples</font>
+</td>
+
+<td width="150" align="center">
+<font face="optima" size="3" color="blue"><a href="help_hints.html"
+      onclick="WinOpen('help_hints.html');return false;"
+      onmouseover="this.style.backgroundColor='gold';"
+      onMouseOut="this.style.backgroundColor='#A1ADEC';">
+Finding motifs</font>
+</td>
+
+<td width="100" align="center">
+<font face="optima" size="3" color="blue"><a href="help_reference.html"
+      onclick="WinOpen('help_reference.html');return false;"
+      onmouseover="this.style.backgroundColor='gold';"
+      onMouseOut="this.style.backgroundColor='#A1ADEC';">
+Reference</font>
+</td>
+<td width=100 align=right>
+<font face="optima" size="3" color="blue"><a href="help_contact.html"
+      onclick="WinOpen('help_contact.html');return false;"
+      onmouseover="this.style.backgroundColor='gold';"
+      onMouseOut="this.style.backgroundColor='#A1ADEC';">
+Contact</font>
+</td>
+</tr>
+</table>
+<DIV>
+<table  bgcolor="#A1ADEC"><tr><td width="880"><fieldset><legend><b><font size=4>Input form</font></b></legend>
+<table cellpadding="5"  bgcolor="#E6E2E6" ><tr><td valign="top" rowspan=1 width="670"><fieldset><legend><b><font size=4 color="#A23497">Data input</font></b></legend>
+<font size=3>Please enter sequences (at least 3 non-related) in FASTA format<font size=2><a href="help_inputFASTA.html"onclick="WinOpen('help_inputFASTA.html');return false;"
+onmouseover="this.style.backgroundColor='gold';"
+onMouseOut="this.style.backgroundColor='#E6E2E6';">
+(help)</a>:</font><BR>
+<textarea name="sequence"  rows="11" cols="60"></textarea>
+<br><br>Upload a file containing  sequences:<br>
+<input type="file" name="SEQFILE"  size="25" maxlength="80" /></font><br>
+<input type="submit" name="Find motifs" value="Find motifs" /><input type="reset"  name=".reset" /></td>
+<td align="left" valign="top" width="500" height="120"><fieldset><legend><b><font size=4 color="#006F00">&nbsp Results retrieval</font></b></legend>
+<font size=2>If you want to get results by mail please check:</font><BR>
+<label><input type="checkbox" name="email_switch" value="on" checked="checked" />Email</label><input type="text" name="email"  size="17" maxlength="70" /><br><font size=2>Job descriptor:</font><input type="text" name="descript"  size="15" maxlength="50" /><br>
+<br><font size=2>If you want to view previous results please enter query identifier <a href="help_retrieval.html"onclick="WinOpen('help_retrieval.html');return false;"
+onmouseover="this.style.backgroundColor='gold';"
+onMouseOut="this.style.backgroundColor='#E6E2E6';">
+(help)</a>:</font><BR>
+<input type="text" name="ID"  size="15" maxlength="50" />&nbsp<input type="submit" name="Go" value="Go" /><BR></td></tr>
+<tr><td valign="top" colspan=2><fieldset><legend><b><font color="#FFCB00" size="4">&nbsp Motif discovery parameters</font></b></legend><table cellpadding ="5"><tr><td align="left" valign="top" width="200">&nbsp &nbsp <font face="helvetica" size="3">To remove</font><font size=2><a href="help_inputFILTER.html"onclick="WinOpen('help_inputFILTER.html');return false;"
+onmouseover="this.style.backgroundColor='gold';"
+onMouseOut="this.style.backgroundColor='#E6E2E6';">
+(help)</a>:</font><BR>
+<font size="2">
+<label><input type="checkbox" name="filtering" value="Smart domains" checked="checked" />Smart domains</label><br /><label><input type="checkbox" name="filtering" value="Pfam domains" checked="checked" />Pfam domains</label><br /><label><input type="checkbox" name="filtering" value="Homology" checked="checked" />Homology</label><br /><label><input type="checkbox" name="filtering" value="Predicted globular segments" />Predicted globular segments</label><br /></font>
+<td align="left" valign="top" width="280"> &nbsp &nbsp<font face="helvetica" size="3">Your species<font size=2><a href="help_inputCONSERVATION.html"onclick="WinOpen('help_inputCONSERVATION.html');return false;"
+onmouseover="this.style.backgroundColor='gold';"
+onMouseOut="this.style.backgroundColor='#E6E2E6';">
+(help)</a>:</font><BR>
+<select name="species" >
+<option selected="selected" value="Any species">Any species</option>
+<option value="Do not use conservation">Do not use conservation</option>
+<option value="Homo sapiens">Homo sapiens</option>
+<option value="Rattus norvegicus">Rattus norvegicus</option>
+<option value="Mus musculus">Mus musculus</option>
+<option value="Gallus gallus">Gallus gallus</option>
+<option value="Fugu rubripes">Fugu rubripes</option>
+<option value="Drosophila melanogaster">Drosophila melanogaster</option>
+<option value="Anopheles gambiae">Anopheles gambiae</option>
+<option value="Caenorhabditis elegans">Caenorhabditis elegans</option>
+<option value="Arabidopsis thaliana">Arabidopsis thaliana</option>
+<option value="Sachoromyces cereviciae">Sachoromyces cereviciae</option>
+<option value="Schizosaccharomyces pombe">Schizosaccharomyces pombe</option>
+<option value="Candida albicanis">Candida albicanis</option>
+<option value="Kluyveromyces lactis">Kluyveromyces lactis</option>
+<option value="Debaryomyces hansenii">Debaryomyces hansenii</option>
+<option value="Ashbya gossypii">Ashbya gossypii</option>
+<option value="Kluyveromyces waltii">Kluyveromyces waltii</option>
+<option value="Candida glabrata">Candida glabrata</option>
+</select><BR></td>
+<td align="left" valign="top" width="250">&nbsp &nbsp <font face="helvetica" size="3"> Motif parameters<font size=2><a href="help_inputMOTIF.html"onclick="WinOpen('help_inputMOTIF.html');return false;"
+onmouseover="this.style.backgroundColor='gold';"
+onMouseOut="this.style.backgroundColor='#E6E2E6';">
+(help)</a>:</font><BR>
+<input type="text" name="L" value="3" size="3" maxlength="3" /><font size=2>Fixed positions<br>
+<input type="text" name="W" value="8" size="3" maxlength="3" />Maximum motif length<br>
+<input type="text" name="Minimal" value="3" size="3" maxlength="3" />Minimal number of motifs in your set<br>
+</td></tr>
+<tr><td>
+<input type="submit" name="Find motifs" value="Find motifs" /></td></tr></table>
+</td></tr></table></td></tr></table>
+<a name="contact">
+<center>
+<!-- // <table  bgcolor="#778899"> --!>
+<table bgcolor="#A1ADEC">
+<tr>
+<td width="850">
+<fieldset><legend><b><font size=4>Info</font></b></legend>
+<table  bgcolor="#A1ADEC" CELLPADDING= 0>
+<tr>
+<td valign="top" width="850">
+<font size= "2">Contact Victor Neduva (neduva@embl.de)</a> for more information. <br>
+Copyright (c) Victor Neduva and Robert B. Russell, EMBL Heidelberg, 2004,2005,2006<br>
+See results of applying this approach to sets of proteins from genome-scale interaction studies <a href="http://lmd.embl.de">here</a>.<br>
+This site is for academic users only.  Commerical users must obtain a licence from <a href="http://www.embl-em.de/home/intro.php">EMBLEM</a><br>
+</font>
+</td>
+<td>
+<a href="http://lmd.embl.de/" border=0><img height=35 width=35 src ="http://lmd.embl.de/lmd/images/LMD_logo_small.png" border=0 align = "top" vspace =0 hspace=0></a>
+</td>
+<td>
+<a href="http://www.russelllab.org/" border=0>Russell Group</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</center>
+</a>
+</DIV>
+<div><input type="hidden" name=".cgifields" value="email_switch"  /><input type="hidden" name=".cgifields" value="filtering"  /></div></form>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head><title>:: AGRIS Arabidopsis thaliana Web Page::</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="/css/agris.css" charset="ISO-8859-1" type="text/css">
+<meta name="description" content="The Arabidopsis Gene Regulatory Information Server">
+<meta name="keywords"
+ content="AGRIS,Arabidopsis Thaliana, AtcisDB, AtTFDB, Arabidopsis Transcription Factors, Arabidopsis Gene Regulatory Networks, Arabidopsis Promoters, HCG Arabidopsis Bioinformatics, Gene Regulation, cis-elements, TF Family">
+<link rel="shortcut icon" href="/favicon.ico">
+<script type="text/javascript">
+<!--
+function popup(mylink, windowname)
+{
+ if (! window.focus)return true;
+  var href;
+ if (typeof(mylink) == 'string')
+  href=mylink;
+ else
+  href=mylink.href;
+ window.open(href, windowname,'width=625,height=250,scrollbars=yes');
+ return false;
+}
+//-->
+</script>
+
+
+
+
+
+
+
+    <script language="javascript" type="text/javascript" src="/jquery.js"></script>
+
+
+<style>
+#feedback{
+position:fixed;
+width:25px;
+height:119px;
+right: 0px;
+bottom: 40px;
+background: red;
+z-index:1;
+margin:0;
+padding:0;
+}
+
+body
+{
+margin:0;
+padding:0;
+}
+</style>
+
+<link rel="stylesheet" href="/css/boxy.css" type="text/css" /> 
+<script type="text/javascript" src="/boxy.js"></script> 
+ <script language="javascript"> 
+ //function for the feedback form
+ 
+$(function() {
+    /* set global variable for boxy window */
+    var contactBoxy = null;
+    /* what to do when click on contact us link */
+    $('.contact_us').click(function(){
+        var boxy_content;
+        boxy_content += "<div style=\"width:300px; height:300px \"><form id=\"feedbacked\">";
+        boxy_content += "<p>Subject<br /><input type=\"text\" name=\"feedback_subject\" id=\"feedback_subject\" size=\"41\" /></p><p>Your name and/or email:<br /><input type=\"text\" name=\"feedback_email\" size=\"41\" /></p><p>Comment:<br /><textarea name=\"feedback_comment\" id=\"feedback_comment\" cols=\"37\" rows=\"5\"></textarea></p><br /><input type=\"submit\" name=\"submit\" value=\"Send >>\" />";
+
+// add hidden values, environment variables received from component, so that they appear in email
+        boxy_content += "</form></div>";
+        contactBoxy = new Boxy(boxy_content, {
+
+	    title: "Give us feedback or Ask a question",
+            draggable: true,
+            modal:true,
+            behaviours: function(c) {
+                c.find('#feedbacked').submit(function() {
+                    Boxy.get(this).setContent("<div style=\"width: 300px; height: 300px\">Sending...</div>");
+                    // submit form by ajax using post and send 3 values: subject, your_email, comment
+		    // submit more than 3 values, use env_var to submit more
+                    $.post("/feedback_email.html", { feedback_subject: c.find("input[name='feedback_subject']").val(),
+feedback_email: c.find("input[name='feedback_email']").val(), feedback_comment: c.find("#feedback_comment").val()
+},
+                    function(data){
+                        /*set boxy content to data from ajax call back*/
+                        contactBoxy.setContent("<div style=\"width: 300px; height: 300px\">"+data+"</div>");
+                    });
+                    return false;
+                });
+            } 
+        });
+        return false;
+    });
+});
+ 
+
+ </script>
+
+
+</head>
+
+<body>
+
+<div align = "center" >
+<table style="border: 2px solid #666666; border-collapse: collapse" bgcolor="#FFFFFF" width="800" align="center">
+<!--<table width="800" border="0" align="center">-->
+  <tr> <td colspan=9 width="708"><img src="/images/header.gif" width="837" height="95" border="0" usemap="#Map2" alt="AGRIS logo"></td></tr>
+  <!--<tr> <td colspan=8 height="23"><div align="center"><img src="/images/menu.gif" width="819" height="116" border="0" usemap="#Map" alt="AGRIS Menu"></div></td></tr>-->	
+<!--</table>-->
+	<tr bgcolor="#297660" style="border: 1px solid #FFFFFF">
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="white"><a class="white" href="/">Home</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/AtcisDB">AtcisDB</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/AtTFDB">AtTFDB</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/REIN">Regulatory<br>Network</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/NSF2010Project">NSF2010<br>Project</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/people.html">People</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/downloads.html">Downloads</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/links.html">Links</a></font></td>
+		<td align="center" style="border: 1px solid #FFFFFF"><font color="#FFFFFF"><a class="white" href="/publications.html">Publications</a></font></td>
+  	</tr>
+</table>
+<map name="Map">
+  <area shape="rect" coords="3,10,102,34" href="/" alt="">
+  
+  <area shape="rect" coords="107,9,206,34" href="/AtcisDB" title="Arabidopsis cis-regulatory element database" alt="">
+  <area shape="rect" coords="210,9,311,33" href="/AtTFDB" title="Arabidopsis transcription factor database" alt="">
+  <area shape="rect" coords="312,9,414,33" href="/NSF2010Project/" title="Arabidopsis 2010 Project" alt="">
+  <area shape="rect" coords="414,9,515,33" href="/people.html" title="People behind AGRIS" alt="">
+  <area shape="rect" coords="520,9,622,34" href="/downloads.html" title="Download AGRIS data" alt="">
+  <area shape="rect" coords="625,10,723,34" href="/links.html" title="Related databases and websites" alt="">
+  <area shape="rect" coords="728,9,812,34" href="/news.html" title="News" alt="">
+  <area shape="rect" coords="104,83,311,108" href="/REIN" title="Regulatory Networks Interactions Module" alt="">
+</map>
+<map name="Map2">
+  <area shape="rect" coords="15,2,97,83" href="http://www.osu.edu" target="_blank" title="The Ohio State University" alt="">
+  <area shape="rect" coords="110,17,213,48" href="http://arabidopsis.med.ohio-state.edu" title="AGRIS main page" alt="">
+</map>
+</div>
+
+
+
+<div id="feedback" width="40px"><a href="#" class="contact_us"><img src="/images/feedback.jpg" border="0"></a></div>
+<table width="800" align="center">
+<tr>
+<td width="800">
+<center>
+<div align="justify">
+        <h1 class="h1">Welcome to The Arabidopsis 
+          Gene Regulatory Information Server (AGRIS)</h1>
+      </center>
+      The <u>A</u>rabidopsis 
+        <u>G</u>ene <u>R</u>egulatory 
+        <u>I</u>nformation <u>S</u>erver 
+        (<em><b>AGRIS</b></em>) is a new 
+        information resource of Arabidopsis promoter sequences, transcription 
+        factors and their target genes. AGRIS currently contains three databases.
+     <br><br> 
+      	 <strong>AtcisDB</strong>
+        consists of approximately 33,000 upstream regions of annotated Arabidopsis genes (TAIR9 release) with 
+        a description of experimentally validated and predicted <i>cis</i>-regulatory elements.
+    <br><br>  <strong>AtTFDB</strong>
+        contains information on approximately 1,770 transcription 
+        factors (TFs). These TFs are grouped into 50 families, based 
+        on the presence of conserved domains.
+<br><br>
+<strong>AtRegNet</strong>
+        contains 11,355 direct interactions between TFs and target genes.
+        <br>
+</div>
+      <h3 align="center"><font color="red">Word frequency calculations in non-coding segments of Arabidopsis genome is available through new interface 
+(<a href="words/">view</a>)</font></h3>          
+
+<table border="1" align="center" width="700" cellpadding="6" bgcolor="#DBDBDB">
+<tr><td align="center">
+<strong><font color="red">NEWS</font></strong> (Last Updated January-2011)</font><br><br>
+<div align="left">
+&nbsp;&bull;&nbsp;AGRIS has been published in NAR 2011 Database special issue. <a href="http://nar.oxfordjournals.org/content/39/suppl_1/D1118.full.pdf">Download PDF</a>, 
+read <a href="http://nar.oxfordjournals.org/content/39/suppl_1/D1118.abstract">abstract</a> or <a href="http://nar.oxfordjournals.org/content/39/suppl_1/D1118.full">full text</a>.<br>
+&nbsp;&bull;&nbsp;Transcription factors are linked to clones available at <a href="http://abrc.osu.edu/">ABRC</a> (Arabidopsis Biological Resource Center) (<a href="AtTFDB/tfsummary.html?locusid=At1g06180">View sample</a>, stock numbers are linked to corresponding stock ordering pages).<br>
+&nbsp;&bull;&nbsp;All the gene models correspond to TAIR9 release of Arabidopsis genome.<br>
+&nbsp;&bull;&nbsp;We want to hear from you. Feedback buttons are available at each page for you to provide feedback or suggestions.<br>
+</div>
+</font>
+</td></tr>
+</table>
+<br>
+<center>
+How to Cite <strong><i>
+<a href="cite.html"><font color="#297660">AGRIS</font></a></i></strong>
+</center><br>
+    </td></tr><tr><td></td></tr></table>
+
+
+
+
+<div align="center">AGRIS has been viewed<br>
+<a href="http://www.amazingcounter.com"><img border="0" src="http://c7.amazingcounters.com/counter.php?i=1435576&c=4307041" alt="web page counter"></a><br>
+times<br>
+</div>
+
+<table align="center" width="800"><tr><td><hr></td></tr></table>
+
+<div align = "center">
+<!--<table width="800" border="0" align="center" cellPadding="0" cellSpacing="1">-->
+<table style="border: 2px solid #666666; border-collapse: collapse" bgcolor="#FFFFFF" width="800" align="center">
+  <tr bgcolor="#297660" style="border: 1px solid #FFFFFF">
+    <td width="161" height="26"><div align="center"><a class="white" href="mailto:yilmaz.11@osu.edu">Comments 
+        &amp; Suggestions</a></div></td>
+    <td width="65"><div align="center"><a class="white" href="http://www.osu.edu/" target="_blank" title="The Ohio State University">OSU</a></div></td>
+    <td width="65"><div align="center"><a class="white" href="http://www.osc.edu/" target="_blank" title="Ohio Supercomputer Center">OSC</a></div></td>
+    <td width="65"><div align="center"><a class="white" href="http://pmbb.osu.edu/" target="_blank" title="Plant Molecular Biology & Biotechnology Program">PMBB</a></div></td>
+    <td width="65"><div align="center"><a class="white" href="http://www.biosci.ohio-state.edu/%7Eplantbio/Facilities/abrc/abrchome.htm" target="_blank" title="Arabidopsis Biological Resource Center">ABRC</a></div></td>
+    <td width="65"><div align="center"><a class="white" href="http://www.biosci.ohio-state.edu/%7Eplantbio/plantbio.html" target="_blank" title="Department of Plant Cellular and Molecular Biology">PCMB</a></div></td>
+    <td width="65"><div align="center"><a class="white" href="http://grassius.org/" target="_blank" title="Grass Regulatory Information Server">GRASSIUS</a></div></td>
+    <td width="65"><div align="center"><a class="white" href="http://www.nsf.gov"target="_blank" title="National Science Foundation">NSF</a></div></td>
+  </tr>
+    <tr> 
+    <td colspan="8"><div align="center"><font face ="bold" color="black"> Copyright 
+        &copy; 2010. All rights reserved. <a href="/credits.html">Credits</a> <br>
+        </font></div></td>
+
+    </tr>
+</table>
+</body>
+</div>
+</html>
+
+</body>
+</html>
+
+

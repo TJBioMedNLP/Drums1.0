@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="ROBOTS" content="ALL">
+		<!--CSSãã¡ã¤ã«ã®æå®-->
+		<link rel="stylesheet" type="text/css" href="./css/css_new2.css" />
+		<!--ããã«Googleãªã©ã§å¼ã£å¼µããããã­ã¼ã¯ã¼ããæå®(,åºåã)-->
+		<meta name="keywords" content="WABI,REST,SOAP,Web API,bioinformatics">
+		<script type="text/javascript" src="./include/wabi.js"></script>
+		<!--ã¿ã¤ãã«å ããã æ¤ç´¢ã¨ã³ã¸ã³ã§ãããããããã®ãæå®-->
+		<title>Web API for Biology</title>
+	</head>
+	<body>
+	<div id=all>
+		<div id=topbox>
+	
+			<table width=100%>
+				<tr>
+					<td align=left><a href=/index.html><img src=./images/logo1.jpg border=0></a></td>
+					<td align=right valign=bottom><div style="font-size:9pt;"><a href="http://www-bird.jst.go.jp/index_e.html" target="_blank"><img border=0 src="/images/bird_logo50.png"></a> <a href="http://www.ddbj.nig.ac.jp/index-e.html" target=_blank><img border=0 src="/images/ddbjnew_R.png"></a><br><a href=contact.html>Contact us</a>/<a href=sitemap.html>Sitemap</a>/<a href=/index_jp.html>Japanese</a></div></td>
+				</tr>
+			</table>
+		</div>
+		<br class="blockend" />
+		<form method=post name=keyword action="/keyword/SearchServlet"onsubmit="return isNotEmpty();">
+		<div id=inbox>
+			<div class=menu align=center>
+			<ul class=menus>
+				<li><a href="/index.html">TOP</a>
+				<li><a href="/tutorial/rest/index.html">REST</a>
+				<li><a href=/tutorial/soap/index.html>SOAP</a>
+				<li><a href=/workflow/index.html>Workflow</a>
+				<li><a href="http://wabi.ddbj.nig.ac.jp/CookBook_en/">CookBook</a>
+			</ul>
+				<input type=text name=query id=query value="sequence blast" style="color:gray" size=15 onclick="clearValue()">
+				<input type=hidden name=lang value="en">
+				<input type=submit value=search> <a href="/keyword.html">&gt;&gt;more</a>
+			</div>
+		</div>
+		</form>
+		<br class="blockend" />
+	<div>
+	<div id=main>
+		<div class="entry_body_top">
+<!-- ã¡ã¤ã³é¨åãããã -->
+<div>
+<div style="float: left; width:600px;">
+<b><img src="images/l1.jpg" width="28" height="21" border="0">
+	What's new<br>
+</b>
+<div class=entry_cont>
+<b>
+<font color=red>Mar 29 2010 FASTA service and KEGG PATHWAY database in ARSA service will be terminated on Mar 31 2010.</font><br>
+Feb 17 2010 OMIM service and RefSeq service will be terminated on Feb 26 2010.</font>
+Jan 15 2010 <a target="_blank" href="http://www.ddbj.nig.ac.jp/whatsnew/whatsnew2010-e.html#10011502">ARSA database search (DDBJ, DAD) temporary unavailable</a><br>
+Oct 19 2009 <a target="_blank" href="http://gtps.ddbj.nig.ac.jp/procedure/index.php">Prokaryotic genomes annotation workflow</a> was added in <a href=./workflow/>the workflow introduction page</a>.<br>
+Sep 8 2009 <a href=./workflow/gtps_annotation>Annotation workflow</a> was added in <a href=./workflow/>the workflow introduction page</a>.<br>
+Aug 6 2009 New API of high speed BLAST was added. Please refer to <a href="/parallel_blast.html">the page</a> about high speed BLAST and <a href="/wabi/Method?&amp;lang=en&amp;serviceName=Blast&amp;methodName=searchParallel&amp;mode=methodDetail">API document.</a><br> 
+
+</br>
+</b>
+</div>
+	<div class=entry_cont>
+		<div align=right>
+			<a href="whatsnew.jsp?lang=en" title="What's New">Update information</a>
+		</div>
+	</div>
+
+<img src="images/l1.jpg" width="28" height="21" border="0"><b>Bioinformatics web service</b><br>
+<div class=entry_cont>
+We publish the 
+<a href=/tutorial/rest/index.html>REST</a> and the 
+<a href=/tutorial/soap/index.html>SOAP</a> interface that can be used from several program languages for aiming standardization in bioinformatics and the improvement of the interoperability of the biological information resource.
+<br>
+There are <font color="red">20</font> services and <font color="red">128</font> methods in Web API for Biology.
+</div>
+</div>
+<div style="float: right;margin:10px;">
+	<center>
+			<a href="http://www.ebi.ac.uk/~bren/alberto_map.html" target=_blank>
+				<img src="images/smap.png" border="0">
+			</a>
+			<br />
+			Web services in the world
+	</center>
+</div>
+</div>
+<div style="clear:left;" id="services"></div>
+<img src="images/l1.jpg" width="28" height="21" border="0"><b>Available services</b>
+	<div class=entry_cont>
+		<table class=service_table width=600>
+		<tr class=service_category><td colspan=2 align=center>Data retrieve and keyword search</td></tr>
+		<tr class=service_header><th>Service name</th><th>Overview</th></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=DDBJ&amp;mode=methodList&amp;lang=en">DDBJ</a></td><td>
+		Retrieve DDBJ entry
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=GetEntry&amp;mode=methodList&amp;lang=en">GetEntry</a></td><td>
+		Database search and entry retrieve by accession number against DDBJ and other biological molecular database.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=ARSA&amp;mode=methodList&amp;lang=en">ARSA</a></td><td>
+		Keyword search system against over 20 life sciences databases developed by DDBJ
+		</td></tr>
+		<tr class=service_category><td colspan=2 align=center>Sequence search and analysis</td></tr>
+		<tr class=service_header><th>Service name</th><th>Overview</th></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=Blast&amp;mode=methodList&amp;lang=en">Blast</a></td><td>
+		Finds regions of similarity between biological sequences developed by NCBI
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=ClustalW&amp;mode=methodList&amp;lang=en">ClustalW</a></td><td>
+		Multiple sequence alignment program for DNA or proteins developed by EBI
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=Mafft&amp;mode=methodList&amp;lang=en">Mafft</a></td><td>
+		Multiple alignment program for amino acid or nucleotide sequeces developed in Kyoto Univ and Kyushu Univ
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=VecScreen&amp;mode=methodList&amp;lang=en">VecScreen</a></td><td>
+		A system for quickly identifying segments of a nucleic acid sequence that may be of vector origin
+		</td></tr>
+		<tr><td>
+		<a href=/wabi/Method?mode=methodList&amp;lang=en&amp;serviceName=PhylogeneticTree>PhylogeneticTree</a></td><td>
+		Generate phylogenetic from phylip format data.
+		</td></tr>
+		<tr class=service_category><td colspan=2 align=center>
+		DDBJ original system
+		</td></tr>
+		<tr class=service_header><th>Service name</th><th>Overview</th></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=Gib&amp;mode=methodList&amp;lang=en">Gib</a></td><td>
+		Genome Information Broker (GIB) is the comprehensive data repository of complete microbial genomes in the public domain.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=Gtop&amp;mode=methodList&amp;lang=en">Gtop</a></td><td>
+		Genome To Protein (GTOP) is a database which summarizes analysis results against coding sequences identified by various genome projects.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=GTPS&amp;mode=methodList&amp;lang=en">GTPS</a></td><td>
+Gene Trek in Prokaryote Space (GTPS) is a database which is re-annotated ORFs against microorganism genome data in DDBJ database.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=GIBV&amp;mode=methodList&amp;lang=en">GIBV</a></td><td>
+		Genome Information Broker for Viruses (GIB-V) is a complete virus genome data repository extracted from DDBJ database.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=GIBEnv&amp;mode=methodList&amp;lang=en">GIBEnv</a></td><td>
+		Genome Information Broker for Environmental samples (GIBEnv) is a database which is added annotation information against DDBJ environmental division.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=GIBIS&amp;mode=methodList&amp;lang=en">GIBIS</a></td><td>
+		Genome Information Broker for Insertion Sequence (GIBIS) is a database containing whole bacterial IS data obtained by extracting IS region from publicized nucleotide sequences of DDBJ.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=SPS&amp;mode=methodList&amp;lang=en">SPS</a></td><td>
+		Splicing Profile based Score (SPS) is a new method to compare two amino acid sequences.
+		</td></tr>
+		<tr class=service_category><td colspan=2 align=center>
+		Other public database system
+		</td></tr>
+		<tr class=service_header><th>Service name</th><th>Overview</th></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=TxSearch&amp;mode=methodList&amp;lang=en">TxSearch</a></td><td>
+		A retrieval system for Taxonomy Database which was unified by DDBJ, GenBank and EMBL
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=Ensembl&amp;mode=methodList&amp;lang=en">Ensembl</a></td><td>
+		Ensembl is a joint project between EMBL - EBI and the Sanger Institute to develop a software system which produces and maintains automatic annotation on selected eukaryotic genomes.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=NCBIGenomeAnnotation&amp;mode=methodList&amp;lang=en">NCBIGenomeAnnotation</a></td><td>
+		NCBI Genome annotation is a summary of NCBI genome database.
+		</td></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=GO&amp;mode=methodList&amp;lang=en">GO</a></td><td>
+		The Gene Ontology project provides a controlled vocabulary to describe gene and gene product attributes in any organism.
+		</td></tr>
+		<tr class=service_category><td colspan=2 align=center>Getting result which is called asynchronously
+</td></tr>
+		<tr class=service_header><th>Service name</th><th>Overview</th></tr>
+		<tr><td>
+		<a href="/wabi/Method?serviceName=RequestManager&amp;mode=methodList&amp;lang=en">RequestManager</a></td><td>
+		A service for getting result which is called asynchronously
+		</td></tr>
+		</table>
+	</div>
+<br />
+<b><img src="images/l1.jpg" width="28" height="21" border="0">
+	<a href="http://wns.nig.ac.jp/?lang=en" target=_blank>Workflow Navigation System  </a><br>
+</b>
+<div class=entry_cont>
+You can use several bioinformatics service with common web interface. This system provides not only the result of service but also the next services.
+</div>
+
+<b><img src="images/l1.jpg" width="28" height="21" border="0">
+	<a href="link.jsp?lang=en">Links for bioinformatics</a><br>
+</b>
+<hr>
+	<b>[Reference]</b> Yeondae Kwon, Yasumasa Shigemoto, Yoshikazu Kuwana and Hideaki Sugawara "Web API for biology with a workflow navigation system" <a target="_blank" href="http://nar.oxfordjournals.org/cgi/content/abstract/37/suppl_2/W11">Nucleic Acids Research, 2009, Vol. 37, No. suppl_2 W11-W16</a><br />
+	<b>[Reference]</b> Sugawara H, Miyazaki S. Biological SOAP servers and web services provided by the public sequence data bank. Nucleic Acids Res. 2003 Jul 1;31(13):3836-9<br />
+	"Web API for Biology" was supported in 2003-2005 by the project of <a target="_blank" style="text-decoration:underline; color:blue;" href="http://www.bioportal.jp/">"Research and Development of Biological Portal Site of the New Generation"</a> and continues developing in the <a target="_blank" style="text-decoration:underline; color:blue;" href="http://www-bird.jst.go.jp/index_e.html">BIRD</a> project.<br />
+                                                Last Updated: Feb 26, 2010<br />                                        </div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div class="entry_body">
+		<center>
+Copyright(C) National Institute of Genetics, All Rights Reserved
+		</center>
+		</div>
+	</div>
+</div>
+</html>
+

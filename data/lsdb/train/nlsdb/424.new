@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="all" />
+	<meta name="author" content="Sascha Willuweit and Lutz Roewer" />
+	<meta name="description" content="This database is interactive and allows the user the search for Y-STR haplotypes in various formats and within specified metapopulations. Related information i.e. STR characteristics, mutations, population genetic analyses etc. is documented." />
+	<meta name="keywords" content="yhrd, ystr, database, y-chromosome, haplotype, minimal haplotype, extended haplotype, swgd, yfiler, yplex, dys19, dys389i, dys389ii, dys390, dys391, dys392, dys393, dys385, dys438, dys439, dys437, dys448, dys456, dys458, dys635, ygatah4, gatah4, ycaii, forensics, forensic genetics, fingerprint, haplogroup, mutation, bio-geographical origin, single nucleotide polymorphism, SNP, DNA sequence variation, migration, allele frecuency, y chromosome, population, metapopulation, geographical group, ethnic group, bioinformatics, evolution, ycc, Y-SNP, YSNP, Wiki, Genemapper, Genotyper, Genescan, ABI, Genetic Genealogy, Genealogy, common ancestor" />
+
+	<title>YHRD - Y Chromosome Haplotype Reference Database</title>
+
+	<style type="text/css">v\:* {behavior:url(#default#VML);}</style>
+	<link href="http://static.yhrd.org/stylesheets/yhrd.css?1219168030" media="screen, projection" rel="stylesheet" title="YHRD 3.0" type="text/css" />
+	<link href="http://static.yhrd.org/stylesheets/yhrd_s.css?1258055058" media="screen" rel="stylesheet" type="text/css" />
+	<!--[if IE]>
+		<link href="http://static.yhrd.org/stylesheets/yhrd_ie.css?1245750120" media="screen, projection, print" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	<link href="http://static.yhrd.org/stylesheets/yhrd_print.css?1252368781" media="print" rel="stylesheet" type="text/css" />
+	
+
+	<script src="http://static.yhrd.org/javascripts/browser_detect.js?1258987555" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.js?1219168030" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.autocomplete.js?1219168030" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.bgiframe.js?1219168030" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.facebox.js?1219168031" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.form.js?1219168030" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.dimensions.js?1219168030" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/ui.core.js?1219168031" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/ui.tabs.js?1219168030" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/effects.core.js?1219168031" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/effects.pulsate.js?1219168031" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.tablesorter.js?1219168030" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/jquery.dxCombobox.js?1219168031" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/yhrd.js?1219168031" type="text/javascript"></script>
+<script src="http://static.yhrd.org/javascripts/s.js?1258383303" type="text/javascript"></script>
+
+	<link href="http://www.yhrd.org/News.rss" rel="alternate" title="YHRD News" type="application/rss+xml" />
+	<link href="http://static.yhrd.org/favicon.ico?1219168025" rel="shortcut icon" title="YHRD Icon" type="image/x-icon" />
+	<link rel="search" type="application/opensearchdescription+xml" title="Search YHRD" href="http://www.yhrd.org/Search+Website.xml" />
+</head>
+<body>
+<div id="navigation">
+	<div id="coverage"><strong>R33</strong>: 86568 haplotypes</div>
+	<ul>
+		
+		<li><a href="/Search">Search</a>
+			
+			
+		</li>
+		
+		<li><a href="/Analyse">Analyse</a>
+			
+			
+		</li>
+		
+		<li><a href="/Research">Research</a>
+			
+			
+		</li>
+		
+		<li><a href="/Contribute">Contribute</a>
+			
+			
+		</li>
+		
+		<li><a href="/Meet">Meet</a>
+			
+			
+		</li>
+		
+	</ul>
+	<div id="meta_navigation">
+		<ul>
+			
+				<li><a href="/Login" class="login" title="Sign in">Sign in</a></li>
+				<li><a href="/Register" title="Register for a new account">Register</a></li>
+				<li><a href="/" title="Home">Home</a></li>
+			
+		</ul>
+	</div>
+	<div id="special_announcements">
+		<ul>
+			<li><a href="/downloads/manual.pdf" target="_blank" title="Open YHRD Manual in a new window"><img src="/images/downloadmanual.png" alt="Download Manual" border="0" /></a></li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+// <!-- <![CDATA[
+var resizeLogic = {
+	queue: [],
+	add: function(f) { resizeLogic.queue[resizeLogic.queue.length] = f; },
+	kickit: function() {
+			for(i = 0; i < resizeLogic.queue.length; i++) {
+				resizeLogic.queue[i]();
+			}
+		  }
+};
+
+function resize_content() {
+	$('#sidebar').css('min-height', 0);
+	$('#content.with_sidebar').css('min-height', 0);
+	if($('#content.with_sidebar').height() < ($('#sidebar').height() - 20)) {
+		$('#content.with_sidebar').css('min-height',($('#sidebar').height() - 20));
+	} else {
+		$('#sidebar').css('min-height',($('#content.with_sidebar').height() + 20));
+	}
+}
+
+$(document).ready(function(){
+	if($('div#navigation ul li.highlight')) {
+		$('div#navigation ul li.highlight').width($('div#navigation ul li.highlight ul').width());
+	}
+	resizeLogic.add(resize_content);
+	resizeLogic.kickit();
+	$(window).resize(resizeLogic.kickit);
+
+
+BrowserDetect.redirectUnsupportedBrowsers("/unsupported_browser.html");
+
+});
+
+// ]]> -->
+</script>
+
+<div id="body">
+	<div id="content" class="with_sidebar">
+		<div class="yellowcloth">
+			
+			
+			
+		</div>
+
+		<div class="yellowcloth">
+	<div>
+		<h1 class="main">Welcome to YHRD</h1>
+		<p />
+		<div class="figure_right"><div>advertisement
+<br />
+<a href="http://marketing.appliedbiosystems.com/mk/get/QUANTDUO_RLOGIN?CID=BN-085777-YHRD200x300" onclick="window.open(this.href); return false;"><img src="/files/ab_quantifiler_duo_kit.gif" alt="Ab_quantifiler_duo_kit" /></a></div></div> The ability to identify male-specific DNA renders polymorphic Y-chromosomal sequences an invaluable addition to the standard panel of autosomal loci used in forensic genetics. Y-STR haplotyping is particularly important for sensitive typing of male DNA in mixed stains as well as for rapid assortment of biological crime scene evidence. Moreover, Y chromosomal profiling can trace back paternal lineages into the past and has thus been proven a useful tool in genealogical and kinship testing. The individuality of the male-specific part of the Y chromosome can be optimally explored by the Y-STR haplotype analysis using a set of highly variable short tandem repeat markers approved by the forensic and scientific community. An extremely informative Y-STR core set or minimal haplotype (minHt) amplifiable in a multiplex reaction has been recommended for court use : <a href="/DYS19" class="page" title="Link to page 'DYS19'">DYS19</a>, <a href="/DYS389I" class="page" title="Link to page 'DYS389I'">DYS389I</a>, <a href="/DYS389II" class="page" title="Link to page 'DYS389II'">DYS389II</a>, <a href="/DYS390" class="page" title="Link to page 'DYS390'">DYS390</a>, <a href="/DYS391" class="page" title="Link to page 'DYS391'">DYS391</a>, <a href="/DYS392" class="page" title="Link to page 'DYS392'">DYS392</a>, <a href="/DYS393" class="page" title="Link to page 'DYS393'">DYS393</a>, <a href="/DYS385" class="page" title="Link to page 'DYS385ab'">DYS385ab</a> (<a href="/Publication;Kayser1997" class="ref" title="Reference to publication 'Kayser et al. 1997'">Kayser et al. 1997</a> and <a href="/Publication;Pascali1999" class="ref" title="Reference to publication 'Pascali et al. 1999'">Pascali et al. 1999</a>). This core haplotype can be extended by other hypervariable Y-STR loci (<a href="/DYS438" class="page" title="Link to page 'DYS438'">DYS438</a>, <a href="/DYS439" class="page" title="Link to page 'DYS439'">DYS439</a>, <a href="/DYS437" class="page" title="Link to page 'DYS437'">DYS437</a>, <a href="/DYS448" class="page" title="Link to page 'DYS448'">DYS448</a>, <a href="/DYS456" class="page" title="Link to page 'DYS456'">DYS456</a>, <a href="/DYS458" class="page" title="Link to page 'DYS458'">DYS458</a>, <a href="/DYS635" class="page" title="Link to page 'DYS635'">DYS635</a>, <a href="/YGATAH4" class="page" title="Link to page 'YGATAH4'">YGATAH4</a>) to further increase the power of discrimination (<a href="/Publication;Ayub2000" class="ref" title="Reference to publication 'Ayub et al. 2000'">Ayub et al. 2000</a>, <a href="/Publication;Redd2002" class="ref" title="Reference to publication 'Redd et al. 2002'">Redd et al. 2002</a> and <a href="/Publication;Mulero2006a" class="ref" title="Reference to publication 'Mulero et al. 2006'">Mulero et al. 2006</a>).
+With the establishment of the <strong class="level1">Y-STR haplotype reference database (YHRD)</strong> in the year 2000 two important objectives are pursued:<div class="br_level2">&nbsp;</div>
+<ol class="level1">
+<li class="level1">the generation of reliable Y-STR haplotype frequency estimates for Y-STR haplotypes to be used in the quantitative assessment of matches in forensic and genealogical casework (<a href="/Search+Haplotypes" class="page" title="Link to page 'Search Haplotypes'">Search Haplotypes</a>)</li>
+<li class="level1">the assessment of male population stratification among world-wide populations as far as reflected by Y-STR haplotype frequency distributions
+(<a href="/Population+Analysis" class="page" title="Link to page 'Population Analysis'">Population Analysis</a>)</li>
+</ol>
+<div class="br_level1">&nbsp;</div>
+
+To this end, a large and steadily growing number of diagnostic and research laboratories (<a href="/Search+Contributors" class="page" title="Link to page 'Search Contributors'">Search Contributors</a>) have joined in a collaborative effort to collect population data (<a href="/Search+Contributions" class="page" title="Link to page 'Search Contributions'">Search Contributions</a> by accession number) and to create a sufficiently large reference database. All institutions contributing in this project, participated in an obligate quality control exercise.
+This database is interactive and allows the user the search for Y-STR haplotypes in various formats and within specified national databases and metapopulations. Related information i.e. STR characteristics, mutations, population genetic analyses etc. is documented (<a href="/YSTR+Loci" class="page" title="Link to page 'YSTR Loci'">YSTR Loci</a>).<div class="br_level1">&nbsp;</div>
+
+The YHRD database and the tools therein are published in <a href="/Publication;Willuweit2007" class="ref" title="Reference to publication 'Willuweit &amp; Roewer 2007'">Willuweit & Roewer 2007</a><div class="br_level1">&nbsp;</div>
+
+For further information, please <a href="/Contact" class="page" title="Link to page 'contact us'">contact us</a>.
+	</div>
+	
+		<p style="display:none" />
+		<div class="info">
+			Last modified 9 months and 19 days ago by <a href="/Profile;3;users">Sascha Willuweit</a>
+		</div>
+	
+</div>
+
+
+		
+			<hr />
+			<div id="sidebar">
+				
+					<div class="block">
+						<h3>Search YHRD</h3>
+						<form action="/Search+Website" id="Search" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="CNdazvclhIIH9RIpe/YektjKKBkB38TLjmpYth0Fl9o=" /></div>
+							<div class="searchform">
+								<input class="text" id="q" name="q" onclick="if(this.value=='Enter terms'){this.value='';};" type="text" value="Enter terms" />
+								<input class="button" name="commit" type="submit" value="Search" />
+							</div>
+						</form>
+					</div>
+					<hr />
+				
+				
+				
+					<div class="block">
+						<h3>Latest News</h3>
+						<div class="content">
+							<dl>
+							
+								<dt><a href="/News;149">Release 33
+</a></dt>
+								<dd><a href="/News;149">
+We have created release 33 (on March 3rd, which is 3.3. Hm?). 2521 new haplotypes, 1003 of these extended by phylogenetic markers [&#8230;]</a></dd>
+								<dd class="info">Posted 1 month ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;147">Y-SNP Fact Sheets
+</a></dt>
+								<dd><a href="/News;147">
+
+
+The inclusion of Y-SNPs in the database stands for a new dimension of the YHRD 3.0 project and was well received by the [&#8230;]</a></dd>
+								<dd class="info">Posted 2 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;146">Release 32
+</a></dt>
+								<dd><a href="/News;146">
+
+
+Within a month academic groups submitted 2.948 new haplotypes (897 extended by YSNP markers). From this data we created release [&#8230;]</a></dd>
+								<dd class="info">Posted 3 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;143">Y-SNPs and Release 31
+</a></dt>
+								<dd><a href="/News;143">
+
+
+With new release 31 the first 2.671 Y chromosomes (from 41 populations) become searchable not only for STRs but for [&#8230;]</a></dd>
+								<dd class="info">Posted 4 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;142">Workshop
+</a></dt>
+								<dd><a href="/News;142">
+
+
+Registration to the 7th Y User Workshop / 4th EMPOP meeting in Berlin, April 22th-24th, 2010 is now open. Please check out the a [&#8230;]</a></dd>
+								<dd class="info">Posted 4 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;138">Release 30 is online!
+</a></dt>
+								<dd><a href="/News;138">
+
+
+August 21, 2009: We have updated the database and added 30 new or updated population samples with 4,405 haplotypes. [&#8230;]</a></dd>
+								<dd class="info">Posted 7 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;137">AMOVA Tool Failure
+</a></dt>
+								<dd><a href="/News;137">
+
+
+The software used for scheduling all AMOVA calculations didn't manage to clean up old and erroneous runs. In a result it [&#8230;]</a></dd>
+								<dd class="info">Posted 7 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;135">New Release 29!
+</a></dt>
+								<dd><a href="/News;135">
+
+
+June 12, 2009: We have updated the database and added 30 new or updated population samples with 2,687 haplotypes. Most of [&#8230;]</a></dd>
+								<dd class="info">Posted 9 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;134">Update: Mutation rates and AMOVA
+</a></dt>
+								<dd><a href="/News;134">
+
+
+June 3, 2009: We have edited the Research page and included a comprehensive list of mutations and mutation [&#8230;]</a></dd>
+								<dd class="info">Posted 10 months ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+								<dt><a href="/News;128">De-bug release
+</a></dt>
+								<dd><a href="/News;128">
+
+
+March 23, 2009: Thanks to Mark Jobling, we were able to identify some duplicates of haplotypes with mutations at DYS385. There [&#8230;]</a></dd>
+								<dd class="info">Posted 1 year ago by <a href="/Profile;3;users">Sascha Willuweit</a></dd>
+							
+							</dl>
+							Looking for old news? <a href="/News" title="Read more." class="int">Read more.</a>
+						</div>
+					</div>
+					<hr />
+				
+		
+					
+			</div>
+		
+	</div>
+
+	
+	<div id="footer">
+		
+		<div id="footer_navigation">
+			<ul>
+				<li><a href="/News.rss" class="rss" type="application/rss+xml">RSS Feed</a></li>
+				<li><a href="/Help">Help</a></li>
+				<li><a href="/Legal">Disclaimer &amp; Legal</a></li>
+				<li><a href="/Contact">Contact</a></li>
+			</ul>
+			<hr />
+		</div>
+		<br />
+		
+
+		
+		<div id="license">
+			<div style="float:left;vertical-align:top">
+				<a target="_blank" id="license_logo" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+					<img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png"/>
+				</a>
+			</div>
+			<div style="float:left;vertical-align:top;width:30%">
+				<span style="font-size:8pt;display:block">YHRD by <a href="http://yhrd.org">Sascha Willuweit &amp; Lutz Roewer</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License</a>.</span>
+			</div>
+			<div style="float:left;padding-left:20px;vertical-align:top">
+				<span style="font-size:8pt;display:block">Supported by </span>
+				<a target="_blank" href="http://www3.appliedbiosystems.com/AB_Home/applicationstechnologies/HID/index.htm"><img src="http://static.yhrd.org/images/ab_logo.gif" alt="Applied Biosystems"/></a>
+			</div>
+			<div style="float:left;padding-left:20px;vertical-align:top">
+				<span style="font-size:8pt;display:block">Endorsed by </span>
+				<a target="_blank" href="http://www.isfg.org"><img src="http://static.yhrd.org/images/isfg_logo.gif" alt="ISFG"/></a>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+
+
+
+<script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var pageTracker = _gat._getTracker('UA-2558213-4');pageTracker._setVar('visitor');pageTracker._initData();pageTracker._trackPageview();
+//]]>
+</script>
+
+<script src="http://edge.quantserve.com/quant.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+_qacct="p-7eMu9NZ9sxBk6";quantserve();
+//]]>
+</script>
+
+<noscript>
+	<p>
+	<img src="http://pixel.quantserve.com/pixel/p-7eMu9NZ9sxBk6.gif" style="display: none;" height="1" width="1" alt="Quantcast" />
+	</p>
+</noscript>
+
+<!--
+<![CDATA[
+WARNING: DO NOT SEND MAIL TO THE FOLLOWING EMAIL ADDRESS! YOU WILL
+BE BLOCKED INSTANTLY AND PERMANENTLY!
+nycholas.greene@thinkpad.de
+<a href="mailto:camilla.clay@thinkpad.de">Block me</a>
+WARNING END
+]]>
+-->
+
+</body>
+</html>

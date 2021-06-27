@@ -1,0 +1,212 @@
+<html>
+<head>
+<title>TcoF - Dragon database of transcription co-factors and transcription factor interacting proteins&nbsp;</title>
+<link rel="stylesheet" type="text/css" href="default.css">
+</head>
+
+<body onload="javascript:loadForm()">
+<script language="JavaScript">
+
+// --------------------------------------------------------------------------------------
+
+function loadForm()
+{
+    TabSelect('T1','S1');
+}
+
+// --------------------------------------------------------------------------------------
+
+function TabSelect (tab, content)
+{
+	//--- get tabs and content IDs	
+	var Tabs = [document.getElementById('T1'), document.getElementById('T2')];
+	var Content = [document.getElementById('S1'), document.getElementById('S2')];
+	
+	//--- reset tabs and content
+	for (var i = 0; i < Tabs.length; i++)
+	{
+		Tabs[i].className = 'tab_nonselected';
+	}
+	
+	for (var i = 0; i < Content.length; i++)
+	{
+		Content[i].style.display = 'none';
+	}
+
+	//--- set clicked tab and content
+	var tab_obj = document.getElementById(tab);
+	var cont_obj = document.getElementById(content);
+	tab_obj.className = 'tab_selected';
+	cont_obj.style.display = '';
+}
+
+// ----------------------------------------------------------------------------
+
+</script>
+<center>
+
+<link rel="stylesheet" type="text/css" media="screen, projection" href="HorizontalMenu.css" />
+
+
+<table border="0" width="800" cellspacing="0" cellpadding="0" style="font-size:11px;background:white;">
+<tr>
+    <td align="right">&nbsp;</a></td>
+</tr>
+</table>
+
+
+<table border="0" width="800" cellspacing="0" cellpadding="0" style="table-layout:fixed;background-image:url('images/banner1.jpg');background-repeat:no-repeat">
+<tr height="95">
+    <td width="400">&nbsp;</td>    
+    <td width="400"><font size="4"><b>TcoF - Dragon database of transcription co-factors and transcription factor interacting proteins</b></font></td>    
+</tr>
+<tr height="10" style="background-color:white"><td colspan="2"></tr></tr>
+</table>
+
+<table border="0" width="800" height="20" cellspacing="0" cellpadding="0" style="table-layout:fixed">
+<tr>
+<td width="10" bgcolor="#AAAAAA">&nbsp;</td>
+<td width="100" bgcolor="#AAAAAA"><a href="index.php">Home</a></td>
+<td width="100" bgcolor="#AAAAAA"><a href="Definitions.php">Definitions</a></td>
+<td width="100" bgcolor="#AAAAAA"><a href="Statistics.php">Statistics</a></td>
+<td width="100" bgcolor="#AAAAAA"><a href="References.php">Related links</a></td>
+<td width="100" bgcolor="#AAAAAA"><a href="Manual.php">Manual</a></td>
+<td width="100" bgcolor="#AAAAAA"><a href="Download.php">Download</a></td>
+<td width="70" bgcolor="#AAAAAA"><a href="About.php">Team</a></td>
+
+<td width="100" bgcolor="#AAAAAA" align="left" nowrap><i><b>Home of TcoF</b></i></td>
+
+</tr></table>
+<br>
+
+<table border="0" width="800" cellspacing="0" cellpadding="0" style="background-color:white">
+<tr>
+        <td align="center">
+            <table border="0" width="500" cellspacing="0" cellpadding="0" style="background-color:white">
+                <tr>
+                <td>
+                <div style="text-align:justify;font-size:13px;position:relative;top:0px;left:0px;background:#eeeeee;filter:alpha(opacity=80);opacity: 0.8;-moz-opacity:0.8;border:1px solid #cccccc;padding:5px" height="320" width="300">
+                TcoF is a database that facilitates the exploration of proteins involved in the regulation of transcription in humans by binding to regulatory DNA regions (transcription factors)                
+                and proteins involved in the regulation of transcription in humans by interacting with transcription factors and not binding to regulatory DNA regions (transcription co-factors).
+                Proteins can be searched by a variety of identifiers or predefined sets of proteins can be viewed.
+                <br><br>
+                For more information feel free to <a href="About.php">contact us</a>.
+                <br><br>Start browsing TcoF below.</div>
+                </td>
+                </tr>
+            </table>
+        <br>        
+        </td>
+        
+</tr>
+<tr>
+<td align="left" valign="top" style="background:white" align="center">
+    <table border="1" cellspacing="0" cellpadding="3" width="768" align="center" style="border-color:gray;border-collapse:collapse;border:1px solid #cccccc">
+    <tr>
+    	<td nowrap id="T1" class="tab_selected" align="center"> <a href="#" onclick="TabSelect('T1','S1')">Search by identifier</a> </td>
+    	<td nowrap id="T2" class="tab_nonselected" align="center"> <a href="#" onclick="TabSelect('T2','S2')">View predefined protein set</a> </td>
+        <!-- <td nowrap style="background:white" align="center">&nbsp;</td> -->
+    </tr>
+        
+        <table border="1" id="S1" cellspacing="0" cellpadding="0" align="center" style="border-color:gray;border-collapse:collapse;border:1px solid #cccccc">
+            <tr>        
+            <td align="center">
+            <form name="SearchNameForm" id="SearchNameForm" method="post" action="searchProteinByIdentifier.php" onsubmit="return (true);">
+                <table border="0" width="768" cellspacing="0" cellpadding="3">
+                    <tr>
+                        <td align="center" colspan="2">
+                        <br>
+                        <input type="text" name="SearchKeywords" value="" size="50%">
+                        <input type="submit" name="search" value="Search">
+                        <br>
+                        <span style="color:grey;font-size: 10px;">Type protein identifier to search. E.g. BRCA1, P38398 or zinc finger</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="250" align="center" name="searchType" id="searchType">Type of search parameter</td>
+                        <td><input name="searchType" id="searchType" type="Radio" value="unip_id" size="5" checked>Uniprot ID (e.g. BRCA1_HUMAN)</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input name="searchType" id="searchType" type="Radio" value="unip_acc" size="5">Uniprot accession (e.g. P51587)</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input name="searchType" id="searchType" type="Radio" value="name" size="5">Name (e.g. Breast cancer type 2 susceptibility protein)</td>
+                    </tr>
+                </table>
+            </form>
+            </td>
+            </tr>
+        </table>
+        
+        <table border="1" id="S2" cellspacing="0" cellpadding="0" align="center" style="border-color:gray;border-collapse:collapse;border:1px solid #cccccc">
+            <tr>
+            <td align="center">
+                <form name="ViewPredefinedForm" id="ViewPredefinedForm" method="post" action="viewPredefinedSet.php" onsubmit="return (true);">
+                    <table border="0" width="768" cellspacing="0" cellpadding="3">
+                        <tr>
+                            <br>
+                            <td align="center" width="250">Find what?</td>
+                            <td>
+                                <input type="radio" name="predefinedSets" value="tfs" checked>transcription factors<br>
+                                <input type="radio" name="predefinedSets" value="tcofs">transcription co-factors<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input name="class1" id="class1" type="checkbox" value="1" checked>High confidence TcoFs<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input name="class2" id="class2" type="checkbox" value="2" checked>Hypothetical TcoFs - class 1<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input name="class3" id="class3" type="checkbox" value="3" checked>Hypothetical TcoFs - class 2<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input name="class4" id="class4" type="checkbox" value="4" checked>Hypothetical TcoFs - class 3<br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="2">
+                            <br>
+                            <input type="submit" name="search" value="Search">
+                            <br>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+            </tr>
+        </table>
+    
+    </table>
+
+</td>
+</tr>
+<br>
+        
+        <td align="center">
+            <table border="0" width="500" cellspacing="0" cellpadding="0" style="background-color:white">
+                <tr>
+                <td>
+                <div style="text-align:justify;font-size:13px;position:relative;top:0px;left:0px;background:#eeeeee;filter:alpha(opacity=80);opacity: 0.8;-moz-opacity:0.8;border:1px solid #cccccc;padding:5px" height="320" width="300">
+                Please cite:<br><a href="http://nar.oxfordjournals.org/content/early/2010/10/20/nar.gkq945.full.html?ijkey=SEYcMNzgA4QoZaZ&keytype=ref" target="_blank">
+                <i>TcoF-DB: dragon database for human transcription co-factors and transcription factor interacting proteins</i><br>
+                Ulf Schaefer; Sebastian Schmeier; Vladimir B. Bajic<br>
+                Nucleic Acids Research 2010; doi: 10.1093/nar/gkq945</a>
+                </td>
+                </tr>
+            </table>
+        <br>        
+        </td>        
+
+
+</table> 
+
+<table style="background:white" border="0" width="800" cellspacing="2" cellpadding="2">
+<tr>
+<td align="center" style="font-size:10px;color:#606060;border-top:1px solid #A3102C">
+<a href="http://www.kaust.edu.sa">King Abdullah University of Science and Technology / Computational Bioscience Research Center &copy; 2011</a>
+</td></tr>
+</table>
+</center>
+</body>
+</html>

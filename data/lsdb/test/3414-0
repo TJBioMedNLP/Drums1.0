@@ -1,0 +1,126 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<title>HCS: Hierarchical Classification of Hydrolases Catalytic Sites</title>
+<link href="css/styles.css" type="text/css" rel="stylesheet"><script src="js/script.js" language="JavaScript"></script><meta name="Author" content="Igor A. Gariev">
+<meta name="Contact" content="gariev@hotmail.com">
+</head>
+<body>
+<table width="100%" cellSpacing="0" cellPadding="3">
+<tr><td class="left">Hydrolases Catalytic Sites</td><td class="left">
+<table width="100%" cellSpacing="1" cellPadding="3" bgcolor="white">
+<tr>
+<td class="left"><a href="..">Home</a></td>
+<td class="left"><a href="classes.html">Classes</a></td>
+<td class="left">FAQ</td>
+<td class="left"><a href="cgi/search.cgi">Search</a></td>
+</tr>
+</table>
+</td></tr>
+</table>
+<div style="text-align: center;"><br>
+	[ <a href="#general-information">General description</a> ]
+	[ <a href="#acknowledgements">Acknowledgements</a> ] 
+	[ <a href="#links">Links</a> ] 
+	[ <a href="#references">References</a> ] 	
+	<br><br><h1>Hierarchical Classification of Hydrolases Catalytic Sites</h1><a name="general-information"></a><table width="90%" class="blue" cellSpacing="1" cellPadding="3"><tr><th colspan="2">General Information</th></tr><tr><td class="name">Data access</td><td>
+	You can access the database by one of the following methods:
+	<ul><li>Explore the hierarchy of <a href="classes.html">classes</a></li><li><a href="cgi/search.cgi">Search</a> for a specific protein</li></ul></td></tr><tr><td class="name">Statistics</td><td>
+	The current release 1.2
+	(May 2005)
+	of the database contains
+	<ul><li>1162 classified hydrolases</li><li>87 classes</li><li>References to 6302 PDB structures</li><li>68 manually drawn schemes of catalytic mechanisms</li><li>56 3D-viewable images of catalytic sites</li><li>594 literature references</li></ul></td></tr><tr><td class="name">Data model</td><td><img src="index.png" style="float: right;"><p>
+	Main objects of the database are proteins and classes. 
+	Each class unites hydrolases with the same type of the catalytic site.
+	Classes are organized into a hierarchy. 
+	Hydrolases can be linked to any class, not necessarily to a terminal one. 
+	</p><p>
+	The relation between a class and its subclass in the hierarchy is that 
+	catalytic site of the subclass <i>refines</i> catalytic site of the 
+	base class, i.e. the former contains all catalytic residues of the 
+	base class site and some additional residues.
+	</p><p>
+	For example, <a href="cgi/protein.cgi?id=P22266">esterase</a> 
+	from <i>Streptomyces scabiei</i> with unusual catalytic dyad Ser-His 
+	belongs to class <a href="cgi/class.cgi?clsid=S.01">S.01</a> 
+	(Serine hydrolases with Ser-His dyad) and more abundant hydrolases 
+	like <a href="cgi/protein.cgi?id=P00761">trypsin</a> or 
+	<a href="cgi/protein.cgi?id=P07518">subtilisin</a> belong to 
+	subclass <a href="cgi/class.cgi?clsid=S.01.01">S.01.01</a> 
+	(Hydrolases with Ser-His-Asp/Glu triad) of that class.
+	</p></td></tr><tr><td class="name">Hierarchy organisation</td><td>
+	To build the hierarchy, catalytic residues are ordered so that more important ones are considered first. Three simple rules are applied:
+	<ol><li>The residue forming a covalent bond with substrate during reaction takes priority. The further a residue from a reactive center, the lower its priority.</li><li>If a catalytic site includes metal ion(s), then it is classified according to nature and the number of the ions.</li><li>If two catalytic sites are equal in composition but known to have different catalytic mechanisms, then they are placed in different classes.</li></ol>
+	Therefore hydrolases like trypsin, which contain serine, histidine and 
+	aspartate residue in their catalytic sites, are classified firstly as serine hydrolases (class <a href="cgi/class.cgi?clsid=S">S</a>), then refined as hydrolases with Ser-His dyad (class <a href="cgi/class.cgi?clsid=S.01">S.01</a>) and finally they occupy class <a href="cgi/class.cgi?clsid=S.01.01">S.01.01</a> (Hydrolases with Ser-His-Asp triad).
+</td></tr><tr><td class="name">Curation method</td><td>
+	The main methods of catalytic site annotation are direct literature 
+	mining and search of protein three-dimensional structures by templates.
+	To increase reliability of the database only the hydrolases with known 
+	3D structure of catalytic domain are included.
+</td></tr><tr><td class="name">Contact</td><td>
+Igor A. Gariev <a href="mailto:gariev@hotmail.com">gariev@hotmail.com</a></td></tr></table><br><a name="acknowledgements"></a><table width="90%" class="blue" cellSpacing="1" cellPadding="3"><tr><th colspan="1">Acknowledgements</th></tr><tr><td><ol><li>Jess program
+		[<a href="#ref5">5</a>]
+	 is used for catalytic site search</li><li>Protein sequences, accession numbers and (partially) names are from UniProt (SwissProt and TrEMBL) 
+		[<a href="#ref6">6</a>]
+	 database</li><li>Protein folds are from CATH
+		[<a href="#ref7">7</a>]
+	 and SCOP
+		[<a href="#ref4">4</a>]
+	 database. Please note, that folds of catalytic domains only are denoted. Many proteins have several domains, for information on folds of non-catalytic domains please refer to the corresponding databases.</li><li>EC numbers and organisms are from PDB documents 
+		[<a href="#ref3">3</a>]
+	 and UniProt annotations</li><li>Catalytic site images are drawn with MolScript
+		[<a href="#ref1">1</a>]
+	 and Raster3D
+		[<a href="#ref2">2</a>]
+	 programs</li><li>Trees of proteins properties are drawn on-the-fly with GraphViz software</li></ol></td></tr></table><br><a name="links"></a><table width="90%" class="blue" cellSpacing="1" cellPadding="3"><tr><th colspan="1">Useful links</th></tr><tr><td><ul><li>Databases of enzymes' active sites, catalytic mechanisms and classifications of hydrolases<ul><li>Catalytic Site Atlas<br><a href="http://www.ebi.ac.uk/thornton-srv/databases/CSA/">http://www.ebi.ac.uk/thornton-srv/databases/CSA/</a></li><li>PROCAT - A database of 3D enzyme active site templates<br><a href="http://www.biochem.ucl.ac.uk/bsm/PROCAT/PROCAT.html">http://www.biochem.ucl.ac.uk/bsm/PROCAT/PROCAT.html</a></li><li>Structure-Function Linkage Database<br><a href="http://sfld.rbvi.ucsf.edu/">http://sfld.rbvi.ucsf.edu/</a></li><li>EzCatDB - A Database of Enzyme Catalytic Mechanisms<br><a href="http://mbs.cbrc.jp/EzCatDB/">http://mbs.cbrc.jp/EzCatDB/</a></li><li>MACiE - A database of enzyme reaction mechanisms<br><a href="http://www-mitchell.ch.cam.ac.uk/macie/">http://www-mitchell.ch.cam.ac.uk/macie/</a></li></ul></li><li>General-use protein databases<ul><li>UniProt -  the Universal Protein Resource (SwissProt database and TrEMBL supplement)<br><a href="http://www.expasy.org/sprot/">http://www.expasy.org/sprot/</a></li><li>PDB - the Protein Data Bank<br><a href="http://www.pdb.org/">http://www.pdb.org/</a></li></ul></li><li>Classification of protein folds<ul><li>CATH - Protein Structure Classification (Class, Architecture, Topology and Homologous superfamily)<br><a href="http://cathwww.biochem.ucl.ac.uk/latest/">http://cathwww.biochem.ucl.ac.uk/latest/</a></li><li>SCOP - Structural Classification of Proteins<br><a href="http://scop.mrc-lmb.cam.ac.uk/scop/">http://scop.mrc-lmb.cam.ac.uk/scop/</a></li></ul></li><li>Classification of hydrolases by sequence similarity<ul><li>CAZY - Carbohydrate-Active enZYmes<br><a href="http://afmb.cnrs-mrs.fr/CAZY/">http://afmb.cnrs-mrs.fr/CAZY/</a></li><li>MEROPS - the Peptidase Database<br><a href="http://merops.sanger.ac.uk/">http://merops.sanger.ac.uk/</a></li></ul></li><li>Homologous protein families<ul><li>Pfam - Protein Families Database<br><a href="http://www.sanger.ac.uk/Software/Pfam/">http://www.sanger.ac.uk/Software/Pfam/</a></li><li>COG - Clusters of Orthologous Groups of proteins<br><a href="http://www.ncbi.nlm.nih.gov/COG/">http://www.ncbi.nlm.nih.gov/COG/</a></li></ul></li></ul></td></tr></table><br><a name="references"></a><table width="90%" class="blue" cellSpacing="1" cellPadding="3"><tr><th colspan="1">References</th></tr><tr><td><ol><li><a name="ref1"></a>Kraulis PJ<br>MOLSCRIPT: a program to produce both detailed and schematic plots of protein structures.<br><i>J. Appl. Cryst.</i>  
+		(1991).
+		<b>24</b>,
+		946-950.
+		
+		doi: <a href="http://dx.doi.org/10.1107/S0021889891004399">10.1107/S0021889891004399</a></li><br><br><li><a name="ref2"></a>Merritt EA, Bacon DJ<br>Raster3D: Photorealistic Molecular Graphics.<br><i>Meth. Enzymol.</i>  
+		(1997).
+		<b>277</b>,
+		505-524.
+		</li><br><br><li><a name="ref3"></a>Berman HM, Westbrook J, Feng Z, Gilliland G, Bhat TN, Weissig H, Shindyalov IN, Bourne PE.<br>The Protein Data Bank.<br><i>Nucleic. Acids. Res.</i>  
+		(2000).
+		<b>28 (1)</b>,
+		235-42.
+		
+		pubmed: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=10592235">10592235</a></li><br><br><li><a name="ref4"></a>Lo Conte L, Brenner SE, Hubbard TJ, Chothia C, Murzin AG.<br>SCOP database in 2002: refinements accommodate structural genomics.<br><i>Nucleic. Acids. Res.</i>  
+		(2002).
+		<b>30 (1)</b>,
+		264-7.
+		
+		pubmed: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=11752311">11752311</a></li><br><br><li><a name="ref5"></a>Barker JA, Thornton JM.<br>An algorithm for constraint-based structural template matching: application to 3D templates with statistical analysis.<br><i>Bioinformatics.</i>  
+		(2003).
+		<b>19 (13)</b>,
+		1644-9.
+		
+		pubmed: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=12967960">12967960</a>
+		doi: <a href="http://dx.doi.org/10.1093/bioinformatics/btg226">10.1093/bioinformatics/btg226</a></li><br><br><li><a name="ref6"></a>Bairoch A, Apweiler R, Wu CH, Barker WC, Boeckmann B, Ferro S, Gasteiger E, Huang H, Lopez R, Magrane M, Martin MJ, Natale DA, O'Donovan C, Redaschi N, Yeh LS.<br>The Universal Protein Resource (UniProt).<br><i>Nucleic. Acids. Res.</i>  
+		(2005).
+		<b>33</b>,
+		D154-9.
+		
+		pubmed: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15608167">15608167</a>
+		doi: <a href="http://dx.doi.org/10.1093/nar/gki070">10.1093/nar/gki070</a></li><br><br><li><a name="ref7"></a>Pearl F, Todd A, Sillitoe I, Dibley M, Redfern O, Lewis T, Bennett C, Marsden R, Grant A, Lee D, Akpor A, Maibaum M, Harrison A, Dallman T, Reeves G, Diboun I, Addou S, Lise S, Johnston C, Sillero A, Thornton J, Orengo C<br>The CATH Domain Structure Database and related resources Gene3D and DHS provide comprehensive domain family information for genome analysis.<br><i>Nucleic. Acids. Res.</i>  
+		(2005).
+		<b>33</b>,
+		D247-51.
+		
+		pubmed: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15608188">15608188</a></li></ol></td></tr></table><br><br></div>
+<table width="100%" cellSpacing="0" cellPadding="3">
+<tr><td class="left">Hydrolases Catalytic Sites</td><td class="left">
+<table width="100%" cellSpacing="1" cellPadding="3" bgcolor="white">
+<tr>
+<td class="left"><a href="..">Home</a></td>
+<td class="left"><a href="classes.html">Classes</a></td>
+<td class="left">FAQ</td>
+<td class="left"><a href="cgi/search.cgi">Search</a></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

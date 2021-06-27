@@ -1,0 +1,247 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <title>BIOCHAM web page</title>
+</head>
+<body>
+<center><b><font size="+2">The Biochemical Abstract Machine BIOCHAM</font></b><br>
+<p>&nbsp;
+EPI Contraintes, INRIA Paris-Rocquencourt, France <br>
+<a href="http://contraintes.inria.fr/BIOCHAM/">http://contraintes.inria.fr/BioCham/</a><br>
+<br>
+developpers mailing list: <a href="mailto:biocham@inria.fr">biocham@inria.fr</a><br>
+</p>
+</center>
+<p> <br>
+</p>
+<p><b style="color: rgb(255, 0, 0);"><u>New</u></b> BioCham 3.2 has been
+released in October 2010.<br>
+</p>
+<!-- <p><b style="color: rgb(255, 0, 0);"><u>New</u></b> BioCham 3.1 is a
+major release including an improved SBGN Reaction Graph Editor, released in August 2010.<br>
+</p>
+<p><b style="color: rgb(255, 0, 0);"><u>New</u></b> BioCham 3.0 includes a new graphical interface, new features for
+parameter search and a new manual. Released in June 2010.<br>
+</p>
+<p><b style="color: rgb(255, 0, 0);"><u>New</u></b> Previous version
+2.9 has
+been used (in synergy with <a
+ href="http://www.cosbi.eu/Rpty_Soft_BetaWB.php">Beta WB</a> and <a
+ href="http://gin.univ-mrs.fr/">GINsim</a>) to win the
+Biological Modelling Competition of the Formal Methods in Molecular
+Biology
+Dagstuhl workshop in Feb. 2009.
+</p>-->
+<p><b><u>Overview</u></b> </p>
+<p>The Biochemical Abstract Machine (BioCham) is a modelling
+environment for systems biology, with some unique features for
+inferring unknown model parameters from temporal logic constraints.<br>
+</p>
+<p>BioCham is mainly composed of :<br>
+</p>
+<ul>
+  <li>a rule-based language for modeling biochemical systems
+(compatible with SBML)</li>
+  <li>several simulators (boolean, differential, stochastic),</li>
+  <li>a temporal logic based language to formalize the temporal
+properties of a biological system and validate models with respect to such specifications,<br>
+  </li>
+  <li>unique features for developing/correcting/completing/coupling
+models,
+including the inference of kinetic parameters in high dimension from
+temporal logic constraints.<br>
+  </li>
+</ul>
+<p>BioCham is a free software protected by the <a
+ href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License
+GPL version 2</a>. This is an Open Source license that allows free
+usage
+of this software.<br>
+</p>
+<p>Feedback on the use of BioCham in applications, research or teaching
+are particularly welcomed. </p>
+<p><b><u>
+Documentation</u></b></p>
+<ul>
+  <li>Reference manual in <a href="DOC/manual.html">html</a> and <a
+ href="DOC/manual.pdf">pdf</a> (including a bibliography)<br>
+  </li>
+  <li><a href="EXAMPLES">Examples</a></li>
+  <li>Tutorial (corresponding to older version 2.4) in&nbsp;<a
+ href="http://contraintes.inria.fr/%7Ecalzone/tutorial/tutorial_dream.htm">html</a>
+and <a
+ href="http://contraintes.inria.fr/%7Ecalzone/tutorial/tutorial.pdf">pdf</a>.<br>
+  </li>
+<li>Video tutorials: <a href="http://contraintes.inria.fr/~djovanov/BiochamGUI_demo5.wmv">Working with an existing model</a>&nbsp;, or <a href="http://contraintes.inria.fr/~djovanov/BiochamGUI_demo4-1.wmv">Creating a new model</a></li>
+</ul>
+<p>You can also try running some BioCham commands through the online
+version. All commands acting on files (export_dot, add_biocham,
+load_sbml, etc.) are deactivated. Only one picture will be displayed
+(the last one produced with plot, dot, etc.).</p>
+<script type="text/javascript">
+<!--
+   function upload() {
+      if (window.FileReader)
+      {
+         var filer = new FileReader();
+         filer.onload = function () {
+            document.getElementById('textdata').value = filer.result;
+         };
+         filer.readAsText(document.getElementById('filedata').files[0]);
+      } else {
+         alert('The File APIs are not fully supported in this browser.\nUsing direct upload instead...\n\nIf you really need to edit the file, copy and paste its contents in the text box.');
+         document.getElementById('myform').submit();
+      }
+   };
+
+   function getexample() {
+      var ex = document.getElementById('examplefile');
+      var value = ex.options[ex.selectedIndex].value;
+      if (value != "") {
+         var myget = new XMLHttpRequest();
+         myget.open('GET', value, true);
+         myget.onreadystatechange = function() {
+            if(myget.readyState == 4 && myget.status == 200)
+               document.getElementById('textdata').value = myget.responseText;
+         };
+         myget.send();
+      }
+   };
+-->
+</script>
+<form action="/cgi-bin/soliman/biocham.pl" id="myform"
+ enctype="multipart/form-data" method="post"> <b>Biocham file</b>
+ (upload a file, select an example or type in below)<br />
+ <input name="filedata" type="file"
+id="filedata" onchange="upload();"> <br>
+  <select name="example" id="examplefile" onchange="getexample();">
+     <option value = "">--</option>
+     <option value =
+     "http://contraintes.inria.fr/BIOCHAM/EXAMPLES/cell_cycle/cell_cycle.bc">Kohn's
+     1999 Cell Cycle control map</option>
+     <option value =
+     "http://contraintes.inria.fr/BIOCHAM/EXAMPLES/cell_cycle_Tyson_6Var/tyson91.bc">Tyson's
+     6 variables Cell Cycle model [PNAS 1991]</option>
+     <option value =
+     "http://contraintes.inria.fr/BIOCHAM/EXAMPLES/MAPK/mapk.bc">Huang and
+     Ferrel's MAPK model with Levchenko et al. 2003 parameters</option>
+     <option value =
+     "http://contraintes.inria.fr/BIOCHAM/EXAMPLES/locations/p53Mdm2.bc">Ciliberto
+     et al. 2005 p53/Mdm2</option>
+  </select> <br />
+  <textarea name="textdata" id="textdata" rows="10" cols="80"></textarea> <br>
+  <input value="Do it" type="submit"> <input value="Clear" type="reset"></form>
+<p><b><u>Download and Installation</u></b> </p>
+<p><span style="text-decoration: underline;">Binary versions</span>: <a
+ href="BiochamSetup.exe">Windows
+binary version</a> (tested on XP and Vista) and <a href="Biocham.dmg">Mac OS X (Universal)
+binary version</a> (tested on SnowLeopard) <br>
+</p>
+<p>We recommend that you have already installed first <a
+ href="http://java.sun.com/">Java</a> version &gt;= 1.5 for using the
+GUI of BIOCHAM.</p>
+<p>Then you just need to execute and follow the instructions of the
+setup program.<br>
+</p>
+<p><span style="text-decoration: underline;">Source version:</span>&nbsp;
+<a href="Biocham-3.2.tar.bz2">Biocham-3.2.tar.bz2</a>. </p>
+<!--<p>BIOCHAM is precompiled for x486 machines under Linux,
+Windows with <a href="http://www.cygwin.com/">Cygwin</a> and Mac OS X. <br>
+</p>-->
+<p>To install from source (which may be difficult on some platforms), and to be able to use all the features of
+Biocham, you need to install also:</p>
+<ul>
+  <li><a href="http://java.sun.com/">Java</a> (at least 1.5)</li>
+  <li>this <a href="http://contraintes.inria.fr/NuSMV/">patched version</a>
+(including source and binary versions) of the model checker <a
+ href="http://nusmv.irst.itc.it/">NuSMV</a>, <br>
+  </li>
+  <li><a href="http://www.gnuplot.info/">GNU Plot</a> <br>
+  </li>
+  <li><a href="http://www.research.att.com/sw/tools/graphviz/">Graphviz</a>
+    <br>
+  </li>
+</ul>
+<p>The installation then basically proceeds by<span
+ style="font-family: courier new,courier,monospace;"><br>
+./configure<br>
+make</span><span style="font-family: courier new,courier,monospace;"><br>
+make
+install</span><br>
+</p>
+<p>If a
+recompilation
+is needed on your machine, you may need to install also:<br>
+</p>
+<ul>
+  <li>a C compiler (preferably <a href="http://gcc.gnu.org/">gcc</a>)
+and a Java compiler, <br>
+  </li>
+<!--<li><a href="http://gprolog.inria.fr/">GNU Prolog</a> (version 1.3.1 or
+  later)</li>-->
+  <li>this <a href="http://contraintes.inria.fr/gprolog-snapshot.tgz">patched
+version</a> of GNU Prolog, </li>
+  <li>the <a href="http://gmplib.org/">GNU MP bignum</a> library
+(version 4.1.3 or higher)</li>
+  <li>the <a href="http://www.cs.unipr.it/ppl/">Parma Polyhedra Library</a>
+(version 0.10 or more recent)</li>
+  <li><a href="http://www.perl.org/">Perl</a>, to generate editor modes
+for <a href="http://www.vim.org/">vim</a> and <a
+ href="http://www.gnu.org/software/emacs/">emacs</a>,</li>
+  <li><a href="http://www.gnu.org/software/help2man/">help2man</a> to
+generate the man page. </li>
+</ul>
+<p>The file <a href="INSTALL">INSTALL</a> explains the compilation and
+installation
+procedure for Windows, Linux and Mac OS X (at least 10.4). </p>
+<p><b><u>References:</u></b></p>
+<p>See the bibliography of the <a href="DOC/manual.html">user's
+manual</a></p>
+<!--
+<p>[1] <b>Symbolic model checking of    biochemical networks</b> by
+Nathalie Chabrier and Fran&ccedil;ois Fages. International Workshop on
+Computational Methods in Systems Biology CMSB'03, Rovereto, Italy, March
+2003. Springer-Verlag LNCS. Available as <a
+ href="http://pauillac.inria.fr/%7Efages/Papers/CF02cmsb.ps">ps</a>.<br>
+</p>
+<p>[2] <b>Modeling and querying biochemical interaction networks.</b>
+by Nathalie Chabrier, Marc Chiaverini, Vincent Danos, Fran&ccedil;ois
+Fages and Vincent Sch&auml;chter. To appear in Theoretical Computer
+Science. May 2003.&nbsp; Available as <a
+ href="http://contraintes.inria.fr/%7Efages/Papers/CCDFS04tcs.pdf">pdf</a>.&nbsp;<br>
+</p>
+<p>[3] <a href="http://contraintes.inria.fr/cpbio">ARC CPBIO</a>,
+INRIA Research Cooperative Action on "Process Calculi and Biology of
+Molecular Networks".</p>
+<p>[4] <b>Modelling and Querying Interaction Networks in the
+Biochemical Abstract Machine BIOCHAM </b> by Nathalie Chabrier-Rivier,
+Fran&ccedil;ois Fages and Sylvain Soliman. Journal of Biological
+Physics and Chemistry 4 (2004) <i>(to appear)</i>. Preprint available
+as <a
+ href="http://contraintes.inria.fr/%7Efages/Papers/CFS04jbpc.ps.gz">ps.gz</a>.<b><br>
+</b></p>
+<p>[5] <b>The Biochemical Abstract Machine BIOCHAM </b> by Nathalie
+Chabrier-Rivier, Fran&ccedil;ois Fages and Sylvain Soliman.<br>
+Proceedings of the Second International Workshop on Computational
+Methods in Systems Biology CMSB'04, Springer-Verlag LNCS. 2004.
+Available as <a
+ href="http://contraintes.inria.fr/%7Efages/Papers/CFS04cmsb.ps.gz">ps.gz</a>.<br>
+</p>
+<p>[6] <b><a href="http://contraintes.inria.fr/CMBSlib">CMBSlib</a>: a
+Library for Comparing Formalisms and Models of    Biological Systems </b>
+by Sylvain Soliman and Fran&ccedil;ois Fages.<br>
+Proceedings of the Second International Workshop on Computational
+Methods in Systems Biology CMSB'04, Springer-Verlag LNCS. 2004.
+Available as <a
+ href="http://contraintes.inria.fr/%7Efages/Papers/SF04cmsb.ps.gz">ps.gz</a>.<br>
+</p>
+-->
+<p><b><u>Feedback and bug reports:</u></b> </p>
+<p>Mail to&nbsp; <a href="mailto:biocham@inria.fr">biocham@inria.fr</a>
+<br>
+&nbsp; <br>
+&nbsp; </p>
+</body>
+</html>

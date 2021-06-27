@@ -1,0 +1,1509 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head> 
+    <title>Research Interests Peter Sykacek</title>
+    <script type="" language="JavaScript" src="ps_sites_scripts.js">
+    </script>
+    <script type="" language="JavaScript">
+      <!--
+      inisite(window.location);
+      // -->
+    </script>
+    <link rel="stylesheet" type="text/css" href="supplement.css">
+    <style type="text/css">
+      .tab {background-color:#C0C0FF; font-size:10pt;}
+      .tab a {color:#000090; font-size:10pt}
+      .tab a:visited {color:#000090;}
+    </style>  
+  </head>
+  <body onload="showtopic(window.location.href, res_linkentries, res_connector, res_layers);" 
+	bgcolor="#D0D0FF" link="#0000FF" vlink="#0000FF" alink="#0000FF">
+    <div id="navig" class="tab" style="position:absolute; left:0px; 
+	 top:0px; width:14%; height:100%; visibility:visible; 
+	 font-size:10pt background-color:#8080FF">
+      <p class="hideshow" align="right">
+	<a class="hideshow" href="javascript:hidelayer('res_layers', '10');">&lt;&lt;hide</a>
+	<a class="hideshow" href="javascript:showlayer('res_layers', '10');">show&gt;&gt</a>
+      </p>
+      <br>
+      Peter's research interest<br>
+      <hr>
+      Machine Learning: <br><br>
+      <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);" 
+	 href="research.html#prob_top"> 
+	Bayesian methods</a> 
+      <br>
+      <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);" 
+	 href="research.html#bayes_sensf"> 
+	Sensor Fusion</a>
+      <br>
+      <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);" 
+	 href="research.html#adaptive_class"> 
+	Adaptive Learning</a>
+      <br>
+      <br>
+      <hr>
+      Biomedical Eng.: <br> <br>
+      <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);" 
+	 href="research.html#bci_top"> BCI </a>
+      <br>
+      <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);" 
+	 href="research.html#adaptive_BCI"> Adaptive BCI </a>
+      <br>
+      <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);" 
+	href="research.html#sleep"> 
+	Sleep Analysis </a>
+      <br>
+      <br>
+      <hr>
+      Computational Biology: <br><br>
+      <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);" 
+	href="research.html#mcabf"> 
+	Shared Gene Function </a>
+      <br>
+      <a onclick="showtopic(this.href, sw_linkentries, sw_connector, sw_layers);" 
+	href="downloads.html#fspma"> 
+	FSPMA</a>
+      <br>
+      <br>
+      <hr>
+    </div>
+    <div id="res_zero" class="folder" style="position:absolute; width:86%; 
+	 right:0%; top:0px; height:100%; visibility:visible; overflow:auto">
+      <h2><a name="prob_top">Probabilistic machine learning</a> </h2>
+      <img src="bayesinf.gif" alt="a machine learning..." height="224" 
+	width="181" align="left" border="0">
+      <p>Unlike other methods probabilistic machine learning is based on 
+	<i>one consistent principle</i> which is used throughout the entire 
+	inference procedure. Probabilistic methods approach inference of 
+	latent variables, model coefficients, nuisance parameters and 
+	model order essentially by applying 
+	<a href="#bernardo_smith"> Bayesian Theory</a>. Hence we may 
+	treat all unknown variables identically which is mathematically nice.
+	For computational reasons a fully probabilistic model might not be 
+	feasible. In such situations we have to use approximations. Obviously 
+	for a methodology that has to stand the test in an empirical discipline, 
+	a mathematical consistency argument is not too convincing. So why should 
+	one <i>use</i> probabilistic methods? 
+      </p>
+      <h3>Advantages of probabilistic models</h3>
+      <ul>
+	<li>Fully probabilistic models avoid "black box" characteristics. 
+	  We may instantiate arbitrary sets of variables and for 
+	  diagnosis purposes infer the distributions over (or expectations of) 
+	  other variables of interest and thus obtain some insight how we obtain a 
+	  particular decision.</li>
+	<li>Using a probabilistic model is relatively easy.
+	  Inference (if properly implemented) should be insensitive to the 
+	  setting of all "fiddle parameters" and will thus provide results
+	  that are close to optimal. An example that relies on this property is 
+	  adaptive inference which I have used for our 
+	  <a href="research.html#adaptive_class" target="bottom_disp">
+	    adaptive classification</a>.
+	</li>
+	<li>Probabilistic models provide means for <i>intelligent</i> 
+	  <a href="research.html#bayes_sensf" target="bottom_disp">sensor fusion</a>
+	  which allows e.g. to combine information that is known with 
+	  different certainty.</li>
+      </ul>
+      <h3>Disadvantages of probabilistic models</h3>
+      <ul>
+	<li>Inference of fully probabilistic models can be slow.</li>
+	<li>Inferring probabilistic models inevitably requires to model 
+	  distributions. Sometimes this can be more than we are asked for.</li>
+      </ul>
+      <h2><a name="bayes_sensf">Bayesian sensor fusion</a></h2>
+      <p>
+	The basic idea of Bayesian sensor fusion is to take uncertainty of 
+	information into account. In machine learning the seminal papers were 
+	those by <a href="#mackay_92a">(MacKay 1992)</a> who discussed the
+	effects of <i>model</i> uncertainty. In <a href="#wright">(Wright 1999)</a>
+	these ideas were later extended to <i>input</i> uncertainty. Related ideas 
+	have been used by
+	<a href="#dellaportas_stephens">(Dellaportas & Stephens 1995)</a>, who 
+	discuss models for errors in observables. I got interested in these
+	issues in the context of hierarchical models where model parameters
+	of a <i>feature extraction stage</i> are used for diagnosis or 
+	segmentation purposes. Such models are e.g. used for sleep analysis 
+	or also in the context of BCI. In a Bayesian sense these features 
+	are latent variables and should be treated as such. Again this is
+	a consistency argument which has to be examined for its practical 
+	relevance.
+      </p>
+      <p>
+	<img src="idea.gif" alt="sensor fusing DAG" height="222" width="297" 
+	     align="left" border="0" hspace="5"> 
+	In order to obtain a hierarchical model that does sensor fusion we 
+	simply regard the feature extraction stage as <i>latent space</i> and 
+	integrate (marginalize) over all uncertainties.
+	The left figure compares a sensor fusing DAG with current practice in many 
+	applications of probabilistic modeling that regard extracted 
+	features as observations. I reported on a first attempt to approach 
+	this problem in <a href="#sykacek_nipsworkshop99">(Sykacek 1999)</a> 
+	which is in more detail described in section 4 in my 
+	<a href="pubs.html#sykacek00a">Ph.D. thesis</a>.
+      </p>
+      <p>
+	In order to see that a latent feature space has practical advantages, we
+	consider a very simple case where two sensors are fused in a naive Bayes 
+	manner to predict the posterior probability in a two class problem. 
+	<img src="sensf_illustration.gif" alt="Illustration of sensor fusion" 
+	     height="349" width="430" align="right" border="0" hspace="5">
+	The model is similar to the one in the graph used above, however with two 
+	latent feature stages that are, conditional on the state of interest t, 
+	assumed to be independent. The plot on the right illustrates the effect 
+	of knowing one of the latent features with varying precision. 
+	Conditioning on a best estimate results obviously in 
+	probabilities that are independent of the precision. We hence obtain a
+	flat line with a probability of class "2" of about 0.27. 
+	Marginalization changes this probability. Depending on how much the uncertainties 
+	differ, we can, as is illustrated in this figure, also obtain <i> different 
+	  predicted states</i>. We may thus expect to improve in such cases where the 
+	precision of the distributions in the latent feature 
+	space varies. We have successfully applied a HMM based latent feature space model 
+	to classification of segments of multi sensor time series. Such problems arise in 
+	clinical diagnosis (sleep classification) and in the context of brain computer 
+	interfaces (BCI). A MCMC implementation and evaluation on synthetic and BCI data 
+	has been published in <a href="pubs.html#sykacek_roberts02a">(Sykacek & Roberts 2002 a)</a>.  
+	This work was also the topic of a talk I gave at the 
+	NCRG in Aston in July 2002. A pdf version of the slides being available 
+	<a href="onlinepapers/aston.pdf">here</a>. Recently 
+	<a href="research.html#beal_etal">(Beal <i>et al</i>. 2002)</a> have applied similar 
+	ideas to sensor fusion of audio and video data.
+      </p>
+      <h2> <a name="adaptive_class"> Adaptive classification based on variational Kalman 
+	  filtering
+	</a> </h2> 
+      <img src="vkf_dag.gif" alt="DAG describing adaptive BCI" height="360" 
+	   width="254" align="right" border="1" hspace="5">
+      The image on the right shows a <i>directed acyclic graph</i> of 
+      our BCI classifier. Every time instance n represents a 
+      second of EEG and the corresponding cognitive state. At instance n,
+      we are given a <i>distribution</i> over the parameter vector w<sub>n-1</sub> 
+      a new observation y<sub>n</sub>. Assuming a two state BCI (e.g. we want to
+      discriminate between cortical activity in the left and right motor cortex),
+      y<sub>n</sub> &#8712 [0,1] and the BCI classifier predicts the probability
+      P(y<sub>n</sub>|D). We use D to denote all <i>past</i> observations 
+      including previous sessions. Data D results in a Gaussian distribution 
+      over the previous parameter p(w<sub>n-1</sub>|D) which has mean 
+      &#251<sub>n-1</sub> and precision matrix &#923<sub>n-1</sub>. As soon as we 
+      observe y<sub>n</sub> we can update the distribution to obtain 
+      p(w<sub>n-1</sub>|D, y<sub>n</sub>). The hyper parameter &#955 can be 
+      regarded as a <i>forgetting factor</i> that controls the amount of 
+      tracking of the algorithm. Rather than setting its value directly, we use 
+      a hierarchical setup. We specify a Gamma prior p(&#955|&#945, &#946) 
+      and infer the posterior distribution 
+      p(&#955|y<sub>n-N</sub>,...y<sub>n-1</sub>,&#945, &#946). 
+      This assumes a stationary <i>adaptation rate</i> &#955 within a 
+      window of size N.  
+      <img src="simsynth.gif" alt="DAG describing adaptive BCI" height="341" 
+	   width="400" align="left" border="1" hspace="5">
+      The adaptive classifier 
+      requires to specify values for &#945, &#946 and the window length N. Based on
+      investigations with stationary data and with data with <i>known</i>
+      non-stationary behavior we suggest to use &#945=0.01, &#946=10<sup>-4</sup> and N=10. 
+      Results on a synthetic data set with these and similar settings are shown in the 
+      figure on the left. The above plot illustrates the expectation of &#955 
+      under the posterior. The second plot shows the instantaneous generalization 
+      accuracy. The data set is stationary - apart from a non-stationary behavior
+      at sample 500, where we <i>flip the labels</i>.
+      Although different values of N lead to different estimates of the optimal 
+      adaptation rate, the effect on the generalization accuracy is small and the
+      best compromise between rapid tracking and high stationary accuracy is obtained 
+      with a window of size 10. As a final comment we would like to mention that 
+      these settings allow that the algorithm is done in real time - a vital property 
+      to be useful for a BCI.
+    </p>
+      <h2><a name="bayes_references">References</a></h2>
+      <dl>
+	<dt><a name="beal_etal">(Beal <i>et al</i>. 2002)</a></dt>
+	<dd>
+	  M. J. Beal, H. Attias and N. Jojic.
+	  A Self-Calibrating Algorithm for Speaker Tracking Based on 
+	  Audio-Visual Statistical Models.
+	  In <i>Proc. Int. Conf. on Acoustics Speech and Signal Proc. 
+	    (ICASSP)</i>, May 2002.
+	</dd>
+	<dt><a name="bernardo_smith">(Bernardo & Smith 1994)</a></dt>
+	<dd>
+	  J. M. Bernardo and A. F. M. Smith. Bayesian Theory. 
+	  John Wiley & Sons, Chichester UK, 1994.
+	</dd>
+	<dt><a name="dellaportas_stephens">(Dellaportas & Stephens 1995)</a></dt>
+	<dd>
+	  P. Dellaportas and S. A. Stephens. Bayesian analysis of errors-in-variables 
+	  regression models. Biometrics, 51:1085-1095, 1995.
+	</dd>
+	<dt><a name="mackay_92a">(MacKay 1992)</a></dt>
+	<dd>
+	  D. J. C. MacKay. Bayesian interpolation. in <i>Neural Computation</i>,
+	  pages 415-447, 1992.
+	</dd>
+	<dt><a name="sykacek_nipsworkshop99">(Sykacek 1999)</a></dt>
+	<dd>
+	  Learning from uncertain and probably missing data.
+	  Peter Sykacek, OEFAI. An abstract is available on the
+	  <a href="http://stat.cs.tu-berlin.de/nips99/abstracts.html" target="_blank">
+	    workshop homepage</a>.
+	</dd>
+	<dt><a name="sykacek_etal03b"> (Sykacek <i>et al</i>. 2003 b) </a></dt>
+	<dd>
+	  P. Sykacek, I. Rezek and S. J. Roberts. Bayes Consistent 
+	  Classification of EEG Data by Approximate Marginalisation. 
+	  In S. J. Roberts and  R. Dybowski editors. <i>Applications of 
+	    Probabilistic Models for Medical Informatics and Bioinformatics</i>, 
+	  pages to appear, Springer Verlag, 2003.
+	</dd>
+	<dt><a name="sykacek_roberts02b"> (Sykacek & Roberts 2003) </a></dt>
+	<dd>
+	  P. Sykacek and S. J. Roberts. 
+	  Adaptive classification by variational Kalman filtering. 
+	  In S.Thrun, S. Becker and K. Obermayer, editors, <i>Advances 
+	    in Neural Information Processing Systems 15</i>, pp 737-744, 
+	  MIT press, 2003.
+	</dd>
+	<dt><a name="sykacek_roberts_2002">(Sykacek & Roberts 2002)</a></dt>
+	<dd>
+	  P.&nbsp;Sykacek and S.&nbsp;Roberts. Bayesian time series classification. In
+	  T.G. Dietterich, S.&nbsp;Becker, and Z.&nbsp;Ghahramani, editors, <i>Advances in
+	    Neural Processing Systems 14</i>, pages 937–944. MIT Press, 2002.
+	</dd>
+	<dt><a name="wright">(Wright 1999)</a></dt>
+	<dd>
+	  W. A. Wright. Bayesian approach to Neural-Network modeling with input uncertainty.
+	  IEEE Trans. Neural Networks, 10:1261-1270, 1999.
+	</dd>
+      </dl>
+    </div>
+    <div id="res_one" class="folder" style="position:absolute; right:0%; 
+	 width:86%; top:0px; height:100%; visibility:hidden; overflow:auto">
+      <h2><a name="bci_top"> Brain computer interface </a> </h2>
+      <!--<img src="bci_equipment2.gif" alt="BCI equipment" height="122" 
+	   width="282" align="left" border="0"> -->
+      Brain computer interface summarizes all components necessary to 
+      establish a thought based human-computer communication channel. 
+      There are two main directions in BCI research. 
+      A BCI can be based on P300 related events with 
+      <a href="#farwell_donchin" target="bottom_disp"> 
+	(Farwell & Donchin 1988)</a> being one of the first 
+      references. The second class of BCI is based on voluntary 
+      control of cognitive tasks, with 
+      <a href="#birbaumer_etal" target="bottom_disp"> 
+	(Birbaumer <i>et al</i>. 1999)</a> , 
+      <a href="#pfurtscheller_etal" target="bottom_disp"> 
+	(Pfurtscheller <i>et al</i>. 1993)</a> and
+      <a href="#wolpaw_etal91" target="bottom_disp"> 
+	(Wolpaw <i>et al</i>. 1991)</a> being the dominating research groups 
+      using this paradigm. Our BCI also follows this second line of 
+      thought. PARG members are involved in BCI research for 
+      about five years <a href="#roberts_etal" target="bottom_disp"> 
+	(Roberts <i>et al</i>. 1998)</a>. Having joined PARG and Oxford University 
+      in September 2000, I work on BCI since then.
+      <h2>
+	<a name="bci_oxford"> BCI research in Oxford 
+	</a> 
+      </h2>
+      In order to make our BCI simple to use, we record a few EEG channels 
+      only (four at most). Our recording equipment is based on a 
+      <a href="http://www.gtec.at/" target="_blank">Gtec amplifier</a>
+      and an AD converter from 
+      <a href="http://www.ni.com/" target="_blank">national instruments</a>.
+      The low number of EEG channels requires the channel 
+      positions to be appropriately synchronized with the cortical area 
+      activated during the cognitive task under consideration. Thus our 
+      experimental protocol 
+      <a href="pubs.html#curran_etal03" target="bottom_disp"> 
+	(Curan <i>et al</i>. 2003)</a> requires input from cognitive psychology which 
+      in our case is provided by Prof. Stokes and her colleagues from the 
+      Research Department of the Royal Hospital for Neuro Disability, 
+      Putney, London. 
+      <img src="bci_fb.gif" alt="BCI as feedback loop" height="226" 
+	   width="256" align="left" border="0"> 
+      According to the taxonomy used in 
+      <a href="#wolpaw_etal02" target="bottom_disp"> (Wolpaw <i>et al</i>. 2002)</a>, 
+      our research concentrates on the <i> signal processing </i> part 
+      of the BCI. In particular we regard the BCI as a feedback loop 
+      with <i>two adaptive entities</i>: on one hand the BCI user will 
+      adapt such as to maximize correct feedback; on the other hand machine 
+      learning techniques are inherently adaptive as well.
+      The inevitable adaptation of the user requires signal processing concepts 
+      that can <i>track non-stationary events</i>. Thus the working hypothesis 
+      for our BCI 2003 is that it must use <i>adaptive inference</i>.
+      <h2> 
+	<a name="probabilistic_bci"> Probabilistic methods in BCI research 
+	</a> 
+      </h2>
+      <!-- <img src="manquestion.gif" alt="any questions?" height="81" width="42" 
+	   align="left" border="0"> -->
+      <i>Probabilistic methods</i> summarizes all approaches that are 
+      consistent with an axiomatic framework that result in 
+      <i>Bayesian theory</i>. Agreed - consistency is <i>nice</i> 
+      but from an application point of 
+      view, where <i>performance</i> is the only relevant measure, not 
+      necessary. However probabilistic methods have several other 
+      properties which make them extremely useful for many problems 
+      we encounter in the signal processing part of a BCI. To mention the 
+      most important:
+      <ul>
+	<li>Model selection can be done <i>consistently</i> by using 
+	  probabilistic methods. The <i>true</i> Bayesian approach 
+	  <a href="pubs.html#sykacek00b" target="bottom_disp"> 
+	    (Sykacek 2000 b)</a> would 
+	  even go further and combine all models under consideration 
+	  according to their probability under the training data.
+	  In the context of our BCI this has in
+	  <a href="pubs.html#curran_etal03" target="bottom_disp"> 
+	    (Curan <i>et al</i>. 2003)</a> been applied successfully 
+	  to find the optimal complexity of the BCI classifier.
+	</li>
+	<li>Probabilistic methods are inherently coupled with the concept of
+	  integrating out uncertainties (this refers to  mathematical 
+	  integration). In a <i>multi sensor environment</i> 
+	  (e.g. multiple EEG channels) integration has the advantage to 
+	  result in <i>certainty based</i> sensor fusion. Applied to BCI 
+	  data 	
+	  <a href="pubs.html#sykacek_roberts02a" target="bottom_disp"> 
+	    (Sykacek & Roberts 2002 a)</a>
+	  this leads to a significant improvement in bit rate. More 
+	  detailed information on that issue is available on my 
+	  machine learning research page in section
+	  <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);"
+	     href="research.html#bayes_sensf" target="bottom_disp"> Bayesian sensor fusion</a>.
+	</li>
+	<li>A problem with non probabilistic BCI systems is that model fitting requires
+	  tuning of several parameters like penalty constants or model orders. 
+	  Setting these parameters requires validation data and many time consuming 
+	  repetitions of the model fitting process. The performance of the trained model 
+	  depends critically on these parameters and requires expert knowledge.
+	  In a probabilistic world such parameters are called <i>hyper parameters</i>. 
+	  The probabilistic framework provides means for inferring these hyper 
+	  parameters together with model parameters in one go. Although we still 
+	  have to choose some parameters, a well designed hierarchical setup makes inference 
+	  less sensitive to their values. This aspect of probabilistic methods is of vital 
+	  importance for our BCI research.
+	</li>
+      </ul>
+      <h2><a name="s_neuro_cog">Alternative neuro-cognitive setup</a></h2> 
+      <p>
+	In order to assess the effects on the bit rates of BCI's, we compare in 
+	<a href="pubs.html#curran_etal03" target="bottom_disp"> (Curan <i>et al</i>. 2003)</a> 
+	the communication bandwidth we may achieve with different cognitive tasks 
+	<a href="#curran+stokes_03">(Curran & Stokes 2003)</a>. 
+	We base comparisons on generalization accuracies obtained for independent test data.  
+	Differences are assessed for statistical significance using McNemar's test, a 
+	test for analyzing paired results that can be found in <a href="#ripley_96">(Ripley 1996)</a>. 
+	In order to allow comparisons with other BCI systems, we also report bit rates as 
+	is suggested in <a href="#wolpaw_etal_2000">(Wolpaw <i>et al</i>. 2000)</a>. The BCI 
+	experiments in this study were done by 10 young, healthy 
+	and untrained subjects. They are based on 3 cognitive tasks:  
+	an auditory imagination, an imagined spatial navigation task and an 
+	imagined right motor task. Each experiment consists of 10 
+	repetitions of alternating pairs of these tasks each of which have been done for seven 
+	seconds. EEG recordings are obtained from two electrode sites:  T4, P4 (right 
+	tempero-parietal for spatial and auditory tasks), C3' , C3" (left motor area for right
+	motor imagination). The ground electrode is placed just lateral to the left mastoid process.  
+      </p>
+      <h4><a name="t_comp_task">Comparing cognitive tasks.</a></h4>
+      <table width="100%" frame="border">
+	<tbody><tr>
+	    <td>comparison</td>	<td>accuracy (a)</td><td>bit/s (a)</td><td>accuracy (b)</td>
+	    <td>bit/s (b)</td><td>P<sub>null</sub></td>
+	  </tr>
+	  <tr><td>(a) vs.  (b)</td><td>74 %</td><td>0.173</td><td>69 %</td><td>0.107</td>
+	    <td>&lt&lt0.01</td></tr>
+	  <tr><td>(a) vs.  (c)</td><td>74 %</td><td>0.173</td><td>71 %</td><td>0.131</td>
+	    <td>&lt0.01</td></tr>
+	  <tr><td>(a) vs.  (d)</td><td>74 %</td><td>0.173</td><td>71 %</td><td>0.131</td>
+	    <td>0.01</td></tr>
+	  <tr><td>(b) vs.  (c)</td><td>69 %</td><td>0.107</td><td>71 %</td><td>0.131</td>
+	    <td>0.02</td></tr>
+	  <tr><td>(b) vs.  (d)</td><td>69 %</td><td>0.107</td><td>71 %</td><td>0.131</td>
+	    <td>0.03</td></tr>
+	  <tr><td>(c) vs.  (d)</td><td>71 %</td><td>0.131</td><td>71 %</td><td>0.131</td>
+	    <td>0.40</td></tr>
+	</tbody>
+      </table>
+      <p>
+	An investigation of different classification paradigms reveals that on this data the BCI 
+	classifiers perform significantly better, when allowing for a nonlinear decision boundary.  
+	The method applied in this comparison uses autoregressive features (AR) extracted from successive 
+	segments of EEG. We use a generative classifier that predicts probabilities of cognitive states.  
+	Table <a href="#t_comp_task">Comparison of different tasks</a> summarizes the results of 
+	this comparison. Task pairing (a) refers to the combination navigation - auditory, task 
+	pairing (b) refers to the combination navigation - right motor, task pairing (c) refers to the 
+	combination auditory - right motor and task pairing (d) refers to the combination left motor - 
+	right motor, which we include in order to allow for a comparison with these classical tasks. 
+	Our results allow to conclude that (a) vs.  (b) result in slightly better correct classification 
+	rates as the classical imagined motor task. However, since we can extract information about 
+	the cognitive state in all cases, the main conclusion is that we might significantly increase 
+	the bit rate of BCI systems by using more than two cognitive tasks. For more details on this 
+	study we refer to <a href="pubs.html#curran_etal03" target="bottom_disp"> (Curan <i>et al</i>. 2003)</a>.
+      </p>
+      <h2>Bayesian sensor fusion for offline BCI </h2>
+      <p>
+	Probabilistic models can be used to describe many architectures that have been applied to static 
+	and adaptive BCI systems.  Examples are Hidden Markov models, that have been successfully 
+	applied to BCI in <a href="#obermeier_etal_2001">(Obermeier <i>et al</i>. 2001)</a>. Probabilistic 
+	models have also been quite popular tools in the 
+	machine learning and statistics community.  Recently these communities have investigated 
+	efficient algorithms that allow inference of very complex models. These findings are of 
+	interest for the BCI community since they allow us to go beyond classical time series models 
+	and by that improve different aspects of BCI systems.  We have recently evaluated two such 
+	generalizations in the context of BCI systems.  Coupled HMM's are generalizations of ordinary 
+	HMM's, where two hidden state sequences are probabilistically coupled using arbitrary 
+	lags. In <a href="#rezek_etal_2002"> (Rezek <i>et al</i>. 2002) </a> these models have 
+	been applied to movement planning and shown to outperform classical HMM's.
+      </p>
+      <p>
+	Another modification of HMM's was proposed in 
+	<a href="pubs.html#sykacek_roberts02a">(Sykacek & Roberts 2002)</a>, where we follow 
+	probabilistic principles and suggest that classifications based on feature extraction 
+	(like the use of spectral 
+	representations or AR models as used in our BCI) have to regard the features as latent 
+	variables. Hence inference and predictions need to marginalize over this latent space. 
+	The practical advantage of the proposed architecture is that both the feature and the model 
+	uncertainty (the latter means the uncertainty about model order) are automatically taken 
+	into consideration.  This effects model estimation and prediction and results in automatic 
+	artefact moderation and thus in intelligent sensor fusion. The idea exploits a property 
+	found by marginalization (i.e.  integration over the distribution) over (at least two) 
+	uncertain latent variables estimated from two sensor signals (e.g.  EEG recorded at different 
+	electrode sites). Depending on the variance of the distribution, we will obtain different 
+	posterior probabilities. 
+	Section <a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);"
+		   href="research.html#bayes_sensf" target="bottom_disp"> Bayesian sensor fusion</a> 
+	illustrates the effect using two sensor signals X<sub>a</sub> and X<sub>b</sub> and the 
+	state of interest (e.g. the cognitive state we want to predict) y. We see how the posterior 
+	probability depends on the variance. The effect may even result in a different assessment 
+	w.r.t. the predicted state. 
+      </p>
+      <p>
+	The application of such a marginalization idea to BCI is illustrated in table 
+	<a href="#t_full_bayes">BCI with fully Bayesian method</a>. We 
+	illustrate results obtained with this paradigm using two task pairings of the study 
+	reported in our <a href="#s_neuro_cog">neuro-cognitive study</a>. We compare the 
+	generalization accuracies of the fully probabilistic model (full Bayes) with those 
+	of a classical approach that does feature extraction separately.  
+	Table <a href="#t_full_bayes">BCI with fully Bayesian method</a> shows also 
+	the probabilities of the null hypothesis P<sub>null</sub> that the results are equal
+	(McNemar's test).
+	We may thus conclude that a fully Bayesian approach significantly outperforms 
+	classifications obtained when conditioning on feature estimates.  Despite having 
+	found that a fully Bayesian approach improves BCI performance, 
+	the proposed method has the disadvantage of not being directly applicable to online BCI. 
+	The computational complexity simply does not allow that.  Hence we investigated an 
+	approximation which can be used in real time and nevertheless achieve the desired 
+	effects <a href="pubs.html#sykacek_etal03b"> (Sykacek <i>et al</i>. 2003 b) </a>.
+      </p>   
+      <h4><a name="t_full_bayes">BCI with fully Bayesian method.</a></h4>
+      <table width="100%" frame="border">
+	<tbody><tr><td></td><td colspan=2> classical model</td><td colspan=2>full Bayes</td><td></td></tr>
+	  <tr><td>task pair</td><td>Accuracy</td><td>bit rate b/s</td><td>Accuracy</td>
+	    <td>bit rate b/s</td><td>P<sub>null</sub></td></tr>
+	  <tr><td>(d)</td><td>75.9%</td><td>0.20</td><td>81.4%</td><td>0.31</td><td>0.04</td></tr>
+	  <tr><td>(a)</td><td>76.2%</td><td>0.21</td><td>84.5%</td><td>0.38</td>
+	    <td>&lt&lt0.01</td></tr>
+	</tbody></table>
+      <h2><a name="adaptive_BCI"> Variational Kalman filter for adaptive BCI</a></h2>
+      <p>
+	Current BCI architectures developed by other research groups rely on assuming that 
+	the EEG generated during cognitive tasks shows stationary behavior.  
+	This assumption must be wrong for several reasons:  
+      <ul>
+	<li>
+	  There are technical problems with the electrolyte fluids used for electrode placement.  
+	  It simply dries out and thus changes impedance.  Hence both signal amplitudes and dynamics 
+	  are subject to temporal variations during a BCI session. 
+	</li>
+	<li>
+	  Both learning (habitation) effects and fatigue (Note at this point that sleep staging is 
+	  entirely based on variations of EEG dynamics.) change the dynamics during and between BCI 
+	  sessions. 
+	</li>
+      </ul>
+      <p>
+	We thus suggest a fully adaptive approach for the translation algorithm that, even in short 
+	time use of a BCI, resulted in higher communication bandwidth than conventional 
+	static BCI's. 
+	Probabilistic models can be of advantage in describing algorithms for adaptive 
+	BCI systems.  A graph structure that illustrates such an approach is shown in my section on
+	<a onclick="showtopic(this.href, res_linkentries, res_connector, res_layers);"
+	   href="research.html#adaptive_class">adaptive classification</a>. 
+	We assume a model that predicts the probabilities of cognitive states and regard 
+	the parameters of the classifier are regarded as latent variables in a first order 
+	Markov process.  The solution in a linear Gaussian case are the well known Kalman 
+	filter equations.  In our case the non-linearity introduced by predicting probabilities 
+	requires us to use an approximation. We suggest for that purpose a variational 
+	technique and thus obtain variational Kalman filtering as an inference method
+	<a href="pubs.html#sykacek_roberts02b"> (Sykacek & Roberts 2003) </a>.
+      </p>
+      <p> 
+	Variational methods (<a href="#jordan_etal_1999">Jordan <i>et al</i>. 1999</a>, 
+	<a href="#attias_99">Attias 1999</a>) are attractive for BCI systems because 
+	compared with Laplace approximations (as e.g.  used for classification problems in 
+	<a href="#penny+roberts_1999">(Penny & Roberts 1999)</a>, 
+	they allow for more flexibility and contrary to particle filters they still provide a 
+	parametric form of the posterior.  Having a parametric posterior is important since it 
+	allows efficient <i>real time</i> implementations. We apply this algorithm to 
+	features extracted from EEG. My favorite approach is to use a <i>lattice filter</i> 
+	representation of auto regressive parameters since they have in 
+	<a href="pubs.html#sykacek_etal99c" target="bottom_disp"> (Sykacek <i>et al</i>. 1999 c)</a> 
+	been found superior to other feature extraction techniques including conventional AR 
+	parameters. Results applying the variational Kalman filter classifier to the BCI data 
+	described in our <a href="#s_neuro_cog">neuro-cognitive study</a>, 
+	are summarized in table <a href="#t_adapt_bci"> Adaptive BCI</a>. The last column 
+	are the probabilities of the null hypothesis P<sub>null</sub> that the results are equal
+	(McNemar's test).The results suggest that a truly adaptive BCI (column vkf) significantly 
+	outperforms the equivalent static method (column vsi). A detailed description of our 
+	adaptive translation algorithm and a thorough evaluation can be found in
+	<a href="pubs.html#sykacek_etal03c">(Sykacek <i>et al</i>. 2003 c)</a>.
+      </p>
+      <h4><a name="t_adapt_bci">Adaptive BCI.</a></h4> 
+      <table width="100%" frame="border">
+	<tbody>
+	  <tr><td></td><td colspan=5>Generalization results</td></tr>
+	  <tr><td></td><td colspan=2>vkf</td><td colspan=2>vsi</td><td></td></tr>
+	  <tr><td>Cognitive task</td><td>Accuracy</td><td>bit/s</td><td>Accuracy</td><td>bit/s</td>
+	    <td>P<sub>null</sub></td></tr>
+	  <tr><td>navigation/auditory</td><td>86%</td><td>0.42</td><td>83%</td><td>0.34</td>
+	    <td>0.02</td></tr>
+	  <tr><td>navigation/movement</td><td>80%</td><td>0.28</td><td>80%</td><td>0.28</td>
+	    <td>0.31</td></tr>
+	  <tr><td>auditory/movement</td><td>78%</td><td>0.24</td><td>76%</td><td>0.21</td>
+	    <td>&lt&lt0.01</td></tr>
+	</tbody>
+      </table>
+      <h2><a name="#BCI_pubs">Our BCI Publications</a></h2>
+      <dl>
+	<dt><a name="curran_etal03">(Curran <i>et al</i>. 2003)</a></dt>
+	<dd>
+	  E. Curran, P. Sykacek, M. Stokes, S. J. Roberts, W. Penny, 
+	  I. Johnsrude and A. M. Owen. Cognitive tasks for driving a Brain 
+	  Compute Interfacing System. In IEEE Trans. Neural Systems and 
+	  Rehabilitation Engineering, pages to appear, 2003.
+	</dd>
+	<dt><a name="sykacek_TR03">(Sykacek 2003 b)</a></dt>
+	<dd>
+	  P. Sykacek. Brain Computer Interfacing: State of the Art, Probabilistic Advances and 
+	  Future Perspectives. Technical Report, available in 
+	  <a href="onlinepapers/bcireport.pdf">pdf</a> and as
+	  <a href="onlinepapers/bcireport.ps.gz">gzipped postscript</a>.
+	</dd>
+	<dt><a name="sykacek_NCAF">(Sykacek 2003 a)</a></dt>
+	<dd>
+	  P. Sykacek. Towards Adaptive BCI. <a href="onlinepapers/camtalk.pdf">Presentation</a> 
+	  at the NCAF meeting on human computer interaction, 
+	  3-4 September 2003, Cambridge, UK.
+	</dd>	
+	<dt><a name="sykacek_etal03c"> (Sykacek <i>et al</i>. 2003 c) </a></dt>
+	<dd>
+	  P. Sykacek, S. J. Roberts and M. Stokes. Adaptive BCI based 
+	  on variational Bayesian Kalman filtering: an empirical evaluation. 
+	  In IEEE Trans. Biomedical Engineering, pages to appear, 2003.
+	  <br>A <a href="onlinepapers/albposter.pdf">poster</a> describing the 
+	  adaptive BCI was awarded in the "best engineering" category at the BCI 
+	  workshop 2002 in Albany, NY, June 12-17.
+	</dd>
+	<dt><a name="sykacek_etal03b"> (Sykacek <i>et al</i>. 2003 b) </a></dt>
+	<dd>
+	  P. Sykacek, I. Rezek and S. J. Roberts. Bayes Consistent 
+	  Classification of EEG Data by Approximate Marginalisation. 
+	  In S. J. Roberts and  R. Dybowski editors. <i>Applications of 
+	    Probabilistic Models for Medical Informatics and Bioinformatics</i>, 
+	  pages to appear, Springer Verlag, 2003.
+	</dd>
+	<dt><a name="sykacek_etal03a"> (Sykacek <i>et al</i>. 2003 a) </a></dt>
+	<dd>
+	  P. Sykacek, S. J. Roberts, M. Stokes, E. Curran, M. Gibbs 
+	  and L. Pickup. Probabilistic methods in BCI research. 
+	  In <i>IEEE Trans. Neural Systems and Rehabilitation Engineering</i>, 
+	  pp. 192--195, 2003. 
+	</dd>
+      </dl>
+      <h2> References </h2>
+      <dl>
+	<dt><a name="attias_99"> (Attias 1999) </a></dt>
+	<dd>
+	  H. Attias. Inferring parameters and structure of latent variable
+	  models by variational Bayes. in <i> Proceedings of 
+	    the Fifteenth Annual Conference on Uncertainty in Artificial 
+	    Intelligence (UAI--99)</i>,
+	  pages 21-30, 1999.
+	</dd>
+	<dt><a name="birbaumer_etal"> (Birbaumer <i>et al</i>. 1999) </a></dt>
+	<dd>
+	  N. Birbaumer, N. Ghanayim, T. Hinterberger, I. Iversen, 
+	  B. Kotchoubey, A. Kübler, J. Perelmouter, E. Taub and H. Flor. 
+	  A spelling device for the paralysed. <i> Nature </i>, 
+	  398:297-298, 1999. 
+	</dd>
+        <dt><a name="curran+stokes_03">(Curran & Stokes 2003)</a></dt>
+	<dd>
+	  E.&nbsp;Curran and M.&nbsp;Stokes. Learning to control brain activity: 
+	  A review of the production and control of EEG components for driving 
+	  brain-computer interface (BCI) systems. <i>Brain and Cognition</i>, 
+	  51: 326–335, 2003.
+	</dd>
+	<dt><a name="farwell_donchin"> (Farwell & Donchin 1988) </a></dt>
+	<dd>
+	  L. A. Farwell and E. Donchin. Talking off the top of your head: 
+	  Toward a mental prosthesis utilizing event-related brain 
+	  potentials. <i> Electroencephalography and Clinical 
+	    Neurophysiology </i>, 70:510-523, 1988.
+	</dd>
+	<dt><a name="jordan_etal_1999">(Jordan <i>et al</i>. 1999)</a></dt>
+	<dd>
+	  M.&nbsp;I. Jordan, Z.&nbsp;Ghahramani, T.&nbsp;S. Jaakkola, and L.&nbsp;K.
+	  Saul. An introduction to variational methods for graphical models. In
+	  M.&nbsp;I. Jordan, editor, <i>Learning in Graphical Models</i>. MIT Press,
+	  Cambridge, MA, 1999.
+	</dd>
+	<dt><a name="obermeier_etal_2001">(Obermeier <i>et al</i>. 2001)</a> </dt>
+	<dd>
+	  B.&nbsp;Obermeier, C.&nbsp;Guger, C.&nbsp;Neuper, and G.&nbsp;Pfurtscheller.
+	  Hidden Markov models for online classification of single trial EEG. <i>Pattern
+	    Recognition Letters</i>, pages 1299–1309, 2001.
+	</dd>
+	<dt><a name="penny+roberts_1999">(Penny & Roberts 1999)</a> </dt>
+	<dd>
+	  W.&nbsp;Penny and S.&nbsp;J. Roberts. Non stationary logistic regression. In <i>Proceedings
+	    of the IJCNN 1999</i>, 1999.
+	</dd>
+	<dt><a name="pfurtscheller_etal"> (Pfurtscheller <i>et al</i>. 1993) </a></dt>
+	<dd>
+	  G. Pfurtscheller, D. Flotzinger and J. Kalcher. Brain-Computer 
+	  Interface - a new communication device for handicapped people.
+	  <i> Journal of Microcomputer Applications </i>, pages 293-299, 
+	  1993.
+	</dd>
+	<dt><a name="rezek_etal_2002">(Rezek <i>et al</i>. 2002)</a></dt>
+	<dd>
+	  I.&nbsp;Rezek, M.&nbsp;Gibbs, and S.&nbsp;Roberts. Maximum a posteriori
+	  estimation of coupled hidden Markov models. <i>Advances in Neural Networks for
+	    Signal Processing</i>, page to appear, 2002.
+	</dd>
+	<dt><a name="ripley_96">(Ripley 1996)</a></dt>
+	<dd>B. D. Ripley. <i>Pattern Recognition and Neural Networks</i>. Cambridge 
+	  University Press, Cambridge, 1996.
+	<dd>
+	<dt><a name="roberts_etal">(Roberts <i>et al</i>. 1998) </a></dt>
+	<dd>
+	  S. J. Roberts, W. Penny and I. Rezek. Temporal and Spatial 
+	  Complexity Measures for EEG-based Brain-Computer Interfacing.
+	  <i>Medical & Biological Engineering & Computing </i>, 37(1), 
+	  pages 93-99, 1998.
+	</dd>
+	<dt><a name="wolpaw_etal91"> (Wolpaw <i>et al</i>. 1991) </a> </dt>
+	<dd>
+	  J. R. Wolpaw, D. J. McFarland, D. J. Neat and C. A. Froneis. 
+	  An EEG-based Brain-Computer Interface for Cursor Control. 
+	  <i> Electroencephalography and Clinical Neurophysiology </i>,
+	  78:252-259, 1991.
+	</dd>
+	<dt><a name="wolpaw_etal02"> (Wolpaw <i>et al</i>. 2002) </a> </dt>
+	<dd>
+	  J. R. Wolpaw, N. Birbaumer, D. J. McFarland, G. Pfurtscheller and T. M. Vaughan.
+	  Brain-computer interfaces for communication and control.
+	  <i>Clinical Neurophysiology</i>, 113:767-791, 2002.
+	</dd>
+	<dt><a name="wolpaw_etal_2000">(Wolpaw <i>et al</i>. 2000)</a></dt>
+	<dd>
+	  J.&nbsp;R. Wolpaw, N.&nbsp;Birbaumer, W.&nbsp;J. Heetderks, D.&nbsp;J.
+	  McFarland, P.&nbsp;H. Peckham, G.&nbsp;Schalk, E.&nbsp;Donchin, L.&nbsp;A.
+	  Quatrano, C.&nbsp;J. Robinson, and T.&nbsp;M. Vaughan. Brain-Computer Interface
+	  technology: a review of the first international meeting. 
+	  <i>IEEE Trans. Rehab. Eng.</i>, pages 164–173,2000.
+	</dd>
+      </dl>
+    </div>
+    <div id="res_two" class="folder" style="position:absolute; right:0%; width:86%;
+	 top:0px; height:100%; visibility:hidden; overflow:auto">
+      <h2><a name="sleep"> Peter's SIESTA Page</a></h2>
+      <p><img src="logo.gif" alt="SIESTA" height="109" width="220" 
+	      align="left" border="0">
+	This page is a summary of my SIESTA activities. 
+	I have looked at various aspects of the EEG model that should lead to the 
+	"core" sleep analyzer. These activities include deriving a Bayesian method 
+	for preprocessing, an investigation of resampling issues, Feature subset 
+	selection and an EEG model based on variational Bayesian techniques that 
+	forms the core of the SIESTA sleep analyzer. We decided for the Bayesian paradigm, since 
+	we found it extremely useful for automatic sleep classification according to Rechtschaffen & Kales rules
+	(<a href="pubs.html#sykacek_etal98" target="bottom_disp">Sykacek <i>et al</i>. 1998</a> and
+	<a href="pubs.html#sykacek_etal02" target="bottom_disp">Sykacek <i>et al</i>. 2002 a</a>).
+	I also came up with ideas how to combine models that were built separately for different biosignals.
+	Below, we will use some acronyms: EEG - electroencephalogram (A signal 
+	obtained by recording from different positions on the scalp. It represents local brain activity.) 
+	EOG - electrooculogram (A signal recorded from the forehead that shows eye movements.) 
+	EMG - electromyogram (A signal recorded from various positions on the human body which represents
+	the local muscle activity).</p>
+      <h2><a name="SIESTA_prep"></a>Bayesian preprocessing</h2>
+      <p>
+	The SIESTA analyzer processes EEG with a Bayesian implementation of an AR 
+	lattice filter structure. (Bayesian reflection
+	coefficients). The difficulty with this representation is the calculation of the 
+	marginal likelihood of the model (i.e. integration of the distribution w.r.t. model 
+	parameters). Preprocessing results in
+	a-posterior distributions of coefficients and posterior probabilities
+	for models. Details have first been published in one of our EMBEC abstracts: 
+	<a href="pubs.html#sykacek_etal99b" target="bottom_disp">(Sykacek <i>et al</i>. 1999 b)</a>
+	Based on this lattice filter model, I have also tried to obtain a REM/non
+	REM feature from EMG. However this attempt failed - probably due to the
+	same reasons why an amplitude based feature could not be derived. </p>
+      <h2>
+	<a name="SIESTA_FSS"></a>Feature subset selection (FSS)</h2>
+      Since we wanted to make sure that the SIESTA analyzer is built around reasonable 
+      features, we decided to use feature subset selection techniques. 
+      <h3>
+	<a name="SIESTA_convFSS"></a>Conventional feature subset selection</h3>
+      FSS is the task of finding a sufficiently large best subset of features
+      that should capture all details contained in some data relevant to a particular
+      problem. This definition of FSS forces us to think about several issues:
+      <ol>
+	<li>
+	  What describes the relevant problem?</li>
+	<li>
+	  What is a proper measure of a "best" subset?</li>
+	<li>
+	  How do we determine whether a subset is sufficiently large?</li>
+      </ol>
+      We decided that the first question is best answered by considering how
+      well subsets separate the corner stones of sleep (these are unambiguously
+      classified segments of wake, deep sleep and REM sleep).
+      <p>From a technical point of view there are several possibilities for measuring
+	the quality of feature subsets. We decided to look at the likelihood function
+	of various classifiers and a nonparametric estimate of an impurity measure 
+	(We measure the Gini index by a k nearest neighbors approach). </p>
+      <p>Search for the "best" subset was based on suboptimal algorithms (forward selection and
+	sequential elimination). This was necessary since
+	the number of features (more than 200) rendered exhaustive search impossible.</p>
+      <p>The optimal subset size was determined with a statistical significance test. We used 
+	McNemar's test of comparing two paired classifiers and an appropriate p-value. In the 
+	forward selection scheme we add the most promising feature if it increases the 
+	classification accuracy with statistical significance. In the backward elimination 
+	strategy, we remove the least important feature if it does not result in a statistically 
+	significant difference.</p>
+      <h3> <a name="<FSSRES>"></a>Classical FSS Results</h3>
+      As only 5 complete recordings were available until deadline for FSS, we
+      could not use more than 4 recordings. (I saved one for validation purposes).
+      A major problem in FSS was that the labels are given for 30 seconds segments
+      and features are calculated on a one seconds basis. Different features
+      were calculated on different explicitly or implicitly defined window lengths.
+      As longer windows will smooth features, the 30 seconds labels will prefer
+      such features that were calculated using longer windows. As reported in
+      Den Haag, I could show this effect empirically. Consulting with S. Roberts,
+      we came to the conclusion that it were best to use only the median sample
+      of each 30 seconds segment. This should help reducing the effect of different
+      window lengths.
+      <p>The results in the following tables are from 
+	<a href="pubs.html#sykacek_etal99c"> (Sykacek <i>et al</i>. 1999 c) </a>.</p>
+      <p>Subset 1: Gini index and sequential forward selection
+	<br></p>
+      <table width="100%" frame="border">
+	<tbody><tr>
+	    <td>stochastic complexity at C3</td>
+	  </tr>  
+	  <tr>
+	    <td>Hjorth coefficient at Fp2: cmpl. /(act. * mob)</td>
+	  </tr></tbody>
+      </table>
+      <p>Subset 2: Likelihood of logistic regression
+	<br>&nbsp;</p>
+      <table width="100%" frame="border">
+	<tbody><tr>
+	    <td>ref. coefficient at C4: 1st. coefficient</td>
+	  </tr>
+	  <tr>
+	    <td>power spectral density at Fp1: Beta (12.5 Hz - 30.0 Hz)</td>
+	  </tr>
+	  <tr>
+	    <td>Kalman AR coefficient at C3: 2nd. coefficient</td>
+	  </tr></tbody>
+      </table>
+      <h3> <a name="bayeswrapp"></a>A Bayesian wrapper</h3>
+      <p>
+	<img src="sieftrprobs.bmp" alt="Bayesian Probabilities" height="271" width="342" align="left" border="0">
+	Conventional FSS has a major problem: If two or more (similar sized) subsets
+	explain the problem equally well, using just one of them is in a Bayesian
+	sense not consistent with the information provided. The correct approach
+	would be to integrate out feature subset uncertainty. Consequently we also
+	applied such a Bayesian technique to the problem of determining relevant
+	feature subsets. The result of such FSS is a posterior probability
+	over feature subsets. Prediction would then consider all subsets according
+	to their posterior probability, which for the SIESTA data is shown in the 
+	image to the left. For further details of this method, I want to refer to 
+	my NIPS 99 preprint <a href="pubs.html#sykacek00b" target="bottom_disp">(Sykacek 2000 b)</a>.</p>
+      <h3> Results Bayesian Wrapper </h3>
+      <p>Subset 3: Bayesian wrapper for C3 only. The posterior probability
+	of this subset is 0.69
+	<br>&nbsp;</p>
+      <table width="100%" frame="border">
+	<tbody><tr>
+	    <td>ref. coefficient at C3: 1st. coefficient</td>
+	  </tr>
+	  
+	  <tr>
+	    <td>ref. coefficient at C3: 3rd. coefficient</td>
+	  </tr>
+	  
+	  <tr>
+	    <td>Hjorth coefficient at C3: cmpl. /(act. * mob)</td>
+	  </tr></tbody>
+      </table>
+      <h2> <a name="EEGsleepmodel"></a>The SIESTA sleep analyzer</h2>
+      <p>
+	<img src="siearch.bmp" alt="SIESTA architecture" height="251" width="379" align="right" border="0">
+	The following considerations lead to the chosen architecture for the Siesta analyzer.</p>
+      <ul>
+	<li>Sleep should be modeled as a three state process (wake, REM and deep sleep). To capture
+	  uncertainty we model probabilities.
+	</li>
+	<li>Expert labels might disagree. In this case the independent variables should be used 
+	  without label. This required a generative classifier and to model the joint density 
+	  over the features extracted from EEG and the "sleep" state.</li>
+	<li>We needed an inference scheme that allows for model selection (or model 
+	  averaging) without being too difficult to compute on large data sets.</li>
+	<li>Later extensions to include models from other sensors (e.g. an EMG model) should be
+	  relatively easy.</li>
+      </ul>
+      <h3>A generative model for classification </h3>
+      <p>
+	<img src="siedag.jpg" alt="DAG generative classification" height="371" 
+	     width="261" align="left" border="0">
+	We decided for a model that allows class conditional densities to be mixture 
+	of Gaussians. Together with prior probabilities for class, we thus have a generative model for 
+	EEG features that - via Bayes theorem - allows predicting probabilities for wake, REM and 
+	deep sleep. The corresponding graphical model is illustrated to the left. The basic 
+	architecture was previously used in a maximum likelihood setting e.g. 
+	<a href="#traven_91">(Tråvén 1991)</a>. The architecture is a latent variable model consisting of 
+	the "features" x, the class label t and the kernel indicator d. In addition the Bayesian 
+	approach requires us to include all model parameters and hyper parameters as well. These are the 
+	prior probabilities of each class P and the parameters of the mixture model. For the latter 
+	we have W as (class conditional) kernel allocation probabilities, &#956 as kernel mean and 
+	&#955 as kernel precision (inverse kernel variance). The remaining variables specify a, 
+	partially hierarchical, prior which is largely influenced by 
+	<a href="#richardson+green_97">(Richardson & Green 1997) </a>.
+	We have &#948<sub>P</sub> and &#948<sub>W</sub> as prior counts (we use 1) in the Dirichlet 
+	distributions over the corresponding variables P and W. Variables &#954 and &#958 specify a 
+	Gaussian prior over the mean, &#956. Variables &#945 and &#946 specify a Gamma prior over the 
+	kernel precisions, &#955, where &#946 is itself given a Gamma prior. This hierarchical setting
+	is suggested by <a href="#richardson+green_97">(Richardson & Green 1997) </a>, to make inference
+	less sensitive to the hyper parameter settings.
+	<!--
+	mu=&#956 lambda=&#955 sigma=&#963 alpha=&#945 beta=&#946 xi=&#958 kappa=&#954 delta=&#948
+	-->
+      </p>
+      <h3>A Variational generative classifier</h3>
+      <p>
+	For reasons of computational efficiency we decided for a variational implementation for
+	the generative classifier. The idea follows from implementations by 
+	<a href="#attias_99">(Attias 1999)</a> who derives a variational solution for a Gaussian 
+	mixture model or <a href="#ghahramani+beal_00">(Gharamani & Beal 2000)</a> who derives a 
+	variational implementation for a mixture of factor analyzers. Variational methods 
+	and the EM algorithm <a href="#dempster_etal_77">(Dempster <i>et al</i>. 1977)</a> share the same ideas.
+	The EM algorithm is a special case of a variational lower bound that becomes exact
+	in the maximum. Unlike the EM, general variational algorithms remain a lower bound.
+      </p>
+      <p>
+	<img src="sleeplge.bmp" alt="Approximate log marginal likelihood" height="287" 
+	     width="356" align="right" border="0">
+	To obtain a lower bound, we apply Jensen's inequality, to the log marginal 
+	likelihood. In the simplest case we use a mean field assumption of a factorizing 
+	posterior distribution. Each circular variable in the DAG gets it's own approximate 
+	distribution. Details of how to derive the algorithm can be found in my PhD thesis 
+	<a href="pubs.html#sykacek00a">(Sykacek 2000 a)</a>. As a result of iterating the
+	variational updates to convergence we obtain a negative free energy for the model
+	which can be used to guide model selection <a href="attias_99">(Attias 1999)</a>.
+	The plot to the right shows the negative free energies of a generative model for one 
+	of the electrodes (C3) for various numbers of Gaussian kernels. It suggests with very 
+	large probability a model with 15 kernels. More details on the prototype of the
+	SIESTA sleep analyzer can be found in 
+	<a href="pubs.html#sykacek_etal01">(Sykacek <i>et al</i>. 2001)</a>. 
+      </p>
+      <h3> Results </h3>
+      <p>
+	If applied to new data, the SIESTA analyzer calculates probability traces that
+	characterize the all-night sleep profile. An example plot is illustrated below.
+	<img src="sleepprobs.bmp" alt="All night sleep profile" height="647" 
+	     width="525"  border="0"/>
+      </p>
+      <h2> References </h2>
+      <dl>
+	<dt><a name="attias_99"> (Attias 1999) </a></dt>
+	<dd>
+	  H. Attias. Inferring parameters and structure of latent variable
+	  models by variational Bayes. in <i> Proceedings of 
+	    the Fifteenth Annual Conference on Uncertainty in Artificial 
+	    Intelligence (UAI--99)</i>,
+	  pages 21-30, 1999.
+	</dd>
+	<dt><a name="dempster_etal_77"> (Dempster <i>et al</i>. 1977) </a></dt>
+	<dd>
+	  A. P. Dempster, N. M. Laird and D. B. Rubin. 
+	  Maximum likelihood from incomplete data via the EM algorithm (with discussion).
+	  In <i> Journal of the Royal Statistical Society B</i>,
+	  pages 1-38, 1977.
+	</dd>
+	<!--<dt><a name="baum_etal_70"> (Baum <i>et al</i>. 1970) </a></dt>
+	<dd>
+	  L. E. Baum, T. Petrie, G. Soules and N. Weiss. 
+	  A maximization technique occurring in the statistical
+	  analysis of probabilistic functions of Markov
+	  chains. in <i> Annals of Mathematical Statistics</i>,
+	  pages 164-171, 1970.
+	</dd> -->
+	<dt><a name="dorffner_etal00"> (Dorffner <i>et al</i>. 2000) </a></dt>
+	<dd>
+	  G. Dorffner, P. Sykacek, S. Roberts, A. Schlögl, A. Värri, 
+	  P. Rappelsberger, P. Anderer, G. Klösch, B. Saletu, MJ. Barbanoj, 
+	  W. Herrmann, S.-L. Himanen, B. Kemp, T. Penzel, J. Röschke. 
+	  Continuous sleep processes and subjective sleep quality - first 
+	  results from the SIESTA project. in <i>J. Sleep Res Supplement 1.</i>,
+	  page 55, 2000.
+	</dd>
+	<dt><a name="flexer_etal02"> (Flexer <i>et al</i>. 2002) </a></dt>
+	<dd>
+	  A. Flexer, G. Dorffner, P. Sykacek, I. Rezek.
+	  An automatic, continuous and probabilistic sleep stager 
+	  based on a hidden Markov model.
+	  <i>Applied Artificial Intelligence</i>, 16(3):199-207,2002.
+	</dd>
+	<dt><a name="flexer_etal00"> (Flexer <i>et al</i>. 2000) </a></dt>
+	<dd>
+	  A. Flexer, P. Sykacek, I. Rezek and G. Dorffner.
+	  Using hidden Markov models to build an automatic, 
+	  continuous and probabilistic stager, in S. I. Amari <i>et al</i>.,
+	  <i> Proceedings of the IEEE-INNS-ENNS International Joint 
+	    Conference on Neural Networks</i>, IJCNN 2000, Como Italy, 
+	  IEEE Computer Society, Vol. III, 627-631, 2000.
+	</dd>
+	<dt><a name="ghahramani+beal_00"> (Ghahramani and Beal 2002) </a></dt>
+	<dd>
+	  Z. Ghahramani and M. J. Beal. Variational inference for Bayesian mixture 
+	  of factor analysers.
+	  <i>Advances in Neural Information Processing Systems 12</i>, 16(3):449-455, 2000.
+	</dd>
+	<dt><a name="kemp_etal98"> (Kemp <i>et al</i>. 1998) </a></dt>
+	<dd>
+	  Kemp B, Penzel T, Värri A. O., Sykacek P.,  Roberts S. J.and  Nielsen K. D. 
+	  EDF: a simple format for graphical analysis results from polygraphic 
+	  SIESTA recordings. in <i>J. Sleep Research 7, suppl. 2</i>, page 132, 1998.
+	</dd>
+	<dt><a name="richardson+green_97"> (Richardson and Green 1997) </a></dt>
+	<dd>
+	  S. Richardson and P. J. Green. 
+	  On Bayesian analysis of mixtures with an unknown number of components. 
+	  in <i> Journal Royal Stat. Soc. B</i>,
+	  pages 731-792, 1997.
+	</dd>
+	<dt><a name="sykacek_etal02"> (Sykacek <i>et al</i>. 2002) </a></dt>
+	<dd>
+	  P. Sykacek, G. Dorffner, P. Rappelsberger and J. Zeitlhofer.
+	  Improving bio signal processing through modelling uncertainty: Bayes 
+	  vs. non-Bayes in sleep staging. <i>Applied Artificial Intelligence</i>,
+	  16(5):395-421,2002.
+	</dd>
+	<dt><a name="sykacek_etal01"> (Sykacek <i>et al</i>. 2001) </a></dt>
+	<dd>
+	  P. Sykacek, S. J. Roberts, I. Rezek, A. Flexer and G. Dorffner. 
+	  A probabilistic approach to high resolution sleep analysis.
+	  In G. Dorffner, K. Hornik and H. Bischof, editors, 
+	  <i>Proceedings of the International Conference on Neural 
+	    Networks (ICANN)</i>, pages 617-624, Springer Verlag, 2001. 
+	</dd>
+	<dt><a name="sykacek00b"> (Sykacek 2000 b) </a></dt>
+	<dd>P.  Sykacek. On input selection with reversible jump Markov chain 
+	  Monte Carlo sampling. in S. A. Solla and T. K. Leen and K. R. Müller 
+	  editors, <i>Advances in Neural Information Processing Systems 12</i>,
+	  pages 638-644, MIT press, 2000.
+	</dd>
+	<dt><a name="sykacek00a"> (Sykacek 2000 a) </a></dt>
+	<dd>P. Sykacek. Bayesian inference for reliable biomedical 
+	  signal processing, PhD. thesis at the Technical University Vienna,
+	  defended in June 2000. 	
+	</dd>
+	<dt><a name="sykacek_etal99c"> (Sykacek <i>et al</i>. 1999 c) </a></dt>
+	<dd>P. Sykacek,  S. J. Roberts, I. Rezek, A. Flexer and G. Dorffner. 
+	  Bayesian wrappers versus conventional filters: 
+	  Feature subset selection in the Siesta project.
+	  in <i> Proceedings of the European Medical & Biomedical 
+	    Engineering Conference</i>, pages 1652-1653, 1999.
+	</dd>
+	<dt><a name="sykacek_etal99b"> (Sykacek <i>et al</i>. 1999 b) </a></dt>
+	<dd>P. Sykacek,  S. J. Roberts, I. Rezek, A. Flexer and G. Dorffner. 
+	  Reliability in preprocessing: Bayes rules Siesta.
+	  in <i> Proceedings of the European Medical & Biomedical 
+	    Engineering Conference</i>, pages 1656--1657, 1999.
+	</dd>
+	<dt><a name="sykacek_etal99a"> (Sykacek <i>et al</i>. 1999 a) </a></dt>
+	<dd>P. Sykacek,  S. J. Roberts, I. Rezek, A. Flexer and G. Dorffner.
+	  Classification in the sampling paradigm: A predictive 
+	  approach towards a Siesta sleep analyzer 
+	  in <i> Proceedings of the European Medical & Biomedical 
+	    Engineering Conference</i>, pages 1660-1661, 1999.
+	</dd>
+	<dt><a name="sykacek_etal98"> (Sykacek <i>et al</i>. 1998) </a></dt>
+	<dd>
+	  P. Sykacek, G. Dorffner, P. Rappelsberger and J. Zeitlhofer.
+	  Experiences with Bayesian learning in a real world application.
+	  in M. I. Jordan and M.J. Kearns and S. Solla editors, 
+	  <i>Advances in Neural Information Processing Systems 10</i>, 
+	  pages 964-970, 1998. 
+	</dd>
+	<dt><a name="sykacek_etal97"> (Sykacek <i>et al</i>. 1997) </a></dt>
+	<dd>
+	  P. Sykacek, G. Dorffner, O. Filz, P. Rappelsberger and J. Zeitlhofer.
+	  Classification of REM sleep periods with artificial neural networks.
+	  in <i>Proc. of Measurement '97, (Smolenice, 1997)</i>, pages 327-333,
+	  1997.
+	</dd>
+	<dt><a name="traven_91"> (Tråvén 1991) </a></dt>
+	<dd>
+	  H. G. C. Tråvén. A neural network approach to statistical pattern
+	  classification by ``semiparametric'' estimation of
+	  probability density functions
+	  in <i>IEEE Trans. Neural Networks</i>, pages 366-377, 1991.
+	</dd>
+      </dl>
+    </div>
+    <div id="res_three" class="folder" style="position:absolute; width:86%; 
+	 right:0%; top:0px; height:100%; visibility:visible; overflow:auto">
+      <h2><a name="mcabf">Online Supplement to  &#8220;Bayesian Modelling of Shared Gene Function&#8221;</a> </h2>
+      <!--<h3>Introduction</h3> -->
+      <p>
+	This work was done by the authors, while contributing to the
+	BBSRC funded "Shared Genetic Pathways in Cell Number Control"
+	research program, which was awarded to the 
+	<a href="www.path.cam.ac.uk">Department of Pathology</a>,
+	University of Cambridge, UK.
+	As the project title suggests, this project investigates
+	molecular biological processes that control development cycles
+	in different biological systems. The search for the underlying
+	genetic markers requires a principled approach that can infer
+	which genes are of <i>shared</i> importance in several
+	microarray experiments. We propose for that purpose a fully
+	Bayesian model for an analysis of shared gene function. The approach assumes
+	that several microarray experiments with known cross
+	annotations between transcripts (genes) should be analyzed for
+	common genetic markers. The implementation described in this
+	work has in particular the advantage to combine data sets
+	<i>before </i>applying thresholds and thus the advantage that
+	the result is independent of that choice. For more information
+	on the method, we refer to the original paper 
+	<a href="#Sykacek+etal:2007:a">(Sykacek <i>et al</i> 2007 a)</a> 
+	and the pdf supplement 
+	<a href="#Sykacek+etal:2007:b">(Sykacek <i>et al</i> 2007 b)</a>.
+      <p>
+      <h2>Experimental Supplement</h2>
+      <h3>Biological Details</h3>
+      <p>
+	The analysis of development processes in many tissues is faced
+	with several interacting biological processes and a mix of
+	various cell types. As an example we investigate in this work
+	the shared biological activity at gene level in a mouse
+	mammary gland development cycle <a href="#Clarkson+etal:2004">
+	(Clarkson <i>et al</i> 2004)</a> and a human endothelial cell
+	culture with apoptosis induced by serum withdrawal
+	<a href="#Johnson+etal:2004">
+	(Johnson <i>et al</i> 2004)</a>. The biological complexity of
+	the experiments is best visualized, if we mark different
+	development stages for active biological processes at a macro
+	level. For the mouse mammary time course, we get the following
+	table of active processes. During lactation, time is in days
+	and during involution we use hours.
+      </p>
+      <table width="100%" frame="border" border=1>
+	<caption>Biological Processes During Lactation and Involution in Mouse Mammary Development</caption>
+	<tbody>
+	  <!--<tr><td>Biological Process</td><td colspan=8>Lactation and Involution Periods</td></tr> -->
+	  <tr><td>Biological Process</td><td>L<sub>0</sub></td><td>L<sub>5</sub></td><td>L<sub>10</sub></td>
+	    <td>I<sub>12</sub></td><td>I<sub>24</sub></td><td>I<sub>48</sub></td><td>I<sub>72</sub></td>
+	    <td>I<sub>96</sub></td></tr>
+	  <tr><td>Type I Apoptosis</td><td>-</td><td>-</td><td>-</td><td>+</td><td>+</td><td>?</td><td>-</td>
+	    <td>-</td></tr>
+	  <tr><td>Type II Apoptosis</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>?</td><td>+</td>
+	    <td>+</td></tr>
+	  <tr><td>Apoptosis</td><td>-</td><td>-</td><td>-</td><td>+</td><td>+</td><td>+</td><td>+</td>
+	    <td>+</td></tr>
+	  <tr><td>Differentiation</td><td>+</td><td>+</td><td>+</td><td>?</td><td>-</td><td>-</td><td>-</td>
+	    <td>-</td></tr>
+	  <tr><td>Inflammation</td><td>?</td><td>-</td><td>-</td><td>+</td><td>+</td><td>?</td><td>-</td>
+	    <td>-</td></tr>
+	  <tr><td>Remodeling</td><td>-/(?)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>?</td><td>+</td>
+	    <td>+</td></tr>
+	  <tr><td>Acute Phase</td><td>+</td><td>-</td><td>-</td><td>-</td><td>+</td><td>+</td><td>+</td>
+	    <td>+</td></tr>
+	</tbody>
+      </table>
+      <p>
+	We use "+" to indicate that a process is active and "-" to
+	indicate it's inactivity. A "?" indicates epochs where we are
+	uncertain about the process activity. A similar though
+	simpler classification can be obtained for the second
+	experiment which studies human endothelial cells under serum
+	deprivation. Duration during serum deprivation is in hours.
+      </p>
+      <table width="100%" frame="border" border=1>
+	<caption>Biological Processes in Endothelial Cells Under Serum Withdraw</caption>
+	<tbody>
+	  <tr><td>Biological Process</td><td>control (t<sub>0</sub>)</td><td>t<sub>28</sub></td></tr>
+	  <tr><td>Type II Apoptosis</td><td>-</td><td>+</td></tr>
+	  <tr><td>Apoptosis</td><td>-</td><td>+</td></tr>
+	  <tr><td>Differentiation</td><td>+</td><td>-</td></tr>
+	</tbody>
+      </table>
+      <h3>Results</h3>
+      <p>
+	In addition to the results we present in the original paper and in the
+	pdf supplement, we provide here the top 20 genes we find important to 
+	contribute to both data sets.
+      </p>
+      <table width="100%" frame="border" border=1>
+	<caption>Ranking From <i>Shared</i> Analysis of Mammary Development and Endothelial Cells</caption>
+	<tbody>
+	  <tr><td>Gene Symbol</td><td>P(I<sub>t</sub>|D)</td>
+	    <td>P(G=t|D)</td><td>Co-Regulation</td></tr>
+	  <tr><td>SAT </td><td> 0.99951 </td><td>0.047597 </td><td>anti </td></tr> 
+	  <tr><td>ODC1 </td><td> 0.99921 </td><td>0.029237 </td><td>co </td></tr> 
+	  <tr><td>GRN </td><td> 0.99921 </td><td>0.029125 </td><td>co </td></tr> 
+	  <tr><td>BSCL2  </td><td> 0.99919 </td><td>0.028601 </td><td>anti </td></tr> 
+	  <tr><td>MLF2 </td><td> 0.99884 </td><td>0.019988 </td><td>anti </td></tr> 
+	  <tr><td>IFRD2 </td><td> 0.99867 </td><td>0.017425 </td><td>co </td></tr> 
+	  <tr><td>BTG2 </td><td> 0.99843 </td><td>0.014688 </td><td>co </td></tr> 
+	  <tr><td>CCNG2 </td><td> 0.99826 </td><td>0.013274 </td><td>co </td></tr> 
+	  <tr><td>TNK2 </td><td> 0.99789 </td><td>0.010943 </td><td>anti </td></tr> 
+	  <tr><td>C9orf10 </td><td> 0.99783 </td><td>0.010614 </td><td>co </td></tr> 
+	  <tr><td>HAGH </td><td> 0.99764 </td><td>0.0097747 </td><td>co </td></tr> 
+	  <tr><td>PPP2CB </td><td> 0.99759 </td><td>0.0095567 </td><td>anti </td></tr> 
+	  <tr><td>SSR1 </td><td> 0.99748 </td><td>0.0091528 </td><td>co </td></tr> 
+	  <tr><td>MUT </td><td> 0.99747 </td><td>0.0091039 </td><td>co </td></tr> 
+	  <tr><td>DHRS3 </td><td> 0.99746 </td><td>0.0090926 </td><td>co </td></tr> 
+	  <tr><td>PSMA1 </td><td> 0.99741 </td><td>0.0089018 </td><td>anti </td></tr> 
+	  <tr><td>HBLD2 </td><td> 0.99732 </td><td>0.0086073 </td><td>co </td></tr> 
+	  <tr><td>SYPL1 </td><td> 0.99724 </td><td>0.0083639 </td><td>co </td></tr> 
+	  <tr><td>C2F </td><td> 0.99723 </td><td>0.0083374 </td><td>co </td></tr> 
+	  <tr><td>ATP6V1B2 </td><td> 0.99706 </td><td>0.0078419 </td><td>anti </td></tr> 
+	</tbody>
+      </table>
+      <p> The full gene list in comma separated format is available as
+      <a href="suppmcabf/mammaryendo.zip">zipped archive</a>. To
+      check, which biological processes we find attributed to this
+      list, we follow the suggestion in <a
+      href="#Lewin:etal:2006">(Lewin <i>et al.</i> 2006)</a> and use
+      Fishers exact test to infer significance levels of active gene
+      ontology (GO) categories from the probabilistic rank list (see
+      also <a href="#Al-Shahrour+etal:2004"> (Al-Shahrour <i>et
+      al.</i>)</a>).  The resulting GO categories for the gene list of
+      this shared analysis can be obtained as <a
+      href="suppmcabf/comb_apo_all.xml">comb_apo_all.xml</a> in xml
+      format. This file is compatible with <a
+      href="http://www.cs.umd.edu/hcil/treemap" target="blank">Treemap
+      - (C) University of Maryland</a> and preserves the parents -
+      child relationships from the directed acyclic GO graph. Note
+      that the treeml.dtd file is part of the Treemap package and not
+      available here. Treemap is under a non commercial license. If it
+      is unavailable despite that, the xml &#xFB01;le can be inspected
+      with any reasonable web browser.  <h2>Software</h2>
+      <p>
+	The software to calculate indicator probabilities that capture
+	shared gene function comes as collection of MatLab
+	libraries. The package consists of the main code, which uses the
+	variational Bayesian approach described in
+	<a href="#Sykacek+etal:2007:a">(Sykacek <i>et al</i> 2007 a)</a>
+	and additional functions for data handling, output generation
+	and an EM implementation for regularized probit link
+	regression used during initialization of all
+	Q-distributions. To make the software distribution flexible,
+	all MatLab functions are collected in archives each containing
+	functions of a particular type. The software is available under 
+	GPL 2 license and comes without any warranty.
+      </p>
+      <h3>Installation</h3>
+      <p>
+	To install the package, one has to download all required
+	archives, provided as *.zip files or tared gzip archives
+	(*.tar.gz), unpack the archives and set appropriate MatLab
+	paths. Scripts using a hypothetical experiment derived from a
+	mouse testis time course kindly provided by R. Furlong,
+	demonstrate how to use the library.
+      </p>
+      <table width="100%" frame="border">
+	<caption>Library Files for Shared Analysis (Zip files ending with .zip 
+	  instead of .tar.gz are available as well)</caption>
+	<tbody>
+	  <tr><td>
+	      Library File </td><td> Description </td></tr><tr><td>
+	      <a href="mlablib/helpers.tar.gz">helpers.tar.gz</a> </td><td> generic helper functions</td></tr><tr><td>
+	      <a href="mlablib/statsgen.tar.gz">statsgen.tar.gz</a> </td><td> generic statistics functions</td></tr><tr><td>
+	      <a href="mlablib/mca_base.tar.gz">mca_base.tar.gz</a> </td><td> basic microarray file handling 
+	      (loading various microarray data formats)</td></tr><tr><td>
+	      <a href="mlablib/mca_fuse.tar.gz">mca_fuse.tar.gz</a> </td><td> generic handling in connection 
+	      with shared analysis (cross annotation and output generation)</td></tr><tr><td>
+	      <a href="mlablib/probitem.tar.gz">probitem.tar.gz</a> </td><td> Penalized maximum likelihood 
+	      (MAP) for probit link regression via an EM algorithm.</td></tr><tr><td>
+	      <a href="mlablib/combanalysis.glb.hphp.tar.gz">combanalysis.glb.hphp.tar.gz</a></td><td>
+	      Variational Bayes for shared analysis of subset probabilities 
+	      in probit regression.</td></tr>
+	</tbody>
+      </table>
+      <p>
+	All components required to successfully run the experiment,
+	will be installed automatically, if one creates a new
+	directory and then downloads and runs the setup script in that
+	directory. Linux (Unix) users should use <a
+	href="suppmcabf/combsyssetup.sh">combsyssetup.sh</a>. After
+	download, you might have to set executable permission by
+	invoking the command <i>chmod +x combsyssetup.sh</i>. Windows
+	users should either do the same after installing a cygwin
+	environment or install the Wget and Unzip packages from
+	<a href="http://gnuwin32.sourceforge.net/packages.html" target="blank">GnuWin32</a>
+	and then download and run <a href="suppmcabf/combsyssetup.bat">combsyssetup.bat</a>
+	Note that this will install all required packages and, if run at
+	later times, install updates.
+      </p>
+      <h3>Tutorial</h3>
+      <p>
+	After having run the script, the installation directory contains
+	MatLab scripts and data which illustrate the approach discussed in 
+	<a href="#Sykacek+etal:2007:a">(Sykacek <i>et al</i> 2007 a)</a>.  
+	The data are extracted from a subset of a mouse testis
+	development time course, kindly provided by R. Furlong. The data
+	consists of 7 time points: adult day 1 day 5 day 10 day 15 day
+	23 and day 35, with differential expression measured against the
+	adult generation. 
+      </p>
+      <h4>Data Files for the Tutorial</h4>
+      <p>
+	To illustrate all steps from cross annotation
+	to generation of gene lists, we divided this data artificially
+	into two "experiments". One experiment contains the samples of
+	the adult generation and days 1 and 15. Here we use the original
+	gene ids. We assume that the biological state change is between
+	adult and the other two development periods. The corresponding
+	data file is called "exp1mca.tsv" and is formatted like
+	<a href="downloads.html#fspma">FSPMA</a> normalized raw output:
+	Gene ids are used as column headers and all samples as rows
+	below.  We also have a corresponding effects description as
+	"exp1eff.tsv", which is used to generate the labels.  The second
+	experiment contains days 35, 23, 5 and 10 and artificially
+	modified gene ids, to mimic a situation that requires
+	between species annotation. Here we assume that the biological
+	states correspond to days 35 and 23 versus days 5 and 10. The
+	files are "exp2mca.tsv" for the microarray data and
+	"exp2eff.tsv" for the labels. Note that the assumption is that
+	each experiment provides information about differences in late
+	and early stages of testis development. The analysis goal is
+	thus similar to a problem, where we attempt to combine two
+	experiments obtained from different platforms or species. This
+	requires "cross annotation", which is here done according to the
+	tab delimited file "crossann.tsv".  In general, each row in this
+	file contains a tuple that provides a unique mapping between
+	all different unique gene ids one finds in a shared analysis. To
+	complete the list of files, we provide in addition the tab
+	delimited file "genespec.csv", which provides for the unique
+	gene ids in the target genome, a mapping to gene symbols and
+	descriptions.
+      </p>
+      <table width="100%" frame="border">
+	<caption> 
+	  <a name="T_datfiles">Data Files - Summary Table</a> 
+	</caption>
+	<tbody>
+	  <tr><td>
+	      File Name</td><td> Description </td></tr><tr><td>
+	      <a href="/suppmcabf/exp1mca.tsv">exp1mca.tsv</a>, 
+	      <a href="/suppmcabf/exp2mca.tsv">exp2mca.tsv</a></td>
+	    <td> Normalized log ratios 
+	      (location and scale adjustment) </td></tr><tr><td>
+	      <a href="/suppmcabf/exp1eff.tsv">exp1eff.tsv</a>, 
+	      <a href="/suppmcabf/exp2eff.tsv">exp2eff.tsv</a></td>
+	    <td> (default) Labels </td></tr><tr><td> 
+	      <a href="/suppmcabf/crossann.tsv">crossann.tsv</a></td>
+	    <td> cross annotations between the 
+	      different gene ids found in the gene lists </td></tr><tr><td> 
+	      <a href="/suppmcabf/genespec.csv">genespec.csv</a></td>
+	    <td> mapping from unique gene ids 
+	      (for the cross annotation target) to standardized 
+	      symbols and gene descriptions </td></tr><tr><td> 
+	      <a href="/suppmcabf/shareanalysis.def">shareanalysis.def</a></td>
+	    <td> specification of the cross annotated 
+	      experiments that enter shared analysis</td></tr>
+	</tbody>
+      </table>
+      <h4>Matlab Scripts for the Tutorial</h4>
+      <table width="100%" frame="border">
+	<caption>
+	  <a name="T_script_files">
+	  Script files, to be run in the order as listed in the table.
+	  </a>
+	</caption>
+	<tbody>
+	  <tr><td>
+	      File Name</td><td> Description </td></tr><tr><td>
+	      <a href="/suppmcabf/crossann.m">crossann.m</a></td>
+	    <td>cross annotation of microarray experiments and
+	      preparation of shared analysis</td></tr><tr><td>
+	      <a href="/suppmcabf/runsim.m">runsim.m</a>, 
+	      <a href="/suppmcabf/calccoreg.m">calccoreg.m</a></td>
+	    <td>calculation of gene indicator probabilities of 
+	      shared gene function by variational Bayesian inference</td></tr><tr><td>
+	      <a href="/suppmcabf/combres2csv.m">combres2csv.m</a></td>
+	    <td>extraction of gene ranking w.r.t. shared 
+	      gene function as a tab delimited file</td></tr>
+	</tbody>
+      </table>
+      <p>
+	Both artificial experiments have to be cross annotated. This
+	step will align the gene ids in different experiments and
+	provide two raw data files and a gene id to symbols and
+	description annotation in MatLab 6 format. Cross annotation is
+	done by the MatLab script crossann.m found in the installation
+	folder.
+      </p>
+      <p>
+	After cross annotation, we have to prepare for the shared
+	analysis. This requires to specify a tab delimited text file
+	("shareanalysis.def") which controls this process. The minimal
+	requirement is to specify in this control file which
+	(previously cross annotated) data files should be analyzed for
+	shared gene function. In addition one can specify a different
+	set of labels. This is useful to analyze the same data for
+	different biological classifications. We may also provide
+	independent test data, which will be used to obtain generalization
+	errors. Analysis is stared with the script combanalysis.m in
+	the installation folder. The simulation will, depending on the size
+	of the problem and the mode of analysis, take up to several
+	hours (this example is though done in less than one minute or
+	in a few minutes time, if we want fold results). As a result we get
+	all simulation output in MatLab format. Details of the
+	calculated results require to look into the code and to
+	analyze the variables stored in the MatLab output file.
+      </p>
+      <p>
+	The last step in an analysis of shared function is to generate
+	a rank table of shared gene function.  This is done with the
+	script crossann2csv.m found in this folder as well. The result
+	is a rank list of similar structure as the one provided in the
+	supplement of the original paper.
+      </p>
+      <p>
+	All intermediate results generated during a shared analysis is
+	stored in MatLab 6 format (for Octave compatibility). The
+	final rank table is a comma separated file.
+      </p>
+      <table width="100%" frame="border">
+	<caption>Summary of result files as generated from this simulation.</caption>
+	<tbody>
+	  <tr><td>
+	      File Name</td><td> Description </td></tr><tr><td>
+	      exp1.mat, exp2.mat </td><td> cross annotated and normalized raw data</td></tr><tr><td>
+	      crossanngenespec.mat </td><td> reordered gene specifications 
+	      (id, symbol and description)</td></tr><tr><td>
+	      state.mat, crosslog.mat</td><td> internal log files (see code)</td></tr><tr><td>
+	      sharetestres.mat</td><td> inference result about shared gene function.
+	      This file contains all results including probabilities, predictions
+	      and all Q-distributions found from variational Bayesian inference.</td></tr><tr><td>
+	      share_test_rank.csv</td><td> rank table as comma separated file.</td></tr>
+	</tbody>
+      </table>	  
+      <h4>Adapting Shared Analysis to Different Experiments</h4>
+      <p>
+	To run such an analysis on a different experiment, one must
+	provide data files structured like those listed in the
+	<a href="#T_datfiles">data files table</a>.  The structure of the
+	microarray data and the default labels is identical to the
+	output generated by <a href="downloads.html#fspma">FSPMA</a>,
+	which can thus be used as preprocessing tool. In addition, one
+	has to generate a file which allows cross annotation between all
+	gene sets that appear in any one data set. If there is only one
+	set of gene ids, cross annotation should be done anyway, to
+	obtain the data in the format as expected by runsim.m. In this
+	case all parts in runsim.m that specify the shared analysis will
+	refer to the same gene id column.  Inference of shared gene
+	function requires in addition a control file similar to
+	shareanalysis.def. Finally one has to adjust all script files in
+	the <a href="#T_script_files">script files summary</a> to meet the 
+	different requirements.
+      </p>
+      <h3> Acknowledgments </h3>
+      <p>
+	This page describes joint work with 
+	<a href="http://www.cardiff.ac.uk/biosi/research/genetics/staff/clarkson.html" target="_blank">R. Clarkson</a>, 
+	<a href="http://www.health.auckland.ac.nz/molmedpath/staff/cris_print.html" target="_blank">C. Print</a>, 
+	<a href="http://www.path.cam.ac.uk" target="_blank">R. Furlong</a> and 
+	<a href="http://www.gen.cam.ac.uk/Research/micklem.htm" target="_blank">G. Micklem</a>. 
+	We also thank <a href="http://www.inference.phy.cam.ac.uk/mackay/" target="_blank">David MacKay</a> 
+	for advise. The project was moslty done at the Departments of 
+	<a href="http://www.path.cam.ac.uk" target="_blank">Pathology</a> and 
+	<a href="http://www.gen.cam.ac.uk" target="_blank">Genetics</a>,
+	University of Cambridge as part of the project "Shared Genetic
+	Pathways in Cell Number Control", ref. 8/EGH16106 funded by
+	the BBSRC within their Exploiting Genomics initiative. During
+	completion of this work, Peter Sykacek moved to the 
+	<a href="http://www.biotec.boku.ac.at/bioinf.html" target="_blank">Bioinformatics group</a> 
+	at BOKU University, Vienna, which is funded by the 
+	<a href="http://www.wwtf.at/" target="_blank">WWTF</a>, ACBT, Baxter AG, and ARC Seibersdorf.
+      </p>
+      <h2>References</h2>
+      <dl>
+	<dt><a name="Al-Shahrour+etal:2004"> (Al-Shahrour <i>et al.</i>)</a></dt>
+	<dd>
+	  F. Al-Shahrour, R. Díaz-Uriarte, and J. Dopazo. FatiGO: A
+	  web tool for finding significant associations of Gene Ontology
+	  terms with groups of genes. in <i>Bioinformatics</i>, 20, pages 578--580, 2004.
+	</dd>
+	<dt><a name="Attias:1999"> (Attias 1999) </a></dt>
+	<dd>
+	  H. Attias. Inferring parameters and structure of latent variable
+	  models by variational Bayes. in <i> Proceedings of 
+	    the Fifteenth Annual Conference on Uncertainty in Artificial 
+	    Intelligence (UAI--99)</i>,
+	  pages 21-30, 1999.
+	</dd>
+	<dt><a name="Clarkson+etal:2004"> (Clarkson <i>et al</i> 2004) </a></dt>
+	<dd>
+	  R. W. E. Clarkson, M. T. Wayland, J. Lee, T. Freeman and C. J. Watson.
+	  Gene expression profiling of mammary gland development reveals
+	  putative roles for death receptors and immune mediators in post-lactational
+	  regression. in <i>Breast Cancer Res.</i>, <b>6</b>(2), pages 92--109, 2004.
+	</dd>
+	<dt><a name="Johnson+etal:2004"> (Johnson <i>et al</i> 2004) </a></dt>
+	<dd>
+	  N. A. Johnson, S. Sengupta, S. A. Saidi, K. Lessan,
+	  S. D. Charnock-Jones, L. Scott, R. Stephens, T. C. Freeman,
+	  B. D. Tom, M. Harris, G. Denyer, M. Sundaram, S. K. Smith
+	  and C. G. Print. Endothelial cells preparing to die by
+	  apoptosis initiate a program of transcriptome and glycome
+	  regulation. in <i>The FASEB Journal</i>, <b>18</b>, pages
+	  188--190, 2004.
+	</dd>
+	<dt><a name="Lewin:etal:2006">(Lewin <i>et al.</i> 2006)</a></dt>
+	<dd>
+	   A. Lewin, S. Richardson, C. Marshall, A. Glazier, and T. Aitman.
+	  Bayesian Modelling of Differential Gene Expression. in 
+	  <i>Biometrics</i>,62(1), pages 10--18.
+	</dd>
+	<dt><a name="Sykacek+etal:2007:a">(Sykacek <i>et al.</i> 2007:a)</a></dt>
+	<dd>
+	  P. Sykacek, R. Clarkson, C. Print, R. Furlong and G. Micklem. 
+	  Bayesian Modeling of Shared Gene Function. In <i>Bioinformatics</i>,
+	  2007; doi: 10.1093/bioinformatics/btm280, pp 1936--1944. An
+          <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btm280?ijkey=5FPeV4GxtcszOOQ&keytype=ref"
+          target="_blank">abstract</a> and a 
+          <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/btm280?ijkey=5FPeV4GxtcszOOQ&keytype=ref" target="_blank">
+          pdf preprint</a> are available from <a href="http://bioinformatics.oxfordjournals.org/" target="_blank">Bioinformatics online</a>,
+	  a local draft version is draft available in
+	  <a href="onlinepapers/combsysanalysis.ps.gz">gzipped postscript</a> and
+	  <a href="onlinepapers/combsysanalysis.pdf">pdf</a>.
+	</dd>
+	<dt><a name="Sykacek+etal:2007:b">(Sykacek <i>et al.</i> 2007:b)</a></dt>
+	<dd>P. Sykacek, R. Clarkson, C. Print, R. Furlong, and
+	  G. Micklem. Supplement to:"Bayesian Modeling of Shared Gene Function".
+	  Technical report, Department of Biotechnology, BOKU
+	  University, Vienna, 2007, available in
+	  <a href="onlinepapers/suppcombsysanalysis.ps.gz">gzipped postscript</a> and
+	  <a href="onlinepapers/suppcombsysanalysis.pdf">pdf</a>.
+	</dd>
+      </dl>
+    </div>
+    <!-- <address><a href="mailto:psykacek@yahoo.co.uk"></a></address> width:660px; height:400px; -->
+  </body>
+</html>

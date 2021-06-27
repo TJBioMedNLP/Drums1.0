@@ -1,0 +1,147 @@
+<html>
+<head>
+	<table align="center" width="800">
+		<tr>
+			<td style=text-align:center>
+				<h1 style="text-align:center; background-image: url(../taphunter/Pictures/Picture1.jpg); width:100%;" >
+					<font  face="Monotype Corsiva " size = "7" >TAP Hunter</font>
+				</h1>
+			</td>
+		</tr>
+	</table>
+		<h2 style="text-align: center">
+			<font size="3">
+				<a href="index.html" align=center>Home</a>
+				<span>|</span>
+				<a href="help.html" align=center>Help</a>
+				<span>|</span>
+				<a href="references.html" align=center>References</a>
+				<span>|</span>
+				<a href="resources.html" align=center>Resources</a>
+				<span>|</span>
+				<a href="Supplementary.html" align=center>Supplementary</a>
+				<span>|</span>
+				<a href="contact.html" align=center>Contact</a>
+			</font>
+		</h2>
+	<title align="center">TAP Hunter
+	</title>
+	<script type="text/javascript">
+		function validateForm(form)
+		{	
+   			if(form.peptides.value=="")
+			  {
+			 	if(form.uploadFile.value=="")
+			   	{
+					alert("Please enter peptide sequence.")
+		   			return false
+		   		}
+		  	}
+ 
+		  	if(form.uploadFile.value!="")
+		   	{
+		   		if(form.uploadFile.value.lastIndexOf(".txt")==-1)
+		   		{    alert("Please upload only .txt extension file")    
+	  	 		     return false
+			   	}
+			}
+
+			if(!document.myform.select_feature[0].checked && !document.myform.select_feature[1].checked)
+		   	{
+		   		alert("Please select the sequence type.")			   			
+			   	return false			   			
+			}
+			else
+			{
+		   		return true
+		   	}
+		}
+		function fasta_seq()
+		{
+
+			if (document.myform.select_feature[0].checked)
+			{
+				document.myform.peptides.value =">Hepatitis B virus \nFLLAQFTSA\n>Human immunodeficiency virus 1 \nILKEPVHGV\n>Homo sapiens \nDFKSVADSY"
+			}
+			else
+			{
+				document.myform.peptides.value =">gi|257123352|gb|ACV41515.1| hemagglutinin [Influenza A virus (A/American black duck/New Brunswick/19347/2006(H4N6))] \nMLSIAILFLLIAEGYSQNYTGNPVICLGHHAVSNGTMVKTLTDDQIEVVTAQELVESQHLPELCPSPLRLVDGQTCDIVNGALGSPGCDHLNGAEWDVFIERPTAVDTCYPFDVPDYQSLRSILANNGKFEFIAEEFQWNAVKQNGKSGACKRANVNDFFNRLNWLTKSDGNAYPLQNLTKVNNGDYARLYIWGVHHPSTDTEQTNLYKNNPGRVTVSTQTSQTSVVPNIGSRPWVRGQSGRISFYWTIVEPGDLIVFNTIGNLIAPRGHYKLNSQKKSTILSTAVPIGSCVSKCHTDKGSISTTRPFQNISRVSIGDCPKYVKQGSLKLATGMRNIPEKATRGLFGAIAGFIENGWQGLIDGWYGFRHQNAEGTGTAADLKSTQAAIDQINGKLNRLIEKTNEKYHQIEKEFEQVEGRIQDLEKYVEDTKIDLWSYNAELLVALENQHTIDVTDSEMNKLFERVRRQLRENAEDKGNGCFEIFHQCDNSCIESIRNGTYDHDIYRDEAINNRFQIQGVKLTQGYKDIILWISFSISCFLLVALLLAFILWACQNGNIRCQICI"
+			}
+		}			
+			
+		function toggle_1()
+		{
+			var div1 = document.getElementById('div1')
+			if (div1.style.display == 'none')
+			{
+				div1.style.display = 'block'
+			}
+			else
+			{
+				div1.style.display = 'none'
+			}
+		}
+		function toggle_off()
+		{
+			var clear = document.getElementById('textbox')
+			clear.value = ""
+		}
+	</script>
+</head>
+
+<body  bgcolor=white  text=black  link=blue  alink=red  vlink=gray>
+<br>
+	<table  align="center" width="770" cellpadding="0" cellspacing="0" border="2" bordercolor="000000">
+		<td>
+			<p style="background-image: url(http://datam.i2r.a-star.edu.sg/taphunter/Pictures/box_1.jpg); width:100%; color:black; text-align:center" >
+				<br><b>Information</b><br>
+				&nbsp;  TAP Hunter is a tool for predicting the binding affinity of peptide to transporter associated with antigen processing (TAP).
+				<a href='javascript: toggle_1()'>more..</a><br>
+				<br><br>
+			</p>
+			<div id='div1' style='display:none'>
+				<table  align="center" width="755" cellpadding="0" cellspacing="0" border="0" bordercolor="000000">
+					<td>
+						<p style="background-image: url(../taphunter/Pictures/box_2.emf); width:100%; color:black; text-align:center" ><br>
+							&nbsp;It is a SVM based model where the feature vector of the nonamer peptides is represented by the amino acid at position 1,2,3 and the last amino acid of the sequence. It has been proved 
+							that these positions have dominant effects on the TAP-peptide binding interaction.The physiochemical properties as well as the amino composition of these positions are also included 
+							in the building of the feature vector. TAP Hunter gave a high AROC value of 0.88 for both the 5-fold cross validation and independent testset evaluations.
+						</p>
+					</td>
+				</table>
+			</div>
+		</td>
+	</table>
+	<hr>
+	<table  align="center" width="790" cellpadding="0" cellspacing="0" border="0" bordercolor="#ffffff">
+		<form name="myform" style="text-align: center;" method="POST" action="/taphunter/cgi-bin/sap.cgi"  enctype="multipart/form-data" onSubmit="return validateForm(this)">
+			<tr>
+				<td bgcolor="#e6e6fa" >
+					<div  id="selection" align="center"><br>
+						<input type=radio name="select_feature" value="Peptides_pred" checked = "checked" onClick="toggle_off()" checked = "checked">Peptides
+						<input type=radio name="select_feature" value="Protein" onClick="toggle_off()">Protein<br>
+						<p align="center">
+						(Note: TAP Hunter only conducts prediction for 1 protein sequence per entry) 
+						</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p  align="center">
+						Please paste your sequence in the FASTA format
+						<br>
+						<img src="/taphunter/Pictures/click_here.jpg" onClick="fasta_seq()">
+					</p>
+					<div align="center" style="background-image:url(/taphunter/Pictures/tap_image1.jpg);">
+						<textarea id="textbox" name="peptides" cols="40" rows="18" ></textarea><br>
+						<br>						
+						<input type="submit" value="Submit">
+						<input type="reset" value="Clear">
+					</div>
+				</td>
+			</tr>
+		</form>
+	</table>
+</body>
+</html>

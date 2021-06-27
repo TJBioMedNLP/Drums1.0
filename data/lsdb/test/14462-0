@@ -1,0 +1,1054 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en">
+  <head>
+		<meta http-equiv="Content-Type"
+        content="text/html;charset=utf-8" />
+		<div style="position:absolute;"><a href="#skip"><img
+    src="https://cabig.nci.nih.gov/skipnav.gif" width="1"
+    height="1" border="0" alt="Skip Navigation"
+    title="Skip Navigation" /></a></div>
+		<title>
+			caGrid 1.3
+			&mdash;
+			
+		</title>
+		
+      
+        <base href="https://cabig.nci.nih.gov/workspaces/Architecture/caGrid" />
+      
+    
+		<meta name="generator" content="Plone - http://plone.org" />
+		<meta content="Home page for caGrid version 1.3.0.2, released November 2009"
+        name="description" />
+
+		<!-- Plone ECMAScripts -->
+		
+			
+        
+            
+                <script type="text/javascript"
+                        src="https://cabig.nci.nih.gov/portal_javascripts/caBigPloneSkin/ploneScripts9750.js">
+                </script>
+                
+            
+        
+    
+		
+
+<script type="text/javascript">
+function recordOutboundLink(link, category, action) {
+  try {
+    var myTracker=_gat._getTrackerByName();
+    _gaq.push(['myTracker._trackEvent', ' + category + ', ' + action + ']);
+    setTimeout('document.location = "' + link.href + '"', 100)
+  }catch(err){}
+}
+</script>
+
+		
+			
+				
+        
+            
+                
+                    
+                    
+                        <style type="text/css"><!-- @import url(https://cabig.nci.nih.gov/portal_css/caBigPloneSkin/ploneStyles6797.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="https://cabig.nci.nih.gov/portal_css/caBigPloneSkin/ploneStyles1174.css"
+                          title="Small Text" />
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="https://cabig.nci.nih.gov/portal_css/caBigPloneSkin/ploneStyles1663.css"
+                          title="Large Text" />
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css"><!-- @import url(https://cabig.nci.nih.gov/portal_css/caBigPloneSkin/ploneStyles1015.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css" media="all"><!-- @import url(https://cabig.nci.nih.gov/portal_css/caBigPloneSkin/ploneStyles1628.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css" media="all"><!-- @import url(https://cabig.nci.nih.gov/portal_css/caBigPloneSkin/ploneStyles6725.css); --></style>
+                    
+                    
+                
+            
+        
+    
+			
+			
+		
+
+		<div align="left">
+			<table width="100%" border="0" cellspacing="0"
+          cellpadding="0" bgcolor="#A90101">
+			<tr bgcolor="#A90101">
+				<td width="283" height="34" align="left"><a href="http://www.cancer.gov"><img
+    src="https://cabig.nci.nih.gov/logotype.gif" width="283"
+    height="34" border="0" title="National Cancer Institute"
+    alt="National Cancer Institute"></a></td>
+				<td>&nbsp;</td>
+				<td width="177" height="34" align="right"><a href="http://www.cancer.gov"><img
+    src="https://cabig.nci.nih.gov/tagline.gif" width="177"
+    height="34" border="0"
+    title="U.S. National Institutes of Health"
+    alt="U.S. National Institutes of Health"></a></td>
+				<td width="118" height="34" align="right"><a href="http://www.cancer.gov"><img
+    src="https://cabig.nci.nih.gov/cancergov.gif"
+    width="118" height="34" border="0"
+    title="www.cancer.gov" alt="www.cancer.gov"></a></td>
+			</tr>
+			</table>
+
+			
+		</div>
+		<!-- Internet Explorer CSS Fixes -->
+		<!--[if lt IE 7]>
+		<style type="text/css" media="all">@import url(https://cabig.nci.nih.gov/IEFixes.css);</style>
+		<![endif]-->
+
+		<link rel="shortcut icon" type="image/x-icon"
+        href="https://cabig.nci.nih.gov/favicon.ico" />
+		<link rel="home" href="https://cabig.nci.nih.gov"
+        title="Front page" />
+		<link rel="search" title="Search this site"
+        href="https://cabig.nci.nih.gov/search_form" />
+		<link rel="author" title="Author information"
+        href="https://cabig.nci.nih.gov/author/seinolf" />
+		<link rel="contents"
+        href="https://cabig.nci.nih.gov/sitemap"
+        title="Site Map" />
+
+		
+
+		
+		<link rel="up"
+        href="https://cabig.nci.nih.gov/workspaces/Architecture"
+        title="Up one level" />
+
+		
+
+		<!-- Disable IE6 image toolbar -->
+		<meta http-equiv="imagetoolbar" content="no" />
+		
+		
+      
+      
+    
+		
+		
+      
+    
+    
+    
+    
+
+      
+      
+      
+    
+		
+		
+      
+      
+    
+		
+		<!--function for footer nav -->
+		<script language="JavaScript">
+			function changeMenuStyle(obj, new_style) { 
+				obj.className = new_style; 
+			}
+			
+			function showCursor(){
+				document.body.style.cursor='hand'
+			}
+			
+			function hideCursor(){
+				document.body.style.cursor='default'
+			}
+			
+			function confirmDelete(){
+				if (confirm('Are you sure you want to delete?')){
+					return true;
+				} else {
+						return false;
+				}
+			}
+			
+			function setUrl ( url, target ) {
+				if ( target == '_self' ) {
+					document.location.href = url;
+				} else {
+						open(url,target);
+				}
+			}
+		</script>
+	</head>
+  <body class="section-workspaces" dir="ltr">
+    <div id="visual-portal-wrapper">
+      <div id="portal-top">
+        <div id="portal-header">
+					<a class="hiddenStructure" accesskey="2"
+        href="https://cabig.nci.nih.gov/workspaces/Architecture/caGrid/#documentContent">Skip to content.</a>
+					<a class="hiddenStructure" accesskey="6"
+        href="https://cabig.nci.nih.gov/workspaces/Architecture/caGrid/#portlet-navigation-tree">Skip to navigation</a>
+					<div id="portal-searchbox">
+		<form name="searchform" method="get" action="https://google1.nci.nih.gov/search" style="white-space:nowrap">
+			<label for="searchGadget" class="hiddenStructure">Search Site</label>
+			<div class="LSBox">
+                                <input type="hidden" name="site" value="esn_collection" />
+                                <input type="hidden" name="client" value="esn_frontend" />
+                                <input type="hidden" name="output" value="xml_no_dtd" />
+                                <input type="hidden" name="proxystylesheet" value="esn_frontend" />
+				<input id="searchGadget" class="searchTextField"
+           name="q" tabindex="" type="text" size="15"
+           value="" title="Search Site" accesskey="4"
+           class="visibility:visible" />
+				<input class="searchButton" name="btnG" type="submit"
+           value="Search" />
+				<div class="LSResult" id="LSResult" style="">
+					<div class="LSShadow" id="LSShadow"></div>
+				</div>
+			</div>
+		</form>
+		<div id="portal-advanced-search" class="hiddenStructure">
+			<a href="https://cabig.nci.nih.gov/search_form"
+      accesskey="5">
+				Advanced Search&hellip;
+			</a>
+		</div>
+	</div>
+					
+		<a id="portal-logo" href="https://cabig.nci.nih.gov"
+     accesskey="1"><img src="https://cabig.nci.nih.gov/logo.jpg"
+                        alt="Visit caBIG Home"
+                        title="Visit caBIG Home" width="520"
+                        height="51" border="0" /></a>
+		
+	
+					<div id="portal-skinswitcher">
+  
+</div>
+				</div>
+				
+      </div>
+      <div class="visualClear"><!-- --></div>
+      
+      <table id="portal-columns">
+      <tbody>
+      <tr>
+        
+        <td id="portal-column-one">
+          <div class="visualPadding">
+            
+              
+
+    
+        
+
+        
+            
+
+	
+		<script language="javascript"
+        src="https://cabig.nci.nih.gov/nav.js"></script>
+
+
+    
+
+
+<link rel="stylesheet" type="text/css"
+      href="https://cabig.nci.nih.gov/navcabigredesign.css" />
+<div id="s1">
+	<ul>
+    
+        <li>
+        
+        <div class="home">
+        <a href="/" target="">
+            <div class="spaceall"><div class="primarypad">Home</div></div></a>
+        </div>
+                <ul>
+                    
+                        <li class="">
+                            <a href="/getting_connected/?pid=primary.2006-07-07.4911641845&sid=getting_connected&status=True"><div class="spaceall"><div class="secondarypad">Getting Connected </div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/adopt/?pid=primary.2006-07-07.4911641845&sid=secondary.2008-06-26.3621080016&status=True"><div class="spaceall"><div class="secondarypad">Finding caBIG® Tools</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/sharable/compatible?pid=primary.2006-07-07.4911641845&sid=Tool_Compatible&status=True"><div class="spaceall"><div class="secondarypad">caBIG® Compatibility </div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/concepts/caCORE_overview?pid=primary.2006-07-07.4911641845&sid=caCORE_Overview&status=True"><div class="spaceall"><div class="secondarypad">caCORE</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="sharable/cagrid_overview?pid=primary.2006-07-07.4911641845&sid=caGrid&status=True"><div class="spaceall"><div class="secondarypad">caGrid</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/working_groups/DSIC_SLWG/data_sharing_policy?pid=primary.2006-07-07.4911641845&sid=secondary.2008-06-26.2664239591&status=True"><div class="spaceall"><div class="secondarypad">Data Sharing</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="">
+                            <a href="support.htm?pid=primary.2006-07-07.4911641845&sid=secondary.2008-06-11.9368026728&status=True"><div class="spaceall"><div class="secondarypad">Getting Support</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/esn/knowledge_centers?pid=primary.2006-07-07.4911641845&sid=KC&status=True"><div class="spaceall"><div class="secondarypad">Knowledge Centers</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/esn/service_providers?pid=primary.2006-07-07.4911641845&sid=SSP&status=True"><div class="spaceall"><div class="secondarypad">Service Providers </div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/training/?pid=primary.2006-07-07.4911641845&sid=secondary.2006-10-24.0611379107&status=True"><div class="spaceall"><div class="secondarypad">Training Portal</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="">
+                            <a href="/overview?pid=primary.2006-07-07.4911641845&sid=secondary.2008-06-26.1093886279&status=True"><div class="spaceall"><div class="secondarypad">About caBIG®</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="">
+                            <a href="/eventscalendar/?pid=primary.2006-07-07.4911641845&sid=secondary.2008-06-26.5386080181&status=True"><div class="spaceall"><div class="secondarypad">Events & Calendar</div></div></a>
+                            
+                        </li>
+                    
+                </ul>
+        </li>
+    
+    
+        <li>
+        
+	<div class="primary">
+        <a href="workspaces/index_html" target="">
+            <div class="spaceall"><div class="primarypad">Workspaces & SIGs</div></div></a>
+	</div>
+        
+        
+                <ul>
+                </ul>
+        </li>
+    
+    
+        <li>
+        
+	<div class="primarysubheader">
+        <a href="/workspaces/domain" target="">
+            <div class="spaceall"><div class="primarypad">Domain Workspaces</div></div></a>
+	</div>
+        
+        
+                <ul>
+                    
+                        <li class="secondarysubheader">
+                            <a href="/workspaces/CTMS/?pid=primary.2006-10-24.9768040952&sid=ctmsws&status=True"><div class="spaceall"><div class="secondarypad">Clinical Trials Management Systems </div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/workspaces/ICR?pid=primary.2006-10-24.9768040952&sid=secondary.2006-07-07.1966134434&status=True"><div class="spaceall"><div class="secondarypad">Integrative Cancer Research</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/workspaces/Imaging?pid=primary.2006-10-24.9768040952&sid=imagws&status=True"><div class="spaceall"><div class="secondarypad">In Vivo Imaging</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/workspaces/TBPT?pid=primary.2006-10-24.9768040952&sid=tbptws&status=True"><div class="spaceall"><div class="secondarypad">Tissue Banks and Pathology Tools</div></div></a>
+                            
+                        </li>
+                    
+                </ul>
+        </li>
+    
+    
+        <li>
+        
+	<div class="primarysubheader">
+        <a href="/workspaces/cross" target="">
+            <div class="spaceall"><div class="primarypad">Cross Cutting Workspaces</div></div></a>
+	</div>
+        
+        
+                <ul>
+                    
+                        <li class="secondarysubheader">
+                            <a href="/workspaces/Architecture?pid=primary.2006-10-24.9953294989&sid=secondary.2006-07-07.1400190757&status=True"><div class="spaceall"><div class="secondarypad">Architecture</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/workspaces/VCDE/?pid=primary.2006-10-24.9953294989&sid=secondary.2006-07-07.2297866337&status=True"><div class="spaceall"><div class="secondarypad">Vocabularies & Common Data Elements</div></div></a>
+                            
+                        </li>
+                    
+                </ul>
+        </li>
+    
+    
+        <li>
+        
+	<div class="primarysubheader">
+        <a href="/workspaces/strategic" target="">
+            <div class="spaceall"><div class="primarypad">Strategic Level Workspaces</div></div></a>
+	</div>
+        
+        
+                <ul>
+                    
+                        <li class="secondarysubheader">
+                            <a href="/working_groups/DSIC_SLWG/index_html?pid=primary.2006-10-24.0137193573&sid=secondary.2006-07-07.1794853805&status=True"><div class="spaceall"><div class="secondarypad">Data Sharing & Intellectual Capital</div></div></a>
+                            
+                        </li>
+                    
+                    
+                        <li class="secondarysubheader">
+                            <a href="/working_groups/Training_SLWG/?pid=primary.2006-10-24.0137193573&sid=secondary.2006-07-07.1886080991&status=True"><div class="spaceall"><div class="secondarypad">Documentation & Training</div></div></a>
+                            
+                        </li>
+                    
+                </ul>
+        </li>
+    
+</ul></div>
+
+
+
+
+
+
+
+		<html>
+<body>
+  
+    <!-- Begin Quick Links -->
+    <table border="0" cellpadding="0" cellspacing="0" id="quicklinks">
+    <tr>
+      <td class="ql_header">Quick Links</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.cancer.gov/" target="_blank" title="National Cancer Institute">National Cancer Institute&nbsp;&nbsp;<img src="opens-in-new-window.gif" width="10" height="10" alt="" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="http://ncicb.nci.nih.gov/" target="_blank" title="NCI Center for Bioinformatics">NCI Center for Bioinformatics&nbsp;&nbsp;<img src="opens-in-new-window.gif" width="10" height="10" alt="" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="http://gforge.nci.nih.gov/" target="_blank" title="NCICB GForge">NCICB GForge&nbsp;&nbsp;<img src="opens-in-new-window.gif" width="10" height="10" alt="" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="https://wiki.nci.nih.gov" target="_blank" title="NCI Wiki">NCI Wiki&nbsp;&nbsp;<img src="opens-in-new-window.gif" width="10" height="10" alt="" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="https://cabig.nci.nih.gov/help" target="_blank" title="Application Support">Application Support&nbsp;&nbsp;<img src="opens-in-new-window.gif" width="10" height="10" alt="" /></a></td>
+    </tr>
+    <tr>
+      <td class="ql_footer">&nbsp;</td>
+    </tr>
+    </table>
+    <!-- End Quick Links -->
+  
+</body>
+</html>
+
+	
+
+
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+       
+
+
+
+        
+
+        
+
+        
+    
+
+            
+            &nbsp;
+          </div>
+        </td>
+        
+        
+        <td id="portal-column-content">  
+           
+            
+            <div id="content" class="">
+            	
+              
+              <div class="documentContent" id="region-content">
+                <a name="documentContent"></a>
+                
+
+								<div id="portal-breadcrumbs">
+
+		<a href="https://cabig.nci.nih.gov">Home</a>
+		<span class="breadcrumbSeparator">
+			&raquo; 
+			 
+		</span>
+		<span dir="ltr">
+			
+				<a href="https://cabig.nci.nih.gov/workspaces">Workspaces</a>
+				<span class="breadcrumbSeparator"> 
+					&raquo; 
+					 
+				</span>
+				
+			
+		</span>
+		<span dir="ltr">
+			
+				<a href="https://cabig.nci.nih.gov/workspaces/Architecture">Architecture</a>
+				<span class="breadcrumbSeparator"> 
+					&raquo; 
+					 
+				</span>
+				
+			
+		</span>
+		<span dir="ltr">
+			
+				
+				
+				<span>caGrid 1.3</span>
+			
+		</span>
+	</div>
+                
+                
+                <a name="skip" id="skip"></a>
+                
+    
+
+        <div class="documentActions">
+    
+
+    <h5 class="hiddenStructure">Document Actions</h5>
+
+    <ul>
+    
+        
+    
+    
+        <li>
+            <a href="javascript:this.print();">
+
+                <img src="https://cabig.nci.nih.gov/print_icon.gif"
+                     alt="Print this page"
+                     title="Print this page" id="icon-print" />
+            </a>
+        </li>
+    
+
+    </ul>
+    
+
+    
+
+</div>
+
+        <h1 class="documentFirstHeading">caGrid 1.3</h1>
+
+        <!--
+        <p class="documentDescription" tal:content="here/Description" tal:condition="here/Description">
+          Description
+        </p>
+        -->
+    
+        
+    
+        <div class="plain">
+            <table cellpadding="4">
+  <tr valign="top" >
+    <td><img src="/images/caGrid_small.gif" align="left" border="0" alt="Small caGrid Logo"/></td>
+    <td>
+	<p>The cancer Biomedical Informatics Grid&reg;, or caBIG&reg;, is a voluntary, virtual, informatics infrastructure; it connects data, research tools, scientists, and organizations to leverage their combined strengths and expertise in an open, federated environment.</p>
+	<p>caGrid is the underlying service-oriented infrastructure that supports caBIG&reg;. Driven primarily by scientific use cases from the cancer research community, it provides the core infrastructure necessary to compose the <i>Grid</i> of caBIG&reg;. </p>
+	<p>caGrid provides the technology that enables collaborating institutions to share information and analytical resources efficiently and securely, while also allowing investigators to easily contribute to and leverage the resources of a national-scale, multi-institutional environment.</p>
+    <p>Please see the <a href="#keyenhancements">Key Enhancements</a> section below for a description of the enhancements in caGrid 1.3.</p>
+    </td>
+  </tr>
+</table>
+
+<br />
+
+<!--caGrid 1.3 Download Information -->
+<h2>Software and Documentation Links</h2>
+
+<table>
+  <tr>
+    <td>caGrid 1.3 Installation Instructions</td>
+    <td><a href="http://cagrid.org/x/lyRM">caGrid 1.3 Installation Instructions</a></td>
+  </tr>
+  <tr>
+    <td>caGrid 1.3.0.2 Installer</td>
+    <td><a href="https://gforge.nci.nih.gov/frs/download.php/7813/caGrid-installer-1.3.zip" target="blank">Install caGrid 1.3.0.2</a></td>
+  </tr>
+  <tr>
+    <td>caGrid 1.3.0.2 Source Code</td>
+    <td><a href="https://gforge.nci.nih.gov/frs/download.php/7811/caGrid-1.3.0.2.zip" target="blank">Download caGrid 1.3.0.2 Source code</a></td>
+  </tr>
+  <tr>
+    <td>caGrid 1.3 Documentation</td>
+    <td><a href="http://cagrid.org/x/5YEX" target="blank">caGrid 1.3 Documentation</a></td>
+  </tr>
+  <tr>
+    <td>caGrid 1.3 API Specifications</td>
+    <td><a href="http://software.cagrid.org/caGrid-1.3-javadocs/" target="blank">caGrid 1.3 API Specifications</a></td>
+  </tr>
+  <tr>
+    <td>caGrid 1.3.0.2 Release Notes</td>
+    <td><a href="https://gforge.nci.nih.gov/frs/shownotes.php?release_id=3671">caGrid 1.3.0.2 Release Notes</a></td>
+  </tr>
+  <tr>
+    <td>NCI CBIIT Download Site</td>
+    <td><a href="http://ncicb.nci.nih.gov/download/downloadcagrid.jsp" target="blank">NCI CBIIT Download Site</a></td>
+  </tr>
+  <tr>
+    <td>caGrid Knowledge Center</td>
+    <td><a href="https://cabig-kc.nci.nih.gov/CaGrid/KC/" target="blank">caGrid KC wiki</a></td>
+  </tr>
+  <tr>
+    <td>caGrid Technical Information</td>
+    <td><a href="http://cagrid.org" target="blank">caGrid wiki</a></td>
+  </tr>
+  <tr>
+    <td>caGrid GAARDS 1.3 Architecture Specification</td>
+    <td><a href="https://cabig.nci.nih.gov/workspaces/Architecture/cagrid_gaards_1.3_architecture_specification">caGrid GAARDS 1.3 Architecture Specification</a></td>
+  </tr>
+</table>
+
+<br />
+
+<!--caGrid 1.3 Project Information -->
+<h2>Project Information for Developers</h2>
+<table>
+  <tr>
+    <td>Reporting Bugs</td>
+    <td><a href="https://gforge.nci.nih.gov/tracker/?atid=174&group_id=25&func=browse" target="blank">caGrid Bug Tracker</a></td>
+  </tr>
+  <tr>
+    <td>Feature Requests</td>
+    <td><a href="https://gforge.nci.nih.gov/tracker/?atid=2252&group_id=25&func=browse" target="blank">caGrid Feature Requests</a></td>
+  </tr>
+  <tr>
+    <td>Project Page</td>
+    <td><a href="http://gforge.nci.nih.gov/projects/cagrid-1-0/" target="blank">caGrid Project Page</a></td>
+  </tr>
+  <tr>
+    <td>File Release Site</td>
+    <td><a href="http://gforge.nci.nih.gov/frs/?group_id=25" target="blank">caGrid File Release Site</a></td>
+  </tr>
+  <tr>
+    <td>Community Training Grid</td>
+    <td><a href="https://cagrid.org/display/community/Community+Training+Grid" target="blank">Community Training Grid Information</a></td>
+  </tr>
+</table>
+
+<br />
+
+<!-- End User web applications Information -->
+<h2>The caBIG&reg; Production Grid</h2>
+
+<p>Each caGrid service registers itself to a central Index Service, eliminating the need to hardcode addresses. The Discovery Client enables programmatic discovery of services, only the Index Service's <i>well known address</i> is needed. However, in some cases it may be useful to know the address of core services.</p>
+
+<p>The caGrid core infrastructure services, maintained by the NCI Center for Biomedical Informatics and Information Techhnology, are:</p>
+    <table border="1">
+      <tr><td><b>Metadata Service Name</b></td><td><b>Documentation</b></td><td><b>End-Point Reference</b></td></tr>
+      <tr><td>Global Model Exchange Service</td><td><a href="http://cagrid.org/display/gme/Home">Documentation</a></td><td><a href="https://cagrid-gme.nci.nih.gov:8443/wsrf/services/cagrid/GlobalModelExchange" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Index Service</td><td><a href="http://cagrid.org/display/metadata13/Index+Service">Documentation</a></td><td><a href="http://cagrid-index.nci.nih.gov:8080/wsrf/services/DefaultIndexService" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Metadata Model Service</td><td><a href="http://cagrid.org/display/mms/Home">Documentation</a></td><td><a href="http://cagrid-mms.nci.nih.gov:8080/wsrf/services/cagrid/MetadataModelService" target="_blank">End-Point Reference</a></td></tr>
+    </table>
+<br />
+    <table border="1">
+      <tr><td><b>Security Service Name</b></td><td><b>Documentation</b></td><td><b>End-Point Reference</b></td></tr>
+      <tr><td>Authentication Service</td><td><a href="http://cagrid.org/display/authenticationservice/Home">Documentation</a></td><td><a href="https://cagrid-auth.nci.nih.gov:8443/wsrf/services/cagrid/AuthenticationService" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Credential Delegation Service</td><td><a href="http://cagrid.org/display/cds/Home">Documentation</a></td><td><a href="https://cagrid-cds.nci.nih.gov:8443/wsrf/services/cagrid/CredentialDelegationService" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Dorian Service</td><td><a href="http://cagrid.org/display/dorian/Home">Documentation</a></td><td><a href="https://cagrid-dorian.nci.nih.gov:8443/wsrf/services/cagrid/Dorian" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Grid Grouper Service</td><td><a href="http://cagrid.org/display/gridgrouper/Home">Documentation</a></td><td><a href="https://cagrid-gridgrouper.nci.nih.gov:8443/wsrf/services/cagrid/GridGrouper" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Grid Trust Service (Master)</td><td><a href="http://cagrid.org/display/gts/Home">Documentation</a></td><td><a href="https://cagrid-gts-master.nci.nih.gov:8443/wsrf/services/cagrid/GTS" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Grid Trust Service (Slave)</td><td><a href="http://cagrid.org/display/gts/Home">Documentation</a></td><td><a href="https://cagrid-gts-slave.nci.nih.gov:8443/wsrf/services/cagrid/GTS" target="_blank">End-Point Reference</a></td></tr>
+    </table>
+ <br />
+    <table border="1">
+      <tr><td><b>Business Activity Service Name</td><td><b>Documentation</b></td><td><b>End-Point Reference</b></td></tr>
+      <tr><td>Federated Query Processor Service</td><td><a href="http://cagrid.org/display/fqp/Home">Documentation</a></td><td><a href="https://cagrid-fqp.nci.nih.gov:8443/wsrf/services/cagrid/FederatedQueryProcessor" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>BPEL Workflow Service</td><td><a href="http://cagrid.org/display/workflow/Overview">Documentation</a></td><td><a href="https://cagrid-bpel-wf.nci.nih.gov:8443/wsrf/services/cagrid/WorkflowFactoryService" target="_blank">End-Point Reference</a></td></tr>
+      <tr><td>Taverna Workflow Service</td><td><a href="http://cagrid.org/display/workflow/Overview">Documentation</a></td><td><a href="https://cagrid-taverna-wf.nci.nih.gov:8443/wsrf/services/cagrid/TavernaWorkflowService" target="_blank">End-Point Reference</a></td></tr>
+    </table>
+<br />
+
+<p>The <a href="http://cagrid-portal.nci.nih.gov" target="_blank">caGrid Portal</a>, which provides a visual display of caBIG&reg; services and participating institutions, is a starting point for discovering data of interest. Portal uses grid APIs to browse for advertised services, discovering services based on metadata and registered objects in the <a href="https://wiki.nci.nih.gov/display/caDSR/caDSR+Wiki" target="blank">Cancer Data Standards Repository</a> (caDSR) and concepts from the <a href="https://wiki.nci.nih.gov/display/EVS/EVS+Wiki" target="blank">Enterprise Vocabulary Service</a> (EVS). Portal also supports querying deployed services using the XML-based caGrid query language, CQL.</p>
+
+<!--- Upto here -->
+
+<br />
+
+<!--caGrid 1.3 Information -->
+<a name="keyenhancements"></a><h2>Key Enhancements</h2>
+
+<p>The caGrid 1.3 release further expands the infrastructure and tooling to support use cases from the scientific community. It is backwards compatible with 1.x versions of caGrid, and includes many exciting new features and enhancements. A detailed listing of the changes from caGrid 1.2 can be found in the release notes, but highlights include:</p>
+
+<ul>
+  <li><b>Continuous Integration</b></li>
+  <p>caGrid 1.3 enhances support for the latest releases (version 4.1.1) of the <a href="http://ncicb.nci.nih.gov/NCICB/infrastructure/cacoresdk" target="_blank">caCORE Software Development Kit</a> (SDK) and <a href="http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/csm" target="_blank">Common Security Module</a> (CSM). caGrid and the caCORE SDK now share a common code base for CQL. In addition, caGrid 1.3 supports the most recent web services containers in the NCI CBIIT Technology Stack (Tomcat 5.5 and JBoss 4.0.5).</p>
+
+  <li><b>Data Services</b></li>
+  <p>Significant enhancements to the Federated Query Processor (FQP), allowing a single, semantic query to execute across multiple caGrid services and return a single result set. FQP now supports WS-Notification, querying secure grid services via the caGrid Credential Delegation Service (CDS), configurable query execution parameters to allow only partial results to be returned, and out-of-band results using the caGrid Transfer Service and WS-Enumeration.</p>
+
+  <li><b>Introduce Toolkit</b></li>
+  <p>The Introduce Toolkit has a number of security-related enhancements, adding fine-grain control over authorization using the caCORE Common Security Module (CSM) and Grid Grouper. Introduce also includes service updaters, allowing service developers to easily update-to and leverage caGrid 1.3.</p>
+
+  <li><b>Metadata Services</b></li>
+  <p>The Mobius Global Model Exchange (GME) has been entirely rewritten for caGrid 1.3 to support the Semantic requirements of caBIG&reg; software developers. The caGrid-developed caDSR grid service, based on the caCORE 3.1 API, has been <a href="http://cagrid.org/display/caGrid13/Deprecation+Plan">deprecated</a>, It has been replaced by the caDSR 4.0 data service (maintained by the caDSR team), and a new caGrid Metadata Model Service (MMS), whose purpose is creation and semantic annotation of caGrid metadata models using caDSR-derived data.</p>
+  <p>caGrid 1.3 also features a refactored Globus Index Service that employs an embedded XML database in lieu of the former in-memory model. It includes several design improvements for increased performance and scalability. The caGrid team thanks and acknowledges the <a href="http://globus.org/">Globus</a> development team for contributing this important enhancement.</p>
+
+  <li><b>Security</b></li>
+  <p>Enhancements to the GAARDS infrastructure include support for multiple authentication profiles, including one-time passwords. Trusted Identity Providers can now be discovered programmatically, allowing full realization of federated authentication use cases. Auditing support has also been added to Dorian, giving systems administrators the degree of control they have requested.</p>
+
+  <li><b>Taverna Workflow</b></li>
+  <p>Orchestration of caGrid services is supported in this release through joint development with the <a href="http://taverna.sourceforge.net/" target="_blank">Taverna project</a>. The caGrid plug-in for the Taverna 2.0 workbench allows development of workflows using their rich user interface.</p>
+</ul>
+
+<br />
+
+<!--caGrid External Technology Information -->
+<h2>External Technologies Used by caGrid </h2>
+
+<p>caGrid 1.3 leverages the following technologies:</p>
+
+<ul>
+  <li><a href="http://www.active-endpoints.com/index.htm" target="blank">ActiveBPEL&trade;</a>: provides an open source workflow engine whose implementation follows the Business Process Execution Language standard. &ndash; From Active Endpoints, Inc.</li>
+  <li><a href="http://www.ja-sig.org/products/cas/" target="_blank">Central Authentication Service</a>: provides underlying core single sign&ndash;on framework used by WebSSO &ndash; From JA-SIG.</li>
+  <li><a href="http://ncicb.nci.nih.gov/core/caDSR" target="blank">Cancer Data Standards Repository</a> (caDSR): provides repository for Common Data Elements and UML models &ndash; From National Cancer Institute Center for Biomedical Informatics and Information Technology</li>
+  <li><a href="http://ncicb.nci.nih.gov/core/EVS" target="blank"> Enterprise Vocabulary Services</a> (EVS): provides controlled vocabularies &ndash; From National Cancer Institute Center for Biomedical Informatics and Information Technology</li>
+  <li> <a href="http://www.globus.org" target="blank">Globus Toolkit</a>: provides the core grid infrastructure and supports service deployment, registration, invocation and secure communication &ndash; From Globus Alliance</li>
+  <li><a href="http://middleware.internet2.edu/dir/groups/grouper/" target="_blank">Grouper</a>: provides ability to manage group information across integrated applications and repositories. &ndash; From Internet2</li>
+  <li><a href="http://taverna.sourceforge.net/" target="_blank">Taverna</a>: provides an open source workflow tool for designing and executing workflows &ndash; From The Open Middleware Infrastructure Institute (UK)</li>
+</ul>
+
+<!--caGrid 1.3 Technical Details ends -->
+<br />
+
+<h2>Contacts</h2>
+<table>
+  <tr><td>Contact Name</td><td>Title</td><td>Affiliation</td></tr>
+  <tr><td><a href="mailto:shanbhak@mail.nih.gov">Krishnakant (Avinash) Shanbhag</a></td><td>Director, Core Infrastructure Engineering</td><td>NCI Center for Biomedical Informatics and Information Technology</td></tr>
+  <tr><td><a href="mailto:keller_michael@bah.com">Michael (Mike) Keller</td><td>caBIG&reg; Architecture Workspace Lead</td><td>Booz Allen Hamilton</td></tr>
+  <tr><td><a href="mailto:eisenschmidtjw@mail.nih.gov">John Eisenschmidt</a></td><td>caGrid Project Manager</td><td>5AM Solutions</td></tr>
+  <tr><td><a href="mailto:lawrence.m.brem@saic.com">Lawrence (Larry) Brem</a></td><td>Architecture Technical Project Manager</td><td>Science Applications International Corporation</td></tr>
+  <tr><td><a href="mailto:scott.oster@osumc.edu">Scott Oster</a></td><td>caGrid Core Infrastructure Lead Architect</td><td>Ohio State University</td></tr>
+  <tr><td><a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a></td><td>caGrid Portal Architect</td><td>SemanticBits, LLC.</td></tr>
+  <tr><td><a href="mailto:madduri@mcs.anl.gov">Ravi Madduri</a></td><td>caGrid Workflow Architect</td><td>University of Chicago, Argonne National Laboratory</td></tr>
+</table>
+
+<br />
+
+<p><a href="cagrid-team1-3">List of caGrid 1.3 Team Members</a></p>
+
+<br />
+
+<h2>Previous Releases</h2>
+<p>
+  <ul>
+    <li><a href="caGrid1-2">caGrid 1.2</a>
+    <li><a href="caGrid1-1">caGrid 1.1</a>
+    <li><a href="caGrid1-0">caGrid 1.0</a>
+    <li><a href="caGrid0-5">caGrid 0.5</a>
+    </ul>
+</p>
+
+
+        </div>
+
+        <div style="text-align:right;">
+
+    <div class="documentByLine">
+        
+
+        <!--
+        <tal:name tal:condition="creator"
+            tal:define="author python:mtool.getMemberInfo(creator)">
+          <span i18n:translate="label_by_author">
+            by
+          <a href="#"
+             tal:attributes="href string:${portal_url}/author/${creator}"
+             tal:content="python:author and author['fullname'] or creator"
+             tal:omit-tag="not:author"
+             i18n:name="author">
+            Bob Dobalina
+          </a>
+          </span>
+
+          &mdash;
+
+        </tal:name>
+        -->
+
+        <span>
+        last modified
+        </span>
+        01-15-2010 12:55 PM
+
+        
+
+        
+
+        
+
+        
+
+        <div class="reviewHistory">
+    
+</div>
+
+    </div>
+
+</div>
+
+        <div id="relatedItems">
+    
+        
+            
+        
+    
+</div>
+    
+    
+
+                
+                
+                  
+                 
+    
+        
+    
+
+                
+              </div>
+            </div>
+          
+        </td>
+        
+        
+          
+        
+      </tr>
+      </tbody>
+      </table>
+      
+      <div class="visualClear"><!-- --></div>
+      
+        
+        <div id="portal-footer">
+    <div id="doctypes" align="center">
+      <table cellpadding="0" cellspacing="0" width="300" border="0">
+      <tr>
+        <td width="124">Download Plugins:&nbsp;&nbsp;</td>
+        <td width="16"><a title="Download Plugin Adobe Acrobat Reader" href="http://www.adobe.com/go/gntray_dl_get_reader" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_pdf.gif" width="16"
+    height="16" border="0"
+    alt="Download Plugin Adobe Acrobat Reader" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin Adobe Flash Player" href="http://get.adobe.com/flashplayer/" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_swf.gif" width="16"
+    height="16" border="0"
+    alt="Download Plugin Adobe Flash Player" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin Microsoft Word Viewer" href="http://www.microsoft.com/downloads/details.aspx?FamilyID=3657ce88-7cfa-457a-9aec-f4f827f20cac&amp;displaylang=en" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_doc.gif" width="16"
+    height="16" border="0"
+    alt="Download Plugin Microsoft Word Viewer" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin Microsoft Excel Viewer" href="http://www.microsoft.com/downloads/details.aspx?FamilyID=1cd6acf9-ce06-4e1c-8dcf-f33f669dbc3a&amp;DisplayLang=en" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_xls.gif" width="16"
+    height="16" border="0"
+    alt="Download Plugin Microsoft Excel Viewer" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin Microsoft PowerPoint Viewer" href="http://www.microsoft.com/downloads/details.aspx?familyid=048dc840-14e1-467d-8dca-19d2a8fd7485&amp;displaylang=en" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_ppt.gif" width="16"
+    height="16" border="0"
+    alt="Download Plugin Microsoft PowerPoint Viewer" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin Real Player" href="http://www.real.com/realsuperpass.html?type=dlrhap_bb&amp;pageid=unagi.8083678&amp;pageregion=offer1&amp;src=realhome_bb_0_2_1_0_0_1_0&amp;pcode=rn&amp;opage=realhome_bb&amp;href=http%253A%2F%2Fwww.real.com%2Frealsuperpass.html%253Ftype%253Ddlrhap_bb%2526pageid%253Dunagi.8083678%2526pageregion%253Doffer1%2526src%253Drealhome_bb_0_2_1_0_0_1_0%2526pcode%253Drn%2526opage%253Drealhome_bb" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_rm.gif" width="16"
+    height="16" border="0" alt="Download Plugin Real Player" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin Windows Media Player" href="http://www.microsoft.com/windows/windowsmedia/download/AllDownloads.aspx?displang=en&amp;qstechnology=" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_wmv.gif" width="16"
+    height="16" border="0"
+    alt="Download Plugin Windows Media Player" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin Quicktime Player" href="http://www.apple.com/quicktime/" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_mov.gif" width="16"
+    height="16" border="0"
+    alt="Download Plugin Quicktime Player" /></a></td>
+        <td width="4">&nbsp;</td>
+        <td width="16"><a title="Download Plugin WinZip" href="http://www.winzip.com/downwz.htm" target="_blank"><img
+    src="https://cabig.nci.nih.gov/link_zip.gif" width="16"
+    height="16" border="0" alt="Download Plugin WinZip" /></a></td>
+       </tr>
+       </table>
+    </div>
+		<table cellpadding="0" cellspacing="0" width="100%" border="0" bgcolor="#5c5c5c">
+		<tr>
+			<td align="center">
+				<table border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr>
+					<td class="NavSeparator"><img
+    src="https://cabig.nci.nih.gov/mainMenuSeparator.gif"
+    width="1" height="16" alt="" /></td>   
+					<td class="NonSelectedHeader"
+         onmouseover="changeMenuStyle(this,'NonSelectedHeaderOver'),showCursor()"
+         onmouseout="changeMenuStyle(this,'NonSelectedHeader'),hideCursor()"
+         onclick="setUrl('https://cabig.nci.nih.gov/contact_us', '_top')"><nobr>CONTACT US</nobr></td>
+					<td class="NavSeparator"><img
+    src="https://cabig.nci.nih.gov/mainMenuSeparator.gif"
+    width="1" height="16" alt="" /></td>
+					<td class="NonSelectedHeader" onmouseover="changeMenuStyle(this,'NonSelectedHeaderOver'),showCursor()" onmouseout="changeMenuStyle(this,'NonSelectedHeader'),hideCursor()" onclick="setUrl('http://www.nih.gov/about/privacy.htm', '_blank');"><nobr>PRIVACY NOTICE</nobr></td>
+					<td class="NavSeparator"><img
+    src="https://cabig.nci.nih.gov/mainMenuSeparator.gif"
+    width="1" height="16" alt="" /></td>
+					<td class="NonSelectedHeader" onmouseover="changeMenuStyle(this,'NonSelectedHeaderOver'),showCursor()" onmouseout="changeMenuStyle(this,'NonSelectedHeader'),hideCursor()" onclick="setUrl('http://www.nih.gov/about/disclaim.htm', '_blank');"><nobr>DISCLAIMER</nobr></td>
+					<td class="NavSeparator"><img
+    src="https://cabig.nci.nih.gov/mainMenuSeparator.gif"
+    width="1" height="16" alt="" /></td>
+					<td class="NonSelectedHeader" onmouseover="changeMenuStyle(this,'NonSelectedHeaderOver'),showCursor()" onmouseout="changeMenuStyle(this,'NonSelectedHeader'),hideCursor()" onclick="setUrl('https://cabig.nci.nih.gov/NCI_Accessibility_Statement', '_self');"><nobr>ACCESSIBILITY</nobr></td>
+					<td class="NavSeparator"><img
+    src="https://cabig.nci.nih.gov/mainMenuSeparator.gif"
+    width="1" height="16" alt="" /></td>
+					<td class="NonSelectedHeader"
+         onmouseover="changeMenuStyle(this,'NonSelectedHeaderOver'),showCursor()"
+         onmouseout="changeMenuStyle(this,'NonSelectedHeader'),hideCursor()"
+         onclick="setUrl('https://cabig.nci.nih.gov/help', '_top')"><nobr>APPLICATION SUPPORT</nobr></td>
+					<td class="NavSeparator"><img
+    src="https://cabig.nci.nih.gov/mainMenuSeparator.gif"
+    width="1" height="16" alt="" /></td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td valign="top">
+				<div align="center">
+					<a href="http://www.cancer.gov/"><img
+    title="National Cancer Institute"
+    src="https://cabig.nci.nih.gov/footer_nci.gif"
+    width="63" height="31" alt="National Cancer Institute"
+    border="0"></a>
+					<a href="http://www.dhhs.gov/"><img
+    title="Department of Health and Human Services"
+    src="https://cabig.nci.nih.gov/footer_hhs.gif"
+    width="39" height="31"
+    alt="Department of Health and Human Services" border="0"></a>
+					<a href="http://www.nih.gov/"><img
+    title="National Institutes of Health"
+    src="https://cabig.nci.nih.gov/footer_nih.gif"
+    width="46" height="31"
+    alt="National Institutes of Health" border="0"></a>
+					<a href="http://www.usa.gov/"><img title="USA.gov"
+    src="https://cabig.nci.nih.gov/footer_usagov.gif"
+    width="91" height="31" alt="USA.gov" border="0"></a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" align="center">
+				<div id="footerLegal">
+					<br>* As of September 2008, the trademarks for cancer Biomedical Informatics Grid<sup>&reg;</sup> and caBIG<sup>&reg;</sup> are registered by the U.S. Patent and Trademark Office.  The trademarks were pending completion of the registration until now. We will be reflecting this change on the caBIG<sup>&reg;</sup> website materials and in other materials as rapidly as we can, but you may notice for the changeover period of time, the usage of both the pending &trade; symbol and the registered <sup>&reg;</sup> symbol in some materials. We will  use the registered trademark symbol when referencing caBIG<sup>&reg;</sup>  in new materials.
+				</div>
+			</td>
+		</tr>
+		</table>
+		<a name="skip_footer"></a>
+	</div>
+      
+		</div>
+		<script type="text/javascript"> var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-12094132-4']);  _gaq.push(['_trackPageview']);  (function() {  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })(); </script>
+	</body>
+</html>
+
+

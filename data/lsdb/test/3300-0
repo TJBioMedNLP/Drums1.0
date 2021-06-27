@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<TITLE>
+Piccolo by TOMINAGA Daisuke
+</TITLE>
+</HEAD>
+<BODY bgcolor="white"
+      text="black"
+      link="#0000EE"
+      vlink="#551A8B"
+      alink="#551A8B"
+>
+<H1>Piccolo</H1>
+Periodicity detection for short-length time series data of bioinformatics<BR>
+<DIV align="right">
+  <A href="http://www.cbrc.jp/%7Etominaga/">Daisuke TOMINAGA</A>,
+  September 13, 2010.
+</DIV>
+| <A href="#program">Program</A>
+| <A href="#ex">Example</A>
+| <A href="#howto">How To Use</A>
+| <A href="#links">Useful links</A>
+| <A href="#ref">References</A>
+|
+<HR>
+
+<H1 id="program">Program</H1>
+<P>
+<UL>
+<LI>Program
+  <UL>
+  <LI><A href="http://tominaga.cbrc.jp/piccolo/">Web application</A>
+  <LI>Download <A href="piccolo.m">the script file</A> of a function for 
+      <A href="http://www.gnu.org/software/octave/">GNU Octave</A> or
+      <A href="http://www.mathworks.com/products/matlab/">MATLAB</A>.
+    </UL>
+  </UL>
+</UL>
+</P>
+
+<H1 id="ex">Example</H1>
+<P>
+<UL>
+<LI>Data files for the script (<B>Not for the web application</B>)<UL>
+  <LI><A href="GDS1629/data.txt">GDS1629</A>
+  <LI><A href="GDS2110/data.txt">GDS2110</A>
+  <LI><A href="GDS2232/data.txt">GDS2232</A>
+  <LI><A href="GDS404/data.txt">GDS404</A>
+  <LI><A href="GSE3424/data.txt">GSE3424</A>
+  <LI><A href="GSE6542_1/data.txt">GSE6542_1</A>
+  <LI><A href="GSE6542_2/data.txt">GSE6542_2</A>
+  <LI><A href="GSE6542_3/data.txt">GSE6542_3</A>
+  <LI><A href="GSE6542_4/data.txt">GSE6542_4</A>
+  <LI><A href="GSE6542_5/data.txt">GSE6542_5</A>
+  <LI><A href="GSE6542_6/data.txt">GSE6542_6</A>
+  <LI><A href="GSE6542_7/data.txt">GSE6542_7</A>
+  </UL>
+</UL>
+The first line in each example file contains time of sampling points.
+</P><P>
+For the <A href="http://tominaga.cbrc.jp/piccolo/">Web application</A>,
+add a column which contains gene name, etc. to a head of each line
+of the data files above.
+</P>
+
+<H1 id="howto">How to Use</H1>
+<P>
+<UL>
+<LI>The GNU Octave/MATLAB script
+<OL>
+<LI>Install a recent version of GNU octave or MATLAB.
+<LI>Download <TT>piccolo.m</TT> and put somewhere you want.
+    The desktop of your PC is easy to see.
+<LI>Put a dataset to be analyzed as a ascii text file
+    in the directory where <TT>piccolo.m</TT> is put.
+<LI>Launch GNU octave or MATLAB,
+    specify the directory above as the working directory.
+<LI>Load the data file. e. g. <TT>load mydata = data.txt;</TT>.<BR>
+    <B>data cannot contain anything but numerical data to be analyzed</B>
+    except header lines. A number of header lines to be skipped must be
+    specified next step.
+<LI>call the function 'piccolo' as follows:<BR>
+    <TT>function piccolo(rawdata, header=0, ic=1, interval=4)</TT><UL>
+	<LI>rawdata: loaded input data
+    <LI>header: heading lines to be skipped
+    <LI>ic: information criterion to be used (1: AIC, 2: BIC)
+    <LI>interval: interval of time between each sampoing point
+    </UL>
+</OL>
+</UL>
+</P>
+
+<H1 id="links">Useful Links</H1>
+<UL>
+<LI>Time series analysis
+  <UL>
+  <LI><A href="http://bioinformatics.cau.edu.cn/ARSER/">ARSER</A>
+      for identifying periodic expression profiles in analyzing microarray data
+      (<A href="http://bioinfo.cau.edu.cn/BioClock/analysis.php">Web app</A>)
+  <LI><A href="http://www.cs.cmu.edu/~jernst/stem/">STEM</A>,
+      Short Time-series Expression Miner
+  </UL>
+<LI>General Genome Analysis
+  <UL>
+  <LI><A href="http://www-btls.jst.go.jp/Links/link.cgi?category=0">Software
+      and Tools for Genome Analysis</A> (Introduction for many tools, Japanese)
+  <LI><A href=""></A>
+  </UL>
+</UL>
+
+<H1 id="ref">References</H1>
+<P>
+<UL>
+<LI>Tominaga D. and K. Horimoto,
+    "<A href="http://www.worldscinet.com/jbcb/06/preserved-docs/0604/S0219720008003722.pdf">Judgment alforithm for periodicity of time series data based on bayesian information criterion</A>", <I>Journal of Bioinformatics and Computational Biology</I>, <A href="http://www.worldscinet.com/jbcb/06/0604/S02197200080604.html"><B>6</B>(4)</A>, 747-757 (2008).
+</UL>
+</P>
+<HR>
+<script type="text/javascript" src="m-tominaga1.js"></script><BR>
+<noscript>enable JavaScript to see the Email address.</noscript>
+<a href="http://www.aist.go.jp" target="_blank"><img src="http://www.cbrc.jp/cbrc/img/aist_logo3.gif" border="0"></a> <br>
+<font color="#8D8C8C" face="Arial, Osaka" class="copyright">&copy; Computational Biology Research Center, AIST, 2004  All Rights Reserved.</font>
+</BODY>
+</HTML>

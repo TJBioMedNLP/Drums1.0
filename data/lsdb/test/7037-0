@@ -1,0 +1,39 @@
+<html>
+
+<header>
+<title>Supplementary Information for Sontag et. al PSB 2006</title>
+</header>
+
+<body>
+<center><h3>
+Supplementary Information for "Probabilistic Modeling of Systematic Errors in Two-Hybrid Experiments"
+</h3>
+Authors: <a href="http://people.csail.mit.edu/dsontag/">David Sontag</a>, <a href="http://www.mit.edu/~rsingh/">Rohit Singh</a>, <a href="http://theory.lcs.mit.edu/~bab/">Bonnie Berger</a>. </center>
+
+<ul>
+<li>Probabilities of proteins being self-activating/promiscuous, <a href="pfp-lr.txt">here</a>.<br><br>
+
+<li>Models used in paper:
+<ul>
+<li><a href="models/bugs-model-simplegenerative.txt">Figure 2</a>
+<li><a href="models/bugs-model-generative.txt">Figure 3</a>
+<li><a href="models/bugs-model-baderlogistic.txt">Figure 4</a>
+<li><a href="models/bugs-model-logistic.txt">Figure 5</a>
+</ul><br>
+
+<li>Inference:<br><br>
+
+We also tried using loopy <a href="http://en.wikipedia.org/wiki/Belief_propagation">belief propagation</a> instead of MCMC to do approximate inference in the generative model of Figure 3. The results (see below graph) are very similar, showing that we are not being hurt by our choice of approximate inference method. Furthermore, our implementation of the inference algorithm (in Java) takes only seconds to run.
+
+<br><br>
+
+<img src="java-lr.jpg">
+
+<br>
+The left axis is "True positive rate"; this should be compared with Figure 7 from the paper. We tried running belief propagation for 10 and 100 iterations; both resulted in the same predicitions. For this experiment, we fixed the parameters to be the average parameters found by MCMC. (In the future we will try Expectation Maximization in combination with belief propagation to learn the parameters.)
+</ul>
+
+</body>
+
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html >
+<head>
+	<title>Genomicus v61.01 - Gene Search</title>
+	<link href='../css/general.css' rel='stylesheet' type='text/css' >
+	<link href='../css/svg.css' rel='stylesheet' type='text/css' >
+	<link href='../menu/menu_style.css' rel='stylesheet' type='text/css' >
+	<link rel='icon' type='image/png' href='../favicon.png' >
+	<meta name='description' content='Genomicus is a web-tool to visualize the conservation of the gene order in metazoan genomes' >
+	<meta name='keywords' content='comparative genomics, ancestral genome, synteny, synteny browser, vertebrates, genomicus' >
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' >
+	<link rel='search' href='../opensearch.xml' title='Genomicus' type='application/opensearchdescription+xml' >
+	<script type='text/javascript' src='../js/ajax.js' ></script>
+</head>
+<body >
+
+<div id='leftpanel'>
+	<a href='search.pl' title='Genomicus v61.01' >
+		<img src='../img/genomicus2.jpg' width='320px' height='100px' alt='Genomicus v61.01 Title' ><br>
+		<img src='../img/logo_synteny.jpg' width='270px' height='273px' alt='Genomicus v61.01 Logo' >
+	</a><br>
+	<br>
+	<a href='http://www.biologie.ens.fr' title='ENS Paris, Biology dept' >
+		<img src='../img/logo_ens.png' width='88px' height='71px' alt='ENS Logo' >
+	</a>
+	<a href='http://www.cnrs.fr' title='CNRS'>
+		<img src='../img/CNRSfilaire-petit.jpg' width='71px' height='71px' alt='CNRS Logo'>
+	</a>
+	<br><br>
+	<a class='externallink' href='http://www.biologie.ens.fr/dyogen/?lang=en'><b>DYOGEN group</b></a>
+	<br><br>
+	<span class='minitext'>web-code version: 2010-11-26</span><br>
+	<span class='minitext'>database version: 61.01</span><br>
+	<br>
+	<ul class='leftmenu'>
+	<li><a class='externallink' href='../help/intro.shtml'>Help &amp; Documentation</a></li>
+	<li><a class='externallink' href='gallery.pl'>Examples</a></li>
+	<li><a class='externallink' href='stats.pl'>Statistics</a></li>
+	<li><a class='externallink' href='archives.pl'>Archives</a></li>
+	<li><a class='externallink' href='ftp://ftp.biologie.ens.fr/pub/dyogen/genomicus/61.01'>Downloads</a></li>
+	<li><a class='externallink' href='history.pl'>Site history</a></li>
+	</ul>
+	<br>
+	<a class='externallink' href='mailto:genomicus-web_chezeux_ens.fr' onmouseover='this.href=this.href.replace(RegExp("(_chezeux_)","g"),"@")'>
+		<img src='../img/mail_generic.png' alt='email logo' class='miniicon'> Contact us.
+	</a>
+	
+</div>
+<div id='rightpanel'><div class='mybox'><form action='?' method='get' id='form_choice'>
+		<p>
+			<b>Enter a gene name</b> <em>(Ensembl nomenclature or approved gene symbol)</em><br>
+			<span class='txtsmall'>You can restrict the search to one species (ancestral or modern).</span>
+		</p>
+		<table><tr>
+			<td><input type='text' name='query' onkeyup='verifGene()' maxlength='60' id='name_choice' autocomplete='off' autofocus='autofocus' ></td>
+			<td><select name='species' id='species_choice' onchange='verifGene()'>
+				<option value=''>-- Select a species --</option><optgroup label='Primates'><option value='78'>Human (Homo sapiens)</option>
+<option value='74'>Rhesus (Macaca mulatta)</option>
+<option value='80'>Tarsier (Tarsius syrichta)</option>
+<option value='82'>Mouse lemur (Microcebus murinus)</option>
+<option value='76'>Gorilla (Gorilla gorilla)</option>
+<option value='77'>Chimpanzee (Pan troglodytes)</option>
+<option value='75'>Orangutan (Pongo pygmaeus)</option>
+<option value='79'>Marmoset (Callithrix jacchus)</option>
+<option value='81'>Bushbaby (Otolemur garnettii)</option>
+</optgroup><optgroup label='Rodents etc.'><option value='88'>Squirrel (Spermophilus tridecemlineatus)</option>
+<option value='87'>Mouse (Mus musculus)</option>
+<option value='86'>Rat (Rattus norvegicus)</option>
+<option value='89'>Kangaroo rat (Dipodomys ordii)</option>
+<option value='84'>Rabbit (Oryctolagus cuniculus)</option>
+<option value='83'>Pika (Ochotona princeps)</option>
+<option value='85'>Guinea pig (Cavia porcellus)</option>
+<option value='73'>Tree shrew (Tupaia belangeri)</option>
+</optgroup><optgroup label='Laurasiatherias'><option value='62'>Hedgehog (Erinaceus europaeus)</option>
+<option value='63'>Microbat (Myotis lucifugus)</option>
+<option value='68'>Pig (Sus scrofa)</option>
+<option value='69'>Horse (Equus caballus)</option>
+<option value='72'>Cat (Felis catus)</option>
+<option value='71'>Dog (Canis familiaris)</option>
+<option value='66'>Cow (Bos taurus)</option>
+<option value='65'>Dolphin (Tursiops truncatus)</option>
+<option value='67'>Alpaca (Vicugna pacos)</option>
+<option value='70'>Giant Panda (Ailuropoda melanoleuca)</option>
+<option value='64'>Megabat (Pteropus vampyrus)</option>
+<option value='61'>Common shrew (Sorex araneus)</option>
+</optgroup><optgroup label='Xenarthras etc.'><option value='60'>Sloth (Choloepus hoffmanni)</option>
+<option value='59'>Armadillo (Dasypus novemcinctus)</option>
+</optgroup><optgroup label='Afrotherias etc.'><option value='58'>Hyrax (Procavia capensis)</option>
+<option value='56'>Elephant (Loxodonta africana)</option>
+<option value='57'>Tenrec (Echinops telfairi)</option>
+</optgroup><optgroup label='Marsupials &amp; Monotremes'><option value='55'>Opossum (Monodelphis domestica)</option>
+<option value='53'>Platypus (Ornithorhynchus anatinus)</option>
+<option value='54'>Wallaby (Macropus eugenii)</option>
+</optgroup><optgroup label='Birds &amp; Reptiles'><option value='52'>Zebra finch (Taeniopygia guttata)</option>
+<option value='49'>Lizard (Anolis carolinensis)</option>
+<option value='50'>Chicken (Gallus gallus)</option>
+<option value='51'>Turkey (Meleagris gallopavo)</option>
+</optgroup><optgroup label='Amphibians'><option value='48'>Frog (Xenopus tropicalis)</option>
+</optgroup><optgroup label='Fish'><option value='91'>Medaka (Oryzias latipes)</option>
+<option value='94'>Fugu (Takifugu rubripes)</option>
+<option value='90'>Zebrafish (Danio rerio)</option>
+<option value='92'>Stickleback (Gasterosteus aculeatus)</option>
+<option value='93'>Tetraodon (Tetraodon nigroviridis)</option>
+</optgroup><optgroup label='Other chordates'><option value='47'>Ciona savignyi (Ciona savignyi)</option>
+<option value='46'>Ciona intestinalis (Ciona intestinalis)</option>
+</optgroup><optgroup label='Other eukaryotes'><option value='43'>Yeast (Saccharomyces cerevisiae)</option>
+<option value='44'>Caenorhabditis elegans (Caenorhabditis elegans)</option>
+<option value='45'>Fruitfly (Drosophila melanogaster)</option>
+</optgroup><optgroup label='Ancestors in Primates'><option value='26'>Primates</option>
+<option value='27'>Haplorrhini</option>
+<option value='28'>Simiiformes</option>
+<option value='29'>Catarrhini</option>
+<option value='30'>Hominidae</option>
+<option value='32'>Homo/Pan group (HomoPan)</option>
+<option value='31'>Homo/Pan/Gorilla group (Homininae)</option>
+<option value='33'>Strepsirrhini</option>
+</optgroup><optgroup label='Ancestors in Rodents etc.'><option value='36'>Rodentia</option>
+<option value='37'>Sciurognathi</option>
+<option value='38'>Murinae</option>
+<option value='34'>Glires</option>
+<option value='35'>Lagomorpha</option>
+</optgroup><optgroup label='Ancestors in Laurasiatherias'><option value='20'>Insectivora</option>
+<option value='23'>Carnivora</option>
+<option value='21'>Chiroptera</option>
+<option value='24'>Caniformia</option>
+<option value='22'>Cetartiodactyla</option>
+<option value='19'>Laurasiatheria</option>
+</optgroup><optgroup label='Ancestors in mammals'><option value='18'>Boreoeutheria</option>
+<option value='25'>Euarchontoglires</option>
+<option value='12'>Theria</option>
+<option value='13'>Marsupialia</option>
+<option value='14'>Eutheria</option>
+<option value='16'>Afrotheria</option>
+<option value='17'>Xenarthra</option>
+<option value='15'>Atlantogenata</option>
+<option value='11'>Mammalia</option>
+</optgroup><optgroup label='Ancestors in fish'><option value='42'>Tetraodontidae</option>
+<option value='40'>Percomorpha</option>
+<option value='41'>Smegmamorpha</option>
+<option value='39'>Clupeocephala</option>
+</optgroup><optgroup label='Ancestors in vertebrates'><option value='5'>Euteleostomi</option>
+<option value='9'>Neognathae</option>
+<option value='10'>Galliformes (Phasianidae)</option>
+<option value='8'>Sauria</option>
+<option value='7'>Amniota</option>
+<option value='6'>Tetrapoda</option>
+</optgroup><optgroup label='Other ancestors'><option value='1'>Bilateria</option>
+<option value='3'>Olfactores</option>
+<option value='0'>Fungi/Metazoa group</option>
+<option value='4'>Ciona</option>
+<option value='2'>Coelomata</option>
+</optgroup></select></td>
+			<td><input type='radio' checked name='view' value='default' onclick='verifGene()'>Default view<br>
+				<input type='radio' name='view' value='custom' onclick='verifGene()'>Custom view</td>
+			<td>&nbsp;<input type='submit' value='Go !' ></td>
+		</tr></table>
+		<div id='tips'>
+		<noscript><p>No Javascript support. Activate it if you want gene suggestions.</p></noscript>
+		</div>
+	</form></div><p><em>Selected examples can be found<a href='gallery.pl' class='externallink'><b>here</b></a></em></p><p>
+	Genomicus is a genome browser that enables users to navigate in genomes in several dimensions: linearly along chromosome axes, transversaly across different species, and chronologicaly along evolutionary time.
+</p>
+
+<p>
+	Once a query gene has been entered, it is displayed in its genomic context in parallel to the genomic context of all its orthologous and paralogous copies in all the other sequenced metazoan genomes. Moreover, Genomicus stores and displays the predicted ancestral genome structure in all the ancestral species within the phylogenetic range of interest. 
+</p>
+
+<p>
+	All the data on extant species displayed in this browser are from Ensembl, JGI, and Genoscope.
+</p>
+
+<br>
+	<b>Summary statistics of Genomicus version 61.01:</b><br><br>
+
+	<table id='introstats'>
+	<tr><th>Number of extant species</th><td>52</td></tr>
+	<tr><th>Number of extant genes</th><td>906175</td></tr>
+	<tr><th>&nbsp;</th></tr>
+	<tr><th>Number of ancestral species</th><td>43</td></tr>
+	<tr><th>Number of ancestral genes</th><td>764206</td></tr>
+	<tr><th>Number of ancestral synteny blocks</th><td>29818</td></tr>
+	</table><br>
+<div class='mybox'><b>What's new in version 61.01 ?</b><br>
+<ul>
+	<li>Database update (Ensembl 61)</li>
+	<li>No additional species in this release</li>
+	<li>No CNE data in this release (will be available as soon as possible in release 6102)</li>
+</ul>
+
+</div></div>
+<div id='footer'>
+Genomicus &mdash; database version: 61.01 / Web-code version: 2010-11-26 &mdash; Dyogen Team
+</div></body></html>

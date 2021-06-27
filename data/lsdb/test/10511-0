@@ -1,0 +1,2343 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>..: Laboratoire de Neuro-imagerie Assistée par Ordinateur [The Fiber Cup] :..</title>
+<script type="text/javascript" src="dist/javascript/layer.js"></script>
+<script type="text/javascript" src="dist/javascript/presentation.js"></script>
+<script type="text/javascript">
+<!--
+function ShowHide(id1, id2) {
+  if (id1 != '') expMenu(id1);
+  if (id2 != '') expMenu(id2);
+}
+	
+function expMenu(id) {
+  var itm = null;
+  if (document.getElementById) {
+    itm = document.getElementById(id);
+  } else if (document.all){
+    itm = document.all[id];
+  } else if (document.layers){
+    itm = document.layers[id];
+  }
+	
+  if (!itm) {
+    // do nothing
+  }
+  else if (itm.style) {
+    if (itm.style.display == "none") { itm.style.display = ""; }
+    else { itm.style.display = "none"; }
+  }
+  else { itm.visibility = "show"; }
+}
+
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function divtexte(content) {
+  var skn=document.getElementById("services").style;
+document.getElementById("services").innerHTML = content;
+skn.visibility = "visible";
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<meta name="generator" content="SPIP 1.9.2d [11132]" />
+
+
+<link rel="shortcut icon" href="favicon.ico" />
+
+
+<link rel="alternate" type="application/rss+xml" title="Syndicate the whole site" href="http://www.lnao.fr/spip.php?page=backend" />
+<meta http-equiv="Content-Language" content="en" />
+<meta name="robots" content="index, follow" />
+<meta name="description" content="Welcome to the Fiber Cup website! The Fiber Cup was originally intended to be a tractography contest at the MICCAI conference help in London in (...)" />
+
+
+
+
+
+
+<script src="http://www.lnao.fr/spip.php?page=jquery.js" type="text/javascript"></script>
+<!-- insert_head --><script type="text/javascript" src="plugins/Lecteur_multimedia/soundmanager/soundmanager2.js"></script><script type="text/javascript"><!--
+var musicplayerurl="plugins/Lecteur_multimedia/eraplayer_playlist.swf";soundManager.url = "plugins/Lecteur_multimedia/soundmanager/soundmanager2.swf";soundManager.consoleOnly = true;soundManager.debugMode = false;soundManager.nullURL = "plugins/Lecteur_multimedia/soundmanager/null.mp3";//--></script>
+<script type="text/javascript" src="plugins/Lecteur_multimedia/javascript/jscroller.js"></script><script type="text/javascript" src="plugins/Lecteur_multimedia/player_enclosure.js"></script><script type="text/javascript"><!--
+	$(document).ready(function(){
+	soundManager.onload = function() {}});
+	// --></script>
+<link rel="stylesheet" href="plugins/Lecteur_multimedia/player.css" type="text/css" media="projection, screen, tv" /><link rel="stylesheet" href="http://www.lnao.fr/spip.php?page=cfg.css" type="text/css" media="all" />
+<script type="text/javascript" src="plugins/dw2/dw2_fermepop.js"></script>
+
+<link rel="stylesheet" type="text/css" href="plugins/dw2/dw2_public_styles.css" />
+<link rel="stylesheet" href="plugins/enluminures_typographiques_v2/css/enluminurestypo.css" type="text/css" media="all" />
+
+
+<link rel="stylesheet" href="plugins/beespip/themes/bordeaux_beige/css/beespip_impression.css" type="text/css" media="print" />
+<link rel="stylesheet" href="plugins/beespip/themes/bordeaux_beige/css/beespip_styles.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="plugins/beespip/themes/bordeaux_beige/css/beespip_structures.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="plugins/beespip/themes/bordeaux_beige/css/barre_typo.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="plugins/beespip/includes/beespip_donnee_voir.css" type="text/css" media="screen, projection" />
+ <link rel="stylesheet" href="plugins/beespip/themes/bordeaux_beige/css/beespip_minical.css" type="text/css" media="projection, screen" />
+</head>
+<body dir="ltr" >
+<div id="conteneur">
+
+
+
+<div id="entete" style="background: url(http://lnao.lixium.fr/plugins/beespip/themes/bordeaux_beige/images-interface/pixel_couleur1.gif) repeat;">
+  <div class="cleaner"><img src="plugins/beespip/themes/bordeaux_beige/images-interface/transp.gif" style="height:1px;width:750px;border: 0;" alt="" /></div>
+  <div id="entetegauche"><img src="http://lnao.lixium.fr/plugins/beespip/themes/bordeaux_beige/images-interface/../../../../../IMG/siteon0.png" width="327" height="135" alt="" /></div>
+   <div id="entetedroite"><div class="column-in">
+    <div style="text-align:center;">
+ 
+  <div class="date" style="margin-left: auto;margin-right: auto;">
+    Friday 4 March 2011
+ <a href="http://lnao.lixium.fr/spip.php?page=agenda"><img src="plugins/beespip/themes/bordeaux_beige/images-interface/month.gif" width="11" height="11" alt="" style="border:0;" /></a>
+</div>
+
+<div class="blocarrondis" style="margin-left: auto;margin-right: auto;">
+  <div class="bashaut"><div><div></div></div></div>
+  <div class="bascontentwrap"><div class="bascontent"> 
+    <ul class="serv">
+      <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/spip.php?page=sommaire-accueil" title="Home page">Home page</a></span></li>
+        
+      <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/spip.php?page=sommaire-actu" title="News">News</a></span></li>
+        
+      <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/spip.php?page=plan" title="Site Map">Site Map</a></span></li>
+        
+      <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/ecrire/" title="Editors area">Editors area</a></span></li>
+    </ul>
+  </div><!-- /bascontent -->
+  </div><!-- /bascontentwrap -->
+  <div class="basbas"><div><div></div></div></div>
+</div><!-- /blocarrondis -->
+</div>
+  </div></div>
+  
+</div>
+
+
+<div id="outercolonnechemin_oui">
+  <div id="centre2colschemin_oui">
+    <div class="colssup2">&nbsp;</div>
+    <div class="colschemin"><span class="chemin"> &raquo;&nbsp;The Fiber Cup</span></div>
+    <div class="cleanerchemin">&nbsp;</div>
+  </div>
+</div>
+
+
+<div id="outercolonne3cols_oui">
+  
+   
+  <div id="gauche">
+    
+
+
+
+
+
+
+
+<script type="text/javascript" src="plugins/beespip/beespip_layer.js"> </script>
+<!-- Menu de navigation rubriques -->
+
+
+
+
+
+
+
+
+
+  
+            <div class="button">
+      <span class="buttonlabel"><img id="beetriangle1" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(1,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique35" title="">Home</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer1' style='display: none;'>
+
+
+
+
+
+    
+
+    <div style='clear: both;'></div></div>  
+            <div class="button">
+      <span class="buttonlabel"><img id="beetriangle2" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(2,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique36" title="L'actualit&amp;eacute; du site.">News</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer2' style='display: none;'>
+
+
+
+
+    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle3" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(3,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique113" title="">Archive</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer3' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article119">Advanced BrainVISA training</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article63">BrainVISA/Anatomist version 3.1 available on the web !</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article68">JIRFNI : TP BrainVISA &amp; Anatomist</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article161">Soutenance de thèse de Matthieu Perrot</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article65">Soutenance HDR Philippe Ciuciu</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+    <div style='clear: both;'></div></div>  
+            <div class="button">
+      <span class="buttonlabel"><img id="beetriangle4" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(4,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique1" title="lab members">People</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer4' style='display: none;'>
+
+
+
+
+
+    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle5" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(5,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique6" title="People who are conducting research projects funded by external grants.">Research scientists</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer5' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle6" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(6,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique17" title="Welcome to Alexis Roche's homepage">Alexis Roche</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer6' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle7" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(7,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique21" title="Welcome to Bertrand Thirion's homepage">Bertrand Thirion</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer7' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle8" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(8,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique74" title="">Cyril Poupon</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer8' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article231">Bibliographie</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article234">Courses and slides</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article233">Curriculum vitae</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article232">Projets</a>
+        </div>
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle9" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(9,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique134" title="">Untitled</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer9' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article230">Bibliography</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle10" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(10,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique50" title="Denis Rivière">Denis Rivière</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer10' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle11" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(11,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique30" title="Welcome to Edouard Duchesnay's homepage">Edouard Duchesnay</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer11' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle12" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(12,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique7" title="">Jean-François Mangin</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer12' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle13" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(13,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique8" title="Welcome to Philippe Ciuciu's homepage">Philippe Ciuciu</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer13' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article6">Short bio</a>
+        </div>
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle14" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(14,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique127" title="">Talks</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer14' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article207">Post-modern fMRI data analysis in parallel imaging</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle15" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(15,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique10" title="">Pierre Fillard</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer15' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article118">Bringing Brainvisa and MedINRIA together</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article116">High quality volume rendering using VTK</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article115">Osirix-like VTK Views</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article108">Popup menus in new medINIRA</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article90">Short bio</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article117">Tractography using an adpative spin-glass model</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle16" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(16,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique51" title="Go to Yann Cointepas' homepage">Yann Cointepas</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer16' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article50">Short bio</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle17" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(17,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique40" title="IMAGEN European project">IMAGEN group</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer17' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle18" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(18,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique42" title="Database Engineer">Alexis Barbot</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer18' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle19" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(19,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique44" title="">Benjamin Thyreau</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer19' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article48">Bio</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle20" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(20,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique41" title="Group leader">Jean-Baptiste Poline</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer20' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article43">Bio</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle21" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(21,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique43" title="">Yannick Schwartz</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer21' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article49">Bio</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle22" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(22,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique2" title="">PhD Students</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer22' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle23" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(23,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique25" title="Welcome to Joy Sun's homepage">(Joy) Zhong Yi Sun</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer23' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle24" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(24,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique29" title="Welcome to Alan Tucholka's homepage">Alan Tucholka</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer24' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle25" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(25,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique73" title="">Anne-Laure Fouque</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer25' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle26" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(26,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique56" title="Welcome to Cécilia Damon's home page : PHD (third year), INRIA Futurs - CEA Saclay">Cécilia Damon</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer26' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article89">CV</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle27" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(27,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique72" title="">Edith Le Floch</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer27' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle28" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(28,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique71" title="">Eric Jouvent</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer28' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle29" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(29,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique76" title="">Linda Marrakchi</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer29' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle30" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(30,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique26" title="Welcome to Lotfi Chaâri's homepage">Lotfi Chaâri</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer30' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle31" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(31,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique27" title="Welcome to Merlin Keller's homepage">Merlin Keller</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer31' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle32" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(32,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique22" title="Welcome to Pamela Guevara's homepage">Pamela Guevara</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer32' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article202">CV</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle33" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(33,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique18" title="Welcome to Pauline Roca's homepage">Pauline Roca</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer33' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle34" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(34,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique20" title="Welcome to Thomas Vincent's homepage">Thomas Vincent</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer34' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle35" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(35,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique24" title="Welcome to Valdis Gudmundsdottir's homepage">Valdis Gudmundsdottir</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer35' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle36" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(36,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique28" title="Welcome to Vincent Michel's homepage">Vincent Michel</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer36' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle37" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(37,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique120" title="">Virgile Fritsch</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer37' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article197">Surface-based fMRI data analyses improvement </a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle38" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(38,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique4" title="people who are in post-doctoral position in LNAO at Neurospin">Post-doc fellows</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer38' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle39" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(39,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique122" title="">Alexandre Gramfort</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer39' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article199">bio</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle40" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(40,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique75" title="">Gael Varoquaux</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer40' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle41" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(41,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique108" title="">Grégory Operto</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer41' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle42" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(42,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique23" title="Welcome to Irina Kezele's homepage">Irina Kezele</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer42' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle43" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(43,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique9" title="Welcome to Julien Lefèvre's home page">Julien Lefèvre</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer43' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article54">Research Interests</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article53">Short Bio</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle44" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(44,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique5" title="">Laurent Risser</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer44' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article4">Short biography</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle45" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(45,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique19" title="Welcome to Matthieu Perrot's homepage">Matthieu Perrot</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer45' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle46" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(46,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique70" title="Who am I?">Maxime Descoteaux</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer46' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article93">New article</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle47" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(47,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique11" title="People who are working for the Neurospin platform">Software development</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer47' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle48" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(48,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique77" title="">Christian Chauvain</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer48' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle49" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(49,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique14" title="Welcome to Dominique Geffroy's homepage">Dominique Geffroy</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer49' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article59">Mission</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle50" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(50,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique15" title="Welcome to Isabelle Denghien's homepage">Isabelle Denghien</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer50' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle51" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(51,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique31" title="Welcome to Lise Favre's homepage">Lise Favre</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer51' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle52" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(52,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique16" title="Welcome to Nicolas Souedet's homepage">Nicolas Souedet</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer52' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+
+    <div style='clear: both;'></div></div>  
+            <div class="button">
+      <span class="buttonlabel"><img id="beetriangle53" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(53,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique47" title="">Close collaborators</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer53' style='display: none;'>
+
+
+
+
+
+    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle54" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(54,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique48" title="People working at the Biomedical Imaging Institute of CEA">CEA/DSV/I2BM</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer54' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle55" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(55,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique112" title="Colleagues living in Grenoble and working in neuroimaging and spatial statistics">Grenoble</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer55' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article184">Grenoble Institut des NeuroSciences</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article185">INRIAlpes</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle56" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(56,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique49" title="People collaborating with LNAO through the IFR49 neuroimaging institute">IFR49</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer56' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle57" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(57,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique52" title="Colleagues living in Marseille and working on neuroimaging">Marseille</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer57' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+    <div style='clear: both;'></div></div>  
+        
+    <div class="button">
+      <span class="buttonlabel"><img id="beetriangle58" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(58,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique3" title="">Bibliography</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer58' style='display: none;'>
+
+
+
+
+    
+
+    <div style='clear: both;'></div></div>  
+        
+    <div class="button">
+      <span class="buttonlabel"><img id="beetriangle59" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(59,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique39" title="Downloadable Software">Software</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer59' style='display: none;'>
+
+
+
+
+    
+
+    <div style='clear: both;'></div></div>  
+            <div class="button">
+      <span class="buttonlabel"><img id="beetriangle60" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(60,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique89" title="">Projects</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer60' style='display: none;'>
+
+
+
+
+
+    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle61" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(61,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique114" title="The Base Archi project aims at providing to the community of brain imaging a complete structural and functional database acquired on heathy subject at 3T, pushing the limits of the 3T hardware in terms of spatial and temporal resolutions. Cyril Poupon is the scientific coordinator of this project that is mainly funded by the Federative Institute 49.">Base Archi</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer61' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article191">Scientific description of the project</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article192">Structural MRI protocol</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article193">Functional MRI protocol</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article194">Roadmap and funding</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article195">Bay time calendar</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle62" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(62,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique90" title="NucleiPark aims at using ultra-high field MRI (7T) systems to study the structural disorders of the brainstem in the case of Parkinsonian syndroms. Cyril Poupon is the scientific coordinator of the project and Marie Vidailhet is the clinical investigator of the project.">NucleiPark</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer62' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle63" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(63,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique91" title="">Introduction</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer63' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article153">Summary</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle64" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(64,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique92" title="">Partnership</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer64' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article131">NeuroSpin team</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article154">INSERM teams</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article155">INRIA teams</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle65" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(65,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique93" title="">Scientific motivation</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer65' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article133">State of the art</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article134">Aims of the project</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article135">Scientific program</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article136">Strategy of the study and Innovation (translational research)</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article137">Selection and evaluation of the patients</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article138">Innovative imaging techniques</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle66" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(66,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique94" title="">Tasks or work-packages</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer66' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle67" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(67,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique95" title="">Preliminary data</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer67' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article139">High resolution images of the SN, STN and RN at 7T</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article140">High angular resolution diffusion images of the brain stem</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle68" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(68,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique96" title="">Task 1 - Structural and diffusion-weighted MR imaging protocol</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer68' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article141">Standard T1, T2 and T2*-weighted images</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article142">High angular resolution diffusion imaging (HARDI)</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle69" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(69,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique97" title="">Task 2 - Animal study preliminary to the human study</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer69' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article143">Brainstem atlas</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle70" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(70,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique98" title="">Task 3 - Human studies on patients and controls, ethics</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer70' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article144">Patient recruitment</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article145">Control recruitment</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article146">Clinical examination at the time of the study</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article147">Acquisitions</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article148">Ethics</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle71" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(71,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique99" title="">Task 4 - Data analysis</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer71' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article149">Morphometric analysis: automatic localization of deep brain nuclei</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article150">Volumetric analysis</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article151">Anatomical connectivity inference from HARDI data</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article152">Coregistration with post-mortem brain atlas: location of brainstem structures and relations with clinical symptoms in Parkinson’s disease and PSP</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle72" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(72,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique103" title="">Grants</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer72' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle73" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(73,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique111" title="">Reports / Comptes-rendus</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer73' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article175">Réunion préparatoire du 8 Mars 2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article176">Réunion de mise en place du 22 Mars 2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article177">Réunion scientifique de présentation du projet à NeuroSpin, le 29 mars 2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article178">Compte-rendu suite à session sur premier patient</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article205">Réunion résolution problèmes budget du 1 Juillet 2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article203">Réunion Atlas Cerveau Humain / Cerveau Primate / Clinique, le 22 Juillet 2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article227">Réunion sur l&#8217;analyse statistique des données du 7 septembre 2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article226">Réunion budget et scientifique du 5 octobre 2010</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle74" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(74,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique126" title="">Bay time calendar on the 7T Human MRI system</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer74' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article204">Year 2010</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle75" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(75,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique132" title="">Practical information</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer75' style='display: none;'>
+
+      
+      
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle76" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(76,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique106" title="Philippe Ciuciu is in charge of the SCHUBERT(SCaling in the HUmain Brain Evoked and Rest acTivity) project, which has been funded for 4 years from October 2009. SCHUBERT aims at investigating the relation between ongoing and evoked brain activity from multimodal functional neuroimaging data and the role the scaling plays in these data sets noticeably in terms of functional connectivity.">SCHUBERT (Young researcher ANR project funded in 2009)</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer76' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article165">Composition of the team</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article164">Overview</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article179">SCHUBERT At a glance</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+    <div style='clear: both;'></div></div>  
+        
+    <div class="button">
+      <span class="buttonlabel"><img id="beetriangle77" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(77,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique45" title="">Quick Links</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer77' style='display: none;'>
+
+
+
+
+
+    
+
+    <div style='clear: both;'></div></div>  
+        
+    <div class="button">
+      <span class="buttonlabel"><img id="beetriangle78" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(78,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique38" title="">Practical information</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer78' style='display: none;'>
+
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article40">Access</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article41">Contacts</a>
+  </div>
+
+
+
+
+    
+
+    <div style='clear: both;'></div></div>  
+        
+    <div class="button">
+      <span class="buttonlabel"><img id="beetriangle79" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(79,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique131" title="Reference atlases for brain imaging">Atlases</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer79' style='display: none;'>
+
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article229">Cortical folds prior atlas</a>
+  </div>
+
+
+
+
+    
+
+    <div style='clear: both;'></div></div>  
+            <div class="button">
+      <span class="buttonlabel"><img id="beetriangle80" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(80,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique128" title="">Lab meeting</a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer80' style='display: none;'>
+
+
+
+
+
+    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle81" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(81,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique135" title="">2010</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer81' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article210">09/21/2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article209">09/28/2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article208">10/05/2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article212">10/19/2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article214">11/02/2010: no meeting because CEA is closed</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article217">11/23/2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article218">11/30/2010</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article220">12/14/2010</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle82" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(82,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique129" title="">Upcoming talks</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer82' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article215">01/04/2011 - E. Le Floch</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article221">01/18/2011 - A.L. Fouque</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article219">01/25/2011 - F. Pedregosa</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article213">02/15/2011 - D. Rivière</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article211">02/22/2011 - V. Siless</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article238">03/01/2011 - F. Rousseau (LSIIT, Strasbourg)</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article216">03/15/2011 - G. Varoquaux</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+    <div style='clear: both;'></div></div>  
+            <div class="button">
+      <span class="buttonlabel"><img id="beetriangle83" src="plugins/beespip/themes/bordeaux_beige/images-interface/on_open_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(83,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique79" title=""><span style="color: #000000;">The Fiber Cup</span></a></b>
+    </div>
+
+    <div class='menu' id='BeeLayer83' style='display: block;'>
+
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article109">Details on the spatial positions</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article112">Download Section</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article106">Fiber Cup dataset now available for download!</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article103">Goal</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article196">How to evaluate your own results?</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article111">Submission format: what is a fiber file?</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article107">Technical details about the phantom</a>
+  </div>
+
+    <div class="menuItem">
+    <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article110">Voxel to real world coordinates</a>
+  </div>
+
+
+
+
+    
+      <div class="button level1label">
+      <span class="buttonlabel"><img id="beetriangle84" src="plugins/beespip/themes/bordeaux_beige/images-interface/close_menu.gif" alt="Unfold" title="Unfold" class="swap-couche"
+	onclick="swap_couche_bee(84,'','plugins/beespip/themes/bordeaux_beige/images-interface/',0);" /></span><b><a href="http://www.lnao.fr/spip.php?rubrique119" title="">MICCAI&#8217;09 Contest</a></b>
+      </div>
+
+      <div class='menu' id='BeeLayer84' style='display: none;'>
+
+      
+      
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article113">Committee</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article127">Fiber Cup Program</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article157">Results and Conclusions</a>
+        </div>
+      
+         <div class="menuItem">
+          <img src='plugins/beespip/themes/bordeaux_beige/images-interface/puce.gif' title='' alt='' longdesc='' /><a href="http://www.lnao.fr/spip.php?article159">Winners announced!</a>
+        </div>
+      
+      
+      
+
+      
+
+
+      <div style='clear: both;'></div></div>    
+
+    <div style='clear: both;'></div></div>  
+
+<p />
+
+<div style="text-align:center;">
+                              <div class="blocarrondim" style="margin-left: auto;margin-right: auto;">
+                <div class="bamhaut"><div><div></div></div></div>
+                <div class="bamcontentwrap"><div class="bamcontent">
+                
+                
+
+                <ul class="pave">
+                
+                 <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/spip.php?page=agenda"><b>agenda</b></a></span></li>
+
+                
+
+                
+
+                
+
+<!--                 <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/spip.php?page=listes"><b>Newsletter</b></a></span></li>-->
+
+                
+
+                
+
+                
+
+                
+
+                 <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/spip.php?page=plan"><b>Site Map</b></a></span></li>
+
+                 <li><span class="cartouchemenu"><a href="http://lnao.lixium.fr/ecrire/"><b>Editors area</b></a></span></li>
+
+                                </ul>
+                </div><!-- /bamcontent -->
+                </div><!-- /bamcontentwrap -->
+                <div class="bambas"><div><div></div></div></div>
+              </div><!-- /blocarrondim -->
+              <div class="cleaner">&nbsp;</div>
+                
+                
+                 
+                
+              <div class="blocarrondim" style="margin-left: auto;margin-right: auto;">
+                <div class="bamhaut"><div><div></div></div></div>
+                <div class="bamcontentwrap"><div class="bamcontent">
+                <div style="text-align:center;">
+                <div class="formulaire_spip formulaire_recherche">
+<a name="formulaire_recherche" id="formulaire_recherche"></a>
+<form action="http://www.lnao.fr/spip.php?page=recherche" method="get">
+	<div>
+<input name='page' value='recherche' type='hidden' />
+	
+	<label for="recherche" title="recherche">Search</label>
+	<input type="text" class="forml" name="recherche" id="recherche" value="Search" onfocus="this.value='';" /></div>
+</form>
+
+</div>
+                </div>
+                </div><!-- /bamcontent -->
+                </div><!-- /bamcontentwrap -->
+                <div class="bambas"><div><div></div></div></div>
+              </div><!-- /blocarrondim -->
+              <div class="cleaner">&nbsp;</div>
+              
+
+    
+</div>
+<br />
+  </div>
+  
+
+  
+  <div id="centre3cols_oui">
+
+    <div id="colprincipale"><div class="column-in">
+      
+      
+      
+      
+      
+      
+      
+
+              <div class="blocarrondi">
+                <div class="bahaut"><div><div></div></div></div>
+                <div class="bacontentwrap" style="vertical-align:middle;"><div class="bacontent" style="vertical-align:middle;">
+                <div class="crayon rubrique-titre-79 titre_article_contour" style="vertical-align:middle;"> The Fiber Cup</div>
+                <div class="cleaner">&nbsp;</div></div><!-- /bacontent -->
+                </div><!-- /bacontentwrap -->
+                <div class="babas"><div><div></div></div></div>
+              </div><!-- /blocarrondi -->
+              <div class="espacebloc">&nbsp;</div>
+
+          
+         <div class="crayon rubrique-texte-79 texterub"><p class="spip">Welcome to the Fiber Cup website!</p>
+
+<p class="spip">The Fiber Cup was originally intended to be a tractography contest at the MICCAI conference help in London in 2009.</p>
+
+<p class="spip">Today, the Fiber Cup is still open and is intended to provide a common dataset with known ground truth along with an evaluation methodology to compare and challenge tractography algorithms.</p>
+
+<p class="spip">The contest is still alive! But before submiting anything,  you should read the <a href="spip.php?article106" class="spip_in">contest rules</a>. Information about the expected file format are available <a href="spip.php?article111" class="spip_in">here</a>.</p>
+
+<p class="spip">Then, go to the <a href="spip.php?article112" class="spip_in">download section</a> to retrieve the data. The evaluation code and the ground truth dataset are available as well. A brief documentation on how to run the evaluation yourself is available <a href="spip.php?article196" class="spip_in">here</a>.</p></div>
+         
+
+         
+         <div class="cleaner">&nbsp;</div>
+
+
+
+
+
+         
+
+
+         
+
+         
+
+
+
+         
+
+
+         
+
+
+         <!-- Articles de la rubrique -->
+		<div id="fragment_html_39b47c4547a88878eaf9d44f6dea6dd1_articles_recents222" class="fragment">
+         	
+         	
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article109" title="The spatial positions for the Fiber Cup have been selected. They consist in an image of labels (in NIFTI file format) where a voxel is set to an integer value (1, 2, 3, etc.) when it is selected and 0 otherwise. 16 voxels were selected for both 3x3x3 and 6x6x6 datasets. The integer value is the actual label of the fiber. When submitting results, fiber files should correspond to their label, e.g.: 
+
+file Fiber1.txt corresponds to voxel with label 1; 
+
+file Fiber2.txt corresponds to voxel with (&amp;hellip;) "><b>Details on the spatial positions</b></a></div>
+         	<div class="mis_a_jour"> Published on Friday 24 July 2009
+         	
+         	</div>
+         	 <div class="mis_a_jour">Update Thursday 30 July 2009</div>
+		
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article112" title="DISCLAIMER: Any use of these data for scientific work or publication must put a reference to: 
+
+Quantitative Evaluation of 10 Tractography Algorithms on a Realistic Diffusion MR Phantom. Fillard P., Descoteaux M., Goh A., Gouttard S., Jeurissen B., Malcolm J., Ramirez-Manzanares A., Reisert M., Sakaie K., Tensaouti F., Yo T., Mangin J.-F., Poupon C. NeuroImage. In press. 
+
+and 
+
+New diffusion phantoms dedicated to the study and validation of high-angular-resolution diffusion imaging (HARDI) (&amp;hellip;) "><b>Download Section</b></a></div>
+         	<div class="mis_a_jour"> Published on Saturday 25 July 2009
+         	
+         	</div>
+         	 <div class="mis_a_jour">Update Tuesday 1 February 2011</div>
+		
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article106" title="PLEASE READ THIS PRIOR TO DOWNLOADING THE DATA! 
+
+Dear participants, 
+
+This year's MICCAI workshop on diffusion MRI features the first Fiber Contest to benchmark the numerous tractography algorithms available in the literature. More details can be found on the DMFC'09 webiste. 
+
+To this end, we worked hard to deploy a new challenging phantom dataset. After much delay, we are pleased to announce that the phantom data for the MICCAI'09 fiber cup is finally available for download! 
+
+You can go (&amp;hellip;) "><b>Fiber Cup dataset now available for download!</b></a></div>
+         	<div class="mis_a_jour"> Published on Monday 20 July 2009
+         	
+         	</div>
+         	 <div class="mis_a_jour">Update Tuesday 29 June 2010</div>
+		
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article103" title="The emergence of numerous models and fiber tracking techniques during the last decade raises the need for a comprehensive comparison of available methods on a common ground truth dataset. Objectives of the workshop are: 1) to provide a MR phantom containing a plethora of crossing, kissing, splitting and bending fiber configurations, 2) to offer a set of quantitative criteria for algorithm performance evaluation with online results, and 3) to attract many participants by organizing it as a (&amp;hellip;)"><b>Goal</b></a></div>
+         	<div class="mis_a_jour"> Published on Thursday 26 February 2009
+         	
+         	</div>
+         	 
+		
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article196" title="You can get the source code of the program used for evaluation here. Binaries for the most standard systems are also available. Consider using them instead of recompiling the program from scratch. 
+
+The program 'fibercup' contains three commands. By typing 'fibercup' in a terminal, the list of available commands will show up: 
+
+&gt;fibercup Software The Fiber Cup &amp;copy; 2010 INRIA, version 1.0.0 
+
+Author: Pierre Fillard (Pierre.Fillard@inria.fr) 
+
+This program comes with ABSOLUTELY NO WARRANTY; This is (&amp;hellip;) "><b>How to evaluate your own results?</b></a></div>
+         	<div class="mis_a_jour"> Published on Tuesday 29 June 2010
+         	
+         	</div>
+         	 
+		
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article111" title="We require a common file format for evaluation of tractography results. Thus, due to the diversity of tools and fiber file formats available in the community, it was not reasonable to choose a particular existing format. We decided to ask for a simple text file, one per fiber, listing the x, y, z coordinates of each point of the fiber one line after another. Here is a short example: 
+
+File Fiber1.txt: 
+
+0.0 1.3 -3.7 0.0 2.3 -3.8 &amp;hellip; 1.5 10.8 -2.5 
+
+The number of lines must be equal to the (&amp;hellip;) "><b>Submission format: what is a fiber file?</b></a></div>
+         	<div class="mis_a_jour"> Published on Saturday 25 July 2009
+         	
+         	</div>
+         	 <div class="mis_a_jour">Update Monday 27 July 2009</div>
+		
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article107" title="This part describes the mechanical conception and manufacturing of the Fiber Cup diffusion phantom dedicated to the benchmarking of tractogrpahy techniques, as well as the full description of the acquisitions performed on it. 
+
+Phantom manufacturing, a threefold process 
+
+Designing and manufacturing a diffusion phantoms is challenging task involving three steps: 
+
+designing a specific fibre configuration, 
+
+designing a media to hold the fibres strongly tightened and a container to receive the (&amp;hellip;) "><b>Technical details about the phantom</b></a></div>
+         	<div class="mis_a_jour"> Published on Monday 20 July 2009
+         	
+         	</div>
+         	 
+		
+        	<div class="espaceligne">&nbsp;</div>
+	 	<div class="texte"><a href="spip.php?article110" title="All DWI datasets have a non-zero origin, a non-unitary spacing (or voxel size) and a non-identity orientation matrix indicating how the dataset is spatially oriented. As a consequence, voxel to real world coordinates transform must take into account all of this. 
+
+For the 3x3x3 datasets: 
+
+origin is: $ \left[93, 93, -1.5\right] $ 
+
+spacing is: $ \left[3,3,3\right] $ 
+
+orientation matrix is: $ \left[ \beginarrayccc 
+
+1 &amp; 0 &amp; 0\\ 0 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; 1 \endarray \right] $ 
+
+Consequently, (&amp;hellip;) "><b>Voxel to real world coordinates</b></a></div>
+         	<div class="mis_a_jour"> Published on Saturday 25 July 2009
+         	
+         	</div>
+         	 
+		
+		
+		<!-- /fragment_html_39b47c4547a88878eaf9d44f6dea6dd1_articles_recents222 --></div>
+
+        
+        
+        
+
+
+
+    </div></div>
+
+    
+    <div id="droite"><div class="column-indroite">
+         
+               
+
+         	  
+
+   	  
+
+   	  <div id="fragment_html_bb7ed1737aac8be060883c1d42cb5dc2_breves_rubrique3" class="fragment">
+
+            <!-- /fragment_html_bb7ed1737aac8be060883c1d42cb5dc2_breves_rubrique3 --></div>
+            
+
+            
+
+   	  
+              <div class="blocarrondi">
+                <div class="bahaut"><div><div></div></div></div>
+                <div class="bacontentwrap"><div class="bacontent"><div class="titre_tableau"></div>
+                <ul class="pave">
+                
+                  <li><a href="spip.php?rubrique119" title="">MICCAI&#8217;09 Contest</a>
+                    
+                  </li>
+                
+                </ul>
+                </div><!-- /bacontent -->
+                </div><!-- /bacontentwrap -->
+                <div class="babas"><div><div></div></div></div>
+              </div><!-- /blocarrondi -->
+              <div class="cleaner">&nbsp;</div>
+              <div class="espacebloc">&nbsp;</div>
+          
+
+            
+
+            
+
+            
+
+            
+
+    </div></div>
+
+  </div><!-- id centre3cols-->
+  <div class="cleaner">&nbsp;</div>
+</div> <!-- id outercolonne3cols-->
+
+<div id="outercolonnepied_oui">
+  <div id="gauchepied_oui"><div class="piedpage"><a href="http://www.spip.net/fr" onclick="window.open(this.href); return false;" class="lienblanc" title="Site created with SPIP">SPIP 1.9.2d [11132]</a><br />
+  <a href="http://www.beespip.org" onclick="window.open(this.href); return false;" class="lienblanc" title="Template BeeSpip">Template BeeSpip v.1.9.2 [353]</a>
+  </div></div>
+  <div id="centrepied_oui"><div class="lignedouble_oui"></div><span class="lienpied"><a href="http://lnao.lixium.fr/spip.php?page=sommaire-accueil" title="Home page">Home</a>
+  	
+  	&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://lnao.lixium.fr/spip.php?page=plan" title="Site Map">Site Map</a>
+  	&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://lnao.lixium.fr/ecrire/" title="Editors area">Editors area</a>
+  	  	&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://lnao.lixium.fr/spip.php?page=connecte' title="Login">Login</a>
+  	</span><br />&nbsp;
+  	 
+  		
+  <span class="pieddate">Update Tuesday 22 February 2011</span>&nbsp;
+
+  	
+  </div>
+</div>
+
+
+	<!-- Formulaire administrateur -->
+	<!-- SPIP-CRON --><div style="background-image: url('http://lnao.lixium.fr/spip.php?action=cron');"></div>
+
+</div> <!-- id conteneur-->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

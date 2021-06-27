@@ -1,0 +1,725 @@
+<html>
+<head>
+</head>
+<body>
+
+<center>
+<a href="index.html"><img src="pics/moraine_banner.png" border="0"></a>
+</center>
+<br>
+
+<center>
+
+<fieldset><legend>Description</legend>
+<table border=0 width='80%'>
+
+<tr bgcolor='#4bb748'>
+<td width='20%'>Name</td>
+<td width='80%'>Description</td>
+</tr>
+
+
+<tr bgcolor='#dae6f0'>
+<td>
+Program
+</td>
+<td>
+MoRAine is a tool for the <u>r</u>e<u>a</u>nnotation of transcription factor binding <u>m</u>otifs and the creation of sequence logos.
+<br><br>
+It reasseses the given binding sequences, by switching the strand annotations, and by shifting
+the motifs in order to maximize the information content of the corresponding position specific scoring matrix.
+</td>
+</tr>
+
+<tr bgcolor='#eef2f3'>
+<td>
+Release
+</td>
+<td>
+2.0
+</td>
+</tr>
+
+
+
+<tr bgcolor='#dae6f0'>
+<td>
+Developers
+</td>
+<td>
+<b>MoRAine 2.0</b>:
+<a href="http://www.cebitec.uni-bielefeld.de/~twittkop">Tobias Wittkop</a> (CeBiTec, Bielefeld University),
+<a href="http://www.icsi.berkeley.edu/~jbaumbac/">Jan Baumbach</a> (ICSI, UC Berkely)
+<br>
+<b>MoRAine 1.0</b>: TW, JB, 
+<a href="http://www.cs.ncl.ac.uk/people/J.Weile">Jochen Weile</a> (Newcastle University),
+<a href="http://ls11-www.cs.uni-dortmund.de/people/rahmann/">Sven Rahmann</a> (TU Dortmund)
+</td>
+</tr>
+
+
+<tr bgcolor='#eef2f3'>
+<td>
+Clustering
+</td>
+<td>
+The recent release 2.0 utilizes <a href="http://transclust.cebitec.uni-bielefeld.de/">Transitivity Clustering</a> internally to improve running time and accuracy compared to MoRAine 1.0.
+</td>
+</tr>
+
+
+<tr bgcolor='#dae6f0'>
+<td>
+Sequence logos
+</td>
+<td>
+For painting sequence logos, MoRAine utilizes the <a href="http://weblogo.berkeley.edu/">Berkeley WebLogo library</a> by Crooks et al.
+</td>
+</tr>
+
+
+<tr bgcolor='#eef2f3'>
+<td>
+Download
+</td>
+<td>
+MoRAine is open source and can be downloaded <a href="Moraine.jar">here</a> as java JAR file.
+</td>
+</tr>
+
+<tr bgcolor='#dae6f0'>
+<td>
+Publication/citation
+</td>
+<td>
+<b>MoRAine 2.0</b>: Wittkop T, Rahmann S, Baumbach J (2010) Efficient online transcription factor binding site adjustment by integrating transitive graph projection with MoRAine 2.0. J Integr Bioinform, 2010 Mar 25;7(3). <a href="http://www.ncbi.nlm.nih.gov/pubmed/20375458" target="_blank">PubMed</a><br>
+<b>MoRAine 1.0</b>: Baumbach J, Wittkop T, Weile J, Kohl T, Rahmann S (2008) MoRAine - A web server for fast computational transcription factor binding motif re-annotation. J Integr Bioinform, 2008 Aug 25;5(2). <a href="http://www.ncbi.nlm.nih.gov/pubmed/20134062" target="_blank">PubMed</a>
+</td>
+</tr>
+
+
+</table>
+
+</fieldset>
+
+
+<br>
+
+
+
+<FORM ACTION='startMoraine.php' METHOD='POST'>
+
+
+
+
+
+<fieldset><legend>Input</legend>
+<table border=0 width='80%'>
+
+<tr bgcolor='#4bb748'>
+<td width='20%'>Option</td>
+<td width='80%'>Value</td>
+</tr>
+
+
+<tr bgcolor='#dae6f0'>
+<td>
+Transcription factor binding sites (in FASTA format)
+</td>
+<td>
+<textarea name="fastaSequencesString" cols="75" rows="10"></textarea>
+</td>
+</tr>
+
+<tr bgcolor='#eef2f3'>
+<td>
+Allowed shifts to the left
+</td>
+<td>
+<SELECT NAME="left">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+</SELECT>
+</td>
+</tr>
+
+<tr bgcolor='#dae6f0'>
+<td>
+Allowed shifts to the right
+</td>
+<td>
+<SELECT NAME="right">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+</SELECT>
+</td>
+</tr>
+
+
+
+</table>
+
+<br><br>
+
+<table border=0 width='80%'>
+
+<tr bgcolor='#dae6f0'>
+<td width='20%'>
+Sequence logo with (cm)
+</td>
+<td width='80%'>
+<input type="text" name="logoWidth" value="10" size = 10>
+</td>
+</tr>
+
+
+<tr bgcolor='#eef2f3'>
+<td>
+Sequence logo height (cm)
+</td>
+<td>
+<input type="text" name="logoHeight" value="5" size = 10>
+</td>
+</tr>
+
+<tr bgcolor='#dae6f0'>
+<td>
+Sequence logo title
+</td>
+<td>
+<input type="text" name="logoTitle" value="" size = 10>
+</td>
+</tr>
+
+
+</table>
+
+<br>
+
+<input type='image' src='pics/start.png' alt='Submit'>
+
+<br>
+
+</fieldset>
+
+
+
+</center>
+
+
+</form>
+
+
+<br>
+<br>
+<br>
+
+<center>
+<h1>Examples:</h1>
+
+<FORM ACTION='startMoraine.php' METHOD='POST'>
+
+<table border=0 width='80%'>
+
+<tr bgcolor='#4bb748'>
+<td width='20%'>Description</td>
+<td width='80%'>Sequences</td>
+</tr>
+
+
+<tr bgcolor='#dae6f0'>
+<td>
+Transcription factor binding sites of NarL (<i>E.coli</i>) (in FASTA format). Using standard options and left/right = 0 for motif reannotation.
+</td>
+<td>
+<textarea name="fastaSequencesString" cols="75" rows="10">
+>b0827
+TACTCAT
+>b0827
+TGCCCAT
+>b0873
+GGCGGTA
+>b0873
+TACCTCT
+>b0887
+TACCTCG
+>b0887
+TACTTCG
+>b0894
+TACCTAT
+>b0894
+TACTACT
+>b0894
+TACTCCT
+>b0904
+AATAAAT
+>b0904
+ATAATGC
+>b0904
+ATATCAA
+>b0904
+ATGATTA
+>b0904
+CAACTCA
+>b0904
+CATTAAT
+>b0904
+GATCGAT
+>b0904
+GTAATTA
+>b0904
+TAATGAT
+>b0904
+TATCGGT
+>b0904
+TTACTCC
+>b0972
+TACGCTT
+>b0972
+TACTTTC
+>b1223
+AAGGGTA
+>b1223
+ATAAATA
+>b1223
+ATAGATA
+>b1223
+ATCGGTA
+>b1223
+ATGGGTA
+>b1223
+CACTGTA
+>b1223
+GTGGTTA
+>b1223
+TACCCAT
+>b1223
+TACTCAC
+>b1223
+TACTCCT
+>b1224
+AGGGGTA
+>b1224
+TAATTAT
+>b1224
+TACCCAT
+>b1224
+TACCCAT
+>b1224
+TACTCCT
+>b1224
+TAGGAAT
+>b1224
+TCCCCAT
+>b1241
+GTGAGTA
+>b1241
+TACCCAG
+>b1474
+AGTGGTG
+>b1474
+CGGATTA
+>b1474
+TACCGCT
+>b1474
+TGAGGTA
+>b2208
+CGGGGTA
+>b2208
+TACCCCG
+>b2288
+TGCTAAT
+>b2710
+ATGGGCA
+>b2710
+TACTCAT
+>b2997
+TACACTA
+>b2997
+TACGTAT
+>b2997
+TGTGGTA
+>b3365
+AGGAGTA
+>b3365
+TACCCAT
+>b4070
+AGTGGTA
+>b4070
+TAACTCT
+>b4070
+TACAATT
+>b4070
+TGTGGTT
+>b4123
+AGGATTA
+>b4123
+ATGTTAT
+>b4123
+CACACAT
+>b4123
+TACAAAA
+>b4123
+TGAGGTA
+>b4125
+TACTCCC
+>b4125
+TGAATTA
+>b4139
+AGGGGTA
+>b4139
+GGTAGTA
+>b4139
+TAATAAT
+>b4154
+AGGAGCA
+>b4154
+TACCTAT
+>b4154
+TACTGTT
+>b4154
+TATCCAT
+>b4154
+TGGAATA
+</textarea>
+</td>
+</tr>
+
+<input type="hidden" name="left" value="0">
+<input type="hidden" name="right" value="0">
+
+<input type="hidden" name="logoWidth" value="10">
+<input type="hidden" name="logoHeight" value="5">
+<input type="hidden" name="logoTitle" value="NarL, E.coli">
+
+
+</table>
+
+<input type='image' src='pics/start.png' alt='Submit'>
+
+
+</form>
+
+</center>
+
+
+
+
+
+
+
+
+<br>
+
+<center>
+
+<FORM ACTION='startMoraine.php' METHOD='POST'>
+
+<table border=0 width='80%'>
+
+<tr bgcolor='#4bb748'>
+<td width='20%'>Description</td>
+<td width='80%'>Sequences</td>
+</tr>
+
+
+<tr bgcolor='#dae6f0'>
+<td>
+Transcription factor binding sites of NarL (<i>E.coli</i>) (in FASTA format). Using standard options and left/right = 1 for motif reannotation.
+</td>
+<td>
+<textarea name="fastaSequencesString" cols="75" rows="10">
+>b0894
+CTACCTATC
+>b0894
+TTACTCCTC
+>b0894
+ATACTACTT
+>b0887
+CTACCTCGA
+>b0887
+TTACTTCGG
+>b0873
+TGGCGGTAG
+>b0873
+ATACCTCTC
+>b0827
+TTGCCCATA
+>b0827
+TTACTCATT
+>b1474
+CAGTGGTGC
+>b1474
+TTGAGGTAG
+>b1474
+CTACCGCTA
+>b1474
+GCGGATTAT
+>b3365
+AAGGAGTAT
+>b3365
+ATACCCATT
+>b2710
+AATGGGCAT
+>b2710
+CTACTCATT
+>b2997
+TTACACTAA
+>b2997
+GTGTGGTAA
+>b2997
+ATACGTATT
+>b2288
+ATGCTAATG
+>b4154
+ATACTGTTG
+>b4154
+TTATCCATC
+>b4154
+AAGGAGCAG
+>b4154
+GTACCTATA
+>b4154
+GTGGAATAG
+>b2208
+TCGGGGTAT
+>b2208
+TTACCCCGA
+>b4139
+TTAATAATT
+>b4139
+AAGGGGTAA
+>b4139
+TGGTAGTAA
+>b4125
+TTACTCCCT
+>b4125
+TTGAATTAC
+>b4123
+CATGTTATT
+>b4123
+ATACAAAAC
+>b4123
+GTGAGGTAT
+>b4123
+TCACACATG
+>b4123
+TAGGATTAT
+>b1241
+GTACCCAGA
+>b1241
+AGTGAGTAA
+>b1224
+TTAGGAATT
+>b1224
+TTACCCATG
+>b1224
+AAGGGGTAT
+>b1224
+ATACTCCTT
+>b1224
+TTACTTTAG
+>b1224
+TTAATTATC
+>b1224
+ATCCCCATC
+>b1223
+GATAGATAA
+>b1223
+GATAAATAT
+>b1223
+TTACTCCTT
+>b1223
+GTACTCACT
+>b1223
+ATACCCATA
+>b1223
+CATCGGTAA
+>b1223
+TGTGGTTAG
+>b1223
+TATGGGTAA
+>b1223
+TAAGGGTAG
+>b1223
+TCACTGTAC
+>b0972
+CTACGCTTT
+>b0972
+ATACTTTCT
+>b0904
+TGTAATTAT
+>b0904
+TAATAAATA
+>b0904
+TATAATGCT
+>b0904
+AATGATTAG
+>b0904
+GCATTAATA
+>b0904
+TTTACTCCG
+>b0904
+TATATCAAT
+>b0904
+TTAATGATT
+>b0904
+TCAACTCAT
+>b0904
+ATATCGGTA
+>b0904
+CGATCGATA
+>b4070
+GTGTGGTTA
+>b4070
+CTAACTCTA
+>b4070
+AAGTGGTAT
+>b4070
+TTACAATTG
+</textarea>
+</td>
+</tr>
+
+<input type="hidden" name="left" value="1">
+<input type="hidden" name="right" value="1">
+<input type="hidden" name="logoWidth" value="10">
+<input type="hidden" name="logoHeight" value="5">
+<input type="hidden" name="logoTitle" value="MalT, E.coli">
+
+
+</table>
+
+<input type='image' src='pics/start.png' alt='Submit'>
+
+
+</form>
+
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<center>
+
+<FORM ACTION='startMoraine.php' METHOD='POST'>
+
+<table border=0 width='80%'>
+
+<tr bgcolor='#4bb748'>
+<td width='20%'>Description</td>
+<td width='80%'>Sequences</td>
+</tr>
+
+
+<tr bgcolor='#dae6f0'>
+<td>
+Transcription factor binding sites of MalT (<i>E.coli</i>) (in FASTA format). Using standard options and left/right = 0 for motif reannotation.
+</td>
+<td>
+<textarea name="fastaSequencesString" cols="75" rows="10">
+>b4035
+ggggtggagg
+>b4035
+cctcctcccc
+>b4035
+cctacgcccc
+>b4035
+cctccttgcc
+>b4035
+catcctcccg
+>b4034
+cgggaggatg
+>b4034
+ggcaaggagg
+>b4034
+ggggcgtagg
+>b4034
+ggggaggagg
+>b4034
+cctccacccc
+>b0403
+gatgatgagt
+>b0403
+cctcctcccc
+>b0403
+tatccgcccc
+>b3571
+tctcatcctg
+>b3571
+agggatgagt
+>b3571
+gctcaccctt
+>b3417
+caggatgagg
+>b3417
+actcctccct
+>b3417
+gtggttgaga
+>b3417
+gctcatcccc
+</textarea>
+</td>
+</tr>
+
+<input type="hidden" name="left" value="0">
+<input type="hidden" name="right" value="0">
+
+<input type="hidden" name="logoWidth" value="10">
+<input type="hidden" name="logoHeight" value="5">
+<input type="hidden" name="logoTitle" value="MalT, E.coli">
+
+
+</table>
+
+<input type='image' src='pics/start.png' alt='Submit'>
+
+
+</form>
+
+</center>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

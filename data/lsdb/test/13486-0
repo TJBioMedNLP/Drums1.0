@@ -1,0 +1,233 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Mooney Lab - Mutation Profiling</title>
+<link rel="shortcut icon" href="/profile/img/BuckLogo.ico" type="image/x-icon"/> 
+
+<link rel="stylesheet" type="text/css" href="/profile/css/cake.generic.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/profile/js/jquery_ui_1_5/themes/flora/flora.all.css" type="text/css" media="screen" title="Flora (Default)" />
+<link rel="stylesheet" href="/profile/css/pipeline.css" type="text/css" />
+
+<link rel="stylesheet" href="/profile/js/cluetip/jquery.cluetip.css" type="text/css" />
+<link rel="stylesheet" href="/profile/js/tooltips/css/sweetTitles.css" type="text/css" />
+<link rel="stylesheet" href="/css/css.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/profile/css/mlbuck.css" />
+
+<style type="text/css">
+	.section {
+		cursor: pointer;
+		font-weight: bold;
+		text-align: center;
+	}
+
+/* Fading Tooltips By Dustin Diaz*/
+body div#toolTip { position:absolute;z-index:1000;width:220px;background:#000;border:2px double #fff;text-align:left;padding:5px;min-height:1em;-moz-border-radius:5px; }
+body div#toolTip p { margin:0;padding:0;color:#fff;font:11px/12px verdana,arial,sans-serif; }
+body div#toolTip p em { display:block;margin-top:3px;color:#f60;font-style:normal;font-weight:bold; }
+body div#toolTip p em span { font-weight:bold;color:#fff; }
+</style>
+<link href="/profile/js/jcarousel/style.css" rel="stylesheet" type="text/css" />
+<!--
+  jQuery library
+-->
+<script type="text/javascript" src="/profile/js/jcarousel/lib/jquery-1.2.3.pack.js"></script>
+<!--
+  jCarousel library
+-->
+<script type="text/javascript" src="/profile/js/jcarousel/lib/jquery.jcarousel.pack.js"></script>
+<!--
+  jCarousel core stylesheet
+-->
+<link rel="stylesheet" type="text/css" href="/profile/js/jcarousel/lib/jquery.jcarousel.css" />
+<!--
+  jCarousel skin stylesheet
+-->
+<link rel="stylesheet" type="text/css" href="/profile/js/jcarousel/skins/tango/skin.css" />
+
+<!-- SORTING A TABLE -->
+<!--
+<script src=" print($html->url("/js/sortable.js")); ?>" type="text/javascript"></script>
+-->
+
+
+<script src="/profile/js/jquery/jquery.js" type="text/javascript"></script>
+<!--
+<script src="http://compbio.iupui.edu/script/jquery/motionpack.js" type="text/javascript"></script>
+<script src="http://compbio.iupui.edu/script/jquery/jqminmax.js" type="text/javascript" ></script>
+<script src="http://compbio.iupui.edu/script/jquery/jqaccordion.pack.js" type="text/javascript" ></script>
+<script src="http://compbio.iupui.edu/script/changeOpacity.js" type="text/javascript"></script>
+-->
+<script type="text/javascript" src="/profile/js/jquery_ui_1_5/ui/ui.core.js"></script>
+<script type="text/javascript" src="/profile/js/jquery_ui_1_5/ui/ui.tabs.js"></script>
+
+<script type="text/javascript" src="/profile/js/tooltips/js/addEvent.js"></script>
+<script type="text/javascript" src="/profile/js/tooltips/js/sweetTitles.js"></script>
+
+<script src="/profile/js/cluetip/jquery.dimensions.js" type="text/javascript"></script>
+<script src="/profile/js/cluetip/jquery.hoverIntent.js" type="text/javascript"></script> 
+<script src="/profile/js/cluetip/jquery.cluetip.js" type="text/javascript"></script>
+<script src="/profile/js/main.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+var sessionid = '';
+var proteinid = '';
+
+function showPopUp(sessid, protid) {
+	sessionid = sessid;
+	proteinid = protid;
+             var poplink = "/profile/SequenceDisplay.php?PROT="+proteinid;
+             popup = window.open(poplink,'popup','location=yes,menubar=no,scrollbars=yes,status=no,left=200, top=200,toolbar=no,width=500px, height=300px');
+	setSessionid(sessionid);
+ $KSESSIONID  = sessionid;
+
+}
+
+function setSessionid(sess)
+{	sessionid=sess;	}
+
+function getSessionid()
+{
+	if(sessionid != null) {
+	return sessionid;
+	document.writeln("Export data to excel");
+	
+	}
+}
+</script>
+
+
+</head>
+<body>
+<script type="text/javascript" src="/profile/js/wz_tooltip/wz_tooltip.js"></script>
+<div class="headerBG">    
+<table width="100%" height="103" border="0" cellpadding="0" cellspacing="0">
+   <tr><td></td></tr>
+   <tr>
+        <td width="142"  border="0"> <a border="0" href="http://www.buckinstitute.org/" title="the Buck Institute"><img  src="/profile/img/buckLogo.jpg" ></a>
+        </td>
+	<td width="179"><a href= "http://www.buckinstitute.org/mooneyLab" target="_blank" title="Mooney Lab Home Page"><img href="http://www.buckinstitute.org/TheScience/themooney" border="0" src="/profile/img/MooneyLabLogoSmall2.jpg" width="179" height="85" align="right"></a>
+        </td>
+        <td valign="bottom" border="0" align="right"><img align="right" src="/profile/img/InSilfpWithSpacer.jpg" alt="Mutation Feature Server" />  
+        </td>  
+    </tr>
+</table>
+</div>
+<div class="topNav">
+       <a href="http://www.buckinstitute.org/mooneyLab" title="Mooney Lab home page" target="_blank">Mooney Lab Home</a>
+       <a href="http://www.buckinstitute.org/mooneyPubs" title="Selected Lab's Publications" target="_blank">Publications</a>
+       <!-- <a href="http://www.buckinstitute.org/Labs/theMooney/researchFocus.asp" title="About the research at the Mooney Lab" target="_blank">Research</a> -->
+       <a cellpadding="0" cellspacing="0" href="/profile/contact" title="Contact us" target="_blank">Contact Us</a>
+</div>
+<!-- <div id="container">  -->
+<table class="basicLayout">
+ <tr>
+   <td>
+      <table cellspacing="0" border="0" cellpadding="0" style="height:auto;" width="100%">
+        <tr>
+         <td class="main" id="topdrop">	
+		<form method="post" action="/profile/webapps/input"><fieldset style="display:none;"><input type="hidden" name="_method" value="POST" /></fieldset>
+<div class="bodyText" style="text-align:justify">
+This tool provides functional profiling for mutation data to ascertain the underlying molecular feature(s) that amino acid substituting mutations disrupt.  Please see the <a href="/profile/about">about page</a> for more information about the method and citing use of the method.  If you would like to run very large datasets (hundreds or thousands of substitutions), contact <a href="mailto:smooney@buckinstitute.org">Sean Mooney</a>.
+</div>
+ 
+<div style="width:715px;" frame="box" class="boxLight"
+       <div class="inputAreaText">
+             <br><label> Wildtype AA sequence :</label>
+			(Enter a protein sequence using single letter amino acid symbols) <br><br>
+				<textarea name="data[Webapp][sequence]" rows="5" cols="80" id="WebappSequence" ></textarea>										<br />
+        </div>
+        <div class="inputAreaText">
+            <label>Mutations :</label>
+               (Enter the mutations seperated by a comma','. Example A120V,M1V,I369L) <br><br>
+				<input name="data[Webapp][mutations]" type="text" size="80" maxlength="3000" value="" id="WebappMutations" />								        </div>
+         <div class="inputText"><label>Email Address :</label> 
+		<input name="data[Webapp][email]" type="text" size="50" maxlength="50" value="" id="WebappEmail" />		        </div>
+        <div class="bodyText" style="font-size:12px;" >
+           <font color ="#CA010E"> * All fields are mandatory *</font>
+        </div>
+       <div class="submitButton">
+                  <div class="submit"><input type="submit" margin-left="0" align="left" value="  Submit  " /></div>        </div>
+</form>
+
+         </span>
+
+</form>
+</div>
+		
+	</td>
+       </tr>
+     </table>
+   </td>
+   <td width="189" valign="top" align="left">
+             <!-- This file includes all the links on the In Silico Functional Profiling web pages, and links to other Mooney lab web sites, and to external websites -->
+<table width="189" cellpadding="0" cellspacing="0" class="basicLayout">
+   <tr>
+      <td cellspacing="0"; cellpadding="0"; border="0" align="left" valign="top" width="189">
+         <div id="blueNavH"> 
+                  FUNCTIONAL PROFILING
+         </div>
+         <div class="blueNav"> <br>
+            <a href="/profile/input" title="In Silico Functional Profiling home page">Home</a>
+            <a href="/profile/about" title="About In Silico Functional Profiling">About Functional Profiling</a>
+            <a href="/profile/input" title="Send Protein and Mutation Data">Submit a Job</a>
+            <a href="/profile/result" title="View Results of Submitted Job">View Results</a>
+                                <br>
+         </div>
+     </td>
+   </tr> 
+   <tr>
+      <td align="left" valign="top" width="189">
+         <div id="blueNavH"> 
+             MOONEY LAB TOOLS 
+         </div>
+         <div class="blueNav"> <br>
+            <a target="_blank" href="http://mutdb.org/" title="MutDB - Annotation of SNPs">MutDB</a> 
+            <a target="_blank" href="http://mutdb.org/mutpred" title="Classification of disease-causing amino acid substitutions and prediction of the underlying molecular effects">MutPred</a>
+            <a target="_blank" href="http://profile.mutdb.org" title="Annotating the molecular effects of specific amino acid substitutions.">In Silico Functional Profiling</a>
+            <a target="_blank" href="http://www.phenopred.org" title="Machine learning tool for predicting disease causing genes">PhenoPred</a> 
+            <a target="_blank" href="http://sblest.org" title="The Structure Based Local Environment Search Tool">S-BLEST</a>
+            <a target="_blank" href="http://sblest.org/crp" title="The Catalytic Residue Predictor">CRP</a>
+            <a target="_blank" href="http://lifescienceweb.org/" title="Life Science Web Services">Web Services</a><br> 
+         </div>
+       </td> 
+  </tr>
+   <tr height="100">
+       <td align="left" valign="top" width="189">
+            <div id="blueNavH"> 
+                 OUTSIDE LINKS 
+            </div>
+            <div class="blueNav"><br>
+<a href="http://blocks.fhcrc.org/sift/SIFT.html" target="_blank">SIFT</a>
+<a href="http://genetics.bwh.harvard.edu/pph/" target="_blank">PolyPhen</a>
+<a href="http://alto.compbio.ucsf.edu/LS-SNP/" target="_blank">LS-SNP</a>
+<a href="http://snps3d.org/" target="_blank">SNPs3D</a>
+<a href="http://polydoms.cchmc.org/polydoms/" target="_blank">PolyDoms</a>
+<a href="http://www.pantherdb.org/tools/csnpScoreForm.jsp" target="_blank">Panther</a>
+<a href="http://mmb2.pcb.ub.es:8080/PMut/" target="_blank">PMut</a>
+<a href="http://cubic.bioc.columbia.edu/services/SNAP/" target="_blank">SNAP</a>
+<a href="http://snpeffect.vib.be/" target="_blank">SNPEffect</a>
+<a href="http://fastsnp.ibms.sinica.edu.tw/pages/input_CandidateGeneSearch.jsp" target="_blank">FASTSNP</a>
+<a href="http://bioinf.umbc.edu/dmdm/" target="_blank">DMDM</a>
+<br>
+            </div>
+       </td>
+   </tr>
+</table>
+   </td>
+   </tr>
+</table>
+
+</div>
+ <div class="footerText">
+	<br> 
+        &nbsp &nbsp &nbsp &nbsp &nbsp<a href="http://buckinstitute.org">Home</a>             
+        &nbsp &nbsp | &nbsp &nbsp <a href="http://buckinstitute.org/contact">Contact</a>                                       
+        &nbsp &nbsp | &nbsp &nbsp <a href="http://buckinstitute.org/sitemap">Site map</a>        
+        <br>
+        &nbsp &nbsp &nbsp &nbsp &nbsp<span>&copy; 2008 Buck Institute. All Rights Reserved </span>
+</div>
+
+</body>
+</html>

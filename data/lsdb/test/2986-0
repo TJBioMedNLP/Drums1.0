@@ -1,0 +1,98 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head><title>CorGen Input Form</title>
+</head><body>
+<link rel="shortcut icon" href="http://corgen.molgen.mpg.de/favicon.ico" >
+<link rel="stylesheet" href="http://corgen.molgen.mpg.de/style.css" type="text/css">
+<BODY LANG="en-US" DIR="LTR">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td bgcolor="FFFFFF" style="border-style: none none solid; border-color:  rgb(0, 0, 0); border-width: 1px; padding: 8px 0px 5px 20px">
+		<a style="text-decoration:none" href="http://corgen.molgen.mpg.de">
+		<font size=+3 > <b>CorGen </b></a> <font size=+0> measuring and generating long-range correlations for DNA sequence analysis
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#cce2c0" style="border-style: none none none; border-color:  rgb(0, 0, 0); border-width: 1px; padding: 4px 0px 2px 20px" >
+		<table border="0" cellpadding="0" cellspacing="0" width="600">
+			<tr>
+				<td>
+
+				<p align="justify">
+					 <b>Long-range correlations in DNA are characterized by a power-law decaying autocorrelation function of the sequence composition. Given a DNA sequence as input, CorGen can measure its composition correlation function and determine amplitude and decay exponent of present long-range correlations. The obtained parameters can then be used to generate random sequences with the same correlation parameters and average sequence composition as the query sequence. CorGen can also generate sequences with user specified long-range correlations and GC-content.</b>
+
+					</p>
+					
+      <br>
+      <br>
+			<tr>
+				<td><p style="padding: 15px 0px 2px 0px;">
+				If you want to measure the composition correlations of your DNA sequence, submit your data and specify the distance interval where a power-law should be fitted to the correlation function (<a href="http://corgen.molgen.mpg.de/cgi-bin/corgen.cgi?advancedanalysis=1">more options</a>)</li></ul>. Sample sequences can be found <a href="http://corgen.molgen.mpg.de/samples/index.html">here</a>:
+					</p>
+
+					
+				
+	<form action="http://corgen.molgen.mpg.de/cgi-bin/corgen.cgi" method="post" enctype="multipart/form-data">
+	<table cellpadding="0px" cellspacing="0" width="100%">
+		<tr>
+			<td width=150px>
+			<ul><li>Sequence data</ul> 
+			</td><td>
+			<input name="uploadfile" type="file">
+			</td>
+			<td></td>
+		</tr>
+		
+		<tr>
+			<td>
+			<ul><li>fitting range
+			</td><td>
+<select name="range">
+<option value="10-100">10-100</option>
+<option selected value="100-1000">100-1000</option>
+<option value="1000-10000">1000-10000</option>
+<option value="10000-100000">10000-100000</option>
+</select>
+			</td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td>
+				<input value="Analyse" type="submit">
+			</td>
+		</tr>
+		
+		<tr><td colspan=4><br><br>If a random sequence with the same long-range correlation parameters and sequence composition as the query sequence should be generated, specify its desired length (1000-10000000): 
+		<br></td></tr>
+
+		<tr>
+			<td>
+			<ul><li>length:</li></ul>
+			</td><td>
+
+			<input name="len" type="text" value="">
+			</td>
+			<td>&nbsp;&nbsp;</td>
+			<td>
+				<input value="Analyse &amp; Generate" type="submit">
+			</td>
+		</tr>
+    <tr><td colspan=4><br><br>If you want to generate a random sequence with user specified long-range correlations, go <a href="http://corgen.molgen.mpg.de/cgi-bin/corgen.cgi?advancedgeneration=1">here</a>.
+	</table>
+
+	</form>
+
+
+
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="FFFFFF" style="border-style: solid none none; border-color:  rgb(0, 0, 0); border-width: 1px; padding: 4px 3px 5px 10px">
+	<a href=mailto:philipp.messer@molgen.mpg.de>Philipp W. Messer</a> and Peter F. Arndt, 2006
+
+</table>
+</body>
+</body></html>

@@ -1,0 +1,96 @@
+<html>
+<head><title>INTREPID functional site Identification</title><LINK REL="stylesheet" HREF="/phylofacts/style.css" TYPE="text/css">
+<link href="/media/css/base_style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+p  { 
+	font-family: verdana, arial, helvetica; 
+	font-size:   10pt; 
+}
+
+.leftNav td { 
+	font-family: verdana, arial, helvetica; 
+	font-size:   9pt; 
+}
+
+</style>
+</head>
+
+<body>
+
+    <!-- print header for page -->
+   <center>
+     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+       <tr>
+         <td width="300" align="left" valign="top">
+           <a href="http://phylogenomics.berkeley.edu/"><img src="/media/icons/logo_bpg.png" width="300" height="120" border="0" /></a>
+         </td>
+         <td class="navtop" align="center">
+           <a class="navtoplink" href="http://phylogenomics.berkeley.edu/">Home</a> |
+           <a class="navtoplink" href="http://phylogenomics.berkeley.edu/phylofacts/">PhyloFacts</a> |
+           <a class="navtoplink" href="http://phylogenomics.berkeley.edu/tools.php">BPG Tools</a> |
+           <a class="navtoplink" href="http://phylogenomics.berkeley.edu/activesite/faq.html">FAQ</a> |
+           <a class="navtoplink" href="http://phylogenomics.berkeley.edu/activesite/help.html">Help</a>
+         </td>
+         <td width="300" align="right" valign="middle">
+           <a href="http://phylogenomics.berkeley.edu/INTREPID/"><img src="/media/icons/logo_intrepid.jpg" width="413" height="80" border="0" /></a>         </td>
+       </tr>
+     </table>
+   </center>
+   <br>
+
+<!--
+<center>
+<img src="/intrepid_alpha/intrepid-banner.jpg"></img>
+</center>
+-->
+<!--<table id="banner" width="100%" height="88" border="0" cellpadding="0"
+cellspacing="0" background="/ruchira/book/images/banner_background4.png"
+bgcolor="">
+<tr><td align="center" valign="top"><img
+src="/ruchira/book/images/banner_horse_transparent4.png" width="696"
+height="188" /></td>
+</tr></table> -->
+
+<br>
+<!--
+<center><FONT SIZE=5 align=center face="Geneva, Arial, Helvetica, sans-serif">
+<STRONG>INTREPID functional site Identification</STRONG></FONT></center>
+--><br>
+
+<center>
+INTREPID - INformation-theoretic TREe traversal for Protein functional site IDentification
+<br>
+Sankararaman and Sj&ouml;lander<a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/24/21/2445"> Bioinformatics 2008</a>
+<br>
+<a style="font-size: small;" href="http://phylogenomics.berkeley.edu/INTREPID/supplement.html">Supplementary Material</a>
+</center>
+
+<table>
+<tr>
+<td width=50>&nbsp</td>
+<td>
+<h3>About the method:</h3>
+<p style="text-align: justify;">
+INTREPID is an information-theoretic approach for functional site identification that exploits the information in large diverse multiple sequence alignments. INTREPID gathers homologs for a sequence using PSI-BLAST and estimates a phylogenetic tree. It then uses Jensen-Shannon divergence to measure the information for each position in the sequence at each subtree node encountered on a traversal of the phylogeny, tracing a path from the root to the leaf corresponding to the sequence of interest. Positions that are conserved across the entire family receive stronger scores than those that only become conserved within more closely related subgroups. This tree traversal produces a phylogenomic conservation score for each position in the MSA. INTREPID uses information from sequence only, and can thus be used when knowledge of structure is not available. More details can be found <a href="../activesite/details.html">here</a>.
+<!--The INTREPID server plots these conservation scores on homologous 3D structures, where available. -->
+</p>
+
+<p style="text-align: justify;">
+Clicking the button below will take you to the INTREPID Server input page, where you can input a
+FASTA-formatted protein sequence for analysis.
+</p>
+
+</td>
+<td width=50>&nbsp</td>
+</tr>
+</table>
+
+<br>
+<center>
+<button type="button" onClick="window.location='/cgi-bin/activesiteprediction/input_activesiteprediction.py'">INTREPID Server</button>
+</center>
+
+<!-- FIGURE: tree-msa plus structure with colored residues -->
+
+</body>
+</html>

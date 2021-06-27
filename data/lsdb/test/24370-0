@@ -1,0 +1,638 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja"
+      lang="ja">
+
+  
+    
+    
+    
+    
+    
+
+  
+
+  <head>
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=utf-8" />
+
+    <title>
+        CentroidAlign
+        &mdash;
+        ncRNA.org
+    </title>
+
+    
+      
+        <base href="http://www.ncrna.org/software/centroidalign/" />
+      
+    
+
+    <meta name="generator" content="Plone - http://plone.org" />
+
+    <meta content="CentroidAlign is an accurate and fast aligner for multiple RNA sequences, based on maximizing the expected sum-of-pair score (SPS)"
+          name="description" />
+
+    <!-- Plone ECMAScripts -->
+    
+      
+        
+            
+                <script type="text/javascript"
+                        src="http://www.ncrna.org/portal_javascripts/Plone%20Default/ploneScripts9595.js">
+                </script>
+                
+            
+        
+    
+    
+
+    
+	
+          
+        
+            
+                
+                    
+                    
+                        <style type="text/css"><!-- @import url(http://www.ncrna.org/portal_css/Plone%20Default/ploneStyles2402.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="http://www.ncrna.org/portal_css/Plone%20Default/ploneStyles3908.css"
+                          title="Small Text" />
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="http://www.ncrna.org/portal_css/Plone%20Default/ploneStyles4910.css"
+                          title="Large Text" />
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css" media="all"><!-- @import url(http://www.ncrna.org/portal_css/Plone%20Default/ploneStyles5971.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css" media="all"><!-- @import url(http://www.ncrna.org/portal_css/Plone%20Default/ploneStyles2468.css); --></style>
+                    
+                    
+                
+            
+        
+    
+        
+        
+    
+
+    <!-- Internet Explorer CSS Fixes -->
+    <!--[if IE]>
+        <style type="text/css" media="all">@import url(http://www.ncrna.org/IEFixes.css);</style>
+    <![endif]-->
+
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://www.ncrna.org/favicon.ico" />
+
+    <link rel="home" href="http://www.ncrna.org"
+          title="Front page" />
+    <link rel="search"
+          href="http://www.ncrna.org/search_form"
+          title="Search this site" />
+    <link rel="author"
+          href="http://www.ncrna.org/author/mhamada"
+          title="Author information" />
+    <link rel="contents" href="http://www.ncrna.org/sitemap"
+          title="Site Map" />
+
+    
+
+    
+
+    <link rel="up" href="http://www.ncrna.org/software"
+          title="Up one level" />
+
+    
+
+    <!-- Disable IE6 image toolbar -->
+    <meta http-equiv="imagetoolbar" content="no" />
+    
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+  </head>
+
+  <body class="section-software" dir="ltr">
+    <div id="visual-portal-wrapper">
+
+      <div id="portal-top">
+
+        <div id="portal-header">
+          <p class="hiddenStructure">
+            <a accesskey="2"
+               href="http://www.ncrna.org/software/centroidalign/#documentContent">Skip to content.</a> |
+
+            <a accesskey="6"
+               href="http://www.ncrna.org/software/centroidalign/#portlet-navigation-tree">Skip to navigation</a>
+          </p>
+
+             <ul id="portal-siteactions">
+
+    <li id="siteaction-sitemap"><a
+    href="http://www.ncrna.org/sitemap" accesskey="3"
+    title="Site Map">Site Map</a></li>
+    <li id="siteaction-accessibility"><a
+    href="http://www.ncrna.org/accessibility-info"
+    accesskey="0" title="Accessibility">Accessibility</a></li>
+    <li id="siteaction-contact"><a
+    href="http://www.ncrna.org/contact-info" accesskey="9"
+    title="Contact">Contact</a></li>
+
+</ul>
+
+             <div id="portal-searchbox">
+    <form name="searchform"
+          action="http://www.ncrna.org/sitesearch"
+          style="white-space:nowrap"
+          onsubmit="return liveSearchSubmit()">
+
+        <label for="searchGadget" class="hiddenStructure">Search Site</label>
+
+        <div class="LSBox">
+        <input id="searchGadget" name="SearchableText"
+               type="text" size="15" title="Search Site"
+               accesskey="4" class="visibility:visible" />
+
+        <input class="searchButton" type="submit"
+               value="Search" />
+
+        <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
+        </div>
+    </form>
+
+    <div id="portal-advanced-search" class="hiddenStructure">
+        <a href="http://www.ncrna.org/search_form"
+           accesskey="5">
+            Advanced Search&hellip;
+        </a>
+    </div>
+
+</div>
+
+             <h1 id="portal-logo">
+    <a href="http://www.ncrna.org" accesskey="1">ncRNA.org</a>
+</h1>
+
+             <div id="portal-skinswitcher">
+  
+</div>
+
+             
+          </div>
+
+          <div id="portal-personaltools-wrapper">
+
+<h5 class="hiddenStructure">Personal tools</h5>
+
+<ul id="portal-personaltools">
+   
+
+    
+        <li>
+            <a href="http://www.ncrna.org/login_form">
+               Log in
+            </a>
+        </li>
+    
+
+</ul>
+</div>
+
+           <div id="portal-breadcrumbs">
+
+    <span id="breadcrumbs-you-are-here">You
+are here:</span>
+    <a href="http://www.ncrna.org">Home</a>
+    <span class="breadcrumbSeparator">
+        &rarr;
+        
+    </span>
+    <span dir="ltr">
+        
+            <a href="http://www.ncrna.org/software">Bioinformatcs Tools for RNAs</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            
+            
+            <span>CentroidAlign</span>
+         
+    </span>
+
+</div>
+      </div>
+
+      <div class="visualClear" id="clear-space-before-wrapper-table"><!-- --></div>
+
+      
+
+      <table id="portal-columns">
+        <tbody>
+          <tr>
+            
+            <td id="portal-column-one">
+              <div class="visualPadding">
+                
+                  
+
+    
+        
+
+        
+            
+
+<dl class="portlet" id="portlet-navigation-tree">
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="http://www.ncrna.org/software/centroidalign/sitemap"
+           class="tile">Navigation</a>
+       
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem lastItem">
+        <ul class="portletNavigationTree navTreeLevel0">
+
+            <li class="navTreeItem">
+                
+                   <div class="visualIcon contenttype-folder">
+                       <a class="navTreeCurrentItem visualIconPadding"
+                          href="http://www.ncrna.org/software/centroidalign"
+                          title="ncRNA.org aims to be a potal site offering comprehensive knowledgebase of ncRNAs and bioinformatics tools for RNA sequence analysis.
+">
+                       
+                       CentroidAlign
+                       </a>
+                   </div>
+                
+            </li>
+            
+
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://www.ncrna.org/software/centroidalign/download"
+           class="state-published visualIconPadding"
+           title="">Download</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-document">
+        
+        <a href="http://www.ncrna.org/software/centroidalign/reference"
+           class="state-published visualIconPadding"
+           title="">Reference</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+        </ul>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+
+
+        
+
+        
+
+        
+    
+
+                
+                &nbsp;
+              </div>
+            </td>
+            
+
+            
+            <td id="portal-column-content">
+
+              
+                <div id="content" class="">
+
+                  
+
+                  <div class="documentContent" id="region-content">
+
+                    <a name="documentContent"></a>
+
+                    
+
+    
+
+
+
+                    
+
+                    <div>
+    
+
+        <div class="documentActions">
+    
+
+    <h5 class="hiddenStructure">Document Actions</h5>
+
+    <ul>
+    
+        <li>
+            <a href="http://www.ncrna.org/software/centroidalign/sendto_form">
+
+                <img src="http://www.ncrna.org/mail_icon.gif"
+                     alt="Send this page to somebody"
+                     title="Send this page to somebody"
+                     id="icon-sendto" />
+            </a>
+        </li>
+    
+    
+        <li>
+            <a href="javascript:this.print();">
+
+                <img src="http://www.ncrna.org/print_icon.gif"
+                     alt="Print this page"
+                     title="Print this page" id="icon-print" />
+            </a>
+        </li>
+    
+
+    </ul>
+    
+
+    
+
+</div>
+
+        <h1 class="documentFirstHeading">CentroidAlign</h1>
+
+        <a href="http://www.ncrna.org/software"
+           class="link-parent">
+        Up one level
+        </a>
+
+        <p class="documentDescription">CentroidAlign is an accurate and fast aligner for multiple RNA sequences, based on maximizing the expected sum-of-pair score (SPS)</p>
+
+        
+        
+        
+
+            <dl>
+                
+                
+
+                    <dt class="">
+
+                        <span
+    class="visualIcon contenttype-folder summary">
+                        <a href="http://www.ncrna.org/software/centroidalign/download/"
+                           class="state-published visualIconPadding url">Download</a>
+                        </span>
+
+                        
+
+                        <span class="documentByLine">
+
+                            
+
+                            
+                        </span>
+
+                    </dt>
+
+                    <dd>
+                         
+                            &nbsp; 
+                         
+                        <span class="description"></span> 
+                    </dd>
+                
+                
+                
+                
+
+                    <dt class="">
+
+                        <span
+    class="visualIcon contenttype-document summary">
+                        <a href="http://www.ncrna.org/software/centroidalign/reference/"
+                           class="state-published visualIconPadding url">Reference</a>
+                        </span>
+
+                        
+
+                        <span class="documentByLine">
+
+                            
+
+                            
+                        </span>
+
+                    </dt>
+
+                    <dd>
+                         
+                            &nbsp; 
+                         
+                        <span class="description"></span> 
+                    </dd>
+                
+                
+            </dl>
+        
+        
+            
+        
+
+        
+        
+    
+    </div>
+
+                    
+                      
+                 
+    
+        
+    
+
+                    
+
+                  </div>
+
+                </div>
+
+              
+            </td>
+            
+
+            
+            
+            
+          </tr>
+        </tbody>
+      </table>
+      
+
+      <div class="visualClear" id="clear-space-before-footer"><!-- --></div>
+
+
+      <hr class="netscape4" />
+
+      
+
+        <div id="portal-footer" align="center">
+  ncRNA.org is provided by
+ <a href="http://www.cbrc.jp/" target="_blank">Computational Biology Research Center (CBRC)</a>,<br />
+ a division of
+ <a href="http://www.aist.go.jp/" target="_blank">National Institute of Advanced Industrial Science and Technology (AIST)</a>
+ <a href="http://www.aist.go.jp/" target="_blank"><img src="aist-banner.png"></a>
+<!--
+<span style="font-family: courier; 
+             border: 1px solid black; 
+             background-color: #dee7ec;
+             padding: 0px 4px;"
+      tal:define="count python:here.mxm_counter.count(here)"
+      tal:content="python:'%06i' % count">
+0000001
+</span>
+-->
+
+</div>
+
+        <div id="portal-colophon">
+      
+
+      <a href="http://plone.org"
+         class="colophonIcon colophonIconPlone"
+         title="This Plone site was built using Plone CMS, the Open Source Content Management System. Click for more information.">
+        Powered by Plone CMS, the Open Source Content Management System
+      </a>
+
+      
+
+      <p class="discreet">
+        This site conforms to the following standards:
+      </p>
+
+      <div class="colophonWrapper">
+      <ul>
+    <li>
+      <a href="http://www.section508.gov"
+         class="colophonIcon colophonIcon508"
+         title="This Plone site conforms to the US Government Section 508 Accessibility Guidelines.">
+        Section 508
+      </a>
+    </li>
+    <li>
+      <a href="http://www.w3.org/WAI/WCAG1AA-Conformance"
+         class="colophonIcon colophonIconWAI"
+         title="This Plone site conforms to the W3C-WAI Web Content Accessibility Guidelines.">
+        WCAG
+      </a>
+    </li>
+    <li>
+      <a href="http://validator.w3.org/check/referer"
+         class="colophonIcon colophonIconXHTML"
+         title="This Plone site is valid XHTML.">
+        Valid XHTML
+      </a>
+    </li>
+    <li>
+      <a href="http://jigsaw.w3.org/css-validator/check/referer&amp;warning=no&amp;profile=css3&amp;usermedium=all"
+         class="colophonIcon colophonIconCSS"
+         title="This Plone site was built with valid CSS.">
+        Valid CSS
+      </a>
+    </li>
+    <li>
+      <a href="http://plone.org/browsersupport"
+         class="colophonIcon colophonIconAnyBrowser"
+         title="This Plone site is usable in any web browser.">
+        Usable in any browser
+      </a>
+    </li>
+      </ul>
+      </div>
+
+    </div>
+      
+
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>PANAV</TITLE>
+<script language="JavaScript">
+<!--
+ 
+function displayHelp() {
+  window.location="panav_help.html";
+}
+ 
+//-->
+</script>                                                                       </HEAD>
+
+<BODY BGCOLOR="white">
+
+<CENTER><IMG SRC = "./images/Bian16.jpg" WIDTH=350 HEIGHT=350>
+        <br></br><font size="6">PANAV</font><br>
+        "(Probabilistic Approach to NMR Assignment and Validation)"<br><br>
+        <IMG SRC = "./images/blueline.gif">
+</CENTER>
+
+
+<TABLE WIDTH=620 BORDER=0 ALIGN=center>
+  <TR><TD>
+    PANAV is a Java based structure-independent chemical shift validation and re-referencing tool. It is based on using residue-specific and secondary structure-specific chemical shift distributions calculated over small (3-6 residue) fragments to identify mis-assigned resonances. The method is also able to identify and re-reference mis-referenced chemical shift assignments. Comparisons against existing re-referencing or mis-assignment detection programs show that the method is as good or superior to existing approaches.
+ &nbsp;Click <a href="/download/PANAV.zip">here</a> to download a standalone version of the PANAV application. 
+ <p>
+ Please cite the following: Bowei Wang, Yunjun Wang and David S. Wishart. <i>"A probabilistic approach for validating protein NMR chemical shift assignments".</i><u> Journal of Biomolecular NMR.</u> Volume 47, Number 2 / June 2010: 85-99.
+ </p> </TD></TR>
+</TABLE> 
+
+<CENTER><IMG SRC = "./images/blueline.gif"></CENTER>
+<br>
+<FORM>
+  <TABLE WIDTH=620 BORDER=0 ALIGN=center>
+    <TR><TD>
+To operate this server: <br>
+1) Input a file that is in BMRB, SHIFTX, or SHIFTY format;<br>
+2) Press the submit button.<br>
+
+    </TD></TR>
+  </TABLE> 
+</FORM>
+
+<FORM ACTION = "/PANAV/servlet/web.callPanav" METHOD = "POST" ENCTYPE="multipart/form-data">
+
+  <TABLE WIDTH=620 BORDER=0 ALIGN=center>
+
+    <TR><TD>Input File:  
+      <INPUT TYPE="file" NAME="file" VALUE="" SIZE="37">
+      
+      <ul>
+      <li>Example 1:  <a href="./examples/bmr10002.str" target='example'>Input BMRB File (.str)</a> ||  <a href="./examples/bmr10002.htm" target='example'>Expected Output</a></li>
+      <li>Example 2:  <a href="./examples/2TRX_shiftX_table.txt" target='example'>Input ShiftX File (.txt)</a> ||  <a href="./examples/2TRX_shiftX_table.htm" target='example'>Expected Output</a></li>
+      <li>Example 3:  <a href="./examples/4790_shifty.txt" target='example'>Input ShiftY File (.txt)</a> ||  <a href="./examples/4790_shifty.htm" target='example'>Expected Output</a></li>
+      </ul>
+      
+      <INPUT TYPE="submit" VALUE="Submit">&nbsp;<font color='red'>*Please note that a submission may take up to 15 - 80 secs to process.</font>
+    </TD></TR>
+
+
+  </TABLE>
+
+</FORM>
+
+<CENTER><IMG SRC = "./images/blueline.gif"><BR><BR></CENTER>	
+
+<TABLE WIDTH=620 BORDER=0 ALIGN=center cellspacing=1>
+  <TR><TD ALIGN=center>Problems?  Questions?  Suggestions?
+    Please contact
+    <A HREF="mailto:info@gchelpdesk.ualberta.ca">
+    Canadian Bioinformatics Help Desk</A><!-- or
+    <A HREF=mailto:"dsw@redpoll.pharmacy.ualberta.ca">
+    David Wishart</A> -->
+<br>
+<!---  See   http://www.ualberta.ca/GEO/Counter.html  for details.  Added by savita-->
+<font style="font-family: helvetica,arial,sans-serif;" size="-1">This page has been viewed  <img src="http://www.ualberta.ca/htbin/Geo-counter.gif?ualberta-reg-ny1-100511-panav.gif&font:Small-black"> times since 11/05/2010. See the 
+  <a href="http://www.ualberta.ca/htbin/Geo-counter.gif?ualberta-reg-ny1-100511-panav.gif&20">
+   last 20 users</a></font>
+
+  </TD></TR>
+
+</TABLE>
+
+</BODY>
+</HTML>

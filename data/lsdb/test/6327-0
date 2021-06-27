@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>PROSIT: Online tool for pseudorotational analysis for nucleosides</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta name="robots" content="index,follow">
+	<link rel="stylesheet" href="style/cactus.css" type="text/css" media="screen,projection,print" />
+</head>
+
+<body>
+
+<div class="topBorder">
+	
+<div class="headerBorder">
+
+<div class="pageHeader">
+
+	<div class="url" id="homeUrl" >
+<a href="http://cactus.nci.nih.gov/index.html">Home</a> |
+<a href="/ncicadd/about.html">About</a> | <a href="/ncicadd/contact.html">Contact</a> | 
+<a href="/ncicadd/disclaimer.html">Disclaimer</a> | <a href="/ncicadd/privacy.html">Privacy</a>
+</div>
+
+<div id="headerLogo">
+	<a title="http://www.cancer.gov" href="http://www.cancer.gov"><img alt="ncilogo" src="image/nci_logo2.gif" width="110" height="72" /></a>
+	<p id="headerLogoText">NCI/CADD Group</p>
+</div>
+	
+	<div class="h1Border">
+	<h1 id="pageTitle"><em>PROSIT: </em>Pseudo-Rotational Online Service and Interactive Tool</h1>
+	</div>
+	<div class="disclaimer" id="disclaimerPrivacyContainer">
+		<p><A HREF="index.html#1">Form</a> | <a href="prosit_help.html">Help</a> | 
+		<a href="/pseudo-visual/">Visualization</a> |
+		<a href="index.html#2">Links</a> | <a href="index.html#3">Author</a> </p>
+	</div>
+	
+</div>
+
+</div>
+
+<img src="pseudo_icon.gif" align=right alt="PROSIT icon" >
+
+<div class="pageContent">
+
+	<div class="h2Border">
+	<h2>Description</h2>
+	</div>
+	
+	<div class="runningText" >
+		<p class="runningText">This tool calculates the pseudorotational phase angle and 
+		puckering amplitude for nucleosides/nucleotides.</p>
+	</div>
+
+	<div class="h2Border">
+	<h2><a name="1">File Submission Form</a></h2>
+	</div>
+	
+	<div class="runningText" >
+		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+ <HEAD>
+  <TITLE>File Submission Form</TITLE>
+ </HEAD>
+
+ <BODY
+  BGCOLOR="#FFFFFF"
+  TEXT="#000000"
+  LINK="#0000FF"
+  VLINK="#000080"
+  ALINK="#FF0000"
+  margin-top : 20px
+  margin-left: 020px
+  margin-right: 020px
+ >
+
+
+<FORM METHOD=POST ACTION="/cgi-bin/prosit1.tcl" ENCTYPE="multipart/form-data">
+
+<table CELLSPACING=3 CELLPADDING=05 COLS=1 WIDTH="660px" align=center NOSAVE >
+<tr BGCOLOR="#ACC6D3"><td WIDTH="140px" align=right>Input File <BR></td><td colspan="2">
+ <INPUT TYPE="file" NAME="filename" SIZE=50><BR><Font size=-1>
+(All major file formats, including PDB, SDF, MOL, XYZ ..., are supported. The file may contain one molecule, several molecules, a DNA/RNA oligonucleotide or DNA/RNA complexed with a protein.)</Font>
+</td></tr>
+
+<tr BGCOLOR="#ACC6D3"><td WIDTH="18%" align=right>Type of Structure <BR></td>
+<td colspan="2" valign=top>
+<DL>
+  <DT><input type="radio" name="struct_type" value="molecule" >Molecule/Molecular Complex (sample <a href="mole_sample.sd">SD file</a> and <a href="mole_result.html">result</a>)<BR><BR></DT>
+  <DT> Or DNA/RNA Strands (sample <a href="dna_BDLB84.pdb">PDB file</a> and  <a href="protein_result.html">result</a>)
+  <DD><input type="radio" name="struct_type" value="dna_single" >Single Strand <BR>
+  <DT>
+  <DD><input type="radio" name="struct_type" value="dna_double" >Double Strand <BR>
+  <DT>
+  <DD><input type="radio" name="struct_type" value="dna_autodetect" checked>Auto Detect 
+  <DT>
+</DL>
+
+</td></tr>
+
+<tr BGCOLOR="#ACC6D3"><td WIDTH="18%" align=right>Graphic Display </td><td colspan="2">
+<input type="radio" value="no_display" name="pic_option" checked>None<BR>
+<input type="radio" value="2d_display" name="pic_option">2D display (GIF)<BR>
+<input type="radio" value="3d_display" name="pic_option">3D display <Font size=-1>(requires <a href="http://www.mdlchime.com/">Chime plug-in</a>, works in Netscape only)</Font><BR>
+</td></tr>
+
+<tr BGCOLOR="#ACC6D3"><td WIDTH="18%" align=right>Output Options <BR></td>
+<td colspan="2">
+<input type="hidden" name="print_atom1" value="no" >
+<input type="checkbox" name="print_atom1" value="yes" checked>Print atom 1' of the sugar.<BR>
+<input type="hidden" name="printv0v4" value="no">
+<input type="checkbox" name="printv0v4" value="yes" checked>Print the values of &nu;<sub>0</sub>-&nu;<sub>4</sub>.<BR>
+<input type="hidden" name="print_dlsugar" value="no" >
+<input type="checkbox" name="print_dlsugar" value="yes" >Print alpha- or beta-type of nucleoside.<BR>
+<input type="hidden" name="print_pucker" value="no" >
+<input type="checkbox" name="print_pucker" value="yes" checked>Print sugar pucker (e.g. C2'-endo).<BR>
+<input type="hidden" name="print_debug" value="no" >
+<input type="checkbox" name="print_debug" value="yes" >Debug Mode (will print a lot of messages).
+</td></tr>
+
+<tr BGCOLOR="#ACC6D3"><td WIDTH="18%" align=right>     <BR></td>
+<td colspan="2">
+<input type="hidden" name="sugar_gen" value="no">
+<input type="checkbox" name="sugar_gen" value="yes" >Find all sugar moieties, regardless of the base.<BR>
+</td></tr>
+
+<tr BGCOLOR="#ACC6D3"><td WIDTH="18%"> <BR></td>
+<td colspan="2"><INPUT TYPE="submit" Name="Submit" VALUE="Submit">
+</td></tr>
+</table>
+</FORM>
+  
+</BODY>
+</HTML>
+
+	</div>
+	
+	<div class="h2Border">
+	<h2><a name="2">Links</a></h2>
+	</div>
+	
+	<div class="runningText" >
+		<p class="runningText">We find ourselves frequenting these websites:
+		<ul><li><A HREF="http://www.rcsb.org/pdb/">RCSB Protein Data Bank (PDB)</a>
+			<li><A HREF="http://ndbserver.rutgers.edu/">Nucleic Acid Database (NDB)</a>
+		</ul></p>
+	</div>
+
+	
+	<p class="spacer"> </p>
+
+	<div class="runningText">
+		<em><a href="http://cactus.nci.nih.gov/ncicadd/contact.html" target="_blank">Bug reports, comments or questions?</a></em>
+		
+		<p>Last Update: 2011-01-15</p>
+	</div>
+	
+</div>
+
+<div class="footer">
+	<p class="spacer"> </p>
+
+<table>
+<tr>
+	<td><a id="ccrLogo" title="http://ccr.cancer.gov" href="http://ccr.cancer.gov"><img id="ccrImage" alt="ccrlogo" src="image/small_ccr_logo.gif" width="36" height="38" /></a></td>
+	<td><p class="logoText" id="ccrLogoText">Center for Cancer<br />Research</p></td>
+	
+	<td><a id="nciLogo" title="http://www.cancer.gov" href="http://nci.nih.gov"><img alt="nciLogo" src="image/small_nci_red.gif" width="56" height="35" /></a></td>
+	<td><p class="logoText" id="nciLogoText">National Cancer<br />Institute</p></td>
+	
+	<td><a id="nihLogo" title="http://www.nih.gov" href="http://www.nih.gov"><img alt="nihLogo" src="image/small_nih.gif" width="52" height="42" /></a></td>
+	<td><p class="logoText" id="nihLogoText">National Institutes<br />of Health</p></td>
+	
+	<td><a id="dhsLogo" title="http://www.hhs.gov" href="http://www.hhs.gov"><img alt="dhsLogo" src="image/small_dhs.gif" width="52" height="42" /></a></td>
+	<td><p class="logoText" id="dhsLogoText">Department of Health<br />and Human Services</p></td>
+	
+	<td><a id="usaGovLogo"  title="http://www.usa.gov" href="http://www.usa.gov"><img alt="usaGovLogo" src="image/small_usa_gov.gif" width="135" height="37" /></a></td>
+</tr>
+</table>
+
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://cactus.nci.nih.gov/piwik/" : "http://cactus.nci.nih.gov/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://cactus.nci.nih.gov/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Tag -->
+
+</div>
+
+</div>
+
+</body></html>

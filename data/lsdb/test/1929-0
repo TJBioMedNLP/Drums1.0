@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+
+<html>
+	<head>
+
+		<meta name="author" content="Jerome Lane" >
+		<meta name="keywords" content="IMGT, immunogenetics, information system, bioinformatics, immunoglobulin, IG, T cell receptor, TR, MHC, RPI, immune system, BLAST" >
+		<meta name="description" content="IMGT/LIGMotif" >
+		
+		<meta http-equiv="refresh" content="18000;url=LIGMotifWelcome.jsp">
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+		<meta http-equiv="cache-control" content="private">
+		<meta http-equiv="cache-control" content="max-age=3600">
+
+		<title>IMGT/LIGMotif - Request</title>
+		<link rel="stylesheet" type="text/css" href="css/global.css" >
+		<link rel="stylesheet" type="text/css" href="css/styleFoot.css" >
+		<link rel="stylesheet" type="text/css" href="css/VQUEST.css" >
+		
+		<script src="js/waitingFor.js" type="text/javascript" language="javascript"></script>
+		<script src="js/vquest.js" type="text/javascript" language="javascript"></script>
+		
+		<script type="text/javascript" language="javascript">
+
+			var maintenant = null ;
+			var Start = null ;
+
+			function affiche_heure( ) {
+
+				if( Start == null ) {
+					maintenant = new Date( ) ;
+					Start = maintenant.getTime( ) ;
+				}
+			
+				var secondes_abs = Math.round( calcul_temps( ) );
+				var secondes_rel = secondes_abs % 60 ;
+				
+				var minutes = ( secondes_abs - 30 ) / 60 ;
+				var minutes_Round = Math.round( minutes ) ;
+				var minutes_abs = Math.abs( minutes_Round );
+				var minutes_rel = minutes_abs % 60 ;
+				
+				var heures = ( minutes_abs - 30 ) / 60 ;
+				var heures_Round =  Math.round( heures )  ;  
+				var heures_abs = Math.abs( heures_Round );
+				
+				var nombre_secondes = "" + ( ( secondes_rel > 9 ) ? secondes_rel : "0" + secondes_rel );
+				var nombre_minutes = "" + ( ( minutes_abs > 9 ) ? minutes_rel : "0" + minutes_rel );
+				var nombre_heures = "" + ( ( heures_abs > 9 ) ? heures_abs : "0" + heures_abs );
+				
+				window.document.affiche.temps.value = nombre_heures + ":" + nombre_minutes + ":" + nombre_secondes;
+				window.setTimeout('affiche_heure( )',1000);
+			}
+			
+			function calcul_temps( ) {
+				var encore_toujours = new Date( ) ;
+				return( ( encore_toujours.getTime( ) - Start ) / 1000) ;
+			}
+
+		</script>
+		
+	</head>
+	<body onload="show();">	
+	
+		<div id="displayAfterSubmit" style="display:none;">
+			<div >
+	<center>
+		<table style="width: 750px;vertical-align: middle;" border="1">
+			<tr>
+				<th >
+					<h1>Your job is currently running...</h1>
+					<br>  
+					<img src="img/waitingFor.gif" alt="Work In Progress..." >
+					<h2> Work In Progress... </h2> 
+
+
+				</th>
+			</tr>
+			<tr>
+				<td >
+					<ul>
+						<li>Few minutes are required for sequences longer than 1000 nucleotides.</li>
+						<li>Running time also depends on the gene type.</li>
+					</ul>
+											
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<center>
+						<form name="affiche" action="">
+							<b>Running time : </b><input size="7" name="temps" value="00:00:00">
+						</form>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</center>
+</div>
+
+
+		</div>
+
+		<div id="displayBeforeSubmit">
+			
+<table style="width: 100;" >
+	<tr>
+		<td ALIGN="LEFT" NOWRAP WIDTH="70">
+			<b>
+				<font color="#000099" size=6>
+				THANK YOU <br>
+				for using <a href="Ligmotif_doc.jsp" >IMGT/LIGMotif</a>
+				</font>
+			</b>
+			<p>
+			<font color="#000099">
+				THE <br>
+				INTERNATIONAL <br>
+				IMMUNOGENETICS <br>
+				INFORMATION SYSTEM&reg;
+			</font>
+			</p>
+		</td>
+		
+		<td style="text-align: right" valign=top width="30">
+			<img src="img/logoIMGT.png" alt="WELCOME !" ><br>
+			<font color="#000099" size=4>http://www.imgt.org</font>
+		</td>
+		
+	</tr>
+</table>
+<hr size=2>
+
+
+
+
+
+			<h1>Analyse your Immunoglobulin and T cell Receptor genomic sequences</h1>
+			<hr>
+			
+			<center>
+			
+				<table class="reference">
+				    <tbody>
+						<tr>
+							<td>
+								<center>
+								<b>Citing IMGT/LIGMotif</b>: Lane L., Duroux P. and Lefranc M.-P. BMC Bioinformatics, 11:223 (2010).<a href="http://www.biomedcentral.com/1471-2105/11/223" target="_blank"><img src="img/pdficon.png" alt="clic to download pdf" border="0"></a>
+								</center>
+							</td>
+					    </tr>
+					</tbody>
+				</table>
+			
+				<p>Current version: 4.0.2 (4th February 2011)</p>
+				
+			</center>
+				<table class="index" >
+				    <tbody>
+					    <tr>
+					    
+						    <td height="24">
+						   
+						    	<center>
+						    	 <p>
+								     <i>
+									     	IMGT/LIGMotif is an IMGT&#174; research tool for the annotation of genomic
+									     	sequences of immunoglobulin (IG) and T cell receptor (TR) loci by IMGT&#174;
+									     	biocurators.
+									   </i>
+								 </p>
+								 <p>
+									   <i>
+									     	Be aware that results require interpretation and basic knowledge in immunogenetics
+									     	as data may be incomplete and/or may provide several solutions.
+							     	 </i>
+							      </p>
+							      <p>
+									   <i>
+									     	We recommend using Firefox for a better use of IMGT/LIGMotif.
+							     	 </i>
+							      </p>
+						     	</center>
+							</td>
+						
+					    </tr>
+					</tbody>
+				</table>
+			
+			
+			
+			<fieldset class="IFfieldset8">	
+				<legend class="legendfont">IMGT/LIGMotif - Nucleotide Query</legend>
+
+						
+<form id="ligmotifWelcome" name="ligmotifWelcome" onsubmit="doBeforeSubmit( this.id );; return true;" action="/ligmotif/ligmotifWelcome.action;jsessionid=325AEC11F15C9CC3540981CB2D800BEE" method="post" enctype="multipart/form-data"><table class="wwFormTable">	
+					<tr>
+						<td>
+							<p><i>Paste a single nucleotide sequence or several sequences in the selected format into the field below: </i></p>
+							<textarea name="sequence" ></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p><i>Submit a file in the selected format directly from your local disk:</i><br>
+							<input type="file" name="file"></p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p><i>Select an input file format:</i>
+							<select name="fileformat">
+								<option selected>fasta</option>
+								<option>embl</option>
+							</select>
+							</p>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+						<fieldset class="IFfieldset7">		
+							<legend class="legendfont">BLAST databases</legend>
+								
+								<table id = "blastdb" >
+		
+									<tr>
+										<td>
+											<i>Gene type (gDNA):</i>
+										</td>
+										<td>
+											<i>Functionality:</i>
+										</td>
+										<td colspan="2">
+											<i>Locus:</i>
+										</td>
+										<td>
+											<i>Organism:</i>
+										</td>
+	
+									</tr>
+		
+									<tr>
+										<td>
+											<input align="right" type="checkbox" value="V" name="V" checked > V <br>
+											<input align="right" type="checkbox" value="D" name="D" > D <br>
+											<input align="right" type="checkbox" value="J" name="J" > J <br>
+	<!--										<input align="right" type="checkbox" value="C" name="C" > C <br>-->
+										</td>
+										<td>
+											<input align="right" type="checkbox" value="F" name="F" checked > F <br>
+											<input align="right" type="checkbox" value="P" name="P" > P <br>
+											<input align="right" type="checkbox" value="ORF" name="ORF"> ORF <br>
+										</td>
+										<td>
+											<input align="right" type="checkbox" value="IGH" name="IGH" checked > IGH <br>
+											<input align="right" type="checkbox" value="IGK" name="IGK" > IGK <br>
+											<input align="right" type="checkbox" value="IGL" name="IGL" > IGL <br>
+										</td>
+										<td>
+											<input align="right" type="checkbox" value="TRA" name="TRA" > TRA <br>
+											<input align="right" type="checkbox" value="TRB" name="TRB" > TRB <br>
+											<input align="right" type="checkbox" value="TRG" name="TRG" > TRG <br>
+											<input align="right" type="checkbox" value="TRD" name="TRD" > TRD <br>
+										</td>
+										<td>
+											<input align="right" type="checkbox" value="Homo" name="Homo" checked > Human <br>
+											<input align="right" type="checkbox" value="Mus" name="Mus" > Mouse <br>
+											<input align="right" type="checkbox" value="Rat" name="Rat" > Rat <br>
+	<!--										<input align="right" type="checkbox" value="Bos" name="Bos" > Cow <br>-->
+	<!--										<input align="right" type="checkbox" value="Canis" name="Canis" > Dog <br>-->
+										</td>
+	<!--									<td>-->
+	<!--										<input align="right" type="checkbox" value="clan" name="clan" > all clans <br>-->
+	<!--									</td>-->
+									</tr>
+									
+	<!--								<tr>-->
+	<!--									<td>-->
+	<!--										<i>cDNA:</i>-->
+	<!--									</td>-->
+	<!--									-->
+	<!--								</tr>-->
+									
+	<!--								<tr>-->
+	<!--									<td>-->
+	<!--										<input align="right" type="checkbox" value="cDNA" name="cDNA" > Dog and Cat<br>-->
+	<!--									</td>-->
+	<!--								</tr>-->
+								</table>
+						</fieldset>
+						<fieldset class="IFfieldset7">		
+						<legend class="legendfont">Heptamer and nonamer databases</legend>
+							<table>
+								<tr>
+<!--									<td>-->
+<!--										<i>Gene type:</i>-->
+<!--									</td>-->
+									<td colspan="2">
+										<i>Locus:</i>
+									</td>
+									<td>
+										<i>Organism:</i>
+									</td>
+	
+								</tr>
+								
+								<tr>
+<!--									<td>-->
+<!--										<input align="right" type="checkbox" name="RSS_V" value="V" checked > V <br>-->
+<!--										<input align="right" type="checkbox" name="RSS_D" value="D" > D <br>-->
+<!--										<input align="right" type="checkbox" name="RSS_J" value="J" > J <br>-->
+<!--									</td>-->
+									<td>
+										<input align="right" type="checkbox" name="RSS_IGH" value="IGH" checked > IGH <br>
+										<input align="right" type="checkbox" name="RSS_IGK" value="IGK" > IGK <br>
+										<input align="right" type="checkbox" name="RSS_IGL" value="IGL" > IGL <br>
+									</td>
+									<td>
+										<input align="right" type="checkbox" name="RSS_TRA" value="TRA" > TRA <br>
+										<input align="right" type="checkbox" name="RSS_TRB" value="TRB" > TRB <br>
+										<input align="right" type="checkbox" name="RSS_TRG" value="TRG" > TRG <br>
+										<input align="right" type="checkbox" name="RSS_TRD" value="TRD" > TRD <br>
+									</td>
+									
+									<td>
+										<input align="right" type="checkbox" name="RSS_Homo" value="Homo" checked > Human <br>
+										<input align="right" type="checkbox" name="RSS_Mus" value="Mus" > Mouse <br>
+										<input align="right" type="checkbox" name="RSS_Rat" value="Rat" > Rat <br>
+									</td>
+								</tr>
+	
+							</table>
+							
+							<table>
+								<tr>
+									<td colspan="2">
+										
+										<input align="right" type="checkbox" name="PSSM" value="PSSM" checked > <b>Use PSSM </b><br>
+										<i>for V, D and J heptamers and nonamers </i>
+									</td>
+								</tr>
+							</table>
+							
+						</fieldset>
+						<fieldset class="IFfieldset7">	
+							<legend class="legendfont">IMGT/V-QUEST databases</legend>
+						
+							<input align="right" type="checkbox" id="A" onclick="show();" value="T" name="vquest" checked > <b>Use IMGT/V-QUEST</b>
+							<div id="Liste" style="display:none;">
+							<table >
+	
+									<tr>
+										<td colspan="4">
+											<i>It is recommended to select precisely the organism database to reduce time execution</i>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input align="right" type="checkbox" value="vquest_Homo sapiens" name="vquest_Homo sapiens" checked > Human <br>
+											<input align="right" type="checkbox" value="vquest_Mus" name="vquest_Mus" > Mouse <br>
+											<input align="right" type="checkbox" value="vquest_Rattus norvegicus" name="vquest_Rattus norvegicus" > Rat <br>
+											<input align="right" type="checkbox" value="vquest_Oncorhynchus mykiss" name="vquest_Oncorhynchus mykiss" > Trout <br>
+										</td>
+										<td>
+											<input align="right" type="checkbox" value="vquest_Gadus morhua" name="vquest_Gadus morhua" > Cod <br>
+											<input align="right" type="checkbox" value="vquest_Chondrichthyes" name="vquest_Chondrichthyes" > Chondrichthyes <br>
+											<input align="right" type="checkbox" value="vquest_Teleostei" name="vquest_Teleostei" > Teleostei <br>
+											<input align="right" type="checkbox" value="vquest_Salmo salar" name="vquest_Salmo salar" > Salmon <br>
+										</td>
+										<td>
+											<input align="right" type="checkbox" value="vquest_Aotus nancymaae" name="vquest_Aotus nancymaae" > Aotus <br>
+											<input align="right" type="checkbox" value="vquest_Ovis aries" name="vquest_Ovis aries" > Sheep <br>
+											<input align="right" type="checkbox" value="vquest_Bos taurus" name="vquest_Bos taurus" > Cow <br>
+	
+										</td>
+									</tr>
+								</table>
+								</div>
+							</fieldset>
+							</td>
+						</tr>
+	<!--				</div>-->
+					<tr>
+						<td>
+							<br>
+							<input type="submit" onclick="window.setTimeout('affiche_heure()',1000)" align="left" value="Run LIGMotif">
+							<input type="reset" value="Clear fields" align="left" >
+						</td>
+					</tr>
+					
+				</table></form>
+
+
+
+
+			</fieldset>
+
+			<div id="footer">
+	<p style='margin-top:20px'>
+	Created: 22/10/2007
+		<p>
+		IMGT/LIGMotif is developed since 2007 by J&eacute;r&ocirc;me Lane (Jerome.Lane@igh.cnrs.fr)
+		</p>
+		<p>
+		IMGT/LIGMotif computer manager: Patrice Duroux (Patrice.Duroux@igh.cnrs.fr)
+		</p>
+		
+		<p>
+		IMGT/LIGMotif scientific officers: Marie-Paule Lefranc (Marie-Paule.Lefranc@igh.cnrs.fr)
+		</p>
+		<hr>
+		<p>
+			<a HREF="Ligmotif_doc.jsp">-> IMGT/LIGMotif Documentation</a>
+			<br>
+			<a HREF="LIGMotifWelcome.jsp">-> IMGT/LIGMotif Query Page</a>
+		</p>
+		<hr>
+	The IMGT&reg; server is at <a href="http://www.cines.fr" class="lien_ext">CINES</a>, Montpellier, France
+	<br>	
+	Contact:
+	Marie-Paule Lefranc
+	<A HREF="mailto:Marie-Paule.Lefranc@igh.cnrs.fr">Marie-Paule.Lefranc@igh.cnrs.fr</a>
+	<br>
+	Editors:
+	J&eacute;r&ocirc;me Lane  
+	<A HREF="mailto:Jerome.Lane@igh.cnrs.fr">Jerome.Lane@igh.cnrs.fr</a> (<a href="http://imgt.org" target="_blank">LIGM</a>, Montpellier, France)
+	and Patrice Duroux 
+	<A HREF="mailto:Patrice.Duroux@igh.cnrs.fr">Patrice.Duroux@igh.cnrs.fr</a> (<a href="http://imgt.org" target="_blank">LIGM</a>, Montpellier, France)
+	 
+	<p class="menu">
+	
+		<a href="http://imgt.org/home.html" title="IMGT Home page">IMGT&nbsp;Home&nbsp;page</a> |
+		<a href="http://imgt.org/textes/IMGTrepertoire/">IMGT&nbsp;Repertoire&nbsp;(IG&nbsp;and&nbsp;TR)</a> |
+		<a href="http://imgt.org/textes/IMGTrepertoireMHC/">IMGT&nbsp;Repertoire&nbsp;(MHC)</a> |
+		<a href="http://imgt.org/textes/IMGTrepertoireRPI/">IMGT&nbsp;Repertoire&nbsp;(RPI)</a> |
+		
+		<a href="http://imgt.org/textes/IMGTindex/">IMGT&nbsp;Index</a> |
+		<a href="http://imgt.org/textes/IMGTScientificChart/">IMGT&nbsp;Scientific&nbsp;chart</a> |
+		<a href="http://imgt.org/textes/IMGTeducation/">IMGT&nbsp;Education</a>
+	
+	</p>
+
+	<p class="cited">
+		Software material and data coming from IMGT server may be used for academic research only,
+		provided that it is referred to IMGT®, and cited as "IMGT®, the international ImMunoGeneTics
+		information system® <a href="/http://imgt.org/">http://www.imgt.org</a>
+		(founder and director: Marie-Paule Lefranc, Montpellier, France)."
+		References to cite:
+		Lefranc, M.-P. et al.,
+		<a href="http://nar.oxfordjournals.org/cgi/content/abstract/27/1/209" class="lien_ext">Nucleic Acids Research, 27, 209-212 (1999)</a>
+		<a href="img/Couv_NAR99.jpg" class="lien_ext">Cover of NAR</a>;
+		Ruiz, M. et al.,
+		<a href="http://nar.oxfordjournals.org/cgi/content/abstract/28/1/219" class="lien_ext">Nucleic Acids Research, 28, 219-221 (2000)</a>;
+		Lefranc, M.-P.,
+		<a href="http://nar.oxfordjournals.org/cgi/content/abstract/29/1/207" class="lien_ext">Nucleic Acids Research, 29, 207-209 (2001)</a>;
+		Lefranc, M.-P.,
+		<a href="http://nar.oxfordjournals.org/cgi/content/abstract/31/1/307" class="lien_ext">Nucleic Acids Res., 31, 307-310 (2003)</a>;
+		Lefranc, M.-P. et al.,
+		<a href="http://www.bioinfo.de/isb/2004/05/0006/" class="lien_ext"><em>In Silico</em> Biol., 5, 0006 (2004)</a> [Epub],
+		
+		<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=15972004" class="lien_ext">5, 45-60 (2005)</a>;
+		Lefranc, M.-P. et al.,
+		<a href="http://nar.oxfordjournals.org/cgi/content/abstract/33/suppl_1/D593" class="lien_ext">Nucleic Acids Res., 33, D593-D597 (2005)</a>
+		<a href="http://nar.oxfordjournals.org/cgi/content/full/33/suppl_1/D593" class="lien_ext">Full text</a>;
+		Lefranc, M.-P. et al.,
+		<a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkn838?ijkey=7sJxANR8efEiP8V&amp;keytype=ref" class="lien_ext">Nucleic Acids Research 2009 37: D1006-D1012; doi:10.1093/nar/gkn838</a>
+		<a href="http://nar.oxfordjournals.org/cgi/content/full/gkn838?ijkey=7sJxANR8efEiP8V&amp;keytype=ref" class="lien_ext">Full text</a>.
+		<br>
+		For any other use please contact Marie-Paule Lefranc
+		<a href="mailto:Marie-Paule.Lefranc@igh.cnrs.fr">Marie-Paule.Lefranc@igh.cnrs.fr</a>.
+	</p>
+	
+	<p class="logosFoot">
+		<a href="http://www.cnrs.fr/" class="lien_ext"><img src="img/cnrs.gif" class="vertical" alt="logo CNRS" ></a>&nbsp;&nbsp;
+		<a href="http://www.univ-montp2.fr" class="lien_ext"><img src="img/um2.gif" class="vertical" alt="logo UM2" ></a>&nbsp;&nbsp;
+		<a href="http://ec.europa.eu/index_en.htm" class="lien_ext"><img src="img/euroflag.gif" class="vertical" alt="logo UE" ></a>
+	</p>
+	
+	<p>
+		IMGT founder and director: Marie-Paule Lefranc <a href="mailto:Marie-Paule.Lefranc@igh.cnrs.fr">Marie-Paule.Lefranc@igh.cnrs.fr</a>
+		<br>
+		Bioinformatics manager: V&eacute;ronique Giudicelli <a href="mailto:Veronique.Giudicelli@igh.cnrs.fr">Veronique.Giudicelli@igh.cnrs.fr</a>
+		
+		<br>
+		
+		Computer manager: Patrice Duroux <a href="mailto:Patrice.Duroux@igh.cnrs.fr">Patrice.Duroux@igh.cnrs.fr</a>
+		<br>
+		Interface design: Chantal Ginestoux <a href="mailto:Chantal.Ginestoux@igh.cnrs.fr">Chantal.Ginestoux@igh.cnrs.fr</a>
+	</p>
+	
+	<p>
+		<a href="http://imgt.org/textes/IMGTindex/CitingIMGT.html" class="lien_ext">Citing&nbsp;IMGT</a> |
+		<a href="/textes/Warranty.html" class="lien_ext">Warranty&nbsp;disclaimer&nbsp;and&nbsp;copyright&nbsp;notice</a> |
+		<a href="/textes/Policy.html" class="lien_ext">Privacy&nbsp;policy&nbsp;and&nbsp;advertisement&nbsp;policy</a>
+	</p>
+
+	  <p>
+		  <small>&copy; Copyright 1995-2011
+		  IMGT&reg;, the international ImMunoGeneTics information system&reg;</small>
+	  </p>
+
+</div>
+
+		</div>
+	</body>
+</html>

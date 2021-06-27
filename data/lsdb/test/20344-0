@@ -1,0 +1,83 @@
+<html>
+<head>
+</head>
+<title>
+ODES: Overlapping DEnse Sub-graphs
+</title>
+
+<body bgcolor="#FFFFFF">
+
+<p>
+<h1 align="center">
+ODES: Overlapping DEnse Sub-graphs
+</h1>
+<p>
+<a href="http://sourceforge.net/projects/dense">Download ver 0.4</a>
+<br>
+<br>
+<b>News:</b> A paper on ODES has been accepted, <a href="http://bioinformatics.oxfordjournals.org/content/26/21/2788.abstract"><i>Bioinformatics</i></a>, Vol. 26, No. 21. (1 November 2010), pp. 2788-2789; doi: 10.1093/bioinformatics/btq514
+<p>
+
+<hr>
+<br>
+<b>ODES</b> is a pthreads parallelized exact algorithm to enumerate all maximal 
+sub-graphs of a graph that exceed a specified cutoff density of at least 1/2, even 
+if they overlap. Based on a theorem proved in our paper, the brute-force search 
+space of a non-clique graph <b>G</b> is confined to the actual dense sub-graphs 
+of <b>G</b>.
+<br>
+<br>
+Features yet to implement:<br><br>
+<li>run algorithm within a series of density bins that span the interval 0.5 to 1.0</li>
+<li>replace binary search with a fast hash function</li>
+<li>output some indication of overlaps</li>
+<br>
+Due to its high complexity, <b>ODES</b> does not scale well to large dense 
+sub-graphs. This can be ameliorated, however, by using <b>ODES</b> in conjunction 
+with a heuristic method. If heuristically determined edges from large dense 
+sub-graphs <b>H</b> are excluded from the initial single-edge sub-graph list for 
+<b>ODES</b>, but retained in the subsequent search space, <b>ODES</b> will find 
+all other overlapping dense sub-graphs outside of <b>H</b>, along with those 
+dense sub-graphs that overlap <b>H</b> containing at least one edge <b>E</b> 
+outside of <b>H</b> that can be the last one chosen according to our theorem. 
+Dense sub-graphs overlapping <b>H</b> that have no such edge <b>E</b> outside 
+of <b>H</b> will not be found. See the README file for details to turn this 
+feature on.
+<br>
+<br>
+<hr>
+
+<p>
+<a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=87775&amp;type=4" width="125" height="37" border="0" alt="SourceForge.net Logo" /></a>
+
+<p>
+<address>
+James Long<br>
+International Arctic Research Center<br>
+University of Alaska Fairbanks<br>
+PO Box 757340<br>
+Fairbanks, AK 99775-7340<br>
+USA<br>
+
+Voice: (907) 474-2440<br>
+</address>
+<p>
+<code>
+<a href="mailto:jlong@alaska.edu">jlong@alaska.edu</a><br>
+<a href="http://www.iarc.uaf.edu">International Arctic Research Center</a><br>
+</code>
+</p>
+<br>
+<p>
+<address>
+Chris Hartman<br>
+Department of Computer Science<br>
+University of Alaska Fairbanks<br>
+PO Box 756670<br>
+Fairbanks, AK 99775-6670<br>
+USA<br>
+</address>
+<br>
+
+</body>
+</html>

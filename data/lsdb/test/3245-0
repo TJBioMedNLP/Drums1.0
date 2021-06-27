@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>The ProBiS Server for Protein Binding Sites Detection</title>
+    <meta name="author" content="Janez Konc"/>
+    <meta name="description" content="Detection of binding sites on proteins of known 3D structure by local structural alignment to a non-redundant protein data bank."/>
+    <meta name="keywords" content="protein binding sites, structural alignment, local alignment, protein interactions, structure conservation, protein binding sites detection, molecular surface, janez konc"/>
+    <link rel="stylesheet" type="text/css" href="http://probis.cmm.ki.si/stil.css"/>
+    <script type="text/javascript" src="http://probis.cmm.ki.si/jquery-1.4.2/jquery.js"></script>
+<!--
+    <script type="text/javascript" src="http://probis.cmm.ki.si/jquery.abetterform.js"></script>
+-->
+    <script type="text/javascript" src="http://probis.cmm.ki.si/script.js"></script>
+    <script type="text/javascript" src="http://probis.cmm.ki.si/getscreen.js"></script>
+    <link rel="shortcut icon" href="http://probis.cmm.ki.si/klika.ico">
+
+   <script type="text/javascript">
+
+     window.onresize=resize_index_page;
+     $('document').ready(function() {resize_index_page();});
+
+/*
+     $('document').ready(function () {
+       $("#komentar_container").abform({
+         attributes :'id="form_komentar" action="index.php" method="POST" enctype="multipart/form-data"',
+         sequential_disable: false,
+         convert : '{ime|text}{komentar|textarea}{komentar_submit|submit|class="absubmit"}'
+       });
+    
+     });
+*/
+   </script>
+
+   <script type="text/javascript">
+   
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-21393229-1']);
+     _gaq.push(['_trackPageview']);
+   
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+   
+   </script>
+
+</head>
+
+<body onload="init_index_page();">
+
+<div id='bProbis'>
+     <a target='_blank' href="http://probis.cmm.ki.si">
+       <img style='float:left;border:0px;' title="ProBiS - Protein Binding Sites" alt="ProBiS - The tool to detect conserved protein binding sites" src="http://probis.cmm.ki.si/logo-L90.png"/>
+       <img style='float:right;border:0px;' title="ProBiS - Protein Binding Sites" alt="ProBiS - The tool to detect conserved protein binding sites" src="http://probis.cmm.ki.si/logo-R90.png"/>
+     </a>
+     <span style="position:absolute;right:195px;bottom:30px;font-size:1.5em;font-weight:bold;color:#333;z-index:100;">
+       Protein Binding Sites Detection
+     </span>
+     <span style="position:absolute;right:195px;bottom:5px;font-size:1em;color:#333;z-index:100;">
+       As of <b>Feb 27, 2011</b> your protein is compared with <b>27334</b> structures
+     </span>
+</div>
+
+
+<div id='iProbis'>
+    <a href="http://probis.cmm.ki.si/index.php" alt="ProBiS Home" title="ProBiS submit page">BINDING SITES</a>&nbsp;|
+    <a href="http://probis.cmm.ki.si/index.php?what=pairwise" alt="ProBiS Home" title="Align two protein structures">PAIRWISE ALIGNMENT</a>&nbsp;|
+    <a href="http://probis.cmm.ki.si/examples.php" alt="Examples" title="Examples of binding site predictions">EXAMPLES</a>&nbsp;|
+    <a href="http://www.sicmm.org/" target='_blank' alt="Center for Molecular Modeling" title="Center for molecular modeling">GROUP HOME</a>&nbsp;|
+    <a href="http://probis.cmm.ki.si/help.php" alt="Help">HELP</a>
+    <span style="position:absolute;right:10px;bottom:9px;font-size:0.8em;color:whitesmoke">
+       <a href="http://probis.cmm.ki.si/help.php#java" target='_blank' title="How to install Java Runtime Environment?">ProBiS requires Java...</a>
+    </span>
+</div>
+
+
+
+
+
+<div id='comments'>
+  <div class="naslov">
+     Post a Comment
+  </div>
+  <form id="komentar_container" name="form_komentar" action="index.php" method=POST enctype="multipart/form-data">
+    Your suggestions, questions, comments, or bug reports will help us 
+    improving this site! <br /> <br />
+    Name:<br />
+    <input type="text" name="ime" size="20"><br />
+    Comment:<br />
+    <textarea id="komentar" name="komentar"></textarea><br />
+    <input id='publicChBox' name='publicChBox' type='checkBox' checked value='public'><label for='publicChBox'>Make it Public</label>
+    <input type="submit" id="komentar_submit" value="Submit" >
+  </form>
+<!--
+  <div id="komentar_container">
+    Your suggestions, questions, comments, or bug reports will help us 
+    to improve this site! <br /> <br />
+    Name:<br />
+    <div id="ime"></div><br />
+    Comment:<br />
+    <div id="komentar"></div><br />
+    <input id='publicChBox' type='checkBox' checked value='public'><label for='publicChBox'>Make it Public</label>
+    <div id="komentar_submit">Submit</div>
+  </div>
+-->
+
+
+</div>
+
+
+
+
+<div id='news'>
+  <div class="naslov">
+     New Features
+  </div>
+  <ul class="seznam">
+<!--
+    <li>
+      Structural alignments now have links to the UniProt database for easier functional annotation.
+    </li>
+-->
+    <li>
+      New Features, FAQ and Comments sections were added. The user interface was generally redesigned.
+    </li>
+  </ul>
+  
+</div>
+
+
+
+
+<div id='faq'>
+  <div class="naslov">
+     Frequently Asked Questions
+  </div>
+  <ul class="seznam">
+<li><a href='http://probis.cmm.ki.si/faq.php#protein_model'>Can I upload a protein model?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#calpha'>What if I have a C&alpha; structure only?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#surface'>How is the protein surface defined?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#upload_failed'>Why upload of a PDB file failed?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#ordering'>How the ordering of atoms in uploaded file affects computation?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#protein_complex'>Could multiple chain IDs or a protein complex be input?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#nmr'>Can I upload an NMR structure?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#fragment'>Can I search the database with a structural motif?</a></li><li><a href='http://probis.cmm.ki.si/faq.php#ligands'>What happens with ligands in the input structure?</a></li>  </ul>
+</div>
+
+
+
+<div id='divSlika' onclick="this.style.display='none';">
+  <span style='position:absolute;right:10px;top:5px;font-weight:bold'>Click to close</span><br>
+  <img id='velikaSlika' style="position:relative;width:400px;border:0px;" src=""></img>
+  <div id="velikiText" style="font-size:1.0em;"></div>
+</div>
+
+
+
+<div id='nProbis'>
+  <div class="naslov">
+    ProBiS in Brief
+  </div>
+  <div style="padding-left:50px;padding-top:10px;padding-bottom:10px;font-size:0.8em;">[click on the slideshow to see static picture]</div>
+  <div id='slideDiv'>
+    <a onclick="showLargePicture();">
+      <img style="width:292px;padding-left:1px;border:0px;cursor:pointer;cursor:hand;" id="slideImg" src="" name="slide"></img>
+    </a>
+    <div id="slideText" style="padding:10px 10px 0px 10px;font-size:1.0em;"></div>
+  </div>
+
+  <script type="text/javascript">
+    //configure the paths of the images, plus corresponding target links
+    slideshowimages("http://probis.cmm.ki.si/slike/slide-5.png",
+                    "http://probis.cmm.ki.si/slike/slide-2.png",
+                    "http://probis.cmm.ki.si/slike/slide-1.png",
+                    "http://probis.cmm.ki.si/slike/slide-3.png",
+                    "http://probis.cmm.ki.si/slike/slide-4.png");
+    slideshowlinks("Fingerprint residues are highly structurally conserved residues.","Residues of the input structure are color-coded by the degree of structural conservation.","Structurally conserved residues (red) correspond with a binding site.","Pairwise local structural alignment does not require proteins to have similar folds.","Retrieved similar structures are represented as clickable sequence alignments.");
+
+    slideit();
+  </script>
+</div>
+
+<div id='citation'>
+  <div class="naslov">
+    Please Cite the Following Articles
+  </div>
+  <ul class="seznam">
+    <li>
+        Konc,J. and Janezic,D. ProBiS algorithm for detection of structurally similar protein binding sites by local structural alignment. <i>Bioinformatics</i> 2010, <b>26</b>, 1160-1168. <a target='_blank' href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/26/9/1160">Free Text</a>
+    </li>
+    <li>
+       Konc,J. and Janezic,D. ProBiS: A web server for detection of structurally similar protein binding sites. <i>Nucleic Acids Res.</i> 2010, <b>38</b>, W436-W440. <a target='_blank' href="http://nar.oxfordjournals.org/cgi/reprint/gkq479">Free Text</a>
+    </li>
+  </ul>
+</div>
+
+<div id='cProbis' style='top:910px' >
+  <div>
+    National Institute of Chemistry, Ljubljana, Slovenia
+<!--
+    ProBiS &copy; 2009-2010 Janez Konc
+-->
+  </div>
+</div>
+
+
+
+<noscript>
+<div id='wProbis'>
+For ProBiS to work, please enable JavaScript in your browser!
+<a href="http://probis.cmm.ki.si/javascriptinfo.html">Click here for instructions.</a>
+&nbsp;&nbsp;
+<a href="javascript:history.go(0)"> Reload this page.</a>
+</div>
+</noscript>
+
+
+<div id='mProbis'>
+
+  <form name="form_multiple" action="index.php" method=POST enctype="multipart/form-data">
+
+    <h3 class="glavninaslov">
+       Detect Structurally Conserved Binding Sites
+       <span class='help'>
+          <a href="http://probis.cmm.ki.si/help.php#bsd" target='_parent' title="Binding sites detection">?</a>
+       </span>             
+    </h3>
+  
+     <input type="hidden" name="postingId" value="form_multiple">
+  
+  
+     <span style='position:absolute;top:80px;left:35px;'>
+       PDB ID:
+       <input type="text" name="pdb_id1" size="10">
+       <span style='font-size:0.8em;position:absolute;top:25px;right:0px;'>(e.g. 1all)</span>
+     </span>
+  
+     <span style='position:absolute;top:80px;left:290px;'>
+       Chain ID(s):
+       <input type="text" size="5" name="chain_id1a">
+       <span style='font-size:0.8em;position:absolute;top:25px;right:0px;'>(e.g. A or AB)</span>
+     </span>
+  
+  
+     <label for='idUpChbx' style='position:absolute;top:170px;left:90px;' >Alternatively, upload your own PDB file
+       <input id='idUpChbx' type='checkbox' onclick="showUpload();">
+     </label>
+  
+     <span id='idUpload' style='display:none;'>
+       <span style='position:absolute;top:260px;left:35px;'>
+            File:
+            <input type="file" name="pdb_file1" size="5">
+       </span>
+  
+       <span style='position:absolute;top:260px;left:290px;'>
+            Chain ID(s):
+            <input type="text" size="5" name="chain_id1b">
+            <span style='font-size:0.8em;position:absolute;top:25px;right:0px;'>(e.g. A or AB)</span>
+       </span>
+     </span>
+  
+  
+     </span>
+  
+  
+     <span style='position:absolute;top:350px;left:85px;'>
+       Your e-mail address <span style='font-size:0.8em'>(optional)</span>:
+       <input type="text" name="email_addr" size="20">
+       <span style='position:absolute;right:0px;top:30px;width:300px;font-size:0.8em;'>
+         A link to the results page will be sent to you by e-mail.
+         Computation for a medium sized protein will take around 30-60min.
+       </span>
+     </span>
+  
+     <span style='position:absolute;top:450px;left:330px;'>
+       <input type="submit" VALUE="Submit Job" >
+     </span>
+  </form>
+
+
+</div>
+
+
+</body>
+</html>

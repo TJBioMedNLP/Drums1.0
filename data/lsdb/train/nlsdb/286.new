@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CATMAID: Collaborative Annotation Toolkit for Massive Amounts of Image Data</title>
+<link rel="stylesheet" type="text/css" href="css/screen.css" />
+<!--[if gte IE 7]>
+<link rel="stylesheet" type="text/css" href="css/screen.ie7.css" />
+<![endif]-->
+<style type="text/css">
+dt a {
+color:#ffff00;
+}
+td {
+vertical-align:top;
+}
+</style>
+</head>
+<body>
+<h1>CATMAID: Collaborative Annotation Toolkit for Massive Amounts of Image Data</h1>
+<h2>Stephan Saalfeld, Albert Cardona, Pavel TomanÄÃ¡k</h2>
+
+<h3>Introduction</h3>
+<p><a href="http://fly.mpi-cbg.de/dev">CATMAID</a> is a <b>C</b>ollaborative <b>A</b>nnotation <b>T</b>oolkit for <b>M</b>assive <b>A</b>mounts of <b>I</b>mage <b>D</b>ata. It is designed to navigate, share and collaboratively annotate massive image data sets of biological specimens. The interface is inspired by <a href="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Dresden+Germany&sll=37.0625,-95.677068&sspn=56.331468,76.201172&ie=UTF8&ll=51.050891,13.74012&spn=0.088487,0.14883&t=h&z=13">GoogleMaps</a>, with which it shares basic navigation concepts, enhanced to allow the exploration of 3D biological image data acquired by optical or physical sectioning microscopy techniques. The interface enables seamless sharing of regions of interest through bookmarks and synchronized navigation through multiple registered data sets.</p>
+
+<p>With massive biological image data sets it is unrealistic to create a sustainable centralized repository. A unique feature of CATMAID is its partially decentralized architecture where the presented image data can reside on any Internet accessible server and yet can be easily cross-referenced in the central database. In this way no image data are duplicated and the data producers retain full control over their images.</p>
+
+<p>CATMAID is intended to serve as data sharing platform for biologists using high-resolution imaging techniques to probe large specimens. Any high-throughput, high-content imaging project such as gene expression pattern screens would benefit from the interface for data sharing and annotation.</p> 
+
+<p>Selected examples of CATMAID image data sets are available <a href="http://fly.mpi-cbg.de/catmaid-suppl">here</a>.</p>
+
+<h3>Manual</h3>
+
+<table>
+<tr>
+<td><img src="img/navigate.png" alt="Screenshot" /></td>
+<td><p>Navigation mode</p>
+<ul>
+<li>Drag the sliders or scroll them with the scroll wheel to navigate in the <em>z</em> dimension or to zoom in and out.</li>
+<li>Drag with left or middle mouse key pressed for navigating in <em>x</em> and <em>y</em> dimension.</li>
+<li>Use the scroll wheel to zoom in (up) and out (down).</li>
+<li>Use the cursor keys to Navigate in <em>x</em> and <em>y</em> dimension, with <button>Shift</button> faster, with <button>Alt</button> slower.</li>
+<li>Use <button>, / &lt;</button> and <button>. / &gt;</button> to navigate in <em>z</em> dimension.</li>
+<li>Use <button>-</button> and <button>+</button> to zoom in and out.</dd>
+<li>Use <button>Tab</button> and <button>Shift</button> + <button>Tab</button> to switch between open stacks on synchronized views.</dd>
+
+</ul></td>
+</tr>
+
+<tr>
+<td><img src="img/text.png" alt="Screenshot" /></td>
+<td><p>Text editing mode</p>
+<ul>
+<li>Drag with middle mouse key pressed for navigating in <em>x</em> and <em>y</em> dimension.</li>
+<li>Use the scroll wheel to zoom in (up) and out (down).</li>
+<li>Click with the left mouse key into the image to seed a new text-label there.</li>
+<li>Click into the text and directly type into it.</li>
+<li>Move existing text-labels dragging the move handle with the left mouse key pressed.  Delete existing text-labels by clicking the delete handle with the left mouse key.</li>
+<li>Keyboard navigation works if not editing a textlabel.</li>
+</ul></td>
+</tr>
+
+<tr>
+<td><img src="img/crop.png" alt="Screenshot" /></td>
+<td><p>Cropping mode</p>
+<ul>
+<li>Drag with middle mouse key pressed for navigating in <em>x</em> and <em>y</em> dimension.</li>
+<li>Use the scroll wheel to zoom in (up) and out (down).</li>
+<li>Click with the left mouse key into the image and drag to define the crop region in <em>x</em> and <em>y</em> dimension.</li>
+<li>Use the sliders to define the <em>z</em> dimension (first and last section) of the crop region.
+<li>Click the apply-button to submit the crop job.  You will get a message as soon as the cropping is done.</a>
+</ul></td>
+</tr>
+</table>
+
+<h4>How to prepare your image data?</h4>
+<ol>
+<li>Use bash scripts and ImageMagick:
+	<ul>
+	<li>Install <a href="http://www.imagemagick.org/script/index.php">ImageMagick</a></li>
+	<li>Download <a href="tile.tar.bz2">these two scripts</a></li>
+	<li>In a folder of images with each showing one section of the volume, execute <code>tile_stack &quot;&lt;file name pattern&gt;&quot; 256 192</code></li>
+	</ul>
+</li>
+<li>Use <a href="http://www.ini.uzh.ch/~acardona/trakem2.html">TrakEM2</a>:
+	<ul>
+	<li>Install <a href="http://pacific.mpi-cbg.de">Fiji</a></li>
+	<li>Create a project as described in the <a href="http://www.ini.uzh.ch/~acardona/trakem2_manual.html#fs_project">TrakEM2 manual</a></li>
+	<li>Export the project by right-clicking the display Canvas and call Display->make flat image</li>
+	<li>Select &quot;Best quality&quot; and &quot;Save for web&quot;</li>
+</li>
+</ol>
+
+<p>So far, CATMAID does not offer a proper user interface for registering projects and stacks.  The entries are manually inserted into the database which is fairly easy using a graphical frontend such as <a href="http://phppgadmin.sourceforge.net/">phpPgAdmin</a>.  You need the following information:
+<ul>
+<li>a CATMAID user account</li>
+<li>a title for the project</li>
+<li>a title and description for the image stack</li>
+<li>the dimensions of the stack in pixels (width, height and number of sections)</li>
+<li>the resolution of the stack in nm/pixel (x,y,section thickness)</li>
+<li>the translational offset for each stack for synchronized view</li>
+<li>a set of lost sections if there were any (section loss happens very often in serial section data sets)</li>
+<li>the base path web URL where you host the prepared images</li>
+</ul>
+
+<h3>Download</h3>
+
+<p>The source code for CATMAID can be downloaded from here: <a href="catmaid.src.tar.bz2">catmaid.src.tar.bz2</a></p>
+
+<h3>Contact</h3>
+
+<p>Pavel TomanÄÃ¡k</p>
+<p>Max Planck Institute of Molecular Cell Biology and Genetics<br />
+Pfotenhauerstr. 108<br />
+01307 Dresden, Germany</p>
+
+<table>
+<tr>
+<td>phone&nbsp;</td><td>+49 351 210-2670</td>
+</tr>
+<tr>
+<td>fax</td><td>+49 351 210-1389</td>
+</tr>
+</table>
+
+<p><a href="mailto:saalfeld@mpi-cbg.de">tomancak@mpi-cbg.de</a></p>
+
+<p class="imprint">&copy; 2009 <a href="mailto:saalfeld@mpi-cbg.de">Stephan Saalfeld, Albert Cardona, Pavel TomanÄÃ¡k</a></p>
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0039)http://mail.med.upenn.edu/~zhiwei/GAME/ -->
+<HTML><HEAD><TITLE>GALF-P</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="GALF-P: Genetic Algorithm with Local Filtering and Post-processing" name=dc.title>
+<META content="Maintained by Cyrus Chan" name=dc.creator>
+<META scheme=ISO639-2 content=eng name=dc.language>
+<META 
+content="genetic algorithm, motif discovery, transcription factor binding sites, gene regulation, GALF, GALF-P" 
+name=dc.keywords>
+<META 
+content="genetic algorithm, motif discovery, transcription factor binding sites, gene regulation, GALF, GALF-P" 
+name=KEYWORDS>
+<META content="GALF-P: Genetic Algorithm with Local Filtering and Post-processing" 
+name=DESCRIPTION>
+<META content="Tak-Ming Chan" name=AUTHOR>
+<STYLE type=text/css>
+.style1 {
+	COLOR: #0066CC}
+.style4 {
+	font-size: medium;
+	color: #0066CC;
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.3132" name=GENERATOR>
+</HEAD>
+<BODY>
+<!--<?php include_once("analyticstracking.php") ?>-->
+
+<TABLE width=826>
+  <TBODY>
+  <TR>
+  <TD width=291><img src="img/GALF_logo.jpg" alt="GALF-P Logo" width="291" height="86" longdesc="This is the logo image for GALF-P."></TD>
+  <TD width=523>&nbsp;</TD>
+  </TR>
+  <TR>
+    <TD colspan="2">
+      <H1><SPAN class=style1>GALF-P</SPAN> <span class="style4">for TFBS Identification (Motif Discovery)</span><BR>
+        <SPAN class=style1>G</SPAN>enetic 
+      <SPAN class=style1>A</SPAN>lgorithm with <SPAN class=style1>L</SPAN>ocal <SPAN class=style1>F</SPAN>iltering and <SPAN class=style1>P</SPAN>ost-processing </H1>      </TD></TR>
+	  </TBODY></TABLE>
+<HR color="#0066CC">
+
+<TABLE cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD height=600>
+      <H2><A name=overview class="style1">Overview</A></H2>
+      <UL>
+        <LI>GALF-P is a novel framework for TFBS identification (motif discovery) in DNA sequences. It consists of Genetic Algorithm with Local Filtering (GALF) and the post-processing procedure based on adaptive adding and removing. GALF-P achieves both effectiveness and efficiency, and provides reliable performance over the other state-of-art GA based approaches. The post-processing procedure is designed for zero or more TFBSs in each sequence. </LI>
+      </UL>
+      <HR>
+
+      <H2><A name=download class="style1">Download</A></H2>
+      <UL>
+        <LI><a href="Programs/GALF_P_VER1.0.rar" target="_blank">Win32 Version</a>: The program can be run directly on Windows platforms after extraction by WinRAR. </LI>
+        <LI><a href="Programs/GALF_P.tar" target="_blank">Linux Version</a>: Tested on Red Hat 9 and Fedora Core 3. </LI>
+        <LI><a href="newver.html" target="_blank">More (Double-strand Search Version).</a></LI>
+      </UL>
+      <HR>
+
+      <H2><A name=documentation class="style1">Usage</A></H2>
+      <UL>
+        <LI><STRONG>Win32 Version: In cmd:</STRONG> GALF_P.exe -w width -i input_file -o output_file [-l MAXLEN\-m MAXINS\-b BETA\-
+          r MAXRUN] [-g Gen\-p Pop\-u Muta\-c Cross] [-f Flag\-A PGALF]
+          <LI><strong>Linux Version:</strong> ./GALF_P.o -w width -i input_file -o output_file [-l MAXLEN\-m MAXINS\-b BETA\-
+          r MAXRUN] [-g Gen\-p Pop\-u Muta\-c Cross] [-f Flag\-A PGALF]
+          <br>
+          <LI><strong>Options:</strong> <BR>
+          <TABLE width="100%" border=0>
+            <TBODY>
+              <TR>
+                <TD colspan="4"><strong>Compulsary arguments:</strong></TD>
+                </TR>
+              <TR>
+                <TD width="2%">&nbsp;</TD>
+                  <TD width="4%">
+                  <DIV align=left>-w</DIV></TD>
+                  <TD width="2%"><DIV align=center></DIV></TD>
+                <TD width="92%">width is the desired motif width (input by the user) </TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-i </DIV></TD>
+                  <TD><DIV align=center></DIV></TD>
+                  <TD>input_file is the fasta input file to read in</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-o</DIV></TD>
+                  <TD><DIV align=center></DIV></TD>
+                  <TD>output_file is the output file to store the results in detail (refer to the examples for more details) </TD>
+              </TR>
+              <TR>
+                <TD colspan="4"><strong>Optional configuration arguments:</strong></TD>
+                </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-l</DIV></TD>
+                  <TD>
+                  <DIV align=center></DIV></TD>
+                  <TD>MAXLEN--maximal sequence length (&gt;=500(default: 1000))</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-m</DIV></TD>
+                  <TD>
+                  <DIV align=center></DIV></TD>
+                  <TD>MAXINS--maximal number of possible instances in each sequence (default: 20; &gt;=1)</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD><DIV align=left>-b</DIV></TD>
+                  <TD><DIV align=center></DIV></TD>
+                  <TD>BETA--the fitness gain threshold in post processing(default: 0.001; &gt;=0)</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD><DIV align=left>-r</DIV></TD>
+                  <TD><DIV align=center></DIV></TD>
+                  <TD>MAXRUN--number of runs of GALF (default: 20; &gt;=5) before post processing </TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD><DIV align=left>-g</DIV></TD>
+                  <TD><DIV align=center></DIV></TD>
+                  <TD>Gen--maximal generation (&gt;=300(default))</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-p</DIV></TD>
+                  <TD>
+                  <DIV align=center></DIV></TD>
+                  <TD>Pop--population size (&gt;=500(default))</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-u</DIV></TD>
+                  <TD>
+                  <DIV align=center></DIV></TD>
+                  <TD>Muta--mutation rate (&gt;=0 and &lt;= 1 (default: 0.9))</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-c</DIV></TD>
+                  <TD>
+                  <DIV align=center></DIV></TD>
+                  <TD>Cross--crossover rate (&gt;=0 and &lt;= 1 (default: 0.3)</TD>
+              </TR>
+              <TR>
+                <TD colspan="4"><strong>Optional control arguments: </strong></TD>
+                </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-f</DIV></TD>
+                  <TD>
+                  <DIV align=center></DIV></TD>
+                  <TD>Flag--to control whether post-processing (adding and/or removing) is performed: 0 (default): both adding and removing; 1: adding only; 2: none</TD>
+              </TR>
+              <TR>
+                <TD>&nbsp;</TD>
+                  <TD>
+                  <DIV align=left>-a</DIV></TD>
+                  <TD>
+                  <DIV align=center></DIV></TD>
+                  <TD>PGALF--whether to print the results of GALF to the output file: 0 (default): No; 1: Yes</TD></TR>
+              <TR>
+                <TD height="21" colspan="4"><strong>Note:</strong> The convergence generation number is fixed at 50 in GALF. Both upper and lower cases for the arguments are acceptable. If the input parameters exceed the listed constraints, the corresponding parameters will be set automatically to be the maximal/minimal constrained values. The actual computation time will be recorded in the output file. </TD>
+                </TR>
+              <!--<TR>
+                <TD colSpan=4 height=45>
+                  <DIV align=left></DIV>
+                    <DIV align=center></DIV>Note: -a, -t, -c, -g must be provided 
+                  simultaneously and be positive, otherwise they will be ignored. If 
+                  the summation of these four parameters does not equal to 1, they 
+                  will be normalized so that their summation is 
+              1.</TD></TR>-->
+			  </TBODY>
+          </TABLE>
+          <BR>        
+      </UL>
+       <HR>
+
+      <H2><A name=reference></A><span class="style1">Examples</span></H2>
+      <UL>
+        <LI><strong>Note:</strong> The input file can be any txt file but must be in the FASTA format. GALF-P currently does not support IUPAC codes, and does not distinguish between the upper and lower cases for A, T, C and G. The background frequencies of A, T, C and G are calculated from the input sequences. The version  for double-strand search is available <a href="newver.html" target="_blank">here</a>. The following examples are shown using the Win32 version. Please change the command accordingly in Linux. </LI>
+        <LI><strong>Sample datasets:</strong> There are two real sample input files for the transcription factor MEF2. In each file there is a set of 17 200 bp sequences, and 17 TFBSs of width 7 are embedded. The two files are the same except that the TFBSs in <a href="Examples/MEF2200bp.fa" target="_blank">the first dataset </a> are specifically capitalized (for easy check of the results in the output file) while in <a href="Examples/MEF2200bp_l.fa" target="_blank">the second set</a> not. Additionally, there is a  <a href="Examples/MyOD200bp.fa" target="_blank">third dataset</a> for MyOD  including 17 sequences in 200 bp, and 21 TFBSs of width 6 are embedded.</LI>
+        <LI><strong>Example 1:</strong> Suppose there is a set of DNA sequences of  the co-expressed genes in <a href="Examples/MEF2200bp.fa" target="_blank">the first dataset (MEF2200bp.fa)</a>. The TFBSs regulated by the corresponding transcription factor are to be found. The desired motif width is 7. The results are to be stored in Results.txt. Then in cmd (command line) mode, GALF-P can be run as follows: <strong>GALF_P.exe -w 7 -i MEF2200bp.fa -o R5.txt</strong>. In this case the optional arguments are chosen by default. The information concerning the configurations will be listed in the <a href="Examples/R5.txt" target="_blank">R5.txt</a>. The results include the starting position(s) of the instance(s) and the extracted instance(s) in each sequence. See <a href="Examples/R5.txt" target="_blank">R5.txt</a> for more details. </LI>
+        <LI><strong>Example 2:</strong> For the above example, GALF-P can also be run as follows: <strong>GALF_P.exe -w 7 -i MEF2200bp.fa -o R5_l.txt -c 0.5 -u 0.9 -r 10 -f 2</strong>. In this case,  GALF-P is executed with GALF  being run 10 times before the post-processing is applied. The crossover rate is 0.5 and the mutation rate is 0.9. No post-processing is applied.  See the output file <a href="Examples/R5_l.txt" target="_blank">R5_l.txt</a> for more details. </LI>
+        <LI><strong>Example 3:</strong> For <a href="Examples/MyOD200bp.fa">MyOD dataset</a>, GALF_P can be run as follows: <strong>GALF_P.exe -w 6 -i MyOD200bp.fa -o R6_2.txt  -r 5  -f 1 -a 1 -g 3000</strong>. Here a maximum of 3000 generations is set while GALF is run for 5 times. The best result from GALF with fitness score (information content without pseudo-counts) will be printed to the output file. In the post-processing, only adding stage is performed. See the sample output <a href="Examples/R6_2.txt" target="_blank">R6_2.txt</a> for more details. </LI>
+        </UL> 
+		<!--* Currently a procedure is embedded in the program to check the correctness (with maximal 3 shifts allowed for a correctly predicted site) if the true TFBSs are capitalized in the input file.
+	   Please note that the correctness will be displayed as 0.0 if  all the TFBSs are in lowercase as the other nucleotides (e.g. <a href="Examples/MEF2200bp_l.fa" target="_blank">the second set</a>).-->
+	   <HR>
+	    <!--<HR>
+
+      <H2><A name=reference>Reference</A></H2>
+      <UL>
+        <LI>Chan, T.-M., Leung, K.-S. and Lee, K.-H., A Novel Framework for TFBS Identification Based on Genetic Algorithm with Combined Representation. <em>Coming soon</em>.</LI>
+      </UL> -->
+
+      <H2><A name=reference class="style1">Supplementary Material</A></H2>
+      <UL>
+        <LI><A 
+        href="Suppl.pdf" target="_blank">Supplementary Material for TFBS Identification Based on Genetic Algorithm with Combined Representations and Adaptive Post-processing </A>.</LI>
+      </UL> 
+      <HR>
+
+      <H2><A name=contact class="style1">Contact</A></H2>
+      <P><IMG src="img/contact.gif" alt="Email: tmchan at cse dot cuhk dot edu dot hk" width="280" height="25"></P>
+      <P>Last update: 23/Nov/2007</P>
+      <HR>    </TD></TR></TBODY></TABLE>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2928164-1";
+urchinTracker();
+</script>
+</BODY>
+</HTML>

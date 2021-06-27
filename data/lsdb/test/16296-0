@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>PLEXY</title>
+  </head>
+  <body>
+    
+    <h2>Introduction</h2>
+    <tt>PLEXY</tt> is a tool for computation of optimal thermodynamical interactions of a box C/D snoRNA with a putative target RNA.
+    It is based on <tt>RNAPLEX</tt>.
+    
+    
+    <h2>Download</h2>
+    <ul>
+      <a href="plexy.pl">download <tt>PLEXY</tt> here</a></br>
+    </ul>
+    Be sure to have the latest version of <a href="http:
+//www.bioinf.uni-leipzig.de/Software/RNAplex/RNAplex-0.2.tar.gz"><tt>RNAPLEX</tt></a> installed.<br>
+    Executables of <tt>RNAPLEX</tt> should  either be installed in the same directory or you have to provide the correct $PATH at the beginning <tt>plexy.pl</tt>.
+    
+    <h2>Input sequences</h2>
+    To perform a target prediction you have to provide: 
+    <ul>
+      <li> one or more putative target sequence(s) in fasta format and</li>
+      <li> one or more snoRNA sequences also fasta formatted. 
+    </ul>
+    The header of each snoRNA sequence has to
+    contain <font color=red>D-</font>
+    and/or </font><font color=salmon>Dprime-</font><font color=red>
+  box annotation(s)</font>. The box annotation must be seperated with
+_ and have to be located at the end of the header line. The first
+two parts are taken for <font color=green>snoRNA_id</font>, everything else does not matter at all.</li><br>
+<br>
+Example:<br>
+><font color=green>U95_H.sapiens</font>_(chr5)_180602916,180602983_-<font color=salmon>_GTGCTGA_36_CTGA</font><font color=red>_26_GTGATGA_5_CTGA_59</font><br>
+GGCGGTGATGACCCCAACATGCCATCTGAGTGTCGGTGCTGAAATCCAGAGGCTGTTTCTGAGCTGCC
+
+<h2>Usage</h2>
+
+<tt>plexy.pl -o [directory/] -f [fa-file] -t [directory/]</tt><br>
+<ul>
+  <li>-f : input fasta-file with CD-box snoRNA sequences </li>
+  <li>-o : directory for output files</li>
+  <li>-t : directory with putative target RNA sequences in fasta format</li>
+</ul>
+OPTIONAL<br>
+<ul>
+  <li>[-l] : option for large datasets. Results are not kept in the
+    memory during runtime but are returned directly and the output is
+    reduced. This makes it possible to search transcript wide, but the
+    results need some postprocessing as interactions are not unique and not
+    sorted for mfe values.</li>
+  <li>[-p] : directory containing accessibility-profiles (RNAplfold)</li>
+  <li>[-e] : MFE-treshold, only targets with better MFE are shown, default value is -7.00 </li>
+</ul>
+
+<h2>Output</h2>
+
+without -l option: (sorted, unique and nice)<br>
+<tt>./plexy.pl -f U95.fa -o temp/ -t /<i>path</i>/human_targetRNAs/ -e -20.00</tt><br>
+<ul>
+  <pre>
+    #D-box targets:
+    U95_H.sapiens	D	H_sapiens_28S-2802	-23.40              	(((((((((((((.&.)))))))))))))                GAACAmGCCTCTGGC&TCCAGAGGCTGTTT               
+    #D'-box targets:
+    U95_H.sapiens	D	H_sapiens_28S-2811	-20.10              	.(((((((((((.&.))))))))))).                  CTGGCmATGTTGGA&CCCAACATGCCAT 
+  </pre>
+</ul>
+with -l option: (not sorted, not unique and not so nice, but machine readable and gentler to your memory, especially during runtime)<br>
+<tt>./plexy.pl -f U95.fa -o temp/ -t /<i>path</i>/human_targetRNAs/ -e -20.00 -l</tt><br>
+<ul>
+  <pre>
+    #D-box targets:
+    U95_H.sapiens|D|H_sapiens_28S-2802|-23.40|(((((((((((((.&.)))))))))))))|GAACAmGCCTCTGGC&TCCAGAGGCTGTTT
+    U95_H.sapiens|D|H_sapiens_28S-2802|-23.40|(((((((((((((.&.)))))))))))))|GAACAmGCCTCTGGC&TCCAGAGGCTGTTT
+    U95_H.sapiens|D|H_sapiens_28S-2802|-23.40|(((((((((((((.&.)))))))))))))|GAACAmGCCTCTGGC&TCCAGAGGCTGTTT
+    U95_H.sapiens|D|H_sapiens_28S-2802|-23.40|(((((((((((((.&.)))))))))))))|GAACAmGCCTCTGGC&TCCAGAGGCTGTTT
+    U95_H.sapiens|D|H_sapiens_28S-2802|-23.40|(((((((((((((.&.)))))))))))))|GAACAmGCCTCTGGC&TCCAGAGGCTGTTT
+    U95_H.sapiens|D|H_sapiens_28S-2802|-23.40|(((((((((((((.&.)))))))))))))|GAACAmGCCTCTGGC&TCCAGAGGCTGTTT
+    U95_H.sapiens|D|H_sapiens_28S-2802|-23.40|(((((((((((((.&.)))))))))))))|GAACAmGCCTCTGGC&TCCAGAGGCTGTTT
+    U95_H.sapiens|D|H_sapiens_28S-2802|-22.90|(((((((((((((&)))))))))))))|GAACAmGCCTCTGG&CCAGAGGCTGTTT
+    #D'-box targets:
+    U95_H.sapiens|D'|H_sapiens_28S-2811|-20.10|.(((((((((((.&.))))))))))).|CTGGCmATGTTGGA&CCCAACATGCCAT
+  </pre>
+</ul>
+<h2>Contact</h2>
+
+If you have any kind of problems or suggestions how to improve <tt>PLEXY</tt> feel free to send a mail to <a href="steffi@bioinf.uni-leipzig.de">steffi@bioinf.uni-leipzig.de</a>
+</body>
+</html>

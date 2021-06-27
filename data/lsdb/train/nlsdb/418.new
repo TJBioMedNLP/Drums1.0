@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>miRNAminer</title>
+  <meta http-equiv="expires" content="0">
+  <meta content="The miRNAminer team" name="author">
+  <meta content="microRNA homolog finder" name="description">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="verify-v1"
+ content="3fELsrw4usJyxMpVIzwxYINXrarSt4C3vm0EHWgEjAM=">
+</head>
+<body>
+<br>
+<table style="width: 100%; font-family: Arial;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="text-align: center; vertical-align: middle;"><a
+ href="index.html"><img alt="miRNAminer home" title="miRNAminer"
+ src="mirnaminerlogo.jpg"
+ style="border: 0px solid ; width: 657px; height: 131px;"></a></td>
+    </tr>
+  </tbody>
+</table>
+<table style="width: 100%; font-family: Arial;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 10%;"> <br>
+      </td>
+      <td style="width: 80%;">
+      <div style="text-align: justify;"> </div>
+      <h4 style="text-align: justify;"> miRNAminer is a web-based tool
+used for homologous miRNA gene
+search in several species.
+Given a search query, candidate homologs are
+identified using
+BLAST search and then tested for their known miRNA properties, such as
+secondary structure, energy, alignment and conservation, in order to
+assess their fidelity. Default parameters are stringent, though these
+can
+be relaxed. miRNAminer can be used prior to depositing novel miRNAs in
+public databases (such as miRbase). <br><br>
+      <font color="red">NEW:</font> See also <a href="http://people.csail.mit.edu/akiezun/miRviewer">miRviewer</a>, a global view of homologous miRNA genes in many species.
+  </h4>
+      </td>
+      <td style="vertical-align: top; width: 10%;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td
+ style="vertical-align: top; text-align: center; font-weight: bold;"><a
+ href="updates.html">Updates</a>&nbsp;&nbsp; | &nbsp; <a
+ href="discovered.html">Discovered miRNAs</a>&nbsp;&nbsp; | &nbsp; <a
+ href="help.html">Help</a> </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<form style="font-family: Arial;" action="miner.php" method="post">
+  <p> <label> <input name="maxPrecursorEnergy" size="4" maxlength="5"
+ value="-21.0" class="formFields" type="text"> </label>max RNA fold
+energy (delta
+G) </p>
+  <p> <label> <input name="minPrecursorLength" size="3" maxlength="3"
+ value="70" class="formFields" type="text"> </label>minimal length of
+precursor sequence (nt) </p>
+  <p> <label> <input name="maxPrecursorLength" size="3" maxlength="3"
+ value="180" class="formFields" type="text"> </label>maximal length
+of precursor sequence (nt) </p>
+  <p> <label> <input name="minPrecursorBasePairing" size="3"
+ maxlength="3" value="55" class="formFields" type="text"> </label>minimal
+base pairing
+percentage in miRNA precursor</p>
+  <p> <label> <input name="maxPrecursorGaps" size="3" maxlength="3"
+ value="10" class="formFields" type="text"> </label>maximal number of
+gaps in miRNA precursor alignment</p>
+  <p> <label> <input name="minPrecursorIden" size="3" maxlength="3"
+ value="56" class="formFields" type="text"> </label>minimal identity
+percentage in miRNA precursor alignment</p>
+  <p> <label> <input name="maxAllowJointMatureAndLoop" size="3"
+ maxlength="3" value="4" class="formFields" type="text"> </label>maximal
+overlap of mature miRNA and hairpin (nt)</p>
+  <p> <label> <input name="minAlignmentIdentityWithMature" size="3"
+ maxlength="3" value="0.80" class="formFields" type="text"> </label>minimal
+mature miRNA
+identity </p>
+  <p> <label> <input name="minBlastAlignmentLength" size="3"
+ maxlength="3" value="18" class="formFields" type="text"> </label>minimal
+BLAST
+alignment length (nt)</p>
+<!--  <p> <label> <input name="minBlastAlignmentIdentity" size="5"
+ maxlength="5" value="0.95" class="formFields" type="text"> </label>minimal
+BLAST
+alignment identity </p> -->
+  <p> <label> <input name="maxMismatchesWithMature" size="3"
+ maxlength="3" value="3" class="formFields" type="text"> </label>maximal
+number of mismatches in mature miRNA </p>
+  <p> <label> <input name="maxBlastEvalue" size="10" maxlength="10"
+ value="0.05" class="formFields" type="text"> </label>maximal BLAST
+e-value </p>
+  <p> <label> <input name="numOfResults" size="10" maxlength="10"
+ value="1" class="formFields" type="text"> </label>number or results
+to report</p>
+  <p> <label> <input name="checkSeedConservation" value="true"
+ checked="checked" type="checkbox"> </label> Require seed conservation
+in mature miRNA (nt 2-8) </p>
+  <p>Target genomes (hold Ctrl and click to select more than one):<br>
+  <select multiple="multiple" name="genome[]" size="5">
+  <option value="Human" selected="selected">Human (homo sapiens)</option>
+  <option value="Mouse">Mouse (mus musculus)</option>
+  <option value="Rat">Rat (rattus norvegicus)</option>
+  <option value="Chimp">Chimp (pan troglodytes)</option>
+  <option value="Dog">Dog (canis familiaris)</option>
+  <option value="Cow">Cow (bos taurus)</option>
+  <option value="elegans">Caenorhabditis elegans</option>
+<!-- <option value="Fruitfly">Fruitfly (drosophila melanogaster)</option> -->
+<!-- <option value="Zebrafish">Zebrafish (danio rerio)</option> -->
+  <option value="Chicken">Chicken (gallus gallus)</option>
+  <option value="Rhesus">Rhesus macaque (macaca mulatta)</option>
+<!-- <option value="Medaka">Medaka (oryzias latipes)</option> -->
+<!-- <option value="Tetraodon">Tetraodon (tetraodon nigroviridis)</option> -->
+  <option value="Opossum">Opossum (monodelphis domestica)</option>
+  <option value="Platypus">Platypus (ornithorhynchus anatinus)</option>
+  </select>
+  </p>
+  <p> MicroRNA precursor sequence <b>(required)</b>:<br>
+  <label><input name="precursor" class="formFields" size="180"
+ maxlength="180"
+ value="AAUGAUGGAGGUGCAGGCGUUUCCUGGGGAUUAAUGACCAGCUGGGAAGAACCAGUGGCCCUCGGCUCUGCCUCCCAGCCAGCCAUUAACUCCAAGGAAAUGUCUUUUGCUGAGGUCGUU"
+ type="text"> </label> </p>
+  <p> Mature microRNA sequence <b>(required)</b>:<br>
+  <label> <input name="mature1" size="35" maxlength="40"
+ value="CCAGCUGGGAAGAACCAGUGGC" class="formFields" type="text"> </label></p>
+<!-- <p> Secondary mature microRNA sequence (optional):<br>
+  <label> <input name="mature2" size="35" maxlength="40" value=""
+ class="formFields" type="text"> </label></p> --><!--Send result by email:
+<input type="checkbox" name="withEmail" value="false" class="formFields"/>-->
+  <br>
+  <p> Your email address-miRNAminer will send results to that email
+(optional)<br>
+  <input name="email" maxlength="80" size="60" value=""
+ class="formFields" type="text"> </p>
+  <h4>When you're ready, press Submit and wait for the result screen
+(search time depends on the number of requested results and the number
+of searched genomes)</h4>
+  <input name="reset" value="Reset" class="formButton" type="reset">&nbsp;
+  <input name="submit" value="Submit" class="formButton" type="submit"></form>
+<span style="font-family: Arial;">Contact </span><a
+ style="font-family: Arial;" href="mailto:mirnaminer@gmail.com">mirnaminer@gmail.com</a><span
+ style="font-family: Arial;">
+with questions or concerns about miRNAminer.<br>
+<br>
+The code is available on request: please contact </span><a
+ style="font-family: Arial;" href="mailto:mirnaminer@gmail.com">mirnaminer@gmail.com</a><span
+ style="font-family: Arial;"></span><br>
+<span style="font-family: Arial;"><br>
+</span>
+<span style="font-family: Arial;">When referring to our website please
+quote the following
+reference<br>
+Shay Artzi, Adam Kiezun and Noam Shomron. <span
+ style="font-style: italic;">miRNAminer: a tool for homologous microRNA
+gene search</span>. BMC
+Bioinformatics 2008, 9:39 <br>
+<a href="http://www.biomedcentral.com/1471-2105/9/39">http://www.biomedcentral.com/1471-2105/9/39</a></span>
+<br style="font-family: Arial;">
+<br style="font-family: Arial;">
+<script src="http://www.google-analytics.com/urchin.js"
+ type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2690858-1";
+urchinTracker();
+</script>
+</body>
+</html>

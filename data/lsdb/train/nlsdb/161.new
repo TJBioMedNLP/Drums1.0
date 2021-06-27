@@ -1,0 +1,1383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head><script type="text/javascript">
+//<![CDATA[
+var ajax = [];function pjx(args,fname,method) { this.target=args[1]; this.args=args[0]; method=(method)?method:'GET'; if(method=='post'){method='POST';} this.method = method; this.r=ghr(); this.url = this.getURL(fname);}function formDump(){ var all = []; var fL = document.forms.length; for(var f = 0;f<fL;f++){ var els = document.forms[f].elements; for(var e in els){ var tmp = (els[e].id != undefined)? els[e].id : els[e].name; if(typeof tmp != 'string'){continue;} if(tmp){ all[all.length]=tmp} } } return all;}function getVal(id) { if (id.constructor == Function ) { return id(); } if (typeof(id)!= 'string') { return id; } var element = document.getElementById(id); if( !element ) { for( var i=0; i<document.forms.length; i++ ){ element = document.forms[i].elements[id]; if( element ) break; } if( element && !element.type ) element = element[0]; } if(!element){ alert('ERROR: Cant find HTML element with id or name: ' + id+'. Check that an element with name or id='+id+' exists'); return 0; } if(element.type == 'select-one') { if(element.selectedIndex == -1) return; var item = element[element.selectedIndex]; return item.value || item.text; } if(element.type == 'select-multiple') { var ans = []; var k =0; for (var i=0;i<element.length;i++) { if (element[i].selected || element[i].checked ) { ans[k++]= element[i].value || element[i].text; } } return ans; } if(element.type == 'radio' || element.type == 'checkbox'){ var ans =[]; var elms = document.getElementsByTagName('input'); var endk = elms.length ; var i =0; for(var k=0;k<endk;k++){ if(elms[k].type== element.type && elms[k].checked && (elms[k].id==id||elms[k].name==id)){ ans[i++]=elms[k].value; } } return ans; } if( element.value == undefined ){ return element.innerHTML; }else{ return element.value; }}function fnsplit(arg) { var url=""; if(arg=='NO_CACHE'){return '&pjxrand='+Math.random()} if((typeof(arg)).toLowerCase() == 'object'){ for(var k in arg){ url += '&' + k + '=' + arg[k]; } }else if (arg.indexOf('__') != -1) { arga = arg.split(/__/); url += '&' + arga[0] +'='+ escape(arga[1]); } else { var res = getVal(arg) || ''; if(res.constructor != Array){ res = [res] } for(var i=0;i<res.length;i++) { url += '&args=' + escape(res[i]) + '&' + arg + '=' + escape(res[i]); } } return url;}pjx.prototype = { send2perl : function(){ var r = this.r; var dt = this.target; this.pjxInitialized(dt); var url=this.url; var postdata; if(this.method=="POST"){ var idx=url.indexOf('?'); postdata = url.substr(idx+1); url = url.substr(0,idx); } r.open(this.method,url,true); ; if(this.method=="POST"){ r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); r.send(postdata); } if(this.method=="GET"){ r.send(null); } r.onreadystatechange = handleReturn; }, pjxInitialized : function(){}, pjxCompleted : function(){}, readyState4 : function(){ var rsp = unescape(this.r.responseText); /* the response from perl */ var splitval = '__pjx__'; /* to split text */ /* fix IE problems with undef values in an Array getting squashed*/ rsp = rsp.replace(splitval+splitval+'g',splitval+" "+splitval); var data = rsp.split(splitval); dt = this.target; if (dt.constructor != Array) { dt=[dt]; } if (data.constructor != Array) { data=[data]; } if (typeof(dt[0])!='function') { for ( var i=0; i<dt.length; i++ ) { var div = document.getElementById(dt[i]); if (div.type =='text' || div.type=='textarea' || div.type=='hidden' ) { div.value=data[i]; } else{ div.innerHTML = data[i]; } } } else if (typeof(dt[0])=='function') { dt[0].apply(this,data); } this.pjxCompleted(dt); }, getURL : function(fname) { var args = this.args; var url= 'fname=' + fname; for (var i=0;i<args.length;i++) { url=url + args[i]; } return url; }};handleReturn = function() { for( var k=0; k<ajax.length; k++ ) { if (ajax[k].r==null) { ajax.splice(k--,1); continue; } if ( ajax[k].r.readyState== 4) { ajax[k].readyState4(); ajax.splice(k--,1); continue; } }};var ghr=getghr();function getghr(){ if(typeof XMLHttpRequest != "undefined") { return function(){return new XMLHttpRequest();} } var msv= ["Msxml2.XMLHTTP.7.0", "Msxml2.XMLHTTP.6.0", "Msxml2.XMLHTTP.5.0", "Msxml2.XMLHTTP.4.0", "MSXML2.XMLHTTP.3.0", "MSXML2.XMLHTTP", "Microsoft.XMLHTTP"]; for(var j=0;j<=msv.length;j++){ try { A = new ActiveXObject(msv[j]); if(A){ return function(){return new ActiveXObject(msv[j]);} } } catch(e) { } } return false;}function jsdebug(){ var tmp = document.getElementById('pjxdebugrequest').innerHTML = "<br><pre>"; for( var i=0; i < ajax.length; i++ ) { tmp += '<a href= '+ ajax[i].url +' target=_blank>' + decodeURI(ajax[i].url) + ' </a><br>'; } document.getElementById('pjxdebugrequest').innerHTML = tmp + "</pre>";}function external() { var args = external.arguments; for( var i=0; i<args[0].length;i++ ) { args[0][i] = fnsplit(args[0][i]); } var l = ajax.length; ajax[l]= new pjx(args,"external",args[2]); ajax[l].url = '/cgi-bin/GeneDistiller_results.cgi?' + ajax[l].url; ajax[l].send2perl(); ;}
+//]]>
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>GeneDistiller</title>
+<link href="/GeneDistiller/css.css" rel="stylesheet" type="text/css">
+<LINK REL="SHORTCUT ICON" HREF="/GeneDistiller/favicon.ico">
+<style type="text/css">
+<!--
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+small {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+}
+.rounded {
+	background-color: #EEEEEE; -moz-border-radius: 20px; padding: 10px;
+}
+.right {
+	background-position: right;
+}
+
+#expression_layer, #cellular_compartments_layer, #prioritisation_settings_layer {
+	background-color: #EEEEEE; -moz-border-radius: 20px; padding: 10px;
+}
+-->
+</style>
+</head>
+<body>
+	<div id="popup" style="border: 1px none rgb(0, 0, 0); overflow: visible; position: absolute; width: 300px; height: 115px; visibility: visible; z-index: 99; display: none; left: -28px; top: 708px;" 
+	onMouseDown="firstcorner(this)"> </div>
+<script src="/javascript/GeneDistiller_API.js" type="text/javascript">
+</script>
+<form action="/cgi-bin/GeneDistiller_results.cgi" name="form" method="post">
+		
+  <table border="0" cellpadding="1" cellspacing="1" width="100%">
+    <tr><td><img src="/GeneDistiller/GeneDistillery_80x82.png" alt="GeneDistillery"  width="80" height="82"></td>
+      <td><h1 align="center">GeneDistiller</h1></td>
+      <td align="right" class="blue_subheading">
+      	<A HREF="/GeneDistiller/manual.html" TARGET="_blank">help / manual</A><br>
+      	<A HREF="/GeneDistiller/disclaimer.html">disclaimer</A><br>
+      	<A HREF="/GeneDistiller/index.html">reset</A>	
+      </TD>
+    </tr>
+    </TABLE>
+  
+ 
+  <div class="rounded"  style="visibility: visible; display: display;">
+    <table border="0" cellpadding="1" cellspacing="1" width="100%">
+      <tr>
+        <td><b>species</b> </td>
+        <td><select name="txid" onMouseOver="p('This selects the species to be studied.')" onMouseOut="k('')">
+            <option selected value="9606">human</option>
+            <option value="10090">mouse</option>
+          </select>
+</td>
+        <td></td>
+        <td class="blue bold"><input name="enable_help" value="1" type="checkbox">
+          display online help (check this to see pop-up descriptions for each element) </td>
+      </tr>
+      <tr>
+        <td  colspan="2"><strong>order / prioritise genes</strong></td>
+      <td  colspan="2"><select name="order" 
+onMouseOver="p('Defines the order genes are presented in. Default is their physical position, but genesymbols or their similarity to reference genes can be used as well.')" 
+onMouseOut="k('')" onChange="SetWeights()">
+<option selected value="start_pos">position</option>
+<option value="">random</option>
+<option value="genesymbol">gene symbol</option>
+<option value="expression_similarity">expression similarity</option>
+<option value="interaction_score">interaction score</option>
+<option value="maestro">Maestro score</option>
+<option value="mitopred">mitochondria prediction</option>
+<option value="expression">tissue-specific expression</option>
+<option value="overall_score">prioritise with self chosen parameters</option>
+<option value="overall_score_mitochondrial">prioritise with focus on mitochondrial genes</option>
+<option value="overall_score_pathway">prioritise with focus on possible pathways (interaction and expression similarity)</option>
+<option value="overall_score_tissue_specific">prioritise with focus on tissue-specific expression</option>
+          </select>
+          
+          
+</td>
+    </tr>
+   </table>
+  </div>
+  <br>
+  <table width="100%">
+   <tr>
+    <td class="blue_subheading" width="50%">target genes</td>
+    <td><small><a href="javascript:ShowLayer('target_genes_layer')">show</a>&nbsp;<a href="javascript:HideLayer('target_genes_layer')">hide</a></small> </td>
+    <td align="right"><input name="submit" type="submit" class="right" value="Submit">
+    </td>
+   </tr>
+  </table>
+  <div class="rounded" id="target_genes_layer"  style="visibility: visible; display: display;">
+   <INPUT TYPE="hidden" name="target_genes_layer_b" value="">
+   <table border="0" cellpadding="1" cellspacing="1" width="100%">
+   	
+    <tr>
+      <td>
+      	
+      	<table border="0" cellpadding="3" width="100%">
+        <tbody>
+        	<tr><td class="blue_subheading" colspan="3">linkage interval</td></tr>
+	<tr>
+           <td><b>chromosome
+            <select name="chromosome" 
+onMouseOver="p('Select the chromosome. Only required if the region is not specified by genes, known SNPs or a list of genes.')" 
+onMouseOut="k('')">
+        <option selected value="">&nbsp;</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+        <option>13</option>
+        <option>14</option>
+        <option>15</option>
+        <option>16</option>
+        <option>17</option>
+        <option>18</option>
+        <option>19</option>
+        <option>20</option>
+        <option>21</option>
+        <option>22</option>
+        <option value="23">X</option>
+        <option value="24">Y</option>
+        <option value="0">MT</option>
+      </select>
+
+
+
+
+             </b></td>
+                <td><b>from</b></td>
+                <td><b>to</b></td>
+              </tr>
+              <tr>
+                <td><b>bp/Mbp (NCBI Build 37)</b></td>
+                <td><input name="start_pos" size="10" maxlength="10" 
+                	onMouseOver="p('Start of the interval in base pairs. Values below 400 will be regarded as Mbp. Leaving this empty means 0 unless another start condition is specified.')" 
+                	onMouseOut="k('')" type="text" value=""></td>
+                <td><input name="end_pos" size="10" maxlength="10" 
+                	onMouseOver="p('End of the interval in base pairs. Values below 400 will be regarded as Mbp. Leaving this empty means end of the chromosome unless another end is specified.')" 
+                	onMouseOut="k('')" type="text" value=""> 
+                	<br>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                	<span class="small">Values below 400 will be converted to Mbp. If (from) or (to) is not specified, the telomer will be used.</span>
+                </td>
+              </tr>
+              <tr>
+                <td><b>gene symbol</b></td>
+                <td><input name="start_gene" size="10" maxlength="20" 
+                	onMouseOver="p('First gene in the interval. Interval starts with the first base of the gene.')" 
+                	onMouseOut="k('')" type="text" value="">
+                </td>
+                <td><input name="end_gene" size="10" maxlength="20" 
+                	onMouseOver="p('Last gene in the interval. The last base of the gene is the end of the interval.')" 
+                	onMouseOut="k('')" type="text" value="">
+                </td>
+              </tr>
+              <tr>
+                <td><b>dbSNP ID / Affymetrix ID</b></td>
+                <td><input name="start_snp" size="10" maxlength="20" 
+                	onMouseOver="p('This SNP defines the begin of the interval.')" 
+                	onMouseOut="k('')" type="text" value="">
+                </td>
+                <td><input name="end_snp" size="10" maxlength="20" 
+                	onMouseOver="p('This SNP defines the end of the interval.')" 
+                	onMouseOut="k('')" type="text" value="">
+                </td>
+              </tr>
+              <tr>
+                <td><b>microsatellite</b></td>
+                <td><input name="start_microsat" size="10" maxlength="20" 
+                	onMouseOver="p('This STR marker defines the begin of the interval.')" 
+                	onMouseOut="k('')" type="text" value="">
+                </td>
+                <td><input name="end_microsat" size="10" maxlength="20" 
+                	onMouseOver="p('This STR marker defines the end of the interval.')" 
+                	onMouseOut="k('')" type="text" value="">
+                </td>
+              </tr><tr>
+                <td><b>type</b></td><td colspan="2">
+          <select name="gene_type" 
+onMouseOver="p('Output can be restricted to certain classes of genes.')" 
+onMouseOut="k('')">
+            <option value="0" selected>all</option>
+            <option value="1">snRNA</option>
+            <option value="2">pseudo</option>
+            <option value="3">rRNA</option>
+            <option value="4">unknown</option>
+            <option value="5">other</option>
+            <option value="6">snoRNA</option>
+            <option value="7">protein-coding</option>
+            <option value="8">tRNA</option>
+            <option value="9">miscRNA</option>
+          </select>
+
+
+        </td></tr><tr><td><button onclick='sendRequest();return false' > Count </button>&nbsp</td><td>  <DIV id="feedback" class="red"></DIV></td></tr>
+            </tbody>
+          </table></td><td  bgcolor="blue"></td><td width="10">&nbsp;</td><td><table><tr>
+          	<td class="blue_subheading"  colspan="2">single genes</td></tr>
+          		<tr>
+        <td><b>NCBI Entrez gene IDs</b> <br>
+          <textarea name="gene_no" cols="30" rows="5" 
+          	onMouseOver="p('A list of NCBI gene IDs can be specified here. Gene IDs and gene symbols can be combined. If you define an interval <B>and</B> genes; the interval will be ignored.')" 
+          	onMouseOut="k('')">
+</textarea>
+         <br>
+          <span class="small">Gene IDs must be comma-separated.</span></td>
+        <td><b>HGNC gene symbols</b> <br>
+          <textarea name="genesymbol" cols="30" rows="5" 
+          	onMouseOver="p('A list of genesymbols can be specified here. Gene IDs and gene symbols can be combined. If you define an interval <B>and</B> genes; the interval will be ignored.')" 
+          	onMouseOut="k('')">
+</textarea>
+          <br>
+         <span class="small">Gene symbols must be comma-separated. * and % can be used as wildcards.</span></td></tr>
+         	  </table></td>
+      </tr>
+    
+  
+    </table>
+  </div>
+  <br>
+  <table width="100%">
+    <tr>
+      <td class="blue_subheading" width="50%">comparison with known genes</td>
+      <td><small><a href="javascript:ShowLayer('known_genes_layer')">show</a>&nbsp;<a href="javascript:HideLayer('known_genes_layer')">hide</a></small> </td>
+      <td align="right"><input name="submit" type="submit" class="right" value="Submit">
+      </td>
+    </tr>
+  </table>
+  <div class="rounded" id="known_genes_layer" style="visibility: visible; display: display;">
+    <INPUT TYPE="hidden" name="known_genes_layer_b" value="">
+    <table border="0" cellpadding="1" cellspacing="1" width="100%">
+      <tr>
+        <td colspan="2">&nbsp;</td>
+        <td colspan="2"><span class="small"> 
+        	<input name="compare_expression" value="1" 
+          
+          onMouseOver="p('Compare expression of genes in the target interval with the genes (or those responsible for the specified phenotypes) listed here.')" 
+          onMouseOut="k('')" type="checkbox">
+          compare expression 
+          <input name="compare_interactions" value="1" 
+          
+          onMouseOver="p('Search for interactions between genes in the target interval and the genes (or those responsible for the specified phenotypes) listed here.')" 
+           onMouseOut="k('')" type="checkbox">
+          search for interactions </span></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="bold">compare with these genes (Entrez gene ID / HGNC gene symbol)</td>
+        <td colspan="2"><input name="comparison_genes" size="60" maxlength="180" 
+        	onMouseOver="p('Here genesymbols or IDs of genes known to cause a similar phenotype can be entered.<br>The application will try to highlight genes with a similar expression pattern in the candidate interval.<br>If you want to restrict the search to genes with a similar expression pattern, enter a high cut-off value for expression similarities under <I><B>filters</B></i>.')" 
+        	onMouseOut="k('')" 
+        	type="text" value=""> <br>
+          <span class="small">(NCBI Gene ID or gene symbol; comma separated)</span></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="bold">compare with these OMIM entries (MIM ID or keyword)</td>
+        <td colspan="2"><span class="small">
+          <input name="comparison_mim" type="text" id="comparison_mim" 
+ 			 onMouseOver="p('Here OMIM IDs or terms related with a similar phenotype can be entered.<br>GeneDistiller will search for associated genes and will check for similar expressed genes or interaction partners in the target interval.<br>If you want to restrict the search to genes with a similar expression pattern, enter a high cut-off value for expression similarities under <I><B>filters</B></i>.')" 
+          onMouseOut="k('')" 
+          size="60" maxlength="180" value=""> <br>
+          (MIM ID; comma separated) </span></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="bold">limit to genes with a similar expression</td>
+        <td colspan="2">cut-off value
+          <input name="expression_similarity_cutoff" size="3" maxlength="4" 
+          onMouseOver="p('The output can be limited to genes with expression patterns similar to reference genes. You can enter the cut-off value for similarity here. Values between 0 and 1 will show genes with a positive correlation of their expression patterns, values between -1 and 0 those with a negative correlation. If you leave this blank, all genes will be displayed.')" 
+          onMouseOut="k('')" type="text"  value=""></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <table width="100%">
+    <tr>
+      <td class="blue_subheading" width="50%">display options</td>
+      <td><small><a href="javascript:ShowLayer('display_options_layer')">show</a>&nbsp;<a href="javascript:HideLayer('display_options_layer')">hide</a></small> </td>
+      <td align="right"><input name="submit" type="submit" class="right" value="Submit">
+      </td>
+    </tr>
+  </table>
+  <div class="rounded" id="display_options_layer" style="visibility: visible; display: display;">
+    <INPUT TYPE="hidden" name="display_options_layer_b" value="">
+    <table border="0" cellpadding="1" cellspacing="1" width="100%">
+      <tr>
+        <td><input name="show_synonyms" id="show_synonyms" value="1"  
+        	onMouseOver="p('Shows gene synonyms.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          checked>
+          NCBI synonyms </td>
+        <td><input name="show_generifs" id="show_generifs" value="1"  
+        	onMouseOver="p('Shows NCBI geneRIFs.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          checked>
+          NCBI geneRIFs </td>
+      </tr>
+      <tr>
+        <td><input name="show_exons" id="show_exons" value="1"  
+        	onMouseOver="p('Shows number of exons (from ENSEMBL).')" 
+        	onMouseOut="k('')" type="checkbox" 
+          >
+          Exons</td>
+        <td><input name="show_transcripts" value="1"  
+        	onMouseOver="p('Shows transcripts and provides hyperlinks to them on ENSEMBL and to ExonPrimer.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          checked>
+          Transcripts (ENSEMBL) / ExonPrimer</td>
+      </tr>
+       <tr>
+ <td><input name="show_proteinfamilies" value="1" 
+onMouseOver="p('Shows protein families (from ENSEMBL).')" 
+onMouseOut="k('')" type="checkbox" 
+ checked>
+ Protein families (ENSEMBL)</td>
+ <td><input name="show_interpro" value="1" 
+onMouseOver="p('Shows protein domains (from InterPro).')" 
+onMouseOut="k('')" type="checkbox" 
+ checked>
+ Protein domains (InterPro)</td>
+ </tr>
+ <tr>
+ <td><input name="show_pfam" value="1" 
+onMouseOver="p('Shows protein domains (from PFAM).')" 
+onMouseOut="k('')" type="checkbox" 
+ checked>
+ Protein domains (PFAM)</td>
+ <td><input name="show_paralogs" value="1" 
+onMouseOver="p('Shows paralogs (from ENSEMBL).')" 
+onMouseOut="k('')" type="checkbox" 
+ checked>
+ Paralogs / sequence similarity (from ENSEMBL)</td>
+ </tr>
+  <tr>
+ <td><input name="show_pathways" value="1" 
+onMouseOver="p('Shows pathways (from Kegg).')" 
+onMouseOut="k('')" type="checkbox" 
+ checked>
+ Pathways (Kegg)</td>
+ <td><input name="show_hpo" value="1" 
+onMouseOver="p('Shows Human Phenotype Ontology terms.')" 
+onMouseOut="k('')" type="checkbox" 
+ checked>
+ Human Phenotype Ontology</td>
+ </tr>
+      <tr>
+        <td><input name="show_omim" value="1"  
+        	onMouseOver="p('Includes OMIM reports.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          checked>
+          OMIM reports        ( <input name="omim_full" value="1"  
+          onMouseOver="p('Only the first paragraph of OMIM reports will be printed. Hyperlinks to the whole report will be presented.')" 
+          onMouseOut="k('')" type="checkbox" 
+          >
+          show full reports)</td>
+        <td><input name="show_mgd_phenotypes" id="show_mgd_phenotypes" value="1"  
+        	onMouseOver="p('Shows mouse phenotypes (from MGD).')" 
+        	onMouseOut="k('')" type="checkbox" 
+          checked>
+          MGD phenotypes  ( <input name="mgd_full" value="1" 
+          onMouseOver="p('Shows also the description of each phenotype entry.')" 
+          onMouseOut="k('')" type="checkbox" 
+          >
+          show detailed descriptions)</td>
+      </tr>
+      <tr>
+        <td><input name="show_genbank" value="1"  
+        	onMouseOver="p('Displays links to Genbank files.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          >
+          Genbank files</td>
+        <td><input name="show_GO" value="1"  
+        	onMouseOver="p('Shows GO annotation with links to AmiGO.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          checked>
+          GeneOntology terms </td>
+      </tr>
+      <tr>
+        <td><input name="show_interaction" id="show_interaction" value="1"  
+        	onMouseOver="p('Shows UniHI interaction data.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          checked>
+          UniHI interactions</td>
+       <td><input name="show_maestro" value="1"  
+        	onMouseOver="p('Shows Maestro score/Mitopred (via ENSEMBL).')" 
+        	onMouseOut="k('')" type="checkbox" 
+          >
+          Maestro score / mitochondria prediction</td>
+      </tr>
+      <tr>
+        <td><input name="expression_as_table" value="1" 
+        	onMouseOver="p('Shows gene expression in a table. Note that the tissues have to be selected.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          >
+          Show table with expression values.</td>
+        <td><input name="expression_as_image" value="1" 
+        	onMouseOver="p('Shows gene expression as a bar chart. Note that the tissues have to be selected.')" 
+        	onMouseOut="k('')" type="checkbox" 
+          >
+          Show expression as bar chart.</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <table width="100%">
+    <tr>
+      <td class="blue_subheading" width="50%">phenotypes</td>
+      <td><small><a href="javascript:ShowLayer('phenotypes_layer')">show</a>&nbsp;<a href="javascript:HideLayer('phenotypes_layer')">hide</a></small> </td>
+      <td align="right"><input name="submit" type="submit" class="right" value="Submit">
+      </td>
+    </tr>
+  </table>
+  <div class="rounded" id="phenotypes_layer" style="visibility: visible; display: display;;">
+    <INPUT TYPE="hidden" name="phenotypes_layer_b" value="">
+    <table border="0" cellpadding="1" cellspacing="1" width="100%">
+      <tr>
+        <td colspan="2"><b>highlight these keywords </b></td>
+        <td colspan="2"><input name="keywords" value="" 
+        	size="60" maxlength="180" 
+          onMouseOver="p('Keywords defined here will be highlighted in OMIM reports and geneRIFs.')" 
+          onMouseOut="k('')" type="text"> <br>
+          <input name="restrict_to_keywords" 
+          
+          value="1" 
+          onMouseOver="p('Restrict output to genes having at least one of these keywords in one report.')" 
+          onMouseOut="k('')" type="checkbox">
+          show only genes with at least one of these words in their OMIM reports</td>
+      </tr>
+           <tr>
+        <td  colspan="2"><b>highlight these Human Phenotype Ontology IDs (and their subclasses) </b></td>
+        <td colspan="2"><input name="hpo_ids" value="" size="60" maxlength="180" 
+        	onMouseOver="p('HPO IDs defined here will be highlighted. The same applies to their subordinate classes.')" 
+        	onMouseOut="k('')" type="text"> <br>
+          <input name="restrict_to_hpo_ids" value="1" 
+          
+          onMouseOver="p('Restrict output to genes to which at least one of these HPO IDs applies.')" 
+          onMouseOut="k('')" type="checkbox">
+          show only genes to which at least one of these HPO IDs applies</td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>highlight these MGD phenotypes </b></td>
+        <td colspan="2"><select name="mgd_phenotypes" multiple size="3"
+onMouseOver="p('Select the mouse phenotypes you are interested in. Multiple selections are possible with the CTRL key. If you want to restrict the output to genes connected with these phenotypes, check the checkbox below.')" 
+onMouseOut="k('')">
+            <option value="1186">pigmentation phenotype</option>
+            <option value="2006">tumorigenesis</option>
+            <option value="2873">normal phenotype</option>
+            <option value="3012">no phenotypic analysis</option>
+            <option value="3631">nervous system phenotype</option>
+            <option value="5367">renal/urinary system phenotype</option>
+            <option value="5369">muscle phenotype</option>
+            <option value="5370">liver/biliary system phenotype</option>
+            <option value="5371">limbs/digits/tail phenotype</option>
+            <option value="5372">life span-post-weaning/aging</option>
+            <option value="5373">lethality-postnatal</option>
+            <option value="5374">lethality-embryonic/perinatal</option>
+            <option value="5375">adipose tissue phenotype</option>
+            <option value="5376">homeostasis/metabolism phenotype</option>
+            <option value="5377">hearing/vestibular/ear phenotype</option>
+            <option value="5378">growth/size phenotype</option>
+            <option value="5379">endocrine/exocrine gland phenotype</option>
+            <option value="5380">embryogenesis phenotype</option>
+            <option value="5381">digestive/alimentary phenotype</option>
+            <option value="5382">craniofacial phenotype</option>
+            <option value="5384">cellular phenotype</option>
+            <option value="5385">cardiovascular system phenotype</option>
+            <option value="5386">behaviour/neurological phenotype</option>
+            <option value="5387">immune system phenotype</option>
+            <option value="5388">respiratory system phenotype</option>
+            <option value="5389">reproductive system phenotype</option>
+            <option value="5390">skeleton phenotype</option>
+            <option value="5391">vision/eye phenotype</option>
+            <option value="5392">touch/vibrissae phenotype</option>
+            <option value="5393">skin/coat/nails phenotype</option>
+            <option value="5394">taste/olfaction phenotype</option>
+            <option value="5395">other phenotype</option>
+            <option value="5397">haematopoietic system phenotype</option>
+          </select>
+
+
+          <br>
+          <input name="restrict_to_mgd_phenotypes" 
+          
+          value="1" 
+          onMouseOver="p('Restrict output to genes to which at least one of these phenotypes was assigned.')" 
+          onMouseOut="k('')" type="checkbox">
+          show only genes to which at least one of these phenotypes was assigned </td>
+      </tr>
+      <tr>
+        <td  colspan="2"><b>highlight these GO IDs (and their subclasses) </b></td>
+        <td colspan="2"><input name="go_ids" value="" size="60" maxlength="180" 
+        	onMouseOver="p('GO IDs defined here will be highlighted. The same applies to their subordinate classes.')" 
+        	onMouseOut="k('')" type="text"> <br>
+          <input name="restrict_to_go_ids" value="1" 
+          
+          onMouseOver="p('Restrict output to genes to which at least one of these GO IDs applies.')" 
+          onMouseOut="k('')" type="checkbox">
+          show only genes to which at least one of these GO IDs applies</td>
+      </tr>
+      <tr>
+        <td  colspan="2"><b>highlight these Kegg pathways (specified by number)</b></td>
+        <td colspan="2"><input name="kegg" value="" size="60" maxlength="180" 
+        	onMouseOver="p('Kegg pathways defined here will be highlighted.')" 
+        	onMouseOut="k('')" type="text"> <br>
+          <input name="restrict_to_kegg" value="1" 
+          
+          onMouseOver="p('Restrict output to genes involved in at least one of these Kegg pathways.')" 
+          onMouseOut="k('')" type="checkbox">
+          show only genes involved in at least one of these Kegg pathways</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <table width="100%">
+    <tr>
+      <td class="blue_subheading" width="50%">expression</td>
+      <td><small><a href="javascript:ShowLayer('expression_layer')">show</a>&nbsp;<a href="javascript:HideLayer('expression_layer')">hide</a></small> </td>
+      <td align="right"><input name="submit" type="submit" class="right" value="Submit">
+      </td>
+    </tr>
+  </table>
+  <div id="expression_layer" style="visibility: visible; display: none;">
+    <INPUT TYPE="hidden" name="expression_layer_b" value="">
+    <table border="0" cellspacing="2">
+      <tbody>
+        <tr>
+          <td colspan="5"><b> Select tissue to be shown with the checkboxes; 
+            use the drop-down menus and text fields to limit expression to values above/below x times of median. Settings can either be 'exclusive' (only genes fulfilling all or one condition are displayed) or 'scoring' (genes are ranked for their fulfillment of all conditions). Tick boxes to display a certain tissue. <br><br>
+            Connect expression conditions with
+            <select name="expression_logic"
+ onMouseOver="p('Select if the conditions shall be joined using AND (all must be fulfilled) or OR (any must be fulfilled).')" 
+onMouseOut="k('')">
+              <option>AND</option>
+              <option>OR</option>
+            </select>
+
+
+            ,
+            <select name="expression_logic2"
+ onMouseOver="p('Select if you want to restrict the output to genes fulfilling the conditions or use expression to rank the genes.')" 
+onMouseOut="k('')">
+              <option value="exclusive">show only genes fulfilling the conditions</option>
+              <option value="scoring">rank genes by their fulfillment of conditions</option>
+            </select>
+
+
+            .</b></td>
+        </tr>
+        <tr>
+          <td colspan="2"><em>show</em></td>
+          <td>&nbsp;</td>
+          <td><em>conditions</em></td>
+          <td><em>x times of median expression </em></td>
+        </tr>
+        <TR>
+<td colspan='5' bgcolor='yellow'>heart</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_27">heart</td><td><SELECT name="expression_operator_27"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_27" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_7">atrioventricular node</td><td><SELECT name="expression_operator_7"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_7" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_14">cardiac myocytes</td><td><SELECT name="expression_operator_14"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_14" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>kidney</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_29">kidney</td><td><SELECT name="expression_operator_29"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_29" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_3">adrenal cortex</td><td><SELECT name="expression_operator_3"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_3" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_4">adrenal gland</td><td><SELECT name="expression_operator_4"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_4" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>blood / bonemarrow</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='4' bgcolor='yellow'>blood</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_78">wholeblood</td><td><SELECT name="expression_operator_78"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_78" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_45">BDCA4+ dendritic cells</td><td><SELECT name="expression_operator_45"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_45" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_46">CD14+ monocytes</td><td><SELECT name="expression_operator_46"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_46" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_47">CD19+ B cells  </td><td><SELECT name="expression_operator_47"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_47" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_48">CD4+ T cells   </td><td><SELECT name="expression_operator_48"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_48" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_49">CD56+ NK cells </td><td><SELECT name="expression_operator_49"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_49" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_50">CD8+ T cells </td><td><SELECT name="expression_operator_50"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_50" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_1">721 B lymphoblasts</td><td><SELECT name="expression_operator_1"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_1" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='4' bgcolor='yellow'>bone marrow</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_12">bone marrow</td><td><SELECT name="expression_operator_12"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_12" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_8">CD105+ endothelial</td><td><SELECT name="expression_operator_8"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_8" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_9">CD33+ myeloid</td><td><SELECT name="expression_operator_9"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_9" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_10">CD34+</td><td><SELECT name="expression_operator_10"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_10" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_11">CD71+ early erythroid</td><td><SELECT name="expression_operator_11"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_11" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>other tissues</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_6">appendix</td><td><SELECT name="expression_operator_6"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_6" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_72">tongue</td><td><SELECT name="expression_operator_72"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_72" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_73">tonsil</td><td><SELECT name="expression_operator_73"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_73" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_74">trachea</td><td><SELECT name="expression_operator_74"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_74" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_70">thymus</td><td><SELECT name="expression_operator_70"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_70" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_71">thyroid</td><td><SELECT name="expression_operator_71"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_71" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_76">uterus</td><td><SELECT name="expression_operator_76"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_76" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_77">uterus corpus</td><td><SELECT name="expression_operator_77"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_77" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_56">salivary gland</td><td><SELECT name="expression_operator_56"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_56" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_33">liver</td><td><SELECT name="expression_operator_33"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_33" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_34">lung</td><td><SELECT name="expression_operator_34"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_34" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_13">bronchial epithelial cells</td><td><SELECT name="expression_operator_13"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_13" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_35">lymph node</td><td><SELECT name="expression_operator_35"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_35" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_41">ovary</td><td><SELECT name="expression_operator_41"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_41" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_42">pancreas</td><td><SELECT name="expression_operator_42"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_42" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_43">pancreatic islets</td><td><SELECT name="expression_operator_43"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_43" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_52">placenta</td><td><SELECT name="expression_operator_52"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_52" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_55">prostate</td><td><SELECT name="expression_operator_55"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_55" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_58">skin</td><td><SELECT name="expression_operator_58"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_58" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_2">adipocyte</td><td><SELECT name="expression_operator_2"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_2" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>testis</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_64">testis</td><td><SELECT name="expression_operator_64"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_64" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_65">testis germ cell</td><td><SELECT name="expression_operator_65"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_65" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_66">testis interstitial</td><td><SELECT name="expression_operator_66"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_66" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_67">Leydig cell (testis)</td><td><SELECT name="expression_operator_67"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_67" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_68">testis seminiferous tubule</td><td><SELECT name="expression_operator_68"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_68" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>brain / neuronal</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_79">whole brain</td><td><SELECT name="expression_operator_79"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_79" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_69">thalamus</td><td><SELECT name="expression_operator_69"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_69" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_28">hypothalamus</td><td><SELECT name="expression_operator_28"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_28" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_16">cerebellum</td><td><SELECT name="expression_operator_16"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_16" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_17">cerebellar peduncles</td><td><SELECT name="expression_operator_17"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_17" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_5">amygdala</td><td><SELECT name="expression_operator_5"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_5" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_54">prefrontal cortex</td><td><SELECT name="expression_operator_54"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_54" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_19">cingulate cortex</td><td><SELECT name="expression_operator_19"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_19" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_53">pons</td><td><SELECT name="expression_operator_53"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_53" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_44">parietal lobe</td><td><SELECT name="expression_operator_44"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_44" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_51">pituitary</td><td><SELECT name="expression_operator_51"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_51" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_63">temporal lobe</td><td><SELECT name="expression_operator_63"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_63" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_38">medulla oblongata</td><td><SELECT name="expression_operator_38"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_38" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_39">occipital lobe</td><td><SELECT name="expression_operator_39"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_39" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_40">olfactory bulb</td><td><SELECT name="expression_operator_40"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_40" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_61">subthalamic nucleus</td><td><SELECT name="expression_operator_61"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_61" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_26">globus pallidus</td><td><SELECT name="expression_operator_26"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_26" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_15">caudate nucleus</td><td><SELECT name="expression_operator_15"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_15" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='4' bgcolor='yellow'>neuronal</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_62">superior cervical ganglion</td><td><SELECT name="expression_operator_62"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_62" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_75">trigeminal ganglion</td><td><SELECT name="expression_operator_75"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_75" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_18">ciliary ganglion</td><td><SELECT name="expression_operator_18"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_18" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_60">spinal cord</td><td><SELECT name="expression_operator_60"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_60" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td width='20'>&nbsp;</td><td colspan='1'><INPUT type="checkbox" value="1" name="expression_show_21">dorsal root ganglion</td><td><SELECT name="expression_operator_21"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_21" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>muscle</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_59">smooth muscle</td><td><SELECT name="expression_operator_59"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_59" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_57">skeletal muscle</td><td><SELECT name="expression_operator_57"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_57" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>development</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_22">fetal brain</td><td><SELECT name="expression_operator_22"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_22" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_23">fetal liver</td><td><SELECT name="expression_operator_23"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_23" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_24">fetal lung</td><td><SELECT name="expression_operator_24"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_24" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_25">fetal thyroid</td><td><SELECT name="expression_operator_25"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_25" size="3"></td></tr>
+<TR>
+<td colspan='5' bgcolor='yellow'>cancer</td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_30">leukemia, chronic myelogenous (k562)</td><td><SELECT name="expression_operator_30"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_30" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_31">leukemia, lymphoblastic (molt4)</td><td><SELECT name="expression_operator_31"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_31" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_32">leukemia, promyelocytic (hl60)</td><td><SELECT name="expression_operator_32"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_32" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_20">colorectal adenocarcinoma</td><td><SELECT name="expression_operator_20"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_20" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_36">Burkitts lymphoma (Daudi)</td><td><SELECT name="expression_operator_36"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_36" size="3"></td></tr>
+<TR>
+<td width='20'>&nbsp;</td><td colspan='2'><INPUT type="checkbox" value="1" name="expression_show_37">Burkitts lymphoma (Raji)</td><td><SELECT name="expression_operator_37"> <option value="">&nbsp;</option><OPTION>&lt;</OPTION><OPTION selected>&gt;</OPTION></SELECT></td><td><INPUT type="text" name="expression_value_37" size="3"></td></tr>
+
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <table width="100%">
+    <tr>
+      <td class="blue_subheading" width="50%">cellular localisation</td>
+      <td><small><a href="javascript:ShowLayer('cellular_compartments_layer')">show</a>&nbsp;<a href="javascript:HideLayer('cellular_compartments_layer')">hide</a></small> </td>
+      <td align="right"><input name="submit" type="submit" class="right" value="Submit">
+      </td>
+    </tr>
+  </table>
+  <div id="cellular_compartments_layer"  style="visibility: visible; display: none;">
+    <INPUT TYPE="hidden" name="cellular_compartments_layer_b" value="">
+    <table border="0" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td colspan="13"><b> Select cellular compartments (or locations within them) 
+            to be highlighted. <br>
+            <input value="" name="cell_comp_restrict" type="checkbox">
+            Restrict output to genes/proteins within one of the selected compartments.</b></td>
+        </tr>
+        <tr>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td width='4%'>&nbsp;</td>
+<td>&nbsp;</td></TR><TR>
+<td colspan='13'><INPUT type="checkbox"  value="1" name="cell_comp_5623">cell
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_44464">cell part
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_267">cell fraction
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_1950">PME fraction
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_5624">membrane fraction
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_299">integral to membrane of membrane fraction
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_300">peripheral to membrane of membrane fraction
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_19717">synaptosome
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_42598">vesicular fraction
+</td></tr>
+<TR>
+<td colspan='5'>&nbsp;</td><td colspan='8'><INPUT type="checkbox"  value="1" name="cell_comp_5792">microsome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_19718">rough microsome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_19719">smooth microsome
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_5622">intracellular
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_44424">intracellular part
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_178">exosome (RNase complex)
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_502">proteasome complex (sensu Eukaryota)
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_5727">extrachromosomal circular DNA
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_5737">cytoplasm
+</td></tr>
+<TR>
+<td colspan='5'>&nbsp;</td><td colspan='8'><INPUT type="checkbox"  value="1" name="cell_comp_16528">sarcoplasm
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_16529">sarcoplasmic reticulum
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_33017">sarcoplasmic reticulum membrane
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_33018">sarcoplasmic reticulum lumen
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_30314">junctional membrane complex
+</td></tr>
+<TR>
+<td colspan='5'>&nbsp;</td><td colspan='8'><INPUT type="checkbox"  value="1" name="cell_comp_44444">cytoplasmic part
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_229">cytoplasmic chromosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5739">mitochondrion
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_262">mitochondrial chromosome
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5740">mitochondrial envelope
+</td></tr>
+<TR>
+<td colspan='9'>&nbsp;</td><td colspan='4'><INPUT type="checkbox"  value="1" name="cell_comp_5757">mitochondrial permeability transition pore complex
+</td></tr>
+<TR>
+<td colspan='9'>&nbsp;</td><td colspan='4'><INPUT type="checkbox"  value="1" name="cell_comp_5758">mitochondrial intermembrane space
+</td></tr>
+<TR>
+<td colspan='9'>&nbsp;</td><td colspan='4'><INPUT type="checkbox"  value="1" name="cell_comp_31966">mitochondrial membrane
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5759">mitochondrial matrix
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_20023">kinetoplast
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_31980">mitochondrial lumen
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_45025">mitochondrial degradosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5768">endosome
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_5769">early endosome
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_5770">late endosome
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_55037">recycling endosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5773">vacuole
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_322">storage vacuole
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_323">lytic vacuole
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5764">lysosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5783">endoplasmic reticulum
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_5790">smooth endoplasmic reticulum
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_5791">rough endoplasmic reticulum
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5793">ER-Golgi intermediate compartment
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5794">Golgi apparatus
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5795">Golgi stack
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5796">Golgi lumen
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5798">Golgi-associated vesicle
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5801">cis-Golgi network
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5802">trans-Golgi network
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_17119">Golgi transport complex
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5811">lipid particle
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5815">microtubule organizing center
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5829">cytosol
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5840">ribosome
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_15934">large ribosomal subunit
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_15935">small ribosomal subunit
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5938">cell cortex
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_30117">membrane coat
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_30531">small cytoplasmic ribonucleoprotein complex
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_30684">preribosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_31410">cytoplasmic vesicle
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_32019">mitochondrial cloud
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_32047">mitosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_42579">microbody
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_5777">peroxisome
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_9514">glyoxysome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_42587">glycogen granule
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_42718">yolk granule
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_43292">contractile fiber
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_30016">myofibril
+</td></tr>
+<TR>
+<td colspan='7'>&nbsp;</td><td colspan='6'><INPUT type="checkbox"  value="1" name="cell_comp_30485">smooth muscle contractile fiber
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_48500">signal recognition particle
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_16234">inclusion body
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_43229">intracellular organelle
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5634">nucleus
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_228">nuclear chromosome
+</td></tr>
+<TR>
+<td colspan='10'>&nbsp;</td><td colspan='3'><INPUT type="checkbox"  value="1" name="cell_comp_788">nuclear nucleosome
+</td></tr>
+<TR>
+<td colspan='10'>&nbsp;</td><td colspan='3'><INPUT type="checkbox"  value="1" name="cell_comp_790">nuclear chromatin
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5635">nuclear envelope
+</td></tr>
+<TR>
+<td colspan='9'>&nbsp;</td><td colspan='4'><INPUT type="checkbox"  value="1" name="cell_comp_5641">nuclear envelope lumen
+</td></tr>
+<TR>
+<td colspan='9'>&nbsp;</td><td colspan='4'><INPUT type="checkbox"  value="1" name="cell_comp_5652">nuclear lamina
+</td></tr>
+<TR>
+<td colspan='9'>&nbsp;</td><td colspan='4'><INPUT type="checkbox"  value="1" name="cell_comp_31965">nuclear membrane
+</td></tr>
+<TR>
+<td colspan='10'>&nbsp;</td><td colspan='3'><INPUT type="checkbox"  value="1" name="cell_comp_5637">nuclear inner membrane
+</td></tr>
+<TR>
+<td colspan='10'>&nbsp;</td><td colspan='3'><INPUT type="checkbox"  value="1" name="cell_comp_5640">nuclear outer membrane
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5654">nucleoplasm
+</td></tr>
+<TR>
+<td colspan='9'>&nbsp;</td><td colspan='4'><INPUT type="checkbox"  value="1" name="cell_comp_44451">nucleoplasm part
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5730">nucleolus
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_5880">nuclear microtubule
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_16363">nuclear matrix
+</td></tr>
+<TR>
+<td colspan='8'>&nbsp;</td><td colspan='5'><INPUT type="checkbox"  value="1" name="cell_comp_31981">nuclear lumen
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5929">cilium
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5930">axoneme
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_20015">glycosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5694">chromosome
+</td></tr>
+<TR>
+<td colspan='6'>&nbsp;</td><td colspan='7'><INPUT type="checkbox"  value="1" name="cell_comp_5856">cytoskeleton
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_9986">cell surface
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_16020">membrane
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_19867">outer membrane
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_30312">external encapsulating structure
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_5618">cell wall
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_30428">cell septum
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_42597">periplasmic space
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_42995">cell projection
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_43005">neuron projection
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_30424">axon
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_30425">dendrite
+</td></tr>
+<TR>
+<td colspan='4'>&nbsp;</td><td colspan='9'><INPUT type="checkbox"  value="1" name="cell_comp_43679">nerve terminal
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_44463">cell projection part
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_43025">cell soma
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_43203">axon hillock
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_43204">perikaryon
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_43684">type IV protein secretion system complex
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_45177">apical part of cell
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_45178">basal part of cell
+</td></tr>
+<TR>
+<td colspan='13'><INPUT type="checkbox"  value="1" name="cell_comp_31012">extracellular matrix
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_5578">proteinaceous extracellular matrix
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_5581">collagen
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_5604">basement membrane
+</td></tr>
+<TR>
+<td colspan='3'>&nbsp;</td><td colspan='10'><INPUT type="checkbox"  value="1" name="cell_comp_5605">basal lamina
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_5614">interstitial matrix
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_43205">fibril
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_60102">collagen and cuticulin-based cuticle extracellular matrix
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_44420">extracellular matrix part
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_43083">synaptic cleft
+</td></tr>
+<TR>
+<td colspan='13'><INPUT type="checkbox"  value="1" name="cell_comp_5576">extracellular region
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_5577">fibrinogen complex
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_5615">extracellular space
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_42025">host cell nucleus
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_43230">extracellular organelle
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_43245">extraorganismal space
+</td></tr>
+<TR>
+<td colspan='2'>&nbsp;</td><td colspan='11'><INPUT type="checkbox"  value="1" name="cell_comp_45171">intercellular bridge
+</td></tr>
+<TR>
+<td colspan='13'><INPUT type="checkbox"  value="1" name="cell_comp_32991">macromolecular complex
+</td></tr>
+<TR>
+<td colspan='13'><INPUT type="checkbox"  value="1" name="cell_comp_55044">symplast
+</td></tr>
+<TR>
+<td colspan='13'><INPUT type="checkbox"  value="1" name="cell_comp_45202">synapse
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_31594">neuromuscular junction
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_32279">asymmetric synapse
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_32280">symmetric synapse
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_44456">synapse part
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_60076">excitatory synapse
+</td></tr>
+<TR>
+<td colspan='1'>&nbsp;</td><td colspan='12'><INPUT type="checkbox"  value="1" name="cell_comp_60077">inhibitory synapse</td></tr>
+
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <table width="100%">
+    <tr>
+      <td class="blue_subheading" width="50%">prioritisation settings</td>
+      <td><small><a href="javascript:ShowLayer('prioritisation_settings_layer')">show</a>&nbsp;<a href="javascript:HideLayer('prioritisation_settings_layer')">hide</a></small> </td>
+      <td align="right"><input name="submit" type="submit" class="right" value="Submit">
+      </td>
+    </tr>
+  </table>
+  <div id="prioritisation_settings_layer" style="visibility: visible; display: none;">
+    <INPUT TYPE="hidden" name="prioritisation_settings_layer_b" value="">
+    <table border="0" cellspacing="2" >
+      <tbody>
+        <tr>
+          <td colspan="3"><b> Use these fields to fine-tune prioritisation according to your needs. </B><BR>
+          	When a prioritisation approach has been selected, default values will be filled in. You can change the values according to your needs and thus put more or less emphasis on the different parameters.
+          	When a weight is set to 0 (zero), the parameter will be ignored.<br>
+          </td>
+        </tr>
+         <tr>
+          <td>&nbsp;</td><td>&nbsp;</td>
+          <td><small>Weight given to the...</small>
+          </td>
+        </tr>
+        <tr>
+          <td>Mitopred</td>
+          <td><input type="text" name="weight_mitopred" size="3" value=""></td>
+          <td><small>Mitopred score for prediction of a mitochondrial import sequence</small></td>
+        </tr>
+        <tr>
+          <td>Maestro</td>
+          <td><input type="text" name="weight_maestro" size="3" value=""></td>
+          <td><small>Maestro score for prediction of a mitochondrial import sequence</small></td>
+        </tr>
+        <tr>
+          <td>OMIM title </td>
+          <td><input type="text" name="weight_omim_title" size="3" value=""></td>
+          <td><small>occurence of a search term in an OMIM title</small></td>
+        </tr>
+        <tr>
+          <td>OMIM clinical symptoms </td>
+          <td><input type="text" name="weight_omim_cs" size="3" value=""></td>
+          <td><small>occurence of a search term in an OMIM clinical synposis</small></td>
+        </tr>
+        <tr>
+          <td>OMIM text </td>
+          <td><input type="text" name="weight_omim_text" size="3" value=""></td>
+          <td><small>occurence of a search term in an OMIM report</small></td>
+        </tr>
+        <tr>
+          <td>NCBI geneRIFs </td>
+          <td><input type="text" name="weight_generifs" size="3" value=""></td>
+          <td><small>occurence of a search term in the NCBI GeneRIFs</small></td>
+        </tr>
+        <tr>
+          <td>MGD phenotype </td>
+          <td><input type="text" name="weight_mgd_phenotype" size="3" value=""></td>
+          <td><small>existence of one of the selected MGD (Mouse Genome Database) phenotypes</small></td>
+        </tr>
+        <tr>
+          <td>successive MGD phenotype </td>
+          <td><input type="text" name="weight_successive_mgd_phenotype" size="3" value=""></td>
+          <td><small>existence of another selected MGD phenotype</small></td>
+        </tr>
+          <tr>
+          <td>HPO terms </td>
+          <td><input type="text" name="weight_hpo_term" size="3" value=""></td>
+          <td><small>existence of one of the specified Human Phenotype Ontology terms (or subclasses)</small></td>
+        </tr>
+        <tr>
+          <td>successive HPO terms </td>
+          <td><input type="text" name="weight_successive_hpo_term" size="3" value=""></td>
+          <td><small>existence of another specified Human Phenotype Ontology terms (or subclasses)</small></td>
+        </tr>
+        <tr>
+          <td>expression similarity </td>
+          <td><input type="text" name="weight_expression_similarity" size="3" value=""></td>
+          <td><small>expression similarity between the candidate gene and other gene(s) specified above under <i>Comparison with known genes</i></small></td>
+        </tr>
+        <tr>
+          <td>tissue-specific expression </td>
+          <td><input type="text" name="weight_tissuespecific_expression" size="3" value=""></td>
+          <td><small>tissue-specific expression</small></td>
+        </tr>
+        <tr>
+          <td>cellular localisation </td>
+          <td><input type="text" name="weight_cellular_component" size="3" value=""></td>
+          <td><small>specified cellular, extracellular, or organellar localisation (or a sub-localisation thereof)</small></td>
+        </tr>
+        <tr>
+          <td>GO terms </td>
+          <td><input type="text" name="weight_go_term" size="3" value=""></td>
+          <td><small>existence of one of the specified GO (GeneOntology) terms (or subclasses)</small></td>
+        </tr>
+        <tr>
+          <td>successive GO terms </td>
+          <td><input type="text" name="weight_successive_go_term" size="3" value=""></td>
+          <td><small>existence of another specified GO terms (or subclasses)</small></td>
+        </tr>
+        <tr>
+          <td>interaction </td>
+          <td><input type="text" name="weight_interaction" size="3" value=""></td>
+          <td><small>interaction with one of the specified partners (or partners selected by their OMIM disease phenotypes)</small></td>
+        </tr>
+        <tr>
+          <td>successive interaction </td>
+          <td><input type="text" name="weight_successive_interaction" size="3" value=""></td>
+          	<td><small>interaction with another of the specified partners</small></td>
+        </tr>
+        <tr>
+          <td>interaction, successive networks </td>
+          <td><input type="text" name="weight_successive_network_interaction" size="3" value=""></td>
+          	<td><small>interaction confirmed in another interaction network</small></td>
+        </tr>
+         <tr>
+          <td>PFAM </td>
+          <td><input type="text" name="weight_pfam" size="3" value=""></td>
+          	<td><small>existence of a target PFAM domain</small></td>
+        </tr>
+        <tr>
+          <td>PFAM, successive domain </td>
+          <td><input type="text" name="weight_successive_pfam" size="3" value=""></td>
+          	<td><small>existence of another target PFAM domain</small></td>
+        </tr>
+      <tr>
+          <td>InterPro </td>
+          <td><input type="text" name="weight_interpro" size="3" value=""></td>
+          	<td><small>existence of a target InterPro domain</small></td>
+        </tr>
+        <tr>
+          <td>InterPro, successive domain </td>
+          <td><input type="text" name="weight_successive_interpro" size="3" value=""></td>
+          	<td><small>existence of another target InterPro domain</small></td>
+        </tr>
+             <tr>
+          <td>Kegg pathways </td>
+          <td><input type="text" name="weight_pathway" size="3" value=""></td>
+          	<td><small>member of a target pathway</small></td>
+        </tr>
+        <tr>
+          <td>Kegg, successive pathway </td>
+          <td><input type="text" name="weight_successive_pathway" size="3" value=""></td>
+          	<td><small>member of another target pathway</small></td>
+        </tr>
+             <tr>
+          <td>protein paralogs: identity </td>
+          <td><input type="text" name="weight_identity" size="3" value=""></td>
+          	<td><small>protein paralogs, weight of sequence identity</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <input name="submit" value="Submit" type="submit">
+</form>
+</body>
+</html>

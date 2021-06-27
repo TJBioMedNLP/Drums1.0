@@ -1,0 +1,748 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+	<TITLE>Welcome to PIR [Protein Information Resource]</TITLE>
+  	<LINK  href="/pirwww/stylesheet/styles.css" type="text/css"  rel="stylesheet">
+  <SCRIPT language=JavaScript src="/pirwww/scripts/progress_bar.js" type="text/javascript"></SCRIPT>
+    <style type="text/css">
+    a:active {  color:#336699; text-decoration:underline}
+    a:link {  color:#336699; text-decoration:underline}
+    a:visited { color:#996666; text-decoration:underline }
+    a:hover {  color: #FFAA00; text-decoration: underline}
+    a.nounderline{text-decoration:none}
+    </style>
+
+
+
+
+
+
+
+<style>
+  table.uni {
+	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif; 
+	color:#000000;font-size:10;
+	background-color:#ffffff;
+	border:1px solid;
+	margin-bottom:1px;
+  }
+</style>
+</HEAD>
+<BODY bgColor="#cccccc" background="/pirwww/images/temp/bg02.gif" leftMargin="0" topMargin="0" marginwidth="0" marginheight="0" >
+<table border="0" cellspacing="0" cellpadding="0" width=100%><tr><td>
+
+
+   <MAP NAME="PIRBanner_Map">
+<AREA SHAPE="rect" alt="home" COORDS="16,16,110,60" HREF="/pirwww/index.shtml" TARGET="_top">
+<AREA SHAPE="rect" alt="uniprot" COORDS="140,36,178,50" HREF="http://www.uniprot.org/" TARGET="_blank">
+</MAP>	
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0 height=80>
+    <TR> 
+      <TD><img alt='' src="/pirwww/images/temp/PIRBanner.png" border="0" usemap="#PIRBanner_Map"></TD> 
+      <TD width="99%" nowrap height=1 background="/pirwww/images/temp/blueSpacer.png">
+		<img alt='' src="/pirwww/images/spacer.gif" width="1" height="1" border=0>
+	  </TD>
+      <td align=right vAlign=top height="80" width="400" background="/pirwww/images/temp/gradientHome6.png">
+         <table border=0 cellpadding=0 cellspacing=0 width="400" height=80>
+          <form action="/cgi-bin/textsearch.pl" id="textSearch" method="get" name="textSearchForm" style="MARGIN: 0px">
+            <tr>
+              <td width=400 colspan=10><img alt='' src="/pirwww/images/spacer.gif" width=400 height="30"></td>
+            </tr>  
+            <tr>
+
+              <td><img alt='' src="/pirwww/images/spacer.gif" width="60" height="1"></td>
+	            <td><input type=radio name=sitesearch checked></td>
+	            <td align=right nowrap class=searchLable>Protein Search</td>
+	            <td><input type=radio name=sitesearch value=sitesearch ></td>
+	            <td align=right nowrap class=searchLable>Site Search</td>
+	            <td><img alt='' src="/pirwww/images/spacer.gif" width="8" height="1"></td>
+              <td align=right><input alt='submit' type='image' src='/pirwww/images/temp/but06.png' border='0' width='18' height='16' name='submit'/></td>
+              <td><img alt='' src="/pirwww/images/spacer.gif" width="2" height="1"></td>
+              <td align=right><input alt='query' name='query0' type='text' class='searchBannerBox' style='background:#CED9E7;'  value="" ></td>
+              <td><img alt='' src="/pirwww/images/spacer.gif" width="6" height="1"></td>
+            </tr>
+
+
+<input type=hidden name=field0 value=ALL>
+<input type=hidden name=search value=1>
+
+          </form>
+        </table>
+      </td>
+    </TR>
+</TABLE>
+
+<style>
+	<!--
+  
+.radio1 {
+	font-size:4px;
+	background-color:transparent;
+	border:1px;
+	border-color:transparent;
+	border:transparent;
+}
+
+.searchBannerBox {
+font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif; 
+font-size: 11px; 
+WIDTH: 180px;  
+HEIGHT:18px
+}
+
+
+td.searchLable {
+	color:#ffffff;
+	font-family:Verdana,Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-weight:bold
+}
+
+
+
+
+
+
+
+table.result
+{
+color:#000000;
+background-color:#ffffff;
+border:1px solid #333333;
+
+}
+
+th.result
+{
+color:#ffffff;
+background-color:#eeeeee;
+padding-bottom:5px;
+}
+
+tr.resultEvenRow
+{
+background-color:#eeeeee;
+padding-bottom:5px;
+}
+
+td.result
+{
+color:#000000;
+background-color:#FFFFFF;
+}
+
+td.tableHead{
+color:#000000;
+background-color:#c1d0df;
+text-align:left; 
+font-weight:bold; 
+}
+	.hide2 { position:absolute; visibility:hidden; }
+	.show2 { position:absolute; visibility:visible; }
+	-->
+</style>
+<!-- ##### home -->
+
+
+<TABLE cellSpacing=0 cellPadding=0 width=100% bgColor=#333333 border=0><tr>
+<TD><img alt='' src='/pirwww/images/temp/leftHome.png'></TD><!-- ############### group dependent-->
+<td class=sml01 width=99% background='/pirwww/images/temp/bgcolor.png'>&nbsp;</td>
+<noscript>
+    <td>
+			<table bgcolor="#4a4a4a" width="100%" height="21" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="nrm02" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="/pirwww/index.shtml" class="m"><font face=verdana size="2pt" color="white">Home</font></a> &nbsp;&nbsp;&nbsp;&nbsp; 
+						<a href="/pirwww/about/AboutPIR.shtml" class="m"><font face=verdana size="2pt" color="white">About PIR</font></a>&nbsp;&nbsp;&nbsp;&nbsp; 
+						<a href="/pirwww/start/GettingStarted.shtml" class="m"><font face=verdana size="2pt" color="white">Databases</font></a> &nbsp;&nbsp;&nbsp;&nbsp; 
+						<a href="/pirwww/search/SearchTools.shtml" class="m"><font face=verdana size="2pt" color="white">Search/Retrieval</font></a> &nbsp;&nbsp;&nbsp;&nbsp; 
+						<a href="/pirwww/database/Databases.shtml" class="m"><font face=verdana size="2pt" color="white">Download</font></a> &nbsp;&nbsp;&nbsp;&nbsp; 
+						<a href="/pirwww/support/Support.shtml" class="m"><font face=verdana size="2pt" color="white">Support</font></a>
+					</td>
+				</tr>
+			</table>
+		</td>
+</noscript>
+
+</tr></table>
+
+   <TABLE cellSpacing=0 cellPadding=0 width=100% bgColor=#ffffff border=0>
+    <TR vAlign=top> 
+      <TD align=left nowrap bgcolor='#ffffff' width=678>
+<!-- The closing half of the body frame is in half_frame_close.inc-->
+
+<!-- ############## page dependent block-->
+<!-- ############## page dependent block-->
+                <!-- YOUR CONTENT starts. -->
+                <TABLE cellpadding=0 cellspacing=0 background="/pirwww/images/temp/bg02.gif" width=100%>
+                <TR>
+                  <!-- left spacer -->
+                  <TD valign="top"><img alt='' src="/pirwww/images/spacer.gif" width="94" height="1" border=0></TD>
+                  <!-- center container -->
+                  <TD bgcolor="#ffffff">
+                          <TABLE cellspacing=5 cellpadding=0 width=678>
+                          <!-- Slogan -->
+                          <TR>
+                          	<TD align="center" width="100%">
+                                <img alt='integreted protein informatics resource for genomic, proteomic and systems biology research' src="/pirwww/images/pirslogan.jpg">
+                            </TD>
+                          </TR>
+                          <!-- UniProt -->
+                          <TR>
+                          	<TD align="center" width="100%">
+
+
+
+                                <TABLE cellspacing=0 cellpadding=1 class="uni" WIDTH=670 background="/pirwww/images/uni_bg.gif">
+                                  <TR>
+                                    <TD  rowspan=2><A HREF="http://www.uniprot.org" TARGET="_BLANK"><img alt='uniprot' src="/pirwww/images/uni_logo.png" border=0></A></TD>
+																		<td width=14  rowspan=2></td>
+                                    <TD class="nrm11" align="left" >The Universal Protein Resource (UniProt) provides
+          the scientific community with a single,	centralized, authoritative resource for protein sequences and functional information. </TD>
+																		<td width=4 background="/pirwww/images/uni_bg.gif"></td>
+                                  </TR>
+
+
+
+																	<tr>
+                                    <TD nowrap colspan=2>
+                                        <a href="http://www.uniprot.org/help/uniprotkb" target="_blank" class='footerMenu3'>UniProtKB<a/> | <a href="http://www.uniprot.org/help/uniref" target="_blank" class='footerMenu3'>UniRef</a> | <a href="http://www.uniprot.org/help/uniparc"  target="_blank" class='footerMenu3'>UniParc</a><img alt='' src="/pirwww/images/spacer.gif" width="206" height="2"><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10 align=middle><small>&nbsp;<font color="#336699">Current release: 2010_04
+</font></small>               
+                                    </TD>
+                                  </TR>
+                                </TABLE>
+
+
+
+                            </TD>
+                          </TR>
+                          <!-- Showcase -->
+                          <TR>
+                          	<TD align="center" width="100%" nowrap>
+                                <TABLE cellspacing=0 cellpadding=10>
+                                <TR>
+                                  <!-- PIRSF -->
+                                	<TD  valign=top align="right">
+                                     <!-- PIRSF starts -->
+                                     <TABLE cellSpacing=0 cellPadding=0 width=210 border=0>
+                                        <TBODY>
+                                        <TR>
+                                          <TD width=210 background="/pirwww/images/temp/bgd025(210).png"><A 
+                                            href="/pro/pro.shtml"><IMG
+                                            height=40 alt='Protein Ontology' src="/pirwww/images/3_cpnt_pro.png" width=210 
+                                            border=0></A></TD>
+                                        </TR>
+                                        <TR>
+                                          <TD width=210><A 
+                                            href="/pro/pro.shtml"><IMG 
+                                            height=80 alt='Protein Ontology' src="/pirwww/images/zz.jpg" width=210 
+                                            border=0></A></TD>
+                                        </TR>
+                                        <TR>
+                                          <TD class=ad01 vAlign=top background="/pirwww/images/temp/bgd025(210).png" 
+                                          bgColor=#ebeeef>
+                                               <TABLE class=nrm02 cellSpacing=0 cellPadding=4 
+                                                    border=0>
+                                                      <TBODY>
+                                                      <TR>
+                                                        <TD valign="top"><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                        <TD> Representation of protein objects with descriptions and relationships 
+                                                        </TD>
+                                                       </TR>
+                                                     
+                                                        <tr><TD valign="top"><IMG alt=''  src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD><td> <a href='/cgi-bin/pro/browser_pro?id=PRO:000000001'>Browse PRO</a></td></tr>                                     
+                                                      
+
+                                                       </TR><TD valign="top"><IMG alt=''  src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD><td> Annotate with <a href="/cgi-bin/pro/race_pro">RACE-PRO</a></td></tr> 
+
+
+                                                         <TR><td></td><TD><IMG  alt='' src="/pirwww/images/spacer.gif" width=10 height=4></TD></TR>
+                                                         <TR><td></td><TD>&#42;<a href="/cgi-bin/pro/entry_pro?id=PRO:000000563">Sample PRO report</a>&#42;</TD></tr>
+
+
+
+
+
+
+                                                       </TBODY>
+                                                </TABLE>
+                                          </TD>
+                                        </TR>
+
+                                        <TR>
+                                          <TD bgColor=#ebeeef><IMG height=11  alt=''
+                                            src="/pirwww/images/temp/pic070(purple).png" width=210></TD>
+                                          </TR></TBODY></TABLE>
+                                  <!-- PIRSF ends -->
+
+                                  </TD>
+                                  <!-- iProClass -->
+                                	<TD align="center" valign="top">
+                                    <!-- iProClass starts -->
+                                       <TABLE cellSpacing=0 cellPadding=0 width=210 border=0>
+                                          <TBODY>
+                                          <TR>
+                                            <TD width=210 background="/pirwww/images/temp/bgd025(210).png"><A 
+                                              href="/pirwww/dbinfo/iproclass.shtml"><IMG 
+                                              height=40 alt=iProClassBanner src="/pirwww/images/3_cpnt_iproclass.png" width=210 
+                                              border=0></A></TD>
+                                          </TR>
+                                          <TR>
+                                            <TD width=210><A 
+                                              href="/pirwww/dbinfo/iproclass.shtml"><IMG 
+                                              height=80 alt=iProClassUniverse src="/pirwww/images/temp/iProClassUniverse5.png" width=210 
+                                              border=0></A></TD>
+                                          </TR>
+                                          <TR>
+                                            <TD class=ad01 vAlign=top background="/pirwww/images/temp/bgd025(210).png" 
+                                            bgColor=#ebeeef>
+                                                 <TABLE class=nrm02 cellSpacing=0 cellPadding=4 
+                                                      border=0>
+                                                        <TBODY>
+
+                                                        <TR>
+                                                          <TD valign="top"><IMG  alt=''  src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                          <TD>Value-added reports for <a Href="http://www.uniprot.org/help/uniprotkb">UniProtKB</a> and unique <a href="http://www.uniprot.org/help/uniparc">UniParc</a> proteins </TD>
+                                                         </TR>
+                                                        <TR>
+                                                          <TD valign="top"><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                          <TD>Functional analysis and <a href="/pirwww/search/idmapping.shtml">protein ID mapping</a></TD>
+                                                          
+
+                                                         <TR><td></td><TD><IMG  alt='' src="/pirwww/images/spacer.gif" width=10 height=12></TD></TR>
+                                                         <TR><td></td><TD>&#42;<a href="/cgi-bin/ipcEntry?id=P04637">Sample protein report</a>&#42;</TD></tr>
+
+
+
+
+
+                                                        </TBODY>
+                                                  </TABLE>
+                                            </TD>
+                                          </TR>
+                                        
+                                          <TR>
+                                            <TD bgColor=#ebeeef><IMG height=11 alt=''
+                                              src="/pirwww/images/temp/pic070(green).png" width=210></TD>
+                                          </TR>
+                                           
+                                          </TBODY></TABLE>
+                                           
+                                          
+                                    <!-- iProClass ends -->
+                                      
+                                  </TD>
+                                  <!-- iProLINK -->
+                                	<TD valign=top align="left">  
+                                    <!-- iProLINK starts -->
+                                         <TABLE cellSpacing=0 cellPadding=0 width=210 border=0>
+                                            <TBODY>
+                                            <TR>
+                                              <TD width=210 background="/pirwww/images/temp/bgd025(210).png"><A 
+                                                href="/pirwww/iprolink/"><IMG 
+                                                height=40 alt=iProLINKBanner src="/pirwww/images/3_cpnt_iprolink.png" width=210 
+                                                border=0></A></TD>
+                                            </TR>
+                                            <TR>
+                                              <TD width=210><A 
+                                                href="/pirwww/iprolink/"><IMG 
+                                                height=80 alt=iProLINKIllustrated src="/pirwww/images/temp/ipl/iProLINK.png" width=210 
+                                                border=0></A></TD>
+                                            </TR>
+                                            <TR>
+                                              <TD class=ad01 vAlign=top background="/pirwww/images/temp/bgd025(210).png" 
+                                              bgColor=#ebeeef>
+                                                   <TABLE class=nrm02 cellSpacing=0 cellPadding=4 
+                                                        border=0>
+                                                          <TBODY>
+
+                                                          <TR>
+                                                            <TD valign="top"><IMG alt=''  src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                            <TD>Source for text mining 
+                                                            and ontology development<br></TD>
+                                                           </TR>
+                                                          <tr><TD valign="top"><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                            <TD><a href="/pirwww/iprolink/rlimsp.shtml">RLIMS-P</a> text mining tool, <a href="/pirwww/iprolink/biothesaurus.shtml">BioThesaurus</a></TD>
+                                                           </TR>
+                                                           
+																													<TR>
+                                                            <TD valign="top"><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                            <TD><a href="/pirwww/iprolink/bibliography.shtml">Bibliography mapping</a> </td></tr>
+
+
+                                                         <TR><td></td><TD><IMG  alt='' src="/pirwww/images/spacer.gif" width=10 height=4></TD></TR>
+																												 <TR><td></td><TD>&#42;<a href="/cgi-bin/bibliography?id=P13866">Sample Biblio. report</a>&#42;</TD></TR>
+
+                                                           </TBODY>
+                                                    </TABLE>
+                                              </TD>
+                                            </TR>
+                                          
+                                            <TR>
+                                              <TD bgColor=#ebeeef><IMG height=11 alt=''
+                                                src="/pirwww/images/temp/ipl/pic070(gold).png" width=210></TD>
+                                            </TR>
+                                             
+                                            </TBODY></TABLE>
+                                             
+                                            
+                                      <!-- iProLINK ends -->														
+
+                                      
+                                  </TD>
+                                </TR>
+
+
+
+                                <TR>
+                                
+                                	<!-- new Resources -->	
+<TD align="left" valign="top">
+                                  <!-- WHAT'S NEW begins -->
+                                  <TABLE cellSpacing=0 cellPadding=0 width=210 align=center 
+                                    border=0><TBODY>
+                                    <TR>
+                                      <TD>
+                                        <TABLE cellSpacing=0 cellPadding=0 width=210 border=0 class="nrm02">
+                                          <TBODY>
+                                          <TR><TH bgColor=#42B0E5><img src="/pirwww/images/spacer.gif" width=2 height=1></th><th bgColor=#42B0E5><font color="ffffff"><b>O</b></font></th>
+																					  <TH bgColor=#42B0E5><img src="/pirwww/images/spacer.gif" width=3 height=1></th>
+                                            <TH bgColor=#8b98a9 height=19 align="left"><font color="ffffff">&nbsp;OTHER RESOURCE</font></TH>
+                                            <TD bgcolor="#8b98a9" align=middle width=18>&nbsp;</TD>
+                                            <TD bgcolor="#8b98a9" width=5>&nbsp;</TD></TR></TBODY></TABLE></TD></TR>
+                                    <TR>
+                                      <TD bgColor=#eeeeee>
+                                        <TABLE cellSpacing=0 cellPadding=0 width=210 align=center 
+                                        border=0>
+                                          <TBODY>
+                                          <TR>
+                                            <TD width=210 height=40 align=right>
+                                                <table border=0 cellpadding=0 cellspacing=0 width="210" height=80>
+																									<TR>
+                                                    <TD colspan=4 class=nrm02 height=10 align="right" nowrap><font color="#6E6E6E"></TD>
+                                                  </TR>
+                                                  <TR>
+                                                        <td align="right" width=175 valign="middle" background="/pirwww/images/spacer.gif" class=nrm02 nowrap>
+                                                            
+                                                          <TABLE class=nrm02 cellSpacing=0 cellPadding=2 
+                                                              border=0>
+                                                                <TBODY>
+
+                                                                <TR>
+                                                                  <TD valign="top"><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                                  <TD><nobr> <a href="http://pir.georgetown.edu/pirwww/proteomics/">Proteomics</a>: <small>NIAID Biodefense</nobr><br> Proteomics Admin. Center </small><br></TD>
+                                                                 </TR>
+                                                                <TR>
+                                                                  <TD valign="top"><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10></TD>
+                                                                  <TD><a href="/pirwww/cabig.shtml">PIR Grid-Enablement</a>: <small><nobr>Data node on NCI's <A HREF="https://cabig.nci.nih.gov">caBIG</A></nobr></small></TD>
+                                                                 </TR>
+                                                                <TR>
+                                                                  <TD valign="top"></TD>
+                                                                 </TR>
+                                                                 </TBODY>
+                                                          </TABLE>
+                                                        </td>
+                                                        <td width="3" align="right" valign="middle" background="/pirwww/images/spacer.gif"><img alt='' src="/pirwww/images/spacer.gif" width="3" height="1"></td>
+                                                        <td width="19" align="right" valign="middle" background="/pirwww/images/spacer.gif">&nbsp;</td>
+                                                        <td width="3" align="right" valign="middle" background="/pirwww/images/spacer.gif"><img alt='' src="/pirwww/images/spacer.gif" width="5" height="1"></td>
+                                                      
+                                                  </TR>
+
+
+																									<TR>
+                                                    
+                                                </TABLE>
+
+                                            </TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+                                      <TD bgcolor=#eeeeee align=right><IMG height=5 src="/pirwww/images/temp/pic080.png" alt=''
+                                    width=144></TD></TR></TBODY></TABLE>
+                                  <!-- NEW PIR RESOURCES ends -->
+</td>
+								  <!-- Searches -->	
+									<TD  valign="top">
+                                      <!-- Search starts -->
+                                       				  
+										  
+										  
+										  <!-- Table1 -->
+                                          <TABLE  cellSpacing=0 cellPadding=0 width=210 align=center border=0>
+                                            <TR> 
+											<!-- PEPTIDE SEARCH begins -->
+												
+												  <TABLE cellSpacing=0 cellPadding=0 width=210 align=center 
+                                            border=0><TBODY>
+                                            <TR>
+                                              <TD>
+                                                <TABLE cellSpacing=0 cellPadding=0 width=210 border=0 class="nrm02">
+                                                  <TBODY>
+                                                  <TR>
+                                                    <TD bgcolor="#42b0e5" align=middle width=18><IMG height=11 alt=''
+                                                      src="/pirwww/images/temp/bulP.gif" width=11></TD>
+                                                    <TH bgColor=#8b98a9 height=19 align="left">&nbsp;<a href="/pirwww/search/peptide.shtml"><font color="ffffff">PEPTIDE SEARCH</font></a></TH>
+                                                    <TD bgcolor="#336699" align=middle width=18><a href='/pirwww/support/help.shtml#7.9'><IMG height=11 alt='help' src="/pirwww/images/temp/question11.gif" width=11 border=0></a></TD>
+                                                    </TR></TBODY></TABLE></TD></TR>
+                                            <TR>
+                                              <TD bgColor=#eeeeee>
+                                                <TABLE cellSpacing=0 cellPadding=0 width=210 align=center 
+                                                border=0>
+                                      <FORM name=form2 action="/cgi-bin/peptidematch.pl" method=post>
+                                                  <TBODY>
+                                                  <TR>
+                                                    <TD width=210 height=40 align=right>
+                                                        <table border=0 cellpadding=0 cellspacing=0 width="210" height=80>
+                                                          <TR>
+                                                            <TD colspan=4 class=nrm02 height=20 align="right" nowrap><font color="#6E6E6E"><small>DATABASE:&nbsp;&nbsp;</font>UniProtKB&nbsp;</TD>
+                                                          </TR>
+                                                          <TR>
+                                                                <td align="right" width=175 valign="middle" background="/pirwww/images/spacer.gif" class=nrm02 nowrap>
+                                                                   <div align="right"><TEXTAREA name="ptn" cols="15" alt='' style="background:#CED9E7;width:160px;height:50px;font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;font-size:11px;" learText(this)" >Use single letter amino acid code</TEXTAREA>
+                                                                  </div>
+                                                                </td>
+                                                                <td width="3" align="right" valign="middle" background="/pirwww/images/spacer.gif"><img alt='' src="/pirwww/images/spacer.gif" width="3" height="1"></td>
+                                                                <td width="19" align="right" valign="middle" background="/pirwww/images/spacer.gif"><input type='image' src='/pirwww/images/temp/but05.png' border='0' width='19' height='17' alt='submit' name='submit'/></td>
+                                                                <td width="3" align="right" valign="middle" background="/pirwww/images/spacer.gif"><img alt='' src="/pirwww/images/spacer.gif" width="5" height="1"></td>
+                                                              
+                                                          </TR>
+
+
+                                                         
+
+
+                                                        </TABLE>
+
+                                                    </TD></TR></FORM></TBODY></TABLE></TD></TR>
+                                            <TR>
+                                              <TD bgcolor=#eeeeee align=right><IMG height=5 src="/pirwww/images/temp/pic080.png" alt=''
+                                            width=144></TD></TR></TBODY></TABLE>
+														
+														
+														</td>
+                                          
+                                          <!-- PEPTIDE SEARCH ends -->
+
+                                        
+                                              <!-- TEXT SEARCH begins --> 
+											             <TD valign="top">
+														
+														  <TABLE  cellSpacing=0 cellPadding=0 width=210 align=center border=0>
+											            <tr><td>
+                                                                 
+																 <TABLE cellSpacing=0 cellPadding=0 width=210 border=0 class="nrm02">
+                                                                   <TR>                                                    <TD bgcolor="#42b0e5" align=middle width=18><IMG alt='' height=11 src="/pirwww/images/temp/bulT.gif" width=11></TD>
+                                                                    <TH bgColor=#8b98a9 height=19 align="left">&nbsp;<a href="/pirwww/search/textsearch.shtml"><font color="ffffff">TEXT SEARCH</font></a></TH>
+                                                                   <TD bgcolor="#336699" align=middle width=18><a href='/pirwww/support/help.shtml#5'><IMG height=11 alt='' src="/pirwww/images/temp/question11.gif" width=11 border=0></a></TD>
+                                                                  </TR>
+                                                                </TABLE>
+																
+                                                        </TD>
+                                                      </TR>
+                                                      <TR>
+                                                       <TD bgColor=#eeeeee>
+                                                            
+															 <TABLE cellSpacing=0 cellPadding=0 width=210 align=center border=0>
+                                                             <FORM name=form1 action="/cgi-bin/textsearch.pl" method=post>
+                                                            <TR>
+                                                             <TD width=210 height=40 align=right>
+                                                                  
+																   <table border=0 cellpadding=0 cellspacing=0 width="210" height=80>
+                                                                  <TR>
+                                                                    <TD colspan=4 class=nrm02 height=20 align="right" nowrap><font color="#6E6E6E"><small>DATABASE:&nbsp;
+                                                                     </font><font color="#FF0000"><i>i</i></font>ProClass</small>&nbsp;</TD>
+                                                                  </TR>
+                                                                  <TR>
+                                                                  <td align="right" width=175 valign="middle" background="/pirwww/images/spacer.gif" class=nrm02 nowrap>
+                                                                  <input name='query0' type='text' class='searchBannerHome' size='15' alt='query' style='width:160px;background:#CED9E7;font-family:Verdana,Arial, Helvetica, sans-serif;'>
+                                                                  </td>
+                                                                  <td width="3" align="right" valign="middle" background="/pirwww/images/spacer.gif"><img   alt='' src="/pirwww/images/spacer.gif" width="3" height="1"></td>
+                                                                   <td width="19" align="right" valign="middle" background="/pirwww/images/spacer.gif"><input type='image' src='/pirwww/images/temp/but05.png' border='0' width='19' height='17' alt='submit' name='submit'/></td>
+                                                                  <td width="3" align="right" valign="middle" background="/pirwww/images/spacer.gif"><img 
+                                                                   alt='' src="/pirwww/images/spacer.gif" width="5" height="1"></td>
+                                                                  </TR>
+                                                                 
+                                                                 </TABLE>
+																
+                                                        <input type=hidden name=field0 value=ALL>
+                                                        <input type=hidden name=search value=1>
+                                                          </TD>
+                                                         </TR><TR>
+                                      <TD bgcolor=#eeeeee align=right><IMG height=5 src="/pirwww/images/temp/pic080.png" alt=''
+                                    width=144></TD></TR></FORM>
+                                                       </TABLE>
+													   
+                                                 </TD>
+                                           
+                                           
+                                          <!-- TEXT SEARCH ends -->
+                                            
+                                  
+                                                              
+													</TR>
+
+
+
+
+
+
+
+
+
+
+
+
+													</TABLE>
+													
+                                                    
+                                      <!-- Search ends -->
+                                  </TD>
+                                
+                                
+                                   
+                                </TR>
+
+
+
+                          <TR>
+                          	<TD align="center" width="100%" colspan=3>
+
+
+																<TABLE cellspacing=0 cellpadding=1 border=0>
+
+
+
+
+                                  <TR><TD class="nrm11" nowrap><IMG alt='' src="/pirwww/images/New_icons.gif" align=top width=40><IMG alt='' src="/pirwww/images/spacer.gif" width=18 height=1><a href="/pirwww/about/employment.shtml">Job Opening</a>: Bioinformatics Programmer Position Available <b>!</td></tr>
+
+
+
+
+
+                                  <TR><TD class="nrm11" nowrap><IMG alt='' src="/pirwww/images/spacer.gif" align=top height=1 width=40><IMG alt='' src="/pirwww/images/spacer.gif" width=18 height=1><a href="http://bmcb.georgetown.edu/bioinformatics/" target=new>Bioinformatics Graduate Program</a>: M.S. program at Georgetown University<br
+																	><IMG alt='' src="/pirwww/images/spacer.gif" width=100 height=1><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10> Now recruiting new students for Fall of 2010<br
+																	><IMG alt='' src="/pirwww/images/spacer.gif" width=100 height=1><IMG alt='' src="/pirwww/images/temp/orangeDot.gif" width=10 height=10> Scholarships available </td></tr>
+                                </TABLE>
+                            </TD>
+                          </TR>
+
+
+
+
+
+
+
+
+
+
+
+                                </TABLE>
+								
+
+
+													</TR>
+													</TABLE>
+
+                  </TD>
+                  <!-- right spacer. don't remove -->
+                  <TD width=99%>&nbsp;</TD>
+                </TR>
+                </TABLE>
+                <!-- YOUR CONTENT ends.   -->
+            
+              
+
+<!-- ############## end of page dependent block-->
+<!-- ############## end of page dependent block-->
+	  
+
+
+
+
+
+
+   <!-- This is a second half of body frame. The first half is in half_frame_close.inc"-->
+      </TD>
+      <TD width=100% background="/pirwww/images/temp/bg02.gif" align=right bgcolor='#ffffff'><img src="/pirwww/images/spacer.gif" width="1" height="1" alt=''></TD>
+    </TR>
+</TABLE>
+
+<!-- FOOTER -->
+<TABLE cellspacing=0 cellpadding=0 width="100%" bgcolor="#eeeeee" border=0 class=nrm02>
+  <TBODY>
+    <TR> 
+			<TD align="center" valign="middle" nowrap bgcolor=#71a1cf>
+				<img src="/pirwww/images/pirlogo2.png" alt="PIR">
+			</TD>
+      <TD align="left" valign="top"> 
+        <TABLE background="/pirwww/images/spacer.gif" width="686" border=0 cellPadding=3 cellSpacing=0 class=nrm02>
+          <TBODY>
+            <TR> 
+              <TD align="left" valign=bottom  nowrap>
+                  &nbsp;<a href="/pirwww/" target="_blank" class='footerMenu'>Home</a>
+                  |&nbsp;<a href="/pirwww/about/" target="_blank" class='footerMenu'>About PIR</a>
+                  |&nbsp;<a href="/pirwww/dbinfo" target="_blank" class='footerMenu'>Databases</a>
+                  |&nbsp;<a href="/pirwww/search/" target="_blank" class='footerMenu'>Search/Analysis</a>
+                  |&nbsp;<a href="/pirwww/download/" target="_blank" class='footerMenu'>Download</a>
+                  |&nbsp;<a href="/pirwww/support/" target="_blank" class='footerMenu'>Support</a>
+              </TD>
+              <TD align="right" valign=bottom  nowrap class=nrm01>
+                  &nbsp;<a href="/pirwww/support/sitemap.shtml" target="_blank" class='footer'>SITE MAP</a>
+                  |&nbsp;<a href="/pirwww/about/linkpir.shtml" target="_blank" class='footer'>TERMS OF USE</a>
+              </TD>
+            </TR>
+            <TR> 
+              <TD colspan="2" align="center" nowrap class="footer3"><span class=nrm10><FONT color=#999999> &copy;2009</FONT></sapn>
+                                    <img src="/pirwww/images/spacer.gif" alt="" width=20 height=1>
+                                    <b><a href="/pirwww/index.shtml" target="_blank">Protein Information Resource</a></b>
+                                    <img src="/pirwww/images/spacer.gif" alt="" width=105 height=1></TD>
+            </TR>
+
+            <TR><TD colspan="2" nowrap><table border=0 cellPadding=2 cellSpacing=0 class=nrm02 width=100%>
+                         <tr><td><img src="/pirwww/images/spacer.gif" alt="" width=50 height=1></td>
+                             <TD nowrap align="center" class=footer><a href='http://bioinformatics.udel.edu' ><FONT color=#999999>University of Delaware</font></a>
+                                          <br><FONT color=#999999>15 Innovation Way, Suite 205
+                                          <br>Newark, DE 19711, USA</FONT></TD>
+                             <td><img src="/pirwww/images/spacer.gif" alt="" width=20 height=1></td>
+
+                            <TD nowrap align="center" class=footer><a href='http://gumc.georgetown.edu' ><FONT color=#999999>Georgetown University Medical Center</font></a>
+                                  <br><FONT color=#999999>3300 Whitehaven Street, NW, Suite 1200
+                                  <br>Washington, DC 20007, USA</FONT></TD>
+                          </tr></table></td>
+
+            </TR>
+          </TBODY>
+        </TABLE></TD>
+			<TD width="99%" >&nbsp;
+			</TD>       
+    </TR>
+</TBODY>
+</TABLE>
+
+</td></tr></table>
+ </body>
+<!-- Menu Related -->
+<!-- <LINK href="/pirwww/menu/milo.css" type=text/css rel=stylesheet> -->
+<SCRIPT language=javascript src="/pirwww/menu/milonic_src.js" type="text/javascript"></SCRIPT>
+<SCRIPT language=javascript>
+  if(ns4) _d.write("<scr"+"ipt language=JavaScript src=/pirwww/menu/mmenuns4.js><\/scr"+"ipt>");		
+    else _d.write("<scr"+"ipt language=JavaScript src=/pirwww/menu/mmenudom.js><\/scr"+"ipt>"); 
+</SCRIPT>
+<SCRIPT language=javascript src="/pirwww/menu/menu_data.js" type="text/javascript"></SCRIPT>
+<SCRIPT language=JavaScript src="/pirwww/menu/tooltips.js" type="text/javascript"></SCRIPT>
+<!-- Menu Related ends -->
+
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4232355-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+
+

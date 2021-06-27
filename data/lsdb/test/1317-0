@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html lang="en" dir="ltr"><head><link href="http://styles.anu.edu.au/_images/anu.ico" rel="shortcut icon" type="image/x-icon"><link href="http://styles.anu.edu.au/anu_global_styles.css" rel="stylesheet" type="text/css"><link href="/_includes/corprate001.css" rel="stylesheet" type="text/css"><script language="JavaScript" src="/_includes/preload.js"></script><style type="text/css"><!--.style1 {font-size: 24px}.style2 {font-size: 12px}--></style><!-- TemplateBeginEditable name="head" --><!-- BEGIN DOCUMENT META DATA --><title>ANU - RSBS - Genomic Interactions - BioInformatics Server</title><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><meta name="Description" content="BioInformatics Server - We are developing bioinformatics infrastructures and analysing experimental data towards an integrative vision of the Legume system biology. Current studies include the prediction of non-coding RNA and microRNA and the development of methods for analysing and visualising gene expression using microarray and proteomic data."><meta name="KeyWords" content="Bioinformatics, Legume, ncRNA, miRNA, gene expression, microarray, proteomic, MapMan, CLANS, GeneBins, MClip" ><<!-- END DOCUMENT META DATA --><!-- TemplateEndEditable --></head><body class="Bg"  topmargin="0" marginwidth="0" marginheight="0">
+<script language="javascript">
+
+  function protect(domain, firstName, lastName){
+    var address=String.fromCharCode(116,111,58,32);
+    address=String.fromCharCode(109,97,105,108)+address;
+    address=address+firstName+'.'+lastName+String.fromCharCode(64)+domain;
+    //alert('Email link='+address);
+    window.location=address;
+  }
+
+</script>
+
+<!-- BEGIN HEADER -->
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%" summary="Page header layout table">
+    <!-- BEGIN LINKS -->
+    <tr>
+        <td colspan="2" width="100%" nowrap
+            style="background-color: #000000;
+		   background-image: url(/_images/bgrounds/Background.Gif);
+                   background-position: 150px 0px;
+                   background-repeat: repeat-y;">
+             <div style="color: #FFFFFF;
+                         margin-right: 8px;
+                         text-align: right;">
+                 <a href="http://www.anu.edu.au/" class="extNav" title="Australian National University Home">ANU Home</a> | 
+                 
+<a href="https://horus.anu.edu.au/" class="extNav" title="HR Online Remote User Services">HORUS</a>
+ | 
+<a href="http://staff.anu.edu.au/" class="extNav" title="ANU Staff Home Page">Staff Home</a>
+ | 
+<a href="http://students.anu.edu.au/" class="extNav" title="ANU Students Home Page">Students</a>
+ | 
+<a href="http://www.rsbs.anu.edu.au" class="extNav" title="RSBS Home Page">RSBS</a>
+             </div>
+        </td>
+    </tr>   
+    <!-- END LINKS -->
+    <tr>
+        <td width="1%" valign="top" nowrap
+            style="background-color: #000000;"><a href="http://www.anu.edu.au/" title="The Australian National University"><img src="http://styles.anu.edu.au/_images/ANULogo.gif" width="150" height="70" border="0" alt="The Australian National University"></a></td>
+        <td width="99%" valign="top" nowrap 
+            style="background-color: #000000;
+                   background-image: url(/_images/bgrounds/Background.Gif);
+                   background-repeat: repeat;">
+            <div class="headTitle" 
+                 style="margin-left: 12px;
+                        margin-right: 0px;
+                        margin-top: 14px;
+                        margin-bottom: 0px;
+                        text-align: left;">
+                 Research School of Biological Sciences             </div>
+                        <div class="headSubTitle" 
+                 style="margin-left: 24px;
+                        margin-right: 8px;
+                        margin-top: 8px;
+                        margin-bottom: 0px;
+                        text-align: right;">
+                 ANU COLLEGE OF SCIENCE            </div>
+                    </td>
+    </tr>
+    
+</table>
+
+
+<table class="SearchbackgroundLight" width="100%" border="0" cellpadding="0" cellspacing="0">
+	<form  action="http://www.anu.edu.au/dirs/csearch.php" method="get" name="SearchForm">
+	<tr>
+<td width="30%" >  <a class="navBlack" href="/_includes/searchBar.inc" style="display: none;" title="Move focus to the beginning of the page content">Skip Navigation</a></td>
+		<td width="100%" align="right" >
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+				<td nowrap valign="middle" align="Left">
+						<label class="navBlack" for="stype"><b>Search the ANU</b></label>
+                                                
+						<select class="boxborder" id="stype" name="stype">
+						<option class="boxborder" value="ANU Web">Website</option>
+						<option class="boxborder">Handbook</option>
+						<option class="boxborder">Admin Areas</option>
+					    <option selected class="boxborder">Phone List</option>
+					    <option style="font-size: 10px;">Staff Email</option>
+						<option class="boxborder">Student Email </option>
+						<option class="boxborder">Mail Archives </option>
+						</select> 
+						
+						<label class="navWhite" class="caption" for="querytext">for </label>
+						<input class="boxborder" type="text" id="querytext" name="querytext" size="20" style="font-size: 10px;">
+						
+						<input type="hidden" name="submit" value="Search"> 
+					</td>
+					<td valign="middle">
+                                <input type="submit" Value="Search" class="searchbutton" onmouseover="this.className='searchbuttonDn'" onmouseout="this.className='searchbutton'" align="middle" border="0" title="Search">
+                                   </td>
+			         <td></td>
+				</tr>
+			</table>
+		</td>
+	
+	</tr>
+	</form>
+	<tr>
+</tr>
+</table>
+
+
+
+
+<!-- END HEADER -->
+
+     <table cellspacing="0" cellpadding="0" border="0" width="100%" summary="Page content layout table">	<tr>		
+<!-- Highlighting functions -->
+
+<script language="javascript">
+  <!--
+  
+  var items=Array();
+  items[0]="Menu_About";
+  items[1]="Menu_CSD";
+  items[2]="Menu_CGG";
+  items[3]="Menu_EDG";
+  items[4]="Menu_EBG";
+  items[5]="Menu_GIG";
+  items[6]="Menu_MGE";
+  items[7]="Menu_MPP";
+  items[8]="Menu_PBE";
+  items[9]="Menu_PCB";
+  items[10]="Menu_VIS";
+  items[11]="Menu_Student_Ops";
+  
+  function highlightMenu(itemID, toggle){
+  
+    var element;
+  
+    element = document.getElementById(itemID);
+    if(toggle=="On"){
+      element.className="menuSelectedItem";
+        for(var i=0; i<items.length; i++){
+        if(items[i]!=itemID){
+          element=document.getElementById(items[i]);
+          element.className="menuItem";
+        }
+      }
+    }else{
+      element.className="menuItem";
+    }
+  }
+  
+  function displayFlashPicOn(itemID){
+    if(itemID==items[0]){
+      go(201);
+    }else if(itemID==items[1]){
+      go(2);
+    }else if(itemID==items[2]){
+      go(21);
+    }else if(itemID==items[3]){
+      go(41);
+    }else if(itemID==items[4]){
+      go(61);
+    }else if(itemID==items[5]){
+      go(81);
+    }else if(itemID==items[6]){
+      go(101);
+    }else if(itemID==items[7]){
+      go(121);
+    }else if(itemID==items[8]){
+      go(141);
+    }else if(itemID==items[9]){
+      go(161);
+    }else if(itemID==items[10]){
+      go(181);
+    }else if(itemID==items[11]){
+      go(221);
+    }else
+      return;
+    playmovie();
+  }
+  
+  function displayFlashPicOff(itemID){
+    if(itemID==items[0]){
+      go(211);
+    }else if(itemID==items[1]){
+      go(11);
+    }else if(itemID==items[2]){
+      go(31);
+    }else if(itemID==items[3]){
+      go(51);
+    }else if(itemID==items[4]){
+      go(71);
+    }else if(itemID==items[5]){
+      go(91);
+    }else if(itemID==items[6]){
+      go(111);
+    }else if(itemID==items[7]){
+      go(131);
+    }else if(itemID==items[8]){
+      go(151);
+    }else if(itemID==items[9]){
+      go(171);
+    }else if(itemID==items[10]){
+      go(191);
+    }else if(itemID==items[11]){
+      go(231);
+    }else
+      return;
+    playmovie();
+  }
+  
+  var movieName = "rsbs_flash";
+
+  function thisMovie(movieName) {
+    // IE and Netscape refer to the movie object differently.
+    // This function returns the appropriate syntax depending on the browser.
+    if (navigator.appName.indexOf ("Microsoft") !=-1) {
+      return window[movieName]
+    }	else {
+      return document[movieName]
+    }
+  }
+  
+  // Checks if movie is completely loaded.
+  // Returns true if yes, false if no.
+  function movieIsLoaded (theMovie) {
+    if (typeof(theMovie) != "undefined") {
+      return theMovie.PercentLoaded() == 100;
+    } else {
+      return false;
+    }
+  }
+  
+  
+  function go(theFrame) {
+    if (movieIsLoaded(thisMovie(movieName))) {
+      thisMovie(movieName).GotoFrame(theFrame);
+    }
+  }
+  
+  function playmovie() {
+  if (movieIsLoaded(thisMovie(movieName))) {
+    thisMovie(movieName).Play();
+  }
+}
+  
+  -->
+</script>
+
+<!-- BEGIN NAVIGATION -->
+
+<td width="1%" align="left" valign="top" style="background: #F6F6F6; border-right: 1px solid #cccccc;">
+    <table border="0" cellpadding="6" cellspacing="0" width="150" summary="Navigation layout table">
+        <tr>
+         <td align="Left">
+			<!-- BEGIN MENU -->
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation menu layout table">
+				<tr>
+					<td width="1%" height="18" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_c.gif); background-repeat: repeat-x;" valign="top" align="left"><img src="http://styles.anu.edu.au/_images/menu/menu_l.gif" width="9" height="18" alt=""></td>
+					<td class="navBlack" nowrap width="98%" height="18" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_c.gif); background-repeat: repeat-x;"><b id=''>BioInformatics Server</b></td>
+					<td width="1%" height="18" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_c.gif); background-repeat: repeat-x;" valign="top" align="right"><img src="http://styles.anu.edu.au/_images/menu/menu_r.gif" width="9" height="18" alt=""></td>
+				</tr>
+				<tr>
+					<td colspan="3" class="menuBody">
+                    		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="menuTable" summary="Menu items layout table">          
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="/index.php"><img src="http://styles.anu.edu.au/_images/docGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="/index.php" class="lftNav" style="color: #000000;" title="Home">Home</a></td>
+  							    	 
+  			</tr>
+  							  
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="/users/index.php"><img src="http://styles.anu.edu.au/_images/dirGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="/users/index.php" class="lftNav" style="color: #000000;" title="People">People</a></td>
+  							    	 
+  			</tr>
+  							  
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="/utils/index.php"><img src="http://styles.anu.edu.au/_images/dirGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="/utils/index.php" class="lftNav" style="color: #000000;" title="Web-services">Web-services</a></td>
+  							    	 
+  			</tr>
+  							  
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="/programs/index.php"><img src="http://styles.anu.edu.au/_images/dirGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="/programs/index.php" class="lftNav" style="color: #000000;" title="Programs">Programs</a></td>
+  							    	 
+  			</tr>
+  							  
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="/downloads/"><img src="http://styles.anu.edu.au/_images/dirGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="/downloads/" class="lftNav" style="color: #000000;" title="Download">Download</a></td>
+  							    	 
+  			</tr>
+  							  
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="/courses/index.php"><img src="http://styles.anu.edu.au/_images/dirGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="/courses/index.php" class="lftNav" style="color: #000000;" title="Courses">Courses</a></td>
+  							    	 
+  			</tr>
+  							  
+                              </table>
+                         </td>
+                    <tr>
+                        <td width="1%" height="7" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_shadow_c.gif); background-repeat: repeat-x;" valign="top" align="left"><img src="http://styles.anu.edu.au/_images/menu/menu_shadow_l.gif" width="9" height="5" alt=""></td>
+                        <td width="98%" height="7" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_shadow_c.gif); background-repeat: repeat-x;"><img src="http://styles.anu.edu.au/_images/menu/spacer.gif" width="9" height="5" alt=""></td>
+                        <td width="1%" height="7" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_shadow_c.gif); background-repeat: repeat-x;" valign="top" align="right"><img src="http://styles.anu.edu.au/_images/menu/menu_shadow_r.gif" width="9" height="5" alt=""></td>
+                    </tr>
+                </table>
+			<!-- BEGIN MENU -->
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation menu layout table">
+				<tr>
+					<td width="1%" height="18" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_c.gif); background-repeat: repeat-x;" valign="top" align="left"><img src="http://styles.anu.edu.au/_images/menu/menu_l.gif" width="9" height="18" alt=""></td>
+					<td class="navBlack" nowrap width="98%" height="18" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_c.gif); background-repeat: repeat-x;"><b id=''>Links</b></td>
+					<td width="1%" height="18" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_c.gif); background-repeat: repeat-x;" valign="top" align="right"><img src="http://styles.anu.edu.au/_images/menu/menu_r.gif" width="9" height="18" alt=""></td>
+				</tr>
+				<tr>
+					<td colspan="3" class="menuBody">
+                    		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="menuTable" summary="Menu items layout table">          
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="http://www.rsbs.anu.edu.au/"><img src="http://styles.anu.edu.au/_images/docGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="http://www.rsbs.anu.edu.au/" class="lftNav" style="color: #000000;" title="RSBS ">RSBS </a></td>
+  							    	 
+  			</tr>
+  							  
+        
+      	<tr>
+  					<td onMouseOver="displayFlashPicOn(this.id);" onMouseOut="displayFlashPicOff(this.id);" id="" class="menuItem" valign="top" align="left" nowrap>
+  					  <img src="http://styles.anu.edu.au/_images/spacer.gif" height="1" width="0" border="0">
+  					  <a href="http://www.rsbs.anu.edu.au/ResearchGroups/GIG/"><img src="http://styles.anu.edu.au/_images/docGrey.gif" width="16" height="10" border="0" alt=""></a>
+  							    							    <a href="http://www.rsbs.anu.edu.au/ResearchGroups/GIG/" class="lftNav" style="color: #000000;" title="Genomic Interactions">Genomic Interactions</a></td>
+  							    	 
+  			</tr>
+  							  
+                              </table>
+                         </td>
+                    <tr>
+                        <td width="1%" height="7" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_shadow_c.gif); background-repeat: repeat-x;" valign="top" align="left"><img src="http://styles.anu.edu.au/_images/menu/menu_shadow_l.gif" width="9" height="5" alt=""></td>
+                        <td width="98%" height="7" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_shadow_c.gif); background-repeat: repeat-x;"><img src="http://styles.anu.edu.au/_images/menu/spacer.gif" width="9" height="5" alt=""></td>
+                        <td width="1%" height="7" style="background-image: URL(http://styles.anu.edu.au/_images/menu/menu_shadow_c.gif); background-repeat: repeat-x;" valign="top" align="right"><img src="http://styles.anu.edu.au/_images/menu/menu_shadow_r.gif" width="9" height="5" alt=""></td>
+                    </tr>
+                </table>
+
+
+
+          </td>
+        </tr>
+<!--	<tr>
+        	<td align="center"><B>Site Search</B>
+
+       <form ACTION="http://search.rsbs.anu.edu.au/search/search.cgi" METHOD="GET">
+             &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" 
+             name="query" size="20" value="" id="query" accesskey="q" style="font-size: 10px;">&nbsp;<input
+             type="submit" value="search" style="font-size: 10px;">
+             <input type=hidden name="collection" value="RSBSExternal">
+          </td>
+          <tr><td align="right">
+              <b><a href="http://search.rsbs.anu.edu.au/search/search.cgi?collection=RSBSExternal&amp;form=advanced">Advanced</a></b>
+       </form>
+              </td>
+          </tr>
+-->
+        <tr>
+            <td align="center"><a href="/utils/PathExpress/index.php?printVersion=1" title="Printer Friendly Version of this Document"><img src="http://styles.anu.edu.au/_images/printer.gif" width="25" height="24" border="0" alt="Printer Friendly Version of this Document"></a></td>
+        </tr>
+    </table>
+</td>
+<!-- END NAVIGATION -->
+		    <td width="99%" align="left" height="300" valign="top"><a name="content"></a>       <a name="top"></a>       <div style="padding-left: 15px; padding-right: 10px;"> <title>PathExpress</title><script type='text/javascript'>var sc_project=2688106;var sc_invisible=1;var sc_security='2f170f49';</script><script type='text/javascript'src='http://www.statcounter.com/counter/counter.js'></script><noscript><divclass='statcounter'><a title='tumblr visitor' href='http://www.statcounter.com/tumblr/' target='_blank'><img class='statcounter' src='http://c.statcounter.com/2688106/0/2f170f49/1/' alt='tumblr visitor'></a></div></noscript><table width="100%" align="center" bgcolor=lightsteelblue>
+<tr><td align="center"><h1>PathExpress</h1><big><b>Exploring the metabolic network to interpret post-genomic data</b></big></td></tr><tr><td align=right>[<a href="index.php">Home</a> | <a href="stats.php">Stats</a> | <a href="help.php">Help</a> | <a href='mailto:ngoffard@gmail.com'>Contact</a>]</td></tr></table>
+<hr>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-86436-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<form enctype='multipart/form-data' method='post' action='analysis.php'><br><table border=0 align=center><tr><td bgcolor=lightsteelblue><b>Genome Array</b></td><td><select name='chip_id'><option value='3702'>Affymetrix Arabidopsis ATH1 Genome Array (Arabidopsis thaliana)</option><option value='4513'>Affymetrix Barley Genome Array (Hordeum vulgare)</option><option value='9913'>Affymetrix Bovine Genome Array (Bos taurus)</option><option value='6239'>Affymetrix C. elegans Genome Array (Caenorhabditis elegans)</option><option value='9615'>Affymetrix Canine Genome 2.0 Array (Canis familiaris)</option><option value='9031'>Affymetrix Chicken Genome Array (Gallus gallus)</option><option value='2711'>Affymetrix Citrus Genome Array (Citrus sinensis)</option><option value='3635'>Affymetrix Cotton Genome Array (Gossypium hirsutum)</option><option value='7227'>Affymetrix Drosophila Genome 2.0 Array (Drosophila melanogaster)</option><option value='562'>Affymetrix E. coli Genome 2.0 Array (Escherichia coli)</option><option value='9606'>Affymetrix Human Genome U133 Plus 2.0 Array (Homo sapiens)</option><option value='4577'>Affymetrix Maize Genome Array (Zea mays)</option><option value='3880'>Affymetrix Medicago Genome Array (Medicago truncatula)</option><option value='382'>Affymetrix Medicago Genome Array (Sinorhizobium meliloti)</option><option value='3879'>Affymetrix Medicago Genome Array (Medicago sativa)</option><option value='10090'>Affymetrix Mouse Genome 430A 2.0 Array (Mus musculus)</option><option value='9606.1'>Affymetrix Plasmodium/Anopheles Genome Array (Homo sapiens)</option><option value='7165'>Affymetrix Plasmodium/Anopheles Genome Array (Anopheles gambiae)</option><option value='5833'>Affymetrix Plasmodium/Anopheles Genome Array (Plasmodium falciparum)</option><option value='3694'>Affymetrix Poplar Genome Array (Populus trichocarpa)</option><option value='9823'>Affymetrix Porcine Genome Array (Sus scrofa)</option><option value='10116'>Affymetrix Rat Genome 230 2.0 Array (Rattus norvegicus)</option><option value='9544'>Affymetrix Rhesus Macaque Genome Array (Rhesus macaque)</option><option value='4530'>Affymetrix Rice Genome Array (Oryza sativa)</option><option value='3847'>Affymetrix Soybean Genome Array (Glycine max)</option><option value='4547'>Affymetrix Sugar Cane Genome Array (Saccharum officinarum)</option><option value='4081'>Affymetrix Tomato Genome Array (Lycopersicon esculentum)</option><option value='29760'>Affymetrix Vitis vinifera (Grape) Genome Array (Vitis vinifera)</option><option value='4565'>Affymetrix Wheat Genome Array (Triticum aestivum)</option><option value='8355'>Affymetrix Xenopus laevis Genome 2.0 Array (Xenopus laevis)</option><option value='8364'>Affymetrix Xenopus tropicalis Genome Array (Xenopus tropicalis)</option><option value='4896'>Affymetrix Yeast Genome 2.0 Array (Schizosaccharomyces pombe)</option><option value='4932'>Affymetrix Yeast Genome 2.0 Array (Saccharomyces cerevisiae)</option><option value='7955'>Affymetrix Zebrafish Genome Array (Danio rerio)</option><option value='1'>ENZYME (Reference)</option><option value='4577.1'>Maize Oligonucleotide Array Project (Zea mays)</option></select></td></tr><tr><td colspan=2><hr></td></tr><tr><td rowspan=2 bgcolor=lightsteelblue><b>List of Identifiers</b></td><td>Enter or Paste: <br><textarea rows=5 cols=50 name='seqpaste'></textarea></td></tr><tr><td>Upload a file: <input type='file' name='seqfile'><br><br><small><a href='exple.txt' target=_blank>Example</a> for Affymetrix ATH1 Genome Array</small></td></tr><tr><td colspan=2><hr></td></tr><tr><td bgcolor=lightsteelblue><b>Compare to:</b></td><td><input type=radio checked name='analysis' value=1> Entire pathways<br><input type=radio name='analysis' value=2> Sub-pathways<br><input type=radio name='analysis' value=3> Enzyme Neighbourhoods | Depth
+<select name="level">
+<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option></select></td></tr><tr><td colspan=2><hr></td></tr><tr><td bgcolor=lightsteelblue><b>P-value threshold: </b></td><td><input type=text name='thr' value=0.05></td></tr><tr><td bgcolor=lightsteelblue><b>P-value adjustment: </b></td><td><input type=radio name='adjust' value='none' checked> None<br><input type=radio name='adjust' value='fdr'> False Discovery Rate (FDR)<br><input type=radio name='adjust' value='bonferroni'> Bonferroni correction<br></td></tr><tr><td colspan=2><hr></td></tr><tr><td></td><td><input type='submit'> / <input type='reset'></td></tr>
+</table></form><hr><b>When using this tool, please cite</b>:<br>- Goffard N. & Weiller G. (2007) <b>PathExpress: a web-based tool to identify relevant pathways in gene expression data</b>, <i>Nucleic Acids Research</i>, <b>35</b>(Web Server Issue), W176-181. [<a href='http://nar.oxfordjournals.org/cgi/content/full/gkm261v1' target=_blank>Full Text</a>]<br>- Goffard N., Frickey T. & Weiller G. (2009) <b>PathExpress update: the enzyme neighbourhood method of associating gene-expression data with metabolic pathways</b>, <i>Nucleic Acids Research</i> [<a href='http://nar.oxfordjournals.org/cgi/content/full/gkp432v1' target=_blank>Full Text</a>]<br><hr>        </p>      </div>	  </td>	</tr></table><!-- BEGIN FOOTER -->
+<div align="center" style="margin-top: 0px;">
+<table cellspacing="0" cellpadding="0" border="0" width="100%" summary="Page footer layout table">
+    <tr>
+        <td align="center"
+            style="background-color: #000000;
+                   background-image: url(/_images/bgrounds/Background.Gif);
+                   background-repeat: repeat;
+                   border-top: 1px solid #CCCCCC;">
+            <div style="color: #FFFFFF;
+                        text-align: center;
+                        padding: 1px;">
+                <a href="http://www.anu.edu.au/legal/copyrit.html" class="extNav">Copyright</a> | 
+                <a href="http://www.anu.edu.au/legal/copyrit.html#DISCLAIMER" class="extNav">Disclaimer</a> | 
+                <a href="http://www.anu.edu.au/legal/copyrit.html#PRIVACY" class="extNav">Privacy</a> | 
+                <a href="http://www.anu.edu.au/contact.php" class="extNav">Contact ANU</a>   
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-image: url(http://styles.anu.edu.au/_images/headerShadow.gif);
+                   background-repeat: repeat-x;"><img src="http://styles.anu.edu.au/_images/spacer.gif" width="1" height="3" border="0" alt=""></td>
+    </tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%" summary="Page footer layout table">
+    <tr>
+        <td align="center" height="10" class="footer">
+            Page last updated: 7 June 2007<br>
+            Please direct all enquiries to: <a href="#" onclick="protect('rsbs.anu.edu.au','rsbs','Webmaster'); return false;">RSBS Webmaster</a><br>
+            Page Authorised by: Director, RSBS        </td>
+    </tr>
+    <tr>
+        <td align="center" height="10" class="footer">
+            The Australian National University &#8212; CRICOS Provider Number 00120C
+        </td>
+    </tr>
+</table>
+</div>
+
+<!-- END FOOTER -->
+</body></html>

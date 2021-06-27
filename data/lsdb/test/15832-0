@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Applied Biosystems - SVM siRNA Design Tool - beta</title>
+	<meta name="robots" content="none" />
+	<meta name="googlebot" content="noarchive" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="stylesheet" href="../shared/css/global_nav.css" />
+	<link rel="stylesheet" href="../ga/ga.css" />
+	<style type="text/css">
+	.gaTableGrey tr { background-color: white; }
+	</style>
+</head>
+
+<body id="home">
+<div style="padding: 10px 15px 0px 15px; border-bottom: 1px solid #E2E2E2; width: 970px;">
+	<div style="float: left;"><a href="http://www.appliedbiosystems.com"><img src="../shared/images/ab_Logo.jpg" border="0" width="170" height="41" alt="Applied Biosystems" /></a></div>
+	<div style="float: left; padding-left: 20px;"><h3>SVM siRNA Design Tool - beta</h3></div>
+	<div style="clear: left;">&nbsp;</div>
+</div>
+<div style="padding: 10px 15px; width: 970px; overflow: hidden;">
+	<p>
+	This siRNA design tool is based on a bioinformatics algorithm described in our recent paper:</p>
+	<p style="margin: 20px;"><a href="http://dx.doi.org/10.1093/nar/gkp864"><span style="color: #1279C6;">Selection of hyper-functional siRNAs with improved potency and specificity</span></a><br />Wang X, Wang X,
+	Rajeev K, Varma RK, Beauchamp L, Magdaleno S and Sendera TJ<br />Nucleic Acids Research, 2009, Vol. 37, No. 22.</p>
+	By analyzing public siRNA data and focusing on hyper-functional siRNAs, we identified a set of sequence features
+	as selection criteria to build an siRNA design algorithm using the machine learning framework,
+	support vector machines. &nbsp;Our new algorithm has been extensively validated experimentally for its ability to select
+	hyper-functional siRNAs that function effectively even at low concentrations.
+	</p>
+	
+	<div style="margin: 25px;">
+		<form name="sequenceForm" id="sequenceForm" method="post" action="">
+		<div id="errorMsg" style="color: red; margin-bottom: 8px;">&nbsp;</div>
+		Enter sequence (Single sequence - A, G, C and T only):<br />
+		<textarea id="seqInput" name="seqInput" cols="50" rows="7" onkeyup="validateText()"></textarea><br /><br />
+		<div style="height: 25px;">
+			<span id="submitButton" class="nestedFontSize"><a href="javascript: submitForm()" class="buttonSmallOrange floatLeft">Submit For Design</a></span>
+			<span id="progressSpan" style="display: none;"><img src="../shared/images/progress-spin.gif" alt="" border="0" width="16" height="16" />&nbsp;&nbsp;Submitting design.  Please wait......</span>
+		</div>
+		</form>
+	</div>
+</div>
+
+<div id="footer">
+	<ul id="footerNav">
+		<li class="first"><a href="http://www.lifetechnologies.com">Corporate</a></li>
+		<li><a href="http://phx.corporate-ir.net/phoenix.zhtml?c=61498&p=irol-irhome" target="_blank">Investors Relations</a></li>
+		<li><a href="http://www.lifetechnologies.com/about-life-technologies/media-resources.html">Media Center</a></li>
+		<li><a href="http://www.lifetechnologies.com/careers">Careers</a></li>
+		<li><a href="http://www.appliedbiosystems.com/webfeedback" target="_blank">Web Feedback</a></li>
+		<li><a href="https://www2.appliedbiosystems.com/siteMap.cfm">Site Map</a></li>
+		<li><a href="http://www.appliedbiosystems.com/about/contact/">Contact Us</a></li>
+	</ul>
+	<div id="copyright">
+		&copy; Copyright <script type="text/javascript" language="javascript">
+			var curdate = new Date();
+			var year = curdate.getFullYear();
+			document.write(year);
+			</script> Life Technologies Corporation. All Rights Reserved.
+	</div>
+	<ul id="utility">
+		<li class="first"><a href="https://www2.appliedbiosystems.com/privacypolicy.cfm">Privacy Policy</a></li>
+		<li><a href="https://www2.appliedbiosystems.com/termsofuse.cfm">Terms of Use</a></li>
+		<li><a href="https://www2.appliedbiosystems.com/legal/">Sales &amp; Licensing Information</a></li>
+	</ul>
+</div>
+<script language="javascript" type="text/javascript">
+function submitForm() {
+	document.getElementById('submitButton').style.display = "none";
+	document.getElementById('progressSpan').style.display = "";
+	document.sequenceForm.submit();
+}
+function toggleDebug() {
+	var elem = document.getElementById('debugData');
+	if(elem.style.display == "none") {
+		elem.style.display = "";
+	} else {
+		elem.style.display = "none";
+	}
+}
+function validateText() {
+	var err = "";
+	var text = document.getElementById('seqInput').value;
+	if(text.search(/[^AGCT\s]/i) > -1) {
+		err += "Invalid bases are found in the sequence you entered.  Only A,G,C and T are accepted.";
+	}
+	document.getElementById('errorMsg').innerHTML = err + "&nbsp;";
+}
+</script>
+</body>
+</html>

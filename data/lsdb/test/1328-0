@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>SPPIDER - protein interface identification</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="author" content="A. Porollo, J. Meller">
+  <meta name="keywords" 
+        content="protein-protein interaction,
+                 protein active site recognition,
+                 protein interface recognition,
+                 protein interface prediction,
+                 protein interface identification,
+                 interaction sites prediction,
+                 interacting sites prediction,
+                 binding sites prediction,
+                 active sites prediction">
+  <meta name="description" content="SPPIDER is a server for identification of residues involved in protein-protein interactions.">
+
+  <link rel="stylesheet" type="text/css" href="design.css" media="screen,print" />
+</head>
+
+<script type="text/javascript">
+function PageOnLoad() {
+  for (var i=0; i<document.InputForm.TQuery.length; i++)
+    if (document.InputForm.TQuery[i].checked)
+      TQonClick(document.InputForm.TQuery[i].value);
+
+  GetParameters();
+  PDBcodeOnChange();
+  UpdateSidebarInfo('ifLastRequest');
+  UpdateSidebarInfo('ifLastUpdate');
+}
+
+function UpdateSidebarInfo(id) {
+    var fr = document.getElementById(id);
+    fr.src = fr.src;
+}
+
+function TQonClick(qtype) {
+  // PDB info
+  document.getElementById('divQueryChain').style.display =
+      (qtype == 1) ? 'block' : 'none';
+  document.getElementById('divBioUnit').style.display =
+      (qtype == 2) ? 'block' : 'none';
+  // Input/Output
+  for (var i=1; i<=document.InputForm.TQuery.length; i++)
+    document.getElementById('divInputQS' + i).style.display =
+    document.getElementById('divOutputQS' + i).style.display =
+      (qtype == i) ? 'block' : 'none';
+  // Source data settings
+  if (qtype == 1 || qtype == 2) {
+    document.getElementById('divSourceStr').style.display = 'block';
+    document.getElementById('divSourceSeq').style.display = 'none';
+  }
+  else {
+    document.getElementById('divSourceStr').style.display = 'none';
+    document.getElementById('divSourceSeq').style.display = 'block';
+  }
+
+  PDBcodeOnChange();
+}
+
+function validateEntry() {
+  if (document.InputForm.aaSeq)
+    document.InputForm.aaSeq.value = 
+      document.InputForm.aaSeq.value.replace(/[\s\t]/g, '');
+
+  var sel = -1;
+  for (var i=0; i<document.InputForm.TQuery.length; i++)
+    if (document.InputForm.TQuery[i].checked) sel = i;
+
+  if (sel < 0) {
+    alert('No type of query specified!');
+    return false;
+  }
+
+  if (document.InputForm.TQuery[sel].value < 3 &&
+      !document.InputForm.PDBCode.value &&
+      !document.InputForm.PDBFileName.value) {
+    alert('No PDB code or file specified!');
+    return false;
+  }     
+  if (document.InputForm.TQuery[sel].value == 3 &&
+      !document.InputForm.QSeq.value) {
+    alert('No protein sequence specified!');
+    return false;
+  }     
+
+  return true;
+}
+
+function GetParameters() {
+    var url = window.location.search.substring(1);
+    var param = url.split('&');
+
+    for (var i=0; i<param.length; i++) {
+        var pos = param[i].indexOf('=');
+        if (pos > 0) {
+            var key = param[i].substring(0, pos);
+            var value = unescape(param[i].substring(pos + 1));
+            if (key == 'PDBCode' && value.length == 4) {
+                document.InputForm.PDBCode.value = value;
+            }
+            else if (key == 'PDBChain' && value.length == 1) {
+                document.InputForm.PDBChain.value = value;
+            }
+        }
+    }
+}
+
+function PDBcodeOnChange() {
+    var form = document.InputForm;
+    if (form.BioUnit)
+        form.BioUnit.disabled = form.PDBCode.value.length != 4;
+    form.btnChainLookup.disabled =
+        form.PDBCode.value.length != 4 && !form.PDBFileName.value;
+}
+
+var win_chains = null;
+function DataLookupOnClick(dtype) {
+    // close already opened window
+    if (win_chains && win_chains.open && !win_chains.closed) {
+   win_chains.close();
+        win_chains = null;
+    }
+
+    var form = document.InputForm;
+    // request the list of chains
+    if (dtype == 'chains') {
+        var pdb_src = 0;
+        var pdb_file = form.PDBCode.value;
+        if (pdb_file.length != 4) pdb_file = '';
+        if (pdb_file) pdb_src = 1;
+        if (!pdb_file && form.PDBFileName.value) pdb_src = 2;
+        if (!pdb_src) {
+            alert('No PDB source specified!');
+            return;
+        }
+
+        // create a new window
+        win_chains = window.open("", "SPPIDER_PDBdata", "width=400,height=100,resizable=yes,status=no,toolbar=no,scrollbars=yes,menubar=no,titlebar=yes,left=10,top=10,screenX=10,screenY=10");
+        win_chains.creator = self;
+        // structure is specified by PDB code
+        if (pdb_src == 1)
+            win_chains.location.href = '/cgi-bin/get_pdb_data.cgi?PDBsrc=' + pdb_file + '\&Info=chains';
+        // structure is from custom file
+        if (pdb_src == 2) {
+            var faction = form.action;
+            var ftarget = form.target;
+            form.action = '/cgi-bin/get_pdb_data.cgi';
+            form.target = 'SPPIDER_PDBdata';
+            form.Info.value = 'chains';
+            form.submit();
+            form.Info.value = '';
+            form.action = faction;
+            form.target = ftarget;
+        }
+        win_chains.focus();
+    }
+
+    // request PDB search by keywords
+    else if (dtype == 'search') {
+        // escape keywords
+        var keywords = escape(form.PDBkeywords.value);
+        if (keywords.length == 0) {
+            alert('No keywords specified!');
+            return;
+        }
+        // create a new window
+        win_chains = window.open("", "SPPIDER_PDBdata", "width=500,height=600,resizable=yes,status=no,toolbar=no,scrollbars=yes,menubar=no,titlebar=yes,left=10,top=10,screenX=10,screenY=10");
+        win_chains.creator = self;
+        win_chains.location.href = '/cgi-bin/get_pdb_data.cgi?Info=search\&Keywords=' + keywords;
+        win_chains.focus();
+    }
+}
+
+function ShowSettings(sender) {
+    var el_sender = document.getElementById(sender);
+    var div_name = 'div' + sender.substr(2);
+    var div_obj = document.getElementById(div_name);
+    if (div_obj)
+        if (el_sender.innerHTML.indexOf('Hide') >= 0) {
+            div_obj.style.display = 'none';
+       el_sender.innerHTML = 'Show options';
+   }
+        else {
+            div_obj.style.display = 'block';
+       el_sender.innerHTML = 'Hide options';
+   }
+}
+
+</script>
+                                   
+<body onload="PageOnLoad()">
+<div class="noprint">
+<div id="logo">
+  <h1><a href="http://www3.interscience.wiley.com/journal/113508803/abstract" target="_blank" title="Original publication">SPPIDER</a></h1>
+  <h2>
+    <b>S</b>olvent accessibility based <b>P</b>rotein-<b>P</b>rotein <b>I</b>nterface<br>
+    i<b>DE</b>ntification and <b>R</b>ecognition
+  </h2>
+</div>                      
+<!-- CCHMC and UC logo at the top right corner -->
+<script type="text/javascript" src="http://sable.cchmc.org/logo.js"></script>
+<!-- posted news and updates regarding the server -->
+<script type="text/javascript" src="http://sable.cchmc.org/news.js"></script>
+
+<div id="menu">
+  <ul>
+    <li class="first"><a href="sppider_doc.html" title="Documentation and protein sets" target="doc">Documentation</a></li>
+    <li><a href="http://sable.cchmc.org/cgi-bin/stat.cgi?SRC=SPPIDER" title="Usage: numbers and types of requests, geography of users" target="_blank">Statistics</a></li>
+    <li><a href="http://sable.cchmc.org/acknowledge.html" title="Acknowledgements to funding, hosting and other support" target="_blank">Credits</a></li>
+    <li><a href="javascript:ShowNews('SPPIDER')" title="Announcements, updates, news">News</a></li>
+    <li><a href="http://folding.cchmc.org" title="Home site of our research group" target="_blank">About us</a></li>
+    <li><a href="http://sable.cchmc.org/cgi-bin/contact_page.cgi?Server=SPPIDER" title="Gateway to feedback" target="_blank">Contacts</a></li>
+  </ul>                          
+</div>
+
+<hr />
+<div id="banner" style="background: url(design/system/img05.png) no-repeat; height: 235px; margin-top: 8px">
+</div>
+
+<form accept-charset="UTF-8" encTYPE="multipart/form-data"
+      method="post" name="InputForm"
+      action="/cgi-bin/int_recognition.cgi"
+      target="_blank" onsubmit="return validateEntry()">
+
+<input type="hidden" name="Info" value="">
+
+<!-- start page -->
+<div id="page_main">
+  <!-- start content -->
+  <div id="content">                               
+    <div class="post">
+      <div class="meta" title="General settings: type of query, e-mail address">
+        <div class="hide">
+          <a href="javascript:ShowSettings('cbQueryType')" id="cbQueryType" title="Toggle view of the settings below">Hide options</a>&nbsp;|&nbsp;<a href="javascript:{if (validateEntry()) document.InputForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>General settings (<a class="help" href="http://sppider.cchmc.org/sppider_doc.html#QueryType" target="doc">Help</a>)</div>
+      </div>
+
+      <div id="divQueryType" style="display: block">
+        <fieldset><legend>Type of query</legend>
+          <label>
+          <input type="radio" name="TQuery" value="1" onclick="TQonClick(value)" checked>
+          Prediction of interaction sites using an unbound protein 3D structure
+          </label><br>
+          <label>
+          <input type="radio" name="TQuery" value="2" onclick="TQonClick(value)">
+          Analysis of known protein-protein complexes and identification of interfaces
+          </label><br>
+          <label>
+          <input type="radio" name="TQuery" value="3" onclick="TQonClick(value)">
+          Sequence-based prediction of interaction sites (<i>Experimental</i>)
+          </label>
+        </fieldset>
+        <p>
+          <label>
+          <input type="text" name="EMail" size="40">
+          E-mail address (<i>optional</i>)
+          </label>
+        </p>
+      </div>
+    </div>
+
+    <div class="post" id="divSourceStr" style="display: block">
+      <div class="meta" title="Source of structural data: PDB deposited or custom coordinate file">
+        <div class="hide">
+          <a href="javascript:ShowSettings('cbStructureSource')" id="cbStructureSource" title="Toggle view of the settings below">Hide options</a>&nbsp;|&nbsp;<a href="javascript:{if (validateEntry()) document.InputForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Structural data in 3D coordinates (<a class="help" href="http://sppider.cchmc.org/sppider_doc.html#Options" target="doc">Help</a>)</div>
+      </div>
+
+      <div id="divStructureSource" style="display: block">
+      <table>
+      <tr>
+        <td>
+        <fieldset><legend><a href="http://www.rcsb.org/" title="Protein Data Bank - repository of 3D structures" target="_blank">PDB</a> deposited protein structure</legend>
+          <p>
+          <label title="4 letters ID, e.g. 1a4y">PDB ID
+          <input type="text" name="PDBCode" size="5" maxlength="4"
+                 onchange="PDBcodeOnChange()"
+                 onkeyup="PDBcodeOnChange()">
+          </label>
+          <i>Examples: 3ert, 1ttu, 1naq</i>
+          </p>
+          <div id="divBioUnit" style="display: none">
+            <label title="Available with PDB codes only" style="margin-right: 15px">considered as
+            <select name="BioUnit">
+              <option value="0">Asymmetric unit as defined in PDB file
+              <option value="1" selected>Biological unit as defined by PQS server
+            </select>
+            </label>
+          </div>
+          <div id="divQueryChain" style="display: none">
+            <label>
+            <input type="text" name="PDBChain" value="" size="5" maxlength="1"
+		   title="Enter space or minus for unlabeled chain">
+            Chain label (<i>optional</i>)
+            </label>
+            <input type="button" name="btnChainLookup" value="Chain Lookup"
+                   title="Retrieve a list of available chain labels"
+                   onclick="DataLookupOnClick('chains')">
+          </div>
+          <p>
+          Get ID by keyword
+          <input type="text" name="PDBkeywords" value="" size="30"
+                 title="Enter keyword(s) to retrieve a list of PDB IDs">
+          <input type="button" name="btnPDBIDLookup" value="Find"
+                 title="Find protein structures available in PDB"
+                 onclick="DataLookupOnClick('search')">
+          </p>
+        </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <fieldset><legend>Custom structure in the <a href="http://www.wwpdb.org/docs.html" target="_blank">PDB format</a></legend>
+          <p>                                 
+          <label title="Specify coordinate file">File
+            <input type="file" name="PDBFileName" size="40">
+          </label>
+          </p>
+        </fieldset>
+        </td>
+      </tr>
+      </table>
+      </div>
+    </div>
+
+    <div class="post" id="divSourceSeq" style="display: none">
+      <div class="meta" title="Source of protein data: Amino acid sequence">
+        <div class="hide">
+          <a href="javascript:ShowSettings('cbSequenceSource')" id="cbSequenceSource" title="Toggle view of the settings below">Hide options</a>&nbsp;|&nbsp;<a href="javascript:{if (validateEntry()) document.InputForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Sequence data in FASTA format</div>
+      </div>
+
+      <div id="divSequenceSource" style="display: block">
+        <p>
+          <label>
+          Sequence name
+          <input type="text" name="QName" style="width: 300px">
+          </label>
+        </p>
+        <p>
+          <label>
+          Amino acid sequence <i>(using one letter codes)</i><br>
+          <textarea name="QSeq" rows="5" style="width: 550px"></textarea>
+          </label>
+        </p>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="meta" title="Input and output settings">
+        <div class="hide">
+          <a href="javascript:ShowSettings('cbQuerySettings')" id="cbQuerySettings" title="Toggle view of the settings below">Hide options</a>&nbsp;|&nbsp;<a href="javascript:{if (validateEntry()) document.InputForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Settings (<a class="help" href="http://sppider.cchmc.org/sppider_doc.html#Options" target="doc">Help</a>)</div>
+      </div>
+
+      <div id="divQuerySettings" style="display: block">
+        <fieldset><legend>Input</legend>
+        <div id="divInputQS1" style="display: none">
+          <p>
+            Version:
+            <label><input type="radio" name="Version" value="1"> SPPIDER I</label>
+            <label><input type="radio" name="Version" value="2" checked> SPPIDER II</label>
+          </p>
+          <p>
+            <label>
+            Tradeoff between <i>Sensitivity</i> and <i>Specificity</i>
+            <select name="Trade">
+              <option>0.1 (Best recall)</option> 
+              <option>0.2</option>
+              <option>0.3</option>
+              <option>0.4</option>
+              <option selected>0.5 (Balanced)</option>
+              <option>0.6</option>
+              <option>0.7</option>
+              <option>0.8</option>
+              <option>0.9</option>
+              <option>1.0 (Best precision)</option>
+            </select>
+            </label>
+          </p>
+        </div>
+        <div id="divInputQS2" style="display: none">
+          <p>
+            <label>
+            Define interaction sites using RSA change threshold
+            <select name="ThrType">
+              <option value="abs">Absolute (&Aring;&sup2;)
+              <option value="rel" selected>Relative (%)
+            </select>
+            </label>
+            <input type="text" name="ThrValue" value="4" size="2" maxlength="3">
+          </p>
+        </div>
+        <div id="divInputQS3" style="display: none">
+          <p>
+            <label>
+            Tradeoff between <i>Sensitivity</i> and <i>Specificity</i>
+            <select name="TradeSB">
+              <option>0.1 (Best recall)</option> 
+              <option>0.2</option>
+              <option>0.3</option>
+              <option>0.4</option>
+              <option selected>0.5</option>
+              <option>0.6</option>
+              <option>0.7</option>
+              <option>0.8</option>
+              <option>0.9 (Best precision)</option>
+            </select>
+            </label>
+          </p>
+        </div>
+        </fieldset>
+
+        <fieldset><legend>Output</legend>
+        <div id="divOutputQS1" style="display: none">
+          <p>
+            <label>
+            <input type="checkbox" name="PDBres" checked>
+            Generate a new PDB file with B-factors replaced by prediction
+            </label><br>
+            <label style="margin-left: 40px">
+            encoded as
+            <select name="BFgradient">
+              <option value="0" selected>Classification</option>
+              <option value="1">Regression</option>
+            </select>
+            </label>
+            <label>
+            and keep the rest chains (if any) in the file
+            <input type="checkbox" name="PDBresOrg" checked>
+            </label>
+          </p>
+<!--
+          <p>
+            <label>
+            <input type="checkbox" name="SCORPPIONres">
+            Map known interaction sites by
+            </label>
+            <label>
+            <select name="SCORPPIONcombine">
+              <option value="0">Adding to</option>
+              <option value="1" selected>Contrasting with</option>
+            </select>
+            prediction <i>(Not fully tested!)</i>
+            </label>
+          </p>
+-->
+          <p>
+            <label>
+            <input type="checkbox" name="SABLEres">
+            Append solvent accessibility prediction results
+            </label>
+            <i>(from <a href="http://sable.cchmc.org/" target="_blank">SABLE</a>)</i>
+          </p>
+          <p>
+            <label>
+            <input type="checkbox" name="CASPfmt">
+            Print results in the
+            </label>
+            <a href="http://predictioncenter.org/casp7/doc/casp7-format.html#FN" target="_blank" title="CASP format definition">CASP</a> format
+          </p>
+        </div>
+        <div id="divOutputQS2" style="display: none">
+          <p>
+            Present found interfaces as
+          </p>
+          <p>
+            <label><input type="radio" name="ReportType" value="1">As summary</label><br>
+            <label><input type="radio" name="ReportType" value="2" checked>Each interface separately</label>
+          </p>
+        </div>
+        <div id="divOutputQS3" style="display: none">
+          <p>
+            <label>
+            <input type="checkbox" name="SABLEres">
+            Append solvent accessibility prediction results
+            </label>
+            <i>(from <a href="http://sable.cchmc.org/" target="_blank">SABLE</a>)</i>
+          </p>
+          <p>
+            <label>
+            <input type="checkbox" name="CASPfmt">
+            Print results in the
+            </label>
+            <a href="http://predictioncenter.org/casp7/doc/casp7-format.html#FN" target="_blank" title="CASP format definition">CASP</a> format
+          </p>
+        </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <p>
+      <input type="Submit" value="Submit">
+      <input type="Reset" value="Reset">
+    </p>
+
+  </div>
+  <!-- end content -->
+  <!-- start sidebar -->
+  <div id="sidebar">
+    <ul>
+    <li>
+      <h2>Last request</h2>
+      <iframe id="ifLastRequest"
+              src="http://sable.cchmc.org/cgi-bin/get_server_info.cgi?Info=request&Server=SPPIDER"
+              style="width: 230px; height: 150px; border: 0; margin-left: 10px"></iframe>
+      <a style="float: right" href="javascript:UpdateSidebarInfo('ifLastRequest')">Refresh</a>
+    </li>
+    <li>
+      <h2>Last update</h2>
+      <iframe id="ifLastUpdate"
+              src="http://sable.cchmc.org/cgi-bin/get_server_info.cgi?Info=update&Server=SPPIDER"
+              style="width: 230px; height: 250px; border: 0; margin-left: 10px"></iframe>
+      <a style="float: right" href="javascript:ShowNews('SPPIDER')">More news</a>
+    </li>
+    <li>
+      <h2>Geography of users</h2>
+      <p style="text-align: center; margin: 0 auto 0 auto">
+        <a href="http://www2.clustrmaps.com/counter/maps.php?url=http://sppider.cchmc.org"
+           id="clustrMapsLink" target="_blank">
+        <img src="http://www2.clustrmaps.com/counter/index2.php?url=http://sppider.cchmc.org"
+             style="border:0px solid"
+             alt="Locations of visitors to this page"
+             title="Locations of visitors to this page" id="clustrMapsImg"
+             onError="this.onError=null; this.src='http://clustrmaps.com/images/clustrmaps-back-soon.jpg';
+                      document.getElementById('clustrMapsLink').href='http://clustrmaps.com'" />
+        </a>
+      </p>
+    </li>
+    </ul>
+  </div>
+  <!-- end sidebar -->
+  <div style="clear: both;">&nbsp;</div>
+  </div>
+<!-- end page -->
+</form>
+</div> <!-- no print -->
+
+<div class="print">
+<div id="logo" style="margin-top: 100px">
+  <h1>SPPIDER</h1>
+  <h2>
+    <b>S</b>olvent accessibility based <b>P</b>rotein-<b>P</b>rotein <b>I</b>nterface<br>
+    i<b>DE</b>ntification and <b>R</b>ecognition
+  </h2>
+</div>                      
+<!-- CCHMC and UC logo at the top right corner -->
+<script type="text/javascript" src="http://sable.cchmc.org/logo.js"></script>
+<!-- SPPIDER logo -->
+<div id="banner">
+  <img src="design/system/img05.png" alt="SPPIDER banner">
+</div>
+</div> <!-- print -->
+
+<div id="footer">
+<table style="width: 100%">
+<tr>
+  <td>
+  <p class="legal">
+    <script type="text/javascript" src="http://sable.cchmc.org/footer.js"></script>
+  </p>
+  </td>
+  <td style="text-align: right">
+  <p class="credit">
+    Developed by<br>
+    <a href="http://sable.cchmc.org/design/aleksey.jpg" target="_blank">A. Porollo</a><br>
+    <a href="http://sable.cchmc.org/design/jarek.jpg" target="_blank">J. Meller</a>
+  </p>
+  </td>
+</tr>
+</table>
+</div>
+</body>
+</html>
+

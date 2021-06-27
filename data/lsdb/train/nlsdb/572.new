@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Sfold - Software for Statistical Folding and Rational Design of Nucleic Acids</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <meta NAME="keywords" CONTENT="Sfold, Wadsworth Center, NYS Department of Health,
+RNA, RNA structure, folding, antisense, ribozyme, Soligo, Sribo, Srna, siRNA,
+RNA interference, RNAi, algorithm, prediction, sampling, biology, chemistry,
+bioinformatics, statistical folding, nucleic acid">
+    <meta NAME="description" CONTENT="Sfold predicts probable RNA secondary structures, assesses target accessibility, and provides tools for the rational design of RNA-targeting nucleic acids.">
+    <style TYPE="text/css">
+      font.title1 { font-style:italic; font-weight:bold; color:#ffffff}
+      font.title2 { font-weight:bold; font-size:12pt; font-family:times; color:#000000}
+      font.date { font-size:10pt; font-family:Times; color:#cccccc}
+      a.link {color:#0000cc}
+      td.gray {background-color:#eeeeee;}
+      td.left {font-weight:bold; color:#ffffff;}
+      td.boxtitle {font-size:12pt; font-family:Times; color:#33ffff}
+    </style>
+
+<script language="Javascript" type="text/javascript">
+function turnon(e) {
+  e.src = "./images/" + e.name + "_on.gif";
+
+  return true;
+}
+
+function turnoff(e) {
+  e.src = "./images/" + e.name + "_off.gif";
+
+  return true;
+}
+</script>
+  </head>
+  <body bgcolor="#cccccc" link="#666666" vlink="#666666">
+  <center><img alt="Return to Wadsworth Center Home Page located at http://www.wadsworth.org" SRC="./images/wadsworth.gif" BORDER=0 usemap="#nysdoh"><br><br>
+<map name="nysdoh">
+<area shape="rect" coords="70,1,280,29" href="http://www.wadsworth.org"
+title="Wadsworth Center Home Page" alt="Wadsworth Center Home Page" target="_blank">
+<area shape="rect" coords="310,1,565,29" href="http://www.health.state.ny.us"
+title="Department of Health Home Page" alt="Department of Health Home Page" target="_blank">
+</map>
+  <table width="750" cellpadding="0" cellspacing="0" border="0" bgcolor="#879eb7"><tr>
+  <td bgcolor="#879eb7" width="20"><img alt="spacing" src="./images/spacing20.gif"></td>
+  <td bgcolor="#53688c" width="230"><img alt="spacing" src="./images/logo.gif"></td>
+  <td width="500" bgcolor="#53688c" align="right" valign="bottom" style="background-image:url(./images/banner_bg1.gif)"><img alt="banner" src="./images/banner_fg.gif"></td>
+  <td style="background-image:url(./images/banner_bg2.gif)"><br></td>
+  </tr>
+  <tr><td colspan="4" bgcolor="#cccccc" height="32">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#475977">
+    <tr><td valign="bottom" height="30">
+    <a href="/" onmouseover="turnon(button1);" onmouseout="turnoff(button1);">
+    <img alt="button1" name="button1" src="./images/button1_off.gif" border="0"></a>
+    <a href="http://sfold.wadsworth.org/License_info.html" onmouseover="turnon(button2);" onmouseout="turnoff(button2);" target="_blank">
+    <img alt="button2" name="button2" src="./images/button2_off.gif" border="0"></a>
+    <a href="http://www.wadsworth.org/resnres/bioinfo/sfold/manual.html" onmouseover="turnon(button4);" onmouseout="turnoff(button4);" target="_blank">
+    <img alt="button3" name="button4" src="./images/button4_off.gif" border="0"></a>
+    <a href="http://www.wadsworth.org/resnres/bioinfo/sfold/FAQ.html" onmouseover="turnon(button5);" onmouseout="turnoff(button5);" target="_blank">
+    <img alt="button5" name="button5" src="./images/button5_off.gif" border="0"></a>
+    <a href="http://www.wadsworth.org/resnres/bioinfo/sfold/validate.html" onmouseover="turnon(button7);" onmouseout="turnoff(button7);" target="_blank">
+    <img alt="button7" name="button7" src="./images/button7_off.gif" border="0"></a>
+    <a href="/contact.pl" onmouseover="turnon(button6);" onmouseout="turnoff(button6);">
+    <img alt="button6" name="button6" src="./images/button6_off.gif" border="0"></a>
+    </td>
+    <td align="right"><font class="date">Monday April 5, 2010</font></td>
+    <td width="10"><br></td></tr>
+    </table>
+  </td></tr>
+
+  <tr bgcolor="#53688c"><td colspan="4">
+  <br>
+  <table align="center" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+  <td class="boxtitle" colspan="3"><img alt="t_module" src="./images/t_module.gif"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="right"><img alt="border" src="./images/border_nw.gif"></td>
+    <td style="background-image:url(./images/border_n.gif)" width="650" valign="top"><img alt="border" src="./images/border_n.gif"></td>
+    <td align="left"><img alt="border" src="./images/border_ne.gif"></td>
+  </tr>
+  <tr>
+    <td style="background-image:url(./images/border_w.gif)" width="15"><img alt="border" src="./images/border_w.gif"></td>
+    <td width="650" bgcolor="#aebddc">
+      <table width="100%" cellpadding="5" cellspacing="3" border="0">
+      <tr><td><a href="./sirna.pl" onmouseover="turnon(button_m3);" onmouseout="turnoff(button_m3);">
+      <img alt="button_m3" name="button_m3" src="./images/button_m3_off.gif" border="0"></a></td>
+      <td>Target accessibility prediction and RNA duplex thermodynamics for rational siRNA design</td>
+      </tr>
+      <tr><td><a href="./soligo.pl" onmouseover="turnon(button_m1);" onmouseout="turnoff(button_m1);">
+      <img alt="button_m1" name="button_m1" src="./images/button_m1_off.gif" border="0"></a></td>
+      <td>Target accessibility prediction and rational design of antisense oligonucleotides and nucleic acid probes</td>
+      </tr>
+      <tr><td><a href="./sribo.pl" onmouseover="turnon(button_m2);" onmouseout="turnoff(button_m2);">
+      <img alt="button_m2" name="button_m2" src="./images/button_m2_off.gif" border="0"></a></td>
+      <td>Target accessibility prediction and rational design of <i>trans</i>-cleaving ribozymes</td>
+      </tr>
+      <tr><td><a href="./srna.pl" onmouseover="turnon(button_m4);" onmouseout="turnoff(button_m4);">
+      <img alt="button_m4" name="button_m4" src="./images/button_m4_off.gif" border="0"></a></td>
+      <td>General features and output for statistical RNA folding</td>
+      </tr>
+      <tr><td><a href="./starmir.pl" onmouseover="turnon(button_m5);" onmouseout="turnoff(button_m5);">
+      <img alt="button_m5" name="button_m5" src="./images/button_m5_off.gif" border="0"></a></td>
+      <td>Energetic characteristics of hybridization between a structured target and
+        a microRNA <img alt="beta" src="./images/beta.png"></td>
+      </tr>
+      </table>
+    </td>
+    <td align="left" style="background-image:url(./images/border_e.gif)" width="15"><img alt="border" src="./images/border_e.gif"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="right"><img alt="border" src="./images/border_sw.gif"></td>
+    <td style="background-image:url(./images/border_s.gif)" width="650" valign="top"><img alt="border" src="./images/border_s.gif"></td>
+    <td align="left"><img alt="border" src="./images/border_se.gif"></td>
+  </tr>
+  </table>
+
+  <br><br>
+  <table align="center" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+  <td colspan="3"><img alt="border" src="./images/t_ref.gif"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="right"><img alt="border" src="./images/border_nw.gif"></td>
+    <td style="background-image:url(./images/border_n.gif)" width="650" valign="top"><img alt="border" src="./images/border_n.gif"></td>
+    <td><img alt="border" src="./images/border_ne.gif"></td>
+  </tr>
+  <tr>
+    <td style="background-image:url(./images/border_w.gif)" width="15"><img alt="border" src="./images/border_w.gif"></td>
+    <td width="650" bgcolor="#aebddc">
+      <table width="100%" cellpadding="5" cellspacing="8" border="0">
+
+		<tr><td>
+			<b>Shtutman, M.</b>, 
+			<b>Maliyekkel, A.</b>, 
+			<b>Shao, Y.</b>, 
+			<b>Carmack, C.S.</b>, 
+			<b>Baig, M.</b>, 
+			<b>Warholic, N.</b>, 
+			<b>Cole, K.</b>, 
+			<b>Broude, E.V.</b>, 
+			<b>Harkins, T.T.</b>, 
+			<b>Ding, Y.</b>, and
+			<b>Roninson, I.B.</b>.
+			(2010) High-throughput function-based gene identification using enzymatically generated short hairpin RNA library and massive parallel sequencing.
+			<i>Proc Natl. Acad Sci. U. S. A.</i> (accepted)<br>
+            [ <a href="PNAS_abstract.pdf" target="_blank">Abstract</a> ]
+            [ <a href="PNAS_supple_final.pdf" target="_blank">PDF file</a> ]<br>
+      </td></tr>     
+            
+		<tr><td>
+			<b>Ding, Y.</b>.
+			(2010) RNA secondary structure prediction and gene regulation by small RNAs. In: 
+			<i>Frontiers in Computational and System Biology.</i>, eds. Jianfeng Feng, Wenjiang Fu and Feng Zhu Sun. Springer (in press).<br>
+            [ <a href="Ding_review_Springer.pdf"
+              target="_blank">PDF file</a> ]<br>
+      </td></tr>     
+      
+		<tr><td>
+			<b>Yu, J.Y.</b>, 
+      		<b>Reynolds, S.H.</b>, 
+      		<b>Hatfield, S.D.</b>, 
+      		<b>Shcherbata, H.R.</b>, 
+      		<b>Fischer, K.A.</b>, 
+      		<b>Ward, E.J.</b>, 
+      		<b>Long, D.</b>, 
+      		<b>Ding, Y.</b>, and
+      		<b>Ruohola-Baker, H.</b>.
+			(2009) Dicer-1-dependent Dacapo suppression acts downstream of Insulin receptor in regulating cell division of Drosophila germline stem cells.
+			<i>Development.</i> <b>136</b>, 1497-1507.<br>
+            [ <a href="http://www.ncbi.nlm.nih.gov/pubmed/19336466?ordinalpos=9&amp;itool=System2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum"
+              target="_blank">Abstract</a> ]<br>
+      </td></tr>     
+      
+      <tr><td>
+      		<b>Keck, K.</b>, 
+      		<b>Volper, E.M.</b>, 
+      		<b>Spengler, R.M.</b>, 
+      		<b>Long, D.D.</b>, 
+      		<b>Chan, C.Y.</b>, 
+      		<b>Ding, Y.</b>, and
+      		<b>McCaffrey, A.P.</b>
+			(2009) Rational design leads to more potent RNA interference against hepatitis B virus: 
+factors effecting silencing efficiency.
+            <i>Mol Ther.</i> <b>17</b>(3):538-47<br>
+            [ <a href="http://www.nature.com/mt/journal/v17/n3/abs/mt2008273a.html"
+              target="_blank">Abstract</a> ]<br>
+      </td></tr>     
+      
+      <tr><td>
+            <b>Chan, C.Y.</b>, <b>Carmack, C.S.</b>, <b>Long, D.</b>, 
+            <b>Maliyekkel, A.</b>, <b>Shao, Y.</b>, <b>Roninson, I.</b>, and <b>Ding, Y.</b> 
+			(2009) A structural interpretation of the effects of GC-content on
+			efficiency of RNA interference.
+            <i><!-- BMC Bioinformatics -->The Seventh Asia Pacific Bioinformatics 
+              Conference</i> (<a href="http://bioinfo.au.tsinghua.edu.cn/apbc2009/">APBC 2009</a>). <br>
+            <i>BMC Bioinformatics</i> 2009, <b>10</b>(Suppl 1):S33 <br>
+            [ <a href="http://www.biomedcentral.com/1471-2105/10/S1/S33/abstract"
+              target="_blank">Abstract</a> ]
+            [ <a href="Chan_etal_GC.pdf"
+              target="_blank">PDF file</a> ]
+            <br>
+      </td></tr>     
+      <tr><td>
+            <b>Hammel, M.</b>, <b>Long, D.</b>, <b>Zhang, L.</b>, <b>Lee, A.</b>,
+            <b>Carmack, C.S.</b>, <b>Han, M.</b>, <b>Ding, Y.</b>, and <b>Ambros, V.</b> 240
+			(2008) mirWIP: microRNA target prediction based on microRNA-containing 
+			ribonucleoprotein-enriched transcripts.
+            <i>Nature Methods</i> <b>5</b>, 813-819 <br>
+            [ <a href="http://www.nature.com/nmeth/journal/v5/n9/abs/nmeth.1247.html"
+              target="_blank">Abstract</a> ]
+            [ <a href="Hammell_etal_suppl.pdf"
+              target="_blank">PDF file</a> ]
+            [ <a href="http://www.f1000biology.com/article/id/1119436" 
+              target="_blank">Faculty of 1000 Biology Recommended</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Chan, C.Y.</b> and <b>Ding, Y.</b> 
+			(2008) Boltzmann ensemble features of RNA secondary structures: 
+			a comparative analysis of biological RNA sequences and random shuffles.
+            <i>J Math Biol</i> <b>56</b>, 93-105. <br>
+            [ <a href="http://www.ncbi.nlm.nih.gov/pubmed/17909813"
+              target="_blank">Abstract</a> ]
+            [ <a href="Chan_Ding.pdf"
+              target="_blank">PDF file</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Long, D.</b>, <b>Chan, C.Y.</b>, and <b>Ding, Y.</b> 
+			(2008) Analysis of microRNA-target interactions by a target structure 
+			based hybridization model.
+            <i>Pacific Symposium on Biocomputing</i> <b>13</b>, 64-74. <br>
+            [ <a href="http://www.ncbi.nlm.nih.gov/pubmed/18232104"
+              target="_blank">Abstract</a> ]
+            [ <a href="Long_etal_PSB08.pdf"
+              target="_blank">PDF file</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+			<b>Shao, Y</b>, <b>Wu, S.</b>, <b>Chan, C.Y.</b>, <b>Klapper, J.R.</b>, 
+            <b>Schneider, E.</b>, and <b>Ding, Y.</b>
+            (2007) A structural analysis of <i>in vitro</i> catalytic activities of hammerhead ribozymes.
+            <i>BMC Biofinformatics</i> <b>8</b>, 469. <br>
+            [ <a href="http://www.biomedcentral.com/1471-2105/8/469"
+              target="_blank">Abstract</a> ]
+            [ <a href="Shao_etal_Rz.pdf"
+              target="_blank">PDF file</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+			<b>Shao, Y.</b>, <b>Anil, M.</b>, <b>Chan, C.Y.</b>, <b>Lawrence, C.E.</b>, 
+			<b>Roninson, I.</b>, and <b>Ding, Y.</b>
+            (2007) Effect of target secondary structure on RNAi efficiency.
+            <i>RNA</i> <b>13</b>, 1631-1640. <br>
+            [ <a href="http://rnajournal.cshlp.org/cgi/content/abstract/rna.546207v1"
+              target="_blank">Abstract</a> ]
+            [ <a href="Shao_etal_main_suppl.pdf"
+              target="_blank">PDF file</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Long, D.</b>, <b>Lee, R.</b>, <b>Williams, P.</b>, <b>Chan, C.Y.</b>,
+            <b>Ambros, V.</b>, and <b>Ding, Y.</b> (2007) Potent effect of target 
+            structure on microRNA function.
+            <i>Nat. Struct. Mol. Biol.</i> <b>14</b>, 287-294. <br>
+            [ <a href="http://www.nature.com/nsmb/journal/v14/n4/abs/nsmb1226.html"
+              target="_blank">Abstract</a> ]
+            [ <a href="http://www.nature.com/nsmb/journal/v14/n4/pdf/nsmb1226.pdf"
+              target="_blank">PDF file</a> ]
+            [ <a href="http://www.nature.com/nsmb/journal/v14/n4/suppinfo/nsmb1226_S1.html" 
+              target="_blank">Supplementary information</a> ]
+            [ <a href="http://www.nature.com/nature/journal/v446/n7136/full/446586a.html#Cell-Biology:-Predictions-on-target"
+              target="_blank">Highlight by <i>Nature</i> <b>446</b>, 587.</a> ]<br>
+            [ <a href="http://www.f1000biology.com/article/id/1086119" 
+              target="_blank">Faculty of 1000 Biology Recommended</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Shao, Y.</b>, <b>Wu, Y.</b>, <b>Chan, C.Y.</b>, <b>McDonough, K.</b>, and 
+            <b>Ding, Y.</b> (2006) Rational design and rapid screening of antisense 
+            oligonucleotides for prokaryotic gene modulation.
+            <i>Nucleic Acids Res.</i> <b>34</b>, 5660-5669. <br>
+            [ <a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkl715?ijkey=QiWNwZwMsDGQPDm&amp;keytype=ref" 
+              target="_blank">Abstract</a> ] 
+            [ <a href="http://nar.oxfordjournals.org/cgi/reprint/gkl715?ijkey=QiWNwZwMsDGQPDm&amp;keytype=ref"
+              target="_blank">PDF file</a> ] 
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b>, <b>Chan, C.Y.</b>, and <b>Lawrence, C.E.</b> (2006) Clustering 
+            of RNA secondary structures with application to messenger RNAs. 
+            <i>J. Mol. Biol.</i> <b>359</b>, 554-571. <br>
+            [ <a href="http://dx.doi.org/10.1016/j.jmb.2006.01.056" 
+              target="_blank">Abstract</a> ] 
+            [ <a href="./Ding_JMB06.pdf" target="_blank">PDF file</a> ] 
+            [ <a href="http://dx.doi.org/10.1016/j.jmb.2006.01.067" 
+              target="_blank">Related review article by Mathews, D.H.</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b> (2006) Statistical and Bayesian approaches to 
+            RNA secondary structure prediction. 
+            <i>RNA</i> <b>12</b>, 323-331. <br>
+            [ <a href="http://www.rnajournal.org/cgi/content/abstract/12/3/323"
+              target="_blank">Abstract</a> ] 
+            [ <a href="./Ding_RNA06_review.pdf"
+               target="_blank">PDF file</a> ] 
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Chan, C.Y.</b>, <b>Lawrence, C.E.</b>, and <b>Ding, Y.</b> (2005) Structure 
+            clustering features on the Sfold Web server. 
+            <i>Bioinformatics</i> <b>21</b>, 3926-3928. <br>
+            [ <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/bti632?ijkey=Ywk30zeIRPGrXMk&amp;keytype=ref" target="_blank">Abstract</a> ] 
+            [ <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/bti632?ijkey=Ywk30zeIRPGrXMk&amp;keytype=ref" target="_blank">PDF file</a> ] 
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b>, <b>Chan, C.Y.</b> and <b>Lawrence, C.E.</b> (2005) RNA 
+            secondary structure prediction by centroids in a Boltzmann weighted ensemble. 
+            <i>RNA</i> <b>11</b>, 1157-1166. <br>
+            [ <a href="http://www.rnajournal.org/cgi/content/abstract/11/8/1157" target="_blank">Abstract</a> ] 
+            [ <a href="./Ding_RNA05.pdf" target="_blank">PDF file</a> ] 
+            [ <a href="./RNA2005_supp.pdf" target="_blank">Supplementary information</a> ]
+            [ <a href="http://www.facultyof1000.com/article/16043502/evaluation" target="_blank">Faculty of 1000 Biology Recommended</a> ]
+            <br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b> and <b>Lawrence, C.E.</b> (2005) Rational design of siRNAs with the <i>S</i>fold software.
+            In <i>RNA Interference: from Basic Science to Drug Development</i>, ed. Krishnarao Appasani, Cambridge University Press. [ <a href="RNAi.pdf" target="_blank">PDF file</a> ]<br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b>, <b>Chan, C.Y.</b> and <b>Lawrence, C.E.</b> (2004) <i>S</i>fold web 
+            server for statistical folding and rational design of nucleic acids. 
+            <i>Nucleic Acids Res.</i> <b>32</b> <i>Web Server issue</i>, W135-W141. <br>
+            [ <a href="http://nar.oupjournals.org/cgi/content/abstract/32/suppl_2/W135" target="_blank">Abstract</a> ] 
+            [ <a href="./NAR32_web.pdf" target="_blank">PDF file</a> ]<br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b> and <b>Lawrence, C.E.</b> (2003) A statistical sampling algorithm for RNA secondary structure prediction.
+            <i>Nucleic Acids Res.</i> <b>31</b>, 7280-7301. <br>
+            [ <a href="./NAR31_24.pdf" target="_blank">Cover</a> ] 
+            [ <a href="http://nar.oupjournals.org/cgi/content/abstract/31/24/7280?ijkey=46rbX4BuSazPY&amp;keytype=ref" target="_blank">Abstract</a> ] 
+            [ <a href="./Ding_NAR03.pdf" target="_blank">Article</a> ]
+            [ <a href="http://www.facultyof1000.com/article/14654704/evaluation" target="_blank">Faculty of 1000 Biology Must Read</a> ]<br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b> (2002) Rational statistical design of antisense oligonucleotides for
+             high throughput functional genomics and drug target validation. <i>Statistica Sinica</i> <b>12</b>, 273-296. <br>
+            [ <a href="http://www3.stat.sinica.edu.tw/statistica/j12n1/j12n114/j12n114.htm" 
+            target="_blank">Abstract</a> ] 
+            [ <a href="http://www.wadsworth.org/resnres/bioinfo/sfold/Ding_SS.pdf" 
+            target="_blank">PDF file</a> ]<br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b> and <b>Lawrence, C.E.</b> (2001) Statistical
+prediction of single-stranded regions in RNA secondary structure and application
+to predicting effective antisense target sites and beyond. <i>Nucleic Acids Res.</i> <b>29</b>, 1034-1046. <br>
+            [ <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=11222752&amp;dopt=Abstract" target="_blank">Abstract</a> ] 
+            [ <a href="http://www.wadsworth.org/resnres/bioinfo/sfold/Ding_NAR01.pdf" target="_blank">PDF file</a> ]<br>
+      </td></tr>
+      <tr><td>
+            <b>Ding, Y.</b> and <b>Lawrence, C.E.</b> (1999) A Bayesian statistical algorithm for RNA secondary structure prediction.
+             <i>Computer &amp; Chemistry</i> <b>23</b>, 387-400. <br>
+            [ <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10404626&amp;dopt=Abstract" target="_blank">Abstract</a> ] 
+            [ <a href="http://www.wadsworth.org/resnres/bioinfo/sfold/Ding.pdf" target="_blank">PDF file</a> ]<br>
+            [ <a href="http://dx.doi.org/10.1016/S0959-440X(00)00088-9" target="_blank">
+            Comments in a review by Zuker (2000) <i>Curr Opin Struct Biol.</i> 
+            <b>10</b>, 303-310.</a> ]
+            <br>
+      </td></tr>
+      </table>
+    </td>
+    <td style="background-image:url(./images/border_e.gif)" width="15"><img alt="border" src="./images/border_e.gif"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="right"><img alt="border" src="./images/border_sw.gif"></td>
+    <td style="background-image:url(./images/border_s.gif)" width="650" valign="top"><img alt="border" src="./images/border_s.gif"></td>
+    <td><img alt="border" src="./images/border_se.gif"></td>
+  </tr>
+  </table>
+
+  <br><br><br>
+  </td></tr>
+  <tr><td colspan="4" bgcolor="#cccccc" height="32">
+<div align="center"><font color="#0000cc"><b><i><br>
+S</i>fold 2.0</b> application server -
+<img alt="1" src="./images/1.gif" style="vertical-align: middle;"><img alt="7" src="./images/7.gif" style="vertical-align: middle;"><img alt="8" src="./images/8.gif" style="vertical-align: middle;"><img alt="6" src="./images/6.gif" style="vertical-align: middle;"><img alt="5" src="./images/5.gif" style="vertical-align: middle;"><img alt="2" src="./images/2.gif" style="vertical-align: middle;">
+ page visits since April 1, 2003</font><br><br><br>
+<table width="100%" cellpadding="4" cellspacing="4" border="0">
+	<tr>
+		<td valign="bottom" align="center" width="50%">
+			<a href="http://www.nih.gov/" target="_blank">
+				<img alt="NIH Emblem" src="./images/82px-NIH_logo.png" border="0" align="middle">
+			</a>
+		</td>
+		<td valign="bottom" align="center" width="50%">
+			<a href="http://www.nsf.gov/" target="_blank">
+				<img alt="NSF Emblem" src="./images/82px-NSF_Logo.png" border="0" align="middle">
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom" align="center" width="50%">
+			<font color="#0000cc">
+			Grant <a href="http://projectreporter.nih.gov/project_info_details.cfm?aid=7175441"
+			 target="_blank" style="color:#0000cc;">5R01GM068726</a>
+			</font>
+			<br>
+			<br>
+		</td>
+		<td valign="bottom" align="center" width="50%">
+			<font color="#0000cc">
+			Grant 
+			<a href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0650991"
+			 target="_blank" style="color:#0000cc;">0650991</a>
+			<br>
+			Grant <a href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0200970"
+			 target="_blank" style="color:#0000cc;">0200970</a>
+			</font>
+		</td>
+	</tr>
+</table>
+
+<table width="100%" cellpadding="4" cellspacing="4" border="0">
+	<tr>
+		<td valign="bottom" align="center">
+			<a href="Sfold_ScienceNetWatch.pdf">
+			<img alt="Science Net Watch Emblem" src="./images/150px_science_Netwatch.png" border="0" align="middle" >
+			</a>
+		</td>
+		<td valign="middle" align="center">
+			<a href="GT_TOC_sfold.pdf">
+			<img alt="GT Emblem" src="./images/204px_GT_cover_logo.png" border="0" align="middle" >
+			</a>
+		</td>
+		<td valign="bottom" align="center">
+			<a href="Nature_highlights_p587.pdf">
+			<img alt="Nature Highlights Emblem" src="./images/150px_nature_logo_highlights.png" border="0" align="middle" >
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom" align="center">
+			&nbsp;
+		</td>
+		<td valign="middle" align="center">
+			<br>
+			<br>
+			<a href="Ye_interview.pdf">
+			<img alt="GT Emblem" src="./images/ResearchMedia_logo.png" border="0" align="middle" >
+			</a>
+		</td>
+		<td valign="bottom" align="center">
+			&nbsp;
+		</td>
+	</tr>
+</table>
+
+</div>
+  </td></tr>
+  
+  </table>
+  </center>
+  </body>
+</html>

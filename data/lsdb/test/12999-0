@@ -1,0 +1,270 @@
+
+<html>
+
+  <head>
+  <title>iPHACE</title>
+    <link rel="icon" href="iPHACEdir/web/BCN_images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="iPHACEdir/web/BCN.css" type="text/css">
+
+    <script LANGUAGE="JavaScript1.1" SRC="iPHACEdir/marvin/marvin.js"></script>
+    <script LANGUAGE="JavaScript1.1" SRC="iPHACEdir/marvin/js2java.js"></script>
+    <script LANGUAGE="JavaScript1.1" SRC="iPHACEdir/MarvinBeans.jar"></script>
+  
+    <script language='JavaScript1.2'>
+         
+      function checkBrowser() {
+        var ns = (document.getElementById) && (!document.all)
+        if (!ns) alert('Internet explorer does not support this web. Change to another browser to have access')
+      }
+
+      function textSearch() {
+
+	var sourc = document.getElementById('sourceName').value
+
+  	var queryText = document.getElementById('queryText').value
+
+        if (queryText == '') alert('Write some text to search')
+        else this.location = 'main.php?text=' + queryText + '&source=' + sourc
+
+      }
+
+      function browseToLigand(key, code, text) {
+
+	var codeParam = '&CSC=' + code 
+	var keyParam = '&source=' + key
+
+        var profParam = ''
+	if (document.getElementById(code + '.profSearch').checked) profParam = '&dist=' + document.getElementById(code + '.profileDist').value
+
+	openBCN('iPHACEdir/web/BCNinterface.php?' + codeParam + keyParam + profParam + '&queryText='+ text)
+
+      }
+
+      function browseToTarget(key, code, text) {
+
+	var codeParam = '&pId=' + code 
+	var keyParam = '&source=' + key
+
+	openBCN('iPHACEdir/web/BCNinterface.php?' + codeParam + keyParam + '&queryText='+ text)
+      }
+
+      function openBCN(page) {
+
+        var MM_config=""
+	MM_config+="toolbar=no,";
+  	MM_config+="location=no,"
+	MM_config+="directories=no,";
+	MM_config+="status=no,"
+	MM_config+="menubar=no," //Not on Apple Mac for obvious reasons
+	MM_config+="scrollbars=yes,"
+	MM_config+="resizable=yes," //Mac windows are always resizable
+	MM_config+="copyhistory=no,"
+	MM_config+="width=1200,"
+	MM_config+="height=900"
+	  
+	if (page == 'index.html') {
+	  var source = this.document.getElementById('sourceName').value
+	  page = 'iPHACEdir/' + source + '/' + source + '.index.html'
+	}
+
+	var MM_win=open(page,"",MM_config);
+	MM_win.moveTo(150,100);
+	MM_win.focus();
+      }
+
+      function select(element) {
+        var contents = document.getElementsByName('contentsDiv');
+	var tabs = document.getElementsByName('tab2');
+
+	for (i=0; i<tabs.length; i++) {
+	  if (tabs[i] == element) {
+	    contents[i].style.display=''
+   	    element.id = 'selected'
+          } else {
+	    contents[i].style.display='none'
+  	    tabs[i].id = 'unselected'
+          }
+	}
+
+      }  
+
+      function switchCBs(key) {
+
+	var state = document.getElementById(key + '.profSearch').checked
+
+	var cbs = document.getElementsByName('profCb')
+	for (i=0; i<cbs.length; i++) cbs[i].checked = ''
+
+	var textFields = document.getElementsByName('profDist')
+	for (i=0; i<textFields.length; i++) textFields[i].style.display = 'none'
+
+        if (state) {
+	  document.getElementById(key + '.profileDist').style.display = ''
+	  document.getElementById(key + '.profSearch').checked = 'checked'
+	}
+
+      }
+
+      function MM_swapImgRestore() {
+	  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+      }
+
+      function MM_findObj(n, d) { 
+	  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+	    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+	  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+	  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+          if(!x && d.getElementById) x=d.getElementById(n); return x;
+      }
+
+      function MM_swapImage() {
+          var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+          if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+      }
+
+      function displayHelp() {
+
+	var source = document.getElementById('sourceName').value;
+
+	if (source == 'all') text = '<small>This source contains interaction data between drugs and GPCR and/or<br>ion channels targets stored in both IUPHAR-DB and PDSP</small>'
+	else if (source == 'IUPHARdb') text = "<small>This source contains interaction data between drugs<br>and GPCR and/or ion channels targets <a id='BCNlink' href='http://www.iuphar-db.org/index.jsp' target='_blank' title='go to IUPHAR-DB main page'>[IUPHAR-DB]</a></small>";
+	else if (source == 'PDSP') text = "<small>This source contains interaction data between drugs in<br>IUPHAR-DB and GPCR and/or ion channel targets <a id='BCNlink' href='http://pdsp.med.unc.edu/indexR.html' target='_blank' title='go to PDSP main page'>[PDSP]</a></small>";
+	document.getElementById('dbExplanation').innerHTML = text;
+
+      }
+
+    </script>
+
+  </head>
+
+  <body onLoad='javascript:queryText.focus();displayHelp();'>
+
+   <div align="center">
+   <table width="887" border="0" cellpadding="0" cellspacing="0">
+      <!--  BEGIN HEADER
+      -->
+     <tr>
+       <td>
+         <table width="887" border="0" cellspacing="0" cellpadding="0">
+           <tr>
+             <td>
+               <img src='iPHACEdir/web/BCN_images/bcn.gif' border=0 title="iPHACE">  
+             </td>
+             <td align="center" valign="bottom">
+               <small><b>Mirror sites:</b> Europe[<a id='BCNlink' href='http://cgl.imim.es/iphace/main.php'>IMIM</a>] <b>|</b> USA[<a id='BCNlink' href='http://agave.health.unm.edu/iphace/main.php'>UNM</a>]</small>
+             </td>
+	     <td align='right' valign="bottom">
+               <a href="iPHACEdir/web/BCNcontents.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image20','','iPHACEdir/web/BCN_images/contents2.gif',1)"><img src="iPHACEdir/web/BCN_images/contents1.gif" title="Contents" alt="Contents" name="Image20" width="85" border="0" id="Image20" /></a>
+               <a href="iPHACEdir/web/BCNhelp.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image21','','iPHACEdir/web/BCN_images/help2.gif',1)"><img src="iPHACEdir/web/BCN_images/help1.gif" title="Help" alt="Help" name="Image21" width="85" border="0" id="Image21" /></a>
+             </td>
+           </tr>
+         </table>
+       </td>
+     </tr>
+      <!--  END HEADER
+      -->
+     <tr>
+       <td><img src="iPHACEdir/web/BCN_images/separa.gif" width="887" height="19" /></td>
+     </tr>
+
+     <tr>
+       <td>
+         <table border=0 cellspacing='0'>
+           <tr>
+	     <td >   
+               Select database 
+               <select id='sourceName' onChange="javascript:displayHelp();"> 
+                 <option value="all">All DBs</option>                 <option value="IUPHARdb">IUPHAR-DB</option>                 <option value="PDSP">PDSP*</option>               </select>
+             </td>
+             <td>
+               <a href="javascript:openBCN('index.html');" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image10','','iPHACEdir/web/BCN_images/bcn_go2.gif',1)"><img src="iPHACEdir/web/BCN_images/bcn_go.gif" title="Access iPHACE" alt="Access iPHACE" name="Image10" width="30" height="30" border="0" id="Image10" /></a> 
+             </td>
+	     <td>
+	       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             </td>
+	     <td id='dbExplanation' onLoad="displayHelp();">
+	       <small>This source contains interaction data between drugs and GPCR and/or<br>ion channels targets stored in both IUPHAR-DB and PDSP</small>
+	     </td>
+           </tr>
+         </table>
+	 <table border=0 >
+           <tr>
+	     <td >
+               <ul id='tab' >
+                 <li id='tab'><a id='selected' id='tab2' name='tab2' href='#' value="regular button" onClick='select(this)'>Text Search</a></li>
+	       </ul>
+             </td>
+           </tr>
+           <tr>                        
+             <td  id='contents' align='center' height='225' width='400'>
+	       <div name='contentsDiv' id='contentsDiv' style='display:yes'>
+		 <table>
+                   <tr>
+                     <td align="center">
+	               <p>Enter a drug or a target term and press return to check its availability in the selected database.</p>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td align="center">
+                       <table>
+                         <tr>
+                           <td>
+           	             <input id='queryText' size='25' title='enter text to serach' type='text' onKeydown="Javascript: if (event.keyCode==13) textSearch();">
+                           </td>
+                           <td >
+	                     <a href="javascript:textSearch();" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image11','','iPHACEdir/web/BCN_images/bcn_search2.gif',1)"><img src="iPHACEdir/web/BCN_images/bcn_search.gif" title="Search" alt="Search" name="Image11" width="30" height="30" border="0" id="Image11" /></a>                   
+                           </td>
+                         </tr>
+                       </table>
+                     </td> 
+                   </tr>
+                 </table>
+
+               </div>
+             </td>
+           </tr>
+         </table>
+       </td>     
+     </tr>
+
+     <tr>
+       <td><img src="iPHACEdir/web/BCN_images/separa.gif" width="887" height="19" /></td>
+     </tr>
+     <tr>
+       <td class="subtittle">
+         <b>Cite this work as:</b> Garcia-Serna R, Ursu O, Oprea TI, Mestres J. iPHACE: integrative navigation in pharmacological space. Bioinformatics 2010, 26: 985-986.
+       </td>
+    </tr>
+     <tr>
+       <td><img src="iPHACEdir/web/BCN_images/separa.gif" width="887" height="19" /></td>
+     </tr>
+     <TR>
+       <TD class="subtittle">
+         <small>This web application needs enabled javascript and java version 1.4 or higher to support <a href='http://www.chemaxon.com' id='BCNlink' target='_blank'>ChemAxon</a>'s applets.</small>
+       </TD>    
+     </TR>
+     <tr>
+       <td><img src="iPHACEdir/web/BCN_images/separa.gif" width="887" height="19" /></td>
+     </tr>
+     <tr>
+       <td align='right'>
+         <a href= "http://www.unm.edu/" target="_blank"><img src='iPHACEdir/web/BCN_images/unm_hsc_logo.gif' border=0 title='University of New Mexico' height=45></a>
+         <a href='http://www.imim.es' target="_blank"><img src="iPHACEdir/web/BCN_images/imim.png" border=0  title="Institut Municipal d'Investigacions M&egrave;diques" height=45></a>
+       </td>
+     <tr>
+   </TABLE>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-1339358-3");
+        pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+
+  </body>
+
+</html>

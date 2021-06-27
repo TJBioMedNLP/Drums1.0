@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<link href="ibivu.ico" rel="shortcut icon">
+<title>IBIVU - Vrije Universiteit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="description" content="Bioinformatics Unit, Vrije Unversiteit Amsterdam">
+
+<META NAME="keywords" CONTENT="VU, Vrije, Free, University, academic, research, learned, education, science, DNA, proteins, meetings, analysis tools, bioinformatics, unit, Amsterdam, database searches, database mining, secondary structure prediction, prediction, sequence alignment, genomics, quest, praline, repro, mathematical biology, bioinfo, mathbio, repeats, gene, rna, dna, protein, bioinformatics, molecular, genetics, software, databases, genomics, sequencing, protein, computational biology, nucleotide, FASTA, BLAST, SRS, ClustalW, DNA, RNA, BioInformer, science, leading edge, SD, PDB, Bioinformatics industry, Genomes, Proteomes, Embl-bank, Swissprot+swiss-prot, Trembl, Sptr, Webin, Autodep, Microarray, Pandit, Ensembl, Intact, Integr8, Intenz, Taxonomy, Interpro., Interproscan, Protein, nucleotide, Sequences">
+
+
+<SCRIPT TYPE="text/javascript">
+<!--
+function newImage (arg) {
+	if (document.images) {
+		rslt = new Image();
+		rslt.src = arg;
+		return rslt;
+	}
+}
+
+function changeImages () {
+    if (document.images ) {
+        for (var i=0; i<changeImages.arguments.length; i+=2) {
+            document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
+        }
+    }
+}
+
+function MM_swapImgRestore () { //v3.0
+    var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages () { //v3.0
+    var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj (n, d) { //v4.01
+    var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+    if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+    for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+    if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage () { //v3.0
+    var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function addBookmark () {
+    var title = document.title;
+    var url = window.location.href;
+    if (window.sidebar) { // Mozilla Firefox Bookmark
+        window.sidebar.addPanel(title, url, "");
+    } else if (window.external) { // IE Favorite
+        window.external.AddFavorite( url, title);
+    } else if (navigator.userAgent.match('Safari')) {
+        alert("Please press Command-D (Open-Apple-D) to bookmark a page in Safari.");
+    } else if (window.opera && window.print) { // Opera Hotlist
+        return true;
+    }
+}
+//-->
+</SCRIPT>
+
+<style type="text/css">
+<!--
+TR.logo {
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TD.logolight {
+        background-color: #E4E4E4;
+}
+TD.logodark {
+        background-color: #D2D2D2;
+}
+-->
+</style>
+
+<style type="text/css">
+<!--
+TABLE.blue {
+        background-color: #003366;
+}
+TABLE.green {
+        background-color: #005500;
+}
+TABLE.white {
+        background-color: #FFFFFF;
+}
+A:LINK {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:VISITED {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:ACTIVE {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:HOVER {
+	color: #FF0000;
+	font-weight: bold;
+	text-decoration: underline;
+}
+TR.blue {
+        color: #FFFFFF;
+        font-size: 14px;
+        background-color: #003366;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.green {
+        color: #FFFFFF;
+        font-size: 14px;
+        background-color: #005500;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.grey {
+        color: #FFFFFF;
+        font-size: 12px;
+        background-color: #666666;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.lightgrey {
+        color: #000000;
+        font-size: 13px;
+        background-color: #E4E4E4;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.darkgrey {
+        color: #000000;
+        font-size: 13px;
+        background-color: #D2D2D2;
+        font-family: Arial, Helvetica, sans-serif;
+}
+-->
+</style>
+
+</head>	
+
+<body style="background-color:#FFFFFF; color:#000000; margin-left:0; margin-top:0;" onLoad="MM_preloadImages('/images/homeon.gif','/images/researchon.gif','/images/confon.gif','/images/progon.gif','/images/memon.gif','/images/pubon.gif','/images/vacon.gif','/images/linkon.gif')">
+
+<table width="100%"><tr valign="top"><td bgcolor="#000000" width="29"><a href="http://www.ibi.vu.nl"><img src="/images/sidebar-main.gif"  alt="sidebar-main" border="0"></a></td><td>
+
+<table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <TR valign="bottom"> 
+    <TD align="left" width="512"> <img src="/images/title.gif" alt="title" width="512" height="57" vspace="0" hspace="0" align="bottom"></TD>
+    <td rowspan="2" style="background-image:url(/images/back1.gif);" width="100%" height="113" align="left" valign="top"> 
+      <div align="center"><img src="/images/griff.gif" alt="griff" width="77" height="75" vspace="2" hspace="2"></div>
+    </td>
+    <td rowspan=2 width="35%" align="left"> 
+      <TABLE WIDTH=277 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+        <TR> 
+          <TD ROWSPAN=2> <IMG SRC="/images/banner-button_01.gif" WIDTH=67 HEIGHT=113 ALT="banner-button_0"></TD>
+          <TD> <A HREF="/contact/"
+				ONMOUSEOVER="changeImages('banner_button_Layer_7', '/images/banner-button_Layer-7-over.gif', 'banner_button_03', '/images/banner-button_03-banner-but.gif', 'banner_button_Layer_4', '/images/banner-button_Layer-4-banne.gif', 'banner_button_05', '/images/banner-button_05-banner-but.gif',
+'banner_button_Layer_5', '/images/banner-button_Layer-5-banne.gif',
+'banner_button_07', '/images/banner-button_07-banner-but.gif'); return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_7', '/images/banner-button_Layer-7.gif', 'banner_button_03', '/images/banner-button_03.gif', 'banner_button_Layer_4', '/images/banner-button_Layer-4.gif', 'banner_button_05', '/images/banner-button_05.gif',
+'banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07',
+'/images/banner-button_07.gif'); return true;"> <IMG NAME="banner_button_Layer_7"
+SRC="/images/banner-button_Layer-7.gif" WIDTH=18 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-7"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_03" SRC="/images/banner-button_03.gif" WIDTH=17 HEIGHT=113 ALT="banner_button_03"></TD>
+          <TD> <A HREF="http://www.few.vu.nl/en/sitemap.asp"
+				ONMOUSEOVER="changeImages('banner_button_Layer_4', '/images/banner-button_Layer-4-over.gif', 'banner_button_05', '/images/banner-button_05-banner--11.gif', 'banner_button_Layer_5', '/images/banner-button_Layer-5-ba-14.gif', 'banner_button_07', '/images/banner-button_07-banner--18.gif');
+return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_4', '/images/banner-button_Layer-4.gif', 'banner_button_05', '/images/banner-button_05.gif', 'banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07', '/images/banner-button_07.gif');
+return true;"> <IMG NAME="banner_button_Layer_4" SRC="/images/banner-button_Layer-4.gif" WIDTH=17 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-4"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_05" SRC="/images/banner-button_05.gif" WIDTH=17 HEIGHT=113 ALT="banner-button_05"></TD>
+          <TD> <A HREF="mailto:ibivu@cs.vu.nl"
+				ONMOUSEOVER="changeImages('banner_button_Layer_5', '/images/banner-button_Layer-5-over.gif', 'banner_button_07', '/images/banner-button_07-banner--19.gif'); return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07', '/images/banner-button_07.gif'); return true;"> 
+            <IMG NAME="banner_button_Layer_5" SRC="/images/banner-button_Layer-5.gif" WIDTH=17 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-5"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_07" SRC="/images/banner-button_07.gif" WIDTH=124 HEIGHT=113 ALT="banner-button_07"></TD>
+        </TR>
+        <TR> 
+          <TD> <IMG SRC="/images/banner-button_08.gif" WIDTH=18 HEIGHT=32 ALT="banner-button_08"></TD>
+          <TD> <IMG SRC="/images/banner-button_09.gif" WIDTH=17 HEIGHT=32 ALT="banner-button_09"></TD>
+          <TD> <IMG SRC="/images/banner-button_10.gif" WIDTH=17 HEIGHT=32 ALT="banner-button_10"></TD>
+        </TR>
+      </TABLE>
+    </td>
+  </tr>
+  <TR valign="bottom"> 
+    <TD height="56" width="512" align="left"><img src="/images/banner-left.gif" width="512" height="56" align="bottom" vspace="0" hspace="0" alt="Bioinformatics Unit banner"></TD>
+  </tr>
+</table>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="90%">
+  <tr> 
+    <td height="46">&nbsp;&nbsp;</td>
+    <td colspan="2" height="46" valign="bottom">
+
+<img src="/images/homeon.gif" align="bottom" width="97" height="46" alt="homeon"><a href="/research" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Research','','/images/researchon.gif',1)"><img name="Research" border="0" src="/images/researchoff.gif" alt="researchoff" width="97" height="46" align="bottom"></a><a href="/teaching" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Teaching','','/images/confon.gif',1)"><img name="Teaching"  border="0" src="/images/confoff.gif" alt="confoff" width="97" height="46" align="bottom"></a><a href="/programs" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Tools','','/images/progon.gif',1)"><img name="Tools" border="0" src="/images/progoff.gif" alt="progoff" width="97" height="46" align="bottom"></a><a href="/members" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Members','','/images/memon.gif',1)"><img name="Members" border="0" src="/images/memoff.gif"  alt="memoff" width="97" height="46" align="bottom"></a><a href="/publications" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Pubs','','/images/pubon.gif',1)"><img name="Pubs" border="0" src="/images/puboff.gif" alt="puboff" width="97" height="46" align="bottom"></a><a href="/vacancies" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Vacancies','','/images/vacon.gif',1)"><img name="Vacancies" border="0" src="/images/vacoff.gif" alt="vacoff" width="97" height="46" align="bottom"></a><a href="/links" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Links','','/images/linkon.gif',1)"><img name="Links" border="0" src="/images/linkoff.gif" alt="linkoff" width="97" height="46" align="bottom"></a></td>
+  </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="90%">
+  <tr valign="top"> 
+    <td rowspan="2" nowrap>&nbsp;&nbsp;</td>
+    <td rowspan="2" width="32" nowrap><img src="/images/tabfoot.gif" alt="tabfoot" width="32" height="81" vspace="0" hspace="0" align="top" border="0"></td>
+    <td height=25 nowrap><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=32 height=25 align="top"></td>
+  </tr>
+  <tr align="left"> 
+    <td nowrap> 
+    <h2><font face="Arial, Helvetica, sans-serif" color="#003366">Welcome to the IBIVU</font></h2>
+ </td>
+  </tr>
+</table>
+
+
+<blockquote>
+<table width=750 border=0 cellspacing=0 cellpadding=0>
+<tr><td width=460 valign=top>
+
+<!--   ABOUT THE IBIVU   -->
+
+<table width="100%" border=0 cellspacing=1 cellpadding=0 class="blue"><tr><td>
+<table width="100%" border=0 cellspacing=1 cellpadding=5 class="white">
+<tr class="blue">
+    <td><b>About the IBIVU</b></td>
+</tr>
+<tr class="lightgrey">
+    <td style="padding:9px 13px; text-align:justify;">
+    The Centre for Integrative Bioinformatics VU (IBIVU) is a recently founded
+    centre by <a href="http://www.few.vu.nl">the Faculty of Sciences</a> and
+    <a href="http://www.falw.vu.nl">the Faculty of Earth and Life Sciences</a>
+    with strong support from the <a href="http://www.vu.nl">VU Central
+    University</a>.
+    <br>
+    The IBIVU has a core <a href="/research">Bioinformatics</a> section which focuses on developing
+    bioinformatics methods, and a <a href="/sysbio">Systems Bioinformatics</a> section which focusus on modeling biological systems. The IBIVU is supported by the
+    <a href="http://www.cs.vu.nl/en/index.php">Department of Computer Science</a> and the
+    <a href="http://www.imcb.nl">Institute for Molecular Cell Biology
+  (IMC)</a>.
+    <br>
+    The main activities include the integration of bioinformatics activities
+    and <a href="http://ibivu.cs.vu.nl/teaching">teaching bioinformatics</a>
+    at bachelor and master level.
+    </td>
+</tr>
+</table>
+</td></tr></table>
+<br>
+
+<!--   EMBEDDED CORE INITIATIVES   -->
+
+<table width="100%" border=0 cellspacing=1 cellpadding=0 class="blue"><tr><td>
+<table width="100%" border=0 cellspacing=1 cellpadding=5 class="white">
+<tr class="blue">
+    <td><b>Embedded core initiatives</b></td>
+</tr>
+<tr class="darkgrey">
+<td style="padding:9px 10px;">
+  <b>The IBIVU takes part in the following (inter)national initiatives:</b>
+    <ul style="margin-top:2pt; margin-bottom:0pt">
+    <li><a href="http://www.cmsb.nl">CMSB</a> (Centre for Medical Systems Biology),
+        <a href="http://dial.liacs.nl">DIAL</a> (Data Integration, Analysis and Logistics) project
+    <li><a href="http://www.ecogenomics.nl">Ecogenomics</a> project
+    <li><a href="http://www.nbic.nl/">NBIC</a> (Netherlands Bioinformatics Centre), 
+    <a href="http://www.nbic.nl/research/biorange/">BioRange</a> project
+  <li>EC FP6 Network of Excellence <a href="http://www.enfin.org">ENFIN</a> (Experimental Network for Functional INtegration) 
+  <li><a href="http://www.genomics.nl">Netherlands Genomics Initiative</a>, 
+<!--
+  <a href="http://www.genomics.nl/GetFile.aspx?aliaspath=%2fHome%2fGenomicsNL%2fGenomics+Programmes%2fHorizon">Horizon Breakthrough project</a>: 'Informatics Tool for Proteomic Biomarker Detection using large-scale nanoLC-FT Mass Spectrometry Data'
+-->
+  <a href="http://www.genomics.nl/Research/Horizon.aspx">Horizon</a> Breakthrough project: 'Informatics Tool for Proteomic Biomarker Detection using large-scale nanoLC-FT Mass Spectrometry Data'
+    </ul>
+    </td>
+</tr>
+</table>
+</td></tr></table>
+<br>
+
+<!--   CLOSE ASSOCIATIONS   -->
+
+<table width="100%" border=0 cellspacing=1 cellpadding=0 class="blue"><tr><td>
+<table width="100%" border=0 cellspacing=1 cellpadding=5 class="white">
+<tr class="blue">
+    <td><b>Close associations</b></td>
+</tr>
+<tr class="lightgrey">
+    <td style="padding:9px 10px;">
+    <b>Close associations exist with the following institutions:</b>
+    <ul style="margin-top:2pt; margin-bottom:0pt">
+    <li><a href="http://www.imcb.nl">IMC</a> (Institute for Molecular Cell Biology)
+    <li><a href="http://www.cncr.vu.nl">CNCR</a> (Centre for Neurogenomics and Cognitive Research)
+    <li><a href="http://www.systembiology.net/crbcs">CRBCS</a> (Centre for Research on BioComplex Systems)
+    <li><a href="http://www.vumc.nl">VUmc</a> (VU Medical Centre)
+    <li><a href="http://www.tweelingenregister.org/index_uk.html">Netherlands Twin Register</a>
+        at the <a href="http://www.psy.vu.nl">Faculty of Psychology</a>
+    <li><a href="http://www.biolinguaresearch.org">BioLingua Research Inc.</a> (BioLingua&trade;
+        Tutorials, BioLingua&trade; Software Tools)
+    <li><a href="http://www.hsleiden.nl/bioinformatica/">Bioinformatics Bachelor program</a> at the Hogeschool Leiden.
+    </ul>
+    </td>
+</tr>
+</table>
+</td></tr></table>
+
+
+
+</td><td width=60 align=center valign=top>
+
+
+<table border=0 cellspacing=1 cellpadding=0 class="blue"><tr><td>
+<table width="100%" border=0 cellspacing=1 cellpadding=2 class="white">
+<tr class="logo"><td class="logodark">&nbsp;            </td><td class="logolight">&nbsp;           </td></tr>
+<tr class="logo"><td class="logolight">&nbsp;           </td><td class="logodark">&nbsp;            </td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">C</td><td class="logolight">&nbsp;           </td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">E</td><td class="logodark">&nbsp;            </td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">N</td><td class="logolight">&nbsp;           </td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">T</td><td class="logodark">&nbsp;            </td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">R</td><td class="logolight">&nbsp;           </td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">E</td><td class="logodark">&nbsp;            </td></tr>
+<tr class="logo"><td style="background-color:#0066FF;">F</td><td style="background-color:#0066FF;">B</td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">O</td><td style="background-color:#0033FF;">I</td></tr>
+<tr class="logo"><td style="background-color:#0099FF;">R</td><td style="background-color:#0099FF;">O</td></tr>
+<tr class="logo"><td style="background-color:#FF6600;">I</td><td style="background-color:#FF6600;">I</td></tr>
+<tr class="logo"><td style="background-color:#00FF66;">N</td><td style="background-color:#00FF66;">N</td></tr>
+<tr class="logo"><td style="background-color:#FF9900;">T</td><td style="background-color:#FF9900;">F</td></tr>
+<tr class="logo"><td style="background-color:#00FF66;">E</td><td style="background-color:#00FF66;">O</td></tr>
+<tr class="logo"><td style="background-color:#FF6600;">G</td><td style="background-color:#FF6600;">R</td></tr>
+<tr class="logo"><td style="background-color:#00CCFF;">R</td><td style="background-color:#00CCFF;">M</td></tr>
+<tr class="logo"><td style="background-color:#FFCC00;">A</td><td style="background-color:#FFCC00;">A</td></tr>
+<tr class="logo"><td style="background-color:#00FF66;">T</td><td style="background-color:#00FF66;">T</td></tr>
+<tr class="logo"><td style="background-color:#FF6600;">I</td><td style="background-color:#FF6600;">I</td></tr>
+<tr class="logo"><td style="background-color:#0033FF;">V</td><td style="background-color:#0033FF;">C</td></tr>
+<tr class="logo"><td style="background-color:#0099FF;">E</td><td style="background-color:#0099FF;">S</td></tr>
+<tr class="logo"><td class="logodark">&nbsp;            </td><td style="background-color:#0066FF;">V</td></tr>
+<tr class="logo"><td class="logolight">&nbsp;           </td><td style="background-color:#0066FF;">U</td></tr>
+<tr class="logo"><td class="logodark">&nbsp;            </td><td class="logolight">&nbsp;           </td></tr>
+<tr class="logo"><td class="logolight">&nbsp;           </td><td class="logodark">&nbsp;            </td></tr>
+<tr class="logo"><td class="logodark">&nbsp;            </td><td class="logolight">&nbsp;           </td></tr>
+<tr class="logo"><td class="logolight">&nbsp;           </td><td class="logodark">&nbsp;            </td></tr>
+<tr class="logo"><td class="logodark">&nbsp;            </td><td class="logolight">&nbsp;           </td></tr>
+<tr class="logo"><td class="logolight">&nbsp;           </td><td class="logodark">&nbsp;            </td></tr>
+<tr class="logo"><td class="logodark">&nbsp;            </td><td class="logolight">&nbsp;           </td></tr>
+</table>
+</td></tr></table>
+
+
+</td><td valign=top>
+
+
+<!--   LATEST NEWS   -->
+<table width=225 border=0 cellspacing=1 cellpadding=0 class="green"><tr><td>
+<table width="100%" border=0 cellspacing=1 cellpadding=5 class="white">
+<tr class="green">
+        <td><b>Latest news</b></td>
+</tr>
+
+<tr class="darkgrey"><td style="padding:10px 10px; font-size:12px;">
+
+  Symposium: <a href="symposium/metabolomics_and_fluxomics.pdf"><b>&#8216;&#8216;Bioinformatics for Metabolomics and Fluxomics&#8217;&#8217;</b></a> on <b>Friday March 11</b>, 9.00h-11.45h, VU University Amsterdam, room HG-07A02 (VU Main Building)
+(<i>February 7, 2011</i>)
+</tr>
+
+
+<tr class="lightgrey"><td style="padding:10px 10px; font-size:12px;">
+
+  On Friday March 11, <b>Thomas Binsl</b> will defend his PhD thesis "Fluxes of Life - Bioinformatics for Metabolic Flux Quantification in Isotopic Non-Steady-State"
+(<i>January 21, 2011</i>)
+</tr>
+
+
+<tr class="darkgrey"><td style="padding:10px 10px; font-size:12px;">
+
+  A short photo impression of the <a href="/Dag der Academische Treurnis">'Dag der Academische Treurnis' (Day of Academic Despondency)</a>.
+(<i>January 21, 2011</i>)
+</tr>
+
+
+<!--
+<tr class="lightgrey"><td style="padding:10px 10px; font-size:12px;">
+<font color="grey">&lt;no news&gt;</font>
+</tr>
+<tr class="darkgrey"></tr>
+-->
+<tr class="lightgrey"><td style="padding:10px 10px; font-size:12px;">
+<a href="old_news.php">News archive</a>
+</td></tr>
+
+</table>
+</td></tr></table>
+
+<br>
+
+<table width=225 border=0 cellspacing=1 cellpadding=0 class="blue"><tr><td>
+<table width="100%" border=0 cellspacing=1 cellpadding=5 class="white">
+<tr class="blue">
+        <td><b>Contact info</b></td>
+</tr>
+<tr class="darkgrey"><td style="padding:9px 13px; font-size:12px;">
+
+<!--   CONTACT INFO   -->
+
+IBIVU<br>
+Vrije Universiteit<br>
+De Boelelaan 1081A<br>
+1081 HV Amsterdam<br>
+The Netherlands
+<p>
+FAX: +31 (0)20 59 87653
+<p>
+<a href="http://www.cs.vu.nl/directions">Directions</a>
+</td></tr>
+</table>
+</td></tr></table>
+
+<!--   PICTURES   -->
+
+<br>
+<br><br><img src="../images/VU.jpg" alt="VU" width=225 height=150 align="bottom"><br>
+<!-- <img src="../images/vu-left.jpg" width=225 height=150> -->
+
+
+</td></tr></table>
+
+</blockquote>
+
+<br>
+
+<font style="font-family: Arial,Helvetica,sans-serif; font-size: 11px">
+(c) IBIVU 2011. If you are experiencing problems with the
+site, please contact the <a href="mailto:ibivu@cs.vu.nl?Subject:About /">webmaster</a>.
+</font>
+
+</td></tr></table>
+
+
+</body>
+</html>

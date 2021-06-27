@@ -1,0 +1,198 @@
+
+<html>
+<head>
+  
+  <title>PIT- Protein Information Technology Group</title>
+  
+  <link rel="stylesheet" type="text/css" href="http://pitgroup.org/style.css"/>
+  
+<script src="/lib/prototype.js" type="text/javascript"></script>
+<script src="/lib/scriptaculous.js" type="text/javascript"></script>
+<script src="/lib/tooltips.js" type="text/javascript"></script>
+
+
+  </head>
+<body>
+<div class='banner'>
+<table><tr><td>
+About us<br/>
+<a href='http://pitgroup.org'>Overview</a><br/>
+<a href='http://pitgroup.org/publicity/'>Publicity</a><br/>
+<a href='http://pitgroup.org/downloads/'>Downloads</a><br/>
+<a href='http://pitgroup.org/triads/'>Triad database</a>
+</td><td>
+Servers<br/>
+<a href='http://wikipdb.org/' target='_blank'>WikiPDB&rarr;</a><br/>
+<a href='http://protdict.pitgroup.org/'>ProtDict</a><br/>
+<a href='http://quickkegg.pitgroup.org/'>QuickKEGG</a>
+</td>
+<td>
+<br/>
+<a href='http://decomp.pitgroup.org/'>Decomp</a><br/>
+<a href='http://nascent.pitgroup.org/'>Nascent</a><br/>
+<a href='http://brownian.pitgroup.org/'>Brownian</a>
+
+</td>
+ </td>
+
+</tr>
+</table>
+</div>
+
+<div class='content'>
+
+<script language="javascript">
+
+function modifyField() {
+    if (document.vals.graphlayout.disabled)
+        document.vals.graphlayout.disabled=false;
+    else {
+        document.vals.graphlayout.disabled=true;
+        document.vals.graphlayout.selectedIndex=0;
+    }
+}
+ 
+</script>
+
+
+<h2>Nascent<sup><small><i>beta</i></small></sup> - Protein-Protein Physical Interaction Network Originating Tool</h2>
+<p>If you are looking for the standalone version of nascent please visit our <a href='http://pitgroup.org/downloads/'>Downloads page</a>.</p>
+<p><br /></p>
+<!--<p style='color:red'>Temporarily closed due to maintenance! Please return later.</p>-->
+
+<form method='post' action='schedule/' name="vals" >
+
+<p>NCBI Taxonomy ID of source organism: <span class='help' title='Interactions will be originated from this organism. (Example: to originate from Escherichia coli type 562 into this input box.) When the name of an organism is typed into the box, an autosuggest box will appear!'>[?]</span></p>
+<input type="text" id="tax1" name="tax1" value="" class='text'/> <input type='checkbox' name='subtree1' checked />Include subtree
+<span class='help' title='Include interactions of organisms that are under the source organism in the phylogenetic tree'>[?]</span>
+<div id="tax1_choices" class="autocomplete"></div>
+
+<p>&nbsp;</p>
+<p>NCBI Taxonomy ID of target organism: <span class='help' title='The interaction network will be built for this organism. (Example: to build a network for Mycobacterium tuberculosis type 1773 into this input box.) When the name of an organism is typed into the box, an autosuggest box will appear!'>[?]</span></p>
+<input type="text" id="tax2" name="tax2" value="" class='text'/> <input type='checkbox' name='subtree2'/>Include subtree 
+<span class='help' title='Include interactions of organisms that are under the target organism in the phylogenetic tree'>[?]</span>
+<div id="tax2_choices" class="autocomplete"></div>
+</p>
+<p>&nbsp;</p>
+<p>
+<select name="graphlayout">
+<option value='0'>No Jpeg output</option>
+<option value='1'>Random Layout</option>
+<option value='2'>Force Directed Layout</option>
+<option value='3'>Fruchterman-Reingold Layout</option>
+<option value='4'>Node Link Tree Layout</option>
+<option value='5'>Ballon Tree Layout</option>
+<option value='6'>Radial Tree Layout</option>
+<option value='7'>Circle Layout</option>
+</select> <span class='help' title='Graph drawing algorithm for generating a JPG displaying the result graph'>[?]</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type='checkbox' name='trembl' onClick="modifyField()" />Include TrEMBL 
+<span class='help' title='Use the whole UniProtKB instead of Swiss-Prot (The JPEG displaying will be disabled)'>[?]</span>
+</p>
+<p>&nbsp;</p>
+
+<input type='submit' value='Schedule job'/>
+
+</form>
+
+<p>&nbsp;</p>
+<h2>Manual</h2>
+
+<h3>Overview</h3>
+
+<p>The Nascent is a protein-protein physical interaction network
+construction tool based on gene names.</p>
+<p>Our program searches for proteins of source organism which are in
+physical interaction by the IntAct database (http://www.ebi.ac.uk/intact/).
+Then those proteins are assigned to their respective gene names. We use
+these gene names to make a correspondence between the source and the target
+organisms making a predicted protein-protein physical interaction network
+for the target organism.</p>
+
+<h3>Using Nascent</h3>
+<p>Write into the appropriate boxes both the NCBI Taxonomy ID of the source
+and target organism; an interactive search system helps you to this, if you
+do not know that ID, but know the latin name of the species (e.g., Mus
+musculus for the mouse). Check the "include subtree" field if the
+interaction data need to be generated for all the descendants of the species
+in the phylogenetic tree. Then choose the output image option. After
+pressing the "Schedule job" button your request will be inserted into a
+queue. Please be patient as it may take some time for our server to get to
+your request, this time strongly depends on on the layout chosen, and it
+varies from 5 seconds to even 10-20 minutes for graphs with several thousand
+vertices and a complex force-based layout. . Progress is monitored in a log
+window in detail. The result will be some links in the log window leading to files containing a list of the predicted edges of the target organism, a
+link to a Java applet for manipulating the graph, and also a JPG image for
+quick viewing. The nodes of edges will be displayed as UniProtKB AC
+numbers.</p>
+<p>Note: Result and log files are stored for 5 days, and can be accessed
+without re-constructing the network by bookmarking the query-page.</p>
+
+<h3>Click <a href="example.png">here</a> for an example</h3>
+<p><a href="example.png" style="color:black"><img src="example_small.png" /></a></p>
+
+<h3>Terms of use</h3>
+<p>You can use this tool and the related database <b>freely</b> for any
+<b>non-commercial</b> research and education purposes, no registration is
+necessary. You are kindly required, however, to cite the following publication in any subsequent work of yours, using the NASCENT tool:
+</p>
+
+<p>Daniel Banky, Rafael Ordog, Vince Grolmusz: NASCENT: An automatic protein interaction network generation tool for non-model organisms
+Bioinformation 3(8)(2009), <a href="http://www.bioinformation.net/" target="_blank">www.bioinformation.net</a></p>
+
+
+<p>If you use our Nascent program for
+<b>commercial research</b> (contract research done at a non-profit
+institution,
+e.g., at a university, or any research done at a for profit institution,
+e.g., a pharmaceutical company) you are required to pay a yearly
+registration fee of <b>US$ 990</b> for a laboratory or <b>US$ 1,990</b> for
+a site
+license, covering a whole university or a whole company. </p>
+
+<p>Please contact us at the following e-mail address: sales AT pitgroup.org
+for payment options. The tool is developed, fully owned and maintaned by the
+Uratim Ltd. (<a href="http://www.uratim.com" target="_blank">http://www.uratim.com</a>), while the non-profit distribution is
+handled by the PIT Group (<a href="http://www.pitgroup.org" target="_blank">http://www.pitgroup.org)</a>.</p>
+
+<p>Both for non-commercial and for commercial users, the use of this
+tool is subject to the following conditions; if you do not agree these
+conditions, please do not use this tool and the accompanying program: </p>
+
+<p><b>LIMITATIONS OF LIABILITY:</b> IN NO CASE SHALL OUR LIABILITY EXCEED
+THE
+AMOUNT OF THE REGISTRATION FEES ACTUALLY PAID BY USER. IN NO EVENT WE,
+OR OUR DIRECT OR INDIRECT SUPPLIERS BE LIABLE FOR ANY INDIRECT, SPECIAL,
+INCIDENTAL, CONSEQUENTIAL OR PUNITIVE DAMAGES OR OTHER PECUNIARY LOSS
+ARISING OUT OF OR IN CONNECTION WITH ANY USE OR INABILITY TO USE THIS
+SOFTWARE TOOL, EVEN IF WE OR SUCH SUPPLIERS HAVE BEEN ADVISED OF THE
+POSSIBILITIES OF SUCH DAMAGES. WE AND OUR SUPPLIERS ARE NOT RESPONSIBLE
+FOR ANY COSTS INCLUDING, WITHOUT LIMITATION, LOSS OF BUSINESS
+INFORMATION, COST OF RECOVERING SUCH INFORMATION, BUSINESS INTERRUPTION,
+LOSS OF BUSINESS PROFITS, THE COST OF SUBSTITUTE SOFTWARE, OR CLAIMS BY
+THIRD PARTIES.</p>
+
+
+<script type="text/javascript">
+init = function(){
+	new Ajax.Autocompleter("tax1", "tax1_choices", "autocomplete.php", {
+	  paramName: "value", 
+	  minChars: 2
+	});
+	new Ajax.Autocompleter("tax2", "tax2_choices", "autocomplete.php", {
+	  paramName: "value", 
+	  minChars: 2
+	});
+}
+init();
+</script>
+
+</div>
+<script type="text/javascript">
+		$$(".help").each( function(link) {
+			new Tooltip(link, {opacity:.90, backgroundColor:"#699999" });
+		});
+</script>
+</body>
+</html>
+

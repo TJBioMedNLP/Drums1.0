@@ -1,0 +1,206 @@
+ 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<script type="text/javascript" src="../js/search.js"></script>
+<title>miRNAMap - genomic maps of studying genes regulation by metazoan microRNAs</title>
+<style type="text/css">
+<!--
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #000000;
+}
+body {
+	background-color: #FFFFFF;
+}
+.style6 {font-family: Arial, Helvetica, sans-serif}
+.style7 {
+	font-size: 14px;
+	color: #FF99FF;
+}
+.style20 {color: #999999}
+.style32 {font-size: 14px}
+.style39 {color: #CC0000}
+.style49 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	color: #666666;
+}
+.style58 {font-size: 16px; color: #FF8000; font-family: Arial, Helvetica, sans-serif; }
+-->
+</style></head>
+
+<body>
+
+<table width="880" height="24" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <th width="840" height="24" scope="col"><img src="image/index_pic/miRNAMap_logo_01.gif" width="880" height="74"></th>
+  </tr>
+</table>
+<table width="880" height="32" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr align="center" valign="bottom" bgcolor="#EAE9EA">
+    <th width="20" scope="col">&nbsp;</th>
+    <th width="120" height="25" bgcolor="#EAE9EA" scope="col"><a href="index.php"><img src="image/index_pic/home.gif" width="110" height="25" border="0"></a></th>
+    <th width="120" scope="col"><a href="html/about.html"><img src="image/index_pic/about.gif" width="110" height="25" border="0"></a></th>
+    <th width="120" scope="col"><a href="html/browse.html"><img src="image/index_pic/browse.gif" width="110" height="25" border="0"></a></th>
+    <th width="120" scope="col"><a href="html/search.html"><img src="image/index_pic/search.gif" width="110" height="25" border="0"></a></th>
+    <th width="120" scope="col"><a href="php/statistics.php"><img src="image/index_pic/statistics.gif" width="110" height="25" border="0"></a></th>
+    <th width="120" scope="col"><a href="ftp://mirnamap.mbc.nctu.edu.tw/miRNAMap2"><img src="image/index_pic/downloads.gif" width="110" height="25" border="0"></a></th>
+    <th width="120" scope="col"><a href="html/tutorial.html"><img src="image/index_pic/tutorial.gif" width="110" height="25" border="0"></a></th>
+    <th width="20" scope="col">&nbsp;</th>
+  </tr>
+  <tr bgcolor="#EBEBEB">
+    <th height="6" colspan="9" scope="col"><div align="center"><img src="image/index_pic/item_home.gif" width="830" height="6"></div></th>
+  </tr>
+</table>
+<table width="880" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <th scope="col"><img src="image/index_pic/miRNAMap_logo_03.gif" width="880" height="13"></th>
+  </tr>
+</table>
+<table width="880" height="30" border="0" align="center" cellpadding="0" cellspacing="0">
+<th height="24" bgcolor="#FFFFFF" scope="col">
+<form name="form_kw" method="GET" action="php/search_kw.php">
+<div align="right" class="style58"><span class="style49">keyword in  
+        <input name="choice" type="radio" value="miRNA" checked>
+        microRNA or        <input name="choice" type="radio" value="miRNAT">
+        target gene :
+        <select name="species" style="font-size: 0.9em">
+            <option value="hsa">Homo sapiens</option>
+            <option value="mmu">Mus musculus</option>
+            <option value="dre">Danio rerio</option>
+            <option value="">---</option>
+            <option value="aga">Anopheles gambiae</option>
+            <option value="cel">Caenorhabditis elegans</option>
+            <option value="cfa">Canis familiaris</option>
+            <option value="dre">Danio rerio</option>
+            <option value="dme">Drosophila melanogaster</option>
+            <option value="gga">Gallus gallus</option>
+            <option value="hsa">Homo sapiens</option>
+            <option value="mmu">Mus musculus</option>
+            <option value="rno">Rattus norvegicus</option>
+            <option value="fru">Takifugu rubripes</option>
+            <option value="xtr">Xenopus tropicalis</option>
+        </select>
+        <input type="text" name="keyword">
+        <input type="submit" value="Search">
+        <input type="button" onClick="kw_search();" value="Example" javascript:void()>
+        </span>            </div>
+    </form>
+</th>
+</table>
+  <table width="880" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center" valign="middle"><img src="image/index_pic/home_main_02.gif" width="880" height="56"></td>
+    </tr>
+</table>
+<table width="880" height="149" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#EAE9EA">
+  <tr>
+    <th width="420" height="126" scope="col">
+      <div align="center"><img src="image/index_pic/what%27s-new.gif" width="310" height="221">      <br>
+      <br>
+      <img src="image/obj_sitetitle.gif" width="80">
+      <a href="1.00/index.php" class="style32">Previous version - miRNAMap 1.0 </a>      </div></th>
+    <th width="420" scope="col"><table width="418" border="0" align="center" cellpadding="0" cellspacing="1">
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><div align="left"><span class="style20 style32"><span class="style6">mature miRNA count</span>: </span></div></td>
+      </tr>
+      <tr>
+        <td><div align="left"><table border=0 cellspacing=0 cellpadding=0><tr><td><table border=0 cellspacing=2 cellpadding=0><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Homo sapiens&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;542&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="542"><div style="width:100px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=10 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Mus musculus&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;424&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="424"><div style="width:78px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=32 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Danio rerio&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;371&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="371"><div style="width:68px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=42 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Rattus norvegicus&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;261&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="261"><div style="width:48px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=62 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Xenopus tropicalis&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;196&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="196"><div style="width:36px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=74 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Gallus gallus&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;162&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="162"><div style="width:30px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=80 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Caenorhabditis elegans&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;135&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="135"><div style="width:25px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=85 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Fugu rubripes&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;133&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="133"><div style="width:25px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=85 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Monodelphis domestica&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;111&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="111"><div style="width:20px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=90 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Drosophila melanogaster&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;85&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="85"><div style="width:16px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=94 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Anopheles gambiae&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;38&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="38"><div style="width:7px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=103 align=left nowrap>&nbsp;</td></tr></table></td></tr><tr><td style="color:#888888;background-color:#CCCCFF;border:1px dashed #A0A0A0;font-family:Arial, Arial, Helvetica;font-size:12px;text-align:left;">&nbsp;Canis familiaris&nbsp;</td><td style="color:#3300FF;background-color:white;border:1px solid silver;font-family:Verdana, Arial, Helvetica;font-size:10px;" align=right nowrap>&nbsp;6&nbsp;</td><td height=100% width=112><table border=0 cellspacing=0 cellpadding=0 height=100%><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td style="border:1px solid #808080;" bgcolor="#0000FF" title="6"><div style="width:1px; height:20px; line-height:1px; font-size:1px;"></div></td></tr></table></td><td style="color:#FF3300;font-family:Comic Sans MS, Times New Roman;font-size:10px;" width=109 align=left nowrap>&nbsp;</td></tr></table></td></tr></table></td></tr></table> </div></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+    </table></th>
+  </tr>
+  <tr>
+    <td colspan=2>
+        <font size=2><strong>Citing miRNAMap2: </strong><br>
+Hsu SD, Chu CH, Tsou AP, Chen SJ, Chen HC, Hsu PW, Wong YH, Chen YH, Chen GH, Huang HD (2008) 'miRNAMap 2.0: genomic maps of microRNAs in metazoan genomes.' Nucleic Acids Res. 2008 Jan;36(Database issue):D165-9. [<a href='http://www.ncbi.nlm.nih.gov/pubmed/18029362?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum'>Pubmed</a>]
+        </font>
+    </td>
+  </tr>
+</table>
+<table width="880" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <th scope="col"><img src="image/index_pic/home_main_04.gif" width="880" height="18"></th>
+  </tr>
+</table>
+<br>
+<!--
+<table width="880" height="36" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#EAE9EA">
+  <tr>
+    <th bgcolor="#FFFFFF" scope="col"><img src="image/index_pic/mail_area_01.gif" width="880" height="15"></th>
+  </tr>
+  <tr>
+    <th width="873" scope="col"> <div align="justify" class="style6">
+      <p align="center" class="style7 style39">Department of Biological Science and Technology,<br>
+        Institute of Bioinformatics National Chiao Tung University, Hsinchu, 
+        Taiwan<br> 
+        Contact with: <a href="mailto:bryan@mail.NCTU.edu.tw">bryan@mail.NCTU.edu.tw </a> </p>
+    </div></th>
+  </tr>
+  <tr>
+    <th bgcolor="#FFFFFF" scope="col"><img src="image/index_pic/home_main_04.gif" width="880" height="18"></th>
+  </tr>
+</table>
+-->
+<table width="880" height="36" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#EAE9EA">
+  <tr>
+    <th bgcolor="#FFFFFF" scope="col"><img src="../image/index_pic/mail_area_01.gif" width="880" height="10"></th>
+  </tr>
+  <tr>
+    <th width="873" scope="col"> <div align="justify" class="style6">
+      <p align="center" class="style7 style39">Department of Biological Science and Technology,<br>
+        Institute of Bioinformatics National Chiao Tung University, Hsinchu, 
+        Taiwan<br> 
+        Contact with: <a href="mailto:bryan@mail.NCTU.edu.tw">bryan@mail.NCTU.edu.tw </a> </p>
+    </div></th>
+  </tr>
+  <tr>
+	<td>
+	  <div align="center">
+		<font size=2px color='#ff0000'>
+		<span>Get Access to 
+		
+		[<a href="http://www.life.nctu.edu.tw/">CBST, http://www.life.nctu.edu.tw/</a>/
+		<a href="http://life.nctu.edu.tw/">CBST, http://life.nctu.edu.tw/</a>
+		/<a href="http://bioinfo.nctu.edu.tw/main.php">IBSB, http://bioinfo.nctu.edu.tw/</a>
+		/<a href="http://bio.life.nctu.edu.tw/main.php">BST, http://bio.life.nctu.edu.tw/</a>
+		/<a href="http://bioce.life.nctu.edu.tw/main.php">IMMBE, http://bioce.life.nctu.edu.tw</a>]
+		</font>
+		 <font size=2px color='#EAE9EA'>
+		CBST, http://www.life.nctu.edu.tw/
+ 		IBSB, http://bioinfo.nctu.edu.tw/
+		BST, http://bio.life.nctu.edu.tw/
+		IMMBE, http://bioce.life.nctu.edu.tw
+		</font>
+
+		</span>
+		<font color='#EAE9EA'>236357 0937119471</font>
+		</font>
+		</div>
+	</td>
+  </tr>
+<!--
+  <tr>
+        <td> <font size=2>Citing miRNAMap2<br>
+
+Hsu SD, Chu CH, Tsou AP, Chen SJ, Chen HC, Hsu PW, Wong YH, Chen YH, Chen GH, Huang HD (2008) 'miRNAMap 2.0: genomic maps of microRNAs in metazoan genomes.' Nucleic Acids Res. 2008 Jan;36(Database issue):D165-9. [<a href='http://www.ncbi.nlm.nih.gov/pubmed/18029362?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_DefaultReportPanel.Pubmed_RVDocSum'>Pubmed</a>]
+</font>
+</td>
+  </tr>
+-->
+  <tr>
+    <th bgcolor="#FFFFFF" scope="col"><img src="../image/index_pic/mail_area_02.gif" width="880" height="10"></th>
+  </tr>
+</table>
+</body>
+</html>

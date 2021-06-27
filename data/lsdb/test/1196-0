@@ -1,0 +1,466 @@
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+ <TITLE>YRC Public Data Repository - Welcome!</TITLE>
+
+ <meta name="keywords" content="protein, proteins, search, public data, experimental data, protein interaction, protein complex, proteomics, yeast, YRC, YRC PDR, mass spectrometry, yeast two-hybrid, protein localization, microscopy, sequence, protein structure, protein structure, structure prediction, go, gene ontology">
+ <meta name="description" content="The YRC PDR provides for the searching of millions of protein descriptions from many databases to find proteins and public experimental data describing those proteins produced by the YRC.  The experimental data is in the form of mass spectrometry, yeast two-hybrid, protein structure prediction, light microscopy and protein complex predictions.">
+
+ <link REL="stylesheet" TYPE="text/css" HREF="/pdr/css/global.css">
+
+</head>
+
+<body>
+
+<div class="popup" id="dhtmltooltip"></div>
+
+<script type="text/javascript">
+
+/***********************************************
+* Cool DHTML tooltip script- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var offsetxpoint=-60 //Customize x offset of tooltip
+var offsetypoint=20 //Customize y offset of tooltip
+var ie=document.all
+var ns6=document.getElementById && !document.all
+var enabletip=false
+if (ie||ns6)
+var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : ""
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function ddrivetip(thetext, thecolor, thewidth){
+if (ns6||ie){
+//if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px"
+//if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor
+tipobj.innerHTML=thetext
+enabletip=true
+return false
+}
+}
+
+function positiontip(e){
+if (enabletip){
+var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+//Find out how close the mouse is to the corner of the window
+var rightedge=ie&&!window.opera? ietruebody().clientWidth-event.clientX-offsetxpoint : window.innerWidth-e.clientX-offsetxpoint-20
+var bottomedge=ie&&!window.opera? ietruebody().clientHeight-event.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+
+var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+
+//if the horizontal distance isn't enough to accomodate the width of the context menu
+if (rightedge<tipobj.offsetWidth)
+//move the horizontal position of the menu to the left by it's width
+tipobj.style.left=ie? ietruebody().scrollLeft+event.clientX-tipobj.offsetWidth+"px" : window.pageXOffset+e.clientX-tipobj.offsetWidth+"px"
+else if (curX<leftedge)
+tipobj.style.left="5px"
+else
+//position the horizontal position of the menu where the mouse is positioned
+tipobj.style.left=curX+offsetxpoint+"px"
+
+//same concept with the vertical position
+if (bottomedge<tipobj.offsetHeight)
+tipobj.style.top=ie? ietruebody().scrollTop+event.clientY-tipobj.offsetHeight-offsetypoint+"px" : window.pageYOffset+e.clientY-tipobj.offsetHeight-offsetypoint+"px"
+else
+tipobj.style.top=curY+offsetypoint+"px"
+tipobj.style.visibility="visible"
+}
+}
+
+function hideddrivetip(){
+if (ns6||ie){
+enabletip=false
+tipobj.style.visibility="hidden"
+tipobj.style.left="-1000px"
+tipobj.style.backgroundColor=''
+//tipobj.style.width=''
+}
+}
+
+document.onmousemove=positiontip
+
+</script>
+
+<table BORDER="0" WIDTH="100%" CELLPADDING="0" CELLSPACING="0">
+
+ <tr>
+
+  <td WIDTH="900" VALIGN="BOTTOM" COLSPAN="2">
+   <nobr><img SRC="/pdr/images/left-top-round.gif" WIDTH="15" HEIGHT="15"><img SRC="/pdr/images/yrc_logo.gif" WIDTH="222" HEIGHT="44" ALT="YRC LOGO"><img SRC="/pdr/images/double-side-round.gif" WIDTH="15" HEIGHT="15"><a href="/pdr/pages/front.jsp;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4"><IMG SRC="/pdr/images/tabs/tab-top-home.png" WIDTH="100" HEIGHT="15" BORDER="0"></a><a href="/pdr/pages/search/advancedSearchForm.jsp;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4"><IMG SRC="/pdr/images/tabs/tab-top-advanced_search.png" WIDTH="100" HEIGHT="15" BORDER="0"></a><a href="/pdr/pages/go/goTermSearchForm.jsp;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4"><IMG SRC="/pdr/images/tabs/tab-top-search_go.png" WIDTH="100" HEIGHT="15" BORDER="0"></a><a href="/pdr/pages/feedbackForm.jsp;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4"><IMG SRC="/pdr/images/tabs/tab-top-feedback.png" WIDTH="100" HEIGHT="15" BORDER="0"></a><a href="/pdr/pages/papers.jsp;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4"><IMG SRC="/pdr/images/tabs/tab-top-papers.png" WIDTH="100" HEIGHT="15" BORDER="0"></a><a href="/pdr/pages/download.jsp;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4"><IMG SRC="/pdr/images/tabs/tab-top-download.png" WIDTH="100" HEIGHT="15" BORDER="0"></a><a href="/pdr/pages/about.jsp;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4"><IMG SRC="/pdr/images/tabs/tab-top-about_YRC.png" WIDTH="100" HEIGHT="15" BORDER="0"></a></nobr></td>
+  <td width="100%">&nbsp;</td>
+ </tr>
+
+ <tr BGCOLOR="#808080">
+  <td VALIGN="middle" WIDTH="236" BGCOLOR="#808080" COLSPAN="1"><nobr><img SRC="/pdr/images/left-bottom-round.gif" WIDTH="15" HEIGHT="20"><img SRC="/pdr/images/title-text.gif" WIDTH="221" HEIGHT="20"></nobr></td>
+
+  <td colspan="2" BGCOLOR="#808080" ALIGN="RIGHT" WIDTH="100%">
+   <img SRC="/pdr/images/right-round.gif" WIDTH="15" HEIGHT="20"></td>
+
+ </tr>
+
+ <tr BGCOLOR="#FFFFFF">
+
+  <TD BGCOLOR="#FFFFFF" COLSPAN="2" ALIGN="right" VALIGN="top" width="50%"><IMG style="margin-left:10px;" align="left" SRC="/pdr/images/bottom_grey_bar.png" WIDTH="250" HEIGHT="15">
+  	<form name="quickSearchForm" method="get" action="/pdr/quickSearch.do;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4" style="margin-top:0px;">
+  		<span style="font-size:8pt;font-weight:bold;">PROTEIN SEARCH:</span> <input type="text" name="query" maxlength="255" size="15" value="" style="font-size:8pt;">
+  		<input type="submit" value="Search" style="font-size:8pt;"><br>
+  		
+  	<font style="font-size:8pt;">Search: <input type="radio" name="type" value="description" checked="checked">Descriptions
+  										 <input type="radio" name="type" value="name">Names
+  	</font> <font style="font-size:8pt;">[<a href="/pdr/pages/search/advancedSearchForm.jsp">Advanced Search</a>]</font>
+	</form>
+  </TD>
+
+  <TD BGCOLOR="#FFFFFF" COLSPAN="1" align="left" VALIGN="top" width="50%" STYLE="font-size:8pt;">&nbsp;</TD>
+
+ </tr>
+</table>
+
+<br>
+
+
+<center><div class="home_header" style="width:1000px;"><h2 class="contentBoxHeader">Welcome to the <i>Yeast Resource Center</i> Public Data Repository</h2></div><div class="home" style="width:1000px;" align="left">
+
+<center><div class="home" style="width:600px;" align="left">
+
+	<h1 style="margin-top:0px;margin-bottom:0px;font-weight:normal;font-size:16pt;">Search the YRC PDR protein database:</h1>
+	
+	<span style="font-size:8pt;">Search examples: protein names, descriptions, SGD IDs, swiss-prot IDs, NCBI GI IDs, uniprot IDs, flybase IDs, etc.</span><br><br>
+
+	<form name="quickSearchForm" method="get" action="/pdr/quickSearch.do;jsessionid=43683AEC8F433DE9B1FE32D735F72FC4">
+		<input type="hidden" name="type" value="description">
+		<input type="text" name="query" maxlength="255" size="20" value="" style="font-size:14pt;">
+		<input type="submit" value="SEARCH" style="font-size:14pt;background-color:#134D00;color:#FFFFFF;"><font style="font-size:10pt;">[<a href="/pdr/pages/search/advancedSearchForm.jsp">Advanced Search</a>]</font>
+	</form>
+<script type="text/javascript" language="JavaScript">
+  <!--
+  var focusControl = document.forms["quickSearchForm"].elements["query"];
+
+  if (focusControl.type != "hidden") {
+     focusControl.focus();
+  }
+  // -->
+</script>
+
+
+	<span style="font-size:8pt;">The YRC PDR currently contains <b>9,678,820</b> descriptions for <b>5,530,667</b> proteins from many databases.</span>
+
+</div></center>
+
+<br><br>
+
+<p><b>To get started</b>, use the search form above, or the "Quick Search" at the upper-right on any page in the website to search names or descriptions of proteins in our database.
+For more focused searches, use the 
+<a href="/pdr/pages/search/advancedSearchForm.jsp"><b>Advanced Search</b></a> page.
+If you have any questions, comments or suggestions, please use our
+<a href="/pdr/pages/feedbackForm.jsp"><b>Feedback</b></a> page.
+
+
+<p>The YRC PDR provides access to scientific experimental data resulting from
+collaborations and technology development involving the <i>Yeast Resource Center</i>.  The data has
+been made public either through publication or by specific consent of the researchers
+involved.  The YRC PDR is described in more detail in the following publication:
+<a href="http://www.ncbi.nlm.nih.gov/entrez/utils/lofref.fcgi?PrId=3051&uid=15608220&db=pubmed&url=http://nar.oupjournals.org/cgi/pmidlookup?view=long&pmid=15608220" target="PUBLICATION_WINDOW">Nucleic Acids Res. 2005 Jan 1;33 Database Issue:D378-82</a>
+
+<!--
+<p><font style="font-size:12pt;"><b>Statistics:</b></font><br>
+To come.
+-->
+
+<br><br>
+<hr width="50%" align="center">
+
+<script language="JavaScript">
+
+	function toggleDetails(referringLink, divToToggle) {
+		var toToggle=document.all? document.all[divToToggle] : document.getElementById? document.getElementById(divToToggle) : ""
+		var linkToToggle=document.all? document.all[referringLink] : document.getElementById? document.getElementById(referringLink) : ""
+
+		if (toToggle == "") { return; }
+		
+		if (toToggle.style.display == "none") {
+			toToggle.style.display = "inline";
+			linkToToggle.innerHTML = "[-Hide Details]";
+		} else {
+			toToggle.style.display = "none";
+			linkToToggle.innerHTML = "[+Show Details]";
+		}
+	}
+
+</script>
+
+<h2 style="font-size:12pt;text-decoration:underline;">Changes &amp; Additions:</h2>
+
+
+<div>
+	<h3 class="news">
+		August 2, 2010 - Yeast Resource Center Public Image Repository (YRC PIR) launched.
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="pirLink1" name="pirLink1" href="javascript:toggleDetails('pirLink1', 'pirDiv1')">[-Hide Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" style="display:inline;" name="pirDiv1" id="pirDiv1">
+		The YRC PIR is a massive database of fluorescence microscopy images containing images and experimental metadata for localization, colocalization, and FRET experiments. It currently contains over 600,000 images from nearly 90,000 data files. This resource
+		is available at <a href="http://images.yeastrc.org/">http://images.yeastrc.org/</a>. More information can be found in
+		<a href="/pdr/pubmedRedirect.do?PMID=20482811">Riffle M, Davis TN. The Yeast Resource Center Public Image Repository: A large database of fluorescence microscopy images. <span style="font-style:italic;">BMC Bioinformatics</span>. 2010 May 19;11:263.</a>
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		August 6, 2009 - Protein subcellular localization data added.
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="huhLink2" name="huhLink2" href="javascript:toggleDetails('huhLink2', 'huhDiv2')">[-Hide Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" style="display:inline;" name="huhDiv2" id="huhDiv2">
+		Added data formally contained in the Yeast GFP fusion localization database (<a href="/pdr/pubmedRedirect.do?PMID=14562095">Huh WK, Falvo JV, Gerke LC, Carroll AS, Howson RW, Weissman JS, O'Shea EK.  Global analysis of protein localization in budding yeast.  Nature. 2003 Oct 16;425(6959):671-2.</a>) to the YRC PDR database.  All of the data are now integrated into the PDR and may be viewed by searching for proteins of interest or by downloading the complete dataset at our
+		<a href="/pdr/pages/download.jsp">download page</a>.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		August 5, 2008 - Launched new Philius transmembrane and signal peptide prediction server.
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="philLink2" name="philLink2" href="javascript:toggleDetails('philLink2', 'philDiv2')">[-Hide Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" style="display:inline;" name="philDiv2" id="philDiv2">
+		A new server has been launched for executing the Philius prediction algorithm on user-supplied protein sequences.  The server
+		is available at <a href="http://www.yeastrc.org/philius/">http://www.yeastrc.org/philius/</a>.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		July 14, 2008 - Protein structure data from the Human Proteome Folding (HPF) project added.
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hpfLink1" name="hpfLink1" href="javascript:toggleDetails('hpfLink1', 'hpfDiv1')">[-Hide Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" style="display:inline;" name="hpfDiv1" id="hpfDiv1">
+		Protein domain, <i>ab initio</i> 3-D structure predictions and protein function predictions from the HPF added to the PDR.  These data
+		include 521,749 predicted domains for 331,671 proteins from 342 distinct organisms.  More information may be found
+		<a href="http://homepages.nyu.edu/%7erb133/Human_Proteome_Folding_Project.html" target="HPF_WINDOW">at this link</a>.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		May 8, 2008 - Added transmembrane and signal peptide predictions from <a href="/pdr/pubmedRedirect.do?PMID=18989393" target="paper_window"><b>Reynolds SM, <i>et al</i>. (2008)</b></a>.
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="philLink1" name="philLink1" href="javascript:toggleDetails('philLink1', 'philDiv1')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="philDiv1" id="philDiv1">
+		The new Philius transmembrane and signal peptide prediction algorithm was applied to 6.3 million distinct proteins in the YRC PDR database.  The results
+		for all predictions are now available on respective protein overview pages when searching for proteins.  This work is described in
+		<a href="/pdr/pubmedRedirect.do?PMID=18989393" target="paper_window">Reynolds SM, <i>et al</i>. (2008) Transmembrane Topology and Signal Peptide Prediction Using Dynamic Bayesian Networks. PLoS Comput Biol 4(11): e1000213. doi:10.1371/journal.pcbi.1000213</a>.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		January 28, 2008 - Added protein complex prediction data from Qiu J, Noble WS (2008).
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="quiLink1" name="quiLink1" href="javascript:toggleDetails('quiLink1', 'quiDiv1')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="quiDiv1" id="quiDiv1">
+		Protein complex co-membership data has been added to the protein complex section for 2,536 proteins from <i>Saccharomyces cerevisiae</i>.  This work is published as
+		<a href="http://www.yeastrc.org/pdr/pubmedRedirect.do?PMID=18421371" target="publication_window">Qiu J, Noble WS (2008) Predicting Co-Complexed Protein Pairs from Heterogeneous Data. PLoS Comput Biol 4(4): e1000054. doi:10.1371/journal.pcbi.1000054</a>
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		April 17, 2007 - Gene Ontology Term Finder Added
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink1" name="hLink1" href="javascript:toggleDetails('hLink1', 'hDiv1')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv1" id="hDiv1">
+		You may now search the YRC PDR Gene Ontology mirror for specific GO terms.  Terms are searched based on their accession strings, names, definitions and synonyms.
+		Each matched term is linked to the GO Overview Page for that term, which contains a graphical interactive view of the local area of the GO graph as well as
+		links for viewing proteins in the PDR annotated with that term.  <a href="/pdr/pages/go/goTermSearchForm.jsp">Click here</a> to access the new GO term search form.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		March 20, 2007 - Protein Complex Section and Data Added
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink2" name="hLink2" href="javascript:toggleDetails('hLink2', 'hDiv2')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv2" id="hDiv2">
+		A new protein complex section has been added to the Protein Overview Page for all proteins.  Protein complex data from Riffle <i>et al</i>. (2007, <i>Manuscript submitted</i>),
+		<a href="http://www.molecule.org/content/article/abstract?uid=PIIS1097276503004763" target="pub_window">Hazbun <i>et al</i>. (2003)</a>,
+		<a href="http://nar.oxfordjournals.org/cgi/content/full/32/suppl_1/D41" target="pub_window">Mewes <i>et al</i>. [MIPS] (2004)</a>,
+		<a href="http://www.nature.com/nature/journal/v440/n7084/full/nature04670.html" target="pub_window">Krogan <i>et al</i>. (2006)</a>,
+		<a href="http://www.nature.com/nature/journal/v440/n7084/full/nature04532.html" target="pub_window">Gavin <i>et al</i>. (2006)</a>,
+		<a href="http://www.nature.com/nature/journal/v415/n6868/abs/415141a.html" target="pub_window">Gavin <i>et al</i>. (2002)</a> and
+		<a href="http://www.nature.com/nature/journal/v415/n6868/full/415180a.html" target="pub_window">Ho <i>et al</i>. (2002)</a>
+		have been added to our database and are displayed in this section.  This feature provides a simple way to see a summary of the
+		protein complexes predicted for a particular protein for multiple studies simultaneously.
+
+		<br><br>From this complex overview section, users can drill down to see highly detailed protein complex information for that protein from any
+		of the mirrored datasets.  From this detailed page, one can view even more detailed <a href="http://www.geneontology.org/" target="go_window">Gene Ontology</a> analysis for each complex
+		predicted containing this protein from the chosen study.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		February 8, 2007 - Gene Ontology (GO) Term Browser Added
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink3" name="hLink3" href="javascript:toggleDetails('hLink3', 'hDiv3')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv3" id="hDiv3">
+		A new GO term overview page is now incorporated into the YRC PDR.  This page provides details defining the GO term, as
+		well as a graphical representation of the GO term in the context of its position in the GO structure.  All nodes displayed
+		on this graphical representation are links to the GO overview page for the respective node, which provides a way to graphically
+		navigate the GO graph.  All GO terms presented in the PDR are linked directly to its GO term overview page.  For an example,
+		see:  <a href="/pdr/viewGONode.do?acc=GO:0000817"  onMouseover="ddrivetip('A multiprotein complex in yeast consisting of Ctf1p, Okp1p, Mcm1p, Ame1p. This complex bridges the subunits that are in contact with centromeric DNA and the subunits bound to microtubules during kinetochore assembly.')" onMouseout="hideddrivetip()">COMA complex</a>.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		Aug. 4, 2006 - Submit your own microscopy localization images
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink4" name="hLink4" href="javascript:toggleDetails('hLink4', 'hDiv4')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv4" id="hDiv4">
+		We have added the ability for users of the YRC PDR to upload their own microscopy localization images of proteins.  Once uploaded, the
+		images will always be annotated with the reference citation provided or the name and contact information of the submitter.  The uploaded data
+		data will be fully integrated into the PDR and will be presented with all other experimental data for the protein in the database.
+
+		<br><br><b>To upload data:</b>  First, search for and view the protein information page for which you have microscopy images.  In the microscopy/localization
+		section of that page, there is a link for uploading your own microscopy data for that protein.  Following that link, you will be presented with a simple
+		form for uploading your own data.  Once submitted, the data will be reviewed by the YRC and then added to the PDR database.  Each microscopy experiment
+		you upload will have its own unique URL, and you will receive an email containing that URL when the submission is accepted.  Please send any questions to
+		<a href="mailto:mriffle@u.washington.edu">Michael Riffle (mriffle@u.washington.edu)</a>.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		Mar. 18, 2006 - Added new protein structure prediction data
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink5" name="hLink5" href="javascript:toggleDetails('hLink5', 'hDiv5')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv5" id="hDiv5">
+		Comprehensive protein structure prediction data for <i>Saccharomyces cerevisiae</i> added to the PDR.  6,186 proteins were parsed into
+		15,809 domains using the <a href="/pdr/pages/psp/pspReference.jsp#Ginzu">Ginzu</a> domain prediction algorithm.  Predicted domains with
+		no homologs were folded by <i>ab initio</i> using the Rosetta algorithm, and then assigned to SCOP (Structural Classification of Proteins) superfamilies.
+		This yielded 1,432 confident structure predictions for 512 proteins.  Please address correspondence relating to
+		these data to 
+		<a href="mailto:bonneau@cs.nyu.edu">Dr. Richard Bonneau</a> (NYU) or <a href="mailto:larsm@u.washington.edu">Dr. Lars Malmström</a> (Univ. of WA).
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		Jan. 25, 2006 - Data added for
+		<a href="http://www.cell.com/content/article/abstract?uid=PIIS009286740200973X" target="PUBLICATION_WINDOW">Cheeseman IM, <i>et al</i>. (2002)</a>
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink6" name="hLink6" href="javascript:toggleDetails('hLink6', 'hDiv6')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv6" id="hDiv6">
+		Mass spectrometry data from twelve affinity purifications added to database.  This work was done in support of the following publication:
+		<a href="http://www.cell.com/content/article/abstract?uid=PIIS009286740200973X" target="PUBLICATION_WINDOW"><b>Cheeseman, IM, <i>et al</i>. (2002).</b> Phospho-regulation of kinetochore-microtubule attachments by the Aurora kinase Ipl1p. <i>Cell</i> 111, 163-172.</a>
+		For more information about these data, please contact the author(s) directly.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		Jan. 25, 2006 - Data added for
+		<a href="http://www.molbiolcell.org/cgi/reprint/E05-07-0640v1" target="PUBLICATION_WINDOW">Widlund PO, <i>et al</i>. (2005)</a>
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink7" name="hLink7" href="javascript:toggleDetails('hLink7', 'hDiv7')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv7" id="hDiv7">
+		Mass spectrometry data identifying proteins from affinity purifications of
+		<a href="/pdr/viewProtein.do?id=531714" onMouseover="ddrivetip('Protein involved in cell cycle regulation and chro...')" onMouseout="hideddrivetip()">BIR1</a> added to database.  This work was done in support of the following publication:
+		<a href="http://www.molbiolcell.org/cgi/reprint/E05-07-0640v1" target="PUBLICATION_WINDOW"><b>Widlund PO, <i>et al</i>. (2005)</b> Phosphorylation of the Chromosomal Passenger Protein, Bir1, Is Required for Localization of Ndc10 to the Spindle during Anaphase and Full Spindle Elongation. <i>Mol Biol Cell</i> [Epub ahead of print]</a>
+		For more information about these data, please contact the author(s) directly.
+	</div>
+</div>
+
+<div>
+	<h3 class="news">
+		Jan. 25, 2006 - New YRC PDR Launched
+		<span style="font-size:8pt;font-weight:normal;">
+			<a id="hLink8" name="hLink8" href="javascript:toggleDetails('hLink8', 'hDiv8')">[+Show Details]</a>
+		</span>
+	</h3>
+	<div class="newsText" name="hDiv8" id="hDiv8">
+		The YRC PDR has been largely redesigned and entirely rewritten using <a href="http://java.sun.com/">Java</a>,
+		<a href="http://struts.apache.org/">Apache Struts</a> and
+		<a href="http://tomcat.apache.org/">Apache Tomcat</a>.
+		Major improvements include: more advanced searching (including GO annotations and sequence), improved protein
+		overview page, improved data viewing pages and supporting multiple species.
+	</div>
+</div>
+
+<br>
+<center>
+ <hr width="75%">
+</center>
+ <font style="font-size:10pt;">The <i>Yeast Resource Center</i> is supported by a P41 grant [P41 RR11823], from the 
+ <a href="http://www.ncrr.nih.gov/">National Center for Research Resources</a> at the
+ <a href="http://www.nih.gov/">US National Institutes of Health</a>.
+ The YRC PDR is located in the
+ <a href="http://depts.washington.edu/~biowww/">Department of Biochemistry</a>,
+ <a href="http://www.washington.edu/">University of Washington</a>.</font>
+ 
+
+
+</div></center>
+
+
+
+<center>
+<HR WIDTH="300">
+<span style="font-size:8pt;">
+YRC Informatics Platform - Version 3.0<BR>
+Created and Maintained by:
+<a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#109;&#114;&#x69;&#x66;&#x66;&#x6c;&#x65;&#x40;&#x75;&#x2e;&#119;&#x61;&#115;&#104;&#x69;&#110;&#x67;&#116;&#111;&#110;&#x2e;&#x65;&#x64;&#117;">Michael Riffle</a>
+</span>
+</center>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-8496355-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</BODY>
+</HTML>

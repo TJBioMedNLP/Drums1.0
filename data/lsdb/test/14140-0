@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>BioNet Package</title>
+<meta name="keywords" content="" />
+<meta name="Premium Series" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+
+<body>
+<!-- start header -->
+<div id="header">
+	<div id="logo">
+		<h1><span>BioNet</span> Package</h1>
+		
+	</div>
+	<div id = "menu">
+		<h1>Routines for the integrated, functional analysis of biological networks</h1>
+	</div>
+</div>
+<!-- end header -->
+<div id="wrapper">
+	<!-- start page -->
+	<div id="page">
+		<div id="sidebar1" class="sidebar">
+			<ul>
+				<li>
+					<h2>About BioNet</h2>
+					<div class="entry">
+						<div class="post">
+					The BioNet package provides an extensive framework for integrated network analysis using R and BioConductor. It includes the statistics for the integration of transcriptomic 
+					and functional data  with biological networks, the methods for scoring of nodes, methods for optimal, suboptimal and fast heuristic searches, as well as routines for the visualization of the fitted model and
+					resulting modules.
+					</div></div>
+					<h2>Download Links</h2>
+					<ul>
+						<li><b>BioNet Package for Linux / Mac:</b> You can download the BioNet package for the recent R version (2.11) by clicking on the <a href="./files/R_2.10.x/BioNet_1.7.3.tar.gz">link here</a>.
+						<li><b>BioNet Package for Windows:</b> You can download the BioNet package for the recent R version (2.11) by clicking on the <a href="./files/R_2.10.x/BioNet_1.7.3.zip">link here</a>.
+						<li><b>Tutorial:</b> You can download the <a href="./files/Tutorial.pdf">Tutorial</a> by clicking on the <a href="./files/Tutorial.pdf">link here</a>. The expression set on diffuse large B-cell lymphomas
+							   used in the tutorial is contained in the DLBCL package below.</li>
+					    <li><b>DLBCL Package for Linux / Mac:</b> You can download the DLBCL package for the recent R version (2.11) by clicking on the <a href="./files/R_2.10.x/DLBCL_1.2.tar.gz">link here</a>.
+						<li><b>DLBCL Package for Windows:</b> You can download the DLBCL package the recent R version (2.11) by clicking on the <a href="./files/R_2.10.x/DLBCL_1.2.zip">link here</a>.
+						<li><b>Reference Manual:</b> You can download the <a href="./files/BioNet.pdf">Manual</a> by clicking on the <a href="./files/BioNet.pdf">link here</a></li>.
+					</ul>
+					<h2>Citations</h2>
+					<ul>
+						<li><b>To cite BioNet in publications use one of these references:</b></li>
+						<li>Beisser, D.; Klau, G. W.; Dandekar, T.; Mueller, T. and Dittrich, M. (2009). BioNet an R-package for the Functional Analysis of Biological Networks. <i>Bioinformatics</i> <b>26</b>, 1129-1130 Apr.</li>
+						<li>Dittrich, M. T.; Klau, G. W.; Rosenwald, A.; Dandekar, T. and M&uuml;ller, T. (2008). Identifying functional modules in protein-protein interaction networks: 
+						an integrated exact approach. <i>Bioinformatics</i> <b>24</b>, i223-i231.</li>
+						<li><b>To cite the software dhea in publications use the following reference:</b></li>
+						<li><i>An algorithmic framework for the exact solution of the prize-collecting Steiner tree problem. </i> Mathematical Programming, Series B, 105(2-3):427-449, 2006, by I. Ljubic, R. Weiskircher, U. Pferschy, G. Klau, P. Mutzel, and M. Fischetti.</li>
+					</ul>
+					<h2>Installation notes</h2>
+					<ul>
+					<div class="post">
+						<li>The algorithm to identify the optimal scoring subnetwork is based on the software dhea (district heating) from Ljubic et al. (2006). The C++ code was extended in order to generate suboptimal 
+						solutions and is controlled over a Python script. The dhea code uses the commercial CPLEX callable library version 9.030 by ILOG, Inc. (Sunnyvale,CA). The free academic license is now available! In order to calculate the optimal solution 
+						a CPLEX library is needed. The other routines, the dhea code and heinz.py Python script (current version 1.63) are publicly available for academic and research purposes within the heinz (heaviest induced subgraph) 
+						package of the open source library LiSA (<a href="http://www.planet-lisa.net" target="_blank">http://www.planet-lisa.net</a>). The dhea code has to be included in the same folder as heinz.py, in order to call the routine by the Python code. To calculate
+						the maximum-scoring subnetwork without an available CPLEX license a heuristic is included in the BioNet package (<em>runFastHeinz</em>).</li>
+					</div>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- start content -->
+		<div id="content">
+				<div class="post">
+				<div class = "entry">
+				<h2 class="title">Introduction to BioNet</h2>
+				</div>
+				<div class="entry">
+					<p>The integrated analysis of microarray data in the context of biological networks (e.g protein-protein interaction networks) has become a major technique in systems biology. 
+					The primary objective of integrated network analysis is the identification of functional modules (significantly differentially expressed subnetworks) within large networks.
+					Therefore, the nodes of the network have to be weighted by a score according to the functional relevance of each gene product and subsequently a proper network search algorithm is 
+					required to find the maximum-scoring subgraph (MSS). Recently, we have devised an algorithm to this NP-hard problem, that computes provably optimal and suboptimal solutions to the MSS 
+					problem in reasonable running time using integer linear programming or a fast heuristic approach. The BioNet package allows the scoring of the network by a modular scoring function 
+					based on signal-noise decomposition of the p-values. Multiple p-values, derived from various sources, can be aggregated beforehand into one p-value using aggregation statistics. Based on the scores
+					provably optimal and suboptimal solutions can be calculated and the resultant modules can be visualized in 2D or 3D.
+					</p>
+					
+				</div>
+			</div>
+			<div class="flower"><img src="images/img06.jpg" alt="" width="499" height="562" /></div>
+			<div class="post">
+				<div class = "entry">
+				<h2 class="title">Figure: 3D visualization of the resulting module</h2>
+				</div>
+				<div class="entry">
+					<p>The figure shows the resulting module in a 3 dimensional plot for an example data set on diffuse large B-cell lymphomas, used in the study of Dittrich et al. (2008).
+					Differential expression is depicted by node colouring (red: upregulated in tumor subclass I (GBC), green: upregulated in tumor subclass II (ACB)). Known disease-relevant modules (shaded) 
+					(Rosenwald et al., 2002) are captured and extended by the integrated network approach.</p>
+					
+				</div>
+			</div>
+
+		</div>
+		<!-- end content -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end page -->
+</div>
+<div id="footer">
+	<p class="copyright"><a href="http://www.biozentrum.uni-wuerzburg.de/bioinformatik/" target="_blank">Department of Bioinformatics, University Wuerzburg, Germany</a></p>
+</div>
+</body>
+</html>

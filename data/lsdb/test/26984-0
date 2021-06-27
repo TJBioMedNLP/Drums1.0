@@ -1,0 +1,1287 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html><head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document"><title>SIMCOAL2</title></head>
+<body bgcolor="#ffffff">
+
+<h2 align="left"><font color="#bf3535">SIMCOAL2</font></h2>
+
+<h2 align="left"><font color="#0000a0">A coalescent program for the simulation of complex
+recombination patterns over large genomic regions under various demographic
+models</font></h2>
+
+<hr>
+<table border="0" width="85%">
+  <tbody><tr>
+    <td width="55%">
+      <ul>
+        <li><a href="#Introduction"><strong>Introduction</strong></a></li>
+        <li><a href="#Recombination"><strong>Recombination</strong></a></li>
+        <li><a href="#Multiple%20coalescent%20events"><strong>Multiple coalescent
+          events</strong></a></li>
+        <li><a href="#SNP%20data"><strong>SNP data</strong></a></li>
+        <li><a href="#Several"><strong>Several chromosome
+          structures</strong></a></li>
+        <li><a href="#GSM"><strong>Generalized Stepwise
+          Mutation model&nbsp;</strong></a></li>
+        <li><a href="#Input%20files"><strong>Input
+        files</strong></a></li>
+        <li><a href="#Example%20of%20input%20files"><strong>Example of an input file</strong></a></li>
+        <li><a href="#Output%20files"><strong>Output
+        files</strong></a></li>
+        <li><strong><a href="#Computation%20times">Computation times</a></strong></li>
+        <li><a href="#Installing%20and%20running%20simcoal2"><strong>Installing and running SIMCOAL2</strong></a></li>
+        <li><a href="#References"><strong>References</strong></a></li>
+        <li><font color="#FF0000"><a href="#Version"><strong>Versions</strong></a></font><strong><font color="#FF0000">
+          </font><font color="#ff0000">&lt;&lt; NEW &gt;&gt;</font></strong></li>
+        <li><font color="#FF0000"><a href="#Bug"><strong>Bug report</strong></a></font><strong><font color="#FF0000">
+          </font><font color="#ff0000">&lt;&lt; NEW &gt;&gt;</font></strong></li>
+      </ul>
+    </td>
+    <td valign="middle" width="45%">
+      <h2>Download latest release&nbsp; <font color="#FF0000">version 2.1.2</font></h2>
+      <h2>&nbsp;&nbsp;&nbsp;&nbsp; executable files</h2>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://cmpg.unibe.ch/software/simcoal2/simcoal2_1_2/Distributed%20files/win/simcoal2_1_2_win.zip">Windows
+      2000/XP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://cmpg.unibe.ch/software/simcoal2/simcoal2_1_2/Distributed%20files/linux/simcoal2_1_2_linux.tar.gz">Linux</a></p>
+      <h2> <font size="5">
+      &nbsp;&nbsp;&nbsp;&nbsp; source code</font></h2>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://cmpg.unibe.ch/software/simcoal2/simcoal2_1_2/Distributed%20files/source/simcoal2_1_2_win_sources.zip">Windows
+      2000/XP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://cmpg.unibe.ch/software/simcoal2/simcoal2_1_2/Distributed%20files/source/simcoal2_1_2_linux.tar.gz">Linux</a></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="55%">
+    </td>
+    <td valign="middle" width="45%">
+    </td>
+  </tr>
+</tbody></table>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+ Introduction</a></h3>
+
+<p style="text-align: justify;"><span style="font-style: normal;"> <span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-GB">We present here
+SIMCOAL2</span><span style="font-size: 12pt; font-family: Times New Roman;" lang="EN-GB">,</span> an
+extended version of the </span><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-US"> <a href="http://cmpg.unibe.ch/software/simcoal/">SIMCOAL</a>&nbsp;program </span><span style="font-style: normal;">(Excoffier
+et al.
+2000), to simulate the neutral genetic diversity at partially linked
+loci under different histories and a wide range of migration and
+demographic models.
+</span></p>
+
+<p style="text-align: justify;">SIMCOAL2 includes a number of new features 
+compared to the previous version:</p>
+
+<ol>
+  <li>
+
+<p style="text-align: justify;">The possibility of arbitrary recombination 
+rates between adjacent loci </p>
+
+  </li>
+  <li>
+
+<p style="text-align: justify;">Multiple coalescent events per generation, 
+allowing the correct simulation of very large samples and very large recombining 
+genomic regions</p>
+
+  </li>
+  <li>
+
+<p style="text-align: justify;">The simulation of SNP data with arbitrary minimum frequency, 
+for instance to simulate ascertainment bias</p>
+
+  </li>
+  <li>
+
+<p style="text-align: justify;">The output of diploid genotypic data generated 
+under the assumption of Hardy-Weinberg equilibrium </p>
+
+  </li>
+  <li>
+
+<p style="text-align: justify;">The simulation of a 
+mixture of different data types (DNA sequence, RFLP, STR, or SNP) along a single 
+chromosome.</p>
+
+  </li>
+</ol>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="Recombination">Recombination</a></h3>
+
+<p class="MsoBodyText" style="text-align: justify;">A recombination event
+can be schematically represented as follow:&nbsp;</p>
+<p class="MsoBodyText" align="center"><img border="0" src="index.20.gif" width="700" height="176"></p>
+<p class="MsoBodyText" align="center"><font color="#0000ff"><b>Schematic 
+representation of a recombination event backward in time</b></font></p>
+<p class="MsoBodyText" style="text-align: justify;">Assuming that at<span style="font-style: normal;">
+a given generation <i>t</i> we sampled 4 partially linked genes (loci) 
+arbitrarily distributed on a given chromosome segment C. A recombination event (represented 
+by<img src="index_simcoal2_1_final_files/index_008.htm" align="middle" border="0" height="27" width="25">on
+the drawing) creates two new lineages in the ancestral generation, <i>t</i>+1,
+here arbitrarily called A<sub>1</sub> and A<sub>2</sub>. A<sub>1</sub> receives from C 
+a copy of the genes located to the left of the recombination event, while A<sub>2</sub> 
+receives a copy of the genes located on the right side of the </span><span style="font-style: normal;">
+recombination event</span><span style="font-style: normal;">. The copies of the 
+genes </span><span style="font-style: normal;">shown
+in black are not observed in the present sample and thus have an
+unknown origin. We make this distinction between known (white) and
+unknown (black) genes, because
+we only have to simulate the ancestry of the observed genes. Therefore,
+we are only interested in the recombination
+events occurring between white genes. The other recombination events
+(e.g. between
+the first two genes in A<sub>2</sub>) have no effect on the genetic constitution of the sample, 
+and thus do not need to be followed or simulated. The simulation of the
+coalescent process with recombination is stopped when the Most Recent Common Ancestor
+(MRCA) of each locus is found.</span></p>
+
+<p class="MsoBodyText" style="text-align: justify;"><span style="font-style: normal;">The 
+ 
+recombination rate is allowed to vary between adjacent loci in order to simulate 
+arbitrary  patterns of recombinations along a chromosome, e.g. the occurrence of recombination hot-spots.</span>
+The following Figure gives an example of a simulated recombination
+pattern. Here, four haplotypes blocks (noted as B1 to B4) characterized
+by low recombination rate are interrupted by three hotspots of
+recombination (HS1 to HS3). The height of the bars are here
+proportional to the recombination rates between adjacent loci.<span style="font-style: normal;"><o:p>
+</o:p>
+</span></p>
+
+<p align="center"><img border="0" src="index.16.gif" width="560" height="190"></p>
+
+<p class="MsoBodyText" align="center"><font color="#0000ff"><b>Representation of 
+relative recombination rates across a chromosomal segment</b></font></p>
+
+<p class="MsoBodyText" style="text-align: justify;"><b>Validation of the 
+simulations:</b> <span style="font-style:normal">The expectation of the number 
+of recombination events in the genealogy of two chromosomes studied for two 
+partially linked markers was used to check the accuracy of our simulations. For 
+two markers separated by the recombination fraction </span>
+<span style="font-style:italic">r</span><span style="font-style:normal">,&nbsp; 
+the
+expected number of recombination events
+having occurred since their Most Recent Common Ancestor is equal
+to 6<i>R</i>/(<i>R</i>+6), where <i>R</i>=4<i>Nr</i> 
+ (eq. 31 in Simonsen and Churchill 1997) and </span>
+<span style="font-style: italic;">N</span><span style="font-style: normal;"> is 
+the population size.  We report below the comparison between
+theoretical predictions and the average 
+values obtained from&nbsp; the simulation of 10 000 genealogies
+with SIMCOAL2.</span></p>
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="44%">
+    <tbody><tr>
+      <td width="33%" style="border-style: solid; border-width: 1"></td>
+      <td align="center" width="33%" style="border-style: solid; border-width: 1"><b><i>R</i>=1</b></td>
+      <td align="center" width="34%" style="border-style: solid; border-width: 1"><b><i>R</i>=100</b></td>
+    </tr>
+    <tr>
+      <td align="center" width="33%" style="border-style: solid; border-width: 1"><b>Expected</b></td>
+      <td align="center" width="33%" style="border-style: solid; border-width: 1">0.86</td>
+      <td align="center" width="34%" style="border-style: solid; border-width: 1">5.66</td>
+    </tr>
+    <tr>
+      <td align="center" width="33%" style="border-style: solid; border-width: 1"><b>SIMCOAL2</b></td>
+      <td align="center" width="33%" style="border-style: solid; border-width: 1">0.87</td>
+      <td align="center" width="34%" style="border-style: solid; border-width: 1">5.67</td>
+    </tr>
+  </tbody></table>
+  </center>
+</div>
+<p class="MsoBodyText" style="text-align: justify;">&nbsp;</p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="Multiple coalescent events">Multiple coalescent events</a></h3>
+
+<p class="MsoBodyText" style="text-align: justify;">T<span style="font-style: normal;">he time to the MRCA
+(</span><span style="font-style: italic;">T<sub>MRCA</sub></span><span style="font-style: normal;">) at any locus (measured in units of <i>M</i> generations, 
+where <span style="font-style: normal;"><i>M</i>=<i>N </i></span><span style="">
+for a</span> haploid population, and </span><span style="font-style: normal;"><i>M</i>=2<i>N </i>
+for a diploid population) is independent from the recombination rate. Under the 
+standard coalescent model </span><span style="font-style: normal;">where
+only one coalescence per generation is assumed, </span><span style="font-style: normal;">
+the expected  </span><span style="font-style: italic;">
+T<sub>MRCA</sub></span><span style="font-style: normal;">
+is given</span><span style="font-style: normal;"> by 2(1-1/<i>n</i>), where </span><span style=""><i>n</i></span><span style="font-style: normal;">
+is the number of sampled gene copies. When the sample size is not small with respect
+to the effective size </span><span style="font-style: normal;">(Wakeley
+2003), or when the recombination rate is high leading to the progressive 
+generation of a large number of ancestral chromosome segments (and thus 
+increasing the number of gene lineages in past generations), multiple coalescent 
+events needs to be implemented to avoid an overestimation of the </span> 
+<span style="font-style: italic;">T<sub>MRCA</sub></span><span style="font-style: normal;"> 
+at any locus. Because this procedure is computationally intensive, we only 
+implement it if the effective number of gene lineages in a deme (at any given 
+time in the past)&nbsp; is large compared to the local deme size </span>
+<span style="font-style: italic;">N</span><span style="font-style: normal;">. On the 
+Figure below, 
+we present the </span><o:p><span style="font-style: normal;">average
+ </span> 
+</o:p>
+ <o:p><span style="font-style: italic;">T<sub>MRCA</sub></span><span style="font-style: normal;"> 
+obtained over
+ </span> 
+</o:p>
+ <o:p><span style="font-style: normal;">10 000
+ </span> 
+</o:p>
+ <span style="font-style: normal;">simulations of </span><o:p><span style="font-style: normal;">100 uniformly distributed
+SNPs with initial sample size n=100, and an overall recombination rate of 4<i>NR</i>=100. 
+ </span> 
+</o:p>
+ <o:p><span style="font-style: normal;">The mean
+and standard deviation between loci are equal to 1.98 and 0.01 respectively. The
+straight line gives the theoretical prediction under</span><span style="font-style: normal;"> </span><span style="font-style: normal;">the
+standard coalescent model (</span></o:p><o:p><span style="font-style: italic;">T<sub>MRCA</sub></span><span style="font-style: normal;">
+ </span> 
+</o:p>
+ <span style="font-style: normal;"><o:p>= 1.98).
+</o:p>
+ </span></p>
+<p class="MsoBodyText" align="center"><span style="font-style: normal;">&nbsp;<o:p>
+</o:p></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:AR-SA"><img border="0" src="index.25.gif" width="540" height="358">
+</span></p>
+
+<p class="MsoBodyText" align="center"><font color="#0000ff">
+<span style="font-family: Times New Roman; font-weight: 700;">Distribution of <i>
+T<sub>MRCA</sub></i> at 100 adjacent partially linked loci</span></font></p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="SNP data">SNP data</a></h3>
+
+<p class="MsoBodyText" style="text-align: justify;"><span style="font-style: normal;">With
+SIMCOAL ver 2.X users can generate the same data types as with&nbsp; </span><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-US">
+<a href="http://cmpg.unibe.ch/software/simcoal#Mutation%20Models">SIMCOAL</a> 
+ver 1.0 (RFLP, DNA sequence, and microsatellite data), plus Single Nucleotide 
+Polymorphims (SNP) data. We also offer the possibility to simulate </span><span style="font-style: normal;">SNP
+with a minimum frequency for the minor allele (which can be different
+for every SNP) in order to mimic one form of ascertainment bias.
+A SNP locus is modeled as a DNA base pair where one mutation has
+appeared somewhere at random along the genealogy of the locus. As shown
+in the following figure, the location of the mutation on the tree
+determines
+its frequency in the sample.
+</span></p>
+<p class="MsoBodyText" align="center"><span style="font-style: normal;">&nbsp;</span><span style="font-style:normal"><img border="0" src="index.22.gif" width="320" height="219"></span><span style="font-style: normal;"><o:p>
+</o:p>
+</span></p>
+
+<p class="MsoBodyText" align="center"><font color="#0000ff">
+<span style="font-family: Times New Roman; font-weight: 700;">Schematic 
+representation of a SNP-defining mutation on a gene genalogy</span></font></p>
+
+<p class="MsoBodyText" align="left">&nbsp;</p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="Several">Several chromosome structures</a></h3>
+
+<p class="MsoBodyText" style="text-align: justify;"> <font color="#000000">With</font> the<font color="#ff0000"> 
+new release 
+of
+SIMCOAL ver 2.1, </font> it is now possible to simulate a much more flexible 
+chromosomal structure than before. We now indeed offer the possibility to 
+simulate the evolution of several chromosomes. By chromosomes we mean <font color="#0000ff">independent
+chromosomal segments</font>. Users can simulate one or more (no limitation except
+hardware) chromosomes each one exhibiting its own
+number of blocks, its own number of markers, its own kind of markers etc... The
+input files used with <span style="font-style: normal;">SIMCOAL2.1 are thus 
+different</span> from those of&nbsp; SIMCOAL2.0 released earlier this year. The 
+portions used to set up the populations features and
+their history are unchanged and the only differences are about the definition of
+the chromosomal segments.&nbsp;An example of a new input file is given below.</p>
+
+<p class="MsoBodyText" style="text-align: justify;"><span style="font-style: normal;">&nbsp;</span></p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="GSM">Generalized Stepwise mutation model</a>&nbsp;&lt;&lt; NEW &gt;&gt;</h3>
+
+<p class="MsoBodyText" style="text-align: justify;">In SIMCOAL ver 2.1, we introduce a more realistic
+mutation model for STR markers: the Generalized Stepwise Mutation (GSM) model, which
+allows insertion (deletion) of more than one repeats. The number of repeats
+inserted (deleted) in one mutation event is treated as a random variable, and is
+randomly drawn from a Geometric distribution with parameter <i>p</i>. The value of p can be
+given in the  input file (see below). The expectation and variance of the Geometric 
+distribution are E[s]=p/(1-p) and Var[s]=p/(1-p)<sup>2</sup>, respectively, 
+where s+1 is the number of
+mutational steps. Concretely this means that for a parameter p set up to 0 in the input
+file, the number of repeats inserted (deleted) will be equal to one for <b>every</b> 
+mutation event. When p is set up to 0.5 in the input file,
+the expected number of repeats inserted (deleted) is equal to 2 with a variation
+around the mean is given in the following scheme.</p>
+
+<p class="MsoBodyText" align="center"><img border="0" src="simcoa8.gif" width="574" height="384"></p>
+<p class="MsoBodyText" align="center"><font color="#0000FF"><b>Distribution</b></font><b><font color="#0000ff">
+of the number of repeats inserted (deleted) according to a geometric law with parameter 
+p=0.5</font></b></p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Input files">
+ Input files</a></h3>
+
+<p><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-US">A single input file is needed for the simulation.
+The format of the input file is  differs from the
+<a href="http://cmpg.unibe.ch/software/simcoal#Input%20file">format</a> used in <a href="http://cmpg.unibe.ch/software/simcoal/">SIMCOAL</a> 
+ver 1.0.
+</span>The parameters required are listed bellow. The differences between the
+two versions of SIMCOAL are indicated using different colors. We show in blue the 
+unmodified
+parameters, and in red the modified and new parameters<span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-US">.</span> </p>
+
+<table style="border-collapse: collapse;" border="0" bordercolor="#111111" cellpadding="0" cellspacing="0" width="846">
+    <tbody><tr>
+        <td valign="top" width="179"><font color="#0000a0"><strong>Demes
+        sizes: </strong></font></td>
+        <td valign="top" width="653">Demes can have different sizes.<br>
+          <br>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><font color="#0000a0"><strong>Samples
+        sizes: </strong></font></td>
+        <td valign="top" width="653">Sample sizes can also be unequal among
+        demes. Samples of size zero can also be used.<br>
+          <br>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><font color="#0000a0"><strong>Growth
+        rate: </strong></font></td>
+        <td valign="top" width="653">This is the exponential growth parameter<em>
+        r</em> in <em>N</em>(<em>t</em>) = <em>N</em>(0) exp(<em>rt</em>).
+        Negative growth implies population expansion, because we
+        simulate backward in time.<br>
+          <br>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><font color="#0000a0"><strong>No. of
+        migration matrices:<br>
+          <br>
+          </strong></font></td>
+        <td valign="top" width="653">Several matrices can be listed in the
+        input file. Their number is specified here. A value of zero means that
+          no migration matrix is provided, and the program will assume that
+          there is no migration between demes.<br>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><font color="#0000a0"><strong>Migration matrices:</strong></font></td>
+        <td valign="top" width="653">A matrix of size equal to the number of
+        listed demes. <b>If no matrix is defined</b>, SIMCOAL creates a
+        migration matrix (with id "0") filled with
+        zeroes, which assumes no migration among demes. The matrices have
+          associated ids that correspond to their order of appearance in the
+          list, starting at zero. If no
+        particular migration matrix is specified with an
+        historical event at generation zero, the matrix
+        "0" (zero) is used.<br>
+          <br>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><font color="#0000a0"><strong>Historical
+        events:</strong></font></td>
+        <td valign="top" width="653">One first specifies the number of such 
+        event to read. A value of zero is valid.<br>
+        Then, on separate lines, one enters each historical event in turn.
+        They are structured as follows:<br>
+        <div align="center"><center><table border="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="70"><strong>1st number</strong>:
+                </td>
+                <td>The number of generations, since the present
+                generation, at which the historical event occurred</td>
+            </tr>
+        </tbody></table>
+        </center></div><div align="center"><center><table border="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="70"><strong>2nd number</strong>:
+                </td>
+                <td>The source deme id (deme ids are arbitrarily
+                numbered starting at zero)</td>
+            </tr>
+        </tbody></table>
+        </center></div><div align="center"><center><table border="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="70"><strong>3rd number</strong>:
+                </td>
+                <td>The sink deme id. Source and sink refer to
+                demes exchanging migrants</td>
+            </tr>
+        </tbody></table>
+        </center></div><div align="center"><center><table border="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="70"><strong>4th number:</strong>
+                </td>
+                <td>The <b>proportion</b> of migrants sent from the
+                source deme to the sink deme. It also represents
+                the probability for each lineage in the
+                source deme to migrate to the sink deme.</td>
+            </tr>
+        </tbody></table>
+        </center></div><div align="center"><center><table border="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="70"><strong>5th number: </strong></td>
+                <td>The <b>relative</b> new size of the sink deme: a
+                number smaller than 1 will simulate a population
+                expansion, while a
+                number larger than one will simulate a population contraction&nbsp;
+                  (when looking forward in time).</td>
+            </tr>
+        </tbody></table>
+        </center></div><div align="center"><center><table border="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="70"><strong>6th number: </strong></td>
+                <td>The new growth rate of the sink deme. Zero
+                means a stationary population. A negative value will imply 
+                population growth (forward in time), and a positive value will 
+                imply population population contraction (also forward in time).</td>
+            </tr>
+        </tbody></table>
+        </center></div><div align="center"><center><table border="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="70"><strong>7th number</strong>:
+                </td>
+                <td>The id of the migration matrix to use. This
+                modification applies to all demes simultaneously.<br>
+                  <br>
+                </td>
+            </tr>
+        </tbody></table>
+        </center></div>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><font color="#ff0000"><b>Number of
+          independent&nbsp; chromosome segments :</b></font></td>
+        <td valign="top" width="653">This number refers to the number of
+          independent chromosome segments that needs to be simulated.<font color="#ff0000">&nbsp;
+          </font><font color="#000000">With the
+release of&nbsp; SIMCOAL2</font> <font color="#000000"> distributed before the
+          10 12 2004&nbsp; it was <b> not </b>
+          possible to simulate different chromosomes with different features. </font>In the<font color="#ff0000"> 
+          current release 
+of
+SIMCOAL ver 2, </font> it is now possible to simulate several chromosomes with
+          different kind and numbers of markers, different patterns of
+          recombination rates, different mutation rates (see the example given below).&nbsp;&nbsp;<br>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><strong><font color="#ff0000">Number of 
+        blocks:</font></strong></td>
+        <td valign="top" width="653">This number refers to the number of sets of 
+        partially linked loci (that we shall call <b>blocks</b>, hereafter) of the same data type, 
+        having the same mutation and recombination rates. For 
+        instance, to simulate <i>L</i> partially
+          linked microsatellites with varying recombination rates and with different mutation
+          rates, we need to specify <i>L</i> blocks, each one containing one
+          microsatellite. To simulate a chromosome segment with <i>L</i> partially
+          linked microsatellites uniformly spaced (with<i> </i>identical 
+        recombination rates<i> </i>between
+          adjacent loci) and having identical mutation rates, one would only need 
+        to define a single block.
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="179"><b><font color="#ff0000">Block 
+        specificities</font></b></td>
+        <td valign="top" width="653">For every block, we need to specify 3 
+        parameters, as follows: 1) the
+          data type, 2) the number of loci to simulate and 3) the recombination 
+        rate immediately on the right of each locus. <br>
+        Additionally to these 3 required parameters, several optional 
+        parameters need to be added depending on the data type<b>.<br>
+        Optional parameters</b><table style="border-collapse: collapse;" id="AutoNumber2" border="1" bordercolor="#111111" cellpadding="4" cellspacing="0" height="157" width="86%">
+          <tbody><tr>
+            <td height="19" width="14%">&nbsp;</td>
+            <td colspan="3" height="19" width="96%">
+            <p align="center"><b>Extra parameters</b></p></td>
+          </tr>
+          <tr>
+            <td height="18" width="14%"><b>Data types</b></td>
+            <td align="center" height="18" width="24%">4<sup>th</sup> parameter</td>
+            <td align="center" height="18" width="20%">5<sup>th</sup> parameter</td>
+            <td align="center" height="18" width="20%">6<sup>th</sup> parameter</td>
+          </tr>
+          <tr>
+            <td height="19" valign="top" width="14%">DNA</td>
+            <td height="19" valign="top" width="24%">Mutation rate per locus</td>
+            <td height="19" valign="top" width="20%">Transition rate <br>
+            <font color="#0000ff">(fraction of substitutions that are 
+            transitions)</font></td>
+            <td height="19" valign="top" width="20%"></td>
+          </tr>
+          <tr>
+            <td height="20" valign="top" width="14%">RFLP</td>
+            <td height="20" valign="top" width="24%">Mutation rate per locus</td>
+            <td height="20" valign="top" width="20%">&nbsp;</td>
+            <td height="20" valign="top" width="20%"></td>
+          </tr>
+          <tr>
+            <td height="57" valign="top" width="14%">Microsatellite</td>
+            <td height="57" valign="top" width="24%">Mutation rate per locus.
+            <font color="#0000ff"><br>
+            A pure stepwise mutation model is used with possible range 
+            constraints</font></td>
+            <td height="57" valign="top" width="20%"><font color="#ff0000">*
+              </font>Value of the geometric parameter for the GSM model. Ranges 
+            between 0 and <font color="#0000ff">1, a value of 0&nbsp; implies insertion/deletion of
+              more than one repeat (strict SMM 
+            model)</font></td>
+            <td height="57" valign="top" width="20%">Range constraint <br>
+                <font color="#0000ff"> (number of different alleles allowed)</font> 
+                0 means no range constraint</td>
+          </tr>
+          <tr>
+            <td height="19" valign="top" width="14%">SNP</td>
+            <td height="19" valign="top" width="24%">Minimum frequency for the 
+            minor allele</td>
+            <td height="19" valign="top" width="20%">&nbsp;</td>
+            <td height="19" valign="top" width="20%"></td>
+          </tr>
+        </tbody></table>
+        <p><font color="#ff0000">*
+        important note:&nbsp; The
+release of&nbsp; SIMCOAL 2.0 distributed before the 10.12.2004&nbsp; does not
+        support the GSM model for microsatellites, and does not accept the 5<sup>th</sup>
+        parameter for microsatellites. Please update your version of SIMCOAL to 
+        ver 2.1</font></p></td>
+    </tr>
+</tbody></table>
+
+<hr>
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Example of input files">
+ Example of an input file</a></h3>
+
+<p><b><font size="3">Definition of the history of population: </font></b>Suppose 
+that we want to simulate a scenario of a population trifurcation, where a 
+(haploid) founder population of size N= 2 000
+(<font color="#0000ff">note that it would be equivalent to the simulation of a 
+diploid population of size <i>N</i>=1000</font>) splits into 3 daughter populations
+of size 1,000, 2,000 and
+1,000, respectively,&nbsp; where 20, 30 and 10 genes are respectively sampled. After the 
+fission event, we shall assume that the three daughter populations are not 
+completely isolated and can exchange genes at rate m=0.005 per generation, which 
+is also assumed constant over time.&nbsp;</p>
+
+<p align="center">
+<img border="0" src="3POP_forward.gif" width="728" height="527"></p>
+
+<p align="center"><b><font color="#0000ff">Schematic representation (viewed 
+forward in time) of a population trifurcation</font></b></p>
+
+<p>While the history of the populations is naturally described forward in time 
+(black arrow on the left above),&nbsp; users simulating a coalescent process 
+have to think backward in time as in the following&nbsp; Figure.</p>
+
+<blockquote>
+  <p align="center">
+  <img border="0" src="3POP_model.gif" width="838" height="566"></p>
+
+  <p align="center"><b><font color="#0000ff">Schematic representation of the 
+  backward historical process actually simulated by SIMCOAL</font></b></p>
+
+</blockquote>
+
+  <p align="left">The specification of the process to be simulated proceeds as 
+  follows:</p>
+
+<ol>
+  <li>Starting at the current generation (0) with three samples of size of 20, 30 and 10 genes, SIMCOAL simulates generation
+after generation the demography of the populations and the coalescent process 
+  backward in time. We first start by defining how many demes we need to 
+  simulate, as well as their size, and the number of samples genes:</li>
+</ol>
+<blockquote>
+
+<p>
+    <font face="Verdana" size="2">
+    <font color="#bf3535">//Input
+parameters for the coalescence and recombination simulation program : simcoal2.exe<strong><br>
+</strong></font>3 samples to simulate<br>
+      <font color="#0000a0">/Deme sizes (haploid number of genes)<strong><br>
+</strong></font>1000<br>
+      2000<br>
+      1000<br>
+      <font color="#0000a0">//Sample
+sizes<strong><br>
+</strong></font>20<br>
+30<br>
+10<br>
+      &nbsp;</font></p>
+
+</blockquote>
+<ol start="2">
+  <li>If users have defined migration (as it was the case in
+the example), they have to specify the total number
+of migration matrices that will be used during the simulation, as well as which migration matrix (see <a href="#Input%20files">here</a> to have
+more details) is to be used at any time. Unless specified otherwise (by an
+  <font color="#0000ff">historical event</font>) SIMCOAL uses the migration matrix 
+  having&nbsp; <font color="#0000ff">id number</font>
+equal to 0 at the begining of the simulations (generation zero). This migration matrix 
+  will be then used until users
+specify another matrix to be used with another historical event. In our case we 
+  just need to define two migration matrices. The second one has only zeroes, 
+  implying that the demes will not exchange migrants anymore. Note that diagonal 
+  elements are here set to zero, but these values are not used by SIMCOAL. </li>
+</ol>
+<blockquote>
+
+<p>
+    <font face="Verdana" size="2">
+      <font color="#0000a0">//Number
+of migration matrices : If 0 : No migration between demes<strong><br>
+</strong></font>2<br>
+      <font color="#0000a0">//Migration
+rates matrix 0 :&nbsp;<strong><br>
+</strong></font>0.000 0.005 0.000<br>
+0.005 0.000 0.005<br>
+0.000 0.005 0.000<br>
+      <font color="#0000a0">//Migration
+rates matrix 1 : No migrations<strong><br>
+</strong></font>0 0 0<br>
+0 0 0<br>
+0 0 0<br>
+&nbsp;</font></p>
+
+</blockquote>
+<ol start="3">
+  <li>In our example, migrations are allowed for the first 500 generations and 
+  are disallowed after the fusion of the three demes into one (when looking 
+  backwards). The population fusion and the change of migration matrix are 
+  specified by just two historical events:</li>
+</ol>
+<blockquote>
+
+<p><font face="Verdana" size="2"><font color="#0000a0">//Historical
+event: time, source, sink, proportion of migrants, new deme size, new growth
+rate, new migration matrix<strong><br>
+</strong></font><font color="#c0c0c0">2</font><font color="#c0c0c0"> historical 
+events</font><br>
+<font color="#ff0000">
+      500</font> 0 1 <font color="#c0c0c0"> 1 1 0</font> <font color="#ff0000"> 1</font><br>
+<font color="#ff0000">
+      500</font> 2 1 <font color="#c0c0c0"> 1 1 0</font> <font color="#ff0000"> 1</font>
+      </font>
+</p>
+
+<p>The first parameter (shown in red) represents the time at which occurs the 
+historical event (in number of generations in the past relative to present 
+time). The last parameter (shown in red as well) is the id of the new
+migration matrix. Thus, the first historical event states that: 500 generations 
+ago, deme #0 (first population defined in
+the input file) will send all its genes to deme #1, and deme zero will remain at 
+the same time as before, but a new migration matrix (#1) should be used from now 
+on. the second historical event specifies that deme #2 should send all its genes 
+to deme #1, and that migration matrix #1 should be used afterwards. Therefore at 
+generation 501, all remaining gene lineages should be present in deme #1, and 
+since no migrations are allowed, they will remain there until they all coalesce 
+and the simulation stops.</p>
+
+</blockquote>
+
+<p><b><font size="3">Definition of the genetic structure of chromosomes: </font></b>Suppose
+
+that we want to simulate the genetic diversity expected of a chromosomal segment&nbsp; 
+made up of <span style="font-style: normal;">three  blocks of partially
+linked loci (recall that by block we mean a set of identical genetic markers with the same 
+inter-locus recombination rate), each one being separated by a recombination hot-spot,
+as shown in the following Figure. Assume that the first block contains 25 SNPs, that the second block contains 50 microsatellite
+(STR) loci, and that the 
+last block is also made up of 25 SNPs.</span></p>
+
+  <p align="center"><img border="0" src="index.15.gif" width="522" height="206"></p>
+
+  <p align="center"><b><font color="#0000ff">Recombination distribution to be 
+  simulated</font></b></p>
+
+<p>If the blocks were each of consisting of 155 Kb, an assuming a diploid size of <i> N</i>=10,000, 
+the recombination rate between adjacent loci<i> (r</i>) within the 3 blocks would 
+be equal
+to 0.2<font size="1"> </font>x<font size="1">
+</font>10<sup>-4</sup>, 0.1 x 10<sup>-4</sup>
+ and 0.2<font size="1"> </font>x<font size="1"> </font>10<sup>-4</sup>  ,
+respectively. We shall finally assume that these blocks are separated by two 
+recombination hot-spots of with recombinations
+rates&nbsp; <i>r</i>  = 0.5<font size="1">
+</font>x<font size="1"> </font>10<sup>-4</sup>.&nbsp;</p>
+
+<p>Therefore, users will first have to set up the number of simulated blocks that they
+want to simulate. Here, this number is <font color="#0000ff"><b>5</b> </font>
+because we need to include the two recombinations hot-spots. In SIMCOAL2, <span style="font-style: normal;"><font color="#0000ff">a
+block is defined as a set of adjacent markers with the <b>same</b> features and
+the <b>same</b> recombination rate between adjacent markers</font>.&nbsp; </span>A
+block can therefore be viewed as a <font color="#0000ff">chain</font> of <i>b</i> elements. Every
+element has two attributes, which are the specificities of the genetic marker (see <a href="#Input%20files">here</a>
+to have more details on how to specificify the properties of the markers like its type, its mutation
+rate, etc... ) <font color="#0000ff">and</font> the recombination rate with the next element. In
+the following scheme, the length of the links between markers is proportional to 
+the recombination rate.&nbsp;</p>
+
+<p align="center"><img border="0" src="index_11.gif" width="789" height="109"></p>
+
+<p>&nbsp;Note that the link between blocks i and i+1 will therefore
+depend on the recombination rate on the right of the last marker of
+block i. We therefore need to define a transition block (block2 in the
+previous
+scheme) made up of a single SNP with a large recombination rate in
+order to
+simulate the recombination hot-spot between the SNP#25 and&nbsp; the STR#1. In the input file these 3 blocks are defined as follows</p>
+
+<table style="border-width: 0pt; border-collapse: collapse;" id="AutoNumber4" bordercolordark="#FFFFFF" bordercolorlight="#FFFFFF" border="0" bordercolor="#ffffff" cellpadding="0" cellspacing="0" width="500">
+      <tbody><tr>
+        <td style="border-style: none; border-width: medium;" width="22%"><font face="Verdana" size="2">
+        SNP</font></td>
+        <td style="border-style: none; border-width: medium;" width="12%"><font face="Verdana" size="2">
+        24</font></td>
+        <td style="border-style: none; border-width: medium;" width="23%"><font face="Verdana" size="2">
+        0.00002</font></td>
+        <td style="border-style: none; border-width: medium;" width="22%"><font face="Verdana" size="2">0.00000</font></td>
+        <td style="border-style: none; border-width: medium;" width="36%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="border-style: none; border-width: medium;" width="22%"><font face="Verdana" size="2">
+        SNP</font></td>
+        <td style="border-style: none; border-width: medium;" width="12%"><font face="Verdana" size="2">
+        1</font></td>
+        <td style="border-style: none; border-width: medium;" width="23%"><font face="Verdana" size="2">
+        0.00005</font></td>
+        <td style="border-style: none; border-width: medium;" width="22%"><font face="Verdana" size="2">0.00000</font></td>
+        <td style="border-style: none; border-width: medium;" width="36%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="border-style: none; border-width: medium;" width="22%"><font face="Verdana" size="2">
+        MICROSAT&nbsp;&nbsp; </font></td>
+        <td style="border-style: none; border-width: medium;" width="12%"><font face="Verdana" size="2">
+        49</font></td>
+        <td style="border-style: none; border-width: medium;" width="23%"><font face="Verdana" size="2">
+        0.00001</font></td>
+        <td style="border-style: none; border-width: medium;" width="22%"><font face="Verdana" size="2">
+        0.00025</font></td>
+        <td style="border-style: none; border-width: medium;" width="36%"><font face="Verdana" size="2">
+        0</font></td>
+      </tr>
+    </tbody></table>
+<p>With these three blocks, we can simulates 25 SNPs with adjacent recombination
+rates equal to <font face="Verdana" size="2">
+        0.00002</font>, separated from<font face="Verdana" size="2">
+        
+        </font>49 STR<font face="Verdana" size="2">
+        (</font>with adjacent recombination rates
+equal to <font face="Verdana" size="2">0.00001 </font>&nbsp;by a hot spot of recombination 
+(r<font face="Times New Roman" size="3">ecombination rates between SNP#25 and
+STR#1&nbsp; equal to 0.00005).</font> 
+An identical structure would need to be described to simulate the second recombination hot-spot after the
+STR#50). Note
+that the last element of the last block is a special element, since its 
+recombination rate is irrelevant, and ignored by SIMCOAL</p>
+
+<p>With this kind of specifications, users are
+free to simulate any chromosomal structure they want, concerning the intensity of
+recombination rates but also the types of markers and the mutation rates. </p>
+
+<p>For instance, if one would like to simulate 4 STRs with different mutation rates,&nbsp; 
+with arbitrary recombination rates ( i.e. arbitrarily spaced on a chromosome), users 
+would need to define 4 blocks of 1 STR as </p>
+
+<table style="border-width: 0pt; border-collapse: collapse;" id="AutoNumber3" bordercolordark="#FFFFFF" bordercolorlight="#FFFFFF" border="0" bordercolor="#ffffff" cellpadding="0" cellspacing="0" width="544">
+      <tbody><tr>
+        <td style="border-style: none; border-width: medium;" align="center" width="103"><font face="Verdana" size="2"><i>Kind
+          of marker&nbsp;</i>&nbsp;</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="111"><font face="Verdana" size="2"><i>Number
+          of markers</i></font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="122"><font face="Verdana" size="2"><i>Recombination
+          rate</i></font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="134"><font face="Verdana" size="2">
+        <i>mutation rate</i>&nbsp;</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="74"><i><font face="Verdana" size="2">range
+          </font><font face="Verdana" size="2">constraint</font></i></td>
+      </tr>
+      <tr>
+        <td style="border-style: none; border-width: medium;" align="center" width="103"><font face="Verdana" size="2">
+        MICROSAT&nbsp;&nbsp; </font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="111"><font face="Verdana" size="2">1</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="122"><font face="Verdana" size="2">
+        0.00021</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="134"><font face="Verdana" size="2">
+        0.00250&nbsp;</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="74"><font face="Verdana" size="2">
+        0</font></td>
+      </tr>
+      <tr>
+        <td style="border-style: none; border-width: medium;" align="center" width="103"><font face="Verdana" size="2">
+        MICROSAT&nbsp;&nbsp; </font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="111"><font face="Verdana" size="2">1</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="122"><font face="Verdana" size="2">
+        0.00041</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="134"><font face="Verdana" size="2">
+        0.00850&nbsp;</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="74"><font face="Verdana" size="2">
+        0</font></td>
+      </tr>
+      <tr>
+        <td style="border-style: none; border-width: medium;" align="center" width="103"><font face="Verdana" size="2">
+        MICROSAT&nbsp;&nbsp; </font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="111"><font face="Verdana" size="2">
+        1</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="122"><font face="Verdana" size="2">
+        0.00005</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="134"><font face="Verdana" size="2">0.00742</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="74"><font face="Verdana" size="2">
+        0</font></td>
+      </tr>
+      <tr>
+        <td style="border-style: none; border-width: medium;" align="center" width="103"><font face="Verdana" size="2">
+        MICROSAT&nbsp;&nbsp; </font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="111"><font face="Verdana" size="2">
+        1</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="122"><font face="Verdana" size="2">
+        0.00000</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="134"><font face="Verdana" size="2">
+        0.00042</font></td>
+        <td style="border-style: none; border-width: medium;" align="center" width="74"><font face="Verdana" size="2">
+        0</font></td>
+      </tr>
+    </tbody></table>
+
+<p>The following listing shows how to set up the complete input file to perform the&nbsp; 
+simulations a trifurcating population described above.</p>
+
+<table style="border-width: 0pt;" border="1" height="468" width="100%">
+  <tbody><tr>
+    <td style="border-style: none; border-width: medium;" height="462" width="100%">
+    <font face="Verdana" size="2">
+    ============================%&lt;======================================<font color="#bf3535"><br>
+    //Input
+parameters for the coalescence and recombination simulation program : simcoal2.exe<strong><br>
+</strong></font>3 samples to simulate<br>
+      <font color="#0000a0">//Deme
+sizes (haploid number of genes)<strong><br>
+</strong></font>1000<br>
+      2000<br>
+      1000<br>
+      <font color="#0000a0">//Sample
+sizes<strong><br>
+</strong></font>20<br>
+30<br>
+10<br>
+      <font color="#0000a0">//Growth
+rates</font><br>
+0<br>
+0<br>
+      0<br>
+      <font color="#0000a0">//Number
+of migration matrices : If 0 : No migration between demes<strong><br>
+</strong></font>2<br>
+      <font color="#0000a0">//Migration
+rates matrix 0 :&nbsp;<strong><br>
+</strong></font>0.000 0.005 0.000<br>
+0.005 0.000 0.005<br>
+0.000 0.005 0.000<br>
+      <font color="#0000a0">//Migration
+rates matrix 1 : No migrations<strong><br>
+</strong></font>0 0 0<br>
+0 0 0<br>
+0 0 0<br>
+      <font color="#0000a0">//Historical
+event: time, source, sink, proportion of migrants, new deme size, new growth
+rate, new migration matrix<strong><br>
+</strong>2</font>  historical events<br>
+      500 0 1 1 1 0 1<br>
+      500 2 1 1 1 0 1<br>
+    <font color="#0000a0">//Number of independent (unlinked) chromosomes<span style="background-color: rgb(255, 255, 0);">,
+    and "chromosome structure" flag:&nbsp; </span></font><span style="background-color: rgb(255, 255, 0);"><font color="#ff0000"><b>0
+    </b>
+</font><font color="#0000a0">for identical structure across chromosomes, and </font>
+    <b><font color="#FF0000">1</font></b><font color="#0000a0"> for different 
+    structures on different chromosomes. </font></span>
+    <br>
+    4 <font color="#ff0000">1</font><br>
+      </font>
+      <font color="#0000a0" face="Verdana" size="2">//</font><font color="#0000a0" face="Verdana" size="2">Number
+    </font><font color="#0000a0" face="Verdana" size="2">of contiguous linkage
+    blocks </font>
+      <font color="#0000a0" face="Verdana" size="2">in </font>
+      <font color="#ff0000" face="Verdana" size="2">chromosome 1</font><font color="#0000a0" face="Verdana" size="2">:&nbsp;</font><font color="#0000a0" face="Verdana" size="2"><br>
+</font><font face="Verdana" size="2">5&nbsp;&nbsp;&nbsp;<br>
+</font>
+      <font color="#0000a0" face="Verdana" size="2">//Per Block: Data type, No. 
+    of loci, Recombination rate to the right-side locus, plus optional 
+    parameters ***</font><font face="Verdana" size="2">see detailed explanation </font>
+      <font color="#0000a0" face="Verdana" size="2"><a href="http://cmpg.unibe.ch/software/simcoal2/index.html#Input%20files">here</a>***</font><font face="Verdana" size="2"><br>
+SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.00002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.05<br>
+SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.00005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    0.10<br>
+MICROSAT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+49&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.00001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <font color="#FF0000"><b>0</b></font><font color="#ff0000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font>
+    0&nbsp;<br>
+    MICROSAT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.00005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    0.0025&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <font color="#FF0000"><b>0</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    0<br>
+SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.00002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    0.10<br>
+</font><font color="#0000a0" face="Verdana" size="2">//Number of contiguous linkage blocks in
+</font><font color="#ff0000" face="Verdana" size="2">
+chromosome 2
+</font><font color="#0000a0" face="Verdana" size="2"><br>
+</font><font face="Verdana" size="2">2&nbsp;&nbsp;&nbsp;<br>
+</font>
+      <font color="#0000a0" face="Verdana" size="2">//Per Block: Data type, No. 
+    of loci, Recombination rate to the right-side locus, plus optional 
+    parameters ***</font><font face="Verdana" size="2">see detailed explanation </font>
+      <font color="#0000a0" face="Verdana" size="2"><a href="http://cmpg.unibe.ch/software/simcoal2/index.html#Input%20files">here</a>***</font><font face="Verdana" size="2"><br>
+SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.05<br>
+SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.00002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.10<br>
+</font><font color="#0000a0" face="Verdana" size="2">//Number of contiguous linkage blocks in
+</font><font color="#ff0000" face="Verdana" size="2">
+chromosome 3
+</font><font color="#0000a0" face="Verdana" size="2"><br>
+</font><font face="Verdana" size="2">1&nbsp;&nbsp;&nbsp;<br>
+</font>
+      <font color="#0000a0" face="Verdana" size="2">//Per Block: Data type, No. 
+    of loci, Recombination rate to the right-side locus, plus optional 
+    parameters ***</font><font face="Verdana" size="2">see detailed explanation </font>
+      <font color="#0000a0" face="Verdana" size="2"><a href="http://cmpg.unibe.ch/software/simcoal2/index.html#Input%20files">here</a>***</font><font face="Verdana" size="2"><br>
+DNA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.00002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.00005</font><font face="Verdana" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    0.33<br>
+    </font><font color="#0000a0" face="Verdana" size="2">//Number of contiguous linkage blocks in
+</font><font color="#ff0000" face="Verdana" size="2">
+chromosome 4
+</font><font color="#0000a0" face="Verdana" size="2"><br>
+</font><font face="Verdana" size="2">4&nbsp;&nbsp;&nbsp;<br>
+</font>
+      <font color="#0000a0" face="Verdana" size="2">//Per Block: Data type, No. 
+    of loci, Recombination rate to the right-side locus, plus optional 
+    parameters ***</font><font face="Verdana" size="2">see detailed explanation </font>
+      <font color="#0000a0" face="Verdana" size="2"><a href="http://cmpg.unibe.ch/software/simcoal2/index.html#Input%20files">here</a>***</font><font face="Verdana" size="2"><br>
+SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.05<br>
+        MICROSAT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.00002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <font color="#ff0000"><b>0.5</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+        MICROSAT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.0025&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><font color="#ff0000">0</font></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+10<br>
+SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.05<br>
+    [EOF]</font>
+    <p><font face="Verdana" size="2">============================%&lt;======================================</font></p></td>
+  </tr>
+</tbody></table>
+
+<p><b>Summary of the different parameters needing to be defined for the 
+description of the markers to be simulated</b> </p>
+
+<p>The parameters which can be given for every markers are:&nbsp;<font face="Verdana" size="2"><br>
+</font>MICROSAT [number of loci] [recombination rate] [mutation rate] <b>[Geometric
+parameter <font color="#ff0000">&lt;&lt; NEW &gt;&gt;</font>]</b> [range
+constraint]<font face="Verdana" size="2"><br>
+</font>SNP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[number of loci] [recombination rate] [minimum frequency]<font face="Verdana" size="2"><br>
+</font>DNA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[number of loci] [recombination rate] [mutation rate] [transition rate]<font face="Verdana" size="2"><br>
+</font>RFLP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[number of loci] [recombination rate] [mutation rate]&nbsp; </p>
+<p><font face="Verdana" size="2"><br>
+</font>[number of
+loci]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+:&nbsp; Number of partially linked loci in a block&nbsp;<font face="Verdana" size="2"><br>
+</font>[recombination
+rate]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+:&nbsp;&nbsp; recombination rate between adjacent markers in a
+block&nbsp;&nbsp;&nbsp;(Global recombination rate of the block = [recombination
+rate] *([number of loci]&nbsp;&nbsp; -1)<font face="Verdana" size="2">)<br>
+</font>[mutation
+rate]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+:&nbsp;&nbsp; mutation rate for every marker in a
+block&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(Global mutation rate of the
+block&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = [mutation
+rate] *[number of loci]<font face="Verdana" size="2">)<br>
+</font>[Geometric parameter]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;
+parameter for the Geometric distribution (varies between 0  and 1)<font face="Verdana" size="2"><br>
+</font>[range
+constraint]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+:&nbsp; 0 or 1 means no constraints, higher numbers give the maximum number of
+repeats<font face="Verdana" size="2"><br>
+</font>[minimum
+frequency]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;
+minimum frequency of a SNP in the <b>whole set of population</b> (ascertainment
+bias)&nbsp;<font face="Verdana" size="2"><br>
+</font>[transition
+rate]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+:&nbsp; fraction of substitutions that are transitions </p>
+
+<p>Additional examples of input files for SIMCOAL (without recombination) can be 
+found on <a href="http://cmpg.unibe.ch/software/simcoal#Input%20file">this page</a> 
+. </p>
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="Output files">Output files</a></h3>
+
+<p>The final state of each gene is recorded and output to several files
+according to two data formats. The first format is compatible with the <a href="http://anthro.unige.ch/arlequin">Arlequin
+program</a> (Schneider et al. 2000). The data generated after each simulation
+are output to a separate Arlequin project file. An Arlequin batch file is also
+created, listing all simulated files, and allowing one to compute different
+statistics on the whole set of simulated files with Arlequin. it therefore 
+allows one to obtain
+their distribution after extraction from the Arlequin output files. Note that
+with version 2.0 of Arlequin, a utility is provided to collect most statistics
+computed in the analysis of batch files under the form of MS-Excel compatible
+files. Examples of statistics that can be extracted from batch file analysis by
+Arlequin are: nucleotide composition, gene diversity, homozygosity, mean number
+of pairwise differences, number of haplotypes, number of polymorphic sites,
+Tajima’s <i>D</i>, Fu's <i>F<sub>S</sub></i>, extent of linkage disequilibrium among loci, mutation parameter
+<i> <font face="Symbol">q</font></i>
+= 2<i>Nu</i> estimated from homozygosity, mean number of pairwise differences, number
+of polymorphic sites, or number of alleles, and genetic distances based on
+pairwise <i>F<sub>ST</sub></i>’s. Note also that the Arlequin software has a file conversion
+utility for exporting input data files into several other format like Biosys,
+Phylip, or GenePop, so that files produced by SIMCOAL2 could be also analyzed by
+these software's after file conversion.</p>
+
+<p>The two other sets of output file
+produced by SIMCOAL2 are compatible with the NEXUS file format. Two files with
+the “*.trees” extension list all the genealogical trees for each simulated locus. The branch lengths
+are expressed either 1) in units of generations scaled by the population size (<i>N</i>), and therefore representing the true coalescent history of the sample of genes,
+or 2) in units of average number of substitutions per site (except for data sets
+containing SNP markers), and therefore
+representing the realized mutational tree. These two sets of trees can be
+visualized with the software 
+<a href="http://taxonomy.zoology.gla.ac.uk/rod/treeview.html">TREEVIEW</a> (Page 1996), 
+as shown on the figure below. Finally, a file with the
+“*.paup” extension, lists all the simulated genes together with their true
+genealogical structure. This file can be analyzed with David Swofford's PAUP*
+software (1999). <font color="#0000ff">Because, these files can be huge, we do not produce them by 
+default, and a conditional compilation directives (#define _PRINT_TREE_PAUP_ and 
+) must be uncommented in the source code of "<i>cond_var.h</i>", and the source must be 
+recompiled to reflect these changes.</font></p>
+
+<p align="center"><img border="0" src="index.9.gif" width="676" height="587"></p>
+
+<p>&nbsp; </p>
+
+<p>Unlike SIMCOAL ver 1, SIMCOAL ver 2 stores all the output files in a folder automatically created and
+named according to the name of the input parameter file (without the extension .par). <font color="#ff0000">
+Beware, SIMCOAL2
+does not clean your disk.</font> For example: if you run a first set of 1000
+simulations and a second set of 100 simulations <font color="#000000">using the
+same input parameter file, only the first 100 Arlequin (*.arp)&nbsp; files will
+be updated. The others will be kept on your disk without any changes.</font></p>
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="Computation times">Computation times</a></h3>
+
+<p><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-GB">The speed of
+simulation with recombination can be much slower than without recombination, and will
+increase with sample size, effective population size, the number of loci, and
+the total recombination rate. For instance, SIMCOAL2 needs 15 minutes to
+simulate 10,000 samples of 100 diploid individuals (<i style="">n</i>=200
+and <i style="">N</i>=1,000) typed at 250 SNPs over a
+segment of 250 Kb (assuming 1cM = 1Mb, and thus with total recombination rate <i style="">R</i>=4<i style="">Nr</i>=10
+for the whole chromosome segment), and about 2.5 hours to simulate 10,000 samples of
+250 microsatellite loci over 2.5 Mb (total recombination rate <i style="">R</i>=100),
+using a Pentium 4 (2.8Ghz) under the Linux operating system.</span></p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a>
+<a name="Installing and running simcoal2">Installing and running SIMCOAL2</a></h3>
+
+<p> The archive of executable files for windows and Linux includes the
+compiled files simcoal2.exe as well as examples of input files to
+simulate partially linked SNPs,&nbsp; microsatellites and a mixture of
+these data types. After extraction, there are three ways to run simcoal:</p>
+
+<ol>
+    <li><font face="Courier New"><strong>simcoal &lt;no
+        arguments&gt;</strong></font><br>
+        The program will prompt you for :<br>
+      a) an input file name to
+        process (<b>just enter the name of the file <font color="#ff0000">without
+      the ".par" extension</font></b> )<br>
+      b) the number of simulations to perform.&nbsp;&nbsp;<br>
+      c) a boolean flag to indicate if you want to generate haplotypic (0)&nbsp; 
+    or genotypic (1) data. <br>
+        <br>
+        </li>
+    <li><font face="Courier New"><strong>simcoal &lt;batch file
+        name&gt;</strong></font><br>
+        The program will open the batch file that should contain,
+        on the first
+        line, the number of simulations to perform, and on the
+        following lines
+        the names of the input files to process<br>
+        <em>Example</em>: <font face="Courier New">simcoal </font><a href="http://cmpg.unibe.ch/software/simcoal2/Distributed%20files/testbatch.txt"><font face="Courier New">testbatch.txt</font></a><br>
+        <br>
+        </li>
+    <li><font face="Courier New"><strong>sim_coal &lt;file
+        name&gt; &lt;number of simulations to perform&gt;
+      &lt;haplotypes (0)/ genotypes (1)&gt;</strong></font><br>
+    <em>Example</em>: <font face="Courier New">simcoal <a href="http://cmpg.unibe.ch/software/simcoal2/Distributed%20files/MIX.par">MIX.par</a> 
+    1000 0</font><font face="Times New Roman"><br>
+    </font></li>
+</ol>
+
+<p>The source files can be compiled with
+Borland C++ Builder v. 5 and v. 6 to run SIMCOAL2 on windows (2000/XP), or with
+gcc (GNU project) to run SIMCOAL2 on a Linux Operating System. To compile the 
+source code under Linux, uncomment the line "#define _LINUX_" in the 
+file "<i>cond_var.h".</i> Others compilation options are also listed in the file 
+"<i>cond_var.h"</i>, and enable SIMCOAL2 to produce additional (undocumented) 
+output files, mainly used for debugging purposes.</p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="References">References</a></h3>
+
+<ul>
+    <li>Page RD, 1996. TREEVIEW: An application to display phylogenetic trees
+      on personal computers. Comput. Appl. Biosci. 12(4):357-358.
+        </li>
+</ul>
+
+<ul>
+    <li>Schneider S, Roessli D and Excoffier L, 2000. Arlequin: a software for
+      population genetics data analysis. User manual ver 2.000. Ver. 2.000.
+      Geneva: Genetics and Biometry Lab, Dept. of Anthropology, University of
+      Geneva.<font face="MS Sans Serif"><br>
+      </font>
+      <a href="http://lgb.unige.ch/arlequin">http://lgb.unige.ch/arlequin</a>
+        </li>
+</ul>
+
+<ul>
+    <li>Simonsen KL, and Churchill GA, 1997. A Markov chain model of coalescence
+      with recombination. Theor. Popul. Biol. 52(1): 43-59.
+        </li>
+</ul>
+
+<ul>
+    <li>
+      <p class="Biblio" style="margin-left: 0.5in; text-align: justify; text-indent: -0.5in;"><span style="" lang="EN-GB">Wakeley
+      J, and Takahashi T, 2003. Gene genealogies when the sample size exceeds the
+      effective size of the population. Mol. Biol. Evol. 20(2):208-213.</span>
+        
+</p></li></ul>
+
+<p>&nbsp;</p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="Version">Version</a>s</h3>
+
+<ul>
+    <li><b>&nbsp;SIMCOAL</b>&nbsp; :&nbsp; Simulate coalescence in populations
+      with complex history (migrations, demographic fluctuations, etc...)&nbsp; <a href="http://cmpg.unibe.ch/software/simcoal/">download</a>
+      it.
+        </li>
+</ul>
+
+<ul>
+    <li><b>&nbsp;SIMCOAL</b><b>2</b>&nbsp; :&nbsp; Extension of SIMCOAL.
+      Simulate coalescence + recombination (uniform recombination rates, hot
+      spot etc...), all kind of coalescent events (when sample sizes are small),
+      a new kind of marker (SNPs) and a mixture of different markers.&nbsp;
+        </li>
+</ul>
+
+<ul>
+    <li><b>&nbsp;SIMCOAL</b><b>2.1</b>&nbsp; :&nbsp; Extension of SIMCOAL2.
+      Simulate several chromosomes with different structure, Generalized
+      Stepwize Mutation model for microsatellites.&nbsp;
+
+<ul>
+    <li><b>&nbsp;SIMCOAL</b><b>2.1.1</b>&nbsp; : correction of a bug concerning
+      the Stepwize Mutation Model with range constraint&nbsp;
+        </li>
+    <li><b>&nbsp;SIMCOAL2.1.2</b>&nbsp; : correction of a bug concerning
+      simulations with sample sizes equal to 0.&nbsp; <b><font color="#FF0000">latest
+      release </font></b>(<a href="#top">download</a> on the top). Now simcoal2
+      accepts to simulate empty populations (population with sample sizes equal
+      to 0), provided that there is at least one population with sample size
+      higher than 0.
+        </li>
+</ul>
+
+        </li>
+</ul>
+
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+
+<hr>
+
+<h3><a href="#top"><img border="0" src="index.1.gif" width="20" height="28"></a><a name="Introduction">
+</a><a name="Bug">Bug report</a></h3>
+
+<ul>
+    <li>22 03 2005: A bug was introduced in the version 2.1 concerning the range
+      constraint option for microsatellites when there is no recombination - <b>Corrected
+      in the latest release SIMCOAL</b>2.1.1
+        </li>
+    <li>14 09 2005: A bug concerning simulations with sample sizes equal to 0
+      was <b><font color="#FF0000">corrected
+      in the latest release</font> <font color="#FF0000">SIMCOAL</font></b><font color="#FF0000">2.1.2</font>
+      (<a href="#top">download</a> on the top).
+        </li>
+</ul>
+
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+
+<hr>
+
+<p><a href="mailto:guillaume.laval@zoo.unibe.ch">Guillaume Laval</a>, Computational and Molecular Population Genetics Lab, University
+of Bern</p>
+
+<p>Last edited on <!--webbot bot="Timestamp"
+s-type="EDITED" s-format="%d.%m.%y" startspan -->14.09.05<!--webbot bot="Timestamp" i-CheckSum="12961" endspan --> (<!--webbot
+bot="Timestamp" s-type="EDITED" s-format="%H:%M" startspan -->16:14<!--webbot
+bot="Timestamp" i-CheckSum="1613" endspan -->)</p>
+</body></html>

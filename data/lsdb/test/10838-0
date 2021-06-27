@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="molecular science; protein; 3D-structure; conformation; folding normal mode; energy minimization; potential function; dynamics; dynamic domain; hinge-motion; fluctuation">
+	<meta name="description" content="the entry page to promode web site. Find protein, 3D-structure, molecular science.">
+	<meta name="category" content="home page">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="robots" content="nofollow">
+	<link rel="stylesheet" type="text/css" href="/pages/css/cont.css">
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="/pages/css/scop.css">
+	<script type="text/javascript" src="/pages/js/script.js"></script>
+	<title>ProMode</title>
+</head>
+<body style="background-color:#ffffff">
+<div align="center">
+	<div style="width:900px">
+<!-- Page Hader -->
+	<table border="0" cellpadding="0" cellspacing="0" style="width:700px;">
+	  <tr>
+	    <td>
+	    <table border="0" cellpadding="0" cellspacing="0" style="width:700px;">
+		  <tr style="background-color:#ffffff;">
+			<td valign="top" align="left">
+				<a href="http://www.pdbj.org/"><img src="/pages/images/pdbj21.gif" border="0" align="middle" alt="PDBj"></a>
+			</td>
+			<td valign="top" align="right">
+				<a href="/index.jsp"><img src="/pages/images/title-fig.png" border="0" align="middle" alt="ProMode"></a>
+			</td>
+			<td valign="bottom" align="right">
+				<div class="navigation">
+					<form action="/pages/jsp/scop_search.jsp" method="GET" class="formquery">
+					<div class="query" nowrap>
+						Enter <abbr title="Protein Data Bank">PDB</abbr> id: <input type="text" name="pdbid" value="" id="pdbid">
+						Chain:  <input type="text" name="chain" value="" id="chain">
+						<input type="submit" value="Search" name="btn_submit">
+					</div>
+					</form>
+					<form action="/pages/jsp/scop_search.jsp" method="GET" class="formquery">
+					<div class="query" nowrap>
+						<!--<a href="/pages/jsp/scop_search.jsp?id=0&amp;type=0">Search along the <acronym title="Structural Classification of Proteins">SCOP</acronym> classification.</a>-->
+						Search along the <acronym title="Structural Classification of Proteins">SCOP</acronym> classification.
+						<input type="submit" value="Enter" name="btn_submit">
+						<input type="hidden" name="id" value="0" id="id">
+						<input type="hidden" name="type" value="0" id="type">
+					</div>
+					</form>
+				</div>
+		     </td>
+		   </tr>
+	    </table>
+	 </td>
+	</tr>
+	<tr>
+		<td valign="top" align="left" colspan="3"><hr style="color:#AAAAFF; height:1; width:700px"></td>
+	</tr>
+	<tr>
+		<td valign="top" align="right" colspan="3"><font class="top_text"><strong>Database of normal mode analysis of proteins</strong></font></td>
+	</tr>
+	<tr>
+		<td valign="top" align="right" colspan="3"><span class="space"><br></span></td>
+	</tr>
+	</table>
+<!--/Page Header -->
+	<table border="0" cellpadding="0" cellspacing="0" width="650" id="menuA">
+		<tr>
+			<td>
+				<table id="initTbl" border="0" align="center" cellpadding="0" cellspacing="0">
+					<tr>
+<!-- Left Menu Pad -->
+	<td class="menuf" valign="top" align="left" width="220">
+		<div class="top_text8" align="center">
+			<a href="#" onClick="return closeMenu()" title="To hide the menu">&lt;&lt;</a> <strong>Navigation</strong>
+		</div>
+		<div class="space">
+			<p><span class="menu"> <a href="javascript:" id="wincont1">+</a> <a href="/pages/jsp/help/what.jsp">What is ProMode?</a></span></p>
+			<p><span class="menu"> <a href="javascript:" id="wincont2">+</a> <a href="/pages/jsp/index.jsp?url=list.jsp&amp;oligomer=0">Proteins in the Database</a></span></p>
+			   <div class="query" style="margin-left: 30;">
+			      <span>PDB id or PDB id + Chain name:</span>
+			      <form action="/pages/jsp/indexn.jsp" method="GET">
+			         <input type="text" name="protein" value="" style="width:4em;" maxlength="5">
+			         <input type="submit" value="Quick Search" style="width:90;">
+			      </form>
+			   </div>
+			<!--
+			<p>
+			   <div class="query" nowrap>
+			      <span style="width:30;">&nbsp;</span>
+			      <span>PDB id or PDB id + Chain name:</span>
+			      <form action="indexn.jsp" method="GET">
+			         <span style="width:30;">&nbsp;</span>
+			         <input type="text" name="protein" value="" style="width:4em;" maxlength="5">
+			         <input type="submit" value="Quick Search" style="width:90;">
+			      </form>
+			   </div>
+			</p>
+			-->
+			<p><span class="menu"> <a href="javascript:" id="wincont3">+</a> <a href="/pages/jsp/index.jsp?url=list.jsp&amp;tag=oli&amp;oligomer=1">Proteins(Oligomer) in the Database</a></span></p>
+			<p><span class="menu"> <a href="javascript:" id="wincont4">+</a> <a href="/pages/jsp/help/what.jsp#chime">About Chime Plug-in</a></span></p>
+			<p><span class="menu"> <a href="javascript:" id="wincont5">+</a> <a href="/pages/jsp/help/java.jsp" >About Java Plug-in</a></span></p>
+			<p><span class="menu"> <a href="javascript:" id="wincont9">+</a> <a href="/pages/jsp/help/what.jsp#direct" >How to link to a page<br>&nbsp;&nbsp;&nbsp;of an entry protein directly</a></span></p>
+			<p><span class="menu"> <a href="javascript:" id="wincont8">+</a> <a href="/pages/jsp/link.jsp">Links</a></span></p>
+			<p><span class="menu"> <a href="javascript:" id="wincont6">+</a> <a href="mailto:promode@list.waseda.jp">Contact Us</a></span></p>
+			<hr>
+			<p><span class="menu" style="white-space: nowrap;"> <a href="javascript:" id="wincont7">+</a> <a href="/pages/jsp/download_main.jsp">Software &amp; Data Download</a>&nbsp;<span style="background-color: #FF0000; color: #EEEEFF; border: solid 1px #0000CC;">NEW</span></span></p>
+			<hr>
+			<p><span class="menu" style="white-space: nowrap;"> <a href="javascript:" id="wincont7">+</a> <a href="/pages/jsp/alignment_top.jsp">Gallery(Comparison between proteins<br>&nbsp;&nbsp;&nbsp;in the same superfamily)</a></span></p>
+		</div>
+	</td>
+<!--/Left Menu Pad -->
+							<td valign="top" align="right" rowspan="2">
+								<div id="cont" class="cont">
+
+
+
+
+
+                         <!-- protein count -->
+						 
+						 <DIV align ="right">
+						 <a style="font-size:12pt" href="/pages/jsp/ja/index.jsp">Japanese</a>
+						 </DIV>
+						 <DIV class="space">&nbsp;</DIV>
+						 
+                         <DIV class="rtn">
+                           <SPAN class="total_txt">No. of protein chains available: </SPAN>
+                           <SPAN class="total_txt total_blue">3129</SPAN>
+                         </DIV>
+                         <DIV class="space">&nbsp;</DIV>					 
+                         <!--/protein count end -->
+
+<!-- Top Page -->
+	<img src="/pages/images/promode.png" width="210" height="240" align="right" alt="ProMode CG">
+	<div align="left" class="cont_first">
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;Dynamics data of protein 3D structures obtained
+		by normal mode analysis are collected. An animation of the normal mode
+		vibrations can be played with a plug-in, Chime. Dynamic domains and
+		their mutual screw motions defined in the normal mode analysis are also
+		displayed with Chime. Dynamical properties for each normal mode
+		vibration and their time averages over all modes, for example,
+		fluctuations of atom positions, fluctuations of dihedral angles,
+		and correlations between atomic movements, are also given graphically.
+		</p>
+		<p>Reference: Hiroshi Wako, Masaki Kato and Shigeru Endo, <I>Pro</I>Mode: a
+		database of normal mode analyses on protein molecules with a full-atom
+		model. (2004) <I>Bioinformatics</I>, <B>20</B>, 2035-2043.
+		</p>
+	</div>
+<!--/Top Page -->
+
+		  <!-- Topics -->
+	<div style="border:1px solid #9999ff; text-align:left;">
+	    <div class="cont" style="font-weight:bold; font-size:12pt; background-color:#e2e2ff;">TOPICS</div>
+	    2008.08.08 Add TOPICS.<br>
+2008.08.07 Update JV3 version.<br>
+2008.08.06 - sample text -
+	</div>
+<!--/Topics -->
+
+
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
+
+<!-- Footer Bar -->
+<table width="650">
+  <tr><td valign="top" align="right" colspan="2" class="copy">(Latest update 2010.09.17)</td></tr>
+</table>
+<hr style="color:#aaaaff;height=1;width:650;" class="space">
+<div>
+  <table class="copy">
+    <tr>
+      <td style="font-weight: bold;">Copyright &copy;</td>
+      <td>WASEDA Univ,Japan. All rights reserved.</td>
+      <td style="font-weight: bold;">&nbsp;&nbsp;Email:</td>
+      <td><a href="mailto:promode@list.waseda.jp">promode@list.waseda.jp</a></td>
+    </tr>
+  </table>
+</div>
+<!--/Footer Bar -->
+	</div>
+</div>
+</body>
+</html>

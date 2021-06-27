@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<title>NeoRef - TAMAL</title>
+	<link rel="stylesheet" type="text/css" title="neoref" href="./css/neoref_leafy.css" />
+	<link rel="alternate stylesheet" type="text/css" title="neoref (no leaves)" href="./css/neoref.css" />
+	<link rel="SHORTCUT ICON" HREF="neoref.ico">
+</head>	
+
+
+
+<head><link rel="alternate" type="application/rss+xml" title="Subscribe to NeoRef - TAMAL Updates" href="http://neoref.ils.unc.edu/tamal/rss/rss.xml" /> </head>
+<body id="home">
+	<div id="border">
+		<div id="container">
+			<div id="banner">	
+	<p id="school"><a href="http://ils.unc.edu/cradle">Center for Research and Development of Digital Libraries</a></p>
+	<h1><a href="http://neoref.ils.unc.edu/">NeoRef Open Archive Search</a></h1>
+</div>
+
+			<div id="sidebar">
+				<div id="query">
+	<h3>TAMAL Search</h3>
+	<div id="snp">
+		<form name="snpSearchForm" id="snpSearchForm" action="./querysnp" method="post" enctype='multipart/form-data'>
+			<h3>
+			<p>Enter a <a href='http://www.gene.ucl.ac.uk/cgi-bin/nomenclature/searchgenes.pl' target='_blank'>standard gene name</a>:<br></p>
+    		<input type="text" name="query" id="query" size=15 />
+			<p>Or, specify a file containing <a href='http://www.gene.ucl.ac.uk/cgi-bin/nomenclature/searchgenes.pl' target='_blank'>standard gene name</a> (one per line, 25 max):</p>
+			<input type="file" name="snpSearchFile" id="snpSearchFile" size=15 />
+        	<p>
+			<input type="submit" name="snpSearchSubmit" id="snpSearchSubmit" value="Search" />
+			<input type="reset" name="snpSearchReset" id="snpSearchReset" value="Reset" />
+			</p>
+			</h3>
+			<h4>User Guide</h4>
+			<h3>
+			<p>
+			<img alt='listserv' style='border-style: none;' src='http://neoref.ils.unc.edu/tamal/css/images/listserv.jpg'>Join the <a href="http://lists.unc.edu/read/all_forums/subscribe?name=tamal" target="_blank">TAMAL listserv</a>! No spam, just infrequent announcements.
+			<hr noshade size=1><br>
+			<a href="./index.jsp">Overview</a><br>
+			<a href="./background.jsp">Background</a><br>
+			<a href="./howTAMALworks.jsp">How TAMAL works</a><br>
+			Using TAMAL (coming soon)<br>
+			Versions (coming soon)<br>
+			<a href="./disclaimer.jsp">Disclaimer</a><br><br>
+			</p>
+			</h3>
+			<input type="hidden" name="queryType" value="interact" />
+			<input type="hidden" name="taggerMthd" value="1" />
+			<input type="hidden" name="ceu" value="1" />
+			<input type="hidden" name="hcb" value="1" />
+			<input type="hidden" name="jpt" value="1" />
+			<input type="hidden" name="yri" value="1" />
+			<input type="hidden" name="synon" value="1" />
+			<input type="hidden" name="nonsynon" value="1" />
+			<input type="hidden" name="splice" value="1" />
+			<input type="hidden" name="intron" value="0" />
+			<input type="hidden" name="promoter" value="1" />
+			<input type="hidden" name="regpot" value="1" />
+			<input type="hidden" name="tfbs" value="1" />
+			<input type="hidden" name="p99" value="1" />
+   		</form>
+	</div>
+<!--
+	<form name="fQuickSearch" id="fQuickSearch" action="review.jsp" method="post">
+		<p>For example:
+        <input type="hidden" name="fSearchQuery" id="fSearchQuery" value="akt1" />
+		<a href="javascript:document.fQuickSearch.submit();">akt1</a>
+		</p>
+	</form>
+-->
+</div>
+
+				<div id="navigation">
+	<h3>Learn More</h3>
+	<ul>
+		<li><a href="./index.jsp">About TAMAL</a></li>
+		<li><a href="./neoref.jsp">About NeoRef</a></li>
+		<li><a href="http://ils.unc.edu/cradle/">About CRADLE</a></li>
+		<li><a href="http://neoref.ils.unc.edu">NeoRef Home</a></li>
+	</ul>		
+	<h3>Contact Us</h3>
+	<p><a href="mailto:pfsulliv@med.unc.edu">Dr. Patrick Sullivan</a></p>
+	<p><a href="mailto:bmh@ils.unc.edu">Dr. Bradley Hemminger</a></p>
+	<p><a href="mailto:saelim@email.unc.edu">Site Programmer</a></p>
+</div>
+
+			</div>
+			<div id="content">
+				<div id="information">
+            		<h3>General Information</h3>
+        			<div id="tabmenu">
+        				<ul class="tab">
+        					<li class="tabfront"><a href="./index.jsp">Overview</a></li>
+							<li class="tabback"><a href="./background.jsp">Background</a></li>
+							<li class="tabback"><a href="./howTAMALworks.jsp">How TAMAL works</a></li>
+							<li class="tabback"><a href="./disclaimer.jsp">Disclaimer</a></li>
+						</ul>
+
+						<h1>
+							<p>TAMAL was written by Dr. Patrick Sullivan of the Department of Genetics at the University of North Carolina at Chapel Hill. The web interface is by Dr. Brad Hemminger and Billy Saelim.</p> 
+
+							<p>The purpose of TAMAL is to help the user select single nucleotide polymorphisms (SNPs) in a specified set of candidate genes for genotyping. The user can specify the ancestral population(s) to study and a set of SNP selection criteria (e.g., haplotype tag and SNPs with several different predicted function. The results can be output as an Excel file (as commonly used by researchers) or in XML (for exchange or processing with other applications). SNPs selected by TAMAL can be displayed in the <a href='http://genome.ucsc.edu/cgi-bin/hgGateway' target='_blank'>UCSC genome browser</a>.</p> 
+
+							<p>The open access Bioinformatics journal article on TAMAL is available <a href='http://bioinformatics.oxfordjournals.org/cgi/reprint/btk025v1' target='_blank'>here</a>. Citation: Hemminger BM, Saelim B, Sullivan PF. TAMAL: An integrated approach to choosing SNPs for genetic studies of human complex traits. Bioinformatics 2006.</p> 
+
+							<p>This information will be supplemented by linking results to literature and other on-line resources found using the NeoRef searching architecture. NeoRef is developed by Dr. Brad Hemminger in the School of Information and Library Science at the University of North Carolina.</p>
+
+							<p><u>TAMAL News</u>&nbsp;&nbsp;<a href="rss/rss.xml"><img src="css/images/rss.gif" border=0></a>&nbsp;<a href="rss/rss.xml"><img src="css/images/xml.gif" border=0></a></p>
+								<a name='item6'><img alt='news' style='border-style: none;' src='http://neoref.ils.unc.edu/tamal/css/images/news.jpg'></a> 2006-08-02 Porting TAMAL v2 to a new server and website is underway. I do not yet have a target completion date. Thanks for your patience.  If you wish Dr. Sullivan to run your gene list through TAMAL v2, please include a list of standard gene names in a text file (one line per gene), specify the ancestries of the populations under study (east Asian, African, and/or European), whether you want tag SNPs (and, if so, whether by TAGGER, Gabriel, and/or Perlegen methods), and the allele frequency filter for structural and functional SNPs.<br> 
+								<a name='item5'><img alt='news' style='border-style: none;' src='http://neoref.ils.unc.edu/tamal/css/images/news.jpg'></a> 2006-05-25 Major News:
+									<ul>
+										<li type='a'>TAMAL v2.0 is running, beta-tested, stable, and fast. In incorporates HapMap Phase 2 data and has many new features and better annotations. Bug fixes include the conserved SNP problem noted below.</li>
+										<li type='a'>TAMAL v2.0 is NOT yet available on the web. Because there were so many changes, we need to buy a new server and rewrite the frontend.  Example TAMAL v2 output for genes in the serotonergic pathway is <a href="data/serotonin_SNP_report.zip">here</a>.</li>
+										<li type='a'>NOTE! This web page is still TAMAL v1.</li>
+										<li type='a'>Pat Sullivan would be happy to run your gene list through TAMAL v2 for you.  If you are worried about security, add 20 extra genes chosen at random.</li>
+										<li type='a'>As part of the rewrite, we discovered that the dbSNP annotations for exonic and splice site SNPs were incomplete. There are more of these SNPs than noted in the databases.</li>
+									</ul>
+								<a name='item4'><img alt='news' style='border-style: none;' src='http://neoref.ils.unc.edu/tamal/css/images/news.jpg'></a> 2006-05-17 TAMAL bug - do not trust the "conserved" SNP annotation. A user reported this bug today. It appears that TAMAL uses the UCSC data correctly but that UCSC database on which the conserved selection is based differs from its description. Am investigating. In the meantime, distrust this feature and compare SNPs selected for this reason with the conservation track. My apologies for any difficulties/wastage this has caused.<br>
+								<a name='item3'><img alt='news' style='border-style: none;' src='http://neoref.ils.unc.edu/tamal/css/images/news.jpg'></a> 2006-04-26 Beta test version of TAMAL upgrade available. Based on NCBI build 35/UCSC hg17. Many new features but not yet ported to the web. To use, send list of standard gene names to Pat Sullivan.<br>
+								<a name='item2'><img alt='news' style='border-style: none;' src='http://neoref.ils.unc.edu/tamal/css/images/news.jpg'></a> 2006-02-17 Major upgrade in progress. We will soon switch to NCBI Build 35/UCSC hg17. Watch this space.<br> 
+								<a name='item1'><img alt='news' style='border-style: none;' src='http://neoref.ils.unc.edu/tamal/css/images/news.jpg'></a> 2006-02-22 An article about TAMAL recently published in Bioinformatics is linked <a href='http://bioinformatics.oxfordjournals.org/cgi/reprint/btk025v1' target='_blank'>here</a>.<br>
+						</h1>
+
+					</div>
+<center><p>This page has been visited 303235 times.</p></center>
+
+				</div>
+			</div>
+			<div id="footer">
+	<a href="./contact.jsp">contact us</a> | updated 04-17-2006
+</div>		
+
+		</div>
+	</div>
+</body>
+</html>

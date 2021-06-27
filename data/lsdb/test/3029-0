@@ -1,0 +1,501 @@
+
+<html>
+<head>
+<TITLE>JProGO: DATA SUBMISSION - Step 1 of 4
+</TITLE>
+<META content="GO;Gene Ontology; Microarray Data Analysis; Functional Analysis; Directed Acyclic Graph">
+<Link rel="stylesheet" HREF="start_site.css" TYPE="text/css">
+</head>
+<body>
+<table width="100%">
+  <tbody>
+    <tr align="center" bgcolor="#6666F0" valign="middle">
+      <td>
+        <font color="#ffffff">JProGO          Step 1 of 4: SELECTION OF PARAMETERS AND DATA SUBMISSION
+</font>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <tbody>
+    <tr>
+      <td valign="top">
+        <table width="100%">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <!-- First Column: Start navigation bar -->
+              
+<br>
+<br>
+<br>
+
+<table valign="top" align="center" border="0" cellspacing="5"
+width="180"><!-- 2 empty rows -->
+<tbody>
+<tr align="center" bgcolor="#6666F0" valign="middle">
+<td onmouseover="this.bgColor=''" onmouseout="this.bgColor=''"><a
+class="navigation" href="index.jsp"><font
+color="#ffffff">HOME</font></a></td>
+</tr>
+
+<tr align="center" bgcolor="#6666F0" valign="middle">
+<td onmouseover="this.bgColor=''" onmouseout="this.bgColor=''"><a
+class="navigation" href="background.jsp"><font
+color="#ffffff">BACKGROUND</font></a></td>
+</tr>
+
+<tr align="center" bgcolor="#6666F0" valign="middle">
+<td onmouseover="this.bgColor=''" onmouseout="this.bgColor=''"><a
+class="navigation" href="features.jsp"><font
+color="#ffffff">FEATURES</font></a></td>
+</tr>
+
+<tr align="center" bgcolor="#6666F0" valign="middle">
+<td onmouseover="this.bgColor=''" onmouseout="this.bgColor=''"><a
+class="navigation" href="tour.jsp"><font color=
+"#ffffff">TOUR</font></a></td>
+</tr>
+
+<tr align="center" bgcolor="#6666F0" valign="middle">
+<td onmouseover="this.bgColor=''" onmouseout="this.bgColor=''"
+bgcolor=""><a class="navigation" href=
+"examples.jsp"><font color=
+"#ffffff">EXAMPLES</font></a></td>
+</tr>
+
+<tr align="center" bgcolor="#6666F0" valign="middle">
+<td onmouseover="this.bgColor=''" onmouseout="this.bgColor=''"
+bgcolor=""><a class="navigation" href=
+"tools.jsp"><font color=
+"#ffffff">TOOLS</font></a></td>
+</tr>
+
+<tr align="center" bgcolor="#6666F0" valign="middle">
+<td onmouseover="this.bgColor=''" onmouseout="this.bgColor=''"><a
+class="navigation" href="contact.jsp"><font
+color="#ffffff">CONTACT</font></a></td>
+</tr>
+</tbody>
+</table>
+
+
+              </TD>
+              <!-- First Column: End navigation bar -->
+              <td>
+                <h3>
+                  <u>JProGO                    :
+</u>
+		
+                </h3>
+                <h3>Gene Ontology-based interpretation of prokaryotic microarray data</h3>
+                <table bgcolor="#FFDD77" border="0">
+                  <tbody>
+                    <tr>
+                      <td>
+                      <form action="jgogodatacheck" method="post" enctype="multipart/form-data" target="_blank">
+                        <a href="info.html#analysis_method" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Analysis Method:
+
+                      </td>
+                      <td>
+                        <select name="AnalysisMethod" size="1">
+                          <!-- <option value="z-score">Overrepresentation-based z-score Test (MAPP-Finder Algorithm)</option> -->
+                          <option value="Fisher-Test">Fisher's Exact Test (threshold value based)</option>
+                          <!--<option value="hypergeometric distribution">Hypergeometric Test (threshold value based)</option> -->
+                          <option value="KS-Test">Kolmogorov-Smirnov Test (threshold value independent)</option>
+                          <option value="t-Test">t-Test (threshold value independent)</option>
+                          <option value="U-Test"  selected="selected">Unpaired Wilcoxon's Test (threshold value independent)</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="info.html#significance_level" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Level of Significance:
+</td>
+                      <td>
+                        <input name="SignificanceLevel" value="0.05" type="text">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="info.html#threshold_value" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Threshold Value:
+</td>
+                      <td>
+                        <input name="Threshold" value="2.0" type="text">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="info.html#alternative_hypothesis" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Alternative Hypothesis:
+</td>
+                      <td>
+                        <select name="AlternativeHypothesis" size="1">
+                          <option value="less">within node less (one-sided)</option>
+                          <option value="greater">within node greater (one-sided)</option>
+                          <option selected="selected" value="two.sided">difference between node and its environment, either direction (two sided)</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <tr>
+                      <td>
+                        <a href="info.html#correctionMultipleTesting" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Correction for Multiple Testing:
+                      </td>
+                      <td>
+                        <select name="MultipleTestingCorrection" size="1">
+                          <option value="Bonferroni">Control of the FWER according to Bonferroni</option>
+                          <option selected="selected" value="FDR">Control of the False Discovery Rate (FDR, Benjamini & Hochberg)</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+
+
+                      <td>
+                        <a href="info.html#organism" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Organism Name:
+</td>
+                      <td>
+                        <select name="OrganismName" size="1">
+
+
+                          
+                          
+                          <option value="*Salmonella_typhimurium_(strain_ATCC_700720_SGSC1412_LT2)">*Salmonella typhimurium (strain ATCC 700720 SGSC1412 LT2)</option>
+<option value="Bacillus_cereus_(strain_ATCC_10987)">Bacillus cereus (strain ATCC 10987)</option>
+<option value="Bacillus_subtilis_(strain_168)">Bacillus subtilis (strain 168)</option>
+<option value="Caulobacter_crescentus_(strain_CB15_ATCC_19089)">Caulobacter crescentus (strain CB15 ATCC 19089)</option>
+<option value="Clostridium_tetani_(strain_Massachusetts_E88)">Clostridium tetani (strain Massachusetts E88)</option>
+<option value="Corynebacterium_glutamicum_(strain_DSM_20300_ATCC_13032_NCIB_10025_Nakagawa)">Corynebacterium glutamicum (strain DSM 20300 ATCC 13032 NCIB 10025 Nakagawa)</option>
+<option value="Escherichia_coli_(strain_K12)" selected>Escherichia coli (strain K12)</option>
+<option value="Helicobacter_pylori_(strain_ATCC_700392_26695)">Helicobacter pylori (strain ATCC 700392 26695)</option>
+<option value="Listeria_innocua_(serovar_6a_strain_CLIP_11262)">Listeria innocua (serovar 6a strain CLIP 11262)</option>
+<option value="Listeria_monocytogenes_(serovar_1_2a_strain_EGD-e)">Listeria monocytogenes (serovar 1 2a strain EGD-e)</option>
+<option value="Methanococcus_jannaschii_(strain_JAL-1_ATCC_43067_DSM_2661)">Methanococcus jannaschii (strain JAL-1 ATCC 43067 DSM 2661)</option>
+<option value="Mycobacterium_tuberculosis_(strain_H37Rv)">Mycobacterium tuberculosis (strain H37Rv)</option>
+<option value="Mycobacterium_tuberculosis_(strain_Oshkosh_CDC_1551)">Mycobacterium tuberculosis (strain Oshkosh CDC 1551)</option>
+<option value="Mycoplasma_genitalium_(strain_ATCC_33530_G-37)">Mycoplasma genitalium (strain ATCC 33530 G-37)</option>
+<option value="Mycoplasma_pneumoniae_(strain_M129_ATCC_29342)">Mycoplasma pneumoniae (strain M129 ATCC 29342)</option>
+<option value="Pseudomonas_aeruginosa_(strain_ATCC_15692_PAO1)">Pseudomonas aeruginosa (strain ATCC 15692 PAO1)</option>
+<option value="Pseudomonas_putida_(strain_KT2440)">Pseudomonas putida (strain KT2440)</option>
+<option value="Rickettsia_conorii_(strain_Malish_7)">Rickettsia conorii (strain Malish 7)</option>
+<option value="Rickettsia_prowazekii_(strain_Madrid_E)">Rickettsia prowazekii (strain Madrid E)</option>
+<option value="Staphylococcus_aureus_(strain_N315)">Staphylococcus aureus (strain N315)</option>
+<option value="Streptococcus_pneumoniae_(strain_TIGR4_ATCC_BAA-334)">Streptococcus pneumoniae (strain TIGR4 ATCC BAA-334)</option>
+<option value="Streptococcus_pyogenes_M1_GAS">Streptococcus pyogenes M1 GAS</option>
+<option value="Yersinia_pestis_(biovar_Mediaevalis_strain_KIM5)">Yersinia pestis (biovar Mediaevalis strain KIM5)</option>
+
+
+
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="info.html#microarray_file" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Microarray File:
+</td>
+                      <td>
+                        <input name="Datei" size="35" maxlength="100000" accept="text/*" type="file">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="Specify number of gene column in your input file">
+			<a href="info.html#gene_column" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+			Gene Name Column No.:</td>
+                      <td>
+                        <input name="GeneCol" size="3" value="1" type="text">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="Specify number of column with expression data in your input file">
+
+			<a href="info.html#data_column" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+			Data Column No.:</td>
+                      <td>
+                        <input name="DataCol" size="3" value="2" type="text">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="Specify column separator of your in input file (e.g. \t for tabulator or ;)">
+			<a href="info.html#delimiter" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+			Column Delimiter:</td>
+                      <td>
+                        <input name="Delimiter" size="3" value="\t" type="text">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="info.html#data_type" target="_blank">
+                          <img src="pictures/info.png" border="0">
+                        </a>
+                        Type of Microarray Data:
+</td>
+                      <td>
+                        <select name="AnalyzedValues" size="1">
+                          <!--<option value="log ratios">logarithm of fold-changes</option> -->
+                          <option value="log-ratios" selected="selected">log ratios (base 2)</option>
+                          <option value="fold-changes" selected="selected">fold changes</option>
+                          <option value="p-values">probabilities of differential expression</option>
+                          <option value="ratios" selected="selected">ratios</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table align="center">
+                  <tbody>
+                    <tr>
+                      <td>                      </td>
+                    </tr>
+                    <tr>
+                      <td>                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input name="Submit" src="pictures/btn_query.png" style="border: 0pt none ;" alt="Submit" type="image">
+</form>                      </td>
+                      <td>
+                      <form action="index.jsp" method="post">
+                        <input name="Reset" src="pictures/btn_reset.png" style="border: 0pt none ;" alt="Reset" type="image">
+                      </form>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+		
+		 <table border="0">
+                    <tr>
+                      <!-- <td><font color="red">NEWS: On 29th June 2007 analysis speed accelerated 3-4 times</font></td> -->
+                    </tr>
+		</table>
+
+
+
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h3>Example Input Files:</h3>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table border="1">
+                  <thead>
+                    <tr>
+                      <th>Expression Matrix</th>
+                      <th>Publication</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+
+
+
+
+                    <tr>
+                      <td>
+                        <a href="accessoryFiles/ArcA_knockout_ppde.txt" target="_blank" title="For download press right button and choose 'SAVE TARGET AS ...'">
+                          <img src="pictures/btn_download.png" alt="Download" border="0">
+                        </a>
+                        <br>
+                        <i>Escherichia coli K12</i>
+                        - ArcA knockout versus Wildtype (ppde)
+                      </td>
+                      <td rowspan="2">                      K.A. Salmon, S.P. Hung, N.R. Steffen, R. Krupp, P. Baldi, G.W. Hatfield and R.P. Gunsalus
+                        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15699038&amp;query_hl=7" target="_blank">
+                          <b>                            Global gene expression profiling in
+                            <i>Escherichia coli K12</i>
+                            : effects of oxygen availability and ArcA
+</b>
+                        </a>
+                        ,J. Biol. Chem. 280, 15084-96, 2005
+</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="accessoryFiles/ArcA_knockout_ratios.txt" target="_blank">
+                          <img src="pictures/btn_download.png" alt="Download" title="For download press right button and choose 'SAVE TARGET AS ...'" border="0">
+                        </a>
+                        <br>
+                        <i>Escherichia coli K12</i>
+                        - ArcA knockout versus Wildtype (ratios)
+                      </td>
+                    </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <tr>
+                      <td>
+                        <a href="accessoryFiles/aerobAnaerobicSwitch_Kang_Ecoli_pvalues.txt" target="_blank" title="For download press right button and choose 'SAVE TARGET AS ...'">
+                          <img src="pictures/btn_download.png" alt="Download" border="0">
+                        </a>
+                        <br>
+                        <i>Escherichia coli K12</i>
+                        - Switch from aerobic to anaerobic life conditions (Wildtype, pde)
+                      </td>
+                      <td rowspan="1">                                            	Y. Kang, K.D.  Weber, Y. Qiu, P.J. Kiley and F.R. Blattner
+                        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=15659690&amp;query_hl=7" target="_blank">
+                          <b>                           Genome-wide expression analysis indicates that FNR of
+                            <i>Escherichia coli K12</i> regulates a large number of genes of unknown function
+
+</b>
+                        </a>
+                         ,J. Bacteriol., 1135-60, 2005
+</td>
+                    </tr>
+
+
+
+
+
+
+
+
+
+                    <tr>
+                      <td>
+                        <a href="accessoryFiles/O2_tension_Ecoli_ppde.txt" target="_blank">
+                          <img src="pictures/btn_download.png" alt="Download" title="For download press right button and choose 'SAVE TARGET AS ...'" border="0">
+                        </a>
+                        <br>
+                        <i>Escherichia coli K12</i>
+                        - Anaerobic versus aerobic growth conditions (ppde)
+                      </td>
+                      <td rowspan="2">                        K. Salmon, S.P. Hung, K. Mekjian, P. Baldi, G.W. Hatfield, and R.P. Gunsalus
+                        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=12754220&amp;query_hl=5" target="_blank">
+                          <b>                            Global gene expression profiling in
+                            <i>Escherichia coli K12</i>
+                            : The effects of oxygen availability and Fnr
+</b>
+                        </a>
+                        ,J. Biol. Chem. 29837-55, 2003
+</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="accessoryFiles/O2_tension_Ecoli_ratios.txt" target="_blank" title="For download press right button and choose 'SAVE TARGET AS ...'">
+                          <img src="pictures/btn_download.png" alt="Download" border="0">
+                        </a>
+                        <br>
+                        <i>Escherichia coli K12</i>
+                        - Anaerobic versus aerobic growth conditions (ratios)
+                      </td>
+                    </tr>
+
+
+                                        <tr>
+                      <td>
+                        <a href="accessoryFiles/leucine_response_Ecoli_ppde.txt" target="_blank" title="For download press right button and choose 'SAVE TARGET AS ...'">
+                          <img src="pictures/btn_download.png" alt="Download" border="0">
+                        </a>
+                        <br>
+                        <i>Escherichia coli K12</i>
+                        - Lrp knockout versus Wildtype (ppde)
+                      </td>
+                      <td rowspan="2">                        S.P. Hung, P. Baldi, and G.W. Hatfield
+                        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=12130640&amp;query_hl=7" target="_blank">
+                          <b>                            Global gene expression profiling in
+                            <i>Escherichia coli K12</i>
+                            : The effects of leucine-responsive regulatory protein
+</b>
+                        </a>
+                        ,J. Biol. Chem. 277, 40309-32, 2002
+</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="accessoryFiles/leucine_response_Ecoli_ratios.txt" target="_blank">
+                          <img src="pictures/btn_download.png" alt="Download" title="For download press right button and choose 'SAVE TARGET AS ...'" border="0">
+                        </a>
+                        <br>
+                        <i>Escherichia coli K12</i>
+                        - Lrp knockout versus Wildtype (ratios)
+                      </td>
+                    </tr>
+
+
+
+
+
+
+
+
+
+
+
+                  </tbody>
+                </table>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <br>
+<b>Publication</b>: M. Scheer, F. Klawonn, R. M&uuml;nch, A. Grote, K. Hiller, C. Choi, I. Koch, M. Schobert, E. H&auml;rtig, U. Klages and D. Jahn.</A>
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=16845060" target="_blank">JProGO: a novel tool for the functional interpretation of prokaryotic microarray data using Gene Ontology information.</a> <i>Nucleic Acids Res.</i>, 34:W510-5, 2006.
+			<br>
+
+                        <br>
+                        <br>
+                        <div class="small">                          This site was successfully tested under Firefox, Netscape Navigator and Internet Explorer. Javascript activation is dispenible
+                          <br>
+                          but cascading style sheet support is advisable. A minimum resolution of 1280 x 1024 pixels is recommended.
+</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

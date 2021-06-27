@@ -1,0 +1,226 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="SHORTCUT ICON" href="http://www.ebi.ac.uk/bookmark.ico" />
+<link rel="alternate" type="application/rss+xml" title="SRS@EBI News" href="/srs/news/srs/news.rss" />
+<link rel="alternate" type="application/rss+xml" title="SRS@EBI Databank Updates" href="/srsbin/cgi-bin/wgetz?-page+databanksRss" />
+<TITLE>SRS error</TITLE>
+<link rel="stylesheet"  href="http://www.ebi.ac.uk/inc/css/contents.css"     type="text/css" />
+<link rel="stylesheet" href="/srs/styles/quick.css">
+<style type="text/css">
+@media print {
+     body, .contents, .headerdiv, .footer {
+         position: relative;
+     }
+}
+</style>
+<script language="JavaScript">
+function newWindow(url) {
+  window.open(url, "sideWin", 
+          'toolbar=no,location=no,scrollbars=yes,resizable=yes')
+}
+
+function newWindow2(url) {
+  var hw=window.open(url, "sideWin2", 'toolbar=yes,location=yes,scrollbars=yes,status=yes,menubar=yes,resizable=yes,personalbar=yes')
+  hw.focus()
+}
+
+function subgif(form, addEl) {
+  form.elements[form.elements.length-1].name = addEl
+  form.submit() 
+}
+function clearForm() {
+document.forms[0].reset()
+}
+function changeGifDown(form, name, elt) {
+  var tmp 
+  var front
+  var docsrcList = document.images[0].src.split("/")
+  listlen = docsrcList.length
+  front = ""
+  for (var j=0; j<listlen-1; j++) {
+    front += docsrcList[j] + "/"    
+  }
+  if (docsrcList[j] != "default") front += "default/" 
+  var gifName = front + name + "_up.png"
+  for (var i=0; i<document.images.length;i++) {
+    tmp = document.images[i]
+    if (tmp.src == gifName) {
+      tmp.src = front + name + "_down.png"
+      break
+    }
+  }
+}
+function changeGifUp(form, name) {
+  var tmp 
+  var front
+  var docsrcList = document.images[0].src.split("/")
+  listlen = docsrcList.length
+  front = ""
+  for (var j=0; j<listlen-1; j++) {
+    front += docsrcList[j] + "/"    
+  }
+  if (docsrcList[j] != "default") front += "default/"  
+  var gifName = front + name + "_down.png"
+  for (var i=0; i<document.images.length;i++) {
+    tmp = document.images[i]
+    if (tmp.src == gifName) {
+      tmp.src = front + name + "_up.png"
+      break
+    }
+  }
+}
+
+// Use a distinct style for external links
+function checkLinks() {
+  var host=location.host;
+  for (var i=0; i<document.links.length; i++) {
+   	var matchHost=document.links[i].href.match(host);
+   	var matchJs=document.links[i].href.match('javascript');
+   	var matchMail=document.links[i].href.match('mailto');
+ 	if (!matchHost && !matchJs && !matchMail) {
+      document.links[i].setAttribute("style", 'font-weight: bold; color: #e33e3e');
+      document.links[i].style.color='#e33e3e';
+      document.links[i].style.fontWeight='bold';
+      document.links[i].title='External to SRS@EBI. '+document.links[i].title;
+    }
+  }
+}
+
+// http connection object for job status
+var httpConnectionB;
+
+// Get current job status and set tab accordingly
+function getBatchJobStatusAndUpdate() {
+  var currDate = new Date();
+  var url = '/srsbin/cgi-bin/wgetz?-id+2IOMm1dEtpe+-ascii+-page+jobStatus+'+currDate.getMilliseconds();
+  // code for Mozilla, etc.
+  if (window.XMLHttpRequest) {
+    httpConnectionB = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    httpConnectionB = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  // Get the page (synchronous)
+  /* if(httpConnectionB) {
+    httpConnectionB.open('GET', url, false);
+    httpConnectionB.send(null);
+    getBatchJobStatusAndUpdateCallBack();
+  } */
+  // Get the page (asynchronous)
+  if(httpConnectionB) {
+    httpConnectionB.onreadystatechange = getBatchJobStatusAndUpdateCallBack;
+    httpConnectionB.open('GET', url, true);
+    httpConnectionB.send(null);
+  }
+}
+
+// Set the tab to the correct state for the current status
+function getBatchJobStatusAndUpdateCallBack() {
+  if(httpConnectionB.readyState==4) {
+    if(httpConnectionB.status==200) {
+      tmpStr = httpConnectionB.responseText;
+      if(tmpStr.search(/<TITLE>SRS error<\/TITLE>/) < 0) {
+        resultList = tmpStr.split(/\n/);
+        statusList = resultList[0].split(/\t/);
+        if(statusList[2] > 0) {
+          document['JobStatusTab'].src='/srs/images/jobs_running.png';
+          document['JobStatusTab'].alt=statusList[2]+' of '+statusList[0]+' jobs running';
+          document['JobStatusTab'].title=statusList[2]+' of '+statusList[0]+' jobs running';
+        } else if(statusList[0] > 0) {
+          document['JobStatusTab'].src='/srs/images/jobs_done.png';
+          document['JobStatusTab'].alt=statusList[1]+' of '+statusList[0]+' jobs done';
+          document['JobStatusTab'].title=statusList[1]+' of '+statusList[0]+' jobs done';
+          clearInterval(statusPoll);
+        } else {
+          document['JobStatusTab'].src='/srs/images/jobs_status.png';
+          document['JobStatusTab'].alt='No jobs have been run';
+          document['JobStatusTab'].title='No jobs have been run';
+          clearInterval(statusPoll);
+        }
+      }
+    }
+  }
+}
+
+// Check batch jobs status every 60s
+var statusPoll = setInterval(getBatchJobStatusAndUpdate, 60000);
+
+// Body onLoad event
+function srsBodyOnload() {
+  if(navigator.userAgent.indexOf('MSIE') != -1) {
+    document.getElementById('head').allowTransparency = true;
+  }
+  checkLinks();
+  getBatchJobStatusAndUpdate();
+}
+</script>
+</HEAD>
+<BODY marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" BGCOLOR="#FFFFFF"  link="#0000ff" onload="srsBodyOnload();">
+<div class="headerdiv" id="headerdiv" style="position:absolute; z-index: 1;">
+<iframe src="/inc/head.html" name="head" id="head" frameborder="0" marginwidth="0px" marginheight="0px" scrolling="no"  width="100%" style="position:absolute; z-index: 1; height: 57px;"></iframe>
+</div>
+<div class="contents" id="contents">
+<FORM method=POST action=/srsbin/cgi-bin/wgetz>
+<INPUT TYPE=hidden NAME="@@sub~" VALUE=1>
+<INPUT TYPE=hidden NAME=userId VALUE=2IOMm1dEtpe>
+<TABLE border=0 cellspacing=0 cellpadding=0 WIDTH="100%" bgcolor="#efefef">
+<TR>
+<TD BGCOLOR="#efefef" VALIGN="top"><IMG border=0 ALIGN=center  SRC="/srs/images/default/top-inactive.gif" usemap="#topGif" ><map name="topGif"><area shape="rect" coords="0,0,97,22" href="wgetz?-page+quickSearch+-id+2IOMm1dEtpe" alt="Quick Search" title="Quick Search"><area shape="rect" coords="96,4,193,22" href="wgetz?-page+top+-id+2IOMm1dEtpe" alt="Select Databanks to Search" title="Select Databanks to Search"><area shape="rect" coords="194,4,291,22" href="wgetz?-page+query+-id+2IOMm1dEtpe" alt="Create your Query" title="Create your Query"><area shape="rect" coords="291,4,388,22" href="wgetz?-page+applSelect+-id+2IOMm1dEtpe" alt="Use Analysis Tools" title="Use Analysis Tools"><area shape="rect" coords="388,4,485,22" href="wgetz?-page+results+-id+2IOMm1dEtpe" alt="Manage your Query Results" title="Manage your Query Results"><area shape="rect" coords="485,4,582,22" href="wgetz?-page+sessions+-id+2IOMm1dEtpe" alt="Manage your Projects" title="Manage your Projects"><area shape="rect" coords="582,4,679,22" href="wgetz?-page+viewMan1+-id+2IOMm1dEtpe+-libList+reset" alt="Create Custom Views" title="Create Custom Views"><area shape="rect" coords="679,4,776,22" href="wgetz?-page+databanks+-id+2IOMm1dEtpe" alt="DataBanks Information Page" title="DataBanks Information Page"><area shape="rect" coords="796,7,828,19" href="javascript:newWindow2('/srs/doc/index.html')" alt="Help Page" title="Help Page"></map></TD>
+<TD BGCOLOR="#efefef" VALIGN="top" ALIGN="right"><A HREF="wgetz?-id+2IOMm1dEtpe+-page+batchJobStatus"><IMG ALIGN=center BORDER=0 SRC="/srs/images/jobs_status.png" name="JobStatusTab"  alt="Status of Analysis Tool jobs" title="Status of Analysis Tool jobs" ></A></TD>
+</TR>
+<TR>
+<TD BGCOLOR="#316363" HEIGHT="2" VALIGN="top" COLSPAN="2"><IMG border=0 ALIGN=left  SRC="/srs/images/null.gif" height=1 ></TD>
+</TR>
+</TABLE>
+<TABLE border=0 cellspacing=0 cellpadding=0 WIDTH="100%">
+<TR>
+<TD HEIGHT="2" VALIGN="top"><IMG border=0 ALIGN=left  SRC="/srs/images/null.gif" height=1 ></TD>
+</TR>
+</TABLE>
+<TABLE border=0 cellspacing=0 cellpadding=6>
+<TR>
+<TD VALIGN="top"><IMG border=0 ALIGN=center  SRC="/srs/images/achtung.gif" ></TD>
+<TD VALIGN="center"><span class="errmsg1">Error: Invalid library Name</span></TD>
+</TR>
+<TR>
+<TD VALIGN="top"></TD>
+<TD VALIGN="top"><span class="errmsg2">Library named  "RESID," does not exist</span></TD>
+</TR>
+<TR>
+<TD VALIGN="top"></TD>
+<TD VALIGN="top">
+<A   HREF="wgetz?-page+docoPage+-id+2IOMm1dEtpe+[srserrcodes-erc:e__novallib]">(More information)</A>
+
+</TD>
+</TR>
+<TR>
+<TD VALIGN="top">&nbsp;</TD>
+<TD VALIGN="top">If you are having persistent problems please <a href="javascript:newWindow2('http://www.ebi.ac.uk/support/index.php?query=SRS')">contact us</a> quoting the error message above and describing what you were doing when you got the error</TD>
+</TR>
+</TABLE>
+<TABLE border=0 cellspacing=0 cellpadding=0 WIDTH="100%">
+<TR>
+<TD BGCOLOR="#bfbfbf" WIDTH="100%" HEIGHT="1" VALIGN="top"><IMG border=0 ALIGN=top  SRC="/srs/images/null.gif" ></TD>
+</TR>
+<TR>
+<TD BGCOLOR="#dedede" VALIGN="top" class="footer">
+<A   HREF="http://www.ebi.ac.uk/Information/termsofuse.html">Terms of Use</A>
+
+<IMG border=0  SRC="/srs/images/separator.gif"  alt="Image" title="Image" >
+<A   HREF="javascript:newWindow2('http://www.ebi.ac.uk/support/index.php?query=SRS')">Feedback &amp; Support</A>
+
+<IMG border=0  SRC="/srs/images/separator.gif"  alt="Image" title="Image" >SRS Release 7.1.3.2&nbsp;
+<A   HREF="/srs/SRScopyright.html">Copyright</A>
+
+&copy; 1997-2003 LION bioscience AG. All Rights Reserved.</TD>
+</TR>
+<TR>
+<TD BGCOLOR="#bfbfbf" WIDTH="100%" HEIGHT="1" VALIGN="top"><IMG border=0 ALIGN=top  SRC="/srs/images/null.gif" ></TD>
+</TR>
+</TABLE>
+   
+<INPUT TYPE=hidden NAME="@@sub~" VALUE=1>
+</FORM>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+  <head>
+    <title>Blossoc: Block-Association Mapping</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+  </head>
+  <body>
+    <h1>
+       <img class="icon" align="absmiddle" src="img/blossoc-icon.png"/>
+       Blossoc
+    </h1>
+
+    <div class="menu">
+     <span style="float: left;">
+     [<a href="../association-mapping/">Assoc. Mapping</a>]
+     </span>
+     [<a href="#about">About</a>]
+     [<a href="#installation">Installation</a>]
+     [<a href="#usage">Usage</a>]
+     [<a href="#examples">Example Files</a>]
+     [<a href="#contact">Contact</a>]
+   </div>
+
+   <a name="about"><h2>About Blossoc</h2></a>
+   <p>
+     Blossoc is a linkage disequilibrium association mapping tool that
+     attempts to build (perfect) genealogies for each site in the
+     input and score these according to non-random clustering of
+     affected individuals, and judge high-scoring areas as likely
+     candidates for containing disease affecting variation.
+   </p>
+   <p>
+     Building the local genealogy trees is based on a number of
+     heuristics that are not guaranteed to build true trees, but have
+     the advantage over more sophisticated methods of being extremely
+     fast.  Blossoc can therefore handle much larger datasets than
+     more sophisticated tools, but at the cost of sacrificing some
+     accuracy.
+   </p>
+   <p>
+     The mapping method implemented in Blossoc is described in:
+   </p>
+   <blockquote>
+     <a href="http://www.biomedcentral.com/1471-2105/7/454/abstract">
+       <b>  Whole genome association mapping by incompatibilities and
+     local perfect phylogenies</b>
+     </a>
+     <br/>
+      T. Mailund, S. Besenbacher and M.H. Schierup
+     <br/>
+     <em>
+       BMC Bioinformatics 2006 <b>7</b>(454). doi:10.1186/1471-2105-7-454.
+     </em>
+   </blockquote>
+   <blockquote>
+     <a href="http://www.genetics.org/cgi/content/abstract/181/2/747">
+       <b> Local phylogeny mapping of quantitative traits: Higher accuracy and better ranking than single marker association in genomewide scans </b>
+     </a>
+     <br/>
+        S. Besenbacher, T. Mailund and M.H. Schierup
+     <br/>
+     <em>
+         Genetics <b>181</b> 747-753 2009; doi:10.1534/genetics.108.092643  
+     </em>
+   </blockquote>
+   <p>See also</p>
+   <blockquote>
+     <a href="http://www.biomedcentral.com/1753-6561/3/S1/S2">
+       <b>Comparison of analyses of the QTLMAS XII common dataset. II: genome-wide association and fine mapping</b>
+     </a>
+     <br/>
+        L. Crooks, G. Sahana, D-J de Koning, M.S. Lund and O. Carlborg
+     <br/>
+     <em>
+       BMC Proceedings 2009, 3(Suppl 1):S2
+     </em>
+   </blockquote>  
+   <blockquote>
+     <a href="http://www.biomedcentral.com/1753-6561/3/S1/S9 ">
+       <b>Data modeling as a main source of discrepancies in single and multiple marker association methods</b>
+     </a>
+     <br/>
+        M.C. Ledur, N. Navarro and M. Perez-Enciso
+     <br/>
+     <em>
+       BMC Proceedings 2009, 3(Suppl 1):S2
+     </em>
+   </blockquote>  
+   <p>
+     Blossoc is released under the <a
+     href="http://www.gnu.org/copyleft/gpl.html">GNU General Public
+     License</a>.
+   </p>
+
+   <a name="installation"><h2>Installation</h2></a>
+   <p>
+     Blossoc is written in C++ and is available as source code (under
+     the GNU General Public License, GPL) and as binary versions as
+     Linux RPM and Debian files.  The source code has been
+     successfully compiled on various Linux and UNIX systems.  As I
+     have only limited access to various architecture, it is at
+     present not possible for me to make binary distributions for
+     other platforms, but if anyone is willing to build the
+     distributions I will be more than happy to put them on this site.
+   </p>
+   
+   <p>
+     Blossoc requires the Boost Library and the GNU Scientific Library (GSL)
+     to be installed.
+     For the graphical user interface version, Qt 3.3 is needed and for
+     SNPfile support, the SNPfile library is needed.
+   </p>
+   <ul>
+      <li>Boost can be obtained from 
+        <a href="http://www.boost.org">
+          http://www.boost.org.
+        </a>
+      </li>
+      <li>
+        GSL can be obtained from 
+        <a href="http://www.gnu.org/software/gsl/">
+           http://www.gnu.org/software/gsl/.
+        </a>
+      </li>
+      <li>
+        Qt can be obtained from 
+        <a href="http://trolltech.com/products/qt">
+           http://trolltech.com/products/qt.
+        </a>
+      </li>
+      <li>
+        SNPfile can be obtained from 
+        <a href="../SNPfile/index.html">
+           http://www.birc.au.dk/~mailund/SNPfile/index.html.
+        </a>
+      </li>
+   </ul>
+
+   <p>
+     The most recent versions can be downloaded below, older versions
+     are available <a href="./download">from here.</a>
+   </p>
+
+   <h3>Binary Distributions</h3>
+  <ul>
+     <li>
+       <a href="./download/blossoc-1.4.0-1.i386.rpm">
+         blossoc-1.4.0-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.3.0-1.i386.rpm">
+         blossoc-1.3.0-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.2.0-1.i386.rpm">
+         blossoc-1.2.0-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.1.1-1.i386.rpm">
+         blossoc-1.1.1-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.1.0-2.i386.rpm">
+         blossoc-1.1.0-2.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.1.0-1.i386.rpm">
+         blossoc-1.1.0-1.i386.rpm
+       </a>
+     </li>
+  </ul>
+  <ul>
+     <li>
+       <a href="./download/blossoc_1.4.0_i386.deb">
+         blossoc_1.4.0_i386.deb
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc_1.3.0_i386.deb">
+         blossoc_1.3.0_i386.deb
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc_1.3.0_amd64.deb">
+         blossoc_1.3.0_amd64.deb
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc_1.2.0_i386.deb">
+         blossoc_1.2.0_i386.deb
+       </a>
+     </li>
+  </ul>
+   <ul>
+     <li>
+       <a href="./download/blossoc-gui-1.2.0-1.i386.rpm">
+         blossoc-gui-1.2.0-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-gui-1.1.1-1.i386.rpm">
+         blossoc-gui-1.1.1-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-gui-1.1.0-1.i386.rpm">
+         blossoc-gui-1.1.0-1.i386.rpm
+       </a>
+     </li>
+  </ul>
+
+   <p>
+     The rpm-files were built on Linux Fedora Core 5 and the Debian files on
+     Ubuntu Feisty Fawn.  If you have any problems installing them on other
+     Redhat or Debian based systems, please let me know.
+   </p>
+   
+   <h3>Source Code Distributions</h3>
+   <ul>
+     <li>
+       <a href="./download/blossoc-1.4.0.tar.gz">
+         blossoc-1.4.0.tar.gz
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.3.0.tar.gz">
+         blossoc-1.3.0.tar.gz
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.2.0.tar.gz">
+         blossoc-1.2.0.tar.gz
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.1.1.tar.gz">
+         blossoc-1.1.1.tar.gz
+       </a>
+     </li>
+     <li>
+       <a href="./download/blossoc-1.1.0.tar.gz">
+         blossoc-1.1.0.tar.gz
+       </a>
+     </li>
+  </ul>
+ 
+   <p>
+     To build the source files, first uncompress and untar the file,
+     then run 'configure' and finally 'make'.  To test that the build
+     was successful, run 'make check'.  To install the program,
+     run 'make install'.
+   </p>
+      <code><pre>
+    $ tar zxf blossoc-<em>version</em>.tar.gz
+    $ cd blossoc-<em>version</em>
+    $ ./configure
+    $ make
+    $ make check
+    $ make install
+</pre></code>
+
+<!--
+     <p>To also build the GUI, you must have Qt installed and then
+     do</p>
+     <code><pre>
+    $ cd Blossoc-Qt
+    $ qmake
+    $ make
+</pre></code>
+-->
+
+     <a name="usage"><h2>Usage</h2></a>
+
+      <p>You can use Blossoc in two different ways, as a command-line
+      program or through a graphical user interface.
+
+      <h3>The command-line version</h3>
+
+      <p>The command line version of Blossoc is started by the
+      command</p>
+      <code><pre>
+    $ blossoc</pre></code>
+
+      <p>It takes, as input, a file containing the positions of
+      markers and a file containing haplotype data.
+      </p>
+      <p>
+        The positions file should consist of an ordered sequence of space
+        separated integers.
+      </p>
+      <p>
+         The genotypes file should contain one or
+         two lines per individual (depending on whether the data is phased
+         or unphased) where each line is a list of space separated allels:
+         0 and 1 for homozygotes and 2 for heterozygotes (with 2 only allowed
+         for unphased data).  The first column is a 'pseudo'-allele used for
+         the case/control dichotomy: a 0 in the first column is taken to mean
+         that the individual is a control and a 1 at the first column is taken
+         to mean that the individual is a case.
+      </p>
+      
+      <p>Run <tt>blossoc --help</tt> to get a complete list of
+      command-line options accepted by Blossoc.
+      </p>
+      
+      <p>
+        If <a href="http://www.birc.au.dk/~mailund/SNPfile">SNPfile</a>
+        support is enabled, you can use the command line tool
+      </p>
+      <code><pre>
+    $ snpfile_blossoc</pre></code>
+      <p>
+        to analyse SNPfiles generated with the
+        <a href="http://www.birc.au.dk/~mailund/SNPfile#text2snpfile">
+        <tt>text2snpfile</tt></a> tool.
+      </p>
+      <p>Run <tt>snpfile_blossoc --help</tt> to get a complete list of
+      command-line options accepted.
+      </p>
+
+      <h3>The GUI version</h3>
+
+      <p>The GUI version of Blossoc is started from your applications
+      menu or using the command</p>
+      <code><pre>
+    $ Blossoc-Qt</pre></code>
+      <p>See the help files of the GUI version for documentation.</p>
+
+      <!-- FIXME: WRITE A MANUAL! -->
+
+      <a name="examples"<h2>Example files</h2></a>
+      <!-- FIXME: update these with version 1.2 where positions are integers -->
+      <p>
+        Simulated test examples can be downloaded below.  The
+        <tt>positions-*.*.txt</tt> files contain the marker positions,
+        the <tt>haplotypes-*.*.txt</tt> the haplotypes.
+      </p>
+      <h3>10 cM region (or &rho; = 4000)</h3>
+      <p>Two datasets with 200 markers in a region corresponding to
+      recombination rate &rho; = 4000 or about 10 cM.  Each contains 1000
+      affected and 1000 unaffected haplotypes; the disease risk for a
+      mutant is 10%, the risk for a wildtype is 5%.</p>
+      <ul><li>
+      [<a href="./download/positions-rho4000.1.txt">positions-rho4000.1.txt</a>] 
+      [<a href="./download/haplotypes-rho4000.1.txt">haplotypes-rho4000.1.txt</a>] 
+      [<a href="./download/blossoc-rho4000.1.png">blossoc-rho4000.1.png</a>] 
+      <br/>
+      Disease locus: 80000
+      </li>
+      <li>
+      [<a href="./download/positions-rho4000.2.txt">positions-rho4000.2.txt</a>] 
+      [<a href="./download/haplotypes-rho4000.2.txt">haplotypes-rho4000.2.txt</a>] 
+      [<a href="./download/blossoc-rho4000.2.png">blossoc-rho4000.2.png</a>] 
+      <br/>
+      Disease locus: 6750000
+      </li>
+      </ul>
+
+      <h3>0.1 cM region (or &rho; = 40)</h3>
+      <p>Three datasets with 200 markers in a region corresponding to
+      recombination rate &rho; = 40 or about 0.1 cM.  Each contains 1000
+      affected and 1000 unaffected haplotypes; the disease risk for a
+      mutant is 10%, the risk for a wildtype is 5%.</p>
+      <ul><li>
+      [<a href="./download/positions-rho40.1.txt">positions-rho40.1.txt</a>] 
+      [<a href="./download/haplotypes-rho40.1.txt">haplotypes-rho40.1.txt</a>] 
+      [<a href="./download/blossoc-rho40.1.png">blossoc-rho40.1.png</a>] 
+      <br/>
+      Disease locus: 5400
+      </li>
+      <li>
+      [<a href="./download/positions-rho40.2.txt">positions-rho40.2.txt</a>] 
+      [<a href="./download/haplotypes-rho40.2.txt">haplotypes-rho40.2.txt</a>] 
+      [<a href="./download/blossoc-rho40.2.png">blossoc-rho40.2.png</a>] 
+      <br/>
+      Disease locus: 95400
+      </li>
+      <li>
+      [<a href="./download/positions-rho40.3.txt">positions-rho40.3.txt</a>] 
+      [<a href="./download/haplotypes-rho40.3.txt">haplotypes-rho40.3.txt</a>] 
+      [<a href="./download/blossoc-rho40.3.png">blossoc-rho40.3.png</a>] 
+      <br/>
+      Disease locus: 30500
+      </li>
+      </ul>
+
+
+   <a name="contact"><h2>Contact</h2></a>
+    <p>
+      For bug-reports or feature requests, please use our <a
+      href="http://www.daimi.au.dk/~mailund/bugtrack/login_page.php">
+      bug-tracking software.</a>
+    </p>
+    <p>
+      For comments or questions, please contact Thomas Mailund &lt;<A
+      href="mailto:mailund@birc.au.dk">mailund@birc.au.dk</a>&gt;,
+      Bioinformatics Research Center (BiRC), University of Aarhus,
+      H&oslash;egh-Guldbergsgade 10, DK-8000 &Aring;rhus C.
+    </p>
+
+   <address>
+     Contact: 
+     <A href="mailto:mailund@birc.au.dk">mailund@birc.au.dk</a>
+   </address>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<html>
+
+<head>
+<title>a neural network based MHC Class I Binding Peptide Prediction Server</title>
+<meta name="Description" content="The nHLAPred is a web server for predicting MHC class binding peptides.">
+<link REL=stylesheet HREF=exstyle.css TYPE=text/css>
+<STYLE type="text/css">
+<!--
+A{text-decoration:none}
+--->
+</STYLE>
+<SCRIPT language="JavaScript">
+
+ 
+<!--
+
+  if (document.images)
+   {
+   pic1on= new Image;
+     pic1on.src="image/ann1.gif"; 
+     pic2on= new Image;
+     pic2on.src="image/submit1.gif";  
+
+     pic1off= new Image;
+     pic1off.src="image/ann2.gif";  
+     pic2off= new Image;
+     pic2off.src="image/submit.gif";
+
+ }
+
+function lightup(imgName)
+ {
+   if (document.images)
+    {
+      imgOn=eval(imgName + "on.src");
+      document[imgName].src= imgOn;
+    }
+ }
+
+function turnoff(imgName)
+ {
+   if (document.images)
+    {
+      imgOff=eval(imgName + "off.src");
+      document[imgName].src= imgOff;
+    }
+ }
+
+//-->
+
+</SCRIPT>
+
+
+</head>
+<body bgcolor="#FFFFFF" vlink="red" alink="green" link="blue" >
+<form ENCTYPE="multipart/form-data" action="/cgibin/nhlapred/nhla_main.pl" method="POST">
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+<!-- main table --> 
+  <tr>
+    <td width="100%">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="3%">
+<a href=http://www.imtech.res.in><img src=logo3.gif  border=0 alt="IMTECH Home" width="70" height="70"></a>
+          </td>
+          <td width="97%" align="center"><span class=btitle>nHLAPred&nbsp;&nbsp;<br></span><span class=b1title>A neural network based MHC Class-I Binding Peptide Prediction Server</font></span></td>
+<td><a href="http://bioinformatics.uams.edu/mirror/nhlapred" target="top"><img src="image/mirror.gif"></a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+<!-- end header  --> 
+<tr>
+ <td width="110%" align="right">
+        <table bgcolor="#E0F8E0" border="0" cellpadding="4" cellspacing="0" width="98%">
+          <tr>
+           <td width="12%" align="center"><a class=ssmenu  href="index.html">Home</a></td>
+<td width="11%" align="center"><a class=ssmenu  href=comp.html>ComPred</a></td> 
+<td width="11%" align="center"><a class=ssmenu  href=neural.html>ANNPred</a></td>
+            <td width="11%" align="center"><a class=ssmenu  href=page1.html>References</a></td>            
+            <td width="11%" align="center"><a class=ssmenu  href=help.html>Help</a></td>
+           <td width="11%" align="center"><a class=ssmenu  href=matrix.html>Matrices</a></td>
+
+<td width="11%" align="center"><a class=ssmenu  href=algorithm.html>Algorithm</a></td>
+
+<td width="11%" align="center"><a class=ssmenu  href=team.html>Team</a></td>        
+<td width="11%" align="center"><a class=ssmenu  href=contact.html>Contact</a></td> </tr></table>            
+         
+</td>
+</tr>
+</table>
+<br><br><br>
+
+<table width="100%"><tr><td width="8%"></td><td width="15%"><table width="100%"  cellspacing="0" cellpadding="0" border="0">
+<tr><td vlign="top" align="left" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornertl.gif"></td><td vlign="top" align="right" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornertr.gif"></td></tr><tr><td colspan=2 bgcolor="#E0F8E0"><center><font colt="#006000"><h3><a href="comp.html">ComPred</h3></font></a></center>
+<p><div align ="justify">This is a comprehensive method for prediction of MHC binding peptides or CTL epitopes of 67 MHC alleles.The prediction for 30 alleles is based on the hybrid appoarch of Artificial Neural Networks (ANNs) and Quantitative Matrices (QM). The prediction for rest 37 MHC alleles is based on the quantiatative matrices.The predicted MHC binders are filtered to potentail CTL epitopes by refining through Proteasomal matrices.</div></p>
+
+<A HREF="comp.html" onMouseover="lightup('pic2')" onMouseout="turnoff('pic2')"> 
+<IMG SRC="image/submit.gif" name="pic2"  border="0"></A>
+
+</td></tr>
+<tr><td vlign="top" align="left" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornerbl.gif"></td><td vlign="top" align="right" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornerbr.gif"></td></tr></table></td><td width="1%"></td>
+
+<td width="15%"><img src="image/mhc_fig1.jpg"></td><td width="15%"><table width="100%"  cellspacing="0" cellpadding="0" border="0">
+<tr><td vlign="top" align="left" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornertl.gif"></td><td vlign="top" align="right" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornertr.gif"></td></tr><tr><td colspan=2 bgcolor="#E0F8E0"><center><font colot="#006000"><h3><a href="neural.html">ANNPred</h3></font></a></center>
+<p><div ="justify">The prediction is based on Artificial Neural Networks (ANNs) for 30 MHC alleles.The feed-forward backpropogation type of ANNs is able to handle the non linearity of data very well so it is very useful for MHC binders prediction. The ANNs is able to classify the data of more accuratly as compared to motifs and weight matrices.The predicted MHC binders are filtered to potentail CTL epitopes by refining through Proteasomal matrices.</div></p>
+
+<A HREF="neural.html" onMouseover="lightup('pic1')" onMouseout="turnoff('pic1')"> 
+<IMG SRC="image/ann2.gif" name="pic1"  border="0"></A>
+
+
+</td></tr>
+<tr><td vlign="top" align="left" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornerbl.gif"></td><td vlign="top" align="right" bgcolor="#E0F8E0"><img src="http://www.imtech.res.in/raghava/nhlapred/image/cornerbr.gif"></td></tr></table></td><td width="1%"></td>
+
+
+<td width="5%"></td>
+
+
+
+
+</tr></table>
+
+ <center><table width="86%">
+<tr><td colspan=4 width="30%" align="center"><img src="image/divider.gif"> <br><a href="comp.html" target="top" ><b>[ComPred]<b></a>&nbsp;<a href="neural.html" target="top"><b>[ANNPred]<b></a>&nbsp;<a href="links.html" target="top"><b>[Links]<b></a>&nbsp;<a href="supl/index.html" target="top"><b>[Supp.&nbsp;Info.]<b></a>&nbsp;<a href="page1.html" target="top"><b>[References]<b></a>&nbsp;<a href="help.html" target="top"><b>[Help]<b></a>&nbsp;<a href="matrix.html" target="top"><b>[matrices]<b></a>&nbsp;<a href="team.html" target="top"><b>[Team]<b></a>&nbsp;<a href="contact.html" target="top"><b>[Contact]<b></a>&nbsp;</td></tr></table>
+</form>
+</body>
+</html>
+

@@ -1,0 +1,111 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-tw">
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<title>TMG - Truncated Mutants Generato</title>
+</head>
+
+<body>
+
+<br>
+<p class="MsoNormal" align="center" style="text-align: center"><b>
+<span lang="EN-US"><font size="5">NTMG - N-terminal Truncated Mutants Generator 
+for cDNA</font></span></b></p>
+<p class="MsoNormal" align="center" style="text-align: center">
+<span lang="EN-US"><b>&nbsp;</b>An Automatic Multiplex PCR Assays Design <br>
+for Generating Various N-terminal Truncated Mutants</span></p>
+<div align="center">
+	<table border="1" width="76%" id="table1" bordercolordark="#FFFFFF" bordercolorlight="#000000">
+		<tr>
+			<td colspan="3">
+			<p class="MsoNormal" align="center"><b><span lang="EN-US">Summary</span></b></p>
+			<p class="MsoNormal" align="left"><b><span lang="EN-US">  </span></b><span lang="EN-US">The 
+			sequential deletion method is generally used to locate the 
+			functional domain of a protein. In order to find the various 
+			N-terminal truncated mutants, researchers have to investigate the 
+			ATG-like codons, to design various PCR forward primers and to do 
+			several PCR experiments. This web server (N-terminal Truncated Mutants 
+			Generator for cDNA) will automatically generate a group of forward PCR 
+			primers and a corresponding reverse PCR primer that can be used in a 
+			single batch of a multiplex PCR experiment to extract the various 
+			N-terminal truncated mutants. This saves much time and money for 
+			those who use the sequential deletion method in their research.</span></p>
+			<p class="MsoNormal" style="text-align: left; text-autospace: none; margin-bottom: 6.0pt">
+			<b><span lang="EN-US">INPUT</span></b><span lang="EN-US"> </span>
+			</p>
+			<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; text-autospace: none; margin-bottom: 6.0pt">
+			<span lang="EN-US">1. The target cDNA sequence. <br>
+			2. The addresses of the start codon and the stop codon. <br>
+			3. Multiplex PCR primer design criteria including melting 
+			temperature (<i>Tm</i>), primer length, GC contents, internal 
+			self-complement, cross dimerization, terminal limitation, and 
+			specificity to filter out unqualified forward PCR primer candidates.</span></p>
+			<p class="MsoNormal" style="text-align: left; text-autospace: none; margin-bottom: 6.0pt">
+			<b><span lang="EN-US">PROCESSING METHOD<br>
+			</span></b><span lang="EN-US">First, it considers the in-frame 
+			criterion and finds ATG-like codons, ATX,AXG or XTG with X 
+			represents A, T, G, or C, then ATG-like codons are modified to ATG start codon for 
+			signaling the initiation of translation in a cDNA sequence. 
+			Secondly, segments containing ATG-like codons within a window of 
+			variable length between 18 to 24 nucleotides are selected as 
+			candidates. By sliding the window one nucleotide at a time along the 
+			cDNA sequence, a stack of PCR primer candidates is collected for 
+			each ATG-like codon. The third step checks the criteria including 
+			melting temperature (<i>Tm</i>), primer length, GC contents, 
+			internal self-complement, dimerization, terminal limitation, and 
+			specificity to filter out unqualified forward PCR primer candidates. 
+			In the fourth step, the hierarchical cluster algorithm is used for 
+			classifying the forward primer candidates into several groups. 
+			Finally, the best forward primer grouping is selected and then one 
+			or several 
+			reverse primers meeting the above criteria and compatible with the 
+			forward primers are chosen. The designed forward primers 
+			accompanied with a common reverse primer can work in a single batch 
+			of a multiplex PCR experiment that is effective in extracting 
+			various N-terminal truncated mutants of a protein for discovery of 
+			its functional domain.</span></p>
+			<p class="MsoNormal" style="text-align: center; text-autospace: none; margin-bottom: 6.0pt">
+			<img border="0" src="pic/example_0.jpg" width="551" height="129"></p>
+			<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; text-autospace: none; margin-bottom: 6.0pt">
+			<span lang="EN-US"><b>OUTPUT<br>
+			</b>Several groups of the forward PCR primers accompanied with the 
+			reverse PCR primer, the melting temperature, the lengths of primers 
+			and the lengths of various mutants.</span></p>
+			<p class="MsoNormal" style="text-align: center; text-autospace: none; margin-bottom: 6.0pt">
+			<img border="0" src="pic/example_1.jpg" width="386" height="308"></p>
+			<p class="MsoNormal" style="text-align: left; text-autospace: none; margin-bottom: 6.0pt">
+			<span lang="en-us"><b>USER's GUIDE<br>
+			</b></span><span lang="EN-US"><b><br>
+			</b>1.Click the &quot;PROCESS&quot; at the bottom to begin the processing.<br>
+			2.Click the &quot;Example.0&quot; , &quot;Example.1&quot; and &quot;Example.2&quot; will show 
+			examples.<br>
+			3.Default input values are provided but user may change the values. 
+			Note that some input value settings (e.g. setting Primer Melting 
+			Temperature to 45-80) may cause the server to take a much longer 
+			time to obtain results. Also note that with some input value 
+			settings (e.g. setting Specificity to 40), the server may find no 
+			primers that satisfy the criterion. In this case, the server will 
+			stop and report this fact.</span></p>
+			<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; text-autospace: none; margin-bottom: 6.0pt"></td>
+		</tr>
+		<tr>
+			<td width="10%" align="center"><b>Execute</b>&nbsp; </td>
+			<td width="36%" align="center"><a href="http://140.120.14.136:8080/WebSDL/config.htm">PROCESS.1</a>　<a href="http://140.120.14.132:8080/WebSDL/config.htm">PROCESS.2</a>　<a href="http://140.120.14.128:8080/WebSDL/config.htm">PROCESS.3</a></td>
+			<td width="48%">
+			<p align="center"><b><a target="_blank" href="example_0.htm">Example.0</a> ,<a target="_blank" href="example_1.htm">Example.1</a> , <a target="_blank" href="example_2.htm">Example.2</a></b></td>
+		</tr>
+	</table>
+	<div align="center">
+		<table border="0" width="75%" cellspacing="1" id="table2">
+			<tr>
+				<td>
+				<p align="right">&nbsp; <a href="mailto:bp.tmgserver@m2k.com.tw">Contact us</a>&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+
+</html>

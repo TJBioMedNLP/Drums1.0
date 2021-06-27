@@ -1,0 +1,80 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ko">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>MBEL, KAIST</title>
+<SCRIPT LANGUAGE="JavaScript">
+
+<!--
+var speed = 100 // 글자가 나타나는 속도를 조절합니다. 음수는 불가 양수로 
+var pause = 1000 // 한줄이 끝나고 다음줄이 나타날때까지의 시간차를 조절합니다. 숫자를 조절.
+var timerID = null
+var bannerRunning = false
+var ar = new Array()
+
+ar[0] = "Welcome to MBEL !"
+ar[1] = "For your research.."
+ar[2] = "Good luck to you ~ "
+
+var currentMessage = 0
+var offset = 0
+function stopBanner() {
+        // if banner is currently running
+        if (bannerRunning)
+                // stop the banner
+                clearTimeout(timerID)
+        // timer is now stopped
+        bannerRunning = false
+}
+
+function startBanner() {
+        stopBanner()
+        showBanner()
+}
+
+function showBanner() {
+        var text = ar[currentMessage]
+        if (offset < text.length) {
+                if (text.charAt(offset) == " ")
+                        offset++                        
+                var partialMessage = text.substring(0, offset + 1) 
+                window.status = partialMessage
+                offset++ 
+                timerID = setTimeout("showBanner()", speed)
+                bannerRunning = true
+        } else {
+                offset = 0
+                currentMessage++
+                if (currentMessage == ar.length)
+                        currentMessage = 0
+                timerID = setTimeout("showBanner()", pause)
+                bannerRunning = true
+        }
+}
+// -->
+
+</SCRIPT>
+
+
+</head>
+
+<body background="lab/img/backgroundlogo.jpg" onLoad="startBanner();">
+<table border="0" width="71%" cellspacing="0" cellpadding="0" height="747">
+  <tr>
+    <td width="74%" height="95">
+      <p align="center"><img border="0" src="lab/img/welcome.gif" width="324" height="47">&nbsp;</p>
+
+      </td>
+    <td width="26%" height="95">
+      <p align="left"><b><font color="#3399CC">[</font><a href="lab/index_en.html"><font color="#3399CC">English</font></a><font color="#3399CC">]</font><font color="#0088B5"> [<a href="lab/index_ko.html"><font color="#0088B5">Korean</font></a>]</font></b>
+      <p>&nbsp;        <tr>
+    <td width="100%" colspan="2" height="652">
+      <p align="center"><img src="lab/img/MBELhomepage2011.jpg" width="960" height="720" border="0"></tr>
+  </table>
+
+</body>
+
+</html>

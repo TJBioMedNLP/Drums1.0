@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Nexplorer - Phylogeny-based Sequence Family Explorer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="/nexplorer/styles/cssmain.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="favicon.ico" >
+<script type="text/javascript" src="/nexplorer/styles/j.js"></script>
+<script type="text/javascript">
+function remove(file) {
+	var removeWindow;
+	removeWindow = window.open("../cgi-bin/remove.pl?filename="+file,"myRemoveWindow","width=300,height=100");
+	window.location.reload();
+}
+</script>
+</head>
+
+
+<body>
+<script type="text/javascript" src="../js/wz_dragdrop.js"></script>
+<div id="skipnav"><a href="#content" tabindex="1" title="Skip Navigation" accesskey="2">Skip Navigation</a></div>
+<div id="logo"><img src="/nexplorer/styles/i/logo-3.jpg" alt="logoalt"/></div>
+
+<div id="navcontainer"> 
+	<ul id="navlist">
+		<li id=active><a href="/nexplorer/cgi-bin/index.cgi?CGISESSID=686ad5a01e20786f78807950f37e5f64">Home</a></li>
+		<li><a href="/nexplorer/docs/tutorial.html">Tutorial</a></li>
+		<li><a href="/nexplorer/docs/index.html">User Guide</a></li>
+		<li id=><a href="/nexplorer/docs/feedback.html">Feedback</a></li>
+		<li><a href="/nexplorer/docs/contact.html">Contact</a></li>
+		<li><a href="/nexplorer/docs/links.html">Links</a></li>
+		<li><a href="/nexplorer/docs/credits.html">Credits</a></li>
+	</ul>
+</div>
+
+	<div id="wrapper">
+	<div id="content">
+	<table width=700 border=0 >
+		<tr>
+			<td>	<fieldset>
+		<legend align=left><font id="sectionheader">Select a Family</font></legend>
+		<div style="text-align: right"><a href="/nexplorer/docs/tutorial.html#family" target="_blank">Help</a></div>
+		<table width="570" border=0 cellpadding=2 cellspacing=1 align=center>
+  			<tr>
+  				<FORM METHOD=GET NAME="searchForm" ACTION="">
+				<input type=hidden name=CGISESSID value=686ad5a01e20786f78807950f37e5f64>
+  				<input type=hidden name=page value="1">
+  				<input type=hidden name="numSelect" value=10>
+  				<td width=20>&nbsp;</td>
+    			<td width=100>Keyword Search:</td>
+				<td width=390><input type="text" name="searchText" size=29 value="drosophila">				 in <select name="dbselect"><option selected>EGFAM<option >KOGS<option >Pandit<option >TreeBase</select></td>
+				<td width=20><input type="submit" name="searchSubmit" value="Go"></td>
+    			<td width=40>&nbsp;</td>
+    		</tr>
+    		<tr>
+    			<td>&nbsp;</td>
+     			<td>&nbsp;</td>
+    			<td valign=top>e.g. drosophila, Lipase, AAC32917.1</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				</FORM>
+  			</tr>
+  			<tr>
+  				<td colspan=5><hr></td>
+  			</tr>
+  			<tr>
+  				<FORM METHOD=POST NAME="upForm" ACTION="upload.cgi" enctype="multipart/form-data">
+				<input type=hidden name=CGISESSID value=686ad5a01e20786f78807950f37e5f64>
+  				<td>&nbsp;</td>
+				<td>File Upload:</td>
+				<td><input type="file" name="uploadFile" size=30></td>
+				<td><input type="submit" name="Submit" value="Upload"></td>
+				<td>&nbsp;</td>
+				</FORM>
+  			</tr>
+  			<tr>
+  				<td>&nbsp;</td>
+  				<td colspan=2><a href="index.cgi?upload=yes&CGISESSID=686ad5a01e20786f78807950f37e5f64">View uploaded files</a></td>
+  				<td>&nbsp;</td>
+  				<td>&nbsp;</td>
+  			</tr>
+		</table>
+		</fieldset>
+		</td>
+		</tr>
+</table>
+	<table width=700>
+<!-- intermittent service notice 
+	<tr>
+	 <td>
+	   <hr>
+<div id="subsectionheader">Notice, 20 May, 2007</div>
+With regret, we advise users to expect intermittent service this week, while we are responding to security concerns. 
+<hr>
+	 </td>
+	</tr>
+ end of intermittent service notice -->
+	<tr>
+	 <td>
+	<div id="subsectionheader">Introduction</div>
+	Nexplorer is a web-based program for interactive browsing and manipulation of character data in NEXUS format 
+	(<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=11975335&query_hl=4&itool=pubmed_docsum">
+Madison, et al., 1997
+</a>). Users
+	may upload a data set, or choose from one of several thousand already available. Nexplorer provides a flexible means to develop customized views that combine a tree and a data matrix or alignment, to
+	create subsets of data, and to output data files for publication-quality graphics.
+	<p>
+	<div id="subsectionheader">Input</div>
+	The input for Nexplorer is a set of character data (or a tree) in NEXUS format.  Users may upload their own data, however the server also provides pre-computed data sets, including value-added versions of 684 KOGs families 
+	(<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15788746&query_hl=6&itool=pubmed_docsum">
+	Sverdlov, et al., 2005
+	</a>) 
+	and 7226 families from Pandit release 12.0 (
+	<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=12912837&query_hl=1&itool=pubmed_docsum">
+Whelan, et al., 2003</a>). 
+Each family contains a protein sequence alignment, a corresponding
+	nucleotide sequence alignment, a matrix of intron data, a phylogeny, and meta-data including taxonomic identifiers.
+	<p>
+	<div id="subsectionheader">Output</div>
+	Nexplorer can generate output files with publication-quality images (in PostScript and PDF vector format).  Users then may print the images or insert them into manuscripts, presentations and reports. Data sets can be saved in NEXUS format. If the user has altered
+	the data set, the output will represent the altered data set.
+	<p>
+	<div id="subsectionheader">Going further</div>
+Nexplorer uses a three-tiered architecture to provide a convenient graphical interface to commonly used operations.  The heart of Nexplorer is the functionality provided by Bio::NEXUS (see <a href="http://sourceforge.net/projects/bionexus/">bionexus project at SourceForge</a>), a NEXUS API in Perl:
+<blockquote>
+	<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Citation&list_uids=17559666">Bio::NEXUS: a Perl API for the NEXUS format for comparative biological data</a>.  Hladish, T., V. Gopalan, C. Liang, W. Qiu, P. Yang, and A. Stoltzfus. 2007. <b>BMC Bioinformatics</b> 8:191.
+</blockquote>
+However, Nexplorer only provides a small subset of the functionality of Bio::NEXUS.  If you don't mind using command-line tools, you can take advantage of much greater functionality by using the <b>nextool.pl</b> and <b>nexplot.pl</b> applications in the Bio::NEXUS package.  
+<p>
+<div id="subsectionheader">Acknowledging this service</div>
+If you use Nexplorer to explore, manipulate, or visualize data for your research, please send us a note to explain what you are doing, and please cite Gopalan, et al, 2006: 
+<blockquote>
+	<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=16267087&query_hl=9&itool=pubmed_docsum" target="_blank">Nexplorer: phylogeny-based exploration of sequence family data.</a><br>Gopalan V, Qiu WG, Chen MZ, Stoltzfus A.
+	<b>Bioinformatics</b>. 2006 Jan 1;22(1):120-1. 
+</blockquote>
+	</td>
+	</tr>
+	</table>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-380568-3";
+urchinTracker();
+</script>
+<script language="javascript" type="text/javascript" src="/nexplorer/styles/footer.txt"></script>
+</div>
+</div>
+</body>
+</html>
+</body>
+</html>

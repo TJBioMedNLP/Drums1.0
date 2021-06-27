@@ -1,0 +1,117 @@
+<html>
+	<head>
+		<style type="text/css"><!--
+			body {
+				margin-top: 0px;
+				margin-right: 0px;
+				margin-bottom: 0px;
+				margin-left: 0px;
+				font-family: sans-serif;
+				color: white;
+			}
+			b {
+				color: #FF8811;
+			}
+			a:link { 
+				color: #8EACE8;
+				text-decoration: none;
+			}
+			a:visited { 
+				color: #8EACE8;
+				text-decoration: none;
+			}
+			a:hover { 
+				color: #FF8811;
+				text-decoration: underline;
+			}
+			a:active { 
+				color: #66FF66;
+			}
+			-->
+		</style>
+		<link rel="icon" type="image/png" href="images/egan_icon.png">
+		<link rel="SHORTCUT ICON" href="images/egan_icon.ico">
+		<title>EGAN: Exploratory Gene Association Networks.  Leverage organic intelligence.</title>
+	</head>
+	<body bgcolor="black">
+		<table border=0 cellpadding=5 cellspacing=0 width=100%>
+			<tr bgcolor="silver"><td colspan=3></td></tr>
+			<tr bgcolor="#8EACE8">
+				<td style="font-size:48px;color:black;vertical-align:middle;white-space:nowrap"><a href="./" style="color:black"><img align=left src="images/egan_icon_large.png" style="vertical-align:middle" border=0 alt="EGAN icon" title="EGAN is awesome"> <b style="color:black">EGAN</b></a></td>
+				<td align=center style="color:black;vertical-align:middle"><a href="leverage.php" style="color:black"><i>Leverage organic intelligence<i></a></td>
+				<td style="text-align:right"><img src="images/ucsf_logo.png" style="vertical-align:middle" alt="UCSF logo" title="EGAN has been developed by the UCSF HDFCCC BCBC"></td>
+			</tr>
+			<tr bgcolor="silver"><td colspan=3></td></tr>
+			<tr><td style="vertical-align:top">
+<script type="text/javascript">
+
+	function SimpleSwap(el, which){
+		el.src=el.getAttribute(which||"origsrc");
+	}
+
+	function SimpleSwapSetup(){
+		var x = document.getElementsByTagName("img");
+		for (var i=0;i<x.length;i++){
+			var oversrc = x[i].getAttribute("oversrc");
+			if (!oversrc) continue;
+			// preload image
+			// comment the next two lines to disable image pre-loading
+			x[i].oversrc_img = new Image();
+			x[i].oversrc_img.src=oversrc;
+			// set event handlers
+			x[i].onmouseover = new Function("SimpleSwap(this,'oversrc');");
+			x[i].onmouseout = new Function("SimpleSwap(this);");
+			// save original src
+			x[i].setAttribute("origsrc",x[i].src);
+			}
+	}
+
+	var PreSimpleSwapOnload = (window.onload) ? window.onload : function(){};
+	window.onload = function(){
+		PreSimpleSwapOnload(); 
+		SimpleSwapSetup();
+	}
+</script>
+
+<table cellpadding=5 cellspacing=0>
+<tr><td style="text-align:center"><a href="./"><img src="images/about_orange.png" oversrc="images/about_orange.png" height=24 border=0 alt="About EGAN" title="About EGAN"></a></td></tr>
+<tr><td style="text-align:center"><a href="why.php"><img src="images/why_gray.png" oversrc="images/why_green.png" height=24 border=0 alt="Why EGAN?" title="Why EGAN?"></a></td></tr>
+<tr><td style="text-align:center"><a href="screenshots.php"><img src="images/screenshots_gray.png" oversrc="images/screenshots_blue.png" height=24 border=0 alt="EGAN Screenshots" title="EGAN Screenshots"></a></td></tr>
+<tr><td style="text-align:center"><a href="downloads.php"><img src="images/downloads_gray.png" oversrc="images/downloads_red.png" height=24 border=0 alt="EGAN Demos and Downloads" title="EGAN Demos and Downloads"></a></td></tr>
+<tr><td style="text-align:center"><a href="documentation.php"><img src="images/docs_gray.png" oversrc="images/docs_green.png" height=24 border=0 alt="EGAN Discussions and Documentation" title="EGAN Discussions and Documentation"></a></td></tr>
+<tr><td style="text-align:center"><a href="contact.php"><img src="images/contact_gray.png" oversrc="images/contact_yellow.png" height=24 border=0 alt="Contact EGAN Users and Developers" title="Contact EGAN Users and Developers"></a></td></tr>
+</table></td><td colspan=2 style="vertical-align:top">
+
+<h2><b>EGAN: Exploratory Gene Association Networks</b></h2>
+<p>
+<a href="leverage.php"><i>Leverage organic intelligence</i></a><br>
+<br>
+<b>EGAN</b> is a software tool that allows a <b>bench biologist</b> to visualize and interpret the results of high-throughput exploratory assays in an interactive hypergraph of <b>genes</b>, <b>relationships</b> (<i>protein-protein interactions, literature co-occurrence, etc.</i>) and <b>meta-data</b> (<i>annotation, signaling pathways, etc.</i>). EGAN provides comprehensive, automated calculation of <b>meta-data coincidence</b> (<i>over-representation, enrichment</i>) for user- and assay-defined <b>gene lists</b>, and provides direct links to <b>web resources and literature</b> (<i>NCBI Entrez Gene, PubMed, KEGG, Gene Ontology, iHOP, Google, etc.</i>).<br>
+<br>
+In short, EGAN allows you to perform data-driven discovery of novel systems biology/disease pathways by integrating computational analysis output with a giant gene-centric knowledge base.  <a href="/docs/EGAN_Basic_Ideas_and_Terminology.pdf">Click here for a basic description of concepts</a>.<br>
+<br>
+EGAN functions as a module for <b>exploratory investigation</b> of analysis results from <b>multiple high-throughput assay technologies</b>, including but not limited to:<ul> 
+<li><b>Transcriptomics</b> via expression microarrays or RNA-Seq
+<li><b>Genomics</b> via SNP GWAS or array CGH
+<li><b>Proteomics</b> via MS/MS peptide identifications
+<li><b>Epigenomics</b> via DNA methylation, ChIP-on-Chip or ChIP-Seq
+<li><b>In-silico analysis</b> of sequences or literature
+</ul>
+EGAN has been built using <i>Cytoscape</i> libraries for graph visualization and layout, and is comparable to <i>DAVID</i>, <i>GSEA</i>, <i>Ingenuity IPA</i> and <i>Ariadne Pathway Studio</i>. There are pre-collated EGAN networks available for <a href="downloads.php">human</a> (<i>Homo sapiens</i>), <a href="downloads.php">mouse</a> (<i>Mus musculus</i>), <a href="downloads.php">rat</a> (<i>Rattus norvegicus</i>), <a href="downloads.php">chicken</a> (<i>Gallus gallus</i>), <a href="downloads.php">zebrafish</a> (<i>Danio rerio</i>), <a href="downloads.php">fruit fly</a> (<i>Drosophila melanogaster</i>), <a href="downloads.php">nematode</a> (<i>Caenorhabditis elegans</i>), <a href="downloads.php">mouse-ear cress</a> (<i>Arabidopsis thaliana</i>) and <a href="downloads.php">brewer's yeast</a> (<i>Saccharomyces cerevisiae</i>).  There is now an EGAN module available for <a href="downloads.php">GenePattern</a> (human-only). <br>
+<br>
+For more information, <a href="http://www.ncbi.nlm.nih.gov/pubmed/19933825">check out the paper</a>.  For a hands-on introduction to EGAN, <a href="EGAN_1_3/launch_egan_entrez_human_five_demo.jnlp">try the demo</a> and <a href="docs/EGAN_1_3_tutorial_A_basic_use-case.pdf">follow along with the tutorial</a>.<br>
+<br>
+EGAN has been developed by the <a href="http://cancer.ucsf.edu/">Helen Diller Family Comprehensive Cancer Center</a> <a href="http://cancer.ucsf.edu/biostat/index.php">Biostatistics and Computational Biology Core</a> at the <a href="http://www.ucsf.edu/">University of California, San Francisco</a>, and is provided for use according to the terms of this <a href="EGAN_1_3/README.txt">license</a>.
+<br>
+<br>
+This EGAN-produced image shows a set of genes found to be up-regulated in breast cancer patients with poorer survival, connected by <i style='color:#C86432'>literature</i>, <i style='color:#FF96C8'>protein-protein interactions</i>, <i style='color:#C8C8C8'>chromosomal adjacency</i> and enriched gene sets: <i style='color:#4BAFFA'>KEGG</i>, <i style='color:#C8C832'>Gene Ontology Process</i> and <i style='color:#C84B4B'>NCI-Nature</i>. These genes and terms/pathways are potential effectors of/biomarkers for poor survival.<br>
+<img src="images/screenshots/EGAN_screenshot_poor_survival_expression.png" alt="This EGAN-produced image shows a set of genes found to be up-regulated in breast cancer patients with poorer survival, connected by literature (orange), protein-protein interactions (pink), chromosomal adjacency (gray) and enriched gene sets: KEGG (blue), Gene Ontology Process (yellow) and NCI-Nature (red). These genes and terms/pathways are potential effectors of/biomarkers for poor survival." title="This EGAN-produced image shows a set of genes found to be up-regulated in breast cancer patients with poorer survival, connected by literature (orange), protein-protein interactions (pink), chromosomal adjacency (gray) and enriched gene sets: KEGG (blue), Gene Ontology Process (yellow) and NCI-Nature (red). These genes and terms/pathways are potential effectors of/biomarkers for poor survival.">
+</p>
+
+			</td></tr>
+			<tr bgcolor="silver"><td colspan=3></td></tr>
+			<tr bgcolor="#8EACE8" style="text-align:center;color:black"><td colspan=3>Copyright © 2011 The Regents of the University of California. All Rights Reserved.</td></tr>
+			<tr bgcolor="silver"><td colspan=3></td></tr>
+		</table>
+	</body>
+</html>

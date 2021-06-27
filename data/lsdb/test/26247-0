@@ -1,0 +1,577 @@
+
+
+
+<!-- %@ page errorPage="../elements/errorpage.jsp" buffer="none" -->
+
+
+
+
+
+ 
+ 
+   
+     
+     
+      
+
+
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>GenRE - Fusarium graminearum Genome DataBase</title>
+<link rel="stylesheet" type="text/css" href="/genre/proj/system/modules/mips.genre.web/resources/genre.css">
+<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; CHARSET=ISO-8859-1">
+<meta name="author" content="MIPS - GenRE - GSF">
+<meta name="description" content="F. graminearum Genome DataBase">
+<meta name="keywords" content="GenRE, genome, research, annotation">
+<script language="JavaScript">
+
+    var winoff=0;
+function winopen(url,target,W,H){ //alert(url+target+W+H);
+   if(W==''){W=800;}
+   if(H==''){W=650;}
+   if(winoff==1){
+     var fenster = window.open(url,target,eingensch);
+     fenster.close(); winoff=0;
+   }
+   var eingensch="scrollbars=yes,menubar=no,resizable=yes,width="+W+",height="+H;
+   var fenster = window.open(url,target,eingensch);
+   fenster.focus(); winoff=1;
+}
+
+function winopen_undef(url,target,W,H){ //alert(url+target+W+H);
+   if(W==''){W=800;}
+   if(H==''){W=650;}
+   if(winoff==1){
+     var fenster = window.open(url,target,eingensch);
+     fenster.close(); winoff=0;
+   }
+   var eingensch="scrollbars=yes,menubar=no,resizable=yes";
+   var fenster = window.open(url,target,eingensch);
+   fenster.focus(); winoff=1;
+}
+
+/***********************************************
+* Switch Content script- © Dynamic Drive (www.dynamicdrive.com)
+* This notice must stay intact for legal use. Last updated April 2nd, 2005.
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var enablepersist="on" //Enable saving state of content structure using session cookies? (on/off)
+var collapseprevious="no" //Collapse previously open content when opening present? (yes/no)
+
+var contractsymbol='<img border="0" src="/genre/proj/system/modules/mips.genre.web/resources/collapse.gif" alt="- " />' //HTML for contract symbol.
+var expandsymbol='<img border="0" src="/genre/proj/system/modules/mips.genre.web/resources/expand.gif" alt="+ " />' //HTML for expand symbol.
+
+
+if (document.getElementById){
+document.write('<style type="text/css">')
+document.write('.switchcontent{display:none;}')
+document.write('</style>')
+}
+
+function getElementbyClass(rootobj, classname){
+var temparray=new Array()
+var inc=0
+var rootlength=rootobj.length
+for (i=0; i<rootlength; i++){
+if (rootobj[i].className==classname)
+temparray[inc++]=rootobj[i]
+}
+return temparray
+}
+
+function sweeptoggle(ec){
+var thestate=(ec=="expand")? "block" : "none"
+var inc=0
+while (ccollect[inc]){
+ccollect[inc].style.display=thestate
+inc++
+}
+revivestatus()
+}
+
+
+function contractcontent(omit){
+var inc=0
+while (ccollect[inc]){
+if (ccollect[inc].id!=omit)
+ccollect[inc].style.display="none"
+inc++
+}
+}
+
+function expandcontent(curobj, cid){
+var spantags=curobj.getElementsByTagName("SPAN")
+var showstateobj=getElementbyClass(spantags, "showstate")
+if (ccollect.length>0){
+if (collapseprevious=="yes")
+contractcontent(cid)
+document.getElementById(cid).style.display=(document.getElementById(cid).style.display!="block")? "block" : "none"
+if (showstateobj.length>0){ //if "showstate" span exists in header
+if (collapseprevious=="no")
+showstateobj[0].innerHTML=(document.getElementById(cid).style.display=="block")? contractsymbol : expandsymbol
+else
+revivestatus()
+}
+}
+}
+
+function revivecontent(){
+contractcontent("omitnothing")
+selectedItem=getselectedItem()
+selectedComponents=selectedItem.split("|")
+for (i=0; i<selectedComponents.length-1; i++)
+document.getElementById(selectedComponents[i]).style.display="block"
+}
+
+function revivestatus(){
+var inc=0
+while (statecollect[inc]){
+if (ccollect[inc].style.display=="block")
+statecollect[inc].innerHTML=contractsymbol
+else
+statecollect[inc].innerHTML=expandsymbol
+inc++
+}
+}
+
+function get_cookie(Name) { 
+var search = Name + "="
+var returnvalue = "";
+if (document.cookie.length > 0) {
+offset = document.cookie.indexOf(search)
+if (offset != -1) { 
+offset += search.length
+end = document.cookie.indexOf(";", offset);
+if (end == -1) end = document.cookie.length;
+returnvalue=unescape(document.cookie.substring(offset, end))
+}
+}
+return returnvalue;
+}
+
+function getselectedItem(){
+if (get_cookie(window.location.pathname) != ""){
+selectedItem=get_cookie(window.location.pathname)
+return selectedItem
+}
+else
+return ""
+}
+
+function saveswitchstate(){
+var inc=0, selectedItem=""
+while (ccollect[inc]){
+if (ccollect[inc].style.display=="block")
+selectedItem+=ccollect[inc].id+"|"
+inc++
+}
+
+document.cookie=window.location.pathname+"="+selectedItem
+}
+
+function do_onload(){
+uniqueidn=window.location.pathname+"firsttimeload"
+var alltags=document.all? document.all : document.getElementsByTagName("*")
+ccollect=getElementbyClass(alltags, "switchcontent")
+statecollect=getElementbyClass(alltags, "showstate")
+if (enablepersist=="on" && ccollect.length>0){
+document.cookie=(get_cookie(uniqueidn)=="")? uniqueidn+"=1" : uniqueidn+"=0" 
+firsttimeload=(get_cookie(uniqueidn)==1)? 1 : 0 //check if this is 1st page load
+if (!firsttimeload)
+revivecontent()
+}
+if (ccollect.length>0 && statecollect.length>0)
+revivestatus()
+}
+
+if (window.addEventListener)
+window.addEventListener("load", do_onload, false)
+else if (window.attachEvent)
+window.attachEvent("onload", do_onload)
+else if (document.getElementById)
+window.onload=do_onload
+
+if (enablepersist=="on" && document.getElementById)
+window.onunload=saveswitchstate
+
+</script>
+</head>
+<body style="FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: Arial,Helvetica,Verdana" 
+text=#000000 vLink=#000000 aLink=#000000 link=#000000 leftMargin=0 
+background="/genre/proj/system/modules/mips.genre.web/resources/bgr_mips.jpg" topMargin=0 marginheight="0" 
+marginwidth="0">
+
+<BASEFONT face=Sans-Serif,Helv,Helvetica,Verdana,Arial size=2>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD><MAP name=gsf><AREA shape=RECT target=_blank alt=GSF 
+        coords=15,10,80,80 href="http://www.gsf.de/"></MAP><IMG alt="Logo GSF" 
+      src="/genre/proj/system/modules/mips.genre.web/resources/topleft.jpg" useMap=#gsf border=0> </TD>
+    <TD width="100%">
+      <P>&nbsp;</P>
+    </TD>
+    <TD><MAP name=mips><AREA shape=RECT alt=mips coords=130,10,300,80 
+        href="http://mips.gsf.de/"></MAP><IMG alt="Logo mips" 
+      src="/genre/proj/system/modules/mips.genre.web/resources/topright.jpg" useMap=#mips border=0> 
+    </TD>
+  </TR>
+  </TBODY>
+</TABLE>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD bgcolor="#E3DFB9"><a href="/genre/proj/genre"><IMG height=25 alt="GenRE" src="/genre/proj/system/modules/mips.genre.web/resources/glogo.gif" width=180 border=0></a> </TD>
+    <TD bgcolor="#E3DFB9"><IMG height=25 alt="" src="/genre/proj/system/modules/mips.genre.web/resources/spacerb.gif" width=16 border=0> </TD>
+    <TD width="100%" style="background-image:url(/genre/proj/system/modules/mips.genre.web/resources/navigation.gif); background-repeat:repeat-y">
+		<!-- Navigation starts here -->
+		<p class="nav">Navigation: 
+ &raquo; <a href="/genre/proj/FGDB/">Fusarium graminearum</a>
+ &raquo; Home
+</p>
+
+		<!-- Navigation ends here -->
+    </TD>
+  </TR>
+  </TBODY>
+</TABLE>
+
+<!-- End Of Header               -->
+
+
+<!-- Main page body starts here -->
+<TABLE cellSpacing=8 cellPadding=0 width="100%" align=center border=0>
+  <TBODY> 
+  <TR vAlign=top> 
+
+          <!-- Sidebar -->
+          <TD width=180 border=0 >
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write("\<script src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'>\<\/script>" );
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3244732-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- Table Header required -->
+<TABLE cellSpacing=2 cellPadding=0 width="180" border=0>
+<TBODY>
+  <TR>
+    <TD>
+     <!-- Block Table start  -->
+      <TABLE cellSpacing=0 cellPadding=0 width="100%">
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=81 align=left bgColor=#F0EBD8>
+            <a href="/genre/proj/FGDB/"><IMG title="FGDB" src="/genre/export/sites/default/FGDB/pictures/FGDB_ICON.png" border=0></a>
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+<!-- If you need mor tables insert the following in between -->
+</TD></TR><TR><TD>
+
+<!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Search Gene/ORF/Descr</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+          <TD valign="top" bgColor=#F0EBD8>
+          <script type="text/javascript">
+                function CheckData(formular)
+                { 
+        return formular.id.value.replace(/^\s+/g, '').replace(/\s+$/g, '');
+                 }
+                </script>
+            <form name="searchEntryForm" method="POST" action="/genre/proj/FGDB/listSearch.html?" onSubmit="return CheckData(this);">
+              <input type="text" name="id" size="10" value="">
+                            <br/>
+              <input type="submit" name="submit" value="Search">
+              <input type="reset" name="reset" value="x">
+            </form>
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+
+<!-- If you need mor tables insert the following in between -->
+</TD></TR><TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Supercontig (1-31)</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+<TD valign="top" bgColor=#F0EBD8>
+            <form name="Contig_View" method="GET" action="/genre/proj/FGDB/contigSearch.html?">
+              <input type="text" name="id" size="10" value="">              
+             <br>               
+             <input type="submit" name="submit" value="Submit">
+              <input type="reset" name="reset" value="Reset">
+            </form>
+         </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+
+</TD></TR><TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Catalogs:</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+<TD valign="top" bgColor=#F0EBD8>
+<form>
+<select name="list" size="1">
+<option selected value="/genre/proj/FGDB/Search/Catalogs/searchCatfirstFun.html">FunCat</option>
+<option value="/genre/proj/FGDB/Search/Catalogs/searchCatfirstEC.html">Enzyme Class</option>
+<option value="/genre/proj/FGDB/Search/Catalogs/searchCatfirstIpr.html">InterPro</option>
+<option value="/genre/proj/FGDB/Search/Catalogs/searchCatfirstClass.html">Protein Class</option>
+<!--option value="/genre/proj/FGDB/Search/Catalogs/searchCatfirstTM.html">TMHMM</option-->
+</select><input TYPE="button" VALUE="Browse"
+onClick="top.location.href=
+this.form.list.options[this.form.list.selectedIndex].value">
+</form> 
+
+         </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+
+
+</TD></TR><TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Details</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+          <TD valign="top" bgColor=#F0EBD8>
+
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/FGDB/Search/index.html">Adv. Search</a></h3>
+
+   <h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+&nbsp;&nbsp;&nbsp;<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/FGDB/Search/Gise/index.html">Index Search</a></h3>
+
+<!--h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/FGDB/Synteny/">Synteny Viewer</a></h3-->
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<!--a style="COLOR: #000066; WHITE-SPACE: nowrap" HREF="javascript:winopen('http://mips.gsf.de/cgi-bin/blast/blast_page?genus=Fgraminearum','link',800,650)">BLAST DNA/Protein</a-->
+<!--a style="COLOR: #000066; WHITE-SPACE: nowrap" HREF="/genre/proj/FGDB/Search/get_blast.jsp?db=FGDB&db_type=wustart&params=-e+0.001+-F+F">BLAST DNA/Protein</a-->
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" HREF="/genre/proj/FGDB/Search/blast.jsp?organism=FGDB">Blast DNA/Protein</a>
+</h3>
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/FGDB/About/index.html">About FGDB</a></h3>
+
+<br />
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="http://www.helmholtz-muenchen.de/en/mips/projects/fungi/index.html">MIPS Fungal Genomes</a></h3>
+
+<!--h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/FGDB/Help/index.html" target="link">Help</a></h3 -->
+
+
+
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+<!-- If you need mor tables insert the following in between -->
+<!-- </TD></TR><TR><TD> -->
+
+<!-- Block Table end -->
+      </TD></TR><TR><TD>
+      <TABLE cellSpacing=1 cellPadding=1 width="100%" bgColor=#e3dfb9>
+      <tr>
+        <td>
+          <A href="http://mips.gsf.de/"><IMG title="mips home" src="/genre/export/sites/default/resources/mips_home.gif" border=0></A>
+        </td>
+        <td>
+          <A onmouseover="mail.src='/genre/export/sites/default/resources/letter_op.gif'" 
+             onmouseout="mail.src='/genre/export/sites/default/resources/letter_cl.gif'" 
+             href="/genre/proj/FGDB/About/people.html">
+          <IMG title="FGDB people" src="/genre/export/sites/default/resources/letter_cl.gif" border=0 name=mail >
+          </A>
+        </td>
+        <td>
+          <!--A onmouseover="print.src='/genre/export/sites/default/resources/print_lo.gif'" 
+             onmouseout="print.src='/genre/export/sites/default/resources/print_sh.gif'" 
+             href="http://mips.gsf.de" target=_blank>
+          <IMG title="print view" src="/genre/export/sites/default/resources/print_lo.gif" border=0 name=print >
+          </A --> 
+           &nbsp;&nbsp;&nbsp;&nbsp; <a href="/genre/proj/FGDB/About/FTP_sites.html"><IMG title="FTP" src="/genre/export/sites/default/FGDB/pictures/ftp.gif" border=0></a>
+        </td>
+      </tr>
+      </TABLE>
+
+</TD></TR><TR><TD>
+
+      <!--TABLE cellSpacing=0 cellPadding=0 width="100%">
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=81 align=left>
+            <a href="http://www.gen-au.at/e_category.jsp"><IMG title="GEN-AU" src="/genre/export/sites/default/FGDB/pictures/GEN-AU_s.png" border=0></a>
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE -->
+
+
+<!-- Table end required -->
+    </TD>
+  </TR>
+</TBODY>
+
+</TABLE>
+  </TD>
+
+	<TD vAlign=top width="100%">
+
+
+     
+   	
+ 
+
+
+
+	  <html>
+	<head>
+		<title>Enter the title of your HTML document here</title>
+	</head>
+	<body>
+		<p>&nbsp;</p>
+		<br />
+		<br />
+		<img align="right" src="/genre/export/sites/default/FGDB/pictures/fwf-logo_var1.png" alt="FWF Der Wissenschaftsfonds." />
+		<br />
+		<h2>
+			<b>Welcome to the MIPS <i>Fusarium graminearum</i> Genome Database</b>
+		</h2>
+		<p>
+The MIPS <i>Fusarium graminearum</i> Genome Database aims to present 
+information on the molecular structure and functional network of the entirely 
+sequenced, filamentous fungus <i>Fusarium graminearum</i> (Anamorph of <i>Gibberella zeae</i>). This interface is based on the assembly 3 sequence of the 
+Whitehead Center for Genome Research.
+Please note the <a href="javascript:winopen('http://www-genome.wi.mit.edu/cgi-bin/annotation/fusarium/download_license.cgi','link',800,650)">
+				<u>
+					<font color="#0000ff">Whitehead Institute 
+Disclaimer</font>
+				</u>
+			</a>.
+The goal is to provide a comprehensive genome database in the Genome Research Environment in parallel with other fungal genomes to enable in 
+depth fungal comparative
+ analysis. </p>
+		<p>
+This project started as part of the GEN-AU Project <a href="javascript:winopen('http://www.gen-au.at/english/project.jsp?id=23','link',800,650)">
+				<i>Virulence mechanisms of the plant pathogenic fungus 
+Fusarium graminearum and resistance mechanisms in host plants</i>
+			</a> 
+coordinated by <a href="javascript:winopen('http://www.boku.ac.at/zag/AG_adam.htm','link',800,650)">Dr. Gerhard Adam (BOKU, Vienna)</a> and funded by the Austrian Federal Ministry for Education, Science and Culture, which has established the national genome programme GEN-AU (GENome Research in AUstria: <a href="javascript:winopen('http://www.gen-au.at/english/content.jsp','link',800,650)">http://www.gen-au.at/</a>). Since 2009 funded by the Austrian FWF (SFB37).</p>
+		<p>
+			<a href="/genre/proj/FGDB/About/overview.html">More on the outline of the Project</a>
+		</p>
+		<hr noshade="noshade" />
+		<p>&nbsp;</p>
+		<h3>There is an onogoing effort to process all gene calls manually and thus, the number of genes is a moving target. Any evidence on wrong or correct gene calls is welcome. <a href="/genre/proj/FGDB/About/people.html">Please provide your data for manual detailed curation of the FGDB content. Thanks!</a>
+		</h3>
+<p>	<b>Citation:</b> Wong P, Walter M, Lee W, Mannhaupt G, M&uuml;nsterk&ouml;tter M, Mewes HW, Adam G, G&uuml;ldener U (2010). FGDB: revisiting the genome annotation of the plant pathogen <i>Fusarium graminearum</i>. <a href="http://nar.oxfordjournals.org/content/early/2010/11/04/nar.gkq1016.abstract.html?ijkey=xw1IiP20laEn00z&amp;keytype=ref">Nucleic Acids Research 2010; doi: 10.1093/nar/gkq1016</a>
+		</p>
+
+		<h3>News:</h3>
+		<ul>
+<li><h3>2010-07-27: New gene model set released: version 3.1. Genome wide integration of gene predictions, EST data and comparative gene calling resulted in a set of 13719 CDS. New calls are named FGSG_15xxx and beyond.
+		</li>
+<li><h3>2010-06-02: PLEXdb Gene OscilloScope link integrated to explore the detailed expression data of all public experiments.
+		</li><li>
+				<h3>2010-01-15: GeneChip expression data integrated (Link below the GBrowse snapshot). Genome wide revision of gene calls ongoing, release of a revised version upcoming.</h3>
+			</li>
+			<li>
+				<h3>2008-02-10: FG3 assembly and calls imported. Conflicts with mapped FG1 calls corrected. Where necessary, new calls (FGSG_15xxx) introduced.</h3>
+			</li>
+		</ul>
+		<p />
+	</body>
+</html>
+
+
+
+
+   
+     
+     
+      
+
+
+
+
+          
+    </TD>
+  </TR>
+  <tr> 
+    <td height="1"><img height="1" width="150" src="/genre/proj/system/modules/mips.genre.web/resources/spacer.gif"></td>
+    <td></td>
+  </tr>
+  </TBODY> 
+</TABLE>
+<!-- Main page body ends here -->
+
+<TABLE cellSpacing=10 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P><FONT color=#666666>&copy; 2003 GSF - Forschungszentrum f&uuml;r Umwelt und 
+      Gesundheit, GmbH Ingolst&auml;dter Landstra&szlig;e 1, D-85764 Neuherberg</FONT></P>
+      <P><A href="http://www.gsf.de/Impressum/index_en.phtml"><B>Imprint</B></A></P> 
+      <P><FONT color=#666666><B>Disclaimer:</B><BR><FONT size=1>MIPS Databases 
+      and associated information are protected by copyright. This server and its 
+      associated data and services are for academic, non-commercial use only. 
+      The <A href="http://www.gsf.de/" target=_blank><FONT color=#666666 
+      size=1>GSF</FONT></A> has no liability for the use of results, data or 
+      information which have been provided through this server. Neither the use 
+      for commercial purposes, nor the redistribution of MIPS database files to 
+      third parties nor the distribution of parts of files or derivative 
+      products to any third parties is permitted. Commercial users may contact 
+      the distributor <A href="http://www.biomax.de/" target=_blank><FONT 
+      color=#666666 size=1>Biomax Informatics AG</FONT></A>.</FONT></font></P>
+    </TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+</body>
+</html>
+
+     
+   	
+

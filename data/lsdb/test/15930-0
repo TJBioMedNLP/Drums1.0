@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<HTML>
+<HEAD>
+<TITLE>DNAbinder: A Web server for prediction of DNA-binding proteins</TITLE>
+<meta name="Description" content="server for prediction of DNA-binding proteins">
+<meta name="KeyWords" content="web server, SVM, ANN, DNA-binding, protein">
+<link href="style.css" rel="stylesheet" type="text/css">
+
+</HEAD>
+
+<BODY>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="60%" ALIGN=CENTER><!-- table # 1-->
+
+
+<TABLE WIDTH='80%' align=center BORDER='0' valign=bottom><!-- table # 2-->
+<tr valign="center"> 
+<td><img src="./Fig/csir.gif"></td>
+<td><img src="./Fig/title.jpg"></td>
+<td><img src="./Fig/imtech.jpg"></td>
+</tr></TABLE><!-- table # 2-->
+
+<TABLE BGCOLOR='#fffacd' align=center BORDER='0' valign=bottom><!-- table # 3-->
+<TR>
+<TD class="menu"><a href="index.html">ABOUT SERVER</a></TD>
+<TD class="menu"><a href="submit.html">SUBMIT SEQUENCE</TD>
+<TD class="menu"><a href="help.html">HELP</TD>
+<TD class="menu"><a href="download.html">DOWNLOAD</TD>
+<TD class="menu"><a href="contact.html">CONTACT</TD>
+<TD class="menu"><a href="developers.html">DEVELOPERS</TD>
+</TR>
+</TABLE><!-- table # 3-->
+
+
+<TABLE WIDTH='85%' ALIGN="CENTER" CELLSPACING='20'><!-- table # 4-->
+<TR>
+<TD>
+
+<P ALIGN='JUSTIFY'><font size='3px'>DNAbinder is a webserver developed for predicting DNA-binding proteins from their amino acid sequence using various compositional features of proteins. The SVM models have been developed on following datasets using following protein features.
+
+
+
+<br><br><b> Datasets: </b>The SVM models were developed on <b>Main dataset</b> (having 146 DNA-binding protein chains and 250 non DNA-binding proteins), <b>alternate dataset</b> (1153 DNA-bindig proteins and 1153 non DNA-binding proteins) and on <b>Realistic dataset</b>  (146 DNA-binding protein chains and 1500 non DNA-binding proteins).<br>
+
+<br><b>Protein features:</b> We developed two SVM models on each dataset using amino acid composition and evolutionary information.
+
+<ol><li><font color='#A52A2A'> Composition based SVM model:</font> This model has been developed using amino acid composition of proteins.
+<li><font color='#A52A2A'>PSSM based SVM model:</font> This model has been developed using evolutionary information in form of PSSM profile obtained from PSI-BLAST search (three iterations with e-value cut-off 0.001) against nr database. </ol>
+<!--<p><a href="Data/README.html"><b>The standalone version of DNAbinder is available from here</b></a></p>-->
+<td><img src="./Fig/dna.jpg"></td></TR>
+</TABLE>
+
+
+
+<TABLE BORDER='0' WIDTH='85%'ALIGN='CENTER' cellspacing="0"summary="This table gives result obtined during training with main and realistic dataset on amino acid and PSSM based input.">
+<CAPTION><EM><b>The Performance of SVM models on main/realistic datasets using amino acid composition (AAC) and PSSM profile of proteins</b></EM></CAPTION>
+
+<TR ALIGN='CENTER'><TD class='BorderMeRed'>Dataset</TD><TD class='BorderMeRed'>Input</TD><TD class='BorderMeRed'>Sensitivity (%)</TD><TD class='BorderMeRed'>Specificity (%)</TD><TD class='BorderMeRed'>Accuracy (%)</TD><TD class='BorderMeRed'>MCC</TD></TR>
+
+<TR ALIGN='CENTER'><TD rowspan='2' class='BlueWho'>Main Dataset (DNAset)</td><TD class='BorderMeBlack'>AAC</TD><TD class='BorderMeBlack'>78.11</TD><TD class='BorderMeBlack'>80.80</TD><TD class='BorderMeBlack'>79.80</TD><TD class='BorderMeBlack'>0.58</TD></TR>
+<TR ALIGN='CENTER'><TD class='BorderMeBlack'>PSSM</TD><TD class='BorderMeBlack'>86.32</TD><TD class='BorderMeBlack'>86.80</TD><TD class='BorderMeBlack'>86.62</TD><TD class='BorderMeBlack'>0.72</TD></TR>
+
+<TR ALIGN='CENTER'><TD rowspan='2' class='BlueWho'>Alternate Dataset (DNAaset)</td><TD class='BorderMeBlack'>AAC</TD><TD class='BorderMeBlack'>72.51</TD><TD class='BorderMeBlack'>72.33</TD><TD class='BorderMeBlack'>72.42</TD><TD class='BorderMeBlack'>0.45</TD></TR>
+<TR ALIGN='CENTER'><TD class='BorderMeBlack'>PSSM</TD><TD class='BorderMeBlack'>73.53</TD><TD class='BorderMeBlack'>74.92</TD><TD class='BorderMeBlack'>74.22</TD><TD class='BorderMeBlack'>0.49</TD></TR>
+
+
+<TR ALIGN='CENTER'><TD rowspan='2' class='BlueWho'>Realistic Dataset (DNArset)</td><TD class='BorderMeBlack'>AAC</TD><TD class='BorderMeBlack'>47.95</TD><TD class='BorderMeBlack'>93.33</TD><TD class='BorderMeBlack'>89.31</TD><TD class='BorderMeBlack'>0.40</TD></TR>
+<TR ALIGN='CENTER'><TD class='BorderMeBlack'>PSSM</TD><TD class='BorderMeBlack'>63.61</TD><TD class='BorderMeBlack'>95.40</TD><TD class='BorderMeBlack'>92.59</TD><TD class='BorderMeBlack'>0.57</TD></TR>
+</TABLE>
+
+
+<TABLE WIDTH='85%' align="CENTER" CELLSPACING='20'>
+<TR><TD>
+<p><font size='3px'>
+<b> DNAbinder allows user to submit more than one sequence for predicting DNA-biding proteins using composition based SVM model. In case of PSSM based SVM model server allows to predict one sequence at a time.</b> If user submit more than one sequence, only first sequence will be considered for prediction.<br><BR>
+
+<br>The probability of correct prediction directly depends on the threshold. For prediction with high confidence (less probability of false positive prediction) high threshold should be choosen.
+<!--
+Due to threshold dependent nature of prediction, final result depends on the threshold. To minimize the number of 'False positives' high threshold should be chosen.The default threshold is set to be 0.0. To get prediction with less number of false positives, the user should choose higher threshold. For prediction with less number of false negatives, threshold should be higher.
+-->
+</font></P></TD>
+
+</TABLE><!-- table # 4-->
+
+<TABLE BGCOLOR='#fffacd' ALIGN=CENTER width='80%'><!-- table # 5-->
+
+
+
+
+<TR><TD width="10%" align='center'><a href="http://www.biomedcentral.com/1471-2105/8/463/abstract"  target="_blank"><img src="Fig/bmc.gif"></a></td><td><FONT color="blue"><b>If you are using this server please site:</font><font color="red">Identification of DNA-binding proteins using support vector machines and evolutionary profiles. Manish Kumar, Michael M. Gromiha and Gajendra PS Raghava, BMC Bioinformatics, 2007, 8:463</b></font><!--<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=16339140&query_hl=1&itool=pubmed_docsum" target="_blank"><img src="Fig/pubmed.gif"></a>--></TD></TR>
+
+
+
+
+<TR><TD  colspan='2' class="menu"><a href="http://www.imtech.res.in/raghava" target="_blank">OTHER SERVERS@IMTECH</a></TD></TR>
+</TABLE><!-- table # 5-->
+
+
+
+</TD></TR></TABLE><!-- table # 1-->
+</BODY>
+</HTML>

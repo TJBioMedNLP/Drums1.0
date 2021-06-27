@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>PCR primer design - the primers4clades web server</title>
+<meta name="authors" content="Bruno Contreras-Moreira and Pablo Vinuesa">
+<meta name="keywords" content="CODEHOP, oligonucleotide, PCR primer design, cross-species PCR, multiple sequence alignments, clusters, clades, lineage-specific primers, phylogeny, protein, DNA, taxon specific primers, taxa, molecular markers, molecular systematics, molecular ecology, metagenomic ana
+lysis, metagenomics">
+<meta name="verify-v1" content="HZEX/Z2TYZnl+srBCXBMd5Qko3zYf048JZG/zFignGQ=">
+<link href="marfil.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="./files/favicon.ico">
+<script type="text/javascript" src="demo.js"></script>
+<script type="text/javascript">
+AIM = { frame : function(c) { var n = 'f' + Math.floor(Math.random() * 99999); var d = document.createElement('DIV'); d.innerHTML = '<iframe style="display:none" src="about:blank" id="'+n+'" name="'+n+'" onload="AIM.loaded(\''+n+'\')"><\/iframe>'; document.body.appendChild(d);var i = document.getElementById(n); if (c && typeof(c.onComplete) == 'function'){ i.onComplete = c.onComplete; } return n; },form : function(f, name){ f.setAttribute('target', name); }, submit : function(f, c) { AIM.form(f, AIM.frame(c)); if (c && typeof(c.onStart) == 'function'){ return c.onStart(); } else{ return true; }},loaded : function(id) { var i = document.getElementById(id); if (i.contentDocument){ var d = i.contentDocument; } else if (i.contentWindow){ var d = i.contentWindow.document; } else{ var d = window.frames[id].document; } if (d.location.href == "about:blank"){ return; } if (typeof(i.onComplete) == 'function'){ i.onComplete(d.body.innerHTML); }}}
+</script>
+<script type="text/javascript" src="json2007.js"></script>
+<script type="text/javascript" src="rsh.js"></script>
+<script type="text/javascript">//http://code.google.com/p/reallysimplehistory
+window.dhtmlHistory.create();
+var rawIndex; var original_content=''; 
+window.onload = function(){ Index=0;dhtmlHistory.initialize();dhtmlHistory.addListener(historyChange); original_content = document.getElementById("content").innerHTML; if(window.dhtmlHistory.isFirstLoad()){ dhtmlHistory.add(Index,original_content) } }
+function historyChange(newLocation, historyData) { var data = (historyData != null ? historyData : original_content ); document.getElementById("content").innerHTML = data; }
+addHistoryEvent = function(data) { Index++; dhtmlHistory.add(Index,data); }
+function startCallback(){ return true; }
+function startCallbackContent(){document.getElementById('outputdiv').innerHTML = "Job submitted, results may take a few minutes (email is safer) <img src=\"files/snake.gif\">"; return true; }
+function completeCallbackContent(response){ document.getElementById("content").innerHTML = response; addHistoryEvent(response); }
+function completeCallback(response){ document.getElementById("loadiv").innerHTML = response; }
+</script>
+<script type="text/javascript" src="mktree.js"></script>
+</head><body>
+
+<div id="top">
+        <h2>primers4clades</h2>
+	<div id="header"><i>version 1.0</i>&nbsp;&nbsp;&nbsp;  <i>mirrors:</i> <a href="http://maya.ccg.unam.mx/primers4clades/">CCG/UNAM</a> , <a href="http://floresta.eead.csic.es/primers4clades/">EEAD/CSIC</a></div>
+</div>
+
+<div id="tabber"><div id="tabcontent">
+	<div id="tabOne"></div>
+	<div id="tabTwo"><div id="tabWelcome">
+	<a href="./index.html">new job</a> | <a href="./search.html">stored jobs</a> | <a href="./tutorial.html">tutorial</a> | <a href="./credits.html">credits</a>
+	</div></div>
+</div></div>
+
+<div id="content">
+        
+	<div id="colOne">
+	<img src="http://maya.ccg.unam.mx/primers4clades/files/icon.png" alt="logo"><br>
+primers4clades provides a fully automated pipeline for the design of PCR primers for cross-species amplification of novel sequences from metagenomic DNA or from uncharacterized organisms belonging to user-specified phylogenetic lineages. It implements an <a href="http://maya.ccg.unam.mx/primers4clades/tutorial.html#What_are_the_Computational_steps">extended CODEHOP</a> strategy based on both DNA and protein multiple alignments of coding genes and evaluates <a href="http://maya.ccg.unam.mx/primers4clades/tutorial.html#Thermodynamic_primer_pair_quality_score">thermodynamic properties</a> of the oligonucleotide pairs, as well as the <a href="http://maya.ccg.unam.mx/primers4clades/tutorial.html#Quantification_of_the_phylogenetic">phylogenetic information content</a> of predicted amplicons, computed from the branch support values of maximum likelihood phylogenies. Trees displayed on screen make it easy to target primers to interactively selected clades.
+	<br><br>
+
+	<div id="loadiv">
+        	<form id="loadform" action="./load.cgi" enctype="multipart/form-data" method="post" onsubmit="return AIM.submit(this, {'onStart' : startCallback,'onComplete' : completeCallback})">
+        	<p><input type="submit" id="loadbutton" value="check server load" class="submitbutton"></p>
+        	</form><br>
+		<a href="http://www4.clustrmaps.com/counter/maps.php?url=http://floresta.eead.csic.es/primers4clades/" id="clustrMapsLink"><img src="http://www4.clustrmaps.com/counter/index2.php?url=http://floresta.eead.csic.es/primers4clades/" style="border:0px;" alt="Locations of visitors to this page" title="Locations of visitors to this page" id="clustrMapsImg"></a>
+	</div>
+	
+	</div>
+	
+        <div id="colTwo">
+	<div id="welcome">
+                <form name="primersform" action="./primers4clades.cgi" enctype="multipart/form-data" method="post"  onsubmit="return AIM.submit(this, {'onStart' : startCallbackContent, 'onComplete' : completeCallbackContent})">
+                <fieldset> <legend>Required input</legend>
+                <label class="required">job name: </label>
+                <input type="text" name="jobname" size="30" title="jobname" value="my sequences"><br>
+
+                <label class="required">email: </label>
+                <input type="text" name="email" size="30" title="Results are emailed to this address and are stored for further analysis">
+                <small>to ensure your results are stored</small>
+
+                <label class="required">paste <a href="./tutorial.html#Bracketed_taxon_names_and_codon_usage_tables" title="check demo for an example">FASTA</a> nucleotide sequences with [bracketed species name] in header:</label>
+                <textarea name="sequence" rows="8" cols="45" title="Paste nucleotide coding sequences here"></textarea>
+                <small>first sequence is taken as the outgroup while drawing the tree</small>
+		<label></label><input type="button" name="sequencedemo" value="demo" class="demobutton" onclick="seqdemo()">
+                <select name="demotype" class="selectbutton"> <option value="atpD">atpD (&alpha;-proteobacteria)</option>
+                <option value="introns">fungal tubulins (introns)</option><option value="myco">Actinobacteria</option>
+                </select>
+
+                <br><br><br><label>or</label>
+                <input type="file" name="sequencefile" size="40" class="filebutton" title="Input must be a text file, not a text processor document"><br>
+                <small>upload a FASTA file, possibly aligned</small><br>
+
+		<label>run mode</label>&nbsp;
+		<select name="mode" class="selectbutton" title="primers4clades can be run in two modes: interactive 'cluster sequences' and non-interactive 'get primers'">
+		<option value="primers">get primers (basic)</option><option value="clusters">cluster sequences (advanced)</option>
+		</select><br>
+
+		<ul class="mktree" id="menu">
+		<li>customize settings<br><br>
+		<ul>
+
+		<!--  ---------------------------------------------------- -->
+                <li><a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi">NCBI translation table</a>&nbsp;
+		<select name="gencode" class="selectbutton">
+                <option value="universal">1 standard</option><option value="2">2 vertebrate mitochondrial</option>
+                <option value="3">3 yeast mitochondrial</option><option value="4">4 mold and protozoa mitochondrial</option>
+                <option value="5">5 invertebrate mitochondiral</option><option value="6">6 ciliate</option>
+                <option value="9">9 echinoderm and flatworm</option><option value="10">10 euplotid nuclear</option>
+                <option value="11">11 bacterial and plastid</option><option value="12">12 alternative yeast nuclear</option>
+                <option value="13">13 ascidian mitochondrial</option><option value="14">14 flatworm mitochondrial</option>
+                <option value="15">15 Blepharisma nuclear</option><option value="16">16 Chlorophycean mitochondrial</option>
+                <option value="21">21 Trematode mitochondrial</option><option value="22">22 Scenedesmus obliquus mitochondrial</option>
+                <option value="23">23 Thraustochytrium mitochondrial</option>
+                </select><br></li>
+                
+		<li>
+                <br><strong>cluster distance metric</strong>&nbsp;<select name="clustype" class="selectbutton" title="Metric used to cluster input sequences, using either the aminoacid or codon multiple alignment">
+                <option value="protein">protein</option><option value="dna">dna</option></select></li>
+
+                <li><table>
+                <tr><th>amplicon length (nucleotides)</th><th>Tm of <a href="./tutorial.html#CODEHOP_design_strategy">consensus clamp</a> (&deg;C)</th><th>phylogenetic evaluation</th></tr>
+                <tr><td><input type="text" class="textbox" name="min_amplength" size="3" title="minimum accepted length for obtained amplicons" value="450"> &le; length &le; <input type="text" class="textbox" name="max_amplength" size="3" title="maximum accepted length for obtained amplicons" value="950"></td>
+                <td align="center"><input type="text" class="textbox" name="tm" size="1" title="Tm in the range 50-60 Celsius" value="55"></td>
+                <td align="center">
+                <select name="amptype" class="selectbutton" title="Evolutionary substitution model, at the protein or nucleotide level, used to estimate the phylogenetic information content of resulting amplicons">
+                <option value="protein_WAGG">protein WAG+G</option>
+                <option value="protein_JTTG">protein JTT+G</option>
+                <option value="protein_Blosum62G">protein Blosum62+G</option>
+                <option value="protein_VTG">protein VT+G</option>
+                <option value="protein_DayhoffG">protein Dayhoff+G</option>
+                <option value="protein_MtREVG">protein MtREV+G</option>
+                <option value="dna_HKYG">dna HKY+G</option>
+                <option value="dna_GTRG">dna GTR+G</option>
+                <option value="dna_K80G">dna K80+G</option>
+                <option value="dna_TrNG">dna TrN+G</option>
+                <option value="dna_JC69G">dna JC69+G</option>
+                </select>
+                </td></tr>
+                </table></li>
+
+		<!--  ---------------------------------------------------- -->
+		</ul>
+		</li>	
+		</ul>
+
+		</fieldset>
+                <p>
+                <input type="submit" value="submit" name="submitbutton" class="submitbutton">
+                <input type="reset" name="resetbutton" value="reset" class="submitbutton">
+                </p>
+                </form>
+
+		<div id="outputdiv"></div>
+        </div>
+        </div>
+</div>
+</body>
+</html>
+

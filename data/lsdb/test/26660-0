@@ -1,0 +1,88 @@
+<html>
+<body>
+<BODY BGCOLOR="silver">
+<form method="post" action="mirEvalVerif.php?action='0'">
+	<H2><b><center>Sequence evaluation of microRNA properties.</center></b></H2>
+	<b><center><A HREF="http://www.mozilla.com/firefox/"> Firefox</A> recommended.</center></b>	
+<br>
+This user friendly tool evaluates a sequence in regards to its possible microRNA-like properties. The properties used to evaluate each sequence are 
+the following: microRNA precursor-like structure(1), sequence similarity with a known microRNA(2) and sequence conservation(3).
+<br><br>
+1: Stretches of 80 nt from the input sequence will be folded and evaluated by an SVM classifier (triplet-SVM [1]).
+Sequences longer than 80 nt will be evaluated by a sliding window of 80 nt with a 20 nt step. If the "advanced" option is used, sequences will also be evaluated with a
+structural clustering technique[4]. 
+<br><br>
+2: Input sequences will be blasted against the mirBase[2] dataset on all organisms and significant similarities will be reported.
+<br><br>
+3: Input sequences will be located on their corresponding genome and the conservation score of this genomic location will be downloaded from the Ensembl database.
+Conservation scores are pre-calculated with the GERP algorithm [3] on an alignment of 10 mammalian species.
+<br><br>
+4: Check whether you are in a microRNA enriched cluster. microRNAs are often found in clusters and this criteria can be used to find novel microRNAs [5].
+
+<br><br><B><font size="4" color="brown">Because mirEval connects to numerous on-line resources, we do not distribute the source code to avoid overloading these resources.</font></B>
+<br><br><B>Criteria 3 and 4 will only be evaluated if your sequence comes from one of the 10 mammalian species that are selectable below.
+If your sequence does not come from one of these 10 species, select "other species"</B>
+<br>
+<!-- <b><center><a href="example2.html">Example</a></center></b> -->
+
+<br>
+<br>
+<br>
+<HR>
+<br>
+<B><br>Paste sequence:</B><br><TEXTAREA NAME='sequence' COLS=80 ROWS=10></TEXTAREA>
+<br><br>
+<B>Select organism</B>
+<SELECT NAME='organism' SIZE=5>
+
+<OPTION VALUE=Other>Other species
+<OPTION VALUE=bos_taurus>Bos taurus
+<OPTION VALUE=canis_familiaris>Canis familiaris
+<OPTION VALUE=gallus_gallus>Gallus gallus
+<OPTION VALUE=homo_sapiens SELECTED>Homo sapiens
+<OPTION VALUE=macaca_mulatta>Macaca mulatta
+<OPTION VALUE=monodelphis_domestica>Monodelphis domestica
+<OPTION VALUE=mus_musculus>Mus musculus
+<OPTION VALUE=ornithorhynchus_anatinus>Ornithorhynchus anatinus
+<OPTION VALUE=pan_troglodytes>Pan troglodytes
+<OPTION VALUE=rattus_norvegicus>Rattus norvegicus
+</SELECT>
+<br><br>
+<B>Select Analysis type</B> (no conservation analysis for "other species")
+<!--<B>Due to upgrade of our server, only structural analysis and miRBase BLAST can be performed. All will return to normal very shortly !!</B>-->
+<br>
+<table>
+<tr><td>Structure:	<td><INPUT TYPE=CHECKBOX NAME='analysisType[]' VALUE='Str' CHECKED>
+<td ALIGN=LEFT>Advanced structure (longer):<td><INPUT TYPE=CHECKBOX NAME='analysisType[]' VALUE='WillStr'><br><td></tr>
+<tr><td>Conservation:	<td><INPUT TYPE=CHECKBOX NAME='analysisType[]' VALUE='Cons'><br></tr>
+<tr><td>miRBase:	<td><INPUT TYPE=CHECKBOX NAME='analysisType[]' VALUE='Mb' CHECKED><br></tr>
+<tr><td>Clusters:	<td><INPUT TYPE=CHECKBOX NAME='analysisType[]' VALUE='Cl'><br>
+</table>
+<br><br>
+<input type="submit" value="OK">
+<br><br>
+
+<A HREF="mailto:ritchie@tagc.univ-mrs.fr">William Ritchie</A>
+
+<br>
+1. Chenghai Xue, Fei Li, Tao He, Guo-Ping Liu, Yanda Li, Xuegong Zhang: 
+Classification of Real and Pseudo MicroRNA Precursors Using Local Struct
+ure-Sequence Features and Support Vector Machine. 
+BMC Bioinformatics, 6: 310, 2005.
+<br>
+2. Griffiths-Jones S, Grocock RJ, van Dongen S, Bateman A, Enright AJ: 
+miRBase microRNA sequences, targets and gene nomenclature. 
+NAR Database Issue, D140, 2006.
+<br>
+3. Cooper GM, Stone EA, Asimenos G, NISC Comparative Sequencing Program, Green ED, Batzoglou S, Sidow A:
+Distribution and intensity of constraint in mammalian genomic sequence.
+Genome Res. 2005 Jul;15(7):901-913. 
+<br>
+4. Ritchie W, Legendre M, Gautheret D.
+RNA stem-loops: to be or not to be cleaved by RNAse III.
+RNA. 2007 Apr;13(4):457-62.
+<br> 
+5. Sewer A, Paul N, Landgraf P, Aravin A, Pfeffer S, Brownstein MJ, Tuschl T, van Nimwegen E, Zavolan M.
+Identification of clustered microRNAs using an ab initio prediction method.
+BMC Bioinformatics. 2005 Nov 7;6:267. 
+</form></body></html>

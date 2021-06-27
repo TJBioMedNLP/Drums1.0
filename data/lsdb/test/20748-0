@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+  <HEAD>
+    <TITLE>GenMiner: Non-Redundant Association Rules Mining from Genomic Data</TITLE>
+    <META http-equiv=Content-Type content="text/html">
+  </HEAD>
+  <BODY>
+  <H1>GenMiner: Non-Redundant Association Rules Mining from Genomic Data</H1>
+  <H2>Ricardo Martinez, Nicolas Pasquier and Claude Pasquier
+  <BR/>Submitted to Bioinformatics</H2>
+
+  <H2>Supplementary materials</H2>
+
+  <H2>GenMiner program</H2>
+  <P>The genminer program can be downloaded <a href="genminer.zip">here</a>.</P>
+
+<H2>Data pre-processing</H2>
+  <P>Gene expression measures are those used by Eisen et al (Eisen et al., 1998). This dataset is discretized using the NorDi algorithm at a 95% confidence level.</P>
+  <P>Gene annotations were collected from the following sources:</P>
+  <UL>
+    <LI><B>Gene Ontology:</B> terms were retrieved from <A HREF="http://archive.geneontology.org/latest-termdb/go_daily-termdb-data.gz">http://archive.geneontology.org/latest-termdb/go_daily-termdb-data.gz</A> (version of 27th August 2007) ; annotations were retrieved from <A HREF="http://www.geneontology.org/cgi-bin/downloadGOGA.pl/gene_association.sgd.gz">http://www.geneontology.org/cgi-bin/downloadGOGA.pl/gene_association.sgd.gz</A> (version of 24th August 2007) ; GOSlim terms were retrieved from <A HREF="http://www.geneontology.org/GO_slims/goslim_yeast.obo">http://www.geneontology.org/GO_slims/goslim_yeast.obo</A>.</LI>
+    <LI><B>Literature:</B> associations between yeast genes and pubmed ids were retrieved from <A HREF="ftp://genome-ftp.stanford.edu/pub/yeast/data_download/literature_curation/gene_literature.tab">ftp://genome-ftp.stanford.edu/pub/yeast/data_download/literature_curation/gene_literature.tab</A> (version of 8th August 2007)</LI>
+    <LI><B>Patways:</B> information concerning the metabolic pathways in which each gene is involved was retrieved from <A HREF="ftp://ftp.genome.jp/pub/kegg/pathway/organisms/sce/sce_gene_map.tab">ftp://ftp.genome.jp/pub/kegg/pathway/organisms/sce/sce_gene_map.tab</A> (version of 9th August 2007)</LI>
+    <LI><B>Phenotype:</B> annotations were retrieved from <A HREF="ftp://genome-ftp.stanford.edu/pub/yeast/data_download/literature_curation/phenotypes.tab">ftp://genome-ftp.stanford.edu/pub/yeast/data_download/literature_curation/phenotypes.tab</A> (version of 9th August 2007)</LI>
+    <LI><B>transcriptional regulators:</B> the information of transcriptional regulators that bind to promoter
+regions were extracted from <A HREF="http://jura.wi.mit.edu/young_public/regulatory_network/binding_by_gene.tsv">http://jura.wi.mit.edu/young_public/regulatory_network/binding_by_gene.tsv</A> using a <I>p-value</I> threshold of 0.0005</LI>
+  </UL>
+</P>
+
+  <H2>Available Data files</H2>
+  <CENTER>
+    <TABLE BORDER="3" CELLPADDING="5" WIDTH=580>
+      <TR>
+        <TD BGCOLOR="#CCCCCC" ALIGN=CENTER><STRONG>Files</STRONG></TD>
+        <TD BGCOLOR="#CCCCCC" ALIGN=CENTER><STRONG>Descriptions</STRONG></TD>
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="EisenYeastData2466-79.txt">Eisen dataset</A></TD>
+        <TD>Expression ratios of 2465 Yeast genes under 79 biological conditions.</TD>		
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="EisenYeastData2466-79Cols.txt">Microarray Experiments</A></TD>
+        <TD>Description of the 79 experiments.</TD>
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="EisenYeastData2466-79Intervals.txt">Cutoffs</A></TD>
+        <TD>Under-expressed and over-expressed cutoff thresholds computed by NorDi.</TD>		
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="values.txt">Discretized expression measures</A></TD>
+        <TD>Discretization of expression measures performed by Nordi.</TD>		
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="dataset.txt">Data mining context</A></TD>
+        <TD>Data matrix of 2465 lines (genes) and 737 columns (discretized expression levels and annotations). Each line contains expression profiles over the 79 biological conditions (values discretized by NorDi) and at most 658 gene annotations (24 GOSlim terms, 14 pathways, 25 transcriptional regulators, 14 phenotypes and 581 pubmed IDs).</TD>
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="fci.zip">Equivalence classes</A></TD>
+        <TD>Frequent closed itemsets and their generators extracted by Close with a minsupport of 0.005. Each class if represented by a line of the form <PRE>[Generator] [Closed itemset] n</PRE> where 'n' is the number of items in the class</TD>
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="ear.zip">Exact associations rules</A></TD>
+        <TD>All exact association rules displayed in the form <PRE>[antecedent] => [consequent] supp=s conf=c</PRE> where 's' and c are the support and the confidence of the rule respectively</TD>
+      </TR>
+      <TR>
+        <TD ALIGN=CENTER><A HREF="aar.zip">Approximate associations rules</A></TD>
+        <TD>All approximate association rules, with a confidence greater or equals to 0.5, displayed in the form <PRE>[antecedent] -> [consequent] supp=s conf=c</PRE> where 's' and c are the support and the confidence of the rule respectively</TD>
+      </TR>
+    </TABLE>
+  </CENTER>
+  </BODY>
+</HTML>

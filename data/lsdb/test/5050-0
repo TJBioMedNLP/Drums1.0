@@ -1,0 +1,47 @@
+
+<html>
+<head><title>Dropbox - 4xx</title>
+<link href="/static/css/main.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="/static/images/favicon.ico"/>
+</head>
+<body style="background-color:#fff">
+<br/><br/>
+<div align="center">
+<table><tr><td width="600px">
+<center><img id="errorimage" src="/static/images/psychobox.png"/></center>
+<div id="errorbox">
+<h1>Error (4xx)</h1>We can't find the page you're looking for. Check out our <a href="https://www.dropbox.com/faq">FAQ</a> or <a href="http://forums.dropbox.com">forums</a> for help. Or maybe you should try heading <a href="https://www.dropbox.com/home">home</a>.
+</div>
+</td></tr></table>
+</div>
+
+<script type="text/javascript" src="/static/javascript/lib.js"></script>
+<script>
+message = {};
+function read_cookie (name) {
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for (var i = 0; i < ca.length; i++) {
+		    var c = ca[i];
+		    while (c.charAt(0) == ' ') {
+                c = c.substring(1, c.length);
+            }
+		    if (c.indexOf(nameEQ) === 0) {
+                return c.substring(nameEQ.length, c.length);
+            }
+	    }
+	    return null;
+}
+Event.observe(document, 'dom:loaded', function () {
+    var locale = read_cookie('locale');
+    if (locale) {
+       var msg = message[locale];
+       if (msg) {
+           $('errorbox').update(msg);
+       }
+    }
+});
+</script>
+
+</body>
+</html>

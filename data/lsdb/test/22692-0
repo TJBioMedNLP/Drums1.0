@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+<title> NQ-Flipper HTML front end V 2.7.0 </title>
+<link rel="stylesheet" href="/include/flipper.css">
+<link rel="shortcut icon" type="image/x-icon" href="/include/pics/flipper-favicon.ico">
+<meta name="keywords" lang="en-us" content="asparagine, glutamine, flip, side-chain amide plane orientation, knowledge-based potential of mean force, mean force potential, X-ray crystallography, electron density map ambiguity, protein structure validation, electron density map interpretation, structure validation, protein structure, sippl, weichenberger, amide flip, atom pair potential, inverse boltzmann law, reversible work theorem, polar side chain, nqflipper,nq-flipper">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+
+<h1 class="title"> The NQ-Flipper page <span class="emphasize">V2.7</span></h1>
+
+<table width="700">
+
+<tr><td>
+Welcome to CAME's NQ-Flipper home page. NQ-Flipper
+recognizes unfavorable rotamers of Asn and Gln residues in protein
+structures. This service is applicable to structures obtained from X-ray
+crystallography, NMR or modeling studies. The method is based on
+knowledge-based potentials of mean force compiled from a database of known
+protein structures determined by X-ray crystallography. The potentials are
+then refined by several cycles of rotamer correction and recompilation of
+potentials. The refined potentials are used here to validate or correct
+asparagine and glutamine amide rotamers.
+</td></tr>
+
+<tr><td>
+To identify and correct improper rotamers, enter the PDB four letter code
+(e.g. <a href="http://flipper.services.came.sbg.ac.at/cgi-bin/flipper.php?PDBCode=1ra9">1ra9</a>) or
+upload your own PDB formatted file. Hitting the "Validate Structure" 
+button executes the program, displays the structure and highlights the
+residues that need to be corrected. (Please have Java and JavaScript enabled
+in your web browser.)
+</td></tr>
+
+<tr><td>
+Usually, there is no need to change any of the parameters. However, if you
+want to explore your structure in more detail, please find a detailed
+description of the parameters <a href="/cgi-bin/help.php">here</a>. 
+</td></tr>
+
+<tr><td>
+ <table> 
+  <tr> 
+   <td align="center">
+    <img style="vertical-align:middle" src="/include/pics/new.png" alt="NEW"> 
+   </td> 
+   <td> 
+    <table border="2"><tr><td>
+    NQ-Flipper <span class="emphasize">V2.7</span> has 
+    <strong>quadrupled</strong> in speed and finally displays interactions
+    to crystal neighbors. You also benefit from this on your own machine, 
+    simply <b><a href="/cgi-bin/nqdownload.php">download</a></b>
+    the program. 
+   </td></tr></table>
+  </tr>
+ </table>
+</td></tr>
+
+</table>
+
+
+<form action="/cgi-bin/flipper.php" name="flMnForm" id="flMnForm" method="POST" enctype="multipart/form-data"> 
+
+<table border="0" cellspacing="0">
+<tr>
+ <td> <a href="/cgi-bin/help.php#PDBCode-Help">PDB code</a>: </td> 
+ <td> 
+  <input 
+   type="text" 
+   name="flMnPDBCode" 
+   size="4" 
+   title="Enter a PDB 4 letter code."
+   value=""> 
+ </td>
+ <td> </td> <td width="20"> <!-- this is a spacer --> </td>
+ <td> <a href="/cgi-bin/help.php#FileName-Help">File name</a>: </td> 
+ <td> 
+  <!-- Here comes either a file upload or disabled (+hidden) text input entry field -->
+    <input type="file" name="flMnPDBFile" size="20" maxlength="3000000" 
+   title="Upload a PDB file for evaluation. Minimal requirements: ATOM records.">
+
+ </td>
+</tr>
+
+<tr>
+ <td> <a href="/cgi-bin/help.php#ModelNr-Help">Model number</a>: </td>
+ <td> 
+   <input 
+    type="text" 
+    name="flMnModelNr" 
+    size="4" 
+    title="If the PDB file includes model numbers, enter one."
+   value="">
+ </td>
+ <td colspan="2"> </td>
+ <td> <a href="/cgi-bin/help.php#AltLoc-Help">Altloc indicator</a>: </td>
+ <td> 
+  <!-- Small table inside a cell to align reset button adequately -->
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+   <td>
+    <input 
+     type="text" 
+     name="flMnAltLoc" 
+     size="1" 
+     align="left"
+     title="If the PDB file includes alternate location indicator, enter one."
+     value=""> 
+   </td>
+   <td align="right">
+    <input 
+     type="reset"
+     value="Clear fields"
+     name="ClearButton"
+     onclick="location='/'"
+     title="Clears all input fields.">
+   </td>
+  </tr>
+  </table>
+ </td>
+</tr>
+
+<tr> <td colspan="6" height="30"> <font class="errorMsg"></font> </td> </tr>
+
+<tr>
+ <td> Consider  </td> 
+ <td> 
+  <input 
+   type="checkbox" checked 
+   title="Include asparagine (ASN) in the evalution of the protein."
+   name="flMnChkHNQ[ASN]"> 
+  <a href="/cgi-bin/help.php#Asn-Help">Asparagine</a> </td>
+ <td> (ASN) </td> 
+ <td> </td>
+ <td> <!-- <a href="/cgi-bin/help.php#{flHpThreshold}">Threshold:</a>--> </td>
+ <td align="left"> 
+  <input type="hidden" name="flMnGray" value="0.3"> 
+ </td>
+</tr>
+<tr>
+ <td>  </td> 
+ <td> 
+  <input 
+   type="checkbox" checked 
+   title="Include glutamine (GLN) in the evalution of the protein."
+   name="flMnChkHNQ[GLN]"> 
+  <a href="/cgi-bin/help.php#Gln-Help">Glutamine</a>
+ </td>
+ <td> (GLN) </td> 
+ <td> </td>
+ <td>  </td>
+ <td> 
+ <!-- radiobutton -->
+ </td>
+</tr>
+<tr>
+ <td>  </td> 
+ <td> 
+  <input 
+   disabled
+   type="checkbox"  
+   title="Include Histidine (HIS) in the evalution of the protein."
+   name="flMnChkHNQ[HIS]"> 
+  <!-- <a href="/cgi-bin/help.php#His-Help"> --> Histidine <!-- </a> -->
+ </td>
+ <td> (HIS) </td> 
+ <td colspan="3"> [This feature is under development.] </td> 
+</tr>
+
+<tr> <td colspan="6" height="30"> <font class="errorMsg"></font> </td> </tr>
+
+<tr> 
+ <td colspan="6" align="center"> 
+  <input type="submit" name="flMnSubmit" id="flMnSubmit" value="Validate Structure" title="Start computation."> 
+ </td> 
+</tr>
+</table>
+<!-- Initially, do not show polar interactions only -->
+<input type="hidden" name="flMnPolar" value="0">
+</form>
+
+<br>
+
+<table width="600">
+<tr><td> <h2> References </h2>
+</td></tr>
+<tr><td>
+Weichenberger, C. X., Byzia, P., and Sippl, M. J. (2008) Visualization of
+unfavorable interactions in protein folds. <br>
+<em>Bioinformatics.</em>, <b>24</b>, 1206-1207.
+[<a href="http://dx.doi.org/10.1093/bioinformatics/btn108">Abstract</a> (HTML)]
+[<a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/24/9/1206">pdf</a>]
+
+</td></tr>
+<tr><td>
+Weichenberger, C. X., and Sippl, M. J. (2007) Recognition and Correction of
+Erroneous Asparagine and Glutamine Side Chain Rotamers in Protein Structures.
+<br>
+<em>Nucleic Acids Res.</em>, <b>35</b>(Web Server issue), W403-406. 
+[<a href="http://dx.doi.org/10.1093/nar/gkm263">Abstract</a> (HTML)] 
+[<a href="http://nar.oxfordjournals.org/cgi/reprint/35/suppl_2/W403">pdf</a>]
+</td></tr>
+<tr><td> 
+Weichenberger, C. X., and Sippl, M. J. (2006) NQ-Flipper: Validation and
+Correction of Asparagine/Glutamine Amide Rotamers in Protein Crystal
+Structures. <br>
+<em>Bioinformatics</em>, <b>22</b>, 1397-1398.
+[<a href="http://dx.doi.org/10.1093/bioinformatics/btl128">Abstract</a>
+(HTML)]
+[<a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/btl128?ijkey=Lzv43rSlkqNT16k&amp;keytype=ref">pdf</a>]
+</td></tr>
+<tr><td> 
+Weichenberger, C. X., and Sippl, M. J. (2006) Self-consistent Assignment of
+Asparagine and Glutamine Amide Rotamers in Protein Crystal
+Structures. <br>
+<em>Structure</em>, <b>14</b>, 967-972. 
+[<a href="http://www.structure.org/content/article/abstract?uid=PIIS0969212606002139">Abstract</a>
+(HTML)] 
+[<a href="http://cms.came.sbg.ac.at/typo3/fileadmin/publications/Weichenberger.Sippl-2006a.pdf">pdf</a>] 
+</td></tr>
+
+</table>
+
+<hr> 
+<table width="700">
+<tr>
+ <td align="left">
+ <i> This site is maintained by Chris Weichenberger. Please send comments and
+     suggestions to: </i>
+ </td>
+</tr>
+<tr>
+ <td align="left"> 
+  <img align="left" src="/include/pics/flipper.png" alt="Flipper-address"> 
+ </td>
+ <td align="right"> 
+  <a href="http://validator.w3.org/check?uri=http://flipper.services.came.sbg.ac.at">
+   <img src="/include/pics/valid-html401.png"
+        alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+ </td>
+</tr>
+</table>
+
+ 
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Find PhyloFacts Orthologs</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="http://phylogenomics.berkeley.edu/media/css/base_style.css" />
+
+<link rel="stylesheet" type="text/css" href="http://phylogenomics.berkeley.edu/media/css/phog_datagrid.css" />
+<script type="text/javascript" src="http://phylogenomics.berkeley.edu/media/js/phog_tooltip.js"></script>
+<script type="text/javascript" src="http://phylogenomics.berkeley.edu/media/djblets/js/jquery-1.2.6.min.js"></script>
+<script type="text/javascript" src="http://phylogenomics.berkeley.edu/media/djblets/js/jquery-ui-1.6rc1.packed.js"></script>
+<script type="text/javascript" src="http://phylogenomics.berkeley.edu/media/djblets/js/jquery.gravy.js"></script>
+<script type="text/javascript" src="http://phylogenomics.berkeley.edu/media/djblets/js/datagrid.js"></script>
+<style type="text/css">
+  div.loading-invisible{
+    display:none;
+  }
+  div.loading-visible{
+    display:block;
+	position:absolute;
+    top:50%;
+	left:50%;
+    width:125px;
+	margin-left:-63px;
+    background:#fff;
+    opacity:.75;
+  }
+  div.go_summary-visible{
+    display:block;
+  }
+  div.go_summary-invisible{
+    display:none;
+  }
+  input.fake_btn{
+    color:#00F;
+    background-color:#FFF;
+    border: 1px solid;
+    border-color:#FFF;
+  }
+</style>
+<script language="JavaScript">
+  function switchVisible(id1, id2) {
+    document.getElementById(id1).className = 'go_summary-invisible';
+    document.getElementById(id2).className = 'go_summary-visible';
+  };
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript" src="http://phylogenomics.berkeley.edu/media/js/bpg_tooltip.js"></script>
+<script type="text/javascript" src="http://phylogenomics.berkeley.edu/media/js/phog_tooltip.js"></script>
+
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="300" align="left" valign="middle">
+          
+            <map name="bpg_logo_map">
+              <area shape=circle coords="70,60,50" href="http://phylogenomics.berkeley.edu">
+              <area shape=circle coords="70,60,60" href="http://www.kelticdesigns.com">
+              <area shape=rect coords="0,0,300,120" href="http://phylogenomics.berkeley.edu">
+            </map>
+            <img src="http://phylogenomics.berkeley.edu/media/icons/logo_bpg.png" width="300" height="120" border="0" usemap="#bpg_logo_map" />
+              
+        </td>
+        <td class="navtop" align="center">
+          
+            <a class="navtoplink" href="http://phylogenomics.berkeley.edu/">Home</a> |
+	        <a class="navtoplink" href="http://phylogenomics.berkeley.edu/phylofacts/">PhyloFacts</a> |
+	        <a class="navtoplink" href="http://phylogenomics.berkeley.edu/tools.php">BPG Tools</a> |
+            <a class="navtoplink" href="/orthologs/faq/">FAQ</a> |
+	        <a class="navtoplink" href="/orthologs/quickstart/">Help</a> |
+	        <a class="navtoplink" href="/orthologs/downloads/">Downloads</a>
+
+        </td>
+        <td width="300" align="right" valign="middle">
+          
+            <a href="/orthologs/"><img src="http://phylogenomics.berkeley.edu/media/icons/logo_phog.png" 
+              width="300" height="103" border="0" /></a>
+    
+        </td>
+  </tr>
+</table>
+
+
+
+<div class="content" id="content">
+
+
+<div id="loading" class="loading-invisible">
+  <p><img src="http://phylogenomics.berkeley.edu/images/EMBLTreeOfLifeWhirlingLayers.gif" alt="Loading"></p>
+</div>
+<script type="text/javascript">
+  document.getElementById("loading").className = "loading-visible";
+  window.onload = function() {
+    document.getElementById("loading").className = "loading-invisible";
+  }
+</script>
+
+  <div class="inset gray">
+    <strong style="font-size: 18px;">PHOG 1.0 (January 2009)</strong><br /><br />
+    The PHOG (PhyloFacts Orthology Group) resource is designed to predict super-orthologs using evolutionary
+    analysis of protein family phylogenies in the PhyloFacts resource. 
+    (<a href="http://phylofacts.berkeley.edu/orthologs/faq/">More...</a>)<br />
+    <span style="font-size: 12px;"> 
+    View sample results:&nbsp;<span class="linklike" onclick="document.getElementById('id_sequence_id').value='PE2R2_HUMAN';
+        document.getElementById('id_sequence_fasta').value=''; document.getElementById('loading').className='loading-visible'; 
+        document.orthologs.submit();">PE2R2_HUMAN,</span>
+      <span class="linklike" onclick="document.getElementById('id_sequence_id').value='Q944H6';
+        document.getElementById('id_sequence_fasta').value=''; document.getElementById('loading').className='loading-visible'; 
+        document.orthologs.submit();">Q944H6 (<em>A. thaliana</em>),</span>
+      <span class="linklike" onclick="document.getElementById('id_sequence_id').value='ALG2_HUMAN';
+        document.getElementById('id_sequence_fasta').value=''; document.getElementById('loading').className='loading-visible'; 
+        document.orthologs.submit();">ALG2_HUMAN,</span>
+      <span class="linklike" onclick="document.getElementById('id_sequence_id').value='Q8IB05_PLAF7';
+        document.getElementById('id_sequence_fasta').value=''; document.getElementById('loading').className='loading-visible'; 
+        document.orthologs.submit();">Q8IB05_PLAF7,</span>
+      <span class="linklike" onclick="document.getElementById('id_sequence_id').value='BLE_STAAR';
+        document.getElementById('id_sequence_fasta').value=''; document.getElementById('loading').className='loading-visible'; 
+        document.orthologs.submit();">BLE_STAAR.</span>
+      </span>
+      <br /><br /><br />
+  </div>
+  <div style="margin-left: 100px">
+    <a id="results"></a>
+    <form action="/orthologs/" method="GET" name = "orthologs">
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="4"></td>
+        </tr>
+        
+        <tr><td height="6" colspan="5"></td></tr>
+        
+        <tr>
+          <td valign="bottom">
+            <label for="id_sequence_id">Find orthologs&nbsp;&nbsp;</label>&nbsp;
+	      </td>
+	      <td valign="bottom">
+            <input id="id_sequence_id" type="text" name="sequence_id" size="40" />&nbsp;&nbsp;&nbsp;<INPUT TYPE=submit Value="Search"
+            onclick="document.getElementById('loading').className = 'loading-visible';">
+          </td>
+	      <td width="40"></td>
+          <td class="smalltext">
+            <span style="line-height: 1.5em">Select 
+              <a href="http://phylofacts.berkeley.edu/orthologs/faq/#evolutionary_distance">evolutionary distance</a>:</span><br />
+            <select onchange="t=document.getElementById('id_threshold'); v=this.value; switch(v) {case '0': t.value='0.0'; break; case '1': t.value='0.09375'; break; case '2': t.value='0.296874'; break; case '3': t.value='0.9375'; break; case '4': t.value='Enter custom threshold'; break;}" name="ortholog_type" id="id_ortholog_type">
+<option value="0">Super orthology: 0.0</option>
+<option value="1">Close: 0.09375</option>
+<option value="2">Moderate: 0.296874</option>
+<option value="3">Distant: 0.9375</option>
+<option value="4">Custom: Enter value</option>
+</select>
+          </td>
+        </tr>
+        
+        <tr><td height="6" colspan="4"></td></tr>
+        
+	    <tr>
+          <td></td>
+	      <td valign="top" class="smalltext">
+	        <a onmouseover="showInputTip();" onmouseout="UnTip();"
+            href="/orthologs/faq#input_types">Protein sequence IDs/accessions only</a><br />
+            Enter test data:&nbsp;<span class="linklike" onclick="document.getElementById('id_sequence_id').value='Q9VKZ8_DROME';
+              document.getElementById('id_sequence_fasta').value='';">Test 1.</span>
+          </td>
+          <td></td>
+          <td class="smalltext" valign="top">
+            <input name="threshold" value="0.0" onclick="if (this.value=='Enter custom threshold') {this.value='';}" onchange="document.getElementById('id_ortholog_type').selectedIndex=4;" type="text" id="id_threshold" /><br />
+          	Threshold: [0.0 to 1.5]
+          </td>
+        </tr>
+        
+        <tr>
+          <td height="40" colspan="3" align="center" valign="top">
+            
+            
+            
+          </td>
+          <td class="smalltext" valign="top">
+                      
+          </td>
+		</tr>
+        
+        <tr>
+          <td></td>
+          <td colspan="2" valign="top">
+            or protein sequence <label for "id_sequence_fasta">in <a href="http://phylofacts.berkeley.edu/orthologs/faq/#fasta">FASTA format</a></label>
+            &nbsp;
+          </td>
+          <td>
+          </td>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td valign="bottom">
+            <textarea id="id_sequence_fasta" style="font-size:10px" rows="6" cols="50" name="sequence_fasta"></textarea>&nbsp;&nbsp;&nbsp;<INPUT TYPE=submit Value="Search"
+            onclick="form.sequence_id.value = ''; document.getElementById('loading').className = 'loading-visible';">
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr><td height="6" colspan="5"></td></tr>
+
+        <tr>
+          <td></td>
+          <td colspan="3"></td>
+        </tr>
+        
+    </table>
+  	</form>
+    
+    <form method=GET action="/orthologs/">
+    <input type=submit value="Clear all">
+    </form>
+
+
+  </div>
+  
+  
+  
+  
+  
+  
+
+</div>
+
+
+    <div class="contactlink" id="contactlink">
+        <form method="link" action="http://phylogenomics.berkeley.edu/contact_us.php" target="_blank">
+            <input type="submit" value="Comments, questions, and bug reports">
+        </form>
+    </div>
+   
+
+  <div class="acknowledgment">
+    Funding for <a href="http://phylogenomics.berkeley.edu/phylofacts/">PhyloFacts</a> is provided by the 
+    <a href="http://phylofacts.berkeley.edu/funding/">National Science Foundation</a> and by the 
+    <a href="http://phylofacts.berkeley.edu/funding/">National Institutes of Health</a>. 
+  </div>  
+   
+
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=4594249; 
+var sc_invisible=1; 
+var sc_partition=56; 
+var sc_click_stat=1; 
+var sc_security="d8236ffb"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="joomla 1.5 statistics"
+href="http://www.statcounter.com/joomla/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/4594249/0/d8236ffb/1/"
+alt="joomla 1.5 statistics" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7134388-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

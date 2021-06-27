@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                      "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- **
+   - * Please check that the page is valid HTML using W3C's validator
+   - * at http://validator.w3.org.
+   - *
+   - * $Id: index.phtml 582 2010-04-13 11:23:41Z davidfange $
+   - ** -->
+<html>
+<head>
+  <title>MesoRD Project Home Page</title>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet"
+        href="MesoRD.css"
+        type="text/css">
+</head>
+
+<body>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td class="header" height="100">
+      <h2>MesoRD - Mesoscopic Reaction Diffusion Simulator</h2>
+    </td>
+
+    <td class="header" align="right" height="100">
+      <img src="logo.gif"
+           alt="MesoRD Logo"
+           border="0"
+           height="100"
+           width="100"/>
+    </td>
+  </tr>
+</table>
+  <table border="0" cellpadding="0" cellspacing="0" width="650">
+    <tr>
+      <!-- **********
+   - * NAVBAR *
+   - ********** -->
+<td class="menu" valign="top" width="160" >
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_section" height="8">
+        General
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="index.phtml">About</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="news.phtml">News</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="screenshots.phtml">Screenshots and Movies</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="toolbox.phtml">MesoRDToolBox</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="publications.phtml">Citations to MesoRD and NSM</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="models.phtml">Model Archive</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="links.phtml">Links</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_section">
+        SourceForge Links
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="http://sourceforge.net/project/showfiles.php?group_id=118046">
+          Download MesoRD
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="http://sourceforge.net/projects/mesord">
+          Project Summary Page
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="http://mesord.svn.sourceforge.net/viewvc/mesord">Browse SVN</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_section" height="8">
+        Documentation
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="man/mesord/docbook/index.html">View online documentation</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <a href="tutorial.phtml">Quick Start</a>
+      </td>
+    </tr>
+<!--
+    <tr>
+      <td class="menu_subsection">
+        <a href="faq.phtml">Questions/Answers</a>
+      </td>
+    </tr>
+-->
+    <tr>
+      <td class="menu_subsection">
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="menu_subsection">
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+  </table>
+</td>
+      <td width="10"></td>
+
+      <td valign="top" width="480">
+        <p class="normal">&nbsp;</p>
+
+
+          <!-- *********
+             - * ABOUT *
+             - ********* -->
+        <h3>About</h3>
+
+        <p class="normal">MesoRD is a tool for stochastic simulation
+        of reactions and diffusion [<a href="#Hattne:2005">2</a>].  In
+        particular, it is an implementation of the Next Subvolume
+        Method [<a href="#ElfEhrenberg:2004">3</a>, <a
+        href="#Elf:2003">4</a>], which is an exact method to simulate
+        the Markov process corresponding to the reaction-diffusion
+        master equation [<a href="#Gardiner:1985">5</a>, <a
+        href="#NicolisPrigogine:1977">6</a>, <a
+        href="#BarasMansour:1997">7</a>].  Since version 0.2.0 MesoRD
+        also supports mean-field simulations.</p>
+	
+	
+	<!-- *******************************************
+	   - * MESORD WITH INTERSUBVOLUME INTERACTIONS *
+	   - *******************************************-->
+	<h3>Running MesoRD with reactions in-between nearest neighbours</h3>
+	<p class="normal">
+	  We have developed a special release of MesoRD, which allows
+	  for reaction rates to be calculated using nearest neighbour
+	  subvolumes. This allows for a correct description of the
+	  reaction rates when the size of the subvolumes are close to
+	  the reaction radii of the molecules.  There are two
+	  different versions which support this extenstion. One <a
+	  href="distrib/mesord-3D.tar.gz">3D version</a> with
+	  corresponding <a
+	  href="distrib/mesord_3D.pdf">documentation</a>, and one <a
+	  href="distrib/mesord-2D.tar.gz">2D version</a> with
+	  corresponding <a
+	  href="distrib/mesord_2D.pdf">documentation</a>.
+	</p>
+	
+
+          <!-- *******************************************
+             - * SIMULATION OF THE MIN-SYSTEM IN E. COLI *
+             - ******************************************* -->
+        <h3>Simulation of the Min-system in <i>E. coli</i></h3>
+
+        <p class="normal">MesoRD has been used to model the stochastic
+        contribution to different mutant phenotypes in the Min-system
+        in <i> E. coli</i> [<a href="#FangeElf:2006">1</a>].
+        Visualisation of a stochastic simulation of a wild type
+        <i>E. coli</i> cell is shown below.  <a href=
+        "http://biocyc.org/ECOLI/NEW-IMAGE?type=ENZYME&amp;object=EG10597-MONOMER">
+        MinD </a> on the cell membrane is shown in red and <a href=
+        "http://biocyc.org/ECOLI/NEW-IMAGE?type=ENZYME&amp;object=EG10598-MONOMER">
+        MinE </a> in complex with MinD on the membrane is shown in
+        blue.</p>
+
+        <center>
+          <img src="movies/min_wt.gif" alt="Wildtype Min-System Movie"/>
+        </center>
+
+
+          <!-- *****************
+             - * CITING MESORD *
+             - ***************** -->
+
+        <h3>Citing MesoRD</h3>
+
+        <p class="normal">Please use reference [<a
+        href="#Hattne:2005">2</a>] when citing MesoRD and reference
+        [<a href="#ElfEhrenberg:2004">3</a>] when citing the Next
+        Subvolume Method.</p>
+
+
+          <!-- **************
+             - * REFERENCES *
+             - ************** -->
+        <h3>References</h3>
+
+        <p class="ref_item"><a name="FangeElf:2006">[1]</a> David
+        Fange and Johan Elf (2006) Noise induced Min phenotypes in
+        <i>E. coli</i>.  <i>PLoS Comp. Biol.</i> <a
+        href="http://compbiol.plosjournals.org/perlserv/?request=get-document&amp;doi=10.1371/journal.pcbi.0020080.eor">link</a></p>
+
+        <p class="ref_item"><a name="Hattne:2005">[2]</a> Johan Hattne,
+        David Fange and Johan Elf (2005) Stochastic reaction-diffusion
+        simulation with MesoRD <i>Bioinfomatics</i>.  <a
+        href="http://bioinformatics.oupjournals.org/cgi/content/abstract/bti431?ijkey=150zaiEiSaaAg&amp;keytype=ref"><b>pdf</b></a></p>
+
+        <p class="ref_item"><a name="ElfEhrenberg:2004">[3]</a> Elf
+        and Ehrenberg (2004) Spontaneous separation of bi-stable
+        biochemical systems into spatial domains of opposite phases
+        <i>Systems Biology </i><b>2</b>.  <a
+        href="http://www.icm.uu.se/molbio/references/ElfSysBio.pdf"><b>pdf</b></a>,
+        Supplementary material: <a
+        href="http://www.icm.uu.se/molbio/references/Elf2004B.pdf">
+        Next Subvolume Method algorithm</a></p>
+
+        <p class="ref_item"><a name="Elf:2003">[4]</a> Elf
+        <i>et&nbsp;al.</i> (2003) Mesoscopic reaction-diffusion in
+        intracellular signaling <i> SPIE </i><b>5110</b> 114-124 2003.
+        <a
+        href="http://www.icm.uu.se/molbio/references/ElfMesoSpat.pdf">
+        <b>pdf</b></a></p>
+
+        <p class="ref_item"><a name="Gardiner:1985">[5]</a> Gardiner,
+        C.: Handbook of stochastic Methods.  Second edition
+        (Springer-Verlag.  Berlin, 1985).</p>
+
+        <p class="ref_item"><a name="NicolisPrigogine:1977">[6]</a>
+        Nicolis, G. and Prigogine, I.: Self-organization in
+        nonequilibrium systems.  (John Wiley &amp; sons.  New York,
+        1977).</p>
+
+        <p class="ref_item"><a name="BarasMansour:1997">[7]</a> Baras,
+        F. and Mansour, M.M. (1997) Microscopic simulation of chemical
+        instabilities, Advances in Chemical Physics, 100:393-475.</p>
+
+
+
+          <!-- ********************
+             - * ACKNOWLEDGEMENTS *
+             - ******************** -->
+
+        <h3>Acknowledgements</h3>
+
+        <p class="normal">The development of MesoRD was funded by a
+        research grant from the Swedish Research Council
+        (Vetenskapsr&aring;det) to M&aring;ns Ehrenberg, Uppsala
+        University.</p>
+
+        <center>
+          <a href="http://sourceforge.net/projects/mesord">
+            <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=118046&type=13"
+                 width="120"
+                 height="30"
+                 border="0"
+                 alt="Get MesoRD at SourceForge.net. Fast, secure and Free Open Source software downloads"/>
+          </a>
+        </center>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+  <HEAD>
+    <link REL="SHORTCUT ICON" HREF="symbol.ico">
+    <TITLE>DISULFIND - Cysteines Disulfide Bonding State and Connectivity Predictor</TITLE>
+    <META http-equiv=Content-Type content="text/html">
+    <LINK href="style.css" type=text/css rel=stylesheet>
+  </HEAD>
+    <BODY>
+      <a name="top"></a>
+      <table CLASS="frame" ALIGN="center">
+	  <tr><td>
+	      <table width="100%">
+		  <tr>	
+		    <td>
+		      <a href="http://www.dsi.unifi.it/neural"><img src="symbol_small.jpg" BORDER=0 Alt="Machine Learning and Neural Networks group"></a><br>
+		    </td>
+		    <td>
+		      <p class="right">
+			<a href="http://www.dsi.unifi.it/">Dipartimento di Sistemi e Informatica<br></a>
+			<a href="http://www.unifi.it/">Universit&agrave; di Firenze<br></a>
+			Via Santa Marta 3<br>
+			50139 Firenze - Italy<br>
+			Tel:+39 055 4796361<br>
+			Fax:+39 055 4796363<br>
+		      </p>
+		    </td>
+		  </tr>
+	      </table>
+	      <HR NOSHADE>	      
+	      <table width=100%>		
+		  <tr align="center">		    
+		    <!-- <td><table><tr><td><IMG ALIGN="left" SRC="cystein.gif"></td>
+		    	       <tr><td><a href="log_stats.html">Server Statistics</a></td>
+		    </table></td>     -->  
+		    <td>
+		      <table>
+		      <tr><td ALIGN="center"><H1>DISULFIND</H1></td></tr>
+		      <tr><td ALIGN="center"><DIV>Cysteines Disulfide Bonding State and Connectivity Predictor</DIV></td></tr>
+		      </table>
+		    </td>
+		  </tr>
+		    <!-- <td><table><tr><td><IMG ALIGN="right" SRC="cystein.gif"></td>
+		   	       <tr><td><a href="help.html">Help & References</a></td>
+		    </table></td>  -->     
+	      </table>
+	      <HR NOSHADE>
+	  </td></tr>   <tr>
+      <td>
+      <table>
+        <tbody>
+          <tr>
+            <td align="center" width="33%"><a href="log_stats.html">Server
+Statistics</a></td>
+            <td align="center" width="33%"><a href="news.php">News</a></td>
+            <td align="center" width="33%"><a href="help.php">Help
+&amp; References</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr noshade="noshade">
+      <form action="process.php" method="post">
+        <center> <br>
+Please, insert your data (* is mandatory field)
+        <hr color="#0000ff" width="640"> <br>
+        <table border="0" width="640">
+          <tbody>
+            <tr>
+              <td><b><font size="3"><a href="help.php#email">Email
+Address</a> &nbsp;</font></b>&nbsp; <br>
+              <input size="40" name="email"></td>
+              <td><b><font size="3"><a href="help.php#query_name">Query
+Name</a></font></b>&nbsp; <br>
+              <input maxlength="24" size="24" name="idseq"></td>
+            </tr>
+            <tr>
+              <td><b><font size="3"><a href="help.php#sequence">Amino
+Acid Sequence</a>, single letter code (*)</font></b>&nbsp; <br>
+              <textarea name="aaseq" rows="12" cols="50"></textarea></td>
+              <td>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><b><font size="3"><a
+ href="help.php#predict_options">Predict Options:</a></font><br>
+                    </b>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td align="right" width="40"><input
+ name="predict" value="0" type="radio"></td>
+                          <td><b><font size="-1">Predict connectivity
+from user specified bonding state</font></b></td>
+                        </tr>
+                        <tr>
+                          <td align="right" width="40"><input
+ name="predict" value="1" checked="checked" type="radio"></td>
+                          <td><b><font size="-1">Predict bonding state
++ connectivity pattern</font></b></td>
+<!--<td<input type=checkbox name="html" ></td><td><B><FONT size=-1>Want html response?</FONT></B></TD>-->
+                        </tr>
+                      </tbody>
+                    </table>
+                    <b> </b></td>
+                  </tr>
+                  <tr>
+                    <td><b><font size="3"><a
+ href="help.php#output_format">Output Options:</a></font><br>
+                    </b>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td align="right" width="40"><input
+ name="output" value="0" type="radio"></td>
+                          <td><b><font size="-1">Batch: send output to
+email address</font></b></td>
+                        </tr>
+                        <tr>
+                          <td align="right" width="40"><input
+ name="output" value="1" checked="checked" type="radio"></td>
+                          <td><b><font size="-1">Interactive: receive
+output on browser</font></b></td>
+                        </tr>
+                        <tr>
+                          <td align="right" width="40">
+                          <select name="alternatives">
+                          <option value="1"> 1 </option>
+                          <option value="2"> 2 </option>
+                          <option value="3"> 3 </option>
+                          </select>
+                          </td>
+                          <td style="vertical-align: top;"><b><font
+ size="-1">Number of alternative patterns to be returned<br>
+                          </font></b></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <b> </b></td>
+                  </tr>
+                </tbody>
+              </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <hr color="#0000ff" width="640">
+        <p> Before submitting your first query please read the
+following <a href="help.php#note">note</a> </p>
+        <input value="Submit Query" name="submit" type="submit"><input
+ value="Reset Fields" name="reset" type="reset">&nbsp; </center>
+      </form>
+      </td>
+    </tr>
+	      <tr><td>
+              <BR>
+	      <HR NOSHADE>
+              <table width="100%">
+              <tr>
+              <td><p class="left"><a href="index.php">home</a></p>
+	      <td><p class="right"><a href="#top">top</a></p>
+              <tr><td><td> 
+	      <p class="caption">
+		&copy; 2003-2006 
+		<A HREF="http://www.dsi.unifi.it/neural">Machine Learning and Neural Networks Group</A>.<br>
+		For questions and comments: <tt>cystein<i> at </i> dsi <i> dot </i> unifi <i> dot </i> it</tt>.	
+	      </p>
+              </table> 
+              </TD></TR>
+      </table>
+      <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+      _uacct = "UA-367403-4";
+      urchinTracker();
+      </script>
+    </BODY>
+</HTML>

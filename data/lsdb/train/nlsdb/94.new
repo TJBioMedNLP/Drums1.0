@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KEGG LIGAND Database</title>
+<link rel="stylesheet" href="/css/kegg2.css" type="text/css" />
+<script language="Javascript" type="text/javascript">
+<!--
+	var exampleValue = new Array();
+	exampleValue[ "compound_entry" ]            = "C00010";
+	exampleValue[ "compound_name" ]             = "Propanoic acid";
+	exampleValue[ "compound_formula" ]          = "HCl";
+	exampleValue[ "compound_weight" ]           = "100 - 200";
+	exampleValue[ "compound_reaction" ]         = "R00001";
+	exampleValue[ "compound_pathway" ]          = "map00010";
+	exampleValue[ "compound_enzyme" ]           = "1.1.1.1";
+	exampleValue[ "compound_dblinks" ]          = "306-60-5";
+	exampleValue[ "glycan_entry" ]              = "G10596";
+	exampleValue[ "glycan_name" ]               = "globoside";
+	exampleValue[ "glycan_composition" ]        = "\"(Man)9\"";
+	exampleValue[ "glycan_class" ]              = "N-Glycan";
+	exampleValue[ "glycan_reaction" ]           = "R05970";
+	exampleValue[ "glycan_pathway" ]            = "map00510";
+	exampleValue[ "glycan_enzyme" ]             = "2.4.1.141";
+	exampleValue[ "glycan_dblinks" ]            = "31775";
+	exampleValue[ "reaction_entry" ]            = "R00259";
+	exampleValue[ "reaction_name" ]             = "L-Glutamine";
+	exampleValue[ "reaction_reacformula" ]      = "C00010";
+	exampleValue[ "reaction_pathway" ]          = "map00010";
+	exampleValue[ "reaction_enzyme" ]           = "1.1.1.10";
+	exampleValue[ "rpair_entry" ]               = "RP00010";
+	exampleValue[ "rpair_compound" ]            = "C00010";
+	exampleValue[ "rpair_rdm" ]                 = "O2c-O1c";
+	exampleValue[ "rpair_type" ]                = "main";
+
+    var currentInputSample = new Array();
+    var inputSample = new Array();
+    function colValue( theForm ){
+        var query_str = "";
+        var index  = theForm.column.options.selectedIndex;
+		var column = theForm.column.options[index].value;
+        var db     = theForm.DATABASE.value;
+
+		column = db + "_" + column;
+
+		var example = exampleValue[ column ];
+        setInputSample( theForm, true );
+        theForm.query.value = "example) " + example;
+		currentInputSample[ db ] = example;
+    }
+
+    function focusQuery( theForm ){
+        if( checkInputSample( theForm ) ){
+            theForm.query.value = "";
+            setInputSample( theForm, false );
+        }
+    }
+
+    function checkQuery( theForm ){
+        //focusQuery( theForm );
+        //if( checkInputSample( theForm ) ){
+        //    theForm.query.value = currentInputSample[ theForm.DATABASE.value ];
+        //}
+    }
+
+    function checkInputSample( theForm ){
+        var db = theForm.DATABASE.value;
+        var flag = inputSample[ db ];
+        if( flag != true ) flag = false;
+        return( flag );
+    }
+
+    function setInputSample( theForm, flag ){
+        var db = theForm.DATABASE.value;
+        inputSample[ db ] = flag;
+    }
+
+	function showExample(){
+		colValue( document.compound );
+		colValue( document.glycan );
+		colValue( document.reaction );
+		colValue( document.rpair );
+	}
+
+	function blurQueryText(textBox){
+		//if( textBox.value == "" )
+		//	colValue( textBox.form );
+	}
+
+function Launcher(formobj,mode) {
+    var p = formobj.text.value;
+    var param, url;
+
+    p = p.replace( /\W/g, " " );
+    p = p.replace( /^\s+/, "" );
+    p = p.replace( /\s+$/, "" );
+    param = p.replace( /\s+/g, "+" );
+    if (p == "") {
+        return false;
+    }
+
+    url = '';
+    if (mode == 0) {
+	url = "/kegg-bin/search_pathway_object?org_name=map&amp;unclassified=" + p;
+    }
+    else if (mode == 1) {
+	url = "/kegg-bin/search_brite_object?unclassified=" + p;
+    }
+    else if (mode == 2) {
+	url = "/dbget-bin/www_btit?ligand+-n+" + param;
+    }
+    else if (mode == 3) {
+	url = "/dbget-bin/www_bget?ligand+" + param;
+    }
+
+    if (url) {
+        window.open(url,'_blank','toolbar=yes,location=yes,directories=yes,scrollbars=yes,width=800,height=600,resizable=yes');
+    }
+}
+// -->
+</script>
+</head>
+
+<body bgcolor="#ffffff" link="#003399" vlink="#003399" onload="showExample()">
+
+<table width="700">
+<tr>
+  <td width="180" align="center">
+    <a href="/kegg/"><img src="/Fig/kegg2_menu.gif" alt="KEGG icon" border="0" /></a>
+  </td>
+  <td>
+    <h2 class="title20">KEGG LIGAND Database</h2>
+    <h5>Molecular building blocks of life in the chemical space</h5>
+  </td>
+</tr>
+</table>
+
+<br />
+<table width="700" cellpadding="2" class="frame2">
+<tr><td align="center" class="td20">
+  <table width="680">
+  <tr>
+    <th><a href="/kegg/kegg2.html">KEGG2</a></th>
+    <th><a href="/kegg/pathway.html">PATHWAY</a></th>
+    <th><a href="/kegg/brite.html">BRITE</a></th>
+    <th><font class="current">LIGAND</font></th>
+    <th><a href="/kegg/glycan/">GLYCAN</a></th>
+    <th><a href="/kegg/compound/">COMPOUND</a></th>
+    <th><a href="/kegg/reaction/">REACTION</a></th>
+    <th><a href="/kegg/plant/">PLANT</a></th>
+  </tr>
+  </table>
+</td></tr>
+
+<tr><td align="center">
+<!-- start -->
+
+<table width="660"><tr><td align="left">
+
+<form name="mode" method="post" enctype="multipart/form-data" action="javascript:Launcher(document.mode,0);">
+<table width="600" align="center">
+  <tr><td>
+    Enter <a href="/kegg/kegg3.html">C/G/R numbers</a> &nbsp;&nbsp;&nbsp;&nbsp; <font class="small">(Example) C00389 C05903 C06562 C08650 C09727 C09762</font>
+  </td></tr>
+  <tr><td>
+    <textarea name="text" cols="70" rows="2"></textarea>
+  </td></tr>
+   <tr><td>
+    <input type="button" value="Pathway mapping" onclick="Launcher(document.mode,0);" />
+    <input type="button" value="Brite mapping" onclick="Launcher(document.mode,1);" />
+    <input type="button" value="Get title" onclick="Launcher(document.mode,2);" />
+    <input type="button" value="Get entry" onclick="Launcher(document.mode,3);" />
+    <input type="reset" value="Clear" />
+  </td></tr>
+</table>
+</form>
+
+<hr class="frame2" />
+
+<h4 class="title20">Chemical Substances and Reactions</h4>
+
+<table>
+<tr><td width="10"></td><td>
+<b>KEGG LIGAND</b> contains our knowledge on the universe of chemical substances and reactions that are relevant to life.
+It is a composite database consisting of COMPOUND, GLYCAN, REACTION, RPAIR, and ENZYME databases, whose entries are identified by C, G, R, RP, and EC numbers, respectively.
+ENZYME is derived from the IUBMB/IUPAC Enzyme Nomenclature, but the others are internally developed and maintained.
+</td></tr>
+</table>
+
+<blockquote>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr align="center">
+    <td colspan="2">Database</td>
+    <td>Identifier</td>
+    <td>Content</td>
+    <td>Specialized<br />entry point</td>
+  </tr>
+  <tr>
+    <td rowspan="5"><a href="/dbget-bin/www_bfind?ligand">LIGAND</a></td>
+    <td><a href="/dbget-bin/www_bfind?compound">COMPOUND</a></td>
+    <td>C number</td>
+    <td>Chemical compound structures</td>
+    <td><a href="/kegg/compound/">KEGG COMPOUND</a></td>
+  </tr>
+  <tr>
+    <td><a href="/dbget-bin/www_bfind?glycan">GLYCAN</a></td>
+    <td>G number</td>
+    <td>Glycan structures</td>
+    <td><a href="/kegg/glycan/">KEGG GLYCAN</a></td>
+  </tr>
+  <tr>
+    <td><a href="/dbget-bin/www_bfind?reaction">REACTION</a></td>
+    <td>R number</td>
+    <td>Biochemical reactions</td>
+    <td rowspan="3"><a href="/kegg/reaction/">KEGG REACTION</a></td>
+  </tr>
+  <tr>
+    <td><a href="/dbget-bin/www_bfind?rpair">RPAIR</a></td>
+    <td>RP number</td>
+    <td>Reactant pair alignments</td>
+  </tr>
+  <tr>
+    <td><a href="/dbget-bin/www_bfind?enzyme">ENZYME</a></td>
+    <td>EC number</td>
+    <td>Enzyme nomenclature</td>
+  </tr>
+</table>
+</blockquote>
+
+<br />
+<form method="get" action="/dbget-bin/www_bfind_sub">
+  <input type="hidden" name="mode" value="bfind" />
+  <input type="hidden" name="max_hit" value="1000" />
+  <img src="/Fig/egg16b.gif" alt="blue" /> <b>Search</b>
+  <select name="dbkey">
+  <option value="ligand" selected="selected">LIGAND</option>
+  <option value="compound">COMPOUND</option>
+  <option value="glycan">GLYCAN</option>
+  <option value="reaction">REACTION</option>
+  <option value="rpair">RPAIR</option>
+  <option value="enzyme">ENZYME</option>
+  </select>
+  <b>for</b>
+  <input type="text" size="30" name="keywords" />
+  <input type="submit" value="Go" />
+  <input type="reset" value="Clear" />
+  <blockquote>
+    <input type="radio" name="mode" value="bfind" checked="checked" />bfind mode
+    <input type="radio" name="mode" value="bget" />bget mode
+  </blockquote>
+</form>
+
+<a name="rdb"></a>
+<hr class="frame2" />
+
+<h4 class="title20">Chemical Structure Search</h4>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Search similar compound structures</b>
+<blockquote>
+<table>
+<tr valign="top"><td><b><a href="http://www.genome.jp/tools/simcomp">SIMCOMP</a></b>:</td><td>maximal common subgraph search -- a portion of the query compound is optimally matched to a portion of the database compound
+[<a href="http://www.ncbi.nlm.nih.gov/pubmed/14505407">reference</a>]
+</td></tr>
+<tr valign="top"><td><b><a href="http://www.genome.jp/tools/subcomp">SUBCOMP</a></b>:</td><td>isomorphic subgraph search -- the query compound is fully matched to a portion of the database compound (substructure match) or a portion of the query compound is fully matched to the database compound (superstructure match)
+</td></tr>
+</table>
+</blockquote>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Search similar glycan structures</b>
+<blockquote>
+<b><a href="http://www.genome.jp/tools/kcam">KCaM</a></b>: local or global search for matching tree structures
+[<a href="http://www.ncbi.nlm.nih.gov/pubmed/15215393">reference</a>]
+</blockquote>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Download chemical structure drawing tool</b>
+<blockquote>
+<table>
+<tr valign="top"><td><b><a href="http://www.genome.jp/download/">KegDraw</a></b>:</td><td>Java application for drawing chemical compound structures and glycan structures with the capabilities to search against the KEGG databases
+</td></tr>
+</table>
+</blockquote>
+
+<hr class="frame2" />
+
+<h4 class="title20">Other Computational Analysis</h4>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Predict reactions for given reactant pairs</b>
+<blockquote>
+<b><a href="http://www.genome.jp/tools/e-zyme">E-zyme</a></b>: automatic assignment of EC numbers
+[<a href="http://www.ncbi.nlm.nih.gov/pubmed/15600352,19477985">reference</a>]
+</blockquote>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Generate possible reaction paths</b>
+<blockquote>
+<b><a href="http://www.genome.jp/kegg/tool/pathcomp.html">PathComp</a></b>: generate possible reaction paths from an enzyme list
+</blockquote>
+
+<hr class="frame2" />
+
+<h4 class="title20">LIGAND Relational Database</h4>
+
+<table>
+<tr><td width="10"></td><td>
+The primary database of KEGG LIGAND is a relational database with the <a href="http://www.genome.jp/download/">KegDraw</a> interface, which is used to generated the secondary (flat file) database for DBGET.
+A read-only copy of the LIGAND relational database is made publicly accessible.
+</td></tr>
+</table>
+
+<br />
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Search COMPOUND</b>
+<blockquote>
+<form name="compound" method="post" action="http://www.genome.jp/ligand-bin/txtsearch" onsubmit="checkQuery( this )">
+  <table>
+    <tr><td width="160" align="right">
+      <select name="column" onchange="colValue(this.form)">
+        <option value="entry" selected="selected">Compound ID</option>
+        <option value="name">Name</option>
+        <option value="formula">Formula</option>
+        <option value="weight">Exact Mass</option>
+        <option value="reaction">Reaction</option>
+        <option value="pathway">Pathway</option>
+        <option value="enzyme">Enzyme</option>
+        <option value="dblinks">DBlinks</option>
+      </select>
+      </td>
+      <td nowrap="nowrap">
+        <input type="text" size="40" name="query" onfocus="focusQuery( this.form )" onblur="blurQueryText(this)" />
+        <input type="submit" value="Go" />
+        <input type="reset" value="Clear" />
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="DATABASE" value="compound" />
+</form>
+</blockquote>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Search GLYCAN</b>
+<blockquote>
+<form name="glycan" method="post" action="http://www.genome.jp/ligand-bin/txtsearch" onsubmit="checkQuery( this )">
+  <table>
+    <tr><td width="160" align="right">
+      <select name="column" onchange="colValue(this.form)">
+        <option value="entry" selected="selected">Glycan ID</option>
+        <option value="name">Name</option>
+        <option value="composition">Composition</option>
+        <option value="class">Class</option>
+        <option value="reaction">Reaction</option>
+        <option value="pathway">Pathway</option>
+        <option value="enzyme">Enzyme</option>
+        <option value="dblinks">DBlinks</option>
+      </select>
+      </td>
+      <td nowrap="nowrap">
+        <input type="text" size="40" name="query" onfocus="focusQuery( this.form )" onblur="blurQueryText(this)" />
+        <input type="submit" value="Go" />
+        <input type="reset" value="Clear" />
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="DATABASE" value="glycan" />
+</form>
+</blockquote>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Search REACTION</b>
+<blockquote>
+<form name="reaction" method="post" action="http://www.genome.jp/ligand-bin/txtsearch" onsubmit="checkQuery( this )">
+  <table>
+    <tr><td width="160" align="right">
+      <select name="column" onchange="colValue(this.form)">
+        <option value="entry" selected="selected">Reaction ID</option>
+        <option value="name">Name</option>
+        <option value="reacformula">Reactant Entry</option>
+        <option value="pathway">Pathway</option>
+        <option value="enzyme">Enzyme</option>
+      </select>
+      </td>
+      <td nowrap="nowrap">
+        <input type="text" size="40" name="query" onfocus="focusQuery( this.form )" onblur="blurQueryText(this)" />
+        <input type="submit" value="Go" />
+        <input type="reset" value="Clear" />
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="DATABASE" value="reaction" />
+</form>
+</blockquote>
+
+<img src="/Fig/egg16b.gif" alt="blue" /> <b>Search RPAIR</b>
+<blockquote>
+<form name="rpair" method="post" action="http://www.genome.jp/ligand-bin/txtsearch" onsubmit="checkQuery( this )">
+  <table>
+    <tr><td width="160" align="right">
+      <select name="column" onchange="colValue(this.form)">
+        <option value="entry" selected="selected">Rpair ID</option>
+        <option value="compound">Compound Entry</option>
+        <option value="rdm">RDM</option>
+        <option value="type">Type</option>
+      </select>
+      </td>
+      <td nowrap="nowrap">
+        <input type="text" size="40" name="query" onfocus="focusQuery( this.form )" onblur="blurQueryText(this)" />
+        <input type="submit" value="Go" />
+        <input type="reset" value="Clear" />
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="DATABASE" value="rpair" />
+</form>
+</blockquote>
+
+<hr class="frame2" />
+
+<i>Last updated: October 5, 2009</i>
+
+</td></tr></table>
+
+<!-- end -->
+</td></tr>
+
+<tr><td align="center" class="td20">
+  <table width="680">
+  <tr>
+    <th><a href="http://www.genome.jp/feedback/?category=ligand">Feedback</a></th>
+    <th><a href="/kegg/">KEGG</a></th>
+    <th><a href="http://www.genome.jp/">GenomeNet</a></th>
+    <td align="center" width="25%"><a href="http://bioinformatics.jp/">Bioinformatics Japan</a></td>
+    <td align="center" width="25%"><a href="http://kanehisa.jp/">Kanehisa Laboratories</a></td>
+  </tr>
+  </table>
+</td></tr>
+</table>
+
+</body>
+
+</html>

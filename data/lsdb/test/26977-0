@@ -1,0 +1,234 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Calogero Raffaele">
+  <title>rre home page</title>
+</head>
+<body nosave="" alink="#ff0000" background="rre_files/background_1.gif"
+ bgcolor="#ffffff" link="#cc3300" text="#006666" vlink="#996633">
+&nbsp;
+<center>
+<table border="0" width="580">
+  <tbody>
+    <tr>
+      <td>
+      <center><img src="rre_files/univers.gif"
+ alt="Universit&agrave; degli Studi di Torino" nosave="" border="0" height="40"
+ width="464"></center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<center>
+<p> </p>
+<hr width="580"></center>
+<center>
+<table border="0" width="768">
+  <tbody>
+    <tr>
+      <td height="320">
+      <center> <font size="+3">RRE: Retrieval of non-coding Regulative
+Elements from annotated Genomic databases</font> </center>
+      <p><font size="+1">RRE is a tool to extract non-coding regions
+associated to annotated genes.</font> </p>
+      <center>
+      <p><img src="rre_files/rre.gif" nosave="" height="500" width="723"></p>
+      </center>
+      <p><font size="+2">RRE tools:&nbsp;</font> </p>
+      <ul>
+        <li> <font size="+1">RRE is a sequence parser
+written in JAVA. RRE parser uses the gene/mRNA/CDS features in GBS/GBK
+files to extract the annotated regions from the corresponding FA file.
+RRE saves the extracted regions in various formats (e.i. <a
+ href="fasta_format.html">fasta</a>,<a href="xml_format.html">xml</a>)
+and it can populate automatically a <a href="mysql_tables.html">MySQL
+database</a> (www.mysql.com).<br>
+In order to run it RRE and Java 1.4 (<a href="http://java.sun.com/j2se/">java.sun.com/j2se/</a>)
+has to be installed in the system.&nbsp;</font> <br>
+        </li>
+        <li><font size="+1">In order to keep updated the non-coding
+information an automatic download robot based on <a
+ href="http://curl.haxx.se/">CURL</a> was integrated with RRE (the
+download robot has been implemented only for&nbsp; PCs running Linux).
+The tool
+allows to download new genomic data releases </font><font size="+1">(GBS/GBK
+and FA/MFA files)</font><font size="+1"> when they are available at
+NCBI.&nbsp;</font>
+          <center> <font color="#cc0000"><font size="+1">Download:&nbsp;
+          <a
+ href="http://www.bioinformatica.unito.it/downloads/rre/DownloadAndRre01Apr2004.tgz">rre.tgz</a>
+(Windows/unix), sample data and windows/unix script file to run RRE
+parser </font></font><font color="#cc0000"><font size="+1"><a
+ href="http://www.bioinformatica.unito.it/downloads/rre/sample_data.tgz">data.tgz</a>
+          </font></font><font color="#cc0000"><font size="+1">.</font></font>
+          </center>
+          <br>
+          <font color="#006600"><font size="+1">To run rre it is
+necessary to download from <a href="ftp://ftp.ncbi.nih.gov/genomes/">NCBI</a>
+*.gbs and *.fa or *.gbk files related to the organism of interest.</font></font>
+          <br>
+        </li>
+        <li><font color="#006600"><font size="+1"><a
+ href="http://www.bioinformatica.unito.it/bioinformatics/rre/rre_help.html">RRE
+help menu</a></font></font></li>
+        <li><font size="+1"><a
+ href="http://www.bioinformatica.unito.it/bioinformatics/rre/curl_help.html">Usage</a></font></li>
+        <li><font size="+1"><a
+ href="http://www.bioinformatica.unito.it/bioinformatics/rre/curl_inst.html">Installation</a></font></li>
+      </ul>
+      <ul>
+        <li>
+          <table border="1" height="37" width="95%">
+            <tbody>
+              <tr>
+                <td>
+                <ul>
+                  <li><font size="+1">Rules used in rre for the
+extraction of regulative regions from gbs/gbk files:</font></li>
+                </ul>
+                <ol>
+                  <li> <font color="#000000">If .gbs and .fa files are
+available .gbs annotations are used to extract sequence data from .fa
+file.</font></li>
+                  <li> <font color="#000000">If .gbk files are the
+only
+available rre extract a .fa file from the data present in .gbk.</font></li>
+                  <li><font color="#000000">5'UTRs are extracted
+starting from the mRNA and CDS annotation using the following rule:
+given the following gbs annotations mRNA =
+(m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My) and CDS =
+(C1..C2,.........,Cx..Cy) where CDS is included in mRNA, 5UTR starts at
+m1, contains the joining of all the exons upstream CDS an ends at C1<br>
+                    </font></li>
+                  <li><font color="#000000">3'UTRs are extracted
+starting from the mRNA and CDS annotation using the following rule: </font><font
+ color="#000000">given the following gbs annotations mRNA =
+(m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My) and CDS =
+(C1..C2,.........,Cx..Cy) where CDS is included in mRNA,</font><font
+ color="#000000"> 3'UTR&nbsp; starts at Cy contains all exons in mRNA
+and ends at My.</font></li>
+                  <li><font color="#000000">Upstream regions are
+extracted using the following rule: mRNA =
+(m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My), Upstream region = N bp
+upstream m1.</font></li>
+                  <li><font color="#000000">Downstream regions are
+extracted using the following rule: mRNA =
+(m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My), Downstream region = N bp
+upstream My.</font></li>
+                  <li><font color="#000000">Exons related to CDS are
+extracted using the following rule: mRNA =
+(m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My), CDS =
+(C1..C2,.........,Cx..Cy), Exon = Range Mi..Mj where
+Mi&gt;C1, Mj&lt;Cy belonging to mRNA sequence</font></li>
+                  <li><font color="#000000">Exons related to the non
+coding part of mRNA (upstream) are extracted using the
+following rule: mRNA = (m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My),
+CDS = (C1..C2,.........,Cx..Cy), Exon = Range Mi..Mj where
+Mi&gt;m1, Mj&lt;C1 belonging to mRNA sequence</font></li>
+                  <li><font color="#000000">Exons related to the non
+coding part of mRNA (downstream) are extracted using the
+following rule: mRNA = (m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My),
+CDS = (C1..C2,.........,Cx..Cy), Exon = Range Mi..Mj where
+Mi&gt;Cy, Mj&lt;My belonging to mRNA sequence</font></li>
+                  <li><font color="#000000">Introns </font><font
+ color="#000000">related to CDS</font><font color="#000000"> are
+extracted using the following rule: mRNA =
+(m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My), CDS =
+(C1..C2,.........,Cx..Cy), Intron = Range Mi..Mj
+where Mi&gt;C1, Mj&lt;Cy not belonging to mRNA sequence.</font></li>
+                  <li><font color="#000000">Introns </font><font
+ color="#000000">related to&nbsp; </font><font color="#000000">the non
+coding part of mRNA (upstream) are extracted using the
+following rule: mRNA = (m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My),
+CDS = (C1..C2,.........,Cx..Cy), Intron = Range Mi..Mj
+where Mi&gt;m2, Mj&lt;C1 not belonging to mRNA sequence.</font></li>
+                  <li><font color="#000000">Introns </font><font
+ color="#000000">related to&nbsp; </font><font color="#000000">the non
+coding part of mRNA (downstream) are extracted using the
+following rule: mRNA = (m1..m2,m3..m4,m5..m6,m7..m8,...,Mx..My),
+CDS = (C1..C2,.........,Cx..Cy), Intron = Range Mi..Mj
+where Mi&gt;Cy, Mj&lt;My not belonging to mRNA sequence.</font></li>
+                  <li><font color="#000000">Overlaps between
+up/downstream regions with gene annotation are handled in the following
+way: Size definition rule Gene &gt; Upstream &gt; Downstream; example:
+Gene_b (0..500), mRNA_b (1..400), Gene_a (10000..80000),
+mRNA_a (40000..50000,60000..70000), Upstream,Downstream
+size=10000 -&gt; Up Gene_b not extracted, Down Gene_b
+(401..9999), Up Gene_a (30000..39999), Down Gene_a (70001..80000</font></li>
+                </ol>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ul>
+      <br>
+      <ul>
+        <li> <font size="+1">A web based interface to RRE database
+populated using RRE parser is available </font><font color="#000099"><font
+ size="+2"><a href="https://www6.unito.it/RRE">here</a></font></font><font
+ size="+1">.</font></li>
+        <li><font size="+1"><a href="./rre_queries.html">Information
+about the quieries available at RRE db</a>.<br>
+          </font></li>
+      </ul>
+      <font size="+1">--------------------------------------------------------------------------------------------------------------------------------</font>
+      <div style="text-align: center;">
+      <div style="text-align: justify;"> </div>
+      <div style="text-align: center;">
+      <div style="text-align: justify;">
+      <div style="text-align: left;"><font size="+1"><strong
+ style="color: rgb(204, 0, 0);"><span
+ style="text-decoration: underline;">Note to the users</span>: <br>
+      </strong></font><font size="+1"><strong
+ style="color: rgb(204, 0, 0);">3/mar/2004: It is now available the
+possibility to extract sequence
+features related to genes containing putative oestrogen-responsive
+elements (ERE). The selection of the sequence feature can be performed
+using&nbsp; trascription information related to genes specific
+expression in ER+ breast cancers and in trascriptional profiling
+experiments performed on MCF7 and ZR75 cell lines.<br>
+      </strong></font></div>
+      <font size="+1"><strong style="color: rgb(204, 0, 0);"></strong></font></div>
+      <font size="+1"><strong style="color: rgb(204, 0, 0);"><br>
+      </strong></font> <font size="+1"><strong
+ style="color: rgb(204, 0, 0);"> </strong></font></div>
+      <div style="text-align: left;"><font size="+1">--------------------------------------------------------------------------------------------------------------------------------<strong
+ style="color: rgb(204, 0, 0);"></strong></font><br>
+      <font size="+1"><strong style="color: rgb(204, 0, 0);"></strong></font></div>
+      <font size="+1"><strong style="color: rgb(204, 0, 0);"><br>
+      </strong></font></div>
+      <center> <font size="+1"><font color="#cc0000">Users can access
+to the the RRE database requesting an authorization
+certificate sending an email to </font><font color="#000099"><a
+ href="mailto:raffaele.calogero@unito.it">raffaele.calogero@unito.it</a></font><font
+ color="#cc0000"> . Please insert in the subject of the email: <span
+ style="color: rgb(0, 0, 102);">ACCESSING TO RRE DB</span> and in the
+main body of the message: <span style="color: rgb(0, 0, 102);">SURNAME,
+NAME, AFFILIATION, EMAIL ADDRESS.</span></font></font>
+      <p><font color="#cc0000"><font size="+1">Users will receive a
+certificate to be installed in Internet Explorer (5.0 or higher) or
+Netscape (7.0 or higher)</font></font> </p>
+      </center>
+      <font size="+1">&nbsp;</font></td>
+    </tr>
+    <tr>
+      <td><br>
+      </td>
+    </tr>
+    <tr>
+      <td><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<center><font face="Geneva,Arial,Helvetica"><font size="-1">Per
+informazioni contattare <a href="mailto:%20raffaele.calogero@unito.it">webmaster</a></font></font></center>
+<p><br>
+</p>
+</body>
+</html>

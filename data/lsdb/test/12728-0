@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="it">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Code for Spectra Classification</title>
+<meta name="Microsoft Theme" content="modular 0111, default">
+</head>
+
+<body background="_themes/modular/modbkgnd.jpg" bgcolor="#FFFFFF" text="#000000" link="#CC0000" vlink="#330099" alink="#FFCC33"><!--mstheme--><font face="trebuchet ms,arial,helvetica">
+<p><span lang="en-us">In this page we describe some MATLAB functions and scripts 
+we have realized (as described <a target="_blank" href="Paperspdf/cibb08.pdf">
+here</a>) to classify
+<a href="http://home.ccr.cancer.gov/ncifdaproteomics/OvarianCD_PostQAQC.zip">
+some mass spectra</a>.</span></p>
+<p><span lang="en-us">To use the code (apart from having installed MATLAB) it is&nbsp; required that in the working 
+directory there are two directories: Cancer (containing the cancer spectra) and 
+Control (clearly containing the control spectra).</span></p>
+<p><span lang="en-us">The <a target="_blank" href="SpectraCode/preprocessing.m">
+preprocessing.m</a> script reads the data and, for each spectrum, re-samples the 
+data and correct the baseline.</span></p>
+<p><span lang="en-us">The <a target="_blank" href="SpectraCode/tuning.m">
+tuning.m</a> script is used to tune the whole system; it uses the functions
+<a target="_blank" href="SpectraCode/findMaxLocations.m">findMaxLocations</a>,
+<a target="_blank" href="SpectraCode/localmaxima.m">localmaxima</a> and
+<a target="_blank" href="SpectraCode/featuresExtraction.m">featuresExtraction</a>.&nbsp;
+The <a target="_blank" href="SpectraCode/ViewResults.m">ViewResults.m</a> script&nbsp; 
+can be used to visualize the results obtained.
+</span></p>
+<p><span lang="en-us">The <a target="_blank" href="SpectraCode/bestsystem.m">
+bestsystem.m</a> script is used to visualize the performance of the best system 
+in terms of ROC curve, AUC and correct rate distribution; it uses the functions:
+<a target="_blank" href="SpectraCode/ROCVerticalAveraging.m">ROCVertcalAveraging</a>,
+<a target="_blank" href="SpectraCode/NEWsvmclassify.m">NEWsvmclassify</a>,
+<a target="_blank" href="SpectraCode/NEWsvmdecision.m">NEWsvmdecion</a> and
+<a target="_blank" href="SpectraCode/auc.m">auc</a>.</span></p>
+<p><span lang="en-us">Last, <a target="_blank" href="SpectraCode/stability.m">
+stability.m</a> is used to show&nbsp; the feature stability of the proposed 
+method.</span></p>
+<p><span lang="en-us">All the scripts code can be downloaded as a
+<a href="SpectraCode/code.rar">single RAR file</a>.</span></p>
+<p><span lang="en-us">For any problem in using the code, please don't hesitate 
+to contact:<br>
+<i><u><b>antonio.dacierno</b></u></i></span><font face="trebuchet ms,arial,helvetica"><i><u><b><font color="#cc0000">AT</font>gmail.com</b></u></i>&nbsp; 
+and/or <i><b><u>ceccarelli<font color="#cc0000">AT</font>unisannio.it</u></b></i><u>.</u></font></p>
+<p><span lang="en-us">&nbsp;</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

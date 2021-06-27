@@ -1,0 +1,158 @@
+<html>
+<head>
+<title>
+CLOTE Computational Biology LAB
+</title>
+</head>
+<body bgcolor="white">
+<img src = "../images/bcLogo.gif" align="left">
+<p>
+<center>
+<img src = "../images/bcBuilding.jpg"> 
+<p>
+<font color="red" size="+2">
+<b>
+CLOTE Computational Biology LAB
+<p>
+RNALOSS: Web server for  RNA locally optimal secondary structure computation 
+</b>
+<br>
+</font>
+</center>
+<p>
+
+
+<tr>
+<td bgcolor="#FFFFFF">
+<img src="../images/singlepix.gif" width="20" height="4">
+</td>
+<td height="3"></td>
+</tr>
+
+<tr> 
+<td bgcolor="#FFFFFF"></td>
+<td>
+<table width="760" border="0" cellspacing="0" cellpadding="15">
+<tr>
+<td bgcolor="#E7E7E7" height="375" align="left" valign="top"> 
+<b>
+<br>
+<p>
+Enter an RNA sequence of at most 100 nucleotides. Enter your email,
+indicate your operating system (for file uploads). Select
+option to either
+<i>
+<blockquote>
+<font color="red"> (A) </font>
+Paste/type an RNA sequence (with or without FASTA comment), or
+</blockquote>
+<blockquote>
+<font color="red"> (B) </font>
+Upload FASTA file containing an RNA (with or without FASTA comment). 
+</blockquote>
+</i>
+For RNA sequences of length 60 nt. or more, output will be returned by
+email. For each possible value of k, RNALOSS computes the number of
+k-locally optimal secondary structures for the input RNA, along with
+relative density of states and minimum free energy of a sample k-locally
+optimal secondary structure (see Documentation).
+<p>
+<font color="red">NOTE:</font>
+RNALOSS run time is O(n<sup>4</sup>), so for sequences of length greater
+than 60, there will be a waiting time of several minutes, and the output will
+be sent by email. Sequences of at most 100 nucleotides are accepted in current
+web server.
+<p>
+Here are two sample RNA sequences for sample trial.
+<ul>
+<li>
+<a href="toyRNA.faa">Tiny toy example of RNA</a>
+<li>
+<a href="rnaDA0650.faa">Ala-tRNA</a> from <i>M. jannaschii</i>, 
+with accession number DA0650, 
+taken from Sprinzl's database. Stored output from webengine is
+<a href="spectrumOutputForRNADA0650.html">HERE</a>
+<li>
+<a href="documentation.html">Documentation</a>
+</ul>
+<p>
+
+<p> 
+<FORM enctype="multipart/form-data" 
+ACTION="../cgi-bin/RNALOSS/rnaloss.cgi"
+METHOD="POST">
+<p>
+Email address: (<font color="red">required</font>):
+<INPUT type="text" NAME="emailAddress" size="25"><br><p>
+<p>
+<b>Select the type of operating system you use (required only for file upload): </b>
+<select NAME="opSys" SIZE=1>
+        <option value="unix">unix
+        <option value="windows">windows
+        <option value="macintosh">macintosh
+</select>
+<p>
+Either paste in an RNA sequence or upload a FASTA format file containing
+a single RNA sequence.
+<p>
+<b>Select the method of inputting the RNA sequence: </b>
+<select NAME="inputType" SIZE=1>
+        <option value="paste">type/paste one sequence
+        <option value="upload">file upload of one RNA sequence
+</select>
+<br>
+
+<p>
+
+<b>
+<font color="red">(A)</font>
+Sequence:</b>
+<p>
+<center>
+<textarea name="rnaSeq" rows=5 cols=60 >
+</textarea>
+</center>
+<p>
+<p>
+<font color="red">(B)</font>
+File:</b>
+<INPUT type="file" NAME="rnaFile">
+<p>
+<center>
+<INPUT TYPE="submit" VALUE="SUBMIT"> 
+<INPUT TYPE="reset" VALUE="RESET"> 
+</center>
+</form>
+<hr>
+</b>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+  
+<tr>
+<td bgcolor="#FFFFFF">
+<img src="../images/singlepix.gif" width="20" height="3"></td>
+<td height="3"></td>
+</tr>
+  
+<tr>
+<td bgcolor="#FFFFFF"></td>
+<td>
+<table width="760" border="0" cellspacing="0" cellpadding="15">
+<tr>
+<td bgcolor="#666666" align="right">
+<p>&copy; Boston College<br>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+</table>
+</body>
+</html>
+
+

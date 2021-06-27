@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- head -->
+<head>
+<title>ModLink+</title>
+<link rev="made" href="mailto:ofornes%40imim.es" />
+<link rel="stylesheet" type="text/css" href="./styles/modlink.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<!-- end of head -->
+
+<!-- Javascript -->
+<script language="JavaScript" src="./javascript/modlink.js"></script>
+
+<!-- body -->
+<body>
+
+<!-- body division -->
+<div id="body" style="background-color:#e5e6e8;">
+
+  <!-- header division -->
+  <div id="content">
+    <!-- banner -->
+    <table class="banner">
+      <tr class="banner_grey">
+        <td class="banner_modlink"><img src="./img/modlink.jpg"/>
+        </td>
+        <td class="banner_options"><a onclick="top.location='./';" onmouseout="style.color='white';" onmouseover="style.cursor='pointer';style.color='#d01005';">Home</a> | <a onclick="top.location='./modlinkretrieveold.html';" onmouseout="style.color='white';" onmouseover="style.cursor='pointer';style.color='#d01005';">Recent Results </a> | <a onclick="top.location='./modlinkhelp.html';" onmouseout="style.color='white';" onmouseover="style.cursor='pointer';style.color='#d01005';">Help</a>
+        </td>
+        <td class="banner_logos"><a onclick="top.location='http://nemo.imim.es/grib/index.htm';"><img src="./img/grib.jpg"/></a>
+        </td>
+        <td class="banner_upf"><a onclick="top.location='http://www.upf.edu/';"><img src="./img/upf.jpg" /></a>
+        </td>
+        <td class="banner_logos"><a onclick="top.location='http://www.imim.es/';"><img src="./img/imim.jpg"/></a>
+        </td>
+      </tr>
+      <tr class="banner_red"><td colspan="5"></td></tr>
+      <tr class="banner_body"><td colspan="5"></td></tr>
+    </table>
+    <!-- end of banner -->
+
+    <!-- links to grib, imim and SBI -->
+    <div id="links">
+      <a href="http://sbi.imim.es/">SBI</a> / Servers / ModLink+: prediction of fold using protein interactions.&nbsp;&nbsp;&nbsp;<font size="1"><a href="javascript:document.forms[0].reset();" class="reset">Reset page</a></font>
+    </div>
+    <!-- end of links -->
+
+    <!-- formulary -->
+    <table class="formulary">
+      <form action="../cgi-bin/modlink/ModLink_plus.cgi" method="POST" enctype="multipart/form-data" name="submit_form" onsubmit="return checkSubmitForm();">
+      <tr>
+        <td class="content">
+        <!-- form info table -->
+        <table class="info" align="center">
+          <tr>
+            <td width="100%" height="100%" valign="top">
+              <!-- query box -->
+              <fieldset class="fieldset">
+              <!-- fieldset flag -->
+              <legend class="legend">Query Sequence</legend>
+              <!-- query box table -->
+              <table width="100%" cellspacing="10" cellpading="0" border="0">
+                <tr>
+                  <!-- flag + help -->
+                  <td><b>Enter the query sequence in FASTA format</b> <img name="queryHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenQueryTextboxHelp');" onmouseout="changeImage('queryHelp','./img/help_white.jpg');" onmouseover="changeImage('queryHelp','./img/help_red.jpg');"/>
+                  <br />
+                  <!-- hidden help division -->
+                  <div id="hiddenQueryTextboxHelp" style="display:none">
+                    <fieldset class="fieldset_help">Query sequence should be pasted in the text area in <b>FASTA format</b>. Only <b>one</b> sequence should be pasted in the text area. <a class="more" onclick="top.location='./modlinkhelp.html#sequence_input'">more...</a></fieldset>
+                  </div>
+                  <!-- textbox -->
+                  <textarea name="query_box" id="queryBox" rows="5" cols="70"></textarea>
+                  <br />
+                  <!-- textbox clear -->
+                  <font size="1"><a class="clear" onClick="doClear('queryBox');">Clear</a></font>
+                  </td>
+                </tr>
+              </table>
+              <!-- browse table -->
+              <table width="100%" cellspacing="10" cellpading="0" border="0">
+                <tr>
+                  <!-- flag -->
+                  <td class="option"><b>Or, upload file</b></td>
+                  <!-- browse + help -->
+                  <td class="the_option">
+                  <input type="file" name="query_file"> <img name="browseQueryHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenQueryUploadHelp');" onmouseout="changeImage('browseQueryHelp','./img/help_white.jpg');" onmouseover="changeImage('browseQueryHelp','./img/help_red.jpg');"/>
+                  <!-- hidden help division -->
+                  <div id="hiddenQueryUploadHelp" style="display:none">
+                    <fieldset class="fieldset_help">Use the browse button to upload a file from your local disk containing the query sequence. The file should contain only <b>one</b> sequence in <b>FASTA format.</b></fieldset>
+                  </div>
+                  </td>
+                </tr>
+              </table>
+              </fieldset>
+              <!-- end of query box -->
+
+              <!-- databases -->
+              <fieldset class="fieldset">
+              <!-- fieldset flag -->
+              <legend class="legend">Protein-Protein Interactions</legend>
+              <!-- database table -->
+              <table width="100%" cellspacing="10" cellpading="0" border="0">
+                <tr>
+                  <!-- flag + help --> 
+                  <td class="option"><b>Databases</b></td>
+                  <!-- browse + help -->
+                  <td class="the_option">
+                    <dt><input type="checkbox" name="databases" value="1">BIND</dt>
+                    <dt><input type="checkbox" name="databases" value="2">BioGRID</dt>
+                    <dt><input type="checkbox" name="databases" value="3" checked="yes">DIP</dt>
+                    <dt><input type="checkbox" name="databases" value="4">HPRD</dt>
+                    <dt><input type="checkbox" name="databases" value="5">IntAct</dt>
+                    <dt><input type="checkbox" name="databases" value="6">MINT</dt>
+                    <dt><input type="checkbox" name="databases" value="7">MIPS</dt>
+                    <dt><input type="checkbox" name="databases" value="8">STRING</dt>
+                    <dt><font size="1">Choose the database(s) of protein-protein interactions</font> <img name="databasesHelp"  src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenDatabasesHelp');" onmouseout="changeImage('databasesHelp','./img/help_white.jpg');" onmouseover="changeImage('databasesHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div id="hiddenDatabasesHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select <b>any number</b> of the previous protein-protein interaction databases. <a class="more" onclick="top.location='./modlinkhelp.html#databases'">more...</a></fieldset>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              </fieldset>
+              <!-- end of databases -->
+
+              <!-- submit -->
+              <fieldset class="fieldset_subm">
+                <!-- submit button -->
+                <p class="submit"><input type="image" src="./img/search_white.jpg" name="search" value="search" onmouseout="this.src='./img/search_white.jpg'" onmouseover="this.src='./img/search_red.jpg'"/></p>
+              </fieldset>
+              <!-- end of submit -->
+
+              <!-- advanced options --> 
+              <div id="advanced_opts" class="advanced"><img name="triangle" src="./img/triangle_hor.jpg" class="question" onclick="displayHidden('hiddenAdvancedOptions');changeImageOnClicking('triangle','hiddenAdvancedOptions');" /><a name="advancedOptions" onclick="displayHidden('hiddenAdvancedOptions');changeImageOnClicking('triangle','hiddenAdvancedOptions');" onmouseover="style.cursor='pointer';" value="0"><b>Advanced options</b></a></div>
+              <!-- hidden division -->
+              <div id="hiddenAdvancedOptions" style="display:none">
+                <!-- interactor box -->
+                <fieldset class="fieldset">
+                <!-- fieldset flag -->
+                <legend class="legend">Proteins Interacting with the Query</legend>
+                <!-- interactor box table -->
+                <table width="100%" cellspacing="10" cellpading="0" border="0">
+                  <tr>
+                    <!-- flag + help -->
+                    <td width="70%"><b>Enter up to 10  sequences in FASTA format of proteins interacting with the query</b> <img name="interactorHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenInteractorTextboxHelp');" onmouseout="changeImage('interactorHelp','./img/help_white.jpg');" onmouseover="changeImage('interactorHelp','./img/help_red.jpg');"/>
+                    <br />
+                    <!-- hidden division -->
+                    <div id="hiddenInteractorTextboxHelp" style="display:none">
+                      <fieldset class="fieldset_help">Protein(s) interacting with the query (if any is known) should be pasted in the text area in <b>FASTA format</b>. <b>Up to 10</b> different sequences should be pasted in the text area. <a class="more" onclick="top.location='./modlinkhelp.html#sequence_input'">more...</a></fieldset>
+                    </div>
+                    <!-- textbox -->
+                    <textarea name="interactor_box" id="interactorBox" rows="5" cols="70"></textarea>
+                    <br />
+                    <!-- textbox clear -->
+                    <font size="1"><a class="clear" onClick="doClear('interactorBox');">Clear</a></font>
+                    </td>
+                    <!-- flag + help -->
+                    <td width="30%" align="left" valign="top"><b>N&ordm; of proteins</b> <img name="interactorNumHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenInteractorNumberHelp');" onmouseout="changeImage('interactorNumHelp','./img/help_white.jpg');" onmouseover="changeImage('interactorNumHelp','./img/help_red.jpg');"/>
+                    <br/>
+                    <!-- hidden division -->
+                    <div id="hiddenInteractorNumberHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select the <b>exact number</b> of submitted proteins interacting with the query.</fieldset>
+                    </div>
+                    <!-- options -->
+                    <select name="interactor_num" size="1"><option>10</option><option>9</option><option>8</option><option>7</option><option>6</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option><option selected="selected">none</option></select>
+                    </td>
+                  </tr>
+                </table>
+                <!-- browse table -->
+                <table width="100%" cellspacing="10" cellpading="0" border="0">
+                  <tr>
+                    <!-- flag -->
+                    <td class="option"><b>Or, upload file</b></td>
+                    <!-- browse + help -->
+                    <td class="the_option"><input type="file" name="interactor_file"> <img name="browseInteractorHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenInteractorUploadHelp');" onmouseout="changeImage('browseInteractorHelp','./img/help_white.jpg');" onmouseover="changeImage('browseInteractorHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div class="helpbox" id="hiddenInteractorUploadHelp" style="display:none">
+                      <fieldset class="fieldset_help">Use the browse button to upload a file from your local disk containing your protein(s) interacting with the query. The file should contain <b>up to 10</b> different sequences in <b>FASTA format</b>.</fieldset>
+                    </div>
+                    </td>
+                  </tr>
+                </table>
+                </fieldset>
+                <!-- end of interactor box -->
+
+                <!-- algorithm parameters -->
+                <fieldset class="fieldset">
+                <!-- fieldset flag -->
+                <legend class="legend">Algorithm Parameters</legend>
+                <!-- algorithm parameters table -->
+                <table width="100%" cellspacing="10" cellpading="0" border="0">
+                  <tr>
+                    <!-- flag -->
+                    <td class="option"><b>Combine with</b></td>
+                    <!-- options + help -->
+                    <td class="the_option"><select name="combination" size="1"><option selected="selected">PSI-BLAST</option><option>HHSearch</option><option>PRC</option></select>
+                    <br />
+                    <font size="1">Choose the extrapolation type</font> <img name="backgroundHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenBackgroundHelp');" onmouseout="changeImage('backgroundHelp','./img/help_white.jpg');" onmouseover="changeImage('backgroundHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div id="hiddenBackgroundHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select the background method to detect similarities in SCOP (<b>PSI-BLAST</b>, <b>HHSearch</b> or <b>PRC</b>). <a class="more" onclick="top.location='./modlinkhelp.html#background'">more...</a></fieldset>
+                    </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- flag -->
+                    <td class="option"><b>Extrapolation</b></td>
+                    <!-- options + help -->
+                    <td class="the_option"><select name="expansion" size="1"><option selected="selected">by family</option><option>by superfamily</option><option>by fold</option><option>no extrapolation</option></select>
+                    <br />
+                    <font size="1">Choose the extrapolation type</font> <img name="expansionHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenExpansionHelp');" onmouseout="changeImage('expansionHelp','./img/help_white.jpg');" onmouseover="changeImage('expansionHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div id="hiddenExpansionHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select the type of extrapolation of links (<b>by family</b>, <b>superfamily</b> or <b>fold</b>) or <b>no extrapolation</b> to skip this process. <a class="more" onclick="top.location='./modlinkhelp.html#algorithm'">more...</a></fieldset>
+                    </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- flag -->
+                    <td class="option"><b>MHS</b></td>
+                    <!-- options + help -->
+                    <td class="the_option"><select name="hubs" size="1"><option selected="selected">no limit</option><option>500</option><option>100</option><option>50</option><option>40</option><option>30</option><option>20</option><option>10</option><option>5</option></select>
+                    <br />
+                    <font size="1">Choose the maximum hub degree</font> <img name="hubsHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenHubsHelp');" onmouseout="changeImage('hubsHelp','./img/help_white.jpg');" onmouseover="changeImage('hubsHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div id="hiddenHubsHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select the <b>maximum hub degree</b> allowed during the extrapolation process or <b>no limit</b>. <a class="more" onclick="top.location='./modlinkhelp.html#algorithm'">more...</a></fieldset>
+                    </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- flag -->
+                    <td class="option"><b>EVTE</b></td>
+                    <!-- options + help -->
+                    <td class="the_option"><select name="evte" size="1"><option>1e-12</option><option>1e-11</option><option>1e-10</option><option>1e-09</option><option selected="selected">1e-08</option><option>1e-07</option><option>1e-06</option><option>1e-05</option><option>1e-04</option><option>1e-03</option><option>1e-02</option><option>1e-01</option><option>1</option><option>10</option><option>100</option></select>
+                    <br />
+                    <font size="1">Choose the threshold <i>e</i>-value</font> <img name="evteHelp" src="./img/help_white.jpg" class="help_icon" onclick="displayHidden('hiddenEvteHelp');" onmouseout="changeImage('evteHelp','./img/help_white.jpg');" onmouseover="changeImage('evteHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div id="hiddenEvteHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select a <b>threshold</b> on the BLAST <i>e</i>-value to finish the extrapolation process. <a class="more" onclick="top.location='./modlinkhelp.html#algorithm'">more...</a></fieldset>
+                    </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- flag -->
+                    <td class="option"><b>EVTH</b></td>
+                    <!-- options + help -->
+                    <td class="the_option"><select name="evth" size="1"><option selected="selected">don't use</option><option>1e-100</option><option>1e-90</option><option>1e-80</option><option>1e-70</option><option>1e-60</option><option>1e-50</option><option>1e-40</option><option>1e-30</option><option>1e-20</option><option>1e-10</option><option>1e-09</option><option>1e-08</option><option>1e-07</option><option>1e-06</option><option>1e-05</option><option>1e-04</option><option>1e-03</option><option>1e-02</option><option>1e-01</option><option>1</option><option>10</option><option>100</option></select>
+                    <br />
+                    <font size="1">Choose the threshold <i>e</i>-value</font> <img name="evthHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenEvthHelp');" onmouseout="changeImage('evthHelp','./img/help_white.jpg');" onmouseover="changeImage('evthHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div id="hiddenEvthHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select a <b>threshold</b> on the BLAST <i>e</i>-value to assign putative proteins that interact with the query. <a class="more" onclick="top.location='./modlinkhelp.html#algorithm'">more...</a></fieldset>
+                    </div>
+                    </td>
+                  </tr>
+                </table>
+                </fieldset>
+                <!-- end of algorithm parameters -->
+
+                <!-- psi-blast parameters -->
+                <fieldset class="fieldset">
+                <!-- fieldset flag -->
+                <legend class="legend">PSI-BLAST parameters</legend>
+                <!-- algorithm parameters table -->
+                <table width="100%" cellspacing="10" cellpading="0" border="0">
+                  <tr>
+                    <!-- flag -->
+                    <td class="option"><b>N&ordm; of iterations</b></td>
+                    <!-- options + help -->
+                    <td class="the_option"><select name="passes" size="1"><option selected="selected">5</option><option>4</option><option>3</option><option>2</option></select>
+                    <br />
+                    <font size="1">Choose the maximum number iterations</font> <img name="roundsHelp" src="./img/help_white.jpg" class="question" onclick="displayHidden('hiddenRoundsHelp');" onmouseout="changeImage('roundsHelp','./img/help_white.jpg');" onmouseover="changeImage('roundsHelp','./img/help_red.jpg');"/>
+                    <!-- hidden help division -->
+                    <div id="hiddenRoundsHelp" style="display:none">
+                      <fieldset class="fieldset_help">Select the <b>maximum</b> number of iterations to search against TrEMBL database to construct the PSSM profile of your query sequence.</fieldset>
+                    </div>
+                    </td>
+                  </tr>
+                </table>
+                </fieldset>
+                <!-- end of algorithm parameters -->
+
+                <!-- submit -->
+                <fieldset class="fieldset_subm">
+                  <!-- submit button -->
+                  <p class="submit"><input type="image" src="./img/search_white.jpg" name="search" value="search" onmouseout="this.src='./img/search_white.jpg'" onmouseover="this.src='./img/search_red.jpg'"/></p>
+                </fieldset>
+                <!-- end of submit -->
+              </div>
+              <!-- end of advanced options -->
+            </tr>
+          </table>
+        </td>
+      </tr>
+      </form>
+    </table>
+    <!-- end of formulary -->
+  </div>  
+  <!-- end of content -->
+  
+    <br />
+
+  <!-- footer -->
+  <div id="footer">
+    <table class="footer">
+      <tr class="footer_body"><td></td></tr>
+      <tr class="footer_red"><td></td></tr>
+      <tr class="footer_grey"><td></td></tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

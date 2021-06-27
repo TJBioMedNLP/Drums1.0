@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- based on design: http://bluerobot.com/web/layouts/layout1.html-->
+<head>
+<base href="http://services.cbu.uib.no/tools/xhm/" />
+
+
+
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CBU - Computational Biology Unit</title>
+
+<!--
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<style type="text/css" media="all">@import "bccs.css";</style>
+-->
+<style type="text/css" media="all">@import url( http://services.cbu.uib.no/bccs.css);</style>
+<link rel="StyleSheet" type="text/css" href="tools.css" media="all">
+<link rel="shortcut icon" href="favicon.ico">
+<!-- ################################################################# -->
+
+<script type="text/javascript"
+        src="http://services.cbu.uib.no/tools/overlib_mini.js"><!-- overLIB (c) Erik Bosrup --></script>
+
+<script type="text/javascript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+</head>
+
+<body onload="MM_preloadImages('images/nav_bccs.png','images/nav_bcpl.png','images/nav_cbu.png','images/nav_cmu.png','images/nav_parallab.png')"
+      id="no">
+
+<div id="PageFrame">
+   
+   &nbsp;
+   
+   <div class="LogoLeft">
+        <img src="http://www.cbu.uib.no/images/cbu.png" alt="CBU - Computational Biology Unit" />
+   </div>
+
+</div>
+
+<div class="Space">&nbsp;</div>
+
+
+<div class="TopBar"></div>
+
+<div class="TopLinks">
+   <a href="http://www.uib.no" class="Navigation">UiB</a> 
+   : <a href="http://www.unifob.uib.no/" class="Navigation">Uni Research</a> 
+   : <a href="http://www.bccs.uib.no" class="Navigation">Uni BCCS</a>
+   : <a href="http://www.bioinfo.no/applications" class="Navigation">Applications</a>
+   
+   
+</div>
+<div class="Content">
+
+<div id="LeftColumn">
+    <div class="Tab"><a><span>About</span></a></div>
+    <div class="BlueBox">
+        <ul><li><a href="./xhmdocs">Documentation</a></li></ul>
+    </div>
+    
+    <div class="WhiteBar"></div>
+    
+    <div class="Tab"><a><span>Problems</span></a></div>
+    <div class="BlueBox">
+        <p>
+            Send an email to 
+            <a href="mailto:contact@bioinfo.no">contact@bioinfo.no</a>
+        </p>
+    </div>
+</div>
+
+
+<div id="RightColumn">
+
+<script>
+<!--
+function showdoc(anchor){
+   window.open('xhmdocs#' + anchor,'docwindow','scrollbars,width=800,height=600,left=80,top=80');
+}
+-->
+</script>
+<table width="100%">
+<tr><td>
+<table width="66%" id="tooltable">
+<tr>
+  <th>
+   <h3 align="Left">Cross-Hybridization - realtime search <br><a href="index_prerun" style="text-decoration: none">Pre-processed search</a></h3>
+  </th>
+</tr>
+<tr><td>
+<form action="handleFormFull" method="post" enctype="multipart/form-data">    
+
+
+
+   Please enter FASTA sequence(s): <br> 
+   <textarea name="query" rows="10" cols="62"></textarea><br><br>
+Or accession entries (e.g. BG062929):<br>
+<textarea name="acc" rows="3" cols="62"></textarea><br>
+
+Or enter the name of a file containing query sequence(s)<br>
+<input type="FILE" name="queryfile" size="40"> <br><br>
+Or enter the name of a file containing query accession id's(s)<br>
+<input type="FILE" name="queryidfile" size="40"> <br><br>
+<br>
+<table>
+<tr><td>Search for:</td><td><select name="searchcode"> 
+<option value="std">Combined A and B</option>
+<option value="12">Optimized Type A and B (slower)</option> 
+<option value="1">Type A</option>
+<option value="2">Type B</option>
+
+<option value="12f1">Type A and B (faster A)</option>   
+                               <option value="1f1">Type A (faster)</option>  
+</select>
+<tr>
+  <td>Output formatting:</td>
+  <td>
+     <select name="formatting">
+	<option value="cross"> XHM adjusted</option>
+        <option value="crossb"> Sparse XHM adjusted</option>
+        <option value="table"> XHM adjusted hit table</option>
+	<option value="blasth"> Blast html</option>
+	<option value="blastr"> Blast raw</option>	
+    </select>
+  </td>
+<tr>
+  <td> Database: </td>
+  <td>
+  <select name="database">
+     <option SELECTED value="unigene_unique_human">UniGene unique human</option>
+     <option value="unigene_unique_mouse">UniGene unique mouse</option>
+     <option value="unigene_unique_rat">UniGene unique rat</option>
+     <option value="refseq_mRNA_human">Refseq mRNA human</option>
+     <option value="refseq_mRNA_mouse">Refseq mRNA mouse</option>
+     <option value="refseq_mRNA_rat">Refseq mRNA rat</option>
+     <option value="tigr_hgi">TIGR Human Gene Index</option>
+     <option value="tigr_mgi">TIGR Mouse Gene Index</option>
+     <option value="tigr_rgi">TIGR Rat Gene Index</option>
+     <option value="KKgi_mouse">BeGIn mouse</option>
+     <option value="KKgi_rat">BeGIn rat</option>
+     <option value="unigene_unique_human" UNSELECTABLE="on">---Full UniGene not recommended---</option>
+     <option value="unigene_full_human">UniGene full human</option>
+     <option value="unigene_full_mouse">UniGene full mouse</option>
+     <option value="unigene_full_rat">UniGene full rat</option>
+   </select>
+  </td>
+ </tr>
+</table>
+
+<input type="SUBMIT" name="SUBMIT" value="Submit Search">
+<input type="reset" value="Reset Form">
+
+
+<h4>CROSS-HYBRIDIZATION SETTINGS (<a href="javascript:showdoc('naplus')">Information</a>)</h4>
+<table width="100%" cellspacing="0" cellpadding="3" border="0" summary="Setting for cross-hyb filtering">
+<tr><td>Required percentage (type A)</td><td><input type="text" name="percent1" size="3"></td></tr> 
+<tr><td>Required length of type A window (def. 50)</td><td><input type="text" name="numfor1" size="3"></td></tr>
+<tr><td>Required length (type B)</td><td><input type="text" name="num2" size="3"></td></tr> 
+<tr><td>Maximum overall percentage identity (def. 100%)</td><td><input type="text" name="percent1max" size="3"></td></tr> 
+<tr><td>Use similarity relative to query length</td><td><input type="checkbox" name="wholeql"></td></td>
+<TR><TD>Na+ concentration (in molar), for Tm calculations
+<TD><input type="text" name="naplus" size="3"> M 
+<TR><TD>Size of gc-clamp (in #bp, def. 10)
+<TD><input type="text" name="gcwindow" size="3">
+</table>
+
+
+<h4>BLAST SETTINGS</h4>
+<table width=100% cellspacing="0" cellpadding="3" border="0" summary="Setting for BLAST search">
+<tr><td>Number of output alignments:</td><td><input type="text" name="numshowed" size="4"></td></tr> 
+<tr><td>Gap opening:</td><td><input type="text" name="gopen" size="3"></td></tr> 
+<tr><td>Gap extension:</td><td><input type="text" name="gextend" size="3"></td></tr> 
+<tr><td>Word size:</td><td><input type="text" name="wordsize" size="3"></td></tr> 
+<tr><td>Mismatch penalty (default -3):</td><td> <input type="text" name="mismatchpen" size="3"></td></tr>
+<tr><td>Show hits above E-value:</td><td><input type="text" name="evalue" size="3"></td></tr>
+<tr><td>Dust filter:</td><td><select name="dust"> <option value="on">On</option> <option value="off">Off</option></select></td></tr> 
+<tr><td>Gapped alignment:</td><td><select name="gapped">
+  <option value="T">Yes</option> 
+  <option value="F">No</option></select></td></tr>
+
+
+</table>
+</form>
+</td><td>
+</table>
+<td valign="top">
+<table width="100%" id="description">
+<tr><td>
+    <h2>Cross-hybridization tool</h2>
+This tool is used by entering one or several nucleotide sequences, or just accession ids. The input sequences will be queried towards
+a specified database, UniGene unique is in general a good choice. Criteria for the two different similarity types can be changed:
+
+
+	<ul><li>Type A: More than X% sequence identity over a given length of sequence.
+   		</li>
+	<li>	Type B: 100% similarity over shorter sub-sequences. Typical length thresholds for these sub-sequences vary from
+                around 15bp and up.
+	</li></ul>
+        In the user interface different options may be set:
+       <ul>
+	<li>
+        CROSS-HYB SETTINGS. Here settings regarding what may be accepted as a (cross) hybridization is set.
+	</li>
+<li>BLAST-SETTINGS. Here the detailed settings for the underlying BLAST execution may be set.
+		</li>
+        <li>In addition, one must choose database to use as "transcript pool", output formatting, and what to search for. Normally, use the Combined A and B search.
+</li>
+</ul>
+<br>
+<strong>Problems? mail to [<a href="mailto:contact@bioinfo.no">contact@bioinfo.no</a>] </strong>
+<br>
+<br>
+<br>
+
+<h2>List of references:</h2>
+Kristian Flikka, Fekadu Yadetie, Astrid Laegreid and Inge Jonassen<br>
+XHM: A system for detection of potential cross hybridizations in DNA microarrays<br>
+BMC Bioinformatics 2004, 5:117 (27 August 2004)<br>
+<br>
+
+Kane, M.D., Jatkoe, T.A., Stumpf, C.R., Lu, J., Thomas, J.D., and Madore,
+  S.J. (2000).<br>
+Assessment of the sensitivity and specificity of oligonucleotide (50mer) microarrays.
+<br>Nucleic Acids Research, 28(22):4552--4557.
+<br><br>
+
+Evertsz, E.M., Au-Young, J., et al. (2001).
+<br>Hybridization cross-reactivity within homologous gene families on glass cDNA microarrays.
+<br>Biotechniques, 31(5):1182, 1184, 1186 passim.
+
+</td></tr>
+
+</table>
+</table>
+</div>
+</div>
+
+<div class="BottomBar">
+   This page is maintained by webmaster@bccs.uib.no. Last updated: 
+   Tuesday 12 February, 2008
+</div>
+
+
+<div class="WhiteBar"></div>
+
+<!--
+ <div class="LogoLeft">
+  <a href="http://validator.w3.org/check?uri=referer">
+    <img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" />
+  </a>
+  <a href="http://jigsaw.w3.org/css-validator/">
+    <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" 
+       alt="Valid CSS!" />
+  </a>
+ </div>
+-->
+
+<div class="LogoRight">
+  <a href="http://www.unifob.uib.no/"><img src="http://bccs.uib.no/images/unifob.gif" alt="Unifob logo" /></a>&nbsp;&nbsp;&nbsp;
+  <a href="http://www.uib.no/"><img src="http://bccs.uib.no/images/uib-trans1.gif" alt="UiB logo" /></a>
+</div>
+
+</div></body>
+
+</html>

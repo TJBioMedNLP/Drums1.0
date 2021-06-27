@@ -1,0 +1,105 @@
+<head>
+<title>PrimerStation </title>
+<script type='text/javascript' src='javascripts.js' charset='utf-8'></script>
+</head>
+<html>
+<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<body>
+<!-- Tool Tips-->
+<span id="HINPUT" class="c1">Enter RefSeq accession numbers and/or genomic positions up to 40 entries,<br> separated by commas, whitespaces and/or new lines.</span>
+<span id="HSIZERANGE" class="c1">PCR produt size range.</span>
+<span id="HMINDIFFERENCES" class="c1">The minimum PCR product size differences between any PCR products.</span>
+<h1>PrimerStation <font size="-2">multiplex PCR primer design site.</font>   <font size="-1"><a href="mquery.php?language=ja">[Japanese]</a></font></h1>
+
+<br>    <!-- Input Form: Sequence -->
+    <form enctype="multipart/form-data" action="mquery.php" METHOD="POST" name="query">
+    PCR targets<br>
+    <font size="2">Enter RefSeq gene identifier and/or chromosomal range for genomic PCR target.<br>(The number of target sequences are limited up to 40.)</font>
+    <table>
+    <tr>
+    <td><textarea class=lined name="keyword" rows="10" cols="60" >NM_014927
+NM_145813
+NM_014380
+NM_012286
+NM_144657
+NM_000084
+NM_022076
+NM_152631
+NM_004979
+NM_016521</textarea><br><input type="SUBMIT" name="retseq" VALUE="Submit"><input type="SUBMIT" value="reset" name="reset"><a href="help.html#query" target="_blank">[help]</a></td></tr>
+    </table>
+    <br>
+
+    <hr width="500" align="left">
+    Design options <a href="help.html#options"><font size="2">[help]</font></a>
+    <table class="user_input">
+    <table>
+    <!-- Product Size -->
+    <tr><th align="left">Product size:</th><td>from <input type=text name="minsize" value="60" size="4"/>bp to <input type=text name="maxsize" value="600" size="4"/>bp</td>
+    </tr>
+    <!-- Separation -->
+    <tr><th align="left" onMouseOver="OnLink('HMINDIFFERENCES',event.x,event.y,event.pageX,event.pageY)" onMouseOut="OffLink('HMINDIFFERENCES')">Minimum product size difference:</th><td><input type=text name="separation" value="10" size="3"/>bp</td>
+    </tr>
+    <!-- Cation -->
+    <tr><th align=left>Cation concentration:</th><td><input type=text name="conc_cation" value="1000" size="4">mM</td></tr>
+    <tr><th align=left>Primer concentration:</th><td><input type=text name="conc_primer" value="0.2" size="4">uM</td></tr>
+    </table>    
+    <table>    
+    <!-- SNPs -->
+    <tr><th align=left><input type=checkbox name="no_snps" checked=true>Avoid designing primers with known SNPs</th></tr>
+    <!-- Mfold -->
+    <tr><th align=left><input type=checkbox name="mfold" >Avoid undesirable secondary structures (slow)</th>
+    <td>
+    threshold dG=<select name="mfold_threshold">
+    <option value="-1">-1</option>
+    <option value="-2" selected>-2</option>
+    <option value="-3">-3</option>
+    <option value="-4">-4</option>
+    </select>
+    </td></tr>
+    <!-- Repeats -->
+    <Tr><th align=left><input type=checkbox name="no_mono_repeats" checked=true>Avoid PCR products with (A)n repeats</th>
+    <td>
+    n=<select name="mononucleotide">
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9" selected>9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    </select>
+    </td></tr>
+
+    <tr><th align=left><input type=checkbox name="no_di_repeats" checked=true>Avoid PCR products with (CA)n repeats</th>
+    <td>n=
+    <select name="dinucleotide">
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6" selected>6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    </select>
+    </td></tr>
+    </table>    
+    </form>
+    <hr width="500" align="left"/><h5>About PrimerStation</h5><p>PrimerStation is a web service to calculate optimal primer sets that are guaranteed high specificity against whole human genome.</p>
+
+<p>To achieve high accuracy, we used hybridization ratio of primers in the liquid solution. Calculating the status of the sequence hybridization in terms of stringent hybridization ratio is computational costly, there was no web service that checks whole human genome and returns highly specific primer set which calculated by the precise physicochemical model.</p>
+
+<p>To shorten the response time, we precomputed the candidates of the specific primers by using a massively parallel computer with 100 CPUs (SunFire 15K) for about 2 months in advance. This enables PrimerStation to search and output the qualified primers interactively.</p>
+
+<p>PrimerStation has a capability of selecting highly specific primers suitable for multiplex PCR by seeking optimal temperature range that minimizes the possibility of cross-reaction.  It also allows users to add some heuristic rules in the primer design, e.g., exclusion of SNPs in primers and avoidance of poly-A and CA-repeats in PCR products.</p>
+
+<p>We performed substantial tests that verified the PCR amplification of randomly selected primers for ChrX, and we confirmed that the primers perfectly magnify specific PCR products. The details of the method will be reported elsewhere. We believe PrimerStation must be beneficial to a wide range of biologists and medical scientists.</p>
+
+<h5>Publications</h5><p>
+<u><a href="http://nar.oxfordjournals.org/cgi/content/abstract/34/suppl_2/W665">PrimerStation: a highly specific multiplex genomic PCR primer design server for the human genome.</a></u>  Tomoyuki Yamada, Haruhiko Soma, and Shinichi Morishita (2006).  Nucleic Acids Res., 34(Web Server Issue): W665 - W669. </p>
+
+<h5>Usage policy</h5><p>All accesses to PrimerStation are saved and processed to take out statistics of accesses, query patterns, and heavy users.  Information provided by users would be used to enhance the function of PrimerStation.  Frequent accesses from unresolved IP addreses or proxy server can be set as the object of refusal.
+</p>
+<h5>Acknowledgements</h5><p>
+This work was supported in part by a Grant-in-Aid for Scientific Research on Priority Areas (C) and the Leading Project for Biosimulation from the Ministry of Education, Culture, Sports, Science and Technology of Japan, and a joint research project with SONY Corporation.  Computational time was provided by the Super Computer System, Human Genome Center, Institute of Medical Science and the University of Tokyo.
+</p>
+</body>
+</html>

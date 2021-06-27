@@ -1,0 +1,213 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+<title>PSIVER</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function Submit(){
+    var conf_msg = "";
+    var $chkf = 1;
+    var $chkf_seq = 0;
+    
+    if(document.inputinfo.upload.value != ""){
+    $chkf_seq = 1;
+    }
+    else if(document.inputinfo.fasta_seq.value){
+    
+    var fasta = document.inputinfo.fasta_seq.value;
+    var lines = fasta.split("\n");
+    for(i=0; i<lines.length; i++){
+    
+    if(! lines[i].match(/^>/)){
+    if(lines[i].match(/[^ABCDEFGHIKLMNPQRSTUVWYZX\*\-\s]+/i)){
+    alert("Please input a protein sequence in fasta format!");
+    $chkf = 0;
+    }
+    else if(lines[i].match(/^[ATCG\*\-\s]+$/i)){
+    alert("Please input a proper protein sequence!");
+    $chkf = 0;
+    }
+    else{
+    $chkf_seq = 1;
+    }
+    }
+    }
+    }
+    else{
+    alert("Please input a protein sequence in fasta format!");
+    $chkf = 0;
+    }
+    
+    
+    if($chkf == 1){
+    if(document.inputinfo.email.value == ""){
+    res = confirm("If you would like to enter your email address (to additionally receive your results by email), please press \"CANCEL\". If you do not want to enter your email address, press \"OK\".");
+    
+    if(res == true){
+    $chkf = 1;
+    }
+    else{
+    $chkf = 0;
+    }
+    }
+    else if(document.inputinfo.email.value.match(/^[0-9A-Za-z._]+@[0-9A-Za-z.]+$/)){
+    $chkf = 1;
+    }
+    else{
+    alert("Please input a correct email addresss!");
+    $chkf = 0;
+    }
+    }
+
+
+    if($chkf == 1){
+    if(document.inputinfo.upload.value){
+    if(window.confirm("Your protein sequence will be uploaded. If these inputs are correct, please press \"OK\"")){
+    document.inputinfo.submit();
+    }
+    }
+    else if(window.confirm("If these inputs are correct, please press \"OK\"")){
+    document.inputinfo.submit();
+    }
+    }
+}
+//-->
+</SCRIPT>
+
+
+<style type="text/css">
+<!--
+#Layer1 {
+	position:absolute;
+	width:417px;
+	height:29px;
+	z-index:1;
+	left: 176px;
+	top: 188px;
+}
+.style6 {color: #1A2466; font-family: Arial, Helvetica, sans-serif, Times, serif; font-style: italic; font-size: 12px; }
+body {
+	background-color: #FFFFFF;
+}
+a:link {
+	color: #003;
+	text-decoration: none;
+}
+a:visited {
+	color: #903;
+	text-decoration: none;
+}
+a:hover {
+	color: #033;
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+body,td,th {
+	color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+.style18 {color: #46616C; font-size: 14px; font-family: Arial, Helvetica, sans-serif; }
+.style19 {
+	color: #47626E;
+	font-size: 10px;
+}
+.style24 {color: #546D77}
+.style26 {
+	color: #F4F4F4;
+	font-style: italic;
+}
+.style27 {color: #4A6672}
+.style28 {font-size: 12px}
+.style30 {font-size: 11px}
+-->
+</style>
+
+
+</head>
+<body bgcolor="#FFFFFF">
+
+<div align="center">
+
+
+<table width="701" bgcolor="#FFFFFF">
+<tr bgcolor="#FFFFFF">
+<td>
+
+
+<div align="center">
+
+<img src="http://tardis.nibio.go.jp/PSIVER/images/PSIVER_TOP.png" width="375" height="115">
+<br>
+
+<span class="style18">
+Home Page | 
+<a href="theory.html">Overview</a> | 
+<a href="help.html">Help page</a> | 
+<a href="help.html#example">Example results</a>
+</span>
+</div>
+
+
+<div align="left">
+  <p class="style18"><br>Welcome to <strong>PSIVER</strong>.<br><br>
+    <span class="style18">PSIVER is a server for the prediction of protein-protein interaction sites in protein sequences. This server is free and open to all users and there is no login requirement.
+    </span></p>
+</div>
+
+<div align="center">
+<table width="572"><tr><td>
+<form name="inputinfo" enctype="multipart/form-data" method="post" action="/cgi-bin/PSIVER/psiver.cgi">
+<br>
+<span class="style18">Please submit a protein sequence, or sequences (maximum 10), in FASTA format: </span>
+    
+  <p class="style24">
+  <span class="style28">> example protein sequence [<a href="http://tardis.nibio.go.jp/PSIVER/users_cache/example/psiver_result.html" class="style26">see example results page</a>]<br> 
+    
+    <span class="style30">MSDLVTKFESLIISKYPVSFTKEQSAQAAQWESVLKSGQIQPHLDQLNLVLRDNTFIVSTL<br>
+    YPTSTDVHVFEVALPLIKDLVASSKDVKSTYTTYRHILRWIDYMQNLLEVSSTDKLEINHD  </span></span>
+    <br><br>
+  <textarea name="fasta_seq" cols="70" rows="7"></textarea>
+  <p class="style18">
+    
+  <span class="style18">OR please upload a protein sequence file: </span>
+    
+  <input name="upload" type="file" size="25"><p>
+  <input type="button" name="button"  onclick="Submit()" value="submit"/>
+  <input type="reset"  name="reset" value="reset"/>
+  <hr>            
+    
+  <span class="style18">Options:</span><p>
+  <span class="style18">Please enter your email address if you would like to also receive your results by email:</span><br>
+    
+  <label>
+  <input name="email" type="text" size="40" maxlength="100"><br><br>
+  </label>
+  </form>
+  
+</td></tr></table></div>
+<p class="style18"><strong>- Updates -</strong></p>
+<p class="style18">25/01/2010: PSIVER is now available.</p>
+
+
+<br>
+<br>
+<br>
+<div align="center" class="style6">
+<span class="style27">&copy; PSIVER Copyright <br>
+PSIVER is maintained by Yoichi MURAKAMI  @ <a href="http://tardis.nibio.go.jp/bioinfo">Bioinformatics Project</a>, NIBIO<br>
+</span>
+<a href="http://www.nibio.go.jp"><img src="http://tardis.nibio.go.jp/PSIVER/images/logo_en.gif" width="362" height="64" border="0"></a>
+</div>
+
+</td>
+</tr>
+</table>
+</div>
+
+   
+</body>
+</html>

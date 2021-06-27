@@ -1,0 +1,751 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/main.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>PHIDIAS: Pathogen-Host Interaction Data Integration and Analysis System</title>
+<!-- InstanceEndEditable -->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="css/bmain.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="inc/functions.js"></script>
+<script language="javascript" src="inc/browsercheck.js"></script>
+<!-- InstanceBeginEditable name="head" -->
+<meta name="description" content="The Pathogen-Host Interaction Data Integration and Analysis System (PHIDIAS) is a web-based database and analysis system that integrates and analyzes genomic sequences, curated literature information, and gene expression data related to pathogen-host interactions (or called host-pathogen interactions) for those pathogens important in public health." />
+<meta name="keywords" content="host-pathogen interaction, pathogen-host interaction, database, data analysis, ontology, network, experts, XML, OWL, paper, publication, prediction, bioinformatics, knowledgebase, pathogen, human, mouse, laboratory animal, biosafety, public health, Bacillus anthracis, Brucella, Burkholderia mallei, Burkholderia pseudomallei, Campylobacter jejuni, Clostridium botulinum, Clostridium perfringens, Coxiella burnetii, Escherichia coli, Francisella tularensis, Helicobacter, Legionella pneumophila, Listeria monocytogenes, Mycobacterium tuberculosis, Rickettsia prowazekii, Salmonella, Shigella, Vibrio, Yersinia pestis, Crimean-Congo hemorrhagic fever virus, Foot-and-mouth disease virus, Guanarito virus, Human immunodeficiency virus, Junin virus, Lake Victoria marburgvirus, Lassa virus, Louping ill virus, Machupo virus, Measles virus, Reston ebolavirus, Rift Valley fever virus, Vaccinia virus, Variola virus, Venezuelan equine encephalitis virus, Yellow fever virus" />
+<style type="text/css">
+<!--
+.style1 {font-size: 16px}
+-->
+</style>
+<!-- InstanceEndEditable -->
+</head>
+<body style="margin:0px" background="images/body_bg.gif">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr id="tablePageHeader">
+    <td width="160"><a href="/index.php"><img src="/images/phidias_logo.gif" width="160" height="90" border="0" /></a></td>
+    <td><!-- InstanceBeginEditable name="Banner" --><img src="/images/phidias_logo_banner_right.gif" width="796" height="90" align="right" /><!-- InstanceEndEditable --></td>
+  </tr>
+  <tr bgcolor="#ffcc33">
+    <td colspan="2"><form style="margin:1px 12px 1px 12px; padding:0px" action="/searchWeb.php" method="post" name="webSearch" id="webSearch">
+        Search:
+        <select name="searchEngine">
+          <option value="phidb">PHIDIAS</option>
+          <option value="phinfo">Phinfo</option>
+          <option value="pgbrowser">PGBrowser</option>
+          <option value="pacodom_cd">Pacodom: conserved domains</option>
+          <option value="pacodom_protein">Pacodom: proteins</option>
+          <option value="phigen">Phigen</option>
+          <option value="phix">Phix</option>
+          <option value="---">-----------------------------------</option>
+          <option value="pubmed">PubMed</option>
+          <option value="google">Google</option>
+          <option value="ncbi_protein">NCBI Protein</option>
+          <option value="ncbi_nucleotide">NCBI Nucleotide</option>
+          <option value="ncbi_genome">NCBI Genome</option>
+          <option value="ncbi_gene">NCBI Gene</option>
+        </select>
+        for
+        <input size="40" name="term" />
+        <input type="submit" value="GO" name="submit" />
+        <input type="reset" value="Clear" name="clear" />
+        <a href="/search_help.php">Help</a>
+      </form></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0">
+  <tr>
+  <td width="160" valign="top" style="margin-left:30px;">
+<div style="width:144px; border:solid 1px #FFDF33; background-color:#FFFFFF; margin:7px 7px 10px 7px;">
+<dl style="margin-left:0px; padding-left:6px;">
+<dt class="topnav">About</dt>
+<dt class="topnav2"><a class="topnav2a" href="/introduction.php">Introduction</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/stat.php">Statistics</a></dt>
+
+<dt class="topnav">Your PHIDIAS</dt>
+<dt class="topnav2"><a class="topnav2a" href="/users/register.php">Register</a> or <a class="topnav2a" href="/users/login.php">Login</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/philert/index.php">Philert</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/datasubmission/index.php">Submission</a></dt>
+
+<dt class="topnav">Genomic Sequences</dt>
+<dt class="topnav2"><a class="topnav2a" href="/gbrowse/index.php">PGBrowser</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/pacodom/index.php">Pacodom</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/blast/index.php">BLAST</a></dt>
+
+<dt class="topnav">PHI Specific Curation</dt>
+<dt class="topnav2"><a class="topnav2a" href="/phinfo/index.php">Phinfo</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/phigen/index.php">Phigen</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/phinet/index.php">Phinet</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/pcd-base/index.php">PCD-base</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/hazard/index.php">HazARD</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/bbp/index.php">BBP (<i>Brucella</i>)</a></dt>
+
+
+<dt class="topnav">PHI Gene Expression</dt>
+<dt class="topnav2"><a class="topnav2a" href="/phix/index.php">Phix</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/macropath/index.php">MacroPath</a></dt>
+<dt class="topnav">PHI Society</dt>
+<dt class="topnav2"><a class="topnav2a" href="/phimeet/index.php">Phimeet</a></dt>
+
+<dt class="topnav">Help &amp; Documents</dt>
+<dt class="topnav2"><a class="topnav2a" href="/docs/docs.php">Documents</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/faqs.php">FAQs</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/links.php">Links</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/acknowledge.php">Acknowledgements</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/disclaimer.php">Disclaimer</a></dt>
+<dt class="topnav2"><a class="topnav2a" href="/contactUs.php">Contact Us</a></dt>
+</dl>
+</div>  
+<div style="text-align:center; width:150px"><a href="http://www.med.umich.edu/" target="_blank"><img src="/images/UMMSLogoCs.gif" alt="UMMS Logo" width="99" height="73" border="0"/></a></div>
+    </td>
+    <td valign="top">
+<div style="margin: 8px 12px 16px 12px;">            
+ <!-- InstanceBeginEditable name="Main" -->
+            <p><span class="notice style1"><strong>Welcome to PHIDIAS! </strong></span>It is a web-based database and analysis system that integrates and analyzes genomic sequences, curated literature information, and gene expression data related to pathogen-host interactions (PHI, or called host-pathogen interactions or HPI). PHIDIAS emphasizes study of  those pathogens that cause severe infectious diseases and/or have significant influence   in public health.   </p>
+            <p><strong>Core programs in PHIDIAS include: </strong> </p>
+            <div align="center"><img src="images/layout.gif" alt="adsearch" width="682" height="162" border="0" usemap="#MapMap" style="display:inherit" />
+                <map name="MapMap" id="MapMap">
+                  <area shape="rect" coords="54,45,137,75" href="gbrowse/index.php" />
+                  <area shape="rect" coords="9,122,68,150" href="blast/index.php" />
+                  <area shape="rect" coords="118,120,182,152" href="pacodom/index.php" />
+                  <area shape="rect" coords="243,46,305,76" href="phinfo/index.php" />
+                  <area shape="rect" coords="343,47,414,75" href="hazard/index.php" />
+                  <area shape="rect" coords="295,85,355,115" href="phinet/index.php" />
+                  <area shape="rect" coords="350,121,410,149" href="phinet/index.php" />
+                  <area shape="rect" coords="235,121,316,150" href="pcd-base/index.php" />
+                  <area shape="rect" coords="477,44,538,74" href="phix/index.php" />
+                  <area shape="rect" coords="466,122,552,149" href="macropath/index.php" />
+                  <area shape="rect" coords="603,84,663,114" href="phimeet/index.php" />
+                  </map>
+            </div>
+
+			
+            <p>&nbsp;</p>
+            <p><strong>Pathogens  in PHIDIAS: </strong> PHIDAIS currently studies 97  pathogenes, including 57 bacteria, 35 viruses, 2 parasite, and 3 fungus: </p>
+            <div align="center">
+              <br/>       
+              <table align="center" cellpadding="4" cellspacing="0" border="0">
+                <tr>
+                  <td valign="top"><table align="center" cellpadding="4" cellspacing="1" style="border:1px solid #9999CC">
+                      <tr>
+                        <td bgcolor="#aec5cc"><strong>#</strong></td>
+                        <td bgcolor="#aec5cc"><strong>Bacteria</strong></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          1                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Actinobacillus pleuropneumoniae"> <em>
+                              Actinobacillus pleuropneumoniae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          2                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Aeromonas salmonicida"> <em>
+                              Aeromonas salmonicida                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          3                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Bacillus anthracis"> <em>
+                              Bacillus anthracis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          4                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Bartonella bacilliformis"> <em>
+                              Bartonella bacilliformis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          5                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Bartonella henselae"> <em>
+                              Bartonella henselae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          6                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Bartonella quintana"> <em>
+                              Bartonella quintana                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          7                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Bordetella avium"> <em>
+                              Bordetella avium                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          8                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Bordetella pertussis"> <em>
+                              Bordetella pertussis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          9                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Borrelia burgdorferi"> <em>
+                              Borrelia burgdorferi                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          10                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="/bbp/index.php"> <em>Brucella</em> </a>
+                                                  <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          11                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Burkholderia mallei"> <em>
+                              Burkholderia mallei                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          12                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Burkholderia pseudomallei"> <em>
+                              Burkholderia pseudomallei                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          13                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Campylobacter jejuni"> <em>
+                              Campylobacter jejuni                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          14                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Chlamydia muridarum"> <em>
+                              Chlamydia muridarum                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          15                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Chlamydia trachomatis"> <em>
+                              Chlamydia trachomatis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          16                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Chlamydophila abortus"> <em>
+                              Chlamydophila abortus                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          17                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Chlamydophila pneumoniae"> <em>
+                              Chlamydophila pneumoniae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          18                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Chlamydophila psittaci"> <em>
+                              Chlamydophila psittaci                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          19                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Clostridium botulinum"> <em>
+                              Clostridium botulinum                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          20                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Clostridium difficile"> <em>
+                              Clostridium difficile                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          21                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Clostridium perfringens"> <em>
+                              Clostridium perfringens                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          22                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Clostridium tetani"> <em>
+                              Clostridium tetani                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          23                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Corynebacterium diphtheriae"> <em>
+                              Corynebacterium diphtheriae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          24                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Coxiella burnetii"> <em>
+                              Coxiella burnetii                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          25                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Enterococcus faecalis"> <em>
+                              Enterococcus faecalis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          26                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Escherichia coli"> <em>
+                              Escherichia coli                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          27                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Francisella tularensis"> <em>
+                              Francisella tularensis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          28                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Haemophilus influenzae"> <em>
+                              Haemophilus influenzae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          29                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Helicobacter"> <em>
+                              Helicobacter                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          30                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Lawsonia intracellularis"> <em>
+                              Lawsonia intracellularis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          31                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Legionella pneumophila"> <em>
+                              Legionella pneumophila                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          32                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Listeria monocytogenes"> <em>
+                              Listeria monocytogenes                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          33                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Mycobacterium tuberculosis"> <em>
+                              Mycobacterium tuberculosis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          34                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Mycoplasma gallisepticum"> <em>
+                              Mycoplasma gallisepticum                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          35                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Mycoplasma pneumoniae"> <em>
+                              Mycoplasma pneumoniae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          36                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Mycoplasma synoviae"> <em>
+                              Mycoplasma synoviae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          37                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Neisseria gonorrhoeae"> <em>
+                              Neisseria gonorrhoeae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          38                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Neisseria meningitidis"> <em>
+                              Neisseria meningitidis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          39                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Plasmodium berghei"> <em>
+                              Plasmodium berghei                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          40                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Porphyromonas gulae"> <em>
+                              Porphyromonas gulae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          41                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Proteus mirabilis"> <em>
+                              Proteus mirabilis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          42                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Pseudomonas aeruginosa"> <em>
+                              Pseudomonas aeruginosa                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          43                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Rickettsia prowazekii"> <em>
+                              Rickettsia prowazekii                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          44                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Rickettsia rickettsii"> <em>
+                              Rickettsia rickettsii                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          45                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Salmonella"> <em>
+                              Salmonella                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          46                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Shigella"> <em>
+                              Shigella                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          47                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Staphylococcus aureus"> <em>
+                              Staphylococcus aureus                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          48                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Streptococcus agalactiae"> <em>
+                              Streptococcus agalactiae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          49                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Streptococcus equi"> <em>
+                              Streptococcus equi                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          50                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Streptococcus pneumoniae"> <em>
+                              Streptococcus pneumoniae                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          51                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Streptococcus pyogenes"> <em>
+                              Streptococcus pyogenes                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          52                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Treponema pallidum"> <em>
+                              Treponema pallidum                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          53                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Vibrio"> <em>
+                              Vibrio                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          54                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Yersinia enterocolitica"> <em>
+                              Yersinia enterocolitica                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          55                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Yersinia pestis"> <em>
+                              Yersinia pestis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          56                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2">                            <a href="portal/index.php?species=Yersinia pseudotuberculosis"> <em>
+                              Yersinia pseudotuberculosis                            </em> </a> </td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          57                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2">                            <a href="portal/index.php?species=Yersinia ruckeri"> <em>
+                              Yersinia ruckeri                            </em> </a> </td>
+                      </tr>
+                                        </table></td>
+                  <td valign="top"><table align="center" cellpadding="4" cellspacing="1" style="border:1px solid #9999CC">
+                      <tr>
+                        <td bgcolor="#aec5cc"><strong>#</strong></td>
+                        <td bgcolor="#aec5cc"><strong>Viruses</strong></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          1                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Crimean-Congo hemorrhagic fever virus">
+                          Crimean-Congo hemorrhagic fever virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          2                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Cryptosporidium parvum">
+                          Cryptosporidium parvum                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          3                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Eastern equine encephalitis virus">
+                          Eastern equine encephalitis virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          4                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Ebola virus">
+                          Ebola virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          5                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Foot-and-mouth disease virus">
+                          Foot-and-mouth disease virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          6                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Guanarito virus">
+                          Guanarito virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          7                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Hantavirus">
+                          Hantavirus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          8                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Hepatitis A virus">
+                          Hepatitis A virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          9                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Hepatitis B virus">
+                          Hepatitis B virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          10                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Human immunodeficiency virus">
+                          Human immunodeficiency virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          11                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Human papillomavirus">
+                          Human papillomavirus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          12                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Influenza virus">
+                          Influenza virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          13                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Japanese encephalitis virus">
+                          Japanese encephalitis virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          14                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Junin virus">
+                          Junin virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          15                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Lake Victoria marburgvirus">
+                          Lake Victoria marburgvirus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          16                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Lassa virus">
+                          Lassa virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          17                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Louping ill virus">
+                          Louping ill virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          18                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Machupo virus">
+                          Machupo virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          19                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Marburg virus">
+                          Marburg virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          20                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Measles virus">
+                          Measles virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          21                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Mumps virus">
+                          Mumps virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          22                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Newcastle disease virus">
+                          Newcastle disease virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          23                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Poliovirus">
+                          Poliovirus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          24                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Powassan virus">
+                          Powassan virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          25                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Rabies virus">
+                          Rabies virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          26                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Reston ebolavirus">
+                          Reston ebolavirus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          27                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Rift Valley fever virus">
+                          Rift Valley fever virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          28                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Rotavirus">
+                          Rotavirus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          29                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Rubella virus">
+                          Rubella virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          30                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Vaccinia virus">
+                          Vaccinia virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          31                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Varicella-zoster virus">
+                          Varicella-zoster virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          32                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Variola virus">
+                          Variola virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          33                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Venezuelan equine encephalitis virus">
+                          Venezuelan equine encephalitis virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          34                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Western equine encephalitis virus">
+                          Western equine encephalitis virus                        </a></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          35                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Yellow fever virus">
+                          Yellow fever virus                        </a></td>
+                      </tr>
+                                        </table></td>
+                  <td valign="top"><table align="center" cellpadding="4" cellspacing="1" style="border:1px solid #9999CC">
+                      <tr>
+                        <td bgcolor="#aec5cc"><strong>#</strong></td>
+                        <td bgcolor="#aec5cc"><strong>Parasites</strong></td>
+                      </tr>
+                                            <tr>
+                        <td  bgcolor="#EEEEEE"><strong>
+                          1                        </strong></td>
+                        <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Plasmodium falciparum"> <em>
+                          Plasmodium falciparum                        </em> </a></td>
+                      </tr>
+                                            <tr>
+                        <td bgcolor="#F8FAFA"><strong>
+                          2                        </strong></td>
+                        <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Plasmodium yoelii"> <em>
+                          Plasmodium yoelii                        </em> </a></td>
+                      </tr>
+                                          </table>
+                      <p>&nbsp;</p>
+                    <table align="center" cellpadding="4" cellspacing="1" style="border:1px solid #9999CC;">
+                        <tr>
+                          <td bgcolor="#aec5cc"><strong>#</strong></td>
+                          <td bgcolor="#aec5cc"><strong>Fungi</strong></td>
+                        </tr>
+                                                <tr>
+                          <td  bgcolor="#EEEEEE"><strong>
+                            1                          </strong></td>
+                          <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Coccidioides immitis"> <em>
+                            Coccidioides immitis                          </em> </a></td>
+                        </tr>
+                                                <tr>
+                          <td bgcolor="#F8FAFA"><strong>
+                            2                          </strong></td>
+                          <td bgcolor="#F8FAFA" colspan="2"><a href="portal/index.php?species=Coccidioides posadasii"> <em>
+                            Coccidioides posadasii                          </em> </a></td>
+                        </tr>
+                                                <tr>
+                          <td  bgcolor="#EEEEEE"><strong>
+                            3                          </strong></td>
+                          <td  bgcolor="#EEEEEE" colspan="2"><a href="portal/index.php?species=Phakopsora pachyrhizi"> <em>
+                            Phakopsora pachyrhizi                          </em> </a></td>
+                        </tr>
+                                            </table></td>
+                </tr>
+              </table>
+              <p>&nbsp;</p>
+        </div>
+      <!-- InstanceEndEditable --></div>    </td>
+  </tr>
+</table>
+<!-- InstanceBeginEditable name="Footer" --><!-- InstanceEndEditable -->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4869243-3");
+pageTracker._trackPageview();
+</script>
+
+</body>
+<!-- InstanceEnd --></html>

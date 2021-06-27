@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Web Servicing the Biological Office</title>
+  </head>
+  <body>
+    <h1>Web Servicing the Biological Office</h1>
+    
+    [<a href="#Interfaces">interfaces</a>] [<a href="#Services">services</a>] [<a href="#Documentation">documentation</a>] [<a href="#Clients">clients</a>] [<a href="#Contact">contact</a>] [<a href="#Contributors">contributors</a>] [<a href="#Citing">citing</a>]
+
+    <p>The goal of this project is to offer services for biologists on the basis of the SOAP web service technology and to integrate these services into standard and widely used applications like those from the Microsoft Office suite. This project is part of the <a href="http://hobit.sourceforge.net/">HOBIT</a> group.</p>
+    
+    <p>In the context of this project two kinds of web services are supplied: <a href="#BNS">Biological Name Services</a> offering mappings between names and identifiers of
+    biological objects (e.g. proteins) and <a href="#BMS">Biological Mark-up Services</a> for tagging of identifiers or names in free text. Three implementations are
+    currently available: <a href="#ProThesaurus">ProThesaurus</a>, <a href="#BeThesaurus">BeThesaurus</a>.
+     Finally, this projects offers a client application called <a href="#ProTag">ProTag</a> for the integration of any Biological Name or Mark-up Service into the Microsoft Office applications.</p>
+
+    <h2><a name="Interfaces">Interfaces</a></h2>
+
+    <p>If you want to use one of the Biological Name or Mark-up Services in your own applications or 
+      want to implement your own Biological Name or Markup Service for integrating it 
+      in ProTag please use the following WSDL documents describing the interfaces of the different web services:</p>
+
+      <p>A <a href="./services/BiologicalNameService?wsdl" name="BNS">Biological Name Service</a> offers mapping between identifiers and names of biological objects and provides <a href="http://lsid.sourceforge.net">Life Science Identifiers (LSID)</a> and URLs for each biological object.</p>
+
+      <p>A <a href="./services/BiologicalMarkupService?wsdl" name="BMS">Biological Mark-up Service</a> offers tagging of identifiers and names of biological objects in free text.<p>
+
+	<h2><a name="Services">Services</a></h2>
+	
+	<p><a name="ProThesaurus" href="/prothesaurus/services">ProThesaurus</a> (Protein Thesaurus) implements a Biological Name and Mark-up Service for protein names and identifiers. </p>
+	
+	<p><a name="BeThesaurus" href="/bethesaurus/services">BeThesaurus</a> (Beta Thesaurus) implements a Biological Name and Mark-up Service for user proposed names and identifiers. Proposals can be made through ProTag or ProThesaurus and are visible to the users through the BeThesaurus web service. BeThesaurus and ProThesaurus share the same code base and so the Biological Mark-up Service of BeThesaurus recognizes only user proposed identifiers but no names.</p>
+	
+	
+	<h2><a name="Documentation">Documentation</a></h2>
+	<p>We also provide a detailed API <a href="./doc/">documentation</a> of the ProThesaurus implementation.</p>
+	
+    <h2><a name="Clients">Clients</a></h2>
+	
+    <p><a name="ProTag"><a href="http://protag.sourceforge.net">ProTag</a> is a Smart Tag and Add-In solution for Microsoft Office applications 
+      and allows querying the ProThesaurus Web Service from within an Office application 
+      while typing your documents. The ProTag solution recognizes different protein 
+      identifiers and names respectively and offers synonyms and identifiers 
+      respectively for them. Further it can be used as a standalone application (i.e. without
+      the need of running a Microsoft Office application) and as a 
+      Microsoft Excel Add-In offering access to the web services within Excel formulas.</a></p>
+      
+     <p><b><a name="Download"></a><a href="http://sourceforge.net/project/showfiles.php?group_id=146810">Download</a> the latest version of ProTag as well as a tutorial for ProTag</b></p>
+     
+     <p>ProTag is an Open Source project. Its web site can be found <a href="http://protag.sourceforge.net">here</a>.
+      
+    <h2><a name="Contact">Contact</a></h2>
+    <p>If you have any questions regarding ProThesaurus, BeThesaurus or ProTag or if you encounter 
+      any problems during installation or using the software provided here, feel free 
+      to <a href="mailto:prothesaurus&#64;bio.ifi.lmu.de">contact us</a>.</p>
+
+	<h2><a name="Contributors">Contributors</a></h2>	
+	<p>The solutions described here were developed at the <a href="http://www.bio.ifi.lmu.de">Teaching and Research Unit Bioinformatics</a> from the <a href="http://www.ifi.lmu.de">Department of Informatics</a>, <a href="http://www.lmu.de">Ludwig-Maximilians-Universit&auml;t M&uuml;nchen</a>, and by the following persons:</p>
+	<p>	
+
+		<a href="mailto:florian.sohler&#64;ifi.lmu.de">Florian Sohler</a> had the initial idea for providing a web service-based thesaurus of protein names and identifiers (ProThesaurus).<br/>
+		<a href="mailto:csaba&#64;bio.ifi.lmu.de">Gergely Csaba</a> and <a href="http://www.bio.ifi.lmu.de/~steiner/">Frank Steiner</a> provided the web service infrastructure.<br/>
+		<a href="mailto:katrin.fundel&#64;bio.ifi.lmu.de">Katrin Fundel</a> supplied the synonym lists for ProThesaurus and provided helpful feedback on ProTag.<br/>
+		<a href="mailto:Ralf.Zimmer&#64;ifi.lmu.de">Ralf Zimmer</a> supervised the development of ProThesaurus and ProTag.<br/>
+		<a href="mailto:gergely.csaba&#64;bio.ifi.lmu.de">Gergely Csaba</a> implemented the synonym lookup algorithm (modified Aho-Corasick) for the web service<br/>
+		<a href="http://szugat.gmxhome.de">Martin Szugat</a> implemented ProThesaurus, BeThesaurus and ProTag.<br/>
+	</p>
+      
+    <h2><a name="Citing">Citing</a></h2>
+    <p>If you want to refer to ProTag or ProThesaurus in your scientific publication please cite the following publication:</p>
+    <p>Szugat,M., G&uuml;ttler,D., Fundel,K., Sohler,F., Zimmer,R., <i><a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/21/suppl_2/ii268?ijkey=oqBS3nH1q9N7Xfj&keytype=ref">Web servicing the biological office</a></i>, Bioinformatics, ECCB/JBI, Vol. 21 Suppl. 2 2005, pages ii268-ii269</p>
+    
+    <p><i><font size="1">Last Modified: 14/18/2007</font></i></p>
+    <p>&nbsp;</p>
+  </body>
+</html>

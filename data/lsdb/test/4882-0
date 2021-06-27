@@ -1,0 +1,265 @@
+<HTML>
+<HEAD>
+   <META NAME="Author" CONTENT="Doulaye Dembele">
+</HEAD>
+<BODY>
+
+<CENTER><H2><FONT COLOR="#0000FF"><A NAME="top">
+Fuzzy C-Means for Clustering Microarray Data</A>
+</FONT></H2></CENTER>
+
+<CENTER><H3><FONT COLOR="#008000">
+Doulaye Demb&eacute;l&eacute; and Philippe Kastner<BR>
+IGBMC<BR>
+CNRS-INSERM-ULP, BP 10142<BR>
+67404 Illkirch Cedex, France</FONT>
+<BR>
+<FONT COLOR="#FF0000">see : <A HREF="http://bioinformatics.oupjournals.org/"
+	TARGET="_BLANK">http://bioinformatics.oupjournals.org/</A><BR>
+	volume 19 ; number 8 ; pages 973-980
+</FONT>
+</H3>
+
+Contacts : <A HREF="mailto:doulaye@titus.u-strasbg.fr">
+          Doulaye Demb&eacute;l&eacute;</A> or
+	   <A HREF="mailto:kastner@titus.u-strasbg.fr">
+          Philippe Kastner </A> 
+
+<HR WIDTH=60%>
+<A HREF="#abstract">Abstract </A> <BR>
+<A HREF="#datasets">Datasets used </A> <BR>
+<A HREF="#colorfigs">Color figures </A> <BR>
+<A HREF="#suptext">Supplemental material </A> <BR>
+<A HREF="#code">Matlab functions </A>
+<HR WIDTH=60%>
+</CENTER>
+
+<H3><A NAME="#abstract">Abstract</A></H3>
+Clustering analysis of data from DNA microarray hybridization studies is essential
+for identifying biologically relevant groups of genes. 
+Partitional clustering methods such as K-means or Self-Organizing Maps 
+assign each gene to a single cluster.
+However, these methods do not provide information about the
+influence of a given gene for the overall shape of clusters.
+Here we apply a fuzzy partitioning method, Fuzzy C-Means (FCM),
+to attribute cluster membership values to genes.<BR>
+<P>
+A major problem in applying the FCM method for clustering microarray data is the 
+choice of the fuzziness parameter <I>m</I>. We show that the commonly used value 
+<I>m=2</I> is not appropriate for some datasets, and that optimal values for 
+<I>m</I> vary widely from one
+dataset to another. We propose an empirical method, based on the distribution of
+distances between genes in a given dataset, to determine an adequate value for 
+<Im</I>.
+By setting threshold levels for the membership values, genes which are
+the most tigthly associated to a given cluster can be selected. 
+Using a yeast cell cycle dataset as an example, we show that this selection increases 
+the overall biological significance of the genes within the cluster.
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A HREF="#top"><IMG SRC="haut_vert.gif" 
+		ALT="Back to top/Retour au debut"></A></FONT></CENTER>
+
+<H3><A NAME="#datasets">Datasets used</A></H3>
+All files given below are tab delimited ascii text ones.
+
+<P><FONT COLOR="#green">Serum dataset</FONT> : 
+<A HREF="serum.txt">serum.txt</A> <BR>
+can be downloaded also from :
+<A HREF="http://www.sciencemag.org/feature/data/984559.shl"
+	TARGET="_BLANK">http://www.sciencemag.org/feature/data/984559.shl</A><BR>
+the entire dataset is available at :
+<A HREF="http://genome-www.stanford.edu/serum"
+	TARGET="_BLANK">http://genome-www.stanford.edu/serum</A>
+
+<P><FONT COLOR="#green">Yeast dataset</FONT> : 
+<A HREF="yeast.txt">yeast.txt</A> (normalized data used)<BR>
+The entire dataset can be downloaded from : 
+<A HREF="Cho_all_YeastTimeSeries.xls">all dataset</A>
+or from <A HREF="http://genomics.stanford.edu"
+	TARGET="_BLANK">http://genomics.stanford.edu</A><BR>
+see also
+<A HREF="http://arep.med.harvard.edu/network_discovery"
+	TARGET="_BLANK">http://arep.med.harvard.edu/network_discovery</A> 
+
+<P><FONT COLOR="#green">Human cancer dataset</FONT> : 
+<A HREF="hc728g.txt">hc728g.txt</A> <BR>
+The complete dataset can be downloaded from :
+<A HREF="http://discover.nci.nih.gov/nature2000/"
+	TARGET="_BLANK">discover.nci.nih.gov/nature2000/</A>
+
+<P><FONT COLOR="#green">Iris dataset</FONT> : 
+<A HREF="iris.txt">iris.txt</A><BR>
+can be downloaded also from :
+<A HREF="ftp://ftp.ics.uci.edu/pub/machine-learning-databases/"
+	TARGET="_BLANK">ftp://ftp.ics.uci.edu/pub/machine-learning-databases/</A>
+
+<P><FONT COLOR="#green">Synthetic dataset 1</FONT> : 
+<A HREF="y3c.txt">y3c.txt</A><BR>
+
+<P><FONT COLOR="#green">Synthetic dataset 2</FONT> : 
+<A HREF="y14c.txt">y14c.txt</A><BR>
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A HREF="#top"><IMG SRC="haut_vert.gif" 
+		ALT="Back to top/Retour au debut"></A></FONT></CENTER>
+
+<H3><A NAME="#colorfigs">Color figures</A></H3>
+<P>figure 1 :<BR>
+<A><IMG SRC="figure1s.jpg" ALT="color figure 1"></A><BR>
+Influence of the fuzziness parameter <I>m</I> on the distribution of 
+membership values.<BR> 
+Boxplot representations of sorted membership values from FCM clustering 
+are shown. <BR> 
+For fixed values of <I>m</I>, the <I>K</I> membership values of each gene 
+were sorted <BR> 
+in decreasing order. For a point in each plot, horizontal segments are 99 
+centile, third quartile,<BR>
+median, first quartile and first centile values respectively ; isolated 
+segments represent outliers.<BR> 
+a) distribution of membership values when <I>m</I> is fixed to <I>2</I>. 
+Note that, in the case<BR> 
+of the yeast and cancer datasets, all membership values for all genes were 
+equal to <I>1/K</I>.<BR>
+b) distribution of membership values when $m$ is equal to the computed upper 
+bound value
+<I>m_ub</I>.<BR>
+c) effect of varying <I>m</I> in the case of the serum data.<BR>
+
+<P>figure 2 :<BR>
+<A><IMG SRC="figure2s.jpg" ALT="color figure 2"></A><BR>
+Boxplot of sorted membership values for real and randomized datasets 
+(see figure 1 for<BR> 
+description of the representation). Only the first <I>15</I> significant 
+values are shown for the<BR> 
+cancer dataset. Randomized datasets was generated as follows. To the first 
+gene in the list of<BR> 
+the dataset, we associated an expression value selected randomly from the 
+<I>N</I> values of the<BR>
+experiment <I>j</I>. To the second gene in the list, we associated an expression 
+value selected <BR>
+radomly from the remaining <I>(N-1)</I> values of experiment <I>j</I>. 
+We repeated this process until<BR> 
+we associated the remaining expression value to the last gene in the list. 
+The overall randomized<BR> 
+dataset was formed by doing these operations for the <I>p</I> experiments.<BR>
+
+<P>figure 3 :<BR>
+<A><IMG SRC="figure3s.jpg" ALT="color figure 3"></A><BR>
+Scatterplot of the two highest membership values of all genes in the datasets.<BR>
+Vertical lines correspond to median value of the highest membership value.<BR> 
+(a) serum dataset, (b) yeast dataset, (c) cancer dataset.<BR>
+
+<P>figure 4 :<BR><BR>
+<A><IMG SRC="figure4s.jpg" ALT="color figure 4"></A><BR>
+Cancer data, threshold-based selection of genes and expression profile 
+representation. <BR>
+We use the value of the threshold (<I>0.67</I>) to divide the data set into 
+two groups :<BR>
+genes with a <I>U_max</I> greater than <I>0.67</I> (red in part (a)) and the 
+genes which<BR>
+have a <I>U_max</I> lower than <I>0.67</I> (magenta in part (a)). Finally, we 
+replace the<BR>
+normalized data of each gene by color codes in which red stands for the highest<BR>
+expression value while green is used for the lower value. The panel (c) 
+of this figure<BR>
+shows a clean separation of clusters for genes having a membership value greater <BR>
+than <I>0.67</I>. In contrast, expression profile of the genes in magenta (part (a))<BR>
+shows a more fuzzy pattern (the panel (b) of the figure).<BR>
+
+<P>figure 5 :<BR>
+<A><IMG SRC="figure5s.jpg" ALT="color figure 5"></A><BR>
+Boxplot of silhouettes values of genes in clusters. For each gene a silhouette 
+value is computed,<BR> 
+see text. When this value is lower than zero, the corresponding gene is poorly 
+classified. <BR>
+(a) serum data set, top : no selection, bottom : gene selection with a threshold 
+equal to <I>0.87</I> ;<BR>
+(b) yeast data set, top : no selection, bottom : gene selection with a threshold 
+equal to <I>0.80</I> ;<BR>
+(c) cancer data set, top : no selection, bottom : gene selection with a threshold 
+equal to <I>0.67</I>.<BR>
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A HREF="#top"><IMG SRC="haut_vert.gif" 
+		ALT="Back to top/Retour au debut"></A></FONT></CENTER>
+
+<H3><A NAME="#suptext">Supplementary material</A></H3>
+<B>Iris dataset</B><BR>
+Using this dataset, we ran the FCM algorithm with various values for the fuzziness 
+parameter <I>m</I>. <I>30</I> independant runs are used.  
+In each run, <I>3</I> (case where <I>K=3</I>) or <I>2</I> (case where <I>K=2</I>)  
+samples are randomly selected as initial centroids.
+After convergence of FCM for all runs, the solution that gives the smallest 
+value for <I>J(K,m)</I> 
+was kept and we estimated <I>U_{max}</I> and <I>U_{min}</I> as defined above.
+
+<P>For the same values of the fuzziness parameter <I>m</I>, we computed the sample
+mean, standard deviation and the coefficient of variation of the derivative distances 
+<I>Y_m</I>. We also computed the ratio of the coefficient of variation. <BR>
+The results obtained are summarized in tables the following two tables
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A><IMG SRC="irisTab1.jpg" ALT="iris table 1"></A></FONT></CENTER>
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A><IMG SRC="irisTab2.jpg" ALT="iris table 2"></A></FONT></CENTER>
+
+<P><B>Synthetic dataset 1</B><BR>
+We varied the fuzziness parameter <I>m</I> and we performed the same computations 
+as for the iris dataset. The results obtained are summarized in the following table 
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A><IMG SRC="synt1Tab.jpg" ALT="synthetic dataset 1 table"></A></FONT></CENTER>
+
+<P><B>Synthetic dataset 2</B><BR>
+We varied the fuzzy parameter <I>m</I> and computed <I>U_{min}</I> and 
+<I>U_{max}</I> and the
+sample statistics of distances <I>Y_m</I> (see the following table)
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A><IMG SRC="synt2Tab.jpg" ALT="synthetic dataset 2 table"></A></FONT></CENTER>
+
+<P><B>Serum dataset</B><BR>
+The sample statistics of the normalized <I>Y_m</I> are summarized in the
+following table 
+ 
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A><IMG SRC="serumTab.jpg" ALT="serum dataset table"></A></FONT></CENTER>
+
+<P><B>Yeast dataset</B><BR>
+Two different selections of genes are made from the 6200 ORF in the yeast
+dataset. The first selection contains 2945 genes while the second contains
+1159 genes.
+The sample statistics of the normalized <I>Y_m</I> of these datasets are 
+summarized in the following tables 
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A><IMG SRC="yeastTab.jpg" ALT="yeast dataset tables"></A></FONT></CENTER>
+
+<P><B>Direct computation of the upper bound value for <I>m</I></B><BR>
+The flowchart in the following figure summarizes the computation steps used
+to define the upper bound value of the fuzziness parameter <I>m</I>.
+
+<P>figure 6 :<BR>
+<A><IMG SRC="mubFlow.jpg" ALT="mub flowchart"></A><BR>
+Computation flowchart for determining the upper bound value of the fuzziness<BR>
+parameter <I>m</I>. The algorithm stops when the absolute value of the error between<BR>
+computed <I>cv</I> and <I>0.03p</I> is lower than <I>e</I>. It also stops when the number of <BR>
+iterations is greater than <I>maxIter</I>. Default values of <I>e</I> and </I>maxIter</I> are </I>0.001</I><BR>
+ and <I>500</I> respectively, and can be ajusted by the user.  The maximum value  of<BR>
+<I>m</I>, <I>m_2=1000</I> can also be changed by the user.<BR>
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A HREF="#top"><IMG SRC="haut_vert.gif" 
+		ALT="Back to top/Retour au debut"></A></FONT></CENTER>
+
+<H3><A NAME="#code">Matlab functions</A></H3>
+
+<A HREF="fcm.ZIP">fcm.ZIP</A><BR>
+
+<P><CENTER><FONT COLOR="#FF0000"> 
+<A HREF="#top"><IMG SRC="haut_vert.gif" 
+		ALT="Back to top/Retour au debut"></A></FONT></CENTER>
+</BODY>
+</HTML>

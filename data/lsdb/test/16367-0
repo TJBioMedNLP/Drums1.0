@@ -1,0 +1,403 @@
+<html>
+<head>
+<meta name="GENERATOR" content = "my small fingers">
+<title>Synonymous codon usage analyse</title>
+</head>
+
+<body>
+
+<hr>
+<h1><center>Online Synonymous Codon Usage Analyses with the ade4 and seqinR packages</center></h1>
+
+<center>
+On line reproduction of the figure from the paper by<br><br>
+<a href="http://biomserv.univ-lyon1.fr/sitelabo/pageperso.php?id_personne=20">Charif, D.</a>,
+<a href="http://pbil.univ-lyon1.fr/ADE-4/JTHome.html">Thioulouse, J.</a>
+<a href="http://pbil.univ-lyon1.fr/members/lobry">Lobry, J.R.</a>,
+<a href="http://pbil.univ-lyon1.fr/members/perriere/guy.html">Perri&egrave;re, G.</a>,<br><br>
+Laboratoire BBE CNRS UMR 5558<br>
+INRIA Helix Project,
+Univ. C. Bernard - LYON I<br> 
+43 Bd 11/11/1918, F-69622 VILLEURBANNE CEDEX, FRANCE
+
+</center>
+
+<blockquote align="justify">
+<b>Summary:</b> Correspondence analysis of codon usage data is a widely used method in sequence analysis, but the variability in amino acid composition between proteins is a confounding factor when one wants to analyse synonymous codon usage variability. A simple and natural way to cope with this problem is to use within-group correspondence analysis. There is, however, no user-friendly implementation of this method available for genomic studies. Our motivation was to provide to the community a Web facility to easily study synonymous codon usage on a subset of data available in public genomic databases. <br><br>
+
+<b>Availability:</b> Availability through the P&ocirc;le Bioinformatique Lyonnais (PBIL) Web server at 
+<a href="http://pbil.univ-lyon1.fr/datasets/charif04/">
+http://pbil.univ-lyon1.fr/datasets/charif04/</a> with a demo allowing to reproduce the figure in the present application note. All underlying software is distributed under a GPL licence.<br><br>
+
+<b>Contact:</b> <a href="http://pbil.univ-lyon1.fr/members/lobry/">
+http://pbil.univ-lyon1.fr/members/lobry/</a>
+</blockquote>
+<hr>
+<center>
+<a href="bigfig.png"><img src="fig.png"></a>
+</center>
+<hr>
+
+<center>
+<FORM onSubmit = "return checkData(this)"
+action="http://pbil.univ-lyon1.fr/cgi-bin/Rweb/Rweb.cgi"
+enctype="multipart/form-data"
+method="post">
+<pre><TEXTAREA NAME="Rcode" ROWS=6 COLS=80>
+####################################################################
+#
+# Load required packages, here ade4 for multivariate analyses and seqinR
+# to access ACNUC databases. This is dispensable since these packages
+# are automatically pre-loaded in our RWeb server, but would be mandatory
+# for runing the script in a different context.
+#
+####################################################################
+
+library(ade4)
+library(seqinr)
+
+####################################################################
+#
+# Give session info to check that we are running the last version
+# of R and the packages.
+#
+####################################################################
+
+sessionInfo()
+
+####################################################################
+#
+# Choose a bank, here the bank trypano is a frozen subset of GenBank:
+# its content is stable to allow for the reproducibility of results.
+# It was build on 27-JAN-2004 from GenBank release 139 by selecting
+# data from Leishamnia major, Trypanosoma brucei and Trypanosoma cruzi.
+# It contains 117,177,046 bases 158,838 sequences 4,744 subsequences 
+# and 2,114 references.
+#
+####################################################################
+
+choosebank(bank = "trypano")                   
+
+####################################################################
+#
+# Search the bank for complete nuclear coding sequence for our three species:
+#
+####################################################################
+
+myquery <- function(listname, species)
+{
+  requested <- paste("SP=", species, "ET O=nuclear ET T=cds ET NO K=partial")
+  query(listname, requested)
+}
+
+myquery("lm", "Leishmania major")
+myquery("tb", "Trypanosoma brucei")
+myquery("tc", "Trypanosoma cruzi")
+
+####################################################################
+#
+# The mnemonics of corresponding sequences are stored in lm$req (1,467
+# sequences) tb$req (1,772 sequences) and tc$req (679 sequences). From
+# these we can now retrieve the sequences:
+#
+####################################################################
+
+
+seqlm <- lapply(lm$req, getSequence)
+seqtb <- lapply(tb$req, getSequence)
+seqtc <- lapply(tc$req, getSequence)
+
+
+####################################################################
+#
+# From sequences, build dataframes with codon usage for each sequence. 
+#
+####################################################################
+
+mkdata <- function(seqs)
+{
+  tab <- sapply(seqs, uco)  
+  tab <- as.data.frame(tab)
+  return( tab )
+}
+
+tablm <- mkdata(seqlm)
+tabtb <- mkdata(seqtb)
+tabtc <- mkdata(seqtc)
+
+####################################################################
+#
+# Remove CDS with in-frame stop codons (translated by "*" here)
+# and CDS that have less than 100 codons:
+#
+####################################################################
+
+cleanup <- function(tab)
+{
+  aa <- translate(sapply(rownames(tab),s2c))
+  tab <- tab[ , colSums(tab[which(aa == "*"), ]) == 1]
+  tab <- tab[ , colSums(tab) > 100 ]
+  return(tab)
+}
+
+tablm <- cleanup(tablm) # now 1,427 cds
+tabtb <- cleanup(tabtb) # now 1,298 cds
+tabtc <- cleanup(tabtc) # now   635 cds
+
+####################################################################
+#
+# Run correspondence analysis on merged dataset:
+#
+####################################################################
+
+tab <- cbind(tablm, tabtb, tabtc)
+names(tab) <- 1:ncol(tab)
+coa <- dudi.coa(tab, scan = FALSE, nf = 2)
+
+####################################################################
+#
+# Run synonymous codon usage analysis:
+#
+####################################################################
+
+facaa <- as.factor(aaa(translate(sapply(rownames(tab),s2c))))
+scua <- within(coa, facaa, scan = FALSE, nf = 2)
+
+####################################################################
+#
+# Plot first factorial map:
+#
+####################################################################
+
+facsp <- as.factor(rep(c("lm","tb","tc"),
+                       c(ncol(tablm),ncol(tabtb),ncol(tabtc))))
+s.class(scua$co, fac = facsp, cstar = 0, label = "",
+        col = c("green", "red", "blue"), cell=0, cpoint=0.8,
+        sub="First factorial map for synonymous codon usage in Tri-Tryp")
+
+s.label(scua$li, add.plot = TRUE, clab = 0.75)
+
+legend( x = 0.1, y = -0.4, pch = 19, col = c("green", "red", "blue"), 
+       legend = c(expression(italic("Leishmania major")),
+                  expression(italic("Trypanosoma brucei")),
+                  expression(italic("Trypanosoma cruzi"))),
+       xjust = 0, cex = 0.8)
+
+####################################################################
+#
+# END
+#
+####################################################################
+
+</TEXTAREA></pre>
+<BR>
+<INPUT TYPE="submit" VALUE="Do it again">
+</FORM>
+<h3>Total run time is about 115 seconds when the server is not too busy</h3>
+</center>
+<hr>
+
+
+
+<H2>R code explanations</H2>
+<H3>Selection of a data bank</H3>
+The first step consists in selecting the sequences for which we want to
+compute the codon usage:
+<PRE>
+    choosebank(bank = "trypano")                   
+</PRE>
+<p align="justify">
+This line selects the data bank in which we want to retrieve the sequences
+to be analysed.
+The complete list of the different banks that are accessible is available
+<A HREF="/search/releases.php">here</A>. 
+Here the bank trypano is a frozen subset of GenBank:
+its content is stable to allow for the reproducibility of results.
+It was build on 27-JAN-2004 from GenBank release 139 by selecting
+data from <i>Leishamnia major</i>, <i>Trypanosoma brucei</i>
+and <i>Trypanosoma cruzi</i>.
+It contains 117,177,046 bases 158,838 sequences 4,744 subsequences 
+and 2,114 references.
+</p>
+
+<H3>Select sequences of interest</H3>
+
+<p align="justify">
+The second step is to get all the sequences mnemonics we are interested
+in. Because we are using the same query for three different species, we
+define a simple function to avoid code duplication. As input it has
+two arguments: listname to store the result of the query and species
+which contains the name of the species of interest.
+</p>
+
+<PRE>
+    myquery <- function(listname, species)
+    {
+      requested <- paste("SP =", species, "ET O = nuclear ET T = cds ET NO K = partial")
+      query(listname, requested)
+    }
+</PRE>
+
+<p align="justify">
+If we call for instance this function with Leishmania major as second argument, the
+request will be <tt>SP = Leishmania major ET O = nuclear ET T = CDS ET NO K = partial</tt>,
+which means that we want all the sequences from Leishmania major that are from
+a nuclear origin and that are coding sequences and that are not partial.
+For a complete description of the query language go
+<a href="http://pbil.univ-lyon1.fr/databases/acnuc/cfonctions.html#QUERYLANGUAGE">there</a>.
+Now, we have just to call this function with our three species:
+</p>
+
+<PRE>
+    myquery("lm", "Leishmania major")
+    myquery("tb", "Trypanosoma brucei")
+    myquery("tc", "Trypanosoma cruzi")
+</PRE>
+<p align="justify">
+The mnemonics of corresponding sequences are stored in lm$req (1,467
+sequence names) tb$req (1,772 sequence names) and tc$req (679 sequence
+names). From them, we can extract the sequences, this is the next step.
+</p>
+
+<H3>Extracting sequences</H3>
+<p align="justify">
+For this, we just apply the function getseq to our list of sequences
+names (they are returned as a vector of chars).
+</p>
+<PRE>
+    seqlm <- lapply(lm$req, getSequence)
+    seqtb <- lapply(tb$req, getSequence)
+    seqtc <- lapply(tc$req, getSequence)
+</PRE>
+
+
+<H3>Computing codon usage for all sequences</H3>
+<p align="justify">
+We use the function uco() to compute codon usage for a sequence.
+We define here a small utility function to put this into a data.frame :
+</p>
+<PRE>
+    mkdata <- function(seqs)
+    {
+      tab <- sapply(seqs, uco)  
+      tab <- as.data.frame(tab)
+      return( tab )
+    }
+</PRE>
+<p align="justify">
+We apply this function to our three species :
+</p>
+
+<PRE>
+    tablm <- mkdata(seqlm)
+    tabtb <- mkdata(seqtb)
+    tabtc <- mkdata(seqtc)
+</PRE>
+
+<H3>Cleaning up the dataset</h3>
+<p align="justify">
+In this section we want to remove CDS with in-frame stop codons (translated by "*" here)
+and CDS that have less than 100 codons:
+</p>
+<PRE>
+    cleanup <- function(tab)
+    {
+      aa <- translate(sapply(rownames(tab),s2c))
+      tab <- tab[ , colSums(tab[which(aa == "*"), ]) == 1]
+      tab <- tab[ , colSums(tab) > 100 ]
+      return(tab)
+    }
+
+    tablm <- cleanup(tablm) # now 1,427 cds
+    tabtb <- cleanup(tabtb) # now 1,298 cds
+    tabtc <- cleanup(tabtc) # now   635 cds
+</PRE>
+
+<H3>Analysis computation</H3>
+
+<p align="justify">
+Here, we merge the data from the three species and name the columns
+by their rank:
+</p>
+<PRE>
+    tab <- cbind(tablm, tabtb, tabtc)
+    names(tab) <- 1:ncol(tab)
+</PRE>
+<p align="justify">
+We run then simple correpondence analysis, asking to keep automatically
+two factors:
+</p>
+<PRE>
+    coa <- dudi.coa(tab, scan = FALSE, nf = 2)
+</PRE>
+<p align="justify">
+Now, to run synonymous codon usage analysis, we first define a factor,
+facaa, saying for which amino-acid the codons are coding and then
+use this factor to run the within analysis:
+</p>
+<PRE>
+    facaa <- as.factor(aaa(translate(sapply(rownames(tab),s2c))))
+    scua <- within(coa, facaa, scan = FALSE, nf = 2)
+</PRE>
+
+<H3>Graphics plotting</H3>
+<p align="justify">
+We first define a factor corresponding to the three species under
+analysis:
+</p>
+<PRE>
+    facsp <- as.factor(rep(c("lm","tb","tc"),
+                           c(ncol(tablm),ncol(tabtb),ncol(tabtc))))
+</PRE>
+<p align="justify">
+We use then s.class to plot the first factorial map with a color
+code for the three species:
+</p>
+<PRE>
+    s.class(scua$co, fac = facsp, cstar = 0, label = "",
+            col = c("green", "red", "blue"), cell=0, cpoint=0.8,
+            sub="First factorial map for synonymous codon usage in Tri-Tryp")
+</PRE>
+<p align="justify">
+We add then the coordinates of colums, that is the codons here, as a label
+with their names:
+</p>
+<PRE>
+    s.label(scua$li, add.plot = TRUE, clab = 0.75)
+</PRE>
+<P align="justify">
+This last line is just to add a legend to the plot:
+</p>
+<PRE>
+    legend( x = 0.1, y = -0.4, pch = 19, col = c("green", "red", "blue"), 
+           legend = c(expression(italic("Leishmania major")),
+                      expression(italic("Trypanosoma brucei")),
+                      expression(italic("Trypanosoma cruzi"))),
+           xjust = 0, cex = 0.8)
+</PRE>
+<hr>
+<h2>How to export results in tabular form</h2>
+<p align="justify">
+If you want to export data in a tabular form, you have first to set
+up the current working directory as follows:
+</p>
+<PRE>
+   setwd("/ftp/ftpdir/pub/ADE-User/data")
+</PRE>
+<p align="justify">
+Then, write the data you want to get, for instance the table
+of codon counts, tab, in the three species:
+</p>
+<PRE>
+   write.table(tab, file="tab") 
+</PRE>
+<p align="justify">
+And then download the corresponding file from our ftp server
+<a href="ftp://pbil.univ-lyon1.fr/pub/ADE-User/data">there</a>.
+</p>
+
+<P><HR><ADDRESS><A HREF="http://pbil.univ-lyon1.fr/members/lobry/">If you have problems or comments...</A><P><A HREF="http://pbil.univ-lyon1.fr/"><IMG SRC="/binaries/home.png" BORDER ="0"></A><I>Back to PBIL home page</I></ADDRESS>
+
+
+</body>
+</html>

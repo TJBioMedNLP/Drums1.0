@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" lang="de" content="T. Benner" />
+    <meta name="copyright" content="&copy; T. Benner 2008" />
+    <meta name="description" content="The Recurrence Risk Estimator (RRE-90) - A Score for Prediction of 90-day Risk of Recurrence After Ischemic Stroke" />
+    <meta name="keywords" content="Clinical-Based, Imaging-Based, Prediction, Stroke Risk, TIA" />
+    <meta name="robots" content="all" />
+    <meta name="date" content="2008-06-18" />
+	<title>The Recurrence Risk Estimator (RRE-90) - A Score for Prediction of 90-day Risk of Recurrence After Ischemic Stroke</title>
+	<style type="text/css" media="screen">
+	@import url(rre.css);
+	</style>
+	<script type="text/javascript" src="rre.js"></script>
+	<script type="text/javascript" src="overlibmws.js"></script>
+</head>
+
+<body>
+
+	<div id="content">
+
+	<!--
+	<p><em>Example:</em></p>
+	<div id="on" style="border: 1px solid #90ee90;padding: 5px;">
+	<a href="javascript: expandCollapse('expand', 'on');">Expand Layer</a>
+	</div>
+	<div id="expand" style="display: none;border: 1px solid #90ee90;padding: 5px;">
+	<a href="javascript: expandCollapse('expand', 'on');">Collapse Layer</a>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque eu ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Ut wisi. Curabitur odio. Sed ornare arcu id diam. Integer ultricies, mauris venenatis vulputate pulvinar</p>
+	</div>
+	-->
+
+	<div id="header"><h1><img alt="Mass General Logo" src="logo_mgh.png" /> The Recurrence Risk Estimator (RRE-90) <img alt="Harvard Logo" src="logo_harvard.png" /><br /><span class="h1_italic">A Score for Prediction of 90-day Risk of Recurrence After Ischemic Stroke</span></h1></div>
+
+	<form id="myform" class="cssform" action="index.php" method="post">
+		
+		<p>
+		<label>Acute stroke <a href="javascript:void(0);" onmouseover="return overlib('DWI, ADC maps, FLAIR, MR-angiography', TEXTSIZE, '.83em', AUTOSTATUS, WRAPMAX, 400);" onmouseout="nd();">MRI</a> is available (within the first 72 hours)</label>
+		<input type="radio" name="q0a" id="q0aYes" value="1" onclick="rre('q0aYes');" /> Yes<br />
+		<input type="radio" name="q0a" id="q0aNo"  value="2" onclick="rre('q0aNo',  1);" /> No<br />
+		</p>
+		
+		<div id="route1" style="display: none;">
+		
+		<p class="cssform_even">
+		<label>History of TIA or stroke within the preceding month of index stroke</label>
+		<input type="radio" name="q1a" id="q1aYes"     value="1" onclick="rre('q1aYes');" /> Yes<br />
+		<input type="radio" name="q1a" id="q1aNo"      value="2" onclick="rre('q1aNo');" /> No<br />
+		</p>
+		
+		<p>
+		<label><a href="javascript:void(0);" onmouseover="return overlib('Multiple non-contiguous lesions that were hyperintense on DWI and hypointense on ADC maps', TEXTSIZE, '.83em', AUTOSTATUS, WRAPMAX, 400);" onmouseout="nd();">Multiple acute infarcts</a></label>
+		<input type="radio" name="q1b" id="q1bYes"    value="1" onclick="rre('q1bYes');" /> Yes<br />
+		<input type="radio" name="q1b" id="q1bNo"     value="2" onclick="rre('q1bNo');" /> No<br />
+		</p>
+		
+		<p class="cssform_even">
+		<label><a href="javascript:void(0);" onmouseover="return overlib('Multiple acute and/or subacute infarcts in both right and left anterior circulations or in both anterior and posterior circulations', TEXTSIZE, '.83em', AUTOSTATUS, WRAPMAX, 400);" onmouseout="nd();">Simultaneous infarcts in different circulations</a></label>
+		<input type="radio" name="q1c" id="q1cYes"    value="1" onclick="rre('q1cYes');" /> Yes<br />
+		<input type="radio" name="q1c" id="q1cNo"     value="2" onclick="rre('q1cNo');" /> No<br />
+		</p>
+		
+		<p>
+		<label><a href="javascript:void(0);" onmouseover="return overlib('Multiple hyperintense lesions on DWI that meet at least two of the following three combinations of signal changes on ADC and FLAIR images: 1) hypointense on ADC, isointense on FLAIR (hyperacute), 2) hypointense on ADC, hyperintense on FLAIR (early acute), 3) isointense on ADC, hyperintense on FLAIR (late acute or subacute)', TEXTSIZE, '.83em', AUTOSTATUS, WRAPMAX, 400);" onmouseout="nd();">Multiple infarcts of different ages</a></label>
+		<input type="radio" name="q1d" id="q1dYes"    value="1" onclick="rre('q1dYes');" /> Yes<br />
+		<input type="radio" name="q1d" id="q1dNo"     value="2" onclick="rre('q1dNo');" /> No<br />
+		</p>
+		
+		<p class="cssform_even">
+		<label><a href="javascript:void(0);" onmouseover="return overlib('Cortical infarcts without accompanying deep (territory of penetrating arteries) or subcortical infarcts', TEXTSIZE, '.83em', AUTOSTATUS, WRAPMAX, 400);" onmouseout="nd();">Isolated cortical infarcts</a></label>
+		<input type="radio" name="q1e" id="q1eYes"    value="1" onclick="rre('q1eYes');" /> Yes<br />
+		<input type="radio" name="q1e" id="q1eNo"     value="2" onclick="rre('q1eNo');" /> No<br />
+		</p>
+		
+		<p class="cssform_odd_last">
+		<label><a href="http://www.nmr.mgh.harvard.edu/CCS/index.shtml">CCS</a> etiologic stroke subtype</label>
+		<input type="radio" name="q1f" id="q1fLAA" value="1" onclick="rre('q1fLAA');" /> Large Artery Atherosclerosis<br />
+		<input type="radio" name="q1f" id="q1fCE"  value="2" onclick="rre('q1fCE');" /> Cardioaortic Embolism<br />
+		<input type="radio" name="q1f" id="q1fSAO" value="3" onclick="rre('q1fSAO');" /> Small Artery Occlusion<br />
+		<input type="radio" name="q1f" id="q1fOC"  value="4" onclick="rre('q1fOC');" /> Other Causes<br />
+		<input type="radio" name="q1f" id="q1fUC"  value="5" onclick="rre('q1fUC');" /> <a href="javascript:void(0);" onmouseover="return overlib('Cryptogenic, incomplete evaluation, or unclassified', TEXTSIZE, '.83em', AUTOSTATUS, WRAPMAX, 400);" onmouseout="nd();">Undetermined Causes</a><br />
+		</p>
+		
+		</div> <!-- <div id="route1" -->
+		
+		<div id="route2" style="display: none;">
+		
+		<p class="cssform_even">
+		<label>History of TIA or stroke within the preceding month of index stroke</label>
+		<input type="radio" name="q2a" id="q2aYes"     value="1" onclick="rre('q2aYes');" /> Yes<br />
+		<input type="radio" name="q2a" id="q2aNo"      value="2" onclick="rre('q2aNo');" /> No<br />
+		</p>
+		
+		<p class="cssform_odd_last">
+		<label><a href="http://www.nmr.mgh.harvard.edu/CCS/index.shtml">CCS</a> etiologic stroke subtype</label>
+		<input type="radio" name="q2b" id="q2bLAA" value="1" onclick="rre('q2bLAA');" /> Large Artery Atherosclerosis<br />
+		<input type="radio" name="q2b" id="q2bCE"  value="2" onclick="rre('q2bCE');" /> Cardioaortic Embolism<br />
+		<input type="radio" name="q2b" id="q2bSAO" value="3" onclick="rre('q2bSAO');" /> Small Artery Occlusion<br />
+		<input type="radio" name="q2b" id="q2bOC"  value="4" onclick="rre('q2bOC');" /> Other Causes<br />
+		<input type="radio" name="q2b" id="q2bUC"  value="5" onclick="rre('q2bUC');" /> <a href="javascript:void(0);" onmouseover="return overlib('Cryptogenic, incomplete evaluation, or unclassified', TEXTSIZE, '.83em', AUTOSTATUS, WRAPMAX, 400);" onmouseout="nd();">Undetermined Causes</a><br />
+		</p>
+		
+		</div> <!-- <div id="route2" -->
+		
+		<div style="margin-left: 555px;">
+		<input type="button" class="button" value="Reset" onclick="resetValues();" /><!-- <input type="button" class="button" value="Compute" onclick="computeResults();" /> -->
+		</div>
+		
+	</form>
+
+	<div id="results" style="display: none;">
+
+	<div class="col1">
+	<h2>Score</h2>
+	<ul>
+		<li><div id="score"></div></li>
+	</ul>
+	</div>
+
+	<div class="col2">
+	<h2>90-day Recurrence Risk (95% CI)</h2>
+	<ul>
+		<li><div id="risk"></div></li>
+	</ul>
+	</div>
+
+	</div> <!-- <div id="content"> -->
+
+	<div id="footer">
+	<p>THE SOFTWARE HAS BEEN DESIGNED FOR
+RESEARCH PURPOSES ONLY AND HAS NOT BEEN REVIEWED OR APPROVED BY THE FOOD AND
+DRUG ADMINISTRATION OR BY ANY OTHER AGENCY. YOU ACKNOWLEDGE AND AGREE THAT
+CLINICAL APPLICATIONS ARE NEITHER RECOMMENDED NOR ADVISED.</p>
+	<p>Copyright &copy; 2008-2009 &middot; <a href="http://www.mgh.harvard.edu">The General Hospital Corporation</a> &middot; All rights reserved &middot; <a href="mailto:&#116;&#104;&#111;&#109;&#097;&#115;&#046;&#098;&#101;&#110;&#110;&#101;&#114;&#064;&#110;&#109;&#114;&#046;&#109;&#103;&#104;&#046;&#104;&#097;&#114;&#118;&#097;&#114;&#100;&#046;&#101;&#100;&#117;">Contact</a></p></div>
+
+	</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost +"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-12117637-1");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+
+</html>

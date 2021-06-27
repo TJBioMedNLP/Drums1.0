@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.4  (Linux)">
+	<META NAME="CREATED" CONTENT="20081217;11064200">
+	<META NAME="CHANGED" CONTENT="20081217;12064300">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		P { margin-bottom: 0.21cm }
+		H1 { margin-bottom: 0.21cm }
+		H1.western { font-family: "Arial", sans-serif; font-size: 16pt }
+		H1.cjk { font-family: "DejaVu Sans"; font-size: 16pt }
+		H1.ctl { font-family: "Tahoma"; font-size: 16pt }
+		H2 { margin-bottom: 0.21cm }
+		H2.western { font-family: "Arial", sans-serif; font-size: 14pt; font-style: italic }
+		H2.cjk { font-size: 14pt; font-style: italic }
+		H2.ctl { font-size: 14pt; font-style: italic }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="es-ES" DIR="LTR">
+<H1 LANG="en-US" CLASS="western">WhichGenes API</H1>
+<P LANG="en-US" STYLE="margin-bottom: 0cm">The WhichGenes API allows
+programmers to access WhichGenes functionalities in a programmatic
+way, through a RESTful Web Service. Using this service, the server
+can be accessed from multiple programming languages, allowing
+researchers to wire WhichGenes results to their experiments. At this
+time, the API offers the gene retrieval operations, including data
+sources listing, catalog listing and query execution.</P>
+
+<P LANG="en-US" STYLE="margin-bottom: 0cm">Like any RESTful Web
+Service, operations are performed via web queries with a well-defined
+URL structure. The server API is located at
+<A HREF="http://www.whichgenes.org/api/">http://www.whichgenes.org/api/</a></P>
+<H2 LANG="en-US" CLASS="western">Data Sources Listing</H2>
+<P LANG="en-US">Lists all data sources that the server can access at
+this moment. The URL is:</P>
+<P LANG="en-US"><A HREF="http://www.whichgenes.org/api/sources">http://www.whichgenes.org/api/sources</A></P>
+<H2 LANG="en-US" CLASS="western">Catalogue Listing</H2>
+<P LANG="en-US">There are two types of data sources: free-text query
+data sources and constrained query data sources. The latter only
+accept a closed set of query terms. These terms are listed when no
+query is given. So an example of this listing can be seen at:</P>
+<P LANG="en-US"><A HREF="http://www.whichgenes.org/api/sources/homosapiens_KEGGPathway/">http://www.whichgenes.org/api/sources/homosapiens_KEGGPathway/</A></P>
+<H2 LANG="en-US" CLASS="western">Query Execution</H2>
+<P LANG="en-US">Executing a query on a data source is performed via:</P>
+<P LANG="en-US">http://www.whichgenes.org/api/sources/{datasource}/{query}</P>
+<P LANG="en-US">In the case of free-text query data sources this URL
+could be an example:</P>
+<P LANG="en-US"><A HREF="http://www.whichgenes.org/api/sources/homosapiens_GeneCardsDiseaseGenes/leukemia">http://www.whichgenes.org/api/sources/homosapiens_GeneCardsDiseaseGenes/leukemia</A></P>
+<P LANG="en-US">In the case of constrained query data sources, the
+{query} must be a valid <B>id</B>, or a comma separated list of <B>ids</B>,
+of the catalog. This URL could be an example:</P>
+<P LANG="en-US"><A HREF="http://www.whichgenes.org/api/sources/homosapiens_KEGGPathway/path:hsa00627,path:hsa00624">http://www.whichgenes.org/api/sources/homosapiens_KEGGPathway/path:hsa00627,path:hsa00624</A></P>
+<H2 LANG="en-US" CLASS="western">Get available namespaces for conversion</H2>
+<P LANG="en-US">Getting the available namespaces for conversion of genesets is done via</P>
+<P LANG="en-US"><a href="http://www.whichgenes.org/api/basket/namespaces">http://www.whichgenes.org/api/basket/namespaces</a></P>
+<H2 LANG="en-US" CLASS="western">Get user's basket</H2>
+<P LANG="en-US">Getting the sets of a given user in his basket is done via:</P>
+<P LANG="en-US">http://www.whichgenes.org/api/basket/{username}/genesets?password={user_password}</P>
+<H2 LANG="en-US" CLASS="western">Get genes of a given geneset in a user's basket</H2>
+<P LANG="en-US">Getting the available namespaces for conversion of genesets is done via</P>
+<P LANG="en-US">http://www.whichgenes.org/api/basket/{username}/{geneset}?password={password}&amp;namespace={namespace}</P>
+<P LANG="en-US">The namespace is optional. By default human genesets are given in HGNC Symbol and mouse genesets are given in MGI-Symbol</P>
+
+
+
+</BODY>
+</HTML>

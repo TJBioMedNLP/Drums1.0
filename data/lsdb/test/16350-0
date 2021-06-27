@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<link href="default.css" rel="stylesheet" type="text/css" >
+
+	<STYLE TYPE="text/css">
+	<!--
+	.indented
+		{
+			padding-left: 30pt;
+		}
+	img
+		{
+			border-style: none;
+		}
+	-->
+	</STYLE>
+	<title>LINNAEUS</title>
+</head>
+<body>
+<table border="0" width="100%">
+	<tr>
+		<td>
+			<h1>LINNAEUS</h1>
+			<b>Species name recognition and normalization software.</b><br>
+
+			LINNAEUS is a general-purpose dictionary matching software, capable of processing multiple types of document formats in the biomedical domain (MEDLINE, PMC, BMC, OTMI, text, etc.). It can produce multiple types of output (XML, HTML, tab-separated-value file, or save to a database). It also contains methods for acting as a server (including load balancing across several servers), allowing clients to request matching over a network.
+
+			<br><br>
+
+			A package with files for recognizing and identifying species names is available for LINNAEUS, showing 94% recall and 97% precision compared to LINNAEUS-species-corpus.
+
+			<br><br>
+
+			LINNAEUS is the subject of the following paper:<br> Gerner M., Nenadic, G. and Bergman, C. M. (2010) LINNAEUS: a species name identification system for biomedical literature. <a href="http://www.biomedcentral.com/1471-2105/11/85">BMC Bioinformatics 11:85</a>.
+
+			<br><br>
+
+			For questions, suggestions or bug reports, please contact <a href="mailto:martin.gerner@postgrad.manchester.ac.uk?subject=LINNAEUS">me</a>.<br>
+			To navigate back: <a href="http://personalpages.manchester.ac.uk/postgrad/martin.gerner">Martin Gerner's personal page</a>, <a href="http://www.bioinf.manchester.ac.uk/bergman/index.html">Bergman lab</a> or the <a href="http://personalpages.manchester.ac.uk/staff/G.Nenadic/TEAM">Nenadic group</a>.<br>
+			The files on this webpage can also accessed from this project's SourceForge project <a href="http://sourceforge.net/projects/linnaeus">page</a>.<br>
+		</td>
+		<td WIDTH="160" valign="middle" align="center">
+			<a href="http://en.wikipedia.org/wiki/Linnaeus"><img src="img/linnaeus.jpg" height=135 alt="Carl von Linné"></a><br>
+		</td>
+	</tr>
+</table>
+<hr>
+<h3>LINNAEUS</h3>
+<ul>
+	<li><a href="http://sourceforge.net/projects/linnaeus/files/Linnaeus/linnaeus-1.5.tar.gz/download">linnaeus-1.5.tar.gz</a> (3.2 MB): LINNAEUS software .jar archives for performing dictionary matching and generating dictionary automatons. Also contains source code, example guides, javadoc documentation and libraries required for compilation.</li>
+	<li><a href="javadoc/">Javadoc</a>: documentation for the source code. The main class is uk.ac.man.entitytagger.EntityTagger.
+</ul>
+
+<h3>Entity type dictionary packs</h3>
+<ul>
+	<li><a href="https://sourceforge.net/projects/linnaeus/files/Entity_packs/species-1.1.tar.gz/download">species-1.1.tar.gz</a> (14 MB): Dictionary and post-processing files required to identify species names in biomedical texts.</li>
+	<li><a href="https://sourceforge.net/projects/linnaeus/files/Entity_packs/cellline-species-proxy-1.0.tar.gz/download">cellline-species-proxy-1.0.tar.gz</a> (152 kB): Cell-line names and synonyms, linked to the species that they are from, useful for e.g. gene NER. For example, 'HeLa cells' will be linked to human. Data from <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/24/23/2760">Sarntivijai <i>et al.</i> (2008)</a>.</li>
+	<li><a href="https://sourceforge.net/projects/linnaeus/files/Entity_packs/genera-species-proxy-1.0.tar.gz/download">genera-species-proxy-1.0.tar.gz</a> (171 kB): Genus names, linked to the most frequently mentioned member species (in MEDLINE), useful for e.g. gene NER. For example, 'Drosophila' will be linked to <i>D. melanogaster</i>.</li>
+</ul>
+
+<hr>
+
+<h3>Remote web service availability</h3>
+		<DIV CLASS="indented">
+		LINNAEUS can be accessed remotely through its web service. It can be accessed either as a SOAP endpoint (<a href="http://linnaeus.smith.man.ac.uk:8080/axis2/services/linnaeus?wsdl">WSDL</a>) or as a RESTFUL service by posting data as a 'text' argument to <a href="http://linnaeus.smith.man.ac.uk:8080/axis2/services/linnaeus/tag">this location</a> (<a href="http://linnaeus.smith.man.ac.uk:8080/axis2/services/linnaeus/tag?text=Human E. coli">example</a>). The XML output should be self-explanatory, but for any questions, don't hesitate to contact me.
+		</DIV><br>
+<hr>
+
+<h3>Corpora</h3>
+<ul>
+	<li><a href="https://sourceforge.net/projects/linnaeus/files/Corpora/manual-corpus-species-1.0.tar.gz/download">manual-corpus-species-1.0.tar.gz</a> (1 MB): A set of open access documents in text format, manually annotated for species mention tags.</li>
+	<li>The other evaluation corpora used in the project are available on request, subject to licensing restrictions being fulfilled.</li>
+</ul>
+
+<h3>Pre-tagged article tag sets</h3>
+<ul>
+	<li><a href="https://sourceforge.net/projects/linnaeus/files/Misc/tags-pmcoa.tsv.gz/download">tags-pmcoa.tsv.gz</a> (38 MB): Species mention tags for all articles in the open access subset of PubMed Central, published up to December 31st, 2008.</li>
+	<li>tags-medline.csv.gz: Species mention tags for all articles in MEDLINE, published up to December 31st, 2008. (available on request, subject to licensing restrictions being fulfilled)</li>
+</ul>
+
+<h3>Sample articles</h3>
+<ul>
+	<li><a href="https://sourceforge.net/projects/linnaeus/files/Misc/pmc-sample.tar.gz/download">pmc-sample.tar.gz</a> (15 MB): A sample set of 961 PMC open access documents useful for testing the software, an index file of the articles and the XML dtd files required to parse them.</li>
+</ul>
+
+<hr>
+
+<h3>Related links</h3>
+<ul>
+	<li>Tools
+		<ul>
+			<li><a href="http://sourceforge.net/projects/taxongrab/">Taxongrab</a>: rule-based species name recognizer.</li>
+			<li><a href="http://www.ebi.ac.uk/webservices/whatizit/">Whatizit</a>: dictionary-based entity recognizer and normalizer (matches, among other things, species).</li>
+			<li><a href="http://www.ubio.org/index.php?pagename=sample_tools">uBio tools</a>: A set of species recognition and normalization tools hosted by the uBio project</li>
+		</ul>
+		<br>
+	<li>Databases
+		<ul>
+		<li><a href="http://www.ncbi.nlm.nih.gov/Taxonomy/">NCBI Taxonomy</a>: The database used for normalization of species mentions</li>
+		<li><a href="http://ubio.org/">uBio</a>: an initiative for creating a catalog of all living (or extinct) species names</li>
+		<li><a href="http://www.catalogueoflife.org">Catalogue of Life</a>: Another database aiming to catalogue species and their names, similar in style to uBio.</li>
+		</ul><br>
+	<li>Document sources
+		<ul>
+			<li><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed">MEDLINE</a>: >18 million article entries, ~10 million abstracts.</li>
+			<li><a href="http://www.pubmedcentral.nih.gov/">PubMed Central</a>: ~1 million open access full-text articles.</li>
+			<li><a href="http://opentextmining.org">Open text mining initiative</a>: Initiative to bypass copyright issues when releasing full-text articles for text-mining purposes (currently not maintained).</li>
+		</ul>
+</ul>
+
+<hr><p>
+	Last updated: May 13th, 2010.
+</p>
+<p>
+	<a href="http://validator.w3.org/check?uri=referer">
+		<img src="http://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML 4.01 Strict" height="31" width="88">
+	</a>
+</p>
+</body></html>

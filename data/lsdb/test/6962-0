@@ -1,0 +1,152 @@
+<html>
+
+<head>
+	
+	<!--meta http-equiv="Refresh" content="3;URL=main.html"-->
+	<link rel="STYLESHEET" href="http://polaris.icmb.utexas.edu/style.css" type="text/css">
+	<meta name="Author" content="Edward Marcotte">
+	<meta name="Classification" content="Educational">
+	<meta name="Description" content="Home Page">
+	<meta name="KeyWords" 
+	content="Computational Biology, Bioinformatics, Comp Bio, Networks, Biological 	Networks">
+	<title>www.YeastNet.org</title>
+
+
+</head>
+<!--body bgcolor="#FFFFFF" topmargin=2 leftmargin=2 marginwidth=2 marginheight=2 -->
+<body bgcolor="#FFFFFF" topmargin=25 marginheight=25>
+
+
+
+<table border=0 cellpadding=5 width="600" align=center>
+<tr>
+<td>
+ <img src="images/YeastNetLogo.jpg" border=0><br>
+
+<hr noshade size="1">
+
+<!--table border=0 cellpadding=5 width="600" align=center>
+<tr>
+<td bgcolor="brown">&nbsp;</td>
+<td bgcolor="brown">&nbsp;</td>
+<td bgcolor="brown">&nbsp;</td>
+<td bgcolor="brown">&nbsp;</td>
+<td bgcolor="brown">&nbsp;</td>
+<td bgcolor="brown">&nbsp;</td>
+</tr>
+</table-->
+
+<br><div class="two"><b>Welcome to the www.YeastNet.org server</b><br>
+<br>
+	<!--<hr noshade size="1"><br>-->
+		<b>Networks:</b> <a href="#YeastNet2">v. 2</a> &nbsp&nbsp&nbsp <b>Applications:</b> <a href="#predict">Phenotype Prediction</a>
+	<hr noshade size="1">
+	<br>
+	<div class="two"><b>Latest network versions</b></div>
+	<ul>
+		<li><div class="two"><b><a name="YeastNet2">YeastNet v. 2</a></b><br><br>
+		<!--a href="plex/plex.html" class="one"><img src="images/plex.jpg" width="100" height="49" border=0></a><br!-->
+		<!--a href="plex/plex.html" class="one"><img src="images/plex.jpg" border=0></a><br!-->
+                YeastNet v. 2 is a probabilistic functional gene network of yeast genes, constructed from
+                ~1.8 million expermental observations from DNA microarrays, physical protein interactions,
+                genetic interactions, literature, and comparative genomics methods.  In total, YeastNet v.2
+                covers 102,803 linkages among 5,483 yeast proteins (95% of the validated proteome).<br>
+<br>
+                YeastNet was constructed using a modified Bayesian integration of diverse data types,
+                with each data type weighted according to how well it links genes that are known to share
+                functions. Each interaction in YeastNet has an associated log-likelihood score (LLS) that
+                measures the probability of an interaction representing a true functional linkage between two genes. 
+		<br><br>
+                <b>YeastNet v. 2 reference:</b><br>
+                <i>Lee, I., Li, Z. and Marcotte, E. M.</i>. An improved, bias-reduced probabilistic functional gene network of baker's yeast, <i>Saccharomyces cerevisiae</i> (<i>PLoS ONE</i> 2007 2(10):e988).  Download <a href="data/PLOS1_YeastNet2_2007.pdf">here</a>.
+<br><br>
+<div class="two"><b>Download the network interactions:<br>
+                  <a href="data/yeastnet2.benchmarkset.gene.txt">Benchmark set, common gene names</a> (approx. 0.7MB).<br>
+                  <a href="data/yeastnet2.benchmarkset.orf.txt">Benchmark set, systematic orf names</a> (approx. 1.1MB).<br>
+                  <a href="data/yeastnet2.gene.txt">Full network, common gene names</a> (approx. 2.9MB).<br>
+                  <a href="data/yeastnet2.orf.txt">Full network, systematic orf names</a> (approx. 3.4MB).<br>
+                  <a href="data/yeastnet2-evidence.gene.txt">Evidence for each link, common gene names</a> (approx. 7.8MB).<br>
+                  <a href="data/yeastnet2-evidence.orf.txt">Evidence for each link, systematic orf names</a> (approx. 8.3MB).<br>
+                </b>
+                A web server to search the network interactively will be added shortly.<br>
+<br>
+                Evidence in YeastNet v. 2 derives from the following datasets, listed in the order used in the evidence file (followed by the overall LLS score):
+<br><br>
+                <div class="one">
+<!--table border="0" cellpadding="2"!-->
+<table>
+          <tr>
+	   <th><div class="one">Evidence code</div></th>
+	   <th><div class="one">Dataset</div></th>
+	 </tr>
+	<tr>
+<th>CC</th><th><div class="one">Co-citation of yeast genes</div></th>
+</tr>
+<tr>
+<th>CX</th><th><div class="one">Co-expression among yeast genes (500 microarray datasets)</div></th>
+</tr>
+<tr>
+<th>GN</th><th><div class="one">Gene neighbourhoods of bacterial and archaeal orthologs</div></th>
+</tr>
+<tr>
+<th>GT</th><th><div class="one">Yeast genetic interactions (multiple datasets)</div></th>
+</tr>
+<tr>
+<th>LC</th><th><div class="one">Literature curated yeast protein interactions</div></th>
+</tr>
+<tr>
+<th>MS</th><th><div class="one">Protein complexes from affinity purification/mass spectrometry (multiple datasets)</div></th>
+</tr>
+<tr>
+<th>PG</th><th><div class="one">Co-inheritance of bacterial orthologs of yeast genes</div></th>
+</tr>
+<tr>
+<tr>
+<th>RS</th><th><div class="one">Rosetta Stone protein-based functional linkages</div></th>
+</tr>
+<th>TS</th><th><div class="one">Protein interactions inferred from tertiary structures of complexes</div></th>
+</tr>
+<tr>
+<th>YH</th><th><div class="one">High-throughput yeast 2-hybrid assays (multiple datasets)</div></th>
+</tr>
+</table>
+
+                <br><br>
+		<br>
+	</ul>
+
+<div class="two"><b>Network Applications</b></div>
+<br>
+	<ul>
+		<li><div class="two"><b><a name="predict">Network Based Phenotype Prediction</a></b><br><br>
+				We demonstrate that loss-of-function yeast phenotypes are predictable by guilt-by-association
+				in functional gene networks.  Testing 1,102 loss-of-function phenotypes from genome-wide
+				assays of yeast reveals predictability of diverse phenotypes, spanning cellular morphology,
+				growth, metabolism, and quantitative cell shape features.  We apply the method to (1) extend
+				a genome-wide screen by predicting, then verifying, genes whose disruption elongates yeast 
+				cells, and (2) predict human disease genes.<br>
+				<br>
+				<b>Yeast network-based phenotype prediction reference:</b><br>
+				<i>McGary, K. L., Lee, I., and Marcotte, E. M.</i> Broad network-based predictability of <i>Saccharomyces cerevisiae</i> gene loss-of-function phenotypes (<i>Genome Biology</i> 2007 8(12):R258) Download <a href="data/Genome_Biology_Phenotype_Prediction_2007.pdf">here</a>.<br>
+				<br>
+				<ul>
+					<li><div class="two"><b><a href="http://www.yeastnet.org/cgi-perl/predict.cgi">web interface</a></b><br><br>
+					<li><div class="two"><b><a href="http://www.yeastnet.org/predict/100phenotypes.tar.gz">phenotype seed sets from paper</a></b><br><br>
+			<!--	<li><div class="two"><b><a href="http://www.yeastnet.org/predict/PhenotypeCode.tar.gz">code</a></b><br><br> -->
+				</ul>
+	</ul>
+<br>
+        <hr noshade size="1">
+	<div class="one">Questions/Comments: Email marcotte AT icmb dot utexas dot edu<br></div>
+	<!--Server stats are available <a href="stats/apropos-stats.html">here</a></div!-->
+
+
+</td><!--END BODY TABLE-->
+</tr>
+</table>
+
+</body>
+
+</html>
+
+

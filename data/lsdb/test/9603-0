@@ -1,0 +1,388 @@
+<html>
+<head>
+
+<title>PhyloFacts Phylogenomic Encyclopedia</title>
+   <LINK REL="stylesheet" HREF="/phylofacts/style.css" TYPE="text/css">
+
+   <style type="text/css">
+      p  { 
+         font-family: verdana, arial, helvetica; 
+         font-size:   10pt; 
+      }
+
+      .leftNav td { 
+         font-family: verdana, arial, helvetica; 
+         font-size:   9pt; 
+      }
+
+   </style>
+
+   <script type="text/javascript">
+      function highlight( item ) {
+         item.style.backgroundColor = "8cccef";
+      }
+
+
+      function normal( item ) {
+         item.style.backgroundColor = "ffffff";
+      }
+
+      function help( anchor ) {
+          var helpURL = "search_help.html#" + anchor;
+          helpWindow = window.open( helpURL, "helpwindow",
+                                "scrollbars=yes, menubar=yes, resizable=yes, "
+                                + "height=150, width=550" );
+          helpWindow.focus();
+      }
+   </script>
+
+</head>
+<body leftmargin=15 rightmargin=15 topmargin=0 marginwidth=15 marginheight=0>
+  
+   <!-- header section -->
+
+   <div style="position: absolute; top: 0px; left: 15px; 
+        height: 190px; width: 100%; background-color: white;">
+               <table border="0" align="center"
+                background="/phylofacts/banner_horse.png"
+                width="700" height="190">
+            <tr valign="bottom">
+               <td width=120> </td>
+
+               <td align="left">
+                  <font face="sans-serif" size=6 color="#990000">
+                  <strong> 
+                  PhyloFacts                  </strong>
+                  </font>
+                  <br>
+                  <font face="sans-serif" color="#990000">
+                  Phylogenomic encyclopedias across the Tree of Life                  </font>
+               </td>
+
+               <td width=40> </td>
+
+               <td>
+                   <FORM NAME=search_form ACTION="/book/retrieval_front_page.php" METHOD=post>
+                       <table>
+                           <tr height=130></tr>
+                           <tr>
+                               <td>
+                                   <A HREF="javascript:help('')"><IMG
+                                      SRC=/phylofacts/images/icn_help_blue_cute.png BORDER=0></A>
+                               </td>
+                       
+                               <td>
+                                   <INPUT TYPE=TEXT SIZE=23 
+                                          STYLE="font-family: Verdana; font-size: 9px;"  
+                                          NAME=search_words VALUE="By accession or identifier"
+                                          ONFOCUS="value=''" TABINDEX="1">
+                                   <INPUT TYPE=submit VALUE="Search">
+                                   <INPUT TYPE=hidden NAME=phylofacts_search_words>
+                                   <INPUT TYPE=hidden NAME=library                   VALUE="all_bpg">
+                                   <INPUT TYPE=hidden NAME=user_password             VALUE="">
+                                   <INPUT TYPE=hidden NAME=c_partition_f             VALUE="1">
+                                   <INPUT TYPE=hidden NAME=search_type VALUE=phylofacts>
+                               </td>
+                           </tr>
+                       </table>
+                   </FORM> 
+               </td>
+
+            </tr>
+         </table>
+            </div>
+
+
+   <!-- Left navigation bar -->
+   <div id="leftNavDiv"
+        style="position: absolute; top: 190px; overflow: auto;
+               left: 0px; padding-left: 15px; background-color: white; ">
+      <table CLASS=leftNav style="background-color: white;" >
+         <tr>
+            <td onmouseover="highlight(this)" onmouseout="normal(this)">
+               <a href="/index.php">
+                  <b>BPG Home</b></a>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <div style="width: 115px; margin-left:5px; padding-left:5px; 
+                    padding-right:5px; overflow:hidden; border-style:solid; 
+                    border-width:thin; border-color:#8cccef">
+                  <table width=115>
+                     <tr>
+                        <td onmouseover="this.style.backgroundColor='#8cccef';"
+                            onmouseout="this.style.backgroundColor='#ffffff';"> 
+                           <a href='http://phylofacts.berkeley.edu/research/'>Research</a>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td onmouseover="this.style.backgroundColor='#8cccef';"
+                            onmouseout="this.style.backgroundColor='#ffffff';">
+                           <a href=/publications.php>Publications</a>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td onmouseover="this.style.backgroundColor='#8cccef';"
+                            onmouseout="this.style.backgroundColor='#ffffff';">
+                           <a href=/affiliations.php>Affiliations</a>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td onmouseover="this.style.backgroundColor='#8cccef';"
+                            onmouseout="this.style.backgroundColor='#ffffff';">
+                           <a href=http://phylofacts.berkeley.edu/members/>Members</a>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td onmouseover="this.style.backgroundColor='#8cccef';"
+                            onmouseout="this.style.backgroundColor='#ffffff';">
+                           <a href="/seminar/current">Seminars</a>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td onmouseover="this.style.backgroundColor='#8cccef';"
+                            onmouseout="this.style.backgroundColor='#ffffff';">
+                           <a href="/contact_us.php">Contact&nbsp;us</a>
+                        </td>
+                     </tr>
+<!--                 <tr>
+                        <td onmouseover="this.style.backgroundColor='#8cccef';"
+                            onmouseout="this.style.backgroundColor='#ffffff';">
+                           <a href="/office_hours.php">Office hours</a>
+                        </td>
+                     </tr>    -->
+                  </table>
+               </div>
+            </td>
+         </tr>
+         <tr>
+                               <td onmouseover="highlight(this)" onmouseout="normal(this)">
+                      <a href="/coverage/"><b>Genome Coverage</b></a>
+                   </td>
+                     </tr>
+          <tr>
+            <td onmouseover="highlight(this)" onmouseout="normal(this)">
+               <a href="/tools.php">
+                  <b>Tools</b></a>
+            </td>
+         </tr>
+              <tr>
+           <td onmouseover="highlight(this)" onmouseout="normal(this)">
+             <a href="/phylofacts/build_info.php"><b>About</b></a> 
+           </td>
+         </tr>
+         <tr>
+           <td onmouseover="highlight(this)" onmouseout="normal(this)">
+             <a href="/phylofacts/help.php"><b>Help</b></a> 
+           </td>
+         </tr>
+     
+            
+      </table>
+   </div> <!-- end of left navigation bar -->
+   &nbsp;
+   <DIV STYLE="margin-top: 190px; margin-left: 160px;">
+   <!-- body section  -->
+<style type="text/css">
+   .main_text td {
+      font-size:   10pt;
+   }
+
+</style>
+
+
+ 
+
+<h2 STYLE="margin-top: 3px; margin-bottom: 3px;">
+   Universal Proteome Explorer
+</h2>
+<P STYLE="margin-top: 0px; font-size: 8pt;">
+Version 2.0. &nbsp; 
+3 March 2011. Families: 59,453.
+Hidden Markov Models (family and subfamily): 1,595,889.
+<BR>
+
+<P STYLE="width: 100%;">
+The PhyloFacts database contains pre-calculated structural and phylogenomic 
+analyses of over 59,000 protein families and domains. 
+[<a href=/phylofacts/build_info.php>read more</a>]
+
+<table class="main_text" cellspacing="10" width="90%">
+   <tr>
+      <td align="right" VALIGN=top NOWRAP>
+         <a href="/phylofacts/search.php">
+            <b>SEQUENCE SEARCH</b></a>
+      </td>
+   <td VALIGN=top>Submit query sequence to find PhyloFacts family matches 
+     <a href="javascript:helpTopic('hmm', 'help_sequence_search')">
+     <img src="/phylofacts/images/icn_help_blue_cute.png" width="16" height="16"
+      border="0" title="Sequence Search Help"></a>
+      </td>
+  </tr>
+   <!--<tr>
+      <td align="right" VALIGN=top NOWRAP>
+         <a href="/tools.php">
+            <b>TOOLS</b></a>
+      </td>
+   <td VALIGN=top>
+     <a href="http://phylofacts.berkeley.edu/orthologs/">PHOG Ortholog Identification</a>,&nbsp; 
+     <a href="http://phylogenomics.berkeley.edu/INTREPID/">INTREPID Functional Site Prediction</a>,&nbsp; 
+     <a href="http://phylogenomics.berkeley.edu/phylobuilder/">PhyloBuilder</a>,&nbsp;  
+     <a href="/tools.php">...</a>      </td>
+  </tr>-->
+ <!--   <tr>
+      <td align="right" valign="top" NOWRAP>
+         <a href="/query_db/query_db.php">
+            <b>DATABASE SEARCH</b></a>
+      </td>
+      <td valign="top">
+         By taxonomy, GO annotation, accession, other descriptors<br>
+     </td>
+   </tr> -->
+   <tr>
+      <td align="right" valign="top" NOWRAP>
+         <H3>BROWSE LIBRARIES</H3>
+      <td valign="top">
+ <!--        <a href="/StructurePrediction">
+            Structure&nbsp;prediction</a>, -->
+         <a href="/GPCR">
+            GPCRs</a>,&nbsp;
+         <a href="/PlantResistanceGene">
+            Plant disease and stress resistance</a>,&nbsp;
+         <a href="/IonChannels">
+            Ion&nbsp;channels</a>,&nbsp;
+         <a href="/InnateImmunity">
+           Innate&nbsp;immunity</a>,&nbsp;
+         <a href="/Plasmodium">
+         <em>Plasmodium&nbsp;falciparum</em></a>,&nbsp;   
+         <a href="/MicrobialGenomes">
+           Microbial&nbsp;phylogenomic&nbsp;explorer</a>
+ </table> 
+
+
+</TD></TR>
+<TR><TD>
+<p><strong>Please help us improve PhyloFacts by filling out our (2-minute) <a href="http://www.surveygizmo.com/s/88711/request-for-input-from-phylofacts-users">online survey.</a></strong></p>
+
+ <p><b>Please cite</b> the following paper in references to this resource:  "PhyloFacts: An online structural phylogenomic encyclopedia for protein functional and structural classification," Nandini Krishnamurthy, Duncan Brown, Dan Kirshner and Kimmen Sj&ouml;lander  <a href="http://genomebiology.com/2006/7/9/R83">Genome Biology 2006, 7:R83</a>.
+</p></TD></TR>
+
+   <tr><td>
+
+      <p><br />
+      Funding for <a href="http://phylogenomics.berkeley.edu/phylofacts/">PhyloFacts</a> is provided by the 
+      <a href="http://phylogenomics.berkeley.edu/funding.php">National Science Foundation</a> and by the 
+      <a href="http://phylogenomics.berkeley.edu/funding.php">National Institutes of Health</a>.   
+      </p></td></tr></table> 
+
+
+
+<!--
+<p>This page was inspired by the excellent <A HREF=http://pfam.janelia.org>Pfam</a> resource.
+-->
+<br />
+
+<!--
+<p style="margin-bottom: 0;">
+   <b>Quickstart guide to using this resource</b>
+</p>
+<ol>
+   <li>
+      See if your protein of interest can be classified to ("matches") one
+      or more PhyloFacts protein families/subfamilies:
+      <ul>
+         <li>
+            Go to PhyloFacts &gt; 
+            <a href="/phylofacts/search.php">
+               Sequence Search</a>.&nbsp;
+         </li>
+         <li>
+            Paste in your protein sequence and click "submit".
+         </li>
+         <li>
+            You can click "Check progress" to see if results are ready, 
+            or wait for an email (it should only  be a minute!).
+         </li>
+         <li>
+            Results include "protein map" diagrams, showing where PhyloFacts
+            protein families or subfamilies align to ("match") your protein.
+            Click on the protein family or subfamily names to see more 
+            information about those PhyloFacts protein families.
+         </li>
+      </ul>
+   </li>
+   <li>
+      Create your own PhyloFacts protein family, using your protein of 
+      interest as the "seed" to identify family members, create
+      an alignment, perform subfamily classification, and create
+      phylogenetic trees:
+      <ul>
+         <li>
+            Go to Tools &gt;
+            <a href="/phylobuilder/">
+               PhyloBuilder</a>.&nbsp;
+         </li>
+         <li>
+            Paste in your protein sequence and click "submit".
+         </li>
+         <li>
+            You can click "Check progress" to see if results are ready, 
+            or wait for an email
+            (depending on how many family members are found, it can take from
+            a few minutes to about a half-hour).
+         </li>
+         <li>
+            Results include a phylogenetic tree and potential homologous
+            solved structures.  
+            Click on the "Tree viewer" icon &mdash; look for your sequence
+            (identified as "seed") in the tree to explore its "neighbors."
+            Click on the "3D structure" icon to view potential homologous
+            structures and family and subfamily significant residues &mdash;
+            amino-acids that are conserved and that may represent catalytic
+            or binding sites.
+         </li>
+      </ul>
+   </li>
+</ol>
+-->
+
+<P>
+<FORM METHOD="LINK" ACTION="http://phylogenomics.berkeley.edu/contact_forms.php" target="_blank">
+<INPUT TYPE="submit" VALUE="Comments, questions, and bug reports">
+</FORM>
+
+   </DIV>
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=4594231; 
+var sc_invisible=1; 
+var sc_partition=56; 
+var sc_click_stat=1; 
+var sc_security="9a31b554"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="blogger web statistics"
+href="http://www.statcounter.com/blogger/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/4594231/0/9a31b554/1/"
+alt="blogger web statistics" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7133066-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</BODY>
+</HTML>
+<br />
+<br />

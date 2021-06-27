@@ -1,0 +1,1566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en">
+
+  
+    
+    
+    
+    
+    
+    
+
+  
+
+  <head>
+
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=utf-8" />
+
+    
+      <base href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/kirmes/kirmes-kernel-based-identification-of-regulatory" /><!--[if lt IE 7]></base><![endif]-->
+    
+
+    <meta name="generator" content="Plone - http://plone.org" />
+
+    <link rel="kss-base-url" href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/kirmes/kirmes-kernel-based-identification-of-regulatory" />
+
+  
+  
+    
+      <script type="text/javascript"
+              src="http://www.fml.tuebingen.mpg.de/portal_javascripts/Plone%20Default/event-registration-cachekey8896.js">
+      </script>
+    
+    
+  
+
+  
+  
+    
+    
+      <style type="text/css"><!-- @import url(http://www.fml.tuebingen.mpg.de/portal_css/Plone%20Default/base-cachekey0584.css); --></style>
+    
+    
+  
+
+  
+    
+    
+      <style type="text/css" media="all"><!-- @import url(http://www.fml.tuebingen.mpg.de/portal_css/Plone%20Default/facultyStaffDirectory-cachekey7248.css); --></style>
+    
+    
+  
+
+  
+  <link rel="kinetic-stylesheet" type="text/css"
+        href="http://www.fml.tuebingen.mpg.de/portal_kss/Plone%20Default/at-cachekey1173.kss" />
+
+
+<title>KIRMES: Kernel-based Identification of Regulatory Modules in Euchromatic Sequences &mdash; FML</title>
+
+    <meta content="We propose a new algorithm that combines the benefits of existing motif finding with the ones of Support Vector Machines (SVMs) to find degenerate motifs in order to improve the modeling of regulatory modules. In experiments on microarray data from Arabidopsis thaliana we were able to show that the newly developed strategy significantly improves the recognition of transcription factor targets. "
+          name="description" />
+
+    <!-- Internet Explorer CSS Fixes -->
+    <!--[if IE]>
+        <style type="text/css" media="all">@import url(http://www.fml.tuebingen.mpg.de/IEFixes.css);</style>
+    <![endif]-->
+
+    
+    <link rel="author"
+          href="http://www.fml.tuebingen.mpg.de/author/raetsch"
+          title="Author information" />
+
+
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://www.fml.tuebingen.mpg.de/favicon.ico" />
+
+
+    <link rel="home" href="http://www.fml.tuebingen.mpg.de"
+          title="Front page" />
+
+    <link rel="contents"
+          href="http://www.fml.tuebingen.mpg.de/sitemap"
+          title="Site Map" />
+
+
+
+
+    <link rel="search"
+          href="http://www.fml.tuebingen.mpg.de/search_form"
+          title="Search this site" />
+
+
+    
+
+    <!-- Disable IE6 image toolbar -->
+    <meta http-equiv="imagetoolbar" content="no" />
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+  </head>
+
+  <body class="section-raetsch template-document_view"
+        dir="ltr">
+    <div id="visual-portal-wrapper">
+
+      <a href="http://tuebingen.mpg.de">
+        <div id="logo_max_planck">
+        </div>
+      </a>
+
+      <div id="portal-top">
+        <div id="portal-header">
+<p class="hiddenStructure">
+  <a accesskey="2"
+     href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/kirmes/#documentContent">Skip to content.</a> |
+
+  <a accesskey="6"
+     href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/kirmes/#portlet-navigation-tree">Skip to navigation</a>
+</p>
+
+<ul id="portal-siteactions">
+
+    <li id="siteaction-sitemap"><a
+    href="http://www.fml.tuebingen.mpg.de/sitemap"
+    accesskey="3" title="Site Map">Site Map</a></li>
+    <li id="siteaction-accessibility"><a
+    href="http://www.fml.tuebingen.mpg.de/accessibility-info"
+    accesskey="0" title="Accessibility">Accessibility</a></li>
+    <li id="siteaction-contact"><a
+    href="http://www.fml.tuebingen.mpg.de/contact-info"
+    accesskey="9" title="Contact">Contact</a></li>
+
+</ul>
+
+<div id="portal-searchbox">
+    <form name="searchform"
+          action="http://www.fml.tuebingen.mpg.de/search">
+
+        <label for="searchGadget" class="hiddenStructure">Search Site</label>
+
+        <div class="LSBox">
+        <input name="SearchableText" type="text" size="18"
+               title="Search Site" accesskey="4"
+               class="inputLabel" id="searchGadget" />
+
+        <input class="searchButton" type="submit"
+               value="Search" />
+    
+        <div class="searchSection">
+            <input id="searchbox_currentfolder_only"
+                   class="noborder" type="checkbox"
+                   name="path"
+                   value="/fml-migrated/raetsch/suppl/kirmes" />
+            <label for="searchbox_currentfolder_only"
+                   style="cursor: pointer">
+                only in current section
+            </label>
+        </div>
+
+        <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
+        </div>
+    </form>
+
+    <div id="portal-advanced-search" class="hiddenStructure">
+        <a href="http://www.fml.tuebingen.mpg.de/search_form"
+           accesskey="5">
+            Advanced Search&hellip;
+        </a>
+    </div>
+
+</div>
+
+<a id="portal-logo" accesskey="1"
+   href="http://www.fml.tuebingen.mpg.de">
+    <img src="http://www.fml.tuebingen.mpg.de/logo.jpg" alt="" title="logo.jpg" height="150" width="434" /></a>
+
+
+    <h5 class="hiddenStructure">Sections</h5>
+
+    <ul id="portal-globalnav">
+        <li id="portaltab-fml" class="plain">
+            <a href="http://www.fml.tuebingen.mpg.de/fml"
+               title="">FML</a></li>
+        <li id="portaltab-antonin" class="plain">
+            <a href="http://www.fml.tuebingen.mpg.de/antonin"
+               title="">Group Antonin</a></li>
+        <li id="portaltab-hauf" class="plain">
+            <a href="http://www.fml.tuebingen.mpg.de/hauf"
+               title="">Group Hauf</a></li>
+        <li id="portaltab-ivanov" class="plain">
+            <a href="http://www.fml.tuebingen.mpg.de/ivanov"
+               title="">Group Ivanov</a></li>
+        <li id="portaltab-raetsch" class="selected">
+            <a href="http://www.fml.tuebingen.mpg.de/raetsch"
+               title="">Group Rätsch</a></li>
+    </ul>
+
+</div>
+
+<div id="portal-personaltools-wrapper">
+
+<h5 class="hiddenStructure">Personal tools</h5>
+
+<ul id="portal-personaltools" class="visualInline">
+   
+
+    
+        <li>
+            <a href="http://www.fml.tuebingen.mpg.de/login_form">Log in</a>
+        </li>
+    
+
+</ul>
+</div>
+
+
+    
+
+<div id="portal-breadcrumbs">
+
+    <span id="breadcrumbs-you-are-here">You
+are here:</span>
+    <a href="http://www.fml.tuebingen.mpg.de">Home</a>
+    <span class="breadcrumbSeparator">
+        &rarr;
+        
+    </span>
+    <span dir="ltr">
+        
+            <a href="http://www.fml.tuebingen.mpg.de/raetsch">Group Rätsch</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl">Supplements</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            
+            
+            <span>KIRMES: Kernel-based Identification of Regulatory Modules in Euchromatic Sequences</span>
+         
+    </span>
+
+</div>
+
+      </div>
+
+      <div class="visualClear" id="clear-space-before-wrapper-table"><!-- --></div>
+
+      <table id="portal-columns">
+        <tbody>
+          <tr>
+            
+            <td id="portal-column-one">
+              <div class="visualPadding">
+                
+                  
+<div id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f666d6c2d6d696772617465640a6e617669676174696f6e"
+     class="portletWrapper kssattr-portlethash-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f666d6c2d6d696772617465640a6e617669676174696f6e">
+<dl class="portlet portletNavigationTree">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/sitemap"
+           class="tile">Navigation</a>
+       
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem lastItem">
+        <ul class="portletNavigationTree navTreeLevel0">
+            
+            
+
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/News"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            What's New?
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/members"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="FSDFacultyStaffDirectory" />
+            People
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/research"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Research Topics
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/publications"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Publications
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeItemInPath">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Supplements
+        </a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel1">  
+        
+
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/arts"
+           class="state-published"
+           title="Supplementary material for the paper &quot;ARTS: accurate recognition of transcription starts in human&quot; by S. Sonnenburg, A. Zien, and G. Raetsch (Bioinformatics doi:10.1093/bioinformatics/btl250)
+
+
+Errata  * There is a typo in the definition of the positive predictive value. It should be PPV=TP/(FP+TP)">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            ARTS: Accurate Recognition of Transcription Starts in Human
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/RASE"
+           class="state-published"
+           title="Supplementary material for the paper &quot;RASE: recognition of alternatively spliced exons in C. elegans&quot; by G. Rätsch, S. Sonnenburg and B. Schölkopf (Bioinformatics doi:10.1093/bioinformatics/bti1053)
+">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            RASE: Recognition of alternatively Spliced Exons
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/LargeScaleSVMs_ICML2005"
+           class="state-published"
+           title="Supplementary material for the paper &quot;Large Scale Genomic Sequence SVM Classifiers&quot; by S. Sonnenburg, G. Rätsch and B. Schölkopf (ICML 2005)">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Large Scale Genomic Sequence SVM Classifiers
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/lsmkl"
+           class="state-published"
+           title="Supplementary material for the paper &quot;Large Scale Multiple Kernel Learning&quot; by S. Sonnenburg, G. Rätsch, C. Schäfer, B. Schölkopf (JMLR 7:1531-1565, 2006)">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Large Scale Multiple Kernel Learning
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/HSMSVM"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Large scale Hidden Semi-Markov SVMs
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/mgene"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            mGene: A Novel Discriminative Gene Finding System
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/protsubloc"
+           class="state-published"
+           title="sequence motif kernel, multiclass multiple kernel learning.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            An automated combination of kernels for protein subcellular localization
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/mppr"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Margin-based Prediction of Polymorphic Regions
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/mkl_silp"
+           class="state-published"
+           title="Supplementary Webpage for our NIPS*05 submission &quot;A General and Efficient Multiple Kernel Learning Algorithm&quot; by Sören Sonnenburg, Gunnar Rätsch and Christin Schäfer.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            A General and Efficient Multiple Kernel Learning Algorithm
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/AnuSplice"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            New Methods for Splice Site Recognition
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/MITBookSplice"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Accurate Splice Site Detection in C. elegans
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/splice"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Accurate Splice Site Detection (Supplementary Material)
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/shogun"
+           class="state-published"
+           title="Shogun, a kernel based machine learning toolbox including multiple kernel learning and many sequence kernels.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Shogun
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/mkl_splice"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Learning Interpretable SVMs for biological Sequence Analysis
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/palma"
+           class="state-published"
+           title="Supplementary material for the paper &quot;PALMA: mRNA to Genome Alignments using Large Margin Algorithms&quot; by Uta Schulze, Bettina Hepp, Cheng Soon Ong and Gunnar Rätsch (Bioinformatics 2007 23(15):1892-1900; doi:10.1093/bioinformatics/btm275)">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            PALMA: mRNA to Genome Alignments using Large Margin Algorithms
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/boostrapping-altsplice-annotation"
+           class="state-published"
+           title="First using homology and cross species alternative splicing prediction, then using active learning.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Bootstrapping the Alternative Splicing Annotation of Newly Sequenced Genomes
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/msplicer"
+           class="state-published"
+           title="under construction">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            mSplicer
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/PSBTiling"
+           class="state-published"
+           title="Supplementary Website for our paper on &quot;Transcript Normalization and Segmentation of Tiling Array Data&quot; presented at the Pacific Symposium on Biocomputing 2008.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Transcript Normalization and Segmentation of Tiling Array Data
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/POIM"
+           class="state-published"
+           title="Positional Oligomer Importance Matrices">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            POIM
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/qpalma"
+           class="state-published"
+           title="Supplementary material for the submission &quot;Optimal Spliced Alignments of Short Sequence Reads&quot; by De Bona, F. et al. (ECCB08/Bioinformatics, 24 (16):i174, 2008)">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Optimal Spliced Alignments of Short Sequence Reads
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/easysvm"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Easysvm
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/rna-secondary-structure-prediction-using-large"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            RNA Secondary Structure Prediction using Large Margin Methods
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeCurrentNode">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/kirmes"
+           class="state-published navTreeCurrentItem"
+           title="KIRMES: Kernel-based Identification of Regulatory Modules in Euchromatic Sequences">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            KIRMES: Kernel-based Identification of Regulatory Modules in Euchromatic Sequences
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/svmcompbio"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Tutorial on Support Vector Machines and Kernels for Computational Biology
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/genomedomainadaptation"
+           class="state-published" title=" ">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            An Empirical Analysis of Domain Adaptation Algorithms for Genomic Sequence Analysis
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/rquant"
+           class="state-published"
+           title="High-throughput sequencing technologies open exciting new approaches to transcriptome profiling. For the important task of inferring transcript abundances from RNA-seq data, we developed a new technique, called rQuant, based on quadratic programming. Our method estimates biases introduced by experimental settings and is thus a powerful tool to reveal and quantify novel (alternative) transcripts.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            rQuant: Quantitative Detection of Alternative Transcripts with RNA-Seq Data
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/palmapper"
+           class="state-published"
+           title="Supplementary material for the submission &quot;PALMapper: Fast and Accurate Spliced Alignments of Sequence Read&quot;">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            PALMapper: Fast and Accurate Spliced Alignments of Sequence Read
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/srm-eval"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            srm-eval
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/mtim"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            mTIM - Accurate Read Coverage Segmentation
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/rdiff"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            rdiff
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/long-term-availability-of-bioinformatics-web"
+           class="state-published" title="Web Service Study">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Long-term availability of bioinformatics web services
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/hmsvmtoolbox"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            hmsvmtoolbox
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/oqtans"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Online Quantitative Transcriptome Analysis
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/aask"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Amino Acid String Kernels
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/coffin"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            coffin
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/software"
+           class="state-published"
+           title="A list of available software packages.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Software
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/services"
+           class="state-published"
+           title="A list of services provided by the group.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Services
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/lectures"
+           class="state-published"
+           title="Folder for lectures and talks">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Talks &amp; Lectures
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/workshops"
+           class="state-published" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Workshops
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+        
+        <a href="http://www.fml.tuebingen.mpg.de/raetsch/contact-1"
+           class="state-published"
+           title="Contact Information">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/folder_icon.gif" alt="Folder" />
+            Contact
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+        </ul>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+
+</div>
+
+
+<div class="managePortletsLink">
+  
+</div>
+
+                
+                &nbsp;
+              </div>
+            </td>
+            
+
+            
+            <td id="portal-column-content">
+
+              
+                <div class="">
+
+                  
+
+
+                  <div id="region-content" class="documentContent">
+
+                    <span id="contentTopLeft"></span>
+                    <span id="contentTopRight"></span>
+                    
+                    <a name="documentContent"></a>
+
+                    
+
+    <dl class="portalMessage info" id="kssPortalMessage" style="display:none">
+        <dt>Info</dt>
+        <dd></dd>
+    </dl>
+
+
+                    
+                    <div id="viewlet-above-content"></div>
+
+                    
+                    
+                    <div id="content">
+                      
+                      
+    
+
+        
+
+        <h1 class="documentFirstHeading"> 
+            
+        <span class="" id="parent-fieldname-title">
+            KIRMES: Kernel-based Identification of Regulatory Modules in Euchromatic Sequences
+        </span>
+    
+        </h1>
+
+        
+
+
+
+        <p class="documentDescription">
+            
+        <span class="" id="parent-fieldname-description">
+            We propose a new algorithm that combines the benefits of existing motif finding with the ones of Support Vector Machines (SVMs) to find degenerate motifs in order to improve the modeling of regulatory modules. In experiments on microarray data from Arabidopsis thaliana we were able to show that the newly developed strategy significantly improves the recognition of transcription factor targets. 
+        </span>
+    
+        </p>
+
+        
+
+
+
+        
+
+        
+        <div class="" id="parent-fieldname-text">
+            <p>This is the companion website for the paper &quot;<a class="reference" href="/raetsch/members/raetsch/bibliography/SBLKR2008">Kernel-based Identification of Regulatory Modules in Euchromatic Sequences</a>&quot; by <a class="reference" href="raetsch/members/sebi">Sebastian J. Schultheiss</a>, Wolfgang Busch, <a class="reference" href="http://www.weigelworld.org/Members/jlohmann">Jan Lohmann</a>, <a class="reference" href="http://www-bs.informatik.uni-tuebingen.de/Members/oliver/contact">Oliver Kohlbacher</a>, and <a class="reference" href="/~raetsch">Gunnar Rätsch</a>.</p>
+<p><strong>Abstract:</strong></p>
+<p><em>Motivation:</em> Understanding transcriptional regulation is one of the main challenges
+in computational biology. An important problem is the identification of transcription
+factor binding sites in promoter regions of potential transcription factor target genes.
+It is typically approached by position weight matrix-based motif identification algorithms
+using Gibbs sampling or heuristics for extending seed oligos. Such algorithms
+succeed in identifying single, relatively well conserved binding sites, but tend to fail
+when it comes to the identification of combinations of several degenerate binding sites
+as those often found in cis-regulatory modules.</p>
+<p><em>Results:</em> We propose a new algorithm that combines the benefits of existing motif
+finding with the ones of Support Vector Machines (SVMs) to find degenerate motifs in
+order to improve the modeling of regulatory modules. In experiments on microarray
+data from Arabidopsis thaliana we were able to show that the newly developed strategy
+significantly improves the recognition of transcription factor targets.</p>
+<p>The pdf file of the published GCB 2008 proceedings paper can be found <a class="reference" href="gcb08-regulatory-motifs.pdf">here</a>.</p>
+<p><strong>Supplementary material:</strong></p>
+<ul>
+<li><p class="first"><a class="reference" href="gcb08-kirmes-appendix.pdf">Appendix to the GCB paper</a> explaining the conservation information and the microarray experiments</p>
+</li>
+<li><p class="first"><a class="reference" href="supplementary-ojb.pdf">Supplementary material</a> to the <em>Bioinformatics</em> submission</p>
+</li>
+<li><p class="first"><a class="reference" href="KIRMES.pdf">Slides</a> to the talk given at the <a class="reference" href="http://www.gcb2008.de">German Conference on Bioinformatics 2008</a> in Dresden, Germany on September 10, 2008.</p>
+</li>
+<li><p class="first">Links to the microarray experiments we used as described in the paper. The experiments were uploaded to the <a class="reference" href="http://www.ebi.ac.uk/arrayexpress">EBI ArrayExpress</a> repository:</p>
+<blockquote>
+<ul class="simple">
+<li><a class="reference" href="http://www.ebi.ac.uk/microarray-as/ae/browse.html?keywords=E-MEXP-98">E-MEXP-98</a>: Transcription profiling of heat stress response in <cite>Arabidopsis</cite> wild type and hsf1x3 double knockout</li>
+<li><a class="reference" href="http://www.ebi.ac.uk/microarray-as/ae/browse.html?keywords=E-MEXP-432">E-MEXP-432</a>:  Transcription profiling of inducible overexpression of <cite>Arabidopsis</cite> meristem regulators by AlcR/AlcA system in continuous light</li>
+</ul>
+</blockquote>
+</li>
+<li><p class="first"><a class="reference" href="yeast-chip-fastas.zip/view">Yeast ChIP-on-chip FASTAs</a> used in the comparison to the PRIORITY Gibbs sampler (positives and negatives) as obtained from the extensive study by Harbison et al., thanks to Raluca Gordân</p>
+</li>
+<li><p class="first"><a class="reference" href="a.thaliana-geneset-FASTAs.zip/view">FASTA files</a> for the Arabidopsis thaliana microarray experiments from the paper</p>
+</li>
+<li><p class="first">Complete Python source code: <a class="reference" href="kirmes-source-code">Installation instructions are here</a>, the program is available for download <a class="reference" href="KIRMES-0.8.0.tar.gz">here</a> in a newer version: Galaxy compatibility and shogun-0.10.0 compatibility.</p>
+</li>
+<li><p class="first">Web service with KIRMES' functionality is being integrated into FML's <a class="reference" href="http://galaxy.fml.tuebingen.mpg.de">Galaxy</a> instance is available.</p>
+</li>
+</ul>
+
+            
+        </div>
+    
+
+        <div class="relatedItems">
+    
+        
+            
+        
+    
+</div>
+    
+        <div class="visualClear"><!-- --></div>
+<div class="documentActions">
+    
+
+    <h5 class="hiddenStructure">Document Actions</h5>
+
+    <ul>
+    
+        <li id="document-action-sendto">
+            <a href="http://www.fml.tuebingen.mpg.de/raetsch/suppl/kirmes/kirmes-kernel-based-identification-of-regulatory/sendto_form"
+               title="">Send this</a>
+        </li>
+    
+    
+        <li id="document-action-print">
+            <a href="javascript:this.print();" title="">Print this</a>
+        </li>
+    
+
+    </ul>
+    
+
+    
+
+</div>
+
+<div class="reviewHistory" id="review-history">
+    
+</div>
+
+
+    
+
+                    </div>
+                    
+
+                    
+                    
+                      
+    
+
+
+                    
+                    
+
+                    <span id="contentBottomLeft"></span>
+                    <span id="contentBottomRight"></span>
+
+                  </div>
+
+                </div>
+
+              
+            </td>
+            
+
+            
+            <td id="portal-column-two">
+              <div class="visualPadding">
+                
+                  
+<div id="portletwrapper-706c6f6e652e7269676874636f6c756d6e0a636f6e746578740a2f666d6c2d6d696772617465642f726165747363680a41737369676e6d656e74"
+     class="portletWrapper kssattr-portlethash-706c6f6e652e7269676874636f6c756d6e0a636f6e746578740a2f666d6c2d6d696772617465642f726165747363680a41737369676e6d656e74"><dl class="portlet portletNews">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="http://www.fml.tuebingen.mpg.de/news"
+           class="tile">News</a>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    
+    <dd class="portletItem odd">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/tutorial-paper-about-how-to-use-palmapper-was"
+           class="tile"
+           title="A tutorial paper &quot;RNA-Seq Read Alignments with PALMapper&quot; by Geraldine Jean, Andre Kahles, Vipin T. Sreedharan, Fabio De Bona and Gunnar Raetsch  was published in Current Protocols in Bioinformatics. ">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            Tutorial paper  about how to use PALMapper was published in Current Protocols in Bioinformatics
+            <span class="portletItemDetails">Dec 20, 2010</span>
+        </a>
+    </dd>
+    
+    
+    <dd class="portletItem even">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/rquant-release"
+           class="tile"
+           title="We released the source code of rQuant, a tool for transcript quantitation from RNA-seq experiments.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            RNA-seq quantitation program rQuant source code release
+            <span class="portletItemDetails">Dec 16, 2010</span>
+        </a>
+    </dd>
+    
+    
+    <dd class="portletItem odd">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/elisabeth-georgiis-defense-on-dec-15-2010"
+           class="tile"
+           title="Elisabeth Georgii will defend her doctoral thesis on Dec 15, 2010 at the Eberhard-Karls-Universität Tübingen.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            Elisabeth Georgii's defense on Dec 15, 2010
+            <span class="portletItemDetails">Dec 01, 2010</span>
+        </a>
+    </dd>
+    
+    
+    <dd class="portletItem even">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/gabriele-schweikert-received-her-doctoral-degree"
+           class="tile"
+           title="Gabriele Schweikert received her doctoral degree (Dr. rer. nat.) with summa cum laude from the Technische Universität Berlin.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            Gabriele Schweikert received her doctoral degree 
+            <span class="portletItemDetails">Nov 24, 2010</span>
+        </a>
+    </dd>
+    
+    
+    <dd class="portletItem odd">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/presentations-about-shogun-have-been-accepted-at"
+           class="tile"
+           title="Oral presentations about the shogun machine learning toolbox have bee accepted for publications at several conferences.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            Presentations about Shogun have been accepted at SciPy, EuroPython and useR!
+            <span class="portletItemDetails">May 27, 2010</span>
+        </a>
+    </dd>
+    
+    
+    <dd class="portletItem even">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/Paper-about-a-faster-way-to-train-sequence"
+           class="tile"
+           title="The paper &quot;COFFIN : A Computational Framework for Linear SVMs&quot; by Sören Sonnenburg and Vojtech Franc has been accepted for publication at ICML'2010.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            Paper about a faster way to train sequence classifiers has been accepted for presentation at ICML 2010.
+            <span class="portletItemDetails">May 27, 2010</span>
+        </a>
+    </dd>
+    
+    
+    <dd class="portletItem odd">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/paper-on-the-shogun-machine-learning-toolbox"
+           class="tile"
+           title="A paper entitled &quot;The SHOGUN Machine Learning Toolbo&quot; by Sören Sonnenburg, Gunnar Rätsch, Sebastian Henschel, Christian Widmer, Jonas Behr, Alexander Zien, Fabio de Bona, Alexander Binder, Christian Gehl, and Vojtech Franc was accepted for publication in the MLOSS section of Journal of Machine Learning Research.">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            Paper on the SHOGUN Machine Learning Toolbox published in Journal of Machine Learning Research
+            <span class="portletItemDetails">May 27, 2010</span>
+        </a>
+    </dd>
+    
+    
+    <dd class="portletItem even">
+
+        <a href="http://www.fml.tuebingen.mpg.de/news/web-based-transcript-quantitation-system"
+           class="tile" title="">
+            <img width="16" height="16" src="http://www.fml.tuebingen.mpg.de/newsitem_icon.gif" alt="News Item" />
+            Web-based Transcript Quantitation System rQuant.web available
+            <span class="portletItemDetails">May 07, 2010</span>
+        </a>
+    </dd>
+    
+
+    <dd class="portletFooter">
+        <a href="http://www.fml.tuebingen.mpg.de/news">
+          More news&hellip;
+        </a>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+</div>
+
+
+<div class="managePortletsLink">
+  
+</div>
+
+                
+                &nbsp;
+              </div>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+      
+
+      <div class="visualClear" id="clear-space-before-footer"><!-- --></div>
+      
+      
+
+      
+
+        <div id="portal-footer">
+
+<p>
+    
+Friedrich Miescher Laboratory of the <a href="http://www.mpg.de">Max Planck Society</a>,  Spemannstraße 39, 72076 Tübingen, Germany
+    
+</p>
+
+
+</div>
+
+<!-- phpmyvisites -->
+<a href="http://www.phpmyvisites.net/" title="Free web analytics, website statistics"
+onclick="window.open(this.href);return(false);"><script type="text/javascript">
+<!--
+var a_vars = Array();
+var pagename='';
+
+var phpmyvisitesSite = 4;
+var phpmyvisitesURL = "http://web1.tuebingen.mpg.de/phpmv2/phpmyvisites.php";
+//-->
+</script>
+<script language="javascript" src="http://web1.tuebingen.mpg.de/phpmv2/phpmyvisites.js" type="text/javascript"></script>
+<object><noscript><p>Free web analytics, website statistics
+<img src="http://web1.tuebingen.mpg.de/phpmv2/phpmyvisites.php" alt="Statistics" style="border:0" />
+</p></noscript></object></a>
+<!-- /phpmyvisites -->
+
+
+
+      
+
+      <div class="visualClear"><!-- --></div>
+    </div>
+<div id="kss-spinner"><img alt=""
+                           src="http://www.fml.tuebingen.mpg.de/spinner.gif" /></div>
+</body>
+</html>
+
+

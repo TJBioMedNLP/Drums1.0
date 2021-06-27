@@ -1,0 +1,297 @@
+
+
+
+
+
+
+
+<html>
+	<head>
+<script type="text/javascript"><!--
+/*djconfig init*/
+//--></script>
+<script type="text/javascript"><!--
+var djConfig = { 
+bindEncoding:'utf-8'
+}; 
+
+//--></script>
+<script type="text/javascript" src="/geneE/faces/myFacesExtensionResource/org.apache.myfaces.renderkit.html.util.MyFacesResourceLoader/12986246/dojo.DojoResourceLoader/dojo.js"><!--
+
+//--></script>
+<script type="text/javascript"><!--
+dojo.setModulePrefix('extensions', '../dojoextensions.ResourceLoader');
+//--></script>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=UTF-8" />
+  <title>GeneE gene query expansion</title>
+  <link rel="stylesheet" type="text/css" href="css/home.css" />
+  <link rel="shortcut icon" href="images/GeneE.ico" />
+  <link rel="bookmark" href="images/GeneE.ico" />
+  <script src="inc/javascript/common.js" type="text/javascript"></script>  
+</head>
+
+	<body>
+		
+			<form id="searchForm" name="searchForm" method="post" action="/geneE/search.jsf;jsessionid=D34E2D12064352F04C2ECFA19301FA63" enctype="application/x-www-form-urlencoded">
+				
+					<br />
+					<br />
+				
+
+				
+
+				<center>
+					<img src="images/GeneE.gif" />
+					<br>
+					<br>
+					<br>
+					<table width="950">
+						<tr>
+							<td width="670" valign="top">
+								Select a search engine:
+								<br>
+								
+									
+									
+									
+								<table id="searchForm:searchEngine"><tr>		<td><label><input type="radio" name="searchForm:searchEngine" checked="checked" value="PubMed" />&#160;PubMed</label></td>		<td><label><input type="radio" name="searchForm:searchEngine" value="Google" />&#160;Google</label></td>		<td><label><input type="radio" name="searchForm:searchEngine" value="Jane" />&#160;Jane</label></td></tr></table>
+								<br>
+								Enter a gene or protein name (optionally followed by other query terms):
+								<br>
+								<link type="text/css" rel="stylesheet" href="/geneE/static/META-INF/autocomplete/styles.css.jsf" />
+<script type="text/javascript" src="/geneE/static/META-INF/common/script.js.jsf"><!--
+
+//--></script>
+<script type="text/javascript"><!--
+
+if (typeof dojo == 'undefined') {
+    bpui.load("/geneE/static/META-INF/dojo/dojo.js.jsf");
+}
+
+//--></script>
+<script type="text/javascript" src="/geneE/static/META-INF/autocomplete/script.js.jsf"><!--
+
+//--></script>
+<script type="text/javascript"><!--
+
+bpui.autocomplete.messages["bindError"] = "An error occurred performing an asynchronous request";
+
+//--></script>
+<div id="searchForm:inputSuggestAjax_menu" style="position: absolute; top:170px;left:140px;visibility:hidden" class="popupFrame"></div>
+<input id="searchForm:inputSuggestAjax" type="text" name="searchForm:inputSuggestAjax" value="" autocomplete="off" maxlength="100" size="90" onfocus="searchForm_inputSuggestAjax.start()" onkeyup="searchForm_inputSuggestAjax.again()" onblur="searchForm_inputSuggestAjax.stop()" />
+<script type="text/javascript"><!--
+
+var searchForm_inputSuggestAjax = new bpui.autocomplete.Component(dojo.byId('searchForm:inputSuggestAjax'), dojo.byId('searchForm:inputSuggestAjax_menu'), '#{searchAction.getSuggestGeneStringList}', '/geneE/dynamic/bpui_autocomplete_handler/completions.jsf', null, null);
+
+//--></script>
+
+								<br>									
+								<input type="checkbox" name="searchForm:_idJsp5" value="true" />Include organism name
+								<br>
+								<br>
+								<script type="text/javascript"><!--
+
+
+	function oamSetHiddenInput(formname, name, value)
+	{
+		var form = document.forms[formname];
+		if(typeof form.elements[name]=='undefined')
+		{
+			var newInput = document.createElement('input');
+			newInput.setAttribute('type','hidden');
+			newInput.setAttribute('id',name);
+			newInput.setAttribute('name',name);
+			newInput.setAttribute('value',value);
+			form.appendChild(newInput);
+		}
+		else
+		{
+			form.elements[name].value=value;
+		}
+		
+	}
+	
+	
+	function oamClearHiddenInput(formname, name, value)
+	{
+		var form = document.forms[formname];
+		if(typeof form.elements[name]!='undefined')
+		{
+			form.elements[name].value=null;
+		}
+		
+	}
+	
+	function oamSubmitForm(formName, linkId, target, params)
+	{
+		
+		var clearFn = 'clearFormHiddenParams_'+formName.replace(/-/g, '\$:').replace(/:/g,'_');
+		if(typeof eval('window.'+clearFn)!='undefined')
+		{
+			eval('window.'+clearFn+'(formName)');
+		}
+		
+		if(typeof window.getScrolling!='undefined')
+		{
+			oamSetHiddenInput(formName,'autoScroll',getScrolling());
+		}
+		
+		var oldTarget = '';
+		if((typeof target!='undefined') && target != null)
+		{
+			oldTarget=document.forms[formName].target;
+			document.forms[formName].target=target;
+		}
+		if((typeof params!='undefined') && params != null)
+		{
+			for(var i=0; i<params.length; i++)
+			{
+				oamSetHiddenInput(formName,params[i][0], params[i][1]);
+			}
+			
+		}
+		
+		oamSetHiddenInput(formName,formName +':'+'_idcl',linkId);
+		
+		if(document.forms[formName].onsubmit)
+		{
+			var result=document.forms[formName].onsubmit();
+			if((typeof result=='undefined')||result)
+			{
+				document.forms[formName].submit();
+			}
+			
+		}
+		else 
+		{
+			document.forms[formName].submit();
+		}
+		if(oldTarget==null) oldTarget='';
+		document.forms[formName].target=oldTarget;
+		if((typeof params!='undefined') && params != null)
+		{
+			for(var i=0; i<params.length; i++)
+			{
+				oamClearHiddenInput(formName,params[i][0], params[i][1]);
+			}
+			
+		}
+		
+		oamClearHiddenInput(formName,formName +':'+'_idcl',linkId);return false;
+	}
+	
+
+//--></script><input id="searchForm:_idJsp6" name="searchForm:_idJsp6" type="submit" value="GeneE Search" onclick="if(typeof window.clearFormHiddenParams_searchForm!='undefined'){clearFormHiddenParams_searchForm('searchForm');}if(typeof window.getScrolling!='undefined'){oamSetHiddenInput('searchForm','autoScroll',getScrolling());}" class="highButton" />
+<input type="hidden" name="autoScroll" />
+
+							</td>
+							<td>
+								<h2>
+									Welcome to GeneE
+								</h2>
+								<p align="justify">
+									GeneE can expand your gene query to include all known synonyms
+									to make sure you won't miss any documents. Highly ambiguous
+									synonyms are combined with gene-specific keywords. More
+									information about GeneE can be found
+									
+										
+									<a id="searchForm:_idJsp7" name="searchForm:_idJsp7" href="about.jsf;jsessionid=D34E2D12064352F04C2ECFA19301FA63">here</a>
+								</p>
+								<p align="justify">
+									Please type in the name of a gene. GeneE will list all genes
+									that are known by that name. Select a gene, and press
+									&quot;GeneE search&quot;.
+								</p>
+								<p align="justify">
+									If you want to change the generated query, click the
+									
+										
+									<a id="searchForm:_idJsp9" name="searchForm:_idJsp9" href="advanceSearch.jsf;jsessionid=D34E2D12064352F04C2ECFA19301FA63">Advance Search</a>
+								</p>
+
+
+
+							</td>
+						</tr>
+					</table>
+
+				</center>
+
+
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+
+				<!--  
+				
+					
+				<fieldset><legend>Your selected gene variation name list:</legend>
+<table id="searchForm:tbl_cars" class="scrollerTable">
+<thead>
+<tr><th class="standardTable_Header">Variation Name</th></tr></thead>
+<tbody id="searchForm:tbl_cars:tbody_element"><tr><td></td></tr></tbody></table>
+
+						<br />
+						<br />
+						
+					</fieldset>
+-->
+			<input type="hidden" name="searchForm_SUBMIT" value="1" /><input type="hidden" name="searchForm:_link_hidden_" /><input type="hidden" name="searchForm:_idcl" /><script type="text/javascript"><!--
+
+	function clear_searchForm()
+	{
+		clearFormHiddenParams_searchForm('searchForm');
+	}
+	
+	function clearFormHiddenParams_searchForm(currFormName)
+	{
+		var f = document.forms['searchForm'];
+		f.elements['searchForm:_link_hidden_'].value='';
+		f.elements['searchForm:_idcl'].value='';
+		f.target='';
+	}
+	
+	clearFormHiddenParams_searchForm();
+//--></script><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAN0AAExcHQACy9zZWFyY2guanNw" /></form>
+
+		
+		<br/>
+<br/>
+<center>
+Copyright 2009, <a href="http://www.biosemantics.org">The Biosemantics Group</a> .
+&nbsp;
+</center>
+
+	<!-- MYFACES JAVASCRIPT -->
+
+<script type="text/javascript"><!--
+
+	function getScrolling()
+	{
+		var x = 0; var y = 0;if (self.pageXOffset || self.pageYOffset)
+		{
+			x = self.pageXOffset;
+			y = self.pageYOffset;
+		}
+		 else if ((document.documentElement && document.documentElement.scrollLeft)||(document.documentElement && document.documentElement.scrollTop))
+		{
+			x = document.documentElement.scrollLeft;
+			y = document.documentElement.scrollTop;
+		}
+		 else if (document.body) 
+		{
+			x = document.body.scrollLeft;
+			y = document.body.scrollTop;
+		}
+		return x + "," + y;
+	}
+	
+//--></script>
+
+</body>
+</html>
+

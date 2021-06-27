@@ -1,0 +1,868 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>PlantGDB - Resources for Plant Comparative Genomics</title>
+	<link rel="StyleSheet" type="text/css" title="Default" href="/css/plantgdb.css" media="screen" />
+	<link rel="StyleSheet" type="text/css" href="/css/superfish.css" media="screen" />
+	<link rel="StyleSheet" type="text/css" href="/css/treeview.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/XGDB/javascripts/jquery/themes/base/ui.all.css" />
+	<link rel="Alternative StyleSheet" type="text/css" href="/css/plantgdb_print.css" media="print" />
+	<!--[if IE 6]>
+	<link rel="StyleSheet" type="text/css" href="/css/plantgdb_ie6.css" />
+	<![endif]-->
+		<script type="text/javascript" src="/javascript/jquery.js"></script>
+	<script src="/XGDB/javascripts/jquery/ui/ui.core.js" type="text/javascript"></script>
+	
+	<script src="/XGDB/javascripts/jquery/ui/ui.sortable.js" type="text/javascript"></script>
+	<script src="/XGDB/javascripts/jquery/ui/ui.draggable.js" type="text/javascript"></script>
+	<script src="/XGDB/javascripts/jquery/ui/ui.resizable.js" type="text/javascript"></script>
+	<script src="/XGDB/javascripts/jquery/ui/ui.dialog.js" type="text/javascript"></script>
+	<script src="/XGDB/javascripts/jquery/ui/effects.core.js" type="text/javascript"></script>
+	<script src="/XGDB/javascripts/jquery/ui/effects.highlight.js" type="text/javascript"></script>
+	<script src="/XGDB/javascripts/jquery/external/bgiframe/jquery.bgiframe.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="/javascript/jquery.tablesorter.js"></script>
+	<script type="text/javascript" src="/javascript/superfish.js"></script>
+	<script type="text/javascript" src="/javascript/hoverIntent.js"></script>
+	<script type="text/javascript" src="/javascript/jquery.accordion.js"></script>
+	<script type="text/javascript" src="/javascript/jquery.treeview.js"></script>
+	<script type="text/javascript" src="/javascript/jquery.treeview.cookie.js"></script>
+	<script type="text/javascript" src="/javascript/jquery.field.js"></script>	
+	<script type="text/javascript" src="/javascript/jquery.calculation.js"></script>
+	<script type="text/javascript" src="/javascript/default.js"></script>
+	<!--script type="text/javascript" src="/javascript/scripts.js"></script--> <!--autosuggest jquery. Testing 10-11-09. -->
+
+
+		<script type="text/javascript" src="/javascript/plantgdb_ga.js"></script>	<link rel="search" href="/search/plantgdb_id_search.xml" type="application/opensearchdescription+xml" title="PlantGDB ID" />
+	<link rel="search" href="/search/plantgdb_keyword_search.xml" type="application/opensearchdescription+xml" title="PlantGDB Keyword" />
+	<link rel="search" href="/search/plantgdb_site_search.xml" type="application/opensearchdescription+xml" title="PlantGDB Site Search" />
+</head>
+<body>
+<div id="outercontainer">
+	<div id="innercontainer">
+		<div id="logomenucontainer"><!-- Container w/ same background color as logo and pgdbmenu -->
+			<div id="headerwidth"><!-- This nested container allows FF2.0 to handle floated divs with % width -->
+				<a name="top"></a>
+				
+<div id="topleft">
+
+</div>
+				<div id="pgdblogo">
+					<a style="background:none" href= "/"><img id="PGDBbanner" alt="PlantGDB" src="/images/PGDBbanner.png" /></a>
+				</div>
+				<div id="topright">
+	<ul id="header">
+		<li><a href="/help/">Help</a></li>
+		<li id="feedback"><a href="/utility/feedback.php">Feedback</a></li>
+		<li id="mailing_list" class="last"><a href="/admin/signup.php">Subscribe</a></li>
+	</ul>
+	<form name="quickSearch" style="margin-left:50px" action="/search/query/TextSearch.php" method="get">
+		<ul>
+			<li>
+				<select name="searchType">
+					<option value="google" title="Search PlantGDB using Google">PlantGDB Site Search</option>
+					<option value="id" title="Search PlantGDB by Sequence ID">Sequence ID</option>
+					<option value="anno" title="Search PlantGDB by Sequence Keyword">Sequence Keyword</option>
+				</select>
+			</li>
+			<li>
+				<input style="color:#AAA" type="text" name="searchString" size="11" value="Search" onfocus="this.value=''"/>
+					<!--img id='search_help' title='Search Help' class='help-button' src="/images/help-icon.png" style="display: inline" />
+					<span id='help_dialog'><h2--><!-- The help system is currently unavailable. Please try again later!--><!--/h2></span-->
+				<input type="submit" value="Search"/>
+			</li>
+		</ul>
+	</form>
+</div>
+<!-- Menu uses the jquery superfish.js plugin. Styling in superfish.css -->
+
+<div id="menuwidth"><!-- Modifying this menu? Sync it with our other menus. See the notes in /phplib/pgdbmenu.inc.php (reference copy). - Dan Rasmussen, 2009-07-14. -->
+	<div id="pgdbmenu">
+		<ul class="sf-menu">
+			<li><a style="text-align:center" class="current" href="/">Home</a></li>
+			<li><a style="text-align:center" href="/search/misc/">Sequence</a>
+				<ul>
+					<li class="overview"><a href="/search/misc/">-Overview -</a></li>
+					<li class="overview"><a href="/download/download.php/">Download</a></li>
+					<li><a href="/search/">Search</a>
+						<ul style="width:17em">
+							<li><a href="/search/">-Overview-</a></li>
+							<li><a href="/search/misc/PublicPlantSeq.php">Select Species...</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Arabidopsis thaliana" class="species">Arabidopsis thaliana</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Brassica napus" class="species">Brassica napus</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Brassica oleracea" class="species">Brassica oleracea</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Glycine max" class="species">Glycine max</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Gossypium hirsutum" class="species">Gossypium hirsutum</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Hordeum vulgare" class="species">Hordeum vulgare</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Medicago truncatula" class="species">Medicago truncatula</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Oryza sativa" class="species">Oryza sativa</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Physcomitrella patens" class="species">Physcomitrella patens</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Sorghum bicolor" class="species">Sorghum bicolor</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Triticum aestivum" class="species">Triticum aestivum</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Vitis vinifera" class="species">Vitis vinifera</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Zea mays" class="species">Zea mays</a></li>
+												</ul>
+					</li>
+					<li><a href="/prj/ESTCluster/">EST Assemb</a>
+						<ul style="width:15em">
+							<li class="overview"><a  href="/prj/ESTCluster/">-Overview -</a></li>
+							<li><a href="/prj/ESTCluster/progress.php">Select Species...</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Arabidopsis_thaliana" class="species">Arabidopsis thaliana</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Brassica_napus" class="species">Brassica napus</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Brassica_oleracea" class="species">Brassica oleracea</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Glycine_max" class="species">Glycine max</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Gossypium_hirsutum" class="species">Gossypium hirsutum</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Hordeum_vulgare" class="species">Hordeum vulgare</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Medicago_truncatula" class="species">Medicago truncatula</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Oryza_sativa" class="species">Oryza sativa</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Physcomitrella_patens" class="species">Physcomitrella patens</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Sorghum_bicolor" class="species">Sorghum bicolor</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Triticum_aestivum" class="species">Triticum aestivum</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Vitis_vinifera" class="species">Vitis vinifera</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Zea_mays" class="species">Zea mays</a></li>
+						</ul>
+					</li>
+					<li><a title="GSS Assembly" href="/prj/GSSAssembly/">GSS Assemb</a></li>
+					<li><a href="ftp://ftp.plantgdb.org/">FTP Server</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/prj/GenomeBrowser/">Genomes</a>
+				<ul style="width:21em">
+					<li class="overview"><a href="/prj/GenomeBrowser/">-Overview-</a></li>
+					<li><a href="/yrGATE/">-Community Annotation-</a></li>
+					<li><a href="/prj/GenomeBrowser/das.php?ref=Genomes">-DAS Services-</a></li>
+				<li><a href="/AtGDB/">AtGDB<i> - Arabidopsis thaliana</i></a></li><li><a href="/BdGDB/">BdGDB<i> - Brachypodium distachyon</i></a></li><li><a href="/BrGDB/">BrGDB<i> - Brassica rapa</i></a></li><li><a href="/CpGDB/">CpGDB<i> - Carica papaya</i></a></li><li><a href="/GhGDB/">GhGDB<i> - Gossypium hirsutum</i></a></li><li><a href="/GmGDB/">GmGDB<i> - Glycine max</i></a></li><li><a href="/HvGDB/">HvGDB<i> - Hordeum vulgare</i></a></li><li><a href="/LjGDB/">LjGDB<i> - Lotus japonicus</i></a></li><li><a href="/MtGDB/">MtGDB<i> - Medicago truncatula</i></a></li><li><a href="/OsGDB/">OsGDB<i> - Oryza sativa</i></a></li><li><a href="/PpGDB/">PpGDB<i> - Physcomitrella patens</i></a></li><li><a href="/PtGDB/">PtGDB<i> - Populus trichocarpa</i></a></li><li><a href="/SbGDB/">SbGDB<i> - Sorghum bicolor</i></a></li><li><a href="/SlGDB/">SlGDB<i> - Solanum lycopersicum</i></a></li><li><a href="/TaGDB/">TaGDB<i> - Triticum aestivum</i></a></li><li><a href="/VvGDB/">VvGDB<i> - Vitis vinifera</i></a></li><li><a href="/ZmGDB/">ZmGDB<i> - Zea mays</i></a></li></ul>
+			</li>
+			<li><a style="text-align:center" href="/tool/">Tools</a>
+				<ul>
+					<li class="overview"><a href="/tool/">-Overview-</a></li>
+					<li><a href="http://www.bioextract.org/query/index.jsp">BioExtract</a></li>
+					<li><a href="/cgi-bin/blast/PlantGDBblast">BLAST</a></li>
+					<li><a href="/prj/GenomeBrowser/das.php?ref=Tools">DAS</a></li>
+					<li><a href="/cgi-bin/GeneSeqer/index.cgi">GeneSeqer</a></li>
+					<li><a href="/cgi-bin/GenomeThreader/gth.cgi">GenomeThreader</a></li>
+					<li><a href="/MuSeqBox/MuSeqBox.php">MuSeqBox</a></li>
+					<li><a href="/cgi-bin/vmatch/patternsearch.pl">PatternSearch</a></li>
+					<li><a href="/cgi-bin/prj/PLEXdb/ProbeMatch.pl">ProbeMatch</a></li>
+					<li><a href="http://www.bioextract.org/genbank/home/index.jsp">TableMaker</a></li>
+					<li><a href="/tool/TE_nest/">TE nest</a></li>
+					<li><a href="/tool/tracembler/">Tracembler</a></li>
+					<li><a href="/prj/yrGATE/">yrGATE</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/prj/">Datasets</a>
+				<ul>
+					<li class="overview"><a href="/prj/">- Overview -</a></li>
+					<li><a href="/prj/AcDsTagging/">Ac/Ds maize</a>
+					<ul style="width:12em">
+						<li><a href="/prj/AcDsTagging/">Overview</a></li>
+						<li><a href="/prj/AcDsTagging/records.php">Browse Insertions</a></li>
+						<!--li><a href="/prj/AcDsTagging/lookup.php">Search</a></li-->
+						<!--li><a href="/prj/AcDsTagging/ipcr_view.php">IPCR</a></li-->
+						<!--li><a href="/prj/AcDsTagging/sequence_view.php">Sequence</a></li-->
+						<!--li><a href="/prj/AcDsTagging/placement_view.php">Placement</a></li-->
+						<!--li><a href="/prj/AcDsTagging/help.php">Help</a></li-->
+					</ul>
+					</li>
+					<li><a href="/ASIP/">ASIP</a></li>
+					<li><a href="/prj/PLEXdb/">PLEXdb</a></li>
+					<li><a href="/prj/RescueMuTagging/">RescueMu</a></li>
+					<li><a href="/prj/RFLP_FLIS/">RFLP/FLIS</a></li>
+					<li><a href="/SRGD/">SRGD</a></li>
+					<li><a href="/prj/UniformMuTagging/">UniformMu</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/PGROP/pgrop.php">Outreach</a>
+				<ul style="width:23em">
+					<li class="overview"><a href="/PGROP/pgrop.php">Plant Genome Outreach Portal (PGROP)</a></li>
+					<li><a href="http://www.lawrencelab.org/Outreach/">Outreach to Native Americans</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/help/">Help</a>
+				<ul>
+					<li><a href="/help/">Help</a>
+						<ul style="width:15em">
+							<li><a href="/help/anno.php">Community Annotation</a></li>
+							<li><a href="/help/xgdb.php">Genome Browsers</a></li>
+							<li><a href="/help/tblmk.php">TableMaker</a></li>
+						</ul>
+					</li>
+					<li><a href="/help/">Tutorials</a>
+						<ul style="width:15em">
+							<li><a href="/tutorial/annotatemodule/">Annotation Tutorial</a></li>
+							<li><a href="/tutorial/annotatelesson/">Annotation Lessons</a></li>
+							<li><a href="/tutorial/geneseqer.php">GeneSeqer Tutorial</a></li>
+
+						</ul>
+					</li>
+					<li><a href="/site/">About Us</a></li>
+					<li><a href="/site/news.php">News</a></li>
+					<li><a title="A brief tour through PlantGDB's resources" href="/site/tour.php">Tour</a></li>
+					<li><a href="/site/faq.php">F.A.Q.</a></li>
+					<li><a href="/site/sitemap.php">Site Map</a></li>
+					<li><a href="/site/publications.php">Publications</a></li>
+					<li><a href="/site/links.php">Links</a></li>
+					<li><a href="/site/acknowledgments.php">Acknowledgments</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div><!-- end of menuwidth div -->
+<!-- Modifying this menu? Sync it with our other footer menus. See the notes in /phplib/pgdbmenu.inc.php (reference copy). - Dan Rasmussen, 2009-07-14. -->
+			</div><!--end headerwidth-->
+		</div><!--end logomenucontainer-->
+		<div id="pagewidth"><!-- This nested container allows FF2.0 to handle floated divs with % width -->
+		<div id="topshadow">
+			
+		</div>
+	<div id="leftcolumncontainer">
+		<div class="minicolumnleft">
+	<h2>PlantGDB</h2>
+	<ul class="leftmenu">
+		<li class="first"><a  id="current" title="Home Page" href="/">Home</a></li>
+	</ul>
+	<h2 class="topmargin1">Sequence</h2>
+	<ul class="leftmenu">
+	    <li class="first"><a title="Download Options" href="/download/download.php">Download</a></li>
+		<li><a title="Access PlantGDB Sequences" href="/search/">Search</a></li>
+		<li><a title="EST Assemblies" href="/prj/ESTCluster/">EST Assemblies</a></li>
+		<li><a title="PlantGDB FTP site" href="ftp://ftp.plantgdb.org/">FTP Server</a></li>
+		<li><a class="italic" title="Overview of Sequence Resources" href="/search/misc/">More...</a></li>
+	</ul>
+	
+	<h2 class="topmargin1">Genomes</h2>
+	<ul class="leftmenu">
+		<li class="first"><a title="Overview of Genome Browsers"  href="/prj/GenomeBrowser/">Genome Browsers</a></li>
+		<li><a title="Tools for Community Annotation of Gene Structure" href="/yrGATE/">Annotation</a></li>
+	</ul>
+
+	<h2 class="topmargin1">Tools</h2>
+	<ul class="leftmenu">
+		<li class="first"><a title="Online service for creating and customizing bioinformatics workflows" href="http://www.bioextract.org/query/index.jsp">BioExtract</a></li>
+		<li><a title="NCBI-BLAST service with flexible, species-parsed plant databases and batch query capabilities" href="/cgi-bin/blast/PlantGDBblast">BLAST</a></li>
+		<li><a title="Generate gene models based on transcript or protein : genome spliced alignment" href="/cgi-bin/GeneSeqer/index.cgi">GeneSeqer</a></li>
+		<li><a class="italic" title="Overview of PlantGDB Tools" href="/tool/">More...</a></li>
+	</ul>
+	
+	<h2 class="topmargin1">Datasets</h2>
+	<ul class="leftmenu">
+		<li class="first"><a title="AcDs Datasets" href="/prj/AcDsTagging/">AcDs Tagging</a></li>
+		<li><a title="Alternative Splicing in Plants" href="/ASIP/">ASIP</a></li>
+		<li><a title="Splicing Related Gene Database" href="/SRGD/">SRGD</a></li>
+		<li><a class="italic" title="Overview of Special Datasets" href="/prj/">More...</a></li>
+	</ul>
+
+	<h2 class="topmargin1">Outreach</h2>
+	<ul class="leftmenu">
+		<li class="first"><a title="Plant Genomics Outreach Portal" href="/PGROP/pgrop.php">PGROP</a></li>
+		<li><a href="http://www.lawrencelab.org/Outreach/">Native American</a></li>
+	</ul>
+
+	<h2 class="topmargin1">Help</h2>
+	<ul class="leftmenu">
+		<li class="first"><a title="Overview of PlantGDB Help &amp; Tutorials" href="/help/">Help &amp; Tutorials</a></li>
+		<li><a title="Information about PlantGDB" href="/site/">About Us</a></li><!-- TODO: 2 links to the same thing (see below). Smarten this up. Dan -->
+		<li><a title="Brief tour of PlantGDB" href="/site/tour.php">Tour</a></li>
+		<li><a title="Frequently Asked Questions" href="/site/faq.php">F.A.Q.</a></li>
+		<li><a title="PlantGDB Site Map" href="/site/sitemap.php">Site Map</a></li>
+		<li><a title="Useful Genome Links" href="/site/links.php" >Links</a></li>
+		<li><a class="italic" title="Information about PlantGDB" href="/site/">More...</a></li><!-- TODO: 2 links to the same thing (see above). Smarten this up. Dan -->
+	</ul>
+</div>
+	</div>
+	<div id="maincontentscontainer" class="threecolumn">
+	<div id="maincontents">
+	<div id="shadowcontainer">
+
+	<h1>Welcome to plantgdb.org!<span class="heading"> &nbsp;&nbsp;&nbsp; Tools and resources for plant genomics.</span></h1>
+
+	<p class="ie_alert">If you experience issues using our site with Internet Explorer, please see our <a href="/site/browsers.php">Web Browser Support page.</a></p>
+
+		<div class="showhide">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="label" style="cursor:pointer">How to ...</a>
+			<div class="news_hidden hidden">
+
+<div id="accordion">
+<!-- General Questions Title-->
+		<div> <!-- General Questions ShowHide -->
+		<!-- General Questions Accordion -->
+			<div>
+				<div class="accordtitle"><a href="#">Download sequence from PlantGDB</a>
+				</div>
+				<div class="accordtext">
+					<p>PlantGDB provides species-parsed sequence from GenBank and UniProt, as well as custom EST/GSS assemblies, for batch download or search.</p>
+					<ol class="bullet1">
+						<li>To download raw sequence, go to Sequence->Download-><a href="/search/misc/PublicPlantSeq.php">Public Plant Sequence</a>, and type the species name.</li>
+						<li>To download assemblies, go to Sequence->Download-><a href="/download/download.php?dir=/Sequence/ESTcontig">EST Assemblies</a> or -><a href="/download/download.php?dir=/Sequence/GSScontig">GSS Assemblies</a>, and click on the species of interest.</li>
+						<li>(Alternatively, use the FTP server: Go to Sequence->FTP Server-><a href="ftp://ftp.plantgdb.org/download/">Download</a>->FASTA_NNN (GenBank/UniProt where NNN is current version) or ->PUT (EST assemblies).)</li>
+						<li>To search on ID keyword, go to Sequence->Search-><a href="/search/query/TextSearch.php">ID or Keyword Search</a>, and enter an ID keyword in the search box.</li>
+						</ol>
+						<p>For more information see <a title="About PlantGDB" href="/search/">Search Overview</a> page.</p>		
+				</div>
+			</div>
+
+			<div>
+				<div class="accordtitle"><a href="#">Find out what EST assemblies are available</a>
+				</div>
+				<div class="accordtext">
+					<p>Go to Sequence-><a href="/prj/ESTCluster/">EST Assemblies</a>, and click &apos;View Current Assemblies&apos; to see a table of assemblies currently available. You can then click an organism name to access a download page for all assembly-related sequence files.</p>
+				</div>
+			</div>
+			<div>
+				<div class="accordtitle"><a href="#"> Use the batch BLAST tool at PlantGDB</a>
+				</div>
+				<div class="accordtext">
+					<p>The BLAST tool allows batch queries against plant species, taxonomic groups, and special datasets:</p>
+					<ol class="bullet1">
+					<li>Go to Tools-><a href="/cgi-bin/blast/PlantGDBblast">Blast</a></li>
+					<li>To query a taxonomic group or other dataset, select a preset (e.g. &quot;All Grasses&quot;; &quot;Maize BACs&quot;)</li>
+					<li>To query a species, begin typing the desired genus/species in the &quot;Species Name&quot; box and click to select the correct species.</li>
+					<li>You may combine any number of species and groups in your BLAST query.</li>
+					<li>Then paste up to 100 FASTA formatted sequences or sequence IDs in the query window, select an algorithm and parameter settings, and click &apos;Execute&apos;.</li>
+					</ol>
+				</div>
+			</div>
+			<div>
+				<div class="accordtitle"><a href="#">Annotate a gene structure</a></div>
+				<div class="accordtext">
+					<ol class="bullet1">
+						<li>Register for an account from a Genome Browser Home Page (example:
+						<a href="/AtGDB/">AtGDB</a>) -see upper left.
+						</li>
+						<li>Enter the ID for a gene you want to annotate in the
+						Search window (example: At1g01010.1). Then
+						click &apos;Search: Genome&apos;. The
+						result is a Genome Context view of that gene.
+						</li>
+						<li>Open yrGATE tool by clicking
+						&apos;Annotate This Region!&apos;. yrGATE displays gene
+						models and evidence alignments along with tools
+						for building a new annotation.
+						</li>
+						<li>Build a gene model by clicking exons or exon coordinates. The new gene model is displayed
+						in green as &quot;Your Structure&quot;, and the
+						resulting sequence is displayed in the mRNA
+						window.
+						</li>
+						<li>Validate your gene model using web portal
+						tools (ORF Finder, BLAST).</li>
+						<li>Enter  Description and a unique ID for your
+						annotation and click &apos;Submit&apos; or &apos;Save&apos; for later editing. 
+						</li>
+						<li>PlantGDB will email you when your
+						annotation is approved or rejected. Once
+						approved, your annotation and its evidence can
+						be viewed in a Genome Browser and is available for remote display through DAS.
+						</li>
+					</ol>
+					<p>For more details, check out the tutorials and video demos on our <a href="/help/">Help and Tutorials</a> pages.</p>
+				</div>
+			</div>
+
+			<div>
+				<div class="accordtitle"><a href="#">Identify colinear regions in two or more genomes</a>
+				</div>
+				<div class="accordtext">
+				<p>PlantGDB's <a href="/prj/GenomeBrowser/">genome browsers</a> provide links to the GEvo tool for viewing genome colinearity, part of the <a href="http://synteny.cnr.berkeley.edu/CoGe/">CoGe</a> genome website. For details, see <a href="/help/xgdb.php#AnnotatedProtCoGe">Genome Browser Help</a>.</p>
+				</div>
+			</div>
+		</div>	<!-- End General Questions Accordion -->
+</div>
+		</div><!--end of hidden div-->
+		</div><!--end showhide div-->
+
+
+<!--Plant Sequence--><div id="maincontentsleft">
+
+					<div class="feature" id="public_plant_sequence"><hr class="featuredivider" />
+					<h2 class="bottommargin1">Public Plant Sequence <span class="heading">Release 175</span></h2>
+
+					<a title="Species Search at PlantGDB" href="/download/download.php"><img src="/images/Tiarella.png" alt="Tiarella" class="thumbnail_1"/></a>
+					Species-parsed <a title="Overview of Sequence Resources" href="/download/download.php"><i>Viridiplantae</i> sequences</a> from GenBank and UniProt.
+					<div class="description showhide"><a title="Show additional sequence information directly below this link" class="label" style="cursor:pointer">More about Plant Sequence...</a>
+						<div class="more_hidden hidden">
+
+						<h3 class="bottommargin1">Version Release  175 (2009-12-20)</h3>
+						<b>Resources: </b><a title="Species Search at PlantGDB" href="/search/misc/PublicPlantSeq.php">Search</a>|<a title="Download Options" href="/download/download.php">Download</a>|<a title="PlantGDB BLAST service" href="/cgi-bin/blast/PlantGDBblast">BLAST</a><br />
+							<b>See below</b> for totals by type.
+							<a title="Search for Tiarella cordifolia (heartleaf foamflower) sequences at PlantGDB" href="/search/query/TextSearch.php?searchType=anno&amp;searchString=Tiarella cordifolia [Organism] AND PLN [Sequence Type]&amp;max=15">View example</a> of a sequence record. <a title="All sequence resources at PlantGDB" href="/search/misc/">View all sequence resources</a> at PlantGDB.
+					<table id="SequenceCounts" class="featuretable smallerfont striped topmargin1" summary="Number of each type of raw Sequence in PlantGDB">
+					<thead>
+						<tr class="shade">
+							<th scope="col" class="smallerfont">Seq Type</th>
+							<th scope="col" class="smallerfont">Description</th>
+							<th scope="col" class="smallerfont" style="text-align:right"> Species Count</th>
+							<th scope="col" class="smallerfont" style="text-align:right"> Sequence Count</th>
+						</tr>
+					</thead>
+					<tbody>
+	<tr><td><a title="GenBank" href="http://www.uniprot.org/help/about"> Protein</a></td><td>UniProt Protein</td><td align="right">47,383</td><td align="right">590,784</td></tr><tr><td><a title="GenBank" href="http://www.ncbi.nlm.nih.gov/projects/dbEST/"> EST</a></td><td>Expressed Sequence Tag</td><td align="right">725</td><td align="right">20,968,343</td></tr><tr><td><a title="GenBank" href="http://www.ncbi.nlm.nih.gov/projects/dbGSS/"> GSS</a></td><td>Genome Survey Sequence</td><td align="right">290</td><td align="right">10,898,757</td></tr><tr><td><a title="GenBank" href="http://www.ncbi.nlm.nih.gov/projects/dbSTS/"> STS</a></td><td>Sequence Tagged Sites</td><td align="right">266</td><td align="right">153,310</td></tr><tr><td><a title="GenBank" href="http://www.ncbi.nlm.nih.gov/projects/HTGS/"> HTG</a></td><td>High Throughput Genomic DNA</td><td align="right">65</td><td align="right">24,496</td></tr><tr><td><a title="GenBank" href="http://www.ncbi.nlm.nih.gov/Web/Newsltr/Fall01/genbank.html"> HTC</a></td><td>High Throughtput cDNA</td><td align="right">104</td><td align="right">62,154</td></tr><tr><td><a title="GenBank" href="http://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html#GenBankDivisionB"> PLN</a></td><td>PLN Division mRNA</td><td align="right">89,337</td><td align="right">1,277,697</td></tr><tr><td><a title="GenBank" href="http://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html#GenBankDivisionB"> DNA_PLN</a></td><td>PLN Division DNA</td><td align="right">88,877</td><td align="right">905,537</td></tr>				</tbody>
+			</table>
+						</div><!--end of hidden div-->
+					</div><!--end showhide div-->
+					</div>
+
+<!--Assemblies-->
+
+				
+				<div class="feature" id="sequence_assemblies"><hr class="featuredivider" />
+					<h2 class="bottommargin1">Sequence Assemblies</h2>
+				<a title="Overview of sequence assemblies at PlantGDB" href="/prj/ESTCluster/"><img src="/images/ESTAssembly.png" alt="EST Assembly" class="thumbnail_1" /></a>
+				PlantGDB-assembled unique transcripts <a title="Overview of sequence assemblies at PlantGDB" href="/prj/ESTCluster/">(PUT) </a> and Genome Survey Sequence assemblies <a title="GSS Assembly Progress Page" href="/prj/GSSAssembly/">(GSS)</a>.
+					<div class="description  showhide"><a title="Show additional transcript information directly below this link" class="label" style="cursor:pointer">More about Assemblies...</a>
+					<div class="more_hidden hidden">
+
+			<h3>PUT Assemblies</h3>
+
+			<p>Total species assembled: 213.</p>
+			<p>The most recent PUT assemblies are Version 175a  [<a href="/prj/ESTCluster/progress.php">View List</a>]; [<a title="View Example Sequence Assembly at PlantGDB" href="/search/display/data.php?Seq_ID=PUT-163a-Zea_mays-021470">View example</a>]</p>
+			<p>PlantGDB-assembled Unique Transcripts (<a title="EST Assembly Progress Page" href="/prj/ESTCluster/progress.php">PUT</a>) are custom transcript assemblies made available for all plants species with >10,000 sequence records. PUT sequences are annotated with top UniProt BLAST hits and corresponding GO annotations (see <a href="/search/query/TextSearch.php">search</a> page), and they can queried using PlantGDB's <a title="PlantGDB BLAST server" href="/cgi-bin/blast/PlantGDBblast">BLAST server</a>. New or refreshed PUT assemblies are created after each version update (currently every 4 months).
+			All assembly data is available for download through our <a title="PUT Download Directory" href="/download/download.php?dir=/Sequence/ESTcontig/">download portal</a>. For detailed statistics on each assembly, refer to the PUT assembly <a title="PUT Assembly Table" href="/prj/ESTCluster/progress.php">progress page</a>.</p>
+						<h3 class="topmargin1">GSS Assemblies</h3>
+						<p>Genome Survey Sequence (GSS)  Assemblies for <a title="GSS Assembly Table" href="/prj/GSSAssembly/zeamays/">maize</a> and <a title="GSS Assembly Table" href="/prj/GSSAssembly/sorghumbicolor/">sorghum</a>.</p>
+				</div><!--end of hidden div-->
+			</div><!--end showhide div-->
+			</div>
+
+<!--Tools-->
+			<div class="feature" id="tools"><hr class="featuredivider" />
+			<h2 class="bottommargin1">Tools</h2>
+				<a title="Tools Overview" href="/tool/"><img src="/images/BLAST.png" alt="BLAST" class="thumbnail_1" /></a>
+				<a title="Overview of PlantGDB Informatics Tools" href="/tool/">Online tools</a> for pattern matching, sequence query, and spliced alignment.
+				<div class="description showhide">
+				<a title="Show additional tool information directly below this link" class="label" style="cursor:pointer">More about Tools...</a>
+				<div class="hidden more_hidden">
+					<table class="featuretable smallerfont striped">
+						<tr>
+							<th>Tool</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>
+							<a title="BioExtract.org home" href="http://www.bioextract.org/query/index.jsp">BioExtract Server</a>
+							</td>
+							<td>
+							An online service for creating and customizing bioinformatics workflows
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="BLAST home" href="/cgi-bin/blast/PlantGDBblast">BLAST</a>
+							</td>
+							<td>
+							An NCBI-BLAST service with , species-parsed plant databases and batch query capabilities
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="DAS home" href="/prj/GenomeBrowser/das.php">DAS</a>
+							</td>
+							<td>
+							Distributed Annotation System (DAS) allows remote genome browsers to access PlantGDB annotations
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="Find Primers home" href="/cgi-bin/prj/AcDsTagging/getPrimers.pl">FindPrimers</a>
+							</td>
+							<td>
+							A tool for designing PCR primers for analyzing maize Ds transposon insertions.
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="GeneSeqer home" href="/cgi-bin/GeneSeqer/index.cgi">GeneSeqer</a>
+							<a href="http://bioservices.usd.edu/geneseqer/">Parallel&nbsp;GeneSeqer</a>
+							</td>
+							<td>
+							A tool for generating gene models based on transcript - genome spliced alignment
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="GenomeThreader home" href="/cgi-bin/GenomeThreader/gth.cgi">GenomeThreader</a>
+							</td>
+							<td>
+							A tool for generating gene models based on transcript or protein:genome spliced alignment
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="MuSeqBox home" href="/MuSeqBox/MuSeqBox.php">MuSeqBox</a>
+							</td>
+							<td>
+							A program that tabulates BLAST output and filter hits according to user-specified criteria
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="PatternSearch home" href="/cgi-bin/vmatch/patternsearch.pl">PatternSearch</a>
+							</td>
+							<td>
+							A tool for querying short sequences (e.g. PCR fragments) for genome homology
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="ProbeMatch home" href="/cgi-bin/prj/PLEXdb/ProbeMatch.pl">ProbeMatch</a>
+							</td>
+							<td>
+							Query your sequence against microarray probe sequences
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="TableMaker home" href="http://www.bioextract.org/genbank/home/index.jsp">TableMaker</a>
+							</td>
+							<td>
+							Search PlantGDB's Plant Sequence database with an easy-to use GUI interface.
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="Tracembler home" href="/tool/TE_nest/">TE_Nest</a>
+							</td>
+							<td>
+							An annotation and visualization tool for the identification transposable elements in genomic sequence
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="TracEmbler home" href="/tool/tracembler/">TracEmbler</a>
+							</td>
+							<td>
+							Perform chromosome walks based on a query sequence, using trace sequences from NCBI's Trace Archive.
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<a title="yrGATE home" href="/prj/yrGATE/">yrGATE</a>
+							</td>
+							<td>
+							A tool for community annotation of genomic sequence, used in conjunction with the xGDB genome browsers
+							</td>
+						</tr>
+					</table>
+				</div><!--end of hidden div-->
+				</div><!--end showhide div-->
+				</div>
+
+<!--Workflows-->
+				<div class="feature" id="workflow_management"><hr class="featuredivider" />
+				<h2 class="bottommargin1">Workflow Management</h2>
+				<a class="hidelinkicon" title="BioExtract Server at BioExtract.org" href="http://www.bioextract.org/query/index.jsp"><img src="/images/BioExtract.png" alt="BioExtract Server" class="thumbnail_1" /></a> 
+					<a title="Query tools and workflows" href="http://www.bioextract.org/query/index.jsp">BioExtract Server</a> provides powerful database queries, analysis tools, and online workflows.
+					<div class="description showhide"><a title="Show additional information directly below this link" class="label" style="cursor:pointer">More about Workflows...</a>
+						<div class="more_hidden hidden">
+					<p>BioExtract allows user to query public sequence data repositories as well as PlantGDB's Viridiplantae data. The query results ("extracts") can be analyzed using a broad menu of online informatics tools and web services (or link to user-provided tools). The analysis results can be subjected to additional analysis or sent to a report file. The entire query-analysis process can be captured and saved as a custom workflow for repeated analysis. <a title="View sample workflow at BioExtract.org" href="http://www.bioextract.org/scripts/index.jsp"> Try a sample workflow at BioExtract.org</a>.</p>
+					</div><!--end of hidden div-->
+					</div><!-- end showhide div-->
+					</div><!-- end feature div-->
+
+					</div><!--end maincontentsleft-->
+
+				<div id="maincontentsright">
+<!--Genomes-->
+				<div class="feature" id="genome_browsers"><hr class="featuredivider" />
+				<h2 class="bottommargin1">Genome Browsers</h2>
+				<a title="Genome Browser Overview" href="/prj/GenomeBrowser/"><img src="/images/AtGDB.png" alt="AtGDB" class="thumbnail_1" /></a>
+					  <a href="/prj/GenomeBrowser/">Genome browsers</a> for emerging &amp; completed plant genomes. Video tutorial: QuickTime&nbsp;<a title="Genome browsers at PlantGDB" class="video-button qtvideo" id="xGDB5"></a> Flash <a title="Genome browsers at PlantGDB" class='flvideo-button flvideo' id='8398310'></a>)
+					<div class="description  showhide"><a title="Show additional genome information directly below this link" class="label" style="cursor:pointer">More about Genome Browsers...</a>
+						<div class="more_hidden hidden">
+						<h3 class="bottommargin1">Genome Databases at PlantGDB</h3>
+						<table class="featuretable smallerfont striped topmargin1" summary="This table describes features of each xGDB Genome Browser">
+	<thead>
+		<tr class="shade">
+			<th scope="col">GDB</th>
+			<th scope="col" width="145">Species</th>
+			<th scope="col" width="60">Type</th>
+			<th scope="col">Assembly</th>
+			<th scope="col">GeneModels</th>
+		</tr>
+	</thead>
+	<tbody>
+				<tr>
+				<td><a title="Genome Database" href="/AtGDB/">AtGDB</a></td>
+				<td class="species">Arabidopsis thaliana</td>
+				<td>Chromosome</td>
+				<td><a href="ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/">TAIR9</a></td>
+				<td><a href="ftp://ftp.arabidopsis.org/home/tair/Sequences/whole_chromosomes/">TAIR9</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/BdGDB/">BdGDB</a></td>
+				<td class="species">Brachypodium distachyon</td>
+				<td>Chromosome</td>
+				<td><a href="http://www.brachypodium.org/">Version 1.0</a></td>
+				<td><a href="http://www.brachypodium.org/">Brachy1.0</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/BrGDB/">BrGDB</a></td>
+				<td class="species">Brassica rapa</td>
+				<td>BAC</td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">n/a</a></td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">GenBank</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/CpGDB/">CpGDB</a></td>
+				<td class="species">Carica papaya</td>
+				<td>Scaffold</td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=nuccore&amp;cmd=search&amp;term=ABIM01000001:ABIM01047483[PACC]/">GenBank</a></td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=nuccore&amp;cmd=search&amp;term=ABIM01000001:ABIM01047483[PACC]/">GenBank</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/GhGDB/">GhGDB</a></td>
+				<td class="species">Gossypium hirsutum</td>
+				<td>BAC</td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">n/a</a></td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">GenBank</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/GmGDB/">GmGDB</a> (Chr)</td>
+				<td class="species">Glycine max</td>
+				<td>Chromosome</td>
+				<td><a href="ftp://ftp.jgi-psf.org/pub/JGI_data/Glycine_max/Glyma1">Glyma1</a></td>
+				<td><a href="ftp://ftp.jgi-psf.org/pub/JGI_data/Glycine_max/Glyma1">Glyma1</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/GxGDB/">GmGDB</a> (BAC/Scaf)</td>
+				<td class="species">Glycine max</td>
+				<td>BAC/Scaffold</td>
+				<td><a href="ftp://ftp.jgi-psf.org/pub/JGI_data/Glycine_max/Glyma0/">Glyma0/Gbk</a></td>
+				<td><a href="ftp://ftp.jgi-psf.org/pub/JGI_data/Glycine_max/Glyma0/">Glyma0.1b</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/HvGDB/">HvGDB</a></td>
+				<td class="species">Hordeum vulgare</td>
+				<td>BAC</td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">n/a</a></td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">GenBank</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/LjGDB/">LjGDB</a></td>
+				<td class="species">Lotus japonicus</td>
+				<td>Chromosome</td>
+				<td><a href="http://www.kazusa.or.jp/lotus/">Lj1.0</a></td>
+				<td><a href="http://www.kazusa.or.jp/lotus/">Lj1.0</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/MtGDB/">MtGDB</a></td>
+				<td class="species">Medicago truncatula</td>
+				<td>Chromosome</td>
+				<td><a href="http://www.medicago.org/genome/downloads/Mt2/">Mt2.0</a></td>
+				<td><a href="http://www.medicago.org/genome/downloads/Mt2/">Mt2.0</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/OsGDB/">OsGDB</a></td>
+				<td class="species">Oryza sativa</td>
+				<td>Chromosome</td>
+				<td><a href="http://rice.plantbiology.msu.edu/pseudomolecules/info.shtml">Release 6.1</a></td>
+				<td><a href="http://rice.plantbiology.msu.edu/pseudomolecules/info.shtml">Release 6.1</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/PpGDB/">PpGDB</a></td>
+				<td class="species">Physcomitrella patens</td>
+				<td>Scaffold</td>
+				<td><a href="http://genome.jgi-psf.org/Phypa1_1/Phypa1_1.info.html">Phypa1.1</a></td>
+				<td><a href="http://genome.jgi-psf.org/Phypa1_1/Phypa1_1.info.html">Phypa1.1</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/PtGDB/">PtGDB</a></td>
+				<td class="species">Populus trichocarpa</td>
+				<td>Chromosome</td>
+				<td><a href="http://genome.jgi-psf.org/Poptr1_1/Poptr1_1.home.html">Poptr1</a></td>
+				<td><a href="http://genome.jgi-psf.org/Poptr1_1/Poptr1_1.home.html">Poptr1.1</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/SbGDB/">SbGDB</a></td>
+				<td class="species">Sorghum bicolor</td>
+				<td>Chromosome</td>
+				<td><a href="http://www.phytozome.net/sorghum">Sbi1</a></td>
+				<td><a href="http://www.phytozome.net/sorghum">Sbi1.4</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/SlGDB/">SlGDB</a></td>
+				<td class="species">Solanum lycopersicum</td>
+				<td>BAC</td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">n/a</a></td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">GenBank</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/TaGDB/">TaGDB</a></td>
+				<td class="species">Triticum aestivum</td>
+				<td>BAC</td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">n/a</a></td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">GenBank</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/VvGDB/">VvGDB</a></td>
+				<td class="species">Vitis vinifera</td>
+				<td>Chromosome</td>
+				<td><a href="http://www.genoscope.cns.fr/spip/Vitis-vinifera-whole-genome.html">Genoscope</a></td>
+				<td><a href="http://www.genoscope.cns.fr/spip/Vitis-vinifera-whole-genome.html">Genoscope</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/ZmGDB/">ZmGDB</a> (Chr)</td>
+				<td class="species">Zea mays</td>
+				<td>Chromosome</td>
+				<td><a href="http://www.maizesequence.org/">n/a</a></td>
+				<td><a href="http://www.maizesequence.org/">4a.53 filtered</a></td>
+			</tr>			<tr>
+				<td><a title="Genome Database" href="/ZxGDB/">ZxGDB</a> (BAC/Scaf)</td>
+				<td class="species">Zea mays</td>
+				<td>BAC</td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">n/a</a></td>
+				<td><a href="http://www.ncbi.nlm.nih.gov/Genbank/">GenBank</a></td>
+			</tr>	</tbody>
+</table>
+					</div><!--end of hidden div-->
+					</div><!--end showhide div-->
+					</div>
+<!--Community Annotation-->
+				<div class="feature" id="community_annotation"><hr class="featuredivider" />
+				<h2 class="bottommargin1">Community Annotation</h2>
+					<a title="Overview of Community Annotation at PlantGDB" href="/yrGATE/"><img src="/images/yrGATE.png" alt="yrGATE" class="thumbnail_1" /></a>
+					Tools and databases for <a title="Tools for Community Annotation of Gene Structure" href="/yrGATE/">gene structure annotation</a>.  Video Tutorial: QuickTime <a title="Annotating gene structure using yrGATE" class="video-button qtvideo" id="yrGATE_MtGDB6"></a>&nbsp;Flash <a title="Annotating gene structure using yrGATE" class='flvideo-button flvideo' id='7858561'></a>)
+					<div class="description showhide"><a title="Show additional information directly below this link" class="label" style="cursor:pointer"> More about Community Annotation...</a><div class="more_hidden hidden">
+						<p>Gene structure models can often be improved and expanded by taking into account EST and cDNA evidence-based alignment. PlantGDB facilitates this process through <b>community annotation</b>, using simple-to-use online tools. The image below shows how evidence alignments (red, light blue) can be used to update existing gene models (dark blue)  with a new gene model (green) [<a href="/yrGATE/">Overview </a>]; [<a title="Help Overview" href="/help/">Help and Tutorial</a>].</p>
+						<p>
+							Once published, gene structure annotations can be viewed using PlantGDB's genome browser or remotely on a genome browser that supports Distributed Annotation Service (DAS) display [<a title="DAS overview" href="/prj/GenomeBrowser/das.php">Overview</a>]
+							<img width="100%" src="/images/annotate_example.gif" alt="annotation example image" />
+						</p>
+					</div><!--end of hidden div--></div><!--end of showhide div-->
+					</div>
+
+<!--Special Datasets-->
+					<div class="feature" id="special_datasets"><hr class="featuredivider" />
+					<h2 class="bottommargin1">Special Datasets</h2>
+					<a title="View Datasets Overview at PlantGDB" href="/prj/"><img src="/images/AcDs.png" alt="AcDs Image" class="thumbnail_1" /></a>
+					<a title="View Datasets Overview at PlantGDB" href="/prj/">Special datasets</a> for transposon insertion sites, splicing-related genes, and more.
+					<div class="description showhide"><a title="Show additional tool information directly below this link" class="label" style="cursor:pointer">More about Special Datasets...</a>
+						<div class="more_hidden hidden">
+							<table class="featuretable smallerfont striped">
+							<tr><th style="width:25%">Dataset</th><th>Description</th></tr>
+							<tr><td><a title="AcDs Tagging Home" href="/prj/AcDsTagging/">AcDs Tagging</a></td><td>AcDs transposon tagging of maize</td></tr>
+							<tr><td><a title="ASIP Home" href="/ASIP/">ASIP</a></td><td>Alternative Splicing in Plants</td></tr>
+							<tr><td><a title="PLEXdb Home" href="/prj/PLEXdb/">PLEXdb</a></td><td>Gene Expression Database</td></tr>
+							<tr><td><a title="RescueMu Home" href="/prj/RescueMuTagging/">RescueMu</a></td><td>RescueMu-tagged GSS sequences are generated by Maize Gene Discovery Project. Sequences matching GSS contigs have been annotated </td></tr>
+							<tr><td><a title="SRGD Home" href="/SRGD/">SRGD</a></td><td>A searchable database of splicing related genes</td></tr>
+							<tr><td><a title="UniformMu Home" href="/prj/UniformMuTagging/">UniformMu</a></td><td>MuTAIL sequences are generated by UniformMu transposon. Sequences matching GSS contigs have been annotated and are available for download </td></tr>
+							</table>
+						</div><!--end of hidden div-->
+					</div><!--end showhide div-->
+					</div>
+
+<!--Outreach-->
+					<div class="feature" id="outreach"><hr class="featuredivider" />
+					<h2 class="bottommargin1">Outreach</h2>
+					<a title="Plant Genome Research Outreach Portal" href="/PGROP/pgrop.php"><img src="/images/PGROP.png" alt="PGROP" class="thumbnail_1" /></a>
+							Plant Genome Research Outreach Portal (<a title="Plant Genome Research Outreach Portal" href="/PGROP/pgrop.php">PGROP</a>) for locating activities, programs and resources; <a href="http://www.lawrencelab.org/Outreach/">Outreach Program for Native Americans</a>.
+						<br />
+						<br />
+						<br />
+						<br />
+
+						</div><!--end feature-->
+						</div><!--end maincontentsright-->
+						</div>
+						</div><!--end maincontents-->
+
+			</div><!--end maincontentscontainer-->
+			<div id="rightcolumncontainer">
+				<div class="minicolumnright">
+
+	<h2>What's New?</h2>
+	<div class="bottommargin1 news topmargin1">
+		<p class="smallerfont">&nbsp;&nbsp;&nbsp;Click below or <a href="/site/news.php">view all news</a><br />
+		<i>Latest update: April 1, 2010</i></p><br />
+		<dl class="showdd">
+
+<dt><span class="new"></span>PlantGDB to offer plant DNA-based ring tones <span class="heading">(4-1)</span></dt>
+
+	<dd>
+			In collaboration with <a href="http://www.plantgdb.org">PlantDNAhits.com</a>, a molecular music company specializing in plant nuclear <a href="http://www.nslij-genetics.org/dnacorr/l-imm86-oo.html">DNA-derived music</a>, PlantGDB will offer ring tones based on your species of interest. Simply query our <a href="/AprilFool/index.php">Tree Ring of Life</a> database using genus, species, and subspecies. You can then choose from a variety of popular genes including (if available) carbonic anhydrase, cellulose synthase, cytochrome C, or one of several nuclear ribosmal rRNA genes. All popular ring tone formats will be supported.  (<a href="/AprilFool/index.php">More information here</a>) (April 1, 2010)
+	</dd>
+
+<dt>AcDs Tagging Update <span class="heading">(3-18)</span></dt>
+	<dd>
+			The <a href="/prj/AcDsTagging"><i>AcDs</i> Tagging</a> database at PlantGDB has been updated to display <i>Ds</i> transposon matches to the maize pseudochromosomes (RefGen_v1). Users can browse a list of "placed" insertions by chromosome coordinate (<a href="/prj/AcDsTagging/records.php">Browse <i>Ds</i> Insertions</a>),  search functional annotations with potential Ds insertions (<a href="/ZmGDB/DisplayGeneAnn.php">(Protein Annotation Table</a>), and order seed containing the mapped insertion (<a href="/prj/AcDsTagging/order_instructions.php">Seed Order Instructions</a>). (March 15, 20010)
+	</dd>
+
+<dt>PlantGDB at Maize Genetics Conf., March 18-21 <span class="heading">(3-12)</span></dt>
+	<dd>
+			PlantGDB will be represented at the <b>52nd Annual Maize Genetics Conference, March 18-21, 2010,</b> Riva del Garda, Italy. Check out Poster 151, "Maize Community Annotation Project to Improve Gene Structures" in the <a title="Download PDF" href="http://www.maizegdb.org/maize_meeting/2010/2010_maize_meeting_program.pdf">2010 meeting program</a>. (March 12, 2010)
+	</dd>
+
+<dt>New Annotation Workflow at BioExtract <span class="heading">(3-12)</span></dt>
+	<dd>
+			The <a href="http://www.bioextract.org">BioExtract Server</a> has added a powerful new workflow for annotating genomic DNA, based on user-selected transcript and protein databases. The pipeline uses <a href="http://evidencemodeler.sourceforge.net/">EVM (EVidence Modeler)</a> to evaluate transcript- and <i>ab initio</i>-derived exons, and it outputs a GFF3-formatted file of optimal gene structures. A similar pipeline is available at PlantGDB for use with xGDB genome browsers (see next news item). (March 12, 2010)
+	</dd>
+
+
+<dt>New Annotation Pipeline at PlantGDB <span class="heading">(3-12)</span></dt>
+	<dd>
+		The AnnotationPipeDream tool allows users to annotate any genomic region (up to 500 kb) using any combination of transcript and protein datasets.  The pipeline  uses <a href="http://evidencemodeler.sourceforge.net/">EVM (EVidence Modeler)</a> to evaluate transcript- and <i>ab initio</i>-derived exons, and it outputs a GFF3-formatted file of optimal gene structures.  The pipeline is currently available in the maize genome browser <a href="/ZmGDB/cgi-bin/getRegion.pl?dbid=0&amp;chr=1&amp;l_pos=2980000&amp;r_pos=3015000">ZmGDB</a> (click "Annotation Pipeline") and will soon be available for all genomes. This pipeline is also available as a customizable workflow in the <a href="hhtp://www.bioextract.org">BioExtract Server</a> (see previous news item). (March 12, 2010)
+	</dd>
+
+
+<dt>Community Annotation Tips <span class="heading">(3-12)</span></dt>
+	<dd>
+			The <a href="/prj/yrgate/index.php">yrGATE tool</a> for gene structure annotation sports new context-sensitive help icons: just click any help icon (<img alt="?" src="/images/help-icon.png" style="margin-bottom: -5px" title="help icon" />) for a popup explanation of each function or tool.<a href="/yrGATE/ZmGDB/AnnotationTool.pl?start=2980000&amp;end=3015000&amp;dbid=0&amp;blastDB=&amp;altCONTEXT=chr&amp;chr=1">(Example)</a>. (March 12, 2010)
+	</dd>
+
+</dl>
+	</div>
+
+	<h2>What's Coming?</h2>
+	<div class="bottommargin1 news topmargin1">	
+		<dl class="showdd">
+
+<dt>Maize RefGen_v2 genome</dt>
+	<dd>
+	The revised pseudomolecule assembly of maize inbred B73 (RefGen_V2) was released on March 5, 2010 by the <a href="http://www2.genome.arizona.edu/genomes/maize">Arizona Genomics Institute</a>. We are busy running spliced-alignment to maize EST, cDNA, PUT, and related-species protein in anticipation of releasing a new version of <a href="/ZmGDB">ZmGDB</a> (expected May, 2010)</dd>
+
+
+<dt><i>Manihot esculenta</i> (cassava) genome browser </dt>
+	<dd>The recently-released <i>Manihot esculenta</i> <a title="Link to Phytozome home page for Manihot esculenta" href="http://www.phytozome.net/cassava.php">draft genome</a> consists of 11,243 scaffolds spanning 416Mb. PlantGDB will release a cassava genome browser incorporating EST, cDNA, PUT and related-species protein alignments as well as published gene models (expected May, 2010).
+	</dd>
+
+</dl>   </div>
+
+	<!--<h2>Outreach News...</h2>
+	<div class="bottommargin1 news topmargin1">	
+		
+<dl class="showdd">
+
+
+	<dt>PGROP - Newly added resources</dt>
+	<dd>
+     <a href="/PGROP/pgrop.php">PGROP</a> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolo.
+	</dd>
+
+
+<dt>Native American Outreach at ISU</dt>
+	<dd><a href="http://www.lawrencelab.org/Outreach/">Native American Outreach</a> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolo
+	</dd>
+
+<dt>Native American Outreach at Little Big Horn College</dt>
+	<dd><a href="http://maize.jcvi.org/cellgenomics/outreach/">Native American Outreach</a> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolo
+	</dd>
+
+</dl>
+
+<p class="center smallerfont">Latest Update: October 26, 2009</p>
+   </div>-->
+
+ </div>
+			</div>
+			
+<div id="debuginfo" style="float: left; align: center;">
+	</div>
+
+		<div id="footer">
+			<ul><!-- Modifying this menu? Sync it with our other footer menus. See the notes in /phplib/footer.php (reference copy). - Dan Rasmussen, 2009-07-14. -->
+				<li id="browsers"><a href="/site/browsers.php">Supported Browsers</a></li>
+				<li id="about_us"><a href="/site/">About Us</a></li>
+				<li id="sitemap"><a href="/site/sitemap.php">Site Map</a></li>
+				<li id="acknowledgments"><a href="/site/acknowledgments.php">Acknowledgments</a></li>
+				<li id="links"><a href="/site/links.php">Links</a></li>
+				<li id="brendelgroup"><a href="http://brendelgroup.org/">Brendel Group</a></li>
+				<li id="nsf" class="last"><a href="http://www.nsf.gov/" title="National Science Foundation">NSF</a></li>
+			</ul>
+			<p id="validation" class="center"><a id="valid_xhtml" href="http://validator.w3.org/check?uri=referer">Valid XHTML</a> and <a id="valid_css" href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></p>
+		</div>
+		<!-- IMPORTANT - the following hidden divs are required for jquery ui dialog display!! -->
+
+		<div id="help_dialog"><h2>Loading Help Page...Thanks for your patience!</h2></div>
+		<div id="video_dialog"><h2>Loading Video...Thanks for your patience!</h2></div>
+		<div id="image_dialog"><h2>Loading Image...Thanks for your patience!</h2></div>
+				</div><!--end pagewidth-->
+	</div><!--end innercontainer-->
+</div><!--end outercontainer-->
+</body>
+</html>

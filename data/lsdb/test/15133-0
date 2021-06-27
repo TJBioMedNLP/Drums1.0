@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta content="text/html; charset=us-ascii" http-equiv=
+"Content-Type">
+<title>R+GPU</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="smallColor" style="float: left"><a name="contents" id=
+"contents">Contents</a>
+<ul>
+<li><a href="#introduction">introduction</a></li>
+<li><a href="#figures">figures</a></li>
+<li><a href="#news">in the news</a></li>
+<li><a href="#downloads">downloads</a></li>
+<li><a href="#issues"><font color="Red">outstanding issues</font></a></li>
+</ul>
+</div>
+<img style="float: right" alt="r+gpu logo" title="r+gpu logo" src="rgpu.png">
+<br clear=all>
+<h2 align="center" color="Red"><a name="new" id="new">
+	<FONT COLOR="FF0000">NEW</FONT> -- gputools uses CULA to give you a GPU enabled fastICA
+</a></h2>
+<p>If you have <a href="http://www.culatools.com/">CULA</a> installed,
+please try out our <a href="gputools_0.21.tar.gz">beta gputools R package</a> with GPU enabled
+fastICA. This package has the temporary name of cudlar so that you don't clobber your
+current version of gputools. You can install them alongside each other.</p>
+<p>The Mac installation process recieved an as yet untested tweak to support CULA, so
+we especially encourage feedback from Mac OS X users. Did cudlar install correctly?
+Did the gpuFastICA routine work as expected?</p>
+<p>Tested on a subset of GSE6306, non-GPU enabled fastICA took over four hours while
+gpuFastICA took just 80 seconds!</p>
+<h2 align="center"><a name="introduction" id="introduction">
+	Enabling GPU Computing in the R Statistical Environment
+</a></h2>
+<p>R is the most popular open source statistical environment in the
+biomedical research community. However, most of the popular R
+function implementations involve no parallelism and they can only
+be executed as separate instances on multicore or cluster hardware
+for large data-parallel analysis tasks. The arrival of modern
+graphics processing units (GPUs) with user friendly programming
+tools, such as Nvidia's CUDA toolkit (<a href=
+"http://www.nvidia.com/cuda">http://www.nvidia.com/cuda</a>),
+provides a possibility of increasing the computational efficiency
+of many common tasks by more than one order of magnitude (<a href=
+"http://gpgpu.org/">http://gpgpu.org/</a>). However, most R users
+are not trained to program a GPU, a key obstacle for the widespread
+adoption of GPUs in biomedical research.</p>
+<p>To overcome this obstacle, we decided to devote efforts for
+moving frequently used R functions in our work to the GPU using
+CUDA. In the ideal solution, if a CUDA compatible GPU and driver is
+present on a user's machine, the user may only need to prefix "gpu"
+to the original function name to take advantage of the GPU
+implementation of the corresponding R function. We take achieving
+this ideal as one of our primary goals so that any biomedical
+researcher can harness the computational power of a GPU using a
+familiar tool. Since our code is open source, researchers may
+customize the R interfaces to their particular needs. In addition,
+because CUDA uses shared libraries and unobtrusive extensions to
+the C programming language, any experienced C programmer can easily
+customize the underlying code.</p>
+<p>Using the CUDA extension to C and the shared linear algebra
+library CUBLAS, we have implemented a variety of statistical
+analysis functions with R interfaces that execute with different
+degrees of parallelism on a Graphics Processing Unit (GPU). If an
+algorithm is comprised of common vector or matrix operations each
+performed once, we involve the GPU by implementing those operations
+with calls to CUBLAS. If an algorithm involves computing the
+elements of a large matrix, we can often merely assign each thread
+executing on the GPU a portion of a row and/or column. Algorithms
+for which we have implemented GPU enabled versions include the
+calculations of distances between sets of points (R dist function),
+hierarchical clustering (R hclust function). Pearson and Kendall
+correlation coefficients (similar to R cor function), and the
+Granger test ('granger.test' in the R MSBVAR package).</p>
+<p>We are committed to implement more R GPU functions, and we hope
+to contribute packages to the open source community via our
+project's website. The initial package is hosted by CRAN as
+<a href="http://cran.r-project.org/web/packages/gputools/index.html">
+gputools</a> a source package for UNIX and Linux systems.
+Install the package in the usual R manner. If there is any trouble
+with the installation, please see
+<a href="install.txt">this set of notes</a>
+included in the source distribution as the file INSTALL.
+We welcome contributions to the R-GPGPU effort
+and encourage any comments or suggestions.</p>
+<p align="right"><a href="#contents">back to contents</a></p>
+<h2><a name="figures" id="figures">Figures</a></h2>
+<table border="0" cellspacing="0" cellpadding="10">
+<tr>
+<td><img alt="speedup graph" title="speedup" 
+	src="speedup.png"></td>
+<td>
+<p>Figure 1 provides performance comparisons between original R
+functions assuming a four thread data parallel solution on Intel
+Core i7 920 and our GPU enabled R functions for a GTX 295 GPU. The
+speedup test consisted of testing each of three algorithms with
+five randomly generated data sets. The Granger causality algorithm
+was tested with a lag of 2 for 200, 400, 600, 800, and 1000 random
+variables with 10 observations each. Complete hierarchical
+clustering was tested with 1000, 2000, 4000, 6000, and 8000 points.
+Calculation of Kendall's correlation coefficient was tested with
+20, 30, 40, 50, and 60 random variables with 10000 observations
+each.</p>
+</td>
+</tr>
+<tr>
+<td><img alt="granger timing graph" title="granger times" 
+	src="granger.png"></td>
+<td>
+<p>Figure 2 provides a performance comparison between the function
+'granger.test' from the package 'MSBVAR' and our gpuGranger
+function. We use a single CPU thread on Intel Core i7 920 and 
+a GTX 260 GPU. The Granger causality algorithm
+was tested with a lag of 2 for 200, 400, 600, 800, and 1000 random
+variables with 10 observations each. </p>
+</td>
+</tr>
+<tr>
+<td><img alt="hclust timing graph" title="hclust times" 
+	src="hcluster.png"></td>
+<td>
+<p>Figure 3 provides a performance comparison between the function
+'hclust' and our gpuHclust function. We use a single CPU thread on 
+Intel Core i7 920 and a GTX 260 GPU. Complete hierarchical clustering 
+was tested with 1000, 2000, 4000, 6000, and 8000 points. </p>
+</td>
+</tr>
+<tr>
+<td><img alt="cor timing graph" title="cor times" 
+	src="kendall.png"></td>
+<td>
+<p>Figure 4 provides a performance comparison between the function
+'cor' and our gpuCor function with 'method' set to 'kendall'. We use 
+a single CPU thread on Intel Core i7 920 and a GTX 260 GPU. 
+Calculation of Kendall's correlation coefficient was tested with
+20, 30, 40, 50, and 60 random variables with 10000 observations each. </p>
+</td>
+</tr>
+</table>
+<p align="right"><a href="#contents">back to contents</a></p>
+<h2><a name="news" id="news">In the News</a></h2>
+<ul class="box">
+<li><a href="http://gpgpu.org/2009/06/14/r-gpgpu">Gpgpu.org</a> has a nice 
+<a href="http://gpgpu.org/2009/06/14/r-gpgpu">article.</a></li>
+<li>We got <a href="http://www.vizworld.com/2009/06/gpu-accelerated-statistical-programming-in-r/">mentioned</a> 
+by <a href="http://www.vizworld.com">Vizworld.</a></li>
+</ul>
+<p align="right"><a href="#contents">back to contents</a></p>
+<h2><a name="downloads" id="downloads">Download</a></h2>
+<p>The gputools R package is free for <b>academic</b> use. For commercial use, please contact
+<a href="mailto:brainarray@umich.edu?Subject=gputools%20commercial%20use">
+	brainarray admin
+</a></p><br><br>
+<p>Download the gputools package for R on a Linux platform here:
+<a href="gputools_0.21.tar.gz">version 0.21</a>. Send questions, comments
+and bugs to bucknerj at umich dot edu.  This package is also hosted on 
+<a href="http://cran.r-project.org/">CRAN</a> as a 
+<a href="http://cran.r-project.org/web/packages/gputools/index.html">
+source package</a> for UNIX and Linux systems.</p>
+<p><a href="install.txt">This</a> text file may be helpful during installation
+of the source package. It appears as INSTALL in the package itself. You should
+no longer have to do anything special to install from the source package on a 
+Mac OS X system or a system with an older GPU.</p>
+<p align="right"><a href="#contents">back to contents</a></p>
+<h2><a name="issues" id="issues">Outstanding Issues</a></h2>
+<p> In case you are curious, here is a table listing the compute capability
+of various Nvidia products. This table comes from the CUDA Programming Guide.
+The CUDA Programming Guide is a free pdf
+that comes with the CUDA toolkit under the doc directory.  
+The function gpuCor and the SVM functions require double precision arithmetic
+on the device. So devices with compute capability less than 1.3 may give 
+unsatisfactory results when using those functions. The rest of the package
+should work fine for cards with compute capability less than 1.3.</p>
+<table border="1">
+<tr>
+<th>Device name</th>
+<th>Compute capability</th>
+</tr>
+<tr bgcolor="LightGreen">
+<td>GeForce GTX 295</td>
+<td>1.3</td>
+</tr>
+<tr bgcolor="LightGreen">
+<td>GeForce GTX 285, GTX 280</td>
+<td>1.3</td>
+</tr>
+<tr bgcolor="LightGreen">
+<td>GeForce GTX 260</td>
+<td>1.3</td>
+</tr>
+<tr>
+<td>GeForce 9800 GX2</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce GTS 250, GTS 150, 9800 GTX, 9800 GTX+, 8800 GTS 512</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce 8800 Ultra, 8800 GTX</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>GeForce 9800 GT, 8800 GT, 9800M GTX</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce GT 130, 9600 GSO, 8800 GS, 8800M GTX, 9800M GT</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce 8800 GTS</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>GeForce 9600 GT, 8800M GTS, 9800M GTS</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce 9700M GT</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce GT 120, 9500 GT, 8600 GTS, 8600 GT, 9700M GT, 9650M GS, 9600M GT, 9600M GS, 9500M GS, 8700M GT, 8600M GT, 8600M GS</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce G100, 8500 GT, 8400 GS, 8400M GT, 9500M G, 9300M G, 8400M GS, 9400 mGPU, 9300 mGPU, 8300 mGPU, 8200 mGPU, 8100 mGPU</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>GeForce 9300M GS, 9200M GS, 9100M G, 8400M G</td>
+<td>1.1</td>
+</tr>
+<tr bgcolor="LightGreen">                                            
+<td>Tesla S1070</td>
+<td>1.3</td>
+</tr>
+<tr bgcolor="LightGreen">                                             
+<td>Tesla C1060</td>
+<td>1.3</td>
+</tr>
+<tr>                                            
+<td>Tesla S870</td>
+<td>1.0</td>
+</tr>
+<tr>                                            
+<td>Tesla D870</td>
+<td>1.0</td>
+</tr>
+<tr>                                             
+<td>Tesla C870</td>
+<td>1.0</td>
+</tr>
+<tr bgcolor="LightGreen">                                            
+<td>Quadro Plex 2200 D2</td>
+<td>1.3</td>
+</tr>
+<tr>                                            
+<td>Quadro Plex 2100 D4</td>
+<td>1.1</td>
+</tr>
+<tr>                                            
+<td>Quadro Plex 2100 Model S4</td>
+<td>1.0</td>
+</tr>
+<tr>                                            
+<td>Quadro Plex 1000 Model IV</td>
+<td>1.0</td>
+</tr>
+<tr bgcolor="LightGreen">                                             
+<td>Quadro FX 5800</td>
+<td>1.3</td>
+</tr>
+<tr bgcolor="LightGreen">                                             
+<td>Quadro FX 4800</td>
+<td>1.3</td>
+</tr>
+<tr>                                            
+<td>Quadro FX 4700 X2</td>
+<td>1.1</td>
+</tr>
+<tr>                                             
+<td>Quadro FX 3700M</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>Quadro FX 5600</td>
+<td>1.0</td>                      
+</tr>
+<tr>
+<td>Quadro FX 3700</td>
+<td>1.1</td>                              
+</tr>
+<tr>
+<td>Quadro FX 3600M</td>
+<td>1.1</td>                 
+</tr>
+<tr>
+<td>Quadro FX 4600</td>
+<td>1.0</td>                               
+</tr>
+<tr>
+<td>Quadro FX 2700M</td>
+<td>1.1</td>                             
+</tr>
+<tr>
+<td>Quadro FX 1700, FX 570, NVS 320M, FX 1700M, FX 1600M, FX 770M, FX 570M</td>
+<td>1.1</td>      
+</tr>
+<tr>
+<td>Quadro FX 370, NVS 290, NVS 140M, NVS 135M, FX 360M</td>
+<td>1.1</td>      
+</tr>
+<tr>
+<td>Quadro FX 370M, NVS 130M</td>
+<td>1.1</td>      
+</tr>
+</table> 
+<p align="right"><a href="#contents">back to contents</a></p>
+<hr>
+<a href="http://www.mbni.med.umich.edu"><img style="float: right"
+alt="MBNI Logo" src="mbniLogo.png"></a><br>
+</body>
+</html>

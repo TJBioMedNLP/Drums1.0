@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:foaf="http://xmlns.com/foaf/0.1/"
+      xmlns:dc="http://purl.org/dc/terms/"
+      xmlns:doi="http://dx.doi.org/"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema-datatypes#"
+      lang="en"> 
+
+ <head> 
+  	<!--[if lt IE 7]>
+	<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
+	<![endif]-->
+	<!--[if lt IE 8]>
+	<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+	<![endif]-->
+	<!--[if lt IE 9]>
+	<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+	<![endif]-->
+	 <link rel="stylesheet" type="text/css" href="layout.css" />
+ 
+	<title>Tutorial: The PluriNetWork / ExprEssence framework</title>
+
+		 
+
+<script language="javascript">
+	var imageSizeIndicator = new Array();
+
+	function goLite(FRM,BTN)
+	{
+  	 window.document.forms[FRM].elements[BTN].style.borderColor = "#a9a9a9";
+	}
+
+	function goDim(FRM,BTN)
+	{
+  	 window.document.forms[FRM].elements[BTN].style.borderColor = "";
+	}
+	function goNextAnchor(where) 
+	{
+   	 window.location.hash = where
+	}
+	function adaptImageSize(image){
+	  var found = false;
+	  var cis	= null;
+
+	  for (var i in imageSizeIndicator){
+		if(i==image.src){	
+		found=true;
+		cis=imageSizeIndicator[image.src];
+	      }
+			
+	  }
+	  if (found==false){
+	    imageSizeIndicator[image.src]="small";
+	    cis="small";
+	  }
+	  if (cis=="small"){
+	    image.width=(image.width/50*100);
+	    imageSizeIndicator[image.src]="large";
+	  }
+	  else{
+	    image.width=(image.width/100*50);
+	    imageSizeIndicator[image.src]="small";	
+	  }
+	}
+
+
+</script>
+		
+ </head>
+ <body> 
+ 
+ 	<h1 align="center"><b>Tutorial</b>: The <em>PluriNetWork / ExprEssence</em> framework</h1>
+   
+   
+ 	<table>
+		<tr>
+			<!-- navigation column -->
+			<td valign="top">
+				<table>
+					<tr>
+						<td><div id="pu2" style="margin-left:10px">Content</div></td>
+					</tr>
+					<tr>
+						<td>   
+							<form name="groovyform">
+								<table>
+									<tr>
+										<td>
+											<input
+								   			type="button"
+								  			name="groovybtn1"
+								   			class="groovybutton"
+								   			value="• Motivation"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="goNextAnchor('Motivation')">							
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input
+								   			type="button"
+								  			name="groovybtn2"
+								   			class="groovybutton"
+											value="• The PluriNetWork"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="goNextAnchor('PluriNetWork')">									
+										</td>
+									</tr>
+									<tr>									
+										<td>
+											<input
+											type="button"
+								  			name="groovybtn3"
+								   			class="groovybuttons"
+								   			value="- Exploring the PluriNetWork"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="goNextAnchor('Exploring')">							
+										</td>
+									</tr>
+									<tr>										
+										<td>
+											<input
+											type="button"
+								  			name="groovybtn4"
+								   			class="groovybuttons"
+								   			value="- Finding a gene in the PluriNetWork"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="goNextAnchor('Finding')">								
+										</td>
+									</tr>
+									<tr>										
+										<td>
+											<input
+											type="button"
+								  			name="groovybtn5"
+								   			class="groovybuttons"
+								   			value="- Inspecting Attribute Values"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="goNextAnchor('Inspecting')">								
+										</td>
+									</tr>
+									<tr>																			
+										<td>
+											<input
+											type="button"
+								  			name="groovybtn6"
+								   			class="groovybuttons"
+								   			value="- Getting the underlying Pubmed article(s)"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="goNextAnchor('Getting')">									
+										</td>																		
+									</tr>
+									<tr>																			
+										<td>
+											<input
+											type="button"
+								  			name="groovybtn17"
+								   			class="groovybuttons"
+								   			value="- BiNGO Gene Ontology analysis"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="goNextAnchor('BiNGO')">									
+										</td>																		
+									</tr>
+									<tr>																			
+										<td>
+											<input
+								   			type="button"
+								  			name="groovybtn7"
+								   			class="groovybutton"
+								   			value="• ExprEssence"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="self.location='ExprEssence.html'">								
+										</td>																		
+									</tr>
+									<tr>																			
+										<td>
+											<input
+								   			type="button"
+								  			name="groovybtn10"
+								   			class="groovybutton"
+								   			value="• Case studies"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="self.location='Case.html'">									
+										</td>																		
+									</tr>
+									<tr>																			
+										<td>
+											<input
+								   			type="button"
+								  			name="groovybtn13"
+								   			class="groovybutton"
+								   			value="• References"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="self.location='References.html'">								
+										</td>																		
+									</tr>
+									<tr>
+									<td>
+											<input
+								   			type="button"
+								  			name="groovybtn15"
+								   			class="groovybutton"
+								   			value="• Download"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="self.location='Download.html'">									
+										</td>																		
+									</tr>
+									<tr>																			
+										<td>
+											<input
+								   			type="button"
+								  			name="groovybtn14"
+								   			class="groovybutton"
+								   			value="• About"
+								   			onMouseOver="goLite(this.form.name,this.name)"
+								   			onMouseOut="goDim(this.form.name,this.name)"
+											onClick="self.location='About.html'">									
+										</td>																		
+									</tr>																	
+									<tr><td style="padding-left:10px; padding-top:10px"> <img  src="Image/Logo.jpg" alt="logo" width=225px align="bottom"/> </td></tr>							
+								</table>
+					
+							</form>
+					
+				  		</td>					
+					</tr>
+				</table>
+			</td>
+			
+			<!-- content column -->
+			<td style="height:700px; width:1600px; padding-left:25px">										
+				<div id="divi">
+			
+              <A name="Motivation" id="pu2">Publications:</A>
+              <p id="pn">
+                    1.	Som A, Harder C, Greber B, Siatkowski M, Paudel Y, Warsow G, Cap C, Sch&ouml;ler H, and Fuellen G. The PluriNetWork: An in-silico representation of the network underlying pluripotency in mouse, and its applications. PLoS One, <a href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0015165">2010, <strong>5(12)</strong>: e15165</a>.
+             </p>
+             <p id="pn">
+              2.	Warsow G, Greber B, Falk S, Harder C, Siatkowski M, Schordan S, Som A, Endlich N, Sch&ouml;ler H, Repsilber D, Endlich K, and Fuellen G. ExprEssence - Revealing the essence of differential experimental data in the context of an interaction/regulation network. BMC Systems Biology, <a href="http://www.biomedcentral.com/1752-0509/4/164/abstract">2010, <strong>4</strong>:164</a>.
+              </p>
+<a href="http://www.wikipathways.org/index.php/Pathway:WP1763">The PluriNetWork at WikiPathways.<br>(NOTE: The pathway was inadvertantly assigned a new number, possibly due to recent WikiPathways hickups.)</a>
+		          <br>
+						  <br>
+						  <br>
+			
+						<A name="Motivation" id="pu2">Motivation</A>
+						  <p id="pn">We wish to obtain insights into biological processes by building up process- and species-specific protein/gene interaction and regulation networks and combining 
+							     them with differential biological data (e.g. gene expression data for two time points). Towards this aim, we built up a network describing pluripotency in mouse 
+							     and used it for stem cell data analysis.</p>
+						  <br>
+						  <br>
+						  <br>
+						<A name="PluriNetWork" id="pu2">The <em>PluriNetWork</em></A>
+						  <p id="pn"> The <A href="MEF_PIPS_IPS.cys"><em>PluriNetWork</em></A> is a manually curated protein/gene interaction and regulation network with the purpose
+								of describing pluripotency in mouse. The structure of the <em>PluriNetWork</em> is straightforward; each node represents one gene and its corresponding protein, 
+								and links are either interactions, stimulations or inhibitions. As of July 2010, the network is based upon 177 publications, consists of 274 nodes (genes/proteins) 
+								and 574 edges (links) - each representing a direct interaction or regulation between two nodes. The <em>PluriNetWork</em> is explored, maintained and analyzed using 
+								<em>Cytoscape</em> (see Figure __1), (downloadable at <a href="http://www.cytoscape.org/download.html" target="parent">http://www.cytoscape.org/download.html</a>). </p>
+						 	
+						 	 <img  src="Image/Figure__1.jpg" alt="n" width=1000 hspace="40px" onClick="NOadaptImageSize(this);">
+							 <p id="pFN"><b>Figure __1.</b> The <em>PluriNetWork</em>, displayed using the <em>Cytoscape</em> network visualization and data integration platform.</p>
+						  	 <br><br>
+						<A name="Exploring" id="pu3">Exploring the <em>PluriNetWork</em></A>
+						  <p id="pn"> Apart from the circuit-like layout, the <em>PluriNetWork</em> data is represented by two tables - one table describing the nodes (genes/proteins) and their attributes and the other the edges (links) and their attributes. At any given time, only one table can be shown in the <em>Cytoscape</em> Data Panel. To switch between the tables, you can click at the bottom of the Data Panel on the tab <em>Node Attribute Browser</em> or <em>Edge Attribute Browser</em>. (See Figure __2).</p>
+						 	 <img  src="Image/Figure__2.jpg" alt="n" width=500 hspace="40px" onClick="NOadaptImageSize(this);">
+						     <p id="pFN"><b>Figure __2.</b> The Data Panel in <em>Cytoscape</em>.</p>
+						  	 <br><br>
+						<A name="Finding" id="pu3">Finding a gene in the <em>PluriNetWork</em></A>
+						    <OL>
+						  		<LI><p id="pli">Click on the button <em><b>right</b></em> to the search input field to configure your search options. (See Figure __3) <br>The radio button that appears in the configuration dialog must be set to Nodes.
+							          <br></p>
+							   	</LI>
+							</OL>
+							    <img  src="Image/Figure__3.jpg" alt="n" width=500 hspace="40px" onClick="NOadaptImageSize(this);">
+							    <p id="pFN"><b>Figure __3.</b> Starting the search configuration dialog.</p>
+							<OL>
+						  		<LI value="2"><p id="pli">Select an attribute containing the values you will be using for the search (e.g. an identifier such as <em>MGI Symbol</em>, to search for Pou5f1, Sox2, Nanog, Esrrb, etc).</p></LI>
+						  		<LI><p id="pli">Type your query into the search input field. </p></LI>
+						  		<LI><p id="pli">If there exists a node (gene/protein) with the attribute/value pair used for the search, this node will be moved to the center of the main panel (if the value cannot be found, the search input field will be marked by a red background). </p></LI>			  		
+							</OL>
+						    <p id="pn">A subnetwork can easily be retrieved in <em>Cytoscape</em> by selecting the desired nodes and edges and clicking on <em>“File-&#62;New-&#62;Network-&#62;From selected nodes and edges”</em>.</p><br><br>
+						<A name="Inspecting" id="pu3">Inspecting Attribute Values</A>
+						  <p id="pn">In the <em>PluriNetWork</em>, for each node (gene/protein) and edge (link), attributes can be browsed as follows.  </p>
+						    <OL>
+						  		<LI><p id="pli">Mark the node/edge of interest by a left mouse click (the color should change); if more than one node/edge shall be selected, hold <em>Shift</em> during selection, or select all nodes/edges in an area defined using the left mouse button.</p></LI>
+						  		<LI><p id="pli">Select the <em>Node Attribute Browser</em> or <em>Edge Attribute Browser</em> at the bottom of the Data Panel.</p></LI>
+						  		<LI><p id="pli">To define which attributes shall be shown, click on the first button of the Data Panel (see Figure __4.), and then tick the corresponding checkboxes in the dialog window that opens up. </p></LI>
+						  		<LI><p id="pli">The selected attribute values of the selected nodes/edges are then shown in the Data Panel.</p></LI>
+						  	</OL>
+						  		<img  src="Image/Figure__4.jpg" alt="n" width=500 hspace="40px" onClick="NOadaptImageSize(this);">
+							    <p id="pFN"><b>Figure __4.</b> Starting the attribute browser.</p>
+								<br><br>
+						<A name="Getting" id="pu3">Getting the underlying Pubmed article(s)</A>
+					
+						  <p id="pn">For each link, at least one reference is available in the <em>PluriNetWork</em> to back it up. It can be retrieved as follows.</p>
+						    <OL>
+						  		<LI><p id="pli"><p id="pli">Mark the edge for which you want to get the PubMed entry.</p></LI>
+						  		<LI><p id="pli">Choose the tab of the <em>Edge Attribute Browser</em> at the bottom of the Data Panel. </p></LI>
+						  		<LI><p id="pli">Left-click on the Pubmed ID attribute (if necessary, follow the section <A href="#Inspecting">“Inspecting Attribute Values”</A>, above, so that the Pubmed ID attribute is shown.)</p></LI>
+						  		<LI><p id="pli">The standard browser should open with the abstract of the Pubmed article. More references may be available by inspecting the attributes “Pubmed ID Source 2”, etc. (If necessary, follow the section <A href="#Inspecting">“Inspecting Attribute Values”</A>, above, so that these attributes are shown.)</p></LI>
+						    </OL>
+						  	<br>
+						  	<br>
+						<A name="BiNGO" id="pu3">BiNGO</A>
+						  <p id="pn"><em>Cytoscape</em> can be enhanced by a variety of plugins, allowing, for example, to perform network 
+							statistics, or to import data of different formats. 
+							For the <em>PluriNetWork</em> paper, we performed an overrepresentation analysis of the biological processes and molecular functions, based on the Gene Ontology Terms of all 274 genes. We used BiNGO <a href="References.html#Ashburner"> [1]</a> with the GO Slim Generic Gene Ontology Annotation <a href="References.html#Camon"> [2]</a>, which is a set of high-level GO terms. The significance level was set to <em>p=0.05</em> (hypergeometric test, Benjamini &#38; Hochberg False Discovery Rate (FDR) correction). Overrepresented terms are visualized in Figure __5 below.
+						  </p>
+						  <p id="pi">To perform this analysis yourself, start <em>Cytoscape</em>, using the <em>“Plugins-&#62;Manage Plugins”</em> dialog to install 
+								the BiNGO plugin available in the “Functional Enrichment” folder, and open the file <a href="MEF_PIPS_IPS.cys">MEF_PIPS_IPS.cys</a>, which includes the <em>PluriNetWork</em>. Select all nodes in the network, using 
+								<em>“Select-&#62;Nodes-&#62;Select All nodes”</em> in the main <em>Cytoscape</em> menu. In the Data Panel of <em>Cytoscape</em>, select the <em>Node Attribute Browser</em>, and, following the instructions on <A href="#Inspecting">“Inspecting Attribute Values”</A> 
+								(see above), select all values of the attribute <em>MGI Symbol</em> and copy the values into the clipboard. Then, start BiNGO via the Plugins menu. Define a name for your BiNGO analysis and select <em>“Paste Genes from Text”</em>. 
+								Then, paste the contents of your clipboard into the open dialog field. In the field <em>Select organism/annotation</em>, please select <em>Mus musculus</em>. For the analysis described here, all other parameters are default values. 
+								Start the analysis by clicking on <em>Start BiNGO</em>. A new network is generated with the name you have chosen above. 
+								This network consists of the GO Terms which could be mapped to gene names in the starting network. GO Terms which are overrepresented in your network will be highlighted. In the panel “BiNGO output”, you will find more information 
+								about the GO Terms (GO identifiers, significance of overrepresentation, names of genes mapped to this GO Term).
+						  </p>
+						  <img  src="Image/Figure__5.jpg" alt="n" width=1000 hspace="40px" onClick="NOadaptImageSize(this);">
+						  <p id="pFN"><b>Figure __5.</b> Result of GO analysis by BINGO.</p>
+						  <p id="pinterpret">In Fig. __5, enriched cellular components are the nuclear chromosome and the nucleoplasm,
+						   reflecting the prominence of transcription factors and epigenetic factors in the <em>PluriNetWork</em>. 
+						   Biological Process Terms are enriched for transcription, DNA metabolism, protein modification, 
+						   cell differentiation / cell death, embryonic development, cell cycle, epigenetic regulation of 
+						   gene expression and signal transduction. Enriched molecular functions such as transcription factor activity, 
+						   chromatin binding, receptor binding and protein kinase activities fit well to the enriched biological processes.</p>
+						  <br>
+				 
+			
+			
+				</div>	
+		    </td>
+		</tr>
+  	</table>
+ </body> 
+</html>

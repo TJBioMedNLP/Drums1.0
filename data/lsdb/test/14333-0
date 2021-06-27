@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de" dir="ltr">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ProCope - Protein Complex Prediction and Evaluation | www.bio.ifi.lmu.de</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link type="text/css" rel="stylesheet" media="all" href="/sites/default/files/css/css_01aab2847bda8701fc11ad39ef99b946.css" />
+<link type="text/css" rel="stylesheet" media="print" href="/sites/default/files/css/css_f00e932f738934b0d05a6c68c7c59fab.css" />
+  <script type="text/javascript" src="/sites/default/files/js/js_4b3d54eb1ddff2d4af35bc8856f94a05.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/" });
+//--><!]]>
+</script>
+
+</head>
+
+<body class="not-front not-logged-in page-node node-type-page no-sidebars">
+  <a name="top" id="page-top"></a> 
+  <div id="page">
+
+    <!-- ########## Kopfbereich ########### -->    
+    <div id="kopfbereich" class="clear-block kopfbereich">
+        <img src="/images/bio_header.jpg" alt="Bio Header Image"/>    </div> <!-- /#kopfbereich -->
+
+  <!-- # for Javascript-scrollTo in edit forms, so that we see more of the edit form itself. -->    
+  <a id="nohead"/>
+
+    <!-- ########## Navbar/Funktionsbereich ########## -->    
+    <div id="clear-funktionsbereich" class="clear-block clear-funktionsbereich kein_druck">
+      <div id="funktionsbereich" class="region region-funktionsbereich funktionsbereich">
+
+        <div id="suche-und-funktionen" class="suche-und-funktionen">
+          <div id="suche" class="suche">
+            <form action="/Complexes/ProCope/."  accept-charset="UTF-8" method="post" id="search-theme-form">
+<div><div id="search" class="container-inline">
+  <div class="form-item" id="edit-search-theme-form-1-wrapper">
+ <label for="edit-search-theme-form-1">Suche: </label>
+ <input type="text" maxlength="128" name="search_theme_form" id="edit-search-theme-form-1" size="15" value="" title="Geben Sie die Wörter ein, nach denen Sie suchen möchten." class="form-text" />
+</div>
+<input type="image" name="submit" value="Suche" id="edit-submit"  class="form-submit" src="/images/go.gif" />
+<div style="display:none"><div class="form-item" id="edit-fetch-autofill-wrapper">
+ <input type="text" maxlength="128" name="fetch_autofill" id="edit-fetch-autofill" size="60" value="" class="form-text" />
+</div>
+</div><input type="hidden" name="form_build_id" id="form-933157fead3b4318d402792d1a0e61a8" value="form-933157fead3b4318d402792d1a0e61a8"  />
+<input type="hidden" name="form_id" id="edit-search-theme-form" value="search_theme_form"  />
+</div>
+
+</div></form>
+          </div> <!-- /#suche -->
+
+          <div id="funktionen" class="funktionen">
+             <a href="http://www.ifi.lmu.de/" class="navbar_link" target="_ext">Institut für Informatik</a>&nbsp;&nbsp;|&nbsp; <a href="/sitemap" class="navbar_link">Sitemap</a>&nbsp;&nbsp;|&nbsp;<a href="http://www.bioinformatik-muenchen.de/" class="navbar_link">Studiengang Bioinformatik</a>          </div> <!-- /#funktionen -->
+        </div> <!-- /#suche-und-funktionen -->
+
+        <div id="sprachumschaltung" class="sprachumschaltung">
+          <ul class="nice-menu nice-menu-down" id="nice-menu-"><li id="menu-127" class="menu-path-www.bio.ifi.lmu.de-logindestinationnode-208"><a href="http://www.bio.ifi.lmu.de/login?destination=node/208">Login</a></li>
+</ul>
+          <a href="/en/Complexes/ProCope" class="language-link"><img src='/modules/languageicons/flags/en.png'  class="language-icon" alt="English" width="16" height="12" /></a>         </div> <!-- /#sprachumschaltung -->
+
+      </div> <!-- /#funktionsbereich -->
+     </div> <!-- /#clear-funktionsbereich -->
+
+
+
+    <!-- ########## Hauptbereich ########## -->    
+    <div id="hauptbereich" class="clear-block hauptbereich">
+      <!-- ########## Hauptnavigation/Menue ########## -->    
+              <div id="hauptnavigation" class="region region-hauptnavigation hauptnavigation kein_druck">
+          <div class="navigationspunkt"><a href="/index.html" title="Lehr- und Forschungseinheit Bioinformatik"><h1>Aktuelles</h1></a>
+</div>
+
+<div class="navigationspunkt"><a href="/mitarbeiter" title="Mitarbeiter"><h1>Mitarbeiter</h1></a>
+</div>
+
+<div class="navigationspunkt"><a href="/lehre" title="Lehre"><h1>Lehre</h1></a>
+</div>
+
+<div class="navigationspunkt"><a href="/publications" title=""><h1>Publikationen</h1></a>
+</div>
+
+<div class="navigationspunkt"><a href="/forschung" title="Forschung"><h1>Forschung</h1></a>
+</div>
+
+<div class="navigationspunkt"><a href="/drittmittelprojekte" title="Forschungsprojekte"><h1>Drittmittelprojekte</h1></a>
+</div>
+
+<div class="navigationspunkt"><a href="/software" title="Software and Webservices"><h1>Software/Services</h1></a>
+<a href="/forschung/struktur/BioWeka" title="BioWeka - Bioinformatik-Erweiterungen für Weka"><h2>BioWeka</h2></a>
+
+<a href="/FERN" title="FERN - A Java Framework for Stochastic Simulation and Evaluation of Reaction Networks"><h2>FERN</h2></a>
+
+<a href="/HALO" title="HALO - Precise transcript half-life determination in Java"><h2>HALO</h2></a>
+
+<a href="/software/pnma" title="PNMA - Petri Net Modeling Appication"><h2>PNMA</h2></a>
+
+<a href="/Complexes/ProCope" title="ProCope - Protein Complex Prediction and Evaluation" class="active"><h2 class="navigation_aktiv">ProCope</h2 class="navigation_aktiv"></a>
+
+<a href="/2005/proml" title="ProML - an XML Schema for Protein and Protein Set Description"><h2>ProML</h2></a>
+
+<a href="/download/stabperf/index.html" title="Reliable gene signatures for microarray classification: assessment of stability and performance"><h2>StabPerf</h2></a>
+
+
+</div>
+
+<div class="navigationspunkt"><a href="/kontakt" title="Kontakt"><h1>Kontakt</h1></a>
+</div>
+
+        </div> <!-- /#hauptnavigation -->
+      
+
+      <!-- ########## Inhaltsbereich ########## -->    
+            <div id="inhaltsbereich" class="inhaltsbereich ">
+    
+        <!-- ########## Navigationspfad ########## -->    
+        <div id="navigationspfad" class="navigationspfad">
+          <a href="/">Startseite</a> > <a href="/software" title="Software and Webservices">Software/Services</a> > ProCope - Protein Complex Prediction and Evaluation        </div> <!-- /#navigationspfad -->
+
+        <!-- ########## Tabs/Title etc ########## -->    
+        <div id="inhaltsbereich_kopf" class="inhaltsbereich-kopf">
+                      <h1 class="title">ProCope - Protein Complex Prediction and Evaluation</h1>                                        </div> <!-- /#inhaltsbereich-kopf -->
+
+        <!-- ########## Content ########## -->    
+	<div id="inhaltsbereich_body" class="clear-block"> <!-- if the content is e.g. just a form that floats -->
+          <div id="node-208" class=""><div class="node-inner">
+
+  
+  <div class="content">
+    ProCope is a software package which provides easy access to
+different methods used for the prediction and evaluation of protein
+complexes from purification data experiments. <br>
+<br>
+Large scale protein purification experiments provide a vast amount of
+indirect protein-protein interaction information. As these data are
+inherently noisy and incomplete, sophisticated methods are required to
+predict actual protein complexes existing and operating <i>in-vivo</i>. Since the
+publication of two large-scale purification datasets for the
+yeast&nbsp;<i>Saccharomyces
+cerevisiae</i>
+in 2006 (<a href="http://www.ncbi.nlm.nih.gov/pubmed/16429126" >Gavin et al.</a> and <a
+ href="http://www.ncbi.nlm.nih.gov/pubmed/16554755">Krogan et al.</a>) different methods
+for the processing of these datasets have been developed. These include
+methods for the derivation of PPI score networks from the data, the
+clustering of these networks to predict actual complexes and the
+evaluation of the predictions using experimental data.<br>
+<br>
+ProCope implements many of the methods described in the literature
+along with further useful methods for PPI score network manipluation,
+complex set manipulation, data integration with Petri nets and result
+visualization. All functionality can be accessed using a <b>graphical user interface</b>,
+a collection of <b>command
+line tools</b> and an <b>application
+programming interface </b> (API) to use all these features in
+your own computer programs. In addition, ProCope contains a plugin for the <b>Cytoscape</b> software platform
+which allows the user to visualize protein networks, complex sets and purification data sets.
+The whole software package is written in
+Java and requires the <a href="http://www.java.com">Java Runtime Environment 5.0</a> or
+higher.<br>
+
+<br>
+ProCope is freely available under the <a href="http://www.gnu.org/licenses/lgpl.html">GNU Lesser General Pub
+lic License</a> (LGPL).<br/><br/>
+
+ <a class="uncollapse_all"  onClick="uncollapse_all()" href="#">Show all</a> <br/><br/>
+
+
+      <a id="fieldset-node-208-1" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed"><span>Figures</span></a>
+  <fieldset class="lfebio collapsible collapsed">
+<div>
+
+<h3>Outline</h3>
+
+
+<div class="clear-block">
+<a href="/webfm_send/129"><img class="nachlinks" src="/webfm_send/131" width=270px ></a>
+(1) A protein–protein interaction scoring network is derived from the 
+purification data. (2) The scoring network is clustered to derive a 
+set of predicted protein complexes. (3) The quality of the predicted 
+complexes is evaluated using functional annotations, experimental 
+data or reference complex sets. (4) Alternatively, the quality of the 
+scoring networks can be evaluated directly on a reference complex set.<br/>
+</div>
+(click to enlarge)
+
+<h3>ProCope graphical user interface</h3>
+<div class="clear-block">
+<a href="/webfm_send/127">
+<img class="nachlinks" src="/webfm_send/128"></a><br/>
+This figure shows the GUI of ProCope and example results: 
+a ROC curve for different scoring networks and histograms 
+of socio-affinity and bootstrap scores.
+</div>
+(click to enlarge)
+
+
+
+</div>
+</fieldset>
+
+
+      <a id="fieldset-node-208-2" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed"><span>Methods</span></a>
+  <fieldset class="lfebio collapsible collapsed">
+<div>
+Below you find a list of all published methods implemented in ProCope along with the respective references.
+
+<h2>Scoring methods</h2>
+<ul>
+<li>Socio affinity scores (<a href="http://www.ncbi.nlm.nih.gov/pubmed/16429126">Gavin et al., 2006</a>)</li>
+<li>Purification enrichment scores (<a href="http://www.ncbi.nlm.nih.gov/pubmed/17200106">Collins et al., 2007</a>)</
+li>
+<li>Hypergeometrical distribution scores (<a href="http://www.ncbi.nlm.nih.gov/pubmed/17605818">Hart et al., 2007</a>)</li>
+<li>Dice coefficients (<a href="http://www.ncbi.nlm.nih.gov/pubmed/18304937">Zhang et al., 2008</a>)</li>
+<li>Bootstrap scores (<a href="http://www.bio.ifi.lmu.de/Complexes/">Friedel et al., 2008</a>)</li>
+</ul>
+<h2>Clustering methods</h2>
+<ul>
+<li>Markov clustering (<a href="http://micans.org/mcl/lit/">van Dongen, 2000</a>)</li>
+<li>Hierarchichal agglomerative clustering</li>
+</ul>
+<h2>Evaluation methods</h2>
+<ul>
+<li>Complex set comparison (<a href="http://www.ncbi.nlm.nih.gov/pubmed/17087821">Brohe&eacute; et al., 2006</a>)
+<li>Semantic similarity based on GO (<a href="http://www.ncbi.nlm.nih.gov/pubmed/16776819">Schlicker et al., 2006</a>)</li>
+<li>Cococalization score (<a target="_blank" href="http://www.bio.ifi.lmu.de/Complexes/">Friedel et al., 2008</a>)</li>
+</ul>
+
+</div>
+</fieldset>
+
+
+
+      <a id="fieldset-node-208-3" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed scroll"><span>Download</span></a>
+  <fieldset class="lfebio collapsible collapsed scroll">
+<div><b>Current release version: 1.2</b> (<a href="/webfm_send/132">version history</a>)
+<br/><br/>
+We provide packages containing both the ProCope program files and a set of data files as well as packages
+containing only the program or data files. Note that the source codes and HTML documentation are deployed with the program files.
+
+The <i>data</i> files include a collection of predicted complex sets, score networks, colocalization data, name mapping files etc.
+<p>
+<table width="400">
+<tr>
+<td><b>Full package (contains both program and data files):</b></td>
+<td>&nbsp;&nbsp;<a href="/webfm_send/120">ZIP</a></td>
+<td>&nbsp;&nbsp;<a href="/webfm_send/119">TAR.GZ</a></td>
+</tr>
+<tr>
+<td><b>Program files only:</b></td>
+<td>&nbsp;&nbsp;<a href="/webfm_send/124">ZIP</a></td>
+<td>&nbsp;&nbsp;<a href="/webfm_send/123">TAR.GZ</a></td>
+</tr>
+<tr>
+<td><b>Data files only:</b></td>
+<td>&nbsp;&nbsp;<a href="/webfm_send/122">ZIP</a></td>
+<td>&nbsp;&nbsp;<a href="/webfm_send/121">TAR.GZ</a></td>
+</tr>
+<tr>
+<td><b>ProCope README</b></td>
+<td  colspan="2">&nbsp;&nbsp;<a href="/webfm_send/125">README.txt</a></td>
+</tr>
+</table>
+
+</div>
+</fieldset>
+
+
+      <a id="fieldset-node-208-4" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed scroll"><span>Webstart</span></a>
+  <fieldset class="lfebio collapsible collapsed scroll">
+<div>
+<p>You can directly start the ProCope graphical user interface from within your webbrowser if
+Java Webstart is installed on your system. The Webstart version does not contain any data files,
+consider downloading the data package below.</p>
+
+<p><a href="/files/Software/procope/procope.jnlp">Launch ProCope 1.2 GUI via Webstart</a></p>
+
+<p>Webstart automatically ensures that you run the latest version of ProCope and that the correct Java Runtime Environment is installed on your computer.</p>
+
+<p><b>Note for firewall users:</b> Please make sure that the Java Web Start application is allowed to access the internet.</p>
+
+</div>
+</fieldset>
+
+
+      <a id="fieldset-node-208-5" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed scroll"><span>How to use Markov Clustering (MCL) in ProCope</span></a>
+  <fieldset class="lfebio collapsible collapsed scroll">
+<div>
+The Markov Cluster algorithm is not directly implemented in the ProCope framework. You have to download
+the MCL executable binaries from <a href="http://micans.org/mcl/">http://micans.org/mcl/</a>.
+The executable program must be in the PATH of your system environment. Alternatively, you can
+specify the location of the MCL program in the user interfaces.
+</div>
+</fieldset>
+
+
+
+
+      <a id="fieldset-node-208-6" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed scroll"><span>Documentation</span></a>
+  <fieldset class="lfebio collapsible collapsed scroll">
+<div>
+The ProCope HTML documentation is available <a href="/files/Software/procope/doc/index.html">online</a> and also included in the download packages below.
+</div>
+</fieldset>
+
+
+
+
+
+      <a id="fieldset-node-208-7" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed scroll"><span>Contact</span></a>
+  <fieldset class="lfebio collapsible collapsed scroll">
+<p>
+If you have questions or suggestions concerning ProCope, please contact <a href="/mitarbeiter/caroline-friedel">Caroline Friedel</a>
+</p>
+</fieldset>
+
+
+      <a id="fieldset-node-208-8" href="javascript://" onClick="Drupal.bio_toggle_fieldset(this)"
+         class="lfebio collapsible collapsed scroll"><span>References</span></a>
+  <fieldset class="lfebio collapsible collapsed scroll">
+<div>
+<div class="biblio-noyear"><div class="biblio-inline">
+<div class="biblio-separator-bar">2008</div>
+
+<div class ="biblio-category-section"><div class="biblio-typechange">Papers</div> 
+<div class="biblio-entry">
+<span class="biblio-authors"><span class="biblio_author_3">Jan Krumsiek</span>, <span class="biblio_author_1">Caroline C. Friedel</span>, <span class="biblio_author_1">Ralf Zimmer</span></span>. 
+<span class="biobiblio-title"><em><a href="/publications/procope-protein-complex-prediction-and-evaluation">ProCope–protein complex prediction and evaluation</a></em></span>. 
+Bioinformatics, vol 24, no. 18, pp. 2115–2116, Sep 2008.
+<div class="clear-block biblio-link-line"><div class="biblio-link-line-background"><div class="biblio-download-links"><ul class="links"><li class="biblio_url_download"><a href="http://dx.doi.org/10.1093/bioinformatics/btn376" target="_ext">DOI</a></li><li class="biblio_internal_url_download"><a href="/Complexes/ProCope" class="intern">Project Website</a></li></ul></div><div class="biblio-bib-links"> <ul class="links"><li class="biblio_bib_download"><a href="/publications/export/bibtex/185" title="Click to download the BibTEX formatted file">BibTex</a></li></ul></div></div></div></div>
+</div><!-- end category-section --></div></div></div>
+</fieldset>
+
+  </div>
+
+  
+</div></div> <!-- /node-inner, /node -->
+        </div>
+
+        <!-- ########## Stuff to put below the generated content ########## -->    
+        
+        <!-- ########## Feed-Icons ########## -->    
+        <!-- # Currently disabled as only forums provide them, but only for logged-in!
+                -->
+
+        <!-- ########## Print-/Top-Links ########## -->    
+	<div class="printlink kein_druck">
+       <a href="#top" onClick="print();"><img width="10" height="12" border="0" 
+           src="/images/drucken.gif" 
+           alt="Seiteninhalt drucken" title="Seiteninhalt drucken"/></a>
+         </div>
+
+         <div class="toplink kein_druck">
+         <a href="#top"><img width="10" height="12" border="0" 
+           src="/images/toplink.gif" 
+           alt="Nach oben" title="Nach oben"/></a>
+         </div>
+      </div> <!-- /#inhaltsbereich -->
+
+      <!-- ########## Servicebereich ########## -->    
+            <div id="servicebereich" class="region region-servicebereich servicebereich kein_druck">
+        <div id="block-block-1" class=""><div class="block-inner">
+
+  <div class="servicetitel">
+    Beliebte Links  </div>
+  
+  <div class="servicetext">
+    <ul>
+
+<li><a href="/informationen/stellenangebote">Stellenangebote</a>
+</li>
+<li><a href="/formulare/Amalienstr.pdf">Registrierungsformular für den CIP-Pool Amalienstr</a>
+
+</ul>
+  </div>
+
+</div></div> <!-- /block-inner, /block -->
+<div id="block-block-2" class=""><div class="block-inner">
+
+  <div class="servicetitel">
+    Informationen für  </div>
+  
+  <div class="servicetext">
+    
+      <a  href="javascript://" onClick="Drupal.bio_toggle_fieldset_servicebereich(this)"
+         class="servicebereich collapsible collapsed"><span>Mitarbeiter</span></a>
+  <fieldset class="servicebereich collapsible collapsed">
+<ul>
+<li><a href="/intern">Interner Bereich</a>
+<li><a href="/forum/lehrstuhl-foren/die-neuen-drupal-webseiten">Drupal-Bedienung</a>
+<li><a href="/current-bugs">Current Drupal bugs</a>
+</ul>
+</fieldset>
+
+
+
+
+      <a  href="javascript://" onClick="Drupal.bio_toggle_fieldset_servicebereich(this)"
+         class="servicebereich collapsible collapsed"><span>Studierende</span></a>
+  <fieldset class="servicebereich collapsible collapsed">
+<ul>
+<li><a href="/informationen/abschlussarbeiten">Abschlußarbeiten und Hiwi-Jobs</a>
+<li><a href="/lehre/WS2009">Lehre WS 2009/10</a>
+</ul>
+</fieldset>
+
+
+      <a  href="javascript://" onClick="Drupal.bio_toggle_fieldset_servicebereich(this)"
+         class="servicebereich collapsible collapsed"><span>Studieninteressierte</span></a>
+  <fieldset class="servicebereich collapsible collapsed">
+<ul>
+<li><a href="/EFV">Studiengang</a>
+</ul>
+</fieldset>
+
+  </div>
+
+</div></div> <!-- /block-inner, /block -->
+      </div><!-- /#servicebereich -->
+      
+
+        </div> <!-- /#hauptbereich -->
+
+
+    <!--  ##########Fusszeile ########## -->    
+    <div id="fusszeile" class="fusszeile">
+      <div class="kein_druck">						       
+        <a href="/impressum" class="footer_link">Impressum</a> - <a href="/datenschutz" class="footer_link">Datenschutz</a> - <a href="/kontakt" class="footer_link">Kontakt</a><div class="testsee"><a href="http://www.familiesteiner.de/wandern">Spannende Wanderungen mit Kindern s&uuml;dlich von M&uuml;nchen Wandern mit Kindern Kinderwanderungen Kinderwandern</a><a href="http://www.florian-steiner.de/">Homepage Florian Steiner</a><a href="http://www.ariane-steiner.de/">Homepage Ariane Steiner</a></div><div class="testsee2"><a href="http://www.familiesteiner.de/wandern">Spannende Wanderungen mit Kindern s&uuml;dlich von M&uuml;nchen Wandern mit Kindern Kinderwanderungen Kinderwandern</a><a href="http://www.florian-steiner.de/">Homepage Florian Steiner</a><a href="http://www.ariane-steiner.de/">Homepage Ariane Steiner</a></div>      </div>
+    </div> <!--  /#fusszeile -->
+  
+  </div> <!-- /#page -->
+
+  </body>
+
+</html>

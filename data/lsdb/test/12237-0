@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application xmlns="http://research.sun.com/wadl/2006/10">
+    <doc xmlns:jersey="http://jersey.dev.java.net/" jersey:generatedBy="Jersey: 1.1.5 01/20/2010 04:04 PM"/>
+    <resources base="http://biogrid.bio.ed.ac.uk:8080/BiogridRestService/resources/">
+        <resource path="/interactions/">
+            <method id="get" name="GET">
+                <request>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:int" default="0"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="max" style="query" type="xs:int" default="10000"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="interSpeciesExcluded" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="selfInteractionsExcluded" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="htpThreshold" style="query" type="xs:int" default="2147483647"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="evidenceList" style="query" type="xs:string" default=""/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="excludedEvidenceCodes" style="query" type="xs:string" default=""/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="includeEvidence" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="geneList" style="query" type="xs:string" default=""/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="searchIds" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="searchNames" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="searchSynonyms" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="excludeGenes" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="includeInteractors" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="includeInteractorInteractions" style="query" type="xs:boolean" default="true"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="pubmedList" style="query" type="xs:string" default=""/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="excludePubmeds" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="taxId" style="query" type="xs:string" default="All"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="includeHeader" style="query" type="xs:boolean" default="false"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="sourceDatabaseList" style="query" type="xs:string" default="BioGRID"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="sourceDatabaseIdList" style="query" type="xs:string" default=""/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="additionalIdentifierTypes" style="query" type="xs:string" default=""/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="format" style="query" type="xs:string" default="tab2"/>
+                </request>
+                <response>
+                    <representation mediaType="text/plain"/>
+                </response>
+            </method>
+            <resource path="{biogridId}/">
+                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="biogridId" style="template" type="xs:string"/>
+                <method id="get" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="includeHeader" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="format" style="query" type="xs:string" default="tab2"/>
+                    </request>
+                    <response>
+                        <representation mediaType="text/plain"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/version/">
+            <method id="get" name="GET">
+                <response>
+                    <representation mediaType="text/plain"/>
+                </response>
+            </method>
+        </resource>
+    </resources>
+</application>

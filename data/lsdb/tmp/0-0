@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head> 
+    <title>Software Downloads Peter Sykacek</title>
+    <script type="" language="JavaScript" src="ps_sites_scripts.js">
+    </script>
+    <script type="" language="JavaScript">
+      <!--
+      // inisite(window.location);
+      // -->
+    </script>
+    
+    <style type="text/css">
+      .tab {background-color:#C0C0FF; font-size:10pt;}
+      .tab a {color:#000090; font-size:10pt}
+      .tab a:visited {color:#000090;}
+    </style>  
+  </head>
+  <body onload="showtopic(window.location.href, sw_linkentries, sw_connector, sw_layers);" 
+    bgcolor="#D0D0FF" link="#0000FF" vlink="#0000FF" alink="#0000FF">
+    <div id="navig" class="tab" style="position:absolute; left:0px; 
+      top:0px; width:14%; height:100%; visisbility:visible; 
+      font-size:10pt background-color:#8080FF">
+      <p class="hideshow" align="right">
+	<a class="hideshow" href="javascript:hidelayer('sw_layers', '10');">&lt;&lt;hide</a>
+	<a class="hideshow" href="javascript:showlayer('sw_layers', '10');">show&gt;&gt</a>
+      </p>
+      <br>
+      Software Downloads<br>
+      <hr>
+      R-Code: <br><br>
+      <a onclick="showtopic(this.href, sw_linkentries, sw_connector, sw_layers);" 
+	href="software.html#fspma"> 
+	FSPMA</a>
+      <br>
+      <br>
+      <hr>
+      Peter Sykacek <br><br>
+      Depts. of Genetics<br>
+      & Pathology <br>
+      Cambridge University<br><br>
+      Downing Street<br>
+      Cambridge CB2 3EH<br>
+      Phn: +44-1223-760346<br>
+      Fax: +44-1223-333992<br><br>
+      <a href="http://www.sykacek.net">
+	www.sykacek.net</a>, 
+      <a href="mailto:peter@sykacek.net">
+	peter@sykacek.net</a>
+      <br>
+      <br>
+      <hr>
+      <!-- Bioinformatics: <br />
+      comming soon!
+    <hr /> -->
+    </div>
+    <div id="sw_zero" class="folder" style="position:absolute; width:86%; 
+	 right:0%; top:0px; height:100%; visibility:visible; overflow:auto">
+      <h2><a name="fspma">A Friendly Statistics Toolbox for Microarray Analysis</a> </h2>
+      <p>The friendly statistics toolbox for microarray analysis (FSPMA) is an
+	R-library that is controlled by a definition file. FSPMA is available
+	under the GPL 2 license. It is free software that comes with NO WARRANTY.
+      </p>
+      <h3> Functionality </h3>
+      <p>
+	FSPMA, <a href="#sykacek_etal_TR051">(Sykacek <i>et al</i>. 2005)</a>, is an R-library 
+	that can be used to analyse microarray data. FSPMA's concept is to base microarray 
+	analysis on a definition file that describes the experiment and which analysis steps should be done. 
+	The definition file allows analysis without adapting or writing R-scripts. In addition it 
+	serves as documantation of the analysis run. FSPMA can be used with data from different 
+	platforms (single and two colour arrays) with optional preprocessing steps done before 
+	the data gets loaded into FSPMA. The main restriction of FSPMA is that the experiment 
+	must be a balanced reference design. Analysis includes handling of bad quality flagged 
+	samples, conventional normalization and normalization with spike RNA, calculation of ANOVA 
+	tables and variance components and finally gene ranking based on within ANOVA contrasts and 
+	by using per gene ANOVA models. FSPMA is wrapped around YASMA, 
+	<a href="#wernisch_etal_2003">(Wernisch <i>et al</i>. 2003)</a>, which it extends by 
+	some preprocessing and normalization options and by more general contrasts that allow e.g. analysis 
+	of longitudinal studies. To find out more about FSPMA's functionality, it is recommended to inspect 
+	FSPMA's tutorial <a href="#sykacek_furlong_2005">(Sykacek & Furlong 2005)</a> which is part of 
+	FSPMA's documentation files.
+      </p>
+      <h3> Installation </h3>
+      <h4> R 2.1 under Windows 32 </h4>
+      <p> 
+      <ul>
+	<li> If Perl is installed on the target machine, the easiest way to install FSPMA for R 
+	  ver. 2.1 under Windows is to download the binary distribution 
+	  <a href="srcfiles/fspmawin.zip">fspmawin.zip</a>, unzip the file in a local 
+	  directory and run the batch file "fspmawininstall.bat".</li> 
+	<li> Without Perl, an alternative method is to unzip the file and install both 
+	  libraries from within the R-GUI for Windows. 
+	  This is done by startng R 2.1 and selecting the option "Install package(s) from 
+	  local zip files..." from the "Packages" menu and by selecting the folder that contains 
+	  the unziped "fspmawin.zip" archive. The order is important: first install YASMA by 
+	  selecting "yasma_0.20.zip", then install FSPMA by selecting "fspma_1.0.zip". 
+	</li>
+	<li>
+	  Without Perl, the same is achieved by unziping the archive and sourcing 
+	  "fspmawininstall.r" from within an R 2.1 session. The latter requires to make the 
+	  folder that contains the library files to be the current directory. To do that 
+	  one selects "Change dir..." from the "File" menu. Then 
+	  choose "Source R code...", again found in the "File" menu and select "fspmawininstall.r". 
+	  Sourcing should not require changing folders, otherwise something went wrong in the 
+	  previous step and installation will fail because R can not allocate the library files. 
+	</li>
+      </ul>
+      Either approach will install FSPMA and a slightly modified version of the 
+      <a href="http://www.cryst.bbk.ac.uk/wernisch/yasma.html" target="_blank">YASMA</a> library, 
+      <a href="#wernisch_etal_2003">(Wernisch <i>et al</i>. 2003)</a>, on which FSPMA depends. Some 
+      minor modifications of the original YASMA library were necessary for compatibility with R ver. 2.1
+      and with the R Win32 tools, which do not support drand48() random number generation. Instead the 
+      Win32 port uses R's internal uniform random number generator.
+    </p>
+      <h4> R 2.1 and other operating systems </h4>
+      <p> For all other operating systems, one has to download the source distribution 
+	<a href="srcfiles/fspmax.zip">fspmax.zip</a>. After unziping the file, 
+	running the command "fspmaxinstall.sh" will install FSPMA and a modified version of the
+	<a href="http://www.cryst.bbk.ac.uk/wernisch/yasma.html" target="_blank">YASMA</a> library, 
+	<a href="#wernisch_etal_2003">(Wernisch <i>et al</i>. 2003)</a>. Note that the source 
+	distribution of the library has been tested with Linux (and Windows) only.
+      </p>
+      <h3> Testing the installation and learning about FSPMA</h3>
+      <p> 
+	To test the installation, one should use the examples provided in FSPMA's online help.
+	See the package overview for details. There are five zip archives containing definition 
+	files and the corresponding data files. These examples are meant for evaluation purpouse and 
+	contain a small number of genes of a larger study done by R. Furlong of the Dept. of Pathology, 
+	University of Cambridge. The run time of each example is thus rather small. Downloading and extracting
+	fspma-tutorial.zip from the package overview page in FSPMA's online help, one can
+	obtain the "fspma.Rnw" Sweave file (see the R help on how to use Sweave) 
+	which together with the experiments will generate the LaTex sources of the FSPMA tutorial 
+	<a href="#sykacek_furlong_2005">(Sykacek & Furlong 2005)</a>. This step will run all code 
+	fragments in the tutorial and requires that all experimental data and the Sweave file to reside 
+	<i>unziped</i> in the same directory. Individual experiments can be run by downloading and 
+	extracting the relevant archive into a local directory. Analysis is started by invoking 
+	"fspma.wrapper" on the R command line using the name of the definition file as parameter, exactly
+	as is shown in the tutorial. Refer to <a href="#sykacek_furlong_2005">(Sykacek & Furlong 2005)</a> for 
+	further details on the output of such analysis runs and how to produce different visualisations of the 
+	data and the analysis results.
+      </p>
+      <h3> A real world dataset </h3>
+      <p>
+	We provide here an additional documented <a href="srcfiles/tstsgd_A.def.gz">definition file</a>
+	for a public Affymetrix dataset. This file must be unzipped (e.g. gunzip)
+	and stored in a directory of your choice. The microarray data that will be analysed by this file 
+	have been published as <a href="#small_etal_2005" >(Small <i> et al </i>. 2005)</a> and 
+	can be downloaded form the 
+	<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?CMD=search&DB=gds"  
+	  target="_blank">NCBI GEO Datasets server</a> under reference GDS660. These data files must be
+	stored in the same directory as the definition file. Subsequently one has to start R in that directory 
+	and type the following commands at the command line. Different to the examples provided with the library, 
+	this definition file provides an analysis of realistic size. In particular evaluating base level 
+	comparisons which are shortcuts for several pair wise comparisons and k nearest beighbour imputation can 
+	be computationally quite demanding. The definition file of this example is discussed in 
+	<a href="#sykacek_TR051">(Sykacek 2005)</a> which is also part of FSPMA's online help.
+      </p>
+      <table width="100%" frame="none">
+	<tbody>
+	  <tr>
+	    <td>>>library(fspma)</td>
+	  </tr>
+	  <tr>
+	    <td>>>ret <- fspma.wrapper('tstsgd_A.def')</td>
+	  </tr>
+	</tbody>
+      </table>
+      <p>
+	As soon as the script terminates, there will be several additional files in that directory. These files
+	contain the normalized raw data and a corresponding effects description, a file with an ANOVA table
+	and variance components (although the latter will not show up in this analysis, since there is only 
+	one random effect which is captured by the residual noise) and several files that contain 
+	the rank lists that correspond to different tests.
+      </p>
+      <h3> Further Information </h3>
+      <p> FSPMA comes with extensive documentation. There are two tutorial like technical reports, one 
+	provides an overview and the second a detailed discussion of definition files. In addition all 
+	user level functions of FSPMA are described in detail in the online help.	
+      </p>
+      <h3> Acknowledgements </h3>
+      <p>
+	This work was done at the Department of Pathology and the Department of Genetics, University of 
+	Cambridge and funded by the BBSRC's Exploiting Genomics initiative under ref. 8/EGH16106, "Shared 
+	Genetic Pathways in Cell Number Control". FSPMA is joint work with Gos Micklem and Rob Furlong 
+	and relies heavily on Lorenz Wernisch's YASMA package.
+      </p>
+      <h2> References </h2>
+      <dl>
+	<dt><a name="small_etal_2005"> (Small <i> et al</i>. 2005) </a></dt>
+	<dd>
+	  C.L. Small, J. E. Shima, M. Uzumcu, M. K. Skinner, and M. D. Griswold. 
+	  Profiling gene expression during the differentiation and development 
+	  of the murine embryonic gonad. Biol Reprod., 72(2):492–501, 2005.
+	</dd>
+	<dt><a name="sykacek_etal_TR051"> (Sykacek <i>et al</i>. 2005) </a></dt>
+	<dd>
+	  P. Sykacek, R. Furlong and G. Micklem. A Friendly Statistics Package 
+	  for Microarray Analysis, 
+	  <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/bti663?ijkey=UxcmV7ypaHrMDUN&keytype=ref" target="_blank">Abstract</a> and 
+	  <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/bti663?ijkey=UxcmV7ypaHrMDUN&keytype=ref"
+ target="_blank">PDF</a> available from Bioinformatics Advance Access. An early preprint is available here as 
+	  <a href="srcfiles/fspma.pdf">pdf</a> and
+	  <a href="srcfiles/fspma.ps.gz">gzipped postscript</a>.
+	</dd>
+	<dt><a name="sykacek_furlong_2005"> (Sykacek & Furlong 2005) </a></dt>
+	<dd>
+	  P. Sykacek and R. Furlong. A FSPMA tutorial. available in 
+	  <a href="srcfiles/fspmatutorial.pdf">pdf</a> and as
+	  <a href="srcfiles/fspmatutorial.ps.gz">gzipped postscript</a>.
+	</dd>	
+	<dt><a name="sykacek_TR051"> (Sykacek 2005) </a></dt>
+	<dd>
+	  P. Sykacek. A reference to FSPMA definition files. available in 
+	  <a href="srcfiles/reference.pdf">pdf</a> and as
+	  <a href="srcfiles/reference.ps.gz">gzipped postscript</a>.
+	</dd>
+	<dt><a name="wernisch_etal_2003"> (Wernisch <i> et al </i>. 2003) </a></dt>
+	<dd>
+	  L. Wernisch, S. L. Kendall, S. Soneji, A. Wietzorrek, T. Parish, J. Hinds, P. G. Butcher, and N. G.
+	  Stoker. Analysis of whole-genome microarray replicates using mixed models. Bioinformatics, 19(1):53–
+	  61, 2003.
+	</dd>
+      </dl>
+    </div>
+    <!-- <address><a href="mailto:psykacek@yahoo.co.uk"></a></address> width:660px; height:400px; -->
+  </body>
+</html>

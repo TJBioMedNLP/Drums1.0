@@ -1,0 +1,195 @@
+
+<html>
+<head>
+<title>MultiPLX 2.1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="description" content="multiplex, bioinformatics, Tartu University">
+<link rel="stylesheet" href="http://bioinfo.ut.ee/multiplx/default.css" type="text/css">
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" link="#0064A0" vlink="#98B8D0" alink="#FFFF00"><center>
+<table border="0" width="800" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+  <tr>
+    <td><img src="http://bioinfo.ut.ee/multiplx/banner.jpg" align="left"></td>
+    <td><h2>MultiPLX 2.1</h2></td>
+  </tr>
+</table>
+<form method="post" enctype="multipart/form-data" action="index.php?action=run">
+<table border="1" width="800" cellspacing="2" cellpadding="10" bordercolor="#003333">
+  <tr>	
+    <td width="100%" height="1"><div class="content" align="justify">
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">
+	
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">About the program: </font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><p>MultiPLX 2.1 is a tool for analyzing PCR primer compatibility and automatically finding optimal multiplexing (grouping) solution. It uses state-of-the-art nearest neighbour DNA binding thermodynamics to estimate possible unwanted pairings between PCR samples. This thermodynamic data is then used to distribute primers into groups that satisfy user defined set of constraints.</p>
+	  <p>Stand-alone MultiPLX binaries, example file and README are available <a href="/download/">here</a>.
+	  <p>Here is a correct <a href="sample.txt">primers</a> file.</p>
+	  <p>For further information please contact: <img src="../email.php?id=6&f=3&c=CCCCCC" align="top"></p>
+	  <p><b><font color="red">How to cite MultiPLX:</font></b> Kaplinski L, Andreson R, Puurand T, Remm M. MultiPLX:	 automatic grouping and evaluation of PCR primers. Bioinformatics. 2005 Apr 15;21(8):1701-2. [<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15598831">PubMed</a>] [<a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/21/8/1701">Full Text</a>]</p>
+	  <p>There have been <b>12903</b> submissions to this web site since January 2005.</p>
+	  </td>
+	</tr>
+      </table>	
+    </td>
+  </tr>
+  <tr>
+    <td height="1"><div class="content" align="justify">	
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">
+	<tr>
+	  <td bgcolor="#FF0000"><b><font color="#FFFFFF">I Please insert primers file (required for each method!)</font></b></td>
+	</tr>
+	<tr>
+	  <td bgcolor="#CCCCCC"><input type="file" name="primerfile"> (<b>plain .txt file only!</b>)
+	</td>
+	</tr>
+      </table>
+    </td>
+  </tr>	
+  <tr>	
+    <td height="1"><div class="content" align="justify">
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">
+	<tr>
+	  <td bgcolor="#0066CC"><b><font color="#FFFFFF">II Please insert data or/and select method</font></b></td>
+	</tr>
+      </table><br>
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">      
+	<tr>
+	  <td colspan="2" bgcolor="#0066CC"><b><font color="#FFFFFF">1. Viewing primer info</font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="2" bgcolor="#CCCCCC">This function calculates the following statistics about primers:<br>
+	  1) The melting temperatures of both left and right primer of each pair<br>
+	  2) The strongest binding energies of each type (end-end, end-any, any-any) for each combination of primers in pair (left-left, left-right, right-right).
+	  The results can be used as additional estimation of primer quality (unrelated to multiplexing).</td>
+	</tr>	
+	<tr>
+	  <td width="50%" bgcolor="#CCCCCC">Monovalent salts: <input type="text" name="na" value="50" size="4"> (mM)</td>
+	  <td width="50%" bgcolor="#CCCCCC">Concentration of [Mg<sup>+</sup>]: <input type="text" name="mg" value="1.5" size="4"> (mM)</td>	
+	</tr>
+	<tr>
+	  <td colspan="2" bgcolor="#CCCCCC"><input type="submit" name="view" value="Run MultiPLX" style="background-color:red;font-weight:bold;color:white;"> <input type="reset" name="reset" value="reset"></td>
+	</tr>	
+      </table><br>
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">2. Calculating scores</font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC">This function calculates all strongest alignement energies (kcal/mol) for each selected
+	  alignement type out of the five possible types (3 types for primer-primer, 2 types for primer-product) between all possible primer pair combinations.</td>
+	</tr>	
+	<tr>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="checkbox" name="sc1" value="1"> primer-primer end2</td>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="checkbox" name="sc2" value="2"> primer-primer end1</td>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="checkbox" name="sc3" value="3"> primer-primer any</td>		
+	</tr>	
+	<tr>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="checkbox" name="sc4" value="4"> primer-product end1</td>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="checkbox" name="sc5" value="5"> primer-product any</td>
+	  <td width="33%" bgcolor="#CCCCCC">&nbsp;</td>		
+	</tr>		
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="submit" name="score" value="Run MultiPLX" style="background-color:red;font-weight:bold;color:white;"> <input type="reset" name="reset" value="reset"></td>
+	</tr>	
+      </table><br>
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">3. Calculating groups</font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC">This function calculates the optimal multiplexing solution of current primers, using
+	  strongest binding energies calculated in previous step (or uploaded by user), basic
+	  primer parameters (product length, melting temperatures) and optionally additional score
+	  file uploaded by user. The resulting file has groups in rows and primer names in columns.</td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Please insert score file</font></b></td>
+	</tr>	
+	<tr>	
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="file" name="scorefile1"></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Choose parameters for grouping</font></b></td>
+	</tr>			
+	<tr>	
+	  <td colspan="3" bgcolor="#CCCCCC">Maximum number of groups <input type="text" name="maxgroup" value="1000" size="5"><br>
+	  Maximum number of primers in group <input type="text" name="maxitemgroup" value="1000" size="5"><br>
+	  Product length max difference (range) in group <input type="text" name="cutoff6" value="" size="5"><br>
+	  Product length min difference (ladder) in group <input type="text" name="cutoff7" value="" size="5"><br>
+	  Maximum primer melting temperature difference in group <input type="text" name="cutoff8" value="" size="5"></td>	
+	</tr>			
+        <tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Choose grouping stringency</font></b></td>
+	</tr>
+	<tr>
+	  <td width="50%" bgcolor="#CCCCCC">
+	  It is possible to use fixed stringency values (high, normal, low) or define custom cutoff values.
+	  Fixed stringency values are following:<br>
+	  High:	-2.0,  -6.0,  -6.0, -10.0, -10.0 (kcal/mol)<br>
+	  Normal: -4.0,  -8.0,  -8.0, -12.0, -12.0 (kcal/mol)<br>
+	  Low: -6.0, -10.0, -10.0, -14.0, -14.0 (kcal/mol)
+	  </td>	  
+	  <td width="50%" bgcolor="#CCCCCC"><input type="radio" name="str1" value="high"> High <input type="radio" name="str1" value="normal"> Normal <input type="radio" name="str1" value="low"> Low</td>
+	</tr>	
+	<tr>	
+	  <td colspan="3" bgcolor="#CCCCCC">dG of primer-primer both 3' ends <input type="text" name="cutoff1" value="-4.0" size="5"> (kcal/mol)<br>
+	  dG of primer-primer 3' end with any region <input type="text" name="cutoff2" value="-8.0" size="5"> (kcal/mol)<br>
+	  dG of primer-primer any regions <input type="text" name="cutoff3" value="-8.0" size="5"> (kcal/mol)<br>
+	  dG of Primer-product 3' end with any region  <input type="text" name="cutoff4" value="-12.0" size="5"> (kcal/mol)<br>
+	  dG of Primer-product any regions <input type="text" name="cutoff5" value="-12.0" size="5"> (kcal/mol)</td>
+	</tr>			
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Please insert additional score file (Optional)</font></b></td>
+	</tr>	
+	<tr>	
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="file" name="scorefile2"> Maximum allowed score: <input type="text" name="cutoff9" value="1.0"></td>
+	</tr>				
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="submit" name="group" value="Run MultiPLX" style="background-color:red;font-weight:bold;color:white;"> <input type="reset" name="reset" value="reset"></td>
+	</tr>	
+      </table><br>
+       <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">4. Verifying groups</font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC">This function allows testing existing grouping file (either calculated in previous
+	  step or uploaded by user) against score file (again either calculated or uploaded).
+	  The resulting file lists all primer pair combinations that break cutoff rules, the
+	  types of violated cutoffs and corresponding binding energies.</td>
+	</tr>		
+	
+        <tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Please insert score file</font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="file" name="scorefile3"></td>
+	</tr>	
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Please insert group file</font></b></td>
+	</tr>	
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="file" name="groupfile"></td>
+	</tr>				
+	
+        <tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Choose grouping stringency</font></b></td>
+	</tr>
+        <tr>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="radio" name="str2" value="high"> High</td>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="radio" name="str2" value="normal" checked> Normal</td>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="radio" name="str2" value="low"> Low</td>
+	</tr>	
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="submit" name="verify" value="Run MultiPLX" style="background-color:red;font-weight:bold;color:white;"> <input type="reset" name="reset" value="reset"></td>
+	</tr>	
+      </table>	
+    </td>
+  </tr>		
+</table>
+</form>
+<p>University of Tartu, Department of Bioinformatics 2011</p>
+</center></body>
+</html>

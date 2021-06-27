@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/SUPERFAMILY/stylesheets/superfamily.css">
+<title>Supplementary information for k-mer model publication</title> 
+</head>
+
+<body class="yui-skin-sam">
+<table width="800" cellpadding=50><tr><td>
+
+<h1 class="c2">Supplementary information</h1>
+
+
+
+for "Improving protein secondary structure prediction using a simple k-mer"
+<br>
+
+by M. Madera, R. Calmus, G. Thiltgen, K. Karplus and J. Gough 
+<br>
+<br>
+<p>
+
+All of our inputs, training data, scripts, programs and results can be browsed and 
+downloaded <a href=data>here</a>, or as one tar-ball <a href=data.tgz>here</a>. The 
+<code>predict-2nd</code> program for running neural networks is available <a 
+href=http://users.soe.ucsc.edu/~karplus/predict-2nd/>here</a>, but should not be 
+necessary as all the profiles used in our publication are available <a 
+href=data/profiles>here</a>.
+
+<p>
+
+The data should be mostly self-explanatory. As for the programs, a typical training 
+cycle looks like this:
+
+<ol>
+<li> Sample: <p>
+
+<code>
+java -cp Java_source TFSampler sample 4 R.dat prof.rdb 100 0 10 rel 4 &gt B.fa
+</code> <p>
+
+<li> Remove burn-in sequences, collect samples for all profiles in a training set, 
+and run this command on the resulting fasta file: <p>
+
+<code>
+java -cp Java_source TFEstimator 4 samples.fa model iteration &gt B.dat
+</code> <p>
+
+<li> Build the scores file for the next iteration: <p>
+
+<code>
+updater.pl T.dat B.dat R_current.dat &gt R_next.dat 
+</code> <p>
+
+</ol>
+
+Decoding is performed either via <code>TFSampler</code> as above for sampled 
+posterior, or using <code>maxp.pl</code> (profile only), <code>maxp_nmer.pl</code> 
+(Viterbi) or <code>maxp_nmer_post.pl</code> (exact posterior) in the scripts 
+directory.
+
+<p>
+
+If you have any questions, please contact 
+<a href=mailto:martin.madera@gmail.com>Martin Madera</a>.
+
+</td></tr></table>
+</body>
+</html>

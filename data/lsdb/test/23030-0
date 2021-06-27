@@ -1,0 +1,387 @@
+<html>
+<head><title>Search engine argumentation</title>
+
+<style>
+</style>
+
+<STYLE type="text/css">
+body { font-family: sans-serif }
+p {  clear: both; margin-bottom: 0.2cm; margin-top: 0.1cm; padding:0.1cm;  }
+h2 { margin-top: 192px; clear: both; font-family: sans-serif; font-size: 14pt }
+h2.header { margin-top: 5px; }
+h3 { clear: both; font-family: sans-serif; font-size: 12pt; padding-top: 1cm; }
+div.content { border: none; position: absolute; left: 100px; top: 180px; z-index: 0 }
+div.header { padding: 10px; border-bottom: 2px solid black;  background-color: white; position: fixed; top: 0px; z-index: 1; left:0px; right: 0px; }
+div.menu { border: none; position: absolute; right: 4px;  bottom: 0px; width: 300px; z-index: 1 }
+div.menuItem { font-weight: bold; color: white;  background-color: gray; position: relative; padding: 2px 8px; border: solid black 2px; text-decoration: none; margin-top: 0.1cm; margin-bottom: 0.2cm; }
+a { text-decoration: none }
+a.menuItem:link { color: yellow; }
+a.menuItem:visited { color: yellow; }
+a.menuItem:active { color: yellow; }
+a.menuItem:hover { color: white; }
+p.tut { border-top: black solid thin; }
+span.j { background-color: #ccffcc; }
+span.nj { background-color: #dddddd; }
+
+td.arg { vertical-align: middle; width: 50%; text-align: center; border-top: black thin solid; padding-top: 5px; padding-bottom: 5px; }
+td { vertical-align: top; padding:5px; }
+
+pre { clear: both; }
+
+img.tut { margin-left: 0px; float: right; padding-left: 10px; padding-bottom: 10px; }
+
+</STYLE>
+
+
+</head>
+<body>
+<a name="top">
+
+
+<div class="header">
+<a href="index.html"><img src="Alogo.png" style="border-style: none"></a><br>
+<h2 class="header">Protein Fold Recognition Argumentation Server</h2>
+<table style="padding: 0; margin: 0; border: 0;">
+<tr>
+<td style="padding: 0; margin: 0; vertical-align: top;">
+<h2 class="header">Imperial College<br>London</h2>
+</td>
+<td style="padding: 0 0 0 40px; margin: 0; vertical-align: top;">
+<p>Work funded by<br><a href="http://www.bbsrc.ac.uk"><img src="bbsrc.png" style="border-style: none"></a>
+</p>
+</td>
+</tr>
+</table>
+
+<div class="menu">
+<div class="menuItem" style="background-color: black;">
+&gt;<a class="menuItem" href="http://www.sbg.bio.ic.ac.uk/3dpssm/html/ffrecog_simple.html">Start search</a> 3D-PSSM is down due to the upcoming CASP trials - sorry!
+</div>
+<div class="menuItem">
+&gt;<a class="menuItem" href="#help">Help</a>
+</div>
+<div class="menuItem">
+&gt;<a class="menuItem" href="#example">Worked example</a>
+</div>
+<div class="menuItem">
+&gt;<a class="menuItem" href="#argumentation">Argumentation</a>
+</div>
+</div>
+
+</div>
+
+<div class="content">
+
+<p>
+<table width="100%">
+<tr>
+<td colspan="2" style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td>
+<p>
+<b style="font-size: larger;">
+Benjamin R. Jefferys<sup>1</sup><br>
+Lawrence A. Kelley<sup>1</sup><br>
+Marek J. Sergot<sup>1</sup><br>
+John Fox<sup>2</sup><br>
+Michael J. E. Sternberg<sup>1</sup>
+</b><br>
+</p>
+</td>
+<td style="vertical-align: bottom">
+<p>
+1 - Imperial College, London<br>
+2 - Cancer Research UK, London
+</p>
+</td>
+</tr>
+</table>
+</p>
+
+<table width="100%" style="margin: 20px 0; background-color: #cccccc; padding: 5px 0;">
+<tr>
+<td style="padding: 0 5px">
+<div class="menuItem" style="background-color: black; margin:0; ">
+&gt;<a class="menuItem" href="http://www.sbg.bio.ic.ac.uk/3dpssm/html/ffrecog_simple.html">Start search</a>
+3D-PSSM is down due to the upcoming CASP trials - sorry!
+</div>
+</td>
+<td style="padding: 0 5px">
+<div class="menuItem" style="margin:0">
+&gt;<a class="menuItem" href="#help">Help</a>
+</div>
+</td>
+<td style="padding: 0 5px">
+<div class="menuItem" style="margin:0">
+&gt;<a class="menuItem" href="#example">Worked example</a>
+</div>
+</td>
+<td style="padding: 0 5px">
+<div class="menuItem" style="margin:0">
+&gt;<a class="menuItem" href="#argumentation">Argumentation</a>
+</div>
+</td>
+</tr>
+<tr>
+<td style="padding: 0 5px" width="25%">Go to 3DPSSM website and submit a protein sequence</td>
+<td style="padding: 0 5px" width="25%">Help on using the argumentation system with 3DPSSM</td>
+<td style="padding: 0 5px" width="25%">An example which explains the philosophy of argumentation with 3DPSSM</td>
+<td style="padding: 0 5px" width="25%">A general description of the theory of argumentation</td>
+</tr>
+</table>
+
+<p>
+This system applies expert knowledge, in the form of an <em>argumentation framework</em>, to results returned by the <a href="http://www.sbg.bio.ic.ac.uk/3dpssm/">3DPSSM Protein Fold Recognition Server</a>. Once a protein sequence has been submitted to that server, the results link to this system. This helps you interpret your search by simplifying and summarising the results, and coming to a conclusion.
+</p>
+
+<p>
+This is just one example of a number of possible applications of argumentation, both within bioinformatics and in general. More information on argumentation may be found at the <a href="http://www.argumentation.org/">ASPIC website</a>
+</p>
+
+<p>
+The 3DPSSM output data used to validate and optimize the argumentation system can be downloaded as a zipped set of XML files <a href="validationData.zip">here</a>. Documentation is included in the archive and <a href="README.validation.txt">here</a>.
+</p>
+
+<p>
+<i>Reference to a paper to cite will appear here</i>
+</p>
+
+<a name="help">
+<h2>Help using the argumentation system</h2>
+<p>
+This section describes a typical session using 3DPSSM with this argumentation system. More information on 3DPSSM can be found on the <a href="http://www.sbg.bio.ic.ac.uk/3dpssm/html/3DPSSMhelp.html">3DPSSM help page</a> 
+</p>
+
+<h3>1 Submit protein sequence to 3DPSSM</h3>
+<p class="tut">
+<img class="tut" src="tutorial1.png">
+Enter the protein sequence whose structure you wish to find on the <a href="http://www.sbg.bio.ic.ac.uk/3dpssm/html/ffrecog_simple.html">3DPSSM search page</a>.
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial2.png">
+Once submitted, wait for email confirming completion of your search. This will usually take about half an hour.
+</p>
+
+<h3>2 View 3DPSSM results</h3>
+<p class="tut">
+<img class="tut" src="tutorial3.png">
+Click on the link in the result email you receive. This shows you the normal 3DPSSM results. These results may be <a href="http://www.sbg.bio.ic.ac.uk/3dpssm/html/interpret.html">studied manually</a>, however this is quite hard work and can be simplified using the argumentation system!
+</p>
+
+<h3>3 View argumentation of 3DPSSM results</h3>
+<p class="tut">
+<img class="tut" src="tutorial4.png">
+Click on the link for argumentation at the top of the main 3DPSSM results page. There is a Java and non-Java link. The Java version allows you to explore decisions made by the argumentation system. <a href="http://www.java.com/en/download/">Get Java here.</a>
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial5.png">
+This is the main argumentation results page. The green area contains matches which have been judged as good by the argumentation system. In the yellow area are matches which the system is undecided on. The red area has matches which have been judged as bad. Click on a result to see more information about it.
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial6.png">
+Across the top are links back to the 3DPSSM pages about this search. If you are using the Java version, there is a button to open a new window where the argumentation framework will be displayed when you click on a match.
+</p>
+
+<h3>4 Explore argumentation for each result</h3>
+<p class="tut">
+<img class="tut" src="tutorial7.png">
+Click on a result name to look at a summary of the argumentation about a search result. The summary appears below the results.
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial10.png">
+When you select a result, if the Java window is visible, you are shown the argumentation framework. More information about what this diagram means is <a href="#argumentation">here</a>. If you don't have Java, you can <a href="http://www.java.com/en/download/">get it here.</a>
+<ul>
+<li>drag the claims around to change the layout of the diagram</li>
+<li>remove a claim by pointing at it then clicking on the cross that appears to the left</li>
+<li>add a claim by selecting it in the box at the bottom left, and clicking on "Add"</li>
+<li>defeated claims are shown with grey backgrounds</li>
+<li>claims supporting the match are shown in green, and claims against the match are red</li>
+<li>the conclusion of the framework is shown at the bottom right</li>
+</ul>
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial8.png">
+This is the summary of an argumentation for a good result. It shows the following information:
+<ul>
+<li>a link to look at the argumentation framework, without using Java</li>
+<li>a list of features of the match which led the positive conclusion</li>
+<li>some basic information about the match</li>
+<li>undefeated claims about the match which led to the positive conclusion</li>
+<li>links back to 3DPSSM to view the 3D model, alignment and template</li>
+</ul>
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial12.png">
+A bad result gives similar information. The features and claims are now those which led to the negative conclusion.
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial11.png">
+An undecided result gives slightly different information. It gives you all the relevant claims about the match, to help you come to your own conclusion. Some claims are in brackets - these have been defeated by other claims. In this example, "the sequence identity is low" has been defeated by "the 3DPSSM E-value is low" (you can see this by viewing the argumentation framework).
+</p>
+
+<p class="tut">
+<img class="tut" src="tutorial9.png">
+Clicking on "view framework" shows a static view of the argumentation framework, if you cannot use Java. More information about what this diagram means is <a href="#argumentation">here</a>.
+<ul>
+<li>defeated claims are shown with grey backgrounds</li>
+<li>claims supporting the match are shown in green, and claims against the match are red</li>
+</ul>
+</p>
+
+<p><a href="#top"><b>Back to top</b></a></p>
+
+<a name="example">
+<h2>Worked example - before and after</h2>
+<p>
+<img class="tut" src="pinusTaeda.jpg">
+This worked example takes the predicted amino acid sequence for a <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Protein&list_uids=58585525&dopt=GenPept">calcium-dependent protein kinase from Pinus taeda</a> (loblolly pine tree - right) and shows the process of finding a putative model for it using 3DPSSM alone, and then applying argumentation to do the same job more easily.
+</p>
+<p>The protein sequence is as follows:
+<pre>
+isggakdlvkrmlehdpkkrlkaadvlshpwmredgeapdkpldstvlvr
+mkqframnklkkvalkviaeslseeeirglkemfksidadnsgtvtfeel
+knglarfgskisetevrqlmdavst
+</pre>
+</p>
+
+<h3>Before: 3DPSSM alone</h3>
+<p class="tut">
+<img class="tut" src="exampleSubmit.png">
+Go to <a href="http://www.sbg.bio.ic.ac.uk/~3dpssm/html/ffrecog_simple.html">3DPSSM submission form</a> and fill in the details as shown, replacing <i>your@email.com</i> with your own email address. Then click "Submit".
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleEmail.png">
+Eventually you will receive an email like this. Click on the second link to view the results in a web browser.
+</p>
+
+<p class="tut">
+<img class="tut" src="example3DPSSM.png">
+Scroll down and look at the first three results (d1ej3a, d1rro and c1jf0a). Some of the key information is shown here. All three have "EF Hand-like" folds according to SCOP, a fold which appears in most of the searches. The 3DPSSM E-values give 80%, 70% and 50% confidence to the results respectively. The length of the template (the protein found to use as a model for the query sequence) varies by around 85 residues. The percentage identity is quite low for all three. The Sawted and Biotext scores, which reflect how well the functional annotation for the query and template agree, are fairly unimpressive. Further down the page, match d1a06 has a good Biotext score, indicated by the orange background. Click on the link at the left to view the detail of the alignment for d1ej3a.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleAlignment.png">
+In the alignment for d1ej3a, you can see that there are gaps in the query sequence where core residues in the template structure are supposed to reside, towards the end of the alignment. Coreness is shown in the bottom row, with warmer colours and higher numbers indicating deeper residues (with many contacts). Missing core residues indicate a bad model.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleQueryPSSM.png">
+Go back to the main page and click on "Query PSSM" above the main table. This gives a very long page which shows the multiple sequence alignment used to search for templates by 3DPSSM. The longer it is, the better the search. Scroll to the bottom and you can see there 125 sequences in the PSSM for the query. This is enough to give a very high quality "probe" for the database, giving us some extra confidence in the results.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleQueryHelix.png">
+Go back to the main page and look at the bottom of the window, where the query secondary structure is shown. All of the query sequence is predicted as alpha-helix (H) or unstructured coils (C). This makes it easier to align with arbitrary, non-homologous structures, therefore perhaps we should be cautious about all the results.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleTemplateHelix.png">
+Go back to the main page and click on the link "d1rro" under the column "Fold Library". This shows you the detail about that particular protein template. Look at the 1D Sequence information. Again, most of the structure is alpha-helix or coil, with just a few short strand elements. So perhaps this result is not so reliable.
+</p>
+
+<p class="tut">
+With a lot of browsing and a bit of expert knowledge, we've done a very basic analysis of some of the results. In reality we'd have to look more closely at all the results in order to get the most from them. The information we've found is sometimes contradictory - the query sequence is difficult because it is predicted as being all alpha-helix, but is good because it has lots of homologues to use as the probe. These claims affect the confidence we have in all the results, whereas the gaps in core residues and the all-helix template only affect individual results. In all it is a lot of work, and difficult to do fairly and consistently manually. Below we see how argumentation simplifies the process. 
+</p>
+
+<h3>After: 3DPSSM and argumentation</h3>
+<p class="tut">
+<img class="tut" src="exampleArgStart.png">
+Go back to the main page and click on the link to the "Java" version of the Argumentation system, towards the top of the page. If you do not have Java or have trouble with the Java version, use the "No Java" link. From now on, "Java:" will precede any instructions which only apply if you have Java, and "No Java:" for those when only apply when you don't have Java.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleArgMain.png">
+This is the main argumentation page. It gives a very simple summary of what the argumentation system thinks about the results, putting them into three categories: good, bad and undecided.<br><span class="j">Java: Click on the "view argumentations" button to open a new window, and move it so you can see everything.</span><br>Now click on [d1a06_] under "Good Matches". It will highlight in white.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleArgBiotextSummary.png">
+The summary of the argumentation about this result is shown.<br><span class="nj">No Java: Click on the "view framework" link</span><br>Recall from the previous section that this result came a long way down the results table, but had a good Biotext score. Also recall that the PSSM for the query was made from many homologues, creating a reliable probe for the database. These two positive features are given in the first sentence: <i>"d1a06__ is a good match due to its keywords, query source homologues"</i>. Towards the bottom are some more details about the arguments which mean this is a good match. For example, there were 125 sequences in the query PSSM: this is summarised as <i>"the query PSSM is derived from many homologues"</i>, with the justification that there were <i>"more than 100"</i> such homologues.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleArgBiotextDetail.png">
+Not all of the claims relevant to a particular match are given in the summary. Some claims are deemed irrelevant as compared to others. For example, d1a06 has a low sequence identity. However this fact is ignored because the good Biotext score is more important. You can see this information in the argumentation framework.<br><span class="j">Java: this is in the window you opened earlier. This display is duplicated here.</span><br><span class="nj">No Java: this was displayed when you clicked on "view framework". This display is similar to that shown here, which is the Java version.</span><br>Circled in blue are these two arguments. The low Biotext score is good for the match, so it is coloured green. The low sequence identity is bad for the match, so it is coloured red. The arrow shows that the Biotext score is more important than the low sequence identity: Biotext <i>attacks</i> low sequence identity, which is shown with a grey background and coloured text to indicate it has been <i>defeated</i>.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleArgBioTextDefeat.png">
+Relationships between the claims can form chains. Here, the claim that there are many query homologues is attacked by a high 3DPSSM E-value: no matter how good the query is, a poor E-value overrides it. However, the good Biotext score in turn attacks the E-value, which is defeated. Its attack on the query homologues is no longer valid, so that claim is not defeated. This process of deciding which claims are defeated is at the core of decision-making with argumentation. Both of the undefeated claims are good for the match, so the overall conclusion of this argumentation is that match d1a06 is good.
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleArgChange.png">
+<span class="j">Java: remove the Biotext claim by pointing at it then clicking on the cross that appears at the top left. It disappears and the argumentation changes radically. The defeated claims change. The query homologues are now defeated, as Biotext isn't there to "rescue" it from the attack by the high 3DPSSM E-value. Since all the undefeated claims are bad for the match, the overall conclusion of the altered argumentation is that match d1a06 is bad.</span>
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleArgUndecidedDetail.png">
+Move back to the main search results page now, and click on [d1ej3a_] under "Undecided matches". Recall that this was the top match in 3DPSSM, with over 80% confidence. The argumentation says that it might not be such a good match. To find out why...<br><span class="j">Java: look at the argumentation in the separate window</span><br><span class="nj">No Java: click on "view framework"</span><br>
+This framework shows a mixture of undefeated claims, both good and bad for the match. The system does not try to resolve this problem, instead leaving it to you to interpret the evidence yourself. This diagram may help you.<br>
+<span class="j">Java: you can experiment with trying to resolve the argumentation by adding or removing claims. For example, you might look at the alignment in 3DPSSM and decide that the core residues aren't so bad. So remove that claim from the diagram. In this case it does not resolve the argumentation. You may also add claims you think apply to the match by selecting them in the box at the bottom left and clicking "Add". Try adding "Very low PSI-Blast E-value": and the argumentation decides that, based on this information, the match is good.</span>
+</p>
+
+<p class="tut">
+<img class="tut" src="exampleArgUndecided.png">
+Move back to the main search results page now, and look at the summary of the argumentation for d1ej3a. This tells you all the claims pertinent to the match. The ones in brackets at the bottom are defeated. From this you can draw your own conclusions.</span>
+</p>
+
+<p class="tut">
+We have used the argumentation system to process and highlight information which previously required a lot of browsing and some expert knowledge. The argumentation system takes the output of 3DPSSM and presents it having been "filtered" to extract and highlight the important information. Matches are sorted into simple categories to highlight likely candidate models. The system allows you to look at the detail of its reasoning process, so you can alter or even dismiss it entirely.  Links are provided to return to the 3DPSSM results so you can make your own assessment. It is easy to explore every single result, rather than just a few, so even the "bad" matches may be studied in some detail.
+</p>
+
+<p><a href="#top"><b>Back to top</b></a></p>
+
+<a name="argumentation">
+<h2>Decision-making with argumentation</h2>
+<p>
+This system uses argumentation as a way to come to a final conclusion regarding a particular hypothesis. In our case that hypothesis is "this is a good structural model for the query amino acid sequence". This will be different for other applications. For example, if the method were applied to Google, the hypothesis would be "this is the web page the user is looking for". In medicine it might be "this drug will cure the patient's illness without serious side-effects".
+</p>
+
+<p>
+The example below shows how argumentation works by building up a framework, explaining the decisions made at each point. For a more formal study of the process, see <i>Claudette Cayrol, Sylvie Doutre, J�r�me Mengin: On Decision Problems Related to the Preferred Semantics for Argumentation Frameworks. J. Log. Comput. 13(3): 377-403 (2003)</i>.
+</p>
+
+<p>
+<table width="100%">
+<tr><td class="arg"><img src="arg1c.png"></td><td class="arg"><img src="arg2c.png"></td></tr>
+<tr>
+<td><b>1.</b> Start with a single claim, Z. Z is coloured red because it is <i>against</i> the hypothesis. There are no other arguments, so it stands uncontested. We conclude the hypothesis is false.</td>
+<td><b>2.</b> We add a claim B. This is <i>in favour</i> of the hypothesis (green), and it attacks Z (a green arrow). Z has no defence against this attack, so it is defeated (shown in grey) and B is undefeated. We conclude the hypothesis is true.</td>
+</tr>
+<tr><td class="arg"><img src="arg3c.png"></td><td class="arg"><img src="arg4c.png"></td></tr>
+<tr>
+<td><b>3.</b> We add a third claim, X, which is against the hypothesis and attacks B (red arrow). 
+<ul>
+<li>X is not attacked, so it is undefeated.
+<li>B is attacked by X, so B is defeated.
+<li>Z is attacked by B, however B has been defeated by X. Therefore Z is undefeated.
+</ul>
+X and Z collectively defend themselves against all other claims. Both the undefeated claims are against the hypothesis, so we conclude it is false.</td>
+<td><b>4.</b> A fourth claim is added, called Y. Y is similar to X - it is against the hypothesis and attacks B. This doesn't change our conclusion. X, Y and Z collectively defend themselves against all claims, and all oppose the hypothesis.</td>
+</tr>
+<tr><td class="arg"><img src="arg5c.png"></td><td class="arg"><img src="arg6c.png"></td></tr>
+<tr>
+<td><b>5.</b> Claim C is added, which is in favour of the hypothesis and attacks Z. X, Y and B are not affected by this addition. However Z is no longer defended against all its attacks: the attack from B is still ignored, but the attack from undefeated C is not. So Z is now defeated. X, Y and C collectively defend themselves against all attacks, however they disagree on the hypothesis. So we cannot come to a conclusion - we are undecided.</td>
+<td><b>6.</b> Finally we add A. A attacks both X and Y, and is not attacked by anything else. This radically changes the argumentation. X and Y are now defeated. Their attacks on B are now invalid, which is now undefeated. B's attack on Z is now valid, but Z was already defeated anyway so nothing changes there. A, B and C collectively defend themselves against all claims, and they all agree the hypothesis is true, therefore that is our conclusion.</td>
+</tr>
+</table>
+</p>
+
+<p><a href="#top"><b>Back to top</b></a></p>
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,105 @@
+
+<html>
+<head>
+<title>GenomeTester 1.3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="description" content="e-PCR,, GenomeTester, human genome, bioinformatics, Tartu University">
+<link rel="stylesheet" href="http://bioinfo.ut.ee/genometester/default.css" type="text/css">
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" link="#0064A0" vlink="#98B8D0" alink="#FFFF00"><center>
+<table border="0" width="800" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+  <tr>
+    <td><img src="http://bioinfo.ut.ee/banner.jpg" align="left"></td>
+    <td><h2>GenomeTester 1.3</h2></td>
+  </tr>
+</table>
+<form method="post" enctype="multipart/form-data" action="index.php?action=run">
+<table border="1" width="800" cellspacing="2" cellpadding="10" bordercolor="#003333">
+  <tr>	
+    <td height="1"><div class="content" align="justify">
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">
+	
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">About the program: </font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><p>GenomeTester 1.3 tests 1) whether PCR primers have excessive number of binding sites on template sequence and 2) how many PCR products would be amplified from the template DNA and where are they located. 
+	  Having too many binding sites will typically result in failed PCR. Amplifying more than one product is undesireable because alternative PCR products could cause false positive signals in genotyping.<br>
+	  Index files are created with word size 16.</p>
+	  <p>Stand-alone GenomeTester binaries (GenomeMasker package), example files and README are available <a href="/download/">here</a>.<br>
+          Here is a correct <a href="primerfile.txt">input</a> file.</p>
+	  <p>For further information please contact: <img src="../email.php?id=3&f=3&c=CCCCCC" align="top"> and please check the <a href="help.php">HELP</a> page too.</p>
+	  <p><b><font color="red">How to cite GenomeTester:</font></b> Andreson R., Reppo E., Kaplinski L., Remm M. GENOMEMASKER package for designing unique genomic PCR primers. BMC Bioinformatics 2006, 7:172. [<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=16566824">PubMed</a>] [<a href="http://www.biomedcentral.com/content/pdf/1471-2105-7-172.pdf">Full Text</a>]</p>
+	  <p>There have been <b>31536</b> submissions to this web site since February 2005.</p>
+	  </td>
+	</tr>
+      </table>	
+    </td>
+  </tr>
+  <tr>
+    <td height="1"><div class="content" align="justify">	
+      <table width="100%" border="1" cellpadding="2" cellspacing="1" bordercolor="#000000">	
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Please select the genome: </font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><select name="genome">
+				                        <option value="cow_40">Bos Taurus build Btau_3.1 (Aug 2006)</option>
+			                                <option value="dog_20">Canis Familiaris build CanFam 2.0 (May 2006)</option>
+			                                <option value="zebrafish_Zv8">Danio rerio build Zv8 (Dec 2008)</option>
+				                        <option value="fly_513">Drosophila melanogaster build BDGP 4.3 (July 2005)</option>
+					                <option value="Fusarium">Fusarium sp. BROAD (March 2007)</option>
+		                                        <option value="human_37" selected>Homo Sapiens build NCBI 37/hg19 (Feb 2009)</option>
+	                                                <option value="human_36">Homo Sapiens build NCBI 36/hg18 (Oct 2005)</option>
+			                                <option value="macaque_10">Macaca mulatta build MMUL 1.0 (Feb 2006)</option>
+	                                                <option value="mouse_37">Mus Musculus build NCBI m37 (Apr 2007)</option>
+				                        <option value="chimp_21">Pan Troglodytes build CHIMP2.1 (Mar 2006)</option>
+					                <option value="rat_34">Rattus Norvegicus build RGSC 3.4 (Dec 2004)</option>
+	                                                </select></td>
+
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">Please insert primer ID, LEFT and RIGHT primer sequence or upload file: </font></b></td>
+	</tr>
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC">ID: <input type="text" name="primer_id" size="16" value=""> LEFT: <input type="text" size="30" name="primer_left" value=""> RIGHT: <input type="text" size="30" name="primer_right" value=""><br>
+	  <p>If You have more than one primer pair, please upload Your own input file (<b>plain .txt file only!</b>). All ID's and sequences must be separated by tabs.</p>
+<pre>Primer1     TGCACAATTTGATGCCGGTTTAGTAT     TTGTTGGTGGCTGCGTGCATAAT
+Primer2     TTAAAATGCAGATGCTGAACTGGGAA     TTGCTGTTTGATGGTGAATTAGGGAA</pre>
+	    <input type="file" name="primerfile"><input type="hidden" name="MAX_FILE_SIZE" value="10000000">
+	  </td>
+	</tr>
+	<tr>
+	  <td width="33%" bgcolor="#0066CC"><b><font color="#FFFFFF">Use bisulphite-treated genomic DNA (currently HUMAN only): </font></b></td>
+	  <td width="33%" bgcolor="#0066CC"><b><font color="#FFFFFF">Maximum product size: </font></b></td>
+	  <td width="33%" bgcolor="#0066CC"><b><font color="#FFFFFF">Primer matches to show: </font></b></td>
+	</tr>
+	<tr>
+	  <td width="33%" bgcolor="#CCCCCC"><input type="checkbox" name="methylation" value="1"></td>
+	  <td width="33%" bgcolor="#CCCCCC"><select name="max_prod_len">
+	                                    <option value="1000" selected>1000 bp</option>
+	                                    <option value="5000">5000 bp</option>
+	                                    <option value="10000">10000 bp</option>
+	                                    </select></td>		
+	  <td width="33%" bgcolor="#CCCCCC"><select name="limit">
+	                                    <option value="100">100</option>
+	                                    <option value="1000" selected>1000</option>
+	                                    <option value="5000">5000</option>
+	                                    </select></td>		
+	</tr>					
+	<tr>
+	  <td colspan="3" bgcolor="#0066CC"><b><font color="#FFFFFF">If you enter Your email address, You will get an email when GenomeTester job is finished (optional):</font></b></td>
+	</tr>			
+	<tr>
+	  <td colspan="3" bgcolor="#CCCCCC"><input type="text" name="email" value="" size="60"></td>
+	</tr>
+	<tr>
+          <td colspan="3" bgcolor="#CCCCCC"><input type="submit" name="gt" value="Run GenomeTester" style="background-color:red;font-weight:bold;color:white;"> <input type="reset" name="reset" value="Reset"></td>	
+      </table>
+    </td>
+  </tr>	
+</table>
+</form>
+<p>University of Tartu, Department of Bioinformatics 2011</p>
+</center></body>
+</html>

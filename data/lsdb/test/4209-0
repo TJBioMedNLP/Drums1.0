@@ -1,0 +1,1233 @@
+
+<!-- ==================================================================== -->
+<!-- ==================================================================== -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+
+<!-- ==================================================================== -->
+
+<meta name="author" content="ArTeCS Group, Complutense University of Madrid, Spain." />
+<meta name="description" content="bioNMF: An online web-based tool for Non-negative Matrix Factorization in biology." />
+<meta name="keywords" content="bioNMF, NMF, Matrix factorization, parallel implementation, Web Services" />
+
+<meta meta http-equiv="Content-Language" content="en"/>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
+<meta http-equiv="Last-Modified" content="2010/06/28" scheme="YYYY/MM/DD"/>
+<meta name="robots" content="index,follow"/>
+
+<!-- ==================================================================== -->
+
+<title>bioNMF - An online web-based tool for Non-negative Matrix Factorization in biology</title>
+
+<!-- ==================================================================== -->
+
+<link rel="stylesheet" type="text/css" href="css/bionmf_styles.css" />
+<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+
+<!-- ==================================================================== -->
+
+<script language="JavaScript" type="text/javascript">
+
+// <!--
+
+// ==============================
+
+// Menu of analysis methods.
+var menuAnalysis = new Array();
+menuAnalysis[ 0 ] = "StandardNMF";
+menuAnalysis[ 1 ] = "Biclustering";
+menuAnalysis[ 2 ] = "SampleClassification";
+
+// Default algorithms
+var defaultAlgorithm = new Array();
+defaultAlgorithm[ 0 ] = "Standard";
+defaultAlgorithm[ 1 ] = "nsNMF";
+defaultAlgorithm[ 2 ] = "Divergence";
+
+// Form.
+var bionmf_form;
+
+
+// ==============================
+// ==============================
+
+
+/*
+ * Resets the menu.
+ */
+function init()
+{
+
+	bionmf_form = document.bionmf_form;
+
+	// Hides input options
+	show_input_options(1);
+
+	// Default input file-format: Text.
+	hide_text_options(0);
+
+	// Hides preprocessing options.
+	show_prep_options(1);
+
+	// Sets the default Analysis Method and some associated options.
+	show_positive();
+	selectMenu( 0 );
+
+	// Hides Analysis options.
+	show_adv_analysis(1);
+	show_init_files(1);
+
+	// Default Analysis Options for no initialization files.
+	bionmf_form.userfile_w.value = "";
+	bionmf_form.userfile_h.value = "";
+	set_init_files();
+
+	// // Debug only
+	// alert("Web disabled temporary. Please try later...");
+
+
+} // init
+
+
+// ==============================
+// ==============================
+
+
+/*
+ * Checks for valid input characters (natural numbers)
+ *  '0'..'9' , <left&right arrow>, <enter>, <backspace>
+ */
+function acceptNum(evt)
+{
+
+	var nav4 = window.Event ? true : false;
+
+	var key = nav4 ? evt.which : evt.keyCode;
+	return ((key >= 48 && key <= 57) || (key <= 31) || (key == 127) ); // '0'..'9' or control characters.
+
+} // acceptNum
+
+// ------------------------------
+
+/*
+ * Checks for valid input characters (float numbers)
+ * '0'..'9', '.' , 'E', 'e', '-', <left&right arrow>, <enter>, <backspace>
+ */
+function acceptNumF(evt)
+{
+
+	var nav4 = window.Event ? true : false;
+
+	var key = nav4 ? evt.which : evt.keyCode;
+	return ( (key >= 48 && key <= 57) || (key <= 31) || (key == 127) || // '0'..'9' or a control character.
+		(key == 46) || (key == 69) || (key == 101) || (key == 45) ); // '.', 'E', 'e' or '-' character.
+
+} // acceptNumF
+
+
+// ==============================
+// ==============================
+
+
+/*
+ * Show or hides the given items.
+ *	is_shown: Elements are show.
+ *	force_hide: Forces to hide (defautl: 0).
+ *
+ * Returns 1 if items are shown, 0 otherwise.
+ */
+function show_items( items, is_shown, force_hide )
+{
+
+	// Hides items.
+	if ( is_shown || force_hide ) {
+
+		for ( i=0 ; i<items.length ; i++ ) {
+			var cn = items[i].className;
+			items[i].className = cn.replace( /item_show/, "item_hide" );
+		}
+
+		return 0;
+
+	} else { // Shows items.
+
+		for ( i=0 ; i<items.length ; i++ ) {
+			var cn = items[i].className;
+			items[i].className = cn.replace( /item_hide/, "item_show" );
+		}
+
+		return 1;
+
+	}
+
+} // show_items
+
+// ==============================
+// ==============================
+
+/*
+ * Shows or hides input options.
+ *	force_hide: If non-zero, forces to hide this item.
+ */
+function show_input_options( force_hide )
+{
+
+	var opt = document.getElementById("input_options");
+	var items = new Array( opt );
+	bionmf_form.input_opt_shown = show_items( items, bionmf_form.input_opt_shown, force_hide );
+
+
+} // show_input_options
+
+// ------------------------------
+// ------------------------------
+
+/*
+ * Hides/shows options for an input text-file.
+ */
+function hide_text_options( hide )
+{
+
+	var text_opt = document.getElementsByName("text_file_options");
+
+	show_items( text_opt, hide, hide );
+
+} // hide_text_options
+
+// ==============================
+// ==============================
+
+/*
+ * Shows or hides preprocessing options.
+ *	force_hide: If non-zero, forces to hide this item.
+ */
+function show_prep_options( force_hide )
+{
+
+	var opt = document.getElementById("preprocessing_options");
+	var items = new Array( opt );
+	bionmf_form.prep_opt_shown = show_items( items, bionmf_form.prep_opt_shown, force_hide );
+
+
+} // show_prep_options
+
+// ------------------------------
+// ------------------------------
+
+/*
+ * Show some hidden options in the "positive" select element.
+ * Keeps current selection.
+ */
+function show_positive()
+{
+
+	var opts = document.getElementsByName("PosOpt");
+	show_items( opts, 0, 0 );
+
+} // show_positive
+
+// ------------------------------
+
+/*
+ * Hides some options in the "positive" select element.
+ * If one of them was selected, changes selection to default ("No").
+ */
+function hide_positive()
+{
+
+	var selected_positive = bionmf_form.positive.value;
+
+	var opts = document.getElementsByName("PosOpt");
+	var i = 0;
+
+	// If one of them is selected, changes selection to default ("No").
+	while ( (i < opts.length) && ( opts[i].value != selected_positive ) )
+		i++;
+
+	if ( i < opts.length )
+		bionmf_form.positive.value = "No";
+
+	// Hides them
+	show_items( opts, 1, 1 );
+
+} // hide_positive
+
+
+// ==============================
+// ==============================
+
+
+/*
+ * onclick event handler.
+ *
+ * Sets the 'analysis_method' hidden variable.
+ * Adjusts the layout of all analysis-methods menues.
+ * Sets some analysis options according to the selection.
+ */
+function selectMenu( id )
+{
+
+	var item=0; // Current menu item.
+
+	// Sets items previous to <id> as 'not selected'.
+
+	for ( item=0 ; item<id ; item++ ) {
+		var e = document.getElementById( "menu_" + menuAnalysis[ item ] );
+		var cn = e.className;
+		cn = cn.replace( /menu_onmouseover/, "menu_onmouseout" );
+		cn = cn.replace( /\s*color_\S+\s*/, "" );	// Deletes background color
+		e.className = cn.replace( /menu_selected/, "menu_not_selected" );
+
+		// Hides, also, the link to example
+		e = document.getElementById( menuAnalysis[ item ] + "_example" );
+		cn = e.className;
+		e.className = cn.replace( /item_show/, "item_hide" );
+	}
+
+
+	// -----------------
+
+
+	// Sets items following to <id> as 'not selected'.
+
+	for ( item=id+1 ; item<menuAnalysis.length ; item++ ) {
+		var e = document.getElementById( "menu_" + menuAnalysis[ item ] );
+		var cn = e.className;
+		cn = cn.replace( /menu_onmouseover/, "menu_onmouseout" );
+		cn = cn.replace( /\s*color_\S+\s*/, "" );	// Deletes background color
+		e.className = cn.replace( /menu_selected/, "menu_not_selected" );
+
+		// Hides, also, the link to example
+		e = document.getElementById( menuAnalysis[ item ] + "_example" );
+		cn = e.className;
+		e.className = cn.replace( /item_show/, "item_hide" );
+	}
+
+
+	// -----------------
+
+
+	// Sets item <id> as 'selected'.
+	var e = document.getElementById( "menu_" + menuAnalysis[ id ] );
+	var cn = e.className;
+	cn = cn.replace( /menu_onmouseout/, "menu_onmouseover" );
+	cn = cn.replace( /menu_not_selected/, "menu_selected" );
+	if ( cn.indexOf( "color_" ) < 0 )
+		cn = cn.concat( " color_" + id + "_menu" );
+	e.className = cn;
+
+
+	// Changes background of Analysis-options children menus.
+	item=0;
+	e = document.getElementsByName( "analysis_options_menu" );
+	for ( item=0 ; item<e.length ; item++ ) {
+		cn = e[ item ].className;
+		e[ item ].className = cn.replace( /color_\S+/, "color_" + id + "_menu" );
+	}
+
+	// Shows link to example-of-output
+	e = document.getElementById( menuAnalysis[ id ] + "_example" );
+	cn = e.className;
+	e.className = cn.replace( /item_hide/, "item_show" );
+
+	// Sets the 'analysis' hidden variable.
+	bionmf_form.analysis.value = menuAnalysis[ id ];
+
+	// Finally, sets the default algorithm.
+	bionmf_form.algorithm.value = defaultAlgorithm[ id ];
+	sparseness_option();
+
+} // selectMenu
+
+// ------------------------------
+// ------------------------------
+
+/*
+ * onmouseover event handler
+ * Replaces "menu_onmouseout" class (if exist) by "menu_onmouseover"
+ */
+function mouseOver( id )
+{
+
+	// Current selected method.
+	var selected_menu = bionmf_form.analysis.value;
+
+	if ( menuAnalysis[ id ] != selected_menu ) {
+		var e = document.getElementById( "menu_" + menuAnalysis[ id ] );
+		var cn = e.className;
+		cn = cn.replace(/menu_onmouseout/, "menu_onmouseover");
+		if ( cn.indexOf( "color_" ) < 0 )
+			cn = cn.concat( " color_" + id + "_menu" );
+		e.className = cn;
+	}
+
+} // mouseOver
+
+// ------------------------------
+
+/*
+ * onmouseout event handler
+ * Replaces the "menu_onmouseover" class (if exist) by "menu_onmouseout".
+ */
+function mouseOut( id )
+{
+
+	// Current selected method.
+	var selected_menu = bionmf_form.analysis.value;
+
+	if ( menuAnalysis[ id ] != selected_menu ) {
+		var e = document.getElementById( "menu_" + menuAnalysis[ id ] );
+		var cn = e.className;
+		cn = cn.replace( /\s*color_\S+\s*/, "" ); // Deletes background color
+		e.className = cn.replace(/menu_onmouseover/, "menu_onmouseout");
+	}
+
+} // mouseOut
+
+
+// ==============================
+// ==============================
+
+
+/*
+ * Shows or hides user initialization files.
+ *	force_hide: If non-zero, forces to hide this item.
+ */
+function show_init_files( force_hide )
+{
+
+	var opt = document.getElementById("initialization_files");
+	var items = new Array( opt );
+	bionmf_form.init_files_shown = show_items( items, bionmf_form.init_files_shown, force_hide );
+
+} // show_init_files
+
+// ------------------------------
+// ------------------------------
+
+/*
+ * Initialization files. If both are selected, peforms the following actions:
+ * 	- Disables several items.
+ *	- Forces kEnd to kStart, nRuns to 1 and save option to "Best"
+ */
+function set_init_files()
+{
+
+	var file_name_w = bionmf_form.userfile_w.value;
+	var file_name_h = bionmf_form.userfile_h.value;
+
+	if ( (file_name_w != "") && (file_name_h != "") ) {
+
+		// Forces range of factorization ranks
+		bionmf_form.kEnd.value = bionmf_form.kStart.value;
+		bionmf_form.kEnd.disabled = true;
+
+		// Forces number of runs per K
+		bionmf_form.nRuns.value = 1;
+		bionmf_form.nRuns.disabled = true;
+
+		// Forces save option.
+		bionmf_form.save_opt.value = "Best";
+		bionmf_form.save_opt.disabled = true;
+
+		// Focus on range of factorization ranks
+		bionmf_form.kStart.select();
+
+	} else {
+
+		bionmf_form.kEnd.disabled = false;
+		bionmf_form.nRuns.disabled = false;
+		bionmf_form.save_opt.disabled = false;
+	}
+
+} // set_init_files
+
+
+// ==============================
+// ==============================
+
+
+/*
+ * If kStart < 2, sets kStart to 2.
+ * If kEnd < kStart (or user selected initialization files), sets kEnd to kStart.
+ */
+function set_kStart_kEnd()
+{
+
+	// NOTE: 'bionmf_form.xxx.value - 0' is a trick to convert values to integer.
+
+	var kStart = bionmf_form.kStart.value - 0;
+	if ( kStart < 2 ) {
+		bionmf_form.kStart.value = 2;
+		kStart = 2;
+	}
+
+	var kEnd = bionmf_form.kEnd.value - 0;
+	var file_name_w = bionmf_form.userfile_w.value;
+	var file_name_h = bionmf_form.userfile_h.value;
+
+	if ( kStart > kEnd  || ( file_name_w != "" && file_name_h != "" ) )
+		bionmf_form.kEnd.value = kStart;
+
+
+} // set_kStart_kEnd
+
+// ------------------------------
+// ------------------------------
+
+/*
+ * If kEnd < 2, set to 2.
+ */
+function set_kEnd()
+{
+
+	// NOTE: 'bionmf_form.xxx.value - 0' is a trick to convert values to integer.
+
+	var kEnd = bionmf_form.kEnd.value - 0;
+
+	if ( kEnd < 2 )
+		bionmf_form.kEnd.value = 2;
+
+}// set_kEnd
+
+
+// ==============================
+// ==============================
+
+/*
+ * Shows or hides user initialization files.
+ *	force_hide: If non-zero, forces to hide this item.
+ */
+function show_adv_analysis( force_hide )
+{
+
+	var opt = document.getElementById("advanced_analysis_opt");
+	var items = new Array( opt );
+	bionmf_form.adv_analysis_shown = show_items( items, bionmf_form.adv_analysis_shown, force_hide );
+
+} // show_adv_analysis
+
+// ------------------------------
+// ------------------------------
+
+/*
+ * Enables or disables the sparseness item.
+ */
+function sparseness_option()
+{
+	bionmf_form.sparseness.disabled = ( bionmf_form.algorithm.value != "nsNMF" );
+
+} // sparseness_option
+
+
+// ===============================
+// ===============================
+//
+// FUNCTIONS TO VALIDATE FORM DATA
+//
+// ===============================
+// ===============================
+
+
+/*
+ * Validates the given filename.
+ */
+function validate_filename( file_name )
+{
+
+	// Path delimiter.
+	var idxUnix = file_name.lastIndexOf("/");	// UNIX Systems ('/')
+	var idxWin  = file_name.lastIndexOf("\\");	// MS Windows Systems ('\')
+
+	// // Debug code:
+	// alert("idxUnix=" + idxUnix + " idxWin=" + idxWin);
+
+	// Gets the basename (idxXXX +1 to skip '\' or '/').
+	if ( idxUnix > idxWin )
+		file_name = file_name.substr(idxUnix+1);
+	else if ( idxUnix < idxWin )
+		file_name = file_name.substr(idxWin+1);
+
+	var filename_pattern = /[^-.+\w]/;	// Allows: [A-Z] | [a-z] | [0-9] | _ | - | . | +
+
+	// Searches for non-allowed characters.
+	if ( filename_pattern.test(file_name) ) {
+		alert("Filename  '" + file_name + "' contains illegal characters. Please rename it.\n" +
+			"Allowed characters for filenames: A-Z a-z 0-9 _ - . +\n" +
+			"No space nor TAB characters are allowed.");
+		return false;
+	}
+
+	return true;
+
+} // validate_filename
+
+
+// ==============================
+// ==============================
+
+
+// Validates analysis options
+function validate_analysis_options()
+{
+
+	// NOTE: 'bionmf_form.xxx.value - 0' is a trick to convert values to integer.
+
+	// kStart.
+	var kStart = bionmf_form.kStart.value - 0;
+	if ( kStart < 2 ) {
+		alert("Factorization ranks must be greater than 1.");
+		bionmf_form.kStart.select();
+		return false;
+	}
+
+
+	// kEnd.
+	var kEnd = bionmf_form.kEnd.value - 0;
+	if ( kEnd < kStart ) {
+		bionmf_form.kEnd.value = kStart;
+		kEnd = kStart;
+	}
+	if ( kEnd > 32 ) {
+		alert("Sorry but factorization ranks exceed the limits for " +
+			"this on-line version. Currently, it is limited to " +
+			32 );
+		bionmf_form.kEnd.select();
+		return false;
+	}
+
+
+	// nRuns
+	var nRuns = bionmf_form.nRuns.value - 0;
+	if ( nRuns < 1 ) {
+		alert("The number of runs per factorization rank must be greater than 0.");
+		bionmf_form.nRuns.select();
+		return false;
+	}
+	if ( nRuns > 128 ) {
+		alert("Sorry but the number of runs per factorization rank exceeds the limits " +
+			"for this on-line version. Currently, this value is limited to " +
+			128);
+		bionmf_form.nRuns.select();
+		return false;
+	}
+	if ( nRuns == 1 ) // Forces the save option.
+		bionmf_form.save_opt.value = "Best";
+
+
+	// nIters
+	var nIters = bionmf_form.nIters.value - 0;
+	if ( nIters < 1) {
+		alert("The number of iterations per run must be greater than 0.");
+		bionmf_form.nIters.select();
+		return false;
+	}
+	if ( nIters > 4096 ) {
+		alert("Sorry but the number of iterations exceeds the limits for this on-line version. " +
+			"Currently, this value is limited to " + 4096);
+		bionmf_form.nIters.select();
+		return false;
+	}
+
+
+	// stop_threshold > 0
+	var stop_threshold = bionmf_form.stop_threshold.value - 0;
+	if ( stop_threshold < 1 ) {
+		alert("The stopping threshold must be greater than 0.");
+		bionmf_form.stop_threshold.select();
+		return false;
+	}
+
+
+	// Sparseness = [0..1] (nsNMF only)
+	if ( bionmf_form.algorithm.value == "nsNMF" ) {
+		var sparseness = bionmf_form.sparseness.value - 0;
+		if ( ( sparseness < 0 ) || ( sparseness > 1 ) ) {
+			alert("The Sparseness factor must be in the range [0...1].");
+			bionmf_form.sparseness.select();
+			return false;
+		}
+	} // if nsNMF
+
+
+	// Save all heatmap and profile graphics for all input/output matrices.
+	if ( bionmf_form.save_heatmaps_chkbx.checked )
+		bionmf_form.save_heatmaps.value = "1";
+	else
+		bionmf_form.save_heatmaps.value = "0";
+
+
+	// Save all analysis's output images
+	if ( bionmf_form.save_output_images_chkbx.checked )
+		bionmf_form.save_output_images.value = "1";
+	else
+		bionmf_form.save_output_images.value = "0";
+
+	return true;
+
+} // validate_analysis_options
+
+
+// ==============================
+// ==============================
+
+
+// Checks selected options
+function validate_options()
+{
+
+	// Checks data filename
+	var intput_filename = bionmf_form.userfile.value;
+	if ( intput_filename.length == 0 ) {
+		alert("Please select a data file.");
+		bionmf_form.userfile.focus();
+		return false;
+	}
+	if ( ! validate_filename( intput_filename ) ) {
+		bionmf_form.userfile.select();
+		return false;
+	}
+
+
+	// ----------------------
+
+
+	// Input file format.
+
+	if ( bionmf_form.is_bin[0].checked ) {	// ASCII-text file:
+
+		// Numeric headers
+		if ( bionmf_form.num_hdrs_chkbx.checked )
+			bionmf_form.num_hdrs.value = "1";
+		else
+			bionmf_form.num_hdrs.value = "0";
+
+		// Numeric labels
+		if ( bionmf_form.num_lbls_chkbx.checked )
+			bionmf_form.num_lbls.value = "1";
+		else
+			bionmf_form.num_lbls.value = "0";
+
+	} // If input file is text.
+
+
+	// ----------------------
+
+
+	// Transpose data matrix.
+
+	if ( bionmf_form.transpose_chkbx.checked )
+		bionmf_form.transpose.value = "1";
+	else
+		bionmf_form.transpose.value = "0";
+
+
+	// ----------------------
+
+
+	// Checks email address
+
+	var email = bionmf_form.email.value;
+	if ( email != "" ) {
+
+		var atpos = email.indexOf('@',0);
+		var dotpos1 = email.indexOf('.',atpos);
+		var dotpos2 = email.indexOf('.',email.length);
+		var spacepos = email.search(/\s/);
+
+		if ( atpos < 1 || dotpos1-atpos < 2 || email.length-dotpos2 < 2 || spacepos != -1 ) {
+			alert( "Invalid e-mail address." );
+			bionmf_form.email.focus();
+			bionmf_form.email.select();
+			return false;
+		}
+
+	}
+	// // Uncomment to have the email address as a mandatory option
+// 	else {
+// 		alert("Missing E-Mail");
+// 		return false;
+// 	}
+
+
+	// ----------------------
+
+
+	/* If the user selects a normalization method that makes data negative,
+	 * then, he or she must also choice a method to make data positive.
+	 */
+
+	if (	bionmf_form.normalization.value != "No" &&
+		bionmf_form.positive.value == "No" ) {
+		alert("Normalization methods require, in addition, to select a method to make data positive.");
+		// shows preprocessing options.
+		var opt = document.getElementById("preprocessing_options");
+		var items = new Array( opt );
+		bionmf_form.prep_opt_shown = show_items( items, 0, 0 );
+		bionmf_form.positive.value = "ExpScal";
+ 		bionmf_form.positive.focus();
+		return false;
+	}
+
+
+	// ----------------------
+
+
+	// Checks for initialization files.
+
+	var file_name_w = bionmf_form.userfile_w.value;
+	var file_name_h = bionmf_form.userfile_h.value;
+
+	if ( (file_name_w.length + file_name_h.length) > 0 ) {
+
+		if ( file_name_h.length == 0 ) {
+			alert("If you select an initialization file for matrix W,\n" +
+				"you must also select a file for matrix H.");
+			bionmf_form.userfile_h.focus();
+			return false;
+		}
+		if ( file_name_w.length == 0 ) {
+			alert("If you select an initialization file for matrix H,\n" +
+				"you must also select a file for matrix W.");
+			bionmf_form.userfile_w.focus();
+			return false;
+		}
+
+		if ( ! validate_filename( file_name_w ) ) {
+			bionmf_form.userfile_w.select();
+			return false;
+		}
+		if ( ! validate_filename( file_name_h ) ) {
+			bionmf_form.userfile_h.select();
+			return false;
+		}
+
+		// NOTE: Prevents updating the same file twice.
+		if ( file_name_w == file_name_h ) {
+			file_name_h = "";
+			bionmf_form.userfile_h.value = "";
+		}
+
+	} // If user selected initialization files.
+
+
+	// ----------------------
+
+
+	// Checks analysis options
+
+    	var ret_val =  validate_analysis_options();
+
+	/* // Uncomment for testing or debugging.
+		if ( ret_val ) {
+			alert("Web disabled temporary. Please try later...");
+			ret_val = false;
+		}
+	// */
+
+	return ret_val;
+
+} // validate_options
+
+
+// ==============================
+// ==============================
+
+// -->
+
+</script>
+
+<!-- ==================================================================== -->
+
+</head>
+
+<body id="mainpage" onload="javascript:init();">
+
+<div id="logo">
+	<img src="images/topBioNMF2.0.png" alt="bioNMF logo">
+	</div>
+
+<br />
+
+<!-- Messages and announcements -->
+<div id="messages">
+	<p>To use <b>bioNMF 1.0</b>, click <a href="http://bionmf.dacya.ucm.es/1.0">here</a></p>
+	<p><b>Last updated</b>: 2010/06/28.<br/>
+		Please refresh your browser's cache (press F5 or Ctrl-R).</p>
+	<!-- <p><h1 class="title">DOWNTIME:</h1>This site will be down on <b>XXXX</b> for maintenance works in the XXXX system.</p> -->
+</div>
+
+<br />
+
+<!-- Links to Help page -->
+<div id="index">
+	<table>
+		<tr>
+			<td class="index_left">&nbsp;</td>
+			<td class="index_right important_news"><b>UPDATED</b><br />(2010/12/30)</td>
+		</tr>
+		<tr>
+			<td class="index_left"><a href="application.html">[help]</a></td>
+			<td class="index_right"><a href="webservices.html">[Webservices]</a></td>
+		</tr>
+	</table>
+</div>
+
+<!-- Main page -->
+<div id="container">
+
+<form method="post" name="bionmf_form" enctype="multipart/form-data" onsubmit="return validate_options()" action="bionmfAction.php" onreset="init()">
+
+	<input type=hidden name="bionmfID" value="7b7772804cd7a55c8d1af7e304768975" />
+
+	<!-- Input data -->
+	<p>
+		<table class="inputdata">
+			<tr>
+				<td>
+					<label for="user_file">Input data-matrix filename</label>
+					<a href="application.html#input_file">[?]</a>:
+				</td>
+				<td>
+					<!-- Maximum file size for uploads -->
+					<input type="hidden" name="MAX_FILE_SIZE" value="33554432" />
+					<input name="userfile" id="user_file" type="file" size="30" maxlength="256" />
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>Please read carefully instructions for <b>valid <a href="application.html#input_file">input-file formats</a></b>.</td>
+			</tr>
+		</table>
+
+		<!-- Input file options -->
+		<table class="options options_border">
+			<thead>
+				<tr>
+					<th colspan="2">
+						<a onclick="show_input_options(0);" class="options_title">Input file options...</a> &nbsp;
+						<a href="application.html#input_file_options">[?]</a>
+						<intput type="hidden" name="input_opt_shown" value="0" />
+					</th>
+				</tr>
+			</thead>
+			<tbody id="input_options" class="item_hide">
+				<tr>
+					<td><b>Input file format:</b></td>
+					<td name="text_file_options" class="item_show"><b>Text-file options:</b></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="is_bin" value="0" id="IsTextRd" onclick="hide_text_options(false);" checked />
+						<label for="IsTextRd">Text file</label>
+					</td>
+					<td name="text_file_options" class="item_show">
+						<input type="checkbox" name="num_hdrs_chkbx" id="nHdrsCbx" />
+						<label for="nHdrsCbx">Data matrix contains numeric column headers</label>
+						<input type="hidden" name="num_hdrs" value="0" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="is_bin" value="1" id="IsBinRd" onclick="hide_text_options(true);" />
+						<label for="IsBinRd">Binary file</label>
+					</td>
+					<td name="text_file_options" class="item_show">
+						<input type="checkbox" name="num_lbls_chkbx" id="nLblsCbx" />
+						<label for="nLblsCbx">Data matrix contains numeric row labels</label>
+						<input type="hidden" name="num_lbls" value="0" />
+					</td>
+				</tr>
+			</tbody>
+		</table> <!-- Input file options -->
+	</p>
+
+	<hr>
+
+	<!-- Preprocessing options -->
+	<p>
+		<table class="options options_border">
+			<thead>
+				<tr>
+					<th colspan="2">
+						<a onclick="show_prep_options(0);" class="options_title">Preprocessing options...</a> &nbsp;
+						<a href="application.html#preprocessing">[?]</a>
+						<intput type="hidden" name="prep_opt_shown" value="0" />
+					</th>
+				</tr>
+			</thead>
+			<tbody id="preprocessing_options" class="item_hide">
+				<tr>
+					<td><label for="transposeCbx">Transpose input matrix before analysis:</label></td>
+					<td>
+						<input type="checkbox" name="transpose_chkbx" id="transposeCbx" />
+						<input type="hidden" name="transpose" value="0" />
+					</td>
+				</tr>
+
+				<!-- Normalization method -->
+				<tr>
+					<td>
+						<label for="NormSelect">Normalization method</label>
+						<a href="application.html#normalization">[?]</a>:
+					</td>
+					<td>
+						<select name="normalization" id="NormSelect">
+							<option value="No" selected="selected">Do not normalize</option>
+							<option value="SubGMean">Subtract global mean</option>
+							<option value="SColsNRows">Scale columns, then normalize rows</option>
+							<option value="SDRows">Set mean to 0 and standard deviation to 1, by rows</option>
+							<option value="SDCols">Set mean to 0 and standard deviation to 1, by columns</option>
+							<option value="SubMRows">Subtract mean by rows</option>
+							<option value="SubMCols">Subtract mean by columns</option>
+							<option value="SubMRowsCols">Subtract mean by rows and then by columns</option>
+						</select>
+					</td>
+				</tr> <!-- Normalization method -->
+
+				<!-- Methods to make data positive -->
+				<tr>
+					<td>
+						<label for="PosSelect">Transformation method to make data positive</label>
+						<a href="application.html#transform">[?]</a>:
+					</td>
+					<td>
+						<select name="positive" id="PosSelect">
+							<option value="No" selected="selected">Do not do anything</option>
+							<option value="SubMin">Subtract the absolute minimum</option>
+							<option name="PosOpt" value="FoldRows" class="item_show">Fold data by rows</option>
+							<option name="PosOpt" value="FoldCols" class="item_show">Fold data by columns</option>
+							<option value="ExpScal">Exponential scaling</option>
+						</select>
+					</td>
+				</tr> <!-- Methods to make data positive -->
+			</tbody>
+		</table> <!-- Preprocessing options -->
+	</p>
+
+	<hr>
+
+	<!-- Analysis method -->
+	<table id="analysis_method">
+		<thead>
+			<tr>
+				<th colspan="3">
+					Analysis method <a href="application.html#analysis">[?]</a>:
+					<input type="hidden" name="analysis" value="StandardNMF"/>
+				</th>
+			</tr>
+			<tr>
+				<td id="menu_StandardNMF" class="menu_selected menu_onmouseover color_0_menu" onclick="selectMenu(0); show_positive();"
+					onmouseover="mouseOver(0)" onmouseout="mouseOut(0)">Standard NMF				</td>
+				<td id="menu_Biclustering" class="menu_not_selected menu_onmouseout" onclick="selectMenu(1); hide_positive();"
+					onmouseover="mouseOver(1)" onmouseout="mouseOut(1)">Biclustering analysis				</td>
+				<td id="menu_SampleClassification" class="menu_not_selected menu_onmouseout" onclick="selectMenu(2); hide_positive();"
+					onmouseover="mouseOver(2)" onmouseout="mouseOut(2)">Sample Classification				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="menu_analysis_options" colspan="3">
+
+				<!-- Analysis options -->
+				<table class="analysis_options" >
+					<tbody name="analysis_options_menu" class="color_0_menu">
+					<tr>
+						<td>
+							<fieldset style="text-align:center;">
+								<legend align="center"><label for="txtKstart">Range of factorization ranks:</label></legend>
+								From &emsp; K &nbsp; = &nbsp;
+								<input type="text" name="kStart" id="txtKstart" value="2" size="4" maxlength="2" onKeyPress="return acceptNum(event)" onchange="set_kStart_kEnd();"/> &emsp;
+								to &emsp; K &nbsp; = &nbsp;
+								<input type="text" name="kEnd" id="txtKend" value="5" size="4" maxlength="2" onKeyPress="return acceptNum(event)"  onchange="set_kEnd();"/>
+							</fieldset>
+						</td>
+						<td>
+							<label for="txtNruns">Number of runs per factorization rank</label><br/>
+							<input type="text" name="nRuns" id="txtNruns" value="40" size="6" maxlength="3" onKeyPress="return acceptNum(event)" />
+						</td>
+					</tr>
+					</tbody>
+				</table> <!-- Analysis options -->
+
+				<!-- Initialization files -->
+				<table class="analysis_options">
+					<thead>
+						<tr>
+							<th colspan="2">
+								<a onclick="show_init_files(0);" class="options_title">User initialization files...</a> &nbsp;
+								<a href="application.html#initialization_files">[?]</a>:
+								<intput type="hidden" name="init_files_shown" value="0" />
+							</th>
+						</tr>
+					</thead>
+					<tbody id="initialization_files" name="analysis_options_menu" class="color_0_menu item_hide">
+						<tr>
+							<td><label for="user_file_w">Initialization file for matrix <b>W</b></label>:</td>
+							<td><input name="userfile_w" id="user_file_w" type="file" size="30" onchange="set_init_files()"/></td>
+						</tr>
+						<tr>
+							<td><label for="user_file_h">Initialization file for matrix <b>H</b></label>:</td>
+							<td><input name="userfile_h" id="user_file_h" type="file" size="30" onchange="set_init_files()"/></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td><b>Note:</b> These files must not have labels.</td>
+						</tr>
+					</tbody>
+				</table> <!-- Initialization files -->
+
+
+				<!-- Advanced analysis options -->
+				<table class="analysis_options">
+					<thead>
+						<tr>
+							<th colspan="3">
+								<a onclick="show_adv_analysis(0);" class="options_title">Advanced analysis options...</a> &nbsp;
+								<a href="application.html#options">[?]</a>:
+								<intput type="hidden" name="adv_analysis_shown" value="0" />
+							</th>
+						</tr>
+					</thead>
+					<tbody id="advanced_analysis_opt" name="analysis_options_menu" class="color_0_menu item_hide">
+						<tr >
+							<td>
+								<label for="txtNiter">Number of iterations per run</label><br />
+								<input type="text" name="nIters" id="txtNiter" value="2000" size="6" maxlength="4" onKeyPress="return acceptNum(event)" />
+							</td>
+							<td>
+								<label for="txtStop">Stopping threshold</label><br />
+								<input type="text" name="stop_threshold" id="txtStop" value="40" size="6" maxlength="4" onKeyPress="return acceptNum(event)" />
+							</td>
+							<td>
+								<label for="slctSave">Save output matrices</label><br />
+								<select name="save_opt" id="slctSave">
+									<option value="Best" selected="selected">Save only the best factorization</option>
+									<option value="Combine">Combine matrices in a single file</option>
+									<option value="All">Save all matrices</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="slctNMF">NMF algorithm</label><br />
+								<select name="algorithm" id="slctNMF" onchange="sparseness_option();" >
+									<option value="Standard" selected="selected">Standard NMF</option>
+									<option value="Divergence">Divergence NMF</option>
+									<option value="nsNMF">Non-smooth NMF</option>
+								</select>
+							</td>
+							<td>
+								<label for="txtSp">Sparseness [0..1] (<em>nsNMF</em> only)</label><br />
+								<input type="text" name="sparseness" id="txtSp" value="0.5" size="6"
+									maxlength="6" onKeyPress="return acceptNumF(event)" disabled="true" />
+							</td>
+							<td>
+								<input type="hidden" name="save_heatmaps" value="0" />
+								<input type="checkbox" name="save_heatmaps_chkbx" id="saveHCbx"/>
+								<label for="saveHCbx">Show heatmap and profile graphics</label>
+								<p><input type="hidden" name="save_output_images" value="0" />
+								<input type="checkbox" name="save_output_images_chkbx" id="saveOICbx" checked />
+								<label for="saveOICbx">Show analysis's output images</label>
+							</td>
+						</tr>
+					</tbody>
+				</table> <!-- Advanced Analysis options -->
+
+				<!-- Examples of outputs -->
+				<br />
+				<div id="StandardNMF_example" class="item_show">
+					<a href="JOBS/NMF_example/results.html">Click here to see an example of Standard NMF</a>
+				</div>
+				<div id="Biclustering_example" class="item_hide">
+					<a href="JOBS/Biclustering_example/results.html">Click here to see an example of Biclustering analysis</a>
+
+				</div>
+				<div id="SampleClassification_example" class="item_hide">
+					<a href="JOBS/SC_example/results.html">Click here to see an example of Sample Classification</a>
+				</div>
+				</td>
+			</tr>
+		</tbody>
+	</table> <!-- Analysis Method -->
+
+
+	<!-- E-mail address (optional) -->
+	<p align="center">
+		<table class="inputdata" style="text-align:center;">
+			<tr>
+				<td> <label for="input_email">Notify results to this e-mail address (optional):</label> </td>
+				<td> <input type="text" name="email" id="input_email" size="30" /> </td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td> <label for="input_email" style="font-size:x-small;">(this address will not be stored after job completion)</label> </td>
+			</tr>
+		</table>
+	</p>
+
+	<!-- Buttons -->
+	<p align="center">
+		<table class="options">
+			<tr>
+				<td id="submitButton">
+					<input class ="buttonSubmit" type="submit" value="Submit" />
+				</td>
+				<td id="resetButton">
+					<input class ="buttonSubmit" type="Reset" value="Reset" />
+				</td>
+			</tr>
+		</table>
+	</p>
+</form>
+
+</div> <!-- container -->
+
+<div id="footer">
+
+	<div id="footer_cite">
+		<p>
+			If you use this software, please cite the following work:
+			<ul>
+				<li>
+					E. Mej&iacute;a-Roa, P. Carmona-Saez, R. Nogales, C. Vicente, M. V&aacute;zquez, X. Y. Yang, C. Garc&iacute;a, F. Tirado and A. Pascual-Montano.<br />
+					<b><i>bioNMF</i>: a web-based tool for nonnegative matrix factorization in biology</b>. <i>Nucl. Acids Res.</i> 2008, <b>36</b> (suppl 2, <i>Web Server</i> issue), W523-W528. doi:10.1093/nar/gkn335.<br />
+					<a href="http://nar.oxfordjournals.org/cgi/content/full/36/suppl_2/W523">http://nar.oxfordjournals.org/cgi/content/full/36/suppl_2/W523</a><br />
+					<a href="http://bionmf.dacya.ucm.es">http://bionmf.dacya.ucm.es</a>
+				</li>
+			</ul>
+		</p>
+	</div>
+
+	<hr />
+
+	<p>Web site optimized for <a href="http://www.mozilla.com/en-US/firefox/">Mozilla Firefox</a>.</p>
+	<p>Please submit suggestions, comments and bug reports to: <img src="images/email.gif" alt="E-mail address"></p>
+</div>
+
+<div id="footer_logo">
+	<p>Web site supported by:<br /></p>
+	<p>
+		<a href="http://www.ucm.es"><img src="images/logo_UCM_small.gif" alt="UCM logo"></a>
+		<a href="http://artecs.dacya.ucm.es"><img src="images/logo_ARTECS_small.jpg" alt="ArTeCS group logo"></a>
+		<a href="http://cyted.org"><img src="images/logo_CYTED_small.jpg" alt="CYTED logo"></a>
+	</p>
+</div>
+
+
+<!-- Tracks usage statistic -->
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write("\<script src='" + gaJsHost +
+			"google-analytics.com/ga.js' type='text/javascript'>\<\/script>" );
+</script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-1656322-9");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+</script>
+
+</body>
+</html>

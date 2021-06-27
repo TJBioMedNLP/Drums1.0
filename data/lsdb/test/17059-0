@@ -1,0 +1,1063 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<META NAME="description" CONTENT=" restriction mapping">
+<title>REMA Restriction Enzyme Mapping for t-RFLP - Expert User Interface</title>
+<link rel="stylesheet" href="my.css" type="text/css"> 
+
+<script>
+
+function openpopupREselect(){ url1= "REselHelp.htm" ; winpops1=window.open(url1,"","scrollbars=yes,resizable=yes,width=400,height=700,status,left=480,top=5");setTimeout("winpops1.close()",5000);}
+function openpopupOutPutArea(){ url2 = "REopaHelp.htm" ; winpops2=window.open(url2,"","scrollbars=yes,resizable=yes,width=400,height=700,status,left=5,top=5");setTimeout("winpops2.close()",5000);}
+function openpopupInputArea(){ url3 = "REipaHelp.htm" ; winpops3=window.open(url3,"","scrollbars=yes,resizable=yes,width=400,height=700,status,left=480,top=5");setTimeout("winpops3.close()",5000);}
+<!--
+function text(txt) {
+window.status = txt;
+}
+// -->
+</script>
+
+</head>
+<body>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+    <center>
+    <table border =" 0"  cellspacing="0" cellpadding ="5">
+    <tr>
+				<td style="background-color: white" align="left"><FONT COLOR=#993333 STYLE="font-size: 20pt;"> Restriction Enzyme Mapping Application </font></td>
+                <!-- <td style="background-color: white"><FONT COLOR=#aa5533 STYLE="font-size: 21pt;"><a href = "IntroToREMA.htm"  >
+             REMA </a></FONT></td> -->
+        <td style="background-color: white">|</td>
+				
+				<td style="background-color: white" align="left" ><a href =RErefs.htm >
+            RE - References</a></td>
+        
+        <td style="background-color: white">|</td>
+        <td style="background-color: white"><a href = "http://rebase.neb.com/rebase/rebase.html"   >
+            RE information - REBASE</a></td>
+        <td style="background-color: white">|</td>
+        
+
+        <td style="background-color: white"><a href = "REhelp.htm"  title =" Get help now">Help</a></td>    
+    </tr>
+    </table>
+
+    </center>
+		<!http://biolinux.cs.man.ac.uk/~campus6js/>
+		<!http://localhost/perl/>
+<form action="/cgi-bin/remat1.pl" method='post' enctype='multipart/form-data'>
+   <TABLE cellpadding ="8" rules ="cols" cols ="3" align ="left" frame ="void">
+              
+								
+						<tr>
+						<td>			
+		<table bgcolor ="#ffbfbf" border ="2" cellpadding ="3" cellspacing ="1">
+							<tr><TD valign ="top" align ="left"> <FONT COLOR=#993333 STYLE="font-size: 16pt;">Sequence Information</FONT><br><a href="REipaHelp.htm" >
+									(help) </a>
+									<a href="startFormHelp.htm" ><FONT COLOR=#44cc33 STYLE="font-size: 14pt;">or New User Help Page</FONT>
+									</a></tr>
+									<td>
+							<TR>
+
+                  <TD valign ="top" align ="center" >
+                      <P><LABEL> Circular </label><INPUT type ="radio" name ="seqtype" value ="circular"><BR>
+
+                         <LABEL> Linear </label><INPUT type ="radio" name ="seqtype" value ="linear" checked></P>
+                     
+															
+
+															<a href="" > 
+															sequence name</a>
+                              
+																												
+                          <BR>
+                               <input type="text" name="seqname" size="15" value =" Untitled">     
+                              
+                              <BR>
+															 <P align =" center">
+											 Input format 
+                      <!OL align ="center">
+                          <SELECT name ="inpformat" size = 1>
+                                    <OPTION value = "raw"> raw text</option>
+                                    <OPTION selected value = "Fasta"> Fasta</option>
+                                    <!OPTION Ebml GenBank GCG> 
+                                    
+                              </SELECT>
+															<BR>
+</P>
+											 
+											 choose a file 
+											 for upload<BR>
+<input type='file' name='ufile' size='15'><p>
+<P>
+											 <P>
+											 
+    Sequence input field:<P> <textarea name="textSeq" cols= 18 rows=14>
+>either select a file for upload (see field above) or paste your sequence in the specified format, over this comment text
+</textarea><BR>
+
+                      
+								</td>
+								
+</table>								
+		</td>						
+											
+<td>		
+<!" #efefdf">									
+<table bgcolor ="#9effdf" border =" 2" cellpadding =" 3" cellspacing =" 1">
+<tr>
+ <TD align ="center"><FONT COLOR=#993333 STYLE="font-size: 16pt;">RE Selection</FONT><BR><a href="REselHelp.htm" > (help) </a>
+                  
+</tr>
+
+<tr>
+ <td>
+    <table border="0" cellspacing="0" cols = "1" cellpadding="3"  >
+    
+     
+		 <tr>
+     
+       
+     
+     <td align=center  >
+		 Select the Enzyme types <BR>(prototypes)<BR>
+		   <SELECT  NAME="proto_types" size = 3 >
+			 <OPTION value = 0 SELECTED>none of them</option>
+        <OPTION value = 1 >all prototypes</option>
+        <OPTION value = 2 >blunt</option>
+        <OPTION value = 3 > 3' overhangs&nbsp;</option>
+        <OPTION value = 5 > 5' overhangs</option>
+       </SELECT>
+     </td>
+		 
+    
+    
+    
+
+    </tr>
+		<tr>
+     <td align=center >
+
+                 &nbsp &nbsp     Minimum  Restriction site Length<br>
+                         <SELECT NAME="mintarget" size = 1 >
+												 		<OPTION value = 0 selected>99</option>	 
+                             <OPTION value = 4 >4</option>
+                             <OPTION value = 5 >5</option>
+                             <OPTION value = 6 >6</option>
+                             <OPTION value = 7 >7</option>
+                             <OPTION value = 8 >8</option>
+                         </SELECT>
+                      <BR>
+											
+      
+     </td>
+    </tr>
+
+    
+       
+    <tr>
+     
+
+				<td align = center >
+     Plus any other Enzymes<br>
+		 including <a id="nebisos" href =http://www.neb.com/nebecomm/tech_reference/restriction_enzymes/isoschizomers.asp? > isoschizomers </a>
+     <br>
+		 
+      <SELECT NAME="extra_enzymes" multiple size = 15>
+               <OPTION SELECTED value= "none" >none
+<option>AarI</option>
+  <option>AasI</option>
+  <option>AatI</option>
+  <option>AatII</option>
+  <option>AccI</option>
+  <option>AccII</option>
+  <option>AccIII</option>
+  <option>Acc16I</option>
+  <option>Acc36I</option>
+  <option>Acc65I</option>
+  <option>AccB1I</option>
+  <option>AccB7I</option>
+  <option>AccBSI</option>
+  <option>AceIII</option>
+  <option>AciI</option>
+  <option>AclI</option>
+  <option>AclWI</option>
+  <option>AcsI</option>
+  <option>AcuI</option>
+  <option>AcvI</option>
+  <option>AcyI</option>
+  <option>AdeI</option>
+  <option>AfaI</option>
+  <option>AfeI</option>
+  <option>AflII</option>
+  <option>AflIII</option>
+  <option>AgeI</option>
+  <option>AhaIII</option>
+  <option>AhdI</option>
+  <option>AhlI</option>
+  <option>AjnI</option>
+  <option>AjuI</option>
+  <option>AleI</option>
+  <option>AlfI</option>
+  <option>AloI</option>
+  <option>AloI</option>
+  <option>AluI</option>
+  <option>AlwI</option>
+  <option>Alw21I</option>
+  <option>Alw26I</option>
+  <option>Alw44I</option>
+  <option>AlwFI</option>
+  <option>AlwNI</option>
+  <option>Ama87I</option>
+  <option>Aor13HI</option>
+  <option>Aor51HI</option>
+  <option>ApaI</option>
+  <option>ApaBI</option>
+  <option>ApaLI</option>
+  <option>ApeKI</option>
+  <option>ApoI</option>
+  <option>AscI</option>
+  <option>AseI</option>
+  <option>AsiGI</option>
+  <option>AsiSI</option>
+  <option>AspI</option>
+  <option>Asp700I</option>
+  <option>Asp718I</option>
+  <option>AspA2I</option>
+  <option>AspCNI</option>
+  <option>AspEI</option>
+  <option>AspHI</option>
+  <option>AspLEI</option>
+  <option>AspS9I</option>
+  <option>AssI</option>
+  <option>AsuI</option>
+  <option>AsuII</option>
+  <option>AsuC2I</option>
+  <option>AsuHPI</option>
+  <option>AsuNHI</option>
+  <option>AvaI</option>
+  <option>AvaII</option>
+  <option>AvaIII</option>
+  <option>AviII</option>
+  <option>AvrII</option>
+  <option>AxyI</option>
+  <option>BaeI</option>
+  <option>BaeI</option>
+  <option>BalI</option>
+  <option>BamHI</option>
+  <option>BanI</option>
+  <option>BanII</option>
+  <option>BanIII</option>
+  <option>BauI</option>
+  <option>BbeI</option>
+  <option>Bbr7I</option>
+  <option>BbrPI</option>
+  <option>BbsI</option>
+  <option>BbuI</option>
+  <option>BbvI</option>
+  <option>BbvII</option>
+  <option>Bbv12I</option>
+  <option>BbvCI</option>
+  <option>BccI</option>
+  <option>Bce83I</option>
+  <option>BceAI</option>
+  <option>BcefI</option>
+  <option>BcgI</option>
+  <option>BcgI</option>
+  <option>BciVI</option>
+  <option>BclI</option>
+  <option>BcnI</option>
+  <option>BcuI</option>
+  <option>BdaI</option>
+  <option>BetI</option>
+  <option>BfaI</option>
+  <option>BfiI</option>
+  <option>BfmI</option>
+  <option>BfrI</option>
+  <option>BfrBI</option>
+  <option>BfuI</option>
+  <option>BfuAI</option>
+  <option>BfuCI</option>
+  <option>BglI</option>
+  <option>BglII</option>
+  <option>BinI</option>
+  <option>BisI</option>
+  <option>BlfI</option>
+  <option>BlnI</option>
+  <option>BlpI</option>
+  <option>Bme18I</option>
+  <option>Bme1390I</option>
+  <option>Bme1580I</option>
+  <option>BmgI</option>
+  <option>BmgBI</option>
+  <option>BmrI</option>
+  <option>BmtI</option>
+  <option>BmyI</option>
+  <option>BoxI</option>
+  <option>BpcI</option>
+  <option>BpiI</option>
+  <option>BplI</option>
+  <option>BpmI</option>
+  <option>BptI</option>
+  <option>Bpu10I</option>
+  <option>Bpu14I</option>
+  <option>Bpu1102I</option>
+  <option>BpuAI</option>
+  <option>BpuEI</option>
+  <option>BsaI</option>
+  <option>Bsa29I</option>
+  <option>BsaAI</option>
+  <option>BsaBI</option>
+  <option>BsaHI</option>
+  <option>BsaJI</option>
+  <option>BsaMI</option>
+  <option>BsaWI</option>
+  <option>BsaXI</option>
+  <option>BsaXI</option>
+  <option>BsbI</option>
+  <option>Bsc4I</option>
+  <option>BscAI</option>
+  <option>BscGI</option>
+  <option>Bse1I</option>
+  <option>Bse8I</option>
+  <option>Bse21I</option>
+  <option>Bse118I</option>
+  <option>BseAI</option>
+  <option>BseBI</option>
+  <option>BseCI</option>
+  <option>BseDI</option>
+  <option>Bse3DI</option>
+  <option>BseGI</option>
+  <option>BseJI</option>
+  <option>BseLI</option>
+  <option>BseMI</option>
+  <option>BseMII</option>
+  <option>BseNI</option>
+  <option>BsePI</option>
+  <option>BseRI</option>
+  <option>BseSI</option>
+  <option>BseXI</option>
+  <option>BseX3I</option>
+  <option>BseYI</option>
+  <option>BsgI</option>
+  <option>Bsh1236I</option>
+  <option>Bsh1285I</option>
+  <option>BshFI</option>
+  <option>BshNI</option>
+  <option>BshTI</option>
+  <option>BsiI</option>
+  <option>BsiEI</option>
+  <option>BsiHKAI</option>
+  <option>BsiHKCI</option>
+  <option>BsiSI</option>
+  <option>BsiWI</option>
+  <option>BsiYI</option>
+  <option>BslI</option>
+  <option>BslFI</option>
+  <option>BslFI</option>
+  <option>BsmI</option>
+  <option>BsmAI</option>
+  <option>BsmBI</option>
+  <option>BsmFI</option>
+  <option>Bso31I</option>
+  <option>BsoBI</option>
+  <option>Bsp13I</option>
+  <option>Bsp19I</option>
+  <option>Bsp24I</option>
+  <option>Bsp24I</option>
+  <option>Bsp68I</option>
+  <option>Bsp106I</option>
+  <option>Bsp119I</option>
+  <option>Bsp120I</option>
+  <option>Bsp143I</option>
+  <option>Bsp143II</option>
+  <option>Bsp1286I</option>
+  <option>Bsp1407I</option>
+  <option>Bsp1720I</option>
+  <option>BspANI</option>
+  <option>BspCI</option>
+  <option>BspCNI</option>
+  <option>BspDI</option>
+  <option>BspEI</option>
+  <option>BspGI</option>
+  <option>BspHI</option>
+  <option>BspLI</option>
+  <option>BspLU11I</option>
+  <option>BspMI</option>
+  <option>BspMII</option>
+  <option>BspMAI</option>
+  <option>BspNCI</option>
+  <option>BspPI</option>
+  <option>BspTI</option>
+  <option>BspT104I</option>
+  <option>BspT107I</option>
+  <option>BspTNI</option>
+  <option>BspXI</option>
+  <option>BsrI</option>
+  <option>BsrBI</option>
+  <option>BsrDI</option>
+  <option>BsrFI</option>
+  <option>BsrGI</option>
+  <option>BsrSI</option>
+  <option>BssAI</option>
+  <option>BssECI</option>
+  <option>BssHI</option>
+  <option>BssHII</option>
+  <option>BssKI</option>
+  <option>BssNAI</option>
+  <option>BssSI</option>
+  <option>BssT1I</option>
+  <option>Bst6I</option>
+  <option>Bst98I</option>
+  <option>Bst1107I</option>
+  <option>BstACI</option>
+  <option>BstAPI</option>
+  <option>BstAUI</option>
+  <option>BstBI</option>
+  <option>Bst2BI</option>
+  <option>BstBAI</option>
+  <option>Bst4CI</option>
+  <option>BstC8I</option>
+  <option>BstDEI</option>
+  <option>BstDSI</option>
+  <option>BstEII</option>
+  <option>BstENI</option>
+  <option>BstF5I</option>
+  <option>BstFNI</option>
+  <option>BstH2I</option>
+  <option>BstHHI</option>
+  <option>BstKTI</option>
+  <option>BstMAI</option>
+  <option>BstMBI</option>
+  <option>BstMCI</option>
+  <option>BstMWI</option>
+  <option>BstNI</option>
+  <option>BstNSI</option>
+  <option>BstOI</option>
+  <option>BstPI</option>
+  <option>BstPAI</option>
+  <option>BstSCI</option>
+  <option>BstSFI</option>
+  <option>BstSNI</option>
+  <option>BstUI</option>
+  <option>Bst2UI</option>
+  <option>BstV1I</option>
+  <option>BstV2I</option>
+  <option>BstXI</option>
+  <option>BstX2I</option>
+  <option>BstYI</option>
+  <option>BstZI</option>
+  <option>BstZ17I</option>
+  <option>Bsu15I</option>
+  <option>Bsu36I</option>
+  <option>BsuRI</option>
+  <option>BsuTUI</option>
+  <option>BtgI</option>
+  <option>BtgZI</option>
+  <option>BthCI</option>
+  <option>BtrI</option>
+  <option>BtsI</option>
+  <option>BveI</option>
+  <option>Cac8I</option>
+  <option>CaiI</option>
+  <option>CauII</option>
+  <option>CciNI</option>
+  <option>CdiI</option>
+  <option>CelII</option>
+  <option>CfoI</option>
+  <option>CfrI</option>
+  <option>Cfr9I</option>
+  <option>Cfr10I</option>
+  <option>Cfr13I</option>
+  <option>Cfr42I</option>
+  <option>ChaI</option>
+  <option>CjeI</option>
+  <option>CjeI</option>
+  <option>CjeNII</option>
+  <option>CjePI</option>
+  <option>CjePI</option>
+  <option>ClaI</option>
+  <option>CpoI</option>
+  <option>CseI</option>
+  <option>CspI</option>
+  <option>Csp6I</option>
+  <option>Csp45I</option>
+  <option>CspAI</option>
+  <option>CspCI</option>
+  <option>CspCI</option>
+  <option>CstMI</option>
+  <option>CviAII</option>
+  <option>CviJI</option>
+  <option>CviRI</option>
+  <option>DdeI</option>
+  <option>DpnI</option>
+  <option>DpnII</option>
+  <option>DraI</option>
+  <option>DraII</option>
+  <option>DraIII</option>
+  <option>DrdI</option>
+  <option>DrdII</option>
+  <option>DriI</option>
+  <option>DsaI</option>
+  <option>DseDI</option>
+  <option>EaeI</option>
+  <option>EagI</option>
+  <option>Eam1104I</option>
+  <option>Eam1105I</option>
+  <option>EarI</option>
+  <option>EciI</option>
+  <option>Ecl136II</option>
+  <option>EclHKI</option>
+  <option>EclXI</option>
+  <option>Eco24I</option>
+  <option>Eco31I</option>
+  <option>Eco32I</option>
+  <option>Eco47I</option>
+  <option>Eco47III</option>
+  <option>Eco52I</option>
+  <option>Eco57I</option>
+  <option>Eco72I</option>
+  <option>Eco81I</option>
+  <option>Eco88I</option>
+  <option>Eco91I</option>
+  <option>Eco105I</option>
+  <option>Eco130I</option>
+  <option>Eco147I</option>
+  <option>EcoHI</option>
+  <option>EcoICRI</option>
+  <option>Eco57MI</option>
+  <option>EcoNI</option>
+  <option>EcoO65I</option>
+  <option>EcoO109I</option>
+  <option>EcoRI</option>
+  <option>EcoRII</option>
+  <option>EcoRV</option>
+  <option>EcoT14I</option>
+  <option>EcoT22I</option>
+  <option>EcoT38I</option>
+  <option>EgeI</option>
+  <option>EheI</option>
+  <option>ErhI</option>
+  <option>EsaBC3I</option>
+  <option>EspI</option>
+  <option>Esp3I</option>
+  <option>FalI</option>
+  <option>FaqI</option>
+  <option>FatI</option>
+  <option>FauI</option>
+  <option>FauNDI</option>
+  <option>FbaI</option>
+  <option>FblI</option>
+  <option>FinI</option>
+  <option>FmuI</option>
+  <option>FnuDII</option>
+  <option>Fnu4HI</option>
+  <option>FokI</option>
+  <option>FriOI</option>
+  <option>FseI</option>
+  <option>FspI</option>
+  <option>FspAI</option>
+  <option>FspBI</option>
+  <option>Fsp4HI</option>
+  <option>FunI</option>
+  <option>FunII</option>
+  <option>GdiII</option>
+  <option>GsuI</option>
+  <option>HaeI</option>
+  <option>HaeII</option>
+  <option>HaeIII</option>
+  <option>HaeIV</option>
+  <option>HaeIV</option>
+  <option>HapII</option>
+  <option>HgaI</option>
+  <option>HgiAI</option>
+  <option>HgiCI</option>
+  <option>HgiEII</option>
+  <option>HgiJII</option>
+  <option>HhaI</option>
+  <option>Hin1I</option>
+  <option>Hin1II</option>
+  <option>Hin4I</option>
+  <option>Hin4I</option>
+  <option>Hin4II</option>
+  <option>Hin6I</option>
+  <option>HinP1I</option>
+  <option>HincII</option>
+  <option>HindII</option>
+  <option>HindIII</option>
+  <option>HinfI</option>
+  <option>HpaI</option>
+  <option>HpaII</option>
+  <option>HphI</option>
+  <option>Hpy8I</option>
+  <option>Hpy99I</option>
+  <option>Hpy178III</option>
+  <option>Hpy188I</option>
+  <option>Hpy188III</option>
+  <option>HpyAV</option>
+  <option>HpyCH4III</option>
+  <option>HpyCH4IV</option>
+  <option>HpyCH4V</option>
+  <option>HpyF3I</option>
+  <option>HpyF10VI</option>
+  <option>Hsp92I</option>
+  <option>Hsp92II</option>
+  <option>HspAI</option>
+  <option>ItaI</option>
+  <option>KasI</option>
+  <option>KpnI</option>
+  <option>Kpn2I</option>
+  <option>KspI</option>
+  <option>Ksp22I</option>
+  <option>Ksp632I</option>
+  <option>KspAI</option>
+  <option>Kzo9I</option>
+  <option>LpnI</option>
+  <option>LweI</option>
+  <option>MabI</option>
+  <option>MaeI</option>
+  <option>MaeII</option>
+  <option>MaeIII</option>
+  <option>MalI</option>
+  <option>MamI</option>
+  <option>MbiI</option>
+  <option>MboI</option>
+  <option>MboII</option>
+  <option>McrI</option>
+  <option>MfeI</option>
+  <option>MflI</option>
+  <option>MhlI</option>
+  <option>MjaIV</option>
+  <option>MlsI</option>
+  <option>MluI</option>
+  <option>MluNI</option>
+  <option>MlyI</option>
+  <option>Mly113I</option>
+  <option>MmeI</option>
+  <option>MnlI</option>
+  <option>Mph1103I</option>
+  <option>MroI</option>
+  <option>MroNI</option>
+  <option>MroXI</option>
+  <option>MscI</option>
+  <option>MseI</option>
+  <option>MslI</option>
+  <option>MspI</option>
+  <option>Msp20I</option>
+  <option>MspA1I</option>
+  <option>MspCI</option>
+  <option>MspR9I</option>
+  <option>MssI</option>
+  <option>MstI</option>
+  <option>MunI</option>
+  <option>MvaI</option>
+  <option>Mva1269I</option>
+  <option>MvnI</option>
+  <option>MvrI</option>
+  <option>MwoI</option>
+  <option>NaeI</option>
+  <option>NarI</option>
+  <option>NciI</option>
+  <option>NcoI</option>
+  <option>NdeI</option>
+  <option>NdeII</option>
+  <option>NgoMIV</option>
+  <option>NheI</option>
+  <option>NlaIII</option>
+  <option>NlaIV</option>
+  <option>Nli3877I</option>
+  <option>NmuCI</option>
+  <option>NotI</option>
+  <option>NruI</option>
+  <option>NsbI</option>
+  <option>NsiI</option>
+  <option>NspI</option>
+  <option>NspIII</option>
+  <option>NspV</option>
+  <option>NspBII</option>
+  <option>OliI</option>
+  <option>PacI</option>
+  <option>PaeI</option>
+  <option>PaeR7I</option>
+  <option>PagI</option>
+  <option>PalI</option>
+  <option>PalAI</option>
+  <option>PasI</option>
+  <option>PauI</option>
+  <option>PceI</option>
+  <option>PciI</option>
+  <option>PctI</option>
+  <option>PdiI</option>
+  <option>PdmI</option>
+  <option>PfeI</option>
+  <option>Pfl23II</option>
+  <option>Pfl1108I</option>
+  <option>PflBI</option>
+  <option>PflFI</option>
+  <option>PflMI</option>
+  <option>PfoI</option>
+  <option>PhoI</option>
+  <option>PinAI</option>
+  <option>PleI</option>
+  <option>Ple19I</option>
+  <option>PmaCI</option>
+  <option>PmeI</option>
+  <option>PmlI</option>
+  <option>PpiI</option>
+  <option>PpiI</option>
+  <option>PpsI</option>
+  <option>Ppu10I</option>
+  <option>PpuMI</option>
+  <option>PpuXI</option>
+  <option>PscI</option>
+  <option>PshAI</option>
+  <option>PshBI</option>
+  <option>PsiI</option>
+  <option>Psp03I</option>
+  <option>Psp5II</option>
+  <option>Psp6I</option>
+  <option>Psp1406I</option>
+  <option>PspAI</option>
+  <option>Psp124BI</option>
+  <option>PspCI</option>
+  <option>PspEI</option>
+  <option>PspGI</option>
+  <option>PspLI</option>
+  <option>PspN4I</option>
+  <option>PspOMI</option>
+  <option>PspPI</option>
+  <option>PspPPI</option>
+  <option>PspXI</option>
+  <option>PsrI</option>
+  <option>PsrI</option>
+  <option>PssI</option>
+  <option>PstI</option>
+  <option>PsuI</option>
+  <option>PsyI</option>
+  <option>PvuI</option>
+  <option>PvuII</option>
+  <option>RcaI</option>
+  <option>RgaI</option>
+  <option>RleAI</option>
+  <option>RsaI</option>
+  <option>RsrII</option>
+  <option>Rsr2I</option>
+  <option>SacI</option>
+  <option>SacII</option>
+  <option>SalI</option>
+  <option>SanDI</option>
+  <option>SapI</option>
+  <option>SatI</option>
+  <option>SauI</option>
+  <option>Sau96I</option>
+  <option>Sau3AI</option>
+  <option>SbfI</option>
+  <option>ScaI</option>
+  <option>SchI</option>
+  <option>SciI</option>
+  <option>ScrFI</option>
+  <option>SdaI</option>
+  <option>SduI</option>
+  <option>SecI</option>
+  <option>SelI</option>
+  <option>SexAI</option>
+  <option>SfaNI</option>
+  <option>SfcI</option>
+  <option>SfeI</option>
+  <option>SfiI</option>
+  <option>SfoI</option>
+  <option>Sfr274I</option>
+  <option>Sfr303I</option>
+  <option>SfuI</option>
+  <option>SgfI</option>
+  <option>SgrAI</option>
+  <option>SgrBI</option>
+  <option>SgrDI</option>
+  <option>SgsI</option>
+  <option>SimI</option>
+  <option>SinI</option>
+  <option>SlaI</option>
+  <option>SmaI</option>
+  <option>SmiI</option>
+  <option>SmiMI</option>
+  <option>SmlI</option>
+  <option>SmuI</option>
+  <option>SnaI</option>
+  <option>SnaBI</option>
+  <option>SpaHI</option>
+  <option>SpeI</option>
+  <option>SphI</option>
+  <option>SplI</option>
+  <option>SrfI</option>
+  <option>Sse9I</option>
+  <option>Sse232I</option>
+  <option>Sse8387I</option>
+  <option>Sse8647I</option>
+  <option>SseBI</option>
+  <option>SsiI</option>
+  <option>SsmI</option>
+  <option>SspI</option>
+  <option>SspBI</option>
+  <option>SspD5I</option>
+  <option>SstI</option>
+  <option>Sth132I</option>
+  <option>Sth302II</option>
+  <option>StrI</option>
+  <option>StsI</option>
+  <option>StuI</option>
+  <option>StyI</option>
+  <option>StyD4I</option>
+  <option>SunI</option>
+  <option>SwaI</option>
+  <option>TaaI</option>
+  <option>TaiI</option>
+  <option>TaqI</option>
+  <option>TaqII</option>
+  <option>TaqII</option>
+  <option>TasI</option>
+  <option>TatI</option>
+  <option>TauI</option>
+  <option>TelI</option>
+  <option>TfiI</option>
+  <option>TliI</option>
+  <option>Tru1I</option>
+  <option>Tru9I</option>
+  <option>TscI</option>
+  <option>TseI</option>
+  <option>TsoI</option>
+  <option>Tsp45I</option>
+  <option>Tsp509I</option>
+  <option>Tsp4CI</option>
+  <option>TspDTI</option>
+  <option>TspEI</option>
+  <option>TspGWI</option>
+  <option>TspRI</option>
+  <option>TssI</option>
+  <option>TstI</option>
+  <option>TstI</option>
+  <option>TsuI</option>
+  <option>Tth111I</option>
+  <option>Tth111II</option>
+  <option>UbaF9I</option>
+  <option>UbaF10I</option>
+  <option>UbaPI</option>
+  <option>UnbI</option>
+  <option>UthSI</option>
+  <option>Van91I</option>
+  <option>Vha464I</option>
+  <option>VneI</option>
+  <option>VpaK11AI</option>
+  <option>VpaK11BI</option>
+  <option>VspI</option>
+  <option>XagI</option>
+  <option>XapI</option>
+  <option>XbaI</option>
+  <option>XceI</option>
+  <option>XcmI</option>
+  <option>XhoI</option>
+  <option>XhoII</option>
+  <option>XmaI</option>
+  <option>XmaIII</option>
+  <option>XmaCI</option>
+  <option>XmaJI</option>
+  <option>XmiI</option>
+  <option>XmnI</option>
+  <option>XspI</option>
+  <option>ZhoI</option>
+  <option>ZraI</option>
+  <option>ZrmI</option>
+  <option>Zsp2I</option>
+        </SELECT>
+     </td>
+    </tr>
+    
+    <tr>
+        <td colspan="2" style="padding: 0px">
+        <hr />
+        </td>
+     </tr>
+
+        <tr>
+        <td align="center" colspan="2">
+        <a id =" RE_link" href = http://www.neb.com/nebecomm/enzymefindersearchbysequence.asp? title="look up different enzyme types on the New England BioLabs site">
+        Restriction Enzyme Information</a>
+        </td>
+    </tr>
+
+
+   </table>
+
+ </td>
+</tr>
+</table>
+</td>
+
+
+<td>
+<table bgcolor ="#ffffdf" border ="2"  rules ="cols" cols ="2" >
+
+<tr>
+<TD align ="right" colspan="2"><FONT COLOR=#993333 STYLE="font-size: 16pt;">Processing choices and display of results</FONT>
+                  <br><a href="REopaHelp.htm" >
+									(help)</a>
+									</td>
+									
+										
+</tr>
+
+<tr>
+	
+<td align=left colspan="1" style="padding: 0px" >
+	
+	&nbsp &nbsp	 Max Cut Number Accepted &nbsp
+		 
+                          <SELECT name ="maxcuts">
+
+                             <OPTION selected>1000</option>
+                             
+                             <OPTION value = 1>1</option>
+                             <OPTION value = 2>2</option>
+                             <OPTION value = 3>3</option>
+                             <OPTION value = 4>4</option>
+                             <OPTION value = 5>5</option>
+                             <OPTION value = 10>10</option>
+                             <OPTION value = 25>25</option>
+                             <OPTION value = 60>60</option>
+                             <OPTION value = 100>100</option>
+			     									 <OPTION value = 500>500</option>
+														 
+                          </SELECT>
+     
+		 
+		
+		</td>	
+								<td align="right" valign="center" rowspan="5" ><img 
+								 src="images/stickyends.gif" height="468" width="252" />
+								</td>
+		
+	  </tr>
+<TR>
+                  <TD  align ="right" > <LABEL>Processing Variations : </label>
+									   <LABEL>Single REs </label><INPUT type ="radio" name ="processType" value ="normal" checked><br>
+
+                     <LABEL> plus paired RE combinations </label><INPUT type ="radio" name ="processType" value ="pairs"> <br>
+               <a href="http://rdp8.cme.msu.edu/html/t-rflp_jul02.html" >t-RFLP protocol</a>      
+	</tr>
+	
+	
+		
+		<tr>
+		<td>&nbsp; &nbsp;Scoring penalty points selection<p>
+	  &nbsp; &nbsp; &nbsp;  single
+		 
+                          <SELECT name ="singlePenalty">
+                             <OPTION selected value = 1>1</option>
+                             <OPTION value = 2>2</option>
+                             <OPTION value = 3>3</option>
+                             <OPTION value = 4>4</option>
+                             <OPTION value = 5>5</option>
+                             <OPTION value = 6>6</option>
+                             <OPTION value = 7>7</option>
+                             <OPTION value = 8>8</option>
+			     									 <OPTION value = 9>9</option>
+			     									 <OPTION value = 10>10</option>
+                             														 
+                          </SELECT>
+                 
+                          
+  &nbsp &nbsp	 pair &nbsp
+		 
+                          <SELECT name ="doublePenalty">
+														 <OPTION value = 1>1</option>
+                             <OPTION value = 2>2</option>
+                             <OPTION value = 3>3</option>
+                             <OPTION value = 4>4</option>
+                             <OPTION selected value = 5>5</option>
+                             <OPTION value = 10>10</option>
+                             <OPTION value = 15>15</option>
+                             <OPTION value = 20>20</option>
+                             <OPTION value = 30>30</option>
+			     									 <OPTION value = 100>100</option>
+														 
+                          </SELECT>            
+                          </td>
+		
+		</tr>            
+	
+<TR>                							
+											
+
+	
+<td align=left colspan="1" style="padding: 0px" >
+
+	
+	
+	&nbsp &nbsp	 DNA length measurement uncertainty<br> &nbsp &nbsp for t/rflp &nbsp
+		 
+                          <SELECT name ="fuzz">
+                             <OPTION value = "0.005" selected>0.5%</option>
+                             <OPTION value = "0.01">1%</option>
+                             <OPTION value = "0.02">2%</option>
+                             <OPTION value = "0.04">4%</option>
+                             <OPTION value = "0.1">10%</option>	     									
+                          </SELECT>
+     
+		 
+		</td>
+		
+		</tr>
+
+
+		
+		
+		
+		
+		
+		<tr>
+		                	  
+             
+<td align=right colspan="1" style="padding: 0px" >
+			<h2> Results pages wanted</h2>
+		 				<LABEL>O/P by Sequence </label><INPUT type ="radio" name ="dispList" value ="Seq" ><br>
+            <LABEL> O/P by RE </label><INPUT type ="radio" name ="dispList" value ="RE" checked> </P>
+            
+		 			 <LABEL> Table of cut positions & Fragment lengths </label><INPUT type ="checkbox" name ="outputs" value ="0" ></P>
+					 <LABEL> Restriction Map </label><INPUT type ="checkbox" name ="outputs" value ="1" checked></P>
+					 <LABEL> Graphical display of fragment sizes</label><INPUT type ="checkbox" name ="outputs" value ="2"></P>
+           <LABEL> Inverse Logarithm Graphical display of fragment sizes</label><INPUT type ="checkbox" name ="outputs" value ="3"></P>
+           <LABEL> t-RFLP table of highest scoring REs </label><INPUT type ="checkbox" name ="outputs" value ="4"></P>
+                 
+                         
+                      
+											<input align='center' valign='bottom' type='submit' value=' Upload Now '><input type='reset'>
+		</td>
+		</tr>
+		<TR>
+        
+
+
+</form>          
+</tr>
+		
+		<tr>
+		<td>
+		
+		
+		
+</td>
+
+</tr>
+</table>
+	</td>
+
+</table>
+
+
+
+</center>
+<br />
+<script language="JavaScript" type="text/javascript" src="wz_tooltip.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>DichroCalc - Circular and Linear Dichroism Calculations of Proteins from First Principles</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="robots" content="index,follow" />
+	<meta name="Description" content="Web interface for circular and linear dichroism calculations of proteins. Free of charge." /> 
+	<meta name="Keywords" content="dichroism calculations protein circular linear calculation interface spectrum spectra PDB DNA RNA nucleic base bases ndi napthalenediimide ab initio matrix method" />
+	<link rel="stylesheet" href="/layout/styles.css" type="text/css" />
+</head>
+
+<body>
+	<div id="header">
+	<div id="header_left">
+		<a href="http://comp.chem.nottingham.ac.uk/home/index.html"><img id="title-logo" src="/layout/title-logo.gif" width="120" height="80" alt="Home Page" /></a><img id="title-header" src="/layout/title-header.gif" alt="The Hirst Group Home Page" width="480" height="80" />
+	</div>
+	
+	<div id="header_right">
+		<a href="http://www.nottingham.ac.uk/"><img id="title-uni" src="/layout/title-uni.gif" width="160" height="80" alt="The University of Nottingham" /></a>
+	</div>
+</div>
+
+	<div id="NaviSideBar">
+	<span class="sidelink">
+		<a href="/home/index.html">Home</a> 
+		<a href="/members/index.html">Group Members</a> 
+		<a href="/positions/index.html">Open Positions</a> 
+		<a href="/research/index.html">Research Topics</a> 
+		<a href="/publications/index.html">Publications</a> 
+		<a href="/collaborators/index.html">Collaborators</a> 
+		<!--a href="/funding/index.html">Funding Record</a --> 
+		<span class="NaviGroup">Web Services</span>
+                <a href="/debt"><img src="/layout/spacer.gif" height="5" width="15" alt="DEBT" />DEBT</a>
+		<a href="/dichrocalc"><img src="/layout/spacer.gif" height="5" width="15" alt="DichroCalc" />DichroCalc</a> 
+                <a href="/disspred"><img src="/layout/spacer.gif" height="5" width="15" alt="DISSPred" />DISSPred</a>
+		<a href="/glyco"><img src="/layout/spacer.gif" height="5" width="15" alt="GlycoPred" />GlycoPred</a> 
+		<a href="/trespasser"><img src="/layout/spacer.gif" height="5" width="15" alt="TRESPASSER" />TRESPASSER</a>
+		<a href="/alumni/index.html">Alumni</a> 
+		<a href="/schedule/index.html">Seminar Schedule</a> 
+		<a href="/download/index.html">Download</a>
+		<a href="/teaching/index.html">Teaching</a>
+		
+		
+		
+		<a href="http://www.nottingham.ac.uk/chemistry/">School of Chemistry</a>
+                <a href="http://theory.chem.nottingham.ac.uk">UoN Theory</a>
+		
+	</span>
+	
+	<div id="W3Clogo">
+		<a href="http://validator.w3.org/check?uri=referer">
+			<img src="http://www.w3.org/Icons/valid-xhtml10-blue"
+				alt="Valid XHTML 1.0 Strict" height="31" width="88" />
+		</a>
+	</div>
+</div>
+
+	<div id="NaviTopBar">
+	<div class="NaviSpacer">&nbsp;</div>
+	<div class="NaviTopLink"><a href="/dichrocalc/index.html">Home</a></div>
+	<div class="NaviTopLink"><a href="/cgi-bin/dichrocalc/bin/getparams.cgi">Calculation</a></div>
+	<div class="NaviTopLink"><a href="/dichrocalc/parameters.html">Parameters</a></div>
+	<div class="NaviTopLink"><a href="/dichrocalc/references.html">References</a></div>
+	<div class="NaviTopLink"><a href="/dichrocalc/help.html">Help</a></div>
+</div>
+
+	
+	<div id="maincontent">
+		<a name="TopOfPage" id="TopOfPage"></a>
+		
+		<div class="DC-logo">
+			<span class="floatleft" style="padding-right:16px"><img src="/layout/dichrocalc.gif" width="220px" alt="DichroCalc - Circular and linear dichroism calculations of proteins"/></span>
+			<span style="text-align: left; font-size: 15pt; font-variant: small-caps; font-weight: bold; color: #0F3388;">
+				<br /> Protein Circular and Linear
+			</span>
+			<span style="text-align: left; font-size: 19pt; font-variant: small-caps; font-weight: bold; color: #0F3388;">
+				<br /> Dichroism Calculation
+			</span>
+			<span style="text-align: left; font-size: 15pt; font-variant: small-caps; font-weight: bold; color: #0F3388;">
+				<br /> from First Principles <br />
+			</span>
+			<span style="font-size: 8pt">v. 3.3</span>
+			<p>&nbsp;</p>
+		</div>
+		
+		<table width="600">
+			<tr>
+				<td>
+					<p>Welcome to DichroCalc, our web interface for protein circular and linear dichroism calculations.</p>
+					
+					<p>You can upload .pdb files, experimental spectra and archives containing several files.
+					File types that can be handled by DichroCalc:</p>
+					
+					<ul>
+						<li>.pdb</li>
+						<li>.tar, .tar.gz, .gz, .tgz</li>
+						<li>.zip</li>
+						<li>.Z</li>
+					</ul>
+					
+					<p>Instead of uploading a file, you can also (or additionally) enter one or more PDB codes of 
+					proteins which are then downloaded from the RCSB Protein Data Bank. If you enter more than one
+					code, please separate them by spaces.</p>
+					
+					<p>If you want to run calculations on non-standard residues, simply make sure that the atoms
+					in the .pdb file are labelled with the ATOM-keyword and the peptide chain is denoted by 
+					C, N, O, CA labels.</p>
+					
+					<p>The calculated spectra are provided as text files containing the xy-data and are
+					also plotted as postscript file. If you additionally provide the experimental 
+					data, a comparison plot is created. To use this feature, add the experimental
+					spectrum with the extension .exp.cd or .exp.ld to the archive containing the pdb file 
+					(i.e. 1beb.pdb and 1beb.exp.cd).</p>
+
+					<p>The supported chromophores for CD and LD calculations are:</p>
+					<ul>
+						<li>peptide bonds (and charge-transfer between adjacent peptide bonds);</li>
+						<li>the aromatic side chain chromohores of phenylalanine, tyrosine, and tryptophan;</li>
+						<li>the side chain chromophores of asparagine, aspartic acid, glutamine, and gluamic acid;</li>
+						<li>the nucleic bases adenine, guanine, cytosine, thymine and uracil for RNA and DNA calculations;</li>
+						<li>the naphthalenediimide chromophore.</li>
+					</ul>
+					
+					<p>For additional information on the interface, please have a look at the
+					<a href='help.html'>help</a> section.</p>
+					
+					<p>Ben Bulheller<br />
+					<img src="/files/mail-bulheller.gif" alt="Ben Bulheller" />
+					</p>
+
+					<p>Originally funded by<br />
+					<a href="http://www.epsrc.co.uk"><img src="../files/epsrc-small.jpg" alt="EPSRC" /></a>
+					</p>
+					
+					<hr />
+<h3>Usage Statistics</h3>
+<table>
+<tr>
+   <td style='width: 150px; text-align: left; font-weight: bold;'>Users:</td>
+   <td style='width: 150px; text-align: right;'>                       315
+</td>
+</tr>
+<tr>
+   <td style='width: 150px; text-align: left; font-weight: bold;'>Jobs:</td>
+   <td style='width: 150px; text-align: right;'>                       2299
+</td>
+</tr>
+<tr>
+   <td style='width: 150px; text-align: left; font-weight: bold;'>Files:</td>
+   <td style='width: 150px; text-align: right;'>                     199240
+</td>
+</tr>
+<tr>
+   <td style='width: 150px; text-align: left; font-weight: bold;'>Jobs using CD:</td>
+   <td style='width: 150px; text-align: right;'>              2282
+</td>
+</tr>
+<tr>
+   <td style='width: 150px; text-align: left; font-weight: bold;'>Jobs using LD:</td>
+   <td style='width: 150px; text-align: right;'>               454
+</td>
+</tr>
+</table>
+<hr />
+
+					
+				</td>
+			</tr>
+		</table>
+		
+		<div id="footer">
+	<div class="FooterLeft"><a class="footerlink" href="http://www.nottingham.ac.uk/chemistry/">School of Chemistry</a></div>
+	<div class="FooterCenter"><a class="footerlink" href="/index.html">Back to Home Page</a></div>
+	<div class="FooterRight"><a class="footerlink" href="#TopOfPage">Top of page</a></div>
+	<p>&nbsp;</p>
+</div>
+
+	</div>
+	
+</body>
+</html>

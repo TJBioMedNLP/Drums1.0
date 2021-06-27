@@ -1,0 +1,823 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en">
+
+<head>
+
+
+<meta http-equiv="Content-Type"
+      content="text/html;charset=utf-8" />
+
+<meta name="robots" content="index, follow" />
+<meta name="generator" content="icoya OpenContent" />
+<meta name="title" content="IonchanPred" />
+
+
+  <meta name="description" content="" />
+
+
+  <meta name="keywords" content="" />
+
+<meta name="author" content="hlin" />
+<meta name="copyright" content="" />
+<meta name="email" content="chem.wang@gmail.com" />
+
+<title>COBI: Center of Bioinformatics @ UESTC - IonchanPred</title>
+
+
+    
+      <base href="http://cobi.uestc.edu.cn/people/hlin/tools/IonchanPred" />
+    
+ 
+
+<!-- fav icon -->
+<link rel="shortcut icon"
+      href="http://cobi.uestc.edu.cn/favicon.ico"
+      type="image/x-icon" />
+
+<!-- Style sheets for CSS2 capable browsers (Mozilla, Opera, IE, Netscape6+, Konqueror etc. -->
+
+  <style type="text/css" media="all"> 
+		@import "http://cobi.uestc.edu.cn/icoya.css";
+  </style> 
+
+<!-- Style sheet used for printing -->
+<link rel="stylesheet" type="text/css" media="print"
+      href="http://cobi.uestc.edu.cn/plonePrint.css" />
+
+
+    
+  
+
+<!-- External script from Apple(!), will need to move into code and tweak.
+(No problem licence-wise, it's free and modifiable) -->
+<script language="JavaScript" type="text/javascript"
+        src="http://cobi.uestc.edu.cn/styley.js"></script>
+<script language="JavaScript" type="text/javascript"
+        src="http://cobi.uestc.edu.cn/ieemu.js"></script>
+
+<!-- Consolidation of all javascript into 1 call -->
+<script language="Javascript" type="text/javascript" >
+  
+   
+ 
+    if (moz) {
+    extendElementModel();
+    extendEventObject();
+    emulateEventHandlers(["mouseover", "mouseout"]);
+  }
+
+  function showDay(date) {
+    tempX = document.body.offsetWidth - event.x;
+    tempY = event.clientY + document.body.scrollTop;
+
+    document.getElementById('day' + date).style.pixelTop = tempY - 20;
+    document.getElementById('day' + date).style.pixelRight = tempX + 12;
+    document.getElementById('day' + date).style.visibility = 'visible';
+    return true;
+  }
+
+  function hideDay(date) {
+    document.getElementById('day' + date).style.visibility = 'hidden';
+    return true;
+  }
+
+  function formtooltip(el,flag){
+    elem = document.getElementById(el);
+    if (flag) { 
+      elem.parentNode.parentNode.style.zIndex=1000;
+      elem.parentNode.parentNode.style.borderRight='0px solid #000';
+      // ugly , yes .. but neccesary to avoid a small but very annoying bug in IE6
+      elem.style.visibility='visible';
+    }
+    else {
+      elem.parentNode.parentNode.style.zIndex=1;
+      elem.parentNode.parentNode.style.border='none';
+      elem.style.visibility='hidden' };
+  }
+
+</script>
+
+<link rel="home" href="http://cobi.uestc.edu.cn"
+      title="Home" />
+<link rel="search"
+      href="http://cobi.uestc.edu.cn/search_form"
+      title="Search this site" />
+<link rel="help" href="http://cobi.uestc.edu.cn/help"
+      title="Help" />
+<link rel="contents" href="http://cobi.uestc.edu.cn/sitemap"
+      title="Site Map" />
+<link rel="up" title="Up one level" />
+
+<meta http-equiv="imagetoolbar" content="no" /> <!-- Disable IE6 image toolbar -->
+
+</head>
+
+
+
+<body>
+
+<div>
+
+<!-- layout head start -->
+<!-- meta start -->
+  <table cellpadding="0" cellspacing="0" border="0" class="TopTable">
+	<tr>
+        <td width="211" rowspan="2" id="logocell"><a name="top"></a><a
+    href="http://cobi.uestc.edu.cn" title="Home"><img src="http://cobi.uestc.edu.cn/expospace_logo.gif" alt="" title="UESTC Logo" height="184" width="211" /></a></td>
+
+        <td class="searchformCell">
+          <form name="searchform"
+                action="http://cobi.uestc.edu.cn/search">
+            <span>Search</span>&nbsp;<input
+    id="searchGadget" name="SearchableText" type="text"
+    size="12" value="" class="search" />
+            &nbsp;<input type="image" src="searchButton.gif"
+                         class="search" id="searchSubmit"
+                         value="Search" />
+            
+          </form>
+
+
+          <div class="portalLinks">
+
+                
+
+                    <a href="http://cobi.uestc.edu.cn">Welcome</a>&nbsp;|
+
+                    
+
+                            
+
+                            
+                                
+                            
+                            <a
+    href="http://cobi.uestc.edu.cn/recent_news">News</a>&nbsp;|&nbsp;
+                    
+                    
+
+                            
+                                
+                                    
+                                        <a
+    href="http://cobi.uestc.edu.cn/login_form">Login</a>&nbsp;|
+                                        
+                                    
+                                
+
+                            
+
+                            
+                                
+                            
+                            <a
+    href="http://cobi.uestc.edu.cn/search_form">Search</a>&nbsp;|&nbsp;
+                    
+                    
+
+                            
+
+                            
+                                
+                            
+                            <a
+    href="http://cobi.uestc.edu.cn/sitemap">SiteMap</a>
+                    
+                
+
+          </div>
+
+        </td>
+        </tr>
+        <tr>
+            <td class="MainMenu">
+              <table class="MainMenuTable">
+                <tr>
+                  <!-- main menu start -->
+                  
+    <!-- toplevel menu start -->
+    
+
+
+
+
+<td class="MainMenu MainMenuSelected"><a
+    href="http://cobi.uestc.edu.cn/people/">
+<span>People</span>
+</a></td>
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/research/">
+<span>Research</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/pub/">
+<span>Publication</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/resource/">
+<span>Resource</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/services/">
+<span>Services</span>
+</a></td>
+
+
+
+
+
+
+<td class="MainMenu"><a href="http://cobi.uestc.edu.cn/events/">
+<span>Events</span>
+</a></td>
+
+
+
+
+
+    <!-- toplevel menu end -->
+    
+                  <!-- main menu end -->
+                  <td></td>
+                </tr>
+              </table>
+
+            </td>
+
+        </tr>
+ </table>
+
+<!-- layout head end -->
+</div>
+
+<!-- main table start -->
+<table border="0" width="100%" cellspacing="0"
+       cellpadding="0" class="mainTable"
+       summary="Main content">
+    <tr>
+        
+            
+                <!-- left column start -->
+                <td width="212" valign="top" class="leftBarCell" rowspan="2">
+                    
+                        
+                            
+                                
+    <!-- menu start -->
+    <div class="VerticalMenu">
+      
+    
+        
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+        
+            
+    
+        
+            
+                
+                        
+                            
+                                <a class="parent"
+    href="http://cobi.uestc.edu.cn/people/">&raquo;&nbsp;&nbsp;<span>People</span></a><br class="netscape4" />
+                                <br class="netscape4" />
+                            
+                            <!--<tal:block tal:condition="python: test((URL1 != URL2), 0, 1)">
+
+                                <a i18n:translate="" tal:condition="not: parent/hasSubItems" tal:attributes="href string:${parent/getVirtualURL}" href="#" class="MenuSelected">&raquo;&nbsp;&nbsp;<span tal:replace="python:test(parent.title,parent.title,parent.id)" /></a><br class="netscape4" />
+                            </tal:block>-->
+                        
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/zguo/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Zheng Guo</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/nrao/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Nini Rao</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/jhuang/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Jian Huang</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/fbguo/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Feng-Biao Guo</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                        
+                            
+                            
+                                <a
+    href="http://cobi.uestc.edu.cn/people/hlin/"
+    class="SubMenuSelected">&raquo;&nbsp;&nbsp;<span>Hao Lin</span></a><br class="netscape4" />
+                            
+                        
+                
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/xwang/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Xianlong Wang</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+            
+                
+                
+                    <a href="http://cobi.uestc.edu.cn/people/HDing/"
+                       class="SubMenu">&raquo;&nbsp;&nbsp;<span>Hui Ding</span></a><br class="netscape4" />
+                
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+        
+            
+    
+        
+            
+                
+            
+            
+                
+            
+
+                     
+            
+            
+            
+            
+        
+    
+
+
+
+
+        
+    
+
+
+
+
+    </div>
+    <!-- menu end -->
+
+    <br /><br />
+
+                            
+                        
+                        
+                            
+                                
+    
+
+                            
+                        
+                        
+                            
+                                
+                            
+                        
+                    
+                </td>
+                <!-- left column end -->
+            
+        
+
+        <!-- main column start -->
+        <td valign="top" class="mainTableCell">
+
+            
+                
+            
+
+            <div>
+                <!-- document start -->
+                <div class="document">
+                        
+                        <div>
+
+      <div class="contentHeader">
+          <h1>IonchanPred</h1>
+      </div>
+
+
+      <div class="description"></div>
+        
+        
+      
+        
+      <H1 align=center><FONT color=#3300cc>IonchanPred</FONT></H1>
+<H2 align=left><FONT color=#0066ff>What is IonchanPred?</FONT></H2>
+<H5 align=left><FONT color=#9966ff>The purpose of IonchanPred is to develop a computational system for predicting ion channel proteins. This server can solve three predictive problems. The jackknife cross-validation has been used to examine and evaluate&nbsp;performance of predictive processes. The first prediction is to discriminate ion channel proteins from non-ion channel proteins.&nbsp;The overall accuracy is&nbsp;86.3%. The second prediction is to distinguish voltage-gated ion channel proteins and ligand-gated ion channel proteins.&nbsp;The overall accuracy achieves 92.6%. The third prediction is to predict four&nbsp;classes of voltage-gated ion channel proteins: potassium (K), sodium (Na), calcium (Ca) and anion (An), respectively.&nbsp;The overall accuracy achieves 87.8%. IonchannPred is a power tool for the prediction of ion channel proteins.</FONT></H5>
+<H5 align=left><FONT color=#9966ff><FONT color=#6633ff>Database:</FONT> The protein sequences&nbsp;were extracted from universal protein resource (<A href="http://www.uniprot.org/">UniProt</A>) and Ligand-Gated Ion Channel database&nbsp; (<A href="http://www.ebi.ac.uk/compneur-srv/LGICdb/LGICdb.php">LGICdb</A>).&nbsp;A series of strict steps were used to process reliable and high quality sequences (details in our article). </FONT><FONT color=#9966ff>To avoid any homology bias, the <FONT color=#3867d7><A href="http://bioinformatics.ljcrf.edu/cd-hi/">CD-HIT </A></FONT>program&nbsp;was utilized to remove the highly similar sequences using 40% sequence identity as the cutoff.&nbsp;As a result, a total of <A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/vol/">148 voltage-gated ion channels </A>and <A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/ligand/">150 ligand-gated ion channels </A>were obtained. The voltage-gated ion channels can further be classified into four categories: <A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/k/">81 potassium (K) channels</A>,&nbsp;<A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/ca/">29&nbsp;calcium (Ca) channels</A>,&nbsp;<A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/na/">12&nbsp;sodium (Na) channels</A> and&nbsp;<A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/anion/">26&nbsp;anion (An) channels</A>, respectively. The non-ion channel proteins were comprised of <A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/non-ion/">300 membrane proteins</A> with the identity less 40%.</FONT></H5>
+<H4 align=left><FONT color=#9966ff><FONT color=#6633ff>Feature Selection:<FONT color=#555753> </FONT><FONT color=#9966ff>The&nbsp;400 dipeptide compositions were used to&nbsp;represent protein sequences.&nbsp;In order to&nbsp;remove feature redundancy and obtain an optimized feature set, the ANOVA-based algorithm was used to find good&nbsp;features which can improve predictive performance.&nbsp;</FONT></FONT></FONT></H4>
+<H4 align=left><FONT color=#9966ff><FONT color=#6633ff>Machine Learning Method:</FONT> The core algorithm of this server was support vector machine. The software used to implement SVM&nbsp;was <FONT color=#3867d7><A href="http://www.csie.ntu.edu.tw/~cjlin/libsvm">LibSVM</A></FONT> written by Lin’s lab. </FONT><FONT color=#9966ff>The radial basis function was used to perform prediction.</FONT>&nbsp;<FONT color=#9966ff>The program grid.py&nbsp;with jackknife cross-validation was used to optimize the&nbsp;regularization parameter <EM>C</EM> and the kernel parameter&nbsp;<EM>g.</EM>&nbsp;The predictive models&nbsp;were built by&nbsp;executive program&nbsp;"svmtrain.exe".</FONT></H4>
+<H4 align=left><FONT color=#0066ff>IonchanPred user's Guide</FONT></H4>
+<H4 align=left><FONT color=#9966ff>IonchanPred program were written in C++. It is very simple to&nbsp;use IonchanPred.</FONT></H4>
+<H4 align=left><FONT color=#9966ff>First, the <A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/IonchanPred.zip/">IonchanPred package </A>must be downloaded. After unpack the package, user can obtain three executed programs: <FONT color=#9900ff>aar.exe</FONT>, <FONT color=#9900ff>svmscale.exe</FONT> and <FONT color=#9900ff>svmpredict.exe</FONT>, respectively and&nbsp;three model&nbsp;files: <FONT color=#9900ff>ion-non.model</FONT>, <FONT color=#9900ff>V-L.model</FONT> and <FONT color=#9900ff>k-ca-an-na.model</FONT>, respectively and three scale file: <FONT color=#9900ff>ion-non</FONT>, <FONT color=#9900ff>V-L</FONT> and <FONT color=#9900ff>k-ca-an-na</FONT>, respectively.</FONT></H4>
+<H4 align=left><FONT color=#9966ff>Second, any protein sequences&nbsp;to be predicted must be&nbsp;saved&nbsp;in text file with&nbsp;FASTA format&nbsp;(<A href="http://cobi.uestc.edu.cn/people/hlin/data/IonchanPred/test/">example</A>).</FONT></H4>
+<H4 align=left><FONT color=#9966ff>Third, user may dblclick "<FONT color=#9900ff>aar.exe</FONT>" for producing parameter file.&nbsp;In pop-up DOS window, user need to keyed sequence file behind the sentence "enter the file name (Fasta format)". Knock "enter" on keyboard. Subsequently, user must select appropriate parameter&nbsp; to produce parameter file (default: test.txt).</FONT></H4>
+<DL>
+<DD>
+<H6 align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parameter options: 1&nbsp;&nbsp;&nbsp;&nbsp; for predicting ion channels and non-ion channels</H6>
+<DD>
+<H6 align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for predicting voltage-gated ion channels and ligand-gated ion channels</H6>
+<DD>
+<H6 align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for predicting four classes of voltage-gated ion channels</H6></DD></DL>
+<H4 align=left><FONT color=#9966ff>Fourth, the parameter file must be scaled by use of program "<FONT color=#9900ff>svmscale</FONT>". Basic command is "<FONT color=#9900ff>svmscale -r store_file test.txt&gt;scalefile</FONT>".</FONT></H4>
+<DL>
+<DD>
+<H6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Store_file options:&nbsp;&nbsp; ion-non&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for predicting ion channels and non-ion channels</H6>
+<DD>
+<H6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V-L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for predicting voltage-gated ion channels and ligand-gated ion channels</H6>
+<DD>
+<H6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; k-ca-an-na&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for predicting four classes of voltage-gated ion channels</H6></DD></DL>
+<H4 align=left><FONT color=#9966ff>Fifth, user need to exacute the program "<FONT color=#9900ff>svmpredict</FONT>". Basic command is "<FONT color=#9900ff>svmpredict scalefile modelfile outfile</FONT>".</FONT></H4>
+<DD>
+<H6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; modelfile options:&nbsp;&nbsp; ion-non.model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for predicting ion channels and non-ion channels</H6>
+<DD>
+<H6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V-L.model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for predicting voltage-gated ion channels and ligand-gated ion channels</H6>
+<DD>
+<H6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; k-ca-an-na.model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for predicting four classes of voltage-gated ion channels</H6>
+<H4 align=left><FONT color=#cc33ff><FONT color=#9966ff>Sixth, results can be obtained from outfile. </FONT></FONT></H4>
+<DL>
+<DL>
+<DT>
+<DL>
+<DT>
+<H6 align=left>&nbsp;&nbsp;&nbsp;&nbsp;Results options:&nbsp;&nbsp; 1 for ion channel, 2 for non-ion channel</H6>
+<DT>
+<H6 align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 for voltage-gated ion channel, 2 for ligand-gated ion channel</H6>
+<DT>
+<H6 align=left>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 for k channel, 2 for ca channel, 3 for anion channel, 4 for na channel</H6></DT></DL></DT></DL>
+<DT>
+<H4 align=left><FONT color=#cc33ff><FONT color=#9966ff>Note: The executed program "<FONT color=#9900ff>svmscale</FONT>" and "<FONT color=#9900ff>svmpredict</FONT>" are derived from libsvm written by <A href="http://www.csie.ntu.edu.tw/~cjlin/">Lin’s lab</A>.</FONT></FONT></H4>
+<DT>
+<H4 align=left><FONT color=#0066ff></FONT>&nbsp;</H4>
+<DT>
+<H4 align=left><FONT color=#0066ff>Reference</FONT></H4>
+<DT>
+<H4 align=left><FONT color=#9966ff>Hao Lin, Hui Ding. Prediction of ion channels and their types by the dipeptide mode of pseudo amino acid composition. <EM>Journal of Theoretical Biology</EM>, 2011, 268(1): 64-69.</FONT></H4></DT></DL></DD>
+    
+  </div>
+                        
+                            
+                        
+                </div>
+                <!-- document end -->
+            </div>
+
+            
+                
+            
+
+            <br />
+            
+        </td>
+
+        
+            
+        
+    </tr>
+
+    <tr>
+        <td>
+            <!-- footer start -->
+            <div>
+
+  <div class="Footer">
+      <div class="footerlinks">
+        <a href="http://cobi.uestc.edu.cn/people/hlin/tools/IonchanPred#top"><span>Top of page</span></a>
+        
+         |
+         <a href="javascript:this.print()">Print this page</a>
+         
+
+        
+
+        
+      </div>
+
+      <div class="icoyaCopyright">
+
+        Last modified: 01.12.2010, 14:27:14&nbsp;&nbsp;-&nbsp;&nbsp;Created by: hlin&nbsp;&nbsp;-&nbsp;&nbsp;Copyright &copy; 2009-2010, Center of Bioinformatics, University of Electronic Science and Technology of China. All rights reserved. 
+
+      </div>
+
+
+      <br />
+      <hr class="netscape4" />
+      <strong class="netscape4">
+        If you can read this text, it means you are not experiencing the Plone design at its best.
+        Plone makes heavy use of CSS, which means it is accessible to any internet browser,
+        but the design needs a
+        <a href="http://www.webstandards.org/upgrade/">standards-compliant browser to look like we intended it</a>.
+        Just so you know ;)
+      </strong>
+
+  </div>
+
+  <!-- set encoding -->
+  
+
+</div>
+            <!-- footer end -->
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

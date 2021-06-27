@@ -1,0 +1,607 @@
+
+
+
+<!-- %@ page errorPage="../elements/errorpage.jsp" buffer="none" -->
+
+
+
+
+
+ 
+ 
+   
+     
+     
+      
+
+
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>GenRE - CYGD &#45; The Comprehensive Yeast Genome Database</title>
+<link rel="stylesheet" type="text/css" href="/genre/proj/system/modules/mips.genre.web/resources/genre.css">
+<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; CHARSET=ISO-8859-1">
+<meta name="author" content="MIPS - GenRE - GSF">
+<meta name="description" content="GenRE Main Page">
+<meta name="keywords" content="GenRE, genome, research, annotation">
+<script language="JavaScript">
+
+    var winoff=0;
+function winopen(url,target,W,H){ //alert(url+target+W+H);
+   if(W==''){W=800;}
+   if(H==''){W=650;}
+   if(winoff==1){
+     var fenster = window.open(url,target,eingensch);
+     fenster.close(); winoff=0;
+   }
+   var eingensch="scrollbars=yes,menubar=no,resizable=yes,width="+W+",height="+H;
+   var fenster = window.open(url,target,eingensch);
+   fenster.focus(); winoff=1;
+}
+
+function winopen_undef(url,target,W,H){ //alert(url+target+W+H);
+   if(W==''){W=800;}
+   if(H==''){W=650;}
+   if(winoff==1){
+     var fenster = window.open(url,target,eingensch);
+     fenster.close(); winoff=0;
+   }
+   var eingensch="scrollbars=yes,menubar=no,resizable=yes";
+   var fenster = window.open(url,target,eingensch);
+   fenster.focus(); winoff=1;
+}
+
+/***********************************************
+* Switch Content script- Â© Dynamic Drive (www.dynamicdrive.com)
+* This notice must stay intact for legal use. Last updated April 2nd, 2005.
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var enablepersist="on" //Enable saving state of content structure using session cookies? (on/off)
+var collapseprevious="no" //Collapse previously open content when opening present? (yes/no)
+
+var contractsymbol='<img border="0" src="/genre/proj/system/modules/mips.genre.web/resources/collapse.gif" alt="- " />' //HTML for contract symbol.
+var expandsymbol='<img border="0" src="/genre/proj/system/modules/mips.genre.web/resources/expand.gif" alt="+ " />' //HTML for expand symbol.
+
+
+if (document.getElementById){
+document.write('<style type="text/css">')
+document.write('.switchcontent{display:none;}')
+document.write('</style>')
+}
+
+function getElementbyClass(rootobj, classname){
+var temparray=new Array()
+var inc=0
+var rootlength=rootobj.length
+for (i=0; i<rootlength; i++){
+if (rootobj[i].className==classname)
+temparray[inc++]=rootobj[i]
+}
+return temparray
+}
+
+function sweeptoggle(ec){
+var thestate=(ec=="expand")? "block" : "none"
+var inc=0
+while (ccollect[inc]){
+ccollect[inc].style.display=thestate
+inc++
+}
+revivestatus()
+}
+
+
+function contractcontent(omit){
+var inc=0
+while (ccollect[inc]){
+if (ccollect[inc].id!=omit)
+ccollect[inc].style.display="none"
+inc++
+}
+}
+
+function expandcontent(curobj, cid){
+var spantags=curobj.getElementsByTagName("SPAN")
+var showstateobj=getElementbyClass(spantags, "showstate")
+if (ccollect.length>0){
+if (collapseprevious=="yes")
+contractcontent(cid)
+document.getElementById(cid).style.display=(document.getElementById(cid).style.display!="block")? "block" : "none"
+if (showstateobj.length>0){ //if "showstate" span exists in header
+if (collapseprevious=="no")
+showstateobj[0].innerHTML=(document.getElementById(cid).style.display=="block")? contractsymbol : expandsymbol
+else
+revivestatus()
+}
+}
+}
+
+function revivecontent(){
+contractcontent("omitnothing")
+selectedItem=getselectedItem()
+selectedComponents=selectedItem.split("|")
+for (i=0; i<selectedComponents.length-1; i++)
+document.getElementById(selectedComponents[i]).style.display="block"
+}
+
+function revivestatus(){
+var inc=0
+while (statecollect[inc]){
+if (ccollect[inc].style.display=="block")
+statecollect[inc].innerHTML=contractsymbol
+else
+statecollect[inc].innerHTML=expandsymbol
+inc++
+}
+}
+
+function get_cookie(Name) { 
+var search = Name + "="
+var returnvalue = "";
+if (document.cookie.length > 0) {
+offset = document.cookie.indexOf(search)
+if (offset != -1) { 
+offset += search.length
+end = document.cookie.indexOf(";", offset);
+if (end == -1) end = document.cookie.length;
+returnvalue=unescape(document.cookie.substring(offset, end))
+}
+}
+return returnvalue;
+}
+
+function getselectedItem(){
+if (get_cookie(window.location.pathname) != ""){
+selectedItem=get_cookie(window.location.pathname)
+return selectedItem
+}
+else
+return ""
+}
+
+function saveswitchstate(){
+var inc=0, selectedItem=""
+while (ccollect[inc]){
+if (ccollect[inc].style.display=="block")
+selectedItem+=ccollect[inc].id+"|"
+inc++
+}
+
+document.cookie=window.location.pathname+"="+selectedItem
+}
+
+function do_onload(){
+uniqueidn=window.location.pathname+"firsttimeload"
+var alltags=document.all? document.all : document.getElementsByTagName("*")
+ccollect=getElementbyClass(alltags, "switchcontent")
+statecollect=getElementbyClass(alltags, "showstate")
+if (enablepersist=="on" && ccollect.length>0){
+document.cookie=(get_cookie(uniqueidn)=="")? uniqueidn+"=1" : uniqueidn+"=0" 
+firsttimeload=(get_cookie(uniqueidn)==1)? 1 : 0 //check if this is 1st page load
+if (!firsttimeload)
+revivecontent()
+}
+if (ccollect.length>0 && statecollect.length>0)
+revivestatus()
+}
+
+if (window.addEventListener)
+window.addEventListener("load", do_onload, false)
+else if (window.attachEvent)
+window.attachEvent("onload", do_onload)
+else if (document.getElementById)
+window.onload=do_onload
+
+if (enablepersist=="on" && document.getElementById)
+window.onunload=saveswitchstate
+
+</script>
+</head>
+<body style="FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: Arial,Helvetica,Verdana" 
+text=#000000 vLink=#000000 aLink=#000000 link=#000000 leftMargin=0 
+background="/genre/proj/system/modules/mips.genre.web/resources/bgr_mips.jpg" topMargin=0 marginheight="0" 
+marginwidth="0">
+
+<BASEFONT face=Sans-Serif,Helv,Helvetica,Verdana,Arial size=2>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD><MAP name=gsf><AREA shape=RECT target=_blank alt=GSF 
+        coords=15,10,80,80 href="http://www.gsf.de/"></MAP><IMG alt="Logo GSF" 
+      src="/genre/proj/system/modules/mips.genre.web/resources/topleft.jpg" useMap=#gsf border=0> </TD>
+    <TD width="100%">
+      <P>&nbsp;</P>
+    </TD>
+    <TD><MAP name=mips><AREA shape=RECT alt=mips coords=130,10,300,80 
+        href="http://mips.gsf.de/"></MAP><IMG alt="Logo mips" 
+      src="/genre/proj/system/modules/mips.genre.web/resources/topright.jpg" useMap=#mips border=0> 
+    </TD>
+  </TR>
+  </TBODY>
+</TABLE>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD bgcolor="#E3DFB9"><a href="/genre/proj/genre"><IMG height=25 alt="GenRE" src="/genre/proj/system/modules/mips.genre.web/resources/glogo.gif" width=180 border=0></a> </TD>
+    <TD bgcolor="#E3DFB9"><IMG height=25 alt="" src="/genre/proj/system/modules/mips.genre.web/resources/spacerb.gif" width=16 border=0> </TD>
+    <TD width="100%" style="background-image:url(/genre/proj/system/modules/mips.genre.web/resources/navigation.gif); background-repeat:repeat-y">
+		<!-- Navigation starts here -->
+		<p class="nav">Navigation: 
+ &raquo; <a href="/genre/proj/yeast/">CYGD</a>
+ &raquo; Home
+</p>
+
+		<!-- Navigation ends here -->
+    </TD>
+  </TR>
+  </TBODY>
+</TABLE>
+
+<!-- End Of Header               -->
+
+
+<!-- Main page body starts here -->
+<TABLE cellSpacing=8 cellPadding=0 width="100%" align=center border=0>
+  <TBODY> 
+  <TR vAlign=top> 
+
+          <!-- Sidebar -->
+          <TD width=180 border=0 >
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write("\<script src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'>\<\/script>" );
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3244732-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- Table Header required -->
+<TABLE cellSpacing=4 cellPadding=0 width="180" border=0>
+<TBODY>
+  <TR>
+    <TD>
+     <!-- Block Table start  -->
+      <TABLE cellSpacing=0 cellPadding=0 width="100%">
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=81 align=left bgColor=#F0EBD8>
+            <a href="/genre/proj/yeast/"><IMG title="CYGD" src="/genre/export/sites/default/yeast/pictures/cygd_icon.png" border=0></a>
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+<!-- If you need mor tables insert the following in between -->
+</TD></TR><TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Search ORF/Gene/Description</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+          <TD valign="top" bgColor=#F0EBD8>
+            <form name="searchEntryForm" method="POST" action="/genre/proj/yeast/listSearch.html?order=entry">
+              <input type="text" name="id" size="10" value="">
+              <BR />
+              <input type="submit" name="submit" value="Submit" />
+              <input type="reset" name="reset" value="X" />
+            </form>
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+<!-- If you need more tables insert the following in between -->
+</TD></TR>
+<TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Chromosome <br/> (chrI - chrXVI,chrMito,2-micron)</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+<TD valign="top" bgColor=#F0EBD8>
+            <form name="Contig_View" method="GET" action="/genre/proj/yeast/contigSearch.html?">
+              <input type="text" name="id" size="10" value="">
+              
+             <br>
+               
+             <input type="submit" name="submit" value="Submit">
+              <input type="reset" name="reset" value="Reset">
+            </form>
+         </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+</TD></TR>
+<TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Catalogs:</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+<TD valign="top" bgColor=#F0EBD8>
+
+<form name="searchCatalogForm" method="POST" action="/genre/proj/yeast/Search/Catalogs/catalog.jsp">
+              <select name="catalogurl" size="1">
+               <option value="searchCatfirstFun.html">FunCat</option>
+               <option value="searchCatfirstEC.html">Enzyme Class</option>
+               <option value="searchCatfirstLoc.html">Localization</option>
+               <option value="searchCatfirstComplex.html">Complexes</option>
+               <option value="searchCatfirstTC.html">Transporter</option>
+               <option value="searchCatfirstPhenotype.html">Phenotypes</option>
+               <option value="searchCatfirstIpr.html">InterPro</option>
+               <option value="searchCatfirstClass.html">Protein Classification</option>
+               <option value="searchCatfirstDisruption.html">Viability</option>
+               <option value="searchCatfirstTM.html">TMHMM</option>
+              </select>
+              <input type="submit" name="submit" value="Browse">
+            </form>
+
+<!--form>
+<select name="searchCatalogForm" size="1">
+             
+               <option selected value="/genre/proj/yeast/Search/Catalogs/searchCatfirstFun.html">Function</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstLoc.html">Localization</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstComplex.html">Complexes</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstEC.html">EC numbers</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstTC.html">Transporter</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstPhenotype.html">Phenotypes</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstIpr.html">InterPro</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstClass.html">Protein Classification</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstDisruption.html">Viability</option>
+               <option value="/genre/proj/yeast/Search/Catalogs/searchCatfirstTM.html">TMHMM</option>
+              </select>
+              <input type="button" value="Browse" onClick="top.location.href=this.form.list.options[this.form.list.selectedIndex].value" />
+            </form-->
+
+         </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+
+
+</TD></TR>
+
+<TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Chromosome View</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+          <TD valign="top" bgColor=#F0EBD8>
+<a style="COLOR: #000066" href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrI%3A00%2C001..20%2C000">&nbsp;&nbsp;I</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrII%3A00%2C001..20%2C000">&nbsp;II</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrIII%3A00%2C001..20%2C000">&nbsp;III</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrIV%3A00%2C001..20%2C000">&nbsp;IV</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrV%3A00%2C001..20%2C000">&nbsp;V</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrVI%3A00%2C001..20%2C000">&nbsp;VI</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrVII%3A00%2C001..20%2C000">&nbsp;VII</a><br>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrVIII%3A00%2C001..20%2C000">&nbsp;&nbsp;VIII</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrIX%3A00%2C001..20%2C000">&nbsp;IX</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrX%3A00%2C001..20%2C000">&nbsp;X</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrXI%3A00%2C001..20%2C000">&nbsp;XI</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrXII%3A00%2C001..20%2C000">&nbsp;XII</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrXIII%3A00%2C001..20%2C000">&nbsp;XIII</a><br>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrXIV%3A00%2C001..20%2C000">&nbsp;&nbsp;XIV</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrXV%3A00%2C001..20%2C000">&nbsp;XV</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrXVI%3A00%2C001..20%2C000">&nbsp;XVI</a>
+<a style="COLOR: #000066"
+   href="http://mips.gsf.de/gbrowse-1.69/fungi/cgi-bin/gbrowse/yeasty/?name=chrmito%3A00%2C001..20%2C000">&nbsp;Mito</a>
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+
+</TD></TR><TR><TD>
+
+      <!-- Block Table start -->
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" bgColor=#E3DFB9>
+      <TBODY> 
+        <TR> 
+          <TD valign="top" height=20 align=left bgColor=#E3DFB9><FONT class=content 
+              color=#000000><B>Other</B></FONT> </TD>
+        </TR>
+        <TR vAlign=top> 
+          <TD valign="top" bgColor=#F0EBD8>
+
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/yeast/Search/index.html">Search / View</a></h3>
+   
+         <h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+&nbsp;&nbsp;&nbsp;<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/yeast/Search/pedantSearch.html">Advanced Search</a></h3>
+
+   <h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+&nbsp;&nbsp;&nbsp;<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/yeast/Search/Gise/index.html">Index Search</a></h3>
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/mpact/">MPact protein interaction</a></h3>
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/yeast/Search/TablesReviews.html">Tables, Lists and Reviews</a></h3>
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<!--a style="COLOR: #000066; WHITE-SPACE: nowrap" HREF="/genre/proj/fungi/Search/WU_BLAST.jsp?genus=Scerevisiae">BLAST DNA/Protein</a-->
+<!--a style="COLOR: #000066; WHITE-SPACE: nowrap" HREF="/genre/proj/yeast/Search/get_blast.jsp?db=Scerevisiae&db_type=wustart&params=-e+0.001+-F+F">BLAST DNA/Protein</a-->
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" HREF="/genre/proj/yeast/Search/blast.jsp?organism=Scerevisiae">WUBLAST DNA/Protein</a>
+</h3>
+
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="/genre/proj/yeast/About/index.html">About CYGD</a></h3>
+
+<!--h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="http://mips.gsf.de/desc/yeast/index_desc.html" target="link">Help</a></h3-->
+
+<br />
+<h3 style="MARGIN: 3px; COLOR: #000066; WHITE-SPACE: nowrap">
+<a style="COLOR: #000066; WHITE-SPACE: nowrap" 
+   href="http://www.helmholtz-muenchen.de/en/mips/projects/fungi/index.html">MIPS Fungal Genomes</a></h3>
+
+
+          </TD>
+        </TR>
+      </TBODY> 
+      </TABLE>
+<!-- If you need mor tables insert the following in between -->
+<!-- </TD></TR><TR><TD> -->
+
+<!-- Block Table end -->
+      </TD></TR><TR><TD>
+      <TABLE cellSpacing=1 cellPadding=1 width="100%" bgColor=#e3dfb9>
+      <tr>
+        <td>
+          <A href="http://mips.gsf.de/"><IMG alt="mips home" src="/genre/export/sites/default/resources/mips_home.gif" border=0></A>
+        </td>
+        <td>
+          <A onmouseover="mail.src='/genre/export/sites/default/resources/letter_op.gif'" 
+             onmouseout="mail.src='/genre/export/sites/default/resources/letter_cl.gif'" 
+             href="mailto:mips-fungi-adm@mips.gsf.de">
+          <IMG alt="MIPS-FUNGI-ADM" src="/genre/export/sites/default/resources/letter_cl.gif" border=0 name=mail >
+          </A>
+        </td>
+        <td>
+          <!--A onmouseover="print.src='/genre/export/sites/default/resources/print_lo.gif'" 
+             onmouseout="print.src='/genre/export/sites/default/resources/print_sh.gif'" 
+             href="http://mips.gsf.de" target=_blank>
+          <IMG alt="print view" src="/genre/export/sites/default/resources/print_lo.gif" border=0 name=print >
+          </A --> 
+           &nbsp;&nbsp;&nbsp;&nbsp; <a href="/genre/proj/yeast/About/FTP_sites.html"><IMG alt="FTP" src="/genre/export/sites/default/yeast/pictures/ftp.gif" border=0></a>
+        </td>
+      </tr>
+      </TABLE>
+
+<!-- Table end required -->
+    </TD>
+  </TR>
+</TBODY>
+
+</TABLE>
+  </TD>
+
+	<TD vAlign=top width="100%">
+
+
+     
+   	
+ 
+
+
+
+	  <html>
+	<head>
+		<title>Enter the title of your HTML document here</title>
+	</head>
+	<body>
+		<br />
+		<br />
+		<H2>
+			<B>Welcome to the MIPS <I>Saccharomyces cerevisiae</I> genome database</B>
+		</H2>
+		<P>The MIPS Comprehensive Yeast Genome Database (CYGD) aims to present 
+information on the molecular structure and functional network of the entirely 
+sequenced, well-studied model eukaryote, the budding yeast <I>Saccharomyces 
+cerevisiae</I>. In addition the data of various projects on related yeasts are 
+used for comparative analysis. </P>
+		<HR noshade="noshade" />
+		<br />
+		<h3>News:</h3>
+		<ul>
+			<li>
+				<h3>2006-12-04: Restart of the CYGD. Restructured entry views, GBrowse integration and new search engines for a more convenient use</h3>
+			</li>
+		</ul>
+	</body>
+</html>
+
+
+
+
+   
+     
+     
+      
+
+
+
+
+          
+    </TD>
+  </TR>
+  <tr> 
+    <td height="1"><img height="1" width="150" src="/genre/proj/system/modules/mips.genre.web/resources/spacer.gif"></td>
+    <td></td>
+  </tr>
+  </TBODY> 
+</TABLE>
+<!-- Main page body ends here -->
+
+<TABLE cellSpacing=10 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P><FONT color=#666666>&copy; 2003 GSF - Forschungszentrum f&uuml;r Umwelt und 
+      Gesundheit, GmbH Ingolst&auml;dter Landstra&szlig;e 1, D-85764 Neuherberg</FONT></P>
+      <P><A href="http://www.gsf.de/Impressum/index_en.phtml"><B>Imprint</B></A></P> 
+      <P><FONT color=#666666><B>Disclaimer:</B><BR><FONT size=1>MIPS Databases 
+      and associated information are protected by copyright. This server and its 
+      associated data and services are for academic, non-commercial use only. 
+      The <A href="http://www.gsf.de/" target=_blank><FONT color=#666666 
+      size=1>GSF</FONT></A> has no liability for the use of results, data or 
+      information which have been provided through this server. Neither the use 
+      for commercial purposes, nor the redistribution of MIPS database files to 
+      third parties nor the distribution of parts of files or derivative 
+      products to any third parties is permitted. Commercial users may contact 
+      the distributor <A href="http://www.biomax.de/" target=_blank><FONT 
+      color=#666666 size=1>Biomax Informatics AG</FONT></A>.</FONT></font></P>
+    </TD>
+    </TR>
+  </TBODY>
+</TABLE>
+
+</body>
+</html>
+
+     
+   	
+

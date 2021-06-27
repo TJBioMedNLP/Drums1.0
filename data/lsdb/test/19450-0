@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content='text/html;charset=utf-8' http-equiv='Content-Type' />
+    <title>SENT: Semantic Features in Text</title>
+    <link href='/stylesheets/screen.css' media='screen , projection' rel='stylesheet' type='text/css' />
+    <link href='/stylesheets/print.css' media='print' rel='stylesheet' type='text/css' />
+    <!--[if IE]><link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link href='/stylesheets/sent.css' rel='stylesheet' type='text/css' />
+    <link href='/stylesheets/jquery.tablesorter.css' rel='stylesheet' type='text/css' />
+    <script type="text/javascript" src="/javascripts/jquery.js?022116365570"></script><script type="text/javascript" src="/javascripts/jquery.dimensions.js?022116365596"></script><script type="text/javascript" src="/javascripts/jquery.tablesorter.js?022116365543"></script><script type="text/javascript" src="/javascripts/jquery.timers.js?022116365540"></script><script type="text/javascript" src="/javascripts/sent.js?02211636555"></script>
+    <link href='/images/favicon.ico' rel='shortcut icon' />
+  </head>
+  <body>
+    <div id='content'>
+      <div class='span_19 clear last' id='header'>
+        <img src='/images/topSent.jpg' />
+      </div>
+      <div id='main'>
+        <div id='top_menu'>
+          <ul class='menu'>
+            <li>
+              <a href='/'>[Main]</a>
+            </li>
+            <li>
+              <a href='/translate'>[Translate]</a>
+            </li>
+            <li>
+              <a href='/help'>[Help]</a>
+            </li>
+            <li>
+              <a href='/help/WebService'>[Web Service]</a>
+            </li>
+            <li>
+              <a href='http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;cmd=DetailsSearch&amp;term=19458159[uid]&amp;log$=activity' target='_blank'>[Publication]</a>
+            </li>
+            <li id='new_user'>
+              <a href='/help/guide'>[Quick Start Guide!]</a>
+            </li>
+          </ul>
+        </div>
+        <div id='head_title'>
+          <h3>SENT: Semantic Features in Text</h3>
+        </div>
+        <hr />
+        <form action='/' enctype='multipart/form-data' method='post'>
+          <div class='column span_8 colborder'>
+            <div class='span_8 last' id='dataset'>
+              <h3 class='tip' id='tip_anchor_Dataset'>
+                1. Dataset
+              </h3>
+              <select name='org'>
+                <option id='Ath' value='Ath'>Arabidopsis thaliana</option>
+                <option id='Cel' value='Cel'>Caenorhabditis elegans</option>
+                <option id='Cal' value='Cal'>Candida albicans</option>
+                <option id='Hsa' value='Hsa'>Homo sapiens</option>
+                <option id='Mmu' value='Mmu'>Mus musculus</option>
+                <option id='Rno' value='Rno'>Rattus norvegicus</option>
+                <option id='Sce' value='Sce'>Saccharomyces cerevisiae</option>
+                <option id='Spo' value='Spo'>Schizosaccharomyces pombe</option>
+                <option id='custom' value='custom'>
+                  Custom Associations
+                </option>
+              </select>
+              <hr class='space' />
+              <p class='vpad_4' id='description'>
+                <span class='title'>
+                  Description:
+                </span>
+                <span class='text'></span>
+              </p>
+              <p class='vpad_4 hide' id='associations'>
+                <label class='tip' for='input_associations' id='tip_anchor_Associations'>
+                  Associations File
+                </label>
+                <input accept='text/plain' id='input_associations' name='associations' size='20' type='file' />
+              </p>
+            </div>
+            <hr />
+            <div class='span_8' id='factors'>
+              <h3 class='tip' id='tip_anchor_Factors'>
+                3. Factors
+              </h3>
+              <p>
+                <label for='input_factors'>Number of Factors:</label>
+                <input id='input_factors' name='factors' />
+                <p class='vpad_4' id='factor_suggestion'>
+                  <span class='title'>
+                    Suggestion:
+                  </span>
+                  <span class='text'></span>
+                </p>
+              </p>
+            </div>
+            <hr />
+            <div class='span_8' id='optional'>
+              <h3>
+                4. Optional
+              </h3>
+              <p>
+                <input id='literature_input' name='literature' type='checkbox' />
+                <label class='tip' for='literature_input' id='tip_anchor_Literature'>
+                  Build Literature Index
+                </label>
+                <br />
+                <input id='finegrained_input' name='fine_grained' type='checkbox' />
+                <label class='tip' for='finegrained_input' id='tip_anchor_Fine'>
+                  Fine grain analysis
+                </label>
+              </p>
+              <p>
+                <input id='name_input' name='name' />
+                <label for='name_input'>
+                  Job Name
+                </label>
+              </p>
+              <p>
+                <input id='email_input' name='email' />
+                <label for='email_input'>
+                  Email
+                </label>
+              </p>
+            </div>
+          </div>
+          <div class='column last span_9'>
+            <div id='genes'>
+              <h3 class='tip' id='tip_anchor_Genes'>
+                2. Genes
+              </h3>
+              <p>
+                See the
+                <a href='#' id='supported'>Supported Ids.</a>
+                Or
+                <a href='/translate/'>Translate</a>
+                your gene synonyms.
+                <textarea id='ids' name='ids'></textarea>
+              </p>
+              <label class='tip' for='file' id='tip_anchor_File'>
+                File with gene ids
+              </label>
+              <input accept='text/plain' class='file' id='file' name='file' size='15' type='file' />
+              <hr class='space' />
+            </div>
+            <hr />
+            <div id='examples'>
+              <h3>
+                Precomputed Examples:
+              </h3>
+              <dl>
+                <dt>
+                  Homo sapiens:
+                </dt>
+                <dd>
+                  <a href='Example_Human=5'>Standard</a>
+                  or
+                  <a href='Example_Human_fine=5'>Fine Grained</a>
+                  .
+                  <a class='example' href='/examples/human.txt' id='example_Hsa'>Load data</a>
+                </dd>
+                <dt>
+                  Saccharomyces cerevisiae:
+                </dt>
+                <dd>
+                  <a href='Example_Yeast=3'>Standard</a>
+                  or
+                  <a href='Example_Yeast_fine=4'>Fine Grained</a>
+                  .
+                  <a class='example' href='/examples/saccharomyces.txt' id='example_Sce'>Load data</a>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <hr />
+          <div class='span_5 push_7' id='submit'>
+            <input type='submit' />
+          </div>
+        </form>
+        <hr />
+        <h5>If you find SENT useful, please cite this publication:</h5>
+        <p>
+          Vazquez, M. and Carmona-Saez, P. and Nogales-Cadenas, R. and Chagoyen, M. and Tirado, F. and Carazo, J.M. and Pascual-Montano, A.:
+          <b>SENT: semantic features in text.</b>
+          <i>Nucleic Acids Research 2009, doi:10.1093/nar/gkp392</i>
+          <a href='http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;cmd=DetailsSearch&amp;term=19458159[uid]&amp;log$=activity' target='_blank'>[Pubmed]</a>
+        </p>
+        <div class='tooltip' id='tip_Fine'>
+          <h3>
+            Fine grain analysis
+          </h3>
+          <hr class='space' />
+          <p>
+            This analysis renders results with more specific terms than the
+            standard analysis but takes considerably longer, around 15 or 30
+            minutes.
+          </p>
+        </div>
+        <div class='tooltip' id='tip_Factors'>
+          <h3>
+            Number of Factors.
+          </h3>
+          <hr class='space' />
+          <p>
+            Select the number of factors to produce.
+          </p>
+          <p>
+            You may specify a coma
+            separated list of values to explore, ranges are also allowed.  There
+            must be a maximum of 8 different values, between 2 and 32. Example: 2-5,
+            10, 15. Results for each value will be showed as they are made available.
+          </p>
+        </div>
+        <div class='tooltip' id='tip_Genes'>
+          <h3>
+            Gene Ids
+          </h3>
+          <hr class='space' />
+          <p>
+            Paste the gene ids.
+          </p>
+          <p>
+            They must be in one of the acceptable formats listed in the Supported
+            Ids table. If gene names are available instead of gene identifiers, try the Translation
+            tool. Ids may be separated by comas or line breaks. If a file is specified it must follow
+            this same format, and it will be used instead of the contents of the text area.
+          </p>
+          <p class='note'>
+            NOTE: Some ids may not be recognized, or may refer to genes with no associated articles in the system
+          </p>
+        </div>
+        <div class='tooltip' id='tip_File'>
+          <h3>
+            File with gene ids
+          </h3>
+          <hr class='space' />
+          <p>
+            You may specify the gene ids by uploading a file instead of using the text area. If a file is specified the ids in the
+            text area will be ignored
+          </p>
+        </div>
+        <div class='tooltip' id='tip_Literature'>
+          <h3>
+            Literature Index
+          </h3>
+          <hr class='space' />
+          <p>
+            Building the literature index will enable the literature examination, which
+            presents the articles used in the analysis sorted according to the relevance to each
+            particular semantic feature.
+          </p>
+        </div>
+        <div class='tooltip' id='tip_Dataset'>
+          <h3>
+            Dataset Selection
+          </h3>
+          <hr class='space' />
+          <p>
+            Select the organism the genes belong to.
+          </p>
+          <p>
+            If 'Custom Associations' is selected, you will be asked to provide a
+            text file with the associations. One association per line, listing the
+            entity and a coma separated list of PubMed ids, separated by a tab
+            character. There associations for a particular entity may also be
+            spread out across different lines.
+          </p>
+        </div>
+        <div class='tooltip' id='tip_Associations'>
+          <h3>
+            Associations File
+          </h3>
+          <hr class='space' />
+          <p>
+            Provide a text file with the associations.
+          </p>
+          <p>
+            One association per line, listing the
+            entity and a coma separated list of PubMed ids, separated by a tab character. There
+            associations for a particular entity may also be spread out across different lines.
+          </p>
+        </div>
+        <script type='text/javascript'>
+          //<![CDATA[
+            
+            function update_select_dataset(){
+              value = $('#dataset select').val();
+              switch (value){
+              case '':
+              case null:
+              case undefined:
+                break;
+              case 'custom':
+                $('#description').hide();
+                $('#associations').show();
+                $('textarea#ids').attr("disabled", true);
+                $('input#file').attr("disabled", true);
+                $('input#finegrained_input').attr("disabled", true);
+                break;
+              default:
+                $('textarea#ids').attr("disabled", false);
+                $('input#file').attr("disabled", false);
+                $('input#finegrained_input').attr("disabled", false);
+                $('#description').show();
+                $('#associations').hide();
+                $('a#supported').attr('href','/help/glossary#' + value);
+                $('#description span.text').load('/ajax/dataset_description?ORG=' + value);
+              }
+            }
+            
+            $('#dataset select').change(
+              function(){
+               update_select_dataset();
+              })
+            update_select_dataset();
+            
+            
+            
+            function nonEmptyLines(str){
+              try {
+                return((str.match(/[^\s,]+/g).length));
+              } catch(e) {
+                return 0;
+              }
+            }
+            
+               /* Num factor sugestion */
+            $('#ids').change(function(){
+              var lines = nonEmptyLines($(this).val());
+              $('p#factor_suggestion span.text').html('')
+              if (lines == 0) return;
+              var msg = 'You have selected ' + lines + ' genes. We suggest to start with trying \'';
+            
+              if (lines <= 3){
+                $('p#factor_suggestion span.text').html('You have selected too few genes to run an analysis.'); 
+                return;
+              }
+              else if (lines <= 5){
+                msg += '2-3';
+              }
+              else if (lines <= 10){
+                msg += '2-4';
+              }
+              else if (lines <= 25){
+                msg += '2-4, 7';
+              }
+              else if (lines <= 50){
+                msg += '2-5, 7, 10';
+              }
+              else if (lines <= 100){
+                msg += '2-5, 10, 15';
+              }
+              else if (lines <= 500){
+                msg += '2-5, 10, 20';
+              }
+              else{ 
+                msg += '2-5, 10, 20, 32';
+              }
+            
+             msg += '\' factors.'
+            
+              $('p#factor_suggestion span.text').html(msg)
+            })
+            
+            
+               /* Init data */
+            if (window.navigator.sent_org){
+              $('#dataset select').val(window.navigator.sent_org);
+              window.navigator.sent_org = null;
+            }
+            if (window.navigator.sent_genes){
+              $('textarea#ids').val(window.navigator.sent_genes);
+              window.navigator.sent_genes = null;
+            }
+            if (window.navigator.sent_factors){
+              $('input#input_factors').val(window.navigator.sent_factors);
+              window.navigator.sent_factors = null;
+            }
+            
+               /* Example ids */
+            $('a.example').click(
+              function(){
+                org = $(this).attr('id').replace(/example_/,'');
+                $.ajax( {
+                  url: $(this).attr('href'),
+                  success : function(html){
+                   $('textarea#ids').attr('value',html).change();
+                   update_select_dataset();
+                   var range = $('p#factor_suggestion span.text').html().match(/'(.*)'/)[1]
+                   $('input#input_factors').val(range);
+                  }
+                });
+            
+                $('#dataset select').val(org);
+                return(false);
+              })
+            $('textarea#ids').change();
+          //]]>
+        </script>
+      </div>
+      <hr />
+      <div class='span_19' id='footer'>
+        <span>
+          Please submit suggestions, comments and bug reports to
+          <img class='inline' id='mvfdi' src='/images/email.gif' />
+        </span>
+      </div>
+    </div>
+    <!-- Google Analytics -->
+    <script type='text/javascript'>
+      //<![CDATA[
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      //]]>
+    </script>
+    <script type='text/javascript'>
+      //<![CDATA[
+        var pageTracker = _gat._getTracker("UA-1656322-11");
+        pageTracker._initData();
+        pageTracker._trackPageview();
+      //]]>
+    </script>
+  </body>
+</html>

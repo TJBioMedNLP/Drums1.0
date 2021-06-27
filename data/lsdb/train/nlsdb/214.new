@@ -1,0 +1,132 @@
+
+
+<html>
+<head>
+	<title>The Protein Continuum Secondary Structure Predictor</title>
+</head>
+
+
+<body>
+<table border="0" width="100%" id="table1" style="border-collapse: collapse">
+	<tr>
+		<td width="308">
+		<img border="0" src="images/csspred.jpg" width="293" height="166"></td>
+		<td>
+<p>The Protein Continuum Secondary Structure Predictor accepts 
+amino acid sequences, presented in the FASTA format, and predicts the 
+continuum secondary structure of each residue in the sequence.
+</p>
+<p>The continuum secondary structure of a residue is a probability distribution over 
+the possible secondary structure classes. The predicted continuum secondary structure  
+is based on high-quality NMR structures, reflecting a variance of structural assignment.
+</p>
+<p>Paste or upload your sequence below.
+	
+</p>
+</td>
+	</tr>
+</table>
+<hr>
+<center>
+<form name="FormInputs" method=POST action="index.jsp" accept="text/html" ENCTYPE="multipart/form-data">
+	
+	<table cellspacing=5 width="723">
+		<tr>
+			<td width="203">
+				&nbsp;Upload FASTA file:</input>
+			</td>
+			<td width="237">
+				<input type="file" size="60" name="seq-file"></input>
+			</td>
+		</tr>
+		<tr>
+			<td width="203">
+				<p align="center">&nbsp;</p>
+				<p align="center"><b>OR</b></td>
+			<td width="237">
+				&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="203">
+				&nbsp;Paste FASTA sequence here:</input>
+			</td>
+			<td colspan="2"><textarea name="sequence" rows=9 cols=60></textarea></td>
+		</tr>
+		<tr>
+			<td width="203">
+				&nbsp;Email address:</input>
+			</td>
+			<td colspan="2"><input type="text" size="60" name="email"></input></td>
+		</tr>
+		<tr>
+			<td width="203"></td>
+			<td align=LEFT width="237"><input type=submit value="            Submit            "></td>
+		</tr>
+	</table>
+</form>
+</center>
+<hr>
+<h3>DATA</h3>
+<p>The protein continuum secondary structure predictor is trained on high-quality NMR structures, inspired by 
+	<a href="http://cubic.bioc.columbia.edu/services/DSSPcont/">DSSPcont</a>.
+	<p>The training data set consists of 174 structures taken from the data set published by Andersen et al 
+	(Structure, 10:175-185, 2002). 
+	The 174-sequence set is made available with </p>
+<ul>
+	<li><a href="data/174_3.fa">3-class (H E C)</a> or </li>
+	<li><a href="data/174_8.fa">8-class (G H I E B T S C)</a> </li>
+</ul>
+<p>secondary structure probabilities.</p>
+<p>The test data consists of another 286 structures added to PDB post-2002. The 
+286-sequence set is made available with </p>
+<ul>
+	<li><a href="data/286_3.fa">3-class (H E C)</a> or </li>
+	<li><a href="data/286_8.fa">8-class (G H I E B T S C)</a> </li>
+</ul>
+<p>secondary structure probabilities.</p>
+Structures in the 174-set and the 286-set share no more than 20% sequence 
+similarity.<hr>
+
+<p>
+	The predictor also calculates the entropy of the predicted continuum 
+	secondary structure to indicate regions prone to undergo conformational 
+	change.</p>
+<p>
+	A 171-sequence conformational variability data set was extracted using the 
+	<a href="http://molmovdb.mbb.yale.edu">Database of Macromolecular Movements</a> 
+	and used to evaluate on how well the entropy identifies sequence regions 
+	undergoing conformational change. Each of the 171 sequences has at least two different observed 
+	8-class secondary structures. All homologues were
+	removed (no pairs within the 171-set and between the 171- and 174-set 
+	described above had more than 20% sequence identity). PDB identifiers, 
+	sequence data (with flexible residues noted with '1') for the 171 sequences 
+	can be found <a href="data/molmovdb_variable.fa">here</a>.
+</p>
+
+
+
+
+<hr>
+
+<h3>REFERENCES</h3>
+Predictor development and evaluation is reported in
+	<blockquote>
+		<p>Bod&eacute;n, M. Yuan, Z. and Bailey, T. L.  
+		<a href="http://www.biomedcentral.com/1471-2105/7/68">Prediction of protein continuum secondary structure with probabilistic models based on NMR solved structures. <i>BMC Bioinformatics</i>. 7:68, 2006.</a></p>
+	</blockquote>
+
+	<blockquote>
+		<p>Bod&eacute;n, M. and Bailey, T. L.  
+		<a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btl198?ijkey=S1ObCjnCLJy4tso&keytype=ref
+">Identifying sequence regions undergoing conformational change via predicted continuum secondary structure.</a> <i>Bioinformatics</i>.
+In press. doi:10.1093/bioinformatics/btl198. <a href="http://www.itee.uq.edu.au/~mikael/papers/casestud.pdf">Supplementary analysis</a>.
+		</p>
+	</blockquote>
+	
+<hr>
+	<p>The web service was implemented by Johnson Shih and Mikael Bod&eacute;n</p>
+	<p>Contact: <a href="mailto:mikael@itee.uq.edu.au">mikael@itee.uq.edu.au</a></p>
+
+
+</body>
+</html>

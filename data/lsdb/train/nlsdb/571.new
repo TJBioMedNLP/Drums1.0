@@ -1,0 +1,1387 @@
+
+
+
+<!-- %@ page errorPage="../elements/errorpage.jsp" buffer="none" -->
+
+
+
+
+
+ 
+ 
+   
+              
+      
+
+
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="keywords" content="server, reference, converter, cross, Uniprot, Swiss-Prot, Swissprot, RefSeq, Ensembl, waegele, brigitte, mips, 2008, bioinformatics, cronos, textmining, batch, webservice, homo sapiens, mus musculus">
+
+<title>CRONOS-Index</title>
+<link rel="stylesheet" type="text/css" href="/genre/export/sites/default/cronos/_configuration/genre.css">
+<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; CHARSET=ISO-8859-1">
+<meta name="author" content="MIPS - GenRE - GSF">
+<meta name="description" content="GenRE Main Page">
+<meta name="keywords" content="GenRE, genome, research, annotation">
+<script type="text/javascript">
+    var winoff=0;
+function winopen(url,target,W,H){ //alert(url+target+W+H);
+   if(W==''){W=800;}
+   if(H==''){W=650;}
+   if(winoff==1){
+     var fenster = window.open(url,target,eingensch);
+     fenster.close(); winoff=0;
+   }
+   var eingensch="scrollbars=yes,menubar=no,resizable=yes,width="+W+",height="+H;
+   var fenster = window.open(url,target,eingensch);
+   fenster.focus(); winoff=1;
+}
+
+function checklists()
+{
+
+        if (document.myform.optone.options[document.myform.optone.selectedIndex].value=='1')
+        {
+           if(document.myform.opttwo.options[document.myform.opttwo.selectedIndex].value.substring(0,3)!='hsa')
+           {
+             alert('To avoid this message please use always the Back-Buttons provided. To continue click on the CRONOS-Link in the Navigation Bar.');           
+             return false;
+           }
+           else{return true;}
+        }
+	else if(document.myform.optone.options[document.myform.optone.selectedIndex].value=='2')
+        {
+           if(document.myform.opttwo.options[document.myform.opttwo.selectedIndex].value.substring(0,3)!='mmu')
+           {
+             alert('To avoid this message please use always the Back-Buttons provided. To continue click on the CRONOS-Link in the Navigation Bar.');           
+             return false;
+           }
+            else{return true;}
+        }
+        else if(document.myform.optone.options[document.myform.optone.selectedIndex].value=='3')
+        {
+           if(document.myform.opttwo.options[document.myform.opttwo.selectedIndex].value.substring(0,3)!='rno')
+           {
+             alert('To avoid this message please use always the Back-Buttons provided. To continue click on the CRONOS-Link in the Navigation Bar.');           
+             return false;
+           }
+            else{return true;}
+        }
+        else if(document.myform.optone.options[document.myform.optone.selectedIndex].value=='4')
+        {
+           if(document.myform.opttwo.options[document.myform.opttwo.selectedIndex].value.substring(0,3)!='bta')
+           {
+             alert('To avoid this message please use always the Back-Buttons provided. To continue click on the CRONOS-Link in the Navigation Bar.');           
+             return false;
+           }
+            else{return true;}
+        }
+        else if(document.myform.optone.options[document.myform.optone.selectedIndex].value=='5')
+        {
+           if(document.myform.opttwo.options[document.myform.opttwo.selectedIndex].value.substring(0,3)!='cfa')
+           {
+             alert('To avoid this message please use always the Back-Buttons provided. To continue click on the CRONOS-Link in the Navigation Bar.');           
+             return false;
+           }
+            else{return true;}
+        }
+        else if(document.myform.optone.options[document.myform.optone.selectedIndex].value=='88')
+        {
+           if(document.myform.opttwo.options[document.myform.opttwo.selectedIndex].value.substring(0,3)!='dme')
+           {
+             alert('To avoid this message please use always the Back-Buttons provided. To continue click on the CRONOS-Link in the Navigation Bar.');           
+             return false;
+           }
+            else{return true;}
+        }
+        else return false;
+}
+
+
+function setOptionsbatch(chosen) {
+var selbox = document.myform.opttwo;
+var selbox2 = document.myform.optthree;
+selbox.options.length =0;
+selbox2.options.length =0;
+ if (chosen == " ") {
+  selbox.options[selbox.options.length] = new Option('Please select an organism first',' ');
+selbox2.options[selbox2.options.length] = new Option('Please select an organism first',' ');
+ 
+}
+if (chosen == "1") {
+  selbox.options[selbox.options.length] = new Option('GeneName','hsagenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','hsaproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','hsarefseq');
+  //selbox.options[selbox.options.length] = new Option('PubMed','hsapmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','hsaswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','hsaensembl_gene');
+  selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','hsaensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','hsaensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','hsagi');
+  selbox.options[selbox.options.length] = new Option('GeneID','hsageneid');
+selbox.options[selbox.options.length] = new Option('HGNC','hsahgnc');
+//  selbox.options[selbox.options.length] = new Option('MIM_ID','hsamim_id');
+//  selbox.options[selbox.options.length] = new Option('MORBID_ID','hsamorbid_id');
+  selbox.options[selbox.options.length] = new Option('EMBL','hsaembl');
+  selbox.options[selbox.options.length] = new Option('PIR','hsapir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','hsaorfnames');
+  //selbox.options[selbox.options.length] = new Option('hssp','hsahssp');
+  //selbox.options[selbox.options.length] = new Option('smr','hsasmr');
+  //selbox.options[selbox.options.length] = new Option('intact','hsaintact');
+  //selbox.options[selbox.options.length] = new Option('InterPro','hsainterpro');
+  //selbox.options[selbox.options.length] = new Option('Panther','hsapanther');
+  //selbox.options[selbox.options.length] = new Option('pfam','hsapfam');
+  //selbox.options[selbox.options.length] = new Option('prints','hsaprints');
+  //selbox.options[selbox.options.length] = new Option('prodom','hsaprodom');
+  //selbox.options[selbox.options.length] = new Option('smart','hsasmart');
+  //selbox.options[selbox.options.length] = new Option('prosite','hsaprosite');
+
+ // selbox.options[selbox.options.length] = new Option('keyword','hsakeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','hsadbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','hsaunists');
+  selbox.options[selbox.options.length] = new Option('CDD','hsacdd');
+  selbox.options[selbox.options.length] = new Option('CCDS','hsaccds');
+
+  selbox.options[selbox.options.length] = new Option('affy_hc_g110','hsaaffy_hc_g110');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133_plus_2','hsaaffy_hg_u133_plus_2');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133a_2','hsaaffy_hg_u133a_2');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133a','hsaaffy_hg_u133a');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133b','hsaaffy_hg_u133b');
+  selbox.options[selbox.options.length] = new Option('affy_u133_x3p','hsaaffy_u133_x3p');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95a','hsaaffy_hg_u95a');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95av2','hsaaffy_hg_u95av2');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95b','hsaaffy_hg_u95b');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95c','hsaaffy_hg_u95c');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95d','hsaaffy_hg_u95d');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95e','hsaaffy_hg_u95e');
+  selbox.options[selbox.options.length] = new Option('affy_hg_focus','hsaaffy_hg_focus');
+  selbox.options[selbox.options.length] = new Option('affy_hugenefl','hsaaffy_hugenefl');
+ // selbox.options[selbox.options.length] = new Option('affy_hg_u133_x3p','hsaaffy_hg_u133_x3p');
+  selbox.options[selbox.options.length] = new Option('agilentcgh','hsaagilentcgh');
+  selbox.options[selbox.options.length] = new Option('agilentprobe','hsaagilentprobe');
+
+selbox2.options[selbox2.options.length] = new Option('GeneName','hsagenename');
+  selbox2.options[selbox2.options.length] = new Option('ProteinName','hsaproteinname');
+  selbox2.options[selbox2.options.length] = new Option('RefSeq','hsarefseq');
+  //selbox2.options[selbox2.options.length] = new Option('PubMed','hsapmid');
+  selbox2.options[selbox2.options.length] = new Option('UniProt','hsaswiss');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Gene ID','hsaensembl_gene');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Transcript ID','hsaensembl_transcript');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Protein ID','hsaensembl_protein');
+  selbox2.options[selbox2.options.length] = new Option('GI','hsagi');
+  selbox2.options[selbox2.options.length] = new Option('GeneID','hsageneid');
+selbox2.options[selbox.options.length] = new Option('HGNC','hsahgnc');
+//  selbox2.options[selbox2.options.length] = new Option('MIM_ID','hsamim_id');
+//  selbox2.options[selbox2.options.length] = new Option('MORBID_ID','hsamorbid_id');
+  selbox2.options[selbox2.options.length] = new Option('EMBL','hsaembl');
+  selbox2.options[selbox2.options.length] = new Option('PIR','hsapir');
+  selbox2.options[selbox2.options.length] = new Option('ORFnames','hsaorfnames');
+  //selbox2.options[selbox2.options.length] = new Option('HSSP','hsahssp');
+  //selbox2.options[selbox2.options.length] = new Option('smr','hsasmr');
+  //selbox2.options[selbox2.options.length] = new Option('intact','hsaintact');
+  //selbox2.options[selbox2.options.length] = new Option('interpro','hsainterpro');
+  //selbox2.options[selbox2.options.length] = new Option('panther','hsapanther');
+  //selbox2.options[selbox2.options.length] = new Option('pfam','hsapfam');
+  //selbox2.options[selbox2.options.length] = new Option('prints','hsaprints');
+  ////selbox2.options[selbox2.options.length] = new Option('prodom','hsaprodom');
+  //selbox2.options[selbox2.options.length] = new Option('smart','hsasmart');
+  //selbox2.options[selbox2.options.length] = new Option('prosite','hsaprosite');
+
+  //selbox2.options[selbox2.options.length] = new Option('keyword','hsakeyword');
+
+  selbox2.options[selbox2.options.length] = new Option('DBSNP','hsadbsnp');
+  selbox2.options[selbox2.options.length] = new Option('UniSTS','hsaunists');
+  selbox2.options[selbox2.options.length] = new Option('CDD','hsacdd');
+  selbox2.options[selbox2.options.length] = new Option('CCDS','hsaccds');
+
+  selbox2.options[selbox2.options.length] = new Option('affy_hc_g110','hsaaffy_hc_g110');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u133_plus_2','hsaaffy_hg_u133_plus_2');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u133a_2','hsaaffy_hg_u133a_2');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u133a','hsaaffy_hg_u133a');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u133b','hsaaffy_hg_u133b');
+  selbox2.options[selbox2.options.length] = new Option('affy_u133_x3p','hsaaffy_u133_x3p');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u95a','hsaaffy_hg_u95a');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u95av2','hsaaffy_hg_u95av2');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u95b','hsaaffy_hg_u95b');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u95c','hsaaffy_hg_u95c');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u95d','hsaaffy_hg_u95d');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_u95e','hsaaffy_hg_u95e');
+  selbox2.options[selbox2.options.length] = new Option('affy_hg_focus','hsaaffy_hg_focus');
+  selbox2.options[selbox2.options.length] = new Option('affy_hugenefl','hsaaffy_hugenefl');
+ // selbox2.options[selbox2.options.length] = new Option('affy_hg_u133_x3p','hsaaffy_hg_u133_x3p');
+  selbox2.options[selbox2.options.length] = new Option('agilentcgh','hsaagilentcgh');
+  selbox2.options[selbox2.options.length] = new Option('agilentprobe','hsaagilentprobe');
+
+}
+if (chosen == "2") {
+  selbox.options[selbox.options.length] = new Option('GeneName','mmugenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','mmuproteinname');
+  selbox.options[selbox.options.length] = new Option('MFunGD','mmumfungd');
+  selbox.options[selbox.options.length] = new Option('RefSeq','mmurefseq');
+  //selbox.options[selbox.options.length] = new Option('PubMed','mmupmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','mmuswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','mmuensembl_gene');
+    selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','mmuensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','mmuensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','mmugi');
+
+  selbox.options[selbox.options.length] = new Option('GeneID','mmugeneid');
+  selbox.options[selbox.options.length] = new Option('MGI','mmumgi');
+  selbox.options[selbox.options.length] = new Option('EMBL','mmuembl');
+  selbox.options[selbox.options.length] = new Option('PIR','mmupir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','mmuorfnames');
+ //// selbox.options[selbox.options.length] = new Option('hssp','mmuhssp');
+ // selbox.options[selbox.options.length] = new Option('smr','mmusmr');
+ // selbox.options[selbox.options.length] = new Option('intact','mmuintact');
+ // selbox.options[selbox.options.length] = new Option('interpro','mmuinterpro');
+ // selbox.options[selbox.options.length] = new Option('panther','mmupanther');
+ // selbox.options[selbox.options.length] = new Option('pfam','mmupfam');
+ // selbox.options[selbox.options.length] = new Option('prints','mmuprints');
+ // selbox.options[selbox.options.length] = new Option('prodom','mmuprodom');
+ // selbox.options[selbox.options.length] = new Option('smart','mmusmart');
+ // selbox.options[selbox.options.length] = new Option('prosite','mmuprosite');
+
+
+ // selbox.options[selbox.options.length] = new Option('keyword','mmukeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','mmudbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','mmuunists');
+  selbox.options[selbox.options.length] = new Option('CDD','mmucdd');
+//  selbox.options[selbox.options.length] = new Option('CCDS','mmuccds');
+
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74a','mmuaffy_mg_u74a');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74av2','mmuaffy_mg_u74av2');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74b','mmuaffy_mg_u74b');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74bv2','mmuaffy_mg_u74bv2');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74c','mmuaffy_mg_u74c');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74cv2','mmuaffy_mg_u74cv2');
+  selbox.options[selbox.options.length] = new Option('affy_moe430a','mmuaffy_moe430a');
+  selbox.options[selbox.options.length] = new Option('affy_moe430b','mmuaffy_moe430b');
+  selbox.options[selbox.options.length] = new Option('affy_mouse430_2','mmuaffy_mouse430_2');
+  selbox.options[selbox.options.length] = new Option('affy_mouse430a_2','mmuaffy_mouse430a_2');
+  selbox.options[selbox.options.length] = new Option('affy_mu11ksuba','mmuaffy_mu11ksuba');
+  selbox.options[selbox.options.length] = new Option('agilentprobe','mmuagilentprobe');
+
+
+selbox2.options[selbox2.options.length] = new Option('GeneName','mmugenename');
+  selbox2.options[selbox2.options.length] = new Option('ProteinName','mmuproteinname');
+  selbox2.options[selbox2.options.length] = new Option('MFunGD','mmumfungd');
+  selbox2.options[selbox2.options.length] = new Option('RefSeq','mmurefseq');
+  //selbox2.options[selbox2.options.length] = new Option('PubMed','mmupmid');
+  selbox2.options[selbox2.options.length] = new Option('UniProt','mmuswiss');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Gene ID','mmuensembl_gene');
+    selbox2.options[selbox2.options.length] = new Option('Ensembl Transcript ID','mmuensembl_transcript');
+selbox2.options[selbox2.options.length] = new Option('Ensembl Protein ID','mmuensembl_protein');
+  
+  selbox2.options[selbox2.options.length] = new Option('MGI','mmumgi');
+  selbox2.options[selbox2.options.length] = new Option('GI','mmugi');
+
+  selbox2.options[selbox2.options.length] = new Option('GeneID','mmugeneid');
+  selbox2.options[selbox2.options.length] = new Option('EMBL','mmuembl');
+  selbox2.options[selbox2.options.length] = new Option('PIR','mmupir');
+ selbox2.options[selbox2.options.length] = new Option('ORFnames','mmuorfnames');
+//  selbox2.options[selbox2.options.length] = new Option('hssp','mmuhssp');
+ // selbox2.options[selbox2.options.length] = new Option('smr','mmusmr');
+ // selbox2.options[selbox2.options.length] = new Option('intact','mmuintact');
+ // selbox2.options[selbox2.options.length] = new Option('interpro','mmuinterpro');
+ // selbox2.options[selbox2.options.length] = new Option('panther','mmupanther');
+ // selbox2.options[selbox2.options.length] = new Option('pfam','mmupfam');
+ // selbox2.options[selbox2.options.length] = new Option('prints','mmuprints');
+ // selbox2.options[selbox2.options.length] = new Option('prodom','mmuprodom');
+ // selbox2.options[selbox2.options.length] = new Option('smart','mmusmart');
+ // selbox2.options[selbox2.options.length] = new Option('prosite','mmuprosite');
+
+
+//  selbox2.options[selbox2.options.length] = new Option('keyword','mmukeyword');
+
+  selbox2.options[selbox2.options.length] = new Option('DBSNP','mmudbsnp');
+  selbox2.options[selbox2.options.length] = new Option('UniSTS','mmuunists');
+  selbox2.options[selbox2.options.length] = new Option('CDD','mmucdd');
+ // selbox2.options[selbox2.options.length] = new Option('CCDS','mmuccds');
+
+ // selbox2.options[selbox2.options.length] = new Option('ensembl_protein','mmuensembl_protein');
+  selbox2.options[selbox2.options.length] = new Option('affy_mg_u74a','mmuaffy_mg_u74a');
+  selbox2.options[selbox2.options.length] = new Option('affy_mg_u74av2','mmuaffy_mg_u74av2');
+  selbox2.options[selbox2.options.length] = new Option('affy_mg_u74b','mmuaffy_mg_u74b');
+  selbox2.options[selbox2.options.length] = new Option('affy_mg_u74bv2','mmuaffy_mg_u74bv2');
+  selbox2.options[selbox2.options.length] = new Option('affy_mg_u74c','mmuaffy_mg_u74c');
+  selbox2.options[selbox2.options.length] = new Option('affy_mg_u74cv2','mmuaffy_mg_u74cv2');
+  selbox2.options[selbox2.options.length] = new Option('affy_moe430a','mmuaffy_moe430a');
+  selbox2.options[selbox2.options.length] = new Option('affy_moe430b','mmuaffy_moe430b');
+  selbox2.options[selbox2.options.length] = new Option('affy_mouse430_2','mmuaffy_mouse430_2');
+  selbox2.options[selbox2.options.length] = new Option('affy_mouse430a_2','mmuaffy_mouse430a_2');
+  selbox2.options[selbox2.options.length] = new Option('affy_mu11ksuba','mmuaffy_mu11ksuba');
+  selbox2.options[selbox2.options.length] = new Option('agilentprobe','mmuagilentprobe');
+}
+if (chosen == "3") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','rnogenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','rnoproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','rnorefseq');
+ // selbox.options[selbox.options.length] = new Option('PubMed','rnopmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','rnoswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','rnoensembl_gene');
+    selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','rnoensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','rnoensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','rnogi');
+
+  selbox.options[selbox.options.length] = new Option('GeneID','rnogeneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','rnoembl');
+  selbox.options[selbox.options.length] = new Option('PIR','rnopir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','rnoorfnames');
+ // selbox.options[selbox.options.length] = new Option('hssp','rnohssp');
+ // selbox.options[selbox.options.length] = new Option('smr','rnosmr');
+ // selbox.options[selbox.options.length] = new Option('intact','rnointact');
+ // selbox.options[selbox.options.length] = new Option('interpro','rnointerpro');
+ // selbox.options[selbox.options.length] = new Option('panther','rnopanther');
+ // selbox.options[selbox.options.length] = new Option('pfam','rnopfam');
+ // selbox.options[selbox.options.length] = new Option('prints','rnoprints');
+ // selbox.options[selbox.options.length] = new Option('prodom','rnoprodom');
+//  selbox.options[selbox.options.length] = new Option('smart','rnosmart');
+//  selbox.options[selbox.options.length] = new Option('prosite','rnoprosite');
+
+//  selbox.options[selbox.options.length] = new Option('keyword','rnokeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','rnodbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','rnounists');
+  selbox.options[selbox.options.length] = new Option('CDD','rnocdd');
+
+  selbox.options[selbox.options.length] = new Option('affy_rg_u34a','rnoaffy_rg_u34a');
+  selbox.options[selbox.options.length] = new Option('affy_rg_u34b','rnoaffy_rg_u34b');
+  selbox.options[selbox.options.length] = new Option('affy_rg_u34c','rnoaffy_rg_u34c');
+  selbox.options[selbox.options.length] = new Option('affy_rat230_2','rnoaffy_rat230_2');
+  selbox.options[selbox.options.length] = new Option('affy_rae230a','rnoaffy_rae230a');
+  selbox.options[selbox.options.length] = new Option('affy_rae230b','rnoaffy_rae230b');
+  selbox.options[selbox.options.length] = new Option('affy_rn_u34','rnoaffy_rn_u34');
+  selbox.options[selbox.options.length] = new Option('affy_rt_u34','rnoaffy_rt_u34');
+  selbox.options[selbox.options.length] = new Option('agilentprobe','rnoagilentprobe');
+  
+  
+selbox2.options[selbox2.options.length] = new Option('GeneName','rnogenename');
+  selbox2.options[selbox2.options.length] = new Option('ProteinName','rnoproteinname');
+  selbox2.options[selbox2.options.length] = new Option('RefSeq','rnorefseq');
+  //selbox2.options[selbox2.options.length] = new Option('PubMed','rnopmid');
+  selbox2.options[selbox2.options.length] = new Option('UniProt','rnoswiss');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Gene ID','rnoensembl_gene');
+    selbox2.options[selbox2.options.length] = new Option('Ensembl Transcript ID','rnoensembl_transcript');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Protein ID','rnoensembl_protein');
+  selbox2.options[selbox2.options.length] = new Option('GI','rnogi');
+
+  selbox2.options[selbox2.options.length] = new Option('GeneID','rnogeneid');
+  selbox2.options[selbox2.options.length] = new Option('EMBL','rnoembl');
+  selbox2.options[selbox2.options.length] = new Option('PIR','rnopir');
+  selbox2.options[selbox2.options.length] = new Option('ORFnames','rnoorfnames');
+ // selbox2.options[selbox2.options.length] = new Option('hssp','rnohssp');
+ // selbox2.options[selbox2.options.length] = new Option('smr','rnosmr');
+ // selbox2.options[selbox2.options.length] = new Option('intact','rnointact');
+ // selbox2.options[selbox2.options.length] = new Option('interpro','rnointerpro');
+ // selbox2.options[selbox2.options.length] = new Option('panther','rnopanther');
+ // selbox2.options[selbox2.options.length] = new Option('pfam','rnopfam');
+//  selbox2.options[selbox2.options.length] = new Option('prints','rnoprints');
+//  selbox2.options[selbox2.options.length] = new Option('prodom','rnoprodom');
+//  selbox2.options[selbox2.options.length] = new Option('smart','rnosmart');
+//  selbox2.options[selbox2.options.length] = new Option('prosite','rnoprosite');
+
+//  selbox2.options[selbox2.options.length] = new Option('keyword','rnokeyword');
+
+  selbox2.options[selbox2.options.length] = new Option('DBSNP','rnodbsnp');
+  selbox2.options[selbox2.options.length] = new Option('UniSTS','rnounists');
+  selbox2.options[selbox2.options.length] = new Option('CDD','rnocdd');
+
+  selbox2.options[selbox2.options.length] = new Option('affy_rg_u34a','rnoaffy_rg_u34a');
+  selbox2.options[selbox2.options.length] = new Option('affy_rg_u34b','rnoaffy_rg_u34b');
+  selbox2.options[selbox2.options.length] = new Option('affy_rg_u34c','rnoaffy_rg_u34c');
+  selbox2.options[selbox2.options.length] = new Option('affy_rat230_2','rnoaffy_rat230_2');
+  selbox2.options[selbox2.options.length] = new Option('affy_rae230a','rnoaffy_rae230a');
+  selbox2.options[selbox2.options.length] = new Option('affy_rae230b','rnoaffy_rae230b');
+  selbox2.options[selbox2.options.length] = new Option('affy_rn_u34','rnoaffy_rn_u34');
+  selbox2.options[selbox2.options.length] = new Option('affy_rt_u34','rnoaffy_rt_u34');
+  selbox2.options[selbox2.options.length] = new Option('agilentprobe','rnoagilentprobe');
+}
+
+if (chosen == "4") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','btagenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','btaproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','btarefseq');
+  //selbox.options[selbox.options.length] = new Option('PubMed','btapmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','btaswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','btaensembl_gene');
+    selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','btaensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','btaensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','btagi');
+
+  selbox.options[selbox.options.length] = new Option('GeneID','btageneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','btaembl');
+  selbox.options[selbox.options.length] = new Option('PIR','btapir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','btaorfnames');
+ // selbox.options[selbox.options.length] = new Option('hssp','btahssp');
+ // selbox.options[selbox.options.length] = new Option('smr','btasmr');
+ // selbox.options[selbox.options.length] = new Option('intact','btaintact');
+ // selbox.options[selbox.options.length] = new Option('interpro','btainterpro');
+ // selbox.options[selbox.options.length] = new Option('panther','btapanther');
+ // selbox.options[selbox.options.length] = new Option('pfam','btapfam');
+ // selbox.options[selbox.options.length] = new Option('prints','btaprints');
+ // selbox.options[selbox.options.length] = new Option('prodom','btaprodom');
+ // selbox.options[selbox.options.length] = new Option('smart','btasmart');
+ // selbox.options[selbox.options.length] = new Option('prosite','btaprosite');
+
+ // selbox.options[selbox.options.length] = new Option('keyword','btakeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','btadbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','btaunists');
+  selbox.options[selbox.options.length] = new Option('CDD','btacdd');
+
+  selbox.options[selbox.options.length] = new Option('affy_bovine','btaaffy_bovine');
+ 
+  
+selbox2.options[selbox2.options.length] = new Option('GeneName','btagenename');
+  selbox2.options[selbox2.options.length] = new Option('ProteinName','btaproteinname');
+  selbox2.options[selbox2.options.length] = new Option('RefSeq','btarefseq');
+  selbox2.options[selbox2.options.length] = new Option('PubMed','btapmid');
+  //selbox2.options[selbox2.options.length] = new Option('UniProt','btaswiss');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Gene ID','btaensembl_gene');
+    selbox2.options[selbox2.options.length] = new Option('Ensembl Transcript ID','btaensembl_transcript');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Protein ID','btaensembl_protein');
+  selbox2.options[selbox2.options.length] = new Option('GI','btagi');
+
+  selbox2.options[selbox2.options.length] = new Option('GeneID','btageneid');
+  selbox2.options[selbox2.options.length] = new Option('EMBL','btaembl');
+  selbox2.options[selbox2.options.length] = new Option('PIR','btapir');
+  selbox2.options[selbox2.options.length] = new Option('ORFnames','btaorfnames');
+ // selbox2.options[selbox2.options.length] = new Option('hssp','btahssp');
+ // selbox2.options[selbox2.options.length] = new Option('smr','btasmr');
+ // selbox2.options[selbox2.options.length] = new Option('intact','btaintact');
+ // selbox2.options[selbox2.options.length] = new Option('interpro','btainterpro');
+ // selbox2.options[selbox2.options.length] = new Option('panther','btapanther');
+ // selbox2.options[selbox2.options.length] = new Option('pfam','btapfam');
+ // selbox2.options[selbox2.options.length] = new Option('prints','btaprints');
+ // selbox2.options[selbox2.options.length] = new Option('prodom','btaprodom');
+ // selbox2.options[selbox2.options.length] = new Option('smart','btasmart');
+//  selbox2.options[selbox2.options.length] = new Option('prosite','btaprosite');
+
+//  selbox2.options[selbox2.options.length] = new Option('keyword','btakeyword');
+
+  selbox2.options[selbox2.options.length] = new Option('DBSNP','btadbsnp');
+  selbox2.options[selbox2.options.length] = new Option('UniSTS','btaunists');
+  selbox2.options[selbox2.options.length] = new Option('CDD','btacdd');
+
+  selbox2.options[selbox2.options.length] = new Option('affy_bovine','btaaffy_bovine');
+}
+if (chosen == "5") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','cfagenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','cfaproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','cfarefseq');
+  selbox.options[selbox.options.length] = new Option('UniProt','cfaswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','cfaensembl_gene');
+  selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','cfaensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','cfaensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','cfagi');
+  selbox.options[selbox.options.length] = new Option('GeneID','cfageneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','cfaembl');
+  selbox.options[selbox.options.length] = new Option('PIR','cfapir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','cfaorfnames');
+  selbox.options[selbox.options.length] = new Option('DBSNP','cfadbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','cfaunists');
+  selbox.options[selbox.options.length] = new Option('CDD','cfacdd');
+  selbox.options[selbox.options.length] = new Option('affy_canine','cfaaffy_canine');
+ 
+  selbox2.options[selbox2.options.length] = new Option('GeneName','cfagenename');
+  selbox2.options[selbox2.options.length] = new Option('ProteinName','cfaproteinname');
+  selbox2.options[selbox2.options.length] = new Option('RefSeq','cfarefseq');
+  selbox2.options[selbox2.options.length] = new Option('UniProt','cfaswiss');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Gene ID','cfaensembl_gene');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Transcript ID','cfaensembl_transcript');
+  selbox2.options[selbox2.options.length] = new Option('Ensembl Protein ID','cfaensembl_protein');
+  selbox2.options[selbox2.options.length] = new Option('GI','cfagi');
+  selbox2.options[selbox2.options.length] = new Option('GeneID','cfageneid');
+  selbox2.options[selbox2.options.length] = new Option('EMBL','cfaembl');
+  selbox2.options[selbox2.options.length] = new Option('PIR','cfapir');
+  selbox2.options[selbox2.options.length] = new Option('ORFnames','cfaorfnames');
+  selbox2.options[selbox2.options.length] = new Option('DBSNP','cfadbsnp');
+  selbox2.options[selbox2.options.length] = new Option('UniSTS','cfaunists');
+  selbox2.options[selbox2.options.length] = new Option('CDD','cfacdd');
+  selbox2.options[selbox2.options.length] = new Option('affy_canine','cfaaffy_canine');
+}
+if (chosen == "88") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','dmegenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','dmeproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','dmerefseq');
+  selbox.options[selbox.options.length] = new Option('UniProt','dmeswiss');
+  selbox.options[selbox.options.length] = new Option('FlyBase Gene ID','dmeensembl_gene');
+  selbox.options[selbox.options.length] = new Option('FlyBase Transcript ID','dmeensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('FlyBase Protein ID','dmeensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','dmegi');
+  selbox.options[selbox.options.length] = new Option('GeneID','dmegeneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','dmeembl');
+  selbox.options[selbox.options.length] = new Option('PIR','dmepir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','dmeorfnames');
+  selbox.options[selbox.options.length] = new Option('DBSNP','dmedbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','dmeunists');
+  selbox.options[selbox.options.length] = new Option('CDD','dmecdd');
+  selbox.options[selbox.options.length] = new Option('affy_drosgenome1','dmeaffy_drosgenome1');
+  selbox.options[selbox.options.length] = new Option('affy_drosophila2','dmeaffy_drosophila2');
+  selbox.options[selbox.options.length] = new Option('BDGP_insitu_expr','dmeaffy_BDGP_insitu_expr');
+  selbox.options[selbox.options.length] = new Option('DEBb','dmeaffy_DEBb');
+ 
+  selbox2.options[selbox2.options.length] = new Option('GeneName','dmegenename');
+  selbox2.options[selbox2.options.length] = new Option('ProteinName','dmeproteinname');
+  selbox2.options[selbox2.options.length] = new Option('RefSeq','dmerefseq');
+  selbox2.options[selbox2.options.length] = new Option('UniProt','dmeswiss');
+  selbox2.options[selbox2.options.length] = new Option('FlyBase Gene ID','dmeensembl_gene');
+  selbox2.options[selbox2.options.length] = new Option('FlyBase Transcript ID','dmeensembl_transcript');
+  selbox2.options[selbox2.options.length] = new Option('FlyBase Protein ID','dmeensembl_protein');
+  selbox2.options[selbox2.options.length] = new Option('GI','dmegi');
+  selbox2.options[selbox2.options.length] = new Option('GeneID','dmegeneid');
+  selbox2.options[selbox2.options.length] = new Option('EMBL','dmeembl');
+  selbox2.options[selbox2.options.length] = new Option('PIR','dmepir');
+  selbox2.options[selbox2.options.length] = new Option('ORFnames','dmeorfnames');
+  selbox2.options[selbox2.options.length] = new Option('DBSNP','dmedbsnp');
+  selbox2.options[selbox2.options.length] = new Option('UniSTS','dmeunists');
+  selbox2.options[selbox2.options.length] = new Option('CDD','dmecdd');
+  selbox2.options[selbox2.options.length] = new Option('affy_drosgenome1','dmeaffy_drosgenome1');
+  selbox2.options[selbox2.options.length] = new Option('affy_drosophila2','dmeaffy_drosophila2');
+  selbox2.options[selbox2.options.length] = new Option('BDGP_insitu_expr','dmeaffy_BDGP_insitu_expr');
+  selbox2.options[selbox2.options.length] = new Option('DEBb','dmeaffy_DEBb');
+}
+}
+
+function setOptions2(chosen) {
+var selbox = document.myform.opttwo;
+
+selbox.options.length =0;
+ if (chosen == " ") {
+  selbox.options[selbox.options.length] = new Option('Please select an organism first',' ');
+ 
+}
+if (chosen == "1") {
+  selbox.options[selbox.options.length] = new Option('GeneName','hsagenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','hsaproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','hsarefseq');
+ // selbox.options[selbox.options.length] = new Option('PubMed','hsapmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','hsaswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','hsaensembl_gene');
+  selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','hsaensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','hsaensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','hsagi');
+  selbox.options[selbox.options.length] = new Option('GeneID','hsageneid');
+  selbox.options[selbox.options.length] = new Option('MIM_ID','hsamim_id');
+  selbox.options[selbox.options.length] = new Option('MORBID_ID','hsamorbid_id');
+  selbox.options[selbox.options.length] = new Option('EMBL','hsaembl');
+  selbox.options[selbox.options.length] = new Option('PIR','hsapir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','hsaorfnames');
+ // selbox.options[selbox.options.length] = new Option('hssp','hsahssp');
+ // selbox.options[selbox.options.length] = new Option('smr','hsasmr');
+ // selbox.options[selbox.options.length] = new Option('intact','hsaintact');
+ // selbox.options[selbox.options.length] = new Option('interpro','hsainterpro');
+ // selbox.options[selbox.options.length] = new Option('panther','hsapanther');
+ // selbox.options[selbox.options.length] = new Option('pfam','hsapfam');
+ // selbox.options[selbox.options.length] = new Option('prints','hsaprints');
+ // selbox.options[selbox.options.length] = new Option('prodom','hsaprodom');
+ // selbox.options[selbox.options.length] = new Option('smart','hsasmart');
+ // selbox.options[selbox.options.length] = new Option('prosite','hsaprosite');
+
+//  selbox.options[selbox.options.length] = new Option('keyword','hsakeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','hsadbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','hsaunists');
+  selbox.options[selbox.options.length] = new Option('CDD','hsacdd');
+  selbox.options[selbox.options.length] = new Option('CCDS','hsaccds');
+
+  selbox.options[selbox.options.length] = new Option('affy_hc_g110','hsaaffy_hc_g110');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133_plus_2','hsaaffy_hg_u133_plus_2');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133a_2','hsaaffy_hg_u133a_2');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133a','hsaaffy_hg_u133a');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u133b','hsaaffy_hg_u133b');
+  selbox.options[selbox.options.length] = new Option('affy_u133_x3p','hsaaffy_u133_x3p');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95a','hsaaffy_hg_u95a');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95av2','hsaaffy_hg_u95av2');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95b','hsaaffy_hg_u95b');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95c','hsaaffy_hg_u95c');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95d','hsaaffy_hg_u95d');
+  selbox.options[selbox.options.length] = new Option('affy_hg_u95e','hsaaffy_hg_u95e');
+  selbox.options[selbox.options.length] = new Option('affy_hg_focus','hsaaffy_hg_focus');
+  selbox.options[selbox.options.length] = new Option('affy_hugenefl','hsaaffy_hugenefl');
+//  selbox.options[selbox.options.length] = new Option('affy_hg_u133_x3p','hsaaffy_hg_u133_x3p');
+  selbox.options[selbox.options.length] = new Option('affy_agilentcgh','hsaaffy_agilentcgh');
+  selbox.options[selbox.options.length] = new Option('affy_agilentprobe','hsaaffy_agilentprobe');
+
+
+
+}
+if (chosen == "2") {
+  selbox.options[selbox.options.length] = new Option('GeneName','mmugenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','mmuproteinname');
+  selbox.options[selbox.options.length] = new Option('MFunGD','mmumfungd');
+  selbox.options[selbox.options.length] = new Option('RefSeq','mmurefseq');
+ // selbox.options[selbox.options.length] = new Option('PubMed','mmupmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','mmuswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','mmuensembl_gene');
+    selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','mmuensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','mmuensembl_protein');
+  selbox.options[selbox.options.length] = new Option('MGI','mmumgi');
+  selbox.options[selbox.options.length] = new Option('GI','mmugi');
+
+  selbox.options[selbox.options.length] = new Option('GeneID','mmugeneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','mmuembl');
+  selbox.options[selbox.options.length] = new Option('PIR','mmupir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','mmuorfnames');
+ // selbox.options[selbox.options.length] = new Option('hssp','mmuhssp');
+ // selbox.options[selbox.options.length] = new Option('smr','mmusmr');
+ //// selbox.options[selbox.options.length] = new Option('intact','mmuintact');
+ // selbox.options[selbox.options.length] = new Option('interpro','mmuinterpro');
+ // selbox.options[selbox.options.length] = new Option('panther','mmupanther');
+ // selbox.options[selbox.options.length] = new Option('pfam','mmupfam');
+ // selbox.options[selbox.options.length] = new Option('prints','mmuprints');
+ // selbox.options[selbox.options.length] = new Option('prodom','mmuprodom');
+ // selbox.options[selbox.options.length] = new Option('smart','mmusmart');
+ // selbox.options[selbox.options.length] = new Option('prosite','mmuprosite');
+
+
+ // selbox.options[selbox.options.length] = new Option('keyword','mmukeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','mmudbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','mmuunists');
+  selbox.options[selbox.options.length] = new Option('CDD','mmucdd');
+  selbox.options[selbox.options.length] = new Option('CCDS','mmuccds');
+
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74a','mmuaffy_mg_u74a');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74av2','mmuaffy_mg_u74av2');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74b','mmuaffy_mg_u74b');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74bv2','mmuaffy_mg_u74bv2');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74c','mmuaffy_mg_u74c');
+  selbox.options[selbox.options.length] = new Option('affy_mg_u74cv2','mmuaffy_mg_u74cv2');
+  selbox.options[selbox.options.length] = new Option('affy_moe430a','mmuaffy_moe430a');
+  selbox.options[selbox.options.length] = new Option('affy_moe430b','mmuaffy_moe430b');
+  selbox.options[selbox.options.length] = new Option('affy_mouse430_2','mmuaffy_mouse430_2');
+  selbox.options[selbox.options.length] = new Option('affy_mouse430a_2','mmuaffy_mouse430a_2');
+  selbox.options[selbox.options.length] = new Option('affy_mu11ksuba','mmuaffy_mu11ksuba');
+  selbox.options[selbox.options.length] = new Option('agilentprobe','mmuagilentprobe');
+
+}
+if (chosen == "3") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','rnogenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','rnoproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','rnorefseq');
+ // selbox.options[selbox.options.length] = new Option('PubMed','rnopmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','rnoswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','rnoensembl_gene');
+    selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','rnoensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','rnoensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','rnogi');
+
+  selbox.options[selbox.options.length] = new Option('GeneID','rnogeneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','rnoembl');
+  selbox.options[selbox.options.length] = new Option('PIR','rnopir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','rnoorfnames');
+ // selbox.options[selbox.options.length] = new Option('hssp','rnohssp');
+ // selbox.options[selbox.options.length] = new Option('smr','rnosmr');
+ // selbox.options[selbox.options.length] = new Option('intact','rnointact');
+ // selbox.options[selbox.options.length] = new Option('interpro','rnointerpro');
+ // selbox.options[selbox.options.length] = new Option('panther','rnopanther');
+ // selbox.options[selbox.options.length] = new Option('pfam','rnopfam');
+ //// selbox.options[selbox.options.length] = new Option('prints','rnoprints');
+ // selbox.options[selbox.options.length] = new Option('prodom','rnoprodom');
+ // selbox.options[selbox.options.length] = new Option('smart','rnosmart');
+ // selbox.options[selbox.options.length] = new Option('prosite','rnoprosite');
+
+ // selbox.options[selbox.options.length] = new Option('keyword','rnokeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','rnodbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','rnounists');
+  selbox.options[selbox.options.length] = new Option('CDD','rnocdd');
+
+  selbox.options[selbox.options.length] = new Option('affy_rg_u34a','rnoaffy_rg_u34a');
+  selbox.options[selbox.options.length] = new Option('affy_rg_u34b','rnoaffy_rg_u34b');
+  selbox.options[selbox.options.length] = new Option('affy_rg_u34c','rnoaffy_rg_u34c');
+  selbox.options[selbox.options.length] = new Option('affy_rat230_2','rnoaffy_rat230_2');
+  selbox.options[selbox.options.length] = new Option('affy_rae230a','rnoaffy_rae230a');
+  selbox.options[selbox.options.length] = new Option('affy_rae230b','rnoaffy_rae230b');
+  selbox.options[selbox.options.length] = new Option('affy_rn_u34','rnoaffy_rn_u34');
+  selbox.options[selbox.options.length] = new Option('affy_rt_u34','rnoaffy_rt_u34');
+  selbox.options[selbox.options.length] = new Option('agilentprobe','rnoagilentprobe');
+  
+
+}
+
+if (chosen == "4") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','btagenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','btaproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','btarefseq');
+ // selbox.options[selbox.options.length] = new Option('PubMed','btapmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','btaswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','btaensembl_gene');
+    selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','btaensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','btaensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','btagi');
+
+  selbox.options[selbox.options.length] = new Option('GeneID','btageneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','btaembl');
+  selbox.options[selbox.options.length] = new Option('PIR','btapir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','btaorfnames');
+ // selbox.options[selbox.options.length] = new Option('hssp','btahssp');
+ // selbox.options[selbox.options.length] = new Option('smr','btasmr');
+ // selbox.options[selbox.options.length] = new Option('intact','btaintact');
+ // selbox.options[selbox.options.length] = new Option('interpro','btainterpro');
+ // selbox.options[selbox.options.length] = new Option('panther','btapanther');
+ // selbox.options[selbox.options.length] = new Option('pfam','btapfam');
+ // selbox.options[selbox.options.length] = new Option('prints','btaprints');
+ // selbox.options[selbox.options.length] = new Option('prodom','btaprodom');
+ // selbox.options[selbox.options.length] = new Option('smart','btasmart');
+ // selbox.options[selbox.options.length] = new Option('prosite','btaprosite');
+
+ // selbox.options[selbox.options.length] = new Option('keyword','btakeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','btadbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','btaunists');
+  selbox.options[selbox.options.length] = new Option('CDD','btacdd');
+
+  selbox.options[selbox.options.length] = new Option('affy_bovine','btaaffy_bovine');
+ 
+
+}
+if (chosen == "5") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','cfagenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','cfaproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','cfarefseq');
+ // selbox.options[selbox.options.length] = new Option('PubMed','cfapmid');
+  selbox.options[selbox.options.length] = new Option('UniProt','cfaswiss');
+  selbox.options[selbox.options.length] = new Option('Ensembl Gene ID','cfaensembl_gene');
+    selbox.options[selbox.options.length] = new Option('Ensembl Transcript ID','cfaensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('Ensembl Protein ID','cfaensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','cfagi');
+
+  selbox.options[selbox.options.length] = new Option('GeneID','cfageneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','cfaembl');
+  selbox.options[selbox.options.length] = new Option('PIR','cfapir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','cfaorfnames');
+//  selbox.options[selbox.options.length] = new Option('hssp','cfahssp');
+//  selbox.options[selbox.options.length] = new Option('smr','cfasmr');
+//  selbox.options[selbox.options.length] = new Option('intact','cfaintact');
+//  selbox.options[selbox.options.length] = new Option('interpro','cfainterpro');
+//  selbox.options[selbox.options.length] = new Option('panther','cfapanther');
+//  selbox.options[selbox.options.length] = new Option('pfam','cfapfam');
+//  selbox.options[selbox.options.length] = new Option('prints','cfaprints');
+//  selbox.options[selbox.options.length] = new Option('prodom','cfaprodom');
+//  selbox.options[selbox.options.length] = new Option('smart','cfasmart');
+//  selbox.options[selbox.options.length] = new Option('prosite','cfaprosite');
+
+//  selbox.options[selbox.options.length] = new Option('keyword','cfakeyword');
+
+  selbox.options[selbox.options.length] = new Option('DBSNP','cfadbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','cfaunists');
+  selbox.options[selbox.options.length] = new Option('CDD','cfacdd');
+
+  selbox.options[selbox.options.length] = new Option('affy_canine','cfaaffy_canine');
+
+}
+if (chosen == "88") {
+
+  selbox.options[selbox.options.length] = new Option('GeneName','dmegenename');
+  selbox.options[selbox.options.length] = new Option('ProteinName','dmeproteinname');
+  selbox.options[selbox.options.length] = new Option('RefSeq','dmerefseq');
+  selbox.options[selbox.options.length] = new Option('UniProt','dmeswiss');
+  selbox.options[selbox.options.length] = new Option('FlyBase Gene ID','dmeensembl_gene');
+  selbox.options[selbox.options.length] = new Option('FlyBase Transcript ID','dmeensembl_transcript');
+  selbox.options[selbox.options.length] = new Option('FlyBase Protein ID','dmeensembl_protein');
+  selbox.options[selbox.options.length] = new Option('GI','dmegi');
+  selbox.options[selbox.options.length] = new Option('GeneID','dmegeneid');
+  selbox.options[selbox.options.length] = new Option('EMBL','dmeembl');
+  selbox.options[selbox.options.length] = new Option('PIR','dmepir');
+  selbox.options[selbox.options.length] = new Option('ORFnames','dmeorfnames');
+  selbox.options[selbox.options.length] = new Option('DBSNP','dmedbsnp');
+  selbox.options[selbox.options.length] = new Option('UniSTS','dmeunists');
+  selbox.options[selbox.options.length] = new Option('CDD','dmecdd');
+  selbox.options[selbox.options.length] = new Option('affy_drosgenome1','dmeaffy_drosgenome1');
+  selbox.options[selbox.options.length] = new Option('affy_drosophila2','dmeaffy_drosophila2');
+  selbox.options[selbox.options.length] = new Option('BDGP_insitu_expr','dmeaffy_BDGP_insitu_expr');
+  selbox.options[selbox.options.length] = new Option('DEBb','dmeaffy_DEBb');
+ 
+ }
+}
+
+
+function CheckEnter(evt) {
+   	var keyCode = document.layers?evt.which:evt.keyCode;
+    if (keyCode != 13) {
+return false;
+    }
+alert('Please Press Submit Button')
+    return true;
+}
+
+function verifOne(nameOfField){
+   if(nameOfField.value=='') {
+      alert(nameOfField.name+' not filled');
+      nameOfField.focus();
+      return false;
+   }
+   else return true;
+}
+
+function verifAll(){
+   MyForm = document.forms[0];
+   for(var i=0;i<MyForm.length;i++) {
+      if(MyForm.elements[i].type=="text" || MyForm.elements[i].type=="file")
+         if(!(verifOne(MyForm.elements[i])))
+            return false;
+   }
+   return true;
+}
+
+
+function winopen_undef(url,target,W,H){ //alert(url+target+W+H);
+   if(W==''){W=800;}
+   if(H==''){W=650;}
+   if(winoff==1){
+     var fenster = window.open(url,target,eingensch);
+     fenster.close(); winoff=0;
+   }
+   var eingensch="scrollbars=yes,menubar=no,resizable=yes";
+   var fenster = window.open(url,target,eingensch);
+   fenster.focus(); winoff=1;
+}
+
+/***********************************************
+* Switch Content script- Â© Dynamic Drive (www.dynamicdrive.com)
+* This notice must stay intact for legal use. Last updated April 2nd, 2005.
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var enablepersist="on" //Enable saving state of content structure using session cookies? (on/off)
+var collapseprevious="no" //Collapse previously open content when opening present? (yes/no)
+
+var contractsymbol='<img border="0" src="/genre/export/sites/default/cronos/_configuration/images/collapse.gif" alt="- " />' //HTML for contract symbol.
+var expandsymbol='<img border="0" src="/genre/export/sites/default/cronos/_configuration/images/expand.gif" alt="+ " />' //HTML for expand symbol.
+
+
+if (document.getElementById){
+document.write('<style type="text/css">')
+document.write('.switchcontent{display:none;}')
+document.write('</style>')
+}
+
+function getElementbyClass(rootobj, classname){
+var temparray=new Array()
+var inc=0
+var rootlength=rootobj.length
+for (i=0; i<rootlength; i++){
+if (rootobj[i].className==classname)
+temparray[inc++]=rootobj[i]
+}
+return temparray
+}
+
+function sweeptoggle(ec){
+var thestate=(ec=="expand")? "block" : "none"
+var inc=0
+while (ccollect[inc]){
+ccollect[inc].style.display=thestate
+inc++
+}
+revivestatus()
+}
+
+
+function contractcontent(omit){
+var inc=0
+while (ccollect[inc]){
+if (ccollect[inc].id!=omit)
+ccollect[inc].style.display="none"
+inc++
+}
+}
+
+function expandcontent(curobj, cid){
+var spantags=curobj.getElementsByTagName("SPAN")
+var showstateobj=getElementbyClass(spantags, "showstate")
+if (ccollect.length>0){
+if (collapseprevious=="yes")
+contractcontent(cid)
+document.getElementById(cid).style.display=(document.getElementById(cid).style.display!="block")? "block" : "none"
+if (showstateobj.length>0){ //if "showstate" span exists in header
+if (collapseprevious=="no")
+showstateobj[0].innerHTML=(document.getElementById(cid).style.display=="block")? contractsymbol : expandsymbol
+else
+revivestatus()
+}
+}
+}
+
+
+var cX = 0; var cY = 0; var rX = 0; var rY = 0;
+function UpdateCursorPosition(e){
+	cX = e.pageX; cY = e.pageY;
+}
+function UpdateCursorPositionDocAll(e){
+	cX = event.clientX; cY = event.clientY;
+}
+if(document.all) {
+	document.onmousemove = UpdateCursorPositionDocAll;
+}
+else {
+	document.onmousemove = UpdateCursorPosition;
+}
+function AssignPosition(d) {
+	if(self.pageYOffset) {
+		rX = self.pageXOffset;
+		rY = self.pageYOffset;
+	}
+	else if(document.documentElement && document.documentElement.scrollTop) {
+		rX = document.documentElement.scrollLeft;
+		rY = document.documentElement.scrollTop;
+	}
+	else if(document.body) {
+		rX = document.body.scrollLeft;
+		rY = document.body.scrollTop;
+	}
+	if(document.all) {
+		cX += rX;
+		cY += rY;
+	}
+	d.style.left = (cX+10) + "px";
+	d.style.top = (cY+10) + "px";
+}
+function HideID(d) {
+	if(d.length < 1) {
+		return;
+	}
+	document.getElementById(d).style.display = "none";
+}
+function ShowID(d) {
+	if(d.length < 1) {
+		return;
+	}
+	var dd = document.getElementById(d);
+	AssignPosition(dd);
+	dd.style.display = "block";
+}
+
+
+function revivecontent(){
+contractcontent("omitnothing")
+selectedItem=getselectedItem()
+selectedComponents=selectedItem.split("|")
+for (i=0; i<selectedComponents.length-1; i++)
+document.getElementById(selectedComponents[i]).style.display="block"
+}
+
+function revivestatus(){
+var inc=0
+while (statecollect[inc]){
+if (ccollect[inc].style.display=="block")
+statecollect[inc].innerHTML=contractsymbol
+else
+statecollect[inc].innerHTML=expandsymbol
+inc++
+}
+}
+
+function get_cookie(Name) { 
+var search = Name + "="
+var returnvalue = "";
+if (document.cookie.length > 0) {
+offset = document.cookie.indexOf(search)
+if (offset != -1) { 
+offset += search.length
+end = document.cookie.indexOf(";", offset);
+if (end == -1) end = document.cookie.length;
+returnvalue=unescape(document.cookie.substring(offset, end))
+}
+}
+return returnvalue;
+}
+
+function getselectedItem(){
+if (get_cookie(window.location.pathname) != ""){
+selectedItem=get_cookie(window.location.pathname)
+return selectedItem
+}
+else
+return ""
+}
+
+function saveswitchstate(){
+var inc=0, selectedItem=""
+while (ccollect[inc]){
+if (ccollect[inc].style.display=="block")
+selectedItem+=ccollect[inc].id+"|"
+inc++
+}
+
+document.cookie=window.location.pathname+"="+selectedItem
+}
+
+function do_onload(){
+uniqueidn=window.location.pathname+"firsttimeload"
+var alltags=document.all? document.all : document.getElementsByTagName("*")
+ccollect=getElementbyClass(alltags, "switchcontent")
+statecollect=getElementbyClass(alltags, "showstate")
+if (enablepersist=="on" && ccollect.length>0){
+document.cookie=(get_cookie(uniqueidn)=="")? uniqueidn+"=1" : uniqueidn+"=0" 
+firsttimeload=(get_cookie(uniqueidn)==1)? 1 : 0 //check if this is 1st page load
+if (!firsttimeload)
+revivecontent()
+}
+if (ccollect.length>0 && statecollect.length>0)
+revivestatus()
+}
+
+if (window.addEventListener)
+window.addEventListener("load", do_onload, false)
+else if (window.attachEvent)
+window.attachEvent("onload", do_onload)
+else if (document.getElementById)
+window.onload=do_onload
+
+if (enablepersist=="on" && document.getElementById)
+window.onunload=saveswitchstate</script>
+
+</head>
+<body style="FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: Arial,Helvetica,Verdana; color:#000000"
+background="/genre/export/sites/default/cronos/_configuration/images/bgr_mips.jpg">
+
+<BASEFONT face=Sans-Serif,Helv,Helvetica,Verdana,Arial size=2>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD><MAP name=gsf><AREA shape=RECT target=_blank alt=GSF 
+        coords=15,10,80,80 href="http://www.gsf.de/"></MAP><IMG alt="Logo GSF" 
+      src="/genre/export/sites/default/cronos/_configuration/images/topleft.jpg" useMap=#gsf border=0> </TD>
+    <TD width="100%">
+      <P>&nbsp;</P>
+    </TD>
+    <TD><MAP name=mips><AREA shape=RECT alt=mips coords=130,10,300,80 
+        href="http://mips.gsf.de/"></MAP><IMG alt="Logo mips" 
+      src="/genre/export/sites/default/cronos/_configuration/images/topright.jpg" useMap=#mips border=0> 
+    </TD>
+  </TR>
+  </TBODY>
+</TABLE>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD bgcolor="#E3DFB9"><a href="/genre/proj/genre"><IMG height=25 alt="GenRE" src="/genre/export/sites/default/cronos/_configuration/images/glogo.gif" width=180 border=0></a> </TD>
+    <TD bgcolor="#E3DFB9"><IMG height=25 alt="" src="/genre/export/sites/default/cronos/_configuration/images/spacerb.gif" width=16 border=0> </TD>
+    <TD width="100%" style="background-image:url(/genre/export/sites/default/cronos/_configuration/images/navigation.gif); background-repeat:repeat-y">
+		<!-- Navigation starts here -->
+		<p class="nav">Navigation: 
+ &raquo; <a href="/genre/proj/cronos/">CRONOS</a>
+ &raquo; index
+</p>
+
+		<!-- Navigation ends here -->
+    </TD>
+  </TR>
+  </TBODY>
+</TABLE>
+
+<!-- End Of Header               -->
+
+
+<!-- Main page body starts here -->
+<TABLE cellSpacing=8 cellPadding=0 width="100%" align=center border=0>
+  <TBODY> 
+  <TR vAlign=top> 
+
+          <!-- Sidebar -->
+          <TD width=180 border=0 >
+
+
+
+
+<style type="text/css">
+  div.sidebar {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+ 
+  div.sidebar a {
+    color: #0000cd;
+  }
+  div.sidebar img {
+    border-width: 0;
+  }
+  div.sidebar div {
+    background-color: #F0EBD8;
+  }
+  div.sidebar h1 {
+    background-color: #E3DFB9;
+    padding: 0.3em;
+  }
+  div.sidebar table {
+    background-color: #E3DFB9;
+    width: 100%;
+  }
+  div.sidebar td {
+    text-align: center;
+  }
+</style>
+
+<div class="sidebar">
+
+        
+<div class="sidebar_search" style="white-space:nowrap">
+  <h1>Downloads</h1>
+<ul>
+<li>
+        <a href="/genre/proj/cronos/Downloads/index.html">overview</a>
+      </li>
+      <li>
+        <a href="/genre/proj/cronos/download.html">latest ambiguous names lists</a>
+      </li>
+</ul>
+<h1>WebService</h1>
+ <ul>
+<!--li>
+        <a href="http://mips.helmholtz-muenchen.de/CronosWSService/CronosWS?WSDL">link to WSDL-File</a>
+</li--><li>
+  	<a href="http://mips.helmholtz-muenchen.de/genre/proj/cronos/CronosWSService.wsdl"> link to WSDL-File</a>			
+	
+      </li>
+<li>
+        <a href="/genre/export/sites/default/cronos/WSREADME.txt">README</a>
+      </li>
+</ul>
+<h1>Batch</h1>
+ <ul>
+<li>
+        <a href="/genre/proj/cronos/batch.html">calculate in batch mode</a>
+      </li>
+</ul>
+
+
+</div>
+
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="http://mips.gsf.de/"><img alt="mips home" src="/genre/export/sites/default/resources/mips_home.gif"/></a>
+      </td>
+      <td>
+        <a onmouseover="mail.src='/genre/export/sites/default/resources/letter_op.gif'" 
+             onmouseout="mail.src='/genre/export/sites/default/resources/letter_cl.gif'" 
+             href="mailto:brigitte.waegele@helmholtz-muenchen.de">
+          <img alt="FGDB people" src="/genre/export/sites/default/resources/letter_cl.gif" name="mail"/>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+</TD>
+ 
+	<TD vAlign=top width="100%">
+
+
+     
+     
+   	
+ 
+
+
+
+	  <h1 style="text-align: center;">
+<span style="color: rgb(255, 255, 255);">kjhh</span></h1>
+<h1 style="text-align: center;">Welcome to CRONOS (V3)
+<br /></h1>
+<h1 style="text-align: center;">the Cross - Reference Navigation Server</h1>
+<h1 style="color: rgb(255, 0, 0); text-align: center;">Updating to V3 completed !</h1>
+<span style="color: rgb(255, 255, 255);">dfg</span> 
+<div style="text-align: center;">
+<!--h3>Calculate in  <a href="/genre/proj/cronos/batch.html">batch</a></h3>
+<h3> <a href="/genre/proj/cronos/Downloads/index.html">Downloads</a></h3>
+<h3>latest ambiguous names  <a href="/genre/proj/cronos/download.html">lists</a></h3>
+<h3>WebService:  <a href="http://mips.gsf.de/CronosWSService/CronosWS?WSDL">WSDL-file</a>/  <a href="/genre/proj/cronos/WSreadme.txt">Access - README</a></h3-->
+<form method="post" action="http://146.107.217.143:8080/CRONOSWeb/index.jsp" name="myform"
+onsubmit="return checklists()">
+<div align="center">
+<table frame="box" border="6" style="width: 371px; height: 124px;">
+<tbody>
+<tr>
+<td style="font-weight: bold;">
+<p>Organism</p>
+</td>
+<td style="text-align: center;">
+<select
+onchange="setOptions2(document.myform.optone.options[document.myform.optone.selectedIndex].value);"
+size="1" name="optone">
+<option value="1" selected="selected">Homo sapiens</option>
+<option value="2">Mus musculus</option>
+<option value="3">Rattus norvegicus</option>
+<option value="4">Bos taurus</option>
+<option value="5">Canis familiaris</option>
+<option value="88">Drosophila melanogaster</option>
+</select>
+</td>
+</tr>
+<tr>
+<td style="font-weight: bold;">
+<p>Type of your Query-ID</p>
+</td>
+<td style="text-align: center;">
+<select name="opttwo" size="1">
+<option value="hsagenename" selected="selected">GeneName</option>
+<option value="hsaproteinname">ProteinName</option>
+<option value="hsarefseq">RefSeq</option>
+<!--option value="hsapmid">PubMed</option-->
+<option value="hsaswiss">UniProt</option>
+<option value="hsaensembl_gene">Ensembl Gene ID</option>
+<option value="hsaensembl_transcript">Ensembl Transcript ID</option>
+<option value="hsaensembl_protein">Ensembl Protein ID</option>
+<option value="hsagi">GI</option>
+<option value="hsageneid">GeneID</option>
+<option value="hsahgnc">HGNC</option>
+<option value="hsamim_id">MIM_ID</option>
+<option value="hsamorbid_id">MORBID_ID</option>
+<option value="hsaembl">EMBL</option>
+<option value="hsapir">PIR</option>
+<option value="hsaorfnames">ORFNames</option>
+<!--option value="hsahssp">HSSP</option-->
+<!--option value="hsasmr">SMR</option-->
+<!--option value="hsaintact">Intact</option-->
+<!--option value="hsainterpro">InterPro</option-->
+<!--option value="hsapanther">Panther</option-->
+<!--option value="hsapfam">Pfam</option-->
+<!--option value="hsaprints">PRINTS</option-->
+<!--option value="hsaprodom">ProDom</option-->
+<!--option value="hsasmart">smart</option-->
+<!--option value="hsaprosite">ProSite</option-->
+<!--option value="hsakeyword">Keywords</option-->
+<option value="hsadbsnp">DBSNP</option>
+<option value="hsaunists">UniSTS</option>
+<option value="hsacdd">CDD</option>
+<option value="hsaccds">CCDS</option>
+<option value="hsaaffy_hc_g110">affy_hc_g110</option>
+<option value="hsaaffy_hg_u133_plus_2">affy_hg_u133_plus_2</option>
+<option value="hsaaffy_hg_u133a_2">affy_hg_u133a_2</option>
+<option value="hsaaffy_hg_u133a">affy_hg_u133a</option>
+<option value="hsaaffy_hg_u133b">affy_hg_u133b</option>
+<option value="hsaaffy_u133_x3p">affy_u133_x3p</option>
+<option value="hsaaffy_hg_u95a">affy_hg_u95a</option>
+<option value="hsaaffy_hg_u95av2">affy_hg_u95av2</option>
+<option value="hsaaffy_hg_u95b">affy_hg_u95b</option>
+<option value="hsaaffy_hg_u95c">affy_hg_u95c</option>
+<option value="hsaaffy_hg_u95d">affy_hg_u95d</option>
+<option value="hsaaffy_hg_u95e">affy_hg_u95e</option>
+<option value="hsaaffy_hg_focus">affy_hg_focus</option>
+<option value="hsaaffy_hugenefl">affy_hugenefl</option>
+<!--option value="hsaaffy_hg_u133_x3p">affy_hg_u133_x3p</option-->
+<option value="hsaagilentcgh">agilentcgh</option>
+<option value="hsaagilentprobe">agilentprobe</option>
+</select>
+</td>
+</tr>
+<tr>
+<td style="font-weight: bold;">
+<p>Query-ID</p>
+</td>
+<td style="text-align: center;">
+<input type="text" name="id" />
+</td>
+</tr>
+<tr>
+<td style="font-weight: bold;">
+<p>Search Option</p>
+</td>
+<td style="text-align: center;">
+<p>
+<input type="radio" checked="" value="exact" name="searchoption" />exact 
+<input type="radio" value="fuzzy" name="searchoption" />fuzzy</p>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td style="text-align: center;">
+<input type="submit" value="Compute" name="Compute" /> 
+<input type="reset" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</form>
+</div>
+<h3>News:</h3>
+<h4>03. Mar 2010: Cronos Update to Version 3.</h4>
+<h4>08. Feb 2010: Batch functionalitiy restored.</h4>
+<h4>10. Aug 2009: Batch functionalitiy restored.</h4>
+<h4>25. Jun 2009: Cronos Update to Version 2.</h4>
+<h4>19. Nov 2008: Drosophila melanogaster added to CRONOS WebService.</h4>
+<h4>17. Nov 2008: Drosophila melanogaster added to CRONOS online and Batch Service. 
+<!--h3>Questions or Suggestions? Please  <a href="mailto:brigitte.waegele@helmholtz-muenchen.de&amp;subject=CRONOS">contact</a> us.</h3-->
+</h4>
+
+
+
+
+   
+              
+      
+
+
+
+
+          
+    </TD>
+  </TR>
+  <tr> 
+    <td height="1"><img height="1" width="150" src="/genre/proj/cronos/resources/spacer.gif"></td>
+    <td></td>
+  </tr>
+  </TBODY> 
+</TABLE>
+<!-- Main page body ends here -->
+<hr/>
+<TABLE cellSpacing=10 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+   <TD>
+    <h3> Reference: <a href = "http://www.ncbi.nlm.nih.gov/pubmed/19010804"> Waegele, B., Dunger-Kaltenbach, I., Fobo, G., Montrone C., Mewes, H.W. and Ruepp, A. CRONOS: the cross-reference navigation server. Bioinformatics. 2009 Jan 1; 25(1):141-3. Epub 2008 Nov 13. </a></h3>
+   </TD>
+  </TR>
+  <TR>
+    <TD>
+      <P><FONT color=#666666>&copy; 2008 Helmholtz Zentrum M&uuml;nchen, GmbH Ingolst&auml;dter Landstra&szlig;e 1, D-85764 Neuherberg</FONT></P>
+      <!--P><A href="http://www.gsf.de/Impressum/index_en.phtml"><B>Imprint</B></A></P> 
+      <P><FONT color=#666666><B>Disclaimer:</B><BR><FONT size=1>MIPS Databases 
+      and associated information are protected by copyright. This server and its 
+      associated data and services are for academic, non-commercial use only. 
+      The <A href="http://www.gsf.de/" target=_blank><FONT color=#666666 
+      size=1>GSF</FONT></A> has no liability for the use of results, data or 
+      information which have been provided through this server. Neither the use 
+      for commercial purposes, nor the redistribution of MIPS database files to 
+      third parties nor the distribution of parts of files or derivative 
+      products to any third parties is permitted. Commercial users may contact 
+      the distributor <A href="http://www.biomax.de/" target=_blank><FONT 
+      color=#666666 size=1>Biomax Informatics AG</FONT></A>.</FONT></font></P-->
+    </TD>
+    </TR>
+  </TBODY>
+</TABLE>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-3584835-2";
+urchinTracker();
+</script>
+</body>
+</html>
+     
+     
+   	
+

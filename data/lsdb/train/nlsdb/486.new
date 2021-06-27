@@ -1,0 +1,335 @@
+<html>
+<!-- no BLAST_DATABASE param -->
+<head>
+  <title>Genotyping</title>
+  <link rel="stylesheet" href="http://www.ncbi.nlm.nih.gov/corehtml/ncbi_test.css">
+  <meta name="robots" content="noindex,nofollow">
+  <script language="JavaScript" src="example.js"></script>
+  <script language="JavaScript"><!--
+function _clear(form)
+{
+	form.QUERY_SEQUENCE.value="";
+	form.LOCAL_SEQUENCE.value="";
+}
+function _isblank(s)
+{
+	for( var i = 0; i < s.length; i ++ )
+	{
+		var	c = s.charAt(i);
+		if( (c != ' ') && (c != '\n') && (c != '') && (c != '\t') )
+			return false;
+	}
+	return true;
+}
+function _submit(form)
+{
+	if( _isblank( form.QUERY_SEQUENCE.value ) )
+		alert('Please enter a query sequence');
+	else
+		form.submit();
+}
+function _sel_db(form)
+{
+   form.action='formpage.cgi';
+	form.submit();
+}
+function _advanced(form, type)
+{
+   form.action='formpagex.cgi';
+	form.submit();
+}
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" background="http://www.ncbi.nlm.nih.gov/corehtml/bkgd.gif" text="#000000" link="#0033CC" vlink="#CC3300">
+<table width=800 border=0 cellpadding=0 cellspacing=0>
+<tr>
+  <!-- logo -->
+  <td>
+  <table width=800 border="0" cellpadding="0" cellspacing="0">
+	 <tr>
+	   <td align="left"><a href="http://www.ncbi.nlm.nih.gov"><img src="http://www.ncbi.nlm.nih.gov/corehtml/left.GIF" width="130" height="45" border="0"></a></td>
+	   <td align="middle" width="625"><span class="H2">Genotyping</span></td>
+	   <td align="right"><img src="gif/header.gif" width="45" height="45"></td>
+	 </tr>
+  </table>
+  </td>
+</tr>
+<tr>
+  <td>
+  <table width=800 class="TEXT" border="0" cellspacing="0" cellpadding="2" bgcolor="#000000">
+	 <tr class="TEXT" align="CENTER">
+	   <td width="16%%"><a href="http://www.ncbi.nlm.nih.gov/pubmed/" class="GUTTER">PubMed</a></td>
+	   <td width="16%%"><a href="http://www.ncbi.nlm.nih.gov/nucleotide/" class="GUTTER">Nucleotide</a></td>
+	   <td width="16%%"><a href="http://www.ncbi.nlm.nih.gov/protein/" class="GUTTER">Protein</a></td>
+	   <td width="16%%"><a href="http://www.ncbi.nlm.nih.gov/sites/genome/" class="GUTTER">Genome</a></td>
+	   <td width="16%%"><a href="http://www.ncbi.nlm.nih.gov/taxonomy/" class="GUTTER">Taxonomy</a></td>
+	   <td width="16%%"><a href="http://www.ncbi.nlm.nih.gov/structure/" class="GUTTER">Structure</a></td>
+	   <td width="16%%"><a href="http://www.ncbi.nlm.nih.gov/popset/" class="GUTTER">PopSet</a></td>
+	 </tr>
+  </table>
+  </td>
+</tr>
+</table>
+<a name="top"></a>
+<!--  the contents   -->
+<table width="800" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="135" height="196" valign="top">
+	<!-- left column --> 
+	<p>&nbsp</p>
+	<p class="GUTTER2">Resources:</p>
+	<p><a href="/retroviruses/" class="GUTTER1">Retroviruses</a></p>
+	<p class="GUTTER2">Reference sets:</p>
+	<p>
+	<a href="view.cgi?db=1" class="GUTTER1">Retroviruses</a><br>
+	<a href="view.cgi?db=2" class="GUTTER1">Hepatitis B</a><br>
+	<a href="view.cgi?db=3" class="GUTTER1">Hepatitis C</a><br>
+	<a href="view.cgi?db=4" class="GUTTER1">Poliovirus</a><br>
+	</p>
+	<p><a href="formpage.cgi?download=yes" class="GUTTER1">Download list of reference sets</a></p>
+	<p><a href="help.html" class="GUTTER1">Help</a></p>
+	<p></p>
+	<p class="GUTTER2">Tools:</p>
+	<p><a href="formpage.cgi" class="GUTTER1" style="color: white; font-weight: bold">Genotyping</a></p>
+	<p class="GUTTER2">External links:</p> 
+	<p><a href="http://www.niaid.nih.gov/daids/default.htm" class="GUTTER1">Division of AIDS at NIAID</a></p>
+	<p><a href="http://hiv-web.lanl.gov" class="GUTTER1">LANL HIV Sequence Database</a></p>
+	<p><a href="http://hivdb.stanford.edu/hiv/" class="GUTTER1">Stanford HIV RT and Protease Gene Database</a></p>
+	</td>
+	<!-- extra column to force things over the gif border -->
+	<td width=15><img src="http://www.ncbi.nlm.nih.gov/coreweb/images/tabs/pixel.gif" width=15 height=1 border=0></td>
+	<!-- right content column  -->
+	<td width="650" valign="top">
+	<p>&nbsp;</p>
+	<table width="650" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+		<tr>
+			<td class="text">
+			<p align="justify">
+&nbsp &nbsp This tool helps identify the genotype of a viral sequence. A window is slid 
+along the query sequence and each window is compared by BLAST to each of the 
+reference sequences for a particular virus. This approach is especially useful 
+for the analysis of recombinant sequences.
+&nbsp (Try an <a href=javascript:example()>example</a>).
+			</p>
+			<p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<table width=650 border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+				<tr>
+					<td colspan=2 rowspan=2 width=2 height=2><img border=0 height=16 width=16 src="gif/corner_tl.gif"></td>
+					<td bgcolor=#FF6600 height=4> <img border=0 height=4 src="http://www.ncbi.nlm.nih.gov/blast/html/Pixel.gif"></td>
+				</tr>
+				<tr>
+					<td bgcolor=#FFFFFF height=12><img border=0 height=4 src="http://www.ncbi.nlm.nih.gov/blast/html/Pixel.gif"></td>
+				</tr>
+				<tr>
+					<td width=4 bgcolor="#FF6600"><img border=0 width=4 height=2 src="http://www.ncbi.nlm.nih.gov/blast/html/Pixel.gif"></td>
+					<td width=12 bgcolor=#FFFFFF>&nbsp;</td>
+					<td>
+<form name="MainForm" id="MainForm" method="post" action="genotype.cgi">
+<input name="BLAST_PROGRAM_INDEX" type=hidden value="">
+<table width=634 border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan=2 align=right>
+    Select:&nbsp
+<select name="BLAST_DATABASE" onchange="_sel_db(this.form)">
+<option value="1" selected>Human immunodeficiency virus 1, (HIV-1) - 2004 "pure" & CRFs</option>
+<option value="2">Human immunodeficiency virus 2, (HIV-2)</option>
+<option value="3">Human T-lymphotropic virus 1, (HTLV-1)</option>
+<option value="4">Human T-lymphotropic virus 2, (HTLV-2)</option>
+<option value="5">Hepatitis B virus, (HBV)</option>
+<option value="6">Hepatitis C virus, (HCV)</option>
+<option value="7">Poliovirus, (PV)</option>
+<option value="9">Human immunodeficiency virus 1 (HIV-1) - 2005 "pure"</option>
+<option value="10">Human immunodeficiency virus 1 (HIV-1) - 2005 "pure" & CFRs</option>
+<option value="11">Human immunodeficiency virus 1 (HIV-1) - 2007 RefSet</option>
+<option value="12">Human immunodeficiency virus 1 (HIV-1) - 2009 RefSet</option>
+</select>
+    </td>
+  </tr>
+<input type=hidden name="GI_SUBTYPE" value="AF004885|A1
+AF069670|A1
+M62320|A1
+U51190|A1
+AF286237|A2
+AF286238|A2
+AF286240|A2
+AF286241|A2
+U21135|B
+M17451|B
+U63632|B
+K03455|B
+U52953|C
+U46016|C
+AF443091|C
+AF110967|C
+AF067155|C
+M27323|D
+U88822|D
+U88824|D
+K03454|D
+AJ249238|F1
+AF075703|F1
+AF077336|F1
+AF005494|F1
+AJ249236|F2
+AJ249237|F2
+AF061641|G
+AF061642|G
+AF084936|G
+U88826|G
+AF005496|H
+AF190127|H
+AF190128|H
+AF082394|J
+AF082395|J
+AJ249239|K
+AJ249235|K
+AJ006022|N
+AJ271370|N
+AJ302646|O
+AJ302647|O
+L20571|O
+L20587|O
+AY046058|U
+AF457101|U
+AF286236|U
+AF197340|CRF01
+AF197341|CRF01
+U51188|CRF01
+U54771|CRF01
+L39106|CRF02
+AF107770|CRF02
+AF063224|CRF02
+AJ286133|CRF02
+AF193276|CRF03
+AF193277|CRF03
+AF119819|CRF04
+AF119820|CRF04
+AF049337|CRF04
+AF076998|CRF05
+AF193253|CRF05
+AF064699|CRF06
+AJ288981|CRF06
+AJ288982|CRF06
+AJ245481|CRF06
+AF503396|CRF07
+AF286226|CRF07
+AF286230|CRF07
+AF286229|CRF08
+AY008715|CRF08
+AY008716|CRF08
+AY008717|CRF08
+AY093603|CRF09
+AY093604|CRF09
+AY093605|CRF09
+AY093607|CRF09
+AF289548|CRF10
+AF289549|CRF10
+AF289550|CRF10
+AF492623|CRF11
+AF492624|CRF11
+AJ291718|CRF11
+AJ291719|CRF11
+AJ291720|CRF11
+AF179368|CRF11
+AY371149|CRF11
+AY371150|CRF11
+AY371151|CRF11
+AY371152|CRF11
+AY371153|CRF11
+AY037279|CRF12
+AF385934|CRF12
+AF385935|CRF12
+AF385936|CRF12
+AF408629|CRF12
+AF408630|CRF12
+AF460972|CRF13
+AF460974|CRF13
+AY371154|CRF13
+AF450096|CRF14
+AF450097|CRF14
+AF423756|CRF14
+AF423757|CRF14
+AF423758|CRF14
+AF423759|CRF14
+AF516184|CRF15
+AF529572|CRF15
+AF529573|CRF15
+AF530576|CRF15
+AF457060|CRF16
+AF286239|CRF16
+AF115393|CPZ
+AF103818|CPZ
+AJ271369|CPZ
+U42720|CPZ
+X52154|CPZ
+">
+<input type=hidden name="LOCAL_SEQUENCE" value="">
+  <tr>
+    <td><A HREF="help.html#sequence">Enter your query sequence as Accession/GI or FASTA</A></td>
+    <td align="right"><input type="button" value="Advanced" onClick="_advanced(this.form)"></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <textarea name="QUERY_SEQUENCE" style="width: 634px; height: 100px;"></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input type="button" value="Subtype" onClick="_submit(this.form)">&nbsp
+      <input type="reset"  value="Reset">&nbsp
+      <input type="button" value="Clear" onClick="_clear(this.form)">&nbsp
+      <table width=634 border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width=230></td>
+          <td width=134></td>
+          <td width=200></td>
+          <td width= 70></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+<tr>
+  <td align="right">&nbsp;</td>
+  <td>&nbsp;</td>
+  <td align="right">
+    <a href="help.html#subtypeparams">Select background color:</a>&nbsp;
+  </td>
+  <td align="right">
+    <select name = "BACKGROUND_COLOR">
+      <option value="1"> Black
+      <option value="2"> Dark Grey
+      <option value="3" selected> Light Grey 
+      <option value="4" > White
+    </select>
+  </td>
+</tr>
+<input type=hidden name="SIMILARITY_THRESHOLD" value="0">
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=2 height=2 rowspan=2 width=2><img border=0 height=16 width=16 src="gif/corner_bl.gif"></td>
+					<td bgcolor=#FFFFFF colspan=2 height=12><img border=0 height=2 src="http://www.ncbi.nlm.nih.gov/blast/html/Pixel.gif"></td>
+				</tr>
+				<tr>
+					<td bgcolor=#FF6600 colspan=2 height=4><img border=0 height=2 src="http://www.ncbi.nlm.nih.gov/blast/html/Pixel.gif"></td>
+				</tr>
+			</table>
+			</td>
+		</tr>
+	</table>
+	</td>
+</tr>
+</table>
+<div valign="bottom" style="position:absolute; left:160px;">Please send questions and comments to <a href="mailto:info@ncbi.nlm.nih.gov?subject=Genotyping tool">info@ncbi.nlm.nih.gov</a></div>
+</body>
+<!-- Server SUBTYPER -->
+</html>

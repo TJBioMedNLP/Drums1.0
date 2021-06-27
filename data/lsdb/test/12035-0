@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <title>Disperse - Introduction</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          <meta name="author" content="Johan Stenberg" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                    <span id="bannerLeft">
+    
+            Disperse
+    
+            </span>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+              <div class="xright">      
+  
+
+  
+    
+  
+  
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+                   <h5>General</h5>
+        <ul>
+              
+    <li class="none">
+              <strong>Introduction</strong>
+        </li>
+              
+    <li class="none">
+              <a href="getting_started.html">Getting started</a>
+        </li>
+              
+    <li class="none">
+              <a href="license.html">License</a>
+        </li>
+              
+    <li class="none">
+              <a href="references.html">References</a>
+        </li>
+              
+    <li class="none">
+              <a href="faq.html">FAQ</a>
+        </li>
+          </ul>
+          <h5>Download and Setup</h5>
+        <ul>
+              
+    <li class="none">
+              <a href="download.html">Download software and data</a>
+        </li>
+              
+    <li class="none">
+              <a href="setup.html">Setup</a>
+        </li>
+              
+    <li class="none">
+              <a href="config_spec.html">Configuration file specification</a>
+        </li>
+          </ul>
+          <h5>Usage</h5>
+        <ul>
+              
+    <li class="none">
+              <a href="pipeline_docs.html">Pipeline</a>
+        </li>
+              
+    <li class="none">
+              <a href="gui.html">Graphical user interface</a>
+        </li>
+              
+    <li class="none">
+              <a href="settings_spec.html">Settings file specification</a>
+        </li>
+              
+    <li class="none">
+              <a href="reactions.html">Restriction reactions</a>
+        </li>
+              
+    <li class="none">
+              <a href="snpdata.html">SNP data</a>
+        </li>
+              
+    <li class="none">
+              <a href="examples.html">Examples</a>
+        </li>
+          </ul>
+          <h5>Project Documentation</h5>
+        <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+              <a href="project-info.html">Project Information</a>
+              </li>
+          </ul>
+                                       <a href="http://maven.apache.org/" title="Built by Maven" id="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+            <div id="lastPublished">
+        Last Published: 2008-12-21
+              </div>
+            </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Introduction</h2><p>The Disperse project aims to develop and distribute software and data for design of selector assays for exon resequencing applications. The software consists of Java and Perl code integrated into a pipeline that performs all tasks required to transform a list of gene names to a set of selector probes targetting all exonic regions of those genes.</p><p>For descriptions of the selector technology and its applications, see the <a href="references.html">references</a> page.</p><p>In brief, designing selector probes for a given target gene involves selecting a set of restriction enzymes that generate suitable restriction fragments, and then assembling sequences of selector probes that target the fragments containing the sequences of interest.</p><p>This task is divided into several stages, each of which will consume data from previous stages, and produce output data that is used in later stages, or that will be helpful for other purposes.</p><div class="section"><h3>Design job requirements</h3><p>To perform a selector design using this software, a number of things are required:</p><ul><li>A set of target genes</li><li>A set of design parameters</li><li>A set of restriction enzymes to choose from</li><li>A general sequence to include in all probes (called the vector sequence)</li></ul></div><div class="section"><h3>Stages</h3><p>A complete design job is divided into the following stages:</p><ol type="1"><li>Find coding sequence coordinates for target genes<p>Given a set of gene names, Disperse will find the coordinates for all regions of coding sequence for each gene. First, the <a href="http://www.ncbi.nlm.nih.gov/CCDS/">CCDS</a> data is checked. If the gene is not found, Disperse will access the <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=gene">NCBI Gene database</a> to extract the coding sequence regions. Overlapping and adjacent regions are merged.</p></li><li>Generate regions of interest (ROIs)<p>For each gene, a set of ROIs is generated based on the coding sequence coordinates, adding a number of flanking positions on either side of each sequence, and merging any overlapping regions. The user can specify the flank size to include a desired number of bases on either side of each CDS to the regions that will be targeted for selection.</p></li><li>Find sequences for ROIs and flanking regions<p>The sequences for each ROI, and an additional number of bases on each side, is extracted using the fastacmd program and a Blast database.</p></li><li>Extract SNP data for target sequences (optional)<p>If the SNP data file is present, all SNPs within the sequences are extracted from this file.</p></li><li>Add SNP data to target sequences (optional)<p>The extracted SNPs are added to to the sequences to produce a set of sequences with snp codes.</p></li><li>Digestion, fragment evaluation, and reaction selection<p>The PieceMaker software is used to find all restriction fragments that fulfill the specified design criteria, and to select a combination of restriction reactions that maximizes the portion of the ROIs that is included in selectable fragments.</p></li><li>Fragment selection<p>PieceMaker is now used to select a subset of the restriction fragments generated by the selected restriction reactions. This subset is selected to minimize the number of fragments required to achieve optimal coverage.</p></li><li>Amplicon file generation<p>This step creates a file with information about the amplicons that should be generated by the designed set of selector probes.</p></li><li>Selector probe sequence assembly<p>The sequences of the selector probes are assembled based on the target fragments and a general sequence motif. This step is carried out by the ProbeMaker software.</p></li><li>Output file consolidation<p>A number of the files created in the previous steps are consolidated into a set of output files providing an overview of the design.</p></li></ol></div><div class="section"><h3>Software operation</h3><p>Disperse has been tested on openSUSE linux 10.3, Windows XP Professional, and Max OS X 10.5.</p><p>The software can be operated in a pipeline mode or in a stagewise mode. Both modes are operated from the command line. The pipeline and some of the stages are Perl scripts, while some stages are executed as shell scripts invoking Java programs. There is also a basic <a href="gui.html">graphical user interface for the pipeline</a>.</p><p>Detailed documentation on how to run the pipeline is available on the 'Usage' menu</p></div></div>
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2006-2008
+    
+          Stanford University
+          
+  
+
+  
+    
+  
+  
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

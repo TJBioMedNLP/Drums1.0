@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="global/styles.css">
+
+<title>EMA - A R package for Easy Microarray data Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body topmargin="0" bgcolor="#E8F4F2">
+<table width="100%" height="100%" border="0">
+  <tr>
+    <td bgcolor="#E8F4F2">&nbsp;</td>
+
+    <td width="900" height="940" align="center" valign="top" background="images/back.gif">
+		<table border =0 cellpadding =10 align=center >
+
+	<tr>
+	  <td width="180">
+	<td width="500" valign="bottom">
+		<img src="images/ema.gif">
+    <td width="200">
+		<A HREF="http://www.curie.fr"><img border="0" src="images/logo_curie.gif" alt="">
+
+	<!-- ******************************* END HEADER *********************************** -->
+
+
+	<!-- ***************************** BEGIN PAGE CONTENT *********************************** -->
+
+	<tr>
+	<td valign=top align=left>
+
+	<td valign=top align=left>
+
+	<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+	  <tbody>
+	    <tr>
+	      <td align="justify" bgcolor="" >
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="global/styles.css">
+</head>
+
+
+<h2>Latest News</h2>
+<ul>
+<li><font color="red"><b>10-13-10</b>: EMA is now available from the
+  <a href=http://cran.r-project.org/ target=_blank>Comprehensive R Archive Network (CRAN)</a>.<br></font>
+<li><font color="red"><b>10-01-10</b>: The version 1.2 of EMA is now
+  released ! Look at the bugs report for more details.<br></font>
+</ul>
+
+</html> 
+<hr>
+	      <a NAME="introduction"></a>
+	      <h2>&nbsp;Introduction</h2>
+   Microarrays are widely used to assess mRNA expression profiles on a genome-wide scale, producing a large amount of data. 
+The analysis of these data can be confusing for non specialist users due to the increasing number of methodologies and tools currently available.<br>
+Based on the experience of biostatisticians of Institut Curie, we propose both a clear analysis protocol and the tools to investigate the data. It provides a useful starting point for many microarrays users.<br>
+The most usual and relevant existing R functions were discussed, validated and gathered in an easy-to-use R package (EMA) devoted to Affymetrix GeneChip analysis. These functions were improved in order to facilitate use, visualization and interpretation of results.
+The current version of EMA offers an entire analysis strategy including : 
+	      <ul>
+	      <li>Normalisation of Affymetrix arrays
+	      <li>Exploratory analysis (Clustering, Principal Component Analysis, Exploratory plots)
+		<li>Differential Analysis (Student-based tests, SAM, ANOVA, linear model, Gene Set Analysis)
+		<li>Supervised classification (See the CMA package)
+		<li>Functional analysis (Gene Ontology)
+		<li>Censored data exploration
+	      </ul>
+	      <br>
+	<p>More information is available:
+	<ul>
+<!--
+	<li><a href="docs/ServantGravier_EMA_2010.pdf">EMA paper</a>
+-->	
+	<li><a href="docs/EMA_vignette_bmc.pdf">EMA vignette</a>
+	</ul>
+
+
+	      <a NAME="downloads"></a>
+	      <hr>
+	      <h2>&nbsp;Downloads</h2>
+	      For R version 2.11 :<br>
+	      <ul>
+	       <li>Linux version : <a href="src/EMA_1.2.tar.gz">EMA_1.2.tar.gz</a>
+	       <li>Windows version : <a href="src/EMA_1.2.zip">EMA_1.2.zip</a>
+	       <li>Bugs report from v1.1 to v1.2 : <a href="docs/bugs_report_EMA1.2.txt">bugs_report_EMA1.2.txt</a>
+	      </ul>
+	      Old versions :
+	      <ul>
+	      Linux version : <br>
+	      <li><a href="src/EMA_1.1.tar.gz">EMA_1.1.tar.gz</a>
+	      <li><a href="src/EMA_1.0.tar.gz">EMA_1.0.tar.gz</a>
+	      <br><br>Windows version : <br>
+	      <li><a href="src/EMA_1.1.zip">EMA_1.1.zip</a>
+	      <li><a href="src/EMA_1.0.zip">EMA_1.0.zip</a>
+	      </ul>
+
+	      <a NAME="documentation"></a>
+	      <hr>
+	      <h2>&nbsp;Documentation</h2>
+	      
+	      <h3>Installation</h3>
+The EMA package is linked to many other CRAN and BioConductor
+packages. Some of the existing functions were extended or
+re-implemented in a easy-to-use way.<br>
+the follwing packages are required for the EMA installation :
+<ul>
+<li>cluster
+<li>Hmisc
+<li>heatmap.plus
+<li>FactoMineR
+<li>GOstats
+<li>survival
+<li>multtest
+<li>affy
+<li>gcrma
+<li>rgl
+<li>GSA
+<li>RankProd
+<li>siggenes
+<li>MASS
+<li>hgu133plus2.db
+<li>xtable
+<li>biomaRt
+</ul>
+
+If you have some errors during dependencies installation, try :<br>
+<table bgcolor="lightgray">
+<tr><td>
+##CRAN packages<br>
+>install.packages(c("GSA","cluster","Hmisc","heatmap.plus","FactoMineR","survival","multtest","rgl", "MASS"))
+</td></tr><tr><td>
+##BioC packages<br>
+>source("http://bioconductor.org/biocLite.R")<br>
+</td></tr><tr><td>
+>biocLite(c("hgu133plus2.db","GOstats","affy","gcrma","RankProd","siggenes","biomaRt", "xtable"))
+</td></tr></table>
+
+
+	      <h3>Help</h3>
+
+The help pages of all the EMA function are available <a
+	      href="docs/html/00Index.html" target=_blank>here.</a>
+	      <a NAME="contacts"></a>
+	      <hr>
+	      <h2>&nbsp;Contacts</h2>
+
+		  <p>The members of the EMA working group are pleased to answer any question or address any concerns you may have with the EMA package. Please send your
+		  request at :
+		<ul>
+		 <li><A HREF="mailto:ema-package@curie.fr">ema-package@curie.fr</A>
+		 </ul>
+
+	      <hr>
+	      <h2>&nbsp;Acknowledgements</h2>
+	      <p>We thank all the persons involved in this project (P. Neuvial, S. Carpentier, J. Trolet, F. Valet) as well as the members of the ABCIS methodology group for their collaboration and fruitful discussions.<br>
+This work was supported by a grant from the Institut Curie "PIC Bioinformatique et Biostatistique" incentive and collaborative program.             
+
+	      </td>
+	</tr>
+	</tbody>
+
+</table>
+
+
+
+    	<td valign=top align="left">
+	<UL>
+	  <font face="Arial" size="-1">
+	<LI><A HREF="#introduction">Introduction</A>
+	<LI><A HREF="#downloads">Documentation</A>
+	<LI><A HREF="#documentation">Download</A>
+	<LI><A HREF="#contacts">Contacts</A>
+    	</UL>
+	</font>
+</table>
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<P align=right >
+	<FONT SIZE="-1">
+	Last modified: July 28 2010</FONT>
+
+	</P>
+	</td>
+    <td bgcolor="#E8F4F2">&nbsp;</td>
+  </tr>
+
+</table>
+</body>
+</html>

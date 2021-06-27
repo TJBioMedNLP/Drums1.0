@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Position dependencies in transcription factor binding sites</title>
+</head>
+<body bgcolor="#d9ffff" text="#000000" link="#0000ff" vlink="#800080" alink="#ff0000">
+
+
+<div style="MARGIN: 1em auto; FONT: 11px arial,sans-serif; TEXT-ALIGN: center"><font face="Arial" color="#000000" size="2">
+<div>
+<TABLE height="20%" cellSpacing=2 cellPadding=2 width="100%" bgColor=#ffffff 
+border=0>
+  
+  <TR>
+    <TD bgColor=#0077b0 width = "15%" ><A href="http://www.fmi.ch/"><IMG 
+       height="100%" width="100%" 
+      alt="" src="logo.gif" 
+      border=0></A>
+    </td><td bgColor=#0077a0>  <FONT color=#ffffff size=5><strong>Position dependencies in transcription 
+      factor binding sites<br><FONT 
+      size=2>Andrija Tomovic and Edward J. 
+  Oakeley</td></FONT><BR></STRONG></FONT></FONT></FONT></TD></TR></TBODY></TABLE></DIV></FONT></DIV>
+
+      
+      <h3> Implementation of new scoring function S'<font size=2>new</font></h3>
+       Described in the paper: <A href="http://bioinformatics.oxfordjournals.org/cgi/content/short/23/8/933">
+	<b>A. Tomovic, E. J. Oakeley - <I>Position Dependencies in Transcription Factor Binding Sites</B></I></A>
+      <br>(Supplemental materials: <A href="./SupMat/1.pdf">1</A>,<A href="./SupMat/2.xls"> 2</A>,<A href="./SupMat/3.xls"> 3</A>,
+      <a href="./SupMat/4.xls"> 4</a>,<a href="./SupMat/5.pdf"> 5</a>,<a href="./SupMat/6.xls"> 6</a>,
+      <a href="./SupMat/7.xls"> 7</a> and <a href="./SupMat/8.pdf">8</a> for the paper)
+	
+<form action="./recognition1.exe" method="POST" enctype="multipart/form-data">
+      Select transcription factor name(s) and/or species-family:<br> 
+       <a href="http://mordor.cgb.ki.se/cgi-bin/jaspar2005/jaspar_db.pl">transcription factor names:</a>  &nbsp; &nbsp; &nbsp; species families:<br>
+
+     <SELECT name= "MatrixIDs" multiple size=4> 
+    <option VALUE="MA0001,AGL3">AGL3
+     <option VALUE="MA0002,RUNX1">RUNX1
+     <option VALUE="MA0004,ARNT">ARNT
+     <option VALUE="MA0005,AGAMOUS">AGAMOUS
+     <option VALUE="MA0006,ARNT-AHR">ARNT-AHR
+     <option VALUE="MA0007,AR">AR
+     <option VALUE="MA0008,ATHB-1">ATHB-1
+     <option VALUE="MA0009,T-BOX">T-BOX
+     <option VALUE="MA0010,BROAD-COMPLEX_1">BROAD-COMPLEX_1
+     <option VALUE="MA0011,BROAD-COMPLEX_2">BROAD-COMPLEX_2 
+     <option VALUE="MA0012,BROAD-COMPLEX_3">BROAD-COMPLEX_3
+     <option VALUE="MA0013,BROAD-COMPLEX_4">BROAD-COMPLEX_4
+     <option VALUE="MA0014,PAX5">PAX5
+     <option VALUE="MA0015,CF2-II">CF2-II
+     <option VALUE="MA0016,CFI-USP">CFI-USP
+     <option VALUE="MA0017,NR2F1">NR2F1
+     <option VALUE="MA0018,CREB1">CREB1
+     <option VALUE="MA0019,CHOP-CEBP">CHOP-CEBP
+     <option VALUE="MA0020,DOF2">DOF2
+     <option VALUE="MA0021,DOF3">DOF3 
+     <option VALUE="MA0022,DORSAL_1">DORSAL_1
+     <option VALUE="MA0023,DORSAL_2">DORSAL_2
+     <option VALUE="MA0024,E2F1">E2F1
+     <option VALUE="MA0025,NFIL3">NFIL3
+     <option VALUE="MA0026,E74A">E74A
+     <option VALUE="MA0027,EN1">EN1
+     <option VALUE="MA0028,ELK1">ELK1
+     <option VALUE="MA0029,EVI1">EVI1
+     <option VALUE="MA0031,FOXD1">FOXD1
+     <option VALUE="MA0034,GAMYB">GAMYB 
+     <option VALUE="MA0036,GATA2">GATA2
+     <option VALUE="MA0037,GATA3">GATA3
+     <option VALUE="MA0038,GFI">GFI
+     <option VALUE="MA0040,FOXQ1">FOXQ1
+     <option VALUE="MA0041,FOXD3">FOXD3
+     <option VALUE="MA0043,HLF">HLF
+     <option VALUE="MA0044,HMG-1">HMG-1
+     <option VALUE="MA0045,HMG-IY">HMG-IY
+     <option VALUE="MA0046,TCF1">TCF1
+     <option VALUE="MA0047,FOXA2">FOXA2 
+     <option VALUE="MA0048,NHLH1">NHLH1
+     <option VALUE="MA0049,HUNCHBACK">HUNCHBACK
+     <option VALUE="MA0051,IRF2">IRF2
+     <option VALUE="MA0052,MEF2A">MEF2A
+     <option VALUE="MA0053,MNB1A">MNB1A
+     <option VALUE="MA0054,MYB-PH3">MYB-PH3
+     <option VALUE="MA0056,ZNF42_1-4">ZNF42_1-4
+     <option VALUE="MA0057,ZNF42_5-13">ZNF42_5-13
+     <option VALUE="MA0058,MAX">MAX
+     <option VALUE="MA0059,MYC-MAX">MYC-MAX
+     <option VALUE="MA0060,NF-Y">NF-Y
+     <option VALUE="MA0061,NF-KAPPAB">NF-KAPPAB
+     <option VALUE="MA0062,GABPA">GABPA
+     <option VALUE="MA0063,NKX2-5">NKX2-5
+     <option VALUE="MA0064,PBF">PBF 
+     <option VALUE="MA0065,PPARG-RXRA">PPARG-RXRA
+     <option VALUE="MA0066,PPARG">PPARG
+     <option VALUE="MA0067,PAX2">PAX2
+     <option VALUE="MA0069,PAX6">PAX6
+     <option VALUE="MA0070,PBX">PBX
+     <option VALUE="MA0071,RORA">RORA
+     <option VALUE="MA0072,RORA1">RORA1
+     <option VALUE="MA0073,RREB1">RREB1
+     <option VALUE="MA0074,RXR-VDR">RXR-VDR
+     <option VALUE="MA0075,PRRX2">PRRX2
+     <option VALUE="MA0076,ELK4">ELK4
+     <option VALUE="MA0077,SOX9">SOX9
+     <option VALUE="MA0078,SOX17">SOX17
+     <option VALUE="MA0079,SP1">SP1
+     <option VALUE="MA0080,SPI1">SPI1
+     <option VALUE="MA0081,SPIB">SPIB
+     <option VALUE="MA0082,SQUA">SQUA
+     <option VALUE="MA0083,SRF">SRF
+     <option VALUE="MA0084,SRY">SRY
+     <option VALUE="MA0085,SU_H">SU_H
+     <option VALUE="MA0086,SNAIL">SNAIL
+     <option VALUE="MA0087,SOX5">SOX5
+     <option VALUE="MA0088,STAF">STAF
+     <option VALUE="MA0089,TCF11-MAFG">TCF11-MAFG
+     <option VALUE="MA0091,TAL1-TCF3">TAL1-TCF3
+     <option VALUE="MA0092,HAND-TCF3">HAND1-TCF3
+     <option VALUE="MA0093,USF1">USF1
+     <option VALUE="MA0094,UBX">UBX
+     <option VALUE="MA0095,YY1">YY1
+     <option VALUE="MA0096,BZIP910">BZIP910
+     <option VALUE="MA0097,BZIP911">BZIP911
+     <option VALUE="MA0098,C-ETS">C-ETS
+     <option VALUE="MA0101,REL">REL
+     <option VALUE="MA0102,CEBP">CEBP
+     <option VALUE="MA0103,DELTAEF1">DELTAEF1
+     <option VALUE="MA0104,MYCN">MYCN
+     <option VALUE="MA0105,NFKB1">NFKB1 
+     <option VALUE="MA0106,TP53">TP53
+     <option VALUE="MA0107,RELA">RELA
+     <option VALUE="MA0111,SPZ1">SPZ1
+     <option VALUE="MA0112,ESR1">ESR1
+     <option VALUE="MA0113,NR3C1">NR3C1
+     <option VALUE="MA0114,HNF4">HNF4
+     <option VALUE="MA0115,NR1H2-RXR">NR1H2-RXR
+     <option VALUE="MA0116,ROAZ">ROAZ
+     <option VALUE="MA0117,MAFB">MAFB
+     <option VALUE="MA0118,MACHO-1">MACHO-1 
+     <option VALUE="MA0119,HOX11-CTF1">HOX11-CTF1
+     <option VALUE="MA0120,ID1">ID1
+     <option VALUE="MA0121,ARR10">ARR10
+     <option VALUE="MA0122,BAPX1">BAPX1
+     <option VALUE="MA0123,ABI4">ABI4
+    </select>
+    &nbsp;&nbsp;
+    &nbsp;
+    &nbsp;
+     <SELECT name= "MatrixIDF" multiple size=4> 
+    <option VALUE="PLANTS">PLANTS
+     <option VALUE="INSECTS">INSECTS
+     <option VALUE="VERTEBRATES">VERTEBRATES
+     <option VALUE="ALL">ALL
+     </select>
+
+      
+      <br><br>
+      Paste your sequence(s) in fasta format: <br>
+      <textarea name="sequence" rows="13" cols="75"></textarea>
+     <br> <br>
+
+      <input type="radio" name="strand" checked="checked" value ="1">Scan single strand <input type="radio" name="strand" value="2">Scan both strands <br>
+      Treshold value (between 0.0 and 1.0) T: <input type="text" name="treshold" value="0.8" size=3><br>
+        (<font size=4> T<0.7 <font size=3>not recommended;<font size=4> 0.7<=T<0.8 <font size=3>low stringency;<font size=4> 0.8<=T<0.9 <font size=3>medium stringency (recommended);<font size=4> 0.9<=T<font size=3> high stringency)<br><br>
+            <input type="submit" value = "Scan"><p> <input type="reset" value="Reset!">
+</form>  
+<!-- Start of eWebCounter Code -->
+<script type="text/javascript" language="javascript">
+var wc_project=60581;
+var wc_version=1;
+var wc_graphic=0;
+</script>
+<script type="text/javascript" language="javascript" src="http://www.ewebcounter.com/include/track.js"></script>
+<noscript><a href="http://www.ewebcounter.com/" target="_blank"><img src="http://www.ewebcounter.com/track.jsp?project_id=60581&java=0" alt="Website Monitoring" border="0"></a></noscript>
+<!-- End of eWebCounter Code -->
+</body>
+</html>
+

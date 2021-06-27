@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <title>BIOADI - Biomedical Abbreivation Definition Identifier</title>
+  <link rel="stylesheet" href="css/main.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+  <link rel="shortcut icon" href="favicon.ico">
+<!-- Google Analytic -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1011685-9");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<!-- /Google Analytic -->
+<script language="JavaScript" type="text/javascript">
+
+var target_link = './query.jsp';
+
+function loadmouse()
+{
+
+  //if (window.Event) {
+  //  document.captureEvents(Event.MOUSEMOVE);
+  //}
+  document.onmousemove = getXY;
+  //document.onmousedown = alert('Browser:'+navigator.appName);
+}
+
+// Detect if the browser is IE or not.
+// If it is not IE, we assume that the browser is NS.
+//var IE = document.all?true:false;
+// If NS -- that is, !IE -- then set up for mouse capture
+//if (!IE) document.captureEvents(Event.MOUSEMOVE);
+
+function getXY(e) {
+  if(document.all?true:false){
+     var de = document.documentElement;
+     var b = document.body;
+     x = event.clientX + (de.scrollLeft || b.scrollLeft) - (de.clientLeft || 0);
+     y = event.clientY + (de.scrollTop || b.scrollTop) - (de.clientTop || 0);
+  //x = event.clientX + document.body.scrollLeft;
+  //y = event.clientY + document.body.scrollTop;
+  }else{
+     x = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft) - (document.documentElement.clientLeft || 0);
+     y = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop || document.body.scrollTop) - (document.documentElement.clientTop || 0);
+  }
+  document.getElementById('mx').value = x;
+  document.getElementById('my').value = y;
+  //alert(x+','+y);
+}
+
+function creatediv(x,y,text,number,t) {
+   removediv('box');
+   //alert('Browser'+BrowserDetect.browser);
+   //alert(x+','+y);
+   var newdiv = document.createElement('div');
+   newdiv.setAttribute('id', 'box');
+   //newdiv.style.width = "150px";
+   //newdiv.style.height = "200px";
+   newdiv.style.position = "absolute";
+   //newdiv.style.left = x + "px";
+   var new_x = parseInt(x) + 10;
+   newdiv.style.left = new_x + "px";
+   newdiv.style.top = y + "px";
+   //alert('x='+document.getElementById('box').style.left+':y='+document.getElementById('box').style.top);
+   //alert('x='+x+':y='+y);
+   newdiv.style.background = "#FFFFFF";
+   newdiv.style.border = "1px solid #000000";
+   
+   var sAgent = navigator.userAgent.toLowerCase();
+   if(sAgent.indexOf("msie")!=-1){
+      newdiv.style.filter = "alpha(opacity=80)";
+   }else{
+      newdiv.style.opacity = "0.8";
+   }
+
+   //text = text.replace(/\,/g,"</td><tr><td>");
+   text = text.replace(/\,/g,"</a></td><tr><td><a onclick=\"ss(2,this.parentNode.childNodes[0].innerHTML);\">");
+   
+   text = text.replace(/\.\.\.\(\( more \)\)/,"<a id =\"more\" onclick=\"fetchpmid("+number+","+t+");\" alt=\"Show All PubMed IDs\">...((more))</a>");
+   //newdiv.innerHTML = "<table id=hor-minimalist-ap><tr><th onclick=\"fetchpmid("+number+","+t+");\" alt=\"Show All PubMed IDs\">PubMed Resource</th></tr><tr><td>" + text + "</tr></table>";
+   newdiv.innerHTML = "<table id=hor-minimalist-ap><tr><th onclick=\"fetchpmid("+number+","+t+");\" alt=\"Show All PubMed IDs\">PubMed Resource</th></tr><tr><td><a onclick=\"ss(2,this.parentNode.childNodes[0].innerHTML);\">" + text + "</td></tr></table>";
+   document.body.appendChild(newdiv);
+}
+
+function fetchpmid(number,t){
+   window.open('fetchpmid.jsp?number='+number+'&T='+t+'&W='+document.getElementById('SK').value);
+}
+function removediv(p) {
+   if(document.getElementById(p)){
+      document.body.removeChild(document.getElementById(p));
+   }
+   if(document.getElementById(p)){
+      document.body.removeChild(document.getElementById(p));
+   }
+}
+
+function hitpmid(){
+    //if(document.getElementById('W').value){
+       document.getElementById('W').value = '';
+       //document.getElementById('Search').value = '';
+       document.getElementById('W').innerText = '';
+       //document.getElementById('Search').innerText = '';
+    //}
+}
+function hitquery(){
+    //if(document.getElementById('WP').value){
+       document.getElementById('WP').value = '';
+       //document.getElementById('Search').value = '';
+    //}
+}
+function hitsearch(){
+    //if(document.getElementById('Search').value){
+       //document.getElementById('WP').value = '';
+       //document.getElementById('W').value = '';
+    //}
+}
+function keypress(e,who){
+   var keycode;
+   if(window.event) // IE
+   {keycode = e.keyCode;}
+   else if(e.which) // Netscape/Firefox/Opera
+   {keycode = e.which;}
+   
+   if (keycode == 13){
+      ss(who,1);
+   }else{
+      return 1;
+   }
+}
+function fetch(f,who){
+    removediv('box');
+	getURL(f,'',who);
+}
+
+
+function ss(i,p)
+{
+   removediv('box');
+   if(i == 1){
+   //if(Empty(document.getElementById('Search').value) == 0){
+      document.getElementById('Search').value = document.getElementById('Search').value.replace(/[\n \f \r \&]/g," ");
+      document.getElementById('Search').value = document.getElementById('Search').value.replace(/[′‘’『』']/g," ");
+      document.getElementById('Search').value = document.getElementById('Search').value.replace(/[〝〞]/g,"\"");
+      document.getElementById('SK').value = document.getElementById('Search').value;
+      getURL('search.jsp', 'W='+document.getElementById('Search').value+'&P='+p+'&type='+document.getElementById('abtype').value,"result");
+      return 0;
+   }
+   if(i == 2){
+      getURL(target_link, 'pmid='+p,"result");
+      return 0;
+   }
+   if(document.getElementById('WP').value > 0){
+      //alert('going to pmid '+document.getElementById('WP').value);
+      getURL(target_link, 'pmid='+document.getElementById('WP').value,"result");
+   }else{
+      if(!document.getElementById('W').value){
+         alert('No input sentences or illegal PubMed ID');
+         return 0;
+      }
+      document.getElementById('W').value = document.getElementById('W').value.replace(/[\n \f \r \&]/g," ");
+      document.getElementById('W').value = document.getElementById('W').value.replace(/[′‘’『』]/g,"'");
+      document.getElementById('W').value = document.getElementById('W').value.replace(/[〝〞]/g,"\"");
+
+      //alert('Query='+document.getElementById('W').value);
+      getURL(target_link, 'query='+document.getElementById('W').value,"result");
+   }
+}
+
+function getURL(url,params,who)
+{
+
+	//alert("[url]="+url+"\nbefore="+params);
+	   params=encodeURI(params);
+	//alert("after="+params);   
+	   document.getElementById('result').style.visibility = "visible";
+	   document.getElementById('result').innerHTML="<p align=\"center\"><img src=\"./i/ajax-loader.gif\"></p>";
+        var httpRequest;
+        if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+            //alert('Mozilla, Safari, ...');
+            httpRequest = new XMLHttpRequest();
+            if (httpRequest.overrideMimeType) {
+                httpRequest.overrideMimeType('text/xml');
+                // See note below about this line
+            }
+        } 
+        else if (window.ActiveXObject) { // IE
+            //alert('IE');
+            try {
+                httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+                } 
+                catch (e) {
+                           try {
+                                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                               } 
+                             catch (e) {}
+                          }
+                                       }
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = function() { alertContents(httpRequest,who);};
+        httpRequest.open('POST', url, true);
+        //alert('length='+params.length);
+        //httpRequest.setRequestHeader("Content-type", "text/xml");
+        httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        //httpRequest.setRequestHeader("Content-length", params.length);
+        //httpRequest.setRequestHeader("Connection", "close");
+        httpRequest.send(params);
+
+}
+
+function alertContents(httpRequest,who)
+{
+        if (httpRequest.readyState == 4) {
+            if (httpRequest.status == 200) {
+                //alert(httpRequest.responseText);
+		pageTracker._trackPageview("/index.html");
+                Parse(httpRequest.responseText,who);
+            } else {
+                alert('There was a problem with the request.('+httpRequest.status+')');
+                document.getElementById('result').innerHTML = "";
+            }
+        }
+}
+
+//var Doc;
+function ToParse(textDoc,who)
+{
+   //textDoc = textDoc.replace(/[\n,\f,\r]/g,"");
+   //alert('result=['+textDoc+']');
+   Doc = textDoc;
+   //alert('parsing data');
+   //setTimeout("Parse()",500);
+   Parse(Doc,who);
+}
+function Empty(mytext)
+{
+	//var re = /^\s{1,}$/g; //match any white space including space, tab, form-feed, etc.
+    var re = /\w/g;
+	if (mytext.search(re) == -1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+function Parse(Doc, who)
+{
+   if(Empty(Doc) == 1){
+      Doc = "No Result!";
+   }
+   //alert('result='+Doc);
+   //if(Doc.indexOf('<div id="result">') > -1){
+   //   alert(Doc);
+   //   Doc = Doc.replace('result','testtable');
+   //   alert(Doc);
+   //   //Doc = Doc.replace(/result/,"test");
+   //}
+   document.getElementById(who).innerHTML=Doc;
+}
+function checkimg(aa)
+{
+//alert('childnodes[1]='+aa.childNodes[0].innerHTML);
+//aa.lastChild.innerHTML='<img src=\"i/checkmark.gif\" width=40 heigh=40>';
+//aa.lastChild.innerHTML='<img src=\"i/checkmark.gif\" width=40 heigh=40>';
+}
+</script>
+</head>
+
+<body onload="fetch('./text/db_service.txt','content');fetch('./text/footer.txt','footer');loadmouse();">
+	<input type="hidden" id="mx">
+    <input type="hidden" id="my">
+    <input type="hidden" id="SK">
+<!-- Container -->
+<div id="container">
+
+	<!-- Header -->
+	<div id="header">
+	    <div id="logo" style="cursor:pointer" onclick="location.reload()">
+			<h2>BIOADI<span></span></h2>
+			<p><u>Bio</u>medical <u>A</u>bbreviation <u>D</u>efinition <u>I</u>dentifier</p>
+		</div>
+	</div>
+	<!-- /Header -->
+	<!-- Navigation -->
+	<div id="navigation">
+		<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+		    <ul>
+		        <li><a onclick="fetch('./text/db_service.txt','content')">
+				SF-LF Search</a></li>
+		        <li><a onclick="fetch('./text/ar_service.txt','content')">
+				SF-LF Identification</a></li>
+		        <li><a onclick="fetch('./text/manual.txt','content')">
+				User Manual</a></li>
+		        <li><a onclick="fetch('./text/blog.txt','content')">
+				Blog</a></li>
+		        <li><a onclick="fetch('./text/download.txt','content')">
+				Download</a></li>
+		        <li><a onclick="fetch('./text/sidebar.txt','content');">
+				Contacts</a></li>
+		    </ul>
+		<div class="clear"></div>
+		<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+	</div>
+	<!-- /Navigation -->
+	<!-- Content -->
+	<div id="content">
+		<div id="result">
+		</div>
+	</div>
+	<!-- /Content -->
+	<!-- Sidebar -->
+	<div id="sidebar">
+	</div>
+	<!-- /Sidebar -->
+<!-- Footer -->
+<div id="footer2">	
+</div>
+<!-- /Footer -->
+</div>
+<!-- /Container -->
+<!-- Footer -->
+<div id="footer">	
+</div>
+<!-- /Footer -->
+
+</body>
+</html>

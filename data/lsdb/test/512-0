@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="description" content="ConoServer is a comprehensive database of toxins isolated from Cone snails. The database provide annotated information on nucleic acid sequences, protein sequences and 3D structures. It tracks known cysteins frameworks, genetic superfamily and pharmacological families."/>
+	<meta http-equiv="keywords" content="ConoServer, cone snail, cone snail toxin, conopeptide, conotoxin, conophan, contryphan, conantokin, conolysin, conopressin, conomarphin, conorfamide, contulakin, David Craik, Quentin Kaas, Jan-Chritophe Westermann"/>
+	<title>ConoServer</title>
+	<link rel="StyleSheet" href="index.css" type="text/css">
+
+	<link rel="stylesheet" href="lightbox.css" type="text/css" media="screen" />
+	<script src="js/prototype.js" type="text/javascript"></script>
+	<script src="js/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
+	<script src="js/lightbox.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+<script>
+function SelectValue(selectid,value) {
+	var i;
+	var select = document.getElementById(selectid);
+	for(i = 0; i < select.options.length; i++) {
+		if (select.options[i].value == value) {
+			select.options[i].selected= true;
+		} else {
+			select.options[i].selected= false;
+		}
+	}
+}
+</script>
+
+
+<div id='globalcontainer'>
+
+<div id='pagehead'>
+	<a href="index.php">
+		<img src="images/banner.png" alt="The Database of contoxins" class='expl'/>
+	</a>
+	<div id='quicksearch'><form>
+<input type='text'   name='text' size='30'\>
+<input type='hidden' name='textfield' value='All fields'\>
+<input type='hidden' name='page' value='list'\>
+<select name="table">
+        <option value='protein'>Protein</option>
+        <option value='nucleicacid'>Nucleic acids</option>
+        <option value='structure'>3D structure</option>
+</select>
+<input type='checkbox' name='exactsearch' value='1'\>
+exact match
+<input type='submit' value='Search'\>
+
+</form>
+</div>
+</div>
+
+<div id='menu'>
+	<div class='submenu'>
+		<img src='images/menu_top.png'/>
+		<h1><a href='?page=welcome'>Welcome</a></h1>
+		<div class='element'><a href='?page=about_conotoxins'>About conopeptides</a></div>
+		<div class='element'><a href='?page=about_conoserver'>About ConoServer</a></div>
+		<div class='element'><a href='?page=about_us'>About us</a></div>
+		<div class='element'><a href='?page=links'>Links</a></div>
+		<div class='element'><a href='?page=list&table=reference&listonly=1'>References</a></div>
+		<div class='element'><a href='?page=stats'>Statistics</a></div>
+		<img src='images/menu_bottom.png'/>
+	</div>
+	<div class='submenu'>
+		<img src='images/menu_top.png'/>
+		<h1><a href='?page=list&table=nucleicacid'>Nucleic acids</a></h1>
+		<div class='element'><a href='?page=search&table=nucleicacid'>Search</a></div>
+		<div class='element'><a href='?page=primermatch'>Primer Match</a></div>
+		<img src='images/menu_bottom.png'/>
+	</div>
+	<div class='submenu'>
+		<img src='images/menu_top.png'/>
+		<h1><a href='?page=list&table=protein'>Proteins</a></h1>
+		<div class='element'><a href='?page=list&table=protein&fields%5B%5D=Sequence'>Sequences</a></div>
+		<div class='element'><a href='?page=search&table=protein'>Search</a></div>
+		<div class='subsubmenu'>
+			<a href='?page=fingerprint'>Fingerprint Search</a>
+		</div>
+		<div class='element'><a href='?page=clustal'>Clustal Alignment</a></div>
+		<div class='element'><a href='?page=digest'>Digest Peptide</a></div>
+		<div class='element'><a href='?page=anaproseq'>Analyse prosequence</a></div>
+		<img src='images/menu_bottom.png'/>
+	</div>
+	<div class='submenu'>
+		<img src='images/menu_top.png'/>
+		<h1><a href='?page=list&table=structure'>Structures</a></h1>
+		<div class='element'><a href='?page=search&table=structure'>Search</a></div>
+		<img src='images/menu_bottom.png'/>
+	</div>
+</div>
+
+<div id='main'>
+
+
+	<h1>Welcome to ConoServer</h1>
+	
+	Predatory marine cone snails use a diverse mixture of peptides known as conopeptides
+	in the capture of their prey. A fascinating feature of these peptides is their
+	high specificity and affinity towards human ion channels, receptors and transporters
+	in the nervous system. This makes conopeptides an interesting resource in the
+	research of neuroreceptors and promising drug leads.
+	
+	This site features a comprehensive repository of peptides isolated from the 
+	venom glands of snail from the Conus genus. 
+	<p>In order to track the vast number of different frameworks and
+	novel peptide sequences that have been characterized this website
+	presents a database of conotoxin peptide sequences and structures.</p>
+
+	<div class='imgWcap'>
+	<img src="images/intro.png" alt="Conotoxin examples"/>
+	<p>Some examples of peptides from various cone snails (from left to right):
+	<a href="index.php?page=card&table=protein&id=1376">ConKunitzin-S1</a> (C. striatus, pdb: 1y62), M1-type conotoxin <a href="index.php?page=card&table=protein&id=2697">MrIIIE </a> (C. marmoreus, pdb: 2efz),
+	&omega;-conotxin <a href="index.php?page=card&table=protein&id=1386">MVIIA</a> (C. magus, pdb: 1ttk) and &alpha;-conotxin <a href="index.php?page=card&table=protein&id=4">Vc1.1</a> (C.victoriae, pdb: 2h8s) .</p>
+	</div>
+	
+	<h2>Statistics Table (generated on Friday 04th of March 2011)</h2>
+	<table id='statisticstable'>
+	<colgroup></colgroup>
+	<colgroup class='numbers' span='3'></colgroup>
+	<tr>
+		<td></td>
+		<th>Number of Entries</th>
+		<th>Species Coverage</th>
+		<th>Links to UniProt, Genbank or PDB</th>
+	</tr><tr>
+		<th>Proteins</th>
+		<td>3660</td>
+		<td>87</td>
+		<td>3533</td>
+	</tr><tr>
+		<th>Nucleotides</th>
+		<td>1819</td>
+		<td>68</td>
+		<td>1815</td>
+	</tr><tr>
+		<th>Structures</th>
+		<td>131</td>
+		<td>23</td>
+		<td>131</td>
+	</tr>
+	</table>
+
+	<a style='float:right; padding-right:25px;' href='index.php?page=stats'>more statistics...</a>
+
+	
+</div>
+<div id='foot'>
+<hr id='foothr'/>
+<u>Please cite</u>: Kaas Q, Westermann JC, Halai R, Wang CK and Craik DJ. <a href='http://www.ncbi.nlm.nih.gov/pubmed/18065428?ordinalpos=2&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum'>ConoServer, a database for conopeptide sequences and structures.</a> <i>Bioinformatics</i> (2008) <b>24</b>(3):445-6
+<p>
+ConoServer is managed at the Institute of Molecular Bioscience <a href='http://imb.uq.edu.au/'>IMB</a>, Brisbane, Australia.
+</p>
+<p>The database and computational tools found on this website may be used for academic research only, provided that it is referred to ConoServer, the database of conotoxins (http://www.conoserver.org). For any other use please contact David Craik (d.craik@imb.uq.edu.au).
+</p>
+<p>
+<img src='images/IMB_UQ_small.png' style='float:right;margin-top: 70px;'/>
+Contacts:<br/>
+<a href="mailto:d.craik@imb.uq.edu.au?subject=ConoServer">David Craik</a><br/>
+<a href="mailto:q.kaas@imb.uq.edu.au?subject=ConoServer">Quentin Kaas</a><br/>
+</p>
+<p>
+Last updated: Friday 4 March 2011</p>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+
+
+<html>
+
+<head>
+
+<title>MScanner
+</title>
+
+<link rel="stylesheet" type="text/css" href="/static/mscanner.css">
+<link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+
+
+</head>
+
+
+<body>
+
+<div id="header">
+<h1>MScanner</h1>
+<p style="margin:0">Rapid statistical classification on the Medline database of biomedical literature</p>
+</div>
+
+<div id="topmenu">
+  <table>
+    <tr>
+      <td>
+        <a href="/">1. Introduction</a>
+      </td>
+      <td>
+        <a href="/query">2. Submit a Task</a>
+      </td>
+      <td>
+        <a href="/status">3. Monitor Status</a>
+      </td>
+      <td>
+        <a href="/output">4. View Outputs</a>
+      </td>
+      <td>
+        <a href="/contact">5. Contact Us</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="contents">
+<div class="narrow" style="margin:clear;font-size:large;">
+
+
+<p>Please see the <a href="static/thesis.pdf">masters thesis</a> for 
+detailed information about the classifier.  The background chapter also
+provides a readable introduction to text classification.</a>
+
+<p>To use the service, just paste a list of <em>PubMed IDs</em>
+into the input box on the <a href="query">submit a task</a>  page.  There is a <q>Help</q> button for each of the 
+advanced options, but the defaults should be fine.  <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=PubMed">PubMed</a> is
+a search engine for Medline.  This is a classifier, which learns
+what a topic looks like from the examples provided, to 
+distinguish relevant Medline records from irrelevant ones.  This
+is useful for curating biomedical databases (where hundreds of
+examples are available, having been used to curate database entries), and
+also to expand collections of citations.</p>
+
+<p>The more examples the better. In fact, using only one example will often 
+return zero results: it specifies a very narrow topic, and it is unlikely 
+for anything in Medline to share enough features with the example to have a positive
+score.  We recommend using the Related Articles feature found on 
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=PubMed">PubMed</a> 
+if you have just one
+example: it finds the most similar records in PubMed.  You may
+however set the score threshold down to -500 instead of zero to return
+even the negative-scoring results from the classifier.</p>
+
+<p>After clicking <q>submit</q> you will be taken to
+the <a
+href="status">status</a> page to monitor the progress of the task, until a
+link to the results appears on the <a href="output">output</a> page.  Filtering
+Medline takes roughly 90 seconds when using MeSH terms, and about 3 minutes
+if title/abstract words are included.  At the bottom of the page,
+you can see results for the filtering and cross validation runs
+in the MScanner publication.  To evaluate MScanner's performance using
+cross validation, you will need at least 30 PubMed IDs (see results on
+sample topics below).</p>
+
+<p>Download the <a href="static/mscanner-20080413.zip">latest source code
+archive</a>. HTML documentation of the MScanner API is included. MScanner is
+released under the <a href="http://www.gnu.org/licenses">GNU General Public
+License</a>.</p>
+
+<p>This site was tested with <a
+href="http://www.mozilla.com/firefox/">Mozilla Firefox 2</a>, <a
+href="http://www.microsoft.com/windows/downloads/ie/getitnow.mspx">Internet
+Explorer 7</a>, <a href="http://www.apple.com/safari/download/">Safari 3</a>
+and <a href="http://www.opera.com/download/">Opera 9</a>.  Some features may not
+work in older browsers or with JavaScript disabled. Please <a
+href="contact">contact us</a> if you have problems.</p>
+
+<p>Below are results for the sample topics published in the MScanner paper in <a
+href="http://www.biomedcentral.com/1471-2105/9/108/abstract">BMC
+Bioinformatics</a> in February 2008.   </p>
+
+<table>
+<tr>
+<th>Training data</th><th>Results</th><th>Results</th>
+</tr>
+<tr>
+<td>PG07 (Pharmacogenetics, 1595 citations)</td>
+<td><a href="static/sample/query/pg07">retrieval</a>
+<td><a href="static/sample/valid/pg07">validation</a></td>
+</tr>
+<tr>
+<td>AIDSBio (AIDS and Bioethics, 10732 citations)</td>
+<td><a href="static/sample/query/aidsbio">retrieval</a></td>
+<td><a href="static/sample/valid/aidsbio">validation</a></td>
+</tr>
+<tr>
+<td>Radiology (splenic imaging, 67 citations)</td>
+<td><a href="static/sample/query/radiology">retrieval</a></td>
+<td><a href="static/sample/valid/radiology">validation</a></td>
+</tr>
+</table>
+ 
+</div><!--class=narrow-->
+</div>
+
+<div id="footer">
+  &copy; 2007-2008 <a href="http://graham.poulter.googlepages.com">Graham Poulter</a>
+</div>
+
+</body>
+
+</html>
+

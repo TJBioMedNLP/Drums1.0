@@ -1,0 +1,520 @@
+<!-- start header.shtml -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Mammalian Protein Localization Database</title>
+    <link REL="stylesheet" HREF="/css/style.css" TYPE="text/css">
+  </head>
+
+  <body COLOR="WHITE" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+    <link REL="stylesheet" HREF="/css/style.css" TYPE="text/css">
+
+    <table BORDER="0" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+      <tr>
+        <td CLASS="TAB" ALIGN="CENTER">
+	  <strong>
+
+	    <font SIZE="-1">
+              <a HREF="/">Home</a> - 
+              <a HREF="/advsearch.shtml">Advanced Search</a> - 
+              <a HREF="/about.shtml">About</a> -
+              <a HREF="/faq.shtml">FAQ</a> -
+              <a HREF="/contact.shtml">Contact Us</a> -
+              <a HREF="/downloads.shtml">Downloads</a> 
+            </font>
+          </strong>
+        </td>
+      </tr>
+<!--
+ <tr>
+  <td CLASS="TAB" ALIGN="CENTER">
+        <strong>
+
+        <font SIZE="-1">
+        <a HREF="http://locatemerge.imb.uq.edu.au">All Proteins</a> -
+        <a HREF="http://secretome.imb.uq.edu.au">Secretome</a> -
+        <a HREF="http://typei.imb.uq.edu.au">Type I Membrane Proteins</a> -
+        <a HREF="http://typeii.imb.uq.edu.au">Type II Membrane Proteins</a> -
+        <a HREF="http://mtmp.imb.uq.edu.au">Multipass Transmembrane Proteins</a> -
+        <a HREF="http://varmo.imb.uq.edu.au">VarMO dataset</a> 
+        </font>
+        </strong>
+
+  </td>
+ </tr>
+-->
+      <tr>
+        <td>
+          <a HREF="/"><img SRC="/images/title.png" BORDER="0" ALT="Mammalian Protein Subcellular Localization Database"></a>
+        </td>
+      </tr>
+    </table>
+
+<BR>
+
+    <table BORDER="0" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+      <tr>
+        <td>
+
+<!-- end header.shtml -->
+
+<!-- start quicksearch.shtml -->
+<!-- quicksearch does not work if it is called from the cgi level (like search.cgi) therefore I delete the function from there-->
+<FORM ACTION="cgi-bin/search.cgi" METHOD="POST">
+<TABLE BORDER="0" WIDTH="100%">
+ <TR>
+  <TD CLASS="TAB">
+   	<FONT SIZE="-1"><STRONG>&nbsp;&nbsp;Quick search: </STRONG>
+   	<INPUT TYPE="TEXT" NAME="search_term" SIZE="20" VALUE="zap*" onclick="this.value=''">
+		&nbsp;
+	<SELECT NAME="organism">
+	  <OPTION VALUE=""> Mouse + Human
+	  <OPTION VALUE="Mouse"> Mouse
+	  <OPTION VALUE="Human"> Human
+	</SELECT>   &nbsp;
+   	<INPUT TYPE="submit" VALUE="Go">
+	&nbsp;
+	[ search protein IDs, descriptions, domain IDs, domain names and locations ] <A HREF="/faq.shtml">[ HELP ]</A>
+  </TD>
+ </TR>
+</TABLE>
+</FORM>
+<!-- end quicksearch.shtml -->
+
+
+<TABLE BORDER="0" WIDTH="100%" CELLSPACING="0" CELLPADDING="0" BGCOLOR="#ABABAB" CLASS="BOX">
+  <TR>
+    <TD CLASS="TAB" VALIGN="TOP">
+      <CENTER><STRONG>Summary Statistics</STRONG></CENTER>
+      <SPAN CLASS="SMALL">
+<TABLE BORDER="0" WIDTH="100%">
+  <TR> 
+    <TD></TD><TD><STRONG>Mouse</STRONG></TD><TD><STRONG>Human</STRONG></TD>
+  </TR>
+  <TR>
+    <TD>Total proteins</TD>
+    <TD VALIGN="RIGHT">
+<!--<A HREF="cgi-bin/search.cgi?set_query=all">-->
+      58128
+<!--</A>-->
+    </TD>
+    <TD>64637</TD>
+  </TR>
+  <TR>
+    <TD>Total TUs</TD>
+    <TD>29682</TD>
+    <TD>26583</TD>
+  </TR>
+  <TR>
+    <TD>Experimental SCL</TD>
+<!--    <TD VALIGN="RIGHT">2068-->
+<TD VALIGN="RIGHT"><A HREF="cgi-bin/search.cgi?set_query=scl_exp&organism='Mouse'">2068</A>
+    </TD>
+    <TD VALIGN="RIGHT"></TD>
+  </TR>
+  <TR>
+    <TD>Literature SCL</TD><!--JS070905-->
+    <TD VALIGN="RIGHT">9268</TD> <!--select count(distinct(uid)) from literature-->
+    <TD VALIGN="RIGHT">6900</TD>
+  </TR>
+<!--<TR>
+    <TD>Exp. and Lit. SCL</TD>
+    <TD VALIGN="RIGHT"><A HREF="cgi-bin/search.cgi?set_query=scl_expandlit"></A></TD>
+  </TR>-->
+  <TR>
+    <TD>Other SCL</TD>
+    <TD VALIGN="RIGHT">14659</TD>
+    <TD VALIGN="RIGHT">17666</TD>
+  </TR>
+  <TR>
+    <TD>Any SCL</TD> <!--JS070905-->
+    <TD VALIGN="RIGHT">20766</TD>
+    <TD VALIGN="RIGHT">21349</TD>
+  </TR>
+<!--<TR>
+    <TD>Co-localization</TD>
+    <TD VALIGN="RIGHT"><A HREF="cgi-bin/search.cgi?set_query=coloc"></A></TD>
+  </TR>-->
+  <TR>
+    <TD><A HREF="list_motifs.shtml">Predicted motif data</A></TD>
+    <TD VALIGN="RIGHT">30583</TD>
+    <TD VALIGN="RIGHT">31198</TD>
+  </TR>
+  <TR>
+    <TD>Ortholog TUs</TD>
+    <TD>10102</TD>
+    <TD>10102</TD>
+  </TR>
+<!--Genetic disorder data
+<A HREF="cgi-bin/search.cgi?set_query=omim"><FONT COLOR="RED"></FONT></A> have predicted genetic disorder data
+-->
+</TABLE>
+
+
+      </SPAN>
+      <HR NOSHADE>
+<TABLE BORDER="0" CLASS="SMALL">
+  <TR>
+    <TD COLSPAN="3" NOWRAP>
+      <STRONG>Membrane Organization</STRONG>
+    </TD>
+  </TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>
+      <STRONG>Mouse</STRONG>
+    </TD>
+    <TD>
+      <STRONG>Human</STRONG>
+    </TD>
+  </TR>
+  <TR>
+    <TD>
+      <i>Soluble Proteins</i>
+    </TD>
+    <TD ALIGN="RIGHT">44040</TD>
+    <TD ALIGN="RIGHT">50029</TD>
+  </TR>
+  <TR>
+    <TD CLASS=SECRETEDFILL>Secreted</TD>
+    <TD CLASS=SECRETEDFILL ALIGN="RIGHT">4231</TD>
+    <TD CLASS=SECRETEDFILL ALIGN="RIGHT">4418</TD>
+  </TR>
+  <TR>
+    <TD CLASS=CYTOPLASMICFILL>Cytoplasmic</TD>
+    <TD CLASS=CYTOPLASMICFILL ALIGN="RIGHT">39809</TD>
+    <TD CLASS=CYTOPLASMICFILL ALIGN="RIGHT">45611</TD>
+  </TR>
+  <TR>
+    <TD>
+      <I>Membrane Proteins</I>
+    </TD>
+    <TD ALIGN="RIGHT">14088</TD>
+    <TD ALIGN="RIGHT">14608</TD>
+  </TR>
+  <TR>
+    <TD CLASS=TYPEIFILL>Type I</TD>
+    <TD CLASS=TYPEIFILL ALIGN="RIGHT">2038</TD>
+    <TD CLASS=TYPEIFILL ALIGN="RIGHT">2350</TD>
+  </TR>
+  <TR>
+    <TD CLASS=TYPEIIFILL>Type II</TD>
+    <TD CLASS=TYPEIIFILL ALIGN="RIGHT">4687</TD>
+    <TD CLASS=TYPEIIFILL ALIGN="RIGHT">5221</TD>
+  </TR>
+  <TR>
+    <TD CLASS=MTMPFILL>Multipass</TD>
+    <TD CLASS=MTMPFILL ALIGN="RIGHT">7363</TD>
+    <TD CLASS=MTMPFILL ALIGN="RIGHT">7037</TD>
+  </TR>
+</TABLE>
+
+    </TD>
+    <TD ALIGN="CENTER" BGCOLOR="WHITE" VALIGN="TOP">
+      <BR>
+      <SPAN CLASS="SMALL">
+        <I><BLOCKQUOTE><P ALIGN="JUSTIFY">
+LOCATE is a curated database that houses data describing the membrane
+organization and subcellular localization of proteins from the RIKEN FANTOM4
+mouse and human protein sequence set. The membrane organization is predicted by the
+high-throughput, computational pipeline MemO. The subcellular locations were
+determined by a high-throughput, immunofluorescence-based assay and by manually
+reviewing peer-reviewed publications.<BR></P></BLOCKQUOTE></I>
+      </SPAN>
+      <BR><BR>
+      <img src="images/cellmap.png" usemap="#cellmap" alt="" style="border-style:none" />
+      <map id="cellmap" name="cellmap">
+        <area shape="rect"#Nuclear Envelope coords="26,69,109,89" href="/cgi-bin/search.cgi?search_term=GO:0042175&search_type=location&loctype=both&organism=both" title="Nuclear Envelope" />
+        <area shape="rect"#Peroxisome coords="293,2,352,18" href="/cgi-bin/search.cgi?search_term=GO:0005777&search_type=location&loctype=both&organism=both" title="Peroxisome" />
+        <area shape="rect"#Secretory Vesicle coords="436,0,530,15" href="/cgi-bin/search.cgi?search_term=GO:0008021&search_type=location&loctype=both&organism=both" title="Secretory Vesicle" />
+        <area shape="rect"#Cytoplasm coords="546,57,610,79" href="/cgi-bin/search.cgi?search_term=GO:0005737&search_type=location&loctype=both&organism=both" title="Cytoplasm" />
+        <area shape="rect"#Endosome coords="552,118,605,138" href="/cgi-bin/search.cgi?search_term=GO:0005768&search_type=location&loctype=both&organism=both" title="Endosome" />
+        <area shape="rect"#Plasma Membrane coords="535,234,630,256" href="/cgi-bin/search.cgi?search_term=GO:0005886&search_type=location&loctype=both&organism=both" title="Plasma Membrane" />
+        <area shape="rect"#Golgi Apparatus coords="446,285,534,308" href="/cgi-bin/search.cgi?search_term=GO:0005794&search_type=location&loctype=both&organism=both" title="Golgi Apparatus" />
+        <area shape="rect"#Lysosome coords="368,302,424,321" href="/cgi-bin/search.cgi?search_term=GO:0005764&search_type=location&loctype=both&organism=both" title="Lysosome" />
+        <area shape="rect"#Mitochondria coords="229,294,303,313" href="/cgi-bin/search.cgi?search_term=GO:0005739&search_type=location&loctype=both&organism=both" title="Mitochondria" />
+        <area shape="rect"#Nucleus coords="57,200,108,216" href="/cgi-bin/search.cgi?search_term=GO:0005634&search_type=location&loctype=both&organism=both" title="Nucleus" />
+        <area shape="rect"#ER coords="0,144,106,167" href="/cgi-bin/search.cgi?search_term=GO:0005783&search_type=location&loctype=both&organism=both" title="ER" />
+        <area shape="circle"#Peroxisome coords="282,55,12" href="/cgi-bin/search.cgi?search_term=GO:0005777&search_type=location&loctype=both&organism=both" title="Peroxisome" />
+        <area shape="circle"#Endosome coords="496,134,13" href="/cgi-bin/search.cgi?search_term=GO:0005768&search_type=location&loctype=both&organism=both" title="Endosome" />
+        <area shape="circle"#Lysosome coords="344,294,12" href="/cgi-bin/search.cgi?search_term=GO:0005764&search_type=location&loctype=both&organism=both" title="Lysosome" />
+        <area shape="poly"#Mitochondria coords="324,275,328,264,339,252,352,245,369,238,384,237,389,241,393,245,390,252,382,265,366,276,346,280,329,283" href="/cgi-bin/search.cgi?search_term=GO:0005739&search_type=location&loctype=both&organism=both" title="Mitochondria" />
+        <area shape="poly"#Golgi coords="368,93,372,88,385,91,395,91,409,91,430,94,437,92,442,83,454,80,465,86,467,98,462,105,454,107,452,116,462,120,463,132,455,136,450,140,449,156,446,163,460,159,462,172,462,179,453,181,453,184,461,184,466,192,465,203,461,212,450,213,442,210,435,208,426,209,415,207,403,205,394,200,384,204,371,204,361,199,359,192,365,185,374,171,380,154,376,127,370,106" href="/cgi-bin/search.cgi?search_term=GO:0005794&search_type=location&loctype=both&organism=both" title="Golgi" />
+      </map>
+
+      <BR>
+      <SPAN CLASS="SMALL">
+        <I><BLOCKQUOTE><P ALIGN="JUSTIFY">If you are aware of published protein subcellular localization data that is not currently included in LOCATE, please <B><A HREF="http://ccb.imb.uq.edu.au/Lit_Sub_Single/Lit_Sub_Form_ips8.html" target="new">contribute</A></B> your information.</P></BLOCKQUOTE></I>
+      </SPAN>
+
+
+    </TD>
+    <TD CLASS="TAB" VALIGN="TOP" NOWRAP>
+      <TABLE BORDER="0" CLASS="SMALL">
+  <TR>
+    <TD COLSPAN="1"><STRONG>Subcellular Localization</STRONG></TD>
+    <TD><STRONG>Mouse</STRONG></TD>
+    <TD><STRONG>Human</STRONG></TD>	<BR>
+  </TR>
+  <TR> 
+    <TD>Centrosome</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005813.shtml">135</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005813.shtml">325</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Cytoplasmic</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005737.shtml">7716</A></TD>  
+    <TD> <A HREF="/searchpages/HumanGO:0005737.shtml">8077</A></TD>  
+    <TD></TD>
+    <TD></TD>
+  </TR>
+  <TR> 
+    <TD>Cytoplasmic Puncta </TD>
+    <TD><A HREF="/searchpages/MouseNOGO:Cytoplasmic_Puncta.shtml">140</A></TD> 
+    <TD><A HREF="/searchpages/HumanNOGO:Cytoplasmic_Puncta.shtml"></A></TD> 
+  </TR>
+  <TR> 
+    <TD>Cytoplasmic Vesicles</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0016023.shtml">298</A></TD>
+    <TD> <A HREF="/searchpages/HumanGO:0016023.shtml">359</A></TD>
+  </TR>
+  <TR> 
+    <TD>Cytoskeleton</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005856.shtml">1068</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005856.shtml">471</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Endoplasmic Reticulum</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005783.shtml">1588</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005783.shtml">1762</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Endosomes</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005768.shtml">685</A> </TD>
+    <TD> <A HREF="/searchpages/HumanGO:0005768.shtml">785</A> </TD>
+  </TR>
+
+  <TR> 
+    <TD>Early Endosomes </TD>
+    <TD><A HREF="/searchpages/MouseGO:0005769.shtml">184</A></TD> 
+    <TD><A HREF="/searchpages/HumanGO:0005769.shtml">141</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Late Endosomes</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005770.shtml">79</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005770.shtml">61</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>ERGIC</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005793.shtml">17</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005793.shtml">8</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Extracellular</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005576.shtml">1079</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005576.shtml">2025</A></TD> 
+  </TR> 
+
+  <TR> 
+    <TD>Golgi Apparatus </TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005794.shtml">925</A></TD>  
+    <TD> <A HREF="/searchpages/HumanGO:0005794.shtml">1541</A></TD>  
+  </TR>
+
+  <TR> 
+    <TD>Golgi Cis Cisterna </TD>
+    <TD><A HREF="/searchpages/MouseGO:0000137.shtml">35</A></TD> 
+    <TD><A HREF="/searchpages/HumanGO:0000137.shtml">39</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Golgi Trans Cisterna</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0000138.shtml">8</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0000138.shtml">16</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Golgi Trans Face</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005802.shtml">114</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005802.shtml">23</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Medial-Golgi</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005797.shtml">15</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005797.shtml">19</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Lipid Particles</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005811.shtml">9</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005811.shtml">1</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Lysosomes </TD>
+    <TD><A HREF="/searchpages/MouseGO:0005764.shtml">474</A></TD>
+    <TD><A HREF="/searchpages/HumanGO:0005764.shtml">531</A></TD>
+  </TR>
+
+  <TR> 
+    <TD>Melanosome</TD>
+    <TD><A HREF="/searchpages/MouseGO:0042470.shtml">48</A></TD>
+    <TD><A HREF="/searchpages/HumanGO:0042470.shtml">58</A></TD>
+  </TR>
+
+<!--<TR> <TD>Membrane Associated </TD><TD> <A
+HREF="/searchpages/HumanGO0016020.shtml">137</A></TD>
+</TR>-->
+  <TR> 
+    <TD>Membrane Associated </TD>
+    <TD> 137</TD> 
+    <TD></TD> 
+  </TR>
+
+  <TR>
+    <TD>Membrane Associated Unknown</TD>
+    <TD> <A HREF="/searchpages/MouseNOGO:Membrane_Associated_Unknown.shtml">27</A></TD>  
+    <TD> <A HREF="/searchpages/HumanNOGO:Membrane_Associated_Unknown.shtml"></A></TD>  
+  </TR>
+
+  <TR>
+    <TD>Mitochondria</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005739.shtml">1554</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005739.shtml">1441</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Inner Mitochondrial Membrane</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005743.shtml">389</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005743.shtml">52</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Outer Mitochondrial Membrane</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005741.shtml">49</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005741.shtml">31</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Nuclear </TD>
+    <TD><A HREF="/searchpages/MouseGO:0005634.shtml">8076</A></TD> 
+    <TD><A HREF="/searchpages/HumanGO:0005634.shtml">9108</A></TD> 
+  </TR>
+
+  <TR>
+    <TD>Nuclear Envelope</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005635.shtml">392</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005635.shtml">277</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Nuclear Speckles</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0016607.shtml">39</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0016607.shtml">52</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Nucleolus </TD>
+    <TD><A HREF="/searchpages/MouseGO:0005730.shtml">1380</A></TD> 
+    <TD><A HREF="/searchpages/HumanGO:0005730.shtml">1623</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Perinuclear Puncta</TD>
+    <TD><A HREF="/searchpages/MouseNOGO:Perinuclear_Puncta.shtml">49</A></TD>
+    <TD><A HREF="/searchpages/HumanNOGO:Perinuclear_Puncta.shtml"></A></TD>
+  </TR>
+
+  <TR> 
+    <TD>Peroxisome</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005777.shtml">222</A></TD>
+    <TD> <A HREF="/searchpages/HumanGO:0005777.shtml">217</A></TD>
+  </TR>
+
+  <TR> 
+    <TD>Plasma Membrane</TD>
+    <TD><A HREF="/searchpages/MouseGO:0005886.shtml">2820</A></TD> 
+    <TD><A HREF="/searchpages/HumanGO:0005886.shtml">5320</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Apical Plasma Membrane </TD>
+    <TD><A HREF="/searchpages/MouseGO:0016324.shtml">121</A></TD> 
+    <TD><A HREF="/searchpages/HumanGO:0016324.shtml">42</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Basolateral Plasma Membrane</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0016323.shtml">145</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0016323.shtml">101</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Reticular</TD>
+    <TD> <A HREF="/searchpages/MouseNOGO:Reticular.shtml">159</A></TD>
+    <TD> <A HREF="/searchpages/HumanNOGO:Reticular.shtml">0</A></TD>
+  </TR>
+  <TR> 
+    <TD>Secretory Granule</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0030141.shtml">84</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0030141.shtml">100</A></TD> 
+  </TR>
+
+  <TR> 
+    <TD>Synaptic Vesicles</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0008021.shtml">122</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0008021.shtml">69</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Tight Junction</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0005923.shtml">140</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0005923.shtml">47</A></TD> 
+  </TR>
+  <TR> 
+    <TD>Transport Vesicle</TD>
+    <TD> <A HREF="/searchpages/MouseGO:0030133.shtml">16</A></TD> 
+    <TD> <A HREF="/searchpages/HumanGO:0030133.shtml">6</A></TD> 
+  </TR>
+  
+ </TABLE>
+
+
+    </TD>
+  </TR>
+
+</TABLE>
+<!--Google Analytics-->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2188419-3";
+urchinTracker();
+</script>
+<!--End of Google Analytics-->
+<!-- start footer.html -->
+<table BORDER="0" WIDTH="100%">
+<tr><td ALIGN="CENTER" CLASS="SMALL">
+<BR>
+Copyright 2004, 2005, 2006, 2007
+Institute of Molecular Bioscience, The University of Queensland and
+the ARC Centre in Bioinformatics<BR>
+We gratefully acknowledge the support of the Australian Research Council.<BR>
+<TABLE BORDER=0 WIDTH=70%>
+<TR>
+<TD>
+<A HREF="http://www.arc.gov.au"><IMG SRC="/images/arc.png" WIDTH="240" HEIGHT="54" BORDER="0"></A>
+</TD>
+<TD>
+<A HREF="http://www.bioinformatics.org.au"><IMG SRC="/images/acblogotr.png" WIDTH="67" HEIGHT="62" BORDER="0">
+</TD>
+</TR>
+</TABLE>
+
+</td></tr>
+</table>
+
+</body>
+</html>
+<!-- end footer.html -->
+

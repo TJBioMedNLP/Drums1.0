@@ -1,0 +1,203 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="common.css">
+<title>Maq</title>
+</head>
+<body>
+<div id="wrap">
+<div id="header">
+	<table border="0" width="100%" cellspacing="0" cellpadding="6">
+		<font face="verdana, sans-serif, arial">
+		<tr bgcolor="#ffffff" style="color:002000">
+		<td width="10%">
+		<td width="80%" align="center"><font size="4"><b>Maq: Mapping and Assembly with Qualities</b></font>
+		<td width="10%" align="right"><a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=191815&amp;type=2" width="125" height="37" border="0" alt="SourceForge.net Logo" /></a>
+		</font>
+	</table>
+</div>
+<div id="nav">
+	<ul><li><a href="index.shtml">[Home]</a>
+	  <li><a href="maq-man.shtml">[Maq]</a>
+	  <li><a href="maqview.shtml">[Maqview]</a>
+	  <li><a href="bwa-man.shtml">[BWA]</a>
+	  <li><a href="glfProgs.shtml">[glfProgs]</a>
+	  <li><a href="faq.shtml">[FAQ]</a>
+	</ul>
+</div>
+
+<div id="sidebar">
+<p>
+<li><a href="index.shtml">Home</a></li>
+<li>Maq</li>
+<dl><dt><a href="maq-man.shtml">User's Manual</a>
+	<dd>Maq User's Manual
+<dt><a href="maq-manpage.shtml">Maq ManPage</a>
+	<dd>Maq Reference Manual
+<dt><a href="maqmap_format.shtml">Maq Aln Format</a>
+  <dd>Maq's .map format
+</dl>
+<li><a href="maqview.shtml">Maqview</a></li>
+<li><a href="bwa-man.shtml">BWA</a></li>
+<li><a href="glfProgs.shtml">glfProgs</a></li>
+<li><a href="faq.shtml">FAQ</a></li>
+<dl><dt><a href="fastq.shtml">FASTQ Format</a></dt>
+	<dd>FASTQ Format Specification</dd>
+	<dt><a href="qual.shtml">Base & Mapping Qualities</a></dt>
+	<dd>Understanding Qualities</dd>
+	<dt><a href="color.shtml">Color Alignment & SNPs</a></dt>
+	<dd>Processing SOLiD Data</dd>
+	<dt><a href="pooled.shtml">Pooled SNP Calling</a></dt>
+	<dd>SNPs from Pooled Samples</dd>
+</dl>
+<li><a href="http://sourceforge.net/mail/?group_id=191815">Maq Mailing List</a></li>
+</dl>
+</p>
+</div>
+
+<div id="main">
+<!-- BEGIN OF THE BODY -->
+<h2>Introduction</h2>
+<p><b>Maq</b> stands for <i>Mapping and Assembly with Quality</i> It
+builds assembly by mapping short reads to reference sequences. Maq is
+a project hosted by
+<a href="http://sourceforge.net/">SourceForge.net</a>. The project
+page is available at
+<a href="http://sourceforge.net/projects/maq/">http://sourceforge.net/projects/maq/</a>. Maq
+is previously known as mapass2.</p>
+
+<h2>Run Maq Now</h2>
+<p>Follow these steps to try Maq. All you need is a
+reference sequence file in the FASTA format.</p>
+<ol>
+<li>Prepare a reference sequence (ref.fasta). Better a bacterial genome.
+<li>Download maq, maq-data and maqview at
+the <a href="http://sourceforge.net/project/showfiles.php?group_id=191815">download
+page</a>.
+<li>Copy maq, maq.pl and maq_eval.pl to the $PATH or to the same directory.
+<li>Simulate diploid reference and read sequences, map reads, call
+  variants and evaluate the results in one go:
+<ul><pre>
+maq.pl demo ref.fasta calib-30.dat
+</pre></ul>
+where <i>calib-30.dat</i> is contained in maq-data.
+<li>View the alignment:
+<ul><pre>cd maqdemo/easyrun;
+maqindex -i -c consensus.cns all.map;
+maqview -c consensus.cns all.map</pre></ul>
+</ol>
+
+<p><b>Even for advanced maq users, running `maq.pl demo' is
+recommended. You may find something helpful.</b></p>
+
+<h2>Documentations</h2>
+<p>Maq is documented in three parts: <a href="maq-man.shtml">Maq User's Manual</a>,
+<a href="maq-manpage.shtml">Maq Reference Manual</a> and
+<a href="faq.shtml">FAQ page</a>.
+The user's manual introduces basic functions in maq, the reference manual gives
+detailed usage of each function and wiki site presents informal but useful tips
+and notes related to maq. These documentations are complementary to each other.</p>
+
+<h2>News</h2>
+<ul>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=595346">
+	  Maq 0.6.6</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=595346">Release Notes</a>)
+	<font color="gray" size="1">- 2008.04.27</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=587851">
+	  Maq 0.6.5</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=587851">Release Notes</a>)
+	<font color="gray" size="1">- 2008.03.28</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=246700&release_id=584923">
+	  Maqview 0.2.3</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=584923">Release Notes</a>)
+	<font color="gray" size="1">- 2008.01.03</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=584446">
+	  Maq 0.6.4</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=584446">Release Notes</a>)
+	<font color="gray" size="1">- 2008.04.27</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=246700&release_id=565715">
+	  Maqview 0.2.1</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=565715">Release Notes</a>)
+	<font color="gray" size="1">- 2008.01.03</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=565713">
+	  Maq 0.6.3</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=565713">Release Notes</a>)
+	<font color="gray" size="1">- 2008.01.03</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=544054">
+	  Maq 0.6.1</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=544054">Release Notes</a>)
+	<font color="gray" size="1">- 2007.10.03</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=246700&release_id=542565">
+	  Maqview 0.1.1</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=542565">Release Notes</a>)
+	<font color="gray" size="1">- 2007.09.27</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=246700&release_id=541822">
+	  Maqview 0.1.0</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=541822">Release Notes</a>)
+	<font color="gray" size="1">- 2007.09.24</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=537379">
+	  Maq 0.6.0</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=537379">Release Notes</a>)
+	<font color="gray" size="1">- 2007.09.05</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=528912">
+	  Maq 0.5.1</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=528912">Release Notes</a>)
+	<font color="gray" size="1">- 2007.07.31</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=238744&release_id=523315">
+	  tgap-maq 20070715</a>	Released
+	<font color="gray" size="1">- 2007.07.15</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=523317">
+	  Maq 0.5.0</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=523317">Release Notes</a>)
+	<font color="gray" size="1">- 2007.07.15</font>
+  <li>Mapass2 is now formally renamed as maq, which stands for <i>Mapping and Assembly with Quality</i>.
+	<font color="gray" size="1">- 2007.07.15</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=520809">
+	  Mapass2 0.4.3</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=520809">Release Notes</a>)
+	<font color="gray" size="1">- 2007.07.04</font>
+  <li>Bug fix in the easyrun script mapass2.pl. The earlier version of
+  this script failed to give correct results when several read files are
+  given. Please download the latest version
+  version <a href="download/mapass2.pl">from this website</a>. I am
+  sorry for the inconvenience this bug may bring. This fix will be
+  incorporated in the next release.
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=517741">
+	  Mapass2 0.4.2</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=517741">Release Notes</a>)
+	<font color="gray" size="1">- 2007.06.21</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=516795">
+	  Mapass2 0.4.1</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=516795">Release Notes</a>)
+	<font color="gray" size="1">- 2007.06.17</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=508651">
+	  Mapass2 0.4.0</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=508651">Release Notes</a>)
+	<font color="gray" size="1">- 2007.05.15</font>
+  <li><a href="http://sourceforge.net/mail/?group_id=191815">Mapass Help</a>
+	Mailing List Opened <font color="gray" size="1">- 2007.05.11</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=507101">
+	  Mapass2 0.3.1</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=507101">Release Notes</a>)
+	<font color="gray" size="1">- 2007.05.09</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=505576">
+	  Mapass2 0.3.0</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=505576">Release Notes</a>)
+	<font color="gray" size="1">- 2007.05.03</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=503322">
+	  Mapass2 0.2.1</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=503322">Release Notes</a>)
+	<font color="gray" size="1">- 2007.04.23</font>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=191815&package_id=229423&release_id=503015">
+	  Mapass2 0.2.0</a>	Released
+	(<a href="http://sourceforge.net/project/shownotes.php?group_id=191815&release_id=503015">Release Notes</a>)
+	<font color="gray" size="1">- 2007.04.22</font>
+  <li><a href="http://sourceforge.net/mailarchive/forum.php?forum_name=mapass-announce">Mapass Announcement</a>
+	Mailing List Opened <font color="gray" size="1">- 2007.04.16</font>
+  <li>Mapass Registered at <a href="http://sourceforge.net">SourceForge.net</a> <font color="gray" size="1">- 2007.03.21</font>
+</ul>
+<!-- END OF THE BODY -->
+</div>
+</div>
+</body>
+</html>

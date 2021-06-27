@@ -1,0 +1,383 @@
+<html>
+<head>
+<title> MG 3.0 </title>
+<style type="text/css" media="screen">
+<!-- 
+
+body {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 0.8em;
+margin: 0;
+padding: 0;
+background-color: #a3a29e;
+color: #333333;
+}
+
+
+a {
+	color: #29A3E1;
+}
+
+a:hover {
+	color: #1A7196;
+}
+
+
+dl, dt, dd, ul, li {
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+#menu {
+position: absolute; /* placement du menu, à modifier selon vos besoins */
+top: 70;
+left: 1%;
+z-index:100;
+width: 98%; /* correction pour Opera */
+}
+
+#menu dl {
+float: left;
+width: 12em;
+}
+
+#menu dt {
+cursor: pointer;
+text-align: left;
+border: 0px solid white;
+margin: 1px;
+}
+
+#menu dd {
+display: none;
+border: 0px solid white;
+}
+
+#menu li {
+text-align: left;
+background: white;
+-moz-opacity:0.80;
+opacity: 0.80;	
+}
+
+#menu li a, #menu dt a {
+color: #000;
+text-decoration: none;
+display: block;
+height: 100%;
+border: 0 none;
+}
+
+#menu li a:hover, #menu li a:focus {
+background: #99ccff;
+}
+
+#site {
+position: absolute;
+z-index: 1;
+top : 70px;
+left : 10px;
+color: #000;
+background-color: #ddd;
+padding: 5px;
+border: 1px solid white; 
+}
+
+#conteneur {
+width: 98%;
+margin-left: 1%;
+}
+
+#encore {
+height: 10px;
+background-color: #a3a29e;
+}
+
+#header {
+height: 60px;
+background-color: #6d9bc2;
+}
+
+#haut {
+height: 20px;
+background-color:#FFFFFF;
+}
+
+#centre {
+background-color:#FFFFFF;
+}
+
+#pied {
+height: 20px;
+background-color: #6d9bc2;
+}
+
+.menuhaut {
+list-style-type: none;
+margin: 0;
+padding:0;
+}
+.menuhaut li {
+display: inline;
+}
+.menuhaut a {
+margin: 0 2px;
+color: #000000;
+text-decoration: underline;
+}
+.menuhaut a:hover {
+text-decoration: none;
+}
+p {margin: 0 0 10px 0;}
+
+
+.tabnormal{background-color:white; color:black; }
+.tabover{background-color:#FFFFCC; color:black; }
+
+
+.info {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index:100;
+}
+
+.the_menu {
+	display:none;
+}
+
+.the_menu li {
+
+}
+
+.the_menu li a {
+	color:#000000; 
+	text-decoration:none; 
+	display:block;
+	font-size: small;	
+}
+
+.the_menu li a:hover {
+	font-weight:bold;
+}
+
+
+
+
+-->
+</style><script type="text/javascript" src="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/js/jquery.js"></script>
+<script language="JavaScript">
+function setMousePos(evt)
+{
+if(!evt) evt=window.event;
+if(evt.pageX) { 
+   mouseX=evt.pageX; 
+   mouseY=evt.pageY; 
+} 
+else { 
+   mouseX=evt.clientX+document.body.scrollLeft; 
+   mouseY=evt.clientY+document.body.scrollTop; 
+} 
+}
+</script>
+<script language="JavaScript">
+function VoirMenu()
+{
+   if(document.getElementById('SlideMenuMG').style.display=="none")
+   { $("#SlideMenuMG").slideDown('medium'); } 
+   else 
+   { $("#SlideMenuMG").slideUp('medium'); } 
+}
+function OpenMenu(i)
+{
+ if(document.getElementById('smenu'+i).style.display=="none")
+ { 
+   for(j=1 ; j<=6 ; j++)
+   { $("#smenu"+j).slideUp('medium');  } 
+   $("#smenu"+i).slideToggle('medium'); 
+ }
+ else
+ { $("#smenu"+i).slideUp('medium'); } 
+}
+function CompteMsg()
+{
+  var url='http://cbib1.cbib.u-bordeaux2.fr/molligen3b/USERS/checkMSG.php'; 
+  if (window.XMLHttpRequest) 
+  {
+    req = new XMLHttpRequest(); 
+    req.onreadystatechange = function() {AjaxMsg();}; 
+    req.open('GET', url, true); 
+    req.send(null); 
+  }
+  else if (window.ActiveXObject) 
+  {
+    req = new ActiveXObject('Microsoft.XMLDOM'); 
+    if (req) 
+    {
+      req.onreadystatechange = function() {AjaxMsg();}; 
+      req.open('GET', url, true); 
+      req.send(null); 
+    }
+  }
+ setTimeout('CompteMsg()', 5000); 
+}
+function AjaxMsg()
+{
+  if (req.readyState == 4) 
+  { 
+    if (req.status == 200 || req.status == 304) 
+    { 
+      results = req.responseText; 
+      document.getElementById('usermsg').innerHTML = results; 
+    } 
+    else 
+    { 
+      document.getElementById('usermsg').innerHTML='ajax error'; 
+      req.statusText; 
+    } 
+  }
+}
+function ViewMsgList()
+{
+  var xhr_object = null; 
+  if(window.XMLHttpRequest) 
+    xhr_object = new XMLHttpRequest(); 
+  else if(window.ActiveXObject) 
+    xhr_object = new ActiveXObject('Microsoft.XMLHTTP'); 
+  else { 
+   alert('Votre navigateur ne supporte pas les objets XMLHTTPRequest...'); 
+   return;  
+  } 
+  var url='http://cbib1.cbib.u-bordeaux2.fr/molligen3b/USERS/ShortListMSG.php'; 
+  xhr_object.open('POST',url, true); 
+  xhr_object.onreadystatechange = function() 
+  { 
+    if(xhr_object.readyState == 4) 
+    { 
+      var tmp = xhr_object.responseText; 
+       document.getElementById('showmsg').innerHTML=tmp; 
+       document.getElementById('showmsg').style.display=''; 
+    } 
+  } 
+  xhr_object.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); 
+  xhr_object.send(); 
+}
+function HiddeMsgList()
+{ document.getElementById('showmsg').style.display='none'; }
+</script>
+</head>
+<body>
+<div id="conteneur">
+<div id="encore">
+</div>
+<div id="header">
+<TABLE border=0 width=100% cellspacing=0 cellpadding=0>
+<TR height=60 valign=middle>
+<TD width=50 bgcolor=#6d9bc2></TD>
+<TD bgcolor=#6d9bc2 width=25% align=left><H2><font color=black> MolliGen 3.0 </font></H2></TD>
+<TD bgcolor=#ffffff><img src="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/images/header2.jpg"></TD>
+<TD bgcolor=#ffffff></TD>
+<TD bgcolor=#ffffff width=33% align=right nowrap>
+</TD>
+<TD bgcolor=#ffffff nowrap align=center><div id='usermsg'></div></TD>
+</TR>
+</TABLE>
+</div>
+<div id="centre">
+<TABLE border=0 width=100%>
+<TR height=600 valign=top>
+<TD width=0>
+<a href="javascript:VoirMenu();"><img src="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/images/down2.png" border=0></a>
+<div id=SlideMenuMG class=SlideMenuMG style="display: none">
+<TABLE CELLSPACING=0 border=0 align=left>
+<TR><TD> <a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/"><font color=black> Home </font></a> </TD></TR>
+<TR><TD nowrap>
+<ul id="smenu1" style="display: none;" class="the_menu">
+</ul>
+</TD></TR>
+<TR><TD> <a href="javascript:OpenMenu(2);"><font color=black> ToolBox </font></a> </TD></TR>
+<TR><TD nowrap>
+<ul id="smenu2" style="display: none;" class="the_menu">
+<li><font color=red> - Simple - </font></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/BLAST/blast.php">- Blast </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/PATTERN/spat.php">- Pattern search </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/GGB/index.php">- Genome Browser</a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/CGview/index.php">- Circular Genome Browser</a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/KEGG/select_simple.php">- Metabolic path. </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/JAVA/JAVAdispatch.php?asked=GC">- GC analysis</a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/InterGenic/select.php">- InterGenic regions </a></li>
+<li> <font color=red>  -- Comparative -- </li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/JAVA/JAVAdispatch.php?asked=MGB">- Multi Genome Browser </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/DQ/select.php">- Differential query</a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/TOOLBOX/KEGG/select_multi.php">- Metabolic comp. </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/JAVA/JAVAdispatch.php?asked=TAXPLOT">- TaxPlot </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/JAVA/JAVAdispatch.php?asked=MUMMER">- Genome alignment </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/JAVA/JAVAdispatch.php?asked=GENOMEALIGT">- Genome CDS alignment </a></li>
+</ul>
+</TD></TR>
+<TR><TD> <a href="javascript:OpenMenu(3);"><font color=black> Search </font></a> </TD></TR>
+<TR><TD nowrap>
+<ul id="smenu3" style="display: none;" class="the_menu">
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/SEARCH/search.php?mode=c"> - classical form </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/SEARCH/search.php?mode=nq"> - natural language form </a></li>
+</ul>
+</TD></TR>
+<TR><TD> <a href="javascript:OpenMenu(4);"><font color=black> Species </font></a> </TD></TR>
+<TR><TD nowrap>
+<ul id="smenu4" style="display: none;" class="the_menu">
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/SPECIES/list_b.php"> - List </a></li>
+<li><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/SPECIES/phylo.php"> - Phylogeny </a></li>
+</ul>
+</TD></TR>
+<TR><TD> <a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/USERS/workspace.php"><font color=black> Workspace </font></a> </TD></TR>
+<TR><TD nowrap>
+<ul id="smenu5" style="display: none;" class="the_menu">
+</ul>
+</TD></TR>
+<TR><TD> <a href="http://cbib1.cbib.u-bordeaux2.fr/molligen3b/USERS/login2.php"><font color=black> Login </font></a> </TD></TR>
+<TR><TD nowrap>
+<ul id="smenu6" style="display: none;" class="the_menu">
+</ul>
+</TD></TR>
+</TABLE>
+</div>
+</TD>
+<TD>
+<BR>
+<BR>
+<BR>
+<BR>
+<TABLE border=0 width=70% align=center>
+<TR><TD>
+<H3> Welcome in MolliGen ! </H3>
+<p>
+MolliGen provides annotated sequence data and analysis for the <a>38</a> public genomes available in mollicute. The MolliGen web resources provides genetic element pages, metabolic pathways, orthologs defined by various method, a collection of tools including a genome browser for interspecies comparison, and data sets for downloading.</p>
+<p>
+The public genomes are in general-purpose sequence data bases such as <a href="http://www.embl.de" target=_blank>EMBL</a> or <a href="http://www.ncbi.nih.gov/Genbank/" target=_blank>GenBank</a>. We are working hard at maintaining this server for the scientific community. If you found this server useful for your research we would appreciate if you cite the MolliGen database.
+Mention our NAR manuscript and this server name and URL :</p>
+<p>
+Barré A., de Daruvar A. and Blanchard A. (2004). <b>MolliGen, a database dedicated to the comparative genomics of Mollicutes.</b> Nucleic Acids Res. 32, Database issue, D307-310 [<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=14681420&dopt=Abstract" target=_blank>NAR full text</a>] 
+</p>
+<p>
+A private access to store your genome in MolliGen, and to compare him with the public genomes, is available upon request.</p>
+</TD></TR>
+</TABLE>
+<BR>
+<TABLE align=center border=0>
+<TR valign=middle><TD nowrap><img src="images/time.png" width=45 height=45></TD><TD><a href="http://cbib1.cbib.u-bordeaux2.fr/molligen/" target=_blank><font color=black>Back to previous version </font></a></TD></TR>
+</TABLE>
+<script>javascript:VoirMenu();</script>
+</TD>
+<TD><div id='showmsg' style="position: absolute ; left: 90% ; top: 70px ; display: none;"></div></TD>
+</TR>
+</TABLE>
+</div>
+<div id="pied"><TABLE border=0 width=100%><TR>
+<TD align=left><font size=-1>CBiB - 2010 (abarre@u-bordeaux2.fr)</font></TD><TD align=right><a href=CREDITS/credits.php?PHPSESSID=ad1c3c95a50beae7515a92321ce8c2cd><font size=-1 color=black> Credits </font></a></TD></TR></TABLE></div>
+<div id="encore">
+</div>
+</div>
+<script language=javascript>CompteMsg();</script>
+</body>
+</html>

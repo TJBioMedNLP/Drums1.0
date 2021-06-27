@@ -1,0 +1,117 @@
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>
+<link rel='stylesheet' href='../styles/style3.css' type='text/css'>
+<title>Epitope Conservancy Analysis</title>
+</head>
+<body>
+<div id='header'>
+<a class='headline' href='/'><h1>IEDB Analysis Resource</h1></a>
+</div>
+<div id='menu'>
+<ul>
+<li class='active'><a href='iedb_input'>Epitope Conservancy Analysis</a></li>
+<li><a href='example.jsp'>Example Dataset</a></li>
+<li><a href='tutorial.jsp'>Tutorial</a></li>
+<li><a href='reference.jsp'>Reference</a></li>
+<li><a href='contact.jsp'>Contact</a></li>
+</ul>
+</div>
+<div id='container'>
+<div id='primarycontainer'>
+<SCRIPT LANGUAGE='JavaScript' SRC='../javaScript/openWindow.js'></SCRIPT>
+<script language='JavaScript'>
+function copydata() {
+document.form1.peptide.value=document.epitopeform.peptide.value;
+document.form1.protein.value=document.proteinform.protein.value;
+}
+
+function cleardata() {
+document.epitopeform.peptide.value='';
+document.proteinform.protein.value='';
+}
+</script>
+<h2>Epitope Conservancy Analysis</h2>
+<table cellspacing=1>
+<form name='epitopeform' id='epitopeform' method='post' action='iedb_input' enctype='multipart/form-data'>
+<tr>
+<th colspan=2><div align='left'>Step 1. Epitope Sequence(s)</div></th>
+</tr>
+<tr>
+<td>Enter epitope sequence(s) in PLAIN or FASTA format: <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</td>
+<td><div align='left'><textarea name='peptide' cols='80' rows='8' id='peptide'></textarea></div></td>
+</tr>
+<tr>
+<td>Or upload epitope sequence(s) from a file: <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</td>
+<td><div align='left'><input type='file' name='epitopeFile' size='60' /><input type='submit' value='Click here to upload' /><input type='hidden' name='optype' value='uploadEpitope' /><input type = 'hidden' name = 'protein' value = '' /></div></td>
+</tr>
+</form>
+<form name='proteinform' id='proteinform' action='iedb_input' method='post' enctype='multipart/form-data'>
+<tr>
+<th colspan=2><div align='left'>Step 2. Protein Sequence(s)</div></th>
+</tr>
+<tr>
+<td>Enter protein sequence(s) in PLAIN or FASTA format: <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</td>
+<td><div align='left'><textarea name='protein' cols='80' rows='8' id='protein'></textarea></div></td>
+</tr>
+<tr>
+<td>Or upload protein sequence(s) from a file: <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</td>
+<td><div align='left'><input type='file' name='proteinFile' size='60' /><input type='submit' value='Click here to upload' /><input type='hidden' name='optype' value='uploadProtein' /><input type = 'hidden' name = 'peptide' value = '' /></div></td>
+</tr>
+<tr><td colspan=2><div align = 'left'><a href='seqbrowser.html' target='_blank'>Click here</a> to browse for sequences in NCBI <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</div></td></tr>
+</form>
+<form action='ConservancyCalculation' method='post' name='form1' target='_self'>
+<tr>
+<th colspan=2><div align='left'>Step 3. Calculation option(s)</div></th>
+<tr>
+<td>Analysis type: <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</td>
+<td><div align='left'>
+<p><input type=radio name='epitopeType' value='LINEAR' checked >Epitope linear sequence conservancy</p>
+<p><input type=radio name='epitopeType' value='DISCONTINUOUS'>Epitope discontinuous sequence conservancy</p>
+</div></td>
+</tr>
+<tr>
+<td>Sequence identity threshold: <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</td>
+<td><div align='left'>
+<select name=lessGreater>
+<option value=ge  selected>&ge;</option>
+<option value=lt>&lt;</option>
+</select>
+<select name=identity>
+<option value=100 selected>100%</option>
+<option value=90>90%</option>
+<option value=80>80%</option>
+<option value=70>70%</option>
+<option value=60>60%</option>
+<option value=50>50%</option>
+<option value=40>40%</option>
+<option value=30>30%</option>
+<option value=20>20%</option>
+<option value=10>10%</option>
+<option value=0>0%</option>
+</select>
+</div></td>
+</tr>
+<tr><td>Remove duplicated protein sequences? <a href='tutorial.jsp'><img src='../images/helpQMark.jpg' align=absmiddle border=0></a>
+</td>
+<td><div align = 'left'><input type='checkbox' name='removeDuplicate' value='Yes'> Yes</div></td>
+</tr>
+<tr><th colspan=2><div align = 'left'>Step 4. Submission</div></th></tr>
+<tr><td colspan=2><div align = 'left'><input type = 'hidden' name = 'peptide' value = '' /><input type = 'hidden' name = 'protein' value = '' />
+<input type = 'submit' name = 'Submit' value = 'Submit' onClick='copydata()' />
+<input type = 'button' name = 'Reset' value = 'Reset' onClick='cleardata()' />
+</div></td></tr>
+</form>
+</table>
+<br><br>
+</div>
+</div>
+</body>
+</html>

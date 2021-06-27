@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<BASE TARGET="_top" >
+<!--<link href="T3F_CSS_04_6_14.css" rel="stylesheet" type="text/css">  -->
+<link href="index.css" rel="stylesheet" type="text/css">
+<title>IT3F: An Interspecies Transcription Factor Function Finder for Plants</title>
+</head>
+
+<body MARGINWIDTH="0" MARGINHEIGHT="0" LEFTMARGIN="0" TOPMARGIN="0">
+<!--
+leftmargin="0" topmargin="0" rightmargin="0" marginwidth="0"
+ marginheight="0" - these commands don't work in the body tag!!
+-->
+
+<!--Creating a table to give structure to the page: -->
+<table summary="This is a table page layout" BORDER="0" WIDTH="970" bgcolor="#EDE3F5" align="center"><!--bgcolor was ="EDE3F5" green: #F8FFEE --> 
+<TR><!--Row1-->
+<TD COLSPAN="5" HEIGHT="50">
+<img border="0" src="firefoxLogo.gif" title="Website tested with Firefox v.3.5" alt="Website tested with Firefox v.3.5" width="31" height="30" align="right">
+<img border="0" src="internetExplorer7.0Logo.gif" title="Website tested with Internet Explorer v.7" alt="Website tested with Internet Explorer v.7" width="31" height="30" align="right">
+						<!--5.10.08 - was width=154  -->
+<img border="0" src="Transcription_Factor_Function_Finder13_5_04.jpg" width="90" height="72" align="absmiddle">
+<b><font size="4px" face="Verdana" COLOR="black">IT3F: An Interspecies Transcription Factor Function Finder for Plants<br>
+<!--<font size="1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp The IT3F website</font></FONT></font></b>-->
+</TD>
+</TR>
+<TR ><!--Row2-->
+<TD rowspan="4" WIDTH="0"></TD>
+<TD COLSPAN="4">
+<font face="Verdana" size="3px" color="black"><b>Purpose of this website:</b></font>
+<font face="Verdana" size="2">For plant biologists who want to understand the function of a transcription factor (TF), or at least learn about
+the relative relationship between a gene encoding a TF and other members of the
+same gene family. This web page allows you to submit "new" query sequence(s), and in an instance returns a web page
+displaying an "existing" neighbor-joining TF family tree with the query sequence(s) added.<br><br>
+&nbsp&nbsp&nbsp&nbsp  For each gene, additional
+information is shown that is important to consider together when investigating the function of a particular gene, for
+example, corresponding gene expression profiles and genes found in regions of a contemporary genome that have been
+duplicated in a relatively recent ancestor so may exhibit some functional redundancy.<br><br>
+&nbsp&nbsp&nbsp&nbsp With the data views provided, it is possible to observe
+closely related genes across different species clustering as "subgroups" (or
+"clades"). These subgroups can be
+explored further with "inner" trees and "global" protein alignments for them. It is also possible to understand how a large gene family can be broken down
+into these subgroups by looking at the Global Alignment Display.
+<br>
+<br>
+<font face="Verdana" size="3px" color="black"><b>How to use this web page:</b></font> Paste query sequence(s) into the Interrogative
+Tree Web Form and select
+a matching TF family or subfamily. Query sequence(s) must be amino acid sequence in FASTA format and should be as complete as
+posible over the DNA binding domain. <a href="IT3F_Documentation.html">Tips...</a><br> 
+<br>
+<!-- <font face="Verdana" size="4" color="black"><b>Tips:</b></font>
+<font face="Verdana" size="2">There is no upper limit to the number of query sequences you can enter in the form, but for the moment, the number of
+sequences has been capped at 100 to avoid excessive cpu load. The tree display is optimised
+to show a maximum of 360 tree tips. The largest tree - currently with 330 tree tips - takes 30 seconds to display using one query
+sequence as input; 45 query sequences takes about 4 minutes.
+The returning pages only work correctly with Internet Explorer [versions 6.0+ and 7.0] using their default display settings. They are optimised for a screen size of at least
+17 inches, but, the bigger the better. If you want to test out this web form, the sequences in <a href="testSeqsForQueries.txt">here</a> will work. 
+</font>
+-->
+<hr noshade="noshade" style="height: 2px; width: 100%; color: rgb(102, 0, 204); margin-left: 0px; margin-right: auto;">
+</TD>
+</TR>
+<TR><!--Row3-->
+<!-- was: <TD WIDTH="30%" HEIGHT="200" align="center"></TD>    now...-->
+<TD WIDTH="0" HEIGHT="130" align="center"></TD>
+<TD WIDTH="0" align="left">
+<!-- <img src="images/TFcartoon.jpg" style="width: 300px; height: 225px;" title="" alt="" align="middle">   -->
+<!--<form action="cgi-bin-IT3F1/IT3F.pl" method="post"> -->
+
+<!-- removing this printing from this scrip below:
+document.write("Browser name: "+ browser);
+document.write("<br />");
+document.write("Browser version: "+ version);	-->
+<script type="text/javascript">
+var browser=navigator.appName;
+var b_version=navigator.appVersion;
+var version=parseFloat(b_version);
+
+if (browser=="Netscape")
+ 
+  {										// The "\" allows start of new line before the quotes  
+ document.write("<form action=\"cgi-bin/IT3Fframe.pl\" method=post> \
+                 <input type=\"hidden\" name=\"browserName\" value=\"Netscape\">");
+
+  }
+else if(browser=="Microsoft Internet Explorer")
+  {
+  document.write("<form action=\"cgi-bin/IT3Fframe.pl\" method=post> \
+                  <input type=hidden name=browserName value=Explorer>");
+  }
+
+</script> 
+<!-- <form action="cgi-bin-IT3F1/IT3Fframe.pl" method="post">  -->
+<pre><font face="Verdana" size="2"><b>The Interrogative Tree Web Form:</b>
+
+Select a TF family or sub-family:</font>
+<font face="Verdana" size="1">(Note - lines ending in a colon e.g. "MYB Superfamily:" are descriptive, not options.)</font>
+<select name="TFfamily">
+<option>
+<option value="">		   Test Data Sets:
+<option value="=flavonoid">	   &nbsp&nbsp&nbsp Flavonoid MYBs			<!--the value in the option tag gets sent ie "=flavonoid", not the other text "flavonoid" -->
+<option>
+<option value="">		   Helix-turn-helix motifs:
+<option value="">		   &nbsp&nbsp&nbsp MYB Superfamily:
+<option value="=AtR2R3MYBs">	   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp R2R3MYB:                                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis
+<option value="=AtOsR2R3MYBs">	   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp R2R3MYB:                                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice  
+<option value="=AtOsGARPs_SHAQKYs">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp SHAQKY:&nbsp&nbsp&nbsp                                   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="">		   Helix-loop-helix motifs:
+<option value="=AtbHLHs">	   &nbsp&nbsp&nbsp bHLH:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis
+<option value="=AtOsbHLHs">	   &nbsp&nbsp&nbsp bHLH:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="=AtOsTCPs">	   &nbsp&nbsp&nbsp TCP:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="=AtOsBdTCP">	   &nbsp&nbsp&nbsp TCP:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+At, Os, Bd
+<option value="">		   Leucine zipper motif:
+<option value="=AtbZIPs">	   &nbsp&nbsp&nbsp bZIP:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis
+<option value="=AtOsbZIPs">	   &nbsp&nbsp&nbsp bZIP:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="">		   Zinc finger motifs:
+<option value="=AtC2H2">	   &nbsp&nbsp&nbsp C2H2:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp At
+<option value="">		   TFs containing other motifs:
+<option  value="">		   &nbsp&nbsp&nbsp AP2/ERF Superfamily:
+<option value="=AtOsAP2-likes">	   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp AP2-like:                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="=AtOsBdAP2">	   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp AP2-like:                 				  
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp At, Os, Bd
+<option value="=AtERFs">	   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ERF-like:                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis
+<option value="=AtOsERFs">	   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ERF-like:                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="=AtOsB3s">	   &nbsp&nbsp&nbsp B3:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="=AtOsHSFs">	   &nbsp&nbsp&nbsp HSF:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis, rice
+<option value="=AtOsBdMADS">	   &nbsp&nbsp&nbsp MADS:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                      
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp At, Os, Bd
+<option value="=AtWRKY">	   &nbsp&nbsp&nbsp WRKY:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis
+<option>
+<option value="">	           These new data sets will replace the above ones soon now that they all work:
+<option value="">		   Helix-turn-helix motifs:
+<option value="">		   &nbsp&nbsp&nbsp MYB Superfamily:
+<option value="=AtOsBdPpR1R2R3MYB">&nbsp&nbsp&nbsp R1R2R3MYB		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBdPp)
+<option value="=AtOsBdMYB1R">      &nbsp&nbsp&nbsp MYB1R&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBd)
+<option value="=AtOsMYB_Summary">  &nbsp&nbsp&nbsp MYB_Summary&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOs)
+<option value="">		   &nbsp&nbsp&nbsp Homeodomain:
+<option value="=AtOsHD">           &nbsp&nbsp&nbsp HD&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOs)
+<option value="=AtOsBdPpHSF">      &nbsp&nbsp&nbsp HSF&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBdPp)
+<option value="">		   Helix-loop-helix motifs:
+<option value="=AtOsbHLH">         &nbsp&nbsp&nbsp bHLH&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOs)
+<option value="=AtOsBdPpTCP">      &nbsp&nbsp&nbsp TCP&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBdPp)
+<option value="">		   Zinc finger (Znf) domains:
+<option value="=AtOsC2H2"> 	   &nbsp&nbsp&nbsp C2H2&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOs)
+<option value="=AtOsBdPpDOF">      &nbsp&nbsp&nbsp DOF&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBdPp)
+<option value="=AtOsBdWRKY">       &nbsp&nbsp&nbsp WRKY&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBd)
+<option value="">		   Other large TF families:
+<option value="=AtOsBdPpAP2">      &nbsp&nbsp&nbsp AP2&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBdPp)
+<option value="=AtOsbZIPnew">     &nbsp&nbsp&nbsp bZIP&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOs)
+<option value="=AtOsBdB3">         &nbsp&nbsp&nbsp B3&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBd)
+<option value="=AtOsERFnew">      &nbsp&nbsp&nbsp ERF&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOs) - use the equivalent dataset above. 
+<option value="=AtOsBdHAP">        &nbsp&nbsp&nbsp CCAAT (HAP)&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBd)
+<option value="=AtOsBdMADS">       &nbsp&nbsp&nbsp MADS&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtOsBd)
+<option>
+<option value="">                  A model higher and lower plant together:
+<option value="">		   Helix-turn-helix motifs:
+<option value="">		   &nbsp&nbsp&nbsp MYB Superfamily:
+<option value="=AtPpMYB1R">        &nbsp&nbsp&nbsp MYB1R&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+<option value="=AtPpMYB_Summary">  &nbsp&nbsp&nbsp MYB_Summary&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+<option value="=AtPpHD">           &nbsp&nbsp&nbsp HD&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+<option value="">		   Helix-loop-helix motifs:
+<option value="=AtPpbHLH">         &nbsp&nbsp&nbsp bHLH&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+<option value="">		   Zinc finger (Znf) domains:
+<option value="=AtPpC2H2">         &nbsp&nbsp&nbsp C2H2&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+<option value="=AtPpWRKY"> 	   &nbsp&nbsp&nbsp WRKY&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+<option value="">		   Other large TF families:
+<option value="=AtPpB3">           &nbsp&nbsp&nbsp B3&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+<option value="=AtPpMADS">         &nbsp&nbsp&nbsp MADS&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(AtPp)
+</select>
+<!--
+<select name="TFfamily">
+29.8.08 - Organise TFs into their known 3D structures e.g.:
+Helix-turn-helix structures:
+MYB Superfamily:
+R2R3MYB etc
+Homeodomain/homeobox (?) Superfamily
+Zinc Finger Structures:
+C2H2, C2C2 etc
+9.8.08 - tried to specify here multiple dropdown menus - it didn't work.
+I think the solution is to just include in the dropdown menu:
+TF Families (alphabetical order A-M) e.g. B3, AP2, MYB, bHLH, bZIP
+TF families (alphabetical order N-Z)e.g. TCP, WRKY
+Secondary metabolite enzyme Gene families (e.g. BAHD acyl tranferase, cytochrome P450)
+Then return a page that specifies the appropriate form - I've seen this trick before
+Then I could convert to a multiple select whereby enzyme families can also be selected +processed to appear
+in the inner trees if evidence of correlations exists vor particular subgroups
+<option>...........................................................................................................................................
+<option value="=AtOsB3s">	B3 (VP1/ABI3-like):&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Arabidopsis (60), rice (52)	
+</select>
+<select name="TFfamily">
+<option>.................................................................................................................................................
+</select> -->
+<font face="Verdana"><font size="2">Input one or more query sequences here in FASTA format. The first 15
+characters (or until the first space) on the FASTA header line will
+be used in the tree display. Characters other than alphanumerical 
+characters will be replaced by '-' characters.
+Example:<font face="courier new" size="2">
+>AtR2R3MYBwhat?
+MGRSPCCEKAHTNKGAWTKEEDERLVAYIKAHGEGCWRSLPKAAGLLRCGKSCRLRWINY
+LRPDLKRGNFTEEEDELIIKLHSLLGNFFFKWSLIAGRLPGRTDNEIKNYWNTHIRRKLI
+</font>
+<textarea name="query" rows="6" cols="50"></textarea>
+
+<input type="submit">     or     <input type="reset"></form></pre></TD>	
+<TD WIDTH="1" BGCOLOR="rgb(102, 0, 204)"><BR></TD>
+<TD WIDTH="" align="left" valign="top"><!---The third column in row 3--->
+<pre><iframe frameborder="0" align="bottom" width="500" height="410" src="IT3F_Datasets.html" scrolling="auto"></iframe></pre>
+</TD>
+</TR>
+<!--<font face="Verdana" size="1"><b>Gene names e.g. AtMYB4, AtbHLH003 from:</b>
+Jakoby et al 2004) - R2R3MYB
+Nakano et al (2006) - ERF
+bHLH
+WRKY
+<b>Zinc finger motif:</b>
+<font face="Verdana" size="1"><b>IT3F Website Key:</b>
+Gene Names and expression data:
+black - Arabidopsis thaliana (At) 
+yellow - rice (Os) and other monocots
+green - Lotus japonicus (Lj)
+dark green - Amborella tricharpoda (Amtr)
+blue - other species (GKF - <u>G</u>enes with <u>K</u>nown <u>F</u>unction)
+red - your query sequence(s)
+Coloured spots - signify gene duplications:
+   dark red = older duplication
+    red = newer duplication
+    blue = genes in tandem
+(data from Blanc, Hokamp and Wolfe (2003)):</font>-->
+
+<TR><!--Row4-->
+<TD COLSPAN=4 >
+<hr noshade="noshade" style="height: 2px; width: 100%; color: rgb(102, 0, 204); margin-left: 0px; margin-right: auto;">
+<font face="Verdana" size="1">Website developer and feedback<br>or problems to: <a href="mailto:Paul.Bailey@bbsrc.ac.uk"
+title="hello" style="color: rgb(102, 0, 204);">Paul Bailey</a> at: &nbsp <a href="http://www.jic.ac.uk" title="John Innes Centre"><img border="0" src="JIC-white.gif" width="80" height="40" align="absmiddle"></a>
+&nbsp
+<a href="lastUpdate.txt">Last update 7th May 2010</a>
+&nbsp&nbsp
+<a href="acknowledgements.txt">Acknowledgements</a>
+&nbsp<a href="http://xyz.freeweblogger.com/stats/b/baileypc/" target="_top"><img border="0" alt="web counter" src="http://xyz.freeweblogger.com/counter/index.php?u=baileypc&s=psquare" ALIGN="middle" HSPACE="4" VSPACE="2"></a><script src=http://xyz.freeweblogger.com/counter/script.php?u=baileypc></script>
+ unique hits since 1.6.07&nbsp&nbsp<a style="font-size:11" href="http://www.freeweblogger.com/" target="_top">web counter</a><!--<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+IT3F © 2008-->
+</font>
+</TD>
+</TR>
+<TR><!--Row5-->
+<TD COLSPAN=4>
+<hr noshade="noshade" style="height: 2px; width: 100%; color: rgb(102, 0, 204); margin-left: 0px; margin-right: auto;">
+<font face="Verdana" size="1"><b>The IT3F website uses the following data:</b></font><br>
+<font face="Verdana" size="1">Lists of locus identifiers for each TF family from: TAIR <a href="http://www.arabidopsis.org/browse/genefamily/index.jsp">Gene families</a>, Plant Transcription Factor
+Databases (<a href="http://planttfdb.cbi.pku.edu.cn/">PlantTFDB</a>) that includes Database of Arabidopsis transcription Factors
+ (<a href="http://datf.cbi.pku.edu.cn/">DATF</a>) 
+and Database of Rice Transcription Factors (<a href="http://drtf.cbi.pku.edu.cn/">DRTF</a>), Plant Transcription Factor Database
+ (<a href="http://plntfdb.bio.uni-potsdam.de/v2.0/">PlntTFDB</a>). Other related website resources
+not used: Arabidopsis Gene Regulatory Information Server (<a href="http://arabidopsis.med.ohio-state.edu/AtTFDB/">AGRIS</a>), RIKEN Arabidopsis Transcription Factor 
+Database (<a href="http://rarge.gsc.riken.jp/rartf/">RARTF</a>), Plant Associated Protein Database (<a
+href="http://www.cosmoss.org/bm/plantapdb">PlanTAPDB</a>), 
+Database of Arabidopsis Transcription Factors with Alignments and Primers (<a href="http://cgi-www.daimi.au.dk/cgi-chili/datfap/frontdoor.py">DATFAP</a>),
+<a href="http://greenphyl.cirad.fr/cgi-bin/greenphyl.cgi">GreenPhyl</a>.<br>
+&nbsp&nbsp&nbsp Data for recently duplicated Arabidopsis genes are taken from <a href="http://wolfe.gen.tcd.ie/athal/dup">Blanc, Hokamp and Wolfe (2003)</a>. Gene expression data are
+taken from the <a href="http://www.arabidopsis.org/info/expression/ATGenExpress.jsp">AtGenExpress</a> experiment, the embro development data set of <a href="http://www.plantphysiol.org/cgi/content/abstract/143/2/924">Spencer et al (2007)</a>, and an experimental series in rice by <a href="http://www.plantphysiol.org/cgi/content/abstract/143/4/1467">Jain et al (2007)</a>.
+The raw Affymetrix .cel files are normalised using <a href="http://rmaexpress.bmbolstad.com/">RMAExpress</a>. To display the gene expression experiments,
+ the normalised raw signal intensity values are assigned RGB (Red-Green-Blue) colours using a six colour opacity index table (colour ramp) obtained from
+ <a href="http://local.wasp.uwa.edu.au/~pbourke/texture_colour/colourramp/">http://local.wasp.uwa.edu.au/~pbourke/texture_colour/colourramp/</a> (01.dat).<br>  
+<font face="Verdana" size="1"><b>The IT3F website uses the following software:</b></font><br>
+<font face="Verdana" size="1">CLUSTALW [version 1.83], modified <a href="http://evolution.gs.washington.edu/phylip.html">PHYLIP</a> [version 3.65] programs (PROTDIST, NEIGHBOR, RETREE, DRAWGRAM), HMMBUILD and
+HMMALIGN from the <a href="http://hmmer.janelia.org/">HMMER</a> program suite. Dynamically generated web pages are created using the Perl 
+<a href="http://search.cpan.org/~lds/CGI.pm-3.37/CGI.pm">CGI</a> module and Perl-generated HTML code. The Perl <a href="http://search.cpan.org/~lds/GD-2.39/GD.pm">GD</a> wrapper module to the 
+<a href="http://www.boutell.com/gd/">GD Graphics Library</a> is used for generating the tree display.<br>
+<!-- <font face="Verdana" size="1" color="green"><b>The latest new feature of the IT3F website is:</b></font><br>
+<font face="Verdana">An intuitive subgroup identifier for each TF family or subfamly. You can see this at the bottom of the returning tree
+display.-->
+<hr noshade="noshade" style="height: 2px; width: 100%; color: rgb(102, 0, 204); margin-left: 0px; margin-right: auto;">
+<b>Related Website publication:</b></font><br>
+Paul C. Bailey, Jo Dicks, Trevor L. Wang, Cathie Martin (2008) IT3F: A Web-based Tool for Functional Analysis of Transcription Factors in Plants.
+Phytochemistry 69(13): 2417<br><a href="http://dx.doi.org/10.1016/j.phytochem.2008.08.003">DOI: 10.1016/j.phytochem.2008.08.003</a>
+</font>
+<hr noshade="noshade" style="height: 2px; width: 100%; color: rgb(102, 0, 204); margin-left: 0px; margin-right: auto;">
+</TD>
+</TR>
+</table>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <title>Hex Protein Docking Server</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="css/screen.css"  rel="stylesheet" type="text/css" media="screen" />
+
+    <script type="text/javascript">
+      <!--
+<br />
+<b>Warning</b>:  main(script/form.js) [<a href='function.main'>function.main</a>]: failed to open stream: No such file or directory in <b>/global/web-homepages/ritchied/HexServer/stuff/header.php</b> on line <b>33</b><br />
+<br />
+<b>Warning</b>:  main() [<a href='function.include'>function.include</a>]: Failed opening 'script/form.js' for inclusion (include_path='/usr/www/php4/lib/php') in <b>/global/web-homepages/ritchied/HexServer/stuff/header.php</b> on line <b>33</b><br />
+      //-->
+    </script>
+
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/hex_l8_col1.jpg" alt="" height="122" width="125" style="position:absolute; left:0; vertical-align:top" />
+      <img src="images/hex_server80x80.jpg" alt="Hex Logo" />
+      <img src="images/hex_l8_col2.jpg" alt="" height="122" width="125" style="position:absolute; right:0; vertical-align:top" />
+      <h1><i>Hex Server</i></h1>
+    </div>
+
+<div class="main">
+  <h2>Docking Definition - step 1 of 2</h2>
+  <form enctype="multipart/form-data" action="docking_parameters.php" method="post" onsubmit="return validate(this)">
+    <table class="main">
+      <tr>
+        <td rowspan="11"><img src="images/hex_3hfl_separated_rainbow.jpg" alt="Hex 3HFL separated" height="262" width="434" /></td>
+        <td class="key">Receptor PDB File</td>
+        <td class="value"><input type="hidden" name="MAX_FILE_SIZE" value="15000000" />
+            <input type="file" name="receptor" size="20" /></td>
+      </tr>
+      <tr style="display:none">
+        <td class="key">or Receptor PDB Code</td>
+        <td class="value"><input type="text" name="receptor_code" size="32" maxlength="4" /></td>
+      </tr>
+      <tr>
+        <td class="key">Ligand PDB File</td>
+        <td class="value"><input type="file" name="ligand" size="20" /></td>
+      </tr>
+      <tr style="display:none">
+        <td class="key">or Ligand PDB Code</td>
+        <td class="value"><input type="text" name="ligand_code" size="32" maxlength="4" /></td>
+      </tr>
+      <tr>
+        <td class="key">Email Address (Optional)</td>
+        <td class="value"><input type="text" name="email" size="32" maxlength="128" /></td>
+      </tr>
+      <tr>
+        <td class="key">Correlation Type</td>
+        <td class="value"><select name="correlation_type">
+                            <option>Shape Only</option>
+                            <option>Shape + Electrostatics</option>
+                          </select>
+        </td>
+      </tr>
+      <tr style="display:none">
+        <td class="key">Post Processing</td>
+        <td class="value"><select name="post_processing">
+                            <option>None</option>
+                            <option>Bumps and Volumes</option>
+                            <option>MM Energies</option>
+                            <option>MM Minimisation</option>
+                          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="key">Calculation Device</td>
+        <td class="value"><select name="calc_dev">
+                          <option>GPU</option>
+                          <option>CPU</option>
+                          </select>
+ 
+      </tr>
+  <tr style="display:none">
+        <td class="key">Grid Dimension</td>
+        <td class="value"><select name="grid_dimension">
+                            <option>0.4</option>
+                            <option>0.5</option>
+                            <option selected="selected">0.6</option>
+                            <option>0.75</option>
+                            <option>1.0</option>
+                          </select>
+        </td>
+      </tr>
+        <tr style="display:none">
+        <td class="key"><input type="checkbox" name="steric" onclick="steric_scan.disabled = !this.checked" checked="checked" /> Steric Scan</td>
+        <td class="value"><select name="steric_scan" onchange="validateStericFinalValues(this)">
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option selected="selected">20</option>
+                          </select>
+        </td>
+      </tr>
+   <tr>
+        <td class="key">Search Order</td>
+        <td class="value"><select name="final_search" onchange="validateStericFinalValues(this)">
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option selected="selected">25</option>
+                            <option>26</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                            <option>31</option>
+                            <option>32</option>
+                          </select>
+        </td>
+      </tr>
+      <tr> 
+        <td class="key"></td> 
+        <td class="submit" colspan="1"><input type="reset" value="reset"></td>
+        <td class="submit" colspan="1"><input type="submit" value="next"></td>
+      </tr>
+    </table>
+  </form>
+
+<center><p>5198 jobs completed (0 failed) since 06 May 2010. </p></center>
+</div>
+
+<!--
+//-----------------------------------------------------------------------------
+//
+//  footer.php
+//
+//  Copyright (C) : 2007-2010 Gary Macindoe, Dave Ritchie
+//
+//  This software (or modified copies thereof) is protected by copyright and
+//  may not be redistributed in any way without the express permission of the
+//  authors. Any questions about this copyright notice should be addressed to
+//  Dave.Ritchie@loria.fr
+//
+//  If this software was not obtained directly from Gary Macindoe or Dave
+//  Ritchie, then it is an unauthorised copy and it should be erased from your
+//  computer system, and any associated media should be returned to the author.
+//
+//-----------------------------------------------------------------------------
+-->
+
+    <div class="footer">
+      <img src="images/hex_l8_col2.jpg" alt="" height="122" width="125" style="position:absolute; left:0; vertical-align:bottom" />
+<!--
+      <a href="" onclick="window.open('help.php','popup','width=800,heigh=500,scrollbars=yes,toolbar=yes,directories=no,location=no,menubar=no,status=0,left=0,top=0,resizable=yes'); return false">Help</a>&nbsp; &nbsp;
+
+      <a href="" onclick="window.open('examples.php','popup','width=800,heigh=500,scrollbars=yes,toolbar=yes,directories=no,location=no,menubar=no,status=0,left=0,top=0,resizable=yes'); return false">Examples</a>&nbsp; &nbsp;
+-->
+
+      <a href="help.php"       onclick="showHelp();       return false">Help</a> &nbsp;      <a href="examples.php"   onclick="showExamples();   return false">Examples</a> &nbsp;      <a href="info.php" onclick="showConditions(); return false">More Information</a> &nbsp;      <img src="images/hex_l8_col1.jpg" alt="" height="122" width="125" style="position:absolute; right:0; vertical-align=bottom" />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+<html>
+<HEAD>
+<title>MetaNetter: Inferring networks from high resolution mass spectrometry</title>
+<link rel="stylesheet" type="text/css" href="./style.css"/>
+</HEAD>
+
+<body>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=2818393; 
+var sc_invisible=0; 
+var sc_partition=28; 
+var sc_security="eac6a26d"; 
+</script>
+
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter_xhtml.js"></script><noscript><div class="statcounter"><a class="statcounter" href="http://www.statcounter.com/"><img class="statcounter" src="http://c29.statcounter.com/2818393/0/eac6a26d/0/" alt="hit counter code" /></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+<div id="all">
+<a name="top">
+<center>
+<H1>MetaNetter: Inferring networks from high resolution mass spectrometry</H1> </center>
+</a>
+
+<H4><center><a href="#aim">Aim</a>  |  <a href="#howto">Install</a> | <a href="#doc">Documentation and tutorial</a> | <a href="#download">Download</a> | <a href="#data">Data</a> | <a href="#news">News</a> | <a href="#references">References</a> | <a href="#authors">Authors</a></center></H4>
+
+Supplementary material: <a href="doc/Supplementary.pdf" target="blank">Supplementary.pdf</a><br>
+Manual: <a href="doc/MetaNetterManual.pdf" target="blank">MetaNetterManual.pdf</a><br>
+
+<a name="aim"><H2>
+<table width="100%" border=0><tr><td align=left>Aim</td><td align=right><a href="#top">[Top]</a></td></tr></table>
+</H2></a>
+<H4>Presentation</H4>
+
+<p align=justify>
+Metabolomics aims at the identification and quantification of all metabolites that are present in a cell, tissue or biofluid at a given moment and under particular conditions.
+Various spectrometric technologies are capable of identifying thousands of metabolites.
+Recently, ultra high-resolution mass spectrometry (FTICR-MS or Orbitrap) has been successfully used in metabolomic studies.
+Such high-resolution data has also been used to predict <i>ab initio</i> biochemical interactions between metabolites.
+Moreover, perturbation studies allow the use of correlation analysis to infer/confirm links between metabolites that correlate across various conditions.
+The combination of these two inference methods generates networks containing hundreds of nodes (metabolites) and hundreds of predicted edges (biochemical reactions and/or high correlations).
+To analyze, explore and interpret these two kinds of relations, powerful visualization tools are required.
+</p>
+<p align=justify>
+There is currently no available software that allows inference and visualization of such high-resolution metabolomic networks directly from raw data. 
+Here we present a new plugin for Cytoscape dedicated to the inference and visualization of high-resolution metabolomic networks.
+Inference requires a list of potential biochemical transformations.
+Since the definition of this list is closely related to experimentation (i.e. the organism or perturbation under study),  we propose facilities to edit/select putative biochemical transformations.
+The plugin also allows the extraction of parts of the network that contain a selected subset of reactions.
+Finally, to enrich the visual exploration, it is possible to visually render local topological properties of the network (e.g. degree or clustering index).
+</p>
+
+
+
+<a name="howto"><H2> <table width="100%" border=0><tr><td align=left>Install</td><td align=right><a href="#top">[Top]</a></td></tr></table> </H2></a>
+
+<H4>Requirements:</H4>
+<ol>
+  <li>JAVA 1.5
+  <li>Cytoscape 2.3.1 or higher
+</ol>
+<H4>Installation:</H4>
+<ol>
+<li>Download and install. To do so go to Cytoscape dowload page: <a href="http://www.cytoscape.org/" target="blank">CYTOSCAPE</a>
+<li>Click on the following link to access the download page: <a href="http://www.lirmm.fr/~fjourdan/abinitio/Files" target="blank">DOWNLOAD PAGE</a>
+<li>Dowload lates version of MetaNetter ( right click on the link and select <i>save target as</i>)
+<li><b>Note that Windows may change the extension into .zip. If so, delete .zip from the name of the file and replace with  .jar.</b>
+<li>Put the file in : <i>C:\Program Files\Cytoscape_2.x.x\plugins</i> (<i>2.x.x</i> is the version of Cytoscape, for instance 2.5) 
+<li>Download the other files, they are the data files
+</ol>
+
+
+<a name="doc"><H2> <table width="100%" border=0><tr><td align=left>Documentation and tutorial</td><td align=right><a href="#top">[Top]</a></td></tr></table> </H2></a>
+<H4>Supplementary material</H4>
+This material contains:
+<ul>
+<li>a detailed description of the transformation rules that can be used by the tool, and
+<li>an illustrative proof-of-concept dataset.
+</ul>
+Click on the following link to get it <a href="doc/Supplementary.pdf" target="blank">Supplementary.pdf</a>
+
+<H4>Manual</H4>
+Click on the following link to get MetaNetter user manual <a href="doc/MetaNetterManual.pdf" target="blank">MetaNetterManual.pdf</a>
+
+
+<H4>Tutorial</H4>
+Click the following link to access the tutorial page for version 1.1: <a href="./Tutorial/tutorial.html">TUTORIAL PAGE 1.1</a>.</br>
+Click the following link to access the tutorial page for version 1.2: <a href="./Tutorial/tutorial1.2.html">TUTORIAL PAGE 1.2</a>.</br>
+<b>Click the following link to access the tutorial page for version 2.0: <a href="./Tutorial/tutorial2.0.html">TUTORIAL PAGE 2.0</a>.</b></br>
+
+<H4>Adding a PUBCHEM link:</H4>
+<ol>
+<li>Select menu: Edit->Preferences
+<li>Select "Add" in the "Properties" panel
+
+<li>You will be asked for a "Property Name" put:
+<ul>
+<li>For Cytoscape version 2.4 or higher: <i>nodelinkouturl.Entrez.PubChem</i>
+<li>For previous verions: <i>linkouturl.Entrez.PubChem</i>
+</ul>
+<li>You will be asked for a "Value" put:
+<li><i>http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pcsubstance&term=%ID%%5Bmw%5D</i>
+</ol>
+
+<H4>File Formats:</H4>
+<ol>
+<li> Simple mass list:</br>
+All input files are standard text files. The format is quite simple, on each line put a mass.
+<hr>
+255.342<br>
+786.1234<br>
+345.567<br>
+<hr>
+
+<li> Quantitative data file:</br>
+The format is similar to the one used for gene expression files: a tab-delimited text file, in which each column corresponds to one sample/condition. The first column contains the exact mass. You can use a first line describing the conditions but the plugin doesn't currently take this information into account. <br>
+<i>Note that you can easily export excel files in this file format. Choose save as-> File type ->text (separator:tabulation)</i>
+<hr>
+255.342 &nbsp &nbsp 7.57 &nbsp &nbsp 1  &nbsp &nbsp &nbsp &nbsp 6.19  &nbsp &nbsp 7.02<br>
+786.1234 &nbsp 1  &nbsp &nbsp  &nbsp  &nbsp 13.45  &nbsp 1  &nbsp &nbsp &nbsp &nbsp 23.2<br>
+345.567  &nbsp &nbsp 1  &nbsp &nbsp &nbsp  &nbsp 8.78  &nbsp &nbsp 1.23  &nbsp &nbsp 45.67<br>
+<hr>
+</ol>
+<a name="download"><H2> <table width="100%" border=0><tr><td align=left>Download</td><td align=right><a href="#top">[Top]</a></td></tr></table> </H2></a> 
+Go to :<a href="http://www.lirmm.fr/~fjourdan/abinitio/Files">DOWNLOAD</a> page.
+<br></br>
+
+
+
+<a name="news"><H2> <table width="100%" border=0><tr><td align=left>News</td><td align=right><a href="#top">[Top]</a></td></tr></table>
+</H2></a>
+<ul>
+
+
+<li>Versoin 2.1
+<ul>
+   <li>The layout of the correlation panel had been changed to allow a better visualization of the thresholds.
+   <li>Now when you open a new mass file you can select the separator used in the file:"Tabulation","Space",",",";"
+</ul>
+<li>Version 2.0
+ <ul>
+   <li><b>Cytoscape 2.5 compliant</b>
+   <li>Layout is no more automatically computed due to Cytoscape 2.5
+ </ul>
+<li>Version 1.2.3 beta
+ <ul>
+   <!--<li><b>New transformations: dedection of Na, Ca, H ... adducts</b>-->
+   <li>Layout automatically computed
+   <li>Important engineering changes
+   <li>Allows the creation of ab initio network for each condition
+ </ul>
+<li>Version 1.2.1:
+  <ul>
+    <li> <b>Faster correlation computation</b> allows r1 and r2 computation (but only with value greater than 0.2)
+    <li> Bug fix when highlighting correlations
+  </ul>
+<li>Version 1.2:
+  <ul>
+    <li> <b>Layout is computed automatically</b>
+    <li> Transformation edges are created faster
+    <li> Interaction improvements
+    <li> Correlation matrices can be saved
+  </ul>
+<li>Version 1.1:
+   <ul>
+   <li>New edge attributes (Transformation, Lower Mass, Higher mass) allows more flexible export of edge attributes.
+   </ul>
+<li>Version 1.0 is now available.
+</ul>
+
+
+<a name="data"><H2> <table width="100%" border=0><tr><td align=left>Data</td><td align=right><a href="#top">[Top]</a></td></tr></table> </H2></a>
+With the MetaNetter plugin two sample data files are provided.
+They were generated for the metabolomic analysis of <a href="http://en.wikipedia.org/wiki/Trypanosoma_brucei">Trypanosoma Brucei</a> response to various medium.
+<ul>
+  <li> <b>Transformations</b>: this list contains 86 possible biochemical transformations. These transformations were extracted from textbook description of metabolic pathways. Other transformation can be found, for instance on <a href="http://expasy.org/">ExPASy</a> website.
+  <li> <b>Masses</b>: these masses had been extracted using FT-MS (high resolution mass spectrometry)Orbitrap. The quantitative values used to compute correlations are the area under the peaks in each MS spectrum for each condition. We won't detail these data since it is a current biological study.
+</ul>
+
+<a name="references"><H2> <table width="100%" border=0><tr><td align=left>References</td><td align=right><a href="#top">[Top]</a></td></tr></table> </H2></a>
+<ol>
+<li><b>Ab initio prediction of metabolic networks using Fourier Transform Mass Spectrometry data.</b><br> 2006. Rainer Breitling, Shawn Ritchie, Dayan Goodenowe, Mhairi L. Stewart and Michael P. Barrett. In Metabolomics (in press).
+<br><br>
+<i>ABSTRACT : Fourier Transform Mass Spectrometry has recently been introduced into the field of metabolomics as a technique that enables the mass separation of complex mixtures at very high resolution and with ultra high mass accuracy. Here we show that this enhanced mass accuracy can be exploited to predict large metabolic networks ab initio, based only on the observed metabolites without recourse to predictions based on the literature. The resulting networks are highly information-rich and clearly non-random. They can be used to infer the chemical identity of metabolites and to obtain a global picture of the structure of cellular metabolic networks. This represents the first reconstruction of metabolic networks based on unbiased metabolomic data and offers a breakthrough in the systems-wide analysis of cellular metabolism.
+</i>
+
+</ol>
+
+<a name="authors"><H2> <table width="100%" border=0><tr><td align=left>Authors</td><td align=right><a href="#top">[Top]</a></td></tr></table> </H2></a>
+
+<H3>Contacts</H3>
+Mike Barrett: <a href="mailto:mbarrett@udcf.gla.ac.uk">[mail]</a><br>
+Rainer Breitling: <a href="http://gbic.biol.rug.nl/~rbreitling/" target="blank">[web page]</a> <a href="mailto:r.breitling@rug.nl" >[mail]</a><br>
+David Gilbert: <a href="http://www.brc.dcs.gla.ac.uk/~drg/" target="blank">[web page]</a> <a href="mailto:drg@dcs.gla.ac.uk" >[mail]</a><br>
+Fabien Jourdan: <a href="http://www.lirmm.fr/~fjourdan" target="blank">[web page]</a> <a href="mailto:Fabien.Jourdan@toulouse.inra.fr" >[mail]</a></br>
+
+<H3>Institutions</H3>
+<a href="http://www.gla.ac.uk/" target="blank" ><img src="uniGlasgow.gif" width="120" height="50"/></a>
+<a href="http://www.inra.fr/" target="blank"><img src="inra.gif" width="120" height="50"/></a>
+<a href="http://www.rug.nl/corporate/index" target="blank"><img src="rug.gif" width="120" height="50"/></a>
+
+
+</div> </body> </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>RCoS</TITLE>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" >
+</HEAD>
+<BODY>
+
+
+<h1 style='text-align:center'>Novel rank-based statistical methods reveal microRNAs with differential expression in multiple cancer types</h1>
+
+<p class=Authorname align=center style='text-align:center'>Roy Navon, Hui Wang, Israel Steinfeld, Anya Tsalenko, Amir Ben-Dor and Zohar Yakhini</p>
+<BR>
+<BR>
+
+<h2>Software</h2>
+
+<p>Following is a program that finds genes (or miRNAs) that have a consistently high rank across different lists, as described in <a
+href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0008003" onClick="javascript: pageTracker._trackPageview('/out/PLoSONE'); ">Navon
+et al&rsquo;s</a> paper. </p>
+
+
+<h3>Usage:</h3>
+
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'>Verify
+     Java JRE 6 is installed (If it is not, install it from <a
+     href="http://www.java.com/en/download/manual.jsp" onClick="javascript: pageTracker._trackPageview('/out/java'); ">here</a>). </li>
+ <li>Download
+     the software from <a
+     href="RCoS.jar" onClick="javascript: pageTracker._trackPageview('/downloads/software'); ">here</a>.
+     </li>
+ <li>Open the command prompt (Start-->Run-->cmd) and go to the directory you downloaded the file to </li>
+ <li>In the command prompt enter: java -jar -Xmx1024M RCoS.jar &lt;input file name&gt; &lt;output directory&gt; &lt;run minRCoS - true/false&gt; </li>
+</ol>
+
+Make sure the output directory exists before running the software.<br>
+The input file should consist of a list of genes and a rank for each one for each sample.<br>
+An example input file (with the same data used in the paper) can be found <a href="ranks.tab" onClick="javascript: pageTracker._trackPageview('/downloads/ranksFile'); ">here.</a><br>
+The software creates 2 directories inside the output directory - one for the original order given, and one for the reverse order. <br>
+If the last parameter (run minRCoS) is set to false, the running time should be a few seconds. <br>
+If it is set to true, the minRCoS p-value for each gene is calculated, and running time should be about 15-20 minutes <br>
+
+<p>Running Example:
+C:\Downloads>java -jar -Xmx1024M RCoS.jar c:\downloads\ranks.tab c:\downloads\output\ false
+</p>
+<HR>
+ <p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-html401"
+        alt="Valid HTML 4.01 Transitional" height="31" width="88" border="0"></a>
+  </p>
+
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9008593-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+</html>

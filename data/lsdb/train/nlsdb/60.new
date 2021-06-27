@@ -1,0 +1,234 @@
+<html>
+<head>
+<TITLE>SIB-CleanEx Database</TITLE>
+
+<style type="text/css">
+body { font-family:  trebuchet ms, lucida, verdana, arial, times; font-size: 12pt;}
+#content { width: 100%; text-align: center; }
+#wrapper { width: 90%; margin-left: auto; margin-right: auto; text-align: left; }
+</style>
+
+</head>
+<body bgcolor="#FFFFFF">
+
+
+<!-- header -->
+
+<p><center><table width="100%" border="2" cellspacing="0" cellpadding="2" align="center"><tr>
+<td bgcolor="#FFFFFF" align="center"> <b><a href="http://www.isb-sib.ch">SIB Home page</a></b></td>
+<td bgcolor="#C0EAC0" align="center"> <b><a href="http://www.isrec.isb-sib.ch/">Computational Cancer Genomics</a></b></td>
+<td bgcolor="#8888FF" align="center"> <b><a href="http://www.ch.embnet.org/">Swiss EMBnet node</a></b></td>
+ <td align="center" bgcolor="#88CCFF"> <b><a href="http://www.expasy.org/">ExPASy</a></b></td>
+<td bgcolor="#FFFF66" align="center"> <b><a href="http://www.isrec.ch">ISREC</a></b></td>
+</td></tr></table></center>
+<center><table border=1><tr><td align=center bgcolor="#F88017"><A HREF="http://www.cleanex.isb-sib.ch/webmail.html">Contact us</A></td>
+</td></tr></table></center><br>
+
+<hr size="2">
+<center><table BORDER COLS=4 WIDTH="80%">
+<tr>
+<td rowspan=2 align=CENTER><img SRC="/icons/NEWCAT_left.jpeg" height=110 align=CENTER border=0></td>
+<td bgcolor=white><a href="http://www.cleanex.isb-sib.ch/index.html"><center><img SRC="/icons/Cleanex_title.gif " height=70 align=CENTER border=0></a></td>
+<td rowspan=2 align=CENTER><img SRC="/icons/NEWCAT_right.jpeg" height=110 align=CENTER border=0></td></tr>
+<tr>
+<td align=CENTER><center><a href="http://www.isb-sib.ch/"><img SRC="/icons/logo_sib_small.jpg" height=50 align=CENTER border=0></a></center></td>
+</tr>
+</table></center><p>
+<HR>
+<!-- end header -->
+<p align=justify>
+<B>CleanEx</B> is a database which provides access to public gene expression data via unique approved gene symbols and which represents heterogeneous expression data produced by different technologies in a way that facilitates joint analysis and cross-dataset comparisons.</p>  
+<CENTER><P>
+<TABLE BORDER=1 CELLPADDING=4><TR><TD bgcolor="#F88017"><A HREF="tutorial/"><B><font color="#FFFFFF" size=+1>CleanEx Tutorial</FONT></B></A></TD></TR></TABLE><P>
+<TABLE BORDER=1><TR><TD><A HREF="#direct">Direct Access</A></TD><TD><A HREF="#exp_gen">Expression Data Related Tools</A></TD><TD><A HREF="#analysis">Analysis Tools</A></TD><TD><A HREF="#extract_gen">Data Extraction Tools</A></TD><TD><A HREF="#mesh">MeSH oriented tools</A></TD><TD><A HREF="#doc">Documentation</A></TD><TD><A HREF="#links">Links</A></TD></TABLE></CENTER>
+<P>
+<b>
+<center>
+Current release is based on Unigene database available on : 06 Feb 2009
+</center>
+</b>
+<HR>
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="direct"></A>Direct Access to CleanEx Individual Entries</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<form name="form" method="GET" action="cgi-bin/cleanex_quick_search.pl">
+<input name="query_str" size=20>
+<input TYPE=SUBMIT value="Quick Search"><br>
+<input TYPE=hidden name="database" value="cleanex">
+in <B>CleanEx</B> database by ID or GENE SYMBOL<br>
+</form>
+<p>
+<form name="form" method="GET" action="cgi-bin/get_doc">
+<input name="entry" size=20>
+<input TYPE=SUBMIT value="Quick Search"><br>
+<input TYPE=hidden name="db" value="cleanex_trg">
+<input TYPE=hidden name="format" value="nice">
+in <B>CleanEx Target</B> database by Target ID(see <a href="http://www.cleanex.isb-sib.ch/current/format_help.html">here</a> for format help)<br>
+</form>
+</td>
+<td valign=top>
+<UL>
+<LI><A HREF="cleanex_query_form.html">Browse CleanEx database</A>
+<LI><A HREF="cleanex_trg_query.html">Browse CleanEx Target database</A>
+</UL>
+</td></tr>
+</table>
+<P>
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="extract_spec"></A>CleanEx Individual Entries with Selected Expression Datasets</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="cleanex_gene_and_datasets_query_form.html">Extract gene and selected expression data</A></td>
+<td>Allows to extract CleanEx individual entries together with datasets selected according to their biological/medical annotation</td></tr>
+</table>
+ <P>
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="exp_gen"></A>Expression Dataset's Related General Tools</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="datasets.html">Dataset List</A></td>
+<td>Shows the complete list of expression datasets included in CleanEx. Datasets are classified according to the organism and to the data generation system (Affymetrix, Dual Channel, Basic Ratio or Counts experiments)</td></tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="cleanex_datasets_query_form.html">Finding expression datasets in CleanEx</A></td>
+<td>Text search in the datasets description lines. The list of terms to search can be either "free text" ot "MeSH terms" based. The MeSH term search is more precise</td></tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="cleanex_experiments_query_form.html">Finding individual experiments from different expression datasets in CleanEx</A></td>
+<td>Text search in the datasets and experiments description lines. The list of terms to search can be either "free text" ot "MeSH terms" based. The MeSH term search is more precise</td></tr>
+<tr bgcolor="#FFF8C6"><td>
+<A HREF="compare_dataset_genes.html">Common Genes List across datasets</A></td>
+<td>From a given dataset list, extracts all the features representing common genes between these datasets. The ouput lists the HUGO Gene Symbols as well as the individual &quot;Spots&quot; or "Probesets" in each dataset</A></td></tr>
+<!--<tr bgcolor="#FFF8C6"><td><A HREF="compare_platforms_genes.html">Common Genes List across platforms</A></td><td>Same as above, but between platform types instead of datasets names</td></tr>-->
+</table>
+ <P>
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="extract_gen"></A>General Data Extraction Tools</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="extract_datasets.html">Extract expression data</A></td>
+<td>Extract numerical data as well as experiment and "feature" descriptions from an expression dataset included in CleanEx. Output is a data matrix with the two description files. Extraction field can be chosen by the user</td></tr>
+<tr bgcolor="#FFF8C6"><td>
+<A HREF="ftp://ftp.epd.unil.ch/pub/databases/CleanEx/">FTP Site</A></td>
+<td>Download all CleanEx files via the FTP repository</td></tr>
+</table>
+ <P>
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="mesh"></A>MeSH oriented Data Extraction Tools</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="first_mesh_page_for_datasets.html">Extract expression data</A></td>
+<td>Extract numerical data as well as experiment and "feature" descriptions from an expression dataset included in CleanEx. Output is a data matrix with the two description files. Extraction field can be chosen by the user. The dataset is selected via a tree-based biological conditions selection. Data extraction then proceeds as above (<A HREF="extract_datasets.html">Extract expression data</A>)</td></tr>
+<tr bgcolor="#FFF8C6"><td>
+<A HREF="first_mesh_page.html">Cross-dataset data extraction</A></td>
+<td>Same as above, but allows data extracion coming from different datasets. Numerical values are "re-scaled" for each experiment (sample) and go from 1 to 1000. For dual channel, only the "red" channel is taken into account</td></tr>
+</table>
+ <P>
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="analysis"></A>Analysis Tools</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="step_by_step_analysis.html">Step-by-step</A></td>
+<td>Going from one dataset, extract specific gene list (over-represented on under-represented). From the generated list, and through another dataset, extracts trends which are common to both datasets</td></tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="first_comp_page.html">Experiments pools comparison</A></td>
+<td>From the MeSH terms list, generate two data pools according to user-selected biological criteria, then extracts the corresponding common genes and numerical data, and processes to a differential analysis between the two pools</td></tr>
+<tr bgcolor="#FFF8C6">
+<td valign=top>
+<A HREF="cleanex_pools_query_form.html">Experiments pools comparison<br>Advanced users</A></td>
+<td>Same as above, but you can directly enter a list of MeSH terms instead of walking down the MeSH tree. This tool works also with &quot;free text search&quot,, but remember that free text IS NOT controlled vocabullary</td></tr>
+<tr bgcolor="#FFF8C6"><td>
+<A HREF="trg_batch_search.html">Batch</A></td>
+<td>From an input list containing either gene names or sequence references, clone names, SAGE or MPSS tags or Affymetrix probesets, gives for each input feature the corresponding gene symbol, sequence reference, or Unigene cluster</td></tr>
+</table>
+ <P>
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="doc"></A>General Documents</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td colspan=2>
+<A HREF="current/CleanEx_manual.html">CleanEx user manual</A><BR>
+<A HREF="http://www.cleanex.isb-sib.ch/current/CleanEx_manual.html#SURVEY OF LAST RELEASE">Survey of most recent release</A><BR>
+<A HREF="examples.html">List of examples from CleanEx and CleanEx Target</A><BR>
+<A HREF="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Retrieve&dopt=AbstractPlus&list_uids=14681477">CleanEx Reference paper</A> : &quot;CleanEx: a database of heterogeneous gene expression data based on a consistent gene nomenclature.&quot;. Praz V, Jagannathan V, Bucher P. <I>Nucleic Acids Res.</I> 2004 Jan 1;32:D542-7. PMID: 14681477.
+</td></tr>
+</table>
+ <P>
+
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff"><A NAME="links"></A>Access to servers offering related services</font></th></A>
+</TR>
+<TR bgcolor="#FFF8C6">
+<TD ><A HREF="http://source.stanford.edu/cgi-bin/sourceSearch">SOURCE</A></TD><TD> Genomic resource of functional annotations, ontologies, and gene expression data</td></tr>
+<TR bgcolor="#FFF8C6">
+<TD><A HREF="http://www.ncbi.nlm.nih.gov/geo/">GEO</A></TD><TD>Gene Expression Omnibus, a resource for gene expression data repository, browsing, query and retrieval</TD></TR>
+<TR bgcolor="#FFF8C6">
+<TD>
+<A HREF="http://genome-www5.stanford.edu/MicroArray/SMD/">SMD</A></TD><TD>The Stanford Microarray Database
+</TD></TR>
+<TR bgcolor="#FFF8C6">
+<TD>
+<A HREF="http://www.ebi.ac.uk/arrayexpress/">ArrayExpress</A></TD><TD>Public repository for microarray data annotated in accordance with MGED recommendations
+</TD></TR>
+</table>
+ <P>
+
+<table cellpadding=1 cellspacing=2 border=1 width=100%>
+<tr>
+<th colspan=2 bgcolor="#F88017"><font color="#ffffff">Access to other databases and tools on the SIB-Lausanne server</font></th>
+</tr>
+<tr bgcolor="#FFF8C6">
+<td>
+<A HREF="http://www.epd.isb-sib.ch/">EPD</A></td><td>The eukaryotic Promoter Database</td></tr>
+<tr bgcolor="#FFF8C6">
+<td>
+<A HREF="http://www.isrec.isb-sib.ch/ssa">SSA</A></td><td>The Signal Search Analysis Server</td></tr>
+<tr bgcolor="#FFF8C6">
+<td>
+<A HREF="http://myhits.isb-sib.ch/cgi-bin/index"><I>my</I>HITS</A></td><td>A database and web tools devoted to protein domains</td></tr>
+<tr bgcolor="#FFF8C6">
+<td>
+<A HREF="http://www.ch.embnet.org/">EMBnet</A></td><td>Swiss Node Of The EMBnet Group</td></tr>
+</table>
+<HR>
+
+<center><H5><I>
+Last modified : 06 Feb 2009
+</I></H5></center>
+
+<P>
+<!-- footer -->
+
+<P><center><table width="100%" border="2" cellspacing="0" cellpadding="2" align="center"><tr>
+<td bgcolor="#FFFFFF" align="center"> <b><a href="http://www.isb-sib.ch">SIB Home page</a></b></td>
+<td bgcolor="#C0EAC0" align="center"> <b><a href="http://www.isrec.isb-sib.ch/">Computational Cancer Genomics</a></b></td>
+<td bgcolor="#8888FF" align="center"> <b><a href="http://www.ch.embnet.org/">Swiss EMBnet node</a></b></td>
+ <td align="center" bgcolor="#88CCFF"> <b><a href="http://www.expasy.org/">ExPASy</a></b></td>
+<td bgcolor="#FFFF66" align="center"> <b><a href="http://www.isrec.ch">ISREC</a></b></td>
+</tr></table></center>
+
+<!-- end footer -->
+
+<br><center><table border=1><tr><td align=center bgcolor="#F88017"><A HREF="http://www.cleanex.isb-sib.ch/webmail.html">Contact us</A></td>
+</td></tr></table></center>
+
+</body>
+</html>
+
+

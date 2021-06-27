@@ -1,0 +1,227 @@
+<HTML> 
+<HEAD> 
+<TITLE>MULTI NEURON ANALYSIS USING MEANOVA</TITLE> 
+
+<META NAME="description" CONTENT="MULTI NEURON ANALYSIS USING MEANOVA"> 
+
+<META NAME="keywords" CONTENT="neurons, olfactory bulb, analysis, neuroscience, statistics"> 
+
+</HEAD> 
+<BODY LANG="EN"> 
+<P align="left"> <IMG ALIGN=LEFT HSPACE=60 VSPACE=60 SRC="sussex.jpg"  ALT="logo"> </P>
+<P align="right"> <IMG ALIGN=RIGHT VSPACE=60 WIDTH=220 HEIGHT=220 HSPACE=80 SRC="babraham.jpg"  ALT="logo"> </P>
+
+<BR CLEAR=all>
+
+
+<H1 ALIGN=CENTER>MULTI NEURON ANALYSIS USING MEANOVA</H1> 
+<H1> Table of Contents</H1>
+<OL><LI><A HREF="#intro">Introduction </A>
+<LI><A HREF="#downloads">Download Software</A>
+<LI><A HREF="#contents">Contents</A>
+
+<LI><A HREF="#references">References</A>
+<LI><A HREF="#sources">Other Sources Of Information</A>
+</OL>
+
+<HR SIZE="5"WIDTH="100%"ALIGN="center"NOSHADE>
+
+<H1><A NAME="intro">Introduction</A></H1>
+
+
+
+<p>This site is dedicated to giving an introduction to the MEANOVA process, and to give an overview of what the software
+ available on this website can do.   The main objective of the software is to be able to analyse spike data from
+extracelluar recordings with multi-electrode arrays.&nbsp; The software acquires 
+the spiking data from selected text files(or produce simulated spiking data), and analyses them with the statistical methods featured in the program.  
+The output from the software is in the form of graphs.   The main technique which is used to analyse the
+spiking data is called MEANOVA and can be found in the paper titled &quot;MEANOVA-Applications
+of MANOVA to MEA Data&quot; by P.Horton et al.&nbsp; 
+
+<p>The software is currently
+being used to investigate the olfactory bulb(the first processing site of odour
+recognition in animals), by using data provided by the babraham institute.  More detail on this topic can be found in the
+reference section[?].  The data from the olfactory bulb is acquired by using rats, to find how the mitral cells in the bulb, respond to different
+odours.  The picture below shows a typical test:</p>
+
+<P align="center"> <IMG ALIGN=CENTER SRC="rat.jpg"  ALT="rat"> </P>
+<P align="center"> FIGURE 1, The circle on the left, contain the electodes.  FIGURE 2 shows the names of each of these</p>
+
+The graphs in the website, were generated using the data acquired from the rats olfactory bulb, unless otherwise stated.
+
+<H2> MEANOVA Process</H2>
+
+
+<p>The main statistical method is MEANOVA, which extends the MANOVA process.  This has been made for the reason, that if one cell in the bulb has had a significant
+change in activity, due to a stimulus, using MANOVA, would hide this very important change.  It would be hidden as it would consider the vast amount
+of other cells which have had no significant change.  MEANOVA is able to solve this problem by producing a significant score for subsets of the cells, i.e analysing
+single cells, and then analysing groups of cells, to find the areas which have had the most significant change.
+
+As an example, if you consider the grid of electrodes below:
+
+<P align="center"> <IMG ALIGN=CENTER WIDTH=250 HEIGHT=250 SRC="array.jpg"  ALT="array"> </P>
+<P align="center"> FIGURE 2</p>
+
+If we look at electrode 33, a few of the groups that will be looked at, are as follows,
+
+<TABLE>
+<TR><TD> Group </TD> <TD> Electrode Name</TD> </TR>
+<TR><TD> 1 </TD> <TD> 33</TD> </TR>
+<TR><TD> 2 </TD> <TD> 33,32</TD> </TR>
+<TR><TD> 3 </TD> <TD> 33,43</TD> </TR>
+<TR><TD> 4 </TD> <TD> 33,42</TD> </TR>
+<TR><TD> ..50 </TD> <TD> 33,32,42,43,44,34,24,23,22,31</TD> </TR>
+</TABLE>
+
+
+<P>As you can see, it looks at adjacent ones first, and then expands out to all of the other electrodes which have shown activity.
+The final group would look at all of the active electrodes together, i.e 11..46.  If 33 was the only electrode to have
+a significant change, the final group analysis, would produce a very low score(i.e under 1).</P>
+
+<P>To show evidence of this, a simulation was produced, using the software provided.  
+A 9X9 mitral cell activity grid was created, with the purpose of only one cell being changed due to a stimulus.  The graphs below show, the average 
+activity rate of the grid of cells produced.  Each square is one mitral cell(one electrode):</P>
+
+
+
+<P><IMG ALIGN=LEFT WIDTH=250 HEIGHT=250 HSPACE=60 SRC="pre.jpg"  ALT="pre"></P>
+<P><IMG ALIGN=RIGHT WIDTH=250 HEIGHT=250 HSPACE=80 SRC="dur.jpg"  ALT="array"></P>
+
+
+<BR CLEAR=all>
+<P align="center"> FIGURE 3</p>
+
+<P>The left graph shows the activity before a stimulus, the right graph shows the activity during a stimulus.  The right graph also
+shows that cell 33 has had an increase in activity.</P>
+
+<P>This change is confirmed, by using MEANOVA.  The graph below shows, the significant change of all electrodes.  The one with the highest
+score corresponds to electrode 33.  The graph also shows that when more and more cells are being analysed together, the significant score decreases.
+The groups that score below 1, would conclude that there is no significant change. </P>
+
+<P align="center"> <IMG ALIGN=CENTER WIDTH=250 HEIGHT=250 SRC="predurgraph.jpg"  ALT="predurgraph"> </P>
+<P align="center"> FIGURE 4</p>
+
+<P> Various factors can be chosen, in the software, for comparison, i.e comparing pre-during stimulus with trials, pre-during with different odours, pre-during with different concentration etc.
+
+<P>More detail on the MEANOVA process can be found in the paper[1], in the <A HREF="#references">References</A> section.</P>
+
+<H2> Other Statistical Methods</H2>
+
+<P>The software can also be used to investigate single cells.  Each electrode can record 1-6 mitral cells.  To analyse single cells we need to look at the differences in one cell between pre and during stimulus.  This can be acheived by analysing interspike intervals.  From here we then use the Kolmogorov-Smirnoff test and Wilcoxon rank sum test ,
+to see if there is a significant change in the behaviour of the cell.  The software can also look at the correlation, and the mean firing rates (pre and during) of the cells. This is still in progress, and a screenshot will appear shortly.</P>
+
+
+<p>The software will also be able to look at all of the cells to see if there is a difference in which cells fire and the firing rates, when different odours are presented.  
+The graphs below show the difference in firing rates of mitral cells, before and during a stimulus being presented.  The different odour numbers represent different odour types:</p>
+<P align="center"> <IMG ALIGN=CENTER SRC="spiking pattern.jpg"  ALT="results"> </P>
+<P align="center"> FIGURE 5</p>
+
+
+<p>Movies can also be produced by using the software, to see how the behaviour of the cells changes over time.
+Two examples are shown below, this is spiking data acquired from the rat's olfactory bulb:</p>
+<p>
+<A HREF = "ob1.avi"> Download movie AVI (83Kb) </A>
+</P>
+<p>
+<A HREF = "ob2.avi"> Download movie AVI (133Kb) </A>
+<P>
+
+
+
+
+<HR SIZE="5"WIDTH="100%"ALIGN="center"NOSHADE>
+
+<H1><A NAME="downloads">Download Software</A></H1>
+
+<p> The software at the moment, incorporates, an option to either enter experimental data or produce
+simulation data.  The statistical analysis is only in the form of MEANOVA, but will be updated
+as soon as possible.  The software needs to be executed in MATLAB 6.5.  The main function is
+mainmenu, this needs to be typed in, to start the program.  At the moment, the MEANOVA selection
+has pre-dur factor already selected and cannot be changed.  The second factor can be chosen in the experimental data mode.
+In simulation mode both factors are fixed, the first being pre-during, and the second being trials.</p>
+
+<p>Version 1.1</P>
+
+<p><A HREF = "stats.zip"> Download zip file </p>
+
+<P>All of the options which are blanked out in the software, are currenlty in production.</P>
+
+
+<HR SIZE="5"WIDTH="100%"ALIGN="center"NOSHADE>
+
+<H1><A NAME="contents">Contents</A></H1>
+
+<H2>Instructions on how to use the software </H2>
+As explained above, the program is started by typing mainmenu in the MATLAB command prompt.  For the software to run correctly 
+all of the files from the zip have to be in the same folder, and the MATLAB directory has to be pointing to this folder.
+
+<H3>Experimental Data </H3>
+
+If the analysis of experimental data is going to be performed, the text files need to be in the same directory as the 
+code files.  The titles of the pre files, have to be the same, as depending on what factors(i.e pre-during, trials) 
+will be used in the MEANOVA process, depends on how the title will be changed.</P>
+
+<P>For example the program asks for pre and during trial 1 files. Example file names:</P>
+
+<P>ratob200103_all_selected odour 6 conc 4 pre trial 1.txt
+<BR>ratob200103_all_selected odour 6 conc 4 during trial 1.txt</P>
+
+<P>If pre-dur and trials factors are going to be analysed, the program will search for the keyword trial,
+and depending on how many trials the user has entered(i.e 3), it will search for all of the files with the
+same name but changing the trial number, so in the end the program will look for:</P>
+
+<P>ratob200103_all_selected odour 6 conc 4 pre trial 1.txt
+<BR>ratob200103_all_selected odour 6 conc 4 during trial 1.txt
+<BR>ratob200103_all_selected odour 6 conc 4 pre trial 2.txt
+<BR>ratob200103_all_selected odour 6 conc 4 during trial 2.txt
+<BR>ratob200103_all_selected odour 6 conc 4 pre trial 3.txt
+<BR>ratob200103_all_selected odour 6 conc 4 during trial 3.txt</P>
+
+<P>Other keywords which have to be in the file name for other factors are odour and conc. These keywords represent the odour and concentration values.  The values after the keywords are changed 
+when comparing odour or concentration.  The program will change the number corresponding to these keywords
+depending on what the user has typed in for the odour and conc numbers.  As long as these keywords are in the filename,
+the program will work.  For example, if comparing odour 4 and 5, the program will automatically find the odour keyword and change the value:
+<BR>
+<BR>i.e ratob200103_all_selected odour 6 conc 4 during trial 1
+<BR>    ratob200103_all_selected odour 6 conc 5 during trial 1 
+<BR> These files will be looked for.
+
+
+<P>The file layout has to be in two columns, first column has to contain spiking times, the second column is the 
+electrode or cell which has spiked.  An example of the file layout can be found in</P>
+
+<p><A HREF = "ratob200103_all_selected odour 6 conc 2 pre trial 1.txt"> Example file format </A></p>
+
+<P>Once the program has finished, three graphs will be produced, one for the pre-during
+factor, one for the second factor, and one for the interactions.</P>
+
+
+<H3>Simulation Data </H3>
+
+If simulation data is going to be used for analysis, a grid of mitral cells is produced.  Each cell will generate a number of spikes, over a period of time.  The spiking times will be affected depending on what variables have been chosen by the user .  
+Specific cells can be chosen to be target cells, i.e which cells will be affected by a stimulus.  Each of the cells is connected to the 8 surrounding cells.
+Each of the non-target cells has a inhibitory connection, whereas, the target cells have a excitatory connection from
+all its 8 surrounding cells.  The connections from the target cells is either a inhibitory or excitatory connection from it to the other cells, which is selected by the user.
+A graph, per set of data is produced, to show the average firing rates of each of the mitral cells. Again three MEANOVA trials are produced.  More detail of the model used can be seen in [1]. </p>
+
+
+<HR SIZE="5"WIDTH="100%"ALIGN="center"NOSHADE>
+
+<H1><A NAME="references">References </A></H1>
+<P> [1]  Published Work: P.M. Horton, L. Bonny, A.U. Nicol, K.M. Kendrick and J.F. Feng, 
+         Applications Of Multi-Variate Analysis Of Variance (MANOVA) to Multi-Electrode Array Electrophysiology Data. J Neurosci Methods 2005;146:22-41</P>
+
+<HR SIZE="5"WIDTH="100%"ALIGN="center"NOSHADE>
+
+<H1><A NAME="sources">Other Sources Of Information </A></H1>
+
+
+<HR SIZE="5"WIDTH="100%"ALIGN="center"NOSHADE>
+
+<ADDRESS> Paul Horton<A HREF="mailto:pmh20@sussex.ac.uk"> email me</A>, web page updated on Thursday 22 April 2004 
+</ADDRESS> 
+
+
+</body>
+
+</html>

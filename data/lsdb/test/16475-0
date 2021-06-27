@@ -1,0 +1,143 @@
+
+<html>
+<head>
+<TITLE>ExPASy - PATOSEQ tool
+</title>
+
+</head>
+<body bgcolor='#FFFFFF'>
+<table>
+<tr>
+<td><H1>PATOSEQ</H1>
+<H3>PATOSEQ is a motif search and alignment program [<A HREF='/tools/patoseq/patoseq-doc.html'>Documentation</A>].</H3>
+</td>
+</tr>
+</table> 
+
+<p>Pedro Gonnet and Fr&eacute;d&eacute;rique Lisacek.  <i><a href='http://bioinformatics.oupjournals.org/cgi/content/abstract/18/8/1091' >Probabilistic alignment of motifs with sequences</a>.</i> Bioinformatics 2002 18: 1091-1101
+<p>Contact address: <a href='mailto:pedro.gonnet@genebio.com'>pedro.gonnet@genebio.com</a>
+<p><a href='http://sourceforge.net/projects/patoseq'>Up-to-date documentation and standalone version</a>
+<p>
+
+PATOSEQ (PATtern TO SEQuence alignments) is a tool that aligns a motif to a set
+of amino acid sequences. If only one set is specified (in the left box), the
+motif will be scanned against this set. If a second set is supplied in the
+right box, the motif will be optimized in subsequent runs to discriminate
+between the two sets. Each set may be input in any format by pasting them into
+the text boxes or by uploading a local file. A predefined set can also be
+selected, to reproduce the results given in the PATOSEQ article. <b>The default
+parameters will optimize a motif for the discrimination between B. subtilis
+lipoproteins and non-lipoproteins, as detailed in the article</b>. Several
+rounds of optimizations may be necessary to refine the motif as much as
+possible.
+
+	<form ENCTYPE='multipart/form-data' method=POST action='/cgi-bin/patoseq.cgi?1' name='form'>
+	<table>
+		<tr>
+			<th>Data sets</th>
+		</tr>
+		<tr>
+			<td>
+				<table border=1>
+					<tr>
+						<td bgcolor=lightblue>
+						Positive set, or scan set
+						</td>
+						<td bgcolor=lightblue>
+							Negative set
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows=10 cols=30 name=positive></textarea>
+							<br>
+							or upload a file : <input type=file size=20 name=positive_file>
+							<br>
+							or select a set :
+							<select name=positive_set>
+								<option></option>
+								<option value='subtilis/subtilis.fasta'>subtilis</option>
+								<option value='ecoli/ecoli.swissprot'>e.coli</option>
+								<option selected value='subtilis/lipoprotein/positive.fasta'>subtilis lipoproteins</option>
+								<option value='ecoli/lipoprotein/positive.fasta'>ecoli lipoproteins</option>
+							</select>
+						</td>
+						<td>
+							<textarea rows=10 cols=30 name=negative></textarea>
+							<br>
+							or upload a file : <input type=file size=20 name=negative_file>
+							<br>
+							or select a set :
+							<select name=negative_set>
+								<option></option>
+								<option selected value='subtilis/lipoprotein/negative.fasta'>subtilis non-lipoproteins</option>
+								<option value='ecoli/lipoprotein/negative.fasta'>ecoli non-lipoproteins</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table border=1>
+					<tr>
+						<td bgcolor=lightblue>
+						Motif
+						</td>
+						<td>
+							<input type=text size=50 name=motif value='M[p,4:2][h,12:5]{}{}{a=0.5,g=0.5}C*'>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table border=1>
+					<tr>
+						<td bgcolor=lightblue>
+						Cutoff (only used if no negative set supplied)
+						</td>
+						<td>
+							<input type=text size=10 name=cutoff value=1.000>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<input type=submit value='Start'>  
+	<input type=reset value='Reset'>
+	</form>
+</div> <!-- sib_body -->
+
+<!-- ********************************************************************************************** -->
+<!-- START OF FOOTER information at the bottom of the page -->
+<div id = 'sib_last_update'> </div>
+<div id = 'sib_footer'>			
+  <div id = 'sib_footer_content'> 
+    <a href = 'http://www.isb-sib.ch/' target='_blank'>Swiss Institute of Bioinformatics</a> 
+    | <a href = '/disclaimer.html'>Disclaimer</a>
+    | <a href = '/sitemap.html'>Sitemap</a>
+    | <a href = '/doc.html'>Documentation</a>
+    | <a href = '/contact.html'>Contact Us</a>
+  </div>
+</div>
+
+<!-- END OF FOOTER -->
+<!-- ********************************************************************************************** -->			
+</div> <!-- sib_container -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-12445523-1");
+pageTracker._setDomainName(".expasy.org");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>
+

@@ -1,0 +1,89 @@
+<head>
+<title>Identitag</title>
+</head>
+<body BGCOLOR="#F0F0F0">
+<center>
+<h1>Identitag</h1>
+</center>
+<hr>
+<p align="justify">
+Serial Analysis of Gene Expression (SAGE) is a method of large-scale gene expression 
+analysis that has the potential to generate the full list of mRNAs present whithin a cell
+population at a given time and their frequency. This method is based on the assumption that
+short cDNA sequences (tags) are in most cases sufficient to identify transcripts. Thus 
+the counting of the tags provides a numerical measurement of quantity of each transcript. 
+An essential step in SAGE library analysis is the unambiguous assignment of each tag to the 
+transcript from which it is derived, which is called tag-to-gene mapping.
+</p>
+<p align="justify">
+We designed and implemented a tool called Identitag for tag-to-gene mapping. This tool
+is based on a relational database which structure can be depicted as three interconnected
+modules represented in <a HREF="Identitag_relational_schema.pdf">Identitag relational schema</a>. 
+The first one stores virtual  tags extracted from transcript sequences belonging to the species
+considered the second stores experimental tags observed in SAGE experiments, and the third
+allows the  annotation of the transcript sequences used for virtual tag extraction. Identitag
+therefore connects  an observed tag to a virtual tag and to the transcript sequence from which
+it is derived, and then to its functional annotation when available. For a complete description
+of Identitag tables see Identitag <a HREF="Identitag_data_dictionary.pdf">data dictionary</a>.
+</p>
+<p align="justify">
+Databases made from different species can be <a HREF="Identitag_with_Orthology.pdf">connected</a>
+according to orthology relationship thus allowing the comparison of SAGE libraries between species. We designed a 
+<a HREF="Design_Orthology_relationship.pdf">method</a> to search for
+putative orthologous sequences between two set of transcript sequences that can be redundant and 
+not representing the entire transcriptome of the two species considered.
+Identitag can thus be used for comparative transcriptomic analysis.
+</p>
+<h3>Use of Identitag for tag-to-gene mapping</h3>
+<p align="justify">
+This website provides Identitag sources that can be used to build an Identitag database 
+for any species for which transcript sequences are available. These sources can be used on
+SUN, Linux and MacOSX operating systems, with Bourne Shell and Perl interpreters and a MySQL
+client (one also need a MySQL server, but it can be on another host). For more details, 
+please read <a HREF="Identitag_documentation.pdf">Identitag documentation for tag-to-gene mapping</a>.
+</p>
+<h3>Use of Identitag for comparative transcriptomic analysis</h3>
+<p align="justify">
+Before doing comparative transcriptomic analysis, two Identitag databases for two different species
+must be built (see previous section). Then this website provides sources allowing to connect
+these two Identitag databases using orthology relationship : the scripts provided search for 
+putative orthologous sequences between the two set of transcript sequences from these two different 
+species. Then these putative orthologous relationships are loaded into Identitag database. In
+addition to requirements specify in previous section, blastall, blastclust and formatdb executables
+must be operational on your computer. For more details, please read
+<a HREF="Orthology_documentation.pdf">Identitag documentation for comparative transcriptomic analysis</a>.
+</p>
+<h3>Download Identitag</h3>
+<p align="justify">
+Identitag sources for tag-to-gene mapping can be downloaded
+<a HREF="ftp://pbil.univ-lyon1.fr/pub/logiciel/identitag/identitag.tgz">here</a>.
+Sources allowing to connect two Identitag databases for two different species can be downloaded
+<a HREF="ftp://pbil.univ-lyon1.fr/pub/logiciel/identitag/orthology.tgz">here</a>.
+</p>
+<h3>Reference</h3>
+<p align="justify">
+If you use Identitag in a published work, please cite the following reference:
+<dl>
+<dd>
+Keime, C., Damiola, F., Mouchiroud, D., Duret, L. and Gandrillon, O. (2004)
+Identitag, a relational database for SAGE tag identification and interspecies comparison of SAGE
+libraries. <i>BMC Bioinformatics</i>, <b>5</b>, 143
+[<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=15469608&dopt=Abstract">Abstract</a>]
+[<a href="http://www.biomedcentral.com/1471-2105/5/143">Full text</a>].
+</dd>
+</dl>
+</p>
+<p align="justify">
+If you encounter some problems when using Identitag, please contact
+<a HREF="mailto:keime@prabi.fr">C&eacute;line Keime</a>.
+Any comments or suggestions are welcome.
+</p>
+<hr>
+<address>
+<a HREF="/comments.html">If you have problems or comments...</a>
+<p>
+<a HREF="/pbil.html"><img SRC="/binaries/home.gif"></a>
+<i>Back to PBIL home page</i>
+</address>
+</body>
+

@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta name="title" content="PANDORA - Protein ANnotation Diagram ORiented Analysis">
+<meta name="description" content="PANDORA offers biological annotation-based analysis of protein sets. Integration of annotation sources and intersection-inclusion DAG allow meaningful biological interpretation. keywords: proteins bioinformatics annotations proteomics computational molecular biology">
+<meta name="keywords" content="pandora, bioinformatics, biology, computational molecular biology,protein annotation, protein, proteins, protein sets, protein groups, annotations, keywords, dag, grapa, swissprot, protein properties, protonet, biological analysis, biological interpretation, proteomics, genomics, integration, protein families, protein clusters, proteomic research, experimental proteomics, computational proteomics, annotation analysis, quantitative proteomics, proteomics tool, annotation, keyword, directed acyclic graph, protein classification, functional genomics, intersection-inclusion">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="Author" content="solange@cs.huji.ac.il" />
+<meta name="Robots" content="index,follow" />
+
+<link rel="stylesheet" href="/pandora.css" type="text/css" />
+<link rel="stylesheet" href="/js/Autocompleter.css" type="text/css" media="screen">
+
+<title>Pandora</title>
+<script type="text/javascript" src="/js/mootools-1.2.1-core-yc.js"></script>	
+<script type="text/javascript" src="/js/mootools-1.2-more.js"></script>	
+<script type="text/javascript" src="/js/Observer.js"></script>	
+<script type="text/javascript" src="/js/Autocompleter.js"></script>	
+<script type="text/javascript" src="/js/Autocompleter.Request.js"></script>	
+<script type="text/javascript" src="js/sortableTable/sortableTable.js"></script>
+
+
+<script type="text/javascript" >
+function checkform (form1, cb )
+{
+  alert (document.form1);
+  alert (document.form1.kwsetvars);
+  for(var i=0; i < document.form1.kwsetvars.length; i++){
+    if(document.form1.kwsetvars[i].checked)
+    return true;
+  }
+  alert ('Please select at least one keyword!'); 
+  return false;
+}
+
+function checked(formName,x){
+	 for(i=0; i<document.forms[formName].elements.length; i++){
+			   document.forms[formName].elements[i].checked = x;
+	 }
+}
+
+function show_tips(tip_class)
+{
+  if($$(tip_class).length > 0)
+  {
+
+    var tips = new Tips($$(tip_class))
+ 
+    tips.addEvent('show', function(tip){
+      tip.fade('in');
+    });
+    tips.addEvent('hide', function(tip){
+      tip.fade('out');
+    });
+ 
+    $$(tip_class).each(function(el){
+      var children = el.getChildren();
+      children.each(function(tip_html){
+	if (tip_html.hasClass('tip_title')) el.store('tip:title', tip_html.get('html'));
+	if (tip_html.hasClass('tip_text')) el.store('tip:text', tip_html.get('html'));
+      }); 
+    });
+  }
+}
+ 
+window.addEvent('domready', function() {
+  show_tips(".Tips2");
+
+  //  var myTable = {};
+
+  if (document.getElementById('v_toggle2show')) {
+    var myVerticalSlide2 = new Fx.Slide('vertical_slide2');
+    var myVerticalSlide22 = new Fx.Slide('vertical_slide22');
+    myVerticalSlide2.hide();
+    $('v_toggle2show').addEvent('click', function(e){
+	e.stop();
+	myVerticalSlide2.show();
+	myVerticalSlide22.hide();
+      });
+    $('v_toggle2hide').addEvent('click', function(e){
+	e.stop();
+	myVerticalSlide2.hide();
+	myVerticalSlide22.show();
+      });
+  }
+
+  if (document.getElementById('kw_search_form')) {
+    new Autocompleter.Request.JSON('set_word', 'kw_autocomplete.php', {
+      'postVar': 'word', 'maxChoices' : '150'
+	});
+  }
+
+  if (document.getElementById('v_toggle1')) {
+    var myVerticalSlide1 = new Fx.Slide('seqToggle');
+    $('v_toggle1').addEvent('click', function(e) { 
+      e.stop();	
+      myVerticalSlide1.toggle(); 
+    });
+    // When Vertical Slide ends its transition, we check for its status
+    // note that complete will not affect 'hide' and 'show' methods
+    myVerticalSlide1.addEvent('complete', function() {
+	$('vertical_status').set('html', status[myVerticalSlide1.open]);
+      });
+}
+
+  if (document.getElementById('resultsTable')) {
+    myTable = new sortableTable('resultsTable', {onClick: function(){alert(this.id)}  });
+    //myTable = new sortableTable('resultsTable', {overCls: 'over', sortOn: '5' , sortBy: 'DESC', onClick: function(){alert(this.id)}	});});
+  
+  }
+
+  if (document.getElementById('myForm')) {
+  $('myForm').addEvent('submit', function(e) {
+    //Prevents the default submit event from loading a new page.
+    e.stop();
+    //Empty the log and show the spinning indicator.
+    var log = $('results').addClass('ajax-loading');
+    log.set('html', "<h2>In progress, please wait...</h2>");
+    // hide the form
+    var myFormVerticalSlide = new Fx.Slide('myForm');
+    myFormVerticalSlide.toggle(); 
+
+    //Set the options of the form's Request handler. 
+    //("this" refers to the $('myForm') element).
+    this.set('send', {
+      onComplete: 
+        function(response) { 
+	  log.removeClass('ajax-loading');
+	  log.set('html', response);
+	  myFormVerticalSlide.toggle(); 
+	  //	  window.scroll(0,0);
+	}
+    });
+
+    //Send the form.
+    this.send();
+  });
+  }
+});
+
+window.addEvent('load', function () {
+  var myVerticalSlide1 = new Fx.Slide('seqToggle');	myVerticalSlide1.hide();
+});
+
+
+</script>
+</head>
+
+
+<body>
+
+<div id="main_content">
+
+  <div id="top_banner">
+  	<!--header -->
+				
+		<h1 id="logo-text"><a href="index.php">Pandora</a></h1>		
+		<p id="slogan">Protein ANnotation Diagram ORiented Analysis</p>		
+			
+		<div id="header-links">
+			<p>
+			<i><a href="http://www.sccb.huji.ac.il">The Sudarsky Center for Computational Biology</a> </i> 
+			<br/><i><a href="http://www.huji.ac.il">The Hebrew University of Jerusalem</a> </i> 
+			</p>		
+		</div>		
+						
+  </div>
+        
+  <div id="page_content">
+    
+	<!-- navigation -->	
+	<div>
+		<ul class="menu"><li id="current" ><a href="index.php"class='nav' >Home</a></li><li ><a href="userset.php"class='nav_even' >User Set</a></li><li ><a href="peptides.php"class='nav' >Peptides</a></li><li ><a href="keyword.php"class='nav_even' >Keyword</a></li><li ><a href="blast.php"class='nav' >Blast</a></li><li ><a href="help.php"class='nav_even' >Help</a></li><li ><a href="about.php"class='nav' >About Us</a></li>
+		</ul>
+	</div>					
+                
+    <div id="left_section">
+      <div class="title">Pandora</div>
+
+      <div class="text_content">
+            <div id="gray_box_border">
+
+        <div id="gray_box_content">
+        <h3>Welcome to Pandora version 4.2!</h3>
+<SCRIPT language="JavaScript">
+<!--
+   var browserName=navigator.appName; 
+if (browserName=="Microsoft Internet Explorer")      {
+	document.write("<b>It seems like you are using Internet Explorer.<br/>Please note that this website is not yet fully supported for Internet Explorer. We recommend using Firefox instead!</b>");
+  }
+//-->
+</SCRIPT>
+<p>
+In order to study of proteins you can choose from the top menubar:
+<ul>
+<li><b>Keyword:</b> Study a set of proteins that share an annotation.
+<li><b>User Set:</b> Study your own set of proteins including quantitative data.
+<li><b>Blast:</b> Blast a sequence and view the results in PANDORA.
+<li><b>Peptides:</b> Match list of mass spectrometry-derived (MS) peptides to the corresponding proteins and analyze these proteins in PANDORA 
+</ul>
+<p>
+        </div>
+                             
+      </div>  
+
+
+ 
+     <div class="read_more_box_left">
+      <a href="help.php"><img src="images/read_more.gif" width="59" height="16" border="0" alt="more" class="more" /></a>
+      </div>
+
+      </div>
+                    
+                    
+                    
+</div>
+
+<div id="right_section">
+      <div class="title2">Links</div>
+      
+      <div class="text_content2">
+      
+<h2>Annotation Systems </h2>
+<ul class="sidemenu">
+<li><a href="http://www.protonet.cs.huji.ac.il/" class="Tips2" title="Protonet" rel="Automatic classification of all proteins into a family tree" >ProtoNet</a></li>
+<li><a href="http://www.everest.cs.huji.ac.il"  class="Tips2" title="Everest" rel="Automatic identification of all proteins domain families and and classification of reccurent segments">Everest</a>
+
+</ul>
+
+<h2>Sequence Retrieval</h2>
+<ul class="sidemenu">
+<li><a target="_blank" href="http://www.uniprot.org">UniProtKB</a>
+<li><a  target="_blank"  href="http://srs.ebi.ac.uk">SRS</a>
+<li><a  target="_blank" href="http://pir.georgetown.edu/pirwww/search/batch.shtml">PIR</a>
+<li><a  target="_blank" href="http://www.ensembl.org/biomart/index.html">Ensembl - Biomart</a>
+</ul>
+
+<h2>ID mapping</h2>
+<ul class="sidemenu">
+<li><a href="http://www.uniprot.org/">UniProtKB ID Mapping</a>
+<li><a href="http://www.ebi.ac.uk/Tools/picr" class="Tips2" title="PICR" rel="Protein Identifier Cross-Reference Service">PICR</a>
+<li><a href="http://david.abcc.ncifcrf.gov/conversion.jsp">DAVID Conversion Tool</a>
+</ul>
+
+<h2>Proteomics MS Databases</h2>
+<ul class="sidemenu">
+
+   <li><a class="Tips2" target="_blank" href="http://www.ebi.ac.uk/pride/" title="PRIDE" rel="The PRIDE PRoteomics IDEntifications database is a centralized, standards compliant, public data repository for proteomics data. It has been developed to provide the proteomics community with a public repository for protein and peptide identifications together with the evidence supporting these identifications.">PRIDE</a>
+
+   <li><a class="Tips2" target="_blank" href="http://www.peptideatlas.org/" title="Peptide Atlas" rel="PeptideAtlas is a multi-organism, publicly accessible compendium of peptides identified in a large set of tandem mass spectrometry proteomics experiments" >Peptide Atlas</a>
+
+   <li><a  class="Tips2" target="_blank" href="http://gpmdb.rockefeller.edu/" title="GPMDB" rel="Global Proteome Machine Database">GPMB</a>
+
+	<li><a class="Tips2" target="_blank" href="http://bioinformatics.icmb.utexas.edu/OPD/" title="OPD" rel="OPD is a public database for storing and disseminating mass spectrometry based proteomics data. The database currently contains roughly 3,000,000 spectra representing experiments from 5 different organisms.">OPD</a>
+
+<li> <a href="https://proteomecommons.org/dev/dfs/" class="Tips2" title="Tranche" rel="Tranche is a free and open source file sharing tool that enables the storage of large amounts of data. Tranche network is a cloud of computers that you can upload files to and download files from." >Tranche</a>
+<li> <a class="Tips2" href="http://www.ncbi.nlm.nih.gov/projects/peptidome" title="Peptidome" rel="Peptidome is a public repository that archives and freely distributes tandem mass spectrometry peptide and protein identification data generated by the scientific community">Peptidome</a>
+
+</ul>
+
+<h2>Phosphorylation Resources</h2>
+<ul class="sidemenu">
+   <li><a class="Tips2" target="_blank" href="http://www.phosphopep.org/" title="PhospoPep" rel="PhospoPep version 2.0 is a project to support systems biology signaling research by providing interactive interrogation of MS-derived phosphorylation data from 4 different organisms. Currently there is data from the fly (Drosophila melanogaster), human (Homo sapiens), worm (Caenorhabditis elegans), and yeast (Saccharomyces cerevisiae).">PhospoPep</a>
+
+	     <li><a class="Tips2" target="_blank" href="http://www.phosida.com/" title="Phosida" rel="Phosida allows retrieval of phosphorylation data of any protein of interest. It lists phosphorylation sites associated with particular projects and proteomes or, alternatively, displays phosphorylation sites found for any protein or protein group of interest. In addition, structural and evolutionary information on each phosphoprotein and phosphosite is integrated. Importantly, Phosida links extensive peptide information to the phosphorylation sites, such as several peptides implicating the same site and temporal profiles of each site in response to stimulus (e.g., EGF stimulation).">Phosida</a> 
+
+   <li> <a class="Tips2" href="http://phospho.elm.eu.org" title="Phospo ELM" rel="The Phospho.ELM database contains a collection of experimentally verified Serine, Threonine and Tyrosine sites in eukaryotic proteins. The entries, manually annotated and based on scientific literature, provide information about the phosphorylated proteins and the exact position of known phosphorylated instances.">Phospho ELM</a>
+
+
+</ul>
+
+					
+
+      </div>
+
+</div>
+        
+<div class="clear"></div>
+
+</div>
+
+<div id="footer">
+      <div class="footer_links">
+      	<!--footer starts here-->
+		
+<p>
+Updated Jan. 31st 2010 - <strong>&copy; Pandora</strong> | <a href="http://www.huji.ac.il">The Hebrew University of Jerusalem</a> | 
+Webmaster: <a href="http://www.skarsenty.com">SK</a> | 
+This site is best viewed with <a href= "http://www.mozilla.com/en-US/firefox/upgrade.html">Firefox</a>
+</p>
+
+<script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  var pageTracker = _gat._getTracker("UA-1129585-9");
+pageTracker._trackPageview();
+</script>
+
+				
+		
+      </div>
+
+</div>
+
+
+
+	
+</div>
+
+</body>
+</html>

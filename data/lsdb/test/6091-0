@@ -1,0 +1,108 @@
+<html>
+
+<head>
+<title>GCFinder Software</title>
+</head>
+
+<body bgcolor=lightgrey>
+
+<h2>GCFinder Software</h2>
+
+<p>GCFinder finds conserved gene clusters on multiple genomes based on
+constraining the overall size of a cluster that allows statistical significance
+estimates to be associated with each cluster.  Two variants are provided:
+
+<ul>
+<li>The first is a restricted version that can be solved in polynomial time
+which requires that a cluster appears in every input chromosome, none of the
+genes appear in more than one orthologous group and orthologous genes are
+strictly ordered within each cluster without allowing paralogous copies.</li>
+<li>The second is an exact algorithm for the unrestricted version that has
+exponential time complexity in the worst case which guarantees that all maximal
+unordered clusters with the lowest <em>e</em>-values are found.</li>
+</ul>
+
+<hr>
+
+<h3>Installing GCFinder</h3>
+
+<p>The <a href="gcfinder.tar.gz">GCFinder source code</a>, including sample
+input and output files, can be compiled under the
+Unix/Linux/Windows(<a href="http://www.cygwin.com">Cygwin</a>) environment.
+The following steps will create a directory called gcfinder.  Detailed usage of
+GCFinder is provided in a <a href="README">README</a> file.
+
+<ul>
+<li>gunzip gcfinder.tar.gz</li>
+<li>tar xvf gcfinder.tar</li>
+<li>cd gcfinder</li>
+<li>./install</li>
+</ul>
+
+<p>A list of maximal unordered gene clusters found on four bacterial
+genomes <em>B. subtilis</em>, <em>S. pyogenes</em>, <em>S. pneumoniae</em> and
+<em>C. acetobutylicum</em>, and four yeast genomes <em>S. cerevisiae</em>,
+<em>S. paradoxus</em>, <em>S. mikatae</em> and <em>S. bayanus</em>, is also
+included with the download.  The maximum size of a gene cluster is constrained
+to be 50.
+
+<hr>
+
+<h3>Examples</h3>
+
+<p>Below are gene clusters found on four bacterial genomes <em>B. subtilis</em>,
+<em>S. pyogenes</em>, <em>S. pneumoniae</em> and <em>C. acetobutylicum</em>:
+
+<ul>
+<li>Top five clusters that appear in all the four genomes:
+<ul>
+<li><a href="S10-spc-alpha.txt"><em>S10-spc-alpha</em> superoperon with
+<em>e</em>-value 2.7e-131</a></li>
+<li><a href="prpC-prkC.txt"><em>prpC-prkC</em> operon with <em>e</em>-value
+3.6e-39</a></li>
+<li><a href="atp.txt"><em>atp</em> operon with <em>e</em>-value 1.7e-37</a></li>
+<li><a href="nusA-infB.txt"><em>nusA-infB</em> operon with <em>e</em>-value
+1.7e-37</a></li>
+<li><a href="Oligopeptide-ABC.txt">Oligopeptide ABC transporter system with
+<em>e</em>-value 1.2e-33</a></li>
+</ul>
+</li>
+<li>Clusters that have many intervening genes:
+<ul>
+<li><a href="ihk-irr.txt"><em>ihk-irr</em> system with <em>e</em>-value
+1.5e-20</a></li>
+<li><a href="pur.txt"><em>pur</em> operon with <em>e</em>-value 2.1e-15</a></li>
+</ul>
+</li>
+<li>Clusters in which some genes appear in two orthologous groups:
+<ul>
+<li><a href="fru.txt"><em>fru</em> operon with <em>e</em>-value 8.6e-14</a></li>
+<li><a href="Glutamine.txt">Glutamine ABC transporter system with
+<em>e</em>-value 8.6e-14</a></li>
+</ul>
+</li>
+</ul>
+
+<p>Below are gene clusters that appear in four yeast genomes
+<em>S. cerevisiae</em>, <em>S. paradoxus</em>, <em>S. mikatae</em>
+and <em>S. bayanus</em>:
+
+<ul>
+<li><a href="yeast1.txt">Top cluster with <em>e</em>-value 4.1e-95</a></li>
+<li><a href="yeast2.txt">Cluster with <em>e</em>-value 4.4e-74</a></li>
+</ul>
+
+<p>Please refer to the <a href="README">README</a> file for an explanation of
+the output format.
+
+<hr>
+
+<h3>Reference</h3>
+
+<p>Yang Q., Yi G., Zhang F., Thon M.R. and Sze S.-H. (2010)
+<a href="http://www.liebertonline.com/doi/abs/10.1089/cmb.2009.0116">Identifying
+gene clusters within localized regions in multiple genomes</a>.
+<em>Journal of Computational Biology</em>, <b>17</b>, 657-668.
+
+</body>
+</html>

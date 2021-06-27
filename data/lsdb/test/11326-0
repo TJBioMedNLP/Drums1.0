@@ -1,0 +1,854 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><title>Technische Universität Carolo Wilhelmina zu Braunschweig - Institut für Pharmazeutische Chemie</title>
+
+<meta http-equiv="content-type" content="text/html ; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="template_files/style.css">
+<meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><meta name="GENERATOR" content="OpenOffice.org 2.3 (Linux)"><style type="text/css">
+<!--
+@page { size: 21.59cm 27.94cm; margin: 2cm }
+P { margin-bottom: 0.21cm }
+--> </style></head>
+<body>
+<div id="header">
+<div id="header_image"><img style="width: 1255px; height: 110px;" src="template_files/header.jpg" alt="Kopfgrafik"></div>
+</div>
+<div id="nav">
+<table id="links" width="800">
+<tbody>
+<tr>
+<td class="links"><a class="nav" href="http://www.pharmchem.tu-bs.de/institut/">Institute Home</a></td>
+<td class="links"><a class="nav" href="http://www.pharmchem.tu-bs.de/forschung/">Research Home</a></td>
+<td class="links"><a class="nav" href="http://www.pharmchem.tu-bs.de/lehre/termine/">Teaching
+Home</a></td>
+<td class="links"><a class="nav" href="http://www.pharmazie-bs.de/" target="_blank">Pharmacy
+in BS</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="main_bg">&nbsp;</div>
+<div id="topic">
+<p class="topic">MUV</p>
+</div>
+<div id="under_nav">
+<table id="under_nav" width="500">
+<tbody>
+<tr>
+<td class="td"><a class="nav" href="MUV.html"><b>MUV
+-Home</b></a></td>
+</tr>
+<tr>
+<td class="td"><a class="nav" href="download.html">Download
+the MUV Datasets</a></td>
+</tr>
+<tr>
+<td class="td"><a class="nav" href="createMUV.html">Create
+your own MUV Datasets<br>
+</a></td>
+</tr>
+<tr>
+<td class="td"><a class="nav" href="SpaceStatsToolbox.html">Spatial
+Statistics Toolbox for Matlab</a></td>
+</tr><tr><td><a class="nav" href="theory.html">MUV Theory</a></td></tr><tr><td><a class="nav" href="faq.html">FAQ</a></td></tr>
+</tbody>
+</table>
+</div>
+<div style="left: 0px; width: 1003px;" id="main_forschung"><img style="width: 100%; height: 177px;" alt="header" src="template_files/baum_1.jpg">
+<p style="text-align: justify;" class="personal1"> <span lang="EN-US"></span></p>
+<h3 style="text-align: center;"><span lang="EN-US">Maximum
+Unbiased Validation (MUV) Datasets for Virtual Screening</span></h3>
+<p style="text-align: justify;" class="personal1">
+
+
+
+</p>
+<div style="text-align: justify;">Many benchmark
+experiments of virtual screening techniques are biased by the
+composition of the benchmark datasets. Such benchmark dataset bias
+usually has two main causes: <br>
+<br>
+1. The actives are to similar to each other ("analogue bias" <a href="#Refs">[1]</a>)
+regarding low-dimensional molecular properties.<br>
+2. The actives are too dissimilar from the decoys ("artificial
+enrichment" <a href="#Refs">[2]</a>) also regarding low-dimensional molecular properties.<br>
+<br>
+Research from our lab recently introduced two tools for the statistical
+analysis of such benchmark dataset bias in chemical datasets:<br><br>1.
+"Simple Descriptors" are a vectorized form of a compound's sum-formula,
+the respective counts of H-Bond acceptors, H-Bond donors, chiral
+centers and ring systems and the compounds logP. These descriptors
+capture all low-dimensional molecular properties associated with
+analogue bias and artificial enrichment.<a href="#Refs">[3]</a> <br><br>2.
+Refined Nearest Neighbor
+analysis based on a&nbsp;simple descriptor representation of the
+respective datasets can be utilized to characterize the topology of the
+datasets, i.e. their clustering behavior and their relative position in
+chemical space.<a href="#Refs">[3]</a> <br>
+<br>
+It was shown, that benchmark dataset bias is associated with "clumpy"
+topologies, i.e. datasets that form clusters in descriptor space and
+are separated from the decoys. Refined Nearest Neighbor analysis also
+provides tools for quantifying the "clumpiness" of datasets: The scalar
+&#931;S has values smaller than 0, whenever a dataset is clumpy and values
+larger that 0, if it is dispersed. Values of &#931;S near 0 indicate the
+special state of spatial randomness, i.e. a spatially randon
+distribution of actives and decoys in simple descriptor space.<br>
+<br>
+It is obvious, that a collection of benchmark datasets, in which all
+datsets exhibit spatial randomness in simple descriptor space would be
+especially advantageous for validating VS methods.<br>
+<br>
+1. A random distribution of actives and decoys regarding simple
+descriptors prevents low-dimensional molecular properties from
+distorting validation results.<br>
+2. Datasets that do not favor ligand based virtual screening methods
+because of trivial features of the molecules used for benchmarking
+greatly facilitate the comparison of ligand based VS methods and
+docking applications.<br>
+<br>
+Based on these findings, the MUV collection of benchmark datasets was
+designed based on PubChem bioactivity data.<a href="#Refs">[4]</a> PubChem has several
+advantages for the design of VS benchmark datasets:<br>
+<br>
+1. All data, including molecular structures and bio-assay readouts is
+publicly available.<br>
+2. Compounds tested inactive in the bio-assays are available as
+experimentally validated decoys.<br>
+3. The compound sets tested in the NIH roadmap effort are very diverse.<br>
+4. The majority of tested compounds is drug-like.<br>
+<br>
+However, PubChem also has downsides as a datasource: Due to its origin
+from HTS, the bioactivity data in PubChem is notoriously noisy.
+Therefore, the MUV design workflow first ensures the maximum level of
+confidence by purging all bioactivity datasets from compounds, whose
+assigned bioactivity might be subject to doubts. The remaining datasets
+are obtimized spatially to generate the final MUV datasets. <br>
+<br>
+<br>
+</div>
+<table style="text-align: left; left: 161px; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 300px;" colspan="1" rowspan="1"><img style="width: 400px; height: 658px;" alt="MUV Workflow" src="workflow.png"></td>
+<td colspan="1" rowspan="1" style="text-align: justify; vertical-align: middle;">1. Pairs
+of bio-assays were extracted from PubChem. Here the requirement
+was that the bioactivity against the same protein target was first
+determined in a high-throughput primary screen and then in a follow-up,
+low-throughput confirmation screen. <br>
+Inactives
+from the primary screens were used as "Potential Decoys" (PD), actives
+from the confirmation screens as "Potential Actives" (PA). Potential
+actives were further required to provide associated dose-response data
+and EC<sub>50</sub> values.<br>
+&nbsp;<br>
+2. From
+the datasets of potential actives, all compounds with doubtable
+bioactivities were purged by an array of automatic&nbsp;filters.<br>
+This
+included compounds with suspicious Hill-Slopes, compounds hitting in an
+unusually high number of assays in PubChem (i.e. frequent hitters) and
+compounds that are known to exhibit undesirable interference with
+optical detection methods.<br>
+<br>
+3. Actives not adequately embedded in the available decoys were removed
+from the datasets. This is essential because no dataset of decoys can
+be designed, that prevents such actives from artificial enrichment.<br>
+<br>
+4. Subsets of k=30 actives were extracted for each dataset with a
+common
+spread measured by the Refined Nearest Neigbor analysis figure &#931;G.<br>
+<br>
+5. Subsets of d=15000 decoys were extracted for each dataset with a
+common
+separation from the actives measured by the Refined Nearest Neigbor
+analysis figure &#931;F.</td>
+</tr>
+<tr align="justify">
+</tr>
+<tr align="justify">
+</tr>
+<tr align="justify">
+</tr>
+<tr align="justify">
+</tr>
+</tbody>
+</table>
+<br><a name="Table"></a>In the first version, MUV contains 17 datasets of actives and corresponding decoys with the following properties:<br><br><table class="MsoNormalTable" style="border: medium none ; border-collapse: collapse; width: 100%;" border="1" cellpadding="0" cellspacing="0"><tbody><tr style="page-break-inside: avoid;"><td style="border: 1pt solid black; padding: 0cm 5.4pt; width: 43.5pt; font-weight: bold;" valign="top" width="58">
+    <span style="font-size: 8pt;" lang="EN-US">Target</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt; font-weight: bold;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Mode of Interaction</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt; font-weight: bold;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Target Class</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt; font-weight: bold;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Prim. Assay (AID)</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt; font-weight: bold;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Confirm. Assay (AID)</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt; font-weight: bold;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Assay-Type</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt; font-weight: bold;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Actives (original dataset)</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt; font-weight: bold;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Decoys (original dataset)</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt; font-weight: bold;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Actives (MUV)</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt; font-weight: bold;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Decoys (MUV)</span></td>
+    <td style="border-style: solid solid solid none; border-color: black black black -moz-use-text-color; border-width: 1pt 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt; font-weight: bold;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Scaffolds (MUV)</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">S1P1 rec.</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Agonists</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">GPCR</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">449</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">466</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Reporter Gene</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">223</span><span style="font-size: 8pt;" lang="EN-US"></span><span style="font-size: 8pt;" lang="EN-US"></span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">55395</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">28</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">PKA</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Kinase</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">524</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">548</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">62</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">64814</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">27</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">SF1</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Nuclear Receptor</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">525</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">600</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Reporter Gene</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">213</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">64550</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">24</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Rho-Kinase2</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Kinase</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">604</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">644</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">67</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">59576</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">27</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">HIV RT-RNase</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">RNase</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">565</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">652</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">370</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">63969</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">27</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Eph rec. A4</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Rec. Tyr. Kinase</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">689</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">689</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">80</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">61480</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">29</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">SF1</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Agonists</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Nuclear Receptor</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">522</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">692</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Reporter Gene</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">75</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">63683</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">HSP 90</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Chaperone</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">429</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">712</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">91</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">63481</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">27</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">ER-a-Coact. Bind.</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">PPI</span><span style="font-size: 8pt;" lang="EN-US"></span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">629</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">713</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">221</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">84656</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">26</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">ER-ß-Coact. Bind.</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">PPI</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">633</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">733</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">194</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">84984</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">28</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">ER-a-Coact. Bind.</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Potentiators</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">PPI</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">639</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">737</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">64</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">84947</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">28</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">FAK</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Kinase</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">727</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">810</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">110</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">96070</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">28</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Cathepsin G</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Protease</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">581</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">832</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">65</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">62007</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">24</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">FXIa</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Protease</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">798</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">846</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">70</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">218421</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">21</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">FXIIa</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Inhinbitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Protease</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">800</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">852</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Enzyme</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">99</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">216795</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">24</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">D1 rec.</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Allosteric Modulators</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">GPCR</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">641</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">858</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Reporter Gene</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">226</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">54292</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">24</span></td>
+  </tr>
+  <tr style="page-break-inside: avoid;">
+    <td style="border-style: none solid solid; border-color: -moz-use-text-color black black; border-width: medium 1pt 1pt; padding: 0cm 5.4pt; width: 43.5pt;" valign="top" width="58">
+    
+    <span style="font-size: 8pt;" lang="EN-US">M1 rec.</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 49.85pt;" valign="top" width="66">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Allosteric Inhibitors</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 46pt;" valign="top" width="61">
+    
+    <span style="font-size: 8pt;" lang="EN-US">GPCR</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 32.85pt;" valign="top" width="44">
+    
+    <span style="font-size: 8pt;" lang="EN-US">628</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 43.1pt;" valign="top" width="57">
+    
+    <span style="font-size: 8pt;" lang="EN-US">859</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 39.4pt;" valign="top" width="53">
+    
+    <span style="font-size: 8pt;" lang="EN-US">Reporter Gene</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">231</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 38.35pt;" valign="top" width="51">
+    
+    <span style="font-size: 8pt;" lang="EN-US">61477</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 35.55pt;" valign="top" width="47">
+    
+    <span style="font-size: 8pt;" lang="EN-US">30</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 34.8pt;" valign="top" width="46">
+    
+    <span style="font-size: 8pt;" lang="EN-US">15000</span></td>
+    <td style="border-style: none solid solid none; border-color: -moz-use-text-color black black -moz-use-text-color; border-width: medium 1pt 1pt medium; padding: 0cm 5.4pt; width: 41.05pt;" valign="top" width="55">
+    
+    <span style="font-size: 8pt;" lang="EN-US">29</span></td></tr></tbody></table><br>Assay IDs refer to bio-assays in PubChem, which were used for the assignment of bioactivities.&nbsp; <br><br>
+Because of their spatial properties in simple descriptor space, MUV
+datasets are a tool for the unbiased validation of virtual&nbsp;screening
+techniques. The datasets are available for download <a href="download.html">here</a>.<br>
+<br>
+You can also generate your own MUV datasets based on your in-house
+bioactivity data. The necessary tools can be found <a href="createMUV.html">here</a>.<span style="font-weight: bold;"><span style="font-weight: bold;"> </span><br>
+<br>
+<br><a name="Refs"></a>References:</span><br>
+<br>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="6">
+<tbody>
+<tr>
+<td style="vertical-align: top;">[1]</td>
+<td style="vertical-align: top;"> Good, A. &amp;
+Oprea, T.<br>
+Optimization of CAMD techniques 3. Virtual screening enrichment
+studies: a help or hindrance in tool selection?<br>
+J. Comput.-Aided Mol. Des., 2008, 22, 169-178<br><a href="http://dx.doi.org/10.1007/s10822-007-9167-2" target="_blank">doi: 10.1007/s10822-007-9167-2</a></td>
+</tr>
+<tr>
+<td style="vertical-align: top;">[2]</td>
+<td>Verdonk, M. L.; Berdini, V.; Hartshorn, M. J.; Mooij,
+W. T. M.; Murray, C. W.; Taylor, R. D. &amp; Watson, P.<br>
+Virtual screening using protein-ligand docking: avoiding artificial
+enrichment.<br>
+J. Chem. Inf. Comput. Sci., 2004, 44, 793-806<br><a target="_blank" href="http://dx.doi.org/10.1021/ci034289q">doi: <jid>10.1021/ci034289q</jid></a></td>
+</tr>
+<tr>
+<td style="vertical-align: top;">[3]</td>
+<td>Rohrer, S.G.; Baumann, K.<br>
+Impact of Benchmark Data Set
+Topology on the Validation of Virtual Screening Methods: Exploration
+and Quantification by Spatial Statistics.<br>
+J. Chem. Inf. Model., 2008, 48, 704-71<br><a href="http://dx.doi.org/10.1021/ci700099u" target="_blank">doi: </a><jid><a href="http://dx.doi.org/10.1021/ci700099u" target="_blank">10.1021/ci700099u</a> (Open Access)</jid></td>
+</tr>
+<tr>
+<td style="vertical-align: top;">[4]</td>
+<td>Rohrer, S.G.; Baumann, K.<br>
+Maximum Unbiased Validation (MUV) Datasets for Virtual Screening Based
+on PubChem Bioactivity Data<br>
+J. Chem. Inf. Model., in press</td>
+</tr>
+</tbody>
+</table>
+<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+<p style="text-align: justify;" class="personal1"></p>
+<br>
+<br>
+</div>
+</body></html>

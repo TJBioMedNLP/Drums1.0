@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>PlantGDB GeneSeqer Online Server</title>
+		<script type="text/javascript" src="/javascript/jquery.js"></script>
+		<script type="text/javascript" src="/javascript/jquery.tablesorter.js"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			$(document).ready(function()
+			{
+				$("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} );
+			}
+			);
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="/javascript/jquery-showhide.js"></script>
+		<script type="text/javascript" src="/javascript/superfish.js"></script>
+		<script type="text/javascript" src="/javascript/hoverIntent.js"></script>
+		<script type="text/javascript" src="/javascript/jquery.accordion.js"></script>
+		<script type="text/javascript" src="/javascript/jquery.accordion.news.js"></script>
+		<script type="text/javascript" src="/javascript/menu.js"></script>
+		<script type="text/javascript" src="/javascript/mm_menu.js"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			// initialise plugins
+			jQuery(function(){
+				jQuery('ul.sf-menu').superfish();
+			}
+			);
+		/* ]]> */
+		</script>
+		<!-- Stylesheets need to be loaded after jquery scripts  -->
+		<link rel="StyleSheet" type="text/css" href="/tool/GeneSeqer/GeneSeqer.css" media="screen"></link>
+		<link rel="StyleSheet" type="text/css" href="/css/plantgdb.css" media="screen"></link>
+		<link rel="StyleSheet" type="text/css" href="/css/superfish.css" media="screen"></link>
+		<!--[if IE 6]>
+			<link rel="StyleSheet" type="text/css" href="/css/plantgdb_ie6.css">
+		<![endif]-->
+		<script type="text/javascript" src="/tool/GeneSeqer/net.js"></script>
+		<script type="text/javascript" src="/tool/GeneSeqer/GeneSeqer.js"></script>
+		<script type="text/javascript" src="/tool/GeneSeqer/OptionGrid.js"></script>
+		<script type="text/javascript" src="/tool/GeneSeqer/SearchOrganism.js"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		function openWin(myStr)
+		{
+			window.open(myStr, 'tinyWindow', 'width=800,height=20,scrollbars=yes');
+		}
+		/* ]]> */
+		</script>	
+	</head>
+	<body>
+		<div id="outercontainer">
+			<div id="innercontainer">
+			<div id="logomenucontainer"><!--Container with same background color as logo and pgdbmenu -->
+			<div id="headerwidth"><!--This nested container allows FF2.0 to handle floated divs with % width-->
+			<div id="topright">
+				<ul id="header">
+					<li id="feedback"><a href="/utility/feedback.php">Feedback</a></li>
+					<li id="mailing_list" class="last"><a href="/admin/signup.php">Subscribe</a></li>
+				</ul>
+			</div>
+	<div id="pgdblogo">
+		<a style="background:none" href= "/"><img alt="PlantGDB Banner" src="/images/PGDBbanner.png" /></a>
+	</div>
+ <!-- COMMENTED OUT DUE TO CONFLICT WITH POST
+<div id="topright">
+   <ul>
+      <li>
+         <form style="display: inline;" name="quickSearch" action="/search/query/TextSearch.php" method="get" id="quickSearch"></form><select name="searchType">
+            <option value="id">
+               ID
+            </option>
+            <option value="anno">
+               Annotation
+            </option>
+         </select>
+      </li>
+      <li>
+         <input type="text" name="searchString" size="10" value="search..." /> <input type="submit" value="Go" />
+      </li>
+      <li>
+      </li>
+   </ul>
+</div-->
+<!-- Menu uses the jquery superfish.js plugin. Styling in superfish.css -->
+<div id="menuwidth"><!-- Modifying this menu? Sync it with our other menus. See the notes in /phplib/pgdbmenu.inc.php (reference copy). - Dan Rasmussen, 2009-07-14. -->
+	<div id="pgdbmenu">
+		<ul class="sf-menu">
+			<li><a style="text-align:center" href="/">Home</a></li>
+			<li><a style="text-align:center" href="/search/misc/">Sequence</a>
+				<ul>
+					<li class="overview"><a href="/search/misc/">-Overview -</a></li>
+					<li class="overview"><a href="/download/download.php/">Download</a></li>
+					<li><a href="/search/">Search</a>
+						<ul style="width:17em">
+							<li><a href="/search/">-Overview-</a>
+							<li><a href="/search/misc/PublicPlantSeq.php">Select Species...</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Arabidopsis thaliana" class="species">Arabidopsis thaliana</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Brassica napus" class="species">Brassica napus</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Brassica oleracea" class="species">Brassica oleracea</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Glycine max" class="species">Glycine max</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Gossypium hirsutum" class="species">Gossypium hirsutum</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Hordeum vulgare" class="species">Hordeum vulgare</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Medicago truncatula" class="species">Medicago truncatula</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Oryza sativa" class="species">Oryza sativa</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Physcomitrella patens" class="species">Physcomitrella patens</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Sorghum bicolor" class="species">Sorghum bicolor</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Triticum aestivum" class="species">Triticum aestivum</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Vitis vinifera" class="species">Vitis vinifera</a></li>
+							<li><a href="/search/misc/plantlistconstruction.php?mySpecies=Zea mays" class="species">Zea mays</a></li>
+						</ul>
+					</li>
+					<li><a href="/prj/ESTCluster/">EST Assemb</a>
+						<ul style="width:15em">
+							<li class="overview"><a href="/prj/ESTCluster/">-Overview -</a></li>
+							<li><a href="/prj/ESTCluster/progress.php">Select Species...</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Arabidopsis_thaliana" class="species">Arabidopsis thaliana</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Brassica_napus" class="species">Brassica napus</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Brassica_oleracea" class="species">Brassica oleracea</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Glycine_max" class="species">Glycine max</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Gossypium_hirsutum" class="species">Gossypium hirsutum</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Hordeum_vulgare" class="species">Hordeum vulgare</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Medicago_truncatula" class="species">Medicago truncatula</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Oryza_sativa" class="species">Oryza sativa</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Physcomitrella_patens" class="species">Physcomitrella patens</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Sorghum_bicolor" class="species">Sorghum bicolor</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Triticum_aestivum" class="species">Triticum aestivum</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Vitis_vinifera" class="species">Vitis vinifera</a></li>
+							<li><a href="/download/download.php?dir=/Sequence/ESTcontig/Zea_mays" class="species">Zea mays</a></li>
+						</ul>
+					</li>
+					<li><a title="GSS Assembly" href="/prj/GSSAssembly/">GSS Assemb</a></li>
+					<li><a href="ftp://ftp.plantgdb.org/">FTP Server</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/prj/GenomeBrowser/">Genomes</a>
+				<ul>
+					<li class="overview"><a href="/prj/GenomeBrowser/">-Overview-</a></li>
+					<!-- li><a href="/yrGATE/">-Community Annotation-</a></li -->
+					<!-- li><a href="/prj/GenomeBrowser/das.php?ref=Genomes">-DAS Services-</a></li -->
+					<li><a>Dicots</a>
+						<ul  style="width:21em">
+							<li><a href="/AtGDB/">AtGDB<i> - Arabidopsis thaliana</i></a></li>
+							<li><a href="/BrGDB/">BrGDB<i> - Brassica rapa</i></a></li>
+							<li><a href="/CpGDB/">CpGDB<i> - Carica papaya</i></a></li>
+							<!--li><a href="/CsGDB/">CsGDB<i> - Cucumis sativus</i></a></li-->
+							<li><a href="/GhGDB/">GhGDB<i> - Gossypium hirsutum</i></a></li>
+							<li><a href="/GmGDB/">GmGDB<i> - Glycine max</i></a></li>
+							<li><a href="/LjGDB/">LjGDB<i> - Lotus japonicus</i></a></li>
+							<li><a href="/MeGDB/">MeGDB<i> - Manihot esculenta</i>><b>&nbsp;**</b></a></li>
+							<li><a href="/MtGDB/">MtGDB<i> - Medicago truncatula</i></a></li>
+							<li><a href="/MgGDB/">MgGDB<i> - Mimulus guttatus</i><b>&nbsp;**</b></a></li>
+							<!--li><a href="/PeGDB/">PeGDB<i> - Prunus persica</i></a></li-->
+							<li><a href="/PtGDB/">PtGDB<i> - Populus trichocarpa</i></a></li>
+							<li><a href="/RcGDB/">RcGDB<i> - Ricinus communis</i><b>&nbsp;**</b></a></li>
+							<li><a href="/SlGDB/">SlGDB<i> - Solanum lycopersicum</i></a></li>
+							<li><a href="/VvGDB/">VvGDB<i> - Vitis vinifera</i></a></li>
+						</ul>
+					</li>
+					<li><a>Monocots</a>
+						<ul  style="width:21em">
+							<li><a href="/BdGDB/">BdGDB<i> - Brachypodium distachyon</i><b>&nbsp;*</b></a></li>
+							<li><a href="/HvGDB/">HvGDB<i> - Hordeum vulgare</i></a></li>
+							<li><a href="/OsGDB/">OsGDB<i> - Oryza sativa</i></a></li>
+							<li><a href="/SbGDB/">SbGDB<i> - Sorghum bicolor</i></a></li>
+							<li><a href="/TaGDB/">TaGDB<i> - Triticum aestivum</i></a></li>
+							<li><a href="/ZmGDB/">ZmGDB<i> - Zea mays</i><b>&nbsp;*</b></a></li>
+						</ul>
+					</li>
+					<li><a>Other</a>
+						<ul  style="width:21em">
+								<!-- li><a href="/CrGDB/">CrGDB<i> - Chlamydomonas reinhardtii</i></a></li -->
+								<li><a href="/PpGDB/">PpGDB<i> - Physcomitrella patens</i></a></li>
+								<!-- li><a href="/SmGDB/">SmGDB<i> - Selaginella moellendorffii</i></a></li -->
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a class="current" style="text-align:center" href="/tool/">Tools</a>
+				<ul>
+					<li class="overview"><a href="/tool/">-Overview-</a></li>
+					<li><a href="http://www.bioextract.org/query/index.jsp">BioExtract</a></li>
+					<li><a href="/cgi-bin/blast/PlantGDBblast">BLAST</a></li>
+					<li><a href="/prj/GenomeBrowser/das.php?ref=Tools">DAS</a></li>
+					<li><a class="current" href="/cgi-bin/GeneSeqer/index.cgi">GeneSeqer</a></li>
+					<li><a href="/cgi-bin/GenomeThreader/gth.cgi">GenomeThreader</a></li>
+					<li><a href="/MuSeqBox/MuSeqBox.php">MuSeqBox</a></li>
+					<li><a href="/cgi-bin/vmatch/patternsearch.pl">PatternSearch</a></li>
+					<li><a href="/cgi-bin/prj/PLEXdb/ProbeMatch.pl">ProbeMatch</a></li>
+					<li><a href="http://www.bioextract.org/genbank/home/index.jsp">TableMaker</a></li>
+					<li><a href="/tool/TE_nest/">TE nest</a></li>
+					<li><a href="/tool/tracembler/">Tracembler</a></li>
+					<li><a href="/prj/yrGATE/">yrGATE</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/prj/">Datasets</a>
+				<ul>
+					<li class="overview"><a href="/prj/">- Overview -</a></li>
+					<li><a href="/prj/AcDsTagging/">Ac/Ds maize</a>
+					<ul style="width:12em">
+						<li><a href="/prj/AcDsTagging/">Overview</a></li>
+						<li><a href="/prj/AcDsTagging/v2/records.php">Browse Insertions</a></li>
+						<li><a href="/prj/AcDsTagging/v2/genes.php">Gene Distance</a></li>
+					</ul>
+					</li>
+					<li><a href="/ASIP/">ASIP</a></li>
+					<li><a href="/prj/PLEXdb/">PLEXdb</a></li>
+					<li><a href="/prj/RescueMuTagging/">RescueMu</a></li>
+					<li><a href="/prj/RFLP_FLIS/">RFLP/FLIS</a></li>
+					<li><a href="/SRGD/">SRGD</a></li>
+					<li><a href="/prj/UniformMuTagging/">UniformMu</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/PGROP/pgrop.php">Outreach</a>
+				<ul style="width:23em">
+					<li class="overview"><a href="/PGROP/pgrop.php">Plant Genome Outreach Portal (PGROP)</a></li>
+					<li><a href="http://www.lawrencelab.org/Outreach/">Outreach to Native Americans</a></li>
+				</ul>
+			</li>
+			<li><a style="text-align:center" href="/site/">Help</a>
+				<ul>
+					<li><a href="/help/">Help</a>
+						<ul style="width:15em">
+							<li><a href="/help/anno.php">Community Annotation</a></li>
+							<li><a href="/help/xgdb.php">Genome Browsers</a></li>
+							<li><a href="/help/tblmk.php">TableMaker</a></li>
+						</ul>
+					</li>
+					<li><a href="/help/">Tutorials</a>
+						<ul style="width:15em">
+							<li><a href="/tutorial/annotatemodule/">Annotation Tutorial</a></li>
+							<li><a href="/tutorial/annotatelesson/">Annotation Lessons</a></li>
+							<li><a href="/tutorial/geneseqer.php">GeneSeqer Tutorial</a></li>
+
+						</ul>
+					</li>
+					<li><a href="/site/">About Us</a></li>
+					<li><a href="/site/news.php">News</a></li>
+					<li><a title="A brief tour through PlantGDB's resources" href="/site/tour.php">Tour</a></li>
+					<li><a href="/site/faq.php">F.A.Q.</a></li>
+					<li><a href="/site/sitemap.php">Site Map</a></li>
+					<li><a href="/site/publications.php">Publications</a></li>
+					<li><a href="/site/links.php">Links</a></li>
+					<li><a href="/site/acknowledgments.php">Acknowledgments</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div><!-- end of menuwidth div -->
+<!-- Modifying this menu? Sync it with our other footer menus. See the notes in /phplib/pgdbmenu.inc.php (reference copy). - Dan Rasmussen, 2009-07-14. -->
+                                </div><!--end headerwidth-->
+<!--HdrEnd--></div><!--end logomenucontainer div!!-->
+						<div id="pagewidth"><!-- This nested container allows FF2.0 to handle floated divs with % width-->
+					<div id="topshadow"><!-- tiny shadow .gif as background-->
+                	</div><!--end topshadow-->
+                <div id ="leftcolumncontainer">
+					<div class="minicolumnleft">
+						<h2>GeneSeqer</h2>
+						<ul class="leftmenu">
+							<li class="first"><a id="current" href="/cgi-bin/GeneSeqer/index.cgi" title="GeneSeqer">GeneSeqer</a></li>
+							<!--li><a href="/tool/GeneSeqer/download.php" title="Download GeneSeqer">Download</a></li-->
+							<li><a href="http://www.brendelgroup.org/bgroup/download/gs/download.html" title="Download GeneSeqer">Download</a></li>
+							<li><a href="/tool/GeneSeqer/help.php" title="GeneSeqer Help">Help</a></li>
+							<li><a href="/tutorial/geneseqer.php" title="GeneSeqer Tutorial">Tutorial</a></li>
+							<li><a href="/tool/GeneSeqer/references.php" title="GeneSeqer References">References</a></li>
+						</ul>
+
+						<h2 class="topmargin1">Other Resources</h2>
+						<ul class="leftmenu">
+							<li class="first"><a href="/tool/">Tools Overview</a></li>
+							<li><a href="http://bioinformatics.iastate.edu/" title="Bioinformatics &amp; Computational Biology at Iowa State University">BCB @ ISU</a></li>
+						</ul>
+					</div>
+                </div>
+                <div id ="maincontentscontainer" class="twocolumn">
+<!--Main-->     <div id="blastBody">
+	<h1>GeneSeqer</h1>
+	<p>GeneSeqer is a gene identification tool based on
+          spliced alignment or "spliced threading" of ESTs with a
+          genomic query sequence. <a href="/tool/GeneSeqer/help.php">Learn more.</a> <br />
+          <span class="new">For larger jobs, you might want to try the new <a href="http://bioservices.usd.edu/geneseqer/">Parallel GeneSeqer</a> web interface.</span></p>
+			<form method="post" action="/cgi-bin/GeneSeqer/index.cgi" enctype="multipart/form-data">
+				<fieldset id="database_container">
+					<legend><strong>Step 1:</strong> Select species-specific splice site model</legend>
+					<div class="fieldset_scroller">
+						<input id="adops" type="radio" name="_s" value="Arabidopsis" checked="checked" /> <label for="adops">Arabidopsis</label><br />
+						<input id="maize" type="radio" name="_s" value="maize" /> <label for="maize">Maize</label><br />
+						<input id="rice" type="radio" name="_s" value="rice" /> <label for="rice">Rice</label><br />
+						<input id="medicago" type="radio" name="_s" value="Medicago" /> <label for="medicago">Medicago</label>
+					</div>
+				</fieldset>
+
+				<fieldset id="input_container">
+					<legend><strong>Step 2:</strong> Input genomic DNA sequence</legend>
+					<p>
+						Sequences should be in the one-letter-code ({a,b,c,g,h,k,m,n,r,s,t,u,w,y}), upper or lower case; all other characters are
+						ignored during input. Multiple sequence input is accepted in <a
+						href="/tool/GeneSeqer/help.php#FASTA">FASTA</a> format (sequences separated by identifier
+						lines of the form "&gt;SQ;name_of_sequence comments") or in <a
+						href="/tool/GeneSeqer/help.php#GENBANK">GenBank</a> format.
+					</p>
+					<p>
+						<span>Paste your genomic DNA sequence here:</span><br />
+						<textarea name="_gdnap" rows="5" cols="82"></textarea><br />
+					</p>
+					<p>
+						<span>... or upload your sequence file (specify file name):</span><br />
+						<input type="file" name="gdnaf" size="60" /><br />
+					</p>
+					<p>
+						<span>... or type in the GenBank accession number of your sequence (its <strong>GenBank
+						format</strong> sequence will be retrieved):</span><br />
+						<input type="text" name="acc" value="" size="15" /><br />
+						<span>... or type in the chromosome number of your sequence:</span><br />
+						<input type="text" name="chr" value="" size="5" /><br />
+
+						<input type="hidden" name="GDBFlag" value="OSGDB" size="50" />
+					</p>
+					<p>
+						<a href="/tool/GeneSeqer/help.php#FORMAT">Select format</a>:
+						<input id="plain" type="radio" name="_l" value="plain " checked="checked" /> <label for="plain">Plain</label>
+						<input id="fasta" type="radio" name="_l" value="FASTA " /> <label for="fasta">FASTA</label>
+						<input id="genbank" type="radio" name="_l" value="GenBank" /> <label for="genbank">GenBank</label><br />
+					</p>
+					<p>
+						<a href="/tool/GeneSeqer/help.php#SNAME">Sequence name</a>: <input type="text" name="_f"
+						size="30" /> (optional, used in <a
+						href="/tool/GeneSeqer/help.php#PLAIN">plain sequence format</a> only)<br />
+					</p>
+					<p>
+						<a href="/tool/GeneSeqer/help.php#FROMTO">From position</a>:
+						<input type="text" name="_a" size="10" value=""/>
+						<a href="/tool/GeneSeqer/help.php#FROMTO">to position</a>:
+						<input type="text" name="_b" size="10" value=""/>
+						<a href="/tool/GeneSeqer/help.php#STRAND">Strand</a>:
+						<input id="original" type="radio" name="_r" value="original " /> <label for="original">Original</label>
+						<input id="reverse" type="radio" name="_r" value="reverse " /> <label for="reverse">Reverse</label>
+						<input id="both" type="radio" name="_r" value="both" checked="checked" /> <label for="both">Both</label>
+					</p>
+				</fieldset>
+
+				<fieldset id="match_container">
+				<legend><strong>Step 3:</strong> Select or input cDNA/EST sequences</legend>
+					<div >
+						<input type="button" id="plants_button" onclick="addRow('blast_db', plants, 'ALLPLANT')" value="All Plants" />
+						<input type="button" id="grasses_button" onclick="addRow('blast_db', grasses, 'ALLGRASS')" value="All Grasses" />
+						<input type="button" id="monocots_button" onclick="addRow('blast_db', monocots, 'ALLMONOCOT')" value="All Monocots" />
+						<input type="button" id="dicots_button" onclick="addRow('blast_db', dicots, 'ALLDICOT')" value="All Dicots" />
+						<div id="msgTag">&nbsp;
+						<strong>Species name: </strong></div> &laquo; &laquo; &laquo; <strong>Begin typing to search <br />
+						<input type="text" name="query_string" id="query_string" onkeyup="processMsg(); search(true,'query_string');" />
+						<input type="button" onclick="doneMsg();" id="clearBtn" name="clearBtn" value="Clear" /></strong>
+						<div id="result_list"></div>
+					</div>
+					<div class="table_container">
+						<table class="option_grid" id="database_headings" cellpadding="3px" cellspacing="0">
+							<tr>
+								<!--th>Organism</th-->
+								<th style="width: 387px;">Organism</th>
+								<th class="parts" title="EST"><!--a href="javascript:;" title="EST">EST</a-->EST</th>
+								<th class="parts" title="Contigs from EST and cDNA"><!--a href="javascript:;" title="Contigs from EST and cDNA">PUT</a-->PUT</th>
+								<th class="parts" title="cDNA"><!--a href="javascript:;" title="cDNA">cDNA</a-->cDNA</th>
+								<th class="parts" title="HTC"><!--a href="javascript:;" title="HTC">HTC</a-->HTC</th>
+							</tr>
+						</table>
+						<div class="scrollable">
+							<table class="option_grid" id="blast_db" cellpadding="3px" cellspacing="0">
+								<tbody style="overflow:auto;">
+									<tr><td colspan="7"></td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<table class="entry_box">
+						<tr>
+							<td>
+								<span>OR paste your own <strong>EST/cDNA</strong> sequence(s) here in <a
+								href="/tool/GeneSeqer/help.php#FORMAT">FASTA</a> format</span><br />
+								<textarea name="_estp" rows="5" cols="55"></textarea>
+							</td>
+							<td>
+								<span>... and/or paste your own <strong>Protein</strong> sequence(s) here in <a
+								href="/tool/GeneSeqer/help.php#FORMAT">FASTA</a> format</span><br />
+								<textarea name="_trgpp" rows="5" cols="55"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								... and/or upload your <strong>EST/cDNA</strong> sequence file (specify file
+								name):<br />
+								<input type="file" name="_e"  size="47" />
+							</td>
+							<td>
+								... and/or upload your <strong>Protein</strong> sequence file (specify file
+								name):<br />
+								<input type="file" name="_q"  size="47" />
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+
+				<fieldset id="alignment_container">
+					<legend><strong>Step 4:</strong> Select alignment stringency level</legend>
+					<div class="fieldset_scroller">
+						<input id="strict" type="radio" name="_strgcy" value="strict " checked="checked" /> <label for="strict">Strict</label><br />
+						<input id="moderate" type="radio" name="_strgcy" value="moderate " /> <label for="moderate">Moderate</label><br />
+						<input id="low" type="radio" name="_strgcy" value="low " /> <label for="low">Low</label>
+					</div>
+				</fieldset>
+
+				<fieldset id="submit_job">
+					<legend><strong>Step 5:</strong> Submit job</legend>
+					<p>
+						Select "Submit" to send the job to the server.
+						By default, output will be posted to your browser.
+						You may select to have the ouput sent to you by email instead.
+						Selection of this option is advised in the rare case that output posting is slow due to server overload.
+
+						If you (also) give us your email address, you will be notified when the job completes.
+
+					</p>
+					<p>
+						<input id="sendoutput" type="checkbox" name="Click" value="on" onclick="document.getElementById('email').focus();"/> <label
+						for="sendoutput">Send the output to this email address</label>: <input id="email" type="text" name="email" size="25"
+						onclick="document.getElementById('sendoutput').checked = 1"/>
+						<br />
+						<input id="html" type="checkbox" name="HTML" value="on" /> <label for="html">HTML formatted output</label><br />
+					</p>
+					<p>
+						<input type="submit" name="RunGSQ" value="Submit" /> <input type="reset" value="Reset" />
+						<input type="hidden" name=".cgifields" value="HTML" />
+						<input type="hidden" name=".cgifields" value="_strgcy" />
+						<input type="hidden" name=".cgifields" value="_r" />
+						<input type="hidden" name=".cgifields" value="Click" />
+						<input type="hidden" name=".cgifields" value="_l" />
+					</p>
+				</fieldset>
+			</form>
+		</div><!--end of blastBody div--></div>
+	<div id="footer">
+		<ul><!-- Modifying this menu? Sync it with our other footer menus. See the notes in /phplib/footer.php (reference copy). - Dan Rasmussen, 2009-07-14. -->
+			<li><a href="/site/browsers.php">Supported Browsers</a></li>
+			<li><a href="/site/">About Us</a></li>
+			<li><a href="/site/sitemap.php">Site Map</a></li>
+			<li><a href="/site/acknowledgments.php">Acknowledgments</a></li>
+			<li><a href="/site/links.php">Links</a></li>
+			<li><a href="http://brendelgroup.org/">Brendel Group</a></li>
+			<li class="last"><a href="http://www.nsf.gov/" title="National Science Foundation">NSF</a></li>
+		</ul>
+	</div><!-- end footer -->
+		</div><!-- end pagewidth -->
+		</div><!-- end innercontainer -->
+	</div><!-- end outercontainer -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		function addSpeciesRow() { return true; }
+	/* ]]> */
+	</script>
+</body>
+</html>

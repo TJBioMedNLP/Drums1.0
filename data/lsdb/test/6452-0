@@ -1,0 +1,724 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+
+
+<head>
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"> 
+<!-- <link rel = "icon" type = "image/png" href = "view/images/favico.png"></link> -->
+<title>Pheno HM Server</title>
+
+<style>
+.workspaceHeight {
+   height: 610px;
+   max-height: 610px;
+   min-height: 430px;
+}
+.workareaHeight {
+	height: 650px;
+	max-height: 650px;
+	min-height: 650px;
+
+}
+.workspaceHeight2 {
+	height: 320px;
+	max-height: 320px;
+	min-height: 300px;
+}
+.hint {
+   color: grey;
+}
+
+
+.b1f, .b2f, .b3f, .b4f, .b5f, .b6f, .b7f, .b8f{font-size:1px; overflow:hidden; display:block;}
+.b1f {height:0px; background:#728FCE; margin:0 5px;}
+.b2f {height:1px; background:#728FCE; margin:0 3px;}
+.b3f {height:1px; background:#728FCE; margin:0 2px;}
+.b4f {height:1px; background:#728FCE; margin:0 1px;}
+.b5f {height:1px; background:#D8D8D8; margin:0 5px;}
+.b6f {height:1px; background:#D8D8D8; margin:0 3px;}
+.b7f {height:1px; background:#D8D8D8; margin:0 2px;}
+.b8f {height:1px; background:#D8D8D8; margin:0 1px;}
+.contentf {background: #728FCE;}
+.contentf div {margin-left: 5px;}
+</style>
+
+
+
+
+
+<script src="view/prototype-1.6.0.2.js" ></script>
+
+<script>
+String.prototype.trim = function() {
+	   return this.replace(/^\s+|\s+$/g, "");
+	 }
+String.prototype.startsWith = function(str) {
+	return (this.match("^"+str)==str)}
+
+	function omim_desc(mpid){
+		url = "/phenoBrowser/MPOMIMServlet?mpid="+mpid+"";
+		window.open(url);
+	}
+	
+	function mp_umls(){
+		url = "/phenoBrowser/view/mpdesc.jsp";
+		window.open(url);
+	}
+	function helploader(jsp) {
+		
+		url = "/phenoBrowser/view/"+jsp+"";
+		window.open(url);
+	}
+	function combined_desc(mpid){
+		url = "/phenoBrowser/MPOmimUmlsServlet?mpid="+mpid+"";
+		window.open(url);
+	}
+	function hp_umls() {
+		url = "/phenoBrowser/view/hpdescription.jsp";
+		window.open(url);
+	}
+//assign the tokenized string with all the rootnodes
+	var mpIDList = "$MP:0000001";
+	var hpIDList = "$HP:0000001";
+	function loadTree(phenotype){
+		if (phenotype == "Mouse PhenoType") {
+		var url = '/phenoBrowser/MPTreeGen';
+		ajax_request(url, "", "TreeArea", processResponse, true); }
+		//doWait("TreeArea"); }
+		if (phenotype == "Human PhenoType") {
+		var url = '/phenoBrowser/HPTreeGen';
+		//ajax_request(url,"", "TreeArea", processResponse, true); 
+		document.write("Human Phenotype is selected! Please wait while the tree is loaded");
+			}
+	}
+
+	function makeGetRequest(mpid,isAdd,scrollTo,Top) {
+	   //alert("mp list before>>" + mpIDList + "<<");
+	   //alert('This is the scroll to:' + scrollTo + '<>' + '<ScrollTo>' + $(scrollTo).cumulativeOffset()[1] + '<>' + '<Top>' + $(Top).cumulativeOffset()[1] + '<>');
+	   
+		if(isAdd){
+			mpIDList = mpIDList+"$"+mpid;
+		}else{
+			mpIDList = mpIDList.replace("$"+mpid,"");
+		}
+		//alert("mP List after>>" + mpIDList + "<<<");
+		var url = '/phenoBrowser/MPTreeGen'
+		var par = 'mpid=' + mpIDList + '&node=' + mpid + '&scrollTo=' + $(scrollTo).cumulativeOffset()[1] + '&top=' + $(Top).cumulativeOffset()[1];
+		ajax_updater(url, par, "TreeArea", processResponse_mp, true);
+	}
+
+	function makeGetHPRequest(hpid,isAdd,scrollTo,Top) {
+		   //alert("mp list before>>" + mpIDList + "<<");
+		   //alert('This is the scroll to:' + scrollTo + '<>' + '<ScrollTo>' + $(scrollTo).cumulativeOffset()[1] + '<>' + '<Top>' + $(Top).cumulativeOffset()[1] + '<>');
+		   
+			if(isAdd){
+				hpIDList = hpIDList+"$"+hpid;
+			}else{
+				hpIDList = hpIDList.replace("$"+hpid,"");
+			}
+			//alert("mP List after>>" + mpIDList + "<<<");
+			var url = '/phenoBrowser/HPTreeGen'
+			var par = 'hpid=' + hpIDList + '&node=' + hpid + '&scrollTo=' + $(scrollTo).cumulativeOffset()[1] + '&top=' + $(Top).cumulativeOffset()[1];
+			ajax_updater(url, par, "hpTreeArea", processResponse_hp, true);
+		}
+	
+	function makeDescRequest(ID) {
+		//$('WorkArea').innerHTML = "";
+		
+		//var url = "/phenoBrowser/GenerateMPDesc?mpid="+ID+"";
+		var url = '/phenoBrowser/GenerateMPDesc';
+		openNewPage(url,ID);
+		//window.open(url);
+		//var par = 'mpid=' + ID;
+		
+		//ajax_request(url, par, "WorkArea", processDescResponse, true);
+		//doWait("WorkArea"); 
+	}
+	function openNewPage(url,ID) {
+		var url_new = "/phenoBrowser/view/mpdetails.jsp?url="+url+"&id="+ID+"";
+		window.open(url_new);
+		
+	}
+		
+	function openNewPage2(url,ID) {
+		var url_new = "/phenoBrowser/view/hpdetails.jsp?url="+url+"&id="+ID+"";
+		window.open(url_new);
+		
+	}
+	function makeDescHPRequest(ID) {
+		//$('WorkArea').innerHTML = "";
+		//var url = "/phenoBrowser/GenerateHPDesc?hpid="+ID+"";
+		var url = '/phenoBrowser/GenerateHPDesc';
+		openNewPage2(url,ID);
+		//window.open(url);
+		//var par = 'hpid=' + ID;
+		
+		//ajax_request(url, par, "WorkArea", processDescResponse, true);
+		//doWait("WorkArea"); 
+	}
+
+	
+	function searchDescription(){
+		var url1 = '/phenoBrowser/SearchPheno';
+		var url2 = '/phenoBrowser/HPSearchPheno';
+		wordId=$('search').getValue();
+		// maximize the search results if minimized
+		if(!$('mouseontology').visible()){
+			minimize();
+		}
+
+		if(!$('humanontology').visible()){
+			minimize();
+		}
+		//wordId=document.input.searchBox.value; // $F('searchBox');
+		
+		var pars1 = 'phenoString=' + wordId + '&mpid=' + mpIDList
+		var pars2 = 'phenoString=' + wordId + '&hpid=' + hpIDList
+		ajax_request(url1, pars1, "TreeArea", processResponse_mp, false);
+		getMPIDS();
+		ajax_request(url2, pars2, "hpTreeArea", processResponse_hp, false);
+		getHPIDS();
+		
+		
+	}
+
+	function search1(wordId){
+		var url1 = '/phenoBrowser/SearchPheno';
+		var url2 = '/phenoBrowser/HPSearchPheno';
+		//wordId=$('search').getValue();
+		// maximize the search results if minimized
+		$('search').setValue(wordId);
+		if(!$('mouseontology').visible()){
+			minimize();
+		}
+
+		if(!$('humanontology').visible()){
+			minimize();
+		}
+
+		//wordId=document.input.searchBox.value; // $F('searchBox');
+		
+		var pars1 = 'phenoString=' + wordId + '&mpid=' + mpIDList
+		var pars2 = 'phenoString=' + wordId + '&hpid=' + hpIDList
+		ajax_request(url1, pars1, "TreeArea", processResponse_mp, false);
+		getMPIDS();
+		ajax_request(url2, pars2, "hpTreeArea", processResponse_hp, false);
+		getHPIDS();
+		
+		
+	}
+	
+	function getMPIDS(){
+		var url1 = '/phenoBrowser/view/ids.jsp?bustcache='+new Date().getTime() ;
+		//var url1 = '/phenoBrowser/view/ids.jsp' ;
+		ajax_request(url1, "", "SrchResults", processIds, false);
+		getSrchResults();
+	}
+	
+	function getSrchResults(){
+		var url2 = '/phenoBrowser/view/srchresults.jsp';
+		
+		ajax_request(url2, "", "SrchResults", processResults, true);
+		//noWait("SrchResults");
+	}
+
+	function getHPIDS() {
+		var url1 = '/phenoBrowser/view/hpids.jsp?bustcache='+new Date().getTime() ;
+		ajax_request(url1, "", "SrchResults_hp", processHPIDs, false);
+		getHPSrchResults();
+	}
+
+	function getHPSrchResults() {
+		var url2 = '/phenoBrowser/view/hpsrchresults.jsp';
+		ajax_request(url2, "", "SrchResults_hp", processHPResults, true);
+	}
+		
+	function clearSearchnew() {
+		//doWait("SrchResults");
+		//document.getElementById('SrchResults').innerHTML = "<img src= "view/images/watermark_logo_small.PNG" border = "0"></img>";
+		$('SrchResults').update("");
+		//$('SrchResults').setStyle({height:'20px'});
+		$('SrchResults_hp').update("");
+		//$('SrchResults_hp').setStyle({height:'20px'});
+		$('TreeArea').setStyle({height:'610px'});
+		//$('WorkArea').update("");
+		$('hpTreeArea').setStyle({height:'610px'});
+		clear1();
+		clear2();
+		
+	}
+
+	function clear1() {
+		document.input.searchBox.value = "";
+		mpIDList = "$MP:0000001";
+		var url = '/phenoBrowser/SearchPheno';
+		var par = 'clear=clear';
+		//ajax_request(url,par,"TreeArea", processResponse_mp, true);
+		ajax_request(url,par,"TreeArea", processResponse_mp, true);
+	}
+
+	function clear2() {
+		document.input.searchBox.value = "";
+		hpIDList = "$HP:0000001";
+		var url = '/phenoBrowser/HPSearchPheno';
+		var par = 'clear=clear';
+		ajax_request(url,par,"hpTreeArea", processResponse_hp, true);
+		//ajax_request_new(url,par,"hpTreeArea", processResponse_hp, true);
+	}
+
+	
+	//function clearSearch(){
+	//	document.input.searchBox.value = "";
+//		$('searcBox').writeAttribute('value','');
+	//	mpIDList = "$MP:0000001";
+	//	hpIDList = "$HP:0000001";	
+	//$('SrchResults').innerHTML = "";
+	//	$('SrchResults').update("");
+	//	$('SrchResults').setStyle({height: '20px'});
+	//	$('TreeArea').setStyle({height: '610px'});
+	//	$('hpTreeArea').setStyle({height: '610px'});
+	//	$('WorkArea').update( "" );
+		
+       // $('SrchResults').style.height ="20px"
+	//    var url1 = '/phenoBrowser/SearchPheno';
+	//    var url2 = '/phenoBrowser/HPSearchPheno';
+	 //   var par = 'clear=clear';
+	 //   ajax_request(url1, par, "TreeArea", processResponse, true);
+	 //   ajax_request(url2, par, "hpTreeArea", processResponse, true);
+	    //loadTree();
+//	}
+	
+	function showResponse(originalRequest)
+	{
+		//put returned XML in the textarea
+		//$('TreeArea').innerHTML = originalRequest.responseText;
+		$('TreeArea').update( originalRequest.responseText);
+		$('hpTreeArea').update(originalRequest.responseText);
+	}
+	
+	function processIds(originalRequest){
+		mpIDList = originalRequest.responseText;
+		
+		mpIDList = mpIDList.trim();
+		
+	}
+
+	function processHPIDs(originalRequest) {
+		hpIDList = originalRequest.responseText;
+		hpIDList = hpIDList.trim();
+	}
+	
+	function processResults(originalRequest){	
+		//noWait("SrchResults");
+		//$('SrchResults').innerHTML = originalRequest.responseText;
+		$('SrchResults').update( originalRequest.responseText);
+		//$('SrchResults').setStyle({height: '220px'});
+		//$('TreeArea').setStyle({height: '410px'});
+		//$('WorkArea').update("");
+	//	noWait("SrchResults");
+	}
+
+	function processHPResults(originalRequest) {
+		$('SrchResults_hp').update( originalRequest.responseText);
+		//$('SrchResults_hp').setStyle({height: '220px'});
+		//$('hpTreeArea').setStyle({height: '410px'});
+		//$('WorkArea').update("");
+	}
+	
+	function processDescResponse(originalRequest) {
+		//alert("initial v count"+Ajax.activeRequestCount);
+		//noWait("WorkArea");
+		//$('WorkArea').innerHTML = originalRequest.responseText;
+		$('WorkArea').update( originalRequest.responseText );
+		
+	}
+	function reportError(request)
+	{
+		alert('Sorry. There was an error.');
+	}
+	
+	function doWait(area){
+	//Ajax.activeRequestCount++;
+	//alert('inside dowait');
+	$(area).update('<img src="view/images/wait.gif">');
+	//document.getElementById(area).innerHTML = '<img src=images/wait.gif>';
+	// Element.show('systemWorking');
+	}
+	
+	function doWait_new(area){
+		//Ajax.activeRequestCount++;
+		//alert('inside dowait');
+		$(area).update('<img src="view/images/watermark_logo_small.png">');
+		//document.getElementById(area).innerHTML = '<img src=images/wait.gif>';
+		// Element.show('systemWorking');
+	}
+	function noWait(area){
+	//	Ajax.activeRequestCount--;
+	//	if(Ajax.activeRequestCount == 0){
+		$(area).update("");
+	//	document.getElementById(area).invisibe = true;
+	//	document.getElementById('systemWorking').invisibe = true;
+	//	Element.hide('systemWorking');
+//		}else{
+	//	alert("Count:" + Ajax.activeRequestCount);
+//		}
+	}
+	
+	//function processResponse(originalRequest) {
+		   // alert("initial count"+Ajax.activeRequestCount);
+		
+		   // alert("Inside process response");
+	 //       $('TreeArea').update( originalRequest.responseText );
+	 //       $('hpTreeArea').update(originalRequest.responseText);
+	    	
+//	    	noWait("TreeArea");
+	//}
+
+	function processResponse_mp(originalRequest) {
+		$('TreeArea').update(originalRequest.responseText);
+	}
+	function processResponse_hp(originalRequest) {
+		$('hpTreeArea').update(originalRequest.responseText);
+	}
+	                                        
+	
+	function ajax_request(url, data, area, ajax_response, value) {
+	//alert("inside ajax request count"+Ajax.activeRequestCount);
+	
+//	var myForm = $('aForm').serialize(true);
+	doWait(area);
+	
+    var myAjax = new Ajax.Request(
+        url, 
+        {method: 'post', parameters: data, onComplete:ajax_response, asynchronous: value }
+    );
+    
+   
+	}	 
+
+	function ajax_request_new(url, data, area, ajax_response, value) {
+		//alert("inside ajax request count"+Ajax.activeRequestCount);
+		
+//		var myForm = $('aForm').serialize(true);
+		doWait_new(area);
+		
+	    var myAjax = new Ajax.Request(
+	        url, 
+	        {method: 'post', parameters: data, onComplete:ajax_response, asynchronous: value }
+	    );
+	    
+	   
+		}	 
+		
+	function ajax_updater(url, data, area, ajax_response, value) {
+	doWait(area);
+	
+    var myAjax = new Ajax.Updater( 
+    	area,
+        url, 
+        {method: 'post', parameters: data, asynchronous: value, evalScripts: true }
+    );
+    
+   
+	}
+
+	
+	
+	function minimize(){
+		$('mouseontology').toggle();
+		$('humanontology').toggle();
+		$('TreeArea').toggle();
+		$('hpTreeArea').toggle();
+		$('results_mp').toggle();
+		$('results_hp').toggle();
+		$('SrchResults').toggle();
+		$('SrchResults_hp').toggle();
+		
+		
+		//if($('mouseontology').visible()){
+			//$('minbutton').value = 'Maximize Work Space';
+			//$('workspaceMain').setStyle({width: '68%'});
+		//}else{
+		//	$('minbutton').value = 'Restore Ontology View';
+			//$('workspaceMain').setStyle({width: '100%'});
+		//}
+	//	if($('humanontology').visible()){
+		//	$('minbutton').value = 'Maximize Work Space';
+			//$('workspaceMain').setStyle({width: '68%'});
+	//	}else{
+		//	$('minbutton').value = 'Restore Ontology View';
+			//$('workspaceMain').setStyle({width: '100%'});
+		//}
+	}
+</script>
+
+<!-- 
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5401969-1");
+pageTracker._trackPageview();
+</script> -->
+</head>
+
+
+
+
+
+
+<body  TEXT="#000000" LINK="#0000EE" VLINK="#551A8B" ALINK="#FF0000" onload="clearSearchnew()">
+
+
+	
+<b class="b5f"></b><b class="b6f"></b><b class="b7f"></b><b class="b8f"></b>
+<table bgcolor = "#D8D8D8" cellSpacing="0" cellPadding="0" width="100%" border="0">
+		<tr>
+			<!-- Logo -->
+			<td valign="top" width="12%">
+			<a href="/phenoBrowser/Phenome" title="PhenoHM Server" > 
+					<img src= "view/images/2new.png" border = "0">
+					
+				</a>
+				
+				
+			</td>
+			
+			<td valign="top">
+				<table cellSpacing="0" cellPadding="0" width="100%">
+					<tr>
+						
+						<td valign="top" align="center">
+							
+							 <font face="helvetica" size="6" color="#373CD5">PhenoHM </font><br> 
+							 
+							<font face="helvetica" size="4" color = "#565051"><b>Human-Mouse Comparative Phenomics Server</b></font>
+						</td> 
+					 </tr>
+					 <tr>
+					 	<td align = "center">
+					 	<font face = "verdana" size = "1" color = "#800517">Best viewed with Firefox or Safari or Internet Explorer (7.0 or higher)</font>
+					 	</td>
+					</tr>
+	
+					<tr>
+													
+						<td align = "center">
+						<font face = "verdana" size = "2" color = "#800517"><a href ="javascript:helploader('mainhelpnew.jsp')" style="text-decoration:none">Help</a>|</font>
+						
+						
+						<font face = "verdana" size = "2" color = "#800517"><a href ="javascript:helploader('supplementary.jsp')" style="text-decoration:none">Supplementary</a>|</font>
+						
+						
+						<font face = "verdana" size = "2" color = "#800517"><a href ="javascript:helploader('links.jsp')" style="text-decoration:none">Sources</a>|</font>
+						
+						
+						<font face = "verdana" size = "2" color = "#800517"><a href ="javascript:helploader('citing.jsp')" style="text-decoration:none">Citing</a>|</font>
+						
+						
+						<font face = "verdana" size = "2" color = "#800517"><a href ="javascript:helploader('disclaimer.jsp')" style="text-decoration:none">Disclaimer</a>|</font>
+						
+						
+						<font face = "verdana" size = "2" color = "#800517"><a href ="javascript:helploader('contactus.jsp')" style="text-decoration:none">Contact us</a></font>&nbsp;
+						</td>
+						
+					</tr>
+					
+					<tr>
+						<td align = "right">
+						<hr/>
+						</td>
+						<td align = "right">
+						<hr/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<font face = "verdana" size = "2"><b>Enter a mouse or human phenotype term or ID or OMIM ID or UMLS </b></font><br>
+						<font face = "verdana" size = "2"><b>CUI <u>OR</u> Use the MP or HP Ontology Tree Views below</b></font><br>
+						<font face  = "verdana" size = "2"><i><u>Example queries:</u></i></font>
+						<ul>
+						<li><font face = "verdana" size = "2"><i>Phenotype Term(<a href ="javascript:search1('dextrocardia')" style="text-decoration:none">dextrocardia</a>, <a href ="javascript:search1('cleft palate')" style="text-decoration:none">cleft palate</a>, <a href ="javascript:search1('atrial septal defect')" style="text-decoration:none">atrial septal defect</a>)</i></font><br></li>
+						<li><font face = "verdana" size = "2"><i>Phenotype ID(<a href ="javascript:search1('MP:0000644')" style="text-decoration:none">MP:0000644</a>, <a href ="javascript:search1('MP:0000111')" style="text-decoration:none">MP:0000111</a>, <a href ="javascript:search1('MP:0000282')" style="text-decoration:none">MP:0000282</a>, <a href ="javascript:search1('HP:0001651')" style="text-decoration:none">HP:0001651</a>, <a href ="javascript:search1('HP:0000175')" style="text-decoration:none">HP:0000175</a>, <a href ="javascript:search1('HP:0001631')" style="text-decoration:none">HP:0001631</a>)</i></font><br></li>
+						<li><font face = "verdana" size = "2"><i>OMIM ID(<a href ="javascript:search1('600576')" style="text-decoration:none">600576</a>, <a href ="javascript:search1('603339')" style="text-decoration:none">603339</a>)</i></font><br></li>
+						<li><font face  = "verdana" size = "2"><i>UMLS CUI(<a href ="javascript:search1('C0011813')" style="text-decoration:none">C0011813</a>, <a href ="javascript:search1('C0008925')" style="text-decoration:none">C0008925</a>)</i></font></li> 
+						</ul>
+						<!-- 
+						<font face = "verdana" size = "2"><i>Enter a mouse or human phenotype term or ID or OMIM ID or UMLS CUI<br><i>Example: Phenotype Term(<a href ="javascript:search1('dextrocardia')" style="text-decoration:none">dextrocardia</a>, <a href ="javascript:search1('cleft palate')" style="text-decoration:none">cleft palate</a>, <a href ="javascript:search1('atrial septal defect')" style="text-decoration:none">atrial septal defect</a>)<br>Phenotype ID(<a href ="javascript:search1('MP:0000644')" style="text-decoration:none">MP:0000644</a>, <a href ="javascript:search1('MP:0000111')" style="text-decoration:none">MP:0000111</a>, <a href ="javascript:search1('MP:0000282')" style="text-decoration:none">MP:0000282</a>, <a href ="javascript:search1('HP:0001651')" style="text-decoration:none">HP:0001651</a>, <a href ="javascript:search1('HP:0000175')" style="text-decoration:none">HP:0000175</a>, <a href ="javascript:search1('HP:0001631')" style="text-decoration:none">HP:0001631</a>) (or)</i></font><br>
+						<font face = "verdana" size = "2"><i>Use the Tree Views below</i></font><br>
+						<font face = "verdana" size = "2"><i>OMIM ID(<a href ="javascript:search1('600576')" style="text-decoration:none">600576</a>, <a href ="javascript:search1('603339')" style="text-decoration:none">603339</a>)</i></font><br>
+						<font face = "verdana" size = "2"><i>UMLS CUI(<a href ="javascript:search1('C0011813')" style="text-decoration:none">C0011813</a>, <a href ="javascript:search1('C0008925')" style="text-decoration:none">C0008925</a>)</i></font>
+						-->
+						</td> 
+					</tr>
+					<tr>
+						
+						<td valign="bottom">
+							
+							<form name="input" action="javascript:searchDescription()" method="post">
+						
+							<input type="text" name="searchBox" size="50" id = "search"> 
+							<input type = "button" value = "Search" onClick = "javascript:searchDescription()"> 
+							<input type = "button" value = "Clear Search Results" onClick = "javascript:clearSearchnew()">
+							<!-- <input type="button" id="minbutton" value="Maximize Work Space" onclick="javascript:minimize()"> -->
+							<!-- <input type="button" id="graphbutton" value="View Graph" onclick="http://localhost:8080/phenoBrowser/cytoscape/cy1.jnlp">
+							<a href="cytoscape/cy1.jnlp">VG</a> -->
+							</form>
+							
+						
+					</tr>
+				</table>
+			</td>
+			<td>
+			</td>
+		</tr>
+</table>
+<b class="b8f"></b><b class="b7f"></b><b class="b6f"></b><b class="b5f"></b>
+<hr/>
+<!-- 
+<div id="description" align = "left" style="background-color:#003399; color: white; width: 100%"><b> &nbsp;Search Results</b></div>
+<div id = "SrchResults" style="max-height:200px;overflow:scroll"></div>
+ -->
+ 
+<!-- 
+.workspaceHeight {
+   height: 300px;
+}
+ -->
+<!-- 
+
+<div class="workspaceHeight" width: 100%  >
+
+	<div style="float: left; width: 30% ">
+			<div id="description" align = "center" style="background-color:#003399; color: white; width: 100%; "><b>Tree Space </b></div>
+			<div class="workspaceHeight" id = "TreeArea" style="overflow:scroll;width:100%; "></div>
+	</div>
+	
+	
+
+	<div class="workspaceHeight" style= " float: left; width: 70%;" >
+			<div  id="Workspace"  align = "center" style="  color: white; background-color:#003399; width:100%; "><b>Work Space </b></div>
+			<div class="workspaceHeight" id="WorkArea" style=" overflow:scroll; width:100%; "></div> 
+	</div>
+
+</div>
+
+ -->
+
+
+<div style= "width: 100%" >
+	
+	<div style="float: right; width: 70%;">
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+		<div id="mouseontology" align = "left" style="background-color:#728FCE; font-family:verdana;font-size:13px;color: white;width: 100%; "><b>Mouse Ontology Tree View </b></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+		<div class="workspaceHeight2" id = "TreeArea" style="background-color:#E3E4FA; overflow:scroll;width:100%; "></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		
+	</div>
+
+	<div style="float: left; width: 30% ; ">
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+	    <div id="results_mp" align = "left" style="background-color:#728FCE; color: white; font-family:verdana; font-size:13px;width: auto;"><b> &nbsp;Search Results for Mouse Phenotype</b></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+		<div id = "SrchResults" style="background-color:#E3E4FA;height: 320px; min-height:300px; max-height:400px;overflow:scroll; width: auto;"><img src = "view/images/watermark_logo_small.png"></img></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		
+	</div>
+	
+	
+
+</div>
+
+
+<div style = "width:100%" >		
+	
+	<div style="float: right; width:70%;">
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+		<div id="humanontology" align = "left" style="background-color:#728FCE; font-family:verdana;font-size:13px;color: white; width: 100%; "><b>Human Ontology Tree View </b></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+		<div class="workspaceHeight2" id = "hpTreeArea" style="background-color:#E3E4FA; overflow:scroll;width: 100%; "></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		
+	</div>
+	<div style="float: left; width: 30% ; ">
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+		<div id="results_hp" align = "left" style="background-color:#728FCE; color: white; font-family:verdana; font-size:13px;width: auto;"><b> &nbsp;Search Results for Human Phenotype</b></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+		<div id = "SrchResults_hp" style="background-color:#E3E4FA;height: 320px; min-height:300px; max-height:400px;overflow:scroll; width: auto;"></div>
+		<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+		
+	</div>
+
+	
+
+</div>
+
+<!-- 
+
+<div style = "width:100%">
+	<div id="workspaceMain" class="workareaHeight" style= " float: left; width: 100%;margin-left: 2px;" >
+			<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+			<div  id="Workspace"  align = "center" style="  color: white; background-color:#728FCE; font-family:verdana; font-size:18px;width:100%; "><b>Work Space </b></div>
+			<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
+			<b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+			<div class="workareaHeight" id="WorkArea" style="background-color:#fefeeb; overflow:scroll; width:100%; "></div>
+			<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b> 
+			
+	</div>
+</div>
+
+-->
+
+
+
+
+<!-- <div style="clear: both;"> </div> -->
+<br/>
+<!-- <b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b> -->
+<!-- <div align = "center" style="color: white; font-family:verdana;font-size:1; width = 100%; background-color:#728FCE ;font-size:13px"><a href = "view/mainhelpnew.jsp" style="color: rgb(255,255,255)" target="_blank"><b>Help</b></a></div>-->
+<div align = "center" style="color: white; font-family:verdana;font-size:1; width = 100%; background-color:#FFFFFF;font-size:13px">
+
+<!-- <div style="filter:shadow(color:gray, strenght:10, direction:135);"> --> 
+
+
+<a href="http://www.computationalmedicine.org" title = "CMC"><img src="view/images/cmcLOGO-new.PNG"  style="border:1px solid gray;" border="0"></a>&nbsp;
+
+
+<a href="http://www.cchmc.org" title = "CCHMC"><img src="view/images/CCHMC_logo-new.PNG"  style="border:1px solid gray;" border="0"></a>&nbsp;
+
+
+<a href="http://www.cincinnatichildrens.org/research/project/dhc/default.htm" title = "Cincinnati DHC"><img src="view/images/DHC_Logo-new.PNG"  style="border:1px solid gray;" border="0"></a>&nbsp;
+
+
+<a href="http://www.gudmap.org" title = "GudMap"><img src="view/images/Gudmap-new.PNG"  style="border:1px solid gray;" border="0"></a>&nbsp;
+
+</div>
+<div align = "center">
+<font face = "helvetica" size = "1">©2007-2010 Cincinnati Children's Hospital Medical Center</font></div>
+<!-- <b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b> -->
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+var pageTracker = _gat._getTracker("UA-12358903-1");
+pageTracker._trackPageview();
+}catch(err) { }
+</script>
+
+
+</body>
+<head> <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE"> </head>
+
+</html>

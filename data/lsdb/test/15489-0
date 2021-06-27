@@ -1,0 +1,77 @@
+<html>
+<head><title>SNEP</title></head>
+<body background="gif/back2.jpg">
+<h1>SNEP Homepage</h1>
+For details, see our paper (Fujisawa et al., 2009, BMC Bioinformatics,  Vol.10, No.131).<p>
+<!--
+Supplementary information for paper (PDF files)<p>
+<a href="pdf/mRNAdata.pdf">mRNA data</a>, 
+<a href="pdf/Appendix.pdf">Appendix</a>, 
+<a href="pdf/ROC.pdf">Figure of ROC curve</a>. <br>
+-->
+<p><hr></p>
+Warranty: The software does not come with any warranty. The software is only free for non-commercial users. For non-academic users, please make contact with the corresponding author. 
+<p><hr></p>
+1. Download and Read the following function file on R. <p>
+Download: <a href="SNEP.R">SNEP.R</a> <br>
+Run: source("SNEP.R");
+<p><hr></p>
+You can know how to use SNEP by understanding Steps 2-6. If you want to directly analyze your CEL file, please read Step A given after Step 6. 
+<p><hr></p>
+2. Prepare two objects on R, <b>ProbeNamePair</b> and <b>Xdata</b>, e.g. from .CEL files.<p>
+nprobe: Number of probes.<br>
+nk: Number of replicates.<br>
+<b>ProbeNamePair</b>: nprobe * 2 matrix. The first and second columns are "ProbeSetName" and "PairIndex" on a .CEL file. <br>
+Example. <a href="ProbeNamePair.txt">ProbeNamePair.txt</a>. <br>
+<b>Xdata</b>: nprobe * (2*nk) matrix. The rows correspond to the rows of ProbeNamePair. The first to nk-th columns correspond to one strain and the (nk+1)-th to (2*nk)-th columns correspond to the other strain. The elements are the log10 values of PM signal intensity. <br>
+Example. <a href="Xdata.txt">Xdata.txt</a>.  <p>
+You can make an example by running the following commands on R:<p>
+ProbeNamePair = read.table("ProbeNamePair.txt", header=T); <br>
+Xdata = read.table("Xdata.txt"); 
+<p><hr></p>
+3. Run the following commands on R to make global variables.<p>
+nprobe = nrow(ProbeNamePair);<br>
+ProbeNamePair$ID = 1:nprobe;<br>
+ProbeFirstNum = subset(ProbeNamePair,PairIndex==1)$ID;<br>
+npset = length(ProbeFirstNum);<br>
+ProbeFirstNum = c(ProbeFirstNum,nprobe+1);<br>
+<p><hr></p>
+4. Run the following commands on R.<p>
+##### Results<br>
+wres = MulTestForGenes(Xdata,npset);<br>
+pvalue = wres[1:nprobe]; <br>
+tv.gene = wres[nprobe+1:npset];<br>
+<p><hr></p>
+5. Results.<p>
+<b>pvalue</b>: nprobe * 1 vector with p-values for all the probes. <br>
+The null hypothesis is that the probe is not an SFP and the alternative hypothesis is that the probe is <i>an SFP for the second strain</i>.<br>
+pvalue=(p_1,...,p_npset), where p_a=(p_{a1},...,p_{aJ}), p_{aj} is the p-value for the j-th probe in the a-th probe set, J is the number of probes in the a-th probe set, typically 11. <br>
+p-value for the alternative hypothesis that the probe is <i>an SFP for the first strain</i> : 1-pvalue<p>
+<b>tv.gene</b>: npset * 1 vector with t-values based on the test statistic T0. <br>
+The null hypothesis is that two expression levels for two strains are not different. <br>
+tv.gene=(t_1,...,t_npset), where t_a is the t-value for the a-th gene. 
+<p><hr></p>
+6. Analysis of Example.<p>
+You will obtain the following results after running the above R program for the example: ProbeNamePair.txt and Xdata.txt. 
+<p>
+> pvalue<br>
+[1] 0.53554154 0.36027663 0.65617879 0.53554154 0.37713016 0.63959028 0.42898901 0.60564204 0.37713016 0.60564204 0.32739966 0.45266215 0.45266215 0.54828344 0.45266215 0.64117058 0.53239102 0.00000000 0.50047622 0.51644679 0.26124566 0.50047622 <br>
+> tv.gene<br>
+[1] 0.07209695 5.55782153 
+</p>
+When you need the p-value for the test statistic T0, you can calculate an approximate p-value by the following: <br>
+> pv.gene = 2*(0.5-abs(0.5-pnorm(tv.gene))); pv.gene<br>
+[1] 9.425247e-01 2.731625e-08
+<p>
+The example consists of two probe sets, which are illustrated in the following two graphs. 
+The black and red correspond to the first and second strain with each 5 replicates, respectively. <br>
+<IMG SRC="1.jpg" hspace="50"><IMG SRC="2.jpg"><p>
+In the first figure, it seems that no SFP is present and two gene expression levels are almost the same. All of the p-values in the first probe set, pvalue[1:11], are not significant. The p-value for the difference of gene expression level between two strains, pv.gene[1], is not significant. <p>
+In the second figure, it seems that the 7th probe is an SFP and two gene expression levels are different. The p-value on the 7th probe, pvalue[11+7]=0.00000000, shows highly significance. The p-value for the difference of gene expression level between two strains, pv.gene[2]=2.731625e-08, shows  highly significance. 
+<p><hr></p>
+A. Treatment of CEL file.<p>
+You must install "Bioconductor" in advance. After that, please make "Xdata" and "ProbeNamePair" by following <a href="CELconvert.txt">this file</a>. 
+<p><hr></p>
+<center>Last modified on Jun 12, 2009.</center>
+</body>
+</html>

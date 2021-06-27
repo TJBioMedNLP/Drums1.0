@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <title>
+      Reference descriptions of cellular electrophysiology models
+    </title>
+    <style type="text/css" media="screen">
+      .body {
+        font-family: sans-serif;
+      }
+      .heading {
+        margin-bottom: 0;
+      }
+      p.authors, p.address{
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      p.status {
+        font-weight: bold;
+        font-style: italic;
+        font-size: smaller;
+      }
+      p.update {
+        font-weight: bold;
+        font-style: italic;
+        font-size: smaller;
+        background: #ffff00;
+        color: #ff0000;
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+      .status-statement {
+        font-family: serif;
+        font-variant: small-caps;
+        font-style: normal;
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+      p.note {
+        font-weight: bold;
+        font-size: x-small;
+        background-color: #000000;
+        color: #ffffff;
+        padding: 0.5em 1em 0.5em 1em;
+      }
+      .note a:link {
+        color: #ffffff;
+      }
+      .note a:visited {
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="heading">
+      Reference descriptions of cellular electrophysiology models
+    </h1>
+    <p class="authors">
+      David P Nickerson, Alberto Corrias &amp; Martin L Buist.
+    </p>
+    <p class="authors">
+      Bioinformatics 2008; doi: <a href="http://dx.doi.org/10.1093/bioinformatics/btn080">10.1093/bioinformatics/btn080</a>
+    </p>
+    <p class="address">
+      <a href="http://www.bioeng.nus.edu.sg/compbiolab/">Computational Bioengineering Laboratory</a>, Division of Bioengineering, National University of Singapore.
+    </p>
+    <!-- Status statement -->
+    <p class="status">
+      This version of the content is: <span class="status-statement"><!--under development.-->Fixed at March 13, 2008</span>
+    </p>
+    <!-- Update statement
+    <p class="update">
+      An updated version of this content is now available at: <a href="http://www.bioeng.nus.edu.sg/compbiolab/p2/">
+        http://www.bioeng.nus.edu.sg/compbiolab/p2/</a>.
+    </p>
+    -->
+    <p>
+      These pages use <a href="http://www.w3.org/MarkUp/">XHTML</a> combined with <a href="http://www.w3.org/Math/">MathML</a> and have been tested using <a href="http://www.getfirefox.com">Firefox 2.0+</a>. They do not appear to render in a vanilla installation of IE7 using Windows XP Professional, but perhaps work with additional plugins.
+    </p>
+    <p>
+      This site provides an initial example of an implementation of a reference description of parts of a cellular electrophysiology model. Two of the main ionic currents in the <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=Retrieve&amp;list_uids=17486452">Corrias &amp; Buist (2007)</a> gastric smooth muscle cellular electrophysiology model have been specified as described in the above article. They are the:
+      <ul>
+        <li>
+          <a href="ICa/index.xml">L-type calcium current</a>; and
+        </li>
+        <li>
+          <a href="IKA/index.xml">A-type potassium current</a>.
+        </li>
+      </ul>
+      In this initial implementation of a reference description, the focus has been on the content rather than presentation. The next step is to build on this content to make it much more presentable and friendly to navigate. We are currently working on this.
+    </p>
+    <p>
+      As described in the <a href="http://dx.doi.org/10.1093/bioinformatics/btn080">accompanying article</a>, each of the reference descriptions is defined at the highest level using <a href="http://www.cellml.org/specifications/metadata/graphs">CellML graphing metadata</a>. Thus the first page for the reference descriptions presents both the graphical rendering of each graph in the reference descriptions and the actual definition of the graphs. From the definitions it is possible to follow links through to the raw data, the <a href="http://www.cellml.org/specifications/metadata/simulations">simulation metadata</a>, and the variable definitions. The variable definitions present all the mathematics used in the model(s) as well as parameter values and boundary conditions. Each resource in the reference descriptions provide all the data with which they are annotated, such as source literature references, species, and biological entity as well as relevant curation metadata like original author of the underlying markup-code and history of modifications.
+    </p>
+    <p>
+      The <a href="IKA/index.xml">A-type potassium current</a> example demonstrates the inclusion of experimental data in the reference description. In this case, we include the original experimental data used in the model fitting process as well as an additional data set which illustrates the suitability of the fitted model.
+    </p>
+    <p>
+      The content for these two examples has been generated directly from the annotated mathematical models. As such, all the content displayed herein is available from the various XML source files which are all linked to throughout the reference description (click the <code>&lt;source/&gt;</code> links). These reference descriptions were generated using the CellMLSimulator application which is open source and available from <a href="http://cellml.sourceforge.net">http://cellml.sourceforge.net</a>.
+    </p>
+    <h2 class="heading">Non-CellML usage</h2>
+    <p>
+      The examples above use <a href="http://www.cellml.org">CellML</a> for the specification of the mathematical model. As discussed in the accompanying article, the methods and technology we propose can be applied equally as well using other standard formats for the model description. In demonstration of this, we provide here an example using the <a href="http://sbml.org">systems biology markup language (SBML)</a>. For this demonstration we use the SBML version of the <a href="http://www.ebi.ac.uk/compneur-srv/biomodels-main/publ-model.do?mid=BIOMD0000000020">Hodgkin &amp; Huxley (1952) squid axon model</a> found in the <a href="http://www.biomodels.net">BioModels.net</a> model repository (last modified: 2007-04-26T14:12:12). In this example we specify the required metadata externally to the SBML document describing the model to aid clarity, but the metadata could easily be included in the actual model document using the SBML <code>&lt;annotation&gt;</code> element.
+    </p>
+    <p>
+      For this demonstration we make use of a local copy of the BioModels.net Hodgkin &amp; Huxley model in SBML, which can be found here: <a href="HH-in-SBML.xml"><code>HH-in-SBML.xml</code></a>. The metadata annotations can be found here: <a href="HH-in-SBML-metadata.xml"><code>HH-in-SBML-metadata.xml</code></a>, where we make use of XML comments to aid the reader in understanding the annotations. Replacement of references to the local <code>HH-in-SBML.xml</code> document with references to the original BioModels.net version at <code>http://www.ebi.ac.uk/compneur-srv/biomodels/models-main/publ/BIOMD0000000020.xml</code> within <code>HH-in-SBML-metadata.xml</code> will result in the metadata directly annotating the BioModels.net version of the SBML model description.
+    </p>
+    <p class="note">
+      As this section of the <a href="http://www.bioeng.nus.edu.sg/compbiolab">Computational Bioengineering Laboratory</a> is created as part of the current active research of the laboratory it is under continual refinement and development. At suitable points in this development workflow we will post updated versions and link to them from here. Once finalised, this version will remain unchanged apart from cosmetic presentation updates.
+    </p>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4321721-5");
+pageTracker._trackPageview();
+</script>
+  </body>
+</html>

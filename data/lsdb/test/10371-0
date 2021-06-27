@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="robots" content="index,nofollow">
+
+
+<title>GenDBWiki/Adm - Bioinformatics Documentation Wiki</title>
+
+<script type="text/javascript">
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Search') {
+        e.value = '';
+        e.style.color = 'black';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Search';
+        e.style.color = 'gray';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initiliaze action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/wiki-1.3.4/modern/css/common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="/wiki-1.3.4/modern/css/screen.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="/wiki-1.3.4/modern/css/print.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="projection" href="/wiki-1.3.4/modern/css/projection.css">
+
+<link rel="Start" href="/groups/brf/software/wiki/FrontPage">
+<link rel="Alternate" title="Wiki Markup" href="/groups/brf/software/wiki/GenDBWiki/Adm?action=raw">
+<link rel="Alternate" media="print" title="Print View" href="/groups/brf/software/wiki/GenDBWiki/Adm?action=print">
+<link rel="Up" href="/groups/brf/software/wiki/GenDBWiki">
+<link rel="Search" href="/groups/brf/software/wiki/FindPage">
+<link rel="Index" href="/groups/brf/software/wiki/TitleIndex">
+<link rel="Glossary" href="/groups/brf/software/wiki/WordIndex">
+<link rel="Help" href="/groups/brf/software/wiki/HelpOnFormatting">
+</head>
+
+<body  lang="en" dir="ltr">
+
+<div id="header">
+<div id="logo"><a href="/groups/brf/software/wiki/FrontPage">Bioinformatics Documentation Wiki</a></div>
+
+<form id="searchform" method="get" action="">
+<div>
+<input type="hidden" name="action" value="fullsearch">
+<input type="hidden" name="context" value="180">
+<label for="searchinput">Search:</label>
+<input id="searchinput" type="text" name="value" value="" size="20"
+    onfocus="searchFocus(this)" onblur="searchBlur(this)"
+    onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search">
+<input id="titlesearch" name="titlesearch" type="submit"
+    value="Titles" alt="Search Titles">
+<input id="fullsearch" name="fullsearch" type="submit"
+    value="Text" alt="Search Full Text">
+</div>
+</form>
+<script type="text/javascript">
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<ul id="username"><li><a href="/groups/brf/software/wiki/UserPreferences">Login</a></li></ul>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="/groups/brf/software/wiki/FrontPage">FrontPage</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/GenDBWiki">GenDBWiki</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/ArrayLIMSWiki">ArrayLIMSWiki</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/EMMAWiki">EMMAWiki</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/ProDBWiki">ProDBWiki</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/GPMSWiki">GPMSWiki</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/O2DBIWiki">O2DBIWiki</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/MGE-PortalWiki">MGE-PortalWiki</a></li>
+<li class="wikilink"><a href="/groups/brf/software/wiki/BACDIVERS-PortalWiki">BACDIVERS-PortalWiki</a></li>
+<li class="current"><a class="nonexistent" href="/groups/brf/software/wiki/GenDBWiki/Adm">GenDBWiki/Adm</a></li>
+</ul>
+
+<div id="pageline"><hr style="display:none;"></div>
+
+
+</div>
+
+<div id="page" lang="en" dir="ltr"><!-- start page -->
+
+
+<h1 id="title"><a title="Click to do a full-text search for this title" href="/groups/brf/software/wiki/GenDBWiki/Adm?action=fullsearch&amp;value=linkto%3A%22GenDBWiki%2FAdm%22&amp;context=180">GenDBWiki/Adm</a></h1>
+<div lang="en" id="content" dir="ltr">
+<a id="top"></a>
+<div lang="en" id="content" dir="ltr">
+<a id="top"></a>
+<p><strong>This page does not exist yet. You can create a new empty page, or use one of the page templates. Before creating the page, please check if a similar page already exists.</strong> </p>
+<a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit">Create new empty page</a><p> </p>
+<div>
+<table>
+<tr>
+<td>
+<p> <strong>Page templates:</strong> </p>
+</td>
+<td>
+<p> <strong>Existing pages with similar names:</strong> </p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">
+<p> <ul>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=AideTemplate">AideTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=CategoryTemplate">CategoryTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=GPMSWiki/WebDocumentationTemplate">GPMSWiki/WebDocumentationTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=HelpTemplate">HelpTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=HilfeTemplate">HilfeTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=HomepageTemplate">HomepageTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=O2DBIWikiPageTemplate">O2DBIWikiPageTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=PagePersonnelleTemplate">PagePersonnelleTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=Pr%c3%a9sentationTemplate">PrésentationTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=SlideShowHandOutTemplate">SlideShowHandOutTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=SlideShowTemplate">SlideShowTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=SlideTemplate">SlideTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=SoftwareTemplate">SoftwareTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=SupportPapierD'UnePr%c3%a9sentationTemplate">SupportPapierD'UnePrésentationTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=ThuisbladTemplate">ThuisbladTemplate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/Adm?action=edit&amp;template=TransparentTemplate">TransparentTemplate</a></li>
+</ul>
+ </p>
+</td>
+<td style="vertical-align: top;">
+<p> <ul>
+<li><a href="/groups/brf/software/wiki/IGetDBWiki">IGetDBWiki</a></li>
+<li><a href="/groups/brf/software/wiki/IGetDBWiki/RoadMap">IGetDBWiki/RoadMap</a></li>
+<li><a href="/groups/brf/software/wiki/MeltDBWiki">MeltDBWiki</a></li>
+<li><a href="/groups/brf/software/wiki/MeltDBWiki/ClassDiagram">MeltDBWiki/ClassDiagram</a></li>
+</ul>
+<ul>
+<li><a href="/groups/brf/software/wiki/GenDBWiki">GenDBWiki</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/AdministratorDocumentation">GenDBWiki/AdministratorDocumentation</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/AdministratorDocumentation/DependenciesAndRequirements">GenDBWiki/AdministratorDocumentation/DependenciesAndRequirements</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/AdministratorDocumentation/GenDBInstallation">GenDBWiki/AdministratorDocumentation/GenDBInstallation</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/AdministratorDocumentation/GenDBInstallationFAQ">GenDBWiki/AdministratorDocumentation/GenDBInstallationFAQ</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/AdministratorDocumentation/ManagingUsers">GenDBWiki/AdministratorDocumentation/ManagingUsers</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/AdministratorDocumentation/UpdatingFromOlderVersions">GenDBWiki/AdministratorDocumentation/UpdatingFromOlderVersions</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/CoreDocumentation">GenDBWiki/CoreDocumentation</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/CoreDocumentation/AdditionalScripts">GenDBWiki/CoreDocumentation/AdditionalScripts</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/CoreDocumentation/CoreScripts">GenDBWiki/CoreDocumentation/CoreScripts</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/CoreDocumentation/FunctionPrediction">GenDBWiki/CoreDocumentation/FunctionPrediction</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/CoreDocumentation/RegionPrediction">GenDBWiki/CoreDocumentation/RegionPrediction</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation">GenDBWiki/DeveloperDocumentation</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/CVSAccess">GenDBWiki/DeveloperDocumentation/CVSAccess</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/ClassDiagram">GenDBWiki/DeveloperDocumentation/ClassDiagram</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/ContributedScripts">GenDBWiki/DeveloperDocumentation/ContributedScripts</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/DocumentationGuidelines">GenDBWiki/DeveloperDocumentation/DocumentationGuidelines</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/GenDBDemoScript">GenDBWiki/DeveloperDocumentation/GenDBDemoScript</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/GenDBProgrammingTutorial">GenDBWiki/DeveloperDocumentation/GenDBProgrammingTutorial</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/PersonalWebServer">GenDBWiki/DeveloperDocumentation/PersonalWebServer</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/SystemDesign">GenDBWiki/DeveloperDocumentation/SystemDesign</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/ToolIntegration">GenDBWiki/DeveloperDocumentation/ToolIntegration</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/DeveloperDocumentation/UseTheSource">GenDBWiki/DeveloperDocumentation/UseTheSource</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/FeatureTable">GenDBWiki/FeatureTable</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/FuturePlans">GenDBWiki/FuturePlans</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/GUIDocumentation">GenDBWiki/GUIDocumentation</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/HowTos">GenDBWiki/HowTos</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/TermsAndConcepts">GenDBWiki/TermsAndConcepts</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/TermsAndConcepts/AnnotationConcepts">GenDBWiki/TermsAndConcepts/AnnotationConcepts</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/TermsAndConcepts/DataModel">GenDBWiki/TermsAndConcepts/DataModel</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/TermsAndConcepts/GenDBAnnotationWorkflow">GenDBWiki/TermsAndConcepts/GenDBAnnotationWorkflow</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/TermsAndConcepts/IntroductionToGenomics">GenDBWiki/TermsAndConcepts/IntroductionToGenomics</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/TermsAndConcepts/RolesAndRights">GenDBWiki/TermsAndConcepts/RolesAndRights</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/TermsAndConcepts/ToolAndJobConcept">GenDBWiki/TermsAndConcepts/ToolAndJobConcept</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation">GenDBWiki/WebDocumentation</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/ContextMenus">GenDBWiki/WebDocumentation/ContextMenus</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows">GenDBWiki/WebDocumentation/DialogWindows</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/AASequenceDialog">GenDBWiki/WebDocumentation/DialogWindows/AASequenceDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/AnnotationDialog">GenDBWiki/WebDocumentation/DialogWindows/AnnotationDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/BlastInterface">GenDBWiki/WebDocumentation/DialogWindows/BlastInterface</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/CircularPlot">GenDBWiki/WebDocumentation/DialogWindows/CircularPlot</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ClusterTool">GenDBWiki/WebDocumentation/DialogWindows/ClusterTool</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ComparativeAnnotator">GenDBWiki/WebDocumentation/DialogWindows/ComparativeAnnotator</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ConfigDialog">GenDBWiki/WebDocumentation/DialogWindows/ConfigDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/CreateMutation">GenDBWiki/WebDocumentation/DialogWindows/CreateMutation</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/CreateRegionDialog">GenDBWiki/WebDocumentation/DialogWindows/CreateRegionDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/DNASequenceDialog">GenDBWiki/WebDocumentation/DialogWindows/DNASequenceDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ExportCDS">GenDBWiki/WebDocumentation/DialogWindows/ExportCDS</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/MultiAnnotator">GenDBWiki/WebDocumentation/DialogWindows/MultiAnnotator</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ObservationDialog">GenDBWiki/WebDocumentation/DialogWindows/ObservationDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/OrthologViewer">GenDBWiki/WebDocumentation/DialogWindows/OrthologViewer</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/PatScan">GenDBWiki/WebDocumentation/DialogWindows/PatScan</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/RegionEditor">GenDBWiki/WebDocumentation/DialogWindows/RegionEditor</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ReportDialog">GenDBWiki/WebDocumentation/DialogWindows/ReportDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/SNP-Detector">GenDBWiki/WebDocumentation/DialogWindows/SNP-Detector</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/SearchDialog">GenDBWiki/WebDocumentation/DialogWindows/SearchDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/SequenceViewer">GenDBWiki/WebDocumentation/DialogWindows/SequenceViewer</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/SetGeneticCode">GenDBWiki/WebDocumentation/DialogWindows/SetGeneticCode</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/SetOrganismAndStrain">GenDBWiki/WebDocumentation/DialogWindows/SetOrganismAndStrain</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ShowSequenceDialog">GenDBWiki/WebDocumentation/DialogWindows/ShowSequenceDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/Supporting_Observations_Update">GenDBWiki/WebDocumentation/DialogWindows/Supporting Observations Update</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/SupportingObservationsUpdate">GenDBWiki/WebDocumentation/DialogWindows/SupportingObservationsUpdate</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/Virtual2DGel">GenDBWiki/WebDocumentation/DialogWindows/Virtual2DGel</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/DialogWindows/ZoomRegionDialog">GenDBWiki/WebDocumentation/DialogWindows/ZoomRegionDialog</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/FAQs">GenDBWiki/WebDocumentation/FAQs</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/GeneralUsage">GenDBWiki/WebDocumentation/GeneralUsage</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/HowTos">GenDBWiki/WebDocumentation/HowTos</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/MainMenu">GenDBWiki/WebDocumentation/MainMenu</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/MainViews">GenDBWiki/WebDocumentation/MainViews</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/MainViews/COGView">GenDBWiki/WebDocumentation/MainViews/COGView</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/MainViews/ContigView">GenDBWiki/WebDocumentation/MainViews/ContigView</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/MainViews/GOView">GenDBWiki/WebDocumentation/MainViews/GOView</a></li>
+<li><a href="/groups/brf/software/wiki/GenDBWiki/WebDocumentation/MainViews/KEGGView">GenDBWiki/WebDocumentation/MainViews/KEGGView</a></li>
+<li><a href="/groups/brf/software/wiki/GeneChip_data_upload">GeneChip data upload</a></li>
+<li><a href="/groups/brf/software/wiki/GeneMvalueStruct">GeneMvalueStruct</a></li>
+<li><a href="/groups/brf/software/wiki/GenoMik-PortalWiki">GenoMik-PortalWiki</a></li>
+</ul>
+ </p>
+</td>
+</tr>
+</table>
+</div>
+<a id="bottom"></a>
+
+</div>
+<a id="bottom"></a>
+
+</div>
+
+</div> <!-- end page -->
+
+
+<div id="footer">
+
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li>
+<li><a href="http://www.python.org/">Python Powered</a></li>
+<li><a href="http://validator.w3.org/check?uri=referer">Valid HTML 4.01</a></li>
+</ul>
+
+<div id="version">MoinMoin 1.3.4 release, Copyright 2000-2004 by Juergen Hermann</div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,314 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>PROMISCUOUS</title>
+	<meta name="description" content="PROMISCUOUS: A database for network-based drug repositioning; AG Preissner; Charite Berlin">
+	<meta name="keywords" content="... to do ...">
+	<meta name="language" content="de, at">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+	<link rel="stylesheet" href="css/modalbox.css" type="text/css" media="screen" />
+	<link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+	<meta http-equiv="imagetoolbar" content="no">
+	<script type="text/javascript" src="js/prototype.js"></script>
+	<script type="text/javascript" src="js/scriptaculous.js?load=effects"></script>
+	<script type="text/javascript" src="js/modalbox.js"></script>
+</head>
+
+<body id="body">
+	
+	<div id="container">
+		<div id="header_menu">
+		<a name="top"></a><a href="./index.php"><div id="header"></div></a><table width=100%>
+	<tr>
+		<td width=12% align=center>
+			<div id="home_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=home"><img src="./img/home_button.jpg" onmouseover="src='./img/home_button_activated.jpg'" onmouseout="src='./img/home_button.jpg'" title="home" alt="home"></a></div>
+		</td>
+		<td width=12% align=center>
+			<div id="network_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=network_vis"><img src="./img/network_button.jpg" onmouseover="src='./img/network_button_activated.jpg'" onmouseout="src='./img/network_button.jpg'" title="interactive network visualisation" alt="interactive network visualisation"></a></div>
+		</td>
+		<td width=12% align=center>
+			<div id="drug_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=drugs"><img src="./img/drug_button.jpg" onmouseover="src='./img/drug_button_activated.jpg'" onmouseout="src='./img/drug_button.jpg'" title="drugs" alt="drugs"></a></div>
+		</td>
+		<td width=12% align=center>
+			<div id="target_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=targets"><img src="./img/target_button.jpg" onmouseover="src='./img/target_button_activated.jpg'" onmouseout="src='./img/target_button.jpg'" title="targets" alt="targets"></a></div>
+		</td>
+		<td width=12% align=center>
+			<div id="pathway_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=pathway"><img src="./img/pathway_button.jpg" onmouseover="src='./img/pathway_button_activated.jpg'" onmouseout="src='./img/pathway_button.jpg'" title="Pathways" alt="Pathways"></a></div>
+		</td>
+		<td width=12% align=center>
+			<div id="search_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=search"><img src="./img/search_button.jpg" onmouseover="src='./img/search_button_activated.jpg'" onmouseout="src='./img/search_button.jpg'" title="Search" alt="Search"></a></div>
+		</td>
+		<td width=12% align=center>
+			<div id="about_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=about"><img src="./img/about_button.jpg" onmouseover="src='./img/about_button_activated.jpg'" onmouseout="src='./img/about_button.jpg'" title="About / FAQ" alt="About / FAQ"></a></div>
+		</td>
+		<td width=12% align=center>
+			<div id="pinboard_button" class="shadow" style="width: 70px"><a target="_self" href="./index.php?site=pinboard"><img src="./img/pinboard_button.jpg" onmouseover="src='./img/pinboard_button_activated.jpg'" onmouseout="src='./img/pinboard_button.jpg'" title="Pinboard" alt="Pinboard"></a></div>
+		</td>
+		
+	</tr>
+	<tr>
+		<td><a target="_self" href="./index.php?site=home"><h5>Home</h5></a></td>
+		<td><a target="_self" href="./index.php?site=network_vis"><h5>Interactive Network Visualisation</h5></a></td>
+		<td><a target="_self" href="./index.php?site=drugs"><h5>Drugs</h5></a></td>
+		<td><a target="_self" href="./index.php?site=targets"><h5>Targets</h5></a></td>
+		<td><a target="_self" href="./index.php?site=pathway"><h5>Pathways</h5></a></td>
+		<td><a target="_self" href="./index.php?site=search"><h5>Search</h5></a></td>
+		<td><a target="_self" href="./index.php?site=about"><h5>About / FAQ</h5></a></td>
+		<td><a target="_self" href="./index.php?site=pinboard"><h5>Pinboard</h5></a></td>
+	</tr>
+</table>		</div>
+
+		<script type="text/javascript">
+			function color_menu_button(id) {
+				$(id).className="highlighted shadow";
+			}
+
+			//eintrag ins pinboard uebernehmen
+			function pinboard(name, userid, identifier, category) {
+				new Ajax.Request('./src/insert_pinboard_ajax.php',
+						{
+							method:'post',
+							parameters: 'name='+name+'&userid='+userid+'&identifier='+identifier+'&category='+category
+
+						});
+				//pin-icon durch "hinzugefügt"-anzeige ersetzen
+				$("pinpic_" + identifier).src = "./img/pin_small_added.png";
+			}
+
+			//Mausposition bestimmen (für Modalboxen)
+			var IE = document.all?true:false;
+			if (!IE)
+				document.captureEvents(Event.MOUSEMOVE);
+			document.onmousemove = getMouseXY;
+			function getMouseXY(e) {
+				if (IE) { // grab the x-y pos.s if browser is IE
+					mouseX = event.clientX + document.body.scrollLeft;
+					mouseY = event.clientY + document.body.scrollTop;
+				}
+				else { // grab the x-y pos.s if browser is NS
+					mouseX = e.pageX - window.pageXOffset;
+					mouseY = e.pageY - window.pageYOffset;
+				}
+				return true;
+			}
+
+			function delete_pinned_entry(id) {
+				$("pinboard_" + id).style.display="none";
+				new Ajax.Request('./src/pinboard_ajax.php',
+						{
+							method:'post',
+							parameters:'delete_id='+id
+						});
+			}
+		</script>
+
+		<div id="contentwrapper">
+		<script type="text/javascript">
+
+color_menu_button("home_button");
+
+</script>
+
+<h1>Home</h1>
+
+<div align="center">
+	<table height="250" width="950"><tr>
+		<td width="30%" style="padding-right:15px;">
+			<table width="100%" height="100%" class="shadow"><tr>
+				<td align="justify"><h3>What ist PROMISCUOUS?</h3> <font color="#213169">PROMISCUOUS</font> is an exhaustive resource of protein-protein and drug-protein interactions with the aim of providing a uniform data set for drug repositioning and further analysis. Our database <font color="#213169">PROMISCUOUS</font> contains three different types of entities: drugs, proteins and side-effects as well as relations between them.  <br><br>
+				<a  href="./index.php?site=faq" title="Go to FAQ">Learn more about <font color="#213169">PROMISCUOUS!</font></a><br>
+				<br></td>
+			</tr></table>
+		</td>
+		<td width="70%">
+			<table width="100%" height="100%" class="shadow"><tr>
+				<td align="justify"><h3>How do I explore PROMISCUOUS?</h3>
+				<font color="#213169"><b>By Drug:</b></font><br>
+				To search for a drug (e.g. <a href="./index.php?site=drugs&drug=Midodrine">Midodrine</a>) go to the <a href="./index.php?site=drugs&drug=Midodrine">Drug search</a> or the <a href="./index.php?site=search&searchterm=Midodrine">fulltext search</a> and type in the drugs name.<br><br>
+				<font color="#213169"><b>By Target:</b></font><br>
+				Targets as for example <a href="./index.php?site=targets&name=Fatty%20acid%20synthase">Fatty acid synthetase</a> can be queried through the <a href="./index.php?site=targets&name=Fatty%20acid%20synthase">Target search site</a> or for example by UniProt ID through the <a href="./index.php?site=search&searchterm=FAS_HUMAN">fulltext search</a> as well. <br><br>
+				<font color="#213169"><b>By Pathway:</b></font><br>
+				To browse <font color="#213169">PROMISCUOUS</font> targets by pathway affiliation go to the <a href="./index.php?site=pathway">pathway site</a>, choose an organism (e.g. Homo sapiens) and then the desired pathway (e.g. <a href="./index.php?site=pathway&id=hsa_04150&name=hsa04150">mTOR signaling pathway</a>).<br><br>
+				</td>
+				<td width=200 align=center><a href="./index.php?site=tutorial"><img src="./img/movie.jpg" width=160 alt="watch video tutorial"><br>
+				<h3><font color="#213169">Watch the video tutorial</font></h3></a>
+				</td>
+			</tr></table>
+		</td>
+	</tr></table>
+</div>
+
+<br>
+
+<div align="center">
+	<table width="950" class="shadow"><tr>
+		<tr>
+			<td width="130"><h3 style="text-align:left;font-size:16pt;margin:0">Reference</h3></td>
+			<td>PROMISCUOUS: a database for network-based drug-repositioning. <a href="http://dx.doi.org/10.1093/nar/gkq1037" target="_blank">[Paper]</a><br>von Eichborn J, Murgueitio MS, Dunkel M, Koerner S, Bourne PE, Preissner R.<br>Nucleic Acids Res. 2011 Jan;39(Database issue):D1060-6. Epub 2010 Nov 10.</td>
+		</tr>
+	</table>
+</div>
+
+<br>
+
+<div align="center">
+	<table width="950" class="shadow"><tr>
+		<td>
+			<table>
+				<tr>
+					<td align="justify">
+					<h3 style="text-align:left;font-size:16pt;">What is the network visualisation?</h3>
+					<font color="#213169">PROMISCUOUS</font> delivers complex relations among drugs, their respective targets and side-effects 
+					of the drugs. For each entity detailed information is given. 
+					To enable the user to explore and handle the data in a scientific yet intuitive way, we developed a novel interface 
+					that offers a &quot;natural&quot; way of exploring the network. Here database entities (drugs, targets and side effects)
+					are represented as nodes in a network with edges, which represent the relations between them.
+					<br> 
+					</td>
+				</tr>
+				<tr>
+					<td align="justify">
+					<h3 style="text-align:left;font-size:16pt;">How do I enter the network visualisation?</h3>
+					To explore <font color="#213169">PROMISCUOUS</font> by directly entering the network visualisation go to the <a href="./index.php?site=network_vis">Interactive visualisation site</a>. 
+					Here you can search for drugs by their cid or for targets by their UniProt ID e.g. <a href="./index.php?site=network_vis&drug_ids=2157">2157</a> or <a href="./index.php?site=network_vis&target_ids=FAS_HUMAN">FAS_HUMAN</a>. 
+					If desired it is also possible to search for more than one target or drug by listing them separated by a semicolon 
+					(e.g. <a href="./index.php?site=network_vis&drug_ids=2157;4195">2157;4195</a>). Searching for a drug and a target as <a href="./index.php?site=network_vis&drug_ids=2157&target_ids=FAS_HUMAN">2157 and FAS_HUMAN</a> in one step is also possible by typing
+					in the cid and the UniProt ID.
+					<br><br>
+					</td>
+				</tr>					
+			</table>
+		</td>
+		<td align="right"><a href="./index.php?site=network_vis&drug_ids=2157;4195"><img title="click to load the applet" src="./img/network.jpg" width=400 alt="network visualisation"></a></td>
+	</tr></table>
+</div>
+
+<br>
+
+<div align="center">
+	<table width="950" class="shadow"><tr>
+		<td>
+			<table>
+				<tr>
+					<td align="center" width="310px">
+					<a href="./index.php?site=drugdev">
+					<h3 style="text-align:center;font-size:16pt;">Why drug-repositioning?</h3>
+					</a>
+					</td>
+					<td align="center" width="310px">
+					<a href="./index.php?site=statistics">
+					<h3 style="text-align:center;font-size:16pt;">Go to our statistics</h3>
+					</a>
+					</td>
+					<td align="center" width="310px">
+					<a href="./index.php?site=links">
+					<h3 style="text-align:center;font-size:16pt;">Useful resources</h3>
+					</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" width="310px">
+					<a href="./index.php?site=drugdev">
+					<img title="Get more information about drug repositioning!" src="./img/drug_pic.png" width="125px"></a>
+					</td>
+					<td align="center" width="310px">
+					<a href="./index.php?site=statistics">
+					<img title="Go to PROMISCUOUS statistics!" src="./img/statistics.png" width="125px"></a>
+					</td>
+					<td align="center" width="310px">
+					<a href="./index.php?site=links">
+					<img title="See other useful resources!" src="./img/tool_box.png" width="90px"></a>
+					</td>
+				</tr>
+			</table>
+		</td>	
+	</tr></table>
+</div>
+
+<div id="browser_check_bar" class="error_bar">
+	<noscript>Please enable JavaScript, otherwise this side will not work because we are using AJAX extensively.</noscript>
+	<script type="text/javascript">
+		$warnings = "";
+
+		function check_browser() {
+			/*  Autor, Entwicklung 2003-2008 Kristof Lipfert Duesseldorf    */
+			/*  Version 20080522                                            */
+	
+			check=[
+			['window.postMessage', 'window.XMLHttpRequest&&(document.postMessage||window.external)', 'document.compatMode', '(document.detachEvent||document.contentType)'],
+			['window.execScript','window.pkcs11','window.opera', 'window.navigator&&(window.navigator.vendor||window.XML)'],
+			[['IE 8','FF 3','Op 9.5','KDE?'],
+			 ['IE 7','FF 2','Op 9','KDE?'],
+			 ['IE 6','FF 1.5','Op 8','KDE?'],
+			 ['IE 5x','NN 7','Op 7','KDE?']]];
+
+			var j; var b; 
+			for(n=0; n<check[1].length; n++) {
+				if (!eval(check[1][n]) == 0) {
+					b=n;
+					//alert (check[1][n]);
+				}
+			}
+			for(n=check[0].length; n>-1; n--) {
+				if (!eval(check[0][n]) == 0)
+					j=n;
+			}
+			//alert(j + "_" + b);
+			return ((j>-1&&b>-1)?check[2][j][b]:'Älterer Browser o. unbekannt.');
+		}
+
+		$browser = check_browser();
+		
+
+		if ( ($browser == "IE 5x") || ($browser == "IE 6") )
+				$warnings += "Please use Microsoft Internet Explorer 7 or newer, otherwise this site will not work properly.<br>";
+
+		if ($browser != "KDE?")
+			$warnings += "We recommend using the latest versions of Mozilla Firefox or Google Chrome for the best experience with this site.<br>";
+
+		if (!navigator.javaEnabled())
+			$warnings += "Please enable Java to be able to use the network visualisation applet.<br>";
+
+		if (!navigator.cookieEnabled)
+			$warnings += "Please allow cookies to get more comfort using this site.<br>";
+
+		if ($warnings != "")
+			$("browser_check_bar").innerHTML = $warnings;
+		else
+			$("browser_check_bar").style.visibility="hidden";
+	</script>
+</div><div id="footer">
+	<div style="float:left">
+		<form  enctype="multipart/form-data" method="POST" name="fulltext_search" action="./index.php?site=search" style="margin:0">
+			<input id="search_footer" class="img" type="text" name="fulltext_searchbox" size="20" onblur="if (this.value=='') this.className='img'" onfocus="this.className=''">
+			<input type="submit" style="height:24px;" alt="search" value="Search">
+		</form>
+	</div>
+	<div style="text-align:right;color:white">
+		This work is licensed under a <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" style="color:#afafaf">Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License</a>.
+		<a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width: 0pt;vertical-align: middle; height: 25px" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png"></a>
+		&nbsp;
+	</div>
+</div>
+
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://bioinf-services.charite.de/biostats/" : "http://bioinf-services.charite.de/biostats/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 11);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://bioinf-services.charite.de/biostats/piwik.php?idsite=11" style="border:0" alt=""/></p></noscript>
+<!-- End Piwik Tag -->		</div>
+	</div>
+</body>
+</html>
+
+

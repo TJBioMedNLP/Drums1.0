@@ -1,0 +1,768 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+  <HEAD>
+
+   <TITLE>Microarray Data Warehouse and Analysis Software</TITLE> 
+    <meta name="author" content="Kurt Fellenberg">
+    <meta name="keywords" content="microarray, datawarehouse, data, warehouse, analysis, DKFZ, Transcriptional Profiling, Correspondence Analysis, Clustering, M-CHIPS, mchips, Microarray, Microarray Database, Data Warehouse, LIMS">
+    <meta name="description" content="Microarray data warehouse for statistical analysis of its entire data including experiment annotations" />
+    <meta name="distribution" content="global">
+    <meta name="resource-type" content="document">
+  </HEAD>
+
+  <BODY MARGINHEIGHT=0 MARGINWIDTH=0 TOPMARGIN=0 LEFTMARGIN=0 BGCOLOR="#FFFFFF" BACKGROUND="" TEXT="#000000" LINK="#0000FF" VLINK="#660099" ALINK="#660099"
+
+onload="javascript:setTimeout(function(){window.location.href='http://www.mchips.org'},2000);">
+
+<table width="33%"><TR border=0><TD width="33.3%" border=0 cellpadding=0>
+<b><a href="http://www.mchips.org" style="text-decoration: none;">
+     <font color="red">This page has moved to the Technical University of Munich. Please, consider
+       updating your bookmarks and click
+       here if you are not transferred automatically.
+  </font></a></b></p></td></tr></table>
+
+
+
+<!-- <table BGCOLOR="#E0EFFF" BACKGROUND="backgrnd.jpg" width=100%>
+-->
+<table BGCOLOR="#E0EFFF" BACKGROUND="" width=100%>
+<TR><TD><p>&nbsp;
+<CENTER><!-- <H1>Microarray Data Warehouse and Analysis Tools</H1> -->
+M-CHiPS is a <b>microarray data warehouse</b> integrated with a
+software platform for microarray data
+<b>analysis</b>. It can be used as a <b>LIMS</b> for DNA chip experiments, also.<br>Unlike
+other microarray data repositories, it entirely <b>dispenses with free-text
+format</b>, instead holding all the information in a format ready <b>for statistical
+analysis</b>.<p> </center>
+<p>&nbsp;</td></tr></table>
+<!-- <table name='top' width="100%" border="0%" BGCOLOR="#3A75AF" BACKGROUND=""> 
+-->
+<!-- <table name='top' width="100%" border="0%" BGCOLOR="#E0EFF0"  BACKGROUND=""> -->
+ <table name='top' width="100%" border="0%" BGCOLOR="#FFFFFF"  BACKGROUND=""> 
+
+
+
+<TR border=0><TD width="33.3%" border=0 cellpadding=0>
+
+
+
+<!--	<A HREF="/tbi/tbi_old.html"><IMG align='left' SRC="/tbi_old/images/tbi-logo.png" BORDER=0 WIDTH=90 ALT="Theoretical Bioinformatics"></a>
+</TD><td width="33.3%" border=0>
+	  <center>
+	  <A HREF="http://www.dkfz.de/index_e.htm"><IMG SRC="http://www.dkfz.de/funct_genome/logo-DKFZsolo.jpg" BORDER=0 WIDTH=110 ALT="German Cancer Research Center (DKFZ)"></A>
+          </center>
+-->
+<A HREF="http://www.edkfz.de/index_e.htm"><IMG align='left' SRC="http://www.dkfz.de/funct_genome/logo-DKFZsolo.jpg" BORDER=0 WIDTH=110 ALT="German Cancer Research Center (DKFZ)"></A>
+
+<A HREF="http://www.dkfz-heidelberg.de/funct_genome"><IMG align='left' SRC="fga3.gif" BORDER=0 WIDTH=150 ALT="Functional Genome Anlaysis"></A>	  
+
+</TD><td width="33.3%" border=0>
+
+
+
+
+
+<A HREF="http://www.tum.de/"><IMG align='right' SRC="http://www.wzw.tum.de/bt/bilder/tum-lbl.gif" BORDER=0 WIDTH=70 ALT="TU Munich (TUM)"></A>	  
+<A HREF="http://www.wzw.tum.de/bt/"><IMG align='right' SRC="LSfBt.jpg" BORDER=0 WIDTH=270 ALT="Bioanalytics Dept."></A>	  
+
+
+
+
+
+<!--
+	  <CENTER><A HREF="http://www.dkfz-heidelberg.de/funct_genome"><IMG SRC="fga_upright.gif" BORDER=0 WIDTH=90 ALT="Functional Genome Anlaysis"></A><br><font size="small" color="#A0FF00">Functional Genome Analysis<font></CENTER><BR>
+-->
+	  <P>
+<!--
+	<FONT COLOR="#FFDF80">Mailing list:</FONT><BR>
+	    <A HREF="mailto:majordomo@dkfz-heidelberg.de?body=subscribe mchips&subject=Send this message without any modification"><FONT COLOR="#FFFFFF">Subscribe</FONT></A><BR>
+	    <A HREF="mailto:mchips@dkfz-heidelberg.de"><FONT COLOR="#FFFFFF">Post</FONT></A><BR>
+-->
+
+</td></tr></table>
+<p>
+
+<!--          <FONT COLOR="#FFFFFF" size=-10>mchips MCHIPS gene expression transcription DNA-CHIPS microarray datawarehouse data warehouse analysis DKFZ mchips DNA arrays Transcriptional Profiling mchips Correspondence Analysis Clustering LIMS M-CHiPS mchips Microarray Database gene expression database mchips Data Warehouse :-)</FONT><BR>
+-->
+
+<table><tr>
+
+<td>
+
+
+
+
+<!--- begin left panel --->
+
+
+    <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="5" WIDTH="100%" HEIGHT="100%">
+      <TR>
+
+	<TD ALIGN="LEFT" VALIGN="CENTER" BGCOLOR="#FFFFFF" WIDTH="20%">
+<!--
+	<TD ALIGN="LEFT" VALIGN="CENTER" BGCOLOR="#E0F0F0"  WIDTH="10%">
+-->
+
+
+
+
+
+
+<!--
+	  <FONT COLOR="#FFDF80">About M-CHiPS:</FONT><BR>
+
+	  <FONT COLOR="#000000">About M-CHiPS:</FONT><BR>
+ 	  <P>
+-->
+
+
+<!--	    <img src="http://www.dkfz.de/icons/" align="top" WIDTH="26" HEIGHT="23"><A HREF="mchips.jpg"><FONT COLOR="#000000">Wherefore ?</FONT></A><BR>
+-->
+
+            <img src="spot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="mchips.jpg"><FONT COLOR="#0000FF">Wherefore ?</FONT></A><BR>
+	  <P><br>
+	    <img src="greenspot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="/tbi_old/services/mchips/characteristics"><FONT COLOR="#0000FF">Characteristics</FONT></A><BR>
+	  <P><br>
+	    <img src="redspot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="publications.html"><FONT COLOR="#0000FF">Publications and schema</FONT></A><BR>
+	  <P><br>
+	    <img src="spot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="#annos"><FONT COLOR="#0000FF">Experiment annotation</FONT></A><BR>
+
+
+
+
+<!--- end left panel, begin middle --->
+
+
+</td>
+<td valign="center">
+<CENTER><IMG SRC="mchips.gif"><p>
+
+<font color="blue"><b>M</b></font>ulti-<font color="blue"><b>C</b></font>onditional <font color="blue"><b>H</b></font>ybridization <font color="blue"><b>I</b></font>ntensity <font
+color="blue"><b>P</b></font>rocessing
+<font color="blue"><b>S</b></font>ystem
+<P>
+<P>
+<H3>Microarray Data Warehouse and Analysis Software</H3>
+<H3>Microarray Bioinformatics Support</H3>
+<A HREF="mchips.jpg"><IMG SRC="/mchips/people/fellenberg/array4.jpg" BORDER=0 WIDTH=210  ALT="wherefore ?"><IMG SRC="analysis2.gif" BORDER=0 WIDTH=200 ALT="wherefore ?"></A><BR>
+<P>
+<P>
+<!--
+<font color="#0000FF">
+-->
+Live since June 1999. Currently,<font color="#FF0000">
+<!-- insert no of hybs --> 13039 <!-- here -->
+hybridizations</font>
+are stored in our databases.
+	  <p>
+	    <img src="spot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="#people"><FONT COLOR="#0000FF">Participants</FONT></A>
+
+&nbsp; &nbsp; &nbsp;
+<img src="greenspot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="http://www.dkfz.de/tbi_old/services/mchips/getting_started.html"><FONT COLOR="#0000FF">How to join us</FONT></A><BR>
+<P
+<P>
+
+</CENTER>
+
+<!--- end middle panel, begin right --->
+</td>
+
+
+<TD ALIGN="left" VALIGN="center" BGCOLOR="#FFFFFF" WIDTH="12%">
+</td>
+<TD ALIGN="left" VALIGN="center" BGCOLOR="#FFFFFF" WIDTH="12%">
+
+
+
+
+
+	  <P>
+	    <img src="greenspot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="jobs.html"><FONT COLOR="#0000FF">Open positions</FONT></A><BR>
+	  <P>
+	    <img src="spot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="#public"><FONT COLOR="#0000FF">Public data</FONT></A><BR>
+	  <P>
+	    <img src="redspot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="#manuals++"><FONT COLOR="#0000FF">Manuals etc.</FONT></A><BR>
+<P>
+
+
+<!--        <FONT COLOR="#FFDF80">Restricted stuff:</FONT><P>
+-->
+        <FONT COLOR="#A0A0A0">Restricted stuff:</FONT><P>
+
+            <img src="spot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="/tbi_old/sesame/expro/structvers2/pushex.html"><FONT COLOR="#0000FF">Annotator</FONT></A><P>
+            <img src="spot.gif" align="top" WIDTH="20" HEIGHT="15"><A HREF="http://www.dkfz.de/tbi_old/sesame/expro/structvers2/results.html" target="results"><FONT COLOR="#0000FF">Results</FONT></A><BR>
+        <P>
+        
+
+
+
+          <FONT COLOR="#A0A0A0">Recently added:</FONT><BR>
+        <P>
+        <A HREF="whats_new.html"><IMG SRC="new13.gif" BORDER=0 ALT="what's new" HEIGHT="40" WIDTH="100"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</td>
+
+
+
+
+</tr></table>
+
+<p>
+The Multi-Conditional Hybridization Intensity Processing System (M-CHiPS), a
+data warehousing concept, focuses on providing a structure suitable for
+statistical analysis of a microarray database's entire components including
+the experiment annotations. It accounts for a rapid growth of the amount of
+hybridisation data, more detailed experimental descriptions and new kinds of
+experiments expected for the future. We have developed a storage concept, a
+particular instance of which is an organism-specific database. Although
+these databases may contain different ontologies of experiment annotations,
+they share the same structure and therefore can be accessed by the very same
+statistical algorithms. Experiment ontologies have not yet reached their
+final shape and standards are reduced to minimal conventions not usable for
+extensive description. An ontology-independent structure enables
+ontology-updates during normal database operation, avoiding
+structure-alterations. 
+    <P>
+
+
+<!--    <HR>
+-->
+<table width="100%" border="0%" BGCOLOR="#E0F0F0" ><tr><td>
+<CENTER><p>&nbsp;
+<p></CENTER>
+</table>
+<p>&nbsp;</p>
+
+
+
+    <CENTER>
+      <A NAME="annos"><H2>Experiment annotation definition schemes</H2></A>
+<H4><font color="0000FF"> All defined values - no freetext !</font></H4>
+<!--
+ <img src="nofreetext.jpg" BORDER=0 WIDTH=120>
+  -->
+
+    </CENTER>
+    <UL>
+      <LI><a href="yeast.html"><B><i>Saccharomyces cerevisiae</i></b><BR></a>
+<a href="yeast.txt"><font size=-1> as tab delimited list</font></a><BR>
+	Categorization of genotype incl. transgenes and auxotrophic markers, growth conditions, and sampling.<P>
+      <LI><a href="arabidopsis.html"><B><i>Arabidopsis thaliana</i></B><BR></a>
+<a href="arabidopsis.txt"><font size=-1> as tab delimited list</font></a><BR>
+	Genotype, growth conditions, various treatments and sampling.<P>
+      <LI><a href="humanbiopsy.html"><B>Human cancer biopsies</B></a><BR>
+<a href="humanbiopsy.txt"><font size=-1> as tab delimited list</font></a><BR>
+	Clinical data related to the patient, tumor characteristics,
+cytogenetics.<P>
+      <LI><a href="trypanosoma.html"><B><i>Trypanosoma brucei</i></B></a><BR>
+<a href="trypanosoma.txt"><font size=-1> as tab delimited list</font></a><BR>
+	Genotype, growth conditions in mouse, fly or in vitro and
+treatments.<P>
+      <LI><a href="neurospora.html"><B><i>Neurospora crassa</i></B></a><BR>
+<a href="neurospora.txt"><font size=-1> as tab delimited list</font></a><BR>
+	Genotype, growth conditions.<P> 
+
+      <LI><a href="mouse2.html"><B>Mouse</B></a><BR>
+<a href="mouse2.txt"><font size=-1> as tab delimited list</font></a><BR>
+<a href="mouse.dtd"><font size=-1> as XML-DTD</font></a><BR>
+<a href="mouse4.xml"><font size=-1> as XML document (example)</font></a><BR>
+        <font color="green">(work in progress)</font><P>
+
+      <LI><a href="candida.html"><B><i>Candida albicans</i></B></a><BR>
+<a href="candida.txt"><font size=-1> as tab delimited list</font></a><BR>
+<a href="candida.dtd"><font size=-1> as XML-DTD</font></a><BR>
+        <font color="green">(work in progress)</font><P>
+
+      <LI><a href="hydractinia.html"><B><i>Hydractinia echinata</i></B></a><BR>
+<a href="hydractinia.txt"><font size=-1> as tab delimited list</font></a><BR>
+<a href="hydractinia.dtd"><font size=-1> as XML-DTD</font></a><BR>
+        <font color="green">(work in progress)</font><P>
+
+
+<!--      <LI><a href="drosophila.html"><B><i>Drosophila melanogaster</i></B></a><BR>
+-->
+      <LI><B><i>Drosophila melanogaster</i></B><BR>
+<a href="drosophila.txt"><font size=-1> as tab delimited list</font></a><BR>
+        <font color="green">(work in progress)</font><P>
+
+
+<!--      <LI><a href="antirrhinum.html"><B><i>Antirrhinum majus</i></B></a><BR>
+-->
+      <LI><B><i>Antirrhinum majus</i></B><BR>
+<a href="antirrhinum.txt"><font size=-1> as tab delimited list</font></a><BR>
+        <font color="green">(work in progress)</font><P>
+
+
+<!--      <LI><a href="pseudomonas.html"><B><i>Pseudomonas putida</i></B></a><BR>
+-->
+      <LI><B><i>Pseudomonas putida</i></B></a><BR>
+<a href="pseudomonas.txt"><font size=-1> as tab delimited list</font></a><BR>
+        <font color="green">(work in progress)</font><P>
+
+      <LI><a href="aspergillus.html"><B>Aspergillus</B></a><BR>
+<a href="aspergillus.txt"><font size=-1> as tab delimited list</font></a><BR>
+<a href="aspergillus.dtd"><font size=-1> as XML-DTD</font></a><BR>
+<!-- <a href="aspergillus.xml"><font size=-1> as XML document (example)</font></a><BR>
+-->
+        <font color="green">(work in progress)</font><P>
+
+
+
+    </UL>
+
+<!--    <HR>
+-->
+<p>&nbsp;</p>
+<table width="100%" border="0%" BGCOLOR="#E0F0F0" >
+<tr><td><center><a href="index.html#top"><img src="top.gif"></a></center></td></tr>
+</table>
+<p>&nbsp;</p>
+
+
+
+    <CENTER>
+      <H2><a name="public">Public data sets</a></H2>
+Following datasets  
+have been published:
+    </CENTER>
+    <UL>
+      <LI><B><a href="http://mips.gsf.de/proj/eurofan/eurofan_2/b2">Eurofan II, B2</a></B><P>
+36 yeast experiments (253 hybridizations, complete array) dealing with filamentous growth, ceramide
+signalling, stresses, hypoxia, PKC pathway, C and N-limited growth in
+continous culture and other conditions;<P>
+
+aquired by 
+<style="font-size:12pt"><A HREF=mailto:al.brown@abdn.ac.uk>Alistair Brown</A>/Helene Tournu (Aberdeen, GB),
+Rudi Planta/Arno Meijer (Amsterdam, NL),
+<A HREF=mailto:bmanamrt@udc.es>Esperanza Cerdan</A>/Manuel Becerra/Luis Lombard&iacute;a (La Coruna, ES),
+<A HREF=mailto:j.hoheisel@dkfz-heidelberg.de>Joerg Hoheisel</A>/Nicole Hauser (Heidelberg, DE),
+<A HREF=mailto:steve.oliver@man.ac.uk>Steve Oliver</A>/Andy Hayes (Manchester, GB);
+<P>
+
+collected and uploaded by <A HREF="mailto:n.hauser@dkfz-heidelberg.de">Nicole Hauser</A>,
+annotated by the experimenters themselves via web annotator, processed in
+M-CHiPS and presented by
+the Munich Information Center for Protein Sequences (<a href="http://mips.gsf.de">MIPS</a>).<P>   
+
+  <LI><a href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/dm1.html"><B><i>Drosophila</i>
+  - embryonic development</B></a><p>Embryonic and pupal stages up to the adult
+fly recorded on two-channel glass slides (34 hybridizations, 22429 x 2 spots
+per array).<p>
+
+  <LI><a
+href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/hhb4.html"><B>Pancreas
+cancer biopsies</B></a><p> (87 hybridizations, 3559 x 2 spots
+per array).<p>
+  <LI><a
+href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/cystic.html"><B>Pancreas
+cancer: cystic tumors</B></a><p> (x hybridizations, 3559 x 2 spots
+per array).<p>
+
+</ul><b>smaller sets:</b><ul>
+  <LI><a
+href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/antirrhinum_petal_development"><B><i>Antirrhinum
+majus</i> petal development</B></a> WT petal stages, <i>def</i>-101 peS3
+shifts, WT peS3 shifts (24 hybridizations, 14208 duplicate features).<p>
+  <LI><a href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/cdc14.html"><B><i>CDC14</i> - induction</B></a> One yeast experiment (13 hybridizations, complete array).<p>
+  <LI><a href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/oxidative_stress.html"><B>Oxidative stress</B></a> One yeast experiment (14 hybridizations, complete array).<p>
+  <LI><a href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/heatshock.html"><B>Heatshock - timecourse</B></a> One yeast experiment (12 hybridizations, complete array).<p>
+  <LI><a href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/PDE_ko.html"><B>cAMP phosphodiesterase ko</B></a> One <i>Candida albicans</i> experiment (16 hybridizations, complete array).<p>
+</ul><b>sets without raw data (which are still to come):</b><ul>
+  <LI><a href="http://www.dkfz-heidelberg.de/tbi_old/services/mchips/wine.html"><B>Wine vers. lab strain</B></a> Transcriptional and genomic comparisons.<p>
+  <LI><a href="http://www.dkfz.de/funct_genome/Arab-data.html#pathogen-response"><B><i>Arabidopsis thaliana</i>:</B></a> Transcriptional variations during pathogene defense.<p>
+  <LI><a href="http://www.dkfz.de/mchips/hydractinia_echinata.html"><B><i>Hydractinia echinata</i></a>: EST database.</B>
+<p>
+
+
+
+    </UL>
+
+
+
+<!--    <HR>
+-->
+<p>&nbsp;</p>
+<table width="100%" border="0%" BGCOLOR="#E0F0F0" >
+<tr><td><center><a href="index.html#top"><img src="top.gif"></a></center></td></tr>
+</table>
+<p>&nbsp;</p>
+
+
+
+<!--
+    <CENTER>
+      <H2>Source code</H2>
+    </CENTER>
+    <UL>
+      <LI><B>Sample database</B><BR>
+Including DDL statements and data, setting permissions for 'webserver'  
+and 'user1':<BR>
+	<a href="bla.html">SQL dump for PostgreSQL</a> <font color="green"> (in preparation...) </font><BR>
+	<a href="bla.html">SQL dump for Oracle</a>  <font color="green"> (in preparation...) </font> <P>
+
+
+      <LI><a href="bla.html"><B>Database administration</B></a>  <font color="green"> (in preparation...) </font> <BR>
+	Collection of scripts for expansion and maintenance of M-CHiPS
+databases. Matlab, Perl and shell scripts; access should be restricted to the DBA. <P>
+
+      <LI><a href="bla.html"><B>CGI scripts for experiment annotation</B></a>  <font color="green"> (in preparation...) </font> <BR>
+ 	CGI - scripts (Perl). To be executed by the web server process.<P>
+      <LI><a href="bla.html"><B>Intensity upload, preprocessing and analysis</B></a>  <font color="green"> (in preparation...) </font> <BR>
+   	Collection of algorithms for <BR>
+* uploading transcription intensities,<BR> 
+* selection of arbitrary sets of hybridizations/measurements,<BR>
+* normalization,<BR>
+* filtering and <BR>
+further analysis like <BR> 
+* hierarchical clustering or<BR>
+* correspondence analysis.<BR>
+To be made accessible to all users.<P>
+    </UL>
+ <HR>
+
+
+-->
+    <CENTER>
+      <H2><a name="people">People involved</a></H2>(formerly and present, in
+no particular order)
+
+<p>&nbsp;</p>
+
+    <TABLE WIDTH=100%>
+      <TR>
+        <TD>Bioinformatics:</TD>
+	<TD><A HREF="/mchips/people/fellenberg">Kurt Fellenberg</A></TD>
+	<TD><A HREF="mailto:c.busold@dkfz-heidelberg.de">Christian Busold</A></TD>
+	<TD><A HREF="/tbi_old/people/beissbarth/">Tim Bei&szlig;barth</A></TD>
+	<TD>Dieter Finkenzeller</TD>
+	<TD><A HREF="/tbi_old/people/brors/">Benedikt Brors</A></TD>
+	<TD><A HREF="http://www.molgen.mpg.de/~vingron">Martin Vingron</A></TD>
+      </TR>
+      <TR>
+        <TD></TD>
+	<TD>Liang Chunguang</TD>
+	<TD>Meju Kaipparettu</TD>
+	<TD>Radhika Upadhyayula</TD>
+	<TD>Amit Agarwal</TD>
+	<TD>Stefan Winter</TD>
+	<TD>Amin Mohaddas Gholami</TD>
+      </TR>
+      <TR>
+        <TD></TD>
+	<TD>Mahesh Visvanathan</TD>
+	<TD>Corinna Schmitt</TD>
+	<TD></TD>
+	<TD></TD>
+	<TD></TD>
+	<TD></TD>
+      </TR>
+
+<TR>
+<td>&nbsp;</td>       
+</TR>
+
+      <TR>
+        <TD>Biological research:</TD>
+        <TD><A HREF="mailto:n.hauser@dkfz-heidelberg.de">Nicole Hauser</A></TD>
+	<TD>Judith Boer</TD>
+	<TD><A HREF="mailto:m.scheideler@dkfz-heidelberg.de">Marcel Scheideler</A></TD>
+	<TD>Susanne Grahlmann</TD>
+	<TD>Frank Diehl</TD>
+        <TD>Verena Aign</TD>
+      </TR>
+      <TR>
+	<TD>  </TD>
+        <TD>Andrea Bauer</TD>
+	<TD>Helene Tournu</TD>
+	<TD>Arno Meijer</TD>
+	<TD>Luis Lombardia</TD>
+	<TD>Manuel Beccera</TD>
+        <TD>Andy Hayes</TD>
+      </TR>
+      <TR>
+	<TD>  </TD>
+        <TD>Albert Neutzner</TD>
+        <TD><A HREF="http://www.rwth-aachen.de/bio3/nik.htm">Nikolaus Schlaich</a></TD>
+        <TD>Tamara Korica</TD>
+        <TD>Boris Beckmann</TD>
+        <TD><a href="http://www.mpiz-koeln.mpg.de/~szachgo/zachgo_index.html">Melanie Bey</a></TD>
+        <TD>Claudia Hartmann</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+        <TD>Diana Stjepandic</TD>
+        <TD>Kerstin Hasenpusch-Theil</TD>
+        <TD>Marcus Frohme</TD>
+        <TD><a HREF="mailto:b.koch@zmbh.uni-heidelberg.de">Britta Koch</a></TD>
+        <TD><A HREF="mailto:m.hild@zmbh.uni-heidelberg.de">Marc Hild</a></TD>
+        <TD>Fabian Kruse</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+        <TD>Marc Valls</TD>
+        <TD>Julia Klopp</TD>
+        <TD><A HREF="mailto:o.witt@dkfz-heidelberg.de">Olaf Witt</A></TD>
+        <TD>Kerstin B&ouml;hm</TD>
+        <TD>Christian Weinel</TD>
+        <TD>José Pérez-Ortín</TD>
+
+      </TR>
+      <TR>
+        <TD>  </TD>
+        <TD>Matthias Nees</TD>
+        <TD>Arnaud Lagorce</TD>
+        <TD>Melanie Bier</TD>
+        <TD>Sonja Bastuck</TD>
+        <TD>Gaelle Dubois</TD>
+        <TD>Yana Syagailo</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+	<TD>Jan Wiemer</TD>
+	<TD>Wladislaw Kusnezow</TD>
+	<TD>Patrick Kuery</TD>
+	<TD>Daniel Wenzler</TD>
+	<TD>Andrea Busch</TD>
+	<TD>Sarah Marsal Barril</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+	<TD>Rainer Schuler</TD>
+	<TD>Benjamin Altenhein</TD>
+	<TD>Angela Becker</TD>
+	<TD>Li Zheng</TD>
+	<TD>Stefanie Brems</TD>
+	<TD>Rocio Alba</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+	<TD>Bo Xu</TD>
+	<TD>Duc van Luu</TD>
+	<TD>Iana Siagailo</TD>
+	<TD>Martina Brachold</TD>
+	<TD>Klaudia Kuranda</TD>
+	<TD>Enrico Ragni</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+	<TD>Viola Denninger</TD>
+	<TD>Martin Brenndoerfer</TD>
+	<TD>Stephane Boeuf</TD>
+	<TD>Karoliina Pelttari</TD>
+	<TD>Eric Steck</TD>
+	<TD>Michaela Burkhardt</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+	<TD>Michaela Schanne</TD>
+	<TD>Prachiti Narvekar</TD>
+	<TD>Sandra Bloethner</TD>
+	<TD>Anja Boos</TD>
+	<TD>Sven Christian</TD>
+	<TD>Yi-Ping Lin</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+	<TD>Christoph Schr&ouml;der</TD>
+	<TD>Linda Ottoboni</TD>
+	<TD>Frank Holtrup</TD>
+	<TD>Mahmoud Youns</TD>
+	<TD>Rafael Queiroz</TD>
+	<TD>Rosa Hernandez-Barbado</TD>
+      </TR>
+      <TR>
+        <TD>  </TD>
+        <TD>Daniela Albrecht</TD>   
+        <TD>Neeme T&ouml;nisson</TD>   
+        <TD>Raphael Martinez</TD>   
+	<TD>Christopher L&ouml;&szlig;ner</TD>
+	<TD>Florian Haas</TD>
+	<TD>Li Lu</TD>
+      <TR>
+	<TD>  </TD>
+        <TD>Sheng-Jia Zhang</TD>
+	<TD><A HREF="mailto:j.hoheisel@dkfz-heidelberg.de">J&ouml;rg Hoheisel</A></TD>        
+        <TD><A HREF="http://www.dkfz.de/mchips/hydractinia_echinata.html">Jorge Soza-Ried</a></TD>
+        <TD>  </TD>
+        <TD>  </TD>
+        <TD>  </TD>
+      </TR>
+    </TABLE>
+<p>&nbsp;</p><a href="mailto:K.Fellenberg@DKFZ.de"><font size="-1">Contact us</font></a><p>
+    </CENTER>
+
+
+
+<!--    <HR>
+-->
+<p>&nbsp;</p>
+<table width="100%" border="0%" BGCOLOR="#E0F0F0" >
+<tr><td><center><a href="index.html#top"><img src="top.gif"></a></center></td></tr>
+</table>
+<p>&nbsp;</p>
+
+
+
+
+
+
+    <CENTER>
+      <H2><a name="manuals++">Participants' corner</a></H2>
+
+<p>&nbsp;</p>
+
+    <TABLE WIDTH=100%>
+      <TR>
+  
+<td valign="top">DB access<br>(requires authentification)
+    <UL><B>
+      <LI><A HREF="/tbi_old/sesame/expro/structvers2/pushex.html">Annotator</A><BR>
+      <LI><A HREF="/tbi_old/sesame/expro/structvers2/results.html">Results section</A><BR>
+      </B>
+    </UL>
+</td>
+
+<td valign="top">Mailing list
+    <UL><B>
+      <LI><A
+HREF="mailto:majordomo@dkfz-heidelberg.de?body=subscribe mchips&subject=Send this message without any modification">Subscribe</A><BR>
+      <LI><A
+HREF="mailto:majordomo@dkfz-heidelberg.de?body=unsubscribe mchips&subject=Send this message without any modification">Unsubscribe</A><BR>
+      <LI><A
+HREF="http://www.dkfz-heidelberg.de/tbi_old/services/expro/maildb" target="archive">Read archive</A><BR>
+      <LI><A
+HREF="http://www.dkfz-heidelberg.de/tbi_old/sesame/expro/structvers2/postmessage.html" target="post">Post a message</A><BR>
+      </B>
+    </UL>
+</td>
+
+<td valign="top">Manual 
+    <UL><B>
+      <LI><A HREF="http://www.dkfz.de/tbi_old/services/mchips/getting_started.html">Getting started</A><BR>
+      <LI><A HREF="http://www.dkfz.de/tbi_old/services/mchips/mchips_help.html">User's guide</A><BR>
+      <LI><A HREF="http://www.dkfz-heidelberg.de/tbi_old/services/expro/faq">FAQ</A><BR>
+      <LI><A HREF="http://www.dkfz-heidelberg.de/mchips/course">Course</A><p>
+      <LI><A HREF="http://www.dkfz-heidelberg.de/mchips/administrators.html">Administrator's guide</A><BR>
+      <LI><A HREF="http://www.dkfz-heidelberg.de/mchips/developers.html">Developer's guide</A><BR>
+      </B>
+    </UL>
+</td>
+
+<td valign="top">Miscellaneous
+    <UL><B>
+      <LI><A HREF="best_practice.html">Best practice</A><BR>
+      <LI><A HREF="http://www.dkfz.de/tbi_old/services/mchips/superdome.html">Our hardware</A><BR>
+      <LI><A HREF="http://www.dkfz.de/tbi_old/services/mchips/talks">For talks</A><BR>
+      <LI><A HREF="http://www.dkfz.de/funct_genome/how-to-find-us.html">How to find us</A><BR>
+      </B>
+    </UL>
+</td>
+</tr></table>
+
+</center>
+
+
+<!--
+
+<p>&nbsp;</p>
+<table width="100%" border="0%" BGCOLOR="#E0F0F0" >
+<tr><td><center><a href="index.html#top"><img src="top.gif"></a></center></td></tr>
+</table>
+<p>&nbsp;</p>
+
+ <CENTER>  
+      <H2>Links</H2>
+ </Center>
+<ul>
+<li>Microarray
+</ul>
+
+
+
+-->
+
+
+
+<p>&nbsp;</p>
+<table width="100%" border="0%" BGCOLOR="#E0F0F0" >
+<tr><td><center><a href="index.html#top"><img src="top.gif"></a></center></td></tr>
+</table>
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</H5>
+
+<!--
+<P>
+<center>
+
+
+<table><tr><td><IMG SRC="gears.gif"></td><td><h3> :-) constantly <font color="blue">under construction </font> ... </h3></td><td><IMG SRC="gears.gif"></td></tr></table>
+
+
+
+<ADDRESS>
+<I><A HREF="/mchips/people/fellenberg">Kurt Fellenberg</a></I>
+<BR><I>2003-05-08</I>
+
+</ADDRESS>
+
+
+</center>
+
+-->
+
+	</td><TD ALIGN="LEFT" VALIGN="TOP">
+
+
+
+      </TD>
+
+</TR>
+    </TABLE>
+
+	  <p>&nbsp;</p><p>&nbsp;</p>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ?
+"https://ssl." : "http://www.");
+document.write("\<script src='" + gaJsHost +
+"google-analytics.com/ga.js' type='text/javascript'>\<\/script>" );
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-774794-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+</BODY>
+</HTML>

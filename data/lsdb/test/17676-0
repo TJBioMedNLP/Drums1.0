@@ -1,0 +1,169 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-AU">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="http://virtualplant.bio.nyu.edu/virtualplant2/css/screen.css" media="screen" title="Screen View (screen)"/>
+
+
+    <title>Sungear</title>
+  </head>
+
+  <body>
+
+
+   <!-- ##### Header ##### -->
+
+
+    <!-- ##### Main Copy ##### -->
+
+    <div id="main-copy">
+      <h1 id="introduction">SUNGEAR UPLOAD & DEMO PAGE</h1>
+      <br>
+      <h2>Welcome to Sungear.</h2>
+      <p> Sungear enables rapid, visually interactive exploration of large sets of genomic data.  It allows
+      browsing of gene sets by experiment membership, gene annotation, and ontological term.  The purpose of Sungear
+      is to make otherwise complicated queries quick and visually intuitive.</p>
+
+      <h2>Guide and FAQ</h2>
+      <p> If you have questions about how to use Sungear, or if it isn't loading properly,
+      check out the sungear <a href="/public/docs/">documentation</a>. </p>
+
+      <h2>Quick links</h2>
+      <p> To start Sungear with one of our pre-loaded data files, click the corresponding link below. After launching Sungear,
+      you can switch to a different pre-loaded data set using the Sungear menu option File | Load...</p>
+
+      <ul>
+      <li><a href="/public/sungear/var.html?data_url=/public/data/sungearFig2_v2&species=arabidopsis">Microarray data (click here to RUN the demo)</a>: 
+This dataset was generated from published microarray studies that identified Arabidopsis genes regulated by transient treatments with the nutrients nitrogen (N) and or carbon (C) (<a href="http://www.plantcell.org/cgi/content/full/16/8/2128?maxtoshow=&HITS=10&hits=10&RESULTFORMAT=&searchid=1138913263728_3483&FIRSTINDEX=0&sortspec=relevance&volume=16&firstpage=2128&journalcode=plantcell">Price, J., et al. (2004) Plant Cell 16, 2128-2150</a>; <a href="http://www.plantphysiol.org/cgi/content/full/136/1/2483?maxtoshow=&HITS=10&hits=10&RESULTFORMAT=&searchid=1138913304053_7357&FIRSTINDEX=0&sortspec=relevance&volume=136&firstpage=2483&journalcode=plantphysiol">Scheible, W.-R., et al.  (2004) Plant Physiol. 136, 2483-2499</a>; <a href="http://www.plantphysiol.org/cgi/content/full/136/1/2512?maxtoshow=&HITS=10&hits=10&RESULTFORMAT=&andorexactfulltext=and&searchid=1138913334326_7367&FIRSTINDEX=0&sortspec=relevance&volume=136&firstpage=2512&resourcetype=1&journalcode=plantphysiol">Wang, R., et al. (2004) Plant Physiol 136, 2512-2522</a>.
+). In this example, six lists of genes containing N- or CN-regulated genes (I= induced; D= depressed) provide the anchors for Sungear. These experiments conducted by three different research groups all share the feature of transiently treating Arabidopsis seedlings with nitrogen or nitrogen plus carbon nutrients, and assaying gene responses using the ATH1 Affymetrix whole genome chips.
+      <li><a href="/public/sungear/var.html?data_url=/public/data/blastp&species=arabidopsis">Comparative Genomics (click here to RUN the demo)</a>:
+This dataset was generated from a BLASTP comparison of all <i>Arabidopsis thaliana</i> protein sequences to the protein sequences in C. elegans (worm), D. melanogaster (fly), H. sapiens (human), M. musculus (mouse), R. norvegicus (rat), S. cerevisiae (yeast), S. pombe (fission yeast), and a collection of Cyanobacterial, Archaea and bacterial genomes, as described previously (<a href="http://genomebiology.com/2004/5/8/R53">Guti&eacute;rrez et al. 2004</a>). In this analysis, the Arabidopsis proteins are the "background" used for annotation (Gene names and GO terms).
+      <li><a href="/public/sungear/var.html?data_url=/public/data/developmentNew.sun&species=arabidopsis">Developmental Time Course (click here to RUN the demo)</a>: Microarray Experiments from different developmental time points of <i> Arabidopsis thaliana </i> (<a href="http://www.nature.com/ng/journal/v37/n5/abs/ng1543.html;jsessionid=9710EB1CF1A9403181375320A92D96C2"> Shmid et al 2005 </a>) were grouped into different developmental stages (Seedling, Young Plants, Mature Plants, Flowering Plants, and Seed Development). Genes that were determined to be differentially expressed (using inhouse statistical analysis) were plotted using Sungear.
+
+      </ul>
+
+      <h2>Upload your own data</h2>
+      <p> To view your own data in Sungear, fill in the upload form below.</p>
+
+      <p> <b>Species</b> refers to the source of gene annotations for the genes in your experiment.
+      Pick the appropriate species from the pull-down list.  If you don't see the species you need,
+      <a href="#contact">contact us</a>.</p>
+
+      <p> <b>Experiment File</b> is the file containing your data.  Click the &quot;Browse&quot;
+      button to choose a data file from your computer.</p>
+
+      <p> <b>File format</b> is the format of your data file.  Examples of the acceptable data file formats
+      are provided <a href="#formats">below</a>.</p>
+      
+
+<form method="POST" enctype="multipart/form-data" action="http://virtualplant.bio.nyu.edu/np-bin/upload-submit.cgi">
+<table>
+<tr>
+<td>Species:</td>
+<td><select name="species">
+
+  <option value="arabidopsis">arabidopsis (TAIR, GO)</option>
+
+  <option value="arabidopsisPO">arabidopsis (TAIR, PO)</option>
+
+  <option value="MLB">MLB</option>
+
+  <option value="fly">fly (flybase)</option>
+
+  <option value="rice">rice (Gramene)</option>
+
+  <option value="eVOC">eVOC</option>
+
+  <option value="human">human (UniProt)</option>
+
+  <option value="human-hgnc">human (HGNC)</option>
+
+  <option value="human-ipi">human (IPI)</option>
+
+</select></td>
+</tr>
+<tr>
+<td>Experiment file:</td>
+<td><input name="file" type="file" size="60" /></td>
+</tr>
+<tr>
+<td>File format:</td>
+<td>
+<input type="radio" name="format" value="fasta" checked />FASTA
+<input type="radio" name="format" value="sungear" />Sungear
+</td>
+
+</tr>
+<tr>
+<td>&nbsp;</td><td><input type="submit" value="Upload file"></td></tr>
+</table>
+    
+
+<br><br>
+      <h2 id="formats">Acceptable data formats</h2>
+
+<ul>
+<li>FASTA-like format:
+
+      <pre>
+>List1
+At1g01050
+At1g01450
+At1g01460
+At1g01510
+At1g01560
+At1g01740
+At1g02970
+At1g03030
+At1g03450
+At1g03590
+At1g03740
+At1g03920
+>List2
+At1g03740
+At1g03920
+At1g77760
+At5g53460
+At1g05250
+At3g49960
+At5g17820
+
+      </pre>
+
+<li>Sungear data format
+
+      <pre>
+List1 | List2 | gene
+1 | 0 | At1g01050
+1 | 0 | At1g01450
+1 | 0 | At1g01460
+1 | 0 | At1g01510
+1 | 0 | At1g01560
+1 | 0 | At1g01740
+1 | 0 | At1g02970
+1 | 0 | At1g03030
+1 | 0 | At1g03450
+1 | 0 | At1g03590
+0 | 1 | At1g77760
+0 | 1 | At5g53460
+0 | 1 | At1g05250
+0 | 1 | At3g49960
+0 | 1 | At5g17820
+1 | 1 | At1g03740
+1 | 1 | At1g03920
+      </pre>
+
+</ul>
+
+      <h2 id="contact">Contact</h2>
+      <a href="contact.cgi">Contact the Sungear team</a>
+      <br>
+      <br>
+
+      <h2 id="ack">Acknowledgements</h2>
+      <img src="/public/nsf4c.jpg">
+
+    </div>
+
+  </body>
+</html>
+

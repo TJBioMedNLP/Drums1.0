@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/srna.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/toggleElements.css" />
+<link rel="Shortcut Icon" href="favicon.ico" /> 
+<link rel="Bookmark" href="favicon.ico" /> 
+
+<title>sRNATarBase</title>
+
+
+<style type="text/css">
+<!--
+*{margin:0;padding:0;border:0;}
+#navMenu {
+	line-height: 24px;
+	list-style-type: none;
+	background-color: #000055;
+}
+#navMenu a {
+ display: block; text-align:center;
+}
+#navMenu a:link  {
+ color:#FFF; text-decoration:none;font-weight:bold;
+}
+#navMenu a:visited  {
+ color:#FFF;text-decoration:none;font-weight:bold;
+}
+#navMenu a:hover  {
+	color:#000055;
+	text-decoration:none;
+	font-weight:bold;
+}
+#navMenu li {
+	float: left;
+	background-color: #F26100;
+}
+#navMenu li a:hover{
+ background:#DDFFFF;
+}
+#navMenu li ul {
+ line-height: 27px;  list-style-type: none;text-align:left;
+ left: -999em; width: 980px; position: absolute; float:left;
+}
+#navMenu li ul li{
+ float: left;
+ background: #DDFFFF; 
+ font-weight:normal;
+ font-size:12px;
+}
+#navMenu li ul a{
+ display: block;text-align:center;
+}
+#navMenu li ul a:link  {
+ color:#666; text-decoration:none;
+ font-weight:normal;
+}
+#navMenu li ul a:visited  {
+ color:#666;text-decoration:none;
+ font-weight:normal;
+}
+#navMenu li ul a:hover  {
+	color:#FFFFFF;
+	text-decoration:none;
+	font-weight:normal;
+	background-color: #F26100;
+}
+#navMenu li:hover ul {
+ left: 0;
+}
+#navMenu li.sfhover ul {
+ left: 0;
+}
+#content {
+ clear: left; 
+}
+-->
+</style>
+<script type=text/javascript><!--//--><![CDATA[//><!--
+function menuFix() {
+ var sfEls = document.getElementById("navMenu").getElementsByTagName("li");
+ for (var i=0; i<sfEls.length; i++) {
+  sfEls[i].onmouseover=function() {
+  this.className+=(this.className.length>0? " ": "") + "sfhover";
+  }
+  sfEls[i].onMouseDown=function() {
+  this.className+=(this.className.length>0? " ": "") + "sfhover";
+  }
+  sfEls[i].onMouseUp=function() {
+  this.className+=(this.className.length>0? " ": "") + "sfhover";
+  }
+  sfEls[i].onmouseout=function() {
+  this.className=this.className.replace(new RegExp("( ?|^)sfhover\\b"), 
+"");
+  }
+ }
+}
+window.onload=menuFix;
+//--><!]]></script>
+
+</head>
+<body>
+<div id="container">
+<div id="srnahead"><img src="images/banner.jpg" alt="sRNATarBase" width="795" height="96" />
+		<ul id="navMenu">
+			<li><a href="index.php">&nbsp;Home&nbsp;</a>
+			</li>
+			<li><a href="search.php">&nbsp;Search&nbsp;</a>
+			</li>
+			<li><a href="blast_search.php">&nbsp;Blast&nbsp;</a>
+			</li>
+			<li><a href="submission.php">&nbsp;Submission&nbsp;</a>
+			</li>
+			<li><a href="download.php">&nbsp;Download&nbsp;</a>
+			</li>
+			<li><a href="prediction.php">&nbsp;Target Prediction&nbsp;</a>
+			</li>
+			<li><a href="phylogenetic_analysis.php">&nbsp;Phylogenetic Analysis&nbsp;</a>
+			</li>
+			<li><a href="help.php">&nbsp;Help&nbsp;</a>
+			</li>
+			<li><a href="contact.php">&nbsp;Contact Us</a>
+			</li>
+  </ul>
+</div>
+	<p>&nbsp;</p>
+
+	
+
+	
+	
+ 
+
+
+	<div id="content">
+		<div id="body">
+		<span class="bigtitle">Overview</span>
+		<p><span style="color: #0000FF; font-weight: bold">sRNATarBase</span> is a comprehensive database for bacterial sRNA targets verified by experiments. The purposes of developing such a database are to provide help for sRNA functional studies, and at the same time to provide a benchmark dataset for computational biologists to construct prediction models. All entries in database were collected from the peer-review published papers manually. The sRNATarBase contains 138 sRNA-target interaction entries and 252  non-interaction entries. The involved number of sRNAs, targets and genomes are 68, 227 and 17, respectively. Moreover, the detailed information for each sRNA-target interaction entry was provided, such as available binding regions, supporting experiments, related literatures and the cross-links to other databases. Users can browse, query and download sRNATarBase through the interactive interface.
+		<p>To keep the database updated for the sRNA research community, sRNATarBase also allows users to submit newly identified sRNA targets. We kindly request that users submit any recently verified targets using the submission form or template file.(<a href="updatelog.php" target="_self">See update log</a>)</p>
+		
+		<p>&nbsp;</p>
+		<span class="bigtitle">Latest News</span>
+		<p> 2010-10-15. Try <a href="http://ccb.bmi.ac.cn/starpicker/" target="_blank">sTarPicker</a>: a new webserver for global target prediction for bacterial small non-coding RNAs.
+		<p>&nbsp;</p>
+		<p style="font-weight: bold; color: #0000FF"><a href="statistics.php" target="_blank">Statistics</a></p>
+		<table class="grid" id="results" width="95%">
+			<tr>
+				<th width="14%" scope="col">Validation <br/>
+				entries</th>
+				<th width="14%" scope="col">Activation<br/>
+				entries</th>
+				<th width="14%" scope="col">Repression<br/>
+				entries</th>
+				<th width="14%" scope="col">No interaction<br/>
+				entries</th>
+				<th width="14%" scope="col">Pending<br/>
+				entries</th>
+				<th width="10%" scope="col">sRNAs</th>
+				<th width="10%" scope="col">Targets</th>
+				<th width="10%" scope="col">Literatures</th>
+			</tr>
+			<tr>
+				<td align="center">392</td>
+				<td align="center">11 </td>
+				<td align="center">129 </td>
+				<td align="center">252 </td>
+				<td align="center">0</td>
+				<td align="center">69</td>
+				<td align="center">229 </td>
+				<td align="center"><a href="literature.php" target="_blank">93</a></td>
+			</tr>
+		</table>
+		<p>&nbsp;</p>
+		<p><span class="bigtitle">Citation:</span>
+		
+		</p>
+		<p><a href="http://www.ncbi.nlm.nih.gov/pubmed/20843985" target="_blank">Cao Y, Wu J, Liu Q, Zhao Y, Ying X, Cha L, Wang L, Li W. sRNATarBase: A comprehensive database of bacterial sRNA targets verified by experiments. RNA. 2010 Nov;16(11):2051-7.</a>
+		<p></p>		
+	  </div>
+	</div>	
+<div id="footer">
+		<div id="siteInfo">  
+			<p>Copyright(c) 2009-2010 <a href="http://www.biosun.org.cn">Center of Computational Biology, Beijing Institute of Basic Medical Sciences. </a>All Rights Reserved. <br/>
+				This website works well with <a href="http://www.microsoft.com/windows/products/winfamily/ie/default.mspx"  target="_blank">IE</a> and <a href="http://www.mozilla.com/en-US/firefox/"  target="_blank">Firefox</a>. <br/>
+			</p>
+	</div>
+
+	</div>	
+</div>
+</body>
+</html>
+Total Visitors: 1495	

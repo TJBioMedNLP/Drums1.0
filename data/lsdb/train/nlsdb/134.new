@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>LocalMove</title> 
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <link rel="stylesheet" type="text/css" href="localmove_files/localmove.css" media="screen">
+    <style>
+      .imgfloatleft{
+        float:left;
+        clear:both;
+        margin-right:10px;
+        border:groove 2px #aaad8e;
+      }
+      .imgfloatright{
+        float:right;
+        clear:both;
+        margin-left:10px;
+        border:groove 2px #aaad8e;
+      }
+      .contentbottom{
+        clear:both;
+      }
+      .imagecontainer{
+      }
+      .listitem{
+        position:relative;
+        margin-left:2em;
+        padding-left:0em;
+        margin-top:0.1em;
+        line-height:1.8em;
+      }
+
+
+    </style>
+
+
+    <script type="text/javascript" src="localmove_files/prototype.js"></script>
+    <SCRIPT LANGUAGE="javascript">
+      var win = null;
+      function NewWindow(mypage,myname,w,h,scroll){
+               LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+               TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+               settings = 'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+		   win = window.open(mypage,myname,settings);
+             }
+    </script>
+    <script type="text/javascript">
+      var niftyDir = "localmove_files/"; 
+    </script>
+    <script type="text/javascript" src="localmove_files/niftycube.js"></script>
+    <script type="text/javascript">
+      window.onload=function(){
+        Nifty("div#container","big");
+        Nifty("div#header");
+        Nifty("div#footer","fixed-height");
+        Nifty("div#content,div#menu");
+        Nifty("ul.postnav a","transparent");
+        Nifty("div#contenttitle");
+      }
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>Local Move: Best on-lattice fits</h1>
+      </div>
+      <div id="menu">
+        <center>
+          <ul class="postnav">
+            <li><a href="#" id="selected"><div id="innerbutton">Home</div></a></li>
+            <li><a href="webserver.html"><div id="innerbutton">Webserver</div></a></li>
+            <li><a href="results.html"><div id="innerbutton">Results</div></a></li>
+            <li><a href="dbsearch.html"><div id="innerbutton">DB Search</div></a></li>
+            <li><a href="manual.html"><div id="innerbutton">Manual</div></a></li>
+            <li><a href="contacts.html"><div id="innerbutton">Contacts</div></a></li>
+          </ul>
+        </center>
+      </div>
+      <div id="content">
+          <div id="contenttitle"><h2>Welcome to LocalMove webserver !</h2></div>
+          <p>
+            <img src="localmove_files/localmovesFCC.png" class="imgfloatleft" />
+            Local move is a Monte-Carlo approach to the problem of finding best-fitting lattice models for biopolymers. <br/>
+            Starting from an initial discrete model (3D self-avoiding walk), it performs a sequence of elementary random 
+            alterations, called <em>Local Moves</em>. The original atoms coordinate, input as a 
+            <a href="http://www.rcsb.org/pdb">PDB file</a>, are then used to decide whether or not to accept the candidate
+            move, either deterministically in a <em>greedy</em> way or stochastically by performing a <em>simulated annealing</em>. Through iterating the 
+            process for a reasonable amount of time, a model is obtained whose inter-atom distance is very close to the original
+            model.
+          </p>
+          <p>
+            <img src="localmove_files/superimposeFCC.png" class="imgfloatright" />
+            Using this this webserver, it is possible to:<br/>
+            <span class="listitem"><a href="webserver.html">Run a LocalMove experiment</a></span><br/>
+            <span class="listitem"><a href="results.html">Monitor fitting progress</a> in real time (Requires <a href="http://www.java.com/en/download/">Java</a>)</span><br/>
+            <span class="listitem"><a href="results.html">Retrieve the best-on lattice output</a><br /></span>
+            Additionally, you can reproduce previously run experiments, pre-load the job submission page
+            with previously defined configuration, or export a movie of the <em>pseudo-folding</em> process (beta).
+            A large panel of options is available for running an experiment.
+            Please refer to the <a href="manual.html">Manual section</a> for a short description of most available options.<br /> 
+          </p>
+          <div class="contentbottom">&nbsp;</div>
+      </div>
+      <div id="footer">
+        <div id="footertext">
+          Software and website created by <a href="http://clavius.bc.edu/~clote">P. Clote</a>, 
+         <a href="http://clavius.bc.edu/~ponty">Y. Ponty</a> and J. Persampieri for 
+         <a href="http://bioinformatics.bc.edu/clotelab">Clotelab</a>
+        </div>
+      </div>
+    </div>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2714361-3";
+urchinTracker();
+</script>
+  </body>
+</html>

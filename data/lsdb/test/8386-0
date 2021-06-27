@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+	<title>FastContact Binaries (Dr. Carlos Camacho)</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Language" content="en-uk" />
+        <meta name="author" content="Christoph Champ" />
+        <meta name="description" content="FastContact: a free energy scoring tool for protein-protein complex structures" />
+        <meta name="robots" content="index,follow" />
+
+	<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+</head>
+
+<body>
+
+<div id="wrapper">
+	<div id="header">
+		<h1>FastContact (binaries)</h1>
+		<h2>a free energy scoring tool for protein-protein complex structures</h2>
+	</div><!-- /id:header -->
+	<div id="main">
+<h2>Download</h2>
+
+<p>Below are the binaries (Fortran77) for the fast computation of binding and contact free energies. Download the binary for your system.</p>
+
+<ul>
+	<li><a href="download/fastcontact.x">fastcontact.x</a> (Linux)</li>
+	<li><a href="download/fastcontactibm.x">fastcontactibm.x</a> (IBM SP)</li>
+</ul>
+
+<p>Dependencies: Make sure you have <tt>libf2c</tt> installed on your machine.</p>
+
+<p>Note: You must set the appropriate permissions for running these binaries (e.g. "<tt>chmod +x fastcontact.x</tt>").</p>
+
+<p>You will also need the definition of the atomic composition of each amino acid (the "RTF file"). This RTF file is consistent with CHARMM19 parameters.</p>
+
+<p>Note: Proteins should have polar hydrogens to obtain meaningful electrostatic interactions</a>
+
+<ul>
+	<li><a href="download/charmm19.rtf">charmm19.rtf</a> ("RTF file")</li>
+</ul>
+
+<p>The following atomic contact potential matrix file ("<tt>corn18.dat</tt>") is given as a reference, it is not needed to run FastContact (From <em>Zhang C, Vasmatzis G, Cornette J, DeLisi C (1997). JMB, 267:707-726</em>):</p>
+
+<ul>
+	<li><a href="download/corn18.dat">corn18.dat</a> ("atomic contact potential matrix file")</li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Syntax:</p>
+<code>fastcontact.x RTF rec.pdb lig.pdb Num_extra_ligands Contacts SASA [&lt; extra_ligand_list] [&gt; stdout]</code>
+<p>where</p>
+<ul>
+	<li><tt>RTF</tt> is a file that defines the united atom composition of each amino acid (provided together with the binary);</li>
+	<li><tt>Num_extra_ligands</tt> is a file with the names of new ligand structures;</li>
+	<li>If <tt>Contacts != 1</tt>, the output details the top 20 residues that have the minimum and maximum contribution to the different free energy components; the residues are renumbered starting with number 1 and the program creates two PDB files with the new numbers. If <tt>Contacts = 1</tt>, no contact energy information is produced; and</li>
+	<li>Solvent accessible surface area (SASA); <tt>SASA != 1</tt> will check that at least one of the contact residues is at the surface. If this constraint is not deemed necessary, then set <tt>SASA = 1</tt></li>
+</ul>
+
+<h3>Example 1</h3>
+
+<p>Download the following files:</p>
+<ul>
+	<li><a href="download/rec.pdb">rec.pdb</a> ("receptor")</li>
+	<li><a href="download/lig.pdb">lig.pdb</a> ("ligand")</li>
+</ul>
+
+<p>Then execute the following command:</p>
+<code>./fastcontact.x charmm19.rtf rec.pdb lig.pdb 0 0 0 &gt; output1.txt</code>
+
+<p>The results from the above run are found in the file "<tt>output1.txt</tt>". They should be identical to the results found in this file: <a href="download/contact_energies1.txt">contact_energies1.txt</a>.</p>
+
+<h3>Example 2</h3>
+
+<p>In order to screen several ligands simultaneously, it is necessary to add an optional argument at the end of the command string.</p>
+
+<p>Download the following files:</p>
+<ul>
+	<li><a href="download/rec.pdb">rec.pdb</a> ("receptor")</li>
+	<li><a href="download/lig.pdb">lig.pdb</a> ("ligand")</li>
+	<li><a href="download/b1.pdb">b1.pdb</a> ("extra ligand #1")</li>
+	<li><a href="download/d3.pdb">d3.pdb</a> ("extra ligand #2")</li>
+	<li><a href="download/ligand1.pdb">ligand1.pdb</a> ("extra ligand #3")</li>
+</ul>
+
+<p>Create a text file (lets call it "<tt>extra_lig_list.txt</tt>") containing a list of the filenames of the extra ligands (one filename per line) as follows:</p>
+<p><tt>b1.pdb<br/>d3.pdb<br/>ligand1.pdb</tt></p>
+
+<p>Then execute the following command:</p>
+<code>./fastcontact.x charmm19.rtf rec.pdb lig.pdb 3 1 0 &lt; extra_lig_list.txt &gt; output2.txt</code>
+
+<p>Note: For <tt>Num_extra_ligands &gt; 0</tt>, you must pipe in a list file (i.e. "<tt>&lt; extra_lig_list.txt</tt>").</p>
+
+<p>The results from the above run are found in the file "<tt>output2.txt</tt>". They should be identical to the results found in this file: <a href="download/contact_energies2.txt">contact_energies2.txt</a></p>
+
+<p>Please cite: Bioinformatics 2005 (e-published; see below)</p>
+		<br class="clearit" />
+	</div><!-- /id:main -->
+
+	<div id="footer">
+		<ul>
+		<li class="reference">
+			Reference: Camacho CJ and Zhang C (2005).
+			<cite>FastContact: rapid estimate of contact and binding free energies.</cite>
+			Bioinformatics, 21(10):2534-6.
+		</li>
+		<li class="copyright">This server was setup by
+			<address class="vcard">
+			<a class="url fn n" href="http://christophchamp.com/">
+				<span class="given-name">P. Christoph</span>
+				<span class="family-name">Champ</span>
+			</a>
+			</address>
+			in <abbr title="200507">July 2005</abbr> at the University of Pittsburgh.
+		</li>
+		<li>"This material is based upon work supported by the National Science Foundation under Grant No. 0444291."<br/>
+"Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation."</li>
+		</ul>
+	</div><!-- /id:footer -->
+</div><!-- /id:wrapper -->
+
+<div id="meta">
+<ul>
+	<li>| <a href="http://structure.pitt.edu/">Home</a></li>
+	<li>| <a href="http://structure.pitt.edu/people/">People</a></li>
+	<li>| <a href="http://structure.pitt.edu/servers/">Servers</a></li>
+	<li>| <a href="http://structure.pitt.edu/software/">Software</a></li>
+	<li>| <a href="http://validator.w3.org/check?uri=referer">XHTML</a></li>
+	<li>| <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> |</li>
+</ul>
+	last update: <abbr title="20070322">22-Mar-2007</abbr>
+</div>
+
+</body>
+</html>

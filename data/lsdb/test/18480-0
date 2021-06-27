@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Assessment of coherence score</title>
+</head>
+<body>
+<h1
+ style="text-align: center; font-family: times new roman,times,serif;">Using
+functional annotations to assess the coherence of a protein set<br>
+</h1>
+<br>
+<div style="text-align: center;"><b style=""><span lang="EN-US"></span></b><span
+ style="" lang="EN-US"> </span><b style=""><span lang="EN-US">A web
+supplement to the work published in: <br>
+</span></b><font size="-1">Chagoyen M, Carazo
+JM and Pascual-Montano A.</font><br>
+Assessment of protein set coherence using functional annotations<br>
+<span style="font-style: italic;">[<a href="http://www.biomedcentral.com/1471-2105/9/444/">BMC Bioinformatics 2008, 9:444</a>]</span><br>
+</div>
+<span style="" lang="EN-US"></span><br>
+<p class="MsoNormal"><b style=""><span lang="EN-US"></span></b></p>
+<table
+ style="margin-left: auto; margin-right: auto; width: 100%; text-align: left;"
+ border="0" cellpadding="10" cellspacing="10">
+  <tbody>
+    <tr>
+      <td colspan="3" style="vertical-align: top;"><span
+ style="font-weight: bold;"></span><b style=""><span lang="EN-US"></span></b>
+      <p class="MsoNormal"><b style=""><span lang="EN-US">Motivation:<o:p></o:p></span></b></p>
+      <span lang="EN-US"></span><span style="" lang="EN-US"></span>
+      <p class="MsoNormal"><span style="" lang="EN-GB">Computational
+analysis of systematic experiments frequently produces one or more sets
+of genes or proteins. Several methods exists for the functional
+interpretation and validation of such sets. Nevertheless, little
+attention has been paid to the assessment of the coherence of those
+sets using functional annotations.</span><span style="" lang="EN-GB"></span><span
+ style="" lang="EN-US"></span><span style="" lang="EN-US"><br>
+      </span></p>
+      <b style=""><span lang="EN-US"> </span></b></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 255, 255);">
+      <h3>Supplementary data files </h3>
+Positive sets: <span style="font-weight: bold;"></span>
+      <ul>
+        <li>Positive sets (cosine similarity) [<a
+ href="coherence_eval_cosine.xls"><span
+ style="text-decoration: underline;">Excel file</span></a>]</li>
+        <li>Positive sets (Jaccard similarity) [<a
+ href="coherence_eval_jaccard.xls">Excel file</a>]</li>
+      </ul>
+Random sets:<br>
+      <ul>
+        <li>Figure (coherence score and significance measures) [<a
+ href="suppl_figure.pdf">PDF file</a>]</li>
+      </ul>
+Matlab code:<br>
+      <ul>
+        <li>Prepare input data (<a href="howto.html">How to</a>)<br>
+        </li>
+        <li>Compute statistical significance (<a href="sim_score.m">sim_score.m</a>)<br>
+        </li>
+      </ul>
+      <br>
+      <br>
+      <span style="font-weight: bold;"></span><span
+ style="font-weight: bold;"></span> </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><b style=""><span lang="EN-US">Objectives:</span></b>
+      <ul>
+        <li><span lang="EN-US">To measure the degree of coherence of a
+protein set based on the global similarity of their functional
+annotations.</span><span lang="EN-US"></span></li>
+        <li><span lang="EN-US">To assess the statistical significance
+of that coherence in the context of a reference set. <br>
+          </span></li>
+      </ul>
+      <p class="MsoNormal"><b style=""><span lang="EN-US">Results:<o:p></o:p></span></b></p>
+      <p class="MsoNormal" style=""><span style="" lang="EN-US">To
+evaluate our methodology we analyzed both positive and random sets in
+the context of the </span><span lang="EN-US"><span
+ style="font-style: italic;">Saccharomyces
+cerevisiae</span> genome (<a href="http://www.yeastgenome.org/">www.yeastgenome.org</a>).
+      </span><span style="" lang="EN-US"> <br>
+Positive sets correspond to macromolecular complexes, cellular
+components and proteins participating the the same pathway. These sets
+are compiled from: <br>
+      </span></p>
+      <ol>
+        <li><span style="" lang="EN-US"><a
+ href="http://www.geneontology.org/">Gene Ontology</a> cellular
+component subontology (release 12/2007)<br>
+          </span></li>
+        <li><span style="" lang="EN-US">MIPS complex catalogue (release
+18-05-2006)<br>
+          </span></li>
+        <li><span style="" lang="EN-US">Kegg Pathway database
+(downloaded 17-12-2008)<br>
+          </span></li>
+      </ol>
+      <p class="MsoNormal" style=""><span style="" lang="EN-US">As the
+catalogue of MIPS complexes
+comprises both curated data as well as results from systematic analysis
+[1-3], we have analysed these datasets separately.</span><br>
+      <span style="" lang="EN-US">For each set we computed the
+coherence score in terms of GO biological processes (release 12/2007),
+together with significance measure in the context of the whole <span
+ style="font-style: italic;">S. cerevisiae</span> genome.<br>
+      <br>
+      </span></p>
+      <span style="font-weight: bold;">Method overview:</span><br>
+      <ol>
+        <li><span
+ style="font-size: 11pt; font-family: &quot;Times New Roman&quot;;" lang="EN-GB"></span><span
+ style="" lang="EN-GB"> Each protein is represented as an n-dimensional
+vector. Each dimension corresponds to the n functional terms used in
+the reference set. Both direct GO term associations and corresponding
+ancestors are used in this representation.</span></li>
+        <li><span style="" lang="EN-GB">The similarity of two proteins
+is computed using their functional representations.</span></li>
+        <li><span style="" lang="EN-GB">The coherence score of a set is
+defined as the mean similarity of all protein pairs (excepting
+autosimilarities).</span></li>
+        <li><span style="" lang="EN-GB">The statistical significance of
+this score is assessed based on the hypergeometric test. For that
+purpose, three neighborhoods are established on set, and therefore
+three distinct p-values are calculated.<br>
+          </span></li>
+      </ol>
+      <p class="MsoNormal" style=""><b style=""><span lang="EN-US">References:<o:p></o:p></span></b>
+      </p>
+      <p class="RefText"><!--[if supportFields]><span lang=EN-US><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>ADDIN EN.REFLIST <span style='mso-element:
+field-separator'></span></span><![endif]--><span
+ lang="EN-US"><span style=""></span>[1] Gavin, A.C., et al. (2002)
+Functional
+organization of the yeast proteome by systematic analysis of protein
+complexes, <span style="font-style: italic;">Nature</span>, 415,
+141-147.</span></p>
+      <p class="MsoNormal" style=""><span lang="EN-US">[2] Ho, Y., et
+al. (2002) Systematic identification of
+protein complexes in Saccharomyces cerevisiae by mass spectrometry, <span
+ style="font-style: italic;">Nature</span>,
+415, 180-183.</span></p>
+      <p class="MsoNormal" style="">[3] Krogan, N.J., et al. (2004)
+High-definition macromolecular composition of yeast RNA-processing
+complexes, <span style="font-style: italic;">Mol Cell</span>, 13,
+225-239.</p>
+      <p class="MsoNormal" style=""><br>
+      <span lang="EN-US"></span> </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+var sc_project=1503392; 
+var sc_invisible=1; 
+var sc_partition=13; 
+var sc_security="ffe5defd"; 
+</script>
+<script type="text/javascript" language="javascript" src="counter.js"></script>&nbsp;<noscript>
+</noscript><!-- End of StatCounter Code -->
+<div style="text-align: right;"><b style=""><span lang="EN-US"></span></b><br>
+Contact: monica.chagoyen [<span style="font-style: italic;">at</span>]
+cnb.csic.es<br>
+<b style=""><span lang="EN-US"></span></b></div>
+<p class="MsoNormal"><b style=""><span lang="EN-US"><br>
+</span></b></p>
+<!--[if supportFields]><span lang=EN-US style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Times New Roman";mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US;mso-fareast-language:ES;mso-bidi-language:AR-SA'><span
+style='mso-element:field-end'></span></span><![endif]-->
+</body>
+</html>

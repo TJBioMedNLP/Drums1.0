@@ -1,0 +1,190 @@
+<html>
+<head>
+   <META name="verify-v1" content="onUC4gLNv88q8XIvzlT8brumoyfErv9HpzoNOJ8ZJls=" />
+   <meta name="Author" content="Veli M&auml;kinen">
+   <title>SuDS project / Compressed suffix tree implementation</title>
+  <meta content="Veli Mäkinen" name=author>
+  <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+  <link rel="stylesheet" href="/include/tktl-nobg.css" title="tktl">
+</head>
+
+<body>
+<!-- header begins  -->
+
+<div id="wrapper">
+
+<!-- This one gets the most cunning trick of the month award. 
+
+   <div class="ylareuna">
+      <div class="language"><img src="/images/bg_language_eng.gif" alt=" " width="744" height="19" hspace="0" vspace="0" border="0" align="top" usemap="#kielivalinta" >
+        <map name="kielivalinta" id="kielivalinta">
+          <area shape="rect" coords="9,1,140,17" href="http://www.helsinki.fi/university/" alt="University of Helsinki homepage" >
+          <area shape="rect" coords="510,1,590,17" href="/index.fi.html" alt="Suomeksi">
+          <area shape="rect" coords="591,1,669,17" href="/index.sv.html" alt="P&aring; svenska">
+          <area shape="rect" coords="670,1,740,17" href="/index.en.html" alt="In English">
+        </map>
+     </div>
+--> 
+
+<!-- mylang: en -->
+<!-- /home/www/cgi-bin/langs: index -->
+   <div class="ylareuna">
+      <div class="language"><img src="/images/bg_language_eng.gif" alt=" " width="744" height="19" hspace="0" vspace="0" border="0" align="top" usemap="#kielivalinta" />
+        <map name="kielivalinta" id="kielivalinta">
+          <area shape="rect" coords="9,1,140,17" href="http://www.helsinki.fi/university/" alt="University homepage" title="University homepage" />
+          <area shape="rect" coords="510,1,590,17" href="" alt="Suomenkielinen versio puuttuu" title="Suomenkielinen versio puuttuu" />
+          <area shape="rect" coords="591,1,669,17" href="" alt="Inte p&aring; svenska" title="Inte p&aring; svenska" />
+          <area shape="rect" coords="670,1,740,17" href="index.html" alt="In english" title="In english" /></map>
+     </div>
+
+     <div class="logopohja">
+        <table style="width: 744px; height: 115px;" border="0" cellpadding="0" cellspacing="0">
+          <tr align="left" valign="top">
+            <td style="width: 288px"><a href="http://www.helsinki.fi/university/"><img src="/images/logo_eng.gif" alt="University of Helsinki" width="288" height="115" hspace="0" vspace="0" border="0" align="top" /></a></td>
+            <td style="width: 420px" valign="top"><img src="/images/tktl-eng.gif" alt="Department of Computer Science" width="420" height="115" hspace="0" vspace="0" align="top" /></td>
+            <td bgcolor="#f0f1f2" style="width: 36px">
+            <div class="tunnusvari">&nbsp;</div></td>
+          </tr>
+    	</table>    </div>
+
+  </div>
+        <div class="liukuvari"><img src="/images/spacer.gif" alt=" " width="1" height="4" />
+  </div>
+	  <h1>Department of Computer Science</h1>
+   
+ <div class="sisalto"> 
+  <div id="valikko">
+      <h2>Department information</h2>
+    
+      <div class="menu">			  
+<a href="/index.en.html">Homepage</a>
+<a href="/new/index.en.html">News and events</a>
+<a href="/research/index.en.html">Research</a>
+<a href="/opiskelu/index.en.html">Studies</a>
+<a href="/instr.engl/fsa/">Admission</a>
+<a href="/compfac/index.en.html">Computing facilities</a>   
+<a href="/laitos/index.en.html">Administration</a>
+ <a href="http://qm-en.cs.helsinki.fi/">Quality manual</a> 
+<a href="/contact/index.en.html">Contact information</a> </div>
+  &nbsp;
+  </div>
+<div id="content">
+<!-- header ends -->
+
+
+<h1><a href="../">SuDS project</a> / Compressed suffix tree implementation</h1>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+var pageTracker = _gat._getTracker("UA-21474586-1");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+<h2>News</h2>
+<p>
+Our C++-implementation of <i>compressed suffix tree</i> is available for 
+<a href="cst_v_1_0.tar.gz" 
+   onClick="javascript: pageTracker._trackPageview('/group/suds/cst/download/cst_v_1_0');">
+  download</a> (version 1.0).
+<ul>
+<li><i>Note:</i> If you have access to a 64-bit server machine with 32 GB memory, you can 
+construct the compressed suffix tree of the complete Human Genome.
+The final memory requirement for HG is 8.8 GB, but during construction the memory peak is at 
+24 GB. 
+<li>This version supports storing the structure to disk, so that the heavy 
+construction for one sequence is required only once.
+<li><i>News:</i> To see what the structure can do, try out 
+<a href="http://sysdb.cs.helsinki.fi/u/tkt_suds/gb/">SUDS Genome Browser</a>:
+A server machine with 128 GB  memory is running the compressed suffix tree of Human Genome.
+With the client, you can query the structure, and it will show the corresponding path in the tree and 
+a list of found occurrences.
+It is also possible to browse the tree manually and click the occurrences to 
+follow a link to <a href="http://www.ensembl.org">Ensembl Genome Browser</a>.
+<a href="http://sysdb.cs.helsinki.fi/~tkt_suds/gb/"><IMG width="100%" SRC="../gb.png" ALT="SUDS Genome Browser"></a>
+</ul>
+</p>
+<p>
+See the <a href="../#cst_note">preprint</a> of a <i>Bioinformatics</i> application note
+for a brief overview and some experimental results.
+</p>
+
+<h2>Background</h2>
+<p>
+Our implementation of compressed suffix tree follows closely a recent 
+article by Sadakane (<a href="http://tcslab.csce.kyushu-u.ac.jp/~sada/papers/cst.ps">Compressed Suffix Trees with Full Functionality</a>, 
+<i>Theory of Computing Systems</i>, in press). 
+The implementation 
+supports all typical <a href="http://en.wikipedia.org/wiki/Suffix_tree">suffix tree</a> 
+operations, including suffix links. 
+In addition, it supports lowest common ancestor (lca) queries.
+Some operations work in constant time (traversing in the tree, lca), others
+are slower than normal suffix tree operations by about a logarithm factor. 
+The space-savings are significant: on a 10MB DNA sequence, the compressed
+suffix tree was taking about 33MB. A normal suffix tree takes easily 160MB 
+(and this does not yet support lca-queries). Even a plain 
+<a href="http://en.wikipedia.org/wiki/Suffix_array">suffix array</a> takes more
+space than the compressed suffix tree. For more details on the implementation, see
+the <a href="../#icst">manuscript</a> describing the 
+algorithm engineering challenges faced during the project. 
+For a brief overview, see the <a href="icst_posterA0.pdf">poster</a>, and
+for some preliminary experiments, see the <a href="http://www.springerlink.com/content/5x504n4338540286/fulltext.pdf">WEA 2007 article</a>.
+</p>   
+
+<h2>Back to <a href="../">SuDS project page</a></h2>
+<p>
+<small><em>
+  Previous update:
+  
+  24.02.2011 -
+  <a href="mailto:Veli.Makinen-35ff161fdb9ebdbe820110307-@cs.helsinki.fi
+">
+  Veli Mäkinen</a>
+</em></small>
+
+<!-- trailer begins --> 
+</div>
+</div>
+<div class="trailer">
+
+<div class="liukuvari">
+<img src="/images/spacer.gif" alt=" " width="1" height="4" />
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: 708px;">
+  <tr><td><div class="search">
+
+<form action="http://www.google.fi/search" method="get"><label>Search</label>
+<input name="sitesearch" type="radio" value="cs.helsinki.fi" />
+<label>department or</label>
+<input name="sitesearch" type="radio" value="helsinki.fi" checked="checked" />
+<label>university site:</label> 
+<input name="q" type="text" size="30" maxlength="200" style="font-size: 80%" />
+<input name="submit" type="submit" value="Search!" id="etsi" />
+<br />
+<a href="/feedback/">Feedback</a> | <a href="http://www.helsinki.fi/ml/">Faculty homepage</a> | <a href="http://www.helsinki.fi/yliopisto/">University homepage</a>
+</form>
+</div> 
+</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- trailer ends --> 
+
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-733425-4";
+urchinTracker();
+</script>
+
+</body>
+</html>
+

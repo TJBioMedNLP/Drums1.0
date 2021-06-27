@@ -1,0 +1,277 @@
+<html><head>
+<title>HMM-based Protein Sequence Analysis, SAM-T99 </title></head>
+
+<body text="#000000" link="#0000ff" vlink="#00009c" alink="#00a000"
+background=../backgrounds/dna2.gif>
+
+<center>
+<h1> HMM-based Protein Sequence Analysis, SAM-T99 </h1>
+</center>
+
+<font color="#ff0000">
+The SAM-T99 server was moved to a different cluster 
+1-5 November 2004.  We believe we have found and fixed all the
+major incompatibilities in the old, badly written code for the server, 
+but we may have missed some.  Please send email to <A
+HREF="mailto:sam-info@cse.ucsc.edu"> sam-info@cse.ucsc.edu</A> if you
+find problems.
+<P>
+We strongly advise switching to
+the newer <A HREF="T02-query.html">SAM-T02 server</A>, which has been
+greatly outperforming SAM-T99 in both our internal tests and in the <A
+HREF="http://bioinfo.pl/LiveBench/">LiveBench</A>
+on-going evaluation of protein-structure servers.
+We keep the SAM-T99 server around for comparison purposes, but will
+no longer be actively maintaining it.
+We plan to eliminate in the next year, as it takes up far more
+resources and performs worse than the newer server.
+</font>
+
+<!--
+<font color="#ff0000">
+SORRY.  The latest download of the NR database could not be
+indexed---until we can get a corrected version of NR, the server will
+not be working.
+<BR>
+ SAM-T99 IS CURRENTLY NOT AVAILABLE.<BR><BR>
+<BR><BR>
+</font>
+-->
+
+
+<H3> This page now uses browser-based delivery by default.
+     To received results by email, check the email-results-box at the bottom
+     of the options section.  <strong>Warning:</strong> <i>Results
+     files can be quite large, and may exceed the allocations or
+     capabilities of your e-mail system.</i>
+</H3>
+
+<!--
+<H3>
+The SAM-T99 server is a bit dated now---please switch to
+the newer <A HREF="T02-query.html">SAM-T02 server</A>, which has been
+greatly outperforming SAM-T99 in both our internal tests and in the <A
+HREF="http://bioinfo.pl/LiveBench/">LiveBench</A>
+on-going evaluation of protein-structure servers.
+We keep the SAM-T99 server around for comparison purposes, but are no
+longer actively maintaining it.
+</H3>
+
+
+<H2> PLEASE STOP USING T99-query.html AND SWITCH OVER TO <A
+HREF="T02-query.html">T02-query.html</A>.
+NOT ONLY WILL YOUR RESULTS BE BETTER, BUT THE LOAD ON OUR MACHINES
+WILL BE REDUCED, AS THE NEWER SERVER IS MORE EFFICIENT.
+</H2>
+
+-->
+
+
+<!--
+<form method="POST" enctype='multipart/form-data' 
+action = "http://www.cse.ucsc.edu/~farmer/cgi-bin/T99-query.pl">
+-->
+
+<H2> <font color="red">SERVICE DISCONTINUED</font> </H2>
+
+<!-- <H3>Step 1: Enter email address and optional subject line</H3> -->
+
+<p>
+email address (required):
+<INPUT TYPE="text" NAME="address" VALUE="" SIZE=45 MAXLENGTH=512>
+</p>
+<p>
+Subject for e-mail (optional)
+<INPUT TYPE="text" NAME="subjectline" VALUE="UCSC SAM-T99-query results" SIZE=45 MAXLENGTH=256>
+</p>
+
+<!-- <H3>Step 2: Enter a sequence or an alignment </H3> -->
+<p>
+Either cut and paste your sequence in the box below or upload it from
+a file on your local system.  Sequences must be in a 
+<A HREF="http://dot.imgen.bcm.tmc.edu:9331/seq-util/Help/readseq.html">
+readseq</A>-compatible format---we recommend FASTA format.  You may
+also use a multiple alignment as a seed, which must be in 
+<A HREF="../a2m-desc.html">a2m</A> format.
+</p>
+<p>
+Cut and paste your sequence here, ...<BR>
+<TEXTAREA NAME="sequence" ROWS=6 COLS=80></TEXTAREA>
+</p>
+<p>
+or specify the sequence-containing file on your system here.
+</p>
+<p>
+<input type="file" size="80" name="seq_file">
+</p>
+
+<p>
+<center><INPUT TYPE="submit" VALUE="Press here to submit" >
+<INPUT TYPE="reset" VALUE="Clear" ></center>
+</p>
+
+<P>
+Further options appear below.
+
+
+<HR>
+
+<H4>
+Please do not submit CASP4 targets on this page---the results are
+already publically available on the
+<A HREF="http://cafasp.bioinfo.pl/target/">  CAFASP target page.
+</A>
+Repeating the searches just burdens our server and denies service to
+people who have new sequences to work with.
+</H4>
+
+<p> This page offers the ability to perform remote protein homolog
+searches and protein structure prediction using HMM technology.
+It is part of a larger suite of UCSC's <A
+HREF="HMM-applications.html"> HMM applications</A> that are available
+on the web.
+More details on the methods used can be found in an <A
+HREF="../ismb99.tutorial.html">HMM tutorial</A>, though that tutorial
+talks about the predecessor SAM-T98 method, which differs in several
+parameter choices.
+A simpler web page that just searches our HMM library with the query
+sequence and doesn't build a multiple alignment, is the <A
+HREF="T99-model-library-search.html">SAM-T99 model-library web
+page</A>, which may provide more limited results much faster.
+
+<P>
+The PDB sequence database is updated weekly, but the template
+libraries are only updated sporadically.
+
+<p>
+You can check the SAM-T99 server queue status
+<a href="http://www.cse.ucsc.edu/~farmer/cgi-bin/T99-queue-status.pl?server=alpha"> here </a>.
+(Local users at UCSC check
+<a href="http://www.cse.ucsc.edu/~farmer/cgi-bin/T99-queue-status.pl?server=beta"> here </a>.)
+</p>
+
+<p>
+Please read the explanation of common errors on
+our
+<a href="http://www.cse.ucsc.edu/research/compbio/HMM-apps/sam-t99-faq.html">
+SAM-T99 Frequently-asked Questions page.</a>
+If you do not find a
+solution to your problem there, please inform us at
+<A HREF="mailto:sam-info@cse.ucsc.edu"> sam-info@cse.ucsc.edu. </A>
+</p>
+
+
+
+
+<!-- <H3> Step 3: Target99 Options </H3> -->
+<!-- <input type="checkbox" name="DoT99Alignment" value="yes" checked> do T99 alignment <br> -->
+<!-- <input type="checkbox" name="DoT99Alignment" checked> do T99 alignment <br> -->
+
+<HR>
+<CENTER>
+<H3> SAM-T99 Options </H3>
+</CENTER>
+<p>
+return T99 alignment in format(s):
+    <input type="checkbox" name="RetTargetAlignmentA2M" value="on"> A2M
+    <input type="checkbox" name="RetTargetAlignmentPrettyAlign" value="on" checked> Pretty Align
+    <input type="checkbox" name="RetTargetAlignmentHtml" value="on" checked> HTML
+    <input type="checkbox" name="RetTargetAlignmentLogos" value="on" checked> Sequence Logos
+</p>
+<p>
+<input type="checkbox" name="RetHMM" value="on"> return HMM
+</p>
+
+<p>
+<input type="checkbox" name="SearchDb" value="on" checked>
+Search PDB (sequences updated weekly)
+<input type="hidden" name="db" value="PDB">
+<!--
+Search database:
+    <select name="db">
+    <option> PDB
+    <option> SCOP
+    <option> PDB and SCOP domains
+    </select>
+    (PDB sequences updated weekly)
+-->
+    <ul>
+    <!-- <li> NLL-NULL score cutoff: <input type="text" name="cutoff" value="-9" size=4 maxlength=4>-->
+    <li> Scoring Method:
+        <select name="ScoreMethod">
+        <option> Average
+        <option> Target
+        <option> Template
+        </select>
+    <li> Maximum E value: <input type="text" name="evalue" value="1.0" size=20 maxlength=20>
+    <li> Maximum number of alignments to include: <input name="numalign" value="20" size=20 maxlength=20>
+    <li> Pairwise alignment format(s):
+        <ul>
+        <li> <input type="checkbox" name="PairwisePrettyAlign" value="on" checked> Pretty Align
+        <li> <input type="checkbox" name="PairwiseA2m" value="on"> A2M
+             <input type="checkbox" name="PairwisePaddedA2m" value="on">
+             Pad A2M inserts
+        <li> <input type="checkbox" name="PairwiseCasp" value="on"> CASP
+        </ul>
+    </ul>
+</p>
+
+<p>
+return secondary structure prediction in format(s):
+    <input type="checkbox" name="RetSecStrCasp" value="on"> CASP
+    <input type="checkbox" name="RetSecStrRdb" value="on" checked> RDB
+    <input type="checkbox" name="RetSecStrFasta" value="on" checked> FASTA
+</p>
+<p>
+<input type="checkbox" name="EmailResults" value="on"> email results
+</p>
+
+<p>
+<center><INPUT TYPE="submit" VALUE="Press here to submit" >
+<INPUT TYPE="reset" VALUE="Clear" ></center>
+</p>
+</form>
+
+<hr>
+<basefont size=2>
+<p>
+<!--
+    Acquisition of
+    <a href="http://www.workstation.digital.com/"> Alpha workstations</a>
+     and
+    <a href="http://www.digital.com/alphaserver"> AlphaServers </a> 
+    was made possible by NSF grant CDA-9115268, and a donation
+    from <a href="http://www.digital.com">
+    <img align=top
+    src="http://www.cse.ucsc.edu/research/compbio/images/declogo.gif"></a>
+    </p>
+-->
+
+<p>
+Email <A HREF="mailto:sam-info@cse.ucsc.edu">
+<address> sam-info@cse.ucsc.edu </address> </A>
+with questions and problems
+<a href="http://www.cse.ucsc.edu/research/compbio/">
+</p>
+<p> UCSC Bioinformatics Group </a> </p>
+<p>
+<a HREF="http://www.cse.ucsc.edu/research/compbio/sam.html"> SAM Home Page </a>
+</p>
+<p>
+Target 99 developed by Kevin Karplus,
+<a href="mailto:karplus@cse.ucsc.edu"> <address> karplus@cse.ucsc.edu </address></a>
+</p>
+<p>
+Page designed by Spencer Tu,
+<a href="mailto:stu@cse.ucsc.edu"> <address> stu@cse.ucsc.edu </address></a>
+</p>
+
+<P>
+(Last Update: 
+  
+  <!-- see man strftime for full format opts-->
+  11:59 PDT 28 July 2007
+)
+
+</body>
+</html>

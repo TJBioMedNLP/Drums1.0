@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>
+Element | Promoter Searching Tool  </title>
+  <link rel="Shortcut Icon" href="favicon.ico" />
+  <link type="text/css" rel="stylesheet" href="style.css" />
+  <style type="text/css">
+  </style>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<base href="" />
+<style type="text/css" media="all">
+@import url(layout.css);
+</style>
+<script type="text/Javascript" language="Javascript" src="element_scripts.js"></script>
+
+</head>
+  <body>
+<br />
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="44"></td>
+    <td width=991>
+
+        	<table border="0" cellpadding="0" cellspacing="0" id="header">
+    <tr>
+      	<td id="menu">
+        	<div id="primary"></div>
+     	</td>
+      	<td id="logo">
+        	<a href="./"><IMG SRC="/images/elementbanner.png" WIDTH=991 HEIGHT=90 BORDER=0 USEMAP="#bannermap"></a>
+		<MAP NAME="bannermap">
+			<AREA SHAPE="RECT" COORDS="10,5,114,37" HREF="http://oregonstate.edu">
+			<AREA SHAPE="RECT" COORDS="31,57,91,75" HREF="http://www.cgrb.oregonstate.edu">
+			<AREA SHAPE="RECT" COORDS="884,13,940,34" HREF="http://cgbi.cgrb.oregonstate.edu">
+			<AREA SHAPE="RECT" COORDS="888,54,938,74" HREF="http://www.mcb.oregonstate.edu">
+		</MAP>
+      	</td>
+    </tr>
+    <tr>
+	<td colspan="2">
+		<div id="secondary">
+		</div>
+	</td>
+    </tr>
+</table>
+
+        	<table border="0" cellpadding="0" cellspacing="0" id="content">
+	<td id="sidebar-left">
+                <div id="blocks"><div class="block block-menus" id="block-menus-1">
+
+        	
+<h2 class="title"><fieldset id=\"my_menu\"><legend><font style="font-size: 16px;"><b>Main Menu</b></font></legend><div class="menus-description"></div>
+<div class="menu menus-menu">
+<ul>
+<li class="leaf"><a href="/">Home</a></li>
+<li class="leaf"><a href="/element_results.html">Results Page</a></li>
+<li class="leaf"><a href="/motif.html">Motif Finder</a></li>
+<li class="leaf"><a href="/element_about.html">About Element</a></li>
+<li class="leaf"><a href="/element_download.html">Downloads</a></li>
+</ul>
+
+</div>
+
+</h2>
+      <div class="content"></fieldset></div><br>
+   </div>
+
+                
+</div></div>
+                </td>
+      <td valign="top" id="content">
+  <div id="slogan"></div>
+  <div id="main">
+    <div class="node ">
+      <h2 class="main-title">
+<b>Promoter Searching Tool</b>      </h2>
+      <span class="submitted"></span>
+
+      <div class="content">
+
+<table>
+<tr><td>
+        ELEMENT identifies over-represented motifs in sets of promoters.<br>
+        To get started, enter a set of genes in the space below.<br><br>
+</td></tr>
+<br>
+<tr><td>
+<form name="formdata" method="POST" enctype="multipart/form-data" action="/index.html" onSubmit="return checkFields()">
+<span class="fileupload">
+	<br>
+	<b>1) Copy and paste the desired group of locus identifiers - do not use splice variants  (<a href="index.html" onClick="makeExampleWindow()">example</a>): 
+	</b><br>
+	<textarea name="data" rows="8" cols="30" ></textarea><br><br>
+</span>
+<span class="options">
+	<br>
+	<b>2) Select a species</b>
+	<br>
+	<select name="species">
+		<option selected value="ATH">
+			Arabidopsis thaliana
+		</option>
+		<option value="POPLAR">
+			Poplar
+		</option>
+		<option value="JAPONICA">
+			IRGSP Rice (japonica)
+		</option> 
+		<option value="BRACHY_1_0">
+			Brachypodium distachyon v 1.0
+		</option> 
+		<option value="BRACHY_1_2">
+			Brachypodium distachyon v 1.2
+		</option> 
+		<option value="PAPAYA">
+			Papaya
+		</option> 
+		<option value="SORGHUM">
+			Sorghum
+		</option> 
+		<option value="ZEBRAFISH">
+			Zebrafish
+		</option> 
+		<option value="GRAPE">
+			Grape (Vitis vinifera)
+		</option>
+		<option value="MAIZE">
+			Maize
+		</option>
+	</select>
+	<br><br>
+	<b>3) Select a promoter length</b>
+	<br>
+        <select name="length">
+        	<option selected value="500">
+        		500 bp
+		</option>
+		<option value="1000">
+			1000 bp
+		</option>
+		<option value="2000">
+			2000 bp
+		</option>
+		<option value="3000">
+			3000 bp
+		</option>
+	</select>
+	<br><br>
+	<b>4) Enter a job name (optional)</b>
+	<br>
+ 	<input type="text" name="name" size="40" maxlength="40"/>
+ 	<br><br>
+	<b>5) Enter your email address</b>
+	<br>
+	<input type="text" name="email" size="40" maxlength="40"/>
+	<br><br>
+	<input type="submit" value="Submit Data"/>  
+	<input type="reset" value="Clear Fields"/>
+	<input type="button" name="advanced" value="Show Advanced Options" onClick="changeOptions()"/>
+</span>
+<br><br>
+<span id="advanced_options" class="advanced">
+<span id="advanced_options_1"></span>
+<span id="advanced_options_2"></span>
+<span id="advanced_options_3"></span>
+<span id="advanced_options_5"></span>
+</span>
+</form>
+<br>
+Please email <a href="mailto:element-support@cgrb.oregonstate.edu">Todd Mockler</a> with suggestions.<br>
+</td></tr>
+</table>
+        	      </div>
+    </div>
+        </div><!-- main -->    </td>
+    <td id="sidebar-right">
+
+    <div class="block block-block" id="block-block-2">
+      <h2 class="title"></h2>
+      <div class="content"><IMG SRC="/images/E_element.gif" ></div><br>
+
+   </div>
+
+    <div class="block block-menus" id="block-menus-3">
+      <h2 class="title"><fieldset id="my_menu"><legend><font style="font-size: 16px;"><b>Links</b></font></legend><div class="menus-description">
+
+</div>
+<div class="menu menus-menu">
+
+        	
+<ul>
+<li class="leaf"><a href="http://diurnal.cgrb.oregonstate.edu/">Diurnal</a></li>
+<li class="leaf"><a href="http://haystack.cgrb.oregonstate.edu/">Haystack</a></li>
+<li class="leaf"><a href="http://orthomap.cgrb.oregonstate.edu/">Orthomap</a></li>
+<li class="leaf"><a href="http://phaser.cgrb.oregonstate.edu/">Phaser</a></li>
+<li class="leaf"><a href="http://mocklerlab.cgrb.oregonstate.edu/">Mockler Lab</a></li>
+<li class="leaf"><a href="http://mocklerlab-tools.cgrb.oregonstate.edu/">Mockler Lab Bioinformatics</a></li>
+<li class="leaf"><a href="http://biology.ucsd.edu/labs/kay/">Kay Lab</a></li>
+<li class="leaf"><a href="http://www.salk.edu/labs/pbio-c/Choryhomepage.html">Chory Lab</a></li>
+</ul>
+
+        	</div>
+</h2>
+      <div class="content"></fieldset></div><br>
+   </div>
+
+    </td>
+    </tr>
+</table>
+  <div id="secondary"></div>
+
+
+<div id="footer">
+    <br><center><font color="#000000" size="2">©Copyright 2007. Oregon State University, All rights reserved. Contact: <a href="mailto:mockler-webmaster@cgrb.oregonstate.edu"><font color="#000000">Webmaster</font></a> <br /><font color="#000000" size="2"> </font></font></center><br>
+  </div>
+    </td>
+    <td width="8" id="right-border"><img src="images/right_top.jpg" width="8" height="21" align="top" /></td>
+    <td>&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td height="10">&nbsp;</td>
+    <td height="10" id="bottom-border"><img src="images/bottom_left.jpg" width="19" height="20" /></td>
+    <td width="8" height="10"><img src="images/bottom_right.jpg" width="8" height="20" /></td>
+    <td height="10">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>
+
+

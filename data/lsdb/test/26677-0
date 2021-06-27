@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0071)http://www.genetics.ucla.edu/labs/horvath/RFclustering/RFclustering.htm -->
+<HTML xmlns="http://www.w3.org/TR/REC-html40" xmlns:v = 
+"urn:schemas-microsoft-com:vml" xmlns:o = 
+"urn:schemas-microsoft-com:office:office" xmlns:w = 
+"urn:schemas-microsoft-com:office:word" xmlns:st1 = 
+"urn:schemas-microsoft-com:office:smarttags"><HEAD><TITLE>The Multi-Node 
+Topological Overlap Measure</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content=FrontPage.Editor.Document name=ProgId>
+<META content="Microsoft FrontPage 6.0" name=GENERATOR>
+<META content="Microsoft Word 10" name=Originator><LINK 
+href="RFclustering_files/editdata.mso" rel=Edit-Time-Data>
+<o:SmartTagType name="date" 
+namespaceuri="urn:schemas-microsoft-com:office:smarttags"></o:SmartTagType>
+<o:SmartTagType 
+name="PostalCode" 
+namespaceuri="urn:schemas-microsoft-com:office:smarttags"></o:SmartTagType>
+<o:SmartTagType 
+name="State" 
+namespaceuri="urn:schemas-microsoft-com:office:smarttags"></o:SmartTagType>
+<o:SmartTagType 
+name="City" 
+namespaceuri="urn:schemas-microsoft-com:office:smarttags"></o:SmartTagType>
+<o:SmartTagType 
+name="PlaceName" 
+namespaceuri="urn:schemas-microsoft-com:office:smarttags"></o:SmartTagType>
+<o:SmartTagType 
+name="PlaceType" 
+namespaceuri="urn:schemas-microsoft-com:office:smarttags"></o:SmartTagType>
+<o:SmartTagType 
+name="place" 
+namespaceuri="urn:schemas-microsoft-com:office:smarttags"></o:SmartTagType><!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Tao Shi</o:Author>
+  <o:LastAuthor>Tao Shi</o:LastAuthor>
+  <o:Revision>4</o:Revision>
+  <o:TotalTime>8</o:TotalTime>
+  <o:Created>2005-04-13T04:02:00Z</o:Created>
+  <o:LastSaved>2005-04-13T04:17:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>638</o:Words>
+  <o:Characters>3638</o:Characters>
+  <o:Company>UCLA</o:Company>
+  <o:Lines>30</o:Lines>
+  <o:Paragraphs>8</o:Paragraphs>
+  <o:CharactersWithSpaces>4268</o:CharactersWithSpaces>
+  <o:Version>10.2625</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<STYLE>@font-face {
+	font-family: Arial;
+}
+@font-face {
+	font-family: @PMingLiU;
+}
+@page Section1 {size: 8.5in 11.0in; margin: 1.0in 1.25in 1.0in 1.25in; mso-header-margin: .5in; mso-footer-margin: .5in; mso-paper-source: 0; }
+P.MsoNormal {
+	FONT-SIZE: 12pt; FONT-FAMILY: PMingLiU; mso-style-parent: ""; mso-pagination: widow-orphan; mso-hansi-font-family: "Times New Roman"; mso-bidi-font-family: PMingLiU; mso-fareast-language: ZH-TW; margin-left:0in; margin-right:0in; margin-top:0in; margin-bottom:0pt
+}
+LI.MsoNormal {
+	FONT-SIZE: 12pt; FONT-FAMILY: PMingLiU; mso-style-parent: ""; mso-pagination: widow-orphan; mso-hansi-font-family: "Times New Roman"; mso-bidi-font-family: PMingLiU; mso-fareast-language: ZH-TW; margin-left:0in; margin-right:0in; margin-top:0in; margin-bottom:0pt
+}
+DIV.MsoNormal {
+	FONT-SIZE: 12pt; FONT-FAMILY: PMingLiU; mso-style-parent: ""; mso-pagination: widow-orphan; mso-hansi-font-family: "Times New Roman"; mso-bidi-font-family: PMingLiU; mso-fareast-language: ZH-TW; margin-left:0in; margin-right:0in; margin-top:0in; margin-bottom:0pt
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 18pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: PMingLiU; mso-pagination: widow-orphan; mso-bidi-font-family: PMingLiU; mso-fareast-language: ZH-TW; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; mso-outline-level: 2
+}
+H4 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: PMingLiU; mso-pagination: widow-orphan; mso-bidi-font-family: PMingLiU; mso-fareast-language: ZH-TW; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; mso-outline-level: 4
+}
+A:link {
+	COLOR: blue; TEXT-DECORATION: underline; text-underline: single
+}
+SPAN.MsoHyperlink {
+	COLOR: blue; TEXT-DECORATION: underline; text-underline: single
+}
+A:visited {
+	COLOR: blue; TEXT-DECORATION: underline; text-underline: single
+}
+SPAN.MsoHyperlinkFollowed {
+	COLOR: blue; TEXT-DECORATION: underline; text-underline: single
+}
+P {
+	FONT-SIZE: 12pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: PMingLiU; mso-pagination: widow-orphan; mso-hansi-font-family: "Times New Roman"; mso-bidi-font-family: PMingLiU; mso-fareast-language: ZH-TW; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto
+}
+SPAN.SpellE {
+	mso-style-name: ""; mso-spl-e: yes
+}
+SPAN.GramE {
+	mso-style-name: ""; mso-gram-e: yes
+}
+DIV.Section1 {
+	page: Section1
+}
+</STYLE>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman"}
+h3
+	{margin-right:0pt;
+	margin-left:0pt;
+	font-size:13.5pt;
+	font-family:PMingLiU;
+	font-weight:bold}
+</style>
+<![endif]-->
+<META http-equiv=Content-Language content=en-us><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]--></HEAD>
+<BODY lang=EN-US style="tab-interval: .5in" vLink=#0000FF link=#0000FF 
+bgColor=#99ccff>
+<DIV class=Section1 style="width: 929; height: 56">
+<h2 align="center"><font face="Arial">Welcome to the MTOM Software Page:</font></h2>
+<h4 align="center"><font face="Arial">Network Neighborhood Analysis and Module Detection</font></h4>
+
+</DIV>
+<br>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+<p style="line-height: 150%"><span style="font-weight: 400"><font face="Arial">Ai Li 
+(1) 
+and Steve Horvath (1,2)</font></span><font face="Arial"><br>
+1 Dept. of Biostatistics, School of Public Health, UCLA<br>
+2 Dept. of Human Genetics, David Geffen School of Medicine, UCLA<br>
+
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<H4><SPAN 
+style="FONT-FAMILY: Arial">Correspondence:</SPAN></H4>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+<p style="line-height: 150%"><font face="Arial">
+<a href="mailto:shorvath@mednet.ucla.edu">shorvath@mednet.ucla.edu</a><br>
+<a href="http://www.ph.ucla.edu/biostat/people/horvath.htm">
+http://www.ph.ucla.edu/biostat/people/horvath.htm</a><br>
+Department of Human Genetics and Department of Biostatistics<br>
+University of California, Los Angeles, CA 90095</font></p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<DIV class=Section1 style="width: 900; height: 949">
+<H4 style="TEXT-ALIGN: center" align=center>
+</h4>
+
+<HR align=center width="100%" SIZE=2>
+<h2 align="center"><font face="Arial"><font size="5">References</font></font></h2>
+<ol><li>Li A, Horvath S (2006) Network Neighborhood Analysis with the multi-node topological overlap measure. Bioinformatics. doi:10.1093/bioinformatics/btl581</li>
+    <ul><li>Link to Paper:
+    <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btl581?ijkey=t0maFYjJPodNz0L&keytype=ref" target="_blank">
+Bioinformatics Webpage</a></li></ul>
+
+<li>Li A, Horvath S. (2009) Network module detection: Affinity search technique with the multi-node topological overlap measure. BMC Res Notes. 2009 Jul 20;2:142.</li>
+<ul><li><a href="http://www.biomedcentral.com/1756-0500/2/142" target="_blank">Link to paper</a></li></ul>
+</ol>
+
+
+	
+
+
+
+<HR align=center width="100%" SIZE=2>
+<h2 align="center"><font face="Arial"><font size="5">Abstract for Neighborhood Analysis</font></font></h2>
+<p><font face="Arial">A pair of nodes in a network is said to have high topological
+overlap if they are both strongly connected to the same group of nodes.<br>
+In gene networks, genes with high topological overlap have been found to have an 
+increased chance of being part of the same biological pathway.</font></p>
+<p><font face="Arial">The use of topological overlap serves as a filter to exclude 
+spurious or isolated connections. A topological overlap measure can be used in network 
+analysis for finding similar nodes or for defining a neighborhood of an initial set of nodes.</font><br>
+</p>
+<p><font face="Arial">The standard topological overlap measure allows one to measure pairwise topological overlap 
+in an undirected network. Here we generalize this overlap measure to multiple nodes. The resulting multiTOM measure 
+can be used to define a neighborhood of a initial set of nodes. We provide several applications which shows the use 
+of these neighborhoods. The method is implemented in our MTOM software.</font></p>
+
+<HR align=left width="100%" SIZE=2>
+<h4></h4>
+
+<h2 align="center"><span lang=PT-BR style='font-family:Arial;mso-ansi-language:PT-BR'>Contents</span></h2>
+
+
+
+<h3><font face="Arial">Software</font></h3>
+<p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="MTOM.exe">Software MTOM</a> </font></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="TutorialMTOM.doc">
+Tutorial in Microsoft Word Format</a> </span><![if !supportLists]><![endif]></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="UpdateRecord.doc">
+Update Record</a> (2006-04-21)</span><![if !supportLists]><![endif]></p>
+
+
+<h3><font face="Arial">Presentation Slides</font></h3>
+<p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font face="Arial">Link to talk: </font>
+
+<span style="font-family: Arial">
+<a href="http://www.genetics.ucla.edu/labs/horvath/MTOM/MTOMHorvathLi.ppt">PowerPoint</a>&nbsp;
+<a href="http://www.genetics.ucla.edu/labs/horvath/MTOM/MTOMHorvathLi.pdf">PDF</a></span> </p>
+
+
+<h3><font face="Arial">Data Sets</font></h3>
+<p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1. Fly Data Set</font></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="high.connectivity.fly.interaction.largest.component.csv">
+Interaction Data Set</a></span><![if !supportLists]><![endif]></p>
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="HighConnectivityEssentialGenesForFly.txt">
+Essential Genes</a> </span><![if !supportLists]><![endif]></p>
+
+
+
+<p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2. Yeast Data Set (from MIPS)</font></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="phyisical.interaction.largest.component.csv">
+Interaction Data Set</a></span><![if !supportLists]><![endif]></p>
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="YeastCellCycleMIPS.txt">
+Cell Cycle Related Genes</a> </span><![if !supportLists]><![endif]></p>
+
+
+
+<p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3. Yeast Data Set (from BioGrid)</font></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="high.connectivity.CS.interaction.largest.component.csv">
+Interaction Data Set</a></span><![if !supportLists]><![endif]></p>
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="HighConnectivityEssentialGenesForCS.txt">
+Essential Genes</a> </span><![if !supportLists]><![endif]></p>
+
+<p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4. Brain Cancer Data Set</font></p>
+
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'><![if !supportLists]><span style='mso-list:Ignore'>
+<font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><span
+style='font-style:normal; font-variant:normal; font-weight:normal; font-size:7.0pt; font-family:Arial'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
+<![endif]><span
+style='font-family:Arial'>
+<a style="color: blue; text-decoration: underline; text-underline: single" href="gbm55ai15000.csv">
+Microarray Data Set</a></span><![if !supportLists]><![endif]></p>
+<p style='margin-left:.5in;text-indent:-.25in;line-height:200%;mso-list:l0 level1 lfo2;
+tab-stops:list .5in'>&nbsp;&nbsp;&nbsp;&nbsp; <![if !supportLists]>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font face="Arial"><a href="http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/ASPMgene/">
+Reference to this Data Set</a><![endif]></font></p>
+
+
+
+
+
+
+
+<h3>
+<font face="Arial">Other material regarding weighted gene co-expression network 
+analysis</font></h3>
+<p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><span style="font-family: Arial"><font size="3">
+<a href="http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/" style="color: blue; text-decoration: underline; text-underline: single">
+Weighted Gene Co-Expression Network Page</a></font></span><p>&nbsp;</p>
+<HR align=center width="100%" SIZE=2>
+</H4>
+<P style="TEXT-ALIGN: center; mso-outline-level: 5" align=center>
+<!--webbot bot="Timestamp" S-Type="EDITED" S-Format="%Y-%m-%d" startspan -->2006-11-19<!--webbot bot="Timestamp" endspan i-checksum="12117" -->
+</P>
+
+<P style="TEXT-ALIGN: center; mso-outline-level: 5" align=center>
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+var sc_project=1517838; 
+var sc_invisible=0; 
+var sc_partition=13; 
+var sc_security="79e6676a"; 
+</script>
+
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript>
+<a href="http://www.statcounter.com/" target="_blank"><img  src="http://c14.statcounter.com/counter.php?sc_project=1517838&amp;java=0&amp;security=79e6676a&amp;invisible=0" alt="web page hit counter" border="0"></a></noscript>
+<!-- End of StatCounter Code --> 
+</P>
+
+
+
+<P style="TEXT-ALIGN: center; mso-outline-level: 5" align=center><B><I><SPAN 
+style="FONT-SIZE: 10pt; FONT-FAMILY: Arial">Please send your suggestions and 
+comments to: <A 
+href="mailto:shorvath@mednet.ucla.edu">shorvath@mednet.ucla.edu</A></SPAN></I><o:p></o:p></B></P></DIV>
+
+</BODY></HTML>

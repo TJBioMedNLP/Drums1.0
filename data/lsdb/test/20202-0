@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="Author" content="FluGenome" />
+<meta name="" content="index,follow" />
+<meta name="Description" content="Genome Comparison Tool" />
+<meta name="Keywords" content="genome, genomeblast" />
+<link rel="stylesheet" type="text/css" href="css/newstyle.css" />
+<title>GenomeBlast</title>
+
+
+<script type="text/javascript">
+function Submit() {
+    var i;
+	var name;
+	for (i=1; i<=document.frmGetParameters.NumberOfGenomeFiles.value;i++) {
+		//name = "document.frmGetParameters.file" + i + ".value";
+	}
+    document.frmGetParameters.NumberOfGenomeFiles.disabled = false;
+
+	document.frmGetParameters.submit();
+    document.body.innerHTML="Uploading Please wait!";
+} //end of function
+
+function create() {
+    var i=0;
+    var sfrm = document.frmGetParameters.innerHTML;
+	var icnt =document.frmGetParameters.NumberOfGenomeFiles.value;
+    var filterchecked = document.frmGetParameters.filter_low.checked;
+	var filtermask = document.frmGetParameters.filter_mask.checked;
+    var expect = document.frmGetParameters.expect.value;
+    var formatsel = -1;
+    var wordsel;
+    var matrixsel;
+    var gapcostsel;
+
+
+    for (var x = 0; x < document.frmGetParameters.dataformat.length; x++) {
+        if(document.frmGetParameters.dataformat[x].checked) {
+            formatsel = document.frmGetParameters.dataformat[x].value;
+        }
+    } 
+    if (formatsel == -1) {
+        alert("Please choose what format your files are in! Defaulting" +
+            " to GenBank!");
+        formatsel = 0;
+    }
+
+    for (var x = 0; x < document.frmGetParameters.wordsize.length; x++) {
+        if(document.frmGetParameters.wordsize.options[ x ].selected) {
+            wordsel = x;
+        }
+    }
+    for (var x = 0; x < document.frmGetParameters.matrix.length; x++) {
+        if(document.frmGetParameters.matrix.options[ x ].selected) {
+            matrixsel = x;
+        }
+    }
+    for (var x = 0; x < document.frmGetParameters.gapcosts.length; x++) {
+        if(document.frmGetParameters.gapcosts.options[ x ].selected) {
+            gapcostsel = x;
+        }
+    }
+      
+	if(icnt<2) {
+		alert("The number of genomes has to be at least 2");
+	} else {
+        document.frmGetParameters.NumberOfGenomeFiles.disabled = true;
+	    document.frmGetParameters.btnOK.disabled=true;
+		       
+	    sfrm = document.frmGetParameters.innerHTML;
+		if(i==0)
+			sfrm=sfrm+"<p>";
+	
+		for(j=0;j<icnt;j++) {
+			sfrm = sfrm + "&nbsp &nbsp &nbsp Select file "+(i+1)+
+                    " <input type=file name='file"+(i+1)+
+                    "' class=ist size=50 >";
+			sfrm = sfrm + "<br>";
+			i++;
+		}
+		sfrm=sfrm+ "  &nbsp &nbsp  &nbsp <input type=button name=bt1 value=' "+
+            "Run Now ' onclick='Submit();' class=lbtn>   &nbsp &nbsp  " +
+            "&nbsp &nbsp &nbsp &nbsp &nbsp ";
+			sfrm=sfrm+ "<input type=button name=bt1 value=' Reset ' " +
+                "onclick='document.location.reload();' class=lbtn> <br> ";
+		document.frmGetParameters.innerHTML = sfrm;
+        document.frmGetParameters.NumberOfGenomeFiles.value = icnt;
+        document.frmGetParameters.filter_low.checked = filterchecked;
+        document.frmGetParameters.filter_mask.checked = filtermask;
+        document.frmGetParameters.expect.value = expect;
+        if (formatsel == "GenBank") {
+            document.frmGetParameters.dataformat[1].checked = false;
+            document.frmGetParameters.dataformat[0].checked = true;
+        } else {
+            document.frmGetParameters.dataformat[0].checked = false;
+            document.frmGetParameters.dataformat[1].checked = true;
+        }
+        document.frmGetParameters.wordsize[wordsel].selected;
+        document.frmGetParameters.matrix[matrixsel].selected;
+        document.frmGetParameters.gapcosts[gapcostsel].selected;
+
+
+        }
+    } //end  of function
+
+</script>
+
+</head>
+<body>
+
+                	<div id="bg">
+		<div id="sadrzaj">
+			<div id="toplinks">
+                <a href="http://h5n1.flugenome.org">H5N1 Home</a>
+<a href="http://www.flugenome.org">Genotyping Home</a>
+<a href="http://bioinfo-srv1.awh.unomaha.edu/bflu/project/">Lab Use</a>
+            </div>
+	    <div id="heading">
+		    <div id="title">
+			    <center><a href="#">GenomeBlast</a></center>
+		    </div>
+				
+	    </div>
+	    
+	    <div id="navigacija">
+            <ul>
+	<li><a href="index.php">Home</a></li>
+	<li><a href="demo.php">Demonstration</a></li>
+	<li><a href="tutorial.php">Tutorial</a></li>
+	<li><a href="sampledata.php">Sample Data</a></li>
+</ul>
+			
+		    <div class="lijevo">
+
+    		      	        </div>
+	    </div>
+
+	    <div id="clanci">
+		    <center><h2>GenomeBlast</h2></center>
+			
+<table id="table1">
+	<tr>
+		<td ><font face="Comic Sans MS" size="2">Genome 
+		BLAST uses Blastp and Megablast programs in the BLAST family for genome 
+		comparison and genotyping respectively. MegaBlast program runs for 
+		nucleotide sequence comparison only. E-values, identity, and coverage can be chosen to define homologue. We define a new  
+		parameter, <i> Coverage</i> (percentage of aligned sequence length over query sequence length), for homologues prediction. </font></td>
+	</tr>
+</table>
+
+<form name=frmGetParameters method="post" Enctype="multipart/form-data" action="http://bioinfo-srv1.awh.unomaha.edu/cgi-bin/genomeblast/getparameters.pl">
+
+
+<table border="0" id="table3" height="39">
+	<tr>
+		<td >
+
+		<font face="Arial" size='3'>&nbsp; <b>Blast Program: Blastp</b>&nbsp; 
+		<input type=hidden name=blasttype value=blastp>
+	</td>
+
+
+
+	</tr>
+</table>
+
+<font face="Arial" size='3'>
+
+<table border="0" id="table1">
+	<tr>
+		<td height="40" >  &nbsp;<font face="Arial" size='4'><B>1. Choose Program Options </B>&nbsp;</font></td>
+		</tr>
+		<tr>
+		<td height="40" >  &nbsp &nbsp &nbsp Choose 
+		Filter&nbsp;&nbsp; 
+            <input type='checkbox' name='filter_low'> Low complexity
+            &nbsp;&nbsp;&nbsp;&nbsp;  <input type='checkbox' name=filter_mask> 
+                Mask for lookup table only </td> 
+
+		</td>
+		</tr>
+		
+		<td height="40" >&nbsp &nbsp &nbsp   Expect&nbsp;&nbsp; 
+		<INPUT size='10' name='expect' value='1'> 
+		</td>
+		</tr>
+		<tr><td height="40">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Wordsize&nbsp;&nbsp; <SELECT name='wordsize'> 
+					<OPTION selected>3
+					<OPTION> 2	</OPTION>
+				</SELECT> 
+	</td>
+	</tr>
+	<tr>
+		<td height="40" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Matrix&nbsp;&nbsp;&nbsp;   <SELECT name='matrix'> 
+					<OPTION selected> BLOSUM62 
+					<OPTION> BLOSUM45
+					</OPTION>
+				</SELECT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+
+
+		Gap Costs&nbsp;&nbsp; <SELECT name='gapcosts'> 
+					<OPTION selected> Existence:11 Extension: 1
+					<OPTION selected> Existence:12 Extension: 1
+					</OPTION>
+				</SELECT>
+
+
+
+
+		</td>
+	</tr>
+</table>
+
+
+
+<p>&nbsp;</p>
+
+
+
+<table border="0" id="table2">
+	<tr>
+		<td width="788" width="578" height="36"> <font face="Arial" size='4'>
+				<B> &nbsp;2 Upload Genome Sequence Files</b> </font>
+	</td>
+	</tr>
+	</table>
+
+<font face="Arial" size='3'>
+	
+<table border="0" id="table2">
+
+	<tr>
+		<td height="40" width="788">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data Format&nbsp; 
+	
+	<input type="radio" name='dataformat' value='GenBank' checked> GenBank 
+	<input type="radio" name='dataformat' value='Fasta'> Fasta 
+    
+		</td>
+	</tr>
+	<tr>
+		<td height="40" width="788">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Number of Genomes 
+		to Compare 
+	<input type=text name="NumberOfGenomeFiles" size=5  value=2 class=ist> &nbsp &nbsp
+		
+		<input type=button name=btnOK value="OK" class=lbtn onclick="create();">&nbsp;
+ (click ok to select files to upload)	
+	</td>
+	</tr>
+</table>
+
+</form>
+
+	    </div>
+    </div>
+    <div id="bottomborder">
+        <br>
+	    <br>
+    </div>
+    <div id="footer">
+                601 users have visited this site since October 11th, 2007    </div>
+</div>
+</body>
+</html>

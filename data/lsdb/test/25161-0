@@ -1,0 +1,972 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>GraphWeb: analysis of biological networks</title>
+<meta name="keywords" content="network analysis, gene modules, Gene Ontology, orthologs, high-throughput, graph analysis, PPI networks, protein-protein interaction, biological graph" />
+<meta name="description" content="GraphWeb is a public web server for graph-based analysis of biological networks." />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<script language="JavaScript" type="text/javascript" src="graphweb.js"></script><table width="1000" cellspacing="2" cellpadding="2" border="0">
+<tr>
+<td valign="top">
+<table border="0">
+<tr>
+<td>
+<a href="."><img align="left" alt="GraphWeb logo" src="images/logo.png" border="0" /></a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<b>
+	<a href=".">Front page</a>
+</b>
+ | <b>
+	<a href="welcome.cgi?t=contact">Contact us</a>
+</b>
+ | <b>
+	<a href="welcome.cgi?t=updates">Recent updates</a>
+</b>
+<br />
+<b>
+	<a href="welcome.cgi?t=help">Help</a>
+</b>
+ | <b>
+	<a href="overview.html">Overview</a>
+</b>
+ | <b>
+	<a href="welcome.cgi?t=examples">Example inputs</a>
+</b>
+<br />
+<br />
+<br />
+</td>
+</tr>
+</table>
+</td>
+<td width="100%">
+<b>GraphWeb</b> is a public web server for graph-based analysis of biological 
+networks that:
+<ul>
+<li>analyses directed and undirected, weighted and unweighted 
+heterogeneous networks of genes, proteins and microarray probesets for 
+many eukaryotic genomes;</li>
+<li>integrates multiple diverse datasets into global networks;</li>
+<li>incorporates multispecies data using gene orthology mapping;</li>
+<li>filters nodes and edges based on dataset support, edge weight and 
+node annotation;</li>
+<li>detects gene modules from networks using a collection of algorithms;</li>
+<li>interprets discovered modules using Gene Ontology, pathways, and cis-regulatory 
+motifs.</li>
+</ul>
+
+</td>
+</tr>
+</table>
+<small>
+	
+		J. Reimand*, L. Tooming*, H. Peterson, P. Adler, J. Vilo: GraphWeb: mining heterogeneous biological networks for gene modules with functional significance. (2008) <br />
+	Nucl. Acids Res. 2008 36: W452-W459; doi:10.1093/nar/gkn230 [ <a href="http://www.bioinf.ebc.ee/~reimand/Reimand_Tooming_Vilo_GraphWeb_NAR.pdf">PDF</a>
+	]
+</small>
+<form method="post" action="index.cgi" enctype="multipart/form-data">
+<input value="outputTable" name="action" type="hidden" />
+<input value="1" name="no_default" type="hidden" />
+<table width="1" bgcolor="#ffffff" cellspacing="5" cellpadding="5" border="0">
+<tr valign="top">
+<td style="border:solid 2px #f79a31; background-color:#ffdca4">
+<img alt="Choose network datasets" src="images/datasets.png" />
+<p>
+	<a target="_blank" href="welcome.cgi?t=help#Methods_of_input" class="help">[?]</a>
+	<label>
+		<input name="input_direct" type="checkbox" checked="checked" onclick="switchMenu(document,'input_plain_block',this.id);" value="1" id="checkbox_input_direct" />
+		<i>
+			From direct input
+		</i>
+	</label>
+	<span id="input_plain_block" > <br />
+	<textarea name="edges"  rows="5" cols="35" id="edges_area"></textarea> </span>
+</p>
+<p>
+	<a target="_blank" href="welcome.cgi?t=help#Methods_of_input" class="help">[?]</a>
+	<label>
+		<input name="input_userfile" type="checkbox" onclick="switchMenu(document,'input_upload_block',this.id);" value="1" id="checkbox_input_userfile" />
+		<i>
+			From a file in your computer
+		</i>
+	</label>
+	<span id="input_upload_block" style="display:none"> <br />
+	<input name="edgesFile" type="file" />
+	</span>
+</p>
+<p>
+<a target="_blank" href="welcome.cgi?t=help#Methods_of_input" class="help">[?]</a>
+<label>
+	<input name="input_serverfile" type="checkbox" onclick="switchMenu(document,'input_existing_block',this.id);" value="1" id="checkbox_input_serverfile" />
+	<i>
+		From a file in our server
+	</i>
+</label>
+<span id="input_existing_block" style="display:none"><br />
+<label>
+Choose an example input or your saved input:<br />
+<select name="edgesExample">
+<option value="">
+	(none)
+</option>
+<optgroup label="*** Our example inputs ***">
+<option value="exampleInput/C.elegans_protein_interactions_(IntAct).txt" onclick="switchOption('organism_menu','organism_celegans'); switchOrthologs(0);">
+	C.elegans protein interactions (IntAct)
+</option>
+<option value="exampleInput/Cattle_protein_interactions_(IntAct).txt" onclick="switchOption('organism_menu','organism_btaurus'); switchOrthologs(0);">
+	Cattle protein interactions (IntAct)
+</option>
+<option value="exampleInput/Fly_protein_interactions_(IntAct).txt" onclick="switchOption('organism_menu','organism_dmelanogaster'); switchOrthologs(0);">
+	Fly protein interactions (IntAct)
+</option>
+<option value="exampleInput/Human_combined_protein_interactions.txt" onclick="switchOption('organism_menu','organism_hsapiens'); switchOrthologs(0);">
+	Human combined protein interactions
+</option>
+<option value="exampleInput/Human_heterogeneous_networks.txt" onclick="switchOption('organism_menu','organism_hsapiens'); switchOrthologs(0);">
+	Human heterogeneous networks
+</option>
+<option value="exampleInput/Human_literature_mining_protein_interactions_(Ramani_et_al).txt" onclick="switchOption('organism_menu','organism_hsapiens'); switchOrthologs(0);">
+	Human literature mining protein interactions (Ramani et al)
+</option>
+<option value="exampleInput/Human_protein_interactions_(HPRD).txt" onclick="switchOption('organism_menu','organism_hsapiens'); switchOrthologs(0);">
+	Human protein interactions (HPRD)
+</option>
+<option value="exampleInput/Human_protein_interactions_(IntAct).txt" onclick="switchOption('organism_menu','organism_hsapiens'); switchOrthologs(0);">
+	Human protein interactions (IntAct)
+</option>
+<option value="exampleInput/Human_protein_interactions_+_mouse_orthologs_(IntAct).txt" onclick="switchOption('organism_menu','organism_hsapiens'); switchOrthologs(1);switchOption('orth_organism_menu','orth_organism_mmusculus');">
+	Human protein interactions + mouse orthologs (IntAct)
+</option>
+<option value="exampleInput/Mouse_protein_interactions_(IntAct).txt" onclick="switchOption('organism_menu','organism_mmusculus'); switchOrthologs(0);">
+	Mouse protein interactions (IntAct)
+</option>
+<option value="exampleInput/Networks_example_in_GraphWeb_publication.txt" onclick="switchOption('organism_menu','organism_hsapiens'); switchOrthologs(0);">
+	Networks example in GraphWeb publication
+</option>
+<option value="exampleInput/Rat_protein_interactions_(IntAct).txt" onclick="switchOption('organism_menu','organism_rnorvegicus'); switchOrthologs(0);">
+	Rat protein interactions (IntAct)
+</option>
+<option value="exampleInput/Yeast_epistatic_network_from_knockout_data.txt" onclick="switchOption('organism_menu','organism_scerevisiae'); switchOrthologs(0);">
+	Yeast epistatic network from knockout data
+</option>
+<option value="exampleInput/Yeast_protein_interactions_(IntAct).txt" onclick="switchOption('organism_menu','organism_scerevisiae'); switchOrthologs(0);">
+	Yeast protein interactions (IntAct)
+</option>
+<option value="exampleInput/Yeast_transcription_regulation_network.txt" onclick="switchOption('organism_menu','organism_scerevisiae'); switchOrthologs(0);">
+	Yeast transcription regulation network
+</option>
+</optgroup>
+</select>
+</label>
+You can download example inputs and see more info about them <a href="welcome.cgi?t=examples">here</a>.</span>
+</p>
+<div id="exampledescrarea" />
+<p>
+	You can also use  <a href="javascript:openPopup('input1.cgi')">Advanced input</a>
+	 to combine several datasets or to use other input formats.
+</p>
+<p><label>
+Organism: <select name="organism" id="organism_menu">
+<option value="hsapiens" id="organism_hsapiens" selected="selected">
+	Homo sapiens
+</option>
+<option value="mmusculus" id="organism_mmusculus">
+	Mus musculus
+</option>
+<option value="scerevisiae" id="organism_scerevisiae">
+	Saccharomyces cerevisiae
+</option>
+<option value="rnorvegicus" id="organism_rnorvegicus">
+	Rattus norvegicus
+</option>
+<option value="dmelanogaster" id="organism_dmelanogaster">
+	Drosophila melanogaster
+</option>
+<option value="celegans" id="organism_celegans">
+	Caenorhabditis elegans
+</option>
+<option value="drerio" id="organism_drerio">
+	Danio rerio
+</option>
+<option value="aaegypti" id="organism_aaegypti">
+	Aedes aegypti
+</option>
+<option value="acarolinensis" id="organism_acarolinensis">
+	Anolis carolinensis
+</option>
+<option value="aclavatus" id="organism_aclavatus">
+	Aspergillus clavatus
+</option>
+<option value="aflavus" id="organism_aflavus">
+	Aspergillus flavus
+</option>
+<option value="afumigatus" id="organism_afumigatus">
+	Aspergillus fumigatus
+</option>
+<option value="agambiae" id="organism_agambiae">
+	Anopheles gambiae
+</option>
+<option value="alyrata" id="organism_alyrata">
+	Arabidopsis lyrata
+</option>
+<option value="amelanoleuca" id="organism_amelanoleuca">
+	Ailuropoda melanoleuca
+</option>
+<option value="anidulans" id="organism_anidulans">
+	Aspergillus nidulans
+</option>
+<option value="aniger" id="organism_aniger">
+	Aspergillus niger
+</option>
+<option value="aoryzae" id="organism_aoryzae">
+	Aspergillus oryzae
+</option>
+<option value="aterreus" id="organism_aterreus">
+	Aspergillus terreus
+</option>
+<option value="athaliana" id="organism_athaliana">
+	Arabidopsis thaliana
+</option>
+<option value="bdistachyon" id="organism_bdistachyon">
+	Brachypodium distachyon
+</option>
+<option value="btaurus" id="organism_btaurus">
+	Bos taurus
+</option>
+<option value="cbrenneri" id="organism_cbrenneri">
+	Caenorhabditis brenneri
+</option>
+<option value="cbriggsae" id="organism_cbriggsae">
+	Caenorhabditis briggsae
+</option>
+<option value="cfamiliaris" id="organism_cfamiliaris">
+	Canis familiaris
+</option>
+<option value="choffmanni" id="organism_choffmanni">
+	Choloepus hoffmanni
+</option>
+<option value="cintestinalis" id="organism_cintestinalis">
+	Ciona intestinalis
+</option>
+<option value="cjaponica" id="organism_cjaponica">
+	Caenorhabditis japonica
+</option>
+<option value="cporcellus" id="organism_cporcellus">
+	Cavia porcellus
+</option>
+<option value="cquinquefasciatus" id="organism_cquinquefasciatus">
+	Culex quinquefasciatus
+</option>
+<option value="cremanei" id="organism_cremanei">
+	Caenorhabditis remanei
+</option>
+<option value="csavignyi" id="organism_csavignyi">
+	Ciona savignyi
+</option>
+<option value="dananassae" id="organism_dananassae">
+	Drosophila ananassae
+</option>
+<option value="derecta" id="organism_derecta">
+	Drosophila erecta
+</option>
+<option value="dgrimshawi" id="organism_dgrimshawi">
+	Drosophila grimshawi
+</option>
+<option value="dmojavensis" id="organism_dmojavensis">
+	Drosophila mojavensis
+</option>
+<option value="dnovemcinctus" id="organism_dnovemcinctus">
+	Dasypus novemcinctus
+</option>
+<option value="dordii" id="organism_dordii">
+	Dipodomys ordii
+</option>
+<option value="dpersimilis" id="organism_dpersimilis">
+	Drosophila persimilis
+</option>
+<option value="dpseudoobscura" id="organism_dpseudoobscura">
+	Drosophila pseudoobscura
+</option>
+<option value="dsechellia" id="organism_dsechellia">
+	Drosophila sechellia
+</option>
+<option value="dsimulans" id="organism_dsimulans">
+	Drosophila simulans
+</option>
+<option value="dvirilis" id="organism_dvirilis">
+	Drosophila virilis
+</option>
+<option value="dwillistoni" id="organism_dwillistoni">
+	Drosophila willistoni
+</option>
+<option value="dyakuba" id="organism_dyakuba">
+	Drosophila yakuba
+</option>
+<option value="ecaballus" id="organism_ecaballus">
+	Equus caballus
+</option>
+<option value="eeuropaeus" id="organism_eeuropaeus">
+	Erinaceus europaeus
+</option>
+<option value="etelfairi" id="organism_etelfairi">
+	Echinops telfairi
+</option>
+<option value="fcatus" id="organism_fcatus">
+	Felis catus
+</option>
+<option value="gaculeatus" id="organism_gaculeatus">
+	Gasterosteus aculeatus
+</option>
+<option value="ggallus" id="organism_ggallus">
+	Gallus gallus
+</option>
+<option value="ggorilla" id="organism_ggorilla">
+	Gorilla gorilla
+</option>
+<option value="iscapularis" id="organism_iscapularis">
+	Ixodes scapularis
+</option>
+<option value="lafricana" id="organism_lafricana">
+	Loxodonta africana
+</option>
+<option value="mdomestica" id="organism_mdomestica">
+	Monodelphis domestica
+</option>
+<option value="mgallopavo" id="organism_mgallopavo">
+	Meleagris gallopavo
+</option>
+<option value="mlucifugus" id="organism_mlucifugus">
+	Myotis lucifugus
+</option>
+<option value="mmulatta" id="organism_mmulatta">
+	Macaca mulatta
+</option>
+<option value="mmurinus" id="organism_mmurinus">
+	Microcebus murinus
+</option>
+<option value="ncrassa" id="organism_ncrassa">
+	Neurospora crassa
+</option>
+<option value="nfischeri" id="organism_nfischeri">
+	Neosartorya fischeri
+</option>
+<option value="oanatinus" id="organism_oanatinus">
+	Ornithorhynchus anatinus
+</option>
+<option value="ocuniculus" id="organism_ocuniculus">
+	Oryctolagus cuniculus
+</option>
+<option value="ogarnettii" id="organism_ogarnettii">
+	Otolemur garnettii
+</option>
+<option value="oindica" id="organism_oindica">
+	Oryza sativa
+</option>
+<option value="olatipes" id="organism_olatipes">
+	Oryzias latipes
+</option>
+<option value="oprinceps" id="organism_oprinceps">
+	Ochotona princeps
+</option>
+<option value="osativa" id="organism_osativa">
+	Oryza sativa
+</option>
+<option value="pcapensis" id="organism_pcapensis">
+	Procavia capensis
+</option>
+<option value="phumanus" id="organism_phumanus">
+	Pediculus humanus
+</option>
+<option value="ppygmaeus" id="organism_ppygmaeus">
+	Pongo pygmaeus
+</option>
+<option value="ptrichocarpa" id="organism_ptrichocarpa">
+	Populus trichocarpa
+</option>
+<option value="ptroglodytes" id="organism_ptroglodytes">
+	Pan troglodytes
+</option>
+<option value="saraneus" id="organism_saraneus">
+	Sorex araneus
+</option>
+<option value="sbicolor" id="organism_sbicolor">
+	Sorghum bicolor
+</option>
+<option value="spombe" id="organism_spombe">
+	Schizosaccharomyces pombe
+</option>
+<option value="stridecemlineatus" id="organism_stridecemlineatus">
+	Spermophilus tridecemlineatus
+</option>
+<option value="tbelangeri" id="organism_tbelangeri">
+	Tupaia belangeri
+</option>
+<option value="tguttata" id="organism_tguttata">
+	Taeniopygia guttata
+</option>
+<option value="tnigroviridis" id="organism_tnigroviridis">
+	Tetraodon nigroviridis
+</option>
+<option value="trubripes" id="organism_trubripes">
+	Takifugu rubripes
+</option>
+<option value="tsyrichta" id="organism_tsyrichta">
+	Tarsius syrichta
+</option>
+<option value="ttruncatus" id="organism_ttruncatus">
+	Tursiops truncatus
+</option>
+<option value="vpacos" id="organism_vpacos">
+	Vicugna pacos
+</option>
+<option value="vvinifera" id="organism_vvinifera">
+	Vitis vinifera
+</option>
+<option value="xtropicalis" id="organism_xtropicalis">
+	Xenopus tropicalis
+</option>
+</select>
+</label>
+</p><p>
+	<a target="_blank" href="welcome.cgi?t=help#Gene_ID_conversion_and_orthologs" class="help">[?]</a>
+	<label>
+		<input name="convert_id" type="checkbox" checked="checked" value="1" id="checkbox_convert_id" />
+		<b>
+			Merge different IDs of same gene
+		</b>
+	</label>
+</p>
+<p>
+<a target="_blank" href="welcome.cgi?t=help#Gene_ID_conversion_and_orthologs" class="help">[?]</a>
+<label>
+	<input name="convert_orth" type="checkbox" onclick="switchMenu(document,'orth_block',this.id);" value="1" id="checkbox_convert_orth" />
+	<b>
+		Convert orthologs
+	</b>
+</label>
+<span id="orth_block" style="display:none"><br />
+<label>
+Ortholog organism: <select name="orth_organism" id="orth_organism_menu">
+<option value="hsapiens" id="orth_organism_hsapiens">
+	Homo sapiens
+</option>
+<option value="mmusculus" id="orth_organism_mmusculus" selected="selected">
+	Mus musculus
+</option>
+<option value="scerevisiae" id="orth_organism_scerevisiae">
+	Saccharomyces cerevisiae
+</option>
+<option value="rnorvegicus" id="orth_organism_rnorvegicus">
+	Rattus norvegicus
+</option>
+<option value="dmelanogaster" id="orth_organism_dmelanogaster">
+	Drosophila melanogaster
+</option>
+<option value="celegans" id="orth_organism_celegans">
+	Caenorhabditis elegans
+</option>
+<option value="drerio" id="orth_organism_drerio">
+	Danio rerio
+</option>
+<option value="aaegypti" id="orth_organism_aaegypti">
+	Aedes aegypti
+</option>
+<option value="acarolinensis" id="orth_organism_acarolinensis">
+	Anolis carolinensis
+</option>
+<option value="aclavatus" id="orth_organism_aclavatus">
+	Aspergillus clavatus
+</option>
+<option value="aflavus" id="orth_organism_aflavus">
+	Aspergillus flavus
+</option>
+<option value="afumigatus" id="orth_organism_afumigatus">
+	Aspergillus fumigatus
+</option>
+<option value="agambiae" id="orth_organism_agambiae">
+	Anopheles gambiae
+</option>
+<option value="alyrata" id="orth_organism_alyrata">
+	Arabidopsis lyrata
+</option>
+<option value="amelanoleuca" id="orth_organism_amelanoleuca">
+	Ailuropoda melanoleuca
+</option>
+<option value="anidulans" id="orth_organism_anidulans">
+	Aspergillus nidulans
+</option>
+<option value="aniger" id="orth_organism_aniger">
+	Aspergillus niger
+</option>
+<option value="aoryzae" id="orth_organism_aoryzae">
+	Aspergillus oryzae
+</option>
+<option value="aterreus" id="orth_organism_aterreus">
+	Aspergillus terreus
+</option>
+<option value="athaliana" id="orth_organism_athaliana">
+	Arabidopsis thaliana
+</option>
+<option value="bdistachyon" id="orth_organism_bdistachyon">
+	Brachypodium distachyon
+</option>
+<option value="btaurus" id="orth_organism_btaurus">
+	Bos taurus
+</option>
+<option value="cbrenneri" id="orth_organism_cbrenneri">
+	Caenorhabditis brenneri
+</option>
+<option value="cbriggsae" id="orth_organism_cbriggsae">
+	Caenorhabditis briggsae
+</option>
+<option value="cfamiliaris" id="orth_organism_cfamiliaris">
+	Canis familiaris
+</option>
+<option value="choffmanni" id="orth_organism_choffmanni">
+	Choloepus hoffmanni
+</option>
+<option value="cintestinalis" id="orth_organism_cintestinalis">
+	Ciona intestinalis
+</option>
+<option value="cjaponica" id="orth_organism_cjaponica">
+	Caenorhabditis japonica
+</option>
+<option value="cporcellus" id="orth_organism_cporcellus">
+	Cavia porcellus
+</option>
+<option value="cquinquefasciatus" id="orth_organism_cquinquefasciatus">
+	Culex quinquefasciatus
+</option>
+<option value="cremanei" id="orth_organism_cremanei">
+	Caenorhabditis remanei
+</option>
+<option value="csavignyi" id="orth_organism_csavignyi">
+	Ciona savignyi
+</option>
+<option value="dananassae" id="orth_organism_dananassae">
+	Drosophila ananassae
+</option>
+<option value="derecta" id="orth_organism_derecta">
+	Drosophila erecta
+</option>
+<option value="dgrimshawi" id="orth_organism_dgrimshawi">
+	Drosophila grimshawi
+</option>
+<option value="dmojavensis" id="orth_organism_dmojavensis">
+	Drosophila mojavensis
+</option>
+<option value="dnovemcinctus" id="orth_organism_dnovemcinctus">
+	Dasypus novemcinctus
+</option>
+<option value="dordii" id="orth_organism_dordii">
+	Dipodomys ordii
+</option>
+<option value="dpersimilis" id="orth_organism_dpersimilis">
+	Drosophila persimilis
+</option>
+<option value="dpseudoobscura" id="orth_organism_dpseudoobscura">
+	Drosophila pseudoobscura
+</option>
+<option value="dsechellia" id="orth_organism_dsechellia">
+	Drosophila sechellia
+</option>
+<option value="dsimulans" id="orth_organism_dsimulans">
+	Drosophila simulans
+</option>
+<option value="dvirilis" id="orth_organism_dvirilis">
+	Drosophila virilis
+</option>
+<option value="dwillistoni" id="orth_organism_dwillistoni">
+	Drosophila willistoni
+</option>
+<option value="dyakuba" id="orth_organism_dyakuba">
+	Drosophila yakuba
+</option>
+<option value="ecaballus" id="orth_organism_ecaballus">
+	Equus caballus
+</option>
+<option value="eeuropaeus" id="orth_organism_eeuropaeus">
+	Erinaceus europaeus
+</option>
+<option value="etelfairi" id="orth_organism_etelfairi">
+	Echinops telfairi
+</option>
+<option value="fcatus" id="orth_organism_fcatus">
+	Felis catus
+</option>
+<option value="gaculeatus" id="orth_organism_gaculeatus">
+	Gasterosteus aculeatus
+</option>
+<option value="ggallus" id="orth_organism_ggallus">
+	Gallus gallus
+</option>
+<option value="ggorilla" id="orth_organism_ggorilla">
+	Gorilla gorilla
+</option>
+<option value="iscapularis" id="orth_organism_iscapularis">
+	Ixodes scapularis
+</option>
+<option value="lafricana" id="orth_organism_lafricana">
+	Loxodonta africana
+</option>
+<option value="mdomestica" id="orth_organism_mdomestica">
+	Monodelphis domestica
+</option>
+<option value="mgallopavo" id="orth_organism_mgallopavo">
+	Meleagris gallopavo
+</option>
+<option value="mlucifugus" id="orth_organism_mlucifugus">
+	Myotis lucifugus
+</option>
+<option value="mmulatta" id="orth_organism_mmulatta">
+	Macaca mulatta
+</option>
+<option value="mmurinus" id="orth_organism_mmurinus">
+	Microcebus murinus
+</option>
+<option value="ncrassa" id="orth_organism_ncrassa">
+	Neurospora crassa
+</option>
+<option value="nfischeri" id="orth_organism_nfischeri">
+	Neosartorya fischeri
+</option>
+<option value="oanatinus" id="orth_organism_oanatinus">
+	Ornithorhynchus anatinus
+</option>
+<option value="ocuniculus" id="orth_organism_ocuniculus">
+	Oryctolagus cuniculus
+</option>
+<option value="ogarnettii" id="orth_organism_ogarnettii">
+	Otolemur garnettii
+</option>
+<option value="oindica" id="orth_organism_oindica">
+	Oryza sativa
+</option>
+<option value="olatipes" id="orth_organism_olatipes">
+	Oryzias latipes
+</option>
+<option value="oprinceps" id="orth_organism_oprinceps">
+	Ochotona princeps
+</option>
+<option value="osativa" id="orth_organism_osativa">
+	Oryza sativa
+</option>
+<option value="pcapensis" id="orth_organism_pcapensis">
+	Procavia capensis
+</option>
+<option value="phumanus" id="orth_organism_phumanus">
+	Pediculus humanus
+</option>
+<option value="ppygmaeus" id="orth_organism_ppygmaeus">
+	Pongo pygmaeus
+</option>
+<option value="ptrichocarpa" id="orth_organism_ptrichocarpa">
+	Populus trichocarpa
+</option>
+<option value="ptroglodytes" id="orth_organism_ptroglodytes">
+	Pan troglodytes
+</option>
+<option value="saraneus" id="orth_organism_saraneus">
+	Sorex araneus
+</option>
+<option value="sbicolor" id="orth_organism_sbicolor">
+	Sorghum bicolor
+</option>
+<option value="spombe" id="orth_organism_spombe">
+	Schizosaccharomyces pombe
+</option>
+<option value="stridecemlineatus" id="orth_organism_stridecemlineatus">
+	Spermophilus tridecemlineatus
+</option>
+<option value="tbelangeri" id="orth_organism_tbelangeri">
+	Tupaia belangeri
+</option>
+<option value="tguttata" id="orth_organism_tguttata">
+	Taeniopygia guttata
+</option>
+<option value="tnigroviridis" id="orth_organism_tnigroviridis">
+	Tetraodon nigroviridis
+</option>
+<option value="trubripes" id="orth_organism_trubripes">
+	Takifugu rubripes
+</option>
+<option value="tsyrichta" id="orth_organism_tsyrichta">
+	Tarsius syrichta
+</option>
+<option value="ttruncatus" id="orth_organism_ttruncatus">
+	Tursiops truncatus
+</option>
+<option value="vpacos" id="orth_organism_vpacos">
+	Vicugna pacos
+</option>
+<option value="vvinifera" id="orth_organism_vvinifera">
+	Vitis vinifera
+</option>
+<option value="xtropicalis" id="orth_organism_xtropicalis">
+	Xenopus tropicalis
+</option>
+</select>
+</label>
+</span>
+</p>
+</td>
+<td rowspan="2" style="border:solid 2px #f79a31; background-color:#ffdca4">
+<img alt="Choose a network algorithm" src="images/algorithm.png" />
+<br />
+<br />
+<script type="text/javascript">var blockArray = ['block_components','block_strong','block_biconnected','block_wholegraph','block_hub','block_clique','block_mcl','block_bc_clustering'];</script><a target="_blank" href="welcome.cgi?t=help#Connected_components" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" checked="checked" onclick="switchAlgorithmsMenu(blockArray,'block_components')" value="components" />
+	Connected components
+</label>
+<br />
+<span id="block_components" ></span><a target="_blank" href="welcome.cgi?t=help#Strongly_connected_components" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" onclick="switchAlgorithmsMenu(blockArray,'block_strong')" value="strong" />
+	Strongly connected components
+</label>
+<br />
+<span id="block_strong" style="display:none"></span><a target="_blank" href="welcome.cgi?t=help#Biconnected_components" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" onclick="switchAlgorithmsMenu(blockArray,'block_biconnected')" value="biconnected" />
+	Biconnected components
+</label>
+<br />
+<span id="block_biconnected" style="display:none"></span><a target="_blank" href="welcome.cgi?t=help#Whole_graph" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" onclick="switchAlgorithmsMenu(blockArray,'block_wholegraph')" value="wholegraph" />
+	Whole graph
+</label>
+<br />
+<span id="block_wholegraph" style="display:none"></span><a target="_blank" href="welcome.cgi?t=help#Hub_based_modules" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" onclick="switchAlgorithmsMenu(blockArray,'block_hub')" value="hub" />
+	Hub-based modules
+</label>
+<br />
+<span id="block_hub" style="display:none">&nbsp;&nbsp;&nbsp;&nbsp;<label>
+	Max distance from hub: <input value="1" name="hubDist" type="text" size="3" />
+</label>
+<br />
+</span><a target="_blank" href="welcome.cgi?t=help#Maximal_cliques" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" onclick="switchAlgorithmsMenu(blockArray,'block_clique')" value="clique" />
+	Maximal cliques
+</label>
+<br />
+<span id="block_clique" style="display:none"></span><a target="_blank" href="welcome.cgi?t=help#MCL" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" onclick="switchAlgorithmsMenu(blockArray,'block_mcl')" value="mcl" />
+	MCL clustering
+</label>
+<br />
+<span id="block_mcl" style="display:none">&nbsp;&nbsp;&nbsp;&nbsp;<label>
+	Inflation: <input value="1.8" name="mclinflation" type="text" size="3" />
+</label>
+<br />
+</span><a target="_blank" href="welcome.cgi?t=help#Betweenness_centrality_clustering" class="help">[?]</a>
+<label>
+	<input name="algorithm" type="radio" onclick="switchAlgorithmsMenu(blockArray,'block_bc_clustering')" value="bc_clustering" />
+	Betweenness centrality clustering
+</label>
+<br />
+<span id="block_bc_clustering" style="display:none">&nbsp;&nbsp;&nbsp;&nbsp;<label>
+	Edges left: <input value="75" name="clust_edgesleft" type="text" size="3" />
+	%
+</label>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<label>
+	Sample size: <input value="100" name="clust_sample" type="text" size="3" />
+	% of nodes
+</label>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<label>
+	Remove <input value="1" name="clust_rem_at_once" type="text" size="3" />
+	edges at a time
+</label>
+<br />
+</span><br />
+<p>
+	<a target="_blank" href="welcome.cgi?t=help#Network_neighbourhood" class="help">[?]</a>
+	<label>
+		<input name="vertexset_filter" type="checkbox" onclick="switchMenu(document,'vertexset_block',this.id);" value="1" id="checkbox_vertexset_filter" />
+		<b>
+			Network neighbourhood
+		</b>
+	</label>
+	<span id="vertexset_block" style="display:none"> <br />
+	&nbsp;&nbsp;&nbsp;&nbsp; Keep only a selection of nodes <br />
+	&nbsp;&nbsp;&nbsp;&nbsp; <textarea name="vertexset" rows="2" cols="24">
+</textarea>
+	<br />
+	&nbsp;&nbsp;&nbsp;&nbsp; <label>
+		and their surroundings within distance  <input value="1" name="vertexsetDist" type="text" size="3" />
+	</label>
+	</span>
+</p>
+</td>
+<td rowspan="2" style="border:solid 2px #f79a31; background-color:#ffdca4">
+<img alt="Modify network settings" src="images/weights_filters.png" />
+<p>
+	<b>
+		Edge settings
+	</b>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Remove_edges_with_less_than_N_labels" class="help">[?]</a>
+	<label>
+		Remove edges with less than  <input value="1" name="minDatasets" type="text" size="3" />
+		 labels
+	</label>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Keep_N_pc_of_heaviest_edges" class="help">[?]</a>
+	<label>
+		Keep  <input value="100" name="edge_precent" type="text" size="3" />
+		% of heaviest edges
+	</label>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Assign_more_weight_to_smaller_networks" class="help">[?]</a>
+	<label>
+		<input name="weightsBySize" type="checkbox" value="1" id="checkbox_weightsBySize" />
+		Assign more weight to smaller networks
+	</label>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Create_global_network" class="help">[?]</a>
+	<label>
+		<input name="aggregate" type="checkbox" value="1" id="checkbox_aggregate" />
+		Create global network (remove all labels)
+	</label>
+</p>
+<p>
+	<b>
+		Node settings
+	</b>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Remove_unknown_genes" class="help">[?]</a>
+	Remove genes: <br />
+	<label>
+		<input name="rem_unknown" type="checkbox" value="1" id="checkbox_rem_unknown" />
+		unknown
+	</label>
+	<label>
+		<input name="rem_ambig" type="checkbox" value="1" id="checkbox_rem_ambig" />
+		ambiguous
+	</label>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Keep_N_pc_of_highest_degree_nodes" class="help">[?]</a>
+	<label>
+		Keep  <input value="100" name="node_precent" type="text" size="3" />
+		% of most connected nodes
+	</label>
+	<br />
+</p>
+<p>
+	<b>
+		Module settings
+	</b>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Hide_modules_with_less_than_N_nodes" class="help">[?]</a>
+	<label>
+		Hide modules with less than  <input value="3" name="minCompSize" type="text" size="3" />
+		 nodes
+	</label>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Show_N_largest_modules" class="help">[?]</a>
+	<label>
+		Show  <input value="100" name="howmany" type="text" size="3" />
+		 largest modules
+	</label>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Calculate_g:Profiler_scores" class="help">[?]</a>
+	<label>
+		<input name="dogprofiler" type="checkbox" checked="checked" onclick="switchMenu(document,'gp_block',this.id);" value="1" id="checkbox_dogprofiler" />
+		Calculate functional scores using <a href="http://biit.cs.ut.ee/gprofiler/index.cgi">g:Profiler</a>
+	</label>
+	<span id="gp_block" > <br />
+	<a target="_blank" href="welcome.cgi?t=help#Sort_modules_by_functional_score" class="help">[?]</a>
+	<label>
+		<input name="sortscore" type="checkbox" value="1" id="checkbox_sortscore" />
+		Sort modules by functional score
+	</label>
+	<br />
+	<a target="_blank" href="welcome.cgi?t=help#Hide_insignificant_modules" class="help">[?]</a>
+	<label>
+		<input name="signifOnly" type="checkbox" checked="checked" value="1" id="checkbox_signifOnly" />
+		Hide insignificant modules
+	</label>
+	<br />
+	</span>
+</p>
+<p />
+<div align="right">
+<br />
+<br />
+<input value="Submit" type="submit" />
+</div>
+</form></td>
+</tr>
+<tr>
+<td style="border:solid 2px #f79a31; background-color:#ffdca4">
+<img src="images/gpedam.png" />
+<br />
+<script type='text/javascript' src='scripts/gpedam.js'></script>
+<div>
+Create a private data folder and upload files. These will appear in
+your input menu in the main window. 
+	<div><br/>
+	<b>Data folder actions:</b>
+	<b><a class="gpedam_help" href="javascript:openPopup('gpedam_help.cgi?help_id=40', 400, 400, 'gpedam_help')"><font color="#ff9c00">
+[?]</font></a></b>
+
+	<a href="javascript:openPopup('gpedam_add.cgi?10111276918', 400, 200, 'gpedam_add')">[Create new folder]</a>
+	<br/>
+	<b><a class="gpedam_help" href="javascript:openPopup('gpedam_help.cgi?help_id=41', 400, 400, 'gpedam_help')"><font color="#ff9c00">
+[?]</font></a></b>
+
+	<a href="javascript:openPopup('gpedam_load.cgi?10111276918', 400, 200, 'gpedam_attach')">[Use my existing folder]</a>
+	
+	<br/>
+	</div>
+</div>
+</td>
+</tr>
+</table>
+<table border="0"><tr><td><br/><br/>
+<img src="images/bluepix.png" width="100%" height="1" alt="" /><br/>
+<a href="http://biit.cs.ut.ee/graphweb/"><b>GraphWeb</b></a> 2007-2008
+<br/>
+Laur Tooming &amp;
+<a href="http://bioinf.ebc.ee/u/reimand/" target="_blank">J&uuml;ri Reimand</a> &amp;
+<a href="http://www.egeen.ee/u/vilo/" target="_blank">Jaak Vilo</a> @
+<a href="http://biit.cs.ut.ee/" target="_blank">BIIT Group</a>,
+<a href="http://www.math.ut.ee/ati/" target="_blank">Institute of Computer Science</a>,
+<a href="http://www.ut.ee/" target="_blank">University of Tartu</a>.
+</td></tr></table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- BIIT global tracking -->
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3124809-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+<!-- GraphWeb tracking -->
+<script type="text/javascript">
+var pageTracker2 = _gat._getTracker("UA-2388006-1");
+pageTracker2._initData();
+pageTracker2._trackPageview();
+</script>
+
+</body>
+</html>

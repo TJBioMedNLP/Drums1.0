@@ -1,0 +1,681 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.75 [en] (X11; U; Linux 2.2.19-6.2.1smp i686) [Netscape]">
+</head>
+<body background="INCLUDE/backyellow.jpg" nosave>
+&nbsp;
+
+
+<center><table COLS=2 WIDTH="80%" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>
+<center><b><font size=+3>General database organization<br>Relational model definition <br> XML input/output file</font></b></center>
+</td> <td><img SRC="./INCLUDE/nmrb_logo1.gif" NOSAVE height=129 width=340></td> </tr> </table> </center>
+
+<BR>
+<BR>
+<BR>
+</P>
+<P STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=4><B>General organization of NMRb: </B></FONT>
+<BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium">
+<FONT SIZE=2>Information can be uploaded either by a web graphic interface (repository form) or by direct file transfer (XML
+information file and raw spectra). Spectra information is inserted in an XML file for the data verification step. Then, information is saved
+in the MySQL base. The raw spectra are saved directly on the hard disc in traditional Unix compression format file (.tgz). and spectra information is organized
+in a relational data-base (MySQL server). The reading of the base is done by a web graphic interface.</FONT></P>
+<BR>
+<BR>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><I><B>Figure 1</B></I></P>
+<BR> 
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<FONT FACE="Times, serif"><FONT SIZE=2><IMG SRC="./RELATIF_INFO/general.gif" NAME="Image2" ALIGN=BOTTOM WIDTH=453 HEIGHT=786 BORDER=0></FONT></FONT></P>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal; page-break-before: always">
+<FONT FACE="Times, serif"><FONT SIZE=4><U><B><SPAN STYLE="text-decoration: none">Relational model organisation:</SPAN></B></U></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<FONT FACE="Times, serif"><FONT SIZE=2>Relational model organisation:
+NMRb data are distributed in 16 interrelated tables which names
+are &quot;DataModel&quot;, &quot;DataSet&quot;, &quot;Spectra&quot;,
+&quot;Molecule&quot;, &quot;Authors&quot;, &quot;Laboratory&quot;,
+&quot;Sample&quot;, &quot;MolInSample&quot;, &quot;Reference&quot; ,
+&quot;Spectrometer&quot;, &quot;Probe&quot;, &quot;Sequence&quot;,
+&quot;Processing&quot;, &quot;Axe&quot;, &quot;Sampling&quot;,
+&quot;GFTProcessing&quot;. </FONT></FONT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm"><SPAN STYLE="font-weight: medium"><SPAN STYLE="font-style: normal"><FONT SIZE=2>Each
+table is a set of rows and columns. All columns contain a given
+information type as described in Table 1. For example, &quot;<SPAN STYLE="text-decoration: none"><FONT FACE="Times, serif">AuthorsEmail&quot;
+is one column of the &quot;Authors&quot; table. </FONT></SPAN>Each row is
+a set of columns with only one value for each. Rows contain real
+values. For example, one row contains &quot;<A HREF="mailto:john@laboratory.fr"><FONT SIZE=2>john@laboratory.fr</FONT></A>&quot;
+in the &quot;<SPAN STYLE="text-decoration: none"><FONT FACE="Times, serif">AuthorsEmail&quot;
+columns of &quot;Authors&quot; table. </FONT></SPAN>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<FONT FACE="Times, serif"><FONT SIZE=2>In order to handle data inside
+a relational table, an index is needed to identify each row stored into
+that table. It is the primary key of table (eg: AuthorsIndex).
+Another reason to create a primary key is the use of its value as a
+foreign key by other tables. For example, the foreign key
+&quot;LaboratoryIndex&quot; in the Authors table correspond to the
+same value (primary key) entry in Laboratory table. This relation
+permits to find easily the author's laboratory with only one SQL
+query.</FONT></FONT></P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<FONT FACE="Times, serif"><FONT SIZE=2>All arrows in Table 1 and in
+Figure 2 define a foreign key corresponding to a primary key entry
+in an other table. </FONT></FONT>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<FONT FACE="Times, serif"><FONT SIZE=2>Some tables like MolInSample
+permit to associate Molecule entry with Spectra entry in order to
+have a variable number of connexion between Molecule and Spectra
+tables. (Sampling and GFTProcessing tables are not yet available. It
+is a prevision for future version.)</FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><I><B>Figure 2</B></I></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif"><FONT SIZE=2><I><U><B><IMG SRC="./RELATIF_INFO/datamodel.gif" NAME="Image1" ALIGN=BOTTOM WIDTH=538 HEIGHT=556 BORDER=0></B></U></I></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; text-decoration: none; page-break-before: always">
+<FONT FACE="Times, serif"><FONT SIZE=3><I><B><SPAN STYLE="text-decoration: none">Table
+1</SPAN></B></I></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				DataModel</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				DataSet</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Spectra</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>TableMolecule</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DataModelIndex</FONT></FONT></P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DataModelVersion</FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DataSetIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DepositionDate</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ConfidencialityLevel</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AccessLogin</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AccessPasswd </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DepositorEmail</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>NumberOfSpectra </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>StudyCitations </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>StudyPDB_id</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>StudyBMRB_id</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>StudyType</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DataSetTitre</FONT></FONT></P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DataModelIndex -&gt;</FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraDataFormat </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraLocalFileAddress </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraSoftware</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraAxeNumber </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraTemperature </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraPressure </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DataSetIndex -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleIndex -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ReferenceIndex -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectrometerIndex -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProbeIndex -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SequenceIndex -&gt;</FONT></FONT></P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProcessingIndex -&gt;</FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeIndex</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeShortName</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeLongName</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeType</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeState </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeWeight</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeSwissprot_id</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeSource</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>PrimarySequence </FONT></FONT> </P>
+                                <P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+			        <FONT FACE="Times, serif"><FONT SIZE=2>OffsetSequence</FONT></FONT> </P>
+                                <P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+			        <FONT FACE="Times, serif"><FONT SIZE=2>ExpOrganism </FONT></FONT> </P>
+                                <P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+			        <FONT FACE="Times, serif"><FONT SIZE=2>ExpSource</FONT></FONT> </P>
+								
+				
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeDetails</FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				MolInSample</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Authors</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Laboratory</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Sample</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MolInSampleIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MolInSampleConcMole </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MolInSampleConcMass </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MolecularIsotopeLabelling </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraIndex -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>MoleculeIndex -&gt;</FONT></FONT></P>
+				<P><BR>
+				</P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AuthorsIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AuthorsFirstName </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AuthorsSurname</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AuthorsEmail</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>LaboratoryIndex -&gt;</FONT></FONT></P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>DataSetIndex -&gt;</FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>LaboratoryIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>LaboratoryName</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>LaboratoryAddress </FONT></FONT>
+				</P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>LaboratoryCountry</FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleIndex</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleSolvant </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SamplePH </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleBufferType </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleBufferConcentration </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleSaltType </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleSaltConcentration </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleAddMol</FONT></FONT></P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SampleDetails </FONT></FONT>
+				</P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+	<COL WIDTH=65*>
+	<COL WIDTH=63*>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Reference</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Spectrometer</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Probe</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Sequence</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ReferenceIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ReferenceMolecule </FONT></FONT>
+				</P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ReferenceAbsoluteFrequency
+				</FONT></FONT>
+				</P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectrometerIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectrometerManufacturer </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectrometerModel </FONT></FONT>
+				</P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProtonFrequency</FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProbeIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProbeManufacturer </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProbeModel</FONT></FONT></P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProbeCryo</FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SequenceIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraSequenceType </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraMixingTimeDuration </FONT></FONT>
+				</P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraPulseSequenceFilter</FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+	<COL WIDTH=55*>
+	<COL WIDTH=73*>
+	<COL WIDTH=64*>
+	<COL WIDTH=64*>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=21%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Processing</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=29%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Axe</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				Sampling</B></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="font-style: normal; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><B>Table
+				GFTProcessing</B></FONT></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=21%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ProcessingIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AxesOrder</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>F1Index -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>F2Index -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>F3Index -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>F4Index -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm"><BR>
+				</P>
+				<P STYLE="font-weight: medium; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><I>(Limited
+				to 4D spectra)</I></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=29%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AxeIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>AxeName <I>(F1, F2,...)</I></FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectraNucleusAxe <I>(1H,
+				13C,..)</I></FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>Stokage <I>(real,
+				complex,..)</I></FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SpectralWidth</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>CarrierFrequency </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SamplingType <I>(regular,
+				partial)</I></FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>PartialSamplingIndex -&gt;</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>ZeroTimePosition </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>Modulation <I>(Real,
+				Complex, ...</I>)</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>PhaseModAxePointed </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>NP_AxePointed </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>Preprocessing <I>( LP,
+				...)</I></FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>PhaseCorrection_PH0 </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>PhaseCorrection_PH1 </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>LeftExtractZoneAfterProcess
+				</FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>RightExtractZoneAfterProcess
+				</FONT></FONT>
+				</P>
+				<P STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>PostProcessing <I>(Reverse,
+				...)</I></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>SamplingIndex </FONT></FONT>
+				</P>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>PartialSamplingTable</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm"><BR>
+				</P>
+				<P STYLE="font-weight: medium; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><I>(For
+				future version)</I></FONT></FONT></P>
+			</TD>
+			<TD WIDTH=25%>
+				<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+				<FONT FACE="Times, serif"><FONT SIZE=2>GFTProcessinIndex</FONT></FONT></P>
+				<P STYLE="margin-bottom: 0cm"><BR>
+				</P>
+				<P STYLE="margin-bottom: 0cm"><BR>
+				</P>
+				<P STYLE="font-weight: medium; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=2><I>(For
+				future version)</I></FONT></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; font-style: normal"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium; text-decoration: none">
+<BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT SIZE=4><U><B>XML file
+for input/output :</B></U></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; font-style: normal"><BR>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: medium"><FONT FACE="Times, serif">XML
+data file:</FONT></SPAN></SPAN> XML is a simple and very flexible text
+format designed to describe data (Figure 3). XML tags are not
+predefined in XML but defined according to NMRb data. We use an XML
+scheme in order to have a fine description of the data according to MySQL
+database characteristics. It permits to preserve some features like
+variable type, enumeration choices values and mandatory or
+facultative information fields. XML file is used to deposit data and
+also to recover them.</FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; font-style: normal"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; text-decoration: none"><FONT FACE="Times, serif"><FONT SIZE=3><I><B>Figure
+3 - syntax of the XML file</B></I></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<CENTER>
+	<TABLE WIDTH=596 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+		<COL WIDTH=586>
+		<THEAD>
+			<TR>
+				<TD WIDTH=586 VALIGN=TOP>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;?xml
+					version=&quot;1.0&quot; ?&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;!--
+					XML file for NMRb Deposition --&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;NMRb_Deposit&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><BR>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Study_Info&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Data_Set&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;NMRb_Id&gt;<B>NMRb_id</B>&lt;/NMRb_Id&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Study_Type&gt;<B>Complex</B>&lt;/Study_Type&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT SIZE=2><I>...
+					General data-set information </I></FONT>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Data_Set&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Molecule&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Molecule_Common_Name&gt;<B>ltp</B>&lt;/Molecule_Common_Name&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Molecule_Weight&gt;<B>6979</B>&lt;/Molecule_Weight&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-weight: medium"><FONT SIZE=2><I>...
+					Molecular information </I></FONT>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Molecule&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Ligand&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>.<I>..
+					as molecular information </I></FONT>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Ligand&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Study_Info&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Authors_Zone&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Authors
+					num=&quot;<B>1</B>&quot;&gt; </FONT>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Authors_First_Name&gt;<B>John</B>&lt;/Authors_First_Name&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT SIZE=2><I>...
+					Authors information </I></FONT>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Laboratory_Name&gt;<B>CBS</B>&lt;/Laboratory_Name&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT SIZE=2><I>...
+					Laboratory information</I></FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Authors&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>...
+					<I>Several Authors entries are possible</I></FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Authors_Zone&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><BR>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Spectra_Zone&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Spectra&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Spectra_File_Name&gt;<B>cosy_1H_295K.tgz&lt;</B>/Spectra_File_Name&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Spectra_Data_Format&gt;<B>Bruker</B>&lt;/Spectra_Data_Format&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Spectra_Axe_Number&gt;<B>2D</B>&lt;/Spectra_Axe_Number&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT SIZE=2><I>...
+					Spectra information</I></FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><BR>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Axes_Zone&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Axes&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Axe&gt;<B>F1</B>&lt;/Axe&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;Axe_Nucleus&gt;<B>1H</B>&lt;/Axe_Nucleus&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT SIZE=2><I>...Axes
+					information</I></FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Axes&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>..
+					<I>Several axes entries are possible</I></FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Axes_Zone&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><BR>
+					</P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Spectra&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>..
+					<I>Several Spectra entries are possible</I></FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal"><FONT SIZE=2>&lt;/Spectra_Zone&gt;</FONT></P>
+					<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><BR>
+					</P>
+					<P ALIGN=LEFT STYLE="font-style: normal; font-weight: medium; text-decoration: none">
+					<FONT FACE="Times, serif"><FONT SIZE=2>&lt;/NMRb_Deposit&gt;</FONT></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+	</TABLE>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<BR>
+<center>
+<p><img SRC="../INCLUDE/separator.gif" NOSAVE height=4 width=421>
+<p><u><font color="#280099"><a href="./index.html">Back to homepage</a></font></u></center>
+
+</BODY>
+</HTML>

@@ -1,0 +1,192 @@
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="root.css" rel="stylesheet" type="text/css" />
+        <title>autoSNPdb :: ACPFG Bioinformatics Group</title>
+        <script src="expander.js" language="javascript" type="text/javascript"></script>
+        <script src="speciesSelect.js" language="javascript" type="text/javascript"></script>
+        
+        <script src="consedView.js" language="javascript" type="text/javascript"></script>
+        <script type="text/javascript">var MAIL_ADDR = "<a href='mailto:dave.edwards@uq.edu.au'>Dave Edwards</a>";</script>
+        
+    </head>
+    <body>
+        <script type="text/javascript">
+
+/***********************************************
+* Cool DHTML tooltip script II- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var offsetfromcursorX=12 //Customize x offset of tooltip
+var offsetfromcursorY=10 //Customize y offset of tooltip
+
+var offsetdivfrompointerX=10 //Customize x offset of tooltip DIV relative to pointer image
+var offsetdivfrompointerY=14 //Customize y offset of tooltip DIV relative to pointer image. Tip: Set it to (height_of_pointer_image-1).
+
+document.write('<div id="dhtmltooltip"></div>') //write out tooltip DIV
+document.write('<img id="dhtmlpointer" src="arrow2.gif">') //write out pointer image
+
+var ie=document.all
+var ns6=document.getElementById && !document.all
+var enabletip=false
+if (ie||ns6)
+var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : ""
+
+var pointerobj=document.all? document.all["dhtmlpointer"] : document.getElementById? document.getElementById("dhtmlpointer") : ""
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function ddrivetip(thetext, thewidth, thecolor){
+if (ns6||ie){
+if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px"
+if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor
+tipobj.innerHTML=thetext
+enabletip=true
+return false
+}
+}
+
+function positiontip(e){
+if (enabletip){
+var nondefaultpos=false
+var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+//Find out how close the mouse is to the corner of the window
+var winwidth=ie&&!window.opera? ietruebody().clientWidth : window.innerWidth-20
+var winheight=ie&&!window.opera? ietruebody().clientHeight : window.innerHeight-20
+
+var rightedge=ie&&!window.opera? winwidth-event.clientX-offsetfromcursorX : winwidth-e.clientX-offsetfromcursorX
+var bottomedge=ie&&!window.opera? winheight-event.clientY-offsetfromcursorY : winheight-e.clientY-offsetfromcursorY
+
+var leftedge=(offsetfromcursorX<0)? offsetfromcursorX*(-1) : -1000
+
+//if the horizontal distance isn't enough to accomodate the width of the context menu
+if (rightedge<tipobj.offsetWidth){
+//move the horizontal position of the menu to the left by it's width
+tipobj.style.left=curX-tipobj.offsetWidth+"px"
+nondefaultpos=true
+}
+else if (curX<leftedge)
+tipobj.style.left="5px"
+else{
+//position the horizontal position of the menu where the mouse is positioned
+tipobj.style.left=curX+offsetfromcursorX-offsetdivfrompointerX+"px"
+pointerobj.style.left=curX+offsetfromcursorX+"px"
+}
+
+//same concept with the vertical position
+if (bottomedge<tipobj.offsetHeight){
+tipobj.style.top=curY-tipobj.offsetHeight-offsetfromcursorY+"px"
+nondefaultpos=true
+}
+else{
+tipobj.style.top=curY+offsetfromcursorY+offsetdivfrompointerY+"px"
+pointerobj.style.top=curY+offsetfromcursorY+"px"
+}
+tipobj.style.visibility="visible"
+if (!nondefaultpos)
+pointerobj.style.visibility="visible"
+else
+pointerobj.style.visibility="hidden"
+}
+}
+
+function hideddrivetip(){
+if (ns6||ie){
+enabletip=false
+tipobj.style.visibility="hidden"
+pointerobj.style.visibility="hidden"
+tipobj.style.left="-1000px"
+tipobj.style.backgroundColor=''
+tipobj.style.width=''
+}
+}
+
+document.onmousemove=positiontip
+
+</script>
+        <table>
+            <tr>
+                <td><a href="http://research1t.imb.uq.edu.au/acpfg" target="_blank"><div id="header"><img src="logo.gif" alt="ACPFG Bioinformatics" border="0" /></div></a></td>
+            </tr>
+        </table>
+            
+        <a href="index.jsp?species="><h1>autoSNPdb</h1></a>
+        
+<table>
+    <tr>
+        <td><a href="index.jsp?species=" > Home </a></td>
+    </tr>
+    <tr>
+        <td><a href="help.htm" target="_blank"> Help </a></td>
+    </tr>
+</table>
+        
+
+
+<!-- Start Page Content -->
+
+<table id="searchbox">
+    <tr><td class="halfspan">
+            <span class="searchbox">1. Select Species...</span><br />    
+            <select name="species" id="species" onblur="speciesSelect(this.value)" onkeyup="if (this.value == 'rice') {document.getElementById('cultivarList').style.display = 'none';} else {document.getElementById('cultivarList').style.display = '';}" onclick="if (this.value == 'rice') {document.getElementById('cultivarList').style.display = 'none';} else {document.getElementById('cultivarList').style.display = '';}">
+                <option value="barley" >Barley</option>
+                <option value="brassica" >Brassica</option>
+                <option value="rice" >Rice</option>
+            </select>
+        </td>
+        <td class="halfspan">&nbsp;
+        </td>
+    </tr>
+    <tr><td class="fullspan" colspan="2">
+            <span class="searchbox">2. Select Action...</span><br />
+            <p>i)&nbsp;&nbsp; <a href="javascript:loadURL('KeywordSearch')">Search the database using keyword(s)</a></p>
+                <span class="searchExplain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search in the contigs (aligned sequences) and singletons for SNPs<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search for words in the UniRef or Gene Ontology annotation<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or simply enter a Contig ID or a Sequence Accession</span>
+            <div id="cultivarList"><p>ii)&nbsp;&nbsp; <a href="javascript:loadURL('CultivarSearch')">Search for SNPs between cultivars</a> (please wait while it loads cultivars)</p>
+            <span class="searchExplain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select two cultivars to find all of the SNPs that correlate with them</span></div>
+            <p>iii)&nbsp;&nbsp; <a href="javascript:loadURL('RefGenomeSearch')">Search for SNPs homologous to reference genomic locations</a></p>
+                <span class="searchExplain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enter a region on the reference genome to get all of the contigs and singletons <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that match sequence within that region</span>
+            <p>iv)&nbsp;&nbsp; <a href="javascript:loadURL('BLASTsearch')">BLAST a sequence against this database</a></p>
+                <span class="searchExplain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enter your own sequence to find all contigs and singletons that match</span>
+            <p>v)&nbsp;&nbsp; <a href="javascript:loadURL('DataStats')">Database Statistics</a></p>
+                <span class="searchExplain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of Sequences, Contigs and Singletons and many other statistics</span>
+            <br><br>
+            Click <img src="smallHelp.GIF" alt="Help Link"> at any time for full system help, or <img src="icon_question_mark.jpg" alt="Question Mark Link"> next to a specific item for help on that item.
+           
+    </td></tr>
+</table>
+
+<!-- End Page Content -->
+
+<div id="footer">
+    <br />
+    - Version 1.3 :: Last updated July 2008 -<br>
+    Australian Centre for Plant Functional Genomics,<br />
+    School of Land, Crop and Food Sciences,<br />
+    Institute for Molecular Biosciences,<br />
+    University of Queensland, Brisbane, Australia.<br />
+    <a href="ackDis.html" target="_blank">Acknowledgements and Disclaimer.</a><br />
+    <br>autoSNPdb was created using Mozilla Firefox 
+    <a href="http://www.getfirefox.com" target="_blank"><img border="0" alt="Firefox 2" title="Firefox 2" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox2/firefox-spread-btn-1.png" /></a>
+    Internet Explorer may not provide full functionality.<br />
+    <br>In association with:<br><br>
+    <a href="http://www.qfab.org.au" target="_blank"><img src="QFAB_Logo_s.gif" alt="QFAB" border="0" /></a>
+</div>
+</body>
+</html>
+
+

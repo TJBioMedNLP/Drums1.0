@@ -1,0 +1,487 @@
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<meta name="google-site-verification" content="IAG1kK9xnxEmGPv9iYZV2KkU3Q67jlfyeib2xrVzOZs" />
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-16000859-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<title>PCFamily : Protein Complex Family Search</title>
+<link href="tm/style_original.css" rel="stylesheet" type="text/css">
+</head>
+<script language="javascript">
+function OpenWindow(url,w,h)
+{
+  window.open(url,'GEMDOCK','width='+w+',height='+h+',toolbar=0,menubar=0,location=0,directories=0,status=0');
+}
+</script>
+<body >
+
+<!--  Header  Begin   -->
+<div id="banner"><a href="http://bioxgem.life.nctu.edu.tw/bioxgem/index.php">BioXGEM</a>.<span class="loc">PCFamily : Protein Complex Family Search</span></div>
+<div id="bannerimg">
+  <a href="http://bioxgem.life.nctu.edu.tw/bioxgem/index.php">
+    <img src="./images/BioXGEM.png" border="0">
+  </a>
+</div>
+<!--  Header  End     -->
+
+<!--  NavMenu  Begin  -->
+<div id="nav">
+  <table cellspacing="0">
+    <tr>&nbsp&nbsp&nbsp
+    </tr>
+  </table>
+</div>
+<!--  NavMenu  End    -->
+
+
+
+<!--  LeftMenu  Begin -->
+<div id="links">
+  <table>
+    <tr><td>
+      <a href="index.php">Home</a><br \><br \>
+      <a href="search_result.php?JOBID=example_1">Example 1</a><br \><br \>
+      <a href="search_result.php?JOBID=example_2">Example 2</a><br \><br \>
+      <a href="help.php">Help</a><br \><br \>
+      <a href="download.php">Download</a><br \><br \>
+      <a href="contact.php">Contact us</a><br \><br \>
+    </td></tr>
+  </table>
+</div>
+<!--  LeftMenu  End   -->
+
+
+<!--  Body  Begin     -->
+<div id="content">
+  <table border=0>
+    <tr>
+      <td valign="top" height="500px" bgcolor="#FFFFFF">
+
+
+<!--  Main  Begin     -->
+
+<script language="javascript">
+/* ---------------------------------------
+   author: Vincent Puglia, GrassBlade Software
+   site:   http://members.aol.com/grassblad
+------------------------------------------- */
+
+function selectAll(formObj, isInverse) 
+{
+   for (var i=0;i < formObj.length-1;i++) 
+   {
+      fldObj = formObj.elements[i];
+      if (fldObj.type == 'checkbox')
+      { 
+         if(isInverse)
+            fldObj.checked = (fldObj.checked) ? false : true;
+         else fldObj.checked = false; 
+       }
+   }
+}
+
+function clearAll(formObj) 
+{
+	fldObj = formObj.elements[formObj.length-1];
+	fldObj.checked = false; 
+}
+</script>
+<SCRIPT LANGUAGE="JavaScript">
+function cleartext(formObj) 
+{
+   for (var i=0;i < formObj.length;i++) 
+   {
+      fldObj = formObj.elements[i];
+      if (fldObj.type == 'textarea')
+      {
+         fldObj.value = ""; 
+      }
+      if (fldObj.type == 'text')
+      {
+         fldObj.value = ""; 
+      }      
+   }
+}
+</SCRIPT> 
+<script language="JavaScript1.2" src="checkinput.js"></script>
+
+<div style=width:750px>
+<table border=0 width="750">
+	<tr>
+		<td rowspan=3 >
+			<img src="images/concept_new.png" width="264">
+		</td>
+		<td valign=top height="auto">
+			<br>
+			<font size=5><b>PCFamily : </font><font size=5>Protein Complex Family Search</font></b>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			<font size=4><b>Identification of homologous protein complexes and subcomplex</b></font>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			<font size=3><b>For your query, PCFamily can provide:</b></font>
+			<ul>
+				<li>Involved complex family analysis</li>
+				<li>Interface composition</li>
+				<li>Evolution analysis</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+			<p><font size=3><b>Input one or multiple protein sequences or a structural complex as a query to search the complex family across multiple species</b></font></p>
+			<p>Press the <img border="0" src="images/HELP.GIF" width="12" height="16">
+			to obtain more information on that specific field.</p>		
+		<td>
+	<tr>
+</table>
+<table width="750" border="0">
+	<tr>
+		<td width="750" colspan="2"><hr align="left"></td>
+	</tr>
+	<form name="protein" method="post" action="getinput_seq_new.php">
+	<tr>
+		<td width="750" colspan="2"><b>Query proteins : </b></td><!--(sequences in FASTA format)-->
+	</tr>
+	<tr>
+		<td width="750" colspan="2"></td>
+	</tr>
+	<tr>
+		<td ><input type="radio" id="Query_type_protein_seq" name="Query_type" value="Protein_seq" checked></td>
+		<td width="750" colspan="1" align="left">Input one or multiple protein sequences in FASTA format&nbsp<a HREF="help.php#fasta"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+	</tr>
+	<tr>
+		<td width="10"></td>
+		<td width="740" colspan="1" align="left">
+        <div align="left"><textarea rows="10" cols="90" name="protein_seq" onfocus="document.getElementById('Query_type_protein_seq').checked=true;">>Q6PEC4,RAT
+MPTIKLQSSDGEIFEVDVEIAKQSVTIKTMLEDLGMDDEGDDDPVPLPNVNAAILKKVIQ
+WCTHHKDDPPPPEDDENKEKRTDDIPVWDQEFLKVDQGTLFELILAANYLDIKGLLDVTC
+KTVANMIKGKTPEEIRKTFNIKNDFTEEEEAQVRKENQWCEEK
+>B2GUZ0,RAT
+MHRKHLQEIPDQSSNVTTSFTWGWDSSKTSELLSGMGVSALEKEEVDSENIPHGLLSNLG
+HPQSPPRKRLKSKGSDKDFVIIRRPKLNRENFPGVSWDSLPDELLLGIFSCLCLPELLRV
+SGVCKRWYRLSLDESLWQSLDLAGKNLHPDVTVRLLSRGVVAFRCPRSFMEQPLGESFSS
+FRVQHMDLSNSVINVSNLHGILSECSKLQNLSLEGLQLSDPIVTTLAQNENLVRLNLCGC
+SGFSESAVATLLSSCSRLDELNLSWCFDFTEKHVQAAVAHLPDTLTQLNLSGYRKNLQKT
+DLCTLIKRCPNLVRLDLSDSIMLKNDCFPEFFQLNYLQHLSLSRCYDIIPETLLELGEIP
+TLKTLQVFGIVPDGTLQLLREALPRLQINCAYFTSIARPTMDNKKNPEIWGIKCRLTLQK
+PSL
+>B2RZ99,RAT
+MSHKQIYYSDKYDDEEFEYRHVMLPKDIAKLVPKTHLMSESEWRNLGVQQSQGWVHYMIH
+EPEPHILLFRRPLPKKPKK</textarea>
+				</div>
+		</td>
+	</tr>
+	<tr>
+		<td width="10"></td>
+		<td>
+			Input multiple protein sequences (e.g. <a HREF="index.php?seq=ex1">example 1</a> or <a HREF="index.php?seq=ex2">example 2</a>&nbsp)&nbsp&nbsp<a HREF="help.php#fasta_three"><img border="0" src="images/HELP.GIF" width="12" height="16"></a>
+		</td>
+	</tr>
+<!--
+	<tr>
+		<td width="10"></td>
+		<td>
+			<a HREF="index.php?seq=one">Input one protein sequence</a>&nbsp&nbsp<a HREF="help.php#fasta_one"><img border="0" src="images/HELP.GIF" width="12" height="16"></a>
+		</td>
+	</tr>
+	<tr>
+		<td width="750" colspan="2"></td>
+	</tr>
+		<td width="10"><input type="radio" id="Query_type_protein_id" name="Query_type" value="Protein_id"></td>
+		<td width="740" colspan="1" align="left">Input UniProt ID or AC (Ex: P63208,SKP2_HUMAN,P61024) </td>
+	</tr>
+	<tr>
+		<td width="10"></td>
+		<td width="740" colspan="1" align="left">
+        <div align="left"><textarea rows="7" cols="90" name="protein_id" value="" onfocus="document.getElementById('Query_type_protein_id').checked=true;">
+P63208,SKP2_HUMAN,P61024</textarea>
+				</div>
+		</td>
+	</tr>
+	-->
+	<tr>
+	<td colspan="1"></td>	
+	
+		<td align="right">
+			<input type="submit" value="Search"> <input type="button" value="Clear" onclick="cleartext(this.form)">
+		</td>
+		
+
+	</tr>
+</form>
+	<tr>
+		<td colspan="2"><hr align="left"></td>
+	</tr>
+	<form name="complex" method="post" action="getinput_pdb.php">
+	<tr>
+		<td width="750" colspan="2"><b>Query a structural complex : </b></td>
+	</tr>
+	<tr>
+		<td width="10"></td>
+		<td width="740" colspan="1" align="left">Input PDB code (4 chars)&nbsp;:&nbsp;<input type="text" name="PDB_query" size="4" value="2ast">
+			&nbsp&nbsp<a HREF="help.php#pdb_id"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+	</tr>
+	<tr>
+		<td colspan="1"></td>
+		<td align="right">
+			<input type="submit" value="Search"> <input type="button" value="Clear" onclick="cleartext(this.form)">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr align="left"></td>
+	</tr>
+<!--
+	<tr>
+		<td colspan="2"><b>New protein complex :</b> <a href="index-upload.php">Upload</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr align="left"></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="left"><b>Options:</b></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+			<p align="left">Joint Z-score for homologous complex search</b>
+			&nbsp&nbsp<a HrEF="help.php#evalue"><img border="0" src="images/HELP.GIF" width="12" height="16"></a>
+		</td>			
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+    	<input name="jzscore" type="radio" value="2"  checked>
+      2 (Default)  
+      <input name="jzscore" type="radio" value="5">
+      5
+      <input name="jzscore" type="radio" value="All">
+      All    
+      <input id="otherlimit" name="jzscore" type="radio" value="x">Other:&nbsp;
+      <input name="jzscore_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit').checked=true;">
+      (Input Range: 0 ~ 99)			
+		</td>
+	</tr>
+	<tr><td colspan="3">&nbsp;</td></tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+			<p align="left">Number of homologous complexes in each species ( Ranking by Joint Z-score )</b>
+			&nbsp&nbsp<a HREF="help.php#evalue"><img border="0" src="images/HELP.GIF" width="12" height="16"></a>
+		</td>			
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+    	<input name="rank_hc" type="radio" value="5">
+      5  
+      <input name="rank_hc" type="radio" value="25">
+      25
+      <input name="rank_hc" type="radio" value="All"  checked>
+      All (Default)
+      <input id="otherlimit2" name="rank_hc" type="radio" value="x">Other:&nbsp;
+      <input name="rank_hc_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit2').checked=true;">
+      (Input Range: >0)			
+		</td>
+	</tr>
+	<tr><td colspan="3">&nbsp;</td></tr>
+  <tr>
+    <td></td>
+    <td colspan="2">The conservation ratio (<i>CRD</i>) of domain group
+    &nbsp&nbsp<a HREF="help.php#CRD"><img border="0" src="images/HELP.GIF" width="12" height="16"></a>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td colspan="2">
+    	<input name="SRD" type="radio" value="1.00">
+      1.00
+      <input name="SRD" type="radio" value="0">
+      All
+      <input name="SRD" type="radio" value="0.60"  checked>
+      0.60&nbsp;(Default)      
+      <input id="otherlimit_SRD" name="SRD" type="radio" value="x">Other:&nbsp;
+      <input name="SRD_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit_SRD').checked=true;">
+      (Input Range: 0.01 ~ 0.99)
+    </td>
+  </tr>
+	<tr><td colspan="3">&nbsp;</td></tr>
+
+  <tr>
+    <td></td>
+    <td colspan="2">The conservation ratio (<i>CRG</i>) of GO group
+    &nbsp&nbsp<a HREF="help.php#CRG"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td colspan="2">
+    	<input name="SRF" type="radio" value="1.00">
+      1.00
+      <input name="SRF" type="radio" value="0">
+      All
+      <input name="SRF" type="radio" value="0.60"  checked>
+      0.60&nbsp;(Default)      
+      <input id="otherlimit_SRF" name="SRF" type="radio" value="x">Other:&nbsp;
+      <input name="SRF_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit_SRF').checked=true;">
+      (Input Range: 0.01 ~ 0.99)
+    </td>
+  </tr>
+	<tr><td colspan="3">&nbsp;</td></tr>-->
+<!-- next is TB-homPPI--><!--
+	<tr>
+		<td></td>
+		<td colspan="2">
+			<p align="left">Z-score for homologous physical interaction search</b>
+			&nbsp&nbsp<a HREF="help.php#evalue"><img border="0" src="images/HELP.GIF" width="12" height="16"></a>
+		</td>			
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+    	<input name="zscore" type="radio" value="3"  checked>
+      3 (Default)  
+      <input name="zscore" type="radio" value="5">
+      5
+      <input name="zscore" type="radio" value="All">
+      All    
+      <input id="otherlimit3" name="zscore" type="radio" value="x">Other:&nbsp;
+      <input name="zscore_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit3').checked=true;">
+      (Input Range: 0 ~ 99)			
+		</td>
+	</tr>
+	<tr><td colspan="3">&nbsp;</td></tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+			<p align="left">Number of homologous physical interactions in each species ( Ranking by Z-score )</b>
+			&nbsp&nbsp<a HREF="help.php#evalue"><img border="0" src="images/HELP.GIF" width="12" height="16"></a>
+		</td>			
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+    	<input name="rank_tb" type="radio" value="5">
+      5 
+      <input name="rank_tb" type="radio" value="25"  checked>
+      25 (Default)
+      <input name="rank_tb" type="radio" value="All">
+      All
+      <input id="otherlimit4" name="rank_tb" type="radio" value="x">Other:&nbsp;
+      <input name="rank_tb_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit4').checked=true;">
+      (Input Range: >0)			
+		</td>
+	</tr>
+	<tr><td colspan="4">&nbsp;</td></tr>
+  <tr>
+    <td></td>
+    <td colspan="3" >Choose output species&nbsp&nbsp<a HREF="help.php#species"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+  	<td>&nbsp;</td>
+    <td colspan="3">
+    	<table border="0">
+    	<tr>
+    		<td>
+  				<input type="checkbox" name="human" value="1" onclick="clearAll(this.form);"><i>Homo sapiens</i>
+  			</td>
+  			<td>    	
+  				<input type="checkbox" name="worm" value="1" onclick="clearAll(this.form);"><i>Caenorhabditis elegans</i>
+  			</td>
+  			<td rowspan="4" valign="top">
+  				<input type="checkbox" id="otherlimit_others" name="others_species" value="1" onclick="clearAll(this.form);">Others (<a href=./taxid.php>Taxonomy ID</a>) Ex: 9913;9598;...<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="others_o" type="text" size="25" onfocus="document.getElementById('otherlimit_others').checked=true;" onclick="clearAll(this.form);">
+  			</td>
+  		</tr>
+  		<tr>
+    		<td colspan="1">
+  				<input type="checkbox" name="fly" value="1" onclick="clearAll(this.form);"><i>Drosophila melanogaster</i>
+  			</td>
+  			<td colspan="1">    	
+  				<input type="checkbox" name="athali" value="1" onclick="clearAll(this.form);"><i>Arabidopsis thaliana</i>
+  			</td>
+  		</tr>
+  		<tr>
+    		<td colspan="1">
+  				<input type="checkbox" name="yeast" value="1" onclick="clearAll(this.form);"><i>Saccharomyces cerevisiae</i>
+  			</td>
+  			<td colspan="1">    	
+  				<input type="checkbox" name="mouse" value="1" onclick="clearAll(this.form);"><i>Mus musculus</i>
+  			</td>
+  		</tr>
+  		<tr>
+    		<td colspan="1">
+  				<input type="checkbox" name="rat" value="1" onclick="clearAll(this.form);"><i>Rattus norvegicus</i>
+  			</td>
+  			<td colspan="1">    	
+  				<input type="checkbox" name="all" value="1"  onclick="selectAll(this.form,0);" checked>All&nbsp;(Default)
+  			</td>
+  		</tr>
+  		</table>
+    </td>
+   </tr>	
+	<tr><td colspan="4">&nbsp;</td></tr>
+
+	<!--
+	<tr>
+		<td colspan="3">
+			<div align="left">
+				<hr width="100%" align="left">
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<div align="left">
+				<b>Reference:</b>
+			</div>		</td>
+	</tr> 
+	<tr>
+		<td width="10">
+		</td>
+		<td width="100%" colspan="2">
+			1. Chen, C.-C., Lin, C.-Y., Lo, Y.-S. and Yang, J.-M. <a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkp309" target=_blank>PPISearch: a web server for searching homologous protein-protein interactions across multiple species</a>. <i>Nucleic Acids Research</i> 37:W376-W383 (2009). (Impact factor: 6.954)
+		</td>
+	</tr> 	
+	<tr><td colspan="2">
+		<p><span class="SMALL1">Last updated 2009/12/29</p>
+	</td></tr>-->
+</table>
+</div>
+</body>
+</html>
+	
+<!--  Main  End       -->
+
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--  Footer  Begin
+<div id="footer">
+	Copyright &copy; 2006 BioXGEM Lab.&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	Institute of Bioinformatics&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	National Chiao-Tung University&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	Hsinchu, Taiwan, R.O.C.&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	All rights reserved.&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+Footer  Begin  -->
+
+<!--  Body  End       -->
+
+</body>
+</html>

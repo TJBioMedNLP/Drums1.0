@@ -1,0 +1,599 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>DNMAD - Diagnosis and Normalization for MicroArray Data</title>
+<link rev="made" href="mailto:jvaquerizas%40ochoa.fib.es" />
+<style type="text/css">
+<!--/* <![CDATA[ */
+A {text-decoration: none}
+
+
+/* ]]> */-->
+</style>
+<script type="text/javascript">//<![CDATA[
+
+function check_flags()
+{
+	if (!document.array.flags.checked) {
+		document.array.flagged.checked = false;
+		document.array.fpositive.checked = false;
+	}
+	if (document.array.flags.checked == false) {
+		document.array.flagged.checked = false;
+		document.array.fpositive.checked = false;
+		document.array.flagged.disabled = true;
+		document.array.fpositive.disabled = true;
+	}
+	else if (document.array.BS.checked == true) {
+		document.array.flagged.checked = true;
+		document.array.fpositive.checked = false;
+		document.array.flagged.disabled = false;
+		document.array.fpositive.disabled = false;
+	}
+	
+	return false;
+}
+
+function check_bs()
+{
+	if (document.array.BS.checked == false) {
+		document.array.bgsubtract[0].checked = false;
+		document.array.bgsubtract[1].checked = false;
+		document.array.bgsubtract[0].disabled = true;
+		document.array.bgsubtract[1].disabled = true;
+	}
+	else if (document.array.BS.checked == true) {
+		document.array.bgsubtract[0].checked = false;
+		document.array.bgsubtract[1].checked = true;
+		document.array.bgsubtract[0].disabled = false;
+		document.array.bgsubtract[1].disabled = false;
+	}
+	
+	return false;
+}
+
+function check_flagged()
+{
+	if (document.array.flagged.checked && !document.array.flags.checked) {
+		document.array.flagged.checked = false;
+		alert("This option is only available if the 'Use negative flags' option is selected");
+	}
+	return false;
+}
+
+function check_fpositive()
+{
+	if (document.array.fpositive.checked && !document.array.flags.checked) {
+		document.array.fpositive.checked = false;
+		alert("This option is only available if the 'Use negative flags' option is selected");
+	}
+	return false;
+}
+
+function check_half()
+{
+	if (document.array.BS.checked == false) {
+		document.array.bgsubtract.checked = false;
+		alert("This option is only available if the 'Use background correction' option is selected");
+	}
+	return false;
+}
+
+function open_image(file, file1)
+{
+	
+	win3 = window.open("/?run=winimage&image="+file,file1,"width=470,height=510,resizable=0,directories=0,location=0,status=0,scrollbars=0,toolbar=0,menubar=0");
+	win3.focus();
+	return false;
+
+}
+
+function close_win(image)
+{
+	window.close(image);
+	return false;
+
+}
+
+function help_win(anchor)
+{
+
+	win_help = window.open("/help/dnmad-help.html"+anchor,"DNMAD_HELP","resizable=1,directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+	win_help.focus();
+	return false;
+
+}
+
+function open_win(res, times, what, pid, file)
+{
+    
+	if (res == "box") {
+		if (what == "individual") {
+			win1 = window.open("/?run=images"+times+"&res=box&pid="+pid+"&array="+file,"Box_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+			win1.focus();
+		}
+		else if (what == "selection") {
+			
+			var files = "";
+		
+			for (var i=0; i<document.array_box.array.length; i++)  {
+				if (document.array_box.array[i].checked)  {
+	            	files = files + "&files=" + document.array_box.array[i].value;
+	        	} 
+			}
+			
+			if (! document.array_box.array.length) {
+				if (document.array_box.array.checked)  {
+	            	files = files + "&files=" + document.array_box.array.value;
+	        	}
+			}
+			
+
+			if (files == "") {
+
+				alert("ERROR! No images selected");
+
+			}
+			else {
+
+//				win1 = window.open("?run=images"+times+"&what="+what+"&res=box&pid="+pid+files,"Box_Images","resizable=1, directories=0,location=0,status=0,scrollbars=1,toolbar=0,menubar=0");
+//				win1.focus();
+				
+				win1 = window.open("","Box_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+				document.array_box.run.value = "images"+times;
+				document.array_box.res.value = "box";
+				document.array_box.pid.value = pid;
+				document.array_box.submit();
+				win1.focus();
+			}
+
+		}
+		else if (what == "all") {
+		
+//			var files = "";
+		
+			for (var i=0; i<document.array_box.array.length; i++)  {
+//				files = files + "&files=" + document.array_box.array[i].value; 
+
+				document.array_box.array[i].checked = true;
+			}
+			
+			if (! document.array_box.array.length) {
+				
+				document.array_box.array.checked = true;
+			
+			}
+			
+			
+//			win1 = window.open("?run=images"+times+"&what="+what+"&res=box&pid="+pid+files,"Box_Images","resizable=1, directories=0,location=0,status=0,scrollbars=1,toolbar=0,menubar=0");
+//			win1.focus();
+
+			win1 = window.open("","Box_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+			document.array_box.run.value = "images"+times;
+			document.array_box.res.value = "box";
+			document.array_box.pid.value = pid;
+			document.array_box.submit();
+			win1.focus();
+			
+			for (var i=0; i<document.array_box.array.length; i++)  {
+				document.array_box.array[i].checked = false;
+			}
+			
+			if (! document.array_box.array.length) {
+				
+				document.array_box.array.checked = false;
+			
+			}
+			
+		}
+		
+	
+	}
+	else if (res == "MA") {
+		if (what == "individual") {
+			win2 = window.open("/?run=images"+times+"&res=MA&pid="+pid+"&array="+file,"MA_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+			win2.focus();
+		}
+		else if (what == "selection") {
+		
+			var files = "";
+			
+			for (var i=0; i<document.array_MA.array.length; i++)  {
+				if (document.array_MA.array[i].checked)  {
+	            	files = files + "&files=" + document.array_MA.array[i].value;
+	        	} 
+			}
+			
+			if (! document.array_MA.array.length) {
+				if (document.array_MA.array.checked)  {
+	            	files = files + "&files=" + document.array_MA.array.value;
+	        	}
+			}
+			
+			if (files == "") {
+
+				alert("ERROR! No images selected");
+
+			}
+			else {
+
+//				win2 = window.open("?run=images"+times+"&what="+what+"&res=MA&pid="+pid+files,"MA_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+//				win2.focus();
+
+				win2 = window.open("","MA_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+				document.array_MA.run.value = "images"+times;
+				document.array_MA.res.value = "MA";
+				document.array_MA.pid.value = pid;
+				document.array_MA.submit();
+				win2.focus();
+			}
+			
+		}
+		else if (what == "all") {
+		
+//			var files = "";
+			
+			for (var i=0; i<document.array_MA.array.length; i++)  {
+//				files = files + "&files=" + document.array_MA.array[i].value; 
+				
+				document.array_MA.array[i].checked = true;
+			}
+//			win2 = window.open("?run=images"+times+"&what="+what+"&res=MA&pid="+pid+files,"MA_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+//			win2.focus();
+			
+			if (! document.array_MA.array.length) {
+				
+				document.array_MA.array.checked = true;
+			
+			}
+			
+			win2 = window.open("","MA_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+			document.array_MA.run.value = "images"+times;
+			document.array_MA.res.value = "MA";
+			document.array_MA.pid.value = pid;
+			document.array_MA.submit();
+			win2.focus();
+			
+			for (var i=0; i<document.array_MA.array.length; i++)  {
+				document.array_MA.array[i].checked = false;
+			}
+			
+			if (! document.array_MA.array.length) {
+				
+				document.array_MA.array.checked = false;
+			
+			}
+		}
+		
+	}
+	
+	
+	else if (res == "image") {
+		if (what == "individual") {
+			win2 = window.open("/?run=images"+times+"&res=image&pid="+pid+"&array="+file,"Image_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+			win2.focus();
+		}
+		else if (what == "selection") {
+		
+			var files = "";
+			
+			for (var i=0; i<document.array_image.array.length; i++)  {
+				if (document.array_image.array[i].checked)  {
+	            	files = files + "&files=" + document.array_image.array[i].value;
+	        	} 
+			}
+			
+			if (! document.array_image.array.length) {
+				if (document.array_image.array.checked)  {
+	            	files = files + "&files=" + document.array_image.array.value;
+	        	}
+			}
+
+			if (files == "") {
+
+				alert("ERROR! No images selected");
+
+			}
+			else {
+
+//				win2 = window.open("?run=images"+times+"&what="+what+"&res=image&pid="+pid+files,"Image_Images","resizable=1, directories=0,location=0,status=0,scrollbars=1,toolbar=0,menubar=0");
+//				win2.focus();
+
+				win2 = window.open("","Image_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+				document.array_image.run.value = "images"+times;
+				document.array_image.res.value = "image";
+				document.array_image.pid.value = pid;
+				document.array_image.submit();
+				win2.focus();
+			}
+			
+		}
+		else if (what == "all") {
+		
+//			var files = "";
+			
+			for (var i=0; i<document.array_image.array.length; i++)  {
+//				files = files + "&files=" + document.array_image.array[i].value; 
+				
+				document.array_image.array[i].checked = true;
+			}
+//			win2 = window.open("?run=images"+times+"&what="+what+"&res=image&pid="+pid+files,"Image_Images","resizable=1, directories=0,location=0,status=0,scrollbars=1,toolbar=0,menubar=0");
+//			win2.focus();
+			
+			if (! document.array_image.array.length) {
+				
+				document.array_image.array.checked = true;
+			
+			}
+			
+			win2 = window.open("","Image_Images","resizable=1, directories=1,location=1,status=1,scrollbars=1,toolbar=1,menubar=1");
+			document.array_image.run.value = "images"+times;
+			document.array_image.res.value = "image";
+			document.array_image.pid.value = pid;
+			document.array_image.submit();
+			win2.focus();
+			
+			for (var i=0; i<document.array_image.array.length; i++)  {
+				document.array_image.array[i].checked = false;
+			}
+			
+			if (! document.array_image.array.length) {
+				
+				document.array_image.array.checked = false;
+			
+			}
+		}
+		
+	}
+	
+	
+	return false;
+}
+
+
+//]]></script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body bgcolor="#EEEEEE" background="/img/cnio_tiled_nj.gif">
+<form method="post" action="/" enctype="multipart/form-data" name="array">
+		
+		<center>
+    		<table border=0 cellspacing=0 width="100%">
+    			<tr bgcolor="#D4DFF4">
+    				<td rowspan="3" align=center width=140>
+    					<a href="http://dnmad.bioinfo.cnio.es">
+						<img SRC="http://dnmad.bioinfo.cnio.es/img/dnmad_logo_small.png" border=0 alt="DNMAD">
+						</a>
+					</td>
+    				<td bgcolor="#4466FF" align=center width="100%">
+    					<a href="http://bioinfo.cnio.es" STYLE="text-decoration:none">
+    					<font color=white>
+						<b>Bioinformatics Unit</b>
+						</font>
+						</a>
+    					&nbsp; - &nbsp;
+    					<a href="http://www.cnio.es" STYLE="text-decoration:none">
+    					<font color=white>
+						<b>CNIO</b>
+						</font>
+						</a>
+					</td>
+    				<td rowspan="3" align=center width=124>
+    					<!--<a href="http://bioinfo.cnio.es">
+    					<img src="http://dnmad.bioinfo.cnio.es/img/bioinfo.png" border=0>
+						</a>-->
+					</td>
+    			</tr>
+				<tr>
+    				<td bgcolor="#D4DFF4" align=center valign=middle  STYLE="font-size:12">
+    					<br>
+    					<font size=5>
+						<b>&nbsp;DNMAD</b>
+						</font>
+						<br>&nbsp;
+    				</td>
+				</tr>
+				<tr>
+    				<td bgcolor="#4466FF" align=center>
+    					&nbsp;
+    				</td>
+				</tr>
+			</table>
+		</center>
+		<br><br>
+	
+		<center>
+		<table border=0 width=90% cellpadding=3 cellspacing=10>
+			<tr>
+				<td bgcolor="#436EEE">
+					<font color="#F6F6F6"><b>&nbsp;&nbsp;Array files selection</b>&nbsp;&nbsp;
+					<a href="#" onClick="help_win('#requirements'); return false;">
+					<img src="/img/info.gif" border="0">
+					</a>
+					</font>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<table width=100% cellpadding=3 cellspacing=10>
+					<tr>
+					<td nowrap>
+					To enter individual uncompressed files of arrays, enter the number
+					of arrays you want to normalize
+					in the<br> following textbox:&nbsp;&nbsp;
+					<a href="#" onClick="help_win('#individual'); return false;">
+					<img src="/img/info.gif" border="0">
+					</a> 
+					<input type="text" name="ind_files" size="4"><br>
+					Then click on the following button: &nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="run" value="Change to uncompressed files mode">
+					<br><br><br>
+
+					<b>Alternatively</b>, you can select a <b>compressed file</b> of arrays:&nbsp;&nbsp;
+					<a href="#" onClick="help_win('#compressed'); return false;">
+					<img src="/img/info.gif" border="0">
+					</a> <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="arrays_file" size="60">
+					<font size="-1"> &nbsp;&nbsp;&nbsp;&nbsp; <br><br>red(Cy5)/green(Cy3) ratio <input type="radio" name="arrays_file_rg" value="1" checked> 
+					or green(Cy3)/red(Cy5) ratio <input type="radio" name="arrays_file_rg" value="-1"></font>
+					</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			<!--<tr>
+				<td>
+					&nbsp;&nbsp;&nbsp;&nbsp; Or select a number of individual uncompressed files:&nbsp;&nbsp;
+					<a href="#" onClick="help_win('#individual'); return false;">
+					<img src="/img/info.gif" border="0">
+					</a> 
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="ind_files" size="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+					<input type="submit" name="run" value="Change">
+				</td>
+			</tr>-->
+			<tr>
+				<td>
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td bgcolor="#436EEE" width="50%">
+								<font color="#F6F6F6">
+								<b>&nbsp;&nbsp;Enter layout information</b>&nbsp;&nbsp;
+								<a href="#" onClick="help_win('#layout'); return false;">
+								<img src="/img/info.gif" border="0">
+								</a>
+								</font>
+							</td>
+							<td bgcolor="#436EEE">
+								<font color="#F6F6F6">
+								<b>&nbsp;&nbsp;Choose your normalization options</b>&nbsp;&nbsp;
+								<a href="#" onClick="help_win('#options'); return false;">
+								<img src="/img/info.gif" border="0">
+								</a>
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table border=0 cellpadding=3>
+									<tr>
+										<td>
+										</td>
+										<td align=center>
+											Rows
+										</td>
+										<td>
+										</td>
+										<td align=center>
+											Columns
+										</td>
+									</tr>
+									<tr>
+										<td>
+											&nbsp;&nbsp;&nbsp;&nbsp; Main grid:
+										</td>
+										<td  align=center>
+											<input type="text" name="ngr" size="5" value="">
+										</td>
+										<td align=center>
+											X
+										</td>
+										<td align=center>
+											<input type="text" name="ngc" size="5" value="">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											&nbsp;&nbsp;&nbsp;&nbsp; Sub-grid:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</td>
+										<td align=center>
+											<input type="text" name="nsr" value="" size="5">
+										</td>
+										<td align=center>
+											X
+										</td>
+										<td align=center>
+											<input type="text" name="nsc" value="" size="5">
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td>
+								<table border=0 cellpadding=3>
+									<tr>
+										<td>
+											<input type="checkbox" name="flags" value="yes" checked onClick="check_flags()"> Use negative flags<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="flagged" value="yes" checked onClick="check_flagged()"> Return negative flagged points as NA<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="fpositive" value="yes" onClick="check_fpositive()"> Use positive flags<br>
+											<input type="checkbox" name="BS" value="yes" checked onClick="check_bs()"> Use background correction<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="bgsubtract" value="subtract" onClick="check_half()"> Use background subtraction<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="bgsubtract" value="half" onClick="check_half()" checked> Use 'half'<br>
+											<input type="checkbox" name="global" value="yes"> Use global loess<br>
+										</td>
+									</tr>
+								</table>								
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#436EEE">
+				</td>
+			</tr>
+<!--			<tr>
+				<td align="center">
+					<br>
+					Enter your e-mail (optional) <input type="text" name="mail" size="30">&nbsp;&nbsp;
+					<a href="#" onClick="help_win('#mail'); return false;">
+					<img src="/img/info.gif" border="0">
+					</a>
+				</td>
+			</tr>
+-->			
+		</table>
+		<center>
+		<br>
+		<input type="submit" name="run" value="Run">
+		&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value=" Clear Form ">
+		&nbsp;&nbsp;
+		<a href="#" onClick="help_win(''); return false;">
+		<b>Help</b>&nbsp;&nbsp;
+		<img src="/img/info.gif" border="0">
+		</a>
+		</center>
+	
+		<br><br>
+    		<table border=0 width="100%" BGCOLOR="#D4DFF4" celllspacing=0>
+    			<tr>
+					<td align=left>
+						<font size=2>
+						Click <a href="/"><b>here</b></a> to start a new normalization process. Please read the deprecation warning in the help before proceeding. 
+						<a href="/help/dnmad-help.html" target="_blank">
+						<b>Help<b> <img src="/img/info.gif" border="0">
+						</a>
+					</td>
+    				<td align=right>
+						<font size=2>
+						&nbsp;Send comments to the <a href="mailto:rdiaz@cnio.es">webmaster</a>.
+    					Last rev. July 29th, 2005. (caton)
+    					</font>
+					</td>
+    			</tr>
+		</table>
+<table width="100%"><tr>
+					<TD align="right" width="200"><a href="http://asterias.bioinfo.cnio.es"><img src="/img/asterias_app.png" width="200" height="40" border="0"></a>
+<p><font size=2><b><a href="http://asterias.bioinfo.cnio.es">Asterias</a></b>, a parallelized, web-based suite for the analysis of genomic data, includes applications for differential gene expression, normalization, survival analysis, aCGH, etc. See further details in the paper in <a href="http://nar.oxfordjournals.org/cgi/content/abstract/35/suppl_2/W75">NAR</a></font></p>
+</TD>
+    			</tr>
+		</table>
+    	</form>
+		</body>
+    	</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0039)http://mail.med.upenn.edu/~zhiwei/GAME/ -->
+<HTML><HEAD><TITLE>GALF-G</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="GALF-G A Generalized Model for Realistic Multiple TFBS Motifs Discovery Using Genetic Algorithm" name=dc.title>
+<META content="Maintained by Cyrus Tak-Ming Chan" name=dc.creator>
+<META scheme=ISO639-2 content=eng name=dc.language>
+<META 
+content="genetic algorithm, motif discovery, transcription factor binding sites, TFBS, GALF, GALF-P, GALF-G" 
+name=dc.keywords>
+<META 
+content="genetic algorithm, motif discovery, transcription factor binding sites, TFBS, GALF, GALF-P, GALF-G" 
+name=KEYWORDS>
+<META content="GALF-G: A Generalized Model for Realistic Multiple TFBS Motifs Discovery Using Genetic Algorithm" 
+name=DESCRIPTION>
+<META content="Tak-Ming Chan" name=AUTHOR>
+<STYLE type=text/css>
+.style1 {
+	COLOR: #0066CC}
+.style4 {
+	font-size: medium;
+	color: #0066CC;
+}
+.style6 {color: #999999}
+.style8 {color: #0033CC; font-style: italic; }
+</STYLE>
+
+<META content="MSHTML 6.00.2900.3132" name=GENERATOR></HEAD>
+<BODY>
+<TABLE width=826>
+  <TBODY>
+  <TR>
+  <TD width=267><img src="GALFG.png" alt="GALF-G Logo" width="267" height="78" longdesc="This is the logo image for GALF-G."></TD>
+  <TD width=547>&nbsp;</TD>
+  </TR>
+  <TR>
+    <TD colspan="2">
+      <H1><SPAN class=style1>GALF-G</SPAN> <span class="style4">--Discovering Multiple Realistic TFBS Motifs Based on a Generalized Model</span><BR>
+        <SPAN class=style1>G</SPAN>enetic 
+      <SPAN class=style1>A</SPAN>lgorithm with <SPAN class=style1>L</SPAN>ocal <SPAN class=style1>F</SPAN>iltering - <SPAN class=style1>G</SPAN>eneralized</H1>      </TD></TR>
+  </TBODY></TABLE>
+<HR color="#0066CC">
+
+<TABLE cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD height=600>
+      <H2><A name=overview class="style1">Overview</A></H2>
+      <UL>
+        <LI>GALF-G is a novel method to discover  multiple realistic TFBS motifs in DNA sequences. 
+		It is based on the  generalized model which evaluates the input width range
+simultaneously and the meta-convergence framework to discover multiple (overlapping) motifs simultaneously. The proposed
+GALF-G (G for generalized) is extended from the GA-based <a href="http://www.cse.cuhk.edu.hk/~tmchan/GALFP" target="_blank">GALF-P</a> with the
+generalized model and meta convergence to handle multiple and
+possibly overlapping motifs. </LI>
+      </UL>
+      <HR>
+
+      <H2><A name=download class="style1">Download</A></H2>
+      <UL>
+        <LI><a href="Program/GALFG_release_140509.zip" target="_blank">Win32 Version</a>: The program can be run directly in command line mode on Windows platforms after extraction by WinRAR or WinZip. </LI>
+        <LI>To run: Click Start-&gt;Run...-&gt;type <em>cmd</em>-&gt;OK to go to cmd (command line) mode. Go to the directory containing GALFG.exe and type GALFG.exe </LI>
+        <!--<LI>Linux Version (upon request)</LI>-->
+      </UL>
+      <HR>
+
+      <H2><A name=documentation class="style1">Usage</A></H2>
+      <UL>
+        <li><strong>Click to see the full <a href="GALFG_help.txt" target="_blank">GALF-G Help </a> </strong> <br><br>
+        </li>
+        <li><strong>Basic Usage</strong><strong>:</strong> <span class="style4">GALFG.exe -i input_file -o output_file [[-w width] [-minw min_width -maxw max_width] [-prior distribution]]</span><br>
+          <br>
+          <table width="95%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td colspan="4">Compulsary ones (input and output):</td>
+              </tr>
+            <tr>
+              <td width="2%">&nbsp;</td>
+              <td width="14%">-i input_file</td>
+              <td width="2%">&nbsp;</td>
+              <td width="82%">the fasta file to read in</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>-o output_file</td>
+              <td>&nbsp;</td>
+              <td>the file to store the result details</td>
+            </tr>
+            <tr>
+              <td colspan="4">Motif width(s) <span class="style4">[(Motif width(s))...]</span>:</td>
+              </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td> -w width</td>
+              <td>&nbsp;</td>
+              <td>the motif width when it is able to be specified, e.g. when users have prior knowledge on an expected width. By inputting -w width only without the -minw and -maxw, the user should have an exact and fixed width in mind in that situation.</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>-minw min_width -maxw max_width</td>
+              <td>&nbsp;</td>
+              <td>they together specify the width range of interest, and have to be input together. The maximal range to handle is 10. </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>-prior distribution</td>
+              <td>&nbsp;</td>
+              <td>the distribution for the motif widths in the range; choices: unif (uniform; default), pois(Poisson) and cstm (customized) </td>
+            </tr>
+            <tr>
+              <td colspan="4"><p>&nbsp;</p>
+                <p>The above set of arguments (Compulsary ones and Motif width(s)),  have to be input in order and before the other optional parameters</p></td>
+              </tr>
+          </table>
+		  <br>
+        </li>
+        <li><strong>Motif Config Usage: </strong><span class="style4">GALFG.exe -i input_file -o output_file [(Motif width(s))...] [-n Types\-b Beta\-fmode Mode]</span>		<br>
+		<br>
+          <table width="95%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="2%">&nbsp;</td>
+              <td width="14%">-n Types</td>
+              <td width="2%">&nbsp;</td>
+              <td width="82%">number of motif types (default: 5) </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>-b Beta</td>
+              <td>&nbsp;</td>
+              <td>threshold for the similarity test (default: 0.3; can be set towards 1 for highly different motifs (e.g. 0.5), and towards 0 for close motifs (e.g. 0.1)) </td>
+            </tr>
+            
+            <tr>
+              <td>&nbsp;</td>
+              <td> -fmode Mode </td>
+              <td>&nbsp;</td>
+              <td>the assumption of motif distributions; options:</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp; ANOPS (default; any number of occurrence per sequence);</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp; OOPS (one occurrence per sequence);</td>
+            </tr>
+			<tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp; ZOOPS (zero or one occurrence per sequence);</td>
+            </tr>
+			<tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp; MOOPS (more than one occurrence per sequence)</td>
+            </tr>
+			<tr>
+              <td colspan="4"><p>&nbsp;</p>
+                <p>The above optional parameters can be input in independent orders (after Motif width(s)), and later repetitive parameters will overwrite the former. </p></td>
+              </tr>
+            </table>
+		</li> 
+		<br> 
+		<li><strong>Repeat Mask Usage: </strong><span class="style4">GALFG.exe -i input_file -o output_file [(Motif width(s))...] [-mskact MASKACT -msklen MASKLENGTH -mskoff MASKOFF]</span>		<br>
+		<br>
+		<table width="95%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <td width="2%">&nbsp;</td>
+		    <td width="14%">-mskact MASKACT</td>
+		    <td width="2%">&nbsp;</td>
+		    <td width="82%">the activation switch for repeat pattern (e.g. AAAAAAAA (single repeats), ATATATAT (double repeats)...) removal (0: off, default; 1: on).<br>
+		      If -vote is off, VOTINGTH and VOTINGW will be ignored </td>
+		    </tr>
+		  <tr>
+		    <td width="2%">&nbsp;</td>
+		    <td width="14%">-msklen MASKLENGTH</td>
+		    <td width="2%">&nbsp;</td>
+		    <td width="82%">the length for a repeat pattern to be removed (default: 6); </td>
+		    </tr>
+		  <tr>
+		    <td width="2%">&nbsp;</td>
+		    <td width="14%">-mskoff MASKOFF</td>
+		    <td width="2%">&nbsp;</td>
+		    <td width="82%">the expansion offset flag (0: off; 1: on, default). If MASKOFF is on, then we will remove maxw-1 nucleotides before the repeat pattern to avoid any overlap of the candidate instances </td>
+		    </tr>
+			<tr>
+              <td colspan="4"><p>&nbsp;</p>
+                <p>The above set of arguments (Compulsary ones and Motif width(s)),  have to be input in order and before the other optional parameters</p></td>
+              </tr>
+		  </table>
+        </li> 
+		<br>    
+        <li><strong>Extreme Voting  Usage: </strong><span class="style4">for extreme datasets and poorly conserved TFBSs </span>(e.g. Tompa et al Benchmark) 
+		<br>
+		<br>
+		<table width="95%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="2%">&nbsp;</td>
+              <td width="14%"><a href="Extreme.htm" target="_blank">Details</a></td>
+              <td width="2%">&nbsp;</td>
+              <td width="82%">Warning: this is not a normal mode for the program. It only serves to investigate the extreme cases for an explorary purpose. </td>
+            </tr>
+            </table>
+		
+		</li>
+      </UL>
+	  <br>
+       <HR>
+
+      <H2><A name=reference></A><span class="style1">Result Formats </span></H2>
+      <UL>
+        <LI>First lines include the running command and parameter settings.</LI>
+        <LI><span class="style4">Motif #</span> shows the different output motifs ranked by their final fitness; (<span class="style4">Slot[x]</span> means its ranking before (optional) instance refinement) </LI>
+        <LI><span class="style8">Fit</span>: the final fitness; <span class="style8">ic</span>: information content; <span class="style8">instance_num</span>: the number of TFBS instances in the output motif; <span class="style8">width</span>: the core width of the motif; offset: the offset of the core width (out of the maximal width from zero)</LI>
+        <LI>Instance: 
+		<br>
+		<strong class="style4">sequence number (from 0)</strong> <span class="style6">\tab</span> <span class="style8">sequence comment in the fasta file</span> <span class="style6">\tab</span> <strong>position of the TFBS (offest already added)</strong> <span class="style6">\tab</span> <em>the subsequence of the TFBS (with the core width (6) in the below examples) </em> <br>
+		Example: <strong class="style4"> &nbsp;&nbsp;3</strong>	 <span class="style8">  &nbsp;&nbsp;>M26773 |446-451:CAACTG|</span> <strong> &nbsp;&nbsp;146</strong>	<em> &nbsp;&nbsp;CAACTG</em><br>
+		Example: <strong class="style4"> &nbsp;&nbsp;4</strong>	 <span class="style8">  &nbsp;&nbsp;>M86232 |447-452:CACTTG|</span> <strong> &nbsp;&nbsp;35</strong>	<em> &nbsp;&nbsp;&nbsp;cagttg
+</em><br>
+		Example: <strong class="style4"> &nbsp;&nbsp;4</strong>	 <span class="style8">  &nbsp;&nbsp;>M86232 |447-452:CACTTG|</span> <strong>  &nbsp;&nbsp;147</strong>	<em> &nbsp;&nbsp;CACTTG</em>    (The same sequence as the previous but a different instance)
+		</LI>
+        </UL> 
+	  <br>
+       <HR>
+
+      <H2><A name=reference></A><span class="style1">Examples</span></H2>
+      <UL>
+        <LI><a href="Examples.htm" target="_blank">Examples with explanations</a></LI>
+        <LI>Results for the improved eukaryotic benchmark: <a href="Examples/8_10_Mask2.zip" target="_blank">8_10_Mask2.zip</a> (Running parameters:<span class="style1">  -i input -o output -minw 8 -maxw 10 -fmode ZOOPS -len 4000 -n 1 -mskact 1 -msklen 6 -mskoff 1</span>) </LI>
+      </UL> 
+	   <!--<HR>
+
+      <H2><A name=reference>Reference</A></H2>
+      <UL>
+        <LI>Chan, T.-M., Leung, K.-S. and Lee, K.-H., A Novel Framework for TFBS Identification Based on Genetic Algorithm with Combined Representation. <em>Coming soon</em>.</LI>
+      </UL> -->
+	   <HR>
+
+      <H2><A name=reference class="style1">Supplementary Materials</A></H2>
+      <UL>
+        <LI><!--<A 
+        href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/22/13/1577?etoc">-->
+          <a href="Datasets.htm" target="_blank">Experiment Datasets</a> (800 Synthetic Datasets; 8 Real Datasets; Benchmark Datasets) </LI>
+        <LI><a href="GALFGSuppl.pdf" target="_blank">Supplementary Materials for Discovering Multiple Realistic TFBS Motifs Based on a Generalized Model</a>
+          <!--</A>-->
+        </LI>
+      </UL> 
+      <HR>
+
+      <H2><A name=contact class="style1">Contact</A></H2>
+      <P><IMG src="contact.gif" alt="Email: tmchan at cse dot cuhk dot edu dot hk" width="280" height="25"></P>
+      <P>Last update: 26/07/2009</P>
+      <HR>    </TD></TR></TBODY></TABLE>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-2928164-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</BODY></HTML>

@@ -1,0 +1,583 @@
+<HTML>
+<HEAD>
+<meta name="description" content="MOSAIC : a relational database for comparative genomics of bacteria using complete genome multiple alignment, MOSAIC : une base de donnée relationnelle pour la génomique comparée des bactéries utilisant des alignements de génomes complets.">
+<meta name="keywords" content="complete genome alignment, bacterial genomes, comparative genomics, alignement de génomes complets, bacteries, génomique comparée">
+<TITLE>MOSAIC</TITLE>
+<link REL="stylesheet" TYPE="text/css" href="mosaic.css">
+</HEAD>
+<BODY bgcolor="#ffffff" text="#000000" link="#333399" alink="#9999ff" vlink="#000066">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+<tr><td align="left" valign="top" width="30%">
+       <a href="http://www.inra.fr" target=_blank>
+	<img src="http://genome.jouy.inra.fr/mosaic/Images/LogoINRAtrans.gif" border=0 alt="http://www.inra.fr"></a>
+</td><td align="center"  valign="middle" width=40%>
+	<img src="http://genome.jouy.inra.fr/mosaic/Images/mosaic-logo.gif" alt=Mosaic title=MOSAIC>
+<br><a href="http://genome.jouy.inra.fr/mosaic ">
+<img src="http://genome.jouy.inra.fr/mosaic/Images/fleche_home.gif" alt="Mosaic home page" title="MOSAIC home page">
+</a>
+
+</td><td align ="right" valign="middle" width=30%>
+<a href=http://genome.jouy.inra.fr/mosaic/doc.cgi><font size=4><b>documentation</b></font></a></td></tr>
+</table>
+</CENTER>
+
+<TABLE ALIGN=right>
+<TR>
+<TD ALIGN="right" class="nopadding"><form method="post" action="/mosaic/" enctype="multipart/form-data">
+</TD></TR><TR><TD ALIGN="right"><FONT SIZE = -2>Login</FONT><INPUT TYPE="text" name="login" size=8>
+</TD></TR><TR><TD ALIGN="right" class="nopadding" NOWRAP><FONT SIZE = -2>Password</FONT><input type="password" name="password"  size="8" /></TD></TR><TR><TD class="nopadding" align=center><input type="submit" name="Private access" value="Private access" /></form></TD></TR></TABLE><br><p align=right><br><font size=-2></font><BR><BR></p><CENTER>
+<TABLE  BGCOLOR=white width=85%<TR><TD><FONT COLOR="#008080" SIZE=2><CENTER><FONT SIZE=4>Welcome to MOSAIC !</FONT></CENTER><BR><p style="margin-left:50px;">
+MOSAIC is a relational database and web interface developed to compare closely related bacterial genomes.<BR>Genomes of different strains of the same species are aligned with either the <A HREF="http://bibiserv.techfak.uni-bielefeld.de/mga/">MGA</A> (Höhl <I>et al</I> 2002) software or the <A HREF="http://asap.ahabs.wisc.edu/mauve/index.php">MAUVE</A> (Darling <I>et al</I> 2004) to determine almost identical regions constituting the <I><B>backbone</B></I> which is interrupted by strain specific sequences (the <I><B>variable_segments</B></I>).<BR>In MOSAIC you can browse alignments, extract backbone and variable_segments sequences and get a graphical visualisation of the aligned genomes.<BR>If you use MOSAIC please cite <a href=http://www.biomedcentral.com/1471-2105/6/171>Chiapello /et al/.  /BMC Bioinformatics/ 2005</a> and <a href=http://www.biomedcentral.com/1471-2105/9/498>Chiapello /et al/.  /BMC Bioinformatics/ 2008</a></p></FONT></TD></TR>
+</td></tr></TABLE>
+<CENTER>
+<TABLE  BGCOLOR=white width=85%<tr><td align=center class="header" width=33% style="color:#0054FF><FONT COLOR="#0054FF">New release available (release 5.1., Jan. 2010) : 1013 comparisons of 149 bacterial species</FONT><BR><BR>
+</td></tr></TABLE>
+<TABLE class="main" BORDER = 1><TR><TD rowspan=2><TABLE ALIGN=top style="width : 100%"><TH style="border-color:#37B7ED;border-style:solid;border-width=1px;color:#0054FF;text-align:center;font-size:small;">SELECT A RELEASE </font></TH></TABLE><BR><TABLE ALIGN=middle><TR><TD style="font-size:14"><form method="post" action="/mosaic/" enctype="application/x-www-form-urlencoded">
+<select name="release"  size="9">
+<option selected="selected" value="release5.1">release5.1 (2009-11-26)</option>
+<option value="release5">release5 (2009-02-02)</option>
+<option value="release4.1">release4.1 (2008-09-01)</option>
+<option value="release4.0">release4.0 (2008-06-01)</option>
+<option value="private">private ()</option>
+<option value="other">other ()</option>
+</select></TD></TR><TR><TD align="center"><input type="submit" name="select_release" value="Actualiser" /><div><input type="hidden" name=".cgifields" value="release"  /></div></form></TD></TR></TABLE></TD><TD><TABLE style="width : 100%"><TH style="border-color:#37B7ED;border-style:solid;border-width=1px;color:#0054FF;text-align:center;font-size:small;" COLSPAN=3>ACCESS BY SPECIES <font size=-2>(Main access to the comparisons available in MOSAIC) </font></TH></TABLE><TABLE ALIGN=LEFT><TR><TD style="color:#008080"><B>Select a species :</B><form method="post" action="/mosaic/" enctype="application/x-www-form-urlencoded">
+<select name="species"  size="10">
+<option value="Acidithiobacillus ferrooxidans">Acidithiobacillus ferrooxidans</option>
+<option value="Acinetobacter baumannii">Acinetobacter baumannii</option>
+<option value="Actinobacillus pleuropneumoniae">Actinobacillus pleuropneumoniae</option>
+<option value="Aliivibrio fischeri">Aliivibrio fischeri</option>
+<option value="Anaeromyxobacter dehalogenans">Anaeromyxobacter dehalogenans</option>
+<option value="Anaplasma marginale">Anaplasma marginale</option>
+<option value="Bacillus anthracis">Bacillus anthracis</option>
+<option value="Bacillus cereus">Bacillus cereus</option>
+<option value="Bacillus licheniformis">Bacillus licheniformis</option>
+<option value="Bacillus thuringiensis">Bacillus thuringiensis</option>
+<option value="Bacteroides fragilis">Bacteroides fragilis</option>
+<option value="Bifidobacterium animalis">Bifidobacterium animalis</option>
+<option value="Bifidobacterium longum">Bifidobacterium longum</option>
+<option value="Borrelia burgdorferi">Borrelia burgdorferi</option>
+<option value="Brucella abortus">Brucella abortus</option>
+<option value="Brucella melitensis">Brucella melitensis</option>
+<option value="Brucella suis">Brucella suis</option>
+<option value="Buchnera aphidicola">Buchnera aphidicola</option>
+<option value="Burkholderia ambifaria">Burkholderia ambifaria</option>
+<option value="Burkholderia cenocepacia">Burkholderia cenocepacia</option>
+<option value="Burkholderia mallei">Burkholderia mallei</option>
+<option value="Burkholderia multivorans">Burkholderia multivorans</option>
+<option value="Burkholderia pseudomallei">Burkholderia pseudomallei</option>
+<option value="Campylobacter jejuni">Campylobacter jejuni</option>
+<option value="Chlamydia pneumoniae">Chlamydia pneumoniae</option>
+<option value="Chlamydia trachomatis">Chlamydia trachomatis</option>
+<option value="Chloroflexus aurantiacus">Chloroflexus aurantiacus</option>
+<option value="Clavibacter michiganensis">Clavibacter michiganensis</option>
+<option value="Clostridium botulinum">Clostridium botulinum</option>
+<option value="Clostridium kluyveri">Clostridium kluyveri</option>
+<option value="Clostridium perfringens">Clostridium perfringens</option>
+<option value="Corynebacterium glutamicum">Corynebacterium glutamicum</option>
+<option value="Coxiella burnetii">Coxiella burnetii</option>
+<option value="Desulfitobacterium hafniense">Desulfitobacterium hafniense</option>
+<option value="Desulfovibrio vulgaris">Desulfovibrio vulgaris</option>
+<option value="Ehrlichia ruminantium">Ehrlichia ruminantium</option>
+<option value="Escherichia coli/Shigella">Escherichia coli/Shigella</option>
+<option value="Francisella tularensis">Francisella tularensis</option>
+<option value="Gluconacetobacter diazotrophicus">Gluconacetobacter diazotrophicus</option>
+<option value="Haemophilus influenzae">Haemophilus influenzae</option>
+<option value="Haemophilus somnus">Haemophilus somnus</option>
+<option value="Helicobacter pylori">Helicobacter pylori</option>
+<option value="Klebsiella pneumoniae">Klebsiella pneumoniae</option>
+<option value="Lactobacillus casei">Lactobacillus casei</option>
+<option value="Lactobacillus delbrueckii">Lactobacillus delbrueckii</option>
+<option value="Lactobacillus reuteri">Lactobacillus reuteri</option>
+<option value="Lactococcus lactis">Lactococcus lactis</option>
+<option value="Legionella pneumophila">Legionella pneumophila</option>
+<option value="Leptospira biflexa">Leptospira biflexa</option>
+<option value="Leptospira borgpetersenii">Leptospira borgpetersenii</option>
+<option value="Leptospira interrogans">Leptospira interrogans</option>
+<option value="Listeria monocytogenes">Listeria monocytogenes</option>
+<option value="Methanococcus maripaludis">Methanococcus maripaludis</option>
+<option value="Methylobacterium extorquens">Methylobacterium extorquens</option>
+<option value="Mycobacterium bovis">Mycobacterium bovis</option>
+<option value="Mycobacterium tuberculosis">Mycobacterium tuberculosis</option>
+<option value="Mycoplasma hyopneumoniae">Mycoplasma hyopneumoniae</option>
+<option value="Neisseria gonorrhoeae">Neisseria gonorrhoeae</option>
+<option value="Neisseria meningitidis">Neisseria meningitidis</option>
+<option value="Porphyromonas gingivalis">Porphyromonas gingivalis</option>
+<option value="Prochlorococcus marinus">Prochlorococcus marinus</option>
+<option value="Pseudomonas aeruginosa">Pseudomonas aeruginosa</option>
+<option value="Pseudomonas putida">Pseudomonas putida</option>
+<option value="Pseudomonas syringae">Pseudomonas syringae</option>
+<option value="Ralstonia pickettii">Ralstonia pickettii</option>
+<option value="Rhizobium etli">Rhizobium etli</option>
+<option value="Rhizobium leguminosarum">Rhizobium leguminosarum</option>
+<option value="Rhodobacter sphaeroides">Rhodobacter sphaeroides</option>
+<option value="Rhodopseudomonas palustris">Rhodopseudomonas palustris</option>
+<option value="Rickettsia bellii">Rickettsia bellii</option>
+<option value="Rickettsia rickettsii">Rickettsia rickettsii</option>
+<option value="Salmonella paratyphi">Salmonella paratyphi</option>
+<option value="Salmonella typhi">Salmonella typhi</option>
+<option value="Shewanella baltica">Shewanella baltica</option>
+<option value="Staphylococcus aureus">Staphylococcus aureus</option>
+<option value="Staphylococcus epidermidis">Staphylococcus epidermidis</option>
+<option value="Stenotrophomonas maltophilia">Stenotrophomonas maltophilia</option>
+<option value="Streptococcus agalactiae">Streptococcus agalactiae</option>
+<option value="Streptococcus equi">Streptococcus equi</option>
+<option value="Streptococcus mutans">Streptococcus mutans</option>
+<option value="Streptococcus pneumoniae">Streptococcus pneumoniae</option>
+<option value="Streptococcus pyogenes">Streptococcus pyogenes</option>
+<option value="Streptococcus suis">Streptococcus suis</option>
+<option value="Streptococcus thermophilus">Streptococcus thermophilus</option>
+<option value="Sulcia muelleri">Sulcia muelleri</option>
+<option value="Sulfolobus islandicus">Sulfolobus islandicus</option>
+<option value="Thermus thermophilus">Thermus thermophilus</option>
+<option value="Treponema pallidum">Treponema pallidum</option>
+<option value="Tropheryma whipplei">Tropheryma whipplei</option>
+<option value="Ureaplasma parvum">Ureaplasma parvum</option>
+<option value="Vibrio cholerae">Vibrio cholerae</option>
+<option value="Vibrio vulnificus">Vibrio vulnificus</option>
+<option value="Xanthomonas campestris">Xanthomonas campestris</option>
+<option value="Xanthomonas oryzae">Xanthomonas oryzae</option>
+<option value="Xylella fastidiosa">Xylella fastidiosa</option>
+<option value="Yersinia pestis">Yersinia pestis</option>
+<option value="Yersinia pseudotuberculosis">Yersinia pseudotuberculosis</option>
+</select><input type="submit" name="select_species" value="Submit" /><input type="hidden" name="release" value="release5.1"  /><div><input type="hidden" name=".cgifields" value="species"  /></div></form></TD></TR></TABLE>
+</TD></TR><TR><TD><TABLE style="width : 100%"><TH style="border-color:#37B7ED;border-style:solid;border-width=1px;color:#0054FF;text-align:center;font-size:small;" COLSPAN=3>ACCESS BY GENE NAME </b><font size=-2>(Access to the backbone/variable segment structure in the vicinity of a gene of interest)</font></TH></TABLE><TABLE>
+<TR><TD style="color:#008080;white-space:nowrap" COLSPAN=2><B>Select a strain and a gene name :</B><BR><FONT SIZE=-2>(Only select a strain to view the list of available genes for this strain)</FONT></TD><TD width=100% valign=top align = right rowspan=2></TD></TR><form method="post" action="/mosaic/" enctype="application/x-www-form-urlencoded">
+<TR VALIGN=top><TD style="color:#008080">
+Strain<BR><SELECT NAME="gene_strain" SIZE=5><OPTION VALUE="584" >Acidithiobacillus ferrooxidans strain ATCC 23270 / DSM 14882 / NCIB 8455
+<OPTION VALUE="585" >Acidithiobacillus ferrooxidans strain ATCC 53993
+<OPTION VALUE="568" >Acinetobacter baumannii strain AB0057
+<OPTION VALUE="303" >Acinetobacter baumannii strain ACICU
+<OPTION VALUE="304" >Acinetobacter baumannii strain ATCC 17978 / NCDC KC 755
+<OPTION VALUE="305" >Acinetobacter baumannii strain AYE
+<OPTION VALUE="306" >Acinetobacter baumannii strain SDF
+<OPTION VALUE="309" >Actinobacillus pleuropneumoniae strain AP6 / AP76, serovar 7
+<OPTION VALUE="307" >Actinobacillus pleuropneumoniae strain JL0 / JL03, serovar 3
+<OPTION VALUE="308" >Actinobacillus pleuropneumoniae strain L20, serovar 5b
+<OPTION VALUE="517" >Aliivibrio fischeri strain ATCC 700601 / ES114
+<OPTION VALUE="519" >Aliivibrio fischeri strain ATCC 700601 / ES114
+<OPTION VALUE="518" >Aliivibrio fischeri strain MJ11
+<OPTION VALUE="520" >Aliivibrio fischeri strain MJ11
+<OPTION VALUE="633" >Anaeromyxobacter dehalogenans strain 2CP-1 / ATCC BAA-258
+<OPTION VALUE="634" >Anaeromyxobacter dehalogenans strain 2CP-C
+<OPTION VALUE="657" >Anaplasma marginale strain Florida
+<OPTION VALUE="658" >Anaplasma marginale strain St. Maries
+<OPTION VALUE="624" >Bacillus anthracis strain A0248
+<OPTION VALUE="106" >Bacillus anthracis strain Ames ancestor
+<OPTION VALUE="104" >Bacillus anthracis strain Ames, isolate Porton
+<OPTION VALUE="625" >Bacillus anthracis strain CDC 684 / NRRL 3495
+<OPTION VALUE="105" >Bacillus anthracis strain Sterne
+<OPTION VALUE="569" >Bacillus cereus strain 03BB102
+<OPTION VALUE="591" >Bacillus cereus strain AH187
+<OPTION VALUE="592" >Bacillus cereus strain AH820
+<OPTION VALUE="107" >Bacillus cereus strain ATCC 10987
+<OPTION VALUE="108" >Bacillus cereus strain ATCC 14579 / DSM 31
+<OPTION VALUE="593" >Bacillus cereus strain B4264
+<OPTION VALUE="594" >Bacillus cereus strain G9842
+<OPTION VALUE="595" >Bacillus cereus strain Q1
+<OPTION VALUE="109" >Bacillus cereus strain ZK / E33L
+<OPTION VALUE="111" >Bacillus licheniformis strain DSM 13 / ATCC 14580, sub_strain Goettingen
+<OPTION VALUE="110" >Bacillus licheniformis strain DSM 13 / ATCC 14580, sub_strain Novozymes
+<OPTION VALUE="419" >Bacillus thuringiensis strain 97-27
+<OPTION VALUE="420" >Bacillus thuringiensis strain Al Hakam
+<OPTION VALUE="231" >Bacteroides fragilis strain ATCC 25285 / NCTC 9343
+<OPTION VALUE="232" >Bacteroides fragilis strain YCH46
+<OPTION VALUE="626" >Bifidobacterium animalis subsp. lactis, strain AD011
+<OPTION VALUE="627" >Bifidobacterium animalis subsp. lactis, strain Bl-04 / DGCC2908 / RB 4825 / SD5219
+<OPTION VALUE="628" >Bifidobacterium animalis subsp. lactis, strain DSM 10140 / JCM 10602 / LMG 18314
+<OPTION VALUE="409" >Bifidobacterium longum strain DJO10A
+<OPTION VALUE="421" >Bifidobacterium longum strain NCC 2705
+<OPTION VALUE="607" >Bifidobacterium longum subsp. infantis, strain ATCC 15697 / DSM 20088 / NCTC 11817 / S12
+<OPTION VALUE="572" >Borrelia burgdorferi strain DSM 4680 / B31 / CIP 102532 / ATCC 35210
+<OPTION VALUE="573" >Borrelia burgdorferi strain ZS7
+<OPTION VALUE="182" >Brucella abortus strain 2308, complete sequence.
+<OPTION VALUE="183" >Brucella abortus strain 2308, complete sequence.
+<OPTION VALUE="113" >Brucella abortus strain 9-941, K1.
+<OPTION VALUE="114" >Brucella abortus strain 9-941, K2.
+<OPTION VALUE="412" >Brucella abortus strain S19
+<OPTION VALUE="413" >Brucella abortus strain S19
+<OPTION VALUE="615" >Brucella melitensis biovar 2, strain ATCC 23457
+<OPTION VALUE="616" >Brucella melitensis biovar 2, strain ATCC 23457
+<OPTION VALUE="529" >Brucella melitensis strain NCTC 10094 / ATCC 23456 / 16M, biovar 1
+<OPTION VALUE="530" >Brucella melitensis strain NCTC 10094 / ATCC 23456 / 16M, biovar 1
+<OPTION VALUE="422" >Brucella suis strain 1330, biovar 1
+<OPTION VALUE="423" >Brucella suis strain 1330, biovar 1
+<OPTION VALUE="424" >Brucella suis strain ATCC 23445 / NCTC 10510
+<OPTION VALUE="425" >Brucella suis strain ATCC 23445 / NCTC 10510
+<OPTION VALUE="635" >Buchnera aphidicola subsp. Acyrthosiphon pisum, strain 5A
+<OPTION VALUE="217" >Buchnera aphidicola subsp. Acyrthosiphon pisum, strain Tokyo 1998
+<OPTION VALUE="636" >Buchnera aphidicola subsp. Acyrthosiphon pisum, strain Tuc7
+<OPTION VALUE="315" >Burkholderia ambifaria strain AMMD / ATCC BAA-244 chromosome 1
+<OPTION VALUE="313" >Burkholderia ambifaria strain AMMD / ATCC BAA-244 chromosome 2
+<OPTION VALUE="312" >Burkholderia ambifaria strain AMMD / ATCC BAA-244 chromosome 3
+<OPTION VALUE="316" >Burkholderia ambifaria strain MC40-6 chromosome 1
+<OPTION VALUE="314" >Burkholderia ambifaria strain MC40-6 chromosome 2
+<OPTION VALUE="311" >Burkholderia ambifaria strain MC40-6 chromosome 3
+<OPTION VALUE="322" >Burkholderia cenocepacia strain AU 1054 chromosome 1
+<OPTION VALUE="324" >Burkholderia cenocepacia strain AU 1054 chromosome 2
+<OPTION VALUE="318" >Burkholderia cenocepacia strain AU 1054 chromosome 3
+<OPTION VALUE="323" >Burkholderia cenocepacia strain HI2424 chromosome 1
+<OPTION VALUE="320" >Burkholderia cenocepacia strain HI2424 chromosome 2
+<OPTION VALUE="317" >Burkholderia cenocepacia strain HI2424 chromosome 3
+<OPTION VALUE="321" >Burkholderia cenocepacia strain MC0-3 chromosome 1
+<OPTION VALUE="325" >Burkholderia cenocepacia strain MC0-3 chromosome 2
+<OPTION VALUE="319" >Burkholderia cenocepacia strain MC0-3 chromosome 3
+<OPTION VALUE="332" >Burkholderia mallei strain ATCC 23344 chromosome 1
+<OPTION VALUE="328" >Burkholderia mallei strain ATCC 23344 chromosome 2
+<OPTION VALUE="327" >Burkholderia mallei strain NCTC 10229 chromosome I
+<OPTION VALUE="331" >Burkholderia mallei strain NCTC 10229 chromosome II
+<OPTION VALUE="329" >Burkholderia mallei strain NCTC 10247 chromosome I
+<OPTION VALUE="333" >Burkholderia mallei strain NCTC 10247 chromosome II
+<OPTION VALUE="326" >Burkholderia mallei strain SAVP1 chromosome I
+<OPTION VALUE="330" >Burkholderia mallei strain SAVP1 chromosome II
+<OPTION VALUE="339" >Burkholderia multivorans strain ATCC 17616 / 249 chromosome 1
+<OPTION VALUE="338" >Burkholderia multivorans strain ATCC 17616 / 249 chromosome 2
+<OPTION VALUE="337" >Burkholderia multivorans strain ATCC 17616 / 249 chromosome 3
+<OPTION VALUE="334" >Burkholderia multivorans strain ATCC 17616 / 249, sub_strain Tohoku University
+<OPTION VALUE="335" >Burkholderia multivorans strain ATCC 17616 / 249, sub_strain Tohoku University
+<OPTION VALUE="336" >Burkholderia multivorans strain ATCC 17616 / 249, sub_strain Tohoku University
+<OPTION VALUE="446" >Burkholderia pseudomallei strain 1106a
+<OPTION VALUE="448" >Burkholderia pseudomallei strain 1106a
+<OPTION VALUE="247" >Burkholderia pseudomallei strain 1710b, K1.
+<OPTION VALUE="245" >Burkholderia pseudomallei strain 1710b, K2.
+<OPTION VALUE="447" >Burkholderia pseudomallei strain 668
+<OPTION VALUE="449" >Burkholderia pseudomallei strain 668
+<OPTION VALUE="246" >Burkholderia pseudomallei strain K96243, K1.
+<OPTION VALUE="244" >Burkholderia pseudomallei strain K96243, K2.
+<OPTION VALUE="118" >Campylobacter jejuni strain NCTC 11168
+<OPTION VALUE="119" >Campylobacter jejuni strain RM1221
+<OPTION VALUE="451" >Campylobacter jejuni subsp. doylei, strain ATCC BAA-1458 / RM4099 / 269.97
+<OPTION VALUE="452" >Campylobacter jejuni subsp. jejuni, strain 81116 / NCTC 11828, serovar O:6
+<OPTION VALUE="450" >Campylobacter jejuni subsp. jejuni, strain 81-176, serovar O:23/36
+<OPTION VALUE="206" >Chlamydia pneumoniae strain AR39
+<OPTION VALUE="121" >Chlamydia pneumoniae strain CWL029
+<OPTION VALUE="120" >Chlamydia pneumoniae strain J138
+<OPTION VALUE="122" >Chlamydia pneumoniae strain TW-183
+<OPTION VALUE="184" >Chlamydia trachomatis strain A/HAR-13 / ATCC VR-571B
+<OPTION VALUE="123" >Chlamydia trachomatis strain D/UW-3/Cx
+<OPTION VALUE="453" >Chlamydia trachomatis strain L2/434/Bu / ATCC VR902B
+<OPTION VALUE="454" >Chlamydia trachomatis strain L2b/UCH-1/proctitis
+<OPTION VALUE="653" >Chloroflexus aurantiacus strain ATCC 29364 / DSM 637 / Y-400-fl
+<OPTION VALUE="654" >Chloroflexus aurantiacus strain ATCC 29366 / DSM 635 / J-10-fl
+<OPTION VALUE="341" >Clavibacter michiganensis subsp. michiganensis, strain NCPPB 382
+<OPTION VALUE="340" >Clavibacter michiganensis subsp. sepedonicus, strain ATCC 33113 / JCM 9667
+<OPTION VALUE="589" >Clostridium botulinum strain 657 / Type Ba4
+<OPTION VALUE="342" >Clostridium botulinum strain Alaska E43 / type E3
+<OPTION VALUE="346" >Clostridium botulinum strain ATCC 19397 / Type A
+<OPTION VALUE="343" >Clostridium botulinum strain Eklund 17B / type B
+<OPTION VALUE="344" >Clostridium botulinum strain Hall / ATCC 3502 / NCTC 13319 / Type A, sub_strain Los Alamos
+<OPTION VALUE="349" >Clostridium botulinum strain Hall / ATCC 3502 / NCTC 13319 / Type A, sub_strain Sanger
+<OPTION VALUE="570" >Clostridium botulinum strain Kyoto / Type A2
+<OPTION VALUE="347" >Clostridium botulinum strain Langeland / NCTC 10281 / Type F
+<OPTION VALUE="348" >Clostridium botulinum strain Loch Maree / Type A3
+<OPTION VALUE="345" >Clostridium botulinum strain Okra / Type B1
+<OPTION VALUE="608" >Clostridium kluyveri strain ATCC 8527 / DSM 555 / NCIMB 10680
+<OPTION VALUE="609" >Clostridium kluyveri strain NBRC 12016
+<OPTION VALUE="427" >Clostridium perfringens strain 13 / Type A
+<OPTION VALUE="428" >Clostridium perfringens strain ATCC 13124 / NCTC 8237 / Type A
+<OPTION VALUE="426" >Clostridium perfringens strain SM101 / Type A
+<OPTION VALUE="125" >Corynebacterium glutamicum strain NCIMB 10025 / DSM 20300 / ATCC 13032 / LMG 3730 / JCM 1318, sub_strain Kalinowski
+<OPTION VALUE="475" >Corynebacterium glutamicum strain R
+<OPTION VALUE="352" >Coxiella burnetii strain Dugway 5J108-111
+<OPTION VALUE="350" >Coxiella burnetii strain Nine Mile phase I / RSA 493
+<OPTION VALUE="504" >Coxiella burnetii strain Q154 / CbuK / CbuK_Q154
+<OPTION VALUE="503" >Coxiella burnetii strain Q212 / CbuG / CbuG_Q212
+<OPTION VALUE="351" >Coxiella burnetii strain RSA 331 / Henzerling II
+<OPTION VALUE="578" >Desulfitobacterium hafniense strain DCB-2 / DSM 10664
+<OPTION VALUE="579" >Desulfitobacterium hafniense strain Y51
+<OPTION VALUE="354" >Desulfovibrio vulgaris strain Hildenborough / ATCC 29579 / NCIMB 8303
+<OPTION VALUE="353" >Desulfovibrio vulgaris subsp. vulgaris, strain DP4
+<OPTION VALUE="127" >Ehrlichia ruminantium strain Gardel
+<OPTION VALUE="129" >Ehrlichia ruminantium strain Welgevonden, sub_strain ARC-OVI
+<OPTION VALUE="128" >Ehrlichia ruminantium strain Welgevonden, sub_strain CIRAD
+<OPTION VALUE="285" >Escherichia coli APEC01
+<OPTION VALUE="282" >Escherichia coli strain 536 / UPEC
+<OPTION VALUE="639" >Escherichia coli strain 55989 / EAEC
+<OPTION VALUE="476" >Escherichia coli strain ATCC 8739 / DSM 1576 / Crooks
+<OPTION VALUE="640" >Escherichia coli strain B / BL21
+<OPTION VALUE="641" >Escherichia coli strain B / REL606
+<OPTION VALUE="642" >Escherichia coli strain BW2952
+<OPTION VALUE="477" >Escherichia coli strain DH10B
+<OPTION VALUE="643" >Escherichia coli strain E2348/69 / EPEC / O127:H6
+<OPTION VALUE="478" >Escherichia coli strain E24377A / ETEC
+<OPTION VALUE="507" >Escherichia coli strain EC4115 / EHEC
+<OPTION VALUE="649" >Escherichia coli strain ED1 / 081a
+<OPTION VALUE="180" >Escherichia coli strain EDL933 / ATCC 700927 / O157:H7 / EHEC
+<OPTION VALUE="455" >Escherichia coli strain HS
+<OPTION VALUE="648" >Escherichia coli strain IAI1 / 08
+<OPTION VALUE="647" >Escherichia coli strain IAI39 / ExPEC / O7:K1
+<OPTION VALUE="130" >Escherichia coli strain K12
+<OPTION VALUE="646" >Escherichia coli strain S88 / ExPEC / O45:K1
+<OPTION VALUE="131" >Escherichia coli strain SAKAI / O157:H7
+<OPTION VALUE="508" >Escherichia coli strain SE11
+<OPTION VALUE="479" >Escherichia coli strain SMS-3-5 / SECEC
+<OPTION VALUE="644" >Escherichia coli strain TW14359 / EHEC / O157:H7
+<OPTION VALUE="645" >Escherichia coli strain UMN026 / ExPEC / O17:K52:H18
+<OPTION VALUE="132" >Escherichia coli strain UPEC / O6:H1 / ATCC 700928 / CFT073
+<OPTION VALUE="250" >Escherichia coli strain UTI89 / UPEC
+<OPTION VALUE="296" >Escherichia coli W3110 strain K12
+<OPTION VALUE="667" >Escherichia coli O103:H2 strain 12009 / EHEC
+<OPTION VALUE="668" >Escherichia coli O111:H- strain 11128 / EHEC
+<OPTION VALUE="666" >Escherichia coli O26:H11 strain 11368 / EHEC
+<OPTION VALUE="260" >Francisella tularensis strain SCHU S4 / Schu 4
+<OPTION VALUE="457" >Francisella tularensis subsp. holarctica, strain FTA
+<OPTION VALUE="261" >Francisella tularensis subsp. holarctica, strain LVS
+<OPTION VALUE="458" >Francisella tularensis subsp. holarctica, strain OSU18
+<OPTION VALUE="414" >Francisella tularensis subsp. mediasiatica, strain FSC147
+<OPTION VALUE="481" >Francisella tularensis subsp. novicida, strain U112
+<OPTION VALUE="456" >Francisella tularensis subsp. tularensis, strain FSC 198
+<OPTION VALUE="480" >Francisella tularensis subsp. tularensis, strain WY96-3418
+<OPTION VALUE="498" >Gluconacetobacter diazotrophicus strain ATCC 49037 / DSM 5601 / PAl5
+<OPTION VALUE="499" >Gluconacetobacter diazotrophicus strain ATCC 49037 / DSM 5601 / PAl5
+<OPTION VALUE="259" >Haemophilus influenzae strain 86-028NP
+<OPTION VALUE="258" >Haemophilus influenzae strain ATCC 51907 / DSM 11121 / KW20 / Rd
+<OPTION VALUE="483" >Haemophilus influenzae strain PittEE
+<OPTION VALUE="482" >Haemophilus influenzae strain PittGG
+<OPTION VALUE="355" >Haemophilus somnus strain 129Pt
+<OPTION VALUE="356" >Haemophilus somnus strain 2336
+<OPTION VALUE="226" >Helicobacter pylori strain 26695 / ATCC 700392
+<OPTION VALUE="652" >Helicobacter pylori strain B38
+<OPTION VALUE="509" >Helicobacter pylori strain G27
+<OPTION VALUE="272" >Helicobacter pylori strain HPAG1
+<OPTION VALUE="225" >Helicobacter pylori strain J99
+<OPTION VALUE="510" >Helicobacter pylori strain P12
+<OPTION VALUE="415" >Helicobacter pylori strain Shi470
+<OPTION VALUE="514" >Klebsiella pneumoniae strain 342
+<OPTION VALUE="513" >Klebsiella pneumoniae subsp. pneumoniae, strain ATCC 700721 / MGH 78578
+<OPTION VALUE="358" >Lactobacillus casei strain ATCC 334
+<OPTION VALUE="357" >Lactobacillus casei strain BL23
+<OPTION VALUE="432" >Lactobacillus delbrueckii subsp. bulgaricus, strain ATCC 11842 / DSM 20081
+<OPTION VALUE="431" >Lactobacillus delbrueckii subsp. bulgaricus, strain ATCC BAA-365
+<OPTION VALUE="515" >Lactobacillus reuteri strain DSM 20016
+<OPTION VALUE="516" >Lactobacillus reuteri strain JCM 1112
+<OPTION VALUE="290" >Lactococcus lactis IL1403
+<OPTION VALUE="288" >Lactococcus lactis MG1363
+<OPTION VALUE="289" >Lactococcus lactis SK11
+<OPTION VALUE="484" >Legionella pneumophila strain Corby
+<OPTION VALUE="253" >Legionella pneumophila strain Lens
+<OPTION VALUE="255" >Legionella pneumophila strain Paris
+<OPTION VALUE="254" >Legionella pneumophila subsp. pneumophila, strain Philadelphia 1 / ATCC 33152 / DSM 7513
+<OPTION VALUE="362" >Leptospira biflexa strain Patoc 1 / Ames, serovar Patoc, chromosome I
+<OPTION VALUE="360" >Leptospira biflexa strain Patoc 1 / Ames, serovar Patoc, chromosome II
+<OPTION VALUE="361" >Leptospira biflexa strain Patoc 1 / ATCC 23582 / Paris, serovar Patoc, chromosome I
+<OPTION VALUE="359" >Leptospira biflexa strain Patoc 1 / ATCC 23582 / Paris, serovar Patoc, chromosome II
+<OPTION VALUE="366" >Leptospira borgpetersenii strain JB197, serovar Hardjo-bovis chromosome 1
+<OPTION VALUE="363" >Leptospira borgpetersenii strain JB197, serovar Hardjo-bovis chromosome 2
+<OPTION VALUE="364" >Leptospira borgpetersenii strain L550, serovar Hardjo-bovis chromosome 1
+<OPTION VALUE="365" >Leptospira borgpetersenii strain L550, serovar Hardjo-bovis chromosome 2
+<OPTION VALUE="219" >Leptospira interrogans strain 56601, K1, serogroup Icterohaemorrhagiae, serovar lai
+<OPTION VALUE="134" >Leptospira interrogans strain 56601, K2.
+<OPTION VALUE="133" >Leptospira interrogans strain Fiocruz L1-130
+<OPTION VALUE="218" >Leptospira interrogans strain Fiocruz L1-130, serogroup Icterohaemorrhagiae, chromosome I
+<OPTION VALUE="566" >Listeria monocytogenes serovar 4a, strain HCC23
+<OPTION VALUE="567" >Listeria monocytogenes serovar 4b, strain Clip81459
+<OPTION VALUE="136" >Listeria monocytogenes strain EGD-e / ATCC BAA-679
+<OPTION VALUE="135" >Listeria monocytogenes strain F2365
+<OPTION VALUE="368" >Methanococcus maripaludis strain C5 / ATCC BAA-1333
+<OPTION VALUE="369" >Methanococcus maripaludis strain C6 / ATCC BAA-1332
+<OPTION VALUE="367" >Methanococcus maripaludis strain C7 / ATCC BAA-1331
+<OPTION VALUE="370" >Methanococcus maripaludis strain S2 / LL
+<OPTION VALUE="630" >Methylobacterium extorquens strain DM4 / DSM 5838
+<OPTION VALUE="631" >Methylobacterium extorquens strain PA1
+<OPTION VALUE="433" >Mycobacterium bovis strain AF2122/97 / ATCC BAA-935
+<OPTION VALUE="434" >Mycobacterium bovis strain BCG / Pasteur 1173P2
+<OPTION VALUE="632" >Mycobacterium bovis strain BCG / Tokyo 172 / ATCC 35737 / TMC 1019
+<OPTION VALUE="459" >Mycobacterium tuberculosis strain ATCC 25177 / H37Ra
+<OPTION VALUE="200" >Mycobacterium tuberculosis strain ATCC 25618 / H37Rv
+<OPTION VALUE="199" >Mycobacterium tuberculosis strain Oshkosh / CDC 1551
+<OPTION VALUE="230" >Mycoplasma hyopneumoniae strain 232
+<OPTION VALUE="138" >Mycoplasma hyopneumoniae strain 7448
+<OPTION VALUE="137" >Mycoplasma hyopneumoniae strain J / ATCC 25934 / NCTC 10110
+<OPTION VALUE="501" >Neisseria gonorrhoeae strain ATCC 700825 / FA 1090
+<OPTION VALUE="502" >Neisseria gonorrhoeae strain NCCP11945
+<OPTION VALUE="485" >Neisseria meningitidis strain 053442, serogroup C
+<OPTION VALUE="629" >Neisseria meningitidis strain alpha14
+<OPTION VALUE="486" >Neisseria meningitidis strain ATCC 700532 / FAM18, serogroup C, serovar 2a
+<OPTION VALUE="264" >Neisseria meningitidis strain MC58, serogroup B
+<OPTION VALUE="263" >Neisseria meningitidis strain Z2491, serogroup A, serovar 4A
+<OPTION VALUE="373" >Porphyromonas gingivalis strain ATCC 33277 / DSM 20709 / JCM 12257
+<OPTION VALUE="374" >Porphyromonas gingivalis strain W83 / ATCC BAA-308
+<OPTION VALUE="466" >Prochlorococcus marinus strain AS9601
+<OPTION VALUE="141" >Prochlorococcus marinus strain CCMP 1378 / MED4
+<OPTION VALUE="463" >Prochlorococcus marinus strain MIT 9215
+<OPTION VALUE="464" >Prochlorococcus marinus strain MIT 9301
+<OPTION VALUE="460" >Prochlorococcus marinus strain MIT 9303
+<OPTION VALUE="185" >Prochlorococcus marinus strain MIT 9312
+<OPTION VALUE="257" >Prochlorococcus marinus strain MIT 9313
+<OPTION VALUE="462" >Prochlorococcus marinus strain MIT 9515
+<OPTION VALUE="465" >Prochlorococcus marinus strain NATL1A
+<OPTION VALUE="256" >Prochlorococcus marinus strain NATL2A
+<OPTION VALUE="571" >Pseudomonas aeruginosa strain LESB58
+<OPTION VALUE="375" >Pseudomonas aeruginosa strain LMG 12228 / ATCC 15692 / PRS 101 / 1C / PAO1
+<OPTION VALUE="377" >Pseudomonas aeruginosa strain PA7
+<OPTION VALUE="376" >Pseudomonas aeruginosa strain UCBPP-PA14
+<OPTION VALUE="379" >Pseudomonas putida strain F1 / ATCC 700007
+<OPTION VALUE="380" >Pseudomonas putida strain GB-1
+<OPTION VALUE="381" >Pseudomonas putida strain KT2440
+<OPTION VALUE="378" >Pseudomonas putida strain W619
+<OPTION VALUE="237" >Pseudomonas syringae strain 1448A / Race 6pathovar phaseolicola
+<OPTION VALUE="238" >Pseudomonas syringae strain B728a, pathovar syringae
+<OPTION VALUE="239" >Pseudomonas syringae strain DC3000
+<OPTION VALUE="586" >Ralstonia pickettii strain 12D
+<OPTION VALUE="587" >Ralstonia pickettii strain 12D
+<OPTION VALUE="540" >Ralstonia pickettii strain 12J
+<OPTION VALUE="541" >Ralstonia pickettii strain 12J
+<OPTION VALUE="387" >Rhizobium etli strain CFN 42 / ATCC 51251
+<OPTION VALUE="382" >Rhizobium etli strain CIAT 652
+<OPTION VALUE="506" >Rhizobium leguminosarum strain 3841
+<OPTION VALUE="505" >Rhizobium leguminosarum strain WSM2304
+<OPTION VALUE="588" >Rhizobium leguminosarum bv. trifolii strain WSM1325
+<OPTION VALUE="390" >Rhodobacter sphaeroides strain ATCC 17023 / 2.4.1 / NCIB 8253 / DSM 158 chromosome 1
+<OPTION VALUE="388" >Rhodobacter sphaeroides strain ATCC 17023 / 2.4.1 / NCIB 8253 / DSM 158 chromosome 2
+<OPTION VALUE="391" >Rhodobacter sphaeroides strain ATCC 17025 / ATH 2.4.3
+<OPTION VALUE="392" >Rhodobacter sphaeroides strain ATCC 17029 / ATH 2.4.9 chromosome 1
+<OPTION VALUE="389" >Rhodobacter sphaeroides strain ATCC 17029 / ATH 2.4.9 chromosome 2
+<OPTION VALUE="610" >Rhodobacter sphaeroides strain KD131 / KCTC 12085
+<OPTION VALUE="611" >Rhodobacter sphaeroides strain KD131 / KCTC 12085
+<OPTION VALUE="210" >Rhodopseudomonas palustris strain ATCC BAA-98 / CGA009
+<OPTION VALUE="523" >Rhodopseudomonas palustris strain TIE-1
+<OPTION VALUE="394" >Rickettsia bellii strain OSU 85-389
+<OPTION VALUE="393" >Rickettsia bellii strain RML369-C
+<OPTION VALUE="436" >Rickettsia rickettsii strain Iowa
+<OPTION VALUE="435" >Rickettsia rickettsii strain Sheila Smith
+<OPTION VALUE="500" >Salmonella paratyphi strain AKU_12601
+<OPTION VALUE="438" >Salmonella paratyphi strain ATCC BAA-1250 / SPB7 / BAA-1250
+<OPTION VALUE="614" >Salmonella paratyphi strain RKS4594
+<OPTION VALUE="437" >Salmonella paratyphi strain SARB42 / ATCC 9150
+<OPTION VALUE="240" >Salmonella typhi strain ATCC 700931 / Ty2
+<OPTION VALUE="241" >Salmonella typhi strain CT18
+<OPTION VALUE="395" >Shewanella baltica strain OS155 / ATCC BAA-1091
+<OPTION VALUE="396" >Shewanella baltica strain OS185
+<OPTION VALUE="397" >Shewanella baltica strain OS195
+<OPTION VALUE="606" >Shewanella baltica strain OS223
+<OPTION VALUE="416" >Shigella boydii strain CDC 3083-94 / BS512, serovar 18
+<OPTION VALUE="269" >Shigella boydii strain Sb227, serovar 4
+<OPTION VALUE="248" >Shigella flexneri strain 2457T / ATCC 700930, serovar 2a
+<OPTION VALUE="249" >Shigella flexneri strain 301, serovar 2a
+<OPTION VALUE="299" >Shigella flexneri strain 8401, serovar 5b
+<OPTION VALUE="186" >Staphylococcus aureus strain bovine RF122 / RF122
+<OPTION VALUE="144" >Staphylococcus aureus strain COL
+<OPTION VALUE="471" >Staphylococcus aureus strain JH1
+<OPTION VALUE="470" >Staphylococcus aureus strain JH9
+<OPTION VALUE="149" >Staphylococcus aureus strain MRSA252
+<OPTION VALUE="146" >Staphylococcus aureus strain MSSA476
+<OPTION VALUE="469" >Staphylococcus aureus strain Mu3 / ATCC 700698
+<OPTION VALUE="147" >Staphylococcus aureus strain Mu50 / ATCC 700699
+<OPTION VALUE="150" >Staphylococcus aureus strain MW2
+<OPTION VALUE="145" >Staphylococcus aureus strain N315
+<OPTION VALUE="262" >Staphylococcus aureus strain NCTC 8325
+<OPTION VALUE="468" >Staphylococcus aureus strain Newman
+<OPTION VALUE="187" >Staphylococcus aureus strain USA300
+<OPTION VALUE="467" >Staphylococcus aureus strain USA300 / TCH1516
+<OPTION VALUE="235" >Staphylococcus epidermidis strain ATCC 12228
+<OPTION VALUE="236" >Staphylococcus epidermidis strain ATCC 35984 / RP62A
+<OPTION VALUE="522" >Stenotrophomonas maltophilia strain K279a
+<OPTION VALUE="521" >Stenotrophomonas maltophilia strain R551-3
+<OPTION VALUE="154" >Streptococcus agalactiae strain 2603 V/R / ATCC BAA-611
+<OPTION VALUE="152" >Streptococcus agalactiae strain A909 / CDC SS700 / ATCC 27591
+<OPTION VALUE="153" >Streptococcus agalactiae strain NEM316
+<OPTION VALUE="621" >Streptococcus equi subsp. equi, strain 4047
+<OPTION VALUE="622" >Streptococcus equi subsp. zooepidemicus, strain H70
+<OPTION VALUE="623" >Streptococcus equi subsp. zooepidemicus, strain MGCS10565
+<OPTION VALUE="619" >Streptococcus mutans serovar c, strain ATCC 700610 / UA159
+<OPTION VALUE="620" >Streptococcus mutans serovar c, strain NN2025
+<OPTION VALUE="596" >Streptococcus pneumoniae strain 70585
+<OPTION VALUE="597" >Streptococcus pneumoniae strain ATCC 700669 / Spain 23F-1
+<OPTION VALUE="155" >Streptococcus pneumoniae strain ATCC BAA-255 / R6
+<OPTION VALUE="489" >Streptococcus pneumoniae strain CGSP14
+<OPTION VALUE="472" >Streptococcus pneumoniae strain D39 / NCTC 7466, serovar 2
+<OPTION VALUE="512" >Streptococcus pneumoniae strain G54, serovar 19F
+<OPTION VALUE="473" >Streptococcus pneumoniae strain Hungary19A-6
+<OPTION VALUE="598" >Streptococcus pneumoniae strain JJA
+<OPTION VALUE="599" >Streptococcus pneumoniae strain P1031
+<OPTION VALUE="156" >Streptococcus pneumoniae strain TIGR4 / ATCC BAA-334
+<OPTION VALUE="160" >Streptococcus pyogenes strain ATCC BAA-595 / MGAS315
+<OPTION VALUE="162" >Streptococcus pyogenes strain ATCC BAA-946 / MGAS10394
+<OPTION VALUE="490" >Streptococcus pyogenes strain Manfredo, serovar M5
+<OPTION VALUE="202" >Streptococcus pyogenes strain MGAS10270, serovar M2
+<OPTION VALUE="201" >Streptococcus pyogenes strain MGAS10750, serovar M4
+<OPTION VALUE="204" >Streptococcus pyogenes strain MGAS2096, serovar M12
+<OPTION VALUE="157" >Streptococcus pyogenes strain MGAS5005 / ATCC BAA-947
+<OPTION VALUE="159" >Streptococcus pyogenes strain MGAS6180
+<OPTION VALUE="161" >Streptococcus pyogenes strain MGAS8232
+<OPTION VALUE="203" >Streptococcus pyogenes strain MGAS9429, serovar M12
+<OPTION VALUE="511" >Streptococcus pyogenes strain NZ131, serovar M49
+<OPTION VALUE="158" >Streptococcus pyogenes strain SF370 / ATCC 700294
+<OPTION VALUE="205" >Streptococcus pyogenes strain SSI-1, serovar M3
+<OPTION VALUE="440" >Streptococcus suis strain 05ZYH33
+<OPTION VALUE="439" >Streptococcus suis strain 98HAH33
+<OPTION VALUE="659" >Streptococcus suis strain BM407
+<OPTION VALUE="660" >Streptococcus suis strain P1/7
+<OPTION VALUE="661" >Streptococcus suis strain SC84
+<OPTION VALUE="275" >Streptococcus thermophilus LMD-9
+<OPTION VALUE="164" >Streptococcus thermophilus strain ATCC BAA-250 / LMG 18311
+<OPTION VALUE="163" >Streptococcus thermophilus strain CNRZ 1066
+<OPTION VALUE="574" >Sulcia muelleri strain GWSS
+<OPTION VALUE="575" >Sulcia muelleri strain SMDSEM
+<OPTION VALUE="600" >Sulfolobus islandicus strain L.S.2.15 / Lassen #1
+<OPTION VALUE="601" >Sulfolobus islandicus strain M.14.25 / Kamchatka #1
+<OPTION VALUE="602" >Sulfolobus islandicus strain M.16.27
+<OPTION VALUE="603" >Sulfolobus islandicus strain M.16.4 / Kamchatka #3
+<OPTION VALUE="604" >Sulfolobus islandicus strain Y.G.57.14 / Yellowstone #1
+<OPTION VALUE="605" >Sulfolobus islandicus strain Y.N.15.51 / Yellowstone #2
+<OPTION VALUE="252" >Thermus thermophilus strain HB27 / ATCC BAA-163 / DSM 7039
+<OPTION VALUE="251" >Thermus thermophilus strain HB8 / ATCC 27634 / DSM 579
+<OPTION VALUE="441" >Treponema pallidum strain Nichols
+<OPTION VALUE="411" >Treponema pallidum subsp. pallidum, strain SS14
+<OPTION VALUE="242" >Tropheryma whipplei strain TW08/27
+<OPTION VALUE="243" >Tropheryma whipplei strain Twist
+<OPTION VALUE="442" >Ureaplasma parvum strain ATCC 27815 / 27 / NCTC 11736, serovar 3
+<OPTION VALUE="443" >Ureaplasma parvum strain ATCC 700970, serovar 3
+<OPTION VALUE="580" >Vibrio cholerae serovar O1, strain M66-2
+<OPTION VALUE="581" >Vibrio cholerae serovar O1, strain M66-2
+<OPTION VALUE="582" >Vibrio cholerae serovar O1, strain MJ-1236
+<OPTION VALUE="583" >Vibrio cholerae serovar O1, strain MJ-1236
+<OPTION VALUE="402" >Vibrio cholerae strain ATCC 39315 / El Tor Inaba N16961, serovar O1 chromosome 1
+<OPTION VALUE="399" >Vibrio cholerae strain ATCC 39315 / El Tor Inaba N16961, serovar O1 chromosome 2
+<OPTION VALUE="400" >Vibrio cholerae strain ATCC 39541 / Ogawa 395 / O395, serovar O1 chromosome 1
+<OPTION VALUE="401" >Vibrio cholerae strain ATCC 39541 / Ogawa 395 / O395, serovar O1 chromosome 2
+<OPTION VALUE="213" >Vibrio vulnificus strain CMCP6
+<OPTION VALUE="215" >Vibrio vulnificus strain CMCP6
+<OPTION VALUE="214" >Vibrio vulnificus strain YJ016
+<OPTION VALUE="216" >Vibrio vulnificus strain YJ016
+<OPTION VALUE="209" >Xanthomonas campestris strain 8004, pathovar campestris
+<OPTION VALUE="208" >Xanthomonas campestris strain 85-10, pathovar vesicatoria
+<OPTION VALUE="207" >Xanthomonas campestris strain ATCC 33913 / NCPPB 528 / LMG 568
+<OPTION VALUE="491" >Xanthomonas campestris strain B100, pathovar campestris
+<OPTION VALUE="234" >Xanthomonas oryzae strain KXO85 / KACC10331
+<OPTION VALUE="233" >Xanthomonas oryzae strain MAFF 311018, pathovar oryzae
+<OPTION VALUE="417" >Xanthomonas oryzae strain PXO99A, pathovar oryzae
+<OPTION VALUE="229" >Xylella fastidiosa strain 9a5c
+<OPTION VALUE="492" >Xylella fastidiosa strain M12
+<OPTION VALUE="474" >Xylella fastidiosa strain M23
+<OPTION VALUE="228" >Xylella fastidiosa strain Temecula1 / ATCC 700964
+<OPTION VALUE="222" >Yersinia pestis strain 91001, biovar Mediaevalis
+<OPTION VALUE="494" >Yersinia pestis strain Angola
+<OPTION VALUE="496" >Yersinia pestis strain Antiqua
+<OPTION VALUE="221" >Yersinia pestis strain CO-92, biovar Orientalis
+<OPTION VALUE="220" >Yersinia pestis strain KIM5, biovar Mediaevalis
+<OPTION VALUE="497" >Yersinia pestis strain Nepal516
+<OPTION VALUE="495" >Yersinia pestis strain Pestoides F
+<OPTION VALUE="407" >Yersinia pseudotuberculosis strain IP 31758, serovar O:1b
+<OPTION VALUE="406" >Yersinia pseudotuberculosis strain IP32953, serovar I
+<OPTION VALUE="408" >Yersinia pseudotuberculosis strain PB1/+, serovar IB
+</SELECT>
+</TD>
+<TD style="color:#008080;white-space:nowrap">Gene name<BR><input type="text" name="gene_name"  size="10" /></TD></TR>
+<TR>
+<TD COLSPAN=2 align=center><input type="submit" name="gene_submit" value="Submit" /></TD></TR>
+<input type="hidden" name="release" value="release5.1"  /></form></TABLE></TABLE></form>
+</TD></TR></TD></TR></TABLE></TABLE></CENTER><TABLE  BGCOLOR=white width=85%>
+<TR><TD align=center><FONT COLOR="#008080" size=2><p style="margin-left:50px;">MOSAIC has been developped by
+<a href="http://mig.jouy.inra.fr" target=_blank>INRA-MIG</a>
+<br>
+<b>GRANTS:</b> ACI-IMPBIO (2004-2006), ANR COCOGEN (2008-2010), ANR MIGADI (2008-2010)
+<br><b>COLLABORATIONS:</b> <a href="http://www.jouy.inra.fr/ublo" target=_blank>INRA-UBLO</a> (now <a href="http://www.micalis.fr" target=_blank>MICALIS</a>) (2003-2008), <a href="http://www.lirmm.fr/" target=_blank>CNRS-LIRMM</a> (2008-2010), <a href="http://www.sb-roscoff.fr/" target=_blank>CNRS-Station Biologique de Roscoff</a> (2008-2010)
+</TD></TR></TABLE>
+
+<br>
+<center>This web site is optimized for Firefox 1.5.x and 2.x. Some pages may not be correctly displayed with other browsers.</center>
+<center> You can download Firefox <a href="http://www.mozilla.com/firefox/">here</center>
+<center>For circular map visualization JAVA plugin (> version 1.4.x) is required.</center>
+<div class="bottomCenter">Contact: <a href="mailto:mosaic-db@jouy.inra.fr">mosaic-db@jouy.inra.fr<br><br></div>
+</body>
+</html>

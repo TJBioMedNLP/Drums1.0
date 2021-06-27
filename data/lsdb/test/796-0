@@ -1,0 +1,414 @@
+<html>
+<head>
+<title>Submit a Sequence</title>
+<!-- Changes:
+20/2/02: No more mandatory email address. 
+Included a PSSM insertion value field, named "hvalue", with a validation script.
+CGI-Script (blast_seq3.py) was amended appropriately
+-->
+<script language="JavaScript">
+
+function validate_sequence_name() {
+	if (document.pecop.seq_name.value.length < 1) {
+		alert("Must enter a name for the sequence");
+		return false;
+	}
+	else
+		return true;
+}
+
+function validate_email() {
+	a = document.pecop.mail_pecop[0].checked;
+	b = document.pecop.mail_pecop[1].checked;
+	c = document.pecop.mail_pecop[2].checked;
+	mail_pecop_checked = a || b || c;
+	if (document.pecop.mail_addr.value.length < 3 &&
+	    mail_pecop_checked) {
+		alert ("Must enter a valid email address to email PeCoP results");
+		return false;
+	}
+	else
+		return true;
+}
+		
+function validate_email_2() {
+	if (document.pecop.mail_addr.value.length < 3) {
+		alert("Must enter a valid email address to email PeCoP results");
+		return false;
+	}
+	else
+		return true;
+}
+function validate_evalue(){
+	evalue = parseFloat(document.pecop.evalue.value);
+	if (isNaN(evalue)) {
+		alert("evalue must be a float number");
+		return false;
+	}
+	else if (evalue <= 0 || evalue > 50) {
+		alert ("evalue range: 0 < evalue < 50");
+		return false;
+	}
+	return true;
+}
+function validate_hvalue(){
+	hvalue = parseFloat(document.pecop.hvalue.value);
+	if (isNaN(hvalue)) {
+		alert("Inclusion threshold must be a float number");
+		return false;
+	}
+	else if (hvalue <= 0 || hvalue > 50) {
+		alert ("inclusion threshold range: 0 < evalue < 50");
+		return false;
+	}
+	return true;
+}
+function validate_sequence() {
+	pasted_sequence = document.pecop.input_group[0].checked;
+	file_sequence = document.pecop.input_group[1].checked;
+	p_sequence_exists = document.pecop.protein_seq.value.length > 0;
+	f_sequence_exists = document.pecop.file_submit.value.length >0;
+	ret_val = false;
+	if (pasted_sequence && p_sequence_exists) {
+		ret_val = true;
+	}
+	if (file_sequence && f_sequence_exists) {
+		ret_val = true;
+	}
+	if (!ret_val) {
+		alert("Must enter a sequence");
+	}
+	return ret_val;
+}
+	
+function validate_plurality() {
+	if (document.pecop.consensus.selectedIndex != 1) {
+		return true;
+	}
+	i_niter = document.pecop.pb_niter.selectedIndex;
+	niter = document.pecop.pb_niter.options[i_niter].value;
+	plu_range_alert = "plurality range: 0 < plurality <= " + niter;
+	plu_range_alert += "\nMust be <= number of iterations requested";
+
+	plurality = parseInt(document.pecop.plurality_thresh.value);
+	if (isNaN(plurality)) {
+		alert("plurality must be an integer");
+		return false;
+	}
+	else if (plurality <= 0 || plurality > niter ) {
+		alert (plu_range_alert);
+		return false;
+	}
+	return true;
+}
+
+function validate_pecop() {
+	r1 = validate_sequence_name();
+	r2 = validate_email_2();
+	r3 = validate_sequence();
+	r4 = validate_evalue();
+	r5 = validate_plurality();
+	r6 = validate_hvalue();
+	if (!r2) {
+		email_conf = confirm("No email address was provided. Continue?");
+	}
+		
+	return r1 && r3 && r4 && r5 && r6 && email_conf;
+}
+
+</script>
+</head>
+<body bgcolor="#EEEEEE">
+
+<center> <h2>PeCoP</h2>
+<a href="about_pecop/index.html" target=_new>
+<img src="peacop.jpg" height=90 width=80 align=right>
+</a>
+</center>
+<center>
+<!--
+<h1>Currently Under Construction</h1>
+-->
+<h3>PSI-BLAST your sequence to find <u>Pe</u>rsistently
+<u>Co</u>nserved <u>P</u>ositions</h3> 
+
+<p>Please wait until you have received the results of one job before you submit another.  Thank you.
+</center>
+ <!-- ACTION="http://bioinformatics.org/~Iddo/cgi-bin/blast_seq2.py" -->
+<FORM METHOD=POST NAME="pecop"
+ ACTION="http://bioinformatics.org/cgi-bin/pecop/blast_seq3.py" 
+ enctype=multipart/form-data onSubmit='return validate_pecop()'>
+ <!--
+ enctype=application/x-www-form-urlencoded
+ enctype=multipart/form-data
+-->
+<INPUT TYPE="hidden" NAME="sequence_submit" VALUE="test-python2">
+Sequence name:
+<input type="text" name="seq_name" size=40 maxlength=80>
+<p>
+<input type="radio" name="input_group" value="pasted_sequence" checked
+onClick="document.pecop.protein_seq.focus()">
+Paste your sequence here. <br>
+<TEXTAREA  NAME="protein_seq" COLS=50 ROWS=10 WRAP="soft"
+ onFocus='document.pecop.input_group[0].click()'>
+</TEXTAREA>
+<p>
+<input type="radio" name="input_group" value="file_sequence"
+onClick="document.pecop.file_submit.focus()">
+or send a fasta-format file:
+<input type="file" name="file_submit" size=35 maxlength=60 accept="text/*"
+ value="*.tfa" 
+ onFocus='document.pecop.input_group[1].click()'
+ onChange='document.pecop.input_group[1].click()'>
+<p>
+email PeCoP results:
+<ul>
+	<li><input type="checkbox" name="mail_pecop" value="fff"> flat-file</li>
+	<li><input type="checkbox" name="mail_pecop" value="WWW" > WWW</li>
+	<li><input type="checkbox" name="mail_pecop" value="blast"> PSI-BLAST</li>
+</ul>
+<p>
+<!--
+PSI-BLAST results format (if emailed)
+<input type="radio" name="blast_format" value="T">  HTML
+<input type="radio" name="blast_format" value="F" checked>  text
+<p>
+-->
+my email address:
+<input type="text" name="mail_addr" size=40 maxlength=80>
+<p>
+<hr>
+<p>
+<h3>PSI-BLAST Parameters</h3>
+Number of PSI-BLAST Iterations:
+<SELECT NAME="pb_niter">
+<option value=2>2</option>
+<option value=3>3</option>
+<option value=4>4</option>
+<option value=5>5</option>
+<option value=6>6</option>
+<option value=7>7</option>
+<option value=8>8</option>
+<option value=9>9</option>
+<option value=10>10</option>
+</SELECT>
+<p>
+Filter low-complexity sequences?
+<SELECT name="filter">
+<option value="T">yes</option>
+<option value="F">no</option>
+</SELECT>
+ <a href="pecop_help.html#filter" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<br>
+Score matrix for PSI-BLAST: 
+ <a href="pecop_help.html#matrix" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<BR>
+<TABLE WIDTH="350" BORDER="0" CELLSPACING="0" CELLPADDING="0" 
+<TR>
+ <TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-3">&nbsp;&nbsp;&nbsp;* Matrix&nbsp;&nbsp;&nbsp;&nbsp;Gap existence cost&nbsp;&nbsp;&nbsp;&nbsp;Per residue gap cost &nbsp;&nbsp;&nbsp;&nbsp;Lambda ratio</FONT>
+</TD>
+</TR>
+<TR>  
+<TD COLSPAN="4"><form><SELECT NAME="subs_mat" SIZE=4 style="HEIGHT: 70px; WIDTH: 350px">
+<OPTION VALUE="PAM30     9       1">&nbsp; &nbsp;PAM30  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+ 
+<OPTION VALUE="PAM70     10      1">&nbsp; &nbsp;PAM70  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+ 
+ 
+<OPTION VALUE="BLOSUM80  10      1">&nbsp; &nbsp;BLOSUM80  &nbsp; &nbsp; &nbsp;&nbsp;10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+  
+<OPTION SELECTED VALUE="BLOSUM62         11      1">&nbsp; &nbsp;BLOSUM62  &nbsp; &nbsp; &nbsp;&nbsp;11 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.85&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM45   14      2">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;14 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+   
+<OPTION VALUE="PAM30   7       2">&nbsp; &nbsp;PAM30  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.9 &nbsp;&nbsp;
+ 
+<OPTION VALUE="PAM30     6       2">&nbsp; &nbsp;PAM30  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.86&nbsp;&nbsp; &nbsp;&nbsp; 
+
+<OPTION VALUE="PAM30     5       2">&nbsp; &nbsp;PAM30  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.77&nbsp;&nbsp;
+
+ <OPTION VALUE="PAM30     10      1">&nbsp; &nbsp;PAM30  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.91&nbsp;&nbsp;
+ 
+ 
+<OPTION VALUE="PAM30     9       1">&nbsp; &nbsp;PAM30  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+ 
+<OPTION VALUE="PAM30  8       1">&nbsp; &nbsp;PAM30  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.79 &nbsp;&nbsp;
+ 
+ <OPTION VALUE="PAM70   8       2">&nbsp; &nbsp;PAM70  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.91 &nbsp;&nbsp;
+
+<OPTION VALUE="PAM70     7       2">&nbsp; &nbsp;PAM70  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.86&nbsp;&nbsp;
+ 
+ 
+<OPTION VALUE="PAM70     6       2">&nbsp; &nbsp;PAM70  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.80&nbsp;&nbsp;
+
+
+<OPTION VALUE="PAM70     11      1">&nbsp; &nbsp;PAM70  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 11 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.92&nbsp;&nbsp;
+
+ <OPTION VALUE="PAM70     10      1">&nbsp; &nbsp;PAM70  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+ 
+<OPTION VALUE="PAM70  9       1">&nbsp; &nbsp;PAM70  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.80&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM80        8       2">&nbsp; &nbsp;BLOSUM80  &nbsp; &nbsp; &nbsp;&nbsp; 8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.9 &nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM80  7       2">&nbsp; &nbsp;BLOSUM80  &nbsp; &nbsp; &nbsp;&nbsp; 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.86&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM80  6       2">&nbsp; &nbsp;BLOSUM80  &nbsp; &nbsp; &nbsp;&nbsp; 6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+ 
+ <OPTION VALUE="BLOSUM80  11      1">&nbsp; &nbsp;BLOSUM80  &nbsp; &nbsp; &nbsp;&nbsp; 11 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.92&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM80  10      1">&nbsp; &nbsp;BLOSUM80  &nbsp; &nbsp; &nbsp;&nbsp;10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+
+<OPTION VALUE="BLOSUM80       9       1">&nbsp; &nbsp;BLOSUM80  &nbsp; &nbsp; &nbsp;&nbsp; 9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.81&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM62        9       2">&nbsp; &nbsp;BLOSUM62   &nbsp; &nbsp; &nbsp;&nbsp; 9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.90 &nbsp;  &nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM62  8       2">&nbsp; &nbsp;BLOSUM62  &nbsp; &nbsp; &nbsp;&nbsp; 8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.83&nbsp;&nbsp;
+
+
+<OPTION VALUE="BLOSUM62  7       2">&nbsp; &nbsp;BLOSUM62  &nbsp; &nbsp; &nbsp;&nbsp; 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.77&nbsp;&nbsp;
+
+<OPTION VALUE="BLOSUM62  12      1">&nbsp; &nbsp;BLOSUM62  &nbsp; &nbsp; &nbsp;&nbsp;12 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.88&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM62  11      1">&nbsp; &nbsp;BLOSUM62  &nbsp; &nbsp; &nbsp;&nbsp;11 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.85&nbsp;&nbsp;
+
+<OPTION VALUE="BLOSUM62       10      1">&nbsp; &nbsp;BLOSUM62  &nbsp; &nbsp; &nbsp;&nbsp;10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.79&nbsp;&nbsp;
+ 
+
+<OPTION VALUE="BLOSUM45        13      3">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;13 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.91&nbsp;&nbsp;
+
+<OPTION VALUE="BLOSUM45  12      3">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;12 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.89&nbsp;&nbsp;
+
+<OPTION VALUE="BLOSUM45  11      3">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;11 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.84&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM45  10      3">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.79&nbsp;&nbsp;
+ 
+ <OPTION VALUE="BLOSUM45  15      2">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;15 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.90&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM45  14      2">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;14 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+
+<OPTION VALUE="BLOSUM45       13      2">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;13 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.83&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM45  12      2">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;12 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM45  19      1">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;19 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.91 &nbsp;&nbsp;
+
+<OPTION VALUE="BLOSUM45  18      1">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;18 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.88&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM45  17      1">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;17 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.87&nbsp;&nbsp;
+ 
+<OPTION VALUE="BLOSUM45  16      1">&nbsp; &nbsp;BLOSUM45  &nbsp; &nbsp; &nbsp;&nbsp;16 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.80&nbsp;&nbsp;</OPTION></SELECT>
+</TD>
+</TR>
+</TABLE>
+<!--
+<SELECT name="subs_mat">
+<option value="BLOSUM62">BLOSUM62</option>
+<option value="BLOSUM80">BLOSUM80</option>
+<option value="BLOSUM45">BLOSUM45</option>
+<option value="PAM70">PAM70</option>
+<option value="PAM30">PAM30</option>
+</SELECT>
+-->
+<br>
+PSI-BLAST E-value:
+<input type="TEXT" name="evalue" size=8 maxlength=8 value="10.0">
+ <a href="pecop_help.html#evalue" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<br>
+Inclusion Threshold:
+<input type="TEXT" name="hvalue" size=8 maxlength=8 value="0.001">
+ <a href="pecop_help.html#hvalue" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<br>
+Display PSI-BLAST alignment as:
+<select name="pb-alignment">
+<option value="0">pairwise</option>
+<option value="1">master-slave showing identities</option>
+<option value="2">master-slave no identities</option>
+<option value="3">flat master-slave, show identities</option>
+<option value="4">flat master-slave, no identities</option>
+<option value="5">master-slave no identities and blunt ends</option>
+<option value="6">flat master-slave, no identities and blunt ends</option>
+</select>
+
+<p><hr>
+<h3>PeCoP Parameters</h3>
+<p>
+Z<sub>score</sub> threshold: &nbsp;
+<select name="zscore_thresh">
+	<option value="0">0</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+</select>
+<p>
+<a href="pecop_help.html#alphabets" target="help">About alphabets</a>
+<p>
+Calculate conservation based on a 
+<SELECT name="calc_alphabet">
+<option value="20">20 letter</option>
+<option value="7">7 letter</option>
+</SELECT>
+alphabet &nbsp; &nbsp; 
+<a href="pecop_help.html#cons_by_alphabet" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<br>
+Display output using a:
+<SELECT name="output_alphabet">
+<option value="20">20 letter</option>
+<option value="7">7 letter</option>
+</SELECT>
+alphabet &nbsp; &nbsp;
+<a href="pecop_help.html#display_by_alphabet" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<br>
+<SELECT name="priors">
+<option value="1">Use</option>
+<option value="0">Don't use</option>
+</SELECT>
+ priors in calculation of information content
+ &nbsp; &nbsp; &nbsp;
+<a href="pecop_help.html#priors" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<br>
+Final position status determined according to:
+<SELECT name="consensus">
+<option value="first_and_last">first and last</option>
+<option value="plurality">plurality</option>
+</SELECT>
+ &nbsp; &nbsp; &nbsp;
+ <a href="pecop_help.html#consensus" target="help">
+<img src="info.gif" alt="what's this?" align=middle border=0></a>
+<br>
+If plurality, then what is the minimal number of iterations?
+<input type="TEXT" name="plurality_thresh" size=2 maxlength=2 value="2"
+ onChange='return validate_plurality()'>
+<p>
+<INPUT TYPE="submit" VALUE="submit">
+<INPUT TYPE="reset"> 
+</FORM>
+<p><p><hr>
+<center><a href="http://www.python.org"><img src="PythonPowered.gif"></a>
+</center>
+
+When using PeCoP please cite:<br>
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=12217925&dopt=Abstract">
+Iddo Friedberg and Hanah Margalit <b>PeCoP:
+automatic determination of persistently conserved positions in protein families
+</b><i>Bioinformatics</i> 2002 18: 1276-1277</a>
+<p>
+Questions, comments, suggestions: <a href="mailto:iddo@bioinformatics.org">
+Iddo Friedberg</a>
+
+<p>
+PeCoP, Blastology, and a few other things at:<br>
+<a href="http://conferences.oreilly.com/biocon/" target=_new><img src="http://conferences.oreillynet.com/images/bio2003/banners/210x60.gif" width="210" height="60" border="0" hspace="10" vspace="10" alt="O'Reilly Bioinformatics Conference." ></a> 
+<br>
+Bioinformatics.Org track.
+<br>
+
+
+
+</body>
+</html>

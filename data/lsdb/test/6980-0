@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ELDA: Limiting Dilution Analysis for stem cell research</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/print.css" type="text/css" media="print" />
+<!--[if IE]>
+    <link rel="stylesheet" href="../../css/ie.css" type="text/css" media="all"/>
+    <![endif] -->
+
+</head>
+
+<body>
+
+<div id="sitewrap">
+
+<div id="innerwrap">
+
+<div id="header">
+	<div id="logo"><h1><a href="../../index.html">WEHI Bioinformatics</a></h1></div>
+
+        </div>
+
+	<div id="content">
+
+	<div class="widecolumn">
+
+		<h2>ELDA: Extreme Limiting Dilution Analysis</h2>
+
+							<p>This page performs limiting dilution analysis using
+							methods described in the following article:<p>Hu, Y, and Smyth, GK (2009). ELDA: Extreme limiting dilution analysis for comparing depleted and enriched populations in stem cell and other assays.
+							<i>Journal of Immunological Methods</i> 347, 70-78. [<a href="http://dx.doi.org/10.1016/j.jim.2009.06.008">Publisher Full Text</a>]</p>
+							<p>ELDA is suitable for any limiting dilution
+							problem, but special methods are implemented to give
+							reliable results in extreme data situations, for
+							example when all the assays give positive or
+							negative results.  It is especially suitable for analysing limiting dilution data arising in stem cell research.</p>
+							<p>ELDA can compare multiple groups or treatment
+							conditions and can test for goodness of fit.</p>
+							<p>Users of the <a href="http://www.r-project.org/">R</a>
+							statistical programming environment can access the
+							command-line version of ELDA through the limdil
+							function of the statmod package.</p>
+							<p>This page replaces the
+							<font face="Times New Roman">&#8220;</font>limdil<font face="Times New Roman">&#8221;
+							</font>webpage which was formerly at http://bioinf.wehi.edu.au/software/limdil.</p>
+							<FORM METHOD = post enctype="multipart/form-data"
+								    ACTION ="http://bioinf.wehi.edu.au/cgi-bin/limdil/limdil.pl">
+								<p>
+
+							<h3>Data Entry:</h3>
+								Data should be input as a data table of three or
+								four columns, separated by any combination of
+								commas, spaces or tabs. The data can be typed
+								directly into the text field below, or can be
+								cut and pasted from any spreadsheet application.
+								Each row of data gives results for a particular
+								cell dose. The columns are: </p>
+								<ol>
+									<li>Dose: number of cells in each culture
+									</li>
+									<li>Tested: number of cultures tested </li>
+									<li>Response: number of positive cultures
+									</li>
+									<li>Group (optional): label for the
+									population group to which cells belong </li>
+								</ol>
+								<p>Enter your data in this box:<br>
+								<TEXTAREA  cols=50 rows=15  NAME="data"></textarea><br>
+								<br>
+								 <input type="text" cols="6" size=4 name = "confidence" value = "0.95"/>&nbsp;Required confidence interval<br />
+								<input type="checkbox" name="plot_results" />&nbsp;Plot results? <br />
+								<input type="checkbox" name = "test_difference"      />&nbsp;Test for inequality in frequency between multiple groups?<br />
+								 <input type="checkbox" name = "test_unit_slope"  />&nbsp;Test adequacy of the single-hit model?<br />
+
+								<input type="checkbox" name = "observed"         />&nbsp;Is the actual number of cells observed? <br />
+								<INPUT TYPE="SUBMIT" VALUE="Run"> <INPUT TYPE="RESET">
+								</p>
+							</FORM>
+
+							<br>
+
+                                                                <h3>An example for single group analysis is shown below:</h3>
+
+								Enter the following input, then select the
+                                                        model test check box, but not the observed check box.<br>
+								<br>
+                                                                50 24 2 <br>
+                                                                100  24  6 <br>
+                                                                200   24 9 <br>
+                                                                400,24,15 <br>
+                                                                800,24,21 <br>
+                                                                <br>
+						    <b>Output:</b>
+                                                    <br />
+<table border ="4">
+  <caption> Confidence Intervals</caption>
+  <tr>
+    <th>  Lower  </th>
+    <th>  Estimate  </th>
+
+    <th>  Upper  </th>
+  </tr>
+  <tr>
+    <th>538</th>
+    <th>403</th>
+    <th> 302</th>
+
+  </tr>
+</table>
+
+<table border ="4">
+ <caption>  Goodness of Fit (Test log-dose slope equals 1)
+<br> Estimated slope is 1.05 </caption>
+  <tr>
+    <th>  Test </th>
+    <th>  Chisq  </th>
+
+    <th>  DF  </th>
+    <th>  P Value  </th>
+  </tr>
+  <tr>    <th> Likelihood ratio test of single-hit model</th>
+ <th>0.0667</th>
+
+ <th>1</th>
+ <th>0.796</th>
+  </tr>
+  <tr>    <th> Score test of heterogeneity </th>
+ <th>0.0509</th>
+ <th>1</th>
+
+ <th>0.822</th>
+  </tr>
+<br></table>
+
+
+
+                                                                <br>
+								<br>
+                                                                <h3>An example for multiple groups analysis is shown below:</h3>
+
+								Enter the following input, then select the single hit model test check box and
+                                                                the multiple groups check box but not the observed check box.
+								<br>
+                                                                <br>
+                                                                30000 6 2 A<br>
+                                                                20000 6 3 A<br>
+                                                                4000  6 2 A<br>
+                                                                500   6 1 A<br>
+                                                                30000 6 6 B<br>
+                                                                20000 6 5 B<br>
+                                                                4000  6 6 B<br>
+                                                                500   6 1 B<br>
+                                                                30000 6 2 C<br>
+                                                                20000 6 3 C<br>
+                                                                4000  6 4 C<br>
+                                                                500   6 2 C<br>
+								<br>
+								<b>Output:</b>
+								<br>
+<table border ="4">
+  <caption> Confidence Intervals</caption>
+  <tr>
+    <th>  Group  </th>
+    <th>  Lower  </th>
+
+    <th>  Estimate  </th>
+    <th>  Upper  </th>
+  </tr>
+  <tr>
+    <th>A</th>
+    <th>67165</th>
+
+    <th>31864</th>
+    <th> 15116</th>
+  </tr>
+    <th>B</th>
+    <th>10252</th>
+    <th>4509</th>
+
+    <th> 1983</th>
+  </tr>
+    <th>C</th>
+    <th>44526</th>
+    <th>22491</th>
+    <th> 11361</th>
+
+  </tr>
+</table>
+<br><table border ="4">
+  <caption> Overall Groups Difference</caption>
+   <tr>
+    <th>  Chisq  </th>
+    <th>  DF  </th>
+
+    <th>  P.value  </th>
+  </tr>
+  <tr> <th>18.1</th>
+    <th>2</th>
+ <th>0.000119</th>
+  </tr>
+
+</table>
+<br><table border ="4">
+  <caption> Pairwise Groups Difference</caption>
+  <tr>
+    <th> Group 1 </th>
+    <th> Group 2 </th>
+    <th>  Chisq  </th>
+
+    <th>  DF </th>
+    <th>  Pr(>Chisq) </th>
+  </tr>
+  <tr>    <th> A </th>
+    <th> B </th>
+
+ <th>16.7</th>
+    <th>1</th>
+ <th>4.38e-05</th>
+  </tr>
+  <tr>    <th> A </th>
+    <th> C </th>
+
+ <th>0.549</th>
+    <th>1</th>
+ <th>0.459</th>
+  </tr>
+  <tr>    <th> B </th>
+    <th> C </th>
+
+ <th>12.4</th>
+    <th>1</th>
+ <th>0.000432</th>
+  </tr>
+</table>
+
+<table border ="4">
+ <caption>  Goodness of Fit (Test log-dose slope equals 1)
+<br> Estimated slope is 0.293 </caption>
+
+  <tr>
+    <th>  Test </th>
+    <th>  Chisq  </th>
+    <th>  DF  </th>
+    <th>  P Value  </th>
+
+  </tr>
+  <tr>    <th> Likelihood ratio test of single-hit model</th>
+ <th>24.4</th>
+ <th>1</th>
+ <th>7.73e-07</th>
+  </tr>
+
+  <tr>    <th> Score test of heterogeneity </th>
+ <th>44.7</th>
+ <th>1</th>
+ <th>2.25e-11</th>
+  </tr>
+<br></table>
+
+
+
+		<h3>
+
+<br>
+
+								Interpreting the goodness of fit tests</h3>
+		<p>The likelihood ratio test is designed to test whether the single-hit
+		model is correct.</p>
+		<p>The score test is designed to test whether the different cultures
+		(assays) have the same active cell proportion. (For example, it is quite
+		likely in practice that experiments done at different times might give
+		rise to slightly different stem cell frequencies, and this test will
+		respond to that.)</p>
+		<p>The nominal value of the slope is 1. A slope
+		greater than one suggests a multi-hit model in which two or more cells are synergistically required to
+		produce a positive response. A slope less than 1 suggests some sort of cell interference.
+		Slopes less than 1 can also be due to heterogeneity.<br>
+ 		</p>
+ <center> <p>Comments/Questions? Email <<a href="mailto:hu@wehi.edu.au">Yifang Hu</a>></p> </center>
+<center><p>Last Modified: 25 Nov 2009</p> </center>
+
+        </div>
+
+
+        <div class="clear">&nbsp;</div>
+
+        </div> <!-- end content -->
+
+        <div id="footer">
+                <div id="footer_copy">
+                        <div id="footer_nav">
+
+                                <ul>
+                                        <li class="first"><a href="http://bioinf.wehi.edu.au/">Bioinformatics Home</a></li>
+                                        <li class="first"><a href="http://www.wehi.edu.au/">WEHI Home</a></li>
+                                        <li><a href="http://bioinf.wehi.edu.au/contacts/index.html">Contact Us</a></li>
+                                        <li class="last"><a href="http://intranet.alpha.wehi.edu.au/intranet/index.html" target="_blank">Intranet</a></li>
+                                </ul>
+                        </div>
+                </div>
+                <div class="clear">&nbsp;</div>
+
+        </div> <!-- end footer -->
+
+        </div> <!-- end innerwrap -->
+
+</div> <!-- end sitewrap -->
+</body>
+</html>
+

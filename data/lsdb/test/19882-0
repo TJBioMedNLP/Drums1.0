@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+ <HEAD>
+  <TITLE> ARCS Homepage</TITLE>
+ </HEAD>
+<!-- Background white, links blue (unvisited), navy (visited), red (active) -->
+ <BODY BGCOLOR="#FFFFFF">
+
+<h2> ARCS: An Aggregated Related Column Scoring Scheme for Aligned Sequences </h2>
+
+<hr>
+<p>
+<b>Motivation</b>: Biologists frequently align multiple sequences to determine consensus sequences or look for predominant residues or conserved regions.
+In particular, determining conserved regions in an alignment is one of the most important activities,
+but it is determined manually by experts in most cases.
+Since protein sequences are often several-hundred residues or longer,
+it is difficult to distinguish biologically important conserved regions (motifs or domains) from others.
+The widely used tools, Logos and information content, often fail to highlight such regions.
+Thus a computational tool that can highlight biologically important regions with a higher accuracy will be significant.
+
+<p><b>Results</b>: This paper presents a new score scheme ARCS (Aggregated Related Column Score) for aligned biological sequences
+and designs an algorithm based on ARCS to highlight the reserved regions among aligned sequences.
+In an extensive experimental evaluation using 533 PROSITE patterns,
+ARCS was able to highlight the motif regions with up to 82% accuracy.
+
+<p><hr>
+
+<h3> Download and Contact information </h3>
+<p>Download: <a href=http://cancer.informatics.indiana.edu/jeochoi/arcs/arcs.pl>ARCS v1.1</a>
+<p>Command line: <b><tt>arcs.pl -matlab -i PS00702.aln -o PS00702 -p 'C-P-[LP]-T-x-E-[ST]-x-C' -n PS00702 -s 3 -t 4 -v</tt></b>
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>either -matlab or -octave</tt> : program used
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>-i PS00702.aln</tt> : multiple alignment file of Clustal-W format
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>-o PS00702</tt> : generate the MatLab code named PS00702.m, the ARCS output named PS00702.arcs, and the figure named PS00702.eps
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>-p 'C-P-[LP]-T-x-E-[ST]-x-C'</tt> : (<i>optional</i>) highlight the positions occurring the pattern in the figure
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>-n PS00702</tt> : (<i>optional</i>) show the title of the figure
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>-s 3</tt> : (<i>optional</i>) the smoothing window size [default: 3]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>-t 4</tt> : (<i>optional</i>) the neighborhood size [default: 4]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; <tt>-v</tt> : (<i>optional</i>) print detail information
+
+<p><hr>
+
+<h3> Supplementary Data </h3>
+
+<p><a href=http://cancer.informatics.indiana.edu/cgi-bin/jeochoi/arcs/index.cgi>Experiments with 533 PROSITE patterns</a></p>
+<p><a href=http://cancer.informatics.indiana.edu/jeochoi/arcs/wrong_ClustalW_random1.htm>ARCS results for 47 PROSITE patterns which are not aligned correctly by Clustal-W</a></p>
+
+</BODY>
+</HTML>

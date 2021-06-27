@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>The Pleiades Promoter Project</title>
+
+            <meta name="keywords" content="genomics, bioinformatics, molecular medicine, genetic research, University of British Columbia, Centre for Molecular Medicine and Therapeutics, promoters, minipromoters, maxipromoters" />
+
+            <meta name="description" content="The Pleiades Promoter Project" />
+
+            <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+
+            <link rel="stylesheet" href="http://www.pleiades.org/pw.css" type="text/css" media="all" />
+
+            <link rel="stylesheet" href="http://www.pleiades.org/pw_print.css" type="text/css" media="print" />
+
+            <script type="text/javascript" src="http://www.pleiades.org/JS/PleiadesJS.js"></script>
+
+            <script type="text/javascript" src="http://www.pleiades.org/JS/cba.js"></script>
+
+            <script type="text/javascript" src="http://www.pleiades.org/JS/bookmark.js"></script>
+<script type="text/javascript">
+
+var slideshow;
+var curimgurl;
+
+//If using image buttons as controls, Set image buttons' image preload here true
+//(use false for no preloading and for when using no image buttons as controls):
+var preload_ctrl_images=false;
+
+//And configure the image buttons' images here:
+//var previmg='left.gif';
+//var stopimg='stop.gif';
+//var playimg='play.gif';
+//var nextimg='right.gif';
+
+var slides=[]; 
+//configure the below images and descriptions to your own. 
+
+//slides[0] = ["teasers/1157_F1.jpg", "EGFP Cerebellum", ""];
+slides[0] = ["teasers/022109A_CAG_1277_SLD10SEC2.jpg", "CAG-EGFP", ""];
+//slides[1] = ["teasers/1375/110307G_slide16_sec2.jpg", "", ""];
+//slides[1] = ["teasers/Ple54_DCXC_1200_Panel_05.jpg", "Ple54-EGFP", ""];
+slides[1] = ["teasers/01_tEMS6367-1-1.jpg", "Ple123-lacZ", ""];
+//slides[2] = ["teasers/1172_F1.jpg", "", ""];
+slides[2] = ["teasers/122008G_GFAP-A_C.jpg", "Ple88-EGFP (co-staining with Gfap protein)", ""];
+//slides[3] = ["teasers/1157_F2.jpg", "Anti-NeuN", ""];
+slides[3] = ["teasers/Ple162_figure2.jpg", "Ple162-EGFP/cre", ""];
+//slides[4] = ["teasers/1375/110307G_slide24_sec2.jpg", "", ""];
+slides[4] = ["teasers/060708B_SC2_slide19_sec2.jpg", "Ple88-EGFP", ""];
+//slides[5] = ["teasers/1375_F1.jpg", "", ""];
+slides[5] = ["teasers/031409G_FEV-D_1401_20X_BS2.jpg", "Ple67-EGFP", ""];
+//slides[6] = ["teasers/1157_F3.jpg", "EGFP", ""];
+slides[6] = ["teasers/RGS16D_041908B_CA1_BGalNeuN.jpg", "Ple178-EGFP/cre", ""];
+//slides[7] = ["teasers/1375_F2.jpg", "", ""];
+//slides[7] = ["teasers/RGS16D_041908B_xgalNeuN.jpg", "Ple178-EGFP/cre", ""];
+slides[7] = ["teasers/28_tEMS6331-6a_Rev.jpg", "Ple131-lacZ", ""];
+//slides[8] = ["teasers/1375/110307G_slide8_sec1.jpg", "", ""];
+slides[8] = ["teasers/HCRT_Orexin_flatten.jpg", "Ple111-EGFP", ""];
+//slides[9] = ["teasers/1157_F4.jpg", "Composite+TOTO3", ""];
+slides[9] = ["teasers/122008G_GFAP-A_D.jpg", "Ple88-EGFP (co-staining with Gfap protein)", ""];
+//slides[10] = ["teasers/1375_F3.jpg", "", ""];
+slides[10] = ["teasers/Ple185_figure1C.jpg", "Ple185-EGFP (co-staining with S100b protein)", ""];
+//slides[11] = ["teasers/1157_F5.jpg", "EGFP Het Hipp-CA1", ""];
+slides[11] = ["teasers/Ple185_figure1A.jpg", "Ple185-EGFP", ""];
+//slides[12] = ["teasers/1375/110307G_slide8_sec3.jpg", "", ""];
+slides[12] = ["teasers/022809A_HCRT-B_1418_20X.jpg", "Ple112-EGFP", ""];
+//slides[13] = ["teasers/1157_F6.jpg", "EGFP Chi Hipp-CA1", ""];
+slides[13] = ["teasers/1_tEMS4900-2.jpg", "Ple153-lacZ", ""];
+
+//slides.desc_prefix='<b>Description:<\/b> '; //string prefix for image descriptions display
+//slides.controls_top=1; //use for top controls
+//slides.counter=1; //use to show image count
+slides.width=320; //use to set width of widest image if dimensions vary
+slides.height=325; //use to set height of tallest image if dimensions vary
+//slides.no_auto=1; //use to make show completely user operated (no play button, starts in stopped mode)
+//slides.use_alt=1; //use for descriptions as images alt attributes
+//slides.use_title=1; //use for descriptions as images title attributes
+//slides.nofade=1; //use for no fade-in, fade-out effect for this show
+slides.border=2; //set border width for images
+slides.border_color='#ff9900'; //'lightblue'; set border color for images
+//slides.no_descriptions=1; //use for no descriptions displayed
+slides.pause=1; //use for pause onmouseover
+//slides.image_controls=1; //use images for controls
+//slides.button_highlight='#cccccc'; //onmouseover background-color for image buttons (requires image_controls=1)
+slides.specs='width=320, height=320' //global specifications for this show's new window(s)
+slides.random=1; //set a random slide sequence on each page load
+//slides.manual_start=1; //start show in manual mode (stopped)
+
+//Notes:
+//slides#.target will set a target for a slide group, will be overridden by slides#[#][3], if present
+//slides#.specs will set new window specifications for a slide group, will be overridden by slides#[#][4], if present
+//slides#.fadecolor will set fading images background color, defaults to white
+//slides#.no_controls will set a slide show with no controls
+//slides#.random will set a random slide sequence on each page load
+//slides#.delay=3000 will set miliseconds delay between slides for a given show, may also be set in the call as the last parameter
+//slides#.jumpto=1 will display added controls to jump to a particular image by its number
+//slides#.no_added_linebreaks=1; use for no added line breaks in formatting of texts and controls
+
+//use below to create a customized onclick event for linked images in a given show:
+//slides#.onclick="window.open(this.href,this.target,'top=0, left=0, width='+screen.availWidth+', height='+screen.availHeight);return false;"
+
+function getimageurl()
+{
+    currentimageurl = slideshow.imagedisplayed();
+    var imgurl = document.getElementById("printimage");
+    if (imgurl)
+    {
+        imgurl.innerHTML = "<img src=\"" + currentimageurl + "\" />";
+    } 
+}
+
+</script>
+
+
+
+<script src="JS/swissarmy.js" type="text/javascript">
+
+/***********************************************
+* Swiss Army Image slide show script  - © John Davenport Scheuer: http://home.comcast.net/~jscheuer1/
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full original source code
+***********************************************/
+
+</script>
+
+</head>
+<body onbeforeprint="javascript:getimageurl();">
+<table align="left" width="100%" cellpadding="0" cellspacing="0">
+<tr>
+
+          <td colspan="3" align="right">
+
+           <div class="topleft">
+
+           <span class="bookmark"><a href="javascript:bookmark('http://www.pleiades.org','The Pleiades Promoter Project');">Bookmark This Site</a>&nbsp;&nbsp;<span class="bar">|</span>
+			&nbsp;&nbsp;<a href="javascript:emailPopup('http://www.pleiades.org/invite.php', 'Pleiades','500','520','240','240')">Email this Site</a></span><br />
+
+			<a href="http://www.cmmt.ubc.ca" target="_blank"><img class="topright" src="http://www.pleiades.org/images/cmmt.gif" /></a></div>
+
+           </td>
+
+           </tr>
+<tr>
+
+            <td class="topmenu" colspan="3">
+
+            &nbsp;&nbsp;&nbsp;<a href="http://www.pleiades.org/index.php">&nbsp;<span style="text-decoration: underline">Home</span>&nbsp;</a>
+
+            <span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/overview.php">&nbsp;<span>Overview</span>&nbsp;</a>
+
+            <span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/progress.php">&nbsp;<span>Progress</span>&nbsp;</a>
+
+            <span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/approvedgenelist.php">&nbsp;<span>Gene&nbsp;List</span>&nbsp;</a>
+
+            <span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/byminip.php">&nbsp;<span>Tools</span>&nbsp;</a>
+
+            <span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/productflyers.php">&nbsp;<span>Product Data</span>&nbsp;</a>
+
+            <span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/ge3ls.php">&nbsp;<span>GE3LS&nbsp;Project</span>&nbsp;</a>
+
+			<span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/pubs.php">&nbsp;<span>Publications</span>&nbsp;</a>
+
+			<span class="bar">|</span>&nbsp;<a href="http://www.pleiades.org/links.php">&nbsp;<span>Links</span>&nbsp;</a>
+
+          </td>
+
+          </tr>
+<tr><td colspan="1" class="menuleft"></td>
+          	<td colspan="2" class="menuright"></td></tr><tr>
+	        <td colspan="1" valign="top" bgcolor="dddddd">
+          	    <table width="100%" class="collapse" border="0" cellspacing="0" cellpadding="0" align="center">
+            	    <tr>
+                	    <td colspan="2">
+                    	    <img src="images/spacer.gif" width="200" height="32" alt="spacer" />
+                    	</td>
+					    <td>
+					    </td>
+				    </tr><tr>
+                <td width="12">
+                    <img src="images/spacer.gif" width="12" alt="spacer" />
+                </td>
+                <td valign="top" width="176">
+                    <b>Welcome</b> to the Pleiades Promoter Project: a project developing and sharing new tools to advance research and therapies for brain disorders.<br /><br />
+                </td>
+                <td width="12">
+                </td>
+            </tr>
+            <tr>
+                <td width="12">
+                    <img src="images/spacer.gif" width="1" height="24" alt="spacer" />
+                </td>
+                <td valign="top" class="sidebar" width="176">
+                </td>
+                <td width="12">
+                </td>
+            </tr><tr>
+                    <td width="12">
+                        <img src="images/spacer.gif" width="1" height="1" alt="spacer" />
+                    </td>
+                    <td valign="top" class="sidebar" width="176">
+                        <a href="http://www.pleiades.org/approvedgenelist.php"><span>List&nbsp;by&nbsp;Gene</span></a><br />
+                        <a href="http://www.pleiades.org/byminip.php"><span>List&nbsp;by&nbsp;MiniPromoter</span></a><br />
+                    </td>
+                    <td width="12">
+                    </td>
+                </tr><tr>
+                <td width="12">
+                    <img src="images/spacer.gif" width="1" height="240" alt="spacer" />
+                </td>
+                <td width="176">
+                </td>
+                <td width="12">
+                </td>
+            </tr></table>
+    </td><td colspan="2" valign="top"><table class="withmenu">
+    <tr>
+        <td>
+            <h1>
+                Current Project Highlights</h1>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table id="slideBox" cellspacing="10">
+                <!--DWLayoutTable-->
+                <tr>
+                    <td width="325" valign="top" bgcolor="#FFFFFF">
+                        <div class="screen">
+
+                            <script type="text/javascript">
+                                slideshow = new inter_slide(slides)
+                            </script>
+
+                        </div>
+                        <div id="printimage" class="print">
+                        </div>
+                    </td>
+                    <td width="240" valign="top" rowspan="2">
+                        <p>
+                            <span style="font-size: 0.90em">Our primary tools are human MiniPromoters that drive
+                                region- and cell-specific gene expression in the mouse brain. Additional tools include
+                                expression constructs, mouse embryonic stem cell lines, and knock-in mice all of
+                                which carry brain-specific MiniPromoters.</span></p>
+                        <p>
+                            <span style="font-size: 0.90em">Our tools are designed for easy modification of our
+                                MiniPromoters into your expression system, or your favorite gene into our expression
+                                system. Importantly, we have the expertise to deliver bioinformatically-designed
+                                and in vivo tested MiniPromoter tools customized to recapitulate interesting gene
+                                expression patterns.</span></p>
+                        <p>
+                            <span style="font-size: 0.90em">Our mission is to enable region- and cell-specific gene-delivery
+                                therapies for such devastating diseases as Alzheimer, Parkinson, Huntington, Amyotrophic
+                                lateral sclerosis, Multiple sclerosis, Spinocerebellar ataxia, depression, autism,
+                                and cancer.</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#ffffff" valign="top">
+                        <strong>Image Highlights</strong>
+                        <br />
+                        <!--                            To view complete set of images for a mini-promoter, just click on the sliding images
+                            to the left.
+-->
+                        To pause the slideshow, simply place your mouse over the image.<br />
+                        <br />
+                        <!-- To view the associated MiniPromoter, click on the image of interest.
+-->                        
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</td></tr><tr>
+            <td colspan="2"></td>
+            <td width="100%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3">
+                <div class="ml footer">
+                    <hr />
+                    The Pleiades Promoter Project</div>
+                <div class="support" align="center">
+					&copy; 2008 The University of British Columbia. All rights reserved.<br /> 
+                    Page Last Modified on:&nbsp;Nov 13, 2009, 12:40:05.<br />
+                    Click <a href="mailto:randy@cmmt.ubc.ca">here</a>
+                    for technical assistance with this site.<br />
+					
+                    <br />
+                </div>
+			<div class="hidden">Page maintained by<a href="www.randyglenn.com">Randy Glenn</a>
+            </td>
+        </tr></table><script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+		  <script type="text/javascript">
+		  _uacct = "UA-2739954-1";
+		  urchinTracker();
+		  </script></body>
+</html>

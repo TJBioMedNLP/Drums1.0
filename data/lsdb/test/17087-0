@@ -1,0 +1,124 @@
+<html>
+<head>
+<meta name="keywords" content="bekerglas, binair, bio, computerstekker, dalicon, enterknop, flashbackground, formule, gif, in, intro, jpg, line, loading, partner, pipet, preloader, rectangle, scene, skip, test, your">
+
+<script language="JavaScript">
+<!--
+	// current arguments are checked; if there is difference between given and 
+	// current arguments: reload page.
+	
+	var link = "";
+
+	function checkArguments(oBt, oRt) {
+		if (navigator.appName == "Netscape" && parseInt(navigator.appVersion) <= 4) { 
+			var Bt = "N4";	
+			}	 	
+		else if (navigator.appName == "Netscape" && parseInt(navigator.appVersion) >= 5){
+		        var Bt = "N6";
+		        }
+		else {
+		        var Bt = "IE";
+			}
+
+		switch(screen.availWidth) {
+			case 640:
+				var Rt = 1;
+				break;
+			case 800:
+				var Rt = 2;
+				break;
+			case 1024:
+				var Rt = 3;
+				break;
+			case 1280:
+				var Rt = 4;
+				break;
+			default:
+				var Rt = 5;
+				break;
+			}
+		if (Bt != oBt || Rt != oRt) {
+			var arguments = "bt/" + Bt + "/rt/" + Rt;
+			link = "/home/content/" + arguments + "/fname/softwaredevelopment/gname/2_products#chimera";
+			window.location.replace(link);
+		}
+	}				
+
+	// URL is parsed, given arguments are checked. 
+	function parseCallingURL(sCallingURL) {	
+		var nameArray = new Array();
+		var valueArray = new Array();
+		var nMaxVars = 0;
+		var sVarLine = "";
+
+
+		//Get the calling URL and parse out variables
+		sCallingURL = String(sCallingURL);
+		
+		if (sCallingURL.length == 0) {
+			var emtyBt = "";
+			var emptyRt = "";
+			makeLink(emptyBt, emptyRt);
+			}
+			
+		// Check if there are any variables
+		if (sCallingURL.indexOf('?') != -1) {
+			sVarLine = String(sCallingURL.substring(sCallingURL.indexOf('?') + 1, sCallingURL.length));
+		} else {
+			// No variables
+			checkArguments("", "");
+		}
+		
+		var nPos = 0;
+		var sChar = "";
+		var sWord = "";
+		nMaxVars = 0;
+		
+		// Parse
+		while (nPos < sVarLine.length) {
+			sChar = sVarLine.substring(nPos, nPos + 1);
+			
+			if (sChar == "=") {
+				nameArray[nMaxVars] = sWord;
+				sWord = "";
+				}
+			else if (sChar == "&") {
+				valueArray[nMaxVars] = sWord;
+				sWord = "";
+				nMaxVars++;
+				}	
+			else if (nPos == sVarLine.length - 1) {
+				sWord += sVarLine.substring(nPos, nPos + 1);
+				valueArray[nMaxVars] = sWord;
+				sWord = "";
+				nMaxVars++;
+				}
+			else {
+				sWord += sChar;
+				}
+			nPos++;
+		}
+		for(var i=0; i < nameArray.length; i++){
+			if(nameArray[i] == "bt") {var oBt = valueArray[i];}
+			else if (nameArray[i] == "rt") {var oRt = valueArray[i];}
+		}
+		checkArguments(oBt, oRt);
+	}
+
+	function determineTypeAndGo() {
+		parseCallingURL(window.location.href);
+	}
+determineTypeAndGo();
+
+//-->
+</script>
+
+</head>
+<body>
+
+<p>If your browser does not automatically load the Chimera site, please follow
+<a href="javascript:determineTypeAndGo()">this hyperlink</a>.</p>
+
+
+</body>
+</html>

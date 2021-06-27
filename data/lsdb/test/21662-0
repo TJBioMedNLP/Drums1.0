@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>site2genome</title>
+<style type="text/css">
+body { background : white; }
+h1 { text-align: center; }
+pre { margin: 0; padding: 0; }
+form { margin: 0; }
+td { vertical-align: top; }
+</style>
+</head>
+
+<body>
+<table width="100%" style="background-color: #CCFFCC;"><tr align="center"><td width="20%">site2genome</td><td width="20%"><a href="/zlab/gene.shtml">Gene Regulation Hub</a></td><td width="20%"><a href="/">Zlab</a></td><td width="20%"><a href="http://bioinfo.bu.edu">B.U.&nbsp;Bioinformatics</a></td><td width="20%"><a href="http://www.bu.edu">Boston&nbsp;University</a></td></tr></table>
+<h1>site<span style="font-size: xx-large;">2</span>genome</h1>
+<p><font color=red>Please note: broken display due to server migration was fixed on Nov 17.
+Sorry for any inconveniences.</font></p>
+<p>This tool locates sites (short DNA sequences) within the <em>human, mouse, rat, fruitfly</em> and the <em>nematode</em> (C. elegans) genomes. It works by fetching user supplied longer sequences containing the sites from <a href="http://www.ncbi.nlm.nih.gov/">GenBank</a>, then aligning each sequence to the appropriate genome using the <a href="http://genome.ucsc.edu/cgi-bin/hgBlat">BLAT webserver at UC Santa Cruz</a>.</p>
+<form action="/mfrith/cgi-bin/site2genome.cgi" method="post">
+<table cellspacing="0" cellpadding="0"><tr>
+<td style="color: #66CC99; font-weight: bold;">Enter up to 100 sites in this format:</td>
+<td style="vertical-align: bottom;"><pre>  GenBank identifier/Name               |  Sequence          |  Description</pre></td>
+</tr><tr>
+<td style="color: #66CC99; font-weight: bold;">E.g.</td>
+<td><pre>  M73700.1                              |  caGGTCAaggCGATCtt |  Lactoferrin ERE</pre></td>
+</tr>
+<td style="color: #66CC99; font-weight: bold;">Or</td>
+<td><pre>  Human neutrophil lactoferrin promoter |  caGGTCAaggCGATCtt |  Lactoferrin ERE</pre></td>
+</table>
+<textarea name="sites" rows=10 cols=80></textarea><br />
+Search name using &nbsp;
+<input type="checkbox" name="searchENTREZ" value="ENTREZ" checked /><a href="http://www.ncbi.nih.gov">GenBank</a>
+<input type="checkbox" name="searchLOCUSLINK" value="LOCUSLINK" /><a href="http://www.ncbi.nih.gov/LocusLink/">LocusLink</a>
+<input type="checkbox" name="searchENSEMBL" value="ENSEMBL" /><a href="http://www.ensembl.org">Ensembl</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="ignoreRNA" value="NORNA" checked />Supress RNA entries from name search results
+<br /><br />
+You can specify the longer sequence using its GenBank identifier or its name, as identified by GenBank or by Ensembl. You may also search by a locus name in LocusLink. If you use a name you must first specify the organism (human, mouse, rat, fruitfly or nematode) and you may have to later select a specific hit (or hits) if the name did not resolve to a unique record. Please note that most often sites of interest are in the upstream regulatory regions of genes and not in the sequence of the transcript's cDNA, which is the most likely result found when searching by a common name. <br />
+If the sequence has mixed case, the outermost uppercase letters define the site boundaries. Additional lowercase letters may help to place the site uniquely in the GenBank sequence. Unknown nucleotides may be specified by 'n'. The GenBank identifier and sequence should not contain any spaces. The description is optional.<br /><br />
+<input type="submit" value="Find my sites!" /><input type="reset" /><br />
+<span style="color: #FF6633">Please be patient:</span> locating multiple sites may take some time!
+</form>
+<h2>Citation</h2>
+Frith, M. C.*, Halees, A. S.*, Hansen, U. & Weng, Z. (Accepted)<br>
+<b>Site2genome: Locating Short DNA Sequences in Whole Genomes</b><br>
+Bioinformatics. *Joint First Authors <br>
+<a href="http://zlab.bu.edu/zlab/publications/site2genome.pdf">Full Text in PDF</a>
+</body>
+</html>

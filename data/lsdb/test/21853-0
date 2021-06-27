@@ -1,0 +1,271 @@
+
+
+
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="genome.css">
+    <title>Medicago Sequencing - Sequence Assembly Table</title>
+</head>
+
+<style type="text/css">
+#linkbox {
+   width:110px;
+   position:absolute;
+   background-color:#99ffcc;
+   display:none;
+   border-style:solid; }
+#defbox {
+   position:absolute;
+   background-color:#ccccff;
+   display:none;
+   border-style:solid; }
+.defarea {
+  background-color:#ccffff;
+  border: none;
+}
+</style>
+<div id="linkbox">
+  <table width="100%" cellspacing=0 border=1>
+    <tr><td>
+         <a href="javascript:popupLinkTo('GAB', 'gabform')"><span class="medium">UMN Assembly Browser</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('BACtable', 'bacform')"><span class="medium">UMN BACs</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('IMGAG_annotation', 'annotationform')"><span class="medium">IMGAG Annotation</span></a>
+    </td></tr><tr><td>
+         <font class="medium" color=gray>OU Gbrowse</font>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('TIGR', 'tigrform')"><span class="medium">TIGR/JCVI Gbrowse</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('NCGR LIS', 'lisform')"><span class="medium">LIS CMap & FPC</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('Genbank', 'genbankform')"><span class="medium">Genbank</span></a>
+    </td></tr><tr>
+      <td bgcolor="#ffffff" align="center">
+         <a href="javascript:hide('linkbox')"><span class="medium">close</span></a><br>
+      </td>
+    </tr>
+  </table>
+</div>
+<form name="lisform" action="http://www.comparative-legumes.org/lisg/genomicsequence.html" target="_blank">
+  <input type="hidden" name="seq_name" value="">
+</form>
+<form name="genbankform" action="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi" target="_blank">
+  <input type="hidden" name="db" value="nucleotide">
+  <input type="hidden" name="val" value="">
+  <input type="hidden" name="acc" value="">
+</form>
+<form name="ensemblform" action="http://decifr.ccgb.umn.edu/Medicago_truncatula/contigview" target="_blank">
+  <input type="hidden" name="clone" value="">
+</form>
+<form name="ouform" action="http://dna8.genome.ou.edu/cgi-bin/gbrowse" target="_blank">
+  <input type="hidden" name="source" value="medicago_new">
+  <input type="hidden" name="name" value="">
+</form>
+<form name="tigrform" action="GoToJCVIGbrowse.php" target="_blank">
+  <input type="hidden" name="name" value="">
+</form>
+<form name="bacform" action="batch_bac_report.php" target="_blank">
+  <input type="hidden" name="search" value="">
+</form>
+<form name="gabform" action="contig_viewer.php" target="_blank">
+  <input type="hidden" name="accession" value="">
+</form>
+<form name="passportform" action="show_bac_passport.php" target="_blank">
+  <input type="hidden" name="bac_acc" value="">
+</form>
+<form name="annotationform" action="show_bac_genecall.php" target="_blank">
+  <input type="hidden" name="bac_acc" value="">
+</form>
+
+
+<script language="JavaScript" src="lib_popup.js"></script>
+<body>
+
+
+<script language="JavaScript" src="/genome/lib_js.js"></script>
+
+<table border=0 cellpadding="0" cellspacing="0">
+  <tr>
+      <td style="border-right:dotted; border-width:thin; border-color:green;"  valign="top" idth="145px">
+          <a href="/genome/index.php"><img src="/genome/images/flower2.jpg" border="0" width="132px" height="140px"></a>
+          
+          <table border=0 cellspace="0" cellpadding="0">
+              <tr>
+                  <td width="148">
+                      <form name="searchform" action="show_reports.php" method="post">
+                          <table bgcolor="#CCF4B9">
+                              <tr><td><font class="medium">Search databases for:</font></td></tr>
+                              <tr><td><input type="text" name="search" size="15"></td></tr>
+
+<!--                            <tr><td><textarea name="search" rows=2 cols=13></textarea></td></tr> -->
+
+                              <tr><td><font class="medium">in&nbsp;</font>
+                                  <select name="type">
+                                      <option value="Everywhere">all data</option>
+                                      <option value="BACs">BACs</option>
+                                      <option value="Markers">markers</option>
+                                      <option value="Contigs">contigs</option>
+                                  </select>
+                              </td></tr>
+                              
+                              <tr><td align="center"><a href="javascript:doSearch()"
+                                  onmouseover="swapImage('header_gobtn', '/genome/images/go_over.gif')" 
+                                  onmouseout="swapImage('header_gobtn', '/genome/images/go_off.gif')" 
+                                  onmousedown="swapImage('header_gobtn', '/genome/images/go_down.gif')" 
+                                  onclick="swapImage('header_gobtn', '/genome/images/go_off.gif')"><img src="/genome/images/go_off.gif" 
+                                  name="header_gobtn" border="0"></a><a href="javascript:openNewWindow('/genome/search_for_help.html')"
+                                  onmouseover="swapImage('header_helpbtn', '/genome/images/help_over.gif')" 
+                                  onmouseout="swapImage('header_helpbtn', '/genome/images/help_off.gif')" 
+                                  onmousedown="swapImage('header_helpbtn', '/genome/images/help_down.gif')" 
+                                  onclick="swapImage('header_helpbtn', '/genome/images/help_off.gif')"><img src="/genome/images/help_off.gif" 
+                                  name="header_helpbtn" border="0"></a>
+                              </td></tr>
+                          </table>
+                      </form>
+                      
+                      <a href="/genome/index.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn0', '/genome/images/project_home_over.gif')" onmouseout="swapImage('navbtn0', '/genome/images/project_home_off.gif')" onclick="swapImage('navbtn0', '/genome/images/project_home_over.gif')"><img src="/genome/images/project_home_off.gif" name="navbtn0" hspace="0" vspace="0" border="0"></a><a href="/genome/about.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn1', '/genome/images/about_project_over.gif')" onmouseout="swapImage('navbtn1', '/genome/images/about_project_off.gif')" onclick="swapImage('navbtn1', '/genome/images/about_project_over.gif')"><img src="/genome/images/about_project_off.gif" name="navbtn1" hspace="0" vspace="0" border="0"></a><a href="/genome/genome_stats.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn2', '/genome/images/genome_stats_over.gif')" onmouseout="swapImage('navbtn2', '/genome/images/genome_stats_off.gif')" onclick="swapImage('navbtn2', '/genome/images/genome_stats_over.gif')"><img src="/genome/images/genome_stats_off.gif" name="navbtn2" hspace="0" vspace="0" border="0"></a><br><br>
+<a href="/genome/BACregistry.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn4', '/genome/images/BAC_registry_over.gif')" onmouseout="swapImage('navbtn4', '/genome/images/BAC_registry_off.gif')" onclick="swapImage('navbtn4', '/genome/images/BAC_registry_over.gif')"><img src="/genome/images/BAC_registry_off.gif" name="navbtn4" hspace="0" vspace="0" border="0"></a><a href="/genome/downloads.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn5', '/genome/images/downloads_over.gif')" onmouseout="swapImage('navbtn5', '/genome/images/downloads_off.gif')" onclick="swapImage('navbtn5', '/genome/images/downloads_over.gif')"><img src="/genome/images/downloads_off.gif" name="navbtn5" hspace="0" vspace="0" border="0"></a><br><br>
+<a href="/genome/map.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn7', '/genome/images/map_over.gif')" onmouseout="swapImage('navbtn7', '/genome/images/map_off.gif')" onclick="swapImage('navbtn7', '/genome/images/map_over.gif')"><img src="/genome/images/map_off.gif" name="navbtn7" hspace="0" vspace="0" border="0"></a><a href="/genome/links.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn8', '/genome/images/genome_links_over.gif')" onmouseout="swapImage('navbtn8', '/genome/images/genome_links_off.gif')" onclick="swapImage('navbtn8', '/genome/images/genome_links_over.gif')"><img src="/genome/images/genome_links_off.gif" name="navbtn8" hspace="0" vspace="0" border="0"></a><a href="/genome/blast.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn9', '/genome/images/blast_search_over.gif')" onmouseout="swapImage('navbtn9', '/genome/images/blast_search_off.gif')" onclick="swapImage('navbtn9', '/genome/images/blast_search_over.gif')"><img src="/genome/images/blast_search_off.gif" name="navbtn9" hspace="0" vspace="0" border="0"></a><a href="/genome/IMGAG.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn10', '/genome/images/Annotation_over.png')" onmouseout="swapImage('navbtn10', '/genome/images/Annotation_off.png')" onclick="swapImage('navbtn10', '/genome/images/Annotation_over.png')"><img src="/genome/images/Annotation_off.png" name="navbtn10" hspace="0" vspace="0" border="0"></a><br><br>
+<a href="/genome/news.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn12', '/genome/images/news_over.gif')" onmouseout="swapImage('navbtn12', '/genome/images/news_off.gif')" onclick="swapImage('navbtn12', '/genome/images/news_over.gif')"><img src="/genome/images/news_off.gif" name="navbtn12" hspace="0" vspace="0" border="0"></a><a href="/genome/literature.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn13', '/genome/images/literature_over.gif')" onmouseout="swapImage('navbtn13', '/genome/images/literature_off.gif')" onclick="swapImage('navbtn13', '/genome/images/literature_over.gif')"><img src="/genome/images/literature_off.gif" name="navbtn13" hspace="0" vspace="0" border="0"></a><a href="/genome/people.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn14', '/genome/images/participants_over.gif')" onmouseout="swapImage('navbtn14', '/genome/images/participants_off.gif')" onclick="swapImage('navbtn14', '/genome/images/participants_over.gif')"><img src="/genome/images/participants_off.gif" name="navbtn14" hspace="0" vspace="0" border="0"></a><br><br>
+<a href="/genome/anomalies.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn16', '/genome/images/report_errors_over.gif')" onmouseout="swapImage('navbtn16', '/genome/images/report_errors_off.gif')" onclick="swapImage('navbtn16', '/genome/images/report_errors_over.gif')"><img src="/genome/images/report_errors_off.gif" name="navbtn16" hspace="0" vspace="0" border="0"></a><a href="/genome/website_comments.php" hspace="0" vspace="0"onmouseover="swapImage('navbtn17', '/genome/images/site_comments_over.gif')" onmouseout="swapImage('navbtn17', '/genome/images/site_comments_off.gif')" onclick="swapImage('navbtn17', '/genome/images/site_comments_over.gif')"><img src="/genome/images/site_comments_off.gif" name="navbtn17" hspace="0" vspace="0" border="0"></a><br><br>
+<a href="http://www.medicago.org/" hspace="0" vspace="0"onmouseover="swapImage('navbtn19', '/genome/images/medicago_home_over.gif')" onmouseout="swapImage('navbtn19', '/genome/images/medicago_home_off.gif')" onclick="swapImage('navbtn19', '/genome/images/medicago_home_over.gif')"><img src="/genome/images/medicago_home_off.gif" name="navbtn19" hspace="0" vspace="0" border="0"></a>                  </td>
+              </tr>
+              <tr><td height="20"></td></tr>
+
+              <tr><td>
+                                    <iframe name="rm" width="1" height="1" frameborder="0" scrolling="no" style="visibility:hidden;"></iframe>
+              </td></tr>
+              
+          </table>
+
+      </td>
+
+      <td width=30>&nbsp;</td>
+      <td width="95%" valign="top">
+
+
+
+
+<table border=0>
+    <tr>
+        <td align="center" valign="top"> 
+           <img src="images/medicago_title.gif">
+        </td>
+    </tr>
+    <tr>
+        <td align="center" valign="top">
+           <h2>- Sequence Assembly Table -</h2>
+        </td>
+    </tr>
+    <tr>
+        <td align=right>
+            <font class="medium" color="gray">
+              Please <a href="anomalies.php#new_report"><b>report</b></a> any data anomalies that you may find.
+            </font>
+        </td>
+    </tr>
+    
+<!--
+    <div id="linkbox">
+  <table width="100%" cellspacing=0 border=1>
+    <tr><td>
+         <a href="javascript:popupLinkTo('GAB', 'gabform')"><span class="medium">UMN Assembly Browser</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('BACtable', 'bacform')"><span class="medium">UMN BACs</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('IMGAG_annotation', 'annotationform')"><span class="medium">IMGAG Annotation</span></a>
+    </td></tr><tr><td>
+         <font class="medium" color=gray>OU Gbrowse</font>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('TIGR', 'tigrform')"><span class="medium">TIGR/JCVI Gbrowse</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('NCGR LIS', 'lisform')"><span class="medium">LIS CMap & FPC</span></a>
+    </td></tr><tr><td>
+         <a href="javascript:popupLinkTo('Genbank', 'genbankform')"><span class="medium">Genbank</span></a>
+    </td></tr><tr>
+      <td bgcolor="#ffffff" align="center">
+         <a href="javascript:hide('linkbox')"><span class="medium">close</span></a><br>
+      </td>
+    </tr>
+  </table>
+</div>
+    <form name="lisform" action="http://www.comparative-legumes.org/lisg/genomicsequence.html" target="_blank">
+  <input type="hidden" name="seq_name" value="">
+</form>
+<form name="genbankform" action="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi" target="_blank">
+  <input type="hidden" name="db" value="nucleotide">
+  <input type="hidden" name="val" value="">
+  <input type="hidden" name="acc" value="">
+</form>
+<form name="ensemblform" action="http://decifr.ccgb.umn.edu/Medicago_truncatula/contigview" target="_blank">
+  <input type="hidden" name="clone" value="">
+</form>
+<form name="ouform" action="http://dna8.genome.ou.edu/cgi-bin/gbrowse" target="_blank">
+  <input type="hidden" name="source" value="medicago_new">
+  <input type="hidden" name="name" value="">
+</form>
+<form name="tigrform" action="GoToJCVIGbrowse.php" target="_blank">
+  <input type="hidden" name="name" value="">
+</form>
+<form name="bacform" action="batch_bac_report.php" target="_blank">
+  <input type="hidden" name="search" value="">
+</form>
+<form name="gabform" action="contig_viewer.php" target="_blank">
+  <input type="hidden" name="accession" value="">
+</form>
+<form name="passportform" action="show_bac_passport.php" target="_blank">
+  <input type="hidden" name="bac_acc" value="">
+</form>
+<form name="annotationform" action="show_bac_genecall.php" target="_blank">
+  <input type="hidden" name="bac_acc" value="">
+</form>
+-->
+    
+    <br />
+<b>Warning</b>:  file(contigviewer_data/contig_lg1..dat) [<a href='function.file'>function.file</a>]: failed to open stream: No such file or directory in <b>/usr/local/www/medicago/htdocs/genome/assembly_table.php</b> on line <b>56</b><br />
+<br />
+<b>Warning</b>:  Invalid argument supplied for foreach() in <b>/usr/local/www/medicago/htdocs/genome/assembly_table.php</b> on line <b>60</b><br />
+</table></p>
+    
+		</td>
+	</tr>
+</table>
+
+<br><br>
+</td>
+</tr>
+</table>
+
+<table border=0 width="100%">
+  <tr><td style="border-top:dotted; border-width:thin; border-color:green">
+<div align="center">
+  <a href="/genome/index.php"><font class="small">home</font></a> <font class="small">|</font> 
+  <a href="/genome/about.php"><font class="small">about</font></a> <font class="small">|</font>
+  <a href="/genome/map.php"><font class="small">map</font></a> <font class="small">|</font>
+  <a href="/genome/genome_stats.php"><font class="small">statistics</font></a> <font class="small">|</font>
+  <a href="/genome/BACregistry.php"><font class="small">registry</font></a> <font class="small">|</font> 
+  <a href="/genome/downloads.php"><font class="small">downloads</font></a> <font class="small">|</font> 
+  <a href="/genome/links.php"><font class="small">links</font></a> <font class="small">|</font> 
+  <a href="/genome/blast.php"><font class="small">blast</font></a> <font class="small">|</font> 
+  <a href="/genome/IMGAG.php"><font class="small">annotation</font></a> <font class="small">|</font> 
+  <a href="/genome/BACneighbor_queries.php"><font class="small">overlap</font></a> <font class="small">|</font>
+  <a href="/genome/BACmarker_queries.php"><font class="small">special queries</font></a> <font class="small">|</font>
+  <a href="/genome/news.php"><font class="small">news</font></a> <font class="small">|</font>
+  <a href="/genome/meetings.php"><font class="small">meetings</font></a> <font class="small">|</font>
+  <a href="/genome/literature.php"><font class="small">literature</font></a> <font class="small">|</font>
+  <a href="/genome/people.php"><font class="small">participants</font></a> <font class="small">|</font>
+  <a href="/genome/sitemap.php"><font class="small">site map</font></a> <font class="small">|</font>
+  <a href="/genome/website_comments.php"><font class="small"><b>comments</b> </font></a>
+</div>
+</td></tr>
+</table>
+
+
+</body>
+</html>
+
+
+
+

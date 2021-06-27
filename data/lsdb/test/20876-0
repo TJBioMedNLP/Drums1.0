@@ -1,0 +1,339 @@
+<html>
+ <head>
+  <title>PSORTb Subcellular Localization Prediction Tool - version 
+3.0</title>
+  <meta name="description" content="PSORTb is a web-based tool for 
+prediction of subcellular localization in 
+ bacterial protein sequences." name="keywords" content="PSORT, bacterial 
+proteins, bacteria, protein, subcellular 
+localization, subcellular location, subcellular, localization, location, 
+prediction, Fiona Brinkman, Jennifer Gardy, Matthew Laird,
+Cory Spencer, Sebastien Rey, Kenta Nakai" http-equiv="Content-Type" 
+content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" href="/styles/psort.css" type="text/css">
+  <style type="text/css">
+<!--
+.style1 {
+	color: #FF0000;
+	font-style: italic;
+}
+.style3 {color: #FF00FF; font-style: italic; }
+-->
+  </style>
+</head>
+ <body bgcolor="#ffffff" onLoad="initFields();">
+  <script type="text/javascript">
+    function initFields() {
+      var row = document.getElementById("emailRow");
+//      row.style.display = 'none';
+      row = document.getElementById("advancedGram");
+      row.style.display = 'none';
+    }
+
+    function updateEmail() {
+      var row = document.getElementById("emailRow");
+      var results = document.getElementById("resultstype");
+      var upload = document.getElementById("uploadLimit");
+
+      if(results.options[results.selectedIndex].value == "display") {
+        row.style.display = 'none';
+        upload.style.display = '';
+      } else if(results.options[results.selectedIndex].value == "email") {
+        row.style.display = '';
+        upload.style.display = 'none';
+      }
+    }
+
+    function updateOrganism() {
+      var row = document.getElementById("organismRow");
+      var advrow = document.getElementById("advancedGram");
+      var results = document.getElementById("organismtype");
+      var upload = document.getElementById("uploadLimit");
+
+      if(results.options[results.selectedIndex].value == "archaea") {
+        row.style.display = 'none';
+	advrow.	style.display = 'none';
+      } else if(results.options[results.selectedIndex].value == "bacteria") {
+        row.style.display = '';
+	updateGram();
+
+      }
+    }
+
+    function updateGram() {
+      var row = document.getElementById("advancedGram");
+      var results = document.getElementById("gramtype");
+
+      if(results.options[results.selectedIndex].value == "advanced") {
+        row.style.display = '';
+	
+      } else {
+        row.style.display = 'none';
+
+      }
+    }
+  </script>
+  <div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+
+   <tr>
+      <td width="134"><a href="http://www.psort.org"><img src="../images/psortb.gif" alt="PSORT-B" width="134" height="75" border="0"></a></td>
+      <td align="right" valign="bottom"><font size="-2"> 
+        <a href="../updates.html">Updates</a> | 
+        <a href="../documentation/index.html">Documentation</a> | 
+	<a href="../resources.html">Resources</a> | 
+	<a href="../contact.pl">Contact</a>
+        &nbsp;&nbsp;
+      </td>
+
+   </tr>
+   <tr>
+      <td width="674" colspan="2"><img src="../images/logo-bar.gif" alt="PSORT-B Menu" width="674" height="10"></td>
+    </tr>
+  </table>
+
+  <br>
+  <table border="0" cellpadding="0" cellspacing="0">
+   <tr>
+
+    <td width="674" height="500" valign="top">
+
+      <div align="center">
+
+  <form method="POST" action="results.pl" enctype="multipart/form-data">
+            <table border="0" cellpadding="3" cellspacing="0">
+			  <tr>
+			   <!-- <td><font color="#FF0000">
+			   The bug detected in the new PSORTb 3.0 version has
+			   been fixed as of May 18, 2010. This was a 
+			  serious error that resulted in incorrect predictions 
+			  being made versus the version published in the 
+			  <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btq249?ijkey=mtNbKJWL9A4SMgH&keytype=ref">associated paper</a>. Therefore please 
+			  only use this correct version, which we will now 
+			  refer to now as 3.0.2. We are 
+			  currently updating the precomputed genome results 
+			  accordingly. We sincerely apologize for any 
+			  inconvenience caused by this notable error. 
+			   </font>
+			   </td> -->
+			   </tr>
+
+              <tr>
+                <td> <h3 align="justify">Submit a Sequence to PSORTb version 3.0.2 <span class="style3">new! </span></h3>
+                  
+                 
+                  <p align="justify">Based on a study last performed in 2010,
+		  PSORTb v3.0.2 is the most precise bacterial localization prediction tool 
+                  available. PSORTb v3.0.2 has a number of <a href="http://www.psort.org/documentation/index.html#v3improvements">improvements</a> over PSORTb v2.0.4. Version 2 of PSORTb is maintained <a href="../psortb2/index.html">here</a>.</p>
+
+                  <p align="justify">You can currently submit one or more Gram-positive or Gram-negative 
+                    bacterial sequences or archaeal sequences in FASTA format<strong> (<a href="../documentation/index.html#fasta">?</a>)</strong>. Copy and paste your 
+                    FASTA-formatted sequences into the textbox below or select 
+                    a file containing your sequences to upload from your computer. 
+                  </p>
+
+                  <p align="justify">See also:</p>
+                  <div align="justify"> 
+                    <ul>
+                      <li><a href="../updates.html"><strong>Updates</strong></a></li>
+                      <li><strong><a href="http://db.psort.org">Precomputed genome results </a></strong></li>
+                      <li><strong><a href="../documentation/index.html#limitations">Limitations of PSORTb v.3.0</a></strong></li>
+                      <li><strong><a href="../documentation/index.html#using">PSORTb User's Guide</a></strong></li>
+                      <li><a href="../downloads/index.html"><strong>Download standalone PSORTb</strong></a> <span class="style1">improved installation process! </span></li>
+                    </ul>
+                    <p>&nbsp;</p>
+                  </div>
+                </tr>
+
+              <tr bgcolor="#eeeeee"> 
+                <td align="center"> <table width="493">
+
+                    <tr> 
+                      <td width="179">
+		        <div class="formlabels">Choose an organism type (<a href="../documentation/index.html#organism">?</a>):</div>
+		      </td>
+                      <td width="302"> 
+		        <div class="formlabels"> 
+                          <select name="organism" id="organismtype" onChange="updateOrganism();">
+                            <option value="bacteria">Bacteria</option>
+                            <option value="archaea">Archaea</option>
+                          </select> 
+			  <span class="requiredlabel">Required</span>
+			</div>
+		      </td>
+                    </tr>
+                    <tr> 
+                    <tr id="organismRow"> 
+                      <td width="179">
+		        <div class="formlabels">Choose Gram stain (<a href="../documentation/index.html#gram">?</a>):</div>
+		      </td>
+                      <td width="302"> 
+		        <div class="formlabels"> 
+                          <select name="gram" id="gramtype" onChange="updateGram();">
+                            <option value="none">Select Gram</option>
+                            <option value="negative">Negative</option>
+                            <option value="positive">Positive</option>
+                            <option value="advanced">Advanced</option>
+                          </select> 
+			  <span class="requiredlabel">Required</span>
+			</div>
+		      </td>
+                    </tr>
+                    <tr id="advancedGram"> 
+                      <td width="179">
+		        <div class="formlabels">Advanced Gram stain options (<a href="../documentation/index.html#gramadvanced">?</a>):</div>
+		      </td>
+                      <td width="302"> 
+		        <div class="formlabels"> 
+                          <select name="advancedgram">
+                            <option value="none">Select Option</option>
+                            <option value="negative">Negative without outer
+			    membrane</option>
+                            <option value="positive">Positive with outer membrane</option>
+                          </select> 
+			  <span class="requiredlabel">Required</span>
+			</div>
+		      </td>
+                    </tr>
+                    <tr> 
+                      <td>
+		        <div class="formlabels">Output format (<a href="../documentation/index.html#output">?</a>):</div>
+		      </td>
+
+                      <td> 
+		        <div align="formlabels"> 
+                          <select name="format">
+                            <option value="html">Normal</option>
+                            <option value="terse">Short Format (tab delimited)</option>
+                            <option value="long">Long Format (tab delimited)</option>
+                          </select>
+                        </div>
+		      </td>
+                    </tr>
+		 <tr>
+		   <td>
+		     <div class="formlabels">Show results (<a href="http://www.psort.org/documentation/index.html#showresults">?</a>):</div>
+		   </td>
+		   <td>
+		     <select name="sendresults" id="resultstype" onChange="updateEmail();">
+		       <option value="email">Send by email</option>
+		       <option value="display">Via the web</option>
+		     </select>
+		   </td>
+		 </tr>
+		 <tr id="emailRow">
+		   <td>
+		     <div class="formlabels">Email address:</div>
+		   </td>
+		   <td>
+		     <input size="40" name="email">
+		   </td>
+		 </tr>
+                  </table>
+		  <br />
+                  Copy and paste your FASTA sequences below<br>
+
+                  <textarea rows="15" cols="80" name="seqs"></textarea>
+                  <br />
+                  <br />
+
+               <table>
+                 <tr> 
+                   <td><font size="3"><i><b>or</b></i> upload from file:</font>
+		   </td>
+
+                   <td><input type="file" name="filename">
+		   </td>
+                 </tr>
+
+		 <tr id="uploadLimit">
+		   <td colspan="2">
+		   (uploads limited to 50KB, approximately 100 proteins, in
+		   Web display mode)
+		   </td>
+		 </tr>
+               </table>
+               <br> 
+	       <input type="submit" name="submit" value="Submit"> 
+	       <input type="reset" name="reset" value=" Clear "> 
+	       <br />
+	       <br /> 
+	     </td>
+
+           </tr>
+           <tr> 
+             <td>This is the most current version of the PSORTb program for bacterial 
+                 protein subcellular localization prediction. PSORTb v3.0 now 
+                  handles archaeal sequences as well as Gram-positive and Gram-negative bacterial sequences. Plus, it has several other <a href="http://www.psort.org/documentation/index.html#v3improvements">improvements</a>. Version 2 of PSORTb is maintained <a href="../psortb2/index.html">here</a> (but we strongly recommend using version 
+                  3.0! ;-). If you are looking for a eukaryotic localization
+		  predictor, please visit <a href="../index.html">psort.org</a>
+		  to access other resources.
+		  &nbsp;<br />
+		  &nbsp;<br />
+		  PSORTb is maintained by the <a href="http://www.pathogenomics.sfu.ca/brinkman" target="_blank"> Brinkman Laboratory</a>, 
+                  <a href="http://www.sfu.ca" target="_blank">Simon Fraser University</a>, British Columbia, Canada. If you 
+                  use PSORTb in your research, we would greatly appreciate if you cited one of the following publications, and note the version of software you use:
+                  <ul>
+		    <li>
+		      <strong>PSORTb v3.0:</strong> N.Y. Yu, J.R. Wagner, M.R. Laird, G.
+		      Melli, S. Rey, R. Lo, P. Dao, S.C.
+		      Sahinalp, M. Ester, L.J. Foster, F.S.L. Brinkman (2010) PSORTb 3.0: Improved protein
+		      subcellular localization prediction with refined
+		      localization subcategories and predictive capabilities
+		      for all prokaryotes, <em><a
+		      href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btq249?ijkey=mtNbKJWL9A4SMgH&keytype=ref" target="_blank">Bioinformatics</a></em> <strong>26(13):1608-1615</strong></li>
+		     <br />
+                    <li><strong>PSORTb v2.0:</strong> J.L. Gardy, M.R. Laird, 
+                      F. Chen, S. Rey, C.J. Walsh, M. Ester, and F.S.L. Brinkman 
+                      (2005) PSORTb v.2.0: expanded prediction of bacterial protein 
+                      subcellular localization and insights gained from comparative 
+                      proteome analysis, <em><a href="http://bioinformatics.oxfordjournals.org/cgi/content/full/26/13/1608?view=long&pmid=20472543" target="_blank">Bioinformatics</a></em> 
+                      <strong>21(5):617-623</strong></li>
+		    &nbsp;<br />
+                    <li><strong>PSORTb v1.0: </strong>Jennifer L. Gardy, Cory Spencer, Ke Wang, Martin Ester, Gabor E. Tusnady, 
+                      Istvan Simon, Sujun Hua, Katalin deFays, Christophe Lambert, Kenta Nakai and Fiona S.L. Brinkman (2003) PSORT-B: improving 
+                      protein subcellular localization prediction for Gram-negative bacteria, <a href="http://nar.oupjournals.org/cgi/content/abstract/31/13/3613" target="_blank"><em>Nucleic Acids Research</em></a> 
+		      <strong>31(13):3613-17</strong></li>
+                  </ul>
+                  <p align="left">If you are interested in being notified about changes in the status of PSORTb, please subscribe to the 
+                    psort-update mailing list by emailing <a href="mailto:maillist@sfu.ca">maillist@sfu.ca</a> with &quot;subscribe psort-update&quot; 
+                    in the subject or body of the message.</p>
+		</td>
+
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+	  </form>
+
+	</div>
+
+      </td>
+
+    </tr>
+  </table>
+
+  <hr width="670">
+    <font size="-2"> [ <a href="../updates.html">Updates</a> | 
+    <a href="../documentation/index.html">Documentation</a> | 
+    <a href="../resources.html">Resources</a> | 
+    <a href="../contact.pl">Contact</a> ]</font>
+  </div>
+
+ </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

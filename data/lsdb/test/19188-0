@@ -1,0 +1,270 @@
+<HTML>
+<HEAD><TITLE>SECISaln</TITLE>
+
+
+
+
+<link rel=stylesheet type="text/css" href="./basic.css" title="SECIS">
+<!--<link rel="stylesheet" type="text/css" href="http://genome.crg.es/css/Genome.css" title="Genome" />-->
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+ <!-- $Id: index.html,v 1.43 2006/11/10 15:28:49 gmaster Exp $ -->
+  <!-- KEYWORDS and DESCRIPTION for INTERNET SEARCH ENGINES -->
+ <META NAME="keywords"    CONTENT="SECISaln,SECIS,selenocystein,Selenoprotein,secisearch,selenocysteine insertion sequence">
+  <META NAME="description" CONTENT="This is the webserver for SECISaln, a program that produces structural alignments of eukaryotic SECIS elements">
+<meta name="FORMATTER" content="GNU Emacs 22.1.1">
+<style type="text/css" title="Genome" media="print">
+body { background-color: #FFFFFF; }
+a { text-decoration: none; color: #006262; }
+ </style>
+ <script language="javascript" type="text/javascript">
+  // From now on do not take care if user resizes windows browser,
+  // just ensure that the site pages were note embeeded within somebody else's frameset.
+  if (window != top) { top.location.href = location.href; }
+ </script>
+<link REL="SHORTCUT ICON" HREF="favicon.ico">
+
+<!--<style type="text/css" title="Genome"> 
+   @import url(http://genome.crg.es/css/Genome.css);
+  </style> 
+-->
+
+<SCRIPT type="text/javascript" src="http://genome.crg.es/Genome.js"></SCRIPT>
+<!-- <STYLE type="text/css"> -->
+<!--  @import url(http://genome.crg.es/Genome_forms_mozilla.css); -->
+<!-- </STYLE> -->
+
+</head>
+
+
+
+
+
+<body onResize="init();" MARGINWIDTH="2" MARGINHEIGHT="0">
+<A NAME="TOC"></A>
+
+
+
+<body id="Bsoftware"><a name="top"></a>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-964675-1";
+urchinTracker();
+
+</script>
+
+<div align="center">
+<div id="wrapper">
+<!-- ############### TITLE AREA ############### -->
+<div align="center">
+<div id="header">
+<h1>GENOME BIOINFORMATICS RESEARCH LAB</h1>
+<small>
+Grup de Recerca en Inform&agrave;tica Biom&egrave;dica <br class="hhh" />
+Institut Municipal d'Investigaci&oacute; M&egrave;dica + Universitat Pompeu Fabra + Centre de Regulaci&oacute; Gen&ograve;mica<br class="hh"  />
+
+</small>
+<div align="center"><div id="menudiv"><table class="gblnav"><tr class="menu"><td id="Mhelp"><a href="http://genome.crg.es/software/secisaln/help.html" title="Ask for Help">Help</a></td><td id="Mnews"><a href="http://genome.crg.es/main/news.php" title="News">News</a></td><td id="Mpeople"><a href="http://genome.crg.es/main/people.php" title="Who is who in the Genome Informatics Research Laboratory">People</a></td><td id="Mresearch"><a href="http://genome.crg.es/research/" title="Research at our Group">Research</a></td><td id="Msoft"><a href="http://genome.crg.es/software/" title="Software developed by our Group">Software</a></td><td id="Mpapers"><a href="http://genome.crg.es/publications/" title="Publications by our Group">Publications</a></td><td id="Mlinks"><a href="http://genome.crg.es/main/links.php" title="Interesting Links">Links</a></td></tr></table>
+
+<table class="gblnav"><tr class="menu"><td id="Mdata"><a href="http://genome.crg.es/datasets/" title="Datasets created/curated by our Group">Resources&nbsp;&amp;&nbsp;Datasets</a></td><td id="Mpreds"><a href="http://genome.crg.es/genepredictions/" title="Gene Predictions produced by our Software">Gene&nbsp;Predictions</a></td><td id="Mseminars"><a href="http://genome.crg.es/seminars/" title="Seminars, Courses and Group Sessions">Seminars&nbsp;&amp;&nbsp;Courses</a></td></tr></table></div></div>
+<div class="alt"><hr /></div>
+
+<div id="nav"><a href="http://www.crg.es/" title="Institut Municipal d&#39;Investigaci&oacute; M&egrave;dica">IMIM</a>&lt;<a href="http://www.upf.edu/" title="Universitat Pompeu Fabra">UPF</a>&lt;<a href="http://www.crg.es/" title="Centre de Regulaci&oacute; Gen&ograve;mica">CRG</a>&lt;<a href="http://nemo.crg.es/grib/" title="Grup de Recerca en Inform&agrave;tica Biom&egrave;dica">GRIB</a>&lt;<a href="http://genome.crg.es/" title="Genome Bioinformatics Research Laboratory HOME PAGE: You are Welcome!!!">HOME</a>&gt;<a href="http://genome.crg.es/software/" title="Software developed in our Group">Software</a>&gt;<a href="http://genome.crg.es/software/secisaln" title="SECISaln">SECISaln</a></div>
+</div></div>
+
+
+
+<BR class="hhh">
+
+
+<br><br>
+
+
+<div class="title">SECI<FONT COLOR="#990000">S</FONT>aln 1.0 Web Server 2008<h1></h1></div><br />
+
+
+
+
+ <DIV ID="box1">
+ <DIV ID="box2">
+
+
+
+ <DIV ID="box"> 
+<P class="box">
+SECISaln will predict a <u><b>eukaryotic</b></u> <a href="./help.html">SECIS element</a> in a nucleotide sequence,
+split it into its <a href="./help.html">structural units</a> and then align each unit against the
+SECISes in our database. SECISaln can distiguish between typeI and typeII SECIS elements and will
+align the submitted sequence against others of the same type. All sequences used by SECISaln have been collected from either <a href="http://www.ncbi.nlm.nih.gov/Genbank/index.html">GenBank</a> or <a href="http://compbio.dfci.harvard.edu/tgi/ego/">EGO</a></P>
+
+<P class="box">SECISaln is <u><b>not</b></u></font> intended to replace
+<a href="http://genome.unl.edu/SECISearch.html">SECISearch</a> as a SECIS element predictor. In fact, SECISaln uses <a href="http://genome.unl.edu/SECISearch.html">SECISearch</a> to predict SECIS elements.
+The objective of this tool is to provide researchers with an easy way to compare structural features
+of SECIS elements.
+It should only be used on sequences known to contain a SECIS element. The pattern used by
+SECISaln to recognise SECIS elements is very permissive and would result in false positives
+when run on unknown sequences.
+
+</P></DIV>
+
+
+
+<div id="dhtmltooltip"></div>
+
+<script type="text/javascript">
+
+/***********************************************
+* Freejavascriptkit.com
+* Visit http://www.freejavascriptkit.com for more free Javascripts source code
+***********************************************/
+
+var offsetxpoint=-250 //Customize x offset of tooltip
+var offsetypoint=-210 //Customize y offset of tooltip
+var ie=document.all
+var ns6=document.getElementById && !document.all
+var enabletip=false
+if (ie||ns6)
+var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : ""
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function ddrivetip(thetext, thecolor, thewidth){
+if (ns6||ie){
+if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px"
+if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor
+tipobj.innerHTML=thetext
+enabletip=true
+return false
+}
+}
+
+function positiontip(e){
+if (enabletip){
+var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+//Find out how close the mouse is to the corner of the window
+var rightedge=ie&&!window.opera? ietruebody().clientWidth-event.clientX-offsetxpoint : window.innerWidth-e.clientX-offsetxpoint-20
+var bottomedge=ie&&!window.opera? ietruebody().clientHeight-event.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+
+var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+
+//if the horizontal distance isn't enough to accomodate the width of the context menu
+if (rightedge<tipobj.offsetWidth)
+//move the horizontal position of the menu to the left by it's width
+tipobj.style.left=ie? ietruebody().scrollLeft+event.clientX-tipobj.offsetWidth+"px" : window.pageXOffset+e.clientX-tipobj.offsetWidth+"px"
+else if (curX<leftedge)
+tipobj.style.left="5px"
+else
+//position the horizontal position of the menu where the mouse is positioned
+tipobj.style.left=curX+offsetxpoint+"px"
+
+//same concept with the vertical position
+if (bottomedge<tipobj.offsetHeight)
+tipobj.style.top=ie? ietruebody().scrollTop+event.clientY-tipobj.offsetHeight-offsetypoint+"px" : window.pageYOffset+e.clientY-tipobj.offsetHeight-offsetypoint+"px"
+else
+tipobj.style.top=curY+offsetypoint+"px"
+tipobj.style.visibility="visible"
+}
+}
+
+function hideddrivetip(){
+if (ns6||ie){
+enabletip=false
+tipobj.style.visibility="hidden"
+tipobj.style.left="-1000px"
+tipobj.style.backgroundColor=''
+tipobj.style.width=''
+}
+}
+
+document.onmousemove=positiontip
+
+</script>
+
+
+
+
+<DIV ID="box">
+<FORM ENCTYPE="multipart/form-data" ACTION="../../../cgi-bin/SECISearch/SECISearch-aln.pl" METHOD=POST>
+
+
+<a href="help.html#pattern" class="tooltip" onMouseover="ddrivetip('This is the pattern used by patscan to predict SECIS elements. The basic difference between the two patterns is that <i>pat_secisaln</i> will only find SECISes of the standard type (ATGAN/AA/NGAN) while <i>Loose</i> will also find non-canonical SECISes (NTGAN/MM/NGAN).<br> Please click through for a more comprehensive description.   ','', 300)"; onMouseout="hideddrivetip()" >Pattern:</A><SELECT NAME=pattern>
+
+<OPTION VALUE=pat_secisaln_dec3 SELECTED>Standard pattern
+<OPTION VALUE=pat_secisaln> Standard pattern (short seq)
+<OPTION VALUE=pat_secisaln_loose> Loose (canonical and non-canonical)
+
+<!--
+<OPTION VALUE=pat_Sep20> Loose (canonical)
+<OPTION VALUE=pat_dm> Default (ATGA)
+<OPTION VALUE=pat_g > Default (GTGA)
+<OPTION VALUE=pat_s > Strict-->
+</SELECT>
+
+ <INPUT TYPE=checkbox NAME=complstrand onMouseover="ddrivetip('Click to have patscan look for possible SECIS\
+es on the complementary strand.','', 300)"; onMouseout="hideddrivetip()">Search complementary strand.
+<br>
+<A class="tooltip" onMouseover="ddrivetip('This is the &Delta;G value below which SECIS structures will be considered stable.','',300)"  onMouseout="hideddrivetip()" HREF=help.html#energy>Overall structure energy</A> <INPUT TYPE=text NAME=e2 SIZE=6 Value="-9"><BR> </DIV>
+
+<!--<DIV ID="box"><INPUT TYPE=checkbox NAME=debug> Debugging<BR>-->
+
+<!--<INPUT TYPE=checkbox NAME=want_gis> Show sequence accession numbers<BR> -->
+
+
+
+
+
+
+
+
+ <DIV ID="box"> 
+ Enter your sequence here:<br> 
+
+
+ <TEXTAREA NAME=sequence ROWS=4 COLS=40 onMouseover="ddrivetip('Paste your sequence (Just one sequence at a time) here in FASTA format.','', 300)"; onMouseout="hideddrivetip()">
+</TEXTAREA><BR>
+<div >
+ OR
+<SELECT NAME=sequence1 onMouseover="ddrivetip('Alternatively, you can chose one of the two example sequences and so view our precompiled alignments','', 300)"; onMouseout="hideddrivetip()">
+<OPTION VALUE="">Choose a test sequence:
+<OPTION VALUE=">test_seq_type1
+TCCTACCCCGGCTGCTTGGCAGTTGCAGTGCTGCTGTCTCGGGGGGGTTTTCATCTATGAGGGTGTTTCC
+TCTAAACCTACGAGGGAGGAACACCTGATCTTACAGAAAATACCACCTCGAGATGGGTGCTGGTCCTGTT
+GATCCCAGTCTCTGCCAGACCAAGGCGAGTTTCCCCACTAATAAAGTGCCGGGTGTCAGCAGAAAAAAAA
+AAAAAAAAAAA">type1
+<OPTION VALUE=">test_seq_type2
+UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGCAAUGGUGCCAGCGGGACUGGUGUUAAUGAAGGCUUGCACUGAAAACACUUGCUGUUAGUGUAGGCUGGAGUUCUCCCUGCCGUCUCGCUGCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">type2
+</SELECT></div>
+<INPUT TYPE=reset VALUE=Clear>
+<INPUT TYPE=submit VALUE=Submit>
+<br><br>
+</div>
+<DIV ID="box">
+Sort results:
+<SELECT NAME=sort onMouseover="ddrivetip('Choose whether the precompiled alignment is to be sorted by protein families or by species.','', 300)"; onMouseout="hideddrivetip()">
+<OPTION VALUE=prot SELECTED> by protein
+<OPTION VALUE=species> by species
+</SELECT>
+</div></FORM>
+<DIV ID="box">Credits: SECISaln uses <a href="http://genome.unl.edu/SECISearch.html">SECISearch</a>, <A HREF=http://www-unix.mcs.anl.gov/compbio/PatScan/HTML/patscan.html>PatScan</A> and RNAfold from the <A HREF=http://www.tbi.univie.ac.at/~ivo/RNA/>Vienna RNA Package.</A><BR>
+<br>If you find this software useful please cite Chapple C. E. <i>et al</i>, Bioinformatics, 2009 <b>25</b>(5):674-675
+
+</DIV>
+
+ 
+<DIV ID="box"><br><div align="center">This page is best viewed using any standards compliant browser such as <a href="http://www.firefox.com">firefox</a>
+                        or 
+                        <a href="http://www.opera.com">opera</a>.<br>Please send questions and comments to <font color="#990000">charles.chapple</font> AT  <font color="#990000">crg</font> DOT  <font color="#990000">es</font>
+<br><br>
+</DIV>
+</div>
+
+
+
+
+</BODY>
+</HTML>
+ 
