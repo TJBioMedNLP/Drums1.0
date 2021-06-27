@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+
+     <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+    <link rel="stylesheet" href="../stylesheets/bminfo.css"> 
+    
+    <link rel="stylesheet" href="../jquery/jquery-ui-1.8.7/themes/base/jquery.ui.all.css"> 
+    <script type="text/javascript" src="../jquery/jquery-latest.js"></script> 
+    <script type="text/javascript" src="../jquery/jquery-ui-1.8.7/ui/jquery-ui.js"></script> 
+	<script type="text/javascript" src="../jquery/jquery-ui-1.8.7/ui/jquery.ui.core.js"></script> 
+	<script type="text/javascript" src="../jquery/jquery-ui-1.8.7/ui/jquery.ui.widget.js"></script> 
+	<script type="text/javascript" src="../jquery/jquery-ui-1.8.7/ui/jquery.ui.tabs.js"></script> 
+    <link href="../jquery/extension/style.css"  rel="stylesheet" type="text/css" /> 
+    <title>DRUMS - search results </title> 
+    
+    
+    <head>
+    <script type="text/javascript" src="../jquery/jquery-latest.js"></script>
+    
+    <script type="text/javascript">
+    var xdr;
+    
+    function processMsg(msg){
+        $('#drums_query_rlt').html(msg);
+        $('#processing').html('')
+    }
+ 
+ 
+    function err()
+    {
+        alert("XDR onerror");
+    }
+    function timeo()
+    {
+        alert("XDR ontimeout");
+    }
+    function loadd()
+    {
+        //alert("XDR onload");
+        processMsg(xdr.responseText);
+    }
+    function progres()
+    {
+        //alert("XDR onprogress");
+        //alert("Got: " + xdr.responseText);
+        return;
+    }
+ 
+    function stopdata()
+    {
+        xdr.abort();
+    }
+ 
+
+    $(document).ready(function(){
+        var q_terms = gup( 't' );
+        var src = ''
+        src += q_terms + '</br>'
+        src += '<img src="../img/structure/loading.gif" width= "200" height="15"/>'
+        $('#processing').html(src);
+        $('#usr_input').val(q_terms);
+        
+        //get results
+        var asiderUrl= 'http://autumn.ims.uwm.edu:5000/mutation/progress?r=mt&t=1&b=3';
+        var pars = 'r=mt&clientid=1&t=' + q_terms;
+        
+        if ($.browser.msie && window.XDomainRequest) {
+            // Use Microsoft XDR
+           var someurl = asiderUrl + '?' + pars
+           ///alert(someurl);
+           xdr = new XDomainRequest();
+           if (xdr){
+                xdr.onerror = err;
+                xdr.ontimeout = timeo;
+                xdr.onprogress = progres;
+                xdr.onload = loadd;
+ 
+                xdr.timeout = 10000;
+                xdr.open("GET", someurl);
+                xdr.send();
+                
+           }else{
+             alert('failed');
+           }
+
+        }else{
+            $.ajax({
+               type: "GET",
+               url: asiderUrl,
+               data: {'r':'mt','clientid':1,'t':q_terms},
+               dataType: 'jason',
+               jsonp:'jsonp_callback',
+               success: function(msg){
+                
+                processMsg(msg)
+                //$('#drums_query_rlt').html(msg);
+                //$('#processing').html('')
+               }
+             });
+        }
+        
+    });
+    
+    function gup( name )
+    {
+      name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+      var regexS = "[\\?&]"+name+"=([^&#]*)";
+      var regex = new RegExp( regexS );
+      var results = regex.exec( window.location.href );
+      if( results == null )
+        return "";
+      else
+        return results[1].replace('+', ' ');
+    }
+    </script>
+
+</head> 
+<body> 
+    <!--CONTENT STARTS HERE --> 
+    <table id="head_table"> 
+        <div id = "bminfo_top">
+        <tbody> 
+            <tr> 
+                    <td > 
+                        <a href="../drums/index.html"> <img src="../img/structure/DrumsCartoon.jpg" width ="120" height = "80" align="bottom"> 
+                        </a> 
+                        
+                    </td> 
+                    
+                <td valign="bottom"><form name="dbsearch" method="GET" action="../drums/search.html">
+                        <input type='hidden' name='r' value='mt'/>
+                        <input id="usr_input" name = "t" type = "text" value= "usher syndrome" size=100%/> 
+                        
+                        <input value = "Search" type = "submit"/></form> 
+                </td> 
+                <td valign="bottom">
+                 <a href="../drums/blast.html">sequence</a> | <a href='adv.html'>advanced search</a>
+                </td>
+            </tr> 
+        </tbody> 
+    </table>
+    </div>
+    
+    <hr width="100%"> 
+
+ 
+ 
+ 
+<div id="drums_query_rlt">
+
+</div><!-- End demo --> 
+<div id="processing" >
+</div>
+</body> 
+</html>  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
