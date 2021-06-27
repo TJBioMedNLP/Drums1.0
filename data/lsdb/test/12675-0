@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<link rel="icon" href="images/LOGITO.jpg" type="image/jpg">
+
+<style type="text/css">
+        <!--
+        a.effect1{text-decoration: none; }
+
+        -->
+</style>
+
+<head>
+	<title>EciD</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<style type="text/css" media="all">@import "CSS/style.css";</style>
+	<style type="text/css" media="all">@import "CSS/menuSup.css";</style>
+	<style type="text/css" media="all">@import "CSS/menuh.css";</style>
+		
+<script type="text/javascript" src="Php/drivers/BrowseDetect.js"></script>
+
+<script type="text/javascript">
+
+if(BrowserDetect.browser == "Firefox" & BrowserDetect.version <= 2){
+	var comment=("Although old Firefox versions (2.x.x) are supported. We recommend you to use Firefox 3 for a properly navigation");
+}
+else if(BrowserDetect.browser == "Explorer" & BrowserDetect.version <= 6){
+	var comment=("Old Internet Explorers are not already supported. We recommend you to update to Explorer 7");
+}
+else if(BrowserDetect.browser == "OmniWeb" || BrowserDetect.browser == "Safari" || BrowserDetect.browser == "Opera" || BrowserDetect.browser == "iCab" || BrowserDetect.browser == "Konqueror" || BrowserDetect.browser == "Camino" || BrowserDetect.browser == "Netscape" || BrowserDetect.browser == "Mozilla"){
+	var comment=("Your browser is not 100% compatible with EcID. For a properly and fast navigation, we recommend Firefox 3. ");
+}
+else{
+	var comment="";
+}
+if (self.screen) {     // for NN4 and IE4
+        width = screen.width
+        height = screen.height
+// Testing this first prevents firing the slow Java of NN4
+}
+else if (self.java) {   // for NN3 with enabled Java
+       var jkit = java.awt.Toolkit.getDefaultToolkit();
+       var scrsize = jkit.getScreenSize();       
+       width = scrsize.width; 
+       height = scrsize.height; 
+}
+else{
+ width = height = '?' // N2, E3, N3 w/Java off, probably Opera and WebTV
+}
+if(width <1280 & height<1024){
+	var comment2="\nYour resolution is " + width + "x" + height + ". For a better visualization, we suggest 1280x1024";
+}else{
+	var comment2="";
+}
+if (comment || comment2){
+	alert(comment + comment2);
+}
+</script>
+
+
+
+<script type="text/javascript">
+
+	function NewWindow(mypage, myname, w, h, scroll) {
+	var winl = (screen.width - w) / 2;
+	var wint = (screen.height - h) / 2;
+	winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
+	win = window.open(mypage, myname, winprops)
+	if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+	}
+</script>
+
+</head>
+<body>	
+
+	<div id="topbar"><b><img src="images/ecid_logo_con_bg2.jpg" width=100 heigth=100></img></b></div>
+
+	<div id="tabs">
+		<ul>
+		<li><span>Home</span></li>
+		<li><a>Summary</a></li>
+		<li><a>Protein Info</a></li>
+		<!-- <li><a href="Php/Homol.php">Homology</a></li>-->
+		<li><a href="Php/Help.php">Help</a></li>
+		</ul>
+	</div>
+	<div id="main">
+	<br>
+	
+		<div id="subtabs">
+			<!-- 
+<div id="menu">
+<ul>
+	<li>
+		<a href="" class="x">Sumary</a>
+	</li>
+</ul>
+<ul>
+<li>
+<h2>Predictions</h2>
+<ul>
+</ul>
+</li>
+</ul>
+//print"<ul>\n<li>\n<h2>Metabolism Data</h2>\n<ul>\n";
+>
+</ul>
+</li>
+</ul>
+		</ul>
+	</li>
+</ul>
+
+
+<ul>
+	<li>
+		<h2>Complejos</h2>
+		<ul>
+			<li><a href="" class="x">Peer Review Network</a></li>
+			<li><a href="" class="x">Announcements</a></li>
+			
+			<li><a href="" class="x">Consultants Login</a>
+		</ul>
+	</li>
+</ul>
+<ul>
+	<li>
+		<h2>Regulacion</h2>
+		<ul>
+			<li><a href="" class="x">Peer Review Network</a></li>
+			<li><a href="" class="x">Announcements</a></li>
+			
+			<li><a href="" class="x">Consultants Login</a>
+		</ul>
+	</li>
+</ul>
+
+<ul>
+	<li>
+		<h2>Metabolismo</h2>
+		<ul>
+			<li><a href="" class="x">Peer Review Network</a></li>
+			<li><a href="" class="x">Announcements</a></li>
+			<li><a href="" class="x">Consultants Login</a>
+		</ul>
+	</li>
+</ul>
+<ul>
+	<li>
+		<h2>Text Mining</h2>
+		<ul>
+			<li><a href="" class="x">Peer Review Network</a></li>
+			<li><a href="" class="x">Announcements</a></li>
+			<li><a href="" class="x">Consultants Login</a>
+		</ul>
+	</li>
+</ul>
+
+</div>
+
+ -->
+			<br>
+		</div>
+		<div id="bodyarea">
+			<h1>Search</h1>
+			
+			<div class="note">&nbsp;&nbsp;&nbsp;&nbsp;Insert protein id, accesion or description to search for.&nbsp;&nbsp;&nbsp;&nbsp;<img title="Swiss-Prot Id's, Gene names, ihops id's , accesion numbers .... "src="images/ktip.png" width=25 </div>
+			<center><br>
+			<form name='search' action='Php/PreQuery.php' method='get'><br>
+	                	<font size='+1'><b>EciD search</b></font><br><font size=1><a href="Php/PreQuery.php?busca=NRDD_ECOLI" class="effect1">Example: nrdD</a></font><br>
+        	        	<input type='text' border='0' name='busca' size='18' height='10' id='parametro'><br><br>
+                	    <input class="boton" type='submit' value="Search">
+	            		<input class="boton" type='reset' value="Clear">
+		       	</form>
+			
+			<form name='search' action='Php/PreSeqQuery.php' method='post'><br>
+	                		<font size='+1'><b>EciD Sequence search</b></font><br><a href="Data/Sequence.txt" class="effect1"
+					onclick="NewWindow(this.href,'wiki','400','200','yes');return false;"><font size=1>Example</font></a><br>
+        	        			<TEXTAREA name="Sequence" rows="4" cols="60"></TEXTAREA>
+                			<br>
+			            <input class="boton" type='submit' value="Search">
+	            		<input class="boton" type='reset' value="Clear">
+		       	</form>
+			<br><br>
+			<font size='+1'><b>EciD download</b></font><br>
+			<a href="download.html" onclick="NewWindow(this.href,'wiki','400','200','yes');return false;"><img src="images/download_icon.png" width=60 height=60></a>
+			</center>		
+		</div>
+		<br>
+<script>
+	var mytext = document.getElementById("parametro");
+	mytext.focus();  
+</script>
+		
+<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+     		<tr>
+      		 <td align='left'><font size=1>Created :27-Jul-2007&nbsp; & &nbsp;Last modified Sunday, 15-March-2010 23:44:21 GMT</td>
+		 	 <td align='center'><font size=1>Recommended : Resolution 1280x1024. Browser : Firefox 3.x &nbsp;  &nbsp; </font></td>
+		<td align='right'><a href="mailto:eandres@cnio.es" class=effect1><font size=1>mail &nbsp; </a></td></font></tr>
+    </table>
+<script src='http://www.google-analytics.com/urchin.js' type='text/javascript'>
+</script>
+<script type='text/javascript'>
+_uacct = 'UA-126996-7';
+urchinTracker();
+</script>	</div>
+</body>
+</html>

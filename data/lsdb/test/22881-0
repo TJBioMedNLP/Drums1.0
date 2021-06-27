@@ -1,0 +1,689 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- turing_cluster_prod -->
+<html>
+<head> <title>  genalyzer.de  </title>
+<meta http-equiv="Keywords" content="">
+<meta http-equiv="Description" content="">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link rel="shortcut icon" href="http://cdn.dsultra.com/favicon/mi_favicon.ico" type="image/x-icon"> 
+  <script type="text/javascript">
+    
+      function setupAFDSearchRequest () {
+        google_afd_request = {
+            channel:     '000970',
+            client:      'ca-dp-oversee12_3ph_xml',
+            domain_name: 'genalyzer.de',
+			ref:         '',
+            hl:          'de',
+            q:           'gas analyzer',
+            
+              num_ads:     '6',
+            
+            afdt:        afdt,
+            token:       afdt
+        };
+    }
+
+	var totalAds = 0;
+	var totalNeededAds = 1;
+	var totalWantedAds = 3;
+	var ads = '';
+	var popularCategories = '';
+	var relatedSearches = '';
+	var calledAFD = false;
+	
+
+	var t_count = 0;  var goo_t_id = '';  var goo_time = 1.5;  var icon_loading = false;
+	var goo_ready = false;  var dom_ready = false;  var google_ads_resp = null;  var process_goo_called = false;  var handle_ads_attempts = 4;
+	var content_opened = false;  var goo_out = false;  var t_set = false;  var content_elm = 'ads';   var google_afd_request = {   num_ads:     '6',  channel:     '000970',
+		client:      'ca-dp-oversee12_3ph_xml', 
+		domain_name: 'genalyzer.de',
+		ref:         '',
+		hl:          'de',
+		kw:          escape("gas analyzer"),
+		kw_type:     'broad',
+		s:           'genalyzer.de'
+	};   function callAFD () {
+        setupAFDSearchRequest();
+		callJS();
+		calledAFD = true;
+	}
+
+    function callJS ( type ) {
+        document.write('<script type="text/javascript" language="JavaScript" src="http://pagead2.googlesyndication.com/apps/domainpark/show_afd_ads.js">');
+        document.write('<\/script>');
+
+        return true;
+    }  function renderAds( source, 
+		    target, 
+		    redirectUrl, 
+		    numberWrittenBefore,
+		    numberReturned) {
+
+    var numberWritten = 0;
+
+    if ( target == null ) 
+	return numberWritten;
+
+    var targetDiv = target;
+
+    if ( source != undefined && source != null ) {
+	var currentIndex = 
+	    numberWritten + numberWrittenBefore;
+	
+	targetDiv.appendChild ( 
+		createGoogleAdElement ( 
+			buildAdRedirectUrl ( 
+				redirectUrl,
+				currentIndex,
+				source
+			),
+			source,
+			source.type
+		)
+	);
+	
+	numberWritten++;
+    }
+    
+    return numberWritten;
+}
+
+
+function convertHeading2Url( url, tElm, nWin ) {
+    var elm = document.getElementById( tElm );
+    var hElm = elm.getElementsByTagName( 'h2' );
+    var nElm = document.createElement("A");
+
+	
+    if ( hElm[0].firstChild.nodeName == 'IMG' ) {
+        var nElmInner = document.createElement( 'IMG' );
+        nElmInner.setAttribute("src", hElm[0].firstChild.src);
+    } else {
+        var nElmInner = document.createTextNode( hElm[0].innerHTML );
+    }
+
+    nElm.setAttribute( 'href', url ); 
+    nElm.setAttribute( 'class', 'ads_group_title' ); 
+    if ( nWin ) nElm.setAttribute( 'target', '_blank' ); 
+    nElm.appendChild( nElmInner );
+    hElm[0].removeChild( hElm[0].firstChild );
+    hElm[0].appendChild( nElm );
+}
+
+function buildAdRedirectUrl( redirectUrl, currentIndex, currentGoogleAd ) {
+    v_url = currentGoogleAd.visible_url;
+    v_url = v_url.replace(/&lt;(.*?)&gt;/g,'');
+    v_url = v_url.replace(/<(.*?)>/g,'');
+
+    return redirectUrl + 
+        '&rank=' + currentGoogleAd.n +
+        '&click_display_url=' + escape( v_url ) +
+        '&go_url=' + encodeURIComponent( currentGoogleAd.url );
+}   function createGoogleAdElement(url, googleAd, adFormat) {
+    var p_wrap = document.createElement( 'p' );  p_wrap.appendChild( createGoogleAdLink( 'span', 'adtitle', googleAd.line1, url, 'nofollow', '_blank', 'doPop=0', googleAd.url ) );   if ( googleAd.line2 ) {
+		p_wrap.appendChild(createGoogleAdLine( 'span', 'addesc', googleAd.line2 ));
+	}
+	if ( googleAd.line3 ) {
+		p_wrap.appendChild(createGoogleAdLine( 'span', 'addesc', googleAd.line3));
+	}   p_wrap.appendChild( createGoogleAdLink( 'span', 'adurl', googleAd.visible_url, url, 'nofollow', '_blank', 'doPop=0', googleAd.url ) );
+
+    return p_wrap;
+}   function createGoogleAdLink( tagName, className, text, url, rel, target, onclick, name, styling ) {
+    if( text.match(/&lt;(.*?)&gt;/g) ) { 
+      text = text.replace(/&lt;(.*?)&gt;/g,'<$1>');
+    }
+
+    var link_wrap 		= document.createElement( tagName );  
+    var link 			= document.createElement( 'a' ); 
+    link_wrap.className	= className;  
+    link.href 			= url;
+    link.rel 			= rel ? rel : '';
+   	link.target 		= target ? target : '';
+   	link.onclick 		= onclick ? onclick : '';
+    link.className 		= className + "_link";
+    link.name			= name ? name : '';
+    link.innerHTML		= text;
+    link.title			= text;
+    link.style.cssText	= styling ? styling : '';
+    link_wrap.appendChild( link );
+    return link_wrap;
+}
+
+function createGoogleAdLine( tagName, className, innerHTML ) {
+    var line = document.createElement( tagName );  
+    line.className = className;
+    line.innerHTML = innerHTML;
+    return line;
+}
+
+function getParam( name ) {
+	var match = new RegExp(name + "=([^&]+)","i").exec( location.search );
+	if ( match==null )
+		match = new RegExp(name + "=(.+)","i").exec( location.search );
+	if ( match==null )
+		return null;
+	match = match + "";
+	result = match.split(",");
+	return result[1];
+}
+
+
+(function(){
+    var DomReady = window.DomReady = {};
+	
+    var userAgent = navigator.userAgent.toLowerCase();
+    
+    var browser = {
+    	version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1],
+    	safari: /webkit/.test(userAgent),
+    	opera: /opera/.test(userAgent),
+    	msie: (/msie/.test(userAgent)) && (!/opera/.test( userAgent )),
+    	mozilla: (/mozilla/.test(userAgent)) && (!/(compatible|webkit)/.test(userAgent))
+    };    
+
+	var readyBound = false;	
+	var isReady = false;
+	var readyList = [];
+
+	
+	function domReady() {
+		
+		if(!isReady) {
+			
+			isReady = true;
+        
+	        if(readyList) {
+	            for(var fn = 0; fn < readyList.length; fn++) {
+	                readyList[fn].call(window, []);
+	            }
+	            readyList = [];
+	        }
+		}
+	};
+
+	
+	function addLoadEvent(func) {
+	  var oldonload = window.onload;
+	  if (typeof window.onload != 'function') {
+	    window.onload = func;
+	  } else {
+	    window.onload = function() {
+	      if (oldonload) {
+	        oldonload();
+	      }
+	      func();
+	    }
+	  }
+	};
+
+	
+	function bindReady() {
+		if(readyBound) {
+		    return;
+	    }
+	
+		readyBound = true;
+
+		
+		if (document.addEventListener && !browser.opera) {
+			
+			document.addEventListener("DOMContentLoaded", domReady, false);
+		}
+
+		
+		if (browser.msie && window == top) (function(){
+			if (isReady) return;
+			try {
+				
+				
+				document.documentElement.doScroll("left");
+			} catch(error) {
+				setTimeout(arguments.callee, 0);
+				return;
+			}
+			
+		    domReady();
+		})();
+
+		if(browser.opera) {
+			document.addEventListener( "DOMContentLoaded", function () {
+				if (isReady) return;
+				for (var i = 0; i < document.styleSheets.length; i++)
+					if (document.styleSheets[i].disabled) {
+						setTimeout( arguments.callee, 0 );
+						return;
+					}
+				
+	            domReady();
+			}, false);
+		}
+
+		if(browser.safari) {
+		    var numStyles;
+			(function(){
+				if (isReady) return;
+				if (document.readyState != "loaded" && document.readyState != "complete") {
+					setTimeout( arguments.callee, 0 );
+					return;
+				}
+				if (numStyles === undefined) {
+	                var links = document.getElementsByTagName("link");
+	                for (var i=0; i < links.length; i++) {
+	                	if(links[i].getAttribute('rel') == 'stylesheet') {
+	                	    numStyles++;
+	                	}
+	                }
+	                var styles = document.getElementsByTagName("style");
+	                numStyles += styles.length;
+				}
+				if (document.styleSheets.length != numStyles) {
+					setTimeout( arguments.callee, 0 );
+					return;
+				}
+			
+				
+				domReady();
+			})();
+		}
+
+		
+	    addLoadEvent(domReady);
+	};
+
+	
+	DomReady.ready = function(fn, args) {
+		
+		bindReady();
+    
+		
+		if (isReady) {
+			
+			fn.call(window, []);
+	    } else {
+			
+	        readyList.push( function() { return fn.call(window, []); } );
+	    }
+	};
+    
+	bindReady();
+})();
+
+function ticker() {
+	t_count = t_count + 1;
+	goo_time = (goo_time > 0) ? (goo_time - .01) : 0;
+	var contentID = '';
+
+	if ( ! goo_ready ) {
+		if ( goo_time > 0 ) {
+			contentID = setTimeout( function() { ticker() }, 1 );
+			if( !icon_loading && dom_ready ) {
+				show_loading();
+				icon_loading = true;
+			}
+		} else {
+			if ( !dom_ready ) {
+				setTimeout( function() { ticker() }, 1); 
+				return;
+			}
+			hide_loading();
+			goo_ready = true;
+			goo_out = true;
+			if ( !content_opened ) open_second();
+			if ( contentID ) clearTimeout ( contentID );
+			return;
+		}
+	} else {
+		clearTimeout ( contentID );
+		return;
+	}
+}
+
+function show_loading() {
+	var d = document.getElementById( content_elm );
+	var l_wrap = document.createElement( "DIV" );
+	l_wrap.id = 'status';
+	l_wrap.setAttribute("style", "position: relative; display: block; width: 100%; height: 25px; padding: 20px 0; text-align: center; background: #ffffff");
+	var l_icon = document.createElement( "IMG" );
+	l_icon.setAttribute("src", "http://cdn.dsultra.com/images/icon_loading.gif");
+	l_icon.setAttribute("style", "margin: 0 auto; vertical-align: middle");
+	l_wrap.appendChild(l_icon);
+	if ( d ) d.insertBefore( l_wrap, d.firstChild);
+}
+function hide_loading() {
+	d = document.getElementById( content_elm );
+	var icon = document.getElementById('status');
+	if ( icon ) d.removeChild( icon );
+	return;
+}
+
+function google_afd_ad_request_done( response ) {
+	if ( ( response.error_code && response.error_code == 200 )
+             || response.faillisted ||  response.blocked  ) {
+		DomReady.ready( function() { open_second( 1, response ) } );
+		return false;
+	}  var click_token = response.token ? response.token : '';
+	var search_token = response.search_token ? response.search_token: '';
+
+	if( response.ads ) { 
+		var google_ads = response.ads;
+	} else {
+		var google_ads = response;
+	}
+	var numberAdsReturned = ( google_ads && google_ads.length ) ? google_ads.length : 0;
+
+	  goo_ready = true;
+	google_ads_resp = response;
+	DomReady.ready( function() { process_goo( response ) } );
+}
+
+function handle_ads_with_wait () {
+   	if ( handle_ads_attempts > 0 && !process_goo_called ) { 
+      		if ( google_ads_resp && document.getElementById("google_ads_block") ) { 
+          		process_goo( google_ads_resp ); 
+   			return;
+     		} else { 
+			handle_ads_attempts--;
+	        	setTimeout(handle_ads_with_wait, 1000);
+      		} 
+	}
+}
+
+function process_goo ( response ) { 
+        if (process_goo_called) 
+		return;         
+	process_goo_called = true;  var click_token = response.token ? response.token : '';
+	var search_token = response.search_token ? response.search_token: '';  if( response.ads ) { 
+		var google_ads = response.ads;
+	} else {
+		var google_ads = response;
+	}
+
+	var numberAdsReturned = ( google_ads && google_ads.length ) ? google_ads.length : 0;
+	  if ( numberAdsReturned && click_token && search_token ) {
+		addToken( click_token, search_token );
+	} else if ( calledAFD && click_token && search_token ) {
+		addToken( click_token, search_token );
+	}     if ( numberAdsReturned < totalNeededAds ) {
+		totalAds = numberAdsReturned;  if ( document.getElementById('secondtier_ads_block') ) {
+			var targetXfetch = document.getElementById('secondtier_ads_block');
+			targetXfetch.style.display = "";
+		}  return;
+	}    var target = document.getElementById('googleAdTarget');
+	var numberAdsWritten=0;  var epl = 'xM-GdH7z6IsuEC1LcSRTMSSwHRdAQuEUyV38UcdJWWCu9VNFKhxtKHFnYEQUv5J9uiDKKqFdRGGLYlpFQWINQAuWhtybgxGdHM-XYlgQg2aYlWfPk7OJPFkmbqQFKEwJJ9yMYyUk8QEAnWfc3KbDdF6dRoKIQeWcpapK9qYVDhBsks394FVIwO_KcXFBNnJYROae89pmhVHWXsOeegYA2GitmuLMGawD3rwTr5x7g8EqSqulKAqzZ91g7SJzqJKp0GOwIV7kNaBLeCCDfKcn7p2hpSxDpglR3cktmkUIA8o0p_dPVQc5XVtTMdar9q2QyWhogGpPU089NWXSNNAAoB4CU3qaYmJq0JCemEajpiF6ZJo00dCyDQEwsP7_vwAA4H8BQABAgFsmAAAJbMcFWVMmWUExNmhaQrsBAADw';
+	var pid = 'goo_dp_12_000970';  if ( calledAFD ) {
+		epl = 'XYM6A75oavwtIbv4LYZfjCinJitCQuEUyV38ox6ZTMCK-xu-dsD7LtEh7MrsOdIoioNbschlkRSjYBoTYAs5ZTUrcWapM7256oQMu4F40k4zN1IyJ6ceHiACW8OIM5KokNSZ7wEg0-ma1l86XV1vocEe-eK61Iot2cR6AwAFoNGWMD6YuEHcN83xUgPekWcRGX47t99LCD_m25EnO18RseeZXYRgYCwqaV09V5IGl446Al2ELoRnsRAcveIsS9FqFiUoRVoRmC2BgTOIkzE8KmEyawpAoLKgOJESmTZCsbAYxiVCyxuBfNmE4BLgGgiotkBQt2Z5bp_N-fHMJsLrXJkJWHjU1BivTRu7KWPtfv6qZNG1lVJ61F7CMY4GoB71QMnTFMSEDAAAAFCe8pSnniJkFJumoaZ-qp8U9NQ0k9BArE0BMLD-_78AAOB_AUAAQIDbNQAAyqnJillTJllBMTZoWkJWAgAA8A';
+		pid = 'afd_dp_12_000970';  }
+
+	 if ( numberAdsReturned > 0 ) { 
+         numberAdsReturned =  (numberAdsReturned < 15) 
+                          ? numberAdsReturned : 15;
+
+   		for (var i=0; i < numberAdsReturned; i++) {
+    		var click_display_url = escape( google_ads[i].visible_url );
+	    	var rank = google_ads[i].n;
+		    var redirectUrl = "?epl=" + epl + "&pid=" + pid;
+
+   			numberAdsWritten += renderAds(google_ads[i],
+    									  target,
+	    								  redirectUrl,
+		    							  numberAdsWritten,
+			    						  numberAdsReturned);
+   		}
+
+         
+        if( response.feedback_url ) { 
+            
+            convertHeading2Url( response.feedback_url, 'google', 1 );
+            
+        }
+        
+
+    }  content_opened = true;
+}
+
+ function open_second( numberAdsReturned, g_res ) {
+    var elm_second_display = false;
+    var elm_second = document.getElementById('secondtier_ads_block');
+    if ( elm_second ) {
+        elm_second.style.display = "none";
+      if ( !numberAdsReturned || goo_out || !goo_ready ) {
+         elm_second.style.display = "";  if ( elm_goo = document.getElementById('google') ) {
+        	elm_goo.getElementsByTagName('h2')[0].style.display = "none";
+		}  }
+    }
+
+	if ( ! t_set ) {  var click_token = ( g_res && g_res.token ) ? g_res.token : '';
+		var search_token = ( g_res && g_res.search_token ) ? g_res.search_token: '';  if ( numberAdsReturned && click_token && search_token ) {
+			addToken( click_token, search_token );
+		} else if ( calledAFD && click_token && search_token ) {
+			addToken( click_token, search_token );
+		}
+	}
+}
+
+ function open_web( numberAdsReturned ) {
+			   if ( numberAdsReturned > 0 ) {
+        var elm_organic = document.getElementById('organic_ads_block');
+        if ( elm_organic ) {
+          elm_organic.style.display = "";
+        }
+      }
+}
+
+function addToken( click_token, search_token ) {  if ( ! t_set ) {
+	var allLinks = document.getElementsByTagName('a');
+
+  	for( var j=0; j < allLinks.length; j++ ){
+		if ( allLinks.item(j).className.match("kw") ) {
+			allLinks.item(j).setAttribute('href', allLinks.item(j).href+"&click_token="+click_token+"&search_token="+search_token);
+		}
+  	}
+
+    if ( document.getElementById('searchbox_action') && search_token ) {
+        document.getElementById('click_token').value = click_token;
+        document.getElementById('search_token').value = search_token;
+    }
+    }
+	t_set = true;
+}
+    
+    var flagsloaded = false;
+
+  function loadFlags () {
+	  if ( !flagsloaded ) {
+	  	var listel = document.getElementById( "dropdownflag" );   listel.options[0].style.background =  "url('http://cdn.dsultra.com/images/en.png') no-repeat right";  listel.options[1].style.background =  "url('http://cdn.dsultra.com/images/es.png') no-repeat right";  listel.options[2].style.background =  "url('http://cdn.dsultra.com/images/fr.png') no-repeat right";  listel.options[3].style.background =  "url('http://cdn.dsultra.com/images/zh.png') no-repeat right";  listel.options[4].style.background =  "url('http://cdn.dsultra.com/images/de.png') no-repeat right";  listel.options[5].style.background =  "url('http://cdn.dsultra.com/images/pt.png') no-repeat right";  listel.options[6].style.background =  "url('http://cdn.dsultra.com/images/ja.png') no-repeat right";  listel.options[7].style.background =  "url('http://cdn.dsultra.com/images/nl.png') no-repeat right";  listel.options[8].style.background =  "url('http://cdn.dsultra.com/images/it.png') no-repeat right";  listel.options[9].style.background =  "url('http://cdn.dsultra.com/images/ko.png') no-repeat right";  flagsloaded = true;
+	  }
+  }  function addEvent(obj, evType, fn) { 
+		if (obj.addEventListener){ 
+			obj.addEventListener(evType, fn, false); 
+			return true; 
+		} else if (obj.attachEvent){ 
+			var r = obj.attachEvent("on"+evType, fn); 
+			return r; 
+		} else { 
+			return false; 
+		} 
+	}  function addOToken( elm ) {
+  var allLinks = document.getElementsByTagName('a');
+    for( var j=0; j < allLinks.length; j++ ){
+        if ( allLinks.item(j).className.match("kw") ) {
+            allLinks.item(j).setAttribute('href', allLinks.item(j).href+"&ot="+elm);
+        }
+    }
+
+    if ( document.getElementById( 'searchbox_action' ) ) {
+        var ot_elm = document.createElement( 'INPUT' );
+        ot_elm.value = elm;
+        ot_elm.type= 'hidden';
+        ot_elm.name = 'ot';
+        ot_elm.id = 'ot';
+        document.getElementById('searchbox_action').getElementsByTagName('DIV')[0].appendChild( ot_elm );
+    }
+}
+  </script> <script type="text/javascript">
+      
+          calledAFD = true;
+          var calledJS = callJS();
+          if( calledJS ) ticker();
+      
+      </script> 
+
+    
+        <link rel="stylesheet" href="http://cdn.dsultra.com/css/0/landing/de.css" type="text/css">
+        
+        <link rel="stylesheet" href="http://cdn.dsultra.com/css/782/landing/de.css" type="text/css">
+        
+        
+        <link rel="stylesheet" href="http://cdn.dsultra.com/css/662/landing/de.css" type="text/css">
+        
+       <!-- BOF custom css -->
+<style type="text/css">
+
+	         #content .google .adtitle a { font-size: 16px }    #content .google .addesc { font-size: 11px }    #content .google .adurl a { font-size: 13px }  
+	         #content .secondtier .adtitle a { font-size: 16px }    #content .secondtier .addesc { font-size: 11px }    #content .secondtier .adurl a { font-size: 13px }  
+	         #content .organic .adtitle a { font-size: 16px }    #content .organic .addesc { font-size: 11px }    #content .organic .adurl a { font-size: 13px }  
+</style>
+<!-- EOF custom css -->    
+</head>
+
+<body onunload="exitPop();" class='generic'>
+<div id="container">
+	<div class="container_wrap">
+
+<!-- BOF Header -->
+	<div id="header">  <!-- BOF custom header -->   <div id="header_wildcard_wrap_2a" style='background:#333333;'>    <div id="header_title">
+      <h1 id="domainname" style='color:#ffffff;font-style:normal;font-weight:bold;'> Genalyzer.de </h1>
+      <p id="tagline">      Hier finden Sie alles zum Thema   </p>
+    </div>
+
+    <div id="header_links">
+      <div id="forsale" style='font-style:normal;font-weight:bold;'>        <a target="_blank"  style='font-style:normal;font-weight:bold;' class='imp' href="http://www.sedo.de/search/details.php4?domain=genalyzer.de&tracked=&partnerid=&language=d" style="color:#f4921f">genalyzer.de steht zum Verkauf</a>  </div>
+    </div>
+    <div class="clear">&nbsp;</div>
+  </div>   <!-- EOF custom header -->    </div>
+<!-- EOF Header -->
+
+<!-- BOF Main -->
+	<div id="main">
+	    <div class="main_wrap">
+
+<!-- BOF Sidebar -->
+		<div id="sidebar">
+		    <div class="sidebar_wrap">   <div class="poplinks">
+    <ul class="cat_resources">  <li class='keywords_header'><h3>Weitere Links</h3></li>                <li class="kwl_1">                              <a href='/?epl=HoIJOJuVEbe60fAMb4h6dwCauNsESCicIrmLf5yWpr7LDN1Dzromme28NosidL-q-JBdnB2FMRou2DhGZ67NHmdzjLzkisWlrE6Dy0TZSXsWVwoT2CqSX6aIE3vyDaqZiGK5M5A2eT1AvFo4RMQZEKidW9lgSbLZH88U4-JOHBZV-NRoUZo3R8BaaRsqyfTvL_JcAn5jMTs3Pn72G-l3fcQGRkyzPlYUd6IPYOmbGpJuJAkcZEQCOQ8KmoBaAd6bElOgqiPfxW764SUFFlombVaXwAXlQhDUv-36CD0CRlOTJk-C4KkSAICmHg0gTW3aVECTgWjaVH6KqT2J-KkaaOsAMLDe_78AAOB_AQAAQIDbFgAANHG3CVlTJllBMTZoWkJdAQAA8A&amp;query=gas%20analyzer' onclick='doPop=0;' class='kw '>gas analyzer</a>   </li>             <li class="kwl_2">                              <a href='/?epl=Mdo4mof_7oAtTEEZYaVXM0CzrXIPEgqnSO7i_2K9zGahOGvASLYgtEZbkeRDxonIxtGElUGYumChvik6dK5qWM0xNcnzERaqGcstO6gMVqt4QtiBawLlsnwvQke7cEQdTlbMinerngkoKg0UhZoBIdZX5ekM0pz970wvaNCwRYUUfpxxoDx3F1BmsQwZF2-vD3JIAWwRQTisvjrcFj5fC-TikTT0MMKQcfKo1HLw5sUpozEQkQEURDWjBbCUsaB7DTEGMjnyLVOX1BqUWGp56zltiGsOMkKO-npuUxoA0DQJTwGxqRIAgBgNNGliU08RUE9GJmhTJqNmauKnamDqADCw3v-_AADgfwEAAECA2xYAAJptlXtZUyZZQTE2aFpCXQEAAPA&amp;query=spectrum%20analyzer' onclick='doPop=0;' class='kw '>spectrum analyzer</a>   </li>             <li class="kwl_3">                              <a href='/?epl=yLNhgDyB5SOnKGB9M9ZVFoCeMUMgJBROkdzFPsqjwWapQGvMkmzN1JO2JM3IxIkoB9aElUGXosHC4VN3Kq4zrOyXm2QaCQsVlUWXIVQ2n92l0IXcosx1ecYoqWVeQKoQOA-zItJ1Y4KILQUTiUQUZ0u7vkZn3Tuvd1VwcDo_Nhb63z2KgS5_wDOTEyEXcF8JOOQAtohRNiw-nd6-_D0fyr0vplkf4ehaQQkqViU1QG6EBs6RGDkPJjUZ0EBCxkwTyVCGp9mOrDG0FiND81Kq129ccwilXPVrXtvpgRghPJVJP4VJbKoEACCDBmpiND0VUE-NadJGbdSgZiL6p2rA6gAwsN7_vwAA4H8BAABAgFsWAAB6xgyBWVMmWUExNmhaQl0BAADw&amp;query=co2%20analyzer' onclick='doPop=0;' class='kw '>co2 analyzer</a>   </li>             <li class="kwl_4">                              <a href='/?epl=_kMk929lNQ5aFsCGfq8GQBgcjLdCQuEUyV38X6yX2SwUZw0YyRaE1mgrknzIOBHZOJqwMghTFyzUN0WHzlUNqzmmJnk-wkI1Y7llB5XBahVPCDtwTaBclu9F6GgXjqjDyYpZ8W7VMwE1ZcNEoWZAgPSls3QGk6z-uFIMGvSzoJCFDyUcWF53F1BmcYaMi3evD3LIgmcBQTcsXt1tC6-nBXKxTBr6KCNIa4qC3MA8YPIkFSJGI-FABoOpzFmxFMTMMMZAVofmZerxbmMTKbW8Okr7iWsOMkKO-npuTxoA0DQJTwGxqRIAgBgNTWjy1EwRUE9MI2RTTKYeauKnamDqADCw3v-_AADgfwEAAECA2xYAAAYH461ZUyZZQTE2aFpCXQEAAPA&amp;query=h2s%20analyzer' onclick='doPop=0;' class='kw '>h2s analyzer</a>   </li>             <li class="kwl_5">                              <a href='/?epl=H5leAJ8cYmYOYxNZUMMvZADqtcZ6SCicIrmL_4v1MpuF4qwBI9mC0BptRZIPGSciG0cTVgZh6oKF-qbo0LmqYTXH1CTPR1ioZiy37KAyWK3iCWEHrgmUy_K9CB3twhF1OFkxK96teiagZjRMFGoGBEhfOktnj2T1w5Vg0KBjC4oofCjhPHkdXkCZyTNkXLx7fZAjCmILCLph9dXdtvA4LZCLZdKqjzIycgSP5gnAYJDommgQM0sUjUVrCjBwTcrzPh_GQFZnzovU47T2hKSWuIbShuKag4yQo76e25MGADRNwlNAbKoEACBGA2k0GT0VUE8mI2RTJqM2auKnamDqADCw3v-_AADgfwEAAECA2xYAANRrjfVZUyZZQTE2aFpCXQEAAPA&amp;query=hydrocarbon%20analyzer' onclick='doPop=0;' class='kw '>hydrocarbon analyzer</a>   </li>             <li class="kwl_6">                              <a href='/?epl=kLV2kUi3ZBYyEhsorrkRITrH2DQhoXCK5C7-L9bLbBaKswaMZAtCa7QVST5knIhsHE1YGYSpCxbqm6JD56qG1RxTkzwfYaGasdyyg8pgtYonhB24JlAuy_cidLQLR9ThZMWseLfqmYCa0TBRqBkQYH0rlc4eydkPzwSDBh1bVEThQwnnyevuAspMppBx8e71QY4oiC0gCIfVU4fbuvO1QC5usYYeylCmCMo1AkmLSEZsDpZxEiLfzDzGJKCNSLjXhzGQxaF4kXqc1p7IUgtcj7SjuOYgI-Sor-f2pAEATZPwFBCbKgGggQwNlCeTTE8RUE9GE8hTJqM2auKnamDqADCw3v-_AADgfwEAAECA2xYAAJ1jbJpZUyZZQTE2aFpCXQEAAPA&amp;query=exhaust%20gas%20analysis' onclick='doPop=0;' class='kw '>exhaust gas analysis</a>   </li>             <li class="kwl_7">                              <a href='/?epl=2SiYV51lfpJozbD3B1hgiYDwW9UCEgqnSO7iX05SWDYRIZOhuZnUEKWb5OYVHj0zOiQmVAoEkRV4gGsRGikbV6jMEDCxVhIeKO2MykikDKtVSxFLsEWBmD3vJOLSX6DIBJoVZoV7Fw0foOyEsCjUDAhSdnJcGXxUZz3OFEGDhi9kTOnLKueJY3cBBSGNIdPg-PkAxxTAFxJ04-7v7L6F18sFMvndOvozPQdoVBQzkZAPbYwVeZm3kMZ3ZQwpFJpiqbyBIDjPPS80h-t9TkhqiTUsNpUG2diFGPlz3LYAGgA0GQ1Ke1IDQANlo6lHPQlB-6kaNOrJaASmYAJN_FQNW-oAMLDe_78AAOB_AQAAQIBbFgAAhN-qFllTJllBMTZoWkJdAQAA8A&amp;query=infrared%20analyzer' onclick='doPop=0;' class='kw '>infrared analyzer</a>   </li>             <li class="kwl_8">                              <a href='/?epl=G11OOaFzclI4qijLbsyJH4DB399rSCicIrkLPk5LU99lhu4hZ12TzHZem0URKq-qPWQXZ0dhjIYLVh-rM9dmjzM6Jl5yxeJSVqfBZaLspD2LK4UJbBU5lynixJ57g2omiFruDKQtXg_wpixMPLwZECJ1qWyuXrLZD2eCqKgwDgoperRYlObdEbBW2oZKMvv5izyXgN9YzM6d37_7jXW8jdhEwDTr27d1VBBiVWjEClDkSJxPKB73gBEo0TVp46TFv5gCVR1ZL3ZHN4clJlZgKydtci83diFH_ZtPT0Y9AjD1lCZPguCpEgCAhgYom9SmTQXCyEimTenJpGeK-KkaaOsAMLDe_78AAOB_AQAAQIDbFgAAg7-_11lTJllBMTZoWkJdAQAA8A&amp;query=ndir%20analyzer' onclick='doPop=0;' class='kw '>ndir analyzer</a>   </li>             <li class="kwl_9">                              <a href='/?epl=WjZUSFqjapX9UbRhA-Ft9UDRfA0IEgqnSO6Cj9PS1HeZoXvIWdcks53XZlGEyqtqD9nF2VEYo-GC1cfqzLXZ44yOiZdcsbiU1WlwmSg7ac_iSmECW0XOZYo4sefeoJoJopY7A2mL1wM8kwXDw5sBIVKXztPVS5PeIU0QFRXug0JKHmcsSvPsCFgrbUMlmf38RZ5LwG8sZufO13e_sY63EcPLYFr6KGNz7tE0EHyAwCWLwdliyIwQnquYxKRREjHziylQ1aF5MVzKflgypRa4js02acsNK-RIx2_bGPUIwNRTmjwJgqdKAAAajQaCph49RYiRgWgatcmkh4inGmjrADCw3v-_AADgfwEAAECA2xYAAIrma0BZUyZZQTE2aFpCXQEAAPA&amp;query=ftir%20analyzer' onclick='doPop=0;' class='kw '>ftir analyzer</a>   </li>             <li class="kwl_10">                              <a href='/?epl=9ZyGLpErAl4Wo-e0Knjzu6kO9JyQUDhFchf_eHambZcKvIY8uiWp9m4dzciME1ENpAkrgzA1wwXrpujUdlnDao6Bk0wjcaGiV2wZQmXSmsUUwhBcFCmXZ4wHfXUBqULgtJgVcS47GeCmJEw4OMYwiPVVWo3glPXHdmLQoOWLCin8WJFBeQ13gCOaKYTBeHudIYcUyBcRc-PitN3X4fXVgTB4ioZexlKgCCR6DiJRhPlmHAVrFTSnwEWTdNCZRYVGJgxZVnkpfa5LUKTUEtdTNhSYml2mYfp6bk8aAECjJk-hEZsqAQBIDw0EMnkUAfXENEI8pSejZqLpp2pg6gAwsN7_vwAA4H8BAABAgNsWAACpDvScWVMmWUExNmhaQlwBAADw&amp;query=emission%20analyzer' onclick='doPop=0;' class='kw '>emission analyzer</a>   </li>  </ul>
+  </div>      <p class="text_sidebar">  </p>          </div>
+		</div>
+<!-- EOF Sidebar -->
+
+<!-- BOF Keywords -->
+		<div id="content">
+		    <div class="content_wrap"> <a class="kw" onclick="doPop=0;" href='/?epl=AWPlfk7B4KjFEDek6seE3Sw4LdxBQuEUyV38a52YCQbl0HqQNNEiMsAkN4xGCjNA3cShQz5ag7o2ORlgpCSMjJd72hhLsMGLuzghsJGFKCobAw_XCAyDpQZh1vBbsm71w1qQC504lBj5tk7PwRraixKbIHx-X2gcjqKRETIZ5aypWvoYhimIwZGQa-LmkRRGxbwXxUgNGqs0olOzSorZoyad5RkrYSchmI_zFtzgmMmpWt23t0wDADLJhAmiTQ3QoIF60CD0VHtoioCaZmIoj8SjJpvS9FOVwMoAMLDe_78AAOB_AQAAQIBbEwAAC04Ld1lTJllBMTZoWkIaAQAA8A&query=botsearch09' style="display: none">gas analyzer</a>  <div class="search"> <div class="search_box">
+  <form id="searchbox_action" action="/" method="POST" onSubmit="doPop = 0;" >
+    <div>
+    <input type="hidden" name="epl" value="CS7wctvxO6APfqZRmeWGVPcsFgqQUDhFchf_V-XkFjRhe7Coe8jumFZMBrCq_FC8MHNwL1SYXrvzRsKrEqhsYZTuBTEyz_JGzfLH1VKDegGhWwZ55eAw8tYCWrkQKDQ0RsEgT9J4Enwz6x_GE4GjShyQU6m28ksmOGcDi9UClQ3UU8wXNMg9EYeHtm3N-xeRetFr9OdYy9IyTx4d3BS2nLRURPOEyReW2gVHXFDBZEWyCCp8Dqk8UcP3KysStmrPnIuzXYbkvKYLIAxAecpTTKYmT5UAkJE21Y-G9DTVU6apN9UwTWAa9SijNlPwlEw_VYNt6wAw8N7_vwAA4H8BAABAgFsUAAD3LBYKWVMmWUExNmhaQkIBAADw">
+    <input type="hidden" name="debug" value="0">
+    <input type="hidden" name="search_token" id="search_token" value="">
+    <input type="hidden" name="click_token" id="click_token" value="">  <input type="text" name="query" class="text" value="">  <div class="submit_wrap">
+    	<input type="submit" value="Suche" class="submit">
+		</div>  </div>
+  </form>
+</div> </div>   <!-- -->  <div class="google" id="google">   <h2 >Sponsored Links</h2>    <div id="googleAdTarget"  ></div>      <div id="secondtier_ads_block"  >   <p>  <span class="adtitle">
+    <a href="/click?epl=VPYcaPnxNzIJ-LS7p8ncCkDNoY8YEgqnSO7iH3XoXJlbUHX7YHxc81Ie8i3Hlw306vdXZFM59bHvUWhQ2NQ8SSWCJbwbyhR1locYakFg2lsJ7pws2r2Qedn1nqF-rxsFc58yDpZKI8ZLUZb1scgagiWvCl-ZSxkv0sQxbYHsiRpgMmA77KI5GMHG-BAp7UxsEIh1Qf6OBY7n-SIDEJiRH6gBaCgoHIdjIO2XXBWd3lETG9cIBir8mnHO1XChbgED6RLuud2vafYE5fRkwakEXbjhMJqIDKiDzHWkFaE9SaiAAYkob2Ng7cfJh5xseL3JcYu9IWHYyp2gYlzC03e5u3g6hqN1sPJ3uSx9b9tTQzA5WduBa6yvNWnRXGWLvfSA4pSJCkmZqDICLiIhIDBodIjZd_oHw5sypG3-PwXSiljBl6UrzyJoju1MwB45NUqakSmN5gCuqVBBCMnfyKHjm3t4htIbQAM0NKQR_VSDtlFPZYo2NTAxMQEANNNoAjDR1KYehoagTT1lppEJoyme1MQ0MQE91SBqagEw8P__vxBakpPy_wlBAECAXyQAAGoOfcRZUyZZQTE2aFpCHAIAAPA" onclick="doPop = 0;" target="_blank" name="http://clicks.keensearchengine.com/xtr_new?q=gas+analyzer&enk=RommkcaZxsEn4ybJj4mPwUa55rGPiUbJJ5FGwSbJJ+Mm"  onmouseover="window.status='www.BoloSearch.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adtitle_link"             >Find analyzer Today!</a>
+  </span>  <span class="addesc">  Looking for analyzer? Find tons of
+deals and info for analyzer in your
+local area!  </span>  <span class="adurl">
+  <a href="/click?epl=VPYcaPnxNzIJ-LS7p8ncCkDNoY8YEgqnSO7iH3XoXJlbUHX7YHxc81Ie8i3Hlw306vdXZFM59bHvUWhQ2NQ8SSWCJbwbyhR1locYakFg2lsJ7pws2r2Qedn1nqF-rxsFc58yDpZKI8ZLUZb1scgagiWvCl-ZSxkv0sQxbYHsiRpgMmA77KI5GMHG-BAp7UxsEIh1Qf6OBY7n-SIDEJiRH6gBaCgoHIdjIO2XXBWd3lETG9cIBir8mnHO1XChbgED6RLuud2vafYE5fRkwakEXbjhMJqIDKiDzHWkFaE9SaiAAYkob2Ng7cfJh5xseL3JcYu9IWHYyp2gYlzC03e5u3g6hqN1sPJ3uSx9b9tTQzA5WduBa6yvNWnRXGWLvfSA4pSJCkmZqDICLiIhIDBodIjZd_oHw5sypG3-PwXSiljBl6UrzyJoju1MwB45NUqakSmN5gCuqVBBCMnfyKHjm3t4htIbQAM0NKQR_VSDtlFPZYo2NTAxMQEANNNoAjDR1KYehoagTT1lppEJoyme1MQ0MQE91SBqagEw8P__vxBakpPy_wlBAECAXyQAAGoOfcRZUyZZQTE2aFpCHAIAAPA" onclick="doPop = 0;" target="_blank"
+  onmouseover="window.status='www.BoloSearch.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adurl_link">www.BoloSearch.com</a>  </span>
+  </p>
+
+                                                <p>  <span class="adtitle">
+    <a href="/click?epl=Q6rNaFuVWAfmBchAubpcplDIdm6FhMIpkrv4L2GgQxSiAyU5TXNSmwvGsgg3bdP94S9EUHZYbxokTXQfHpA4vgI9HMFktf6s3kIK97nN5JvMl1RHUZcOcqqRVg87ISLArcRpjxbhdo0KZKrZxc0kqHjPypobs2WuvUe5ohLYrKSYIInC49AFzj5X8SH0fU1sdhBDjSSthbkg0D3ZFX7Hh-c4jiwtw4HdVhOExuZkcq1orE0BziJQrmMh6r4jb603hYURBxXBaRyzptMHbp7yPUh0m0NS-VRQCtS-BY98gge5AjUNdrQavlzvclCjBxPsGL92WYmDhj9aWjVS-IW83GsEJM1uF5pqV14AZO6TPQgV_-dbYtJyDYgIEpwtHNO-3sYngrrg7OmFYnfbPnqbAFtq1taVJDrj8rJaVMCwjqiTIWO4120CK9XXdjqN3if2ggSZ89SNwndcn4EoEyIlHOwcR47sDEe9GJNUBibVD9F2Nizu3cHlWO78YMU9u1ko1S-Bg2DEAxmaRo9AOhHUG5-EkDt-wELKuiI1aWJN1m7GoMxXLgtPPNlrekXDSepg7nhRVcet-XrRuuguksd3Lafmpzq-nPi74t-GJv60VbXlVB6C4v6sK2a44pySHUIX0sDp6JZ1-4OPuo0bFwmnPQE7XGkpysrI2bxgzKxlX7vjQF5eWW317ehmvS-HwmOpjHMxJPWaEkdHOpnqGTm28zlANskXgTI3cNpIQg0rhQydNmwcJdpag3PfA1rwVBi0YiiFboVKmgk4JgtBiG5tq4z3nDqRZpY2sZJayAxkES6wsSyaMDWxMJElwivi0lhLk1-ka13IHtqM7zS_rMF0oS7N2Y7CzEPaQNpKJua5WTEIO7WKBqkyXaMK1IQuoAtOlcwUb43RZzhvcCs0J1d5YNDrnlMYVQTCvOySEimrLNyA6VsPx8P2xNvfzhEaArsky89l4Yz9ZrBEsS2CV7KXwLI4fhYpy8j9aUDnEred7zzHMROBq7Z8Nkb9sVHHqxvTRYpe__3Re-ZBPE1QB9akIcQzNshIlQk_Qvnn4w7TkaFRj-pH9YPaAOohRmnARJqRZpRpmsLUgEYDkIFGk2mgATTRIz0FDaGhQQ3UA4AGAEA9QHmoGdVP4amYmEY90VMN1FNTP2gEGvIUGyQeacRkU6ZHmjQ0PKVJDbfqdIfLcfwCQPT__7_w__-_-v8DQwBAgF82AAAK2c6tWVMmWUExNmhaQq8EAADw" onclick="doPop = 0;" target="_blank" name="http://r.looksmart.com/og/pr=Psr;ro=1;rc=9;digest=87052fd8425b92592a47871392d540a1;kid=b84e4ebfd97e440577a2dee99648dfe5;t=1299228202;v=8;data=JpXwpTxLuI1EmWwTP1PZKRP6CUQAiyKnIR4Iumc0MmYdwH7qSzkdrZZMu4e50NzBx_oBiqGO044jES3XOvwHfazQJcNFNXEBTjpdRvWCcXAjDqsQR0YBxdFYz0T07cmruJ4ro2RMlUcxZzW-4OQgAasxlL5e0KUc7FiL48-Dk0D0_p9Vx6w8QQ;uh=108x7403436158153909884;la=1072527;lm=1611504;ad=745163740;ag=757696795;kw=1108713977;qt=gas%20analyzer;vr=20;lt=EM;ip=129.89.57.69;pt=;st=87.80.4.0.0.0.0;os=616.228.34.0.9.211.2.5;sy=keyword;my=smart;geo=894417;vid=0;subid=1b2a3v4q5c6q017s;opi=ovs1;ii=414b.1fd7.4d70a62a.1fe0;pn=;to=;tc=9;po=1;pc=9;pi=ovs1:unk;ts=;rm=;rh=|http://search.us.b00kmarks.com/landing.php?keyword=analyzer%20gas&f=614&affsub=2519-1b2a3v4q5c6q017s&market=us"  onmouseover="window.status='http://www.b00kmarks.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adtitle_link"          >analyzer gas!</a>
+  </span>  <span class="addesc">  Find Offers, Informations and answers on analyzer gas!  </span>  <span class="adurl">
+  <a href="/click?epl=Q6rNaFuVWAfmBchAubpcplDIdm6FhMIpkrv4L2GgQxSiAyU5TXNSmwvGsgg3bdP94S9EUHZYbxokTXQfHpA4vgI9HMFktf6s3kIK97nN5JvMl1RHUZcOcqqRVg87ISLArcRpjxbhdo0KZKrZxc0kqHjPypobs2WuvUe5ohLYrKSYIInC49AFzj5X8SH0fU1sdhBDjSSthbkg0D3ZFX7Hh-c4jiwtw4HdVhOExuZkcq1orE0BziJQrmMh6r4jb603hYURBxXBaRyzptMHbp7yPUh0m0NS-VRQCtS-BY98gge5AjUNdrQavlzvclCjBxPsGL92WYmDhj9aWjVS-IW83GsEJM1uF5pqV14AZO6TPQgV_-dbYtJyDYgIEpwtHNO-3sYngrrg7OmFYnfbPnqbAFtq1taVJDrj8rJaVMCwjqiTIWO4120CK9XXdjqN3if2ggSZ89SNwndcn4EoEyIlHOwcR47sDEe9GJNUBibVD9F2Nizu3cHlWO78YMU9u1ko1S-Bg2DEAxmaRo9AOhHUG5-EkDt-wELKuiI1aWJN1m7GoMxXLgtPPNlrekXDSepg7nhRVcet-XrRuuguksd3Lafmpzq-nPi74t-GJv60VbXlVB6C4v6sK2a44pySHUIX0sDp6JZ1-4OPuo0bFwmnPQE7XGkpysrI2bxgzKxlX7vjQF5eWW317ehmvS-HwmOpjHMxJPWaEkdHOpnqGTm28zlANskXgTI3cNpIQg0rhQydNmwcJdpag3PfA1rwVBi0YiiFboVKmgk4JgtBiG5tq4z3nDqRZpY2sZJayAxkES6wsSyaMDWxMJElwivi0lhLk1-ka13IHtqM7zS_rMF0oS7N2Y7CzEPaQNpKJua5WTEIO7WKBqkyXaMK1IQuoAtOlcwUb43RZzhvcCs0J1d5YNDrnlMYVQTCvOySEimrLNyA6VsPx8P2xNvfzhEaArsky89l4Yz9ZrBEsS2CV7KXwLI4fhYpy8j9aUDnEred7zzHMROBq7Z8Nkb9sVHHqxvTRYpe__3Re-ZBPE1QB9akIcQzNshIlQk_Qvnn4w7TkaFRj-pH9YPaAOohRmnARJqRZpRpmsLUgEYDkIFGk2mgATTRIz0FDaGhQQ3UA4AGAEA9QHmoGdVP4amYmEY90VMN1FNTP2gEGvIUGyQeacRkU6ZHmjQ0PKVJDbfqdIfLcfwCQPT__7_w__-_-v8DQwBAgF82AAAK2c6tWVMmWUExNmhaQq8EAADw" onclick="doPop = 0;" target="_blank"
+  onmouseover="window.status='http://www.b00kmarks.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adurl_link">http://www.b00kmarks.com</a>  </span>
+  </p>
+
+                                                <p>  <span class="adtitle">
+    <a href="/click?epl=ehS8dNiWucs7RmhBUMs38QCw4sE3SCicIrmL_2_Ag0sWB0ykiNOmjAmoiPSzK9ywcBGCg_qTa7AYYVB-fNMcwz_8gqbqfy7-pSGOLO1WHmJk8TJnXgyVcWdelaLTE2EdjB9MM1X6Ym40guG0xIaOKg1E_JY0iSsrYa0YrGZSCSrIz6WjRoc9DwoF3vQPsbZ4GQ1ymMGowFe0g0bkMszgayUjixKuYwkDBxfCxqIkS3Eok2NGZmm0sxnRE4098IRK58CGIctWAsdg3ZWeUYLlI0SMukSNEMYqNU6wbJusCpI9EV5bqbprFeA0bYPjsCi1OHkJQnJOgztX1ykW4GZaHc3ZWeiG9g4AUmVD2R7cnKmPLFQnpPdZ0kFw-GAKkJxSlHw2WZjdUCHMpWraQNiI31P7nu9LFjIzdkT7nqHKtcKGJCBUIDJbCQYWaBjfzbGIbXxn1CyLQVmN8icLrn2G7BrLgUahxwNMR6FIxtZU9mDemBZhaSx9BwzdPds9vCgL4XkWnuOdNrUG_CKUx64peyCMkNegyaDk3zgv6uSV3XHLyakSBIWrkUpFmYvvOBS5NZ_Bfc-LRl2e9m3dpaNjC3_H396dXp2dXxH0XU5yTd1WevuCXmnXw_dYe0CZjO-_b8fXpNGrO3OZYvHEixjGLuV3rOYh6RELJNhcg8xdVeivCxEqpctP-rrSE4X4FnPrC1Zm9OWmJ1MXe8ZAJjMdEANzHJpwbKaD8j6hT2xQCrsJnS5eiSuCTaHrRngCcMU3dbr4ndZjCIrB2WCq2uDc39upoplqQoioGBEKpGXRoPc9uM1UhmyIyBeecEqtkCsKVV-E9-zE-PypuNBdEC6NS1HgWyjWyUIiqDQb6MxgJcmGYrfexK9UTgFFI8tKkRMldI1xHf6UUUZbO_OhSWKKajMn2pIRfUCFDA_Ug5UakaV4P5CSTc0Ga0IsJcgwweIS0dywIq4nfjdIAFX6xh2Bx2y5tIp08J7fKUu5BGizqtAqnmoX9uHDvQxGxOLCSs4xCBcu1gKxNDu9NYmZrGZcdtGx-mWsvfL4b8xTFail2DMd66IM0rJ2YMJaI35hY98u7OkXqAeoDYAGNJraqEfQU0_lCZ7SU09N_aSMGgCoR6MBAGg0DZp6RE8xtalNGjVNNtUgAwCIAWg0MhmIJkMmYQL0lAZNmfrJUG1qeupRP-Up2VNoNI0m9PSmAjA1ZDLVYHKjw2WOGwNA9P__v_D9_7_6_wNDAECA3zkAAGDFg29ZUyZZQTE2aFpCwQQAAPA" onclick="doPop = 0;" target="_blank" name="http://r.looksmart.com/og/pr=Psr;ro=2;rc=9;digest=2645cdcc0dcf36f1454bbd00a62f11b3;kid=b84e4ebfd97e440577a2dee99648dfe5;t=1299228202;v=8;data=WfDWZ_nkGhtYkCflJTNshkRw0VCR5z1g6zBFKW6xXSfbPGg05rXT1YZx_lzGsILfAoiQu00AYOcDquuNd6huN8KdWh0hA7ok1zOKyvh8tcaw0IK2CJcaY2oNVd7RTWqgiaxl6Jv7ikvGMujqs6eC7l5Gw0D-Zcv4CnE_E4TTvSqrKyuowkTHeA;uh=134x4531735495095549696;la=765722;lm=979759;ad=726150590;ag=733877242;kw=936746252;qt=gas%20analyzer;vr=20;lt=EM;ip=129.89.57.69;pt=;st=87.80.4.0.0.0.0;os=616.228.34.0.9.211.2.5;sy=keyword;my=smart;geo=894417;vid=0;subid=1b2a3v4q5c6q017s;opi=ovs1;ii=414b.1fd7.4d70a62a.1fe0;pn=;to=;tc=9;po=2;pc=9;pi=ovs1:unk;ts=;rm=;rh=|http://www.info.com/gas%20analyzer?cb=24&CMP=3098&affiliate=2519-1b2a3v4q5c6q017s&lsid=936746252-414b.1fd7.4d70a62a.1fe0&qps=LS-NP&qtf=2"  onmouseover="window.status='http://www.info.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adtitle_link"             >Gas Analyzer Info</a>
+  </span>  <span class="addesc">  Get Info on Gas Analyzer from 14 search engines in 1.  </span>  <span class="adurl">
+  <a href="/click?epl=ehS8dNiWucs7RmhBUMs38QCw4sE3SCicIrmL_2_Ag0sWB0ykiNOmjAmoiPSzK9ywcBGCg_qTa7AYYVB-fNMcwz_8gqbqfy7-pSGOLO1WHmJk8TJnXgyVcWdelaLTE2EdjB9MM1X6Ym40guG0xIaOKg1E_JY0iSsrYa0YrGZSCSrIz6WjRoc9DwoF3vQPsbZ4GQ1ymMGowFe0g0bkMszgayUjixKuYwkDBxfCxqIkS3Eok2NGZmm0sxnRE4098IRK58CGIctWAsdg3ZWeUYLlI0SMukSNEMYqNU6wbJusCpI9EV5bqbprFeA0bYPjsCi1OHkJQnJOgztX1ykW4GZaHc3ZWeiG9g4AUmVD2R7cnKmPLFQnpPdZ0kFw-GAKkJxSlHw2WZjdUCHMpWraQNiI31P7nu9LFjIzdkT7nqHKtcKGJCBUIDJbCQYWaBjfzbGIbXxn1CyLQVmN8icLrn2G7BrLgUahxwNMR6FIxtZU9mDemBZhaSx9BwzdPds9vCgL4XkWnuOdNrUG_CKUx64peyCMkNegyaDk3zgv6uSV3XHLyakSBIWrkUpFmYvvOBS5NZ_Bfc-LRl2e9m3dpaNjC3_H396dXp2dXxH0XU5yTd1WevuCXmnXw_dYe0CZjO-_b8fXpNGrO3OZYvHEixjGLuV3rOYh6RELJNhcg8xdVeivCxEqpctP-rrSE4X4FnPrC1Zm9OWmJ1MXe8ZAJjMdEANzHJpwbKaD8j6hT2xQCrsJnS5eiSuCTaHrRngCcMU3dbr4ndZjCIrB2WCq2uDc39upoplqQoioGBEKpGXRoPc9uM1UhmyIyBeecEqtkCsKVV-E9-zE-PypuNBdEC6NS1HgWyjWyUIiqDQb6MxgJcmGYrfexK9UTgFFI8tKkRMldI1xHf6UUUZbO_OhSWKKajMn2pIRfUCFDA_Ug5UakaV4P5CSTc0Ga0IsJcgwweIS0dywIq4nfjdIAFX6xh2Bx2y5tIp08J7fKUu5BGizqtAqnmoX9uHDvQxGxOLCSs4xCBcu1gKxNDu9NYmZrGZcdtGx-mWsvfL4b8xTFail2DMd66IM0rJ2YMJaI35hY98u7OkXqAeoDYAGNJraqEfQU0_lCZ7SU09N_aSMGgCoR6MBAGg0DZp6RE8xtalNGjVNNtUgAwCIAWg0MhmIJkMmYQL0lAZNmfrJUG1qeupRP-Up2VNoNI0m9PSmAjA1ZDLVYHKjw2WOGwNA9P__v_D9_7_6_wNDAECA3zkAAGDFg29ZUyZZQTE2aFpCwQQAAPA" onclick="doPop = 0;" target="_blank"
+  onmouseover="window.status='http://www.info.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adurl_link">http://www.info.com</a>  </span>
+  </p>
+
+                                                <p>  <span class="adtitle">
+    <a href="/click?epl=2VCyTZAdjFgAcNAyesOYPAAjocYPCYVTJHfx_54eGkJdrBZ3LGW9PEIjmiPBHPRy7Oi1mOpyS5oaF-UL0oblMEpU480hpCcanqQy5s0uzK0lxD1RXWmrzEOQlCemZxq5NCk6zFd9L90bDBCUdKpwJjPqJ6H55tjgGUxLg4_TE0G5OzVIbTjD6WtO3gLezvbItzWM-RIwEKFw2OURdtJG3hRhUnOvm1mua3EKluCpZBE5xYFQgmZlSnBltKKruts1uYFDbdixupPe9Oo_SRoYib-o7XVsSZcvW_MEiivTJriCPG9_Mwi9Lbf8Xo9w5yc1zNszF-eaDDoVpgMhoduJsFWeBKTSSIIZdI9qiNs9J2iWpbg3BrwH1z7ySqFgiKqtOnPZuBVI0A1u6ql9-7g6os1b9LwZ3iqgFaU7CebZDUhbMYrAtEMQ5bqMMBbYxc5cgNc4oZKjmDbT6FRWDJJzd2YPWGFDCB9N_Mxr_ZNfUXtfLoSn2X_hKzrZpF8UEBopwe7IWQjGmGa8DpixM1Sntx5VSfVdO7ATO5OsY9CqrTK59zDmp1IOMuBgoGgIxxSa0zIoyyiomr1UInfi6-C3FruV4oQ2ojIF037wAbnwMRZaAaHAm4UYylnmzRDjJczIrk4cl29MQzLLUpU8VHN_nA8ekhoDLZdZ46EBTe1rNp_rrmtdQydUPmrJyRTn5sX4a7CF1UqUJFg2hiDlfUE1NKAxISmBg_MXYBrypuHCLiwsB5HkGA_fBg5EZOtNl299DfX1PUSzm3dazwI9JriBHn2WRGcbzC5GtpSB6h94xIVu1UcdVNQVKjMwOkb9l08mpFhtsD6ebQdbXConSRzPvGoUg17qBBxU78Vhcjv8lu1ba-Vn5IuMDcWEYPSWcIu3YEcydILJBcObpbz5OUnbn4seuzMGJd-GaHyehs3mCzc3DmzZFBPRWY7OE7VYUxyiA2eaPeK9kdYXT-XiyorZsWvT5qMfS1Bws4_vui-U9n0i-e5k69yn0IzEGlsU8fDhWYdMvpOxa1o6RXLMOmrdNHfpJe8P_EyPS9F7zYYALTiOK7jIU1tIYoZ_nGzqqGCCkDUp7K66-3qw1fedy0iFqhZ5YH-BjmIfBsdEPOXeeal0_Qzeb2uiNGR1Z0Jdr0R_HkFuEzFZKKOv5KXybOD8pcqcO9TuLRcr_MOPnFWr1CcQDav9tMfSk3lRfW1u1uUNvMH5tOxweek_m3WEEIa_dkGBkXFuXSWnicZZDnUQBn2oBxKxvE68Hz7d2NRtczzfJbAhCGnsnjGbGMWXdETW38W0TFDmdJyhJ7YMqdsjFc2Fboy1rLQCX92qJ0-32V8EuNwHoGwVt-zyiTyawAI6bm3hvF0dA9MAM1hbUQ-R1Se5x1cO0UewN6MIXvGXCSEogY205NJkIfbxPuphi2x4jpoQXkMGR3hZPa5Ho49tQzrRSQjICKxNBeFEbUAW6KAi5wM4h6VOlw5srK_GAeOBJNPlAgQROOOyvvo3ZluR1Nr7r_nWsKNEWwDVdxK6jBMFGUmJqx9B-feTri3pqU1N_aRGP9VM7ZE0_VSDhgZNgzBi0pOeIk81AA0aiNFoAARDk4khNJMm05AIlE3T1CY9mcQmpJ-mTGxqghgNk6dMpgxFiAHKI5mJ0MimSXuqn5qeYuoRT-nJNE0aniqCpjxlAk-yKdOkGfVomJpMTzQ1nhQ_hdFEEXhre3ZHd5dn7Z73HgRQ8P__v_D__7_y_wNBAECA3zUAADASavxZUyZZQTE2aFpCOwYAAPA" onclick="doPop = 0;" target="_blank" name="http://domainbt.bidsystem.com:80/adkservredir/redirect?sessionid=666591f78882492b8276c36230adad2f&uuid=666591f78882492b8276c36230adad2f&txn=8f9fe554b040e09e&app=feed&tabno=0&bid=0.027132&event=newpage&aff=7110&dom=genalyzer.de&cat=0&df=30&url=http://efp.ns3.bidsystem.com/c/AAhAWg0lmCLIsNGNKrNe1_Gq1N4pTT2s-g_IztehytWS6ojWQecDiWk0kCbmodvtYDIi87xcrQ0ieOo5sIDzNaoR6ZnqE_4vDWybHHt-2auulGgMvdR3p0g6Wf84nFm-VQzMXcnXtSO_CvSBD1g0rKD7aV82_E1oDsDvHC-6fkTMaITr0kaelSkCCxxX0jycw20pJSC05miCu7wg4KkY1Rajx5mId-CUwg8Vbt2Cpu0pEKFGhpWeidxrwLF5cuvSbwV-egQsj3nxXZOBqEXKFge37rhXZpMfMaBW6L_rblBhDgcPsq6DknB-cKkXvzqm51OR3wlfOSALmwC4vM9vDBR417gy8hATg3TC6xkCKv5aluY0ffp1jsiK0UfcCUAFZRudv2-yb8_c6YOwhQtkbc9dwz6nUyKixjJ9o_0uzhzBePDIWazbQURaU98I2Tna1zZGaRb5RLFB2rrgrUmKjPhfiLrsN302yKePxxJdp-wumn8kTKJdtT74Pu-JWrkpAkW8xyYU_fZQOLPsK_B1iNiJFZ_g3nPc8CeYbP1iDBtAbC4DVTjNosseAqq2X4XZambpjbY5sqypZLR2rRbfSzeiroZd-nWoMgHiKzVyqNtg6w0EVv3gdsINDyWI6UyrbO5zdeCjWB-D0J_Zwe_dmUm1eBvGsLtV3mO7-gSb6hltJbWpKKp1-FtCy1TCzsC9pU8eCRToVUjny3Lk2nAzw0zLVCcmKQQ456tIu53ZZkNsPwVVmncE-KIV7uEtjnyTCoe7uqeguw80nKeql0hpDmv5qH2YoC-7wqOh39lPGoWhlA0puftgq59hXa8fs6fRY2p98recYo0GH1pyy0AmJFm0glsMBAhJfped_w?efp_adknowledgefeed=1"  onmouseover="window.status='yellowpages.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adtitle_link"                >Auto Repair Near You.</a>
+  </span>  <span class="addesc">  Search for the Best Auto Repair Services in your Area on YELLOWPAGES.COM  </span>  <span class="adurl">
+  <a href="/click?epl=2VCyTZAdjFgAcNAyesOYPAAjocYPCYVTJHfx_54eGkJdrBZ3LGW9PEIjmiPBHPRy7Oi1mOpyS5oaF-UL0oblMEpU480hpCcanqQy5s0uzK0lxD1RXWmrzEOQlCemZxq5NCk6zFd9L90bDBCUdKpwJjPqJ6H55tjgGUxLg4_TE0G5OzVIbTjD6WtO3gLezvbItzWM-RIwEKFw2OURdtJG3hRhUnOvm1mua3EKluCpZBE5xYFQgmZlSnBltKKruts1uYFDbdixupPe9Oo_SRoYib-o7XVsSZcvW_MEiivTJriCPG9_Mwi9Lbf8Xo9w5yc1zNszF-eaDDoVpgMhoduJsFWeBKTSSIIZdI9qiNs9J2iWpbg3BrwH1z7ySqFgiKqtOnPZuBVI0A1u6ql9-7g6os1b9LwZ3iqgFaU7CebZDUhbMYrAtEMQ5bqMMBbYxc5cgNc4oZKjmDbT6FRWDJJzd2YPWGFDCB9N_Mxr_ZNfUXtfLoSn2X_hKzrZpF8UEBopwe7IWQjGmGa8DpixM1Sntx5VSfVdO7ATO5OsY9CqrTK59zDmp1IOMuBgoGgIxxSa0zIoyyiomr1UInfi6-C3FruV4oQ2ojIF037wAbnwMRZaAaHAm4UYylnmzRDjJczIrk4cl29MQzLLUpU8VHN_nA8ekhoDLZdZ46EBTe1rNp_rrmtdQydUPmrJyRTn5sX4a7CF1UqUJFg2hiDlfUE1NKAxISmBg_MXYBrypuHCLiwsB5HkGA_fBg5EZOtNl299DfX1PUSzm3dazwI9JriBHn2WRGcbzC5GtpSB6h94xIVu1UcdVNQVKjMwOkb9l08mpFhtsD6ebQdbXConSRzPvGoUg17qBBxU78Vhcjv8lu1ba-Vn5IuMDcWEYPSWcIu3YEcydILJBcObpbz5OUnbn4seuzMGJd-GaHyehs3mCzc3DmzZFBPRWY7OE7VYUxyiA2eaPeK9kdYXT-XiyorZsWvT5qMfS1Bws4_vui-U9n0i-e5k69yn0IzEGlsU8fDhWYdMvpOxa1o6RXLMOmrdNHfpJe8P_EyPS9F7zYYALTiOK7jIU1tIYoZ_nGzqqGCCkDUp7K66-3qw1fedy0iFqhZ5YH-BjmIfBsdEPOXeeal0_Qzeb2uiNGR1Z0Jdr0R_HkFuEzFZKKOv5KXybOD8pcqcO9TuLRcr_MOPnFWr1CcQDav9tMfSk3lRfW1u1uUNvMH5tOxweek_m3WEEIa_dkGBkXFuXSWnicZZDnUQBn2oBxKxvE68Hz7d2NRtczzfJbAhCGnsnjGbGMWXdETW38W0TFDmdJyhJ7YMqdsjFc2Fboy1rLQCX92qJ0-32V8EuNwHoGwVt-zyiTyawAI6bm3hvF0dA9MAM1hbUQ-R1Se5x1cO0UewN6MIXvGXCSEogY205NJkIfbxPuphi2x4jpoQXkMGR3hZPa5Ho49tQzrRSQjICKxNBeFEbUAW6KAi5wM4h6VOlw5srK_GAeOBJNPlAgQROOOyvvo3ZluR1Nr7r_nWsKNEWwDVdxK6jBMFGUmJqx9B-feTri3pqU1N_aRGP9VM7ZE0_VSDhgZNgzBi0pOeIk81AA0aiNFoAARDk4khNJMm05AIlE3T1CY9mcQmpJ-mTGxqghgNk6dMpgxFiAHKI5mJ0MimSXuqn5qeYuoRT-nJNE0aniqCpjxlAk-yKdOkGfVomJpMTzQ1nhQ_hdFEEXhre3ZHd5dn7Z73HgRQ8P__v_D__7_y_wNBAECA3zUAADASavxZUyZZQTE2aFpCOwYAAPA" onclick="doPop = 0;" target="_blank"
+  onmouseover="window.status='yellowpages.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adurl_link">yellowpages.com</a>  </span>
+  </p>
+
+                                                <p>  <span class="adtitle">
+    <a href="/click?epl=4TwRpMDRlTeachq-0jKqhtJfkX4goXCK5C76aIBwueR9t9oBvfmFAj3tfNhQ6crinsHTuRbqZMqyogw2sjMFJ1d-bScKZfN75Tf_SoWXGalqCxFCwunh3OexyydwPTWR1upY6PGKS65zdaQnIm0tBiWEerokjRgmWrAmYauBI_VoNaa6s7DWXCcykLiEKYwNhy9rAa5oS1lgw56QHNkCQmoudWraBEueMeCETalYgXiAILgoeaO7pilsT9cby8jNSOWiVp6fF2VvQSMOzJMJZ4Ab7JkYyuf7LLYGeCw1NX6gfQh5oxI9TvGGk1ESEhNfKpSak13lOw9LnaDqpL2Dre2ZPBrLhbt1NjzL-NwGIT1rE5Vh2mL8iBkdJ8DGuHMpv9EfcD1k7BjUpe4kdNCkAlUgLmRlERLuoBN24KcBhngSmSEleV5sLGxGTViY6IED8fYU5E5JZV7oQDnsnpwvMFwMfJJmBduTVl5zVYxAKju333jOZoou75cEvyzO6Y2MFIa7RJjXOgxNVcPTsPo9ueF0whA9YTQS00aRn4JM0IQGAA0AANBAPWnT0BgmRpCpQT_VRkxik1ETgBoC05oBMPD__78AEACZ8v8DQQBAgF8nAADpr0g_WVMmWUExNmhaQnMCAADw" onclick="doPop = 0;" target="_blank" name="http://www.irs.com/free-credit-report/?utm_source=network&utm_medium=cpc&utm_campaign=freecreditreport&xss=908&dsaid=1b2a3v4q5c6q017s&adid=10689&cfci=3d5f9c6764a405263780736f27ad2bc2"  onmouseover="window.status='www.Banks.com/FreeCreditReport'; return true;"
+  onmouseout="window.status=''; return true;" class="adtitle_link"             >Free Credit Report</a>
+  </span>  <span class="addesc">  What Do Creditors Know About You? Learn How to Obtain a Free Copy of Your Credit Report  </span>  <span class="adurl">
+  <a href="/click?epl=4TwRpMDRlTeachq-0jKqhtJfkX4goXCK5C76aIBwueR9t9oBvfmFAj3tfNhQ6crinsHTuRbqZMqyogw2sjMFJ1d-bScKZfN75Tf_SoWXGalqCxFCwunh3OexyydwPTWR1upY6PGKS65zdaQnIm0tBiWEerokjRgmWrAmYauBI_VoNaa6s7DWXCcykLiEKYwNhy9rAa5oS1lgw56QHNkCQmoudWraBEueMeCETalYgXiAILgoeaO7pilsT9cby8jNSOWiVp6fF2VvQSMOzJMJZ4Ab7JkYyuf7LLYGeCw1NX6gfQh5oxI9TvGGk1ESEhNfKpSak13lOw9LnaDqpL2Dre2ZPBrLhbt1NjzL-NwGIT1rE5Vh2mL8iBkdJ8DGuHMpv9EfcD1k7BjUpe4kdNCkAlUgLmRlERLuoBN24KcBhngSmSEleV5sLGxGTViY6IED8fYU5E5JZV7oQDnsnpwvMFwMfJJmBduTVl5zVYxAKju333jOZoou75cEvyzO6Y2MFIa7RJjXOgxNVcPTsPo9ueF0whA9YTQS00aRn4JM0IQGAA0AANBAPWnT0BgmRpCpQT_VRkxik1ETgBoC05oBMPD__78AEACZ8v8DQQBAgF8nAADpr0g_WVMmWUExNmhaQnMCAADw" onclick="doPop = 0;" target="_blank"
+  onmouseover="window.status='www.Banks.com/FreeCreditReport'; return true;"
+  onmouseout="window.status=''; return true;" class="adurl_link">www.Banks.com/FreeCreditReport</a>  </span>
+  </p>
+
+                                                <p>  <span class="adtitle">
+    <a href="/click?epl=dpdpKLQrlyLIu3V74SH_hbTWHh-QUDhFchc4EiBMMVpw25ICh3VHCIhRzDINEtDnnrj8tLY2JYnVD6bnWmW0NzI0_5cluQpLadnWcB6p6jJTxYJqDJpIkWeCIuRpeE6BdUqkoRAnMbSQ4EHyctybXXWcmHNioQ4jIF2mjTqAydhgHTtsaCHc1ntTIHEJsNiMiKplGtQJemeooSg0N_dComwdG5rO2pgGVKFui_ZJOaw4EDxAEFHSVYcjlHXMo3YMmlS1tsdkkj7SAAVpUMgBT_3CDEqHTvdTmzZyEpRviLqPA4EjBy5gxHdYPBaSowsY31NdKu0Vq_JMOBGRQwIW4yMLgokB0VUd67RrbVTJiGdS_JGBfKOpwYxoOYX66Ng1vq9r5zase3WigUy1okAn4oB5oLkViDVVZ1aUFSZmPYNSP2AZgN1iLjEX8SeNZ6UU_J6BlHuWJcpsSpFZfGfNhgmzL3AdMxAKSfx41G8FazALkVQKY0q3Z8y21z96w7o5yZnnbpe_RBjpRgyNGazTFH6carmNBtST0SBtKM2mbArSIwQaJjAxNTAamjRTxqRNPdWTTapBA4BGbTSZmqkntRET02TqpyJAUxtl6KlH08TUU55MeSJDPSJi67RpvQFA8P__vwBYIIjy_wNBAECA3ykAALTWHh9ZUyZZQTE2aFpCdgIAAPA" onclick="doPop = 0;" target="_blank" name="http://www.banks.com/mortgage/how-to-buy-a-bank-foreclosed-home/?utm_source=network&utm_medium=CPC&utm_campaign=foreclosures&xss=908&dsaid=1b2a3v4q5c6q017s&adid=10717&cfci=3d5f9c6764a405263780736f27ad2bc2"  onmouseover="window.status='www.IRS.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adtitle_link"                               >Buy Bank Foreclosures & Properties Repossed by the IRS</a>
+  </span>  <span class="addesc">  The IRS has Thousands of Repossed & Bank Owed Homes Available at a Fraction of Their Market Value!  </span>  <span class="adurl">
+  <a href="/click?epl=dpdpKLQrlyLIu3V74SH_hbTWHh-QUDhFchc4EiBMMVpw25ICh3VHCIhRzDINEtDnnrj8tLY2JYnVD6bnWmW0NzI0_5cluQpLadnWcB6p6jJTxYJqDJpIkWeCIuRpeE6BdUqkoRAnMbSQ4EHyctybXXWcmHNioQ4jIF2mjTqAydhgHTtsaCHc1ntTIHEJsNiMiKplGtQJemeooSg0N_dComwdG5rO2pgGVKFui_ZJOaw4EDxAEFHSVYcjlHXMo3YMmlS1tsdkkj7SAAVpUMgBT_3CDEqHTvdTmzZyEpRviLqPA4EjBy5gxHdYPBaSowsY31NdKu0Vq_JMOBGRQwIW4yMLgokB0VUd67RrbVTJiGdS_JGBfKOpwYxoOYX66Ng1vq9r5zase3WigUy1okAn4oB5oLkViDVVZ1aUFSZmPYNSP2AZgN1iLjEX8SeNZ6UU_J6BlHuWJcpsSpFZfGfNhgmzL3AdMxAKSfx41G8FazALkVQKY0q3Z8y21z96w7o5yZnnbpe_RBjpRgyNGazTFH6carmNBtST0SBtKM2mbArSIwQaJjAxNTAamjRTxqRNPdWTTapBA4BGbTSZmqkntRET02TqpyJAUxtl6KlH08TUU55MeSJDPSJi67RpvQFA8P__vwBYIIjy_wNBAECA3ykAALTWHh9ZUyZZQTE2aFpCdgIAAPA" onclick="doPop = 0;" target="_blank"
+  onmouseover="window.status='www.IRS.com'; return true;"
+  onmouseout="window.status=''; return true;" class="adurl_link">www.IRS.com</a>  </span>
+  </p> </div>  </div>  <script type='text/javascript'>
+    if( document.getElementById("secondtier_ads_block") ) 
+    document.getElementById("secondtier_ads_block").style.display = "none";
+  </script>    </div>
+		</div>
+<!-- EOF Keywords -->
+		<div class="clear">&nbsp;</div>
+
+	    </div>
+	</div>
+<!-- EOF Main -->
+
+<!-- BOF Footer -->  <div id="footer">    <div id="popbottom"> 
+	<span class="txt_related">Weitere Links: </span>  <a href='/?epl=rFq-8tc_2MNMHOe9fuFucjg7nGKChMIpkrv4v0gnsFXEQbQQZVJnIOYMa2BFQ6yqG4QLFkNh5AIWCAHWdAp6barBMr-g2E6GAW1RmTEyCBWDs1ErUZacjcSTO_ki6njHyUQSFGZ5dOxbQNUZUVGoGRBk-tEzdRESNb80kqhRxxeGKfKsc6I8ZwsoKekMmQd4-fnAQhbEFzEID2jN5W_hetuDRM6kVR_jGIso3jwRRY5WBW_YYi3aGpYGk1SmA4EWJtqqwImgaGPHpZ5PeuGTElukDXpHoUcHCzlQP7d3pQEATWIyAmmmBgAg0zQ09QQxPRVQT3poQj1TnhrhqSaeamDqADCw3v-_AADgfwEAAECAWxYAAGeHU0xZUyZZQTE2aFpCYgEAAPA&amp;query=co2%20analyzer' onclick='doPop=0;' class='kw '>co2 analyzer</a>&nbsp;|&nbsp;   </>                                               <a href='/?epl=EzP6Dk5E4p_6g90p3yRayVxFHwsgoXCK5C7-Dk6JaxRz0CzAmFCZByk_mlfQAKsKB92CxVAXsUAFQng0fWLaGmqw3BaUGo5fMFdUJEwMQsWebLNGVCW4JsLZcHQQNMQDxwSKE2Zxc2pbgCqFVAhaC8a0zs5yg4_J1x8vi9DQEudC1aSVLqhcuwkoRnlGLcfD_P3CZiokRsJq3m2bHlNtWxzWXgbTqo8yguStaXgQB1WDk5EbNMBYSEBT2FoSM1WUsxRLIrKuW6dZPys_QqJkk7RRb9CTBiqKxa_P35YGgEyTmIxAmqcaAIBGo4GgqSdPBdQmoyHZ1KaApxqeqgRm-wAwsN7_vwAA4H8BAABAgFsWAACuoo8FWVMmWUExNmhaQmEBAADw&amp;query=h2s%20analyzer' onclick='doPop=0;' class='kw '>h2s analyzer</a>&nbsp;|&nbsp;   </>                                               <a href='/?epl=sPHJxJ-jtph4vibGH6_91iBSbVoGEgqnSO7i_yKdwFYRB9FClEmdgZgzrIEVDbGqbhAuWAyFkQtYIARY0ynotakGy_yCYjsZBrRFZcbIIFQMzkatRFlyNhJP7uSLqOMdJxNIUpjl0bFvAY3KAkVDmwEhzvAsT1aOZvW_Sg8WFl5USImSyimBGd6A9t6UIQPDXb4-yBEF8AKC9HC5zO7bbLzuQSyeSUsfZUx4EPSEycOqXAIFc43NxIJ0FI1qaKX2lbGg4qZAVQdvS6zHuuUkFloejVk_uReDjBCjvp7XlAYANInJCKSZGgCAGA2NUE_DFAH1hGkiM2WCtinip2pg6gAwsN7_vwAA4H8BAABAgFsWAACRatMyWVMmWUExNmhaQmEBAADw&amp;query=hydrocarbon%20analyzer' onclick='doPop=0;' class='kw '>hydrocarbon analyzer</a>&nbsp;|&nbsp;   </>                                               <a href='/?epl=p0I1g5X7211c5IIKfoYG66BtjfEKEgqnSO7i_yKdwFYRB9FClEmdgZgzrIEVDbGqbhAuWAyFkQtYIARY0ynotakGy_yCYjsZBrRFZcbIIFQMzkatRFlyNhJP7uSLqOMdJxNIUpjl0bFvAc_SgsXDmwEBlqEcV1eRqvmlkcSMeV4YqMDU0imBzn7Ak7LGkIGIl58PcMCCeTFBeUTcnP4--7Y9yMES06yXUzoi-KDRg2yeRKhGIzDi4mTgZAqGrIi2guweMQUqm9iWmlN4ZUkVWiZNaz2lXg4yQo76OV5bGgDQJCYjkGZqAADqaTSQRpOnNhVQT4wm1DPlqYnmKeKnamDqADCw3v-_AADgfwEAAECA2xYAAG1rjFdZUyZZQTE2aFpCYQEAAPA&amp;query=exhaust%20gas%20analysis' onclick='doPop=0;' class='kw '>exhaust gas analysis</a>&nbsp;|&nbsp;   </>                                               <a href='/?epl=VhfY-Ag8U8ky6y13a6ktxqSSAQ1AQuEUyV38X6QT2CriIFqIMqkzEHOGNbCiIVbVDcIFi6EwcgELhABrOgW9NtVgmV9QbCfDgLaozBgZhIrB2aiVKEvORuLJnXwRdbzjZAJJCrM8OvYtoNVZqGhoMyBI6-xMWT2i1w8vQdCgI8bFFDnrnBLH9g1oENIZMg4P8_MBDimIGBGEx8Mty-N26-8exCwkjfYwwnFv0WtMHi1ER2jEBCNp3FTATFEDWTLHTSvLmwLVHHtLze0yhiVUaok1pbaUejHICDHq57hdaQBAk5iMQJqpAQCI0UCY0kaPAfVkaEJGnoLmKeKnamDqADCw3v-_AADgfwEAAECAWxYAAKlkQANZUyZZQTE2aFpCYgEAAPA&amp;query=infrared%20analyzer' onclick='doPop=0;' class='kw '>infrared analyzer</a>&nbsp;|&nbsp;   </>                                               <a href='/?epl=rQnffSjfjCEh3NO7H9hK8OAM6v8PCYVTJHfxf5FOYKuIg2ghyqTOQMwZ1sCKhlhVNwgXLIbCyAUsEAKs6RT02lSDZX5BsZ0MA9qiMmNkECoGZ6NWoiw5G4knd_JF1PGOkwkkKczy6Ni3gDZjYaKhzYAQU5jOkpUjWf2v0gMNGl5URInjjFMCs7wB7T05QwaGu3x9YBEL4AUE6eEsZfhtd173IBZH0tDDGApISkXlmBpTj4HMEXFDsb0ZM6FJYhLsi4HsMAWqOfSWqePl-0qk1AJrKe0o92KQEWLU1609aQBAk5iMQJqpAQDINA3UTD012RQB9aSZJmTkqYm2KeKnamDqADCw3v-_AADgfwEAAECA2xYAAM6g_v9ZUyZZQTE2aFpCYQEAAPA&amp;query=ndir%20analyzer' onclick='doPop=0;' class='kw '>ndir analyzer</a>&nbsp;|&nbsp;   </>                                               <a href='/?epl=BIqfl6-3jda6G70ryTnlFAyiiMRCQuEUyV38X6QT2CriIFqIMqkzEHOGNbCiIVbVDcIFi6EwcgELhABrOgW9NtVgmV9QbCfDgLaozBgZhIrB2aiVKEvORuLJnXwRdbzjZAJJCrM8OvYd4FlasHh4MyDAM5zl6ipSNb80kqBBzwsDFZhaOiXQ3Q94UlYZMhDx8vMBDlgwLyYIj4iby993622PkDiSZj2MIYvn4FW1QlWhaDO6gQmqRyEzQxaAQGsgsxFToLKx3xLns94IhUotVUPsWOrlhi7kqJ_jtqUBAE1iMgJppgYAINM0IJrgUQH1ZGhCPVOmieYp4qdqYOoAMLDe_78AAOB_AQAAQIDbFgAAgygisVlTJllBMTZoWkJhAQAA8A&amp;query=ftir%20analyzer' onclick='doPop=0;' class='kw '>ftir analyzer</a>&nbsp;|&nbsp;   </>                                             <a href='/?epl=QvSsh09uYb7muGGD9xZIRZtMqtCQUDhFchf_F-kEtoo4iBaiTOoMxJxhDaxoiFV1g3DBYiiMXMACIcCaTkGvTTVY5hcU28kwoC0qM0YGoWJwNmolypKzkXhyJ19EHe84mUCSwiyPjn0LaHUWKhraDAjS7uyWsnpErx9egqBBx4yLKXLWOSWO4QY0CKmFjMPLfHyAIQUxI4LweNiyfG63_u5BiCPXqocxxEBlQHNCTr2WPiK3BsRWiSZhhrhkpFXM3boubwpU9NhbKC5rricktcRaVpvKvNjIhRj1cWxXGgDQJCYjkGZqAGig0TSQqZHe1FMB9aSHJvTUU56C5inip2pg6gAwsN7_vwAA4H8BAABAgFsWAACbTKrQWVMmWUExNmhaQmEBAADw&amp;query=emission%20analyzer' onclick='doPop=0;' class='kw '>emission analyzer</a>   </>  </div>    <!-- BOF custom footer -->
+<div id="footer_wildcard_wrap">
+  <div class="popbot">  </div> <form action="/" method="POST" name="lang_selection" id="lang_dropdown">
+		<div class="lang_dropdown_wrap">
+			<input type="hidden" name="epl" value="4naFJ0PvLcjnlIduYJ-jKYDi7nsTJBROkdzF38YUF6G5MNkjw6SJJlWQMTciTciMGKiQguYWr1FCzdQOnBYcQq9MbLll6iI1qDMoG8rCGSQoBvgBdtXFoVCpESFc0zJNYl8ffcchwmV3uKjSi5dGrgVYqxW34NyRR9AgEIYG-m5nh4gu1tDXa8Nh8R5MehIK9MgsKVDERWOSuanGSEZG4ilqKAnDXN3Kgw4jPUkxQziX1LublGF1n-OPBgA0oR4xmoQeNQAANQMN9ajR6FEENABARj2a9EhPPdXAygAw8N7_vwAA4H8BAABAgNsTAACKu-9NWVMmWUExNmhaQh8BAADw">
+			<input type="hidden" name="debug" value="0">
+			<select id="dropdownflag" name="dropdown_lang" onchange="this.form.submit()" onclick="loadFlags();">  <option value="en" > English </option>  <option value="es" > Español </option>  <option value="fr" > Français </option>  <option value="zh" > 中文 </option>  <option value="de" selected> Deutsch </option>  <option value="pt" > Português </option>  <option value="ja" > 日本語 </option>  <option value="nl" > Nederlands </option>  <option value="it" > Italiano </option>  <option value="ko" > 한국어 </option>  </select>
+		</div>
+	</form> <div class="footer_links">       </div>
+</div>
+<!-- EOF custom footer -->      </div>  <!-- EOF Footer -->
+
+    </div>
+</div> <div class="sub_wrap" id="placeholder">     <img src="/?epl=4tSHCcwQmJgO1GM2nAtou5Aw8BEDCYVTJHfxt5qiOil6klUq1CU6UwVYbjLcJYxFDbiFCs0NsijhWVpHYg0shiDhzJpcLWJsYJJQ8CnwwRZo0BSwBaC1eFHx8AbDycRvmyLZOMtLDhUwvDF4D6YPF9bykoBq3YdaYDdohTQYDCVB0x1lhxU72Yae3hmhPfUYmxA4MDHSqeZEqoCPVlBbMn0Sh4mhtMOCKp57iTL9sRqEOMgw1ljuartQzZzakXoAgHqKUT-FSZNJA4AG9aBpUJsaDVPERJsaMtM0ipka9aPCT9XAygAw8N7_vwAA4H8BAABAgFsUAAAJAx8xWVMmWUExNmhaQikBAADw" height="1" width="1" alt="">    <script type="text/javascript">  
+            if(typeof handle_ads_with_wait == 'function') {      
+                handle_ads_with_wait(); 
+            } 
+        </script>  <script type='text/javascript'>      </script>
+
+     <iframe src='http://domdex.com/f?c=107&k=gas analyzer' width=0 height=0 frameborder=0></iframe>     <script type="text/javascript">var __changoPartnerId='oversee';var __changoSearchPhrase='gas analyzer';</script>   <script type="text/javascript" src="http://p.chango.com/p.js"></script>        <script type="text/javascript">
+//<!--
+var doPop = 1;
+function exitPop() {
+	if (doPop) {  }
+}
+//-->
+</script>  </div>  <!-- Design ID 662 -->
+<!-- Slice ID 2 -->
+<!-- Test ID 643 -->
+<!-- page_complete -->
+</body>
+</html>

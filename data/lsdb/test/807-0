@@ -1,0 +1,180 @@
+<HTML>
+<HEAD>
+<TITLE>ESyPred3D submitting form</TITLE>
+</HEAD>
+<BODY BGCOLOR=#FFFFF0>
+<TABLE  CELLPADDING=3>
+<TR >
+<TD><IMG SRC="http://www.fundp.ac.be/dessins/sigle.gif" ></TD>
+<TD>
+<CENTER>
+<H1>ESyPred3D Web Server 1.0</H1>
+<b><A HREF="mailto:Christophe.Lambert@fundp.ac.be">Christophe Lambert</A> and <A HREF="mailto:Eric.Depiereux@fundp.ac.be">Eric Depiereux</A></b><br>
+<A HREF="http://www.sciences.fundp.ac.be/urbm/">Molecular Biology Research Unit</a> , <A HREF="http://www.fundp.ac.be">The University of Namur</A>, Belgium.<br>
+Project supported by the <A HREF="http://www.fnrs.be">F.R.I.A.</a>.
+</CENTER>
+</TD>
+<TD><IMG SRC="images/logo_URBM.gif" ></TD>
+</TR>
+</TABLE>
+
+<table><tr><td>
+<B>ESyPred3D</B> - ESyPred3D is a new automated homology modeling program. The method gets benefit of the increased alignment performances of a new alignment strategy using neural networks. Alignments are obtained by combining, weighting and screening the results of several multiple alignment programs. The final three dimensional structure is built using the modeling package MODELLER.</td>
+<td>
+<b>Please cite:</b><br>
+<blockquote style="white-space: nowrap;">
+Lambert C, Leonard N, De Bolle X, Depiereux E.<br>
+<i>ESyPred3D: Prediction of proteins 3D structures.</i><br>
+<b>Bioinformatics. 2002 Sep;18(9):1250-1256</b>
+</blockquote>
+</td></tr></table>
+<HR>
+<a href="http://webapps.fundp.ac.be/esypred/status.php">ESyPred3D queue status</a>
+<hr>
+<H2> Data and parameters input for the ESyPred3D server: </H2><P>
+
+<FORM METHOD="POST" enctype="multipart/form-data" ACTION="esypred-query.cgi">
+
+<TABLE>
+<TR>
+<TD>
+<INPUT SIZE=60 NAME="usremail">
+</TD>
+<TD>
+<B>Your email address</B>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<INPUT SIZE=60 NAME="usrsubject">
+</TD>
+<TD>
+<B>Description (optional)</B>
+</TD>
+</TR>
+<TR>
+<TD>
+<input SIZE=49 type="file" ENCTYPE="text/plain" name="seqfile">
+</TD>
+<TD>
+<B>You can upload a sequence file</B>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<H4>(Characters others than the standard 20 amino acids codes will be removed)</H4>
+</TD>
+</TR>
+
+
+<TR>
+<TD>
+<TEXTAREA NAME="sequence" ROWS=10 COLS=60></TEXTAREA>
+</TD>
+<TD>
+<B>or paste your sequence</B>
+</TD>
+</TR>
+
+<TR>
+<TD colspan=2>
+<center>
+<H3>
+<inPUT TYPE="submit" VALUE="SUBMIT TO SERVER">
+<inPUT TYPE="reset"  VALUE="CLEAR INPUT">
+</H3>
+</center>
+</TD>
+</TR>
+</table>
+<H3>Advanced parameters</H3>
+<table>
+<tr>
+<td colspan=2>
+<font color="#007700"><b>Use this PDB template</b></font> <input SIZE=6 name="template"> (<b>xxxx_y</b>)<br>
+where xxxx is the PDB code and y is the chain<br><br>
+</td>
+</tr>
+<tr>
+<td colspan=2>
+<font color="#ff0000"><b>Do not use this PDB template</b></font> <input SIZE=4 name="notthistemplate"> (<b>xxxx</b>)<br>
+where xxxx is the PDB code<br><br>
+</td>
+</tr>
+<tr>
+<td  colspan=2>
+<h3><b>Output:<b></h3>
+</td>
+</tr>
+<tr>
+<td>
+<INPUT TYPE="checkbox" NAME="logfile" VALUE="on"  CHECKED> Summary of results<BR>
+<INPUT TYPE="checkbox" NAME="pdbformat" VALUE="on"  CHECKED> PDB format<BR>
+<INPUT TYPE="checkbox" NAME="pfrmat" VALUE="on"> PFRMAT format<BR>
+<INPUT TYPE="checkbox" NAME="pirttali" VALUE="on"  CHECKED> PIR target-template alignment<BR>
+</td>
+<td>
+<INPUT TYPE="checkbox" NAME="compression" VALUE="on"  CHECKED> Compress files using base64 (better for attach files)<BR><br>
+<b>Alignment Method using</b><br>
+<SELECT NAME="alimethod">
+<OPTION SELECTED> neural net and new screening
+<OPTION> neural net
+<OPTION> frequency table
+</select>
+</td>
+</tr>
+</TABLE>
+</FORM>
+<HR>
+
+<H2> Information about the ESyPred3D server: </H2><P>
+<B>ESyPred3D</B> - ESyPred3D is a new automated homology modeling program. The method gets benefit of the increased alignment performances of a new alignment strategy using neural networks. Alignments are obtained by combining, weighting and screening the results of several multiple alignment programs. The final three dimensional structure is built using the modeling package MODELLER.
+
+<BR>
+
+<TABLE CELLPADDING=30>
+<TR>
+<TD>
+<H3> <A HREF="http://www.fundp.ac.be/sciences/biologie/urbm/index.html#service">Other lab www services</A></H3>
+</TD>
+</TR>
+</TABLE>
+
+<HR>
+
+<H2>Please send comments and enquiries to: </H2><P>
+<CODE><PRE>
+   Christophe LAMBERT
+
+   University of Namur    :   Tel: +32-81-72-44-17 
+   U.R.B.M.               :   Fax: +32-81-72-44-20
+   Rue de Bruxelles, 61   :   E-mail: <A HREF="mailto:christophe.lambert@fundp.ac.be">christophe.lambert@fundp.ac.be</A>
+   5000 Namur, Belgium    :           
+</PRE></CODE>
+
+<HR>
+<H2>Co-worker:</H2>
+<UL>
+<LI> <B>Nadia Leonard</B></LI>
+</UL>
+<HR>
+<H2>Thanks for fruitful discussions and help:</H2>
+<UL>
+<LI> <B>Guy Baudoux</B></LI>
+<LI> <B>Katalin deFays</B></LI>
+</UL>
+
+<HR>
+
+<H2>Bibliography:</H2>
+
+<HR>
+
+
+<ADDRESS> <A HREF="mailto:christophe.lambert@fundp.ac.be">Webmaster</A></ADDRESS>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,972 @@
+<!-- Beginning of template-part1of3.shtml -->
+
+<html>
+
+
+<head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+name="description" contents="A collection of model organism databases of metabolic pathways, including reactions, enzymes, genes and substrate compounds"/>
+<meta name="keywords" contents="metabolism, pathways, metabolic, enzymes, compounds, reactions, biochemical, bioinformatics, model organism database, genes, genome"/>
+
+<!-- For the top menu bar -->
+
+<!-- Core + Skin CSS --> 
+<link rel="stylesheet" type="text/css" href="/yui/build/assets/skins/sam/skin.css">
+<!-- Dependencies -->  
+<script type="text/javascript" src="/yui/build/utilities/utilities.js"></script> 
+<script type="text/javascript" src="/yui/build/container/container-min.js"></script> 
+<script type="text/javascript" src="/yui/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="/yui/build/autocomplete/autocomplete-min.js"></script>
+<script type="text/javascript" src="/yui/build/layout/layout-min.js"></script>
+<script type="text/javascript" src="/yui/build/menu/menu-min.js"></script> 
+
+<!-- Tooltip libraries -->
+
+<script type="text/javascript" src="/overLIB/Mini/overlib_mini.js"><!-- overLIB (c) Erik Bosrup --></script>
+<script type="text/javascript" src="/overLIB/Mini/overlib_exclusive_mini.js"></script>
+<script type="text/javascript" src="/overLIB/Mini/overlib_positioncap_mini.js"></script>
+
+<!-- The style and JavaScript for Pathway Tools Server -->
+  <!-- Base Pathway Tools JavaScript code -->
+  <script type="text/javascript" src="/pathwayTools-min.js"></script> 
+ 
+  <!-- The following file is generated on the fly by the server -->
+  <script type="text/javascript" src="/get-organisms.js"></script>
+  <script type="text/javascript" src="/get-user-data.js"></script>
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  
+  <!-- User web site style sheet customization should use the following file --> 
+  <link rel="stylesheet" type="text/css" href="/userWebsiteCustomization.css"> 
+  
+  <!-- User web site JavaScript customization should use the following file --> 
+  <script type="text/javascript" src="/userWebsiteCustomization.js"></script> 
+
+<script>
+
+/* This code needs to be here to avoid the menu and other Yahoo widgets to flicker
+   on the screen. 
+*/
+var orgSelectorDialog;
+
+// Do this as early as possible to minimize flicker:
+YAHOO.util.Event.onAvailable("body", function () {
+    updateBannerClass();
+});
+
+YAHOO.util.Event.onContentReady("pathwayToolsMenubar", function () {
+    /*
+         Instantiate a MenuBar, passing in the id of the HTML element 
+         representing the MenuBar.
+    */
+
+    var oMenuBar = new YAHOO.widget.MenuBar("pathwayToolsMenubar", 
+                                            {autosubmenudisplay: true, 
+                                             shadow: false, 
+                                             hidedelay: 700
+                                             });
+
+    // Add dynamically all the menubar commands and menus here if need be.
+    addContextSpecificToolbarMenus();
+
+    // User sites can define this fn in userWebsiteCustomization.js in 
+    // order to programmatically alter the menus.
+    addSiteSpecificMenuItems();
+
+    // Render the MenuBar instance
+    oMenuBar.render();
+
+});
+
+YAHOO.util.Event.onContentReady("orgSelectorDialog", function () {
+
+    /* Instantiate the Organism Selector dialog */
+
+    var handleCancel= function() {this.cancel();}
+    var handleOK= function() {changeOrganism();}
+    var dialogButtons = [ { text: "OK", handler:handleOK, isDefault:true },
+                          { text: "Cancel", handler:handleCancel } ];
+    var enterKeyListener = new YAHOO.util.KeyListener(document, {keys:13}, 
+                                                      {fn:changeOrganism});
+    orgSelectorDialog = new YAHOO.widget.Dialog("orgSelectorDialog", {
+	buttons: dialogButtons,
+        visible: false,
+        fixedcenter: false,
+        draggable: true,
+        dragOnly: true,
+	keylisteners: enterKeyListener,
+	zIndex: 1000
+    });
+    orgSelectorDialog.width = 820;
+    orgSelectorDialog.beforeRenderEvent.subscribe(function() {
+        var layout = new YAHOO.widget.Layout('orgSelectorBody', {
+           height: 420, width: 820,
+           units: [
+                   {position:'left', width:280, body:'leftcontent'},
+                   {position:'right', width:520, body:'rightcontent'},
+                   {position:'center', body:'centercontent'}
+                  ]
+        });
+        layout.render();
+    });
+    orgSelectorDialog.render();
+    orgSelectorDialog.beforeShowEvent.subscribe(initChooser);
+});
+
+
+</script>
+
+
+
+<!-- Ending of template-part1of3.shtml -->
+
+
+
+
+<meta name="description" contents="Database of Escherichia coli metabolic pathways, including reactions, enzymes, genes and substrate compounds">
+<meta name="keywords" contents="Metabolism, metabolism, Biochemistry, biochemistry, pathways, metabolic, enzymes, compounds, reactions, metabolic pathways, metabolic pathway, biochemical reactions, Biology, biology, microbiology, Microbiology, biochemical pathways, pathway, MetaCyc, BioCyc, EcoCyc, microbial, plant, biosynthesis, degradation, bioinformatics, E. coli, Escherichia coli, genes, metabolic overview, expression viewer">
+
+<title>
+EcoCyc: Encyclopedia of Escherichia coli K-12 Genes and Metabolism
+</title>
+
+<script type="text/javascript">
+var forceOrgID = "ECOLI";
+setOrganism("ECOLI");
+</script>
+
+</head>
+
+<body id=body class="yui-skin-sam MainPage" onload=initOnWindowLoad()>
+
+<!-- The top banner, we are in a body -->
+<table width=100%  border=0 padding=0 margin=0 cellpadding=0 style="border-collapse: collapse;">
+<tr>
+<td>
+<div id="ptbanner">
+    <a id="logoLink" class="logo" href="/"></a>
+
+    <!-- Beginning temporary message -->
+
+<!-- 
+     Do not duplicate this file: only one such file should exists for the Web server. 
+     
+     This file must reside
+     under the root directory of the cluster (so it resides in the BioCyc
+     htdocs root directory). The location corresponds exactly to where it resides
+     in CVS. Each Web site (e.g., ecocyc, humancyc, metacyc, biocyc)
+     gets its temporary message from this single file.
+
+     If you modify this file you must release it for the cluster as any 
+     other Web page to see your modification(s) take place on our Web sites.
+
+     There are currently four top level DIVs identified by a unique ID, one
+     for each Web site. You
+     should always keep these four DIVs and not add any other top level DIV. 
+     One or several DIVs, with no id, can be inserted in each four top level DIV. 
+     Such second level DIV contains a HTML message. One of the second level DIV
+     is selected randomly to be displayed when a Web page is displayed for the
+     corresponding Web site.
+ 
+     So the structure of the HTML of this page is (each top level DIV might
+     contain zero, one or several second level div with a message):
+
+     <div id=biocycTmpMessages>
+         <div class=temporaryMsg style=...>
+         message
+         </div>
+          ...
+     </div>
+
+     <div id=ecocycTmpMessages>
+         <div class=temporaryMsg style=...>
+         message
+         </div>
+          ...
+     </div>
+
+     <div id=metacycTmpMessages>
+         <div class=temporaryMsg style=...>
+         message
+         </div>
+          ...
+     </div>
+
+     <div id=humancycTmpMessages>
+         <div class=temporaryMsg style=...>
+         message
+         </div>
+          ...
+     </div>
+
+     (Do not change the div parameters unless you really know what they do.)
+
+     Only one div is visible at a time according to the corresponding active banner (EcoCyc,
+     HumanCyc, MetaCyc, BioCyc).
+
+     To have the same message for all four banners, you must enter the same message under 
+     the four divs.
+     The visibility and width of each div is controlled by the BioCyc Pathway Tools JavaScript.
+     The file style.css defines the style class temporaryMsg of the divs used below.
+
+     The message should be short as the space used to display it in the banner
+     is _very_ limited. If it is too long, it will be clipped. The div box will _not_ get bigger as more
+     text is used.
+
+     Typically, the temporary message should be less than 60 characters to fit in the div, but the exact
+     number cannot be given as it depends on the characters used (a "m" is wider than a "x"), 
+     the length of words, the size of the font and its type and even more exotic reasons.
+
+     You can reduce the size of the font used, if your text will not fit in the div box, by using
+     standard HTML tag as in <font size=-1> your temporary message here  </font>. (Always in the
+     <div ...><font size=-1>... </font></div>, not outside.)
+     You must visually verify the result, using a browser, to make sure that your text looks
+     ok and fits in the div box.
+
+-->
+
+ <!-- The set of BioCyc temporary messages must be all inside the following div  -->
+
+ <div id=biocycTmpMessages> 
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   Please participate in the new <br> <a href="http://www.surveymonkey.com/s/HHHW8PX">MetaCyc User Survey</a> 
+   </div> 
+
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   <a href="http://bioinformatics.ai.sri.com/ptools/tutorial/PathwayTools2010.html">Pathway Tools Tutorial<br> 
+   May 17 - 20, 2010<br> 
+   Menlo Park, CA</a> 
+   </div> 
+ </div> 
+
+ <!-- The set of EcoCyc temporary messages must be all inside the following div --> 
+
+ <div id=ecocycTmpMessages> 
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   Please participate in the new <br> <a href="http://www.surveymonkey.com/s/HHHW8PX">MetaCyc User Survey</a> 
+   </div> 
+
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   <a href="http://bioinformatics.ai.sri.com/ptools/tutorial/PathwayTools2010.html">Pathway Tools Tutorial<br> 
+   May 17 - 20, 2010<br> 
+   Menlo Park, CA</a> 
+   </div> 
+ </div> 
+
+ <!-- The set of MetaCyc temporary messages must be all inside the following div --> 
+
+ <div id=metacycTmpMessages> 
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   Please participate in the new <br> <a href="http://www.surveymonkey.com/s/HHHW8PX">MetaCyc User Survey</a> 
+   </div> 
+
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   <a href="http://bioinformatics.ai.sri.com/ptools/tutorial/PathwayTools2010.html">Pathway Tools Tutorial<br> 
+   May 17 - 20, 2010<br> 
+   Menlo Park, CA</a> 
+   </div> 
+ </div> 
+
+ <!-- The set of HumanCyc temporary messages must be all inside the following div --> 
+
+ <div id=humancycTmpMessages> 
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   Please participate in the new <br> <a href="http://www.surveymonkey.com/s/HHHW8PX">MetaCyc User Survey</a> 
+   </div> 
+
+   <div class=temporaryMsg style="text-align: center;background-color:#F0E68C"> 
+   <a href="http://bioinformatics.ai.sri.com/ptools/tutorial/PathwayTools2010.html">Pathway Tools Tutorial<br>
+   May 17 - 20, 2010<br> 
+   Menlo Park, CA</a>
+   </div> 
+ </div> 
+
+
+    <!-- Login line and overlays for login help, etc. is in the following file -->
+    <!-- The login line has two possible modes: "logged in" or "not logged in".
+      Either one of them is shown depending on the state of the user cookies
+      controlling the login. The selection of which one to show is done by the 
+      JavaScript in login.js 
+--> 
+
+<!-- Logging fields when "not logged in" --> 
+
+<div id=notLoggedIn class=logIn>
+  <a href="javascript:UnhideLogin()">LOGIN</a>&nbsp;| 
+  &nbsp;<a href="javascript:UnhideWhyLogin()">Why&nbsp;Login?</a>&nbsp;| 
+  &nbsp;<a href="http://biocyc.org/preferences.html?status=new" tabindex='8'>Create&nbsp;New&nbsp;Account</a>
+</div>
+
+<!-- Logging fields when "logged in" --> 
+
+<div id=loggedIn class=logIn>
+  Logged&nbsp;in&nbsp;as&nbsp;<span id=loginUserName></span>&nbsp;|
+  &nbsp;<a href="/logout.html">Logout</a>&nbsp;|
+  &nbsp;<a href="/help-user.html">Help</a>&nbsp;|
+  &nbsp;<a href="/preferences.html">My&nbsp;preferences</a>
+</div>
+
+<!-- Beginning of hidden/visible login overlay -->
+
+<div style="margin-top: 10px; text-align: left; float: right; position: relative; left: 0;">
+
+<div id="Login" style="visibility:hidden; position: absolute; left: -24em; top: 1em; color: black; font-size: small; font-family: sans-serif; background-color: #f0f0ff; display: block;  border-width: thin;  border-color: blue; border-style: solid; z-index:1000">
+
+  <form id="frmSignon" action="try-login.html" method="post" name="signon" autocomplete="off">
+
+  <div style="padding: 10px">
+  <input type="hidden" id="myurl" name="myurl" value="javascript:document.location"/>
+
+ <table class=logIn cellspacing="8" cellpadding="0">
+  <tr id="FirstRow">
+    <td>
+      <div id="email1" align="right" style="font-size: smaller;  font-family: sans-serif;">
+      Email:
+      </div>
+    </td> 
+
+    <td><input type="text" style="font-size: smaller;  font-family: sans-serif;" size="16" id="emailname" name="emailname" accesskey="U" tabindex="1" /></td>
+  </tr>
+
+  <tr id="SecondRow">
+   <td>
+     <div align="right" style="font-size: smaller;  font-family: sans-serif;">
+     Password:</div>
+   </td>
+  <td><input type="password" style="font-size: smaller;  font-family: sans-serif;" size="16" id="password" name="password" tabindex="2"></td>
+ </tr>
+
+ <tr id="ThirdRow">
+  <td></td>
+  <td>
+   <div style="font-size: smaller;  font-family: sans-serif; position: relative; top: -5px;">
+   <a href="javascript:ForgotPasswordize()" tabindex='6'>Forgot password?</a></div>
+  </td>
+  </tr>
+  <tr id="FourthRow">
+  <td></td>
+  <td>
+
+   <div style="font-size: smaller;  font-family: sans-serif;">
+   <input type="checkbox" name="rememberp" value="1" checked="true" tabindex='5'> Keep me logged in</div>
+  </td>
+</tr>
+
+ <tr>
+ <td  id="ThirdPanel" colspan="2" style="padding-left: 12px; font-size: smaller; font-family: sans-serif;"></td>
+ </tr>
+
+</table>
+
+<center>
+<table border="0" cellspacing="10" cellpadding="0">
+<tr>
+<td><button name="CancelButton" type="button" onclick="HideLogin()" tabindex='4'>Cancel</button>&nbsp;&nbsp;</td>
+
+<td>&nbsp;&nbsp;&nbsp;<input id="LogInButton" name="LogInButton" type="button" onclick="document.signon.submit()" tabindex="3" value="Log In" /></td>
+
+</tr>
+</table>
+</center>
+</div>
+
+</form>
+<br>
+</div>
+
+ <!-- hide/visible why login -->
+
+ <div id="WhyLogin" style="visibility:hidden; position: absolute; left: -50em; top: 0.5in; z-index: 1; color: black; font-size: smaller; font-family: sans-serif; background-color: #f0f0ff; width: 4.27in;  display: block;  border-width: thin;  border-color: blue; border-style: solid; z-index:1000">
+
+  <div style="background-color: #A5BFDA; height: 0.22in;">
+   <div align="right" onclick="HideWhyLogin()">
+      <img src="/x.gif" alt="X" border="0">
+   </div>
+  </div>
+
+  <div style="padding: 20px">
+    <!-- WRITEUP-1  -->
+    <center><h4>Why Create an Account?</h4></center>
+  
+    <p>Web site accounts provide several benefits.  Through your account you can:
+    <p>
+    <UL>
+    <LI> Customize the appearance of pages on this Web site
+    <p>
+    <LI> Store organism sets for comparative operations
+    <p>
+    <LI> Configure default settings for the Omics Viewers
+    <p>
+    <LI> Receive important email updates about this Web site
+    <UL/>
+  
+    <br>
+    <a href="http://biocyc.org/preferences.html?status=new">Create New Account</a>
+  </div>
+ </div>
+ <!-- End why login visible/hidden element -->
+
+</div>
+
+<!-- End of visible/hidden overlay -->
+
+
+
+    <div class=searchGroupingExternalBox >
+      <div class=searchGroupingInternalBox>
+        <!-- Quick Search -->
+
+         <form class=searchMenu 
+               name=substring onSubmit="if (this.elements[1].value != '') {this.action= '/'+orgID()+'/substring-search?type=NIL&object='+this.elements[1].value} else return(false);">
+         <input name=type type=hidden value="NIL"/>
+         <input class="inputQuickSearch" name="object" size="35" />
+	 <input type=submit name="quickSearch" class="searchButton" value="Quick Search">
+	 <input type=submit name="geneSearch" class="searchButton" value="Gene Search" onclick="document.substring.type.value='GENE';" />
+         </form>
+         
+        <!-- End Quick Search -->
+
+        <!-- Database name and change link -->
+         <div class=searchMenuDatabaseName>Search&nbsp;Database&nbsp;<i><span id=currentDatabaseName class="dynDBName banner"></span>&nbsp;&nbsp;</i>
+         <a id=changeField href='javascript:void(0);' onclick="showChooser(false)">change</a>
+         </div>
+      </div>
+    </div>
+   <!-- End Database name and change link -->
+</div>
+</td>
+</tr>
+<!-- The top menu bar -->
+
+<tr>
+  <td>
+  
+<!-- The standard top menubar for Pathway Tools -->
+
+<div id="pathwayToolsMenubar" class="yuimenubarnav" style="visibility:hidden">
+ <div class="bd">
+  <ul class="toolbar">
+
+  <li class="yuimenubaritem"><a class="yuimenubaritemlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</a>
+    <div id="home" class="yuimenu">
+    <div class="bd">
+    <ul class="first-of-type">
+     <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://biocyc.org">&nbsp;&nbsp;&nbsp;BioCyc&nbsp;&nbsp;&nbsp;</a></li>
+     <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://ecocyc.org">&nbsp;&nbsp;&nbsp;EcoCyc&nbsp;&nbsp;&nbsp;</a></li>
+     <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://metacyc.org">&nbsp;&nbsp;&nbsp;MetaCyc&nbsp;&nbsp;&nbsp;</a></li>
+     <li class="yuimenuitem"><a class="yuimenuitemlabel" href="http://humancyc.org">&nbsp;&nbsp;&nbsp;HumanCyc&nbsp;&nbsp;&nbsp;</a></li>
+    </ul>
+   </div>
+   </div>
+  </li>
+
+  <li class="yuimenubaritem"><a class="yuimenubaritemlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search</a>
+     <div id="search" class="yuimenu withDatabase">
+
+      <div class="bd">
+        <ul class="first-of-type">
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/cpd-search.shtml">Compounds</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/gene-search.shtml">Genes/Proteins/RNAs</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/rxn-search.shtml">Reactions</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/pwy-search.shtml">Pathways</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/query.html">Advanced</a></li>
+         <li class="yuimenuitem"><a href="">Ontologies</a>
+          <div id="ontologies" class="yuimenu">
+           <div class="bd">
+             <ul class="first-of-type">
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" onclick="this.href='/'+orgID()+'/class-tree?object=Gene-Ontology-Terms'" href="">Gene&nbsp;Ontology</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="" onclick="this.href='/'+orgID()+'/class-tree?object=MultiFun'" >MultiFun&nbsp;Gene&nbsp;Ontology</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" onclick="this.href='/'+orgID()+'/class-tree?object=Pathways'" href="">Pathway&nbsp;Ontology</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="" onclick="this.href='/'+orgID()+'/class-tree?object=EC-Reactions'">Enzyme&nbsp;Commission&nbsp;Ontology</a></li>
+        <li class="yuimenuitem"><a class="yuimenuitemlabel" href="" onclick="this.href='/'+orgID()+'/class-tree?object=Compounds'">Compound&nbsp;Ontology</a></li>
+             </ul>
+           </div>
+          </div>
+        </li>
+	<li class="yuimenuitem"><a class="yuimenuitemlabel" href="/full-text-search.shtml">Google this site</a></li>
+        <li class="yuimenuitem" id="blastMenuItem"><a class="yuimenuitemlabel" href="" onclick="this.href='/blast.html'">BLAST</a></li>
+        </ul>            
+      </div>
+       <table class=menuDatabase>
+         <tr><td></td><td><font size=-1>Search&nbsp;Database:</font></td></tr>
+         <tr><td><div style="height:1em; margin:0 0 0 0">&#x25BA;
+                 </div></td>
+                 <!-- the name of the database is filled dynamically -->
+             <td><div style="height:1em"><i><span class="dynDBName menu"></span></i></div>
+             </td>
+         </tr>
+         <tr><td></td><td><a href="javascript:void(0);" onclick="showChooser(false)">change</a></td></tr>
+       </table>
+      </div>
+  </li>
+
+
+  <li class="yuimenubaritem"><a class="yuimenubaritemlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tools</a>
+     <div id="tools" class="yuimenu withDatabase">
+        <div class="bd">
+        <ul class="first-of-type">
+         <li class="yuimenuitem" id="genomeBrowserMenuItem"><a href="" onClick="if(orgID() == 'META'){this.href='javascript:alert(\'No Genome for MetaCyc\')'}else{this.href='/'+orgID()+'/select-gen-el'}" class="yuimenuitemlabel">Genome&nbsp;Browser</a></li>
+
+         <li class="yuimenuitem" id="cellOVMenuItem"><a class="yuimenuitemlabel" href="" onClick="if(orgID() == 'META'){this.href='javascript:alert(\'No Overview Diagram for MetaCyc\')'}else{this.href='/overviewsWeb/celOv.shtml'}">Cellular&nbsp;Overview</a></li>
+
+         <li class="yuimenuitem" id="cellOVMenuItem"><a class="yuimenuitemlabel" href="" onClick="if(orgID() == 'META'){this.href='javascript:alert(\'No Overview Diagram for MetaCyc\')'}else{this.href='/'+orgID()+'/NEW-IMAGE?type=OVERVIEW'}">Old Cellular&nbsp;Overview</a></li>
+
+
+         <li class="yuimenuitem" id="genOVMenuItem"><a class="yuimenuitemlabel" href="" onclick="if(orgID() == 'META'){this.href='javascript:alert(\'No Genome Overview for MetaCyc\')'}else{this.href='/'+orgID()+'/NEW-IMAGE?type=GENOME-OVERVIEW'}" >Genome&nbsp;Overview</a></li>
+
+         <li class="yuimenuitem" id="regOVMenuItem"><a class="yuimenuitemlabel" href="" onclick="if(orgID() == 'META'){this.href='javascript:alert(\'No Regulatory Overview for MetaCyc\')'}else{this.href='/overviewsWeb/regOv.shtml'}" >Regulatory&nbsp;Overview</a></li>
+
+         <li class="yuimenuitem" id="omicsMenuItem"><a class="yuimenuitemlabel" href="/expression.html">Omics&nbsp;Viewer(s)</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/comp-genomics">Comparative&nbsp;Analysis</a></li>
+ 
+         <li class="yuimenuitem"><a href="">Reports</a>
+          <div id="reports" class="yuimenu">
+           <div class="bd">
+             <ul class="first-of-type">
+                <li class="yuimenuitem"><a class="yuimenuitemlabel" href="" onClick="this.href='/'+orgID()+'/organism-summary?object='+orgID()">Summary&nbsp;statistics</a></li>
+                <li class="yuimenuitem"><a class="yuimenuitemlabel" href="" onClick="this.href='/'+orgID()+'/release-notes'">History&nbsp;of&nbsp;updates</a></li>
+                <li class="yuimenuitem" id="pwyEvMenuItem"><a class="yuimenuitemlabel" href="" onClick="if ((orgID() == 'ECOLI') || (orgID() == 'META')) {this.href='javascript:alert(\'The report that you have requested is not available for this particular Pathway / Genome Database.\')'} else {this.href='/'+orgID()+'/hierarchical.html'}">Pathway&nbsp;evidence</a></li>
+                <li class="yuimenuitem" id="pwyHolesMenuItem"><a class="yuimenuitemlabel" href="" onClick="if ((orgID() == 'ECOLI') || (orgID() == 'META')) {this.href='javascript:alert(\'The report that you have requested is not available for this particular Pathway / Genome Database.\')'} else {this.href='/'+orgID()+'/missing-rxns.html'}">Pathway&nbsp;holes</a></li>
+             </ul>
+           </div>
+          </div>
+         </li>
+        </ul>
+     </div>
+
+       <table class=menuDatabase>
+         <tr><td></td><td><font size=-1>Search&nbsp;Database:</font></td></tr>
+         <tr><td><div style="height:1em; margin:0 0 0 0">&#x25BA;
+                 </div>
+             </td>
+             <td><div style="height:1em"><i><span class="dynDBName menu">&nbspc;</span></i></div>
+             </td>
+         </tr>
+         <tr><td></td><td><a href="javascript:void(0);" onclick="showChooser(false)">change</a></td></tr>
+       </table>
+     </div>
+  </li>
+
+  <li class="yuimenubaritem"><a class="yuimenubaritemlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Help</a>
+     <div id="help" class="yuimenu">
+        <div class="bd">
+        <ul class="first-of-type">
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/help.shtml">Basic&nbsp;Help</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/searchhelp.shtml">Search&nbsp;Help</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/biocyc-guide.shtml">Guide to BioCyc</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/glossary.shtml">BioCyc Glossary</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/publications.shtml">BioCyc Publications</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/support.shtml">Contact&nbsp;Us/Support</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/download.shtml">Software/Database&nbsp;Downloads</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/ecocyc/background.shtml">Guide to EcoCyc</a></li>
+         <li class="yuimenuitem"><a class="yuimenuitemlabel" href="/metacyc/MetaCycUserGuide.shtml">Guide to MetaCyc</a></li>
+        </ul>
+     </div>
+     </div>
+  </li>
+
+
+  </ul>
+ </div>
+</div>
+	
+  </td>
+</tr>
+
+</table>
+<!-- Organism Selector Dialog -->
+
+<div id="orgSelectorDialog" style="visibility:hidden">
+  <div class="hd"><b>Select a Database</b></div>
+  <div class="bd" id="orgSelectorBody">
+<form id="orgSelectorForm">
+<div id="leftcontent">
+<div id="myPreferred">
+<h3>My Preferred Database</h3>
+<div id="myPreferredContent" style="margin-left:20px"></div>
+</div>
+<h3>Recently Used</h3>
+<div id="recentlyUsedContent" style="margin-left:20px"></div>
+<div id="popular">
+<h3>Popular Databases</h3>
+<div id="popularDatabasesContent" style="margin-left:20px"></div>
+</div>
+</div>
+
+<div id="centercontent">
+<a href="javascript:alphabetClick('a')">A</a><br/>
+<a href="javascript:alphabetClick('b')">B</a><br/>
+<a href="javascript:alphabetClick('c')">C</a><br/>
+<a href="javascript:alphabetClick('d')">D</a><br/>
+<a href="javascript:alphabetClick('e')">E</a><br/>
+<a href="javascript:alphabetClick('f')">F</a><br/>
+<a href="javascript:alphabetClick('g')">G</a><br/>
+<a href="javascript:alphabetClick('h')">H</a><br/>
+<a href="javascript:alphabetClick('i')">I</a><br/>
+<a href="javascript:alphabetClick('j')">J</a><br/>
+<a href="javascript:alphabetClick('k')">K</a><br/>
+<a href="javascript:alphabetClick('l')">L</a><br/>
+<a href="javascript:alphabetClick('m')">M</a><br/>
+<a href="javascript:alphabetClick('n')">N</a><br/>
+<a href="javascript:alphabetClick('o')">O</a><br/>
+<a href="javascript:alphabetClick('p')">P</a><br/>
+<a href="javascript:alphabetClick('q')">Q</a><br/>
+<a href="javascript:alphabetClick('r')">R</a><br/>
+<a href="javascript:alphabetClick('s')">S</a><br/>
+<a href="javascript:alphabetClick('t')">T</a><br/>
+<a href="javascript:alphabetClick('u')">U</a><br/>
+<a href="javascript:alphabetClick('v')">V</a><br/>
+<a href="javascript:alphabetClick('w')">W</a><br/>
+<a href="javascript:alphabetClick('x')">X</a><br/>
+<a href="javascript:alphabetClick('y')">Y</a><br/>
+<a href="javascript:alphabetClick('z')">Z</a><br/>
+</div>
+
+<div id="rightcontent">
+
+  <h3>Select a Database:</h3>
+
+  <div id="orgselectorAutoComplete">
+     <input id="orgInput" type="text"> 
+     <div id="orgContainer"></div>
+  </div>
+  <div id="orgnum"></div>
+  <div id="setPreferredDiv">
+  <input type=checkbox id="setPreferred"> Make this my preferred database
+  </div>
+</div>
+</form>
+</div>
+</div>
+
+
+  <table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <!-- The left side, it behaves a bit like a menu with news etc -->
+
+
+      <td width=100px valign=top bgcolor="#bcd3d7">
+<!-- Sidebar Menu -->
+<table cellspacing=0 cellpadding=5 border=0 bgcolor="#bcd3d7">
+
+  <!-- About EcoCyc -->
+  <tr><td>
+   <h2>About&nbsp;EcoCyc</h2>
+     <a class=sideBar href="background.shtml">Project&nbsp;Overview</a>
+     <br><a class=sideBar href="/samples.shtml">Guided&nbsp;Tour</a>
+     <br><a class=sideBar href="/webinar.shtml">Instructional&nbsp;Videos</a>
+     <br><a class=sideBar href="publications.shtml">Publications</a>
+     <br><a class=sideBar href="release-notes.shtml">Update&nbsp;History</a>
+     <br><a class=sideBar href="advisors.shtml">Steering&nbsp;Committee</a>
+     <br><a class=sideBar href="credits.shtml">Credits</a>
+  </td></tr>
+  
+  <!-- Information -->
+  <tr><td>
+   <h2>Information</h2></font>
+     <a class=sideBar href="gene-links.shtml">Gene&nbsp;Cross-References</a>
+     <br><a class=sideBar href="enzymes.shtml">Unsequenced&nbsp;Enzymes</a>
+     <br><a class=sideBar href="conferences.shtml">Conferences</a>
+     <br><a class=sideBar href="links.shtml">Web&nbsp;Links</a>
+  </td></tr>
+  <!-- Services -->
+  <tr><td>
+   <h2>Services</h2></font>
+     <a class=sideBar href="subscribe.shtml">Join&nbsp;EcoCyc&nbsp;Mailing List</a>
+     <br><a class=sideBar href="t-shirt.shtml">EcoCyc&nbsp;T-Shirt</a>
+     <br><a class=sideBar href="opensearch.shtml">Faster&nbsp;EcoCyc&nbsp;Search</a>
+	<br><a class=sideBar href="/posters.shtml">Metabolic&nbsp;Posters</a>
+   <br><a class=sideBar href="/posters.shtml">Genome&nbsp;Posters</a>
+  </td></tr>
+
+</table>
+</td>
+<!-- End of Sidebar Menu -->
+
+
+    <!-- Main Content -->
+    <td>
+    <table cellpadding=15 cellspacing=0 border=0 bgcolor="#ffffff">
+    
+    <!-- Project Overview -->
+    <tr>
+      <td>
+      <h1>EcoCyc Overview</h1>
+
+      <p class=bodyText>
+      EcoCyc is a scientific database for the bacterium <i>Escherichia coli</i> K-12 MG1655.  The EcoCyc project performs <a href="background.shtml#curation">literature-based curation</a> of the entire genome, and of transcriptional regulation, transporters, and metabolic pathways. <a href="background.shtml"><font size="-2">[project overview]</font></a>
+      <p class=bodyText>
+      New to EcoCyc?  Take the <A href="/samples.shtml">guided tour</A> of the EcoCyc.org Web site, watch our <a href="/webinar.shtml">free online
+    instructional videos</a>, or read our 2009 article: 
+        <a href="http://nar.oxfordjournals.org/cgi/content/full/37/suppl_1/D464">
+    "EcoCyc: A comprehensive view of <i>Escherichia coli</i> biology."</a>
+      </p>
+      <p class=bodyText>
+      Check out the new <a href="http://ecolihub.org/">EcoliHub 2.0</a>.
+      </p>
+    
+    <!-- New Features -->
+
+     <h1>New in EcoCyc</h1>
+     <p class=bodyText>
+
+      <p>
+      <ul>
+      <li><b>Highlighted publication from version 14.0:</b></p>   
+      <ul>
+	   <span class=randomDiv>
+        
+	   <span>
+        <li>With a single exception, all enzymes that methylate various sites in the 16S ribosomal RNA have now been identified.  The most recent additions were 
+      	<a href="http://ecocyc.org/ECOLI/NEW-IMAGE?type=ENZYME&object=EG11085-MONOMER">RsmH</a> and 
+      	<a href="http://ecocyc.org/ECOLI/NEW-IMAGE?type=ENZYME&object=G7641-MONOMER">RsmI</a>, which were found to be responsible for methylation of C1402 at N4 
+      	of cytosine and the 2'-<i>O</i> position of the ribose moiety, respectively.  You can read the original publication 
+      	<a href="http://nar.oxfordjournals.org/cgi/content/full/38/4/1341">here</a>.
+       </span>        
+
+       <span>
+        <li>Crystal structures of a number of proteins that are thought to form a carboxysome-like proteinaceous microcompartment that functions in 
+        ethanolamine utilization were recently reported by <a href="http://www.sciencemag.org/cgi/content/abstract/327/5961/81">Tanaka et al.</a> 
+        (PMID 20044574).  The structures of <a href="/ECOLI/NEW-IMAGE?type=ENZYME&object=CPLX0-7836">EutS</a>, 
+        <a href="/ECOLI/NEW-IMAGE?type=ENZYME&object=CPLX0-7801">EutL</a>, <a href="/ECOLI/NEW-IMAGE?type=ENZYME&object=G7270-MONOMER">EutK</a> and 
+        <a href="/ECOLI/NEW-IMAGE?type=ENZYME&object=CPLX0-7835">EutM</a> are suggestive of their functions, and we are looking forward to their functional 
+        characterization in <i>E. coli</i>.
+       </span>
+        
+       <span>
+        <li>The <a href="/ECOLI/NEW-IMAGE?type=ENZYME&object=YTFQ-MONOMER">YtfQ</a> protein has been identified as a galactofuranose binding protein - the 
+        periplasmic component of a predicted ABC-type transporter (YtfQRT/YjfF).  You can read the original publication 
+      	<a href="http://www.jbc.org/content/284/45/31156.abstract">here</a>.
+       </span>
+
+       </span>
+	  </ul>
+    
+      <p><li><b>New zoomable Web metabolic map diagram for EcoCyc</b></p>   
+      <ul> <li> The metabolic map diagram (Cellular Overview) for EcoCyc has been completely
+      reworked to be faster, zoomable, and searchable.  <a href="overviewsWeb/celOv.shtml">Click here</a> 
+      to try it.  Search commands are in the Cellular Overview menu.
+      </ul>
+
+      <p><li><b>EcoliHouse relational database now available</b></p>
+          <ul>
+	      <li><a
+          href="http://biowarehouse.ai.sri.com/EcoliHouseOverview.html">EcoliHouse</a>
+          is a publicly queryable relational database of EcoCyc and
+          other Escherichia coli K12 datasets. It
+          provides an environment for large-scale data mining using
+          SQL statements issued across the Internet.</li></ul></li>
+      
+
+     <p><li><b>Run EcoCyc and 13 <i>E. coli</i> and <i>Shigella</i> genomes on your computer:</b></p>
+     <ul>
+     <li> You can install this new suite of <i>E. coli</i> and <i>Shigella</i> genomes 
+     on your computer (Mac, PC, Linux) for faster and more powerful operation than the Web site.
+     <a href="/download.shtml"><font size="-2">[download info]</font></a>
+     </ul>
+
+     <p><li><b>Search the text of 30,000 <i>E. coli</i> articles using Textpresso</b>  <a href="http://ecocyc.org/ecocyc/textpresso.shtml"><font size="-2">[Textpresso Search]</font></a> 
+
+      <p><li> <b>Oldest <i>E. coli</i> publication?</b></p>
+      <ul>
+      <li>The oldest <i>E. coli</i> paper we've found indexed in PubMed is <a href="http://www.ncbi.nlm.nih.gov/pubmed/17859963?ordinalpos=288863">The Importance to the Surgeon of Familiarity with the Bacillus Coli Communis</a> by Roswell Park. Can you find an older one, in PubMed or somewhere else online? If so, we'd love to hear from you. Literature archaeologists should take note that early papers will refer to <i>Bacillus coli</i> rather than <i>Escherichia coli</i>.
+      </ul>
+     </ul>
+
+    <p>The full EcoCyc release history is available <a href="release-notes.shtml">here</a>. You can read past highlights pieces by <a href="highlights.shtml">clicking here</a>.
+       <p>
+
+    
+    <!-- Update Frequency -->
+      <h1>Update Frequency</h1>
+
+      <p class=bodyText>
+      The EcoCyc.org Web site and downloadable files are updated quarterly.  A faster, more powerful EcoCyc
+    that you can <a href="/download.shtml">install locally</a> on your computer (Macintosh, PC/Windows, PC/Linux) is released semiannually.<font size="-2">[<a href="release-notes.shtml">EcoCyc release history</a>]</font>
+     </p>
+
+
+    <!-- Project Leaders -->
+     <h1>EcoCyc Project Leaders</h1>
+
+
+     <p class=bodyText>
+      <a href="http://www.ai.sri.com/pkarp/">
+       Peter D. Karp
+      </a> |
+      <a href="http://www.ccg.unam.mx/en/ComputationalGenomics">
+       Julio Collado-Vides
+      </a> |
+      <a href="http://www.membranetransport.org/ian/home.shtml">
+       Ian Paulsen 
+      </a> | 
+      <a href="http://www.mimg.ucla.edu/faculty/gunsalus/">
+       Rob Gunsalus
+      </a> 
+      </p>
+
+      <p class=bodyText>
+      See our <a href="credits.shtml">credits page</a> for more details on EcoCyc contributors and their roles.
+     </p>
+    
+    <!-- Other Ecoli Strains -->
+
+     <h1>Other <i>E.&nbsp;coli</i> strains</h1>
+
+     <p class=bodyText>
+      The BioCyc database collection includes databases for the following strains of <i>Escherichia coli</i> and related organisms.
+    The non-K-12 MG1655 databases were generated computationally and lack the extensive manual literature-based curation 
+    of the EcoCyc K-12 database.  You can download Pathway Tools plus all of these genomes onto your own computer
+    for faster and more powerful operation than the Web site.       <a href="/download.shtml"><font size="-2">[download info]</font></a>
+<p>
+      <table width="650" border="0" cellpadding="0" cellspacing="0" class="one">
+        <tr>
+          <td class="spec1">Organism</td>
+          <td class="spec1">Database</td>
+          <td class="spec1">Highlights</td>
+        </tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain K-12 MG1655 (EcoCyc)</td>
+          <td class="text1"><a href="/ECOLI/organism-summary?object=ECOLI">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Literature curation of complete genome</li>
+            <li class="bullet2">Information from 19,000 publications</li>
+            <li class="bullet2">Transcriptional regulatory network</li>
+            <li class="bullet2">Protein complexes</li>
+            <li class="bullet2">Enzyme and transporter functions</li>
+            <li class="bullet2">Gene Ontology assignments</li>
+          </ul></td>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain K-12 W3110</td>
+          <td class="text1"><a href="/ECOL316407/organism-summary?object=ECOL316407">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Laboratory strain</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain SMS-3-5</td>
+          <td class="text1"><a href="/ECOL439855/organism-summary?object=ECOL439855">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Environmental isolate</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain CFT073</td>
+          <td class="text1"><a href="/ECOL199310/organism-summary?object=ECOL199310">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Uropathogenic strain (UPEC)</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain 536</td>
+          <td class="text1"><a href="/ECOL362663/organism-summary?object=ECOL362663">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Uropathogenic strain (UPEC)</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain UTI89</td>
+          <td class="text1"><a href="/ECOL364106/organism-summary?object=ECOL364106">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Uropathogenic strain (UPEC)</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain EDL933, serotype O157:H7</td>
+          <td class="text1"><a href="/ECOO157/organism-summary?object=ECOO157">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enterohaemorrhagic strain (EHEC)</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain O157:H7 VT2-Sakai</td>
+          <td class="text1"><a href="/ECOL83334/organism-summary?object=ECOL83334">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enterohaemorrhagic strain (EHEC)</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Escherichia coli</i>, Strain APEC O1</td>
+          <td class="text1"><a href="/ECOL405955/organism-summary?object=ECOL405955">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Avian pathogenic strain (APEC)</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Shigella flexneri</i>, Strain 2457T, serotype 2a</td>
+          <td class="text1"><a href="/SHIGELLA/organism-summary?object=SHIGELLA">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enteropathogenic strain, shigellosis</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Shigella flexneri</i>, Strain 301, serotype 2a</td>
+          <td class="text1"><a href="/SFLE198214/organism-summary?object=SFLE198214">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enteropathogenic strain, shigellosis</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Shigella flexneri</i>, Strain 8401, serotype 5</td>
+          <td class="text1"><a href="/SFLE373384/organism-summary?object=SFLE373384">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enteropathogenic strain, dysentery</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Shigella boydii</i>, Strain Sb227</td>
+          <td class="text1"><a href="/SBOY300268/organism-summary?object=SBOY300268">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enteropathogenic strain, dysentery</li>
+          </ul></td></tr>
+      <tr><td class="text2"><i>Shigella dysenteriae</i>, Strain Sd197</td>
+          <td class="text1"><a href="/SDYS300267/organism-summary?object=SDYS300267">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enteropathogenic strain, dysentery</li>
+          </ul></td></tr>
+       <tr><td class="text2"><i>Shigella sonnei</i>, Strain Ss046</td>
+          <td class="text1"><a href="/SSON300269/organism-summary?object=SSON300269">Summary</a></td>
+          <td class="text1"><ul>
+            <li class="bullet2">Enteropathogenic strain, dysentery</li>
+          </ul></td></tr>
+     </table>
+      </p>
+    
+
+      <!-- Acknowledgments -->
+      <h1>Acknowledgements</h1>
+
+     <p class=bodyText>
+     The development of EcoCyc is funded by NIH grant GM077678 from the NIH National Institute of General Medical Sciences
+and National Center for Research Resources.
+
+    </tr>    
+    </table>
+
+   </td>
+  </tr>
+</table>
+
+<!-- Beginning of BioCyc template-part3of3.shtml -->
+   </div> <!-- end of page content -->
+   <!-- we are in a table with the sidebar. Here we close the center and the entire table -->
+   </td>
+  </tr>
+</table>
+
+<!-- Beginning of BioCyc userFooterCustomization.shtml -->
+<table class="footer" width="100%" border="0" cellpadding="15" cellspacing="0">
+  <tr>
+    <td class=footer>
+
+    &copy;2010 SRI International, 333 Ravenswood Avenue, Menlo Park, CA 94025-3493
+
+    <br />
+    SRI International is an independent, nonprofit corporation. 
+    <a href="http://www.sri.com/privacy.html">Privacy policy</a>&nbsp;&nbsp;&nbsp; 
+    <a href="http://www.sri.com/disclaimer.html">Disclaimer</a> 
+    </p>
+    </td>
+  </tr>
+</table>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? 
+"https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + 
+"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7250911-1");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+<!-- End of BioCyc userFooterCustomization.shtml -->
+
+
+</body>
+
+</html>
+<!-- Ending of general user template-part3of3.shtml -->
+
+

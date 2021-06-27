@@ -1,0 +1,177 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0038)http://icbp.stanford.edu/software/ssc/ -->
+<!-- saved from url=(0038)http://icbp.stanford.edu/software/scc/ --><HTML><HEAD><TITLE>Classification based-on Network</TITLE>
+<META http-equiv=Content-Language content=zh-cn>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META content="MSHTML 6.00.2900.3268" name=GENERATOR></HEAD>
+<BODY>
+<H1>Spectral Analysis for Class Discovery and Classification (SPACC) <BR>(version 
+2.0) </H1>
+<P>We proposed SPACC, a classifier that can perform both class discovery and 
+classification. The algorithm is implemented in Matlab 7, with a Graphic 
+User Interface on top of it, designed and written by Peng Qiu. </P>
+<P>Our motivation is as follows. In the literature, the existing classification 
+methods can be mainly divided into two categories, unsupervised and supervised 
+methods. In unsupervised methods, samples are grouped into clusters or tree 
+structures, where the class label information does not affect the clustering 
+process. Since the class label is not used, unsupervised method has the 
+potential to discover subclasses that are beyond the known class label 
+information. However, there is lack of systematic way to interpret the agreement 
+and disagreement between unsupervised clusters and known class labels. On the 
+other hand, for supervised methods, the aim is to find the boundary that best 
+separates different classes, where the class labels play an important role. 
+Since the total number of classes is defined by the class labels, supervised 
+classifiers are not able to pick up possible data substructures within each 
+known class. In supervised methods, another issue is the robustness, the 
+adversary effect of data outliers and mislabeled samples needs to be carefully 
+handled. The limitations of unsupervised and supervised methods motivated us to 
+propose a novel classification method, which utilizes the class label 
+information to a less important role so as to perform class discovery and 
+classification simultaneously.</P>
+<P>A manuscript of this work has been submitted, and will be available soon.</P>
+<P>This software is new and still being developed. There will be updated 
+versions coming soon.</P>
+<P>If you have any questions or 
+find any problems in it, please email me at <A 
+href="mailto:qiupeng@stanford.edu">qiupeng@stanford.edu</A>.</P>
+<P>&nbsp;</P>
+<H1>Installation instructions</H1>
+<P>This package requires Matlab 7. In order to give users maximum freedom of 
+manipulating this software, the raw .m files are provided. </P>
+<P>(1) download the zip package at:<BR>
+<a style="text-decoration: none" href="http://www.stanford.edu/~qiupeng/software/SPACC/SPACC_source_code.zip">http://www.stanford.edu/~qiupeng/software/SPACC/SPACC_source_code.zip</a> 
+(last updated on July 1, 2009)</P>
+<P>(2) unzip to your local machine</P>
+<P>(3) open Matlab 7 and change the directory to where the package is 
+unzipped</P>
+<P>(4) type "network_classification" and enter, the GUI will show up<br>
+<br>
+&nbsp;</P>
+<P>We&#39;ve also compiled the software in to a stand-alone executable format:<br>
+<a href="http://www.stanford.edu/~qiupeng/software/SPACC/SPACC_standalone.zip" style="text-decoration: none">
+http://www.stanford.edu/~qiupeng/software/SPACC/SPACC_standalone.zip</a> 
+(last updated on July 1, 2009)<br>
+Simply un-zip and run SPACC.exe, the user interface will show up. </P>
+<P>&nbsp;</P>
+<H1>Manual</H1>
+<P><B>(1) Prepare input file:</B></P>
+<UL>
+  <LI>The input file is a .mat file which has the following variables:<BR>&nbsp; 
+  training_samples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; each column is 
+  one sample, each row is one feature <BR>&nbsp; 
+  training_labels&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; class label 
+  of each training sample<BR>&nbsp; training_samples_names :&nbsp; cell array of 
+  the names of each training sample (optional)<BR>&nbsp; 
+  testing_samples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; each column 
+  is one sample, each row is one feature <BR>&nbsp; 
+  testing_labels&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; vector, 
+  class label of each testing sample<BR>&nbsp; testing_samples_names&nbsp; 
+  :&nbsp; cell array of the names of each testing sample (optional)<BR>&nbsp;
+  <LI>There are a few example input files included in the zip package. <BR>&nbsp;
+  <LI><B>Note: <BR>(1) </B>This software does not perform feature selection. The 
+  user needs to select relevant features when preparing the input 
+  file.<BR><B>(2) </B>Theoretically, this algorithm can handle infinite number 
+  of features, as long as they are relevant.<BR><B>(3) </B>If the numerical 
+  range of the input data is too large, errors may occur, that error can be 
+  avoided by normalization (reducing the numerical range of the input data). </LI></UL>
+<P><B>(2) Browse and Load input file</B> </P>
+<UL>
+  <LI>In step 1 (top-left panel), if the input file is successfully loaded, the 
+  number of samples in each class for the training set and testing set will be 
+  displayed.<BR>&nbsp; 
+  <LI>Each training and testing sample will be assigned an index that is defined 
+  by the software. This information is shown in the message box at the bottom. 
+  </LI></UL>
+<P><B>(3) Display training data</B></P>
+<UL>
+  <LI>In step 2 (top-right panel), click "show training samples" button. The 
+  training samples will be displayed in the left plot. Each training sample is 
+  one marker in the plot, the class labels are reflected by the shape of the 
+  markers. The proposed algorithm is applied to the training 
+  samples, with results displayed in the right plot. The red polygons show the 
+  convex hulls of each resulting clusters. It 
+  is possible that one resulting cluster contains only one sample. Such cases 
+  will not be indicated by red polygons. <BR>&nbsp;
+  <LI>The two plots are both PCA-plots, drawn using principal component analysis 
+  (PCA). The horizontal and vertical axes are the coefficients of (by default) 
+  the first two principal components. The users can choose other principal 
+  components by modifying the two EditBoxes to the left of the button. 
+<BR>&nbsp;
+  <LI>The left plot in step 2 is interactive. User can delete/undelete training 
+  samples by clicking in the figure.<BR>&nbsp;
+  <LI><B>NOTE</B>: although the samples are displayed using PCA, the 
+  algorithm is based on all the features provided by the input 
+  file.<BR>&nbsp;
+  <LI><B>NOTE</B>:<B> One very important component </B>of the algorithm is how 
+  to define the Laplacian matrix based on the input data, because the Laplacian 
+  matrix is the basis for the iterative partitioning. The Laplacian matrix is 
+  defined in the file "calculate_dist_la_matrix.m", users can modify this file 
+  to define the Laplacian matrix in their own way.&nbsp; </LI></UL>
+<P><B>(4) Display training and testing data</B></P>
+<UL>
+  <LI>The plot in step 3 displays both training and testing data in a PCA-plot. 
+  The purpose is for users to have a general picture. </LI></UL>
+<P><B>(5) Classification</B></P>
+<UL>
+  <LI>In step 4, by clicking the "classification" button,  
+  classification is performed on the testing set. <BR>&nbsp;
+  <LI>In step 5, the plot shows the classification one testing sample (the red 
+  marker). The shape of the red marker indicates the true label of the testing 
+  sample. The blue polygon shows: the classification decision is made based on 
+  the majority vote of which training samples.<BR>&nbsp;
+  <LI>Using the EditBox and buttons above the plot, users can navigate through 
+  all testing samples.<BR>&nbsp;
+  <LI>List of incorrectly classified testing samples is shown in the list box. 
+  By clicking in the list box, instances of incorrect classification will be 
+  shown in the right plot. </LI></UL>
+<P><B>(6) Output</B></P>
+<UL>
+  <LI>In step 4, the "output results" will generate an output file named 
+  "tmp_result_file.mat". The output file contains sample index (defined by the 
+  software), sample name, and classification results.<BR>&nbsp;
+  <LI>In "tmp_result_file.mat&quot;, classification results of training sample is 
+	&quot;training_#&quot;. The number indicates the results of the training samples (the 
+	red polygons in step 2). &quot;-1&quot; means outlier. The classification results of 
+	testing samples is &quot;correct&quot;, &quot;incorrect&quot;.<BR>&nbsp;</LI></UL>
+<P>&nbsp;</P>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9655676-4");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9655676-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript"> 
+var sc_project=5900569; 
+var sc_invisible=1; 
+var sc_security="d6e0eaf0"; 
+</script>
+ 
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="tumblr hit counter"
+href="http://www.statcounter.com/tumblr/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/5900569/0/d6e0eaf0/1/"
+alt="tumblr hit counter" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+
+</BODY></HTML>

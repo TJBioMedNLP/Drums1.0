@@ -1,0 +1,282 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+  <HEAD>
+    <TITLE>Homeodomain Resource Database - Homeodomain Resource</TITLE>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+	<LINK REL="stylesheet" TYPE="text/css" MEDIA="screen" HREF="/include/genome_public2/css/old-header.css">
+	<LINK REL="stylesheet" TYPE="text/css" MEDIA="screen" HREF="/include/intranet2/css/intranet.css">
+	<LINK REL="stylesheet" TYPE="text/css" MEDIA="print" HREF="/include/intranet2/css/intranet-print.css">
+	<script type="text/javascript">
+
+function getDivs() {
+  var classElements = new Array();
+  var els = document.getElementsByTagName('div');
+  var elsLen = els.length;
+  var i; var j;
+  for (i = 0, j = 0; i < elsLen; i++) {
+    if ( els[i].className == "global_navigation" ) {
+      classElements[j] = els[i];
+      j++;
+    }
+  }
+  return classElements;
+}
+
+function highlightNavMenuChoice() {
+	var elementList = new Array();
+	elementList = getDivs();
+
+	for (var i = 0; i < elementList.length; i++) {
+                var thisDivElement = elementList[i];
+		var divChildren = thisDivElement.getElementsByTagName('a');
+		for (var j = 0; j < divChildren.length; j++) {
+		        var thisChild = divChildren[j];
+                        var re = new RegExp('^'+window.location+'(index\.[a-zA-Z0-9]+)?$');
+			if (re.exec(thisChild.href))
+				highlightItemAndExpandChildren(thisChild.parentNode);
+		}
+	}
+}
+
+function highlightItemAndExpandChildren (liElement) {
+
+        /* Highlight Item */
+	  var anchorElement = liElement.getElementsByTagName('a');
+	  var ih = liElement.innerHTML;
+	  
+	  ih=ih.replace(/<a/i, "<span class=\"highlight\"><a");
+	  ih=ih.replace(/<\/a>/i, "</a></span>");
+	  liElement.innerHTML = ih;
+
+
+	/* Expand Children */
+	var ulChildren = liElement.getElementsByTagName('ul');
+	for (var i = 0; i < ulChildren.length; i++) {
+
+	        var thisChild = ulChildren[i];
+		thisChild.style.display='';
+	}
+
+	/* Make sure the parents are expanded too.  Could be done more cleanly. */
+	liElement.parentNode.style.display='';
+//	liElement.parentNode.parentNode.style.display='';
+//	liElement.parentNode.parentNode.parentNode.style.display='';
+}
+	</script>
+  </HEAD>
+
+<BODY>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" CLASS="container">
+  <TR>
+    <TD>
+
+<!-- Old Header Start -->
+<form method="get" action="http://search2.google.cit.nih.gov/search" name="search">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" CLASS="old-header">
+  <tr valign="top">
+    <td width="6" height="92"><img src="/include/genome_public/images/header_skipnav.jpg" width="6" height="92" alt=""></td>
+    <td width="494" height="92"><img src="/include/genome_public/images/header_left.jpg" width="494" height="92" alt="National Human Genome Research Institute" usemap="#homeMap" /><map name="homeMap" 
+id="homeMap"><area shape="rect" coords="1,18,398,53" href="http://www.genome.gov" alt="National Human Genome Research Institute" title="National Human Genome Research Institute" 
+/><area shape="rect" coords="1,53,46,66" href="http://www.genome.gov" alt="National Human Genome Research Institute" title="National Human Genome Research Institute" /><area 
+shape="rect" coords="53,56,208,70" href="http://www.nih.gov/" alt="National Institutes of Health" title="National Institutes of Health" /></map></td>
+
+    <td width="280">
+      <table width="280" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="280"><img src="/include/genome_public/images/form_spacer1.jpg" width="280" height="5" alt=""/></td>
+        </tr>
+        <tr valign="top">
+          <td width="280" height="27" align="center" background="/include/genome_public/images/header_rightTop.jpg">
+            <table cellspacing="0" cellpadding="0" border="0">
+              <tr>
+
+                <td class="searchtext" nowrap="nowrap">
+                  <img src="/include/genome_public/images/spacer2.gif" width="30" height="5" alt="" border="0" />
+                  <input id="searchbox" size="25" type="text" name="q" maxlength="255" value="" title="Search genome.gov" />&nbsp;&nbsp;&nbsp;<input type="submit" value="Search" />
+                  <input type="hidden" name="site" value="GENOME"/>
+                  <input type="hidden" name="client" value="GENOME_frontend"/>
+                  <input type="hidden" name="proxystylesheet" value="GENOME_frontend"/>
+                  <input type="hidden" name="output" value="xml_no_dtd"/>
+                  <input type="hidden" name="filter" value="0"/>
+                  <input type="hidden" name="getfields" value="*"/>
+
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td width="280" height="32"><img src="/include/genome_public/images/header_rightMiddle.jpg" width="356" height="32" alt="" border="0" /></td>
+        </tr>
+        <tr>
+
+          <td width="280" height="28" align="center" class="headernav" background="/include/genome_public/images/header_rightBottom.jpg"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a 
+href="http://www.genome.gov" style="color: #C6FBFC">Home</a> | <a href="http://www.genome.gov/about/" style="color: #C6FBFC">About NHGRI</a> | <a href="http://www.genome.gov/Media/" 
+style="color: #C6FBFC">Newsroom</a> | <a href="http://www.genome.gov/staffSearch.cfm" style="color: #C6FBFC">Staff</a></td>
+        </tr>
+      </table>
+
+    </td>
+    <td>
+      &nbsp;
+    </td>
+  </tr>
+</table> 
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+  <tr valign="top">
+    <td width="100%" height="43" background="//include/genome_public/images/navback_research.gif">
+      <table cellspacing="0" cellpadding="0" border="0">
+
+        <tr valign="top">
+          <td width="3" height="43"><img src="//include/genome_public/images/spacer2.gif" width="3" height="43" alt=""/></td>
+          <td width="133" height="43"><a href="http://www.genome.gov/Research/"><img src="/include/genome_public/images/navresearch_research.jpg" width="133" height="43" alt="Research"/></a></td>
+          <td width="130" height="43"><a href="http://www.genome.gov/Grants/"><img src="/include/genome_public/images/navresearch_grants.jpg" width="130" height="43" alt="Grants"/></a></td>
+          <td width="134" height="43"><a href="http://www.genome.gov/Health/"><img src="/include/genome_public/images/navresearch_health.jpg" width="134" height="43" alt="Health"/></a></td>
+          <td width="133" height="43"><a href="http://www.genome.gov/PolicyEthics/"><img src="/include/genome_public/images/navresearch_policy.jpg" width="133" height="43" alt="Policy &amp; 
+Ethics"/></a></td>
+          <td width="135" height="43"><a href="http://www.genome.gov/Education/"><img src="/include/genome_public/images/navresearch_education.jpg" width="135" height="43" alt="Educational 
+Resources"/></a></td>
+          <td width="133" height="43"><a href="http://www.genome.gov/Careers/"><img src="/include/genome_public/images/navresearch_careers.jpg" width="133" height="43" alt="Careers &amp; 
+Training"/></a></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
+<!-- Old Header End -->
+
+</td></tr>
+<tr><td>
+
+
+<div class="global_navigation">
+    <!-- Content Navigation Start -->
+<h1>Homeodomain Resource</h1>
+<ul>
+    
+
+    
+        <li><a href="?mode=welcome">Home/Search</a></li>
+    
+        <li><a href="?mode=like&view=proteins&sortby=ENTREZ_GENE_SYMBOL_BY_GROUP">Homeodomain Proteins</a></li>
+    
+        <li><a href="?mode=like&view=structures&sortby=PDB_ID">Solved Protein Structures</a></li>
+    
+        <li><a href="?mode=like&view=protein_interactions&sortby=PUBLICATION_DATE&order=DESC">Protein-Protein Interactions</a></li>
+    
+        <li><a href="?mode=like&view=binding_sites&sortby=COMMON_NAME">DNA Binding Sites</a></li>
+    
+        <li><a href="?mode=like&view=disorders&sortby=ENTREZ_GENE_SYMBOL">Disorders and Mutations</a></li>
+    
+        <li><a href="?mode=about&view=no_table">About the Homeodomain Resource</a></li>
+    
+        <li><a href="?mode=statistics&view=no_table">Database Statistics</a></li>
+    
+</ul>
+</div>
+
+<div class="global_content">
+
+<h1>Homeodomain Resource</h1>
+<br/>
+<p>The Homeodomain Resource is a curated collection of sequence, structure, interaction, genomic, and functional information on the homeodomain family. A description of each of the major sections of the database can be found below, and users can navigate through the site using the links found in the menu that appears on the left-hand side of every page within the site.</p>
+<!--p>Welcome to the Homeodomain Resource web site.</p-->
+<!--p>The Homeodomain Resource is an annotated collection of non-redundant protein sequences, three-dimensional structures, and genomic information for the homeodomain protein family.</p-->
+<br/>
+<h3>Search</h3>
+<br/>
+<form method="post">
+  Search&nbsp;
+  <select type="select" name="view">
+    
+    <option value="all_tables" label="Entire Database">Entire Database</option>
+  
+    <option value="proteins" label="Homeodomain Proteins">Homeodomain Proteins</option>
+  
+    <option value="structures" label="Solved Protein Structures">Solved Protein Structures</option>
+  
+    <option value="protein_interactions" label="Protein-Protein Interactions">Protein-Protein Interactions</option>
+  
+    <option value="binding_sites" label="DNA Binding Sites">DNA Binding Sites</option>
+  
+    <option value="disorders" label="Disorders and Mutations">Disorders and Mutations</option>
+  
+  </select>
+  &nbsp;&nbsp;for&nbsp;
+  <input type="text" name="term" size="30" maxlength="128" />
+  &nbsp;&nbsp;
+  <input type="submit" value="Search" />
+  <input type="hidden" name="mode" value="like" />
+</form>
+<br/>
+<br/>
+<!--h3>Listing</h3-->
+<!--p>Clicking on the following links will provide you a complete listing of data in that category.</p-->
+<h3>Explore the Homeodomain Resource (HDR)</h3>
+<br/>
+<ul>
+<li><a href="?mode=like&view=proteins&sortby=ENTREZ_GENE_SYMBOL_BY_GROUP">Homeodomain proteins</a>
+<p><br/><i>A detailed view of all homeodomain proteins in HDR, providing the sequence of each protein 
+and the homeodomain region within each protein. For each entry, links to Entrez Gene, 
+RefSeq, UniProt, Ensembl, and additional information within HDR are provided, where 
+available.</i></p>
+</li>
+
+<li><a href="?mode=like&view=structures&sortby=PDB_ID">Solved three-dimensional structures of homeodomain proteins and protein-DNA complexes</a>
+<p><br/><i>This section includes information on all X-ray and NMR structures of homeodomain proteins, 
+including structures where the homeodomain protein is bound to DNA.  For each entry, links 
+to the Protein Data Bank (PDB) and the NCBI Molecular Modeling Database (MMDB) are 
+provided.</i></p>
+</li>
+
+<li><a href="?mode=like&view=protein_interactions&sortby=PUBLICATION_DATE">Protein-protein interactions involving homeodomain proteins</a>
+<p><br/><i>A curated list of homeodomain interactions at the protein level, providing information on the 
+mechanism of interaction and links to the primary literature documenting these interactions. 
+Links to the Biomolecular Interaction Network Database (BIND) are also provided, where 
+available.</i></p>
+</li>
+
+<li><a href="?mode=like&view=binding_sites&sortby=COMMON_NAME">DNA binding sites</a>
+<p><br/><i>A curated list of known homeodomain-DNA interactions, indicating the DNA binding 
+sequence and relevant citations from the literature.</i></p>
+</li>
+<li><a href="?mode=like&view=disorders&sortby=ENTREZ_GENE_SYMBOL">Human genetic and genomic disorders linked to homeodomain proteins</a>
+<p><br/><i>A comprehensive list of entries collected from Online Mendelian Inheritance in Man (OMIM) 
+and the Human Gene Mutation Database (HGMD). For each condition, a list of associated 
+nucleotide-level and protein-level mutations is provided.</i></p>
+</li>
+<li><a href="?mode=statistics&view=no_table">Database statistics</a>
+<p><br/><i>Information on the contents of HDR by both category and species. The species list allows for the quick collection of information on homeodomain proteins from a single species.</i></p>
+<p>&nbsp;</p>
+</li>
+</ul>
+<font size="2"><p style="color:black"><i>This database was last updated on October   28, 2009.</i></p></font>
+
+</div>
+                </TD>
+          </TR>
+	  <TR>
+	    <TD CLASS="global_footer">
+		  <!-- Footer Start -->
+		  <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
+		    <TR>
+			  <TD CLASS="global_footer_logos">
+			    <A HREF="http://www.os.dhhs.gov/" TARGET="_blank"><IMG SRC="/include/images/logo_hhs.gif" ALT="Link to Health and Human Services"></A><A HREF="http://www.nih.gov/" TARGET="_blank"><IMG SRC="/include/images/logo_nih.gif" ALT="Link to National Institutes of Health"></A><A HREF="http://www.firstgov.gov/" TARGET="_blank"><IMG SRC="/include/images/logo_firstgov.gif" ALT="Link to First Gov.com"></A>
+			  </TD>
+			  <TD CLASS="global_footer_nav">
+			    <IMG SRC="/include/images/footer_separator.gif" ALT=""><A HREF="http://www.genome.gov">genome.gov</A><IMG SRC="/include/images/footer_separator.gif" ALT=""><A HREF="http://www.genome.gov/10002900">Contact</A><IMG SRC="/include/images/footer_separator.gif" ALT=""><A HREF="http://www.genome.gov/accessibility.cfm">Accessibility</A><IMG SRC="/include/images/footer_separator.gif" ALT=""><A HREF="http://www.genome.gov/siteIndex.cfm">Site Index</A>
+			  </TD>
+			</TR>
+		  </TABLE>
+		  <!-- Footer End -->
+		</TD>
+	  </TR>
+	</TABLE>
+<script>highlightNavMenuChoice();</script>
+  </BODY>
+</HTML>
+
+

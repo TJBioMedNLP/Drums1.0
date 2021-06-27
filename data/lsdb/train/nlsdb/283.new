@@ -1,0 +1,551 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>DOUTfinder</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+/* generics */
+
+
+body {font: 0.84em/1.333 Arial, sans-serif;}
+
+a, a:link,a:active {color:#000000;}
+a.a, a.a:link,a.a:active {color:#a9a9a9;}
+.help {text-align:justify;}
+td {font-size: 90%;}
+
+-->
+</style>
+</head>
+<body bgcolor=white>
+<script language="JavaScript" type="text/javascript">
+<!--
+function clearSeq () {	
+   window.document.input.sequenceset.value = '';
+   window.document.input.singlesequence.value = '';
+   window.document.input.sequenceset_file.value = '';
+}
+
+function clearSingleSeq () {	
+   window.document.input.singlesequence.value = '';
+}
+
+function clearSetSeq () {	
+   window.document.input.sequenceset.value = '';
+   window.document.input.sequenceset_file.value = '';
+}
+
+function Sefir () {
+  window.document.input.sequenceset.value = ' ';
+window.document.input.singlesequence.value = '>Hs_IL17like_AAM74077\nMAPWLQLCSVFFTVNACLNGSQLAVAAGGSGRARGADTCGWRGVGPASRNSGLYNITFKYDNCTTYLNPV\nGKHVIADAQNITISQYACHDQVAVTILWSPGALGIEFLKGFRVILEELKSEGRQCQQLILKDPKQLNSSF\nKRTGMESQPFLNMKFETDYFVKVVPFPSIKNESNYHPFFFRTRACDLLLQPDNLACKPFWKPRNLNISQH\nGSDMQVSFDHAPHNFGFRFFYLHYKLKHEGPFKRKTCEQEQTTEMTSCLLQNVSPGDYIIELVDDTNTTR\nKVMHYALKPVHSPWAGPIRAVAITVPLVVISAFATLFTVMCRKKQQENIYSHLDEESSESSTYTAALPRE\nRLRPRPKVFLCYSSKDGQNHMNVVQCFAYFLQDFCGCEVALDLWEDFSLCREGQREWVIQKIHESQFIIV\nVCSKGMKYFVDKKNYKHKGGGRGSGKGELFLVAVSAIAEKLRQAKQSSSAALSKFIAVYFDYSCEGDVPG\nILDLSTKYRLMDNLPQLCSHLHSRDHGLQEPGQHTRQGSRRNYFRSKSGRSLYVAICNMHQFIDEEPDWF\nEKQFVPFHPPPLRYREPVLEKFDSGLVLNDVMCKPGPESDFCLKVEAAVLGATGPADSQHESQHGGLDQD\nGEARPALDGSAALQPLLHTVKAGSPSDMPRDSGIYDSSVPSSELSLPLMEGLSTDQTETSSLTESVSSSS\nGLGEEEPPALPSKLLSSGSCKADLGCRSYTDELHAVAPL\n';
+}
+
+function Eco () {   
+   window.document.input.singlesequence.value = ' ';
+window.document.input.sequenceset.value = '>Eco1_Zea_mays  \nLMSKSKVKEVITVVEKELGFGEGKLLHKLCKVYLYISAQRIVGCLVTEPI\nKTGHRVIPSSTEGSPNDLPVSSTERGKNGHTLEFGSISFKREIIRRHSRS\nVKNKEECQDPGAILCETEAVPALCGFRAIWVAPSCRRKRIASKLMDVARK\nTFCEGRTLGISQFAFSPPTSSGKGLACRYCKTSAFLVYKDGPV\n>Eco1_Sorghum_bicolor  \nHEADCRRLLRISPRRQQRQTGEGRGEHVGRRSEAMQPKISAFFKRQEADP\nDPNSGDGEGNGHGSDIAATEAKRKAKGCRRDELVSKKRNYAQFHLELGQP\nDFLHHTCSVCGMMYARGNDEDEKVHRAYHKNYSXGVPFKGWKNETVMXXX\nXXXXXXXXRRHNHSIKNKEECQDPGAIICETEAVPALCGFRAIWVVPSRR\nRKRIASKLMDVARKPFCEGRTLGISQFAFTPPTSFGKGLACRYCKTSSFL\nVYKDGPV\n>Eco1_Hordeum_vulgare  \nSVSMVLGSEATEAKRPKSCGDGKVLNKKRNYGQFHLELGQPDFLLPHVAA\nVCGMMYAPXGNDDDEERFTGAYHKEAYFRGPSRSKGXGRRRKNRGLXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAVAALCGFRAIWVVPSCII\nKGIASQLVDAARKSFCEDGALGISQCAFTPPTSDGKELASSCYKTSAFLV\nYRNGDV\n>Eco1_At_new  \nMQAKINSFFKPSSSSSIAASVTTDTDDGLAVWENNRNAIVNTYQRRSAIT\nERSEVLKGCIEKTLKKGSSSVPKNHKKKRNYTQFHLELGQSDFLLRHCAE\nCGAKYAPGDELDEKNHQSFHKDYMYGLPFKGWQNEKAFTSPLFIKNRIVM\nVSENDSPAHRNKVQEVVKMMEVELGEDWILHQHCKVYLFISSQRISGCLV\nAEPIKEAFKLIASPDDERQLDNGVIVCEEEAKPAVCGIRAIWVSPSNRRK\nGIATWLLDTTRESFCNNGCMLEKSQLAFSQPSSIGRSFGSKYFGTCSFLL\nYKAQLIDTHFS\n>Eco1a_Mm  \nHEVQNEERLRQNPSGAVVSSKGSDLDKHDFPSENSLDENKTISPESVYPI\nFNVSSVNTKRPEEQSSVGSTACTNFLKQTNVPKNINSRDTNKGGKDQLVI\nDAGQKHFGTTVCKSCGMIYTASNPEDEIQHLQHHHRFLEGIKFVGWKRER\nVVAEFWDGKIVLVLPRDPSYAIKKVEDVQELVDLELGFQQTVPVCPDKTK\nTFLFIDEKRVVGCLIAEPIKQAFRVLSEPSASKECSRAWRCSDVPEPAIC\nGISRIWVFRLKRRKRIARRLVDTVRNCFMFGCFLSTNEIAFSDPTPDGKL\nFATKYCNTPNFLVYNFHN\n>Eco1a_Hs  \nASSVNSKRSLGEEQFSVGSVNFMKQTNIQLYTNTRDTSKKTKDQLIIDAG\nQKHFGATVCKSCGMIYTASNPEDEMQHVQHHHRFLEGIKYVGWKKERVVA\nEFWDGKIVLVLPHDPSFAIKKVEDVQELVDNELGFQQVVPKCPNKIKTFL\nFISDEKRVVGCLIAEPIKQAFRVLSEPIGPESPSSTECPRAWQCSDVPEP\nAVCGISRIWVFRLKRRKRIARRLVDTLRNCFMFGCFLSTDEIAFSDPTPD\nGKLFATKYCNTPNFLVYNFNS\n>Eco1_Danio_rerio  \nLRREMKKQTDNQLIIDAGQKQFGATTCASCGMLYSTDSPEDNFQHTQFHQ\nRFLDTIKFVGWKKERVVAEFWDGKIILVLPDDPKYATRKAEDVRRIADSE\nLGFQQITLSSPSSAKTYLFINTDKXVVGCLVAENIRQAYRVLEQQEKQKD\nMSKKNFMQHHRTWXCSTVPEKAICGVSRIWVFSLMRRKSVATRLLDTARN\nTFMYGSHLTKEEIAFSDPTPQGKLFATKYCQTPTFLVYNFIS\n>Eco1b_Mm  \nAPDQNFSICSASEVETNPLENTAAASTLLSQAKIDEDRTFPGSAPNQQHS\nVLSDEASINRKNRDVPPNHSQLKHDSHLEITIPKSLKLKDSEKVDEKQLV\nIDAGHKRFGAVSCNICGMLYTASNPEDETQHLLFHNQFISAVKYVGWKKE\nRILAEYPDGRIIMVLPEDPKYALKKVDEIREMVDNDLGFQQAPLMCYSRT\nKTLLFISNDKKVVGCLIAEHIQWGYRVIEEKLPVIRSEEEKVRFERQKAW\nCCSTLPEPAICGISRIWVFSMMRRKKIASRMIECLRSNFIYGSYLSKEEI\nAFSDPTPDGKLFATQYCGTGQFLVYNFINGQNTT\n>Eco1b_Hs  \nASNKNFSQCLESKLENSPVENVTAASTLLSQAKIDTGENKFPGSAPQQHS\nILSNQTSKSSDNRETPRNHSLPKCNSHLEITIPKDLKLKEAEKTDEKQLI\nIDAGQKRFGAVSCNVCGMLYTASNPEDETQHLLFHNQFISAVKYVGWKKE\nRILAEYPDGRIIMVLPEDPKYALKKVDEIREMVDNDLGFQQAPLMCYSRT\nKTLLFISNDKKVVGCLIAEHIQWGYRVIEEKLPVIRSEEEKVRFERQKAW\nCCSTLPEPAICGISRIWVFSMMRRKKIASRMIECLRSNFIYGSYLSKEEI\nAFSDPTPDGKLFATQYCGTGQFLVYNFINGQNST\n>Eco1_Xl  \nLGFQQVPLRLHSRTKTLVFISSDKKVAGCLIAEHIQWGYRVIDDLIPEGT\nSQKEKALSERVKAWCCSTSPEPAICGVSRIWVFSMMRRKKIASRMLECLR\nNNFIYGSFLNKDEIAFSDPTPDGKLFATRYCGTSQFLVYN\n>Eco1_Strongylocentrotus_purpur  \nQGYRVIVDEQKAEGNDSQKAWCCETESEPALCGISRIWVPRSTXQIASRM\nVDCLR\n>Eco1_Ciona_intestinalis  \nHDQHQHKLHHQRFNVILRFPSWKNERTVASYVDGRIVKILPTDPKFAQKK\nVEDILELIDSELGFSQNISTTRVSYLYVSDQQQVTGCLIAEQIKRGFPLL\nETMTSSGMMSCSLQSTPVTCGVSRIWCHAPHRKRGVATRLMDALRCSFVL\nGERLNMNQVAFSDPTISGKSFATKYFKTPHFLTYNCST\n>Eco1_Ca  \nMGSINSQKPQKIQSILALPSNFKKITCSTCDMTYNPHISQDKLLHNKYHT\nNFINGIPWNYKTDNDVLIIENFTLVETPKLNSTGKSLKSTKTRQTFKGSI\nICINKSNKRHIQKVELLLNMVNQELNASQDSGQWKKPEFDRSKAFVIIID\nSKAIGLCTTDTIQPDQGRWMIHKTQSIVPNQINKNVVIGISRIWISRKWR\nQYGLGKKLLNVVLKNSIYSVQLLKNQVAFSQPSFSGGMLAKSFNGVKHKS\nGEMLLPVYIE\n>Eco1_Saccharomyces_kluyveri  \nRKKRXWMILGTKDIVPQVSPIVKLGISRIWVCKNHRGEGIALRLLETARK\nYSIYGTEVAKWELAWSQPSESGGELAKKYNSVFHEKSGKLLIPCYI\n>Eco1_Sc  \nMKARKSQRKAGSKPNLIQSKLQVNNGSKSNKIVKCDKCEMSYSSTSIEDR\nAIHEKYHTLQLHGRKWSPNWGSIVYTERNHSRTVHLSRSTGTITPLNSSP\nLKKSSPSITHQEEKIVYVRPDKSNGEVRAMTEIMTLVNNELNAPHDENVI\nWNSTTEEKGKAFVYIRNDRAVGIIIIENLYGGNGKTSSRGRWMVYDSRRL\nVQNVYPDFKIGISRIWVCRTARKLGIATKLIDVARENIVYGEVIPRYQVA\nWSQPTDSGGKLASKYNGIMHKSGKLLLPVYI\n>Eco1_Sp  \nPLSDETNNKRAFLDAFLGNGGNLTPNWKKQTPKAISNSSDNMTQLHLDLA\nNSTVTCSECSMEYNSTSEEDILLHSRFHSRVLGGVTVSFQCSPIYRVNYG\nLSSDCIYSINSESSLIDQRKAEEALSFVNNELSSEPIETIGVDKYTTFLF\nISDKKCVGLLLAERISSAYIVDELELNNNNSTSSAVYIKNENLRKGFVLG\nISRIWVSASRRKQGIASLLLDNALKKFIYGYVISPAEVAFSQPSESGKQF\nIISWHRSRNNGSSKSLRYAVYES\n>Eco1_Dm  \nVQPKLFPIFTQRLQPVVQKSLRRRPDTSMRLLTAAGGSNQYQIDAGQKAF\nGARQCQQCGLVYTVHEPEEELLHREYHNSIHVLRFKGWIDEDIVSVYPEW\nASDGRIIRINERAPTARLDRLRDLIGVVDKELGYSSYIVPKIFVAFIAVR\nKQQIVGFCLVQPLSQAHRFIQVDGTDYFSEESYPASCGVSRIWVSPLQRR\nSGIASKLLRVVQCHTVLGQEIARECIAFSTPTDDGRALARQFTGLDNFLT\nYDQ\n>Eco1_Ce  \nMKDPGLPKNSLKKSKLDDYFKKVERNTEENLQEQSTSADVQKSLRCPKRK\nVLDDDATDDNIIAKKEKRAVRKRSSGHSMKKLAKSQMVLDCGQSVIGSTK\nCKDCRMMYSVDSAEDVAEHEKFHNAWRFRFEISRTFVPNFLNFHNRDHGN\nFKVYYLATFADGPFKKLFNEHMKKINEELGYCDEKNDLWSPEKRIFLVLS\nVREERMLIGGILVIEKISRAWTNVGKMEVTDNNDINDWIVGVDRIWVDSH\nCRMKGVANSLLDAATTQDRQMEFRSRRLRIAFCDPTDDGIKLARRFIETR\nYQKEDQYNGEILIY\n>Eco1_Yarrowia_lipolytica  \nMKTYRAKRKYLSESEDDVFSSSPTQSPETSPLQPPNESRLNIKAAQAVSP\nCQKRAKVVKKPAKTKAPVQMTLSLGQTTSTTCKTCGMTYQVAYGPDISAH\nKSFHSTALNGPKWKPSVSAVVVDKSKTYTVYKSRLLSHPCVSQFLKLVNS\nELNAPEPILSSQAAVYVYVVDQRAVGCVLVDRITKCRHVDIQTGTLGLKE\nYPAVMGVSRMYVSQLFRRTGIVTKLLDLAKSDFIYGIGA\n>Eco1_Leishmania  \nRVCSRPLFTVFDTASPARRRCFECRHMSSSQTWTQTHARYLRRGAALQIS\nRNTCKGAPAACAGCDDSADSAPGRHQKRSKVRPSCCSATLRSAVLAVLHA\nAHESIGSPEAVSHGGCVVIVHVKAARDGVRCASAKTASRAPVWFVDGVCV\nAEDIPRAYRALRAQVTRVGDSWCTGTPLCGVRLMWVSPASRGRGVAYLMI\nERARHAVCYGFVVPAEHVAFSEPTAMGSAFARRYQARQDFLVYHY\n>Eco1_Trypanosoma_brucei  \nMHNSVPASNTCSPFREETVSKRGKRSRGTGGDDKITRGTCSQPFSVITLP\nPGKLLEWLVCSPCRVYDVNLPRSRNNDNNISSLQCAVLPNFFVEYGGRSY\nSCVAKVCKPQLRKVLLRALAAVRQEMGSVDDIPHDSLLVVAVSPINAFSS\nECIHDASRTAMPRAREGCKIVGLCVARELSAPHRMHCESNWSHEKSEASG\nVGAAVQEGLGDCWEEDATRVGGTNNVRKAFCGVQLVWVADCYRRHGVAKV\nLVDTARRHISYGFEVPVERVAFSEPTSLGKLFAKSYSGRPDFLIF\n';
+}
+//-->
+</script>
+
+
+
+<p style="line-height: 150%">
+<!--<font color="#000066"> <select name = "DATALIB">
+    <option VALUE = "nr"                > AA - nr: non-redundant GenBank CDS translations+PDB+SwissProt+PIR+PRF 
+    <option VALUE = "swissprot"         > AA - SwissProt: last major release of SwissProt aa-sequences
+    <option VALUE = "pdbaa"             > AA - PDB aa-sequences
+</select> -->
+ 
+<table  bgcolor="#dde5f8" border="1" cellpadding="10" width="800">
+
+	  <tr>
+	    <td colspan="2" bgcolor="#FFFFFF">
+	      <div style="text-align:bottom">
+		<img src="logo.png" style="float:left;width:445;height:100;" alt="logo" height="100" width="445">
+		<font color="#ff0000">?</font> 
+		<span style="font-size:1em;color:#a9a9a9;font-weight:bold">
+		  Your <a class="a" href="http://smart.embl.de">Smart</a>, 
+		  <a class="a"  href="http://www.sanger.ac.uk/Software/Pfam/">Pfam</a>, 
+		  <a class="a"  href="http://www.ebi.ac.uk/InterProScan/">Interpro</a> or 
+		  <a class="a"  href="http://www.ncbi.nlm.nih.gov/Structure/cdd/wrpsb.cgi">CDD</a>
+		  database searches did not return significant domain similarities</span> <font color="#ff0000">?</font><br>
+		<font color="#000066">!</font> <span style="font-size:1em;color:#a9a9a9;font-weight:bold"> 
+		  Try DOUTfinder analysis of your protein, which will you help evaluate the subsignificant domain hits! </span> 
+		<font color="#000066">!</font>
+	      </div>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td colspan="2">
+	      <div style="text-align:center;">
+		<input TYPE="button" name="Eco" VALUE="Rerun Example: Eco1" onclick="javascript:Eco();">&nbsp;&nbsp;<input TYPE="button"  name="SEF" VALUE="Rerun Example: SEF" onclick="javascript:Sefir();"><br />
+		<input TYPE="button" name="RESULT-Eco" VALUE="Precomputed Example: Eco1" onclick="document.location.href='ecoexample/index.html'">&nbsp;&nbsp;<input TYPE="button"  name="RESULT-SEF" VALUE="Precomputed Example: SEF" onclick="document.location.href='sefirexample/index.html'">
+	      </div>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td colspan="2" align="center" bgcolor="white">
+	      &nbsp;&nbsp;<input type="button" name="button" value="Clear" onclick="javascript:clearSeq();">
+	    </td>
+	  </tr>
+	  
+	  <tr>
+   <form name='input' action='cgi-bin/webjob_doutfinder.cgi' method='POST' enctype='multipart/form-data'>
+	    <td valign=top width="200">
+	      <p align="center">
+		<span style="white-space: nowrap;">
+		  <nobr><b>INPUT: Homologous Sequence Set</b><a href="#inset"><img src="help.gif" border="0" alt="help"></a></nobr>
+		</span>
+	      </p>
+	      <p>
+		<span style="white-space: nowrap;">
+		  <nobr>Enter a <b>set of homologous sequences</b> in FASTA format</nobr>
+		</span><br>
+		
+
+
+		<textarea name="sequenceset" onclick="javascript:clearSingleSeq();" cols="50" rows="10">>Eco1_Zea_mays  
+LMSKSKVKEVITVVEKELGFGEGKLLHKLCKVYLYISAQRIVGCLVTEPI
+KTGHRVIPSSTEGSPNDLPVSSTERGKNGHTLEFGSISFKREIIRRHSRS
+VKNKEECQDPGAILCETEAVPALCGFRAIWVAPSCRRKRIASKLMDVARK
+TFCEGRTLGISQFAFSPPTSSGKGLACRYCKTSAFLVYKDGPV
+>Eco1_Sorghum_bicolor  
+HEADCRRLLRISPRRQQRQTGEGRGEHVGRRSEAMQPKISAFFKRQEADP
+DPNSGDGEGNGHGSDIAATEAKRKAKGCRRDELVSKKRNYAQFHLELGQP
+DFLHHTCSVCGMMYARGNDEDEKVHRAYHKNYSXGVPFKGWKNETVMXXX
+XXXXXXXXRRHNHSIKNKEECQDPGAIICETEAVPALCGFRAIWVVPSRR
+RKRIASKLMDVARKPFCEGRTLGISQFAFTPPTSFGKGLACRYCKTSSFL
+VYKDGPV
+>Eco1_Hordeum_vulgare  
+SVSMVLGSEATEAKRPKSCGDGKVLNKKRNYGQFHLELGQPDFLLPHVAA
+VCGMMYAPXGNDDDEERFTGAYHKEAYFRGPSRSKGXGRRRKNRGLXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAVAALCGFRAIWVVPSCII
+KGIASQLVDAARKSFCEDGALGISQCAFTPPTSDGKELASSCYKTSAFLV
+YRNGDV
+>Eco1_At_new  
+MQAKINSFFKPSSSSSIAASVTTDTDDGLAVWENNRNAIVNTYQRRSAIT
+ERSEVLKGCIEKTLKKGSSSVPKNHKKKRNYTQFHLELGQSDFLLRHCAE
+CGAKYAPGDELDEKNHQSFHKDYMYGLPFKGWQNEKAFTSPLFIKNRIVM
+VSENDSPAHRNKVQEVVKMMEVELGEDWILHQHCKVYLFISSQRISGCLV
+AEPIKEAFKLIASPDDERQLDNGVIVCEEEAKPAVCGIRAIWVSPSNRRK
+GIATWLLDTTRESFCNNGCMLEKSQLAFSQPSSIGRSFGSKYFGTCSFLL
+YKAQLIDTHFS
+>Eco1a_Mm  
+HEVQNEERLRQNPSGAVVSSKGSDLDKHDFPSENSLDENKTISPESVYPI
+FNVSSVNTKRPEEQSSVGSTACTNFLKQTNVPKNINSRDTNKGGKDQLVI
+DAGQKHFGTTVCKSCGMIYTASNPEDEIQHLQHHHRFLEGIKFVGWKRER
+VVAEFWDGKIVLVLPRDPSYAIKKVEDVQELVDLELGFQQTVPVCPDKTK
+TFLFIDEKRVVGCLIAEPIKQAFRVLSEPSASKECSRAWRCSDVPEPAIC
+GISRIWVFRLKRRKRIARRLVDTVRNCFMFGCFLSTNEIAFSDPTPDGKL
+FATKYCNTPNFLVYNFHN
+>Eco1a_Hs  
+ASSVNSKRSLGEEQFSVGSVNFMKQTNIQLYTNTRDTSKKTKDQLIIDAG
+QKHFGATVCKSCGMIYTASNPEDEMQHVQHHHRFLEGIKYVGWKKERVVA
+EFWDGKIVLVLPHDPSFAIKKVEDVQELVDNELGFQQVVPKCPNKIKTFL
+FISDEKRVVGCLIAEPIKQAFRVLSEPIGPESPSSTECPRAWQCSDVPEP
+AVCGISRIWVFRLKRRKRIARRLVDTLRNCFMFGCFLSTDEIAFSDPTPD
+GKLFATKYCNTPNFLVYNFNS
+>Eco1_Danio_rerio  
+LRREMKKQTDNQLIIDAGQKQFGATTCASCGMLYSTDSPEDNFQHTQFHQ
+RFLDTIKFVGWKKERVVAEFWDGKIILVLPDDPKYATRKAEDVRRIADSE
+LGFQQITLSSPSSAKTYLFINTDKXVVGCLVAENIRQAYRVLEQQEKQKD
+MSKKNFMQHHRTWXCSTVPEKAICGVSRIWVFSLMRRKSVATRLLDTARN
+TFMYGSHLTKEEIAFSDPTPQGKLFATKYCQTPTFLVYNFIS
+>Eco1b_Mm  
+APDQNFSICSASEVETNPLENTAAASTLLSQAKIDEDRTFPGSAPNQQHS
+VLSDEASINRKNRDVPPNHSQLKHDSHLEITIPKSLKLKDSEKVDEKQLV
+IDAGHKRFGAVSCNICGMLYTASNPEDETQHLLFHNQFISAVKYVGWKKE
+RILAEYPDGRIIMVLPEDPKYALKKVDEIREMVDNDLGFQQAPLMCYSRT
+KTLLFISNDKKVVGCLIAEHIQWGYRVIEEKLPVIRSEEEKVRFERQKAW
+CCSTLPEPAICGISRIWVFSMMRRKKIASRMIECLRSNFIYGSYLSKEEI
+AFSDPTPDGKLFATQYCGTGQFLVYNFINGQNTT
+>Eco1b_Hs  
+ASNKNFSQCLESKLENSPVENVTAASTLLSQAKIDTGENKFPGSAPQQHS
+ILSNQTSKSSDNRETPRNHSLPKCNSHLEITIPKDLKLKEAEKTDEKQLI
+IDAGQKRFGAVSCNVCGMLYTASNPEDETQHLLFHNQFISAVKYVGWKKE
+RILAEYPDGRIIMVLPEDPKYALKKVDEIREMVDNDLGFQQAPLMCYSRT
+KTLLFISNDKKVVGCLIAEHIQWGYRVIEEKLPVIRSEEEKVRFERQKAW
+CCSTLPEPAICGISRIWVFSMMRRKKIASRMIECLRSNFIYGSYLSKEEI
+AFSDPTPDGKLFATQYCGTGQFLVYNFINGQNST
+>Eco1_Xl  
+LGFQQVPLRLHSRTKTLVFISSDKKVAGCLIAEHIQWGYRVIDDLIPEGT
+SQKEKALSERVKAWCCSTSPEPAICGVSRIWVFSMMRRKKIASRMLECLR
+NNFIYGSFLNKDEIAFSDPTPDGKLFATRYCGTSQFLVYN
+>Eco1_Strongylocentrotus_purpur  
+QGYRVIVDEQKAEGNDSQKAWCCETESEPALCGISRIWVPRSTXQIASRM
+VDCLR
+>Eco1_Ciona_intestinalis  
+HDQHQHKLHHQRFNVILRFPSWKNERTVASYVDGRIVKILPTDPKFAQKK
+VEDILELIDSELGFSQNISTTRVSYLYVSDQQQVTGCLIAEQIKRGFPLL
+ETMTSSGMMSCSLQSTPVTCGVSRIWCHAPHRKRGVATRLMDALRCSFVL
+GERLNMNQVAFSDPTISGKSFATKYFKTPHFLTYNCST
+>Eco1_Ca  
+MGSINSQKPQKIQSILALPSNFKKITCSTCDMTYNPHISQDKLLHNKYHT
+NFINGIPWNYKTDNDVLIIENFTLVETPKLNSTGKSLKSTKTRQTFKGSI
+ICINKSNKRHIQKVELLLNMVNQELNASQDSGQWKKPEFDRSKAFVIIID
+SKAIGLCTTDTIQPDQGRWMIHKTQSIVPNQINKNVVIGISRIWISRKWR
+QYGLGKKLLNVVLKNSIYSVQLLKNQVAFSQPSFSGGMLAKSFNGVKHKS
+GEMLLPVYIE
+>Eco1_Saccharomyces_kluyveri  
+RKKRXWMILGTKDIVPQVSPIVKLGISRIWVCKNHRGEGIALRLLETARK
+YSIYGTEVAKWELAWSQPSESGGELAKKYNSVFHEKSGKLLIPCYI
+>Eco1_Sc  
+MKARKSQRKAGSKPNLIQSKLQVNNGSKSNKIVKCDKCEMSYSSTSIEDR
+AIHEKYHTLQLHGRKWSPNWGSIVYTERNHSRTVHLSRSTGTITPLNSSP
+LKKSSPSITHQEEKIVYVRPDKSNGEVRAMTEIMTLVNNELNAPHDENVI
+WNSTTEEKGKAFVYIRNDRAVGIIIIENLYGGNGKTSSRGRWMVYDSRRL
+VQNVYPDFKIGISRIWVCRTARKLGIATKLIDVARENIVYGEVIPRYQVA
+WSQPTDSGGKLASKYNGIMHKSGKLLLPVYI
+>Eco1_Sp  
+PLSDETNNKRAFLDAFLGNGGNLTPNWKKQTPKAISNSSDNMTQLHLDLA
+NSTVTCSECSMEYNSTSEEDILLHSRFHSRVLGGVTVSFQCSPIYRVNYG
+LSSDCIYSINSESSLIDQRKAEEALSFVNNELSSEPIETIGVDKYTTFLF
+ISDKKCVGLLLAERISSAYIVDELELNNNNSTSSAVYIKNENLRKGFVLG
+ISRIWVSASRRKQGIASLLLDNALKKFIYGYVISPAEVAFSQPSESGKQF
+IISWHRSRNNGSSKSLRYAVYES
+>Eco1_Dm  
+VQPKLFPIFTQRLQPVVQKSLRRRPDTSMRLLTAAGGSNQYQIDAGQKAF
+GARQCQQCGLVYTVHEPEEELLHREYHNSIHVLRFKGWIDEDIVSVYPEW
+ASDGRIIRINERAPTARLDRLRDLIGVVDKELGYSSYIVPKIFVAFIAVR
+KQQIVGFCLVQPLSQAHRFIQVDGTDYFSEESYPASCGVSRIWVSPLQRR
+SGIASKLLRVVQCHTVLGQEIARECIAFSTPTDDGRALARQFTGLDNFLT
+YDQ
+>Eco1_Ce  
+MKDPGLPKNSLKKSKLDDYFKKVERNTEENLQEQSTSADVQKSLRCPKRK
+VLDDDATDDNIIAKKEKRAVRKRSSGHSMKKLAKSQMVLDCGQSVIGSTK
+CKDCRMMYSVDSAEDVAEHEKFHNAWRFRFEISRTFVPNFLNFHNRDHGN
+FKVYYLATFADGPFKKLFNEHMKKINEELGYCDEKNDLWSPEKRIFLVLS
+VREERMLIGGILVIEKISRAWTNVGKMEVTDNNDINDWIVGVDRIWVDSH
+CRMKGVANSLLDAATTQDRQMEFRSRRLRIAFCDPTDDGIKLARRFIETR
+YQKEDQYNGEILIY
+>Eco1_Yarrowia_lipolytica  
+MKTYRAKRKYLSESEDDVFSSSPTQSPETSPLQPPNESRLNIKAAQAVSP
+CQKRAKVVKKPAKTKAPVQMTLSLGQTTSTTCKTCGMTYQVAYGPDISAH
+KSFHSTALNGPKWKPSVSAVVVDKSKTYTVYKSRLLSHPCVSQFLKLVNS
+ELNAPEPILSSQAAVYVYVVDQRAVGCVLVDRITKCRHVDIQTGTLGLKE
+YPAVMGVSRMYVSQLFRRTGIVTKLLDLAKSDFIYGIGA
+>Eco1_Leishmania  
+RVCSRPLFTVFDTASPARRRCFECRHMSSSQTWTQTHARYLRRGAALQIS
+RNTCKGAPAACAGCDDSADSAPGRHQKRSKVRPSCCSATLRSAVLAVLHA
+AHESIGSPEAVSHGGCVVIVHVKAARDGVRCASAKTASRAPVWFVDGVCV
+AEDIPRAYRALRAQVTRVGDSWCTGTPLCGVRLMWVSPASRGRGVAYLMI
+ERARHAVCYGFVVPAEHVAFSEPTAMGSAFARRYQARQDFLVYHY
+>Eco1_Trypanosoma_brucei  
+MHNSVPASNTCSPFREETVSKRGKRSRGTGGDDKITRGTCSQPFSVITLP
+PGKLLEWLVCSPCRVYDVNLPRSRNNDNNISSLQCAVLPNFFVEYGGRSY
+SCVAKVCKPQLRKVLLRALAAVRQEMGSVDDIPHDSLLVVAVSPINAFSS
+ECIHDASRTAMPRAREGCKIVGLCVARELSAPHRMHCESNWSHEKSEASG
+VGAAVQEGLGDCWEEDATRVGGTNNVRKAFCGVQLVWVADCYRRHGVAKV
+LVDTARRHISYGFEVPVERVAFSEPTSLGKLFAKSYSGRPDFLIF
+		</textarea>
+	      </p>
+	      <p>
+		<span style="white-space: nowrap;">
+		  <nobr>File: <input type="file" onclick="javascript:clearSingleSeq();" name="sequenceset_file"> <a href="#txt"><img src="help.gif" border="0" alt="help"></a>
+	      </nobr></span></p>
+	    </td>
+	    <td valign=top>
+	      <p align="center">
+		<span style="white-space: nowrap;">
+		  <nobr><b>INPUT: Single Sequence<a href="#inseq"><img src="help.gif" border="0" alt="help"></a></b></nobr>
+		</span>
+	      </p>
+	      <p>
+		<span style="white-space: nowrap;">
+		  <nobr>Enter a <b>single sequence</b> in FASTA format</nobr></span><br>
+		<textarea name="singlesequence" onclick="javascript:clearSetSeq();" cols="50" rows="10" wrap="virtual"></textarea>
+	      </p>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td colspan="2" align="center" bgcolor="white">
+	      <input type="submit" value="Submit">
+	      <input type="reset" value="Reset">
+	      <input type="button" name="button" value="Clear" onclick="javascript:clearSeq();">
+	    </td>
+	  </tr>
+	  <tr>
+	    <td colspan="2" align="center">
+	      
+	      <table border=0>
+		  <tr>
+		    <td>
+		      <table border=0>
+			  <tr>
+			    <td colspan="2">
+			      <b>Pre-rps-blast filtering:</b>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			      <select width="75" name ="seg" style="width: 75px">
+				<option selected value="T">True&nbsp;&nbsp;
+				<option value="F">False
+			      </select>
+			    </td>
+			    <td>
+			      SEG<a href="#seg"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			      <select width="75" name ="coil" style="width: 75px">
+				<option selected value="1">True&nbsp;&nbsp;
+				<option value="0">False
+			      </select>
+			    </td>
+			    <td>
+			      Coiled-Coil<a href="#coil"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			      <select width="75" name ="tm" style="width: 75px">
+				<option selected value="1">True&nbsp;&nbsp;
+				<option value="0">False
+			      </select>
+			    </td>
+			    <td> 
+			      Transmem.<a href="#tm"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+		      </table>
+		    </td>
+		    
+		    <td>
+		      <table border=0>
+			  <tr>
+			    <td colspan="2">
+			      <b>DOUTfinder parameters:</b>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			      <select width="75" name ="cdhit" style="width: 75px">
+				<option value="0.99">99%
+				<option value="0.9">90%&nbsp;&nbsp;
+				<option selected value="0.8">80%
+				<option value="0.7">70%
+			      </select>
+			    </td>
+			    <td> 
+			      Max. seq-ident<a href="#cdhit"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			      <select width="75" style="width: 75px" name ="expect">
+				<option value="2.5">2.5
+				<option value="5">5
+				<option value="10">10
+				<option selected value="20">20
+				<option value="50">50
+			      </select>
+			    </td>
+			    <td> 
+			      DOUT Max. E-value <a href="#E"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+		  
+			  <tr>
+			    <td>
+			      <select width="75" name ="coverage" style="width: 75px">
+				<option value="60">60%
+				<option value="50">50%
+				<option selected value="40">40%
+			     	<option value="30">30%
+				 </select>
+			    </td> 
+			    <td> 
+			      DOUT Min. Dom. Cov.<a href="#C"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+		      </table>
+		    </td>
+		    <td>
+		      <table border=0 bgcolor="#FFFFFF">
+			  <tr>
+			    <td colspan="2">
+			      <b>PSI-BLAST settings:</b>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			      <select width="75" name ="rounds" style="width: 75px">
+				<option value="1">1
+				<option selected value="2">2
+				<option value="3">3
+				<option value="4">4
+			      </select>
+			    </td>
+			    <td> 
+			      Rounds<a href="#R"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			      <select width="75" style="width: 75px" name ="inclusion">
+				<option value="0.002">0.002
+				<option selected value="0.005">0.005
+				<option value="0.01">0.01
+			      </select>
+			    </td>
+			    <td> 
+			      Inclusion E <a href="#I"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+			  
+			  
+			  <tr>
+			    <td>
+			      <select width="75" name ="psiD" style="width: 75px">
+				<option selected value="DOUT0306n80">nr80d
+				<option value="DOUT0306n90">nr90d
+			      </select>
+			    </td>
+			    <td> 
+			      Database<a href="#PD"><img src="help.gif" border="0" alt="help"></a>
+			    </td>
+			  </tr>
+		      </table>
+		    </td>
+		  </tr>
+	      </table> 
+	    </td>
+	  </tr>
+	  
+	  
+	  <tr>
+	    <td colspan="2">
+	      <div style="margin:5 50 5 50"><b>Example 1</b> Eco1-family DOUTfinder analysis identifies an acetyltransferase domain within a provided group of orthologs. The true nature of this subsignificant domain similarity has been experimentally tested (<a href='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=11864574'>PMID: 11864574</a>).<br>
+		<b>Example 2</b> DOUTfinder analysis using the single human SEF/IL17 protein as an input shows that the TIR domain appears multiple times as a subsignificant hit among the related proteins. The D-score identifies these hits as a likely true similarity. This similarity has been previously reported in <a href='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=12765832'>PMID:12765832</a>.<br>&nbsp<br>
+		<div style="text-align:center;">
+	      <input type="button" name="RESULT-Eco" value="Precomputed Example: Eco1" onclick="document.location.href='ecoexample/index.html'">&nbsp;&nbsp;<input type="button"  name="RESULT-SEF" value="Precomputed Example: SEF" onclick="document.location.href='sefirexample/index.html'">
+		</div><br>
+		<b>Example 3</b> <a href="DOUTpfam18_html/index.html">DUF analysis</a>. Analysis of domains of unknown function (DUFs) derived from Pfam18 database suggests that more that around 80 of these DUFs show probable similarities to already known domains. Several of these predictions could be later confirmed using the CLANS assignment within Pfam19. 
+	      </div>
+	    </td>
+	  </tr>
+      </table>
+      
+    </form>
+    
+    
+    <table width="500">
+	<tr>
+	  <td>
+	    <p class="help">
+	    About:<br> 
+	    <img src="help.gif"><a name="inset"><b>Homologous Sequence Set input:</b></a><br>
+	      Sequences provided as a homologous sequence set will be made non-redundant, masked and afterwards analysed via rps-blast. Subsignificant rps-blast hits will be further evaluated using DOUTfinder. The use of selected conserved regions is advicable. Input is limited to 75 protein sequences in a fasta format. <br>
+	      Depending on the length of your query this analysis will take around several minutes, and is faster than the single sequence option, which requires a psi-blast search to be performed in addition.
+	    </p><p class="help">
+	    <img src="help.gif"><a name="inseq"></a><b>Single Sequence input:</b><br>
+	      If a single sequences is provided an initial psi-blast search will be performed to collect a homologous sequence set. This initial analysis step will take several minutes. All consequent steps parallel the analysis of a homologous sequence set as described above.
+	    </p>
+	    <p class="help">
+	      <img src="help.gif"><a name="txt"></a><b>Simple text file upload:</b><br>
+	      You can upload your sequences in a simple text format. To generate a simple text file you can use any text-processing software, and save file as text.
+	    </p>
+	    
+	    <p class="help">
+	    <img src="help.gif"><a name="seg"></a><b>Rps-Blast flag: SEG Filter</b><br>
+	      You can determine whether rps-blast will be run with a SEG low complexity filter switched on (<b>T</b>) or off (<b>F</b>). If filtering is turned off, false positive hits can increase in compositionally biased regions. 
+	    </p><p class="help">
+	    <img src="help.gif"><a name="coil"></a><b>Input flag: Coil Filter</b><br>
+		  You can determine whether a coiled-coil filter should be applied to your input (<b>T</b>) or not (<b>F</b>). If filtering is turned off, false positive hits can increase in compositionally biased regions. 
+	    </p><p class="help">
+	    <img src="help.gif"><a name="tm"></a><b>Input flag: Transmembrane Filter</b><br>
+	      You can determine whether a HMMTOP-based filtering should be applied to your input (<b>T</b>) or not (<b>F</b>). If filtering is turned off, false positive hits can increase in compositionally biased regions. 
+	    </p><p class="help">
+	    <img src="help.gif"><a name="cdhit"></a><b>Protein set flag: maximum-sequence identity</b><br>
+	      CD-HIT is used to obtain a non-redundant protein set with a user determined identity cut-off. The set is made non-redundant, in order to reduce noise due to highly similar sequences.
+	    </p><p class="help">
+	    <img src="help.gif"><a name="E"></a><b>DOUT-analysis flag: Expect</b><br>
+		  Subsignificant domain hits (>0.01) are only taken into consideration as potential domain outliers in case the E-value is below this user defined threshold. False positive results are rare with the default setting of 0.01. Higher E-value thresholds give more false positives, while lower E-values increase reliability.
+	    </p><p class="help">
+	    <img src="help.gif"><a name="C"></a><b>DOUT-analysis flag: Coverage</b><br>
+	      Subsignificant domain hits (>0.01) are only taken into consideration as potential domain outliers in case the coverage of the domain is above this user-defined threshold.
+	    </p><p class="help">
+	    <img src="help.gif"><a name="R"></a><b>Single seq flag: Blastpgp rounds</b><br>
+		  If a single seqeuence is given as an input PSI-BLAST is used to obtain a sequence set. You can change the maximum number of PSI-BLAST passes to use in multipass version.
+	    </p><p class="help">
+		<img src="help.gif"><a name="I"></a><b>Single seq flag: Inclusion threshold</b><br>
+		  If a single seqeuence is given as an input PSI-BLAST is used to obtain a sequence set. You can change the E-value threshold for inclusion in this initial search.
+	    </p><p class="help">
+		<img src="help.gif"><a name="PD"></a><b>Single seq flag: Database choise</b><br>
+		  If a single seqeuence is given as an input PSI-BLAST is used to obtain a sequence set. You can run the PSI-BLAST against two versions of the NCBI non-redundant database (mar06), which have both processed using <a href="http://bioinformatics.org/cd-hit/">cd-hit</a>. nr80d is a 80% non-redundant derivate of NCBI nr supplemented by Pfam 19 seed files, and the CDD Smart and Pfam domain fasta files. nr90d is a 90% non-redundant derivate of NCBI nr supplemented by Pfam 19 seed files, and the CDD Smart and Pfam domain fasta files.
+	    </p>
+	  </td></tr>
+  </table>
+    <hr>
+<A HREF="http://mendel.imp.ac.at/contact.html">Contact</a><br>
+<A HREF="mailto:novatchkova-at-imp.ac.at">Site-admin</A>.<br>
+    <hr>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+</body>
+
+</html>

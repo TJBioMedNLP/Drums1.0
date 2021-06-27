@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+    
+
+    
+    <head>
+    <title>Galaxy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <link href="/mplot/static/style/base.css?v=2" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/mplot/static/style/panel_layout.css?v=2" media="screen" rel="Stylesheet" type="text/css" />
+    <style type="text/css">
+    #center {
+    }
+    </style>
+
+    
+    <!--[if lt IE 7]>
+    <script src="/mplot/static/scripts/IE7.js?v=2" type="text/javascript"></script>
+<script src="/mplot/static/scripts/ie7-recalc.js?v=2" type="text/javascript"></script>
+    <![endif]-->
+    <script src="/mplot/static/scripts/jquery.js?v=2" type="text/javascript"></script>
+
+    </head>
+    
+    <body scroll="no" class="">
+	<div id="everything" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-width: 600px;">
+        <div id="background"></div>
+        <div id="masthead">
+            
+
+    <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center">
+    
+    <table class="tab-group" border="0" cellspacing="0" style="margin: auto;">
+	<tr>
+    
+    
+    
+    	
+        
+        <td class="tab active" style=""><a target="_parent" href="/mplot/root">Analyze Data</a></td>
+    
+	    
+	    
+        
+        <td class="tab" style=""><a target="_parent" href="/mplot/workflow">Workflow</a></td>
+    
+	    
+	    <!--
+        
+        <td class="tab" style=""><a target="_parent" href="/mplot/library">Data Libraries</a></td>
+    -->
+    
+
+    
+    <td class="tab">
+        Visualization
+        <div class="submenu">
+        <ul>
+            <li><a href="/mplot/protein_viewer">Build protein viewer</a></li>
+            <!--
+            <li><a href="/mplot/tracks">Build track browser</a></li>
+            -->
+            <li><hr style="color: inherit; background-color: gray"/></li>
+	    <li><a href="/mplot/visualization">Stored visualizations</a></li>
+        </ul>
+        </div>
+    </td>
+
+    
+        
+        <td class="tab admin-only" style="display: none;"><a target="_parent" href="/mplot/admin">Admin</a></td>
+    
+    
+    <td class="tab">
+        <a>Help</a>
+        <div class="submenu">
+        <ul>            
+            <li><a href="mailto:alexander.rose@weirdbyte.de">Email comments, bug reports, or suggestions</a></li>
+            <!--<li><a target="_blank" href="http://bitbucket.org/galaxy/galaxy-central/wiki">Galaxy Wiki</a></li>             
+            <li><a target="_blank" href="http://galaxycast.org">Video tutorials (screencasts)</a></li>
+            <li><a target="_blank" href="http://bitbucket.org/galaxy/galaxy-central/wiki/Citations">How to Cite Galaxy</a></li>-->
+        </ul>
+        </div>
+    </td>
+    
+    <td class="tab">
+        <a>User</a>
+        
+        <div class="submenu">
+        <ul class="loggedout-only" style="">
+            <li><a target="galaxy_main" href="/mplot/user/login">Login</a></li>
+            <li><a target="galaxy_main" href="/mplot/user/create">Register</a></li>
+        </ul>
+        <ul class="loggedin-only" style="display: none;">
+                <li>Logged in as <span id="user-email"></span></li>
+                <li><a target="galaxy_main" href="/mplot/user">Preferences</a></li>
+                
+                <li><a target="galaxy_main" href="/mplot/user/logout">Logout</a></li>
+                <li><hr style="color: inherit; background-color: gray"/></li>
+                <li><a target="galaxy_main" href="/mplot/history/list">Histories</a></li>
+                <li><a target="galaxy_main" href="/mplot/dataset/list">Datasets</a></li>
+                    <li><a href="/mplot/page/list">Pages</a></li>  
+        </ul>
+        </div>
+    </td>
+    
+    </tr>
+    </table>
+    
+    </div>
+    
+    <div class="title" style="position: absolute; top: 0; left: 0;">
+        <a href="/">
+        <img border="0" src="/mplot/static/images/galaxyIcon_noText.png" style="width: 26px; vertical-align: top;">
+        Galaxy
+        <span class='brand'>/MPlot</span>
+        </a>
+    </div>
+    
+
+        </div>
+        <div id="messagebox" class="panel--message">
+        </div>
+    
+    
+    
+
+    <div id="overlay"
+    style="display: none;"
+    >
+    <div id="overlay-background" style="position: absolute; width: 100%; height: 100%;"></div>
+    
+    <table class="dialog-box-container" border="0" cellpadding="0" cellspacing="0"
+        style="display: none;"
+    ><tr><td>
+    <div class="dialog-box-wrapper">
+        <div class="dialog-box">
+        <div class="unified-panel-header">
+            <div class="unified-panel-header-inner"><span class='title'></span></div>
+        </div>
+        <div class="body"></div>
+        <div>
+            <div class="buttons" style="display: none; float: right;"></div>
+            <div class="extra_buttons" style="display: none; padding: 5px;"></div>
+            <div style="clear: both;"></div>
+        </div>
+        </div>
+    </div>
+    </td></tr></table>
+    </div>
+
+            <div id="left">
+                
+    <div class="unified-panel-header" unselectable="on">
+        <div class='unified-panel-header-inner'>Tools</div>
+    </div>
+    <div class="unified-panel-body" style="overflow: hidden;">
+        <iframe name="galaxy_tools" src="/mplot/root/tool_menu" frameborder="0" style="position: absolute; margin: 0; border: 0 none; height: 100%; width: 100%;"> </iframe>
+    </div>
+
+            </div>
+            <div id="left-border">
+                <div id="left-border-inner" style="display: none;"></div>
+            </div>
+        <div id="center">
+            
+
+    
+    
+    <iframe name="galaxy_main" id="galaxy_main" frameborder="0" style="position: absolute; width: 100%; height: 100%;" src="/mplot/static/welcome.html"> </iframe>
+
+
+        </div>
+            <div id="right-border"><div id="right-border-inner" style="display: none;"></div></div>
+            <div id="right">
+                
+    <div class="unified-panel-header" unselectable="on">
+        <div class="unified-panel-header-inner">
+            <div style="float: right">
+                <a id="history-options-button" class='panel-header-button popup' href="/mplot/root/history_options" target="galaxy_main">Options</a>
+            </div>
+            <div class="panel-header-text">History</div>
+        </div>
+    </div>
+    <div class="unified-panel-body" style="overflow: hidden;">
+        <iframe name="galaxy_history" width="100%" height="100%" frameborder="0" style="position: absolute; margin: 0; border: 0 none; height: 100%;" src="/mplot/history"></iframe>
+    </div>
+
+            </div>
+	</div>
+        <!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://proteinformatics.charite.de/piwik/" : "http://proteinformatics.charite.de/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://proteinformatics.charite.de/piwik/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+<!-- End Piwik Tag -->
+    </body>
+    
+    
+    <script src="/mplot/static/scripts/jquery.event.drag.js?v=2" type="text/javascript"></script>
+<script src="/mplot/static/scripts/jquery.event.hover.js?v=2" type="text/javascript"></script>
+<script src="/mplot/static/scripts/jquery.form.js?v=2" type="text/javascript"></script>
+<script src="/mplot/static/scripts/galaxy.base.js?v=2" type="text/javascript"></script>
+<script src="/mplot/static/scripts/galaxy.panels.js?v=2" type="text/javascript"></script>
+    <script type="text/javascript">
+        
+    ensure_dd_helper();
+        
+            var lp = make_left_panel( $("#left"), $("#center"), $("#left-border" ) );
+            force_left_panel = lp.force_panel;
+        
+            var rp = make_right_panel( $("#right"), $("#center"), $("#right-border" ) );
+            handle_minwidth_hint = rp.handle_minwidth_hint;
+            force_right_panel = rp.force_panel;
+    
+    </script>
+    <![if !IE]>
+    <script type="text/javascript">
+        var upload_form_error = function( msg ) {
+            if ( ! $("iframe#galaxy_main").contents().find("body").find("div[class='errormessage']").size() ) {
+                $("iframe#galaxy_main").contents().find("body").prepend( '<div class="errormessage" name="upload_error">' + msg + '</div><p/>' );
+            } else {
+                $("iframe#galaxy_main").contents().find("body").find("div[class='errormessage']").text( msg );
+            }
+        }
+        jQuery( function() {
+            $("iframe#galaxy_main").load( function() {
+                $(this).contents().find("form").each( function() { 
+                    if ( $(this).find("input[galaxy-ajax-upload]").length > 0 ){
+                        $(this).submit( function() {
+                            // Only bother using a hidden iframe if there's a file (e.g. big data) upload
+                            var file_upload = false;
+                            $(this).find("input[galaxy-ajax-upload]").each( function() {
+                                if ( $(this).val() != '' ) {
+                                    file_upload = true;
+                                }
+                            });
+                            if ( ! file_upload ) {
+                                return true;
+                            }
+                            // Make a synchronous request to create the datasets first
+                            var async_datasets;
+                            var upload_error = false;
+                            $.ajax( {
+                                async:      false,
+                                type:       "POST",
+                                url:        "/mplot/tool_runner/upload_async_create",
+                                data:       $(this).formSerialize(),
+                                dataType:   "json",
+                                success:    function(array_obj, status) {
+                                                if (array_obj.length > 0) {
+                                                    if (array_obj[0] == 'error') {
+                                                        upload_error = true;
+                                                        upload_form_error(array_obj[1]);
+                                                    } else {
+                                                        async_datasets = array_obj.join();
+                                                    }
+                                                } else {
+                                                    // ( gvk 1/22/10 ) FIXME: this block is never entered, so there may be a bug somewhere
+                                                    // I've done some debugging like checking to see if array_obj is undefined, but have not
+                                                    // tracked down the behavior that will result in this block being entered.  I believe the
+                                                    // intent was to have this block entered if the upload button is clicked on the upload
+                                                    // form but no file was selected.
+                                                    upload_error = true;
+                                                    upload_form_error( 'No data was entered in the upload form.  You may choose to upload a file, paste some data directly in the data box, or enter URL(s) to fetch data.' );
+                                                }
+                                            }
+                            } );
+                            if (upload_error == true) {
+                                return false;
+                            } else {
+                                $(this).find("input[name=async_datasets]").val( async_datasets );
+                                $(this).append("<input type='hidden' name='ajax_upload' value='true'>");
+                            }
+                            // iframe submit is required for nginx (otherwise the encoding is wrong)
+                            $(this).ajaxSubmit( { iframe: true } );
+                            if ( $(this).find("input[name='folder_id']").val() != undefined ) {
+                                var library_id = $(this).find("input[name='library_id']").val();
+                                var show_deleted = $(this).find("input[name='show_deleted']").val();
+                                if ( location.pathname.indexOf( 'admin' ) != -1 ) {
+                                    $("iframe#galaxy_main").attr("src","/mplot/library_common/browse_library?cntrller=library_admin&id=" + library_id + "&created_ldda_ids=" + async_datasets + "&show_deleted=" + show_deleted);
+                                } else {
+                                    $("iframe#galaxy_main").attr("src","/mplot/library_common/browse_library?cntrller=library&id=" + library_id + "&created_ldda_ids=" + async_datasets + "&show_deleted=" + show_deleted);
+                                }
+                            } else {
+                                $("iframe#galaxy_main").attr("src","/mplot/tool_runner/upload_async_message");
+                            }
+                            return false;
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <![endif]>
+
+    <script type="text/javascript">
+    $(function(){
+        $("#history-options-button").css( "position", "relative" );
+        make_popupmenu( $("#history-options-button"), {
+            "History Lists": null,
+            "Saved Histories": function() {
+                galaxy_main.location = "/mplot/history/list";
+            },
+            "Shared Histories": function() {
+                galaxy_main.location = "/mplot/history/list?operation=sharing";
+            },
+            "Histories Shared with Me": function() {
+                galaxy_main.location = "/mplot/history/list_shared";
+            },
+            "Current History": null,
+            "Create New": function() {
+                galaxy_history.location = "/mplot/root/history_new";
+            },
+            "Clone": function() {
+                galaxy_main.location = "/mplot/history/clone";
+            },
+            "Share or Publish": function() {
+                galaxy_main.location = "/mplot/history/sharing";
+            },
+            "Extract Workflow": function() {
+                galaxy_main.location = "/mplot/workflow/build_from_current_history";
+            },
+            "Dataset Security": function() {
+                galaxy_main.location = "/mplot/root/history_set_default_permissions";
+            },
+            "Show Deleted Datasets": function() {
+                galaxy_history.location = "/mplot/history?show_deleted=True";
+            },
+            "Show structure": function() {
+                galaxy_main.location = "/mplot/history/display_structured";
+            },
+            "Delete": function()
+            {
+                if ( confirm( "Really delete the current history?" ) )
+                {
+                    galaxy_main.location = "/mplot/history/delete_current";
+                }
+            }
+        });
+    });
+    </script>
+
+</html>

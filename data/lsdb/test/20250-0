@@ -1,0 +1,164 @@
+
+
+
+
+ 
+
+
+
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="gin.css" />
+                <link rel="alternate" type="application/rss+xml" title="RSS" href="http://gin.ncibi.org:8080/gin/gin.xml" />
+		<title>GIN: Gene Interaction Network</title>
+	</head>
+	
+	<body>
+	
+	
+
+<div id="wrapper">
+	<div id="header"> 
+		<a href="index.jsp"> <img src="GIN_BannerR1.jpg" alt="GIN Banner" border="0"> </a> 
+	</div> <!-- End header div -->
+  	<div id="top-nav">
+      <ul>
+         <li><a href="index.jsp">Home</a></li>
+         <li><a href="molecule_search.jsp">Molecule-Specific Network</a></li>
+         <li><a href="network_list.jsp">Disease-Specific Networks</a></li>
+    	 <li><a href="about.jsp">About</a></li>
+      </ul>
+   </div> <!-- End top-nav div -->
+
+<style type="text/css">
+<!--
+.style3 {font-size: 11px}
+.style4 {color: #FF0000}
+-->
+</style>
+
+
+
+<div id="sidebar">
+         <h2>Molecule-Specific Network</h2>
+                 <p>To get the statistics for the network of interactions in the neighborhood of a molecule, enter its symbol below.
+        You can limit your search by organism, molecule type, and data source. </p>
+
+                 <form action="viewNetwork">
+                <center>
+                <table cellpadding="5">
+                        <tr>
+                                <td>Molecule(s) Symbol(s):</td>
+                                <td><!--<input type="text" name="name" style="width:270px" /> -->
+                                <textarea name="name" style="width:270px" rows="2"></textarea>
+                                </td>
+
+                        </tr>
+                        <tr> <td> </td><td class="style3"> You can enter a list of space separated molecule symbols</td>
+                        <tr>
+                                <td>Organism:</td>
+                                <td>
+                                        <select name="organism" style="width:270px" >
+                                                <option value="-1000">All Organisms</option>
+                                                <option value="3702">Arabidopsis thaliana</option>
+                                                <option value="6239">Caenorhabditis elegans</option>
+                                                <option value="7227">Drosophila melanogaster</option>
+                                                <option value="562">Escherichia coli</option>
+                                                <option value="9606" selected >Homo sapiens</option>
+                                                <option value="10090">Mus musculus</option>
+                                                <option value="10116">Rattus norvegicus</option>
+                                                <option value="4932">Saccharomyces cerevisiae</option>
+                                        </select>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td>Molecule Type:</td>
+                                <td>
+                                        <select name="moltype" style="width:270px" >
+                                                <option value="All Molecule Types">All Molecule Types</option>
+                                                <option value="protein">protein</option>
+                                                <option value="mRNA">mRNA</option>
+                                                <option value="gene">gene</option>
+                                                <option value="pseudo">pseudo</option>
+                                                <option value="chemical">chemical</option>
+                                                <option value="DNA">DNA</option>
+                                        </select>
+                                </td>
+                        </tr>
+                        <tr>
+                          <td>Data Source:</td>
+                          <td><select name="datasource" style="width:270px" >
+                <option value="All Data Sources">All Data Sources</option>
+                <option value="BIND">BIND</option>
+                <option value="CCSB">CCSB</option>
+                <option value="DIP">DIP</option>
+                <option value="GRID">GRID</option>
+                <option value="HPRD">HPRD</option>
+                <option value="IntAct">IntAct</option>
+                <option value="KEGG">KEGG</option>
+                <option value="MDC">MDC</option>
+                <option value="MINT">MINT</option>
+                <option value="PubMed">PubMed</option>
+                <option value="reactome">reactome</option>
+              </select></td>
+                  </tr>
+                        <tr>
+                          <td>Email <span class="style4">(optional) </span></td>
+                          <td><input name="email" type="text" id="email" style="width:270px" /></td>
+                  </tr>
+                        <tr>
+                                <td>&nbsp;</td>
+                                <td><p class="style3">A copy of the results will be sent to your email once they are ready. Useful in case of large networks </p>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                                <td colspan="2" style="text-align: center">
+                                        <input type="submit" value="Search"/>
+                                </td>
+                        </tr>
+                </table>
+                </center>
+        </form>
+
+                <h2>Links</h2>
+        <ul>
+                <li><a href="http://tangra.si.umich.edu/clair">CLAIR Group</a></li>
+                <li><a href="http://mimi.ncibi.org/MimiWeb/main-page.jsp">MiMI</a></li>
+                <li><a href="http://www.ncibi.org/">NCIBI</a></li>
+        </ul>
+</div>
+
+<div id="content">
+        <h1>What is GIN?</h1>
+        <p>
+        GIN (Gene Interaction Network) is a system for analyzing molecule interaction networks.
+        The molecule interaction networks are retrieved from the NCIBI data repository, which is accessible through <a href="http://mimi.ncibi.org/MimiWeb/main-page.jsp">MiMI</a>.
+        The NCIBI data repository includes the MiMI database, which integrates protein interactions from different databases and other biological sources, daily updated Pubmed resources,
+        and protein interactions extracted from the literature by using text minining methods.
+        </p>
+
+        <h3>Sample Queries</h3>
+
+        <ul>
+                <li>Molecule Symbol: <b>CSF1R</b>, Organism: <b>Homo sapiens</b>, Molecule Type: <b>All Molecule Types</b>, Data Source: <b>All Data Sources</b> [<a href="/viewNetwork?name=CSF1R&organism=9606&moltype=All+Molecule+Types&datasource=All+Data+Sources&networktype=1">Execute</a>]</li>
+        </ul>
+
+        <ul>
+                <li>Molecule Symbol: <b>Myc</b>, Organism: <b>Mus musculus</b>, Molecule Type: <b>All Molecule Types</b>, Data Source: <b>All Data Sources</b> [<a href="/viewNetwork?name=Myc&organism=10090&moltype=All+Molecule+Types&datasource=All+Data+Sources&networktype=1">Execute</a>]</li>
+        </ul>
+        <ul>
+                <li>Molecule Symbol: <b>BRCA1</b>, Organism: <b>All Organisms</b>, Molecule Type: <b>protein</b>, Data Source: <b>BIND</b> [<a href="/viewNetwork?name=BRCA1&organism=-1000&moltype=protein&datasource=BIND&networktype=1">Execute</a>]</li>
+        </ul>
+        <ul>
+                <li>Molecule Symbol: <b>MAPK1</b>, Organism: <b>Homo sapiens</b>, Molecule Type: <b>protein</b>, Data Source: <b>All Data Sources</b> [<a href="/viewNetwork?name=MAPK1&organism=9606&moltype=protein&datasource=All+Data+Sources&networktype=1">Execute</a>]</li>
+        </ul>
+
+</div>
+
+   <div id="footer"> <img src="Footer.jpg" alt="Supported by NIH Grant # U54-DA021519" width="1000" height="48"> </div>
+   </div>
+	</body>
+
+</html>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Acromine dictionary</title>
+<meta name="copyright" content="&copy; National Centre for Text Mining" />
+<meta name="keywords" content="Text Mining, Data Mining, University of Manchester, University of Liverpool, Acronym, Abbreviation" />
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" /> 
+<meta name="DC.title" content="Acromine Demonstration" />
+<meta name="DC.creator" content="Naoaki Okazaki" /> 
+<meta name="DC.publisher" content="NaCTeM" />
+
+<meta name="DC.type" content="XHTML" />
+<meta name="DC.format" content="text/html;charset=iso-8859-1" />
+<meta name="DC.language" scheme="DCTERMS.URI" content="English" /> 
+<link rel="stylesheet" href="http://www.nactem.ac.uk/css/nactem.css" type="text/css" />
+<link rel="stylesheet" href="acromine.css" type="text/css" />
+<link rel="alternate" type="application/rss+xml" href="http://www.nactem.ac.uk/news/rss.xml" title="NaCTeM News &amp; Events (RSS)" />
+<link rel="up" href="/" title="Up" />
+<meta name="DC.subject" lang="English" content="The National Centre for Text Mining is the world's first publicly-funded centre for text mining." />
+<meta name="DC.description" lang="English" content="NaCTeM is a collaboration between the Universities of Manchester and Liverpool" />
+<link rel="up" href="/" title="Up" />
+
+<link rel="stylesheet" type="text/css" href="yui2.8.0r4/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="yui2.8.0r4/build/treeview/assets/skins/sam/treeview.css" />
+<script type="text/javascript" src="yui2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="yui2.8.0r4/build/yahoo/yahoo-min.js"></script>
+<script type="text/javascript" src="yui2.8.0r4/build/connection/connection-min.js"></script>
+<script type="text/javascript" src="yui2.8.0r4/build/treeview/treeview-min.js"></script>
+
+<script type="text/javascript">
+<!--
+function loadContext(node, funcLoadComplete)
+{
+    var url = 'acromine_context.py?defid=' + node.data;
+
+    var callback = {
+        success: function(o) {
+            var data = eval("(" + o.responseText + ")");
+            for (i = 0;i < data.length;++i) {
+                var child = new YAHOO.widget.HTMLNode(data[i], node, false);
+                child.isLeaf = true;
+                child.enableHighlight = false;
+            }
+            o.argument.fnLoadComplete();
+        },
+
+        failure: function(o) { 
+            YAHOO.log("Failed to process XHR transaction.", "info", "example"); 
+            o.argument.fnLoadComplete(); 
+        },
+
+        argument: { 
+            'node': node, 
+            'fnLoadComplete': funcLoadComplete
+        },
+
+        timeout: 7000
+    };
+
+    YAHOO.util.Connect.asyncRequest('GET', url, callback); 
+}
+
+function build_treeview(o)
+{
+    var data = eval("(" + o.responseText + ")");
+
+    var tree = new YAHOO.widget.TreeView("treeDiv1", data);
+    tree.subscribe('clickEvent',function () {return false;});
+
+    var root = tree.getRoot();
+    for (i = 0;i < root.children.length;++i) {
+        var nodeSF = root.children[i];
+        for (j = 0;j < nodeSF.children.length;++j) {
+            var nodeContext = nodeSF.children[j].children[1];
+            nodeContext.setDynamicLoad(loadContext, 0);
+        }
+    }
+
+    tree.render();
+}
+
+function retrieve()
+{
+    var element = YAHOO.util.Dom.get('treeDiv1');
+    element.innerHTML = '<p><img src="yui2.8.0r4/build/treeview/assets/skins/sam/treeview-loading.gif"></img> Please wait...</p>';
+
+    var callback = {
+        success: build_treeview,
+        failure: function (o) {
+            alert('ERROR: failed to connect to the server.');
+            }
+        };
+
+    var form = document.getElementById('form');
+    YAHOO.util.Connect.setForm(form);
+    YAHOO.util.Connect.asyncRequest('GET', "acromine_treeview.py", callback);
+    return false;
+}
+
+-->
+</script>
+
+</head>
+ 
+<body>
+
+<!-- PAGE CONTAINER -->
+<div id="container">
+<div id="frameleft"></div>
+<div id="frameright"></div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+	
+	
+<div id="logobanner">
+  <a href="/index.php"><img src="/images/nactemlogo.gif" alt="NaCTeM" title="Welcome to the National Centre for Text Mining" width="262" height="73" /></a> </div>
+
+	
+
+	<div id="pagecontent">
+		<div id="breadcrumbtrail">
+		You are in: <a href="/software/acromine/">Acromine</a></div>
+
+		<div id="subcontent">
+		
+			<div id="subcontentleft">
+				<div id="subcontentleftcontent">
+				
+					
+<h1>Acromine Demonstration</h1>
+<h2>Terms of Use</h2>
+By using the Acromine service, you agree to the general <a href="http://www.nactem.ac.uk/terms_conditions.php">Terms and Conditions of Use for the NaCTeM Website</a>, in addition to the following Terms of Use for Acromine:
+<ul> 
+<li>Please let us know that you are using Acromine by <a href="mailto:nactem-services@listserv.manchester.ac.uk">email</a>. </li> 
+<li> Please cite the following when publishing work that uses Acromine: <br/>
+Okazaki, N., Ananiadou, S. (2006) <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btl534?ijkey=klrhhjCKJJEaz9T">Building an abbreviation dictionary using a term recognition approach</a>. <i>Bioinformatics</i>, Volume 22, Number 24, pp. 3089-3095, Oxford University Press.</li>
+<li>Please credit and link to the NaCTeM website (<a href="http://www.nactem.ac.uk">http://nactem.ac.uk</a>) in any electonic services beased on the Acromine service or resulting data.
+</li>
+<li> Please <a href="mailto:nactem-services@listserv.manchester.ac.uk">contact us</a> in advance if you plan to use the service for bulk processing. Acromine is a freely available service from the academic domain. This means that it is necessary to limit server load and give preference to individual users. Excessive server load may result in IP addresses or institutions being blocked from using the Acromine service. There is a limit enforced on how many times unregistered
+users may use this service per day. </li>
+</ul>
+
+
+<h2>Table of contents</h2>
+<ul>
+<li><a href="#demo">Web Demonstration</a>: Look up Acromine through your browsers.</li>
+<li><a href="rest.html">RESTful Service</a>: for integrating Acromine with your applications (<a href="http://www.nactem.ac.uk/requestaccess.php">request access</a>)</li>
+</ul>
+
+<h2><a name="demo">Web Demonstration</a></h2>
+<p>
+Please enter an abbreviation in "Abbreviation" field to search its expanded forms, or an expanded form in "Fullform" field to search its abbreviations.
+</p>
+
+<form id="form">
+<table style="table-layout:auto">
+<tr>
+<th>Abbreviation</th>
+<th colspan="2">Fullform</th>
+</tr>
+<tr>
+<td>
+<input type="text" name="sf" size="10" maxlength="15" value="" />
+</td>
+<td>
+<input type="text" name="lf" size="40" maxlength="60" value="" />
+</td>
+<td>
+<input type="button" onclick="retrieve();" value="Search" />
+</td>
+</tr>
+</table>
+</form>
+
+<div id="treeDiv1"></div>
+
+<h3>After using this service, please complete a <a href="http://www.nactem.ac.uk/phpsurveyor/index.php?sid=1">questionnaire</a>.</h3>
+
+<!--if-home-->
+<h2>Background</h2>
+<p>
+Abbreviation result from a highly productive type of term variation which substitutes fully expanded terms (e.g., <i>retinoic acid receptor alpha</i>) with shortened term-forms (e.g., <i>RARA</i>).
+Even though no generic rules or exact patterns have been established for dealing with abbreviation creation, abbreviations often appears in documents without the expanded form explicitly stated.
+Thus, an abbreviation dictionary is necessary for advanced text-mining tasks to establish associations between abbreviations and their expanded forms.
+</p>
+<p>
+Acromine is an abbreviation dictionary automatically constructed from the whole MEDLINE as of April, 2009.
+Acromine identifies abbreviation definitions by assuming a word sequence co-occurring frequently with a parenthetical expression to be a potential expanded form.
+Applied to the whole MEDLINE (9,635,599 abstracts), the implemented system extracted 68,007 abbreviation candidates and recognized 467,402 expanded forms.
+The current Acromine achieves 99% precision and 82-95% recall on our evaluation corpus that roughly emulates the whole MEDLINE.</p>
+
+<h2>References</h2>
+<ul>
+<li>Okazaki, N., Ananiadou, S. and Tsujii, J. (2010). <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btq129v1">Building a High Quality Sense Inventory for Improved Abbreviation Disambiguation</a>. <i>Bioinformatics</i>, Oxford University Press.</li>
+<li>Okazaki, N., Ananiadou, S. (2006) <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btl534?ijkey=klrhhjCKJJEaz9T">Building an abbreviation dictionary using a term recognition approach</a>. <i>Bioinformatics</i>, Volume 22, Number 24, pp. 3089-3095, Oxford University Press.</li>
+</ul>
+<!--endif-home-->
+<h2>Feedback</h2>
+<h3>If you have used AcroMine, please complete a <a href="http://www.nactem.ac.uk/phpsurveyor/index.php?sid=1">questionnaire</a> to tell us how useful you found the service.</h3>
+				</div>
+			</div>
+			
+			
+				
+				
+				
+			<div id="footer">
+				
+<p><a href="http://www.jisc.ac.uk/"><img src="/images/jisc.gif" alt="JISC" width="81" height="50" /></a> <a href="http://www.bbsrc.ac.uk/"><img src="/images/bbsrc.gif" alt="BBSRC" width="101" height="50" /></a> <a href="http://www.epsrc.ac.uk/"><img src="/images/epsrc.gif" alt="EPSRC" width="117" height="50" /></a><br />
+  The National Centre for Text Mining is funded by JISC, BBSRC and EPSRC. <br />
+  All
+site content &copy; The Universities of Manchester and Liverpool<br />
+</p>
+
+			</div>
+	
+		</div>
+		
+		
+		
+	</div>
+
+
+<!-- END MAIN CONTENT -->
+</div>
+</div>
+<div id="framebottom"></div>
+
+<!-- END PAGE CONTAINER -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1983580-2";
+urchinTracker();
+</script>
+</body>
+</html>

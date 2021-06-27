@@ -1,0 +1,130 @@
+<!--
+<\? require("webanalysis/include/stats_main.inc");
+	$stats = new init(true, 'webanalysis/'); // 2 params. true/false for activate or not, and the path of webanalyse. ?>
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<!-- ABSCHNITT DOkUMENT TYP
+WIRD AUF JEDER SEITE AUFGERUFEN! -->
+<head>
+	<meta http-equiv="Content-Type" 	content="text/html; charset=iso-8859-1">
+	<meta http-equiv="Content-Language" content="en">
+	<!-- <meta http-equiv="refresh" 			content="0; URL=""> -->
+	<meta name="Copyright" 				content="Copyright 2008 R.H.Bortfeldt HU Berlin">
+	<meta name="Publisher" 				content="R.H. Bortfeldt">
+	<meta name="revisit-after" 			content="30 days">
+	<meta name="robots" 				content="index, follow, all">
+	<meta name="rating" 				content="general">
+
+<!-- ... WEITER AUF JEDER INDIVIDUELLEN SEITE MIT
+<meta name="keywords" content="...">
+<meta name="description" content="...">
+<title>
+<\? $aktiv="Seitenthema"; include("inc. ... php"); \?>
+-->
+
+
+
+<!-- INDIVIDUELL FUER JEDE SEITE! -->
+<meta name="Description" 	content="LGF-INW Homepage">
+<meta name="Keywords" 		content="Züchtungsbiologie">
+<title>Software-RandoMate</title>
+
+<link href="/wikizbnutztier/css/randomate.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+
+
+<!-- HEADER SECTION MIT TAB REGISTER -->
+<!-- INDIVIDUELL FUER JEDE SEITE! -->
+<script type="text/javascript">var ol_textcolor = "#00579d"; var ol_height=10;</script>
+<script type="text/javascript" src="/wikizbnutztier/javascript/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
+
+
+<!-- CSS TAB SECTION -->
+ <div class="headingContainer">
+    <table border=0">
+    	<tr>
+         	<td width="200"><h1>RandoMate v1.2</h1> </td>
+                 <td><img src="/wikizbnutztier/bilder/randomate_mouse.png"></td>
+         </tr>
+    </table>
+
+</div>
+
+<div id="tabs10">
+
+	<ul>
+         	<li id="current"><a href="index.php"><span>Upload File</span></a></li>
+		<li><a href="manual_input.php"><span>Paste Table</span></a></li>
+                 <li><a href="help.php"><span>Help</span></a></li>
+
+         </ul>
+</div>
+
+
+<!-- FORM SECTION -->
+<div class="uploadContainer">
+<!--  -->
+	<form action="/wikizbnutztier/software/RandoMate/index.php"
+   		method="POST" enctype="multipart/form-data">
+
+		<table border="0">
+                 	<tr align="left">
+                         	 <td></td>
+                                  <td width="100px">Inputfile</td>
+                                  <td></td>
+	                 </tr>
+                          <tr>
+                          	<td><a href="help.php#input" onmouseover="return overlib('Insert file with table of families, sex and animal IDs');" onmouseout="return nd();"><img src="/wikizbnutztier/bilder/help_button_20x20px.gif" alt="" border="0"></a></td>
+                          	<td colspan="2"><input type="file" name="userfile"  size="60"/></td>
+                          	<td><input type="hidden" name="userfile"   value="" /></td>
+                          </tr>
+                          <tr>
+                          	<td></td>
+                          	<td></td>
+                                 <td></td>
+                          </tr>
+                          <tr>
+                                 <td></td>
+                          	<td colspan="2"># Matings <span style="color:#CCCCFF">(If left blank, the maximal number will be computed)</span></td>
+                                 <td></td>
+                          </tr>
+                          <tr align="right">
+                                  <td><a href="help.php#matings" onmouseover="return overlib('Insert number of desired mating pairs');" onmouseout="return nd();"><img src="/wikizbnutztier/bilder/help_button_20x20px.gif" alt="" border="0"></a></td>
+                                  <td align="left">
+                                  	<input type="text" name="num_matings" size="3"/>
+                                  </td>
+
+                                  <td>
+                                  	<input type="submit" name="send" value="Run"/>
+                                         <input type="reset"  name="clear" value="Clear" />
+                                  </td>
+	                 </tr>
+                          <tr>
+                          	<td></td>
+                          	<td>
+                                         <input type="hidden" name="MAX_FILE_SIZE"   value="102400" />
+                                         <input type="hidden" name="default_matings" value="10000" />
+                                 </td>
+                                 <td></td>
+                          </tr>
+                 </table>
+ 	</form>
+</div>
+
+<p></p>
+
+<div class="outputContainer">
+Please upload a file!
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,446 @@
+<html>
+<head>
+  <title>BioMart - MartView</title>
+  
+  <link rel="stylesheet" type="text/css" href="/pepseeker/biomart/mview/martview.css" />
+
+<script src="/pepseeker/biomart/mview/js/martview.js"  type="text/javascript" ></script> 
+
+</head>
+
+<body style="margin: 0px;" onload="setVisibleStatus()">
+
+
+
+<div class="mart_header" style=" width:100%; height:15%; overflow:auto;">
+	<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	<td width="100%" height="100%" align="left">
+<img src="/martview/images/logo.png" alt="pepseeker logo" width="170">
+
+	</td>
+	</tr>
+	</table>	
+</div>
+
+
+<div id="mart_containerpanel" style=" width:100%; height:80%; overflow:visible;">
+<form name="mainform" action="/pepseeker/biomart/martview/15ae8dcbfc69986299e1557fa89251ac" method="post" enctype="multipart/form-data">
+	<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
+
+
+  
+  
+
+	<tr>	
+	<td width="100%" height="5%" align="left">
+	<div style=" width:100%; height:100%; overflow:visible; position: relative;">
+
+	<table class ="mart_main_menubar" width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td height="100%"  align="left" valign="top" >
+					     
+			<!--
+			<img src="/martview/images/biomart-logo.gif" alt="" style="float: right; margin: 6px 4px 0px 0px"/></a> 				 
+			-->
+	
+		
+			<!--input type="submit" value="New" style="margin: 0px 0px 0px 6px" name="submit.newsession"--> 
+			<a id="new_button_tag"
+				style="margin-left:6px;"
+				class="mart_btn"
+	   			onmouseover="this.className='mart_btn mart_btnhov'" 
+	   			onmouseout="this.className='mart_btn'"
+				onclick="
+				var currentPath = window.location.pathname; 
+				currentPath = currentPath.replace('/15ae8dcbfc69986299e1557fa89251ac', '');							window.location = currentPath; 
+	
+	  			return false; 
+
+	  			" 
+	  			title="Start a new query">New
+	  		</a>
+	
+	
+			<!--input type="button" value="Count" name="get_count_button" -->
+			<a id="count_button_tag"
+				style="margin-left:4px"
+				class="mart_btn"
+				onmouseover="this.className='mart_btn mart_btnhov'" 
+				onmouseout="this.className='mart_btn'"
+
+				onclick="
+				if (datasetExists() > 0) {
+					document.getElementById('summarypanel_filter_count_1').innerHTML = 'Loading... ';
+					addLoadingImage('summarypanel_filter_count_1', 'pepseeker/biomart');
+					
+					if (document.getElementById('summarypanel_filter_count_2') != null)	{
+						document.getElementById('summarypanel_filter_count_2').innerHTML = 'Loading... ';
+						addLoadingImage('summarypanel_filter_count_2', 'pepseeker/biomart');
+					}
+					document.mainform.formatterMenu.value = 'preView';
+					document.mainform.do_export.value = 0; 
+					document.mainform.track_visible_section.value = document.mainform['mart_mainpanel__current_visible_section'].value;
+					document.mainform.savequery.value = 0; 
+					document.mainform.showquery.value = 0; 
+					document.mainform.countButton.value = 5;
+			
+					document.mainform.target = 'count_hiddenIFrame';
+					document.mainform.submit();
+	
+					document.mainform.countButton.value = 1;
+				
+					return false;
+				}
+
+				" title="Get result count for the query with any filters applied">Count
+			</a>
+
+	
+			<!--input type="button" value="Results" name="get_results_button" -->
+			<a id="results_button_tag"
+				style="margin-left:4px"
+				class="mart_btn"
+				onmouseover="this.className='mart_btn mart_btnhov';" 
+				onmouseout="this.className='mart_btn';"
+			
+				onclick="
+				if (datasetExists() > 0) {
+					document.getElementById('resultsTableId').innerHTML = 'Loading... ';
+					addLoadingImage('resultsTableId', 'pepseeker/biomart');
+					document.mainform.formatterMenu.value = 'preView';
+					document.mainform.do_export.value = 0; 
+					document.mainform.savequery.value = 0;
+					document.mainform.showquery.value = 0;  
+		
+					var summaryCountElt1 = document.getElementById('summarypanel_filter_count_1');
+					if (summaryCountElt1)	{				
+						document.mainform.summarypanel_filter_count_1_hidden.value = summaryCountElt1.innerHTML;
+					}
+					var summaryCountElt2 = document.getElementById('summarypanel_filter_count_2');
+					if (summaryCountElt2)	{
+						document.mainform.summarypanel_filter_count_2_hidden.value = summaryCountElt2.innerHTML;
+					}
+			
+					showPanelHideSiblings('resultspanel');			
+					setHighlightedSummaryPanelBranch('show_results');			
+	
+					document.mainform.track_visible_section.value = document.mainform['mart_mainpanel__current_visible_section'].value;
+	
+					document.mainform['mart_mainpanel__current_visible_section'].value = 'resultspanel'; 
+					document.mainform['summarypanel__current_highlighted_branch'].value = 'show_results'; 
+
+					document.mainform.resultsButton.value = 5;
+		
+					document.mainform.target = 'results_hiddenIFrame';
+					document.mainform.submit();
+			
+					document.mainform.resultsButton.value = 1;			
+				
+					return false;
+				}
+				" title="Preview the results of the query">Results
+			</a>
+	
+		</td>
+		<td height="100%" align="right" valign="top" >
+		
+			<a id="xml_button_tag"
+				style="margin-right:4px"
+				class="mart_btn"
+   			onmouseover="this.className='mart_btn mart_btnhov'" 
+   			onmouseout="this.className='mart_btn'"
+          	onclick="
+				if (datasetExists() > 0) {          	
+	          	document.mainform.showquery.value = 1; 
+   	       	document.mainform.do_export.value = 0; 
+					document.mainform.savequery.value = 0; 
+					document.mainform.target = 'newwindow'; 
+					document.mainform.submit();
+				}
+				" title ="Show query in XML Web Service Format">XML
+			</a>
+
+			<a id="perl_button_tag"
+				style="margin-right:4px"
+				class="mart_btn"
+   			onmouseover="this.className='mart_btn mart_btnhov'" 
+   			onmouseout="this.className='mart_btn'"
+          	onclick="
+				if (datasetExists() > 0) {          	
+	          	document.mainform.showquery.value = 2; 
+   	       	document.mainform.do_export.value = 0; 
+					document.mainform.savequery.value = 0; 
+					document.mainform.target = 'newwindow'; 
+					document.mainform.submit();
+				}
+				" title ="Show query in XML Web Service Format">Perl
+			</a>
+	        
+			<a id="help_button_tag"
+				style="margin-right: 6px"
+				class="mart_btn"
+   			onmouseover="this.className='mart_btn mart_btnhov'" 
+   			onmouseout="this.className='mart_btn'"
+   			
+          	onclick="
+         	 	document.mainform.showquery.value = 0; 
+        		  	document.mainform.do_export.value = 0; 
+					document.mainform.savequery.value = 0;
+					document.mainform.target = '_self'; 
+					var summaryCountElt1 = document.getElementById('summarypanel_filter_count_1');
+					if (summaryCountElt1)	{				
+						document.mainform.summarypanel_filter_count_1_hidden.value = summaryCountElt1.innerHTML;
+					}
+					var summaryCountElt2 = document.getElementById('summarypanel_filter_count_2');
+					if (summaryCountElt2)	{
+						document.mainform.summarypanel_filter_count_2_hidden.value = summaryCountElt2.innerHTML;
+					}
+	         	javascript:void(window.open('/pepseeker/biomart/mview/help.html','martview','width=600,height=500,resizable,scrollbars'));	
+				" title ="Get Help">Help
+			</a>
+
+
+		</td>
+		</tr>
+	</table>
+
+
+	</div>
+	</td>
+	</tr>
+	
+	
+	<!-- GAP betweeb buttonsBar and panels below-->	
+	<tr>
+		<td width="100%" height="1%" align="left">			
+		</td>
+	</tr>
+	
+	
+	<tr>
+	
+	<td width="100%" height="94%" align="left">
+	<div style="width:100%; height:100%; overflow:hidden; align:top; background: white; position: relative;">
+		<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+		<tr>
+		<td class="mart_tableSummaryPanel" height="100%" width="25%" align="left" valign="top">
+			<div id="summaryPanelDiv" class="mart_summarypanel_datasets" style="height:100%; overflow: auto; text-align: top; position:relative; display: none;">			
+
+				<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+				<tr>
+				<td width="100%" height="100%" valign="top" align="left">
+				
+<!--
+<div style="text-align: center;">
+  <b>Query summary</b>
+</div>
+-->
+
+None selected
+<br />
+
+					
+				</td>
+				</tr>
+				</table>
+			</div> <!-- summary box closes -->	
+			<div id="summaryPanelDiv_empty" style="display: block;">			
+				<table class="mart_summarypanel_listheaderTable" width="100%" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed; margin: 16px 0px 0px 0px;">
+				<tr> <td> <span class="mart_summarypanel_listheader_Empty" id=""> Dataset </span>	</td>	</tr>
+				</table> 	<div  class="mart_summarypanel_listitem2">	[None selected]</div>
+			</div>
+		</td>
+	
+	<td class="mart_tableMainPanel" height="100%" width="85%" valign="top" align="left">
+
+					
+			<input type="hidden" name="menuNumber" value="0" />
+			<input type="hidden" name="newsession" value="0" />
+			<input type="hidden" name="do_export" value="0" />
+			<input type="hidden" name="do_export2resultspage" />
+			<input type="hidden" name="savequery" value="0" />
+			<input type="hidden" name="showquery" value="0" />
+			<input type="hidden" name="countButton" value="0" />
+			<input type="hidden" name="resultsButton" value="0" />
+			<input type="hidden" name="reverseName" value="0" />
+			<input type="hidden" name="summarypanel_filter_count_1_hidden" value="" />
+			<input type="hidden" name="summarypanel_filter_count_2_hidden" value="" />
+			<input type="hidden" name="track_visible_section" value="0" />
+			<input type="hidden" name="export_dataset" value="0" />
+			<input type="hidden" name="formatterMenu" value="" />
+			<input type="hidden" name="newQueryValue" value="1" />
+			<input type="hidden" name="uniqueRowsPreView" value="" />
+			<input type="hidden" name="uniqueRowsExportView" value="" />
+			<input type="hidden" name="showAll" value="0" />
+			<input type="hidden" name="schemaName" value="" />
+			
+			<input type="hidden" name="mart_mainpanel__current_visible_section" value=""/>
+			<input type="hidden" name="summarypanel__current_highlighted_branch" value=""/>
+			
+			<div id="mart_mainpanel" style="height:100%; overflow:hidden; text-align: top; position: relative;">
+			<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
+			<tr>
+			<td id="mart_mainpanel" width="100%" height="100%" valign="top" align="left">	
+<div id="mart_datasetselectpanel" class="mart_datasetselectpanel" style="" >
+
+
+<div id="schemaMenu" class="mart_schemamenu" style="">
+	<select name="schemamenu" 
+		class="mart_input"
+		onchange="
+
+			removeHiddenFormParam('schema');
+
+			addHiddenFormParam('schema', document.mainform, this.options[this.selectedIndex].innerHTML);
+			clearSummaryPanel();
+			removeHiddenFormParam('dataBase');		
+			removeHiddenFormParam('dataset');
+			schemaMenuTriggered(this.options[this.selectedIndex].value);
+		">
+	</select>
+</div>
+
+<div id="dbMenu" class="mart_databasemenu" style="display:none;">
+	<select  name="databasemenu" 
+		class="mart_input"
+		onchange="
+
+			removeHiddenFormParam('schema');
+			addHiddenFormParam_Schema('schema', document.mainform, this.options[this.selectedIndex].value);
+									
+			removeHiddenFormParam('dataBase');
+
+			addHiddenFormParam('dataBase', document.mainform, this.options[this.selectedIndex].innerHTML);
+			clearSummaryPanel();
+			
+			removeHiddenFormParam('dataset');
+
+			dbMenuTriggered(this.options[this.selectedIndex].value);
+		">
+	</select>
+</div>
+
+<div id="dsMenu_1" class="mart_datasetmenu_compara" style="display:none;">
+	<select name="datasetmenu_1"
+		class="mart_input"	
+		onchange="
+			document.mainform.menuNumber.value = 1;
+			clearSummaryPanel();
+			removeHiddenFormParam('dataset');
+			datasetmenu_1_Triggered(this.options[this.selectedIndex].value);
+		">
+
+	</select>
+</div>
+
+<div id="dsMenu_2" class="mart_datasetmenu_compara" style="display:none;">
+	<select name="datasetmenu_2"
+		class="mart_input"	
+		onchange="
+			document.mainform.menuNumber.value = 2;
+			clearSummaryPanel();
+			removeHiddenFormParam('dataset');			
+			datasetmenu_2_Triggered(this.options[this.selectedIndex].value);
+		">
+
+	</select>
+</div>
+
+<div id="dsMenu_3" class="mart_datasetmenu" style="display:none;">
+	<select name="datasetmenu_3"
+		class="mart_input"	
+		onchange="
+			document.mainform.do_export.value = 0;
+			document.mainform.showquery.value = 0;
+			removeHiddenFormParam('dataset');
+			if(this.options[this.selectedIndex].value != '')	{
+				if (document.getElementById('dsMenu_1').style.display == 'block')	{
+					// or dsMenu_2, just to flag its multi menu system for Web.pm
+					document.mainform.menuNumber.value = 3;
+				}
+				else {
+					document.mainform.menuNumber.value = 0;
+				}
+
+				addDatasetParamToForm(this.options[this.selectedIndex].value);
+				if (document.getElementById('summarypanel_filter_count_1') != null)	{
+					document.getElementById('summarypanel_filter_count_1').innerHTML = '';
+					document.mainform.summarypanel_filter_count_1_hidden.value = '';
+				}
+				if (document.getElementById('summarypanel_filter_count_2') != null)	{
+					document.getElementById('summarypanel_filter_count_2').innerHTML = '';
+					document.mainform.summarypanel_filter_count_2_hidden.value = '';
+				}
+				document.mainform.target = '_self';
+				document.mainform.resultsButton.value = 0;				
+				document.mainform.submit();
+			}
+			else{
+				clearSummaryPanel();
+				//alert('not submitting - SOME WEIRD ERROR');
+			}
+		">
+	</select>
+</div>
+
+</div>
+			</td>
+			</tr>
+			</table>
+			</div>
+
+
+		</td>
+		</tr>
+		</table>
+		
+	</div>
+	</td>
+	</tr>
+	
+	<tr>
+		<td align="left" height="0%" valign="top">
+		<div style="border-width: 0px 0px 1px 0px; border-style: solid; border-color: black;"> </div>
+		</td>
+	</tr>
+	</table>
+	
+	<!-- following Iframes must be kept out of the above table otherwise FireFox starts moaning about auto scrolling -->
+	<!-- we set display:none (for all browsers) and visibility:hiddden (for Safari & Konqueror) through JS -->
+	<iframe id="countIFrameId" name="count_hiddenIFrame" src="about:blank" style="width:0px; height:0px;" 
+				onload="getCountAjax();">
+	</iframe>				
+	<iframe id="resultsIFrameId" name="results_hiddenIFrame" src="about:blank" style="width:0px; height:0px;" 
+				onload="getResultsAjax();">
+	</iframe>
+	
+  </form>
+</div>
+	
+
+<div id="mart_footerStrip" class="mart_footer" style=" width:100%; height:5%; overflow:hidden;">
+	<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	<td width="100%" height="100%" align="left" >
+<!-- : footer.tt,v 1.4 2007/05/01 23:18:33 arek Exp  -->
+
+<div id="mart_bottom_bar">
+         biomart version 0.6	
+</div>
+	</td>
+	</tr>
+	</table>	
+
+</div>
+
+	<script language="JavaScript" type="text/javascript" >
+		//<![CDATA[
+			datasetpanel_pre_onload({'databasemenu':{'pepseekerGOLD____pepseekerGOLD':{'datasetmenu_3':[['peptide','peptide']]},'pepseeker2____pepseeker2':{'datasetmenu_3':[['peptide_1','peptide']]}},'schema':{'pepseekerGOLD':{'databasemenu':[['pepseekerGOLD____pepseekerGOLD','pepseekerGOLD']]},'pepseeker2':{'databasemenu':[['pepseeker2____pepseeker2','pepseeker2']]}}} , {'datasetmenu_1':'','datasetmenu_2':'','databasmenu':'','datasetmenu_3':'','schema':''} , '- CHOOSE SCHEMA -', '- CHOOSE DATABASE -', '- CHOOSE DATASET -', '0');
+		//]]>
+	</script>
+
+
+
+</body>
+</html>

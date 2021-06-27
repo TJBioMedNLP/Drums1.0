@@ -1,0 +1,458 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>BamView</title>
+    <meta name="keywords" content="Artemis, samtools, picard, BAM, viewer, alignment, Sanger Institute" />
+    <meta name="description" content="Visualisation Tool For Read Alignment Data" />
+	<meta name="google-site-verification" content="ULisJuFjsLK8mZGPi94mftzzArWAYXbdMcpyRy7iLus" />
+	
+    <style type="text/css">
+      @import "css/ui.tabs.css";
+      @import "css/ui.theme.css";
+      @import "css/ui.core.css";
+    </style>
+    <script type="text/javascript" src="js/jquery-1.3.2.min.js">
+    </script>
+    <script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $("#tabs").tabs();
+      });
+    </script>
+  </head>
+  
+  <body style="font-size:75%;">
+  <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9678684-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+    <div id="tabs">
+      <ul>
+        <li>
+          <a href="#home"><span>BamView Download</span></a>
+        </li>
+        <li>
+          <a href="#usage"><span>Usage</span></a>
+        </li>
+        <li>
+          <a href="#artemis"><span>Example in Artemis</span></a>
+        </li>
+        <li>
+          <a href="#bam"><span>Generating a BAM</span></a>
+        </li>
+		<li>
+          <a href="#faq"><span>FAQ</span></a>
+        </li>
+		<li>
+          <a href="#Contact"><span>Contact</span></a>
+        </li>
+      </ul>
+      <div id="home">
+        <p>
+          <strong>BamView</strong> is a free interactive display of read alignments in 
+		  BAM data files. It has been developed by the 
+		  Pathogen Group at the <a href="http://www.sanger.ac.uk/">Sanger Institute</a>.
+        </p>
+		<p>
+        BamView can be launched with <a href="http://java.sun.com/products/javawebstart/">Java Web Start</a>
+        by clicking below:
+		</p>
+          <table border="2" cellspacing="2" cellpadding="2">
+            <tr>
+              <td>
+                <b><a href="v1.1.1/BamView.jnlp" onclick="javascript: pageTracker._trackPageview('/downloads/BamViewJNLP'); ">
+                	LAUNCH BamView</a></b>
+              </td>
+            </tr>
+          </table>
+        <p>
+          Or download BamView from:
+        </p>
+        <ul>
+          <li>
+            <a href="v1.1.1/BamView.v1.1.1.dmg.zip" onclick="javascript: pageTracker._trackPageview('/downloads/BamViewMacOSX'); ">MacOSX</a>&#8224;
+          </li>
+          <li>
+            <a href="v1.1.1/BamView_v1.1.1.jar" onclick="javascript: pageTracker._trackPageview('/downloads/BamViewJAR'); ">Windows and UNIX</a>
+          </li>
+        </ul>
+        <p>Alternatively launch <strong>Artemis</strong> from the Development
+		tab (for the most recent updates) on the <a href="http://www.sanger.ac.uk/resources/software/artemis/#development">
+        Artemis home page</a>. Within Artemis, the BamView panel shows the reads alongside the annotation.
+        To use this in Artemis open up a sequence file and open the BamView panel from the "File" 
+        menu and select the "Read BAM..." option.
+		</p>
+	<p>
+	The source code is available as part of the Artemis code which can be downloaded from 
+	<a href="http://github.com/sanger-pathogens/Artemis">GitHub</a>.
+	</p>
+	     <p><b>&#8224; Note for MacOSX</b>:
+        occasionally a browser decides to display the
+        contents of the .dmg file rather than downloading it.
+		If this happens hold down the control key and click on the download link
+		or right click on the download link and save the link as a file. 
+		</p>
+		
+		<p style="background-color: #d3d3d3" class="ui-corner-all">
+			<strong>BamView:</strong>
+			Viewing mapped read alignment data in the context of the reference sequence.<br />
+			Tim Carver; Ulrike B&ouml;hme; Thomas D. Otto; Julian Parkhill; Matthew Berriman
+			Bioinformatics 2010;<br />
+			doi: <a href="http://dx.doi.org/10.1093/bioinformatics/btq010">
+				10.1093/bioinformatics/btq010</a>
+		</p>
+      </div>
+      <div id="usage">
+        <p>
+          This application displays read alignments/mappings. As the name suggests it reads a 
+          BAM file that has been sorted and indexed using <a href="http://samtools.sourceforge.net/">SAMtools</a>. 
+		</p>
+		<strong>Requirements</strong>
+		<p>  
+		  BamView requires Java 1.6 as it makes use of the Java bindings 
+          (<a href="http://picard.sourceforge.net/">Picard</a>) to read the BAM file.
+        </p>
+		<strong>Command line options</strong>
+        <p>
+          To run the application on UNIX from the downloaded jar file run the UNIX:
+        </p>
+        <p>
+          <tt>java -mx512m -jar BamView.jar</tt>
+        </p>
+        <p>
+          and extra command line options are given when '-h' is used:
+        </p>
+        <p>
+          <tt>java -jar BamView.jar -h</tt>
+        </p>
+		<p>
+	 	  BAM files can be specified on the command line with the '-a' option: 
+		</p>
+        <p>
+          <tt>java -mx512m -jar BamView.jar -a pathToFile/sorted.bam</tt>
+        </p>
+        <p>  
+		  If a BAM filename is not given on the command line BamView will prompt for 
+		  a file to be entered. The BAM index file should have the same name as the 
+		  BAM file but with a '.bai' suffix. Multiple BAM files can be loaded and 
+		  overlaid in the viewer. To make this easier BamView will read in files that 
+		  contain a list of filenames.
+		</p>
+		
+		<p>
+		<strong>Right click menu</strong>
+		</p>
+		<p>
+			A menu is shown when right clicking on the BamView window (see figure below). This provides a
+			number of viewing options. If you right click over a read it also gives an option in the
+			menu to show the details of that read in a separate window. Under the 'Show' menu there
+			is an option to display the SNP's. 
+		</p>
+		<p>
+		<i><em>Figure showing the menu that appears when right clicking on BamView. The vertical red lines
+		mark the SNP's.</em></i>
+          <img src="gfx/bv3.gif" width="850" height="427" alt="BamView" style="border:1px solid black;" />
+        </p>
+		
+		<p>
+		<strong>Viewing insertions and deletions</strong>
+		</p>
+		<p>
+			When zoomed in to the nucleotide level insertions are marked by purple vertical 
+			lines (see figure below). The insertion type is displayed as a tooltip when the mouse is positioned 
+			over the insertion. Deletions are marked with horizontal lines joining the sections of 
+			the read they belong to (see figure below). Clicking on a read highlights the read pair 
+			with a red border and the deletion lines become red.
+		</p>
+		<p>
+          <img src="gfx/bv.gif" width="850" height="427" alt="BamView" style="border:1px solid black;" />
+        </p>
+
+		<p>
+		<strong>Base qualities</strong>
+		</p>
+		<p>
+			Bases can be coloured by ('Colour By' -> 'Base Quality') their quality scores
+			(blue &lt;10; green &lt;20; orange &lt;30; black &gt;=30).
+		</p>
+		<p>
+          <img src="gfx/bv2.gif" width="850" height="427" alt="BamView" style="border:1px solid black;" />
+        </p>
+		
+		<p>	
+		<strong>Viewing multiple BAM files</strong>
+		</p>
+		<p>
+		  Additional BAM files can be read and overlaid in BamView by right clicking
+		  on the BamView panel and selecting the 'Add BAM...' option from the popup menu.
+		  The BAM files that are displayed can be switched off and on from the 
+		  'BAM files' menu in the popup menu.
+		</p>
+		<p>
+		  Alternatively paths to multiple BAM files can be read from a file of
+		  file names. A file containing the list of BAM file names can be used 
+		  when BamView is launched and prompts for a file name. It can also be
+		  given as an option on the command line:
+		</p>
+		<p>
+			<tt>java -mx512m -jar BamView.jar -a bam.list</tt>
+		</p>
+		<strong>Reading BAM files from HTTP links</strong>
+		<p>
+			The sorted BAM and the index files can be read from an HTTP server.
+			The URL can be supplied when BamView is opened:
+		</p>
+		<p>
+          <img src="gfx/bv_url.gif" width="400" height="142" alt="Open BAM" style="border:1px solid black;" />
+        </p>
+		<p>
+			Or on the command line:
+		</p>
+		<p>
+			<tt>java -jar BamView.jar -a 'http://127.0.0.1/BAM/sorted_new_bam.out.bam'</tt>
+		</p>
+		<p>
+			A file containing a lists of HTTP links to BAM files can also be used
+			and read from an HTTP link, for example:
+		</p>
+		<p>
+			<tt>java -jar BamView.jar -a 'http://127.0.0.1/BAM/bam.list'</tt>
+		</p>
+		<p>
+		<strong>Increasing the Memory</strong>
+		</p>
+		<p>
+          Displaying BAM files with high coverage of reads is memory intensive. The
+		  'Stack' view is generally quicker and the less memory intensive of the views.
+		  It may also be necessary to increase the memory available to the application.
+		</p>
+		<p> 
+		  On <strong>linux</strong> change 
+		  the -mx value on the command line above. This is used to specify 
+		  the maximum size, in bytes, of the memory allocation pool, e.g. -mx512m
+		  sets it to 512MB. This should be set to a smaller value than the total memory 
+		  available on your computer.
+        </p>
+		<p>
+			On <strong>MacOSX</strong>, this value is set in the file Info.plist in the directory
+			BamView.app/Contents. Towards the bottom of the file there are a couple
+			of lines that look like this:
+		</p>
+		<p>
+			<tt>
+			  &lt;key&gt;VMOptions&lt;/key&gt;<br />
+              &lt;string&gt;-Xmx800m&lt;/string&gt;
+			</tt> 
+		</p>
+		<p>
+			Changing the value after -Xmx will change the memory used by BamView.
+		</p>
+		<p>
+			On <strong>windows</strong> create a shortcut to the BamView JAR file. 
+			Edit the properties of the shortcut and add "java -mx512m -jar " to the 
+			start of the Target: field. -mx512m sets the maximum memory Java will 
+			allocate to BamView. 
+		</p>
+      </div>
+      <div id="artemis">
+          <ol>
+            <li>
+              <a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/3D7.latest_version/">Click here</a>
+              to download an example Plasmodium falciparum reference.
+            </li>
+            <li>
+              <a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/3D7.archive/misc/BAM/Plasmodium3D7_RNASeq.bam">Click here</a>
+              to download a BAM file for Plasmodium falciparum.
+            </li>
+            <li>
+              <a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/3D7.archive/misc/BAM/Plasmodium3D7_RNASeq.bam.bai">Click here</a>
+              to download the associated index file and put this in the same folder as the
+              BAM file.
+            </li>
+            <li>
+              Download Artemis or launch it from the web start link above and open the reference sequence.
+            </li>
+            <li>
+              Then from the 'File' menu in Artemis select the option 'Read BAM...' to open the BamView window.
+            </li>
+            <li>
+              Select the correct chromosome from the drop down list of reference sequences (MAL1, MAL2,...) 
+              at the top. <strong>Note</strong>
+              that the bar at the top is on auto-hide by default in Artemis which means
+              that is appears only when the mouse cursor is moved to the top of the BamView window.
+            </li>
+          </ol>
+		<p>
+          This will open the BamView window similar to the example below. Right clicking on the window provides
+          a pop-up menu from which different views can be selected.
+        </p>
+        <p>
+          <img src="gfx/Pf3D7_13.gif" width="482" height="448" alt="Chromosome13" />
+        </p>
+        <p>
+          <strong>Note</strong>
+          that the bottom of the BamView display can be dragged up and down to
+          alter the size of the window. Below is a zoomed out illustration of the stack view:
+        </p>
+        <p>
+          <img src="gfx/Pf3D7_13a.gif" width="482" height="329" alt="Chromosome13" />
+        </p>
+        <p>
+          Below is an example of finding a sequencing error when comparing the 
+          reads to the reference.
+        </p>
+        <p>
+          <img src="gfx/pseudogene.png" width="482" height="300" alt="Chromosome13" />
+        </p>
+      </div>
+      <div id="bam">
+      <p>
+        <strong>Outline</strong>
+      </p>
+      <p>
+        There are a number of tools to align sequence reads to a reference sequence. 
+        Read alignment data that is generated by <a href="http://maq.sourceforge.net/">Maq</a>
+        can 
+        be converted to SAM using SAMtools (maq2sam-long for maq-0.6.x and maq2sam-short for maq-0.7.x).  
+        There is also a script (export2sam.pl) that converts Illumina export to SAM. <a href="http://bowtie-bio.sourceforge.net/">Bowtie</a>
+        is short read aligner which can also generate SAM files. There is a useful Bowtie tutorial <a href="http://bowtie-bio.sourceforge.net/tutorial.shtml#sam">here</a>.<a href="http://www.sanger.ac.uk/Software/analysis/SSAHA2/">SSAHA2</a>
+        is designed as mapping of sequencing reads onto genomic reference sequences. One of the output formats in SSAHA2 is the SAM format. 
+        The <a href="http://bio-bwa.sourceforge.net/">BWA</a>
+        software is an efficient program that aligns relatively short.
+      </p>
+      <p>
+        Using the SAMtools view flag SAM files can be converted to the binary version (BAM).
+      </p>
+      <p>
+        SAMtools can be downloaded for different operating systems (UNIX, MacOSX and Windows) from the 
+        download link on the SAMtools <a href="http://samtools.sourceforge.net/">home page</a>.
+      </p>
+      <p>
+        To sort a BAM file with SAMtools run the command with the 'sort' flag, e.g.:
+      </p>
+      <p>
+        <tt>samtools sort Plasmodium3D7_RNASeq.bam Plasmodium3D7_RNASeq_sorted</tt>
+      </p>
+      <p>
+        To index the sorted BAM the command to run will look like this:
+      </p>
+      <p>
+        <tt>samtools index Plasmodium3D7_RNASeq_sorted.bam</tt>
+      </p>
+      <p>
+        Then BamView can be launched from the web start link above or run from the downloaded jar, e.g:
+      </p>
+      <tt>java -jar -mx512m BamView.jar -a Plasmodium3D7_RNASeq_sorted.bam -r Pf3D7_13.embl</tt>
+      <p>
+        <strong>Example</strong>
+      </p>
+      <p>
+        An example run using BWA to generate a BAM file from fastq files is given below:
+      </p>
+        <ol>
+          <li>
+            <a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/misc/BAM/1788_1_1.fastq">Click here</a>
+            to download 1788_1_1.fastq.
+          </li>
+          <li>
+            <a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/misc/BAM/1788_1_2.fastq">Click here</a>
+            to download 1788_1_2.fastq.
+          </li>
+          <li>
+            <a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/misc/BAM/3D7.sequence.2.1.4.fasta">Click here</a>
+            to download the reference sequence 3D7.sequence.2.1.4.fasta.
+          </li>
+          <li>
+            Download <a href="http://bio-bwa.sourceforge.net/">BWA</a>
+            and <a href="http://samtools.sourceforge.net/">SAMtools</a>
+            and add these 
+            to your PATH.
+          </li>
+          <li>
+            Then this <a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/misc/BAM/little.bwa.bam.sh">shell script</a>
+            automates the commands required to generate the BAM. Make the script executable (chmod a+x little.bwa.bam.sh).
+            This can be run with the command line:<br />
+            <tt>./little.bwa.bam.sh 3D7.sequence.2.1.4.fasta \
+ 1788_1_1.fastq 1788_1_2.fastq 3D7 200</tt>
+            <br />where 3D7 is the output BAM ttfix and 200 is the expected insert size. 
+            Note that this can take a few hours to run.
+          </li>
+          <li>
+            Then BamView can be launched from the web start link above or run from the downloaded jar, e.g:
+			<br /><tt>java -jar -mx512m ../artemis/BamView.jar \
+ -a 3D7.bam -r 3D7.sequence.2.1.4.fasta</tt>
+          </li>
+        </ol>
+
+	  <p>
+	  	Other example scripts are here for:
+	  </p>
+		<ul>
+		<li><a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/misc/BAM/little.maq.bam.sh">maq</a>
+		</li>
+		<li><a href="ftp://ftp.sanger.ac.uk/pub/pathogens/Plasmodium/falciparum/3D7/misc/BAM/little.bwa.bam.sh">ssaha</a>
+		</li></ul>
+	  <p>
+		maq.pl and ssaha2 (version 2.5) must be in the path, as well as the samtools/misc/ directory (for maq). 
+		For malaria, ssaha will take a long time. Maq should need roughly 10x longer than bwa.
+	  </p>
+    </div>
+	
+	<div id="faq">
+	 <p>
+	 	<strong>Troubleshooting if BamView is not opening</strong>:
+	 	<ol>
+	 		<li>Ensure that you are using the most recent Java (at least Java1.6 - 
+			a warning message is shown if the version of Java you have is older than this).</li>
+			<li>The BAM file needs to be <em>sorted</em>:<br /> 
+			<tt>samtools sort &lt;in.bam&gt; &lt;out.prefix&gt;</tt><br />
+			and <em>indexed</em><br />
+			<tt>samtools index &lt;in.bam&gt; [&lt;out.index&gt;]</tt></li>
+			<li>Check that you have the BAM index file in the same directory. 
+			BamView assumes that the name of the index file is the same as the 
+			BAM file but with the added .bai extension.</li>
+			<li>If the BamView window is actually opening but just blank then try 
+			changing to a different view by right clicking on the BamView window. 
+			You may need to select the correct reference from the top left drop down list.</li>
+	 	</ol>
+		<strong>Colour schemes</strong>:
+		<ol>
+			<li><em>Stack view and Strand stack view</em>: paired reads are blue; single reads or reads with an
+			unmapped pair are black; reads with the same start and end alignment positions
+			are overlaid and are green.</li>
+			<li><em>Inferred size view:</em> paired reads are blue and those with an inversion are red. 
+			Reads that do not have a mapped mate are black and are optionally shown in the 
+			inferred insert size view.</li>
+			<li><em>Paired stack view:</em> paired reads are blue and those with an inversion are red.</li>
+			<li><em>Zoomed in to the nucleotide level</em>: the bases can be coloured by 
+			their mapping quality score:<br />blue <10; green <20; orange <30; black ³30.</li>
+		</ol>
+		<strong>BamView in Artemis</strong>:
+		<ol>
+			<li>The <em>asynchronous</em> option (when selected from the menu) means that when you scroll 
+			along the sequence the BamView window only updates when scrolling stops. This makes scrolling 
+			faster when the coverage is high in the region being viewed. However this can be turned 
+			off to see the reads as you scroll along.</li>
+		</ol>
+     </p>
+	</div>
+	
+	<div id="Contact">
+	 <p>
+          We welcome contributions and suggestions for new features to BamView.
+        </p>
+        <p>
+          If you have comments about this software please send them to the 
+		  <a href="mailto:artemis@sanger.ac.uk">BamView developers</a>.
+        </p>
+	</div>
+    </div>
+  </body>
+</html>

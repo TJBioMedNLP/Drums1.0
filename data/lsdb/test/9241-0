@@ -1,0 +1,488 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<script type="text/javascript">
+
+	//Here is our True Positive Rate chart.
+	// SEQ (W=11) 		
+	// Probability 	FPr 	TPr
+	// 0.683 	0.05 	0.119
+	// 0.632 	0.1 	0.22
+	// 0.601 	0.15 	0.294
+	// 0.574 	0.2 	0.374
+	var SEQ_11 = new Array();
+	SEQ_11['.05'] = ".119";
+	SEQ_11['.10'] = ".22";
+	SEQ_11['.15'] = ".294";
+	SEQ_11['.20'] = ".374";
+			
+	// PSSM (W=11) 		
+	// Probability 	FPr 	TPr
+	// 0.742 	0.05 	0.152
+	// 0.684 	0.1 	0.261
+	// 0.637	0.15 	0.345
+	// 0.602 	0.2 	0.423
+	var PSSM_11 = new Array();
+	PSSM_11['.05'] = ".152";
+	PSSM_11['.10'] = ".261";
+	PSSM_11['.15'] = ".345";
+	PSSM_11['.20'] = ".423";
+
+	// SEQ+NSA (W=7) 		
+	// Probability 	FPr 	TPr
+	// 0.738 	0.05 	0.205
+	// 0.671 	0.1 	0.319
+	// 0.626	0.15 	0.408
+	// 0.588	0.2 	0.485
+	var SEQ_7 = new Array();
+	SEQ_7['.05'] = ".205";
+	SEQ_7['.10'] = ".319";
+	SEQ_7['.15'] = ".408";
+	SEQ_7['.20'] = ".485";
+
+	// PSSM+NSA (W=7) 		
+	// Probability 	FPr 	TPr
+	// 0.764 	0.05 	0.186
+	// 0.7 	0.1 	0.299
+	// 0.648 	0.15 	0.402
+	// 0.604 	0.2 	0.482
+	var PSSM_7 = new Array();
+	PSSM_7['.05'] = ".186";
+	PSSM_7['.10'] = ".299";
+	PSSM_7['.15'] = ".402";
+	PSSM_7['.20'] = ".482";
+	
+	//This function will update the True Positive Rate based on the selected items of the user.
+	function updateTruePositiveRate()
+	{
+
+		var lsTruePositiveRate;
+		lsTruePositiveRate = "";
+		
+		//Enter Fasta
+		//W = 11, Seq Encoding + not a PDB file.
+		if((document.forms[0].seq_input_method[0].checked == true) && (document.forms[0].encoding[1].checked == true))
+		{
+			lsTruePositiveRate = SEQ_11[document.forms[0].false_positive_rate.value];
+		}
+		//W = 11 PSSM encoding + not a PDB file.
+		if((document.forms[0].seq_input_method[0].checked == true) && (document.forms[0].encoding[0].checked == true))
+		{
+			lsTruePositiveRate = PSSM_11[document.forms[0].false_positive_rate.value];
+		}
+		
+		//Upload Fasta
+		if((document.forms[0].seq_input_method[1].checked == true) && (document.forms[0].encoding[1].checked == true))
+		{
+			lsTruePositiveRate = SEQ_11[document.forms[0].false_positive_rate.value];
+		}
+		//W = 11 PSSM encoding + not a PDB file.
+		if((document.forms[0].seq_input_method[1].checked == true) && (document.forms[0].encoding[0].checked == true))
+		{
+			lsTruePositiveRate = PSSM_11[document.forms[0].false_positive_rate.value];
+		}		
+		
+		
+		//Upload PDB
+		//W = 11, Seq Encoding + a PDB file.
+		if((document.forms[0].seq_input_method[2].checked == true) && (document.forms[0].encoding[1].checked == true))
+		{
+			lsTruePositiveRate = SEQ_7[document.forms[0].false_positive_rate.value];
+		}
+		//W = 11 PSSM encoding + a PDB file.
+		if((document.forms[0].seq_input_method[2].checked == true) && (document.forms[0].encoding[0].checked == true))
+		{
+			lsTruePositiveRate = PSSM_7[document.forms[0].false_positive_rate.value];
+		}
+				
+		//Get PDB
+		//W = 11, Seq Encoding + a PDB file.
+		if((document.forms[0].seq_input_method[3].checked == true) && (document.forms[0].encoding[1].checked == true))
+		{
+			lsTruePositiveRate = SEQ_7[document.forms[0].false_positive_rate.value];
+		}
+		//W = 11 PSSM encoding + a PDB file.
+		if((document.forms[0].seq_input_method[3].checked == true) && (document.forms[0].encoding[0].checked == true))
+		{
+			lsTruePositiveRate = PSSM_7[document.forms[0].false_positive_rate.value];
+		}				
+				
+		document.getElementById("truePositiveRate").innerHTML = lsTruePositiveRate;
+	}
+
+	
+	//This function will validate the html form.
+	function validateForm()
+	{
+		//Let's blow out values to the text boxes the user isn't using.
+		if(document.forms[0].seq_input_method[0].checked == true)
+		{
+			document.forms[0].file_uploaded.value = "";
+			document.forms[0].file_uploaded_pdb.value = "";
+			document.forms[0].subunit.value = "";
+		}
+	
+		//Let's blow out values to the text boxes the user isn't using.
+		if(document.forms[0].seq_input_method[1].checked == true)
+		{
+			document.forms[0].seq_pasted.value = "";
+			document.forms[0].file_uploaded_pdb.value = "";
+			document.forms[0].subunit.value = "";
+		}	
+	
+		//Let's blow out values to the text boxes the user isn't using.
+		if(document.forms[0].seq_input_method[2].checked == true)
+		{
+			document.forms[0].seq_pasted.value = "";
+			document.forms[0].file_uploaded.value = "";
+		}		
+	
+		//If user is pasting a value and the text field is empty, alert them.
+		if(document.forms[0].seq_pasted.value=="" && document.forms[0].seq_input_method[0].checked == true)
+		{
+			alert("Please enter a sequence.");
+			return false;
+		}
+
+		//If user is uploading a file and the text field is empty, alert them.
+		if(document.forms[0].file_uploaded.value=="" && document.forms[0].seq_input_method[1].checked == true)
+		{
+			alert("Please select a file to upload.");
+			return false;
+		}	
+		
+		//If user is uploading a pdb file and the text field is empty, alert them.
+		if(document.forms[0].file_uploaded_pdb.value=="" && document.forms[0].seq_input_method[2].checked == true)
+		{
+			alert("Please select a file to upload.");
+			return false;
+		}
+		
+		//This is the regular expression to make sure the pdb ID is only 4 characters. a-z or 0-9.
+		re = new RegExp("^[A-Z0-9]$");
+			
+		//Test to see if subunit is kosher.
+		if(document.forms[0].seq_input_method[2].checked == true && re.test(document.forms[0].subunit.value) == false && document.forms[0].subunit.value != "")
+		{
+			alert("The 1 character subunit can only contain the letters A-Z and the digits 0-9.");
+			return false;		
+		}
+		
+		
+		//If user is getting a pdb file and the text field is empty, alert them.
+		if(document.forms[0].get_pdb.value=="" && document.forms[0].seq_input_method[3].checked == true)
+		{
+			alert("Please enter a four-character PDB ID.");
+			return false;
+		}			
+
+		//Run RegEx test if the input method if PDB ID.		
+		if(document.forms[0].seq_input_method[3].checked == true)
+		{
+			//Convert the PDB ID value to lowercase if it exists.
+			document.forms[0].get_pdb.value = document.forms[0].get_pdb.value.toLowerCase();
+
+			//This is the regular expression to make sure the pdb ID is only 4 characters. a-z or 0-9.
+			re = new RegExp("^[a-z0-9]{4,4}$");
+
+			//Here we test the regex.
+			if(re.test(document.forms[0].get_pdb.value) == false)
+			{
+				alert("The 4 character PDB can only contain the letters a-z and the digits 0-9.");
+				return false;
+			}
+		}
+		
+		//If user is getting a pdb file and the text field is empty, alert them.
+		if(document.forms[0].get_pdb.value=="" && document.forms[0].seq_input_method[3].checked == true)
+		{
+			alert("Please enter a four-character PDB ID.");
+			return false;
+		}					
+		
+		//If the  user selects  to recieve results by e-mail and they did not enter an e-mail address, alert them.
+		if(document.forms[0].delivery[0].checked == true && document.forms[0].email.value == "")
+		{
+			alert("Please enter your e-mail address.");
+			return false;
+		}
+		
+		document.forms[0].submit();
+	}
+</script>
+
+<html xmlns ="http://www.w3.org/1999/xhtml">   
+    <head>
+        <style type = "text/css">
+            body
+            {
+                background-color: #FFFFFF;
+                text-align : center;
+            }
+            
+            .headerText
+            {
+                font-size : x-large;
+                text-align : center;
+            }
+            
+            .headerDescriptionText
+            {
+                font-size : larger;
+                text-align : center;
+            }
+            
+            .headerContainer
+            {
+                border-style : solid;
+				border-width : 1;
+				border-color : #660000;
+                background-color : #E6E6E6;
+                width : 700px;
+				margin: 0 auto;
+            }
+			
+            .bodyContainer
+            {
+                border : solid;
+				border-width : 1;
+				border-color : #660000;
+                background-color : #E6E6E6;
+                width : 700px;
+				margin: 0 auto;
+            }            
+        .style1 {
+	font-size: medium
+}
+.style9 {font-size: x-large; text-align: center; font-weight: bold; }
+.style13 {font-size: small}
+        .style15 {font-size: medium; font-family: Arial, Helvetica, sans-serif; }
+        </style>
+        
+        <meta name="description" content="This web-site represents an on-line application of support vector machine (SVM), a machine-learning method, to predict ordered conformational switches in the protein backbone. The web-server is located at the Gen*NY*sis Center for Excellence in Cancer Genomics, University at Albany, State University of New York."/>
+        <meta name="keywords" content="proteins, folding, sites, predictions, interactions, predictors, interfaces, residues, evolutionary, evolution, conservation, web server, on-line, university at albany, amino acids, sequences, positions, PSI-BLAST, position specific scoring matrix, pssm, university at albany, conformational switches, transitions, changes, backbone, flexibility"/>
+        <title>FlexPred: a web-server for predicting conformational switches in proteins</title>      
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /></head>
+
+    <body onload = "updateTruePositiveRate();">
+       <div style ="text-align:center;margin: 0 auto;">
+            <a href="http://www.albany.edu/cancergenomics/people/kuznetsov.html">
+                <img src="center_logo.jpg" border="1" style = "border-color:#660000;"></img>            </a>        </div>
+
+       
+<br />
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=4568337; 
+var sc_invisible=1; 
+var sc_partition=56; 
+var sc_click_stat=1; 
+var sc_security="450fc081"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="myspace profile view counter"
+href="http://www.statcounter.com/myspace/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/4568337/0/450fc081/1/"
+alt="myspace profile view counter" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+        
+        <div style ="text-align:center;">
+            <div class = "headerContainer"> 
+                <div>
+                    <h2><span class="style9">FlexPred: a web-server for predicting residue positions<br />
+                    involved in conformational switches in proteins</span><span class="headerText"> <br />
+                    </span></h2>
+                <span class="headerText">
+                    <hr align="center" style ="width:60%;color:#660000;" />
+                        </span></div>
+
+<div class = "headerDescriptionText">
+                    <p align="center"><a href="help.html" target="_blank" class="style1">[HELP]<br />
+      </a></p>
+                    <p align="justify"><span class="style15">Proteins are dynamic and flexible macromolecules. Upon  changes in the environment, the protein backbone can undergo significant  ordered conformational changes and switch from one folded conformation to another. This web-server   predicts residue positions that may be involved in such <strong>ordered</strong> conformational switches. The prediction can be performed using  either a user-supplied protein sequence or a protein structure in a Protein Data Bank (PDB) file. If  a protein sequence  is submitted, then the prediction is performed using sequence-derived information only (such as the profile of evolutionary conservation of residue positions). If a PDB file is submitted, then the prediction is performed using sequence-derived  information and solvent accessibility of residue positions calculated from this file. Please note that this web-server is not meant to predict protein disorder (you may refer to <a href="http://www.disprot.org" target="_blank">DisProt</a> for a list of disorder predictors). For more information on the methodology and accuracy of the prediction please refer to the original publication (<a href="http://www.ncbi.nlm.nih.gov/pubmed/18186479?ordinalpos=1&amp;itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum" target="_blank">Kuznetsov, 2008</a>) and  <a href="help.html" target="_blank">help link</a>.</span><br />
+                    </p>
+</div>
+          </div>
+        </div>
+        
+		<br />
+		
+        
+
+        <form action="./cgi-bin/parseform.cgi" method="post" enctype="multipart/form-data">
+	        <div class = "bodyContainer">              
+	          <div align="center"><span class="style1"><b>Step 1: </b><a href="help.html#input_options" target="HelpWindow">Input options</a><br />
+              <br />
+              Please select your input choice from the options given below.
+              <br />
+              (All amino acid sequences must be in <a href="help.html#sequence_format" target = "HelpWindow">FASTA format</a>)<br />	            
+              <br />
+	            
+              <input type="radio" name="seq_input_method" id = "seq_input_method" value="paste" onclick = "document.getElementById('divTextBoxInput').style.display = 'block';document.getElementById('divFileUploadInput').style.display = 'none';document.getElementById('divFileUploadInputPTB').style.display = 'none';document.getElementById('divFileGetInputPTB').style.display = 'none';document.forms[0].encoding[0].checked = true;updateTruePositiveRate();" checked>
+              Enter a FASTA sequence<br />
+              <br />
+              </span></div>
+          <div id = "divTextBoxInput" style ="display:block;">
+	                <div align="center"><span style="font-size: medium">Paste your amino acid sequence in the box below:
+	                  </span>
+	                  <textarea id = "seq_pasted" name="seq_pasted" rows = "10" cols = "80"></textarea>
+	                </div>
+          </div>
+	            
+			  <hr align="center" style ="width:60%;color:#660000;" />
+				
+	            
+              <div align="center">
+                <input type="radio" name="seq_input_method" id = "seq_input_method" value="upload" onclick = "document.getElementById('divTextBoxInput').style.display = 'none';document.getElementById('divFileUploadInput').style.display = 'block';document.getElementById('divFileUploadInputPTB').style.display = 'none';document.getElementById('divFileGetInputPTB').style.display = 'none';document.forms[0].encoding[0].checked = true;updateTruePositiveRate();"/>
+                <span class="style1">Upload a FASTA sequence file<br />
+                </span><br />
+              </div>
+              <div id = "divFileUploadInput" style ="display:none;">
+	                Click 'Browse' button and select your file:
+	                <input type="file" name="file_uploaded" size="30" />
+	            </div>				
+				
+				<hr align="center" style ="width:60%;color:#660000;" />
+				
+				<div align="center">
+				  <input type="radio" name="seq_input_method" id = "seq_input_method" value="upload_pdb" onclick = "document.getElementById('divTextBoxInput').style.display = 'none';document.getElementById('divFileUploadInput').style.display = 'none';document.getElementById('divFileUploadInputPTB').style.display = 'block';document.getElementById('divFileGetInputPTB').style.display = 'none';document.forms[0].encoding[1].checked = true;updateTruePositiveRate();"/>
+				  <span class="style1">Upload a PDB file</span><br />
+				  <br />
+	            </div>
+<div id = "divFileUploadInputPTB" style ="display:none;">
+	                Click 'Browse' button and select your file:
+	                <input type="file" name="file_uploaded_pdb" size="30" />
+					<br />
+					<br />
+					Does this file contain multiple models?
+					<input type="radio" id = "multiple_models_yes_no" name = "multiple_models_yes_no" value = "1" onclick = "updateTruePositiveRate();">Yes
+					<input type="radio" id = "multiple_models_yes_no" name = "multiple_models_yes_no" value = "0" onclick = "updateTruePositiveRate();" checked>No
+					<br />
+					<br />
+					Enter subunit here:
+<input type = "text" size="5" maxlength="1" name="subunit" onkeyup = "document.forms[0].subunit.value = document.forms[0].subunit.value.toUpperCase();"/>
+	            </div>	
+				
+				<hr align="center" style ="width:60%;color:#660000;" />
+				
+				<div align="center">
+				  <input type="radio" name="seq_input_method" id = "seq_input_method" value="get_pdb" onclick = "document.getElementById('divTextBoxInput').style.display = 'none';document.getElementById('divFileUploadInput').style.display = 'none';document.getElementById('divFileUploadInputPTB').style.display = 'none';document.getElementById('divFileGetInputPTB').style.display = 'block';document.forms[0].encoding[1].checked = true;updateTruePositiveRate();"/>
+				  <span class="style1">Get a PDB file by ID</span><br />
+				  <br />
+	            </div>
+<div id = "divFileGetInputPTB" style ="display:none;">
+	                Enter a four-character PDB ID:
+	                <input type="text" name="get_pdb" size="10" maxlength="4" onkeyup = "document.forms[0].get_pdb.value = document.forms[0].get_pdb.value.toLowerCase();"/>
+					<br />
+					<br />
+					Does this file contain multiple models?
+					<input type="radio" id = "multiple_models_yes_no_get" name = "multiple_models_yes_no_get" value = "1" onclick = "updateTruePositiveRate();">Yes
+					<input type="radio" id = "multiple_models_yes_no_get" name = "multiple_models_yes_no_get" value = "0" onclick = "updateTruePositiveRate();" checked>No
+					<br />
+					<br />
+					Enter subunit here:
+<input type = "text" size="5" maxlength="1" name="subunit_get" onkeyup = "document.forms[0].subunit_get.value = document.forms[0].subunit_get.value.toUpperCase();" />
+	            </div>	
+				
+				
+				<br />
+                
+	        </div>    
+	        
+<br />
+
+	        <div class = "bodyContainer">
+	            <span class="style1"><b>Step 2:</b> <a href="help.html#encoding_methods" target="HelpWindow">Encoding of amino acid sequence</a><br />
+	            <br />
+	            <input type="radio" name="encoding" id = "encoding" value="pssm" onclick = "updateTruePositiveRate();" checked />
+	            PSSM-based encoding (<b>Recommended for sequence-based submissions</b>)<br />
+	            <input type="radio" name="encoding" id = "encoding" value="seq_binary" onclick = "updateTruePositiveRate();" />
+              Binary encoding (<strong>Recommended for PDB-based submissions</strong>)</span><br />
+	        </div>
+	        
+<br />
+			
+	        <div class = "bodyContainer">
+        <span class="style1"><b>Step 3: </b><a href="help.html#false_positive_rate" target="HelpWindow">False Positive Rate (FPr)</a></span><br /> 
+              <br />
+              Select desired FPr: 
+                
+              <select id = "false_positive_rate" name = "false_positive_rate" onChange= "updateTruePositiveRate();">
+                <option value = ".05">.05 (Default)</option>
+                <option value = ".10">.10</option>
+                <option value = ".15">.15</option>
+                <option value = ".20">.20</option>
+              </select>
+                
+<br />			
+<br />
+</div>
+<br />			
+<div class = "bodyContainer">
+                <span class="style1"><b>Step 4: </b><a href="help.html#retrieval_method" target="HelpWindow">Retrieval  of the results</a>              <br /> 
+      </span><br />
+	            
+	            <input type="radio" name="delivery" value="email" checked = "checked"  />
+	            <span class="style1">E-mail the results (<b>Recommended</b>). E-mail address:	            </span>
+                <input type="text" size="40" name="email" /><br />
+	            <input type="radio" name="delivery" value="link_to_file" />
+	            <span class="style1">Display a URL link to my process. I will check it manually.</span><br />
+                <span class="style13">(Data are kept on the web server for 24 hours, and deleted afterwards)                </span><br />
+<br />
+	            <span class="style1"><a href="help.html#output_format" target="HelpWindow">[Output format]</a> <a href="help.html#wait_time" target="HelpWindow">[Expected wait time]</a></span><br />
+	        </div>			
+	        
+<br />
+	        
+	        <input type="button" value="Submit" onclick = "validateForm();" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        <input type="reset" value="Start over" />
+
+        </form>
+
+        <h3><strong>If you use this web-server, please cite the following articles:</strong></h3>
+<p align="center" class="style1"><span class="style1"><strong>Web-server citation:</strong> I.B.Kuznetsov and M.McDuffie, 2008,   		FlexPred: a   		web-server for predicting residue positions involved<br />
+        in conformational   		switches in proteins. <em><a href="http://www.bioinformation.net/003/002700032008.pdf" target="_blank">Bioinformation</a></em><a href="http://www.bioinformation.net/003/002700032008.pdf">, 3(3):134-136</a></span></p>
+    <p align="center" class="style1"><strong>Methodology citation:</strong> I.B.Kuznetsov, 2008,     Ordered  conformational change in the protein backbone: 
+  prediction of <br />
+          conformationally  
+              
+          variable positions 
+          from sequence and 
+          low-resolution structural data.<br /> 
+          <em><a href="http://www.ncbi.nlm.nih.gov/pubmed/18186479?ordinalpos=1&amp;itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum" target="_blank">Proteins: Structure, Function and Bioinformatics, 72(1):74-87</a></em></p>
+    <p><span class="style13"><strong>Please address your questions and comments to</strong> <a href="http://www.albany.edu/cancergenomics/people/kuznetsov.html" target="_blank">Igor Kuznetsov</a></span><br />
+    </p>
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+<!--
+function popup(mylink, windowname)
+{
+if (! window.focus)return true;
+var href;
+if (typeof(mylink) == 'string')
+   href=mylink;
+else
+   href=mylink.href;
+window.open(href, windowname, 'width=500,height=400,scrollbars=yes');
+return false;
+}
+//-->
+</script>
+
+<script type="text/javascript">
+<!--
+function myPopup2() {
+window.open( "popup.html", "myWindow", 
+"status = 1, height = 500, width = 500, resizable = 1,scrollbars=yes")
+}
+//-->
+</script>

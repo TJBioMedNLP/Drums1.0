@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- 
+	This website is powered by TYPO3 - inspiring people to share!
+	TYPO3 is a free open source Content Management Framework initially created by Kasper Skaarhoj and licensed under GNU/GPL.
+	TYPO3 is copyright 1998-2006 of Kasper Skaarhoj. Extensions are copyright of their respective owners.
+	Information and contribution at http://typo3.com/ and http://typo3.org/
+-->
+
+	<script type="text/javascript">
+/*<![CDATA[*/
+	var djConfig = {baseScriptUri : "http://clinicaltrials.ifpma.org/typo3conf/ext/rvt_dojo/"}
+/*]]>*/
+</script>
+<script type="text/javascript" src="http://clinicaltrials.ifpma.org/typo3conf/ext/rvt_dojo/dojo.js"></script>
+
+	<base href="http://clinicaltrials.ifpma.org/" />
+	<link rel="SHORTCUT ICON" href="fileadmin/templates/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="typo3temp/stylesheet_ed18e8eecf.css" />
+	<script src="fileadmin/scripts/menu.js" type="text/javascript"></script>
+
+	<title>Quick and Easy Access to Clinical Trial Information - IFPMA Clinical Trials Portal</title>
+	<meta name="title" content="Quick and Easy Access to Clinical Trial Information - IFPMA Clinical Trials Portal" />
+	<meta name="keywords" content="search clinical trials, finding clinical trials, clinical trials, clinical trial, clinical research, clinical study, drug trials, drug trial, pharmaceutical industry, IFPMA" />
+	<meta name="description" content="The IFPMA Clinical Trials Portal offers an easy-to-use interface to search clinical trials: Ongoing and Completed Clinical Trials of New Medicines. The portal, developed by the research-based pharmaceutical industry, improves access to clinical trial information and ensures the industryâs commitment to transparency." />
+	<meta name="date" content="2009-12-18" />
+	
+	<meta name="generator" content="TYPO3 4.1 CMS" />
+	<script type="text/javascript" src="typo3temp/javascript_757c080409.js"></script>
+
+<meta name="verify-v1" content="ec22jBLpbikDebXSHzxt8BXEk5yCfROapTP6sWW/R3o=" />
+
+<link href="fileadmin/templates/ifpma/layout.css" rel="stylesheet" type="text/css" media="screen" />
+
+<link href="fileadmin/templates/ifpma/print.css" rel="stylesheet" type="text/css" media="print" />
+
+<link href="fileadmin/templates/ifpma/style.css" rel="stylesheet" type="text/css" media="all" />
+
+
+<style type="text/css">
+			.tx-ifpmawebservice-pi1 {
+				display:block;
+			}	
+
+			span img.dojoComboBox {
+				display:none !important; 
+			}
+
+			span input.dojoComboBox {
+				border-right-width: 1px !important;
+				height:22px;
+				margin-top:5px;
+			}
+			</style>
+<script type="text/javascript">  			
+			dojo.require("dojo.widget.Dialog");
+			var dlgError;
+			function initDialog(e) {
+			//void function for dojo
+			}
+			dojo.addOnLoad(initDialog);
+			</script>
+
+</head>
+<body>
+
+
+		<div id="fixed-header">
+			<div id="header">
+				<div id="headerLogo"><a href="en/myportal/index.htm"><img src="fileadmin/templates/ifpma/logo.jpg" width="181" height="102" alt="" /></a></div>
+				<div id="headerMyportal-wrapper"><div id="headerMyportal-title"><i>my</i><b>Portal</b></div><div id="headerMyportal">
+
+
+	<!--
+
+		BEGIN: Content of extension "loginbox_macmade", plugin "tx_loginboxmacmade_pi2"
+
+	-->
+	<div class="tx-loginboxmacmade-pi2">
+				
+		<!--div id="myPortalDiv">
+		###MY_PORTAL_TEXT###</div-->
+		
+		<div dojoType="dialog" id="dlgError" bgColor="black" bgOpacity="0.4" toggle="fade" toggleDuration="250">
+		An error occurred during login. Most likely you didn't enter the username or password correctly.
+		<input type="button" id="hiderError" value="OK">
+		</div>
+		
+<script type="text/javascript">
+
+dojo.require("dojo.widget.Dialog");
+var dlgError;
+function initDialog(e) {
+dlgError = dojo.widget.byId("dlgError");
+var btnError = document.getElementById("hiderError");
+dlgError.setCloseControl(btnError);
+}
+dojo.addOnLoad(initDialog);
+
+</script>
+		
+		<!--<span id="loginBoxElements">-->
+		<form action="no_cache/en/myportal/index.htm" method="post" enctype="multipart/form-data" id="loginBoxSmall" name="loginBoxSmall">
+			<!--label for="username">Email:</label--> 
+		
+		<input class="loginInput" name="user" type="text" size="10" id="username" value="e-mail" onblur="if(this.value=='') this.value='e-mail';" onfocus="if(this.value=='e-mail') this.value='';" />
+			<!--label>Password:</label--> 
+		<input class="loginInput" name="pass" type="password" size="10" value="password" onblur="if(this.value=='') this.value='password';" onkeydown="doSomething(event)" onfocus="if(this.value=='password') this.value='';" />
+			<!--a href="#"><img src="typo3conf/ext/ifpma_webservice/res/bt.gif" width="18" height="15" border="0" /></a-->
+		<input id="submitLoginImg" class="submitLogin" name="submit" type="image" src="typo3conf/ext/ifpma_webservice/res/bt.gif">
+			<!--input name="submit" type="submit" value="login" /-->
+			<div id="loginLinks">
+			<!--
+			<a href="en/create-account/index.htm?tx_srfeuserregister_pi1%5Bcmd%5D=create" title="Presents a registration form.">Not a member yet?</a> |
+			<a href="no_cache/en/clinical-trials-portal/index.htm?tx_newloginbox_pi1%5Bforgot%5D=1">Forgot your password?</a>
+			-->
+			<a href="/index.php?id=55&L=&tx_srfeuserregister_pi1%5Bcmd%5D=create">No account yet?</a><br />
+			<a href="/index.php?id=40&L=&tx_newloginbox_pi1%5Bforgot%5D=1">Forgot your password?</a>
+			</div>
+			<input name="logintype" type="hidden" value="login" /><input name="redirect_url" type="hidden" value="no_cache/en/myportal/index.htm" /><input name="pid" type="hidden" value="23" /><input id="withSearchBuffer" type="hidden" value="" name="withSearchBuffer"/><input id="withoutSearchBuffer" type="hidden" value="" name="withoutSearchBuffer"/><input id="locationSearchBuffer" type="hidden" value="" name="locationSearchBuffer"/><input id="locationSearchBuffer" type="hidden" value="" name="andOrSearchBuffer"/><input id="locationSearchBuffer" type="hidden" value="" name="synonymSearchBuffer"/>
+		</form>
+
+		<script type="text/javascript">
+				/*
+				dojo.require("dojo.widget.Dialog");
+				var dlgError;
+				function initDialog(e) {
+					dlgError = dojo.widget.byId("dlgError");
+					var btnError = document.getElementById("hiderError");
+					dlgError.setCloseControl(btnError);
+				}
+				dojo.addOnLoad(initDialog);
+				*/
+		</script>
+
+		
+		<script type="text/javascript">
+
+		function findFirstRuleInSheet(sheet, name) {
+			var rules = sheet.cssRules;
+			for (var ruleno=0 ; ruleno<rules.length ; ++ruleno) {
+				var rule = rules[ruleno].cssText;
+				var ruleparts = rule.split(/[{}]/);
+				var rulenames = rule.split(" ");
+				for (var i=0 ; i<rulenames.length ; ++i)
+					if (name==rulenames[i]) break;
+				if (i<rulenames.length) break;
+			}
+			return ruleno==rules.length ? null : rules[ruleno];
+		}
+
+		function findFirstRule(name) {
+			var stylesheets = document.styleSheets;
+			for (var sheetno=0 ; sheetno<stylesheets.length ; ++sheetno) {
+				if (style=findFirstRuleInSheet(stylesheets[sheetno],name)) break;
+			}
+			return style;
+		}
+
+		function getElementsOfClass(parentnode, name) {
+			var nodes = new Array();
+			var children = parentnode.childNodes;
+			for (var i=0 ; i<children.length ; ++i) {
+				nodes = nodes.concat(getElementsOfClass(children[i], name));
+			}
+			if (parentnode.className==name) {
+				nodes = nodes.concat(parentnode);
+			}
+			return nodes;
+		}
+		
+	    function reveal_page_loginboxmacmade(){
+			//debugger;
+			if (document.getElementById("working_panel")) document.getElementById("working_panel").style.display = "none";
+			var nodes = getElementsOfClass(document.getElementById("headerMyportal"), "tx-loginboxmacmade-pi2");
+			for (var i=0 ; i<nodes.length ; ++i) 
+				nodes[i].className = "tx-loginboxmacmade-pi2-visible";
+			//console.debug(nodes);
+			//debugger;
+		}
+		
+		function doSomething(e) {
+			if (!e) var e = window.event
+			if (e.keyCode) code = e.keyCode;
+			else if (e.which) code = e.which;
+			//alert(code);
+			if (code == 13){
+				//dojo.byId("executeSearch").value="yes";
+				//showPage(1); 
+				dojo.byId("loginBoxSmall").submit();
+			}
+			else{
+				return false;
+			}
+			
+		}
+		
+
+		dojo.addOnLoad(reveal_page_loginboxmacmade);
+	    </script>
+	</div>
+	
+	<!-- END: Content of extension "loginbox_macmade", plugin "tx_loginboxmacmade_pi2" -->
+
+	</div></div>
+			</div><!--/header-->
+			<div id="menu-wrapper">
+				<div id="mainMenu">
+					<a id="home-link" href="en/myportal/index.htm"><img alt="home" src="fileadmin/templates/ifpma/images/home.png" /></a>
+					<ul id="navmenu"><li><a href="en/span-class-my-myspanportal/index.htm" onfocus="blurLink(this);"><span class="my">my</span>Portal</a><ul><li><a href="en/create-an-account/index.htm" onfocus="blurLink(this);">Create an account</a></li><li><a href="en/span-class-my-myspanportal/benefits-for-patients/index.htm" onfocus="blurLink(this);">Benefits for patients</a></li><li><a href="en/span-class-my-myspanportal/benefits-for-physicians/index.htm" onfocus="blurLink(this);">Benefits for physicians</a></li><li><a href="en/span-class-my-myspanportal/videotour/index.htm" onfocus="blurLink(this);">Video Tour</a></li></ul></li><li><a href="en/search-trials-ongoing/all/index.htm" onfocus="blurLink(this);">Search Ongoing Trials</a><ul><li><a href="no_cache/en/search-trials-ongoing/quick/index.htm" onfocus="blurLink(this);">Quick Search</a></li><li><a href="no_cache/en/search-trials-ongoing/all/index.htm" onfocus="blurLink(this);">Search</a></li><li><a href="no_cache/en/search-trials-ongoing/pediatric/index.htm" onfocus="blurLink(this);">Pediatric Trials Search</a></li><li><a href="en/search-trials-ongoing/sources/index.htm" onfocus="blurLink(this);">Sources</a></li></ul></li><li><a href="en/search-trials-results/all/index.htm" onfocus="blurLink(this);">Search Trial Results</a><ul><li><a href="no_cache/en/search-trials-results/quick/index.htm" onfocus="blurLink(this);">Quick Search</a></li><li><a href="no_cache/en/search-trials-results/all/index.htm" onfocus="blurLink(this);">Search</a></li><li><a href="no_cache/en/search-trials-results/pediatric/index.htm" onfocus="blurLink(this);">Pediatric Trials Search</a></li><li><a href="en/search-trials-ongoing/sources/index.htm" onfocus="blurLink(this);">Sources</a></li></ul></li><li><a href="en/media/index.htm" onfocus="blurLink(this);">News</a><ul><li><a href="en/media/media/index.htm" onfocus="blurLink(this);">Press Releases</a></li><li><a href="en/media/newsletter/index.htm" onfocus="blurLink(this);">Newsletter</a></li><li><a href="en/media/about-us/index.htm" onfocus="blurLink(this);">About us</a></li></ul></li><li><a href="en/tips/index.htm" onfocus="blurLink(this);">Learn More</a><ul><li><a href="en/tips/drug-development/index.htm" onfocus="blurLink(this);">Drug Development</a></li><li><a href="en/tips/faqs/index.htm" onfocus="blurLink(this);">FAQs</a></li><li><a href="en/tips/pediatric-trials-faqs/index.htm" onfocus="blurLink(this);">Pediatric Trials FAQs</a></li><li><a href="en/tips/glossary/index.htm" onfocus="blurLink(this);">Glossary</a></li></ul></li></ul>
+					<div id="langSelectMenu"><form><select class="inform" name="L" onchange="document.location.href='http://clinicaltrials.ifpma.org/index.php?id=4&amp;L=' + this.value"><option selected="" value="0">English </option><option value="1">æ¥æ¬èª</option><option value="2">Deutsch</option><option value="3">EspaÃ±ol</option><option value="4">FranÃ§ais</option></select></form></div>
+  				</div><!--/mainMenu-->
+			</div><!--/menu-wrapper-->
+		</div><!--/fixed-header-->
+		<div id="site-wrapper">
+			<div id="site-container">
+				<div id="container"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1150/templavoila_pi1 [begin] -->
+		<a id="c1150"></a><div class="contentItem"><div class="two-cols-dotted">
+	<div class="two-cols-dotted-col two-cols-dotted-col-a two-cols-dotted-first-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1194/list [begin] -->
+		<a id="c1194"></a><div class="contentItem">
+		<!--  Plugin inserted: [begin] -->
+			
+	<!--  CONTENT ELEMENT, uid:1198/image [begin] -->
+		<a id="c1198"></a><div class="contentItem">
+		<!--  Image block: [begin] -->
+			<div class="csc-textpic csc-textpic-center csc-textpic-below"><div class="csc-textpic-imagewrap" style="width:447px;"><dl class="csc-textpic-image csc-textpic-firstcol csc-textpic-lastcol" style="width:447px;"><dt><a href="no_cache/en/search-trials-ongoing/all/index.htm"><img src="uploads/pics/diseases_tagcloud.png" width="447" height="203" alt="" /></a></dt><dd class="csc-textpic-caption"></dd></dl></div></div><div class="csc-textpic-clear"><!-- --></div>
+		<!--  Image block: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1198/image [end] -->
+		
+		<!--  Plugin inserted: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1194/list [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<div class="two-cols-dotted-col two-cols-dotted-col-b two-cols-dotted-last-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1152/text [begin] -->
+		<a id="c1152"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<p class="bodytext"><strong>IFPMA Clinical Trials Portal</strong> is brought to you by IFPMA on behalf of its Member Companies and Associations.</p>
+<p class="bodytext"><strong>IFPMA Clinical Trials Portal ensures</strong></p><ul><li>A <span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">free</span> and <span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">easy-to-use</span> interface for patients and health professionals alike to <a href="no_cache/en/search-trials-ongoing/all/index.htm">ongoing clinical trials</a>, <a href="no_cache/en/search-trials-results/all/index.htm" target="_self" class="internal-link">clinical trial results</a> and <a href="en/tips/index.htm">complementary information</a> on related issues.</li><li><a href="http://www.hon.ch/HONcode/Conduct.html?HONConduct756149" onclick="vHWin=window.open('http://www.hon.ch/HONcode/Conduct.html?HONConduct756149','FEopenLink','width=800,height=600');vHWin.focus();return false;" class="external-link-new-window">Non-promotional</a> and <a href="http://www.hon.ch/HONcode/Conduct.html?HONConduct756149" onclick="vHWin=window.open('http://www.hon.ch/HONcode/Conduct.html?HONConduct756149','FEopenLink','width=800,height=600');vHWin.focus();return false;" class="external-link-new-window">reliable information</a>.</li><li>Industry's commitment to the <a href="fileadmin/files/pdfs/EN/November_10_2009_Updated_Joint_Position_on_the_Disclosure_of_Clinical_Trial_Information_via_Clinical_Trial_Registries_and_Databases.pdf" onclick="vHWin=window.open('http://clinicaltrials.ifpma.org/fileadmin/files/pdfs/EN/November_10_2009_Updated_Joint_Position_on_the_Disclosure_of_Clinical_Trial_Information_via_Clinical_Trial_Registries_and_Databases.pdf','FEopenLink','width=800,height=600');vHWin.focus();return false;" class="download">transparency</a> of clinical trials.</li></ul><p style="TEXT-ALIGN: right" class="bodytext"><img src="uploads/RTEmagicC_mission-statement_03.png.png" style="WIDTH: 33px; HEIGHT: 32px" alt="" /><a href="fileadmin/files/pdfs/EN/November_10_2009_Updated_Joint_Position_on_the_Disclosure_of_Clinical_Trial_Information_via_Clinical_Trial_Registries_and_Databases.pdf" onclick="vHWin=window.open('http://clinicaltrials.ifpma.org/fileadmin/files/pdfs/EN/November_10_2009_Updated_Joint_Position_on_the_Disclosure_of_Clinical_Trial_Information_via_Clinical_Trial_Registries_and_Databases.pdf','FEopenLink','width=800,height=600');vHWin.focus();return false;" class="download">Mission Statement &gt;&gt;</a></p>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1152/text [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<hr class="clear-both-and-not-visible" />
+</div></div>
+	<!--  CONTENT ELEMENT, uid:1150/templavoila_pi1 [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1153/templavoila_pi1 [begin] -->
+		<a id="c1153"></a><div class="contentItem"><div class="four-boxes-1_2-1_2-1_1-layout">
+	<div class="outer-outer">
+		<div class="outer">
+			<div class="inner">
+				<div class="col col-a first-col">
+					<div class="row row-1">
+						<div class="td-wrapper">
+							<div class="td td-1">
+								<h1 class="box-title box-title-a">Clinical Trial Quick Search</h1>
+								<div class="layout-content content-a">
+	<!--  CONTENT ELEMENT, uid:1175/list [begin] -->
+		<a id="c1175"></a><div class="contentItem">
+		<!--  Plugin inserted: [begin] -->
+			
+
+
+	<!--
+
+		BEGIN: Content of extension "ifpma_webservice", plugin "tx_ifpmawebservice_pi1"
+
+	-->
+	<div class="tx-ifpmawebservice-pi1">
+		
+<!-- BEGIN: HOME SEARCH -->
+<div id="homeSearchForm">
+    <form name="webServiceForm" action="typo3conf/ext/ifpma_webservice/pi1/ifpma_prepRequest.php?L="  method="post" enctype="###FORM_ENCTYPE###">
+	<table width="100%">
+	<tr>
+	<td>
+	<img src="typo3conf/ext/ifpma_webservice/res/pict_loupe.gif">&nbsp; &nbsp;<select value="init" id="searchInputHome"  dojoType="ComboBox" name="search" dataUrl="typo3conf/callWS/callAutocompletionWS.php?lang=en&typedChars=%{searchString}" buttonSrc="../../../fileadmin/dojo/combo_box_arrow.gif" autoComplete="false" mode="remote" maxListLength="10" forceValidOption="false" searchDelay="400"></select>
+    </td>
+	<td align="right" valign="bottom">
+	<div class="btBleu">
+        <div class="btBleuLeft"></div>
+		<div class="btBleuRight" style="width:70px;text-align:center"><a id="search" name="Submit" onclick="javascript:webServiceForm.submit();" value="Search">Search</a></div>
+      </div>
+	  </td>
+	  </tr>
+	 </table>
+    </form>
+  </div>
+<!-- END: HOME SEARCH -->
+
+	</div>
+	
+	<!-- END: Content of extension "ifpma_webservice", plugin "tx_ifpmawebservice_pi1" -->
+
+	
+		<!--  Plugin inserted: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1175/list [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1154/text [begin] -->
+		<a id="c1154"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<h1><span style="color: rgb(252, 148, 27);">Advanced Search:</span></h1>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1154/text [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1170/templavoila_pi1 [begin] -->
+		<a id="c1170"></a><div class="contentItem"><div class="two-cols">
+	<div class="two-cols-col two-cols-col-a two-cols-first-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1171/text [begin] -->
+		<a id="c1171"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<ul><li><a href="no_cache/en/search-trials-ongoing/all/index.htm">Ongoing Clinical Trials</a></li><li><a href="no_cache/en/search-trials-ongoing/pediatric/index.htm">Ongoing Pediatric Clinical Trials</a></li></ul>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1171/text [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<div class="two-cols-col two-cols-col-b two-cols-last-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1172/text [begin] -->
+		<a id="c1172"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<ul><li><a href="no_cache/en/search-trials-results/all/index.htm">Clinical Trial Results</a></li><li><a href="no_cache/en/search-trials-results/pediatric/index.htm">Pediatric Clinical Trial Results</a></li></ul>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1172/text [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<hr class="clear-both-and-not-visible" />
+</div></div>
+	<!--  CONTENT ELEMENT, uid:1170/templavoila_pi1 [end] -->
+		</div>
+							</div>
+						</div>
+					</div>
+					<div class="row row-2">
+						<h1 class="box-title box-title-b">Benefit from IFPMA Clinical Trials Portal!</h1>
+						<div class="td td-1">
+							<div class="layout-content content-b">
+	<!--  CONTENT ELEMENT, uid:1163/text [begin] -->
+		<a id="c1163"></a><div class="contentItem">
+		<!--  Header: [begin] -->
+			<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Basic Search Features</h1></div>
+		<!--  Header: [end] -->
+			
+		<!--  Text: [begin] -->
+			<ul><li>Search by Medical Condition and Drug Name</li><li>Language Interfaces (En, Es, Fr, De, Jp) </li> <li>Glossary and Easy Explanation of Medical Expressions</li><li>Geographical Search</li></ul>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1163/text [end] -->
+		</div>
+						</div>
+						<div class="td td-2">
+							<div class="layout-content content-c">
+	<!--  CONTENT ELEMENT, uid:1165/text [begin] -->
+		<a id="c1165"></a><div class="contentItem">
+		<!--  Header: [begin] -->
+			<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Search for Clinical Trials on specific diseases</h1></div>
+		<!--  Header: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1165/text [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1166/templavoila_pi1 [begin] -->
+		<a id="c1166"></a><div class="contentItem"><div class="two-cols">
+	<div class="two-cols-col two-cols-col-a two-cols-first-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1167/html [begin] -->
+		<a id="c1167"></a><div class="contentItem">
+		<!--  Raw HTML content: [begin] -->
+			<ul>
+<li>
+<a href="index.php?id=42&amp;L=5&amp;with=cancer&amp;synonymList=true&amp;mailrun=1">
+Cancer
+</a>
+</li>
+<li>
+<a href="index.php?id=42&amp;L=5&amp;with=hiv|aids&amp;AndOr=or&amp;synonymList=true|true&amp;mailrun=1">
+HIV/AIDS
+</a>
+</li>
+</ul>
+		<!--  Raw HTML content: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1167/html [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<div class="two-cols-col two-cols-col-b two-cols-last-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1168/html [begin] -->
+		<a id="c1168"></a><div class="contentItem">
+		<!--  Raw HTML content: [begin] -->
+			<ul>
+<li>
+<a href="index.php?id=42&amp;L=5&amp;with=heart|cardiovascular|cardiac&amp;AndOr=or|or&amp;synonymList=true|true|true&amp;mailrun=1">
+Heart Disease
+</a>
+</li>
+<li>
+<a href="index.php?id=42&amp;L=5&amp;with=diabetes&amp;AndOr=or|or&amp;synonymList=true|true|true&amp;mailrun=1">
+Diabetes
+</a>
+</li>
+</ul>
+		<!--  Raw HTML content: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1168/html [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<hr class="clear-both-and-not-visible" />
+</div></div>
+	<!--  CONTENT ELEMENT, uid:1166/templavoila_pi1 [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1169/text [begin] -->
+		<a id="c1169"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<p class="bodytext"><a href="no_cache/en/search-trials-ongoing/all/index.htm" target="_self" class="internal-link">Find clinical trials on another specific disease &gt;&gt;</a></p>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1169/text [end] -->
+		</div>
+						</div>
+						<hr class="clear-both-and-not-visible" />
+					</div>
+				</div>
+				<div class="col col-b last-col main-two-cols-box-col-right">
+					<div class="box-title-d-wrapper"><h1 class="box-title box-title-d"><i>my</i>Portal</h1></div>
+					<div class="layout-content content-d">
+	<!--  CONTENT ELEMENT, uid:1173/text [begin] -->
+		<a id="c1173"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<p class="bodytext"><a href="en/span-class-my-myspanportal/benefits-for-patients/index.htm" target="_self" class="internal-link"><img src="uploads/RTEmagicC_patient_04.png.png" style="WIDTH: 33px; HEIGHT: 42px" alt="" />You are a patient?</a><br />Gain a <span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">better understanding</span> of clinical trials through <span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">personalized information</span>.</p>
+<p class="bodytext"><a href="en/span-class-my-myspanportal/benefits-for-physicians/index.htm" target="_self" class="internal-link"><img src="uploads/RTEmagicC_physician_02.png.png" style="WIDTH: 33px; HEIGHT: 42px" alt="" />You are a physician?</a><span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)"><br />Advise</span> and <span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">guide</span> your patients with <span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">updated data</span> on clinical trials.</p>
+<p class="bodytext">&nbsp;</p>
+<h1><img src="uploads/RTEmagicC_save-time_01.png.png" style="WIDTH: 33px; HEIGHT: 32px" alt="" />Save Time</h1>
+<p class="bodytext">Save time and resources <span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">with free </span><span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27); FONT-STYLE: italic">my</span><span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">Portal email alerts</span>, specifically defined to meet your needs.</p><ul><li>Save your search</li><li>Repeat your search</li><li>Receive an email when a new matching trial is posted</li></ul>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1173/text [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1191/templavoila_pi1 [begin] -->
+		<a id="c1191"></a><div class="contentItem"><div class="orange-button">
+	<div class="button-content">
+	<!--  CONTENT ELEMENT, uid:1480/text [begin] -->
+		<a id="c1480"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<p class="bodytext"><a href="no_cache/en/create-an-account/index.htm"><span style="font-weight: bold;">Join now (it's free!)</span></a> </p>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1480/text [end] -->
+		</div>
+</div></div>
+	<!--  CONTENT ELEMENT, uid:1191/templavoila_pi1 [end] -->
+		</div>
+				</div>
+				<hr class="clear-both-and-not-visible" />
+			</div>
+		</div>
+	</div>
+</div></div>
+	<!--  CONTENT ELEMENT, uid:1153/templavoila_pi1 [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1155/templavoila_pi1 [begin] -->
+		<a id="c1155"></a><div class="contentItem"><div class="five-boxes-2_3-1_3-1_1-layout">
+	<div class="outer">
+		<div class="inner">
+			<div class="col col-a first-col">
+				<div class="row row-1">
+					<div class="td td-1">
+						<h1 class="box-title box-title-a">Receive our Newsletter</h1>
+						<div class="layout-content content-a">
+	<!--  CONTENT ELEMENT, uid:1159/text [begin] -->
+		<a id="c1159"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<p class="bodytext">Receive updated information on the IFPMA Clinical Trials Portal through <a href="en/media/newsletter/index.htm">Focal Point Newsletter</a>.</p>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1159/text [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1177/html [begin] -->
+		<a id="c1177"></a><div class="contentItem">
+		<!--  Raw HTML content: [begin] -->
+			<div class="btn-left" style="float: right;">
+<form action="http://www.ifpma.org:8082/lists/?p=autosubscribe&amp;id=2&amp;XDEBUG_SESSION_START=netbeans-xdebug" method="post" name="form" id="form"><input type="text" value="e-mail" onblur="if (this.value=='') this.value='e-mail';" onfocus="if (this.value=='e-mail') this.value='';" class="submit_field" name="email" />
+		<input type="image" border="0" value="Submit" class="submit_button" size="20" src="http://clinicaltrials.ifpma.org/fileadmin/templates/newsletter/images/submit_arrow.png" name="subscribe" />
+<input type="hidden" name="list[2]" value="signup" />
+		<input type="hidden" name="listname[2]" value="test" />
+		  <input type="hidden" value="CTP Newsletter" name="list_name" />
+</form>
+</div>
+		<!--  Raw HTML content: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1177/html [end] -->
+		</div>
+					</div>
+					<div class="td td-2">
+						<h1 class="box-title box-title-b">Recently added Press Release</h1>
+						<div class="layout-content content-b">
+	<!--  CONTENT ELEMENT, uid:1174/text [begin] -->
+		<a id="c1174"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<table cellpadding="1" cellspacing="1" style="BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; WIDTH: 100%; BORDER-BOTTOM: 0px solid" class="contenttable"><tbody><tr><td style="VERTICAL-ALIGN: top"><p class="bodytext"><img src="uploads/RTEmagicC_press-release_03.png.png" style="WIDTH: 34px; HEIGHT: 34px" alt="" /></p></td><td><p class="bodytext"><span style="FONT-WEIGHT: bold; COLOR: rgb(252,148,27)">10&nbsp;November 2009</span> <p class="bodytext">Updated Industry Clinical Trials Transparency Position Requires Disclosure of All Clinical Trials in Patients</p><p align="right"><a href="fileadmin/files/pdfs/EN/2009_11_10_Release_New_Clinical_Trial_Transparency_Posn.pdf" onclick="vHWin=window.open('http://clinicaltrials.ifpma.org/fileadmin/files/pdfs/EN/2009_11_10_Release_New_Clinical_Trial_Transparency_Posn.pdf','FEopenLink','width=800,height=600');vHWin.focus();return false;" class="download">More&nbsp;&gt;&gt;</a> </p></p></td></tr></tbody></table>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1174/text [end] -->
+		</div>
+					</div>
+					<hr class="clear-both-and-not-visible" />
+				</div>
+				<div class="row row-2">
+					<div class="td td-1">
+						<h1 class="box-title box-title-c">Quick Links</h1>
+						<div class="layout-content content-c">
+	<!--  CONTENT ELEMENT, uid:1156/templavoila_pi1 [begin] -->
+		<a id="c1156"></a><div class="contentItem"><div class="two-cols-dotted">
+	<div class="two-cols-dotted-col two-cols-dotted-col-a two-cols-dotted-first-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1157/text [begin] -->
+		<a id="c1157"></a><div class="contentItem">
+		<!--  Header: [begin] -->
+			<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Key Documents</h1></div>
+		<!--  Header: [end] -->
+			
+		<!--  Text: [begin] -->
+			<ul><li><a href="en/media/newsletter/index.htm">Newsletter</a></li><li><a href="en/media/media/index.htm">Press Releases</a></li><li><a href="fileadmin/files/pdfs/EN/November_10_2009_Updated_Joint_Position_on_the_Disclosure_of_Clinical_Trial_Information_via_Clinical_Trial_Registries_and_Databases.pdf" onclick="vHWin=window.open('http://clinicaltrials.ifpma.org/fileadmin/files/pdfs/EN/November_10_2009_Updated_Joint_Position_on_the_Disclosure_of_Clinical_Trial_Information_via_Clinical_Trial_Registries_and_Databases.pdf','FEopenLink','width=800,height=600');vHWin.focus();return false;" class="download">Joint position on the Disclosure of Clinical Trial Information</a></li></ul>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1157/text [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<div class="two-cols-dotted-col two-cols-dotted-col-b two-cols-dotted-last-col"><!--TYPO3SEARCH_begin-->
+	<!--  CONTENT ELEMENT, uid:1158/text [begin] -->
+		<a id="c1158"></a><div class="contentItem">
+		<!--  Header: [begin] -->
+			<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">Useful Tips</h1></div>
+		<!--  Header: [end] -->
+			
+		<!--  Text: [begin] -->
+			<ul><li><a href="en/span-class-my-myspanportal/videotour/index.htm">Video Tour</a></li><li><a href="en/tips/faqs/index.htm">FAQs</a></li><li><a href="en/tips/pediatric-trials-faqs/index.htm">Pediatric FAQs</a></li><li><a href="en/tips/glossary/index.htm">Glossary</a></li></ul>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1158/text [end] -->
+		<!--TYPO3SEARCH_end--></div>
+	<hr class="clear-both-and-not-visible" />
+</div></div>
+	<!--  CONTENT ELEMENT, uid:1156/templavoila_pi1 [end] -->
+		</div>
+					</div>
+					<div class="td td-2">
+						<h1 class="box-title box-title-d">Many Sources</h1>
+						<div class="layout-content content-d">
+	<!--  CONTENT ELEMENT, uid:1160/text [begin] -->
+		<a id="c1160"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<p class="bodytext">The IFPMA Portal provides <a href="en/search-trials-ongoing/sources/index.htm">links to clinical trial information from many company and government sponsored websites</a>.<br /><br /></p>
+<p style="TEXT-ALIGN: right" class="bodytext"><br /><a href="en/search-trials-ongoing/sources/index.htm">Sources &gt;&gt;</a></p>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1160/text [end] -->
+		</div>
+					</div>
+					<hr class="clear-both-and-not-visible" />
+				</div>
+			</div>
+			<div class="col col-b last-col main-two-cols-box-col-right">
+				<h1 class="box-title box-title-e">Helping you understand the Drug Development Process</h1>
+				<div class="layout-content content-e">
+	<!--  CONTENT ELEMENT, uid:1161/text [begin] -->
+		<a id="c1161"></a><div class="contentItem">
+		<!--  Text: [begin] -->
+			<p class="bodytext">Understand the drug development process through an easy-to-use <a href="en/tips/drug-development/index.htm" target="_self" class="internal-link">interactive module by innovation.org</a>.<br /><br /><br /><br /></p>
+		<!--  Text: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1161/text [end] -->
+		
+	<!--  CONTENT ELEMENT, uid:1162/image [begin] -->
+		<a id="c1162"></a><div class="contentItem">
+		<!--  Image block: [begin] -->
+			<div class="csc-textpic csc-textpic-center csc-textpic-below"><div class="csc-textpic-imagewrap" style="width:241px;"><dl class="csc-textpic-image csc-textpic-lastcol" style="width:241px;"><dt><img src="uploads/pics/innovation.org.png" width="241" height="130" alt="" /></dt><dd class="csc-textpic-caption"></dd></dl></div></div><div class="csc-textpic-clear"><!-- --></div>
+		<!--  Image block: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:1162/image [end] -->
+		</div>
+			</div>
+			<hr class="clear-both-and-not-visible" />
+		</div>
+	</div>
+</div></div>
+	<!--  CONTENT ELEMENT, uid:1155/templavoila_pi1 [end] -->
+		<!--TYPO3SEARCH_end--></div><!--/container-->
+				<div id="footer"><b> Copyright &copy;&nbsp;2010&nbsp;IFPMA &#124;&nbsp;<a href="en/footermenu/privacy-policy/index.htm">Privacy Policy</a>&nbsp;&#124;&nbsp;<a href="en/footermenu/terms-and-conditions-of-use/index.htm">Terms and Conditions of Use</a>&nbsp;&#124;&nbsp;<a href="en/footermenu/contact-us-ctpatifpmaorg/index.htm">Contact us: ctp[at]ifpma.org</a><br /><table><tr><td><img src="fileadmin/templates/ifpma/HonLogoSmall.png" alt="HON Logo" /></td><td>We comply with the<a href="http://www.hon.ch/HONcode/Conduct.html" onclick="window.open(this.href); return false;"> HONcode standard for trustworthy health information: </a><a href="https://www.hon.ch/HONcode/Conduct.html?HONConduct756149" onclick="window.open(this.href); return false;"> verify here</a></td></table><script type="text/javascript">
+/*
+dojo.require("dojo.widget.Dialog");
+var dlgError;
+function initDialog(e) {
+dlgError = dojo.widget.byId("dlgError");
+var btnError = document.getElementById("hiderError");
+dlgError.setCloseControl(btnError);
+}
+dojo.addOnLoad(initDialog);
+*/
+</script></div><!--/footer-->
+			</div><!--/site-container-->
+		</div><!--/site-wrapper-->
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+		var pageTracker = _gat._getTracker("UA-11206402-1");
+		pageTracker._trackPageview();
+	} catch(err) {}</script>
+	
+</body>
+</html>

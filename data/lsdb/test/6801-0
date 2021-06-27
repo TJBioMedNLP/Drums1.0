@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>WUR Multi-netclust Server</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" type="text/css" href="/styles/style_tools.css">
+<link rel="STYLESHEET" type="text/css" href="/rsc/stijl/blauw_01.css" title="style wur">
+</head>
+<body>
+<center>
+  <table width="100%" border="0" cellspacing="10" cellpadding="0">
+    <tr>
+      <td>
+        <table width="100%" cellspacing="10">
+          <tr valign="top">
+            <td width="75%">
+    <h1>Multi-netclust</h1>
+Multi-netclust is an efficient tool to detect connected clusters in
+large biological networks represented by different data matrices. The tool uses
+user-defined threshold values to combine the matrices and to detect clusters connected in
+all or in either of the data networks using a simple, memory-efficient graph algorithm.
+This web server allows one to combine up to five matrices using the Multi-netclust
+algorithm; however, the command-line version of the program can handle, in principle, an
+arbitrary number of matrices. Moreover, Multi-netclust is fast and scalable: analyzing a
+network of more than 1 million nodes and 100 million edges takes only a few minutes on an
+ordinary computer. The Multi-netclust program is written in C/C++, and is freely available
+under the GNU GPL license for Unix (Linux, FreeBSD and OSX) and Windows platforms.
+	</td>
+            <td width="25%">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="boxed">
+                <tr><td class="header">Description and Sources</td></tr>
+                <tr><td>
+		  <ul>
+			<li><a href="doc/index.html">Algorithm description</a></li>
+			<li><a href="examples/index.html">Download examples</a></li>
+			<li><a href="Download/nc/index.html">Download Netclust</a></li>
+			<li><a href="Download/mnc/index.html">Download Multi-netclust</a></li>
+		  </ul></td>
+                </tr></table></td>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td><h2>Multi-netclust</h2>
+      <form name="form1" method="post" enctype="multipart/form-data" action="netclust.php">
+<input type="hidden" name="number_of_matrices" value="2">         <table width="100%" border="0" align="center" cellpadding="10" cellspacing="0">
+<!-- EERSTE KOLOM -->
+            <tr><td>
+		     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="boxed">
+		       <tbody>
+	<tr><td colspan="2" class="header">Preprocessor settings</td></tr>
+	<tr><td width="50%" align="left">
+	<input type="submit" name="run" value="Run">
+	<input type="reset" name="clear" value="Clear">
+	</td>
+	<td width="50%" align="right">
+	Add/remove input box
+	<input style="width: 30px" type="submit" name="more_matrices" value="+">
+	<input  style="width: 30px" type="submit" name="less_matrices" value="-">
+	</td></tr>
+                  <tr>
+                    <td colspan=2 valign="top">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="boxed">	<tr><td colspan=2 align="left" title="Input file in sparse matrix (edge-list) format.">Matrix file 1 <input type="file" size="20" name="matrix_file_1"></td></tr>
+	<tr>
+		<td width="50%" align="left" title="Use this weighting factor to assign a weight to the matrix 1.">Alpha value <input type="text" size="10" value="0.50" name="matrix_alpha_1"></td>
+		<td width="50%" align="right" title="Use this similarity-/distance-based filter to remove dubious entries from the matrix 1.">Cutoff value <input type="text" size="4" name="matrix_cutoff_1" value="0"></td>
+	</tr>                      </table>
+                    </td>
+                </tr>                  <tr>
+                    <td colspan=2 valign="top">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="boxed">	<tr><td colspan=2 align="left" title="Input file in sparse matrix (edge-list) format.">Matrix file 2 <input type="file" size="20" name="matrix_file_2"></td></tr>
+	<tr>
+		<td width="50%" align="left" title="Use this weighting factor to assign a weight to the matrix 2.">Alpha value <input type="text" size="10" value="0.50" name="matrix_alpha_2"></td>
+		<td width="50%" align="right" title="Use this similarity-/distance-based filter to remove dubious entries from the matrix 2.">Cutoff value <input type="text" size="4" name="matrix_cutoff_2" value="0"></td>
+	</tr>                      </table>
+                    </td>
+                </tr>        <tr><td width="50%" align="left" title="Select the type of the input matrices.">Matrix type
+        <select name="matrixType">
+                <option value="0"> Similarity
+                <option value="1"> Distance
+        </select></td>
+	<td width="50%" align="right" title="Select from two matrix aggregation (kernel fusion) methods.">Aggregation method
+	<select name="aggregationMethod">
+		<option value="0"> Summation
+		<option value="1"> Product
+	</select></td></tr>		</tbody></table></td>
+<!-- TWEEDE KOLOM -->
+	<td valign="top"><table><tr><td width="350" valign="top">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="boxed">
+		<tr><td colspan="2" class="header">Cluster detection settings</td></tr>
+		<tr><td align="left" title="Use this similarity-/distance-based filter to remove dubious entries from the combined matrix.">Cutoff value <input type="text" size="4" name="clustering_cutoff" value="0"></td></tr>
+		<tr><td align="left" title="">Output format:
+			<input type="radio" name="membersPerLine" value="one">ONE
+			<input type="radio" name="membersPerLine" value="all" checked>ALL cluster member(s) per line
+		</td></tr>
+
+	</table>
+        </td></tr>
+       </table>
+      </form>
+     </td>
+    </tr>
+    <tr>
+      <td><em><font size="2">&copy; 2009 Laboratory of Bioinformatics, WUR</font></em></td>
+    </tr>
+  </table>
+  <!-- end of content -->
+  <!-- footer -->
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td colspan="2" bgcolor="#0.2066"><img src="/rsc/shim.gif" width="182" height="1" border="0" alt=""></td>
+    </tr>
+    <tr valign="top">
+      <!-- pas datum en informatie in de footer cell naar behoefte aan -->
+      <td align="left" class="footer"><p><em>Version 1.1; Last Modified
+          <!-- #BeginDate format:Sw1 -->4 July, 2010<!-- #EndDate -->
+          by AK</em></p>
+      </td>
+      <td align="right"><a href="http://www.wur.nl/" target="_blank"><img name="woordmerk" src="/images/BIF-WUR-logo.png" height="60" align="right" hspace="0" alt="To homepage Wageningen UR" border="0"></a></td>
+    </tr>
+  </table>
+</center>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<html>
+<head>
+<title>JAIL</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="./css/stylesheet.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+
+
+</head>
+<body>
+
+<div id="header">
+<a href = "./index.php"><img height="60px" src="img/jail.jpg" style="float: left"/></a>
+<a href = "http://www.charite.de" target = "_blank">
+<img height="60px" src="img/charite_logo.jpg" style="float: right"/>
+</a>
+<b><i>&nbsp;JAIL</i></b>
+</div>
+<div id="sidebar">
+
+	<div id="navi">
+			<a target="_self" href="./index.php?site=home" style="text-decoration: none">Home</a>
+			<hr/>
+			<hr/>
+			<a target="_self" href="./index.php?site=search" style="text-decoration: none">Search</a>
+			<hr/>
+			<a target="_self" href="./index.php?site=domain_interaction_search" style="text-decoration: none">Domain-Interaction-Search</a>
+			<hr />
+			<a target="_self" href="./index.php?site=scop_traverse&parent=0" style="text-decoration: none">Browse by Fold</a>
+			<hr/>
+			<a target="_self" href="./index.php?site=nucleic_interfaces" style="text-decoration: none">Browse Protein-Nucleic-Interfaces</a>
+			<hr/>
+			<a target="_self" href="./index.php?site=download" style="text-decoration: none">Download</a>
+			<hr/>
+			<a target="_self" href="./index.php?site=faq" style="text-decoration: none">FAQ</a>
+			<hr/>
+			<hr/>
+			<a target="_self" href="./index.php?site=contact" style="text-decoration: none">Contact</a>
+	</div>
+	
+	<br/>&nbsp;<br/>
+	
+	<div id="quick_search">
+		<form action="./index.php" method="get">
+		<input type="hidden" name="type[]" value="BU">
+		<input type="hidden" name="type[]" value="NC">
+		<input type="hidden" name="type[]" value="SD">
+		<input type="hidden" name="type[]" value="NS">
+		<input type="hidden" name="type_none" value="on">
+		<input type="hidden" name="site" value="search_results">
+		PDB-Id or Keyword:<span onmouseover="ddrivetip('Fulltext search for the given keywords. They may be combined using:<table class=tooltip><tr><td>word</td><td>OR, the word may be in the result set</td></tr><tr><td>+word</td><td>AND, the word has to be in the result set</td></tr><tr><td>-word</td><td>NOT, the word must not be in the result set</td></tr><tr><td>word*</td><td>truncation, a larger word starting with &quot;word&quot;</td></tr><tr><td>&quot;word&quot;</td><td>the result set must contain the enclosed phrase <i>literally</i></td></tr></table>')"; onmouseout="hideddrivetip()"> <img src="./img/question_mark_tiny.jpg"></span>
+		<input type="text" name="fulltext_keyword" size="21'">
+		<input type="submit" value="Search" style="width:194px;">
+		</form>
+	</div>
+
+</div>
+<!-------------- Tooltip --------------------->
+<div id="dhtmltooltip" style="position:absolute;visibility:hidden;border:1px black solid;background:#f5f5b5;padding:5px"></div>
+
+<script type="text/javascript">
+
+var offsetxpoint=0 //Customize x offset of tooltip
+var offsetypoint=20 //Customize y offset of tooltip
+var ie=document.all
+var ns6=document.getElementById && !document.all
+var enabletip=false
+if (ie||ns6)
+var tipobj=document.all? document.all["dhtmltooltip"] : document.getElementById? document.getElementById("dhtmltooltip") : ""
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+function ddrivetip(thetext, thecolor, thewidth){
+if (ns6||ie){
+if (typeof thewidth!="undefined") tipobj.style.width=thewidth+"px"
+if (typeof thecolor!="undefined" && thecolor!="") tipobj.style.backgroundColor=thecolor
+tipobj.innerHTML=thetext
+enabletip=true
+return false
+}
+}
+
+function positiontip(e){
+if (enabletip){
+var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+//Find out how close the mouse is to the corner of the window
+var rightedge=ie&&!window.opera? ietruebody().clientWidth-event.clientX-offsetxpoint : window.innerWidth-e.clientX-offsetxpoint-20
+var bottomedge=ie&&!window.opera? ietruebody().clientHeight-event.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+
+var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+
+//if the horizontal distance isn't enough to accomodate the width of the context menu
+if (rightedge<tipobj.offsetWidth)
+//move the horizontal position of the menu to the left by it's width
+tipobj.style.left=ie? ietruebody().scrollLeft+event.clientX-tipobj.offsetWidth+"px" : window.pageXOffset+e.clientX-tipobj.offsetWidth+"px"
+else if (curX<leftedge)
+tipobj.style.left="5px"
+else
+//position the horizontal position of the menu where the mouse is positioned
+tipobj.style.left=curX+offsetxpoint+"px"
+
+//same concept with the vertical position
+if (bottomedge<tipobj.offsetHeight)
+tipobj.style.top=ie? ietruebody().scrollTop+event.clientY-tipobj.offsetHeight-offsetypoint+"px" : window.pageYOffset+e.clientY-tipobj.offsetHeight-offsetypoint+"px"
+else
+tipobj.style.top=curY+offsetypoint+"px"
+tipobj.style.visibility="visible"
+}
+}
+
+function hideddrivetip(){
+if (ns6||ie){
+enabletip=false
+tipobj.style.visibility="hidden"
+tipobj.style.left="-1000px"
+tipobj.style.width=''
+}
+}
+
+document.onmousemove=positiontip
+</script>
+<!-------------- Tooltip Ende --------------------->
+
+<div id="content" style="height:auto">
+<div id="top_spacer"></div>
+
+<h1>Home</h1>
+
+<table  border=0>
+<tr>
+	<td valign="top" rowspan="2" >
+		<img src="./img/home_1got.jpg"  name="1got" alt="1got" >
+	</td>
+	<td valign="top">
+		<h4>Just another interface library?</h4>
+		Interfaces of macromolecules are a valuable basis to analyse the process of molecular recognition. 
+		JAIL classifies not only the interfaces between domain architectures 
+		but also those between protein chains and those between proteins and nucleic acids.
+
+		<h4>Of course not!</h4>
+
+	</td>
+</tr>
+<tr>
+	<td>
+	<font size=2>
+	Gt-alpha/Gi-alpha chimera (PDB-ID: 1GOT).
+	<a href="./index.php?site=show_interfaces&pdb_id=1got">Interfaces of 1GOT</a>
+	</font>
+
+	</td>
+</tr>
+
+</table>
+<BR>
+Interacting proteins are difficult to crystallize and rarely present within the 
+<a href="http://www.rcsb.org">Protein Data Base</a>. 
+Nevertheless, it is essential to analyse the interacting parts of the proteins to understand the process of
+protein-protein docking.
+
+<BR>
+<BR>
+
+To overcome this problem we have built up the JAIL database. 
+Since interacting domains exhibit similiar structural features than proteins, all known interfaces 
+between interacting domains of the <a href="http://scop.mrc-lmb.cam.ac.uk/scop/">SCOP database</a>
+were extracted and classified in JAIL.
+
+<BR>
+<BR>
+
+Only a part of all protein structures are included in SCOP. Particularly, new PDB entries are not yet annotated. 
+To overcome this problem additionally all interfaces between protein chains were calculated and included in the 
+database. This type of interface also comprises the interacting parts of the assumed biological units. 
+The last important type of interfaces provided here is composed of the interacting parts between proteins and 
+nucleic acids. Overall the data set consists of about 180,000 interfaces.
+ 
+<BR>
+<BR>
+
+JAIL is a comfortable tool to browse through the interface library and to analyze single interfaces. 
+However, more general questions require large-scale analysis. 
+For this purpose, a detailed form enables the compiling of comprehensive non redundant data sets for download.
+
+<BR>
+<BR>
+
+<b>UPDATED April 2009:</b> Evolutionary conservation, interface definition. Please find detailed information in the <a href="./index.php?site=faq">FAQs</a>.
+
+<BR>
+<BR> 
+
+</div>
+
+
+<div id="footer">
+<p>
+
+<a href="http://www.charite.de" target="_blank">Charit&eacute; Berlin</a>
+ - 
+<a href="http://bioinformatics.charite.de" target="_blank">Structural Bioinformatics Group (SBG)</a>
+</p>
+
+
+<p>&copy; 2008 SBG - Last update: December 2010 </p>
+
+</div>
+
+
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://bioinf-services.charite.de/biostats/" : "http://bioinf-services.charite.de/biostats/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://bioinf-services.charite.de/biostats/piwik.php?idsite=3" style="border:0" alt=""/></p></noscript>
+<!-- End Piwik Tag -->
+
+
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://bioinf-apache/biostats/" : "http://bioinf-apache/biostats/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://bioinf-apache/biostats/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+<!-- End Piwik Tag -->
+
+
+
+</body>
+
+</html>

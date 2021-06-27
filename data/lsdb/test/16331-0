@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Related Journals website</title>
+  </head>
+  <body bgcolor="#FFFFFF">
+<script language="javascript">
+<!-- begin script
+
+function getCookieVal(offset) {
+  var endstr = document.cookie.indexOf (";", offset);
+  if (endstr == -1)
+    endstr = document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+
+function FixCookieDate(date) {
+  var base = new Date(0);
+  var skew = base.getTime(); // dawn of (Unix) time - should be 0
+  if (skew > 0)  // Except on the Mac - ahead of its time
+    date.setTime (date.getTime() - skew);
+}
+
+function GetCookie(name) {
+  var arg = name + "=";
+  var alen = arg.length;
+  var clen = document.cookie.length;
+  var i = 0;
+  while (i < clen) {
+    var j = i + alen;
+    if (document.cookie.substring(i, j) == arg)
+      return getCookieVal (j);
+    i = document.cookie.indexOf(" ", i) + 1;
+    if (i == 0) break; 
+  }
+  return null;
+}
+
+function SetCookie(name,value,expires,path,domain,secure) {
+  document.cookie = name + "=" + escape (value) +
+    ((expires) ? "; expires=" + expires.toGMTString() : "") +
+    ((path) ? "; path=" + path : "") +
+    ((domain) ? "; domain=" + domain : "") +
+    ((secure) ? "; secure" : "");
+}
+
+function DeleteCookie(name,path,domain) {
+  if (GetCookie(name)) {
+    document.cookie = name + "=" +
+      ((path) ? "; path=" + path : "") +
+      ((domain) ? "; domain=" + domain : "") +
+      "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+  }
+}
+
+function setBeginQueryCookie () {
+    var rightNow = new Date();
+    var expdate = new Date();
+    FixCookieDate (rightNow); // for Mac
+    FixCookieDate (expdate); // for Mac
+    var beginTime = GetCookie("beginCookie");
+
+    if (beginTime == null) {
+      expdate.setTime (expdate.getTime() + (1 * 60 * 60 * 1000)); // dead in 1 hour
+      SetCookie ("beginCookie", rightNow.getTime(), expdate);
+     // SetCookie ("beginSrvtime", rightNow.toLocaleString(), expdate);
+    //  SetCookie ("UserId", -1, expdate);
+    }
+}
+
+setBeginQueryCookie();
+<!-- document.write(document.cookie + "<br>"); -->
+
+// end script -->
+</script>
+
+<script language="javascript">
+<!-- begin script
+
+function msg(myform) {
+  if (document.textform.term.value.length == 0) {
+    alert('Please enter key words, then click search');
+    myform.term.focus();
+    return false; 
+  }
+  else {
+    myform.action = "BoolQuery.cgi";
+    return true;
+  }
+ 
+}
+
+// end script -->
+</script>
+
+  <table width="600" cellspacing="0" cellpadding="5">
+<tr>
+    <td width="140" align="left"><a href="http://www.ncbi.nlm.nih.gov"><img src="ncbi_logo.gif" alt="NCBI Logo" border="0"></a></td>
+    <td width="460"><img src="datatools.gif" width="460" height="60" alt="Dat
+abases and Tools Titlebar"></td>
+  </tr>
+  </table>
+
+<table width="600" border="0" cellspacing="0" cellpadding="5" bgcolor="#006699">
+     <tr>
+
+       <td width="100%" align="center"><font color="#FFFFFF"><span class="title">National Center for Biotechnology Information</span></font></td>
+        </tr>
+        </table>
+
+
+<br>
+    <font size="5"><b>Related Journals for Biomedical Research</b></font><br>
+    <br>
+
+    <p>
+    <p>
+Your can search journals by name, abbreviation, or issn.<br>
+    <form name="textform" onSubmit="return msg(this)">
+    Enter search terms:
+    <input type="textarea" name="term" size="40"><br><br>
+    <input type="submit" value="Search">
+    <input type="reset" value="Reset">
+  <!--  <input type="hidden" name="session" value="0"> -->
+    </form>
+<br>
+<br>
+Or you can browse by <a href="SubjectTerms.html">subject terms</a>.
+<br>
+<br>
+See <font size="4"><a href="help.html">HELP</a> </font>page for more information.
+
+<p>
+<p>
+<p>
+<br>
+<b>Citation:</b>
+<br>Identifying related journals through log analysis, Bioinformatics 2009; doi:10.1093/bioinformatics/btp529
+<br>Zhiyong Lu, Natalie Xie, W. John Wilbur
+<br>
+<br>
+  </body>
+
+</html>

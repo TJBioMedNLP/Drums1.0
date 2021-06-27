@@ -1,0 +1,251 @@
+<HEAD>
+<TITLE>GATHER</TITLE>
+<SCRIPT TYPE="text/javascript" SRC="ajax.js"></SCRIPT>
+<LINK REL="stylesheet" TYPE="text/css" HREF="gstyle.css" />
+<META http-equiv="expires" content="0"></HEAD>
+
+<BODY ONUNLOAD="onUnload();">
+
+<DIV class="leftalign"><TABLE CELLSPACING=0 CELLPADDING=0><TR><TD>
+<DIV STYLE="margin-left:5em"><SPAN CLASS="pagetitle">GATHER</SPAN><BR><FONT SIZE=-1><EM>Gene&nbsp;Annotation&nbsp;Tool&nbsp;to&nbsp;Help&nbsp;Explain&nbsp;Relationships</EM></FONT></DIV></TD></TR></TABLE></DIV>
+<DIV class="rightalign"><TABLE CELLSPACING=0 CELLPADDING=0><TR><TD ALIGN=RIGHT>
+<A HREF="FAQ.html">[Help]</A><BR><A HREF="#" onClick="javascript:analyzeRbE2F();return false">[Rb/E2F Demo]</A></TD></TR></TABLE></DIV>
+<BR>
+
+
+<BR>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=6 BORDER=0>
+<TR>
+<TD VALIGN=TOP WIDTH=50%>
+<DIV CLASS="shadow"><DIV CLASS="content">
+<TABLE CELLSPACING=0 CELLPADDING=2 BORDER=0>
+<TR>
+<TD COLSPAN=3 VALIGN="TOP">
+<B><FONT COLOR=RED>Please enter a list of genes to annotate.</FONT></B><BR>
+</TD>
+</TR>
+<TR>
+<TD VALIGN=TOP>
+<TEXTAREA NAME="genes" ROWS="8" COLS="20" ID="gene_box" ONFOCUS="onFocusGeneInput()" ONKEYPRESS="onGeneChange(400)" ONBLUR="onBlurGeneInput()">
+</TEXTAREA><BR>
+<BR>
+<B>Organism:</B>
+&nbsp;&nbsp;&nbsp;<SELECT SIZE=1 WIDTH=20 ID="tax_id" NAME="organism" ONCHANGE="onGeneChange()">
+<OPTION VALUE="9606" SELECTED>human</OPTION>
+<OPTION VALUE="10090" >mouse</OPTION>
+<OPTION VALUE="10116" >rat</OPTION>
+<OPTION VALUE="7227" >fly</OPTION>
+<OPTION VALUE="6239" >worm</OPTION>
+<OPTION VALUE="4932" >yeast</OPTION>
+</SELECT>
+<BR>
+<INPUT TYPE=CHECKBOX ID="homologs" ONCLICK="onAnnotationChange()" > <B>Include&nbsp;Homologs</B><BR>
+<INPUT TYPE=CHECKBOX ID="network" ONCLICK="onAnnotationChange()" > <B>Infer&nbsp;from&nbsp;Network</B></TD>
+<TD VALIGN=TOP WIDTH=100%>
+<FORM NAME="annot_form">
+<B>Annotations:</B><BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="gene_ontology" ONCLICK="onAnnotationChange()" CHECKED>Gene&nbsp;Ontology<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="words" ONCLICK="onAnnotationChange()" >MEDLINE&nbsp;Words<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="mesh" ONCLICK="onAnnotationChange()" >MeSH<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="kegg" ONCLICK="onAnnotationChange()" >KEGG&nbsp;Pathway<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="proteins" ONCLICK="onAnnotationChange()" >Protein&nbsp;Binding<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="literature" ONCLICK="onAnnotationChange()" >Literature&nbsp;Net<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="mirna" ONCLICK="onAnnotationChange()" >miRNA<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="transfac" ONCLICK="onAnnotationChange()" >TRANSFAC<BR>
+<INPUT TYPE="radio" NAME="annot_type" VALUE="maploc" ONCLICK="onAnnotationChange()" >Chromosome<BR>
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</DIV></DIV>
+</TD>
+<TD VALIGN="TOP">
+<TABLE WIDTH=100% CELLSPACING=5% CELLPADDING=0 BORDER=0>
+<TR>
+  <TD COLSPAN=3 VALIGN=BOTTOM><B><U>Your&nbsp;Query&nbsp;Genes</U></B>:&nbsp;<FONT SIZE=-1><SPAN ID="num_genes"></SPAN></FONT></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_1_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_1_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_1_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_2_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_2_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_2_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_3_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_3_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_3_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_4_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_4_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_4_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_5_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_5_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_5_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_6_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_6_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_6_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_7_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_7_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_7_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_8_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_8_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_8_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_9_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_9_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_9_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="gene_table_10_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_10_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP><SPAN ID="gene_table_10_3">&nbsp;</SPAN></TD>
+</TR>
+<TR>
+<TD COLSPAN=3 ALIGN=LEFT VALIGN=BOTTOM><FORM ONSUBMIT="refreshGenes(); return false"><FONT SIZE=-1>Page <INPUT TYPE=TEXT ID="gene_page" SIZE=3> of <SPAN ID="gene_total_pages"></SPAN>  [<A HREF="" ID="gene_prev" CLASS="">prev</A> | <A HREF="" ID="gene_next" CLASS="">next</A>]</FONT></FORM></TD>
+</TR>
+</TABLE>
+<INPUT TYPE="hidden" ID="gene_page" VALUE=1>
+</TD>
+</TR>
+</TABLE>
+<SPAN ID="statusbar"></SPAN>
+<TABLE WIDTH=100% CELLSPACING=2% CELLPADDING=0 BORDER=0>
+<TR>
+  <TH VALIGN=BOTTOM ALIGN=LEFT COLSPAN=2><U><SPAN ID="annotation_type1">&nbsp;</SPAN></U></TH>
+  <TH VALIGN=BOTTOM ALIGN=LEFT WIDTH=8% COLSPAN=2><U>#&nbsp;Genes</U></TH>
+  <TH VALIGN=BOTTOM ALIGN=CENTER WIDTH=15% COLSPAN=2><FONT SIZE=-1><U><EM>p</EM> Value</U></FONT></TH>
+  <TH VALIGN=BOTTOM ALIGN=CENTER WIDTH=7%><FONT SIZE=-1><U>Bayes Factor</U></FONT></TH>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_1_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_1_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_1_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_1_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_1_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_1_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_1_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_1_genes"></SPAN></TD>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_2_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_2_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_2_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_2_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_2_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_2_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_2_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_2_genes"></SPAN></TD>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_3_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_3_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_3_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_3_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_3_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_3_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_3_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_3_genes"></SPAN></TD>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_4_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_4_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_4_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_4_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_4_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_4_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_4_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_4_genes"></SPAN></TD>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_5_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_5_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_5_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_5_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_5_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_5_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_5_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_5_genes"></SPAN></TD>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_6_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_6_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_6_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_6_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_6_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_6_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_6_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_6_genes"></SPAN></TD>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_7_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_7_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_7_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_7_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_7_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_7_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_7_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_7_genes"></SPAN></TD>
+</TR>
+<TR>
+  <TD WIDTH=5% VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_8_1">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_8_2">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_8_3">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><SPAN ID="annotation_table_8_4">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=RIGHT><SPAN ID="annotation_table_8_5">&nbsp;</SPAN></TD>
+  <TD VALIGN=TOP ALIGN=LEFT><FONT SIZE=-1><SPAN ID="annotation_table_8_6">&nbsp;</SPAN></FONT></TD>
+  <TD VALIGN=TOP ALIGN=CENTER><FONT SIZE=-1><SPAN ID="annotation_table_8_7">&nbsp;</SPAN></FONT></TD>
+</TR>
+<TR>
+<TD></TD>
+<TD COLSPAN=6><SPAN ID="annotation_table_8_genes"></SPAN></TD>
+</TR>
+<TR>
+<TD COLSPAN=7 ALIGN=LEFT VALIGN=BOTTOM><FORM ONSUBMIT="refreshAnnotations(0); return false"><FONT SIZE=-1>Page <INPUT TYPE=TEXT ID="annotation_page" SIZE=3> of <SPAN ID="annotation_total_pages"></SPAN>  [<A HREF="" ID="annotation_prev" CLASS="">prev</A> | <A HREF="" ID="annotation_next" CLASS="">next</A>]</FONT></FORM></TD>
+</TR>
+</TABLE>
+<INPUT TYPE="hidden" ID="annotation_page" VALUE=1>
+<INPUT TYPE="hidden" ID="shown_annotations" VALUE="">
+<HR>
+<DIV class="leftalign"><FORM ACTION="" METHOD=POST ID="download_form" ONCLICK="downloadAnnotations()"><INPUT ID="download_button" NAME="Download" TYPE="submit" VALUE="Download"><EM><SPAN ID="annotation_type2">&nbsp;</SPAN></EM> annotations as tab-delimited text file.</FORM></DIV>
+<DIV class="rightalign">1,086,952&nbsp;queries&nbsp;served.</DIV>
+<BR>
+<script type="text/javascript">
+refreshGenes()
+refreshAnnotations(1)
+</script>
+</BODY>

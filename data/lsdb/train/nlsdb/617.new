@@ -1,0 +1,515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <title>Climate Wizard</title>
+        <script type="text/javascript">
+            djConfig = {
+                parseOnLoad: true
+            }
+        </script>
+		<link rel="stylesheet" type="text/css" href="css/default.css">
+		
+        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">        
+        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5">
+        </script>
+		<!--
+		<link rel="stylesheet" type="text/css" href="http://orthogonal.esri.com/jsapi/arcgis/1.6/js/dojo/dijit/themes/tundra/tundra.css">        
+        <script type="text/javascript" src="http://orthogonal.esri.com/jsapi/arcgis/?v=1.6">
+        </script>
+		-->
+        <script type="text/javascript" src="scripts/textlookup.js">
+        </script>
+        <script type="text/javascript" src="factoids/factoids.js">
+        </script>
+        <script type="text/javascript" src="scripts/setup.js">
+        </script>
+        
+        <script type="text/javascript">
+            dojo.require("esri.map");
+            dojo.require("dijit.form.HorizontalSlider");           
+            
+            var map, topoLayer, worldbaseLayer, climateChangeLayer, factoidsLayer, factoidsClickHandle, iTip;
+            
+            function init(){
+                esri.config.defaults.map.slider = {
+                    left: "5px",
+                    top: "5px",
+                    width: null,
+                    height: "100px"
+                };
+                var initialExtent = new esri.geometry.Extent({
+                    "xmin": -14000817.596935518,
+                    "ymin": 2553608.4109505154,
+                    "xmax": -7445578.051200547,
+                    "ymax": 7396658.523097996,
+                    "spatialReference": {
+                        "wkid": 102113
+                    }
+                });
+                topoLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer",{id:"topo"});
+				worldbaseLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer",{id:"worldbase",visible:false});
+								
+                map = new esri.Map("mapdiv", {
+                    extent: initialExtent
+                });
+				map.addLayer(worldbaseLayer);
+				map.addLayer(topoLayer);                
+               
+                var d = new Date();
+                mon = d.getMonth();
+                
+                mlist = document.getElementById('cycledropdown');
+                mlist.options[mon + 5].selected = true;
+                
+                //remove this to use current month
+                mlist.options[0].selected = true;
+                
+                dojo.connect(map, 'onMouseMove', showCoords);
+                dojo.connect(map, 'onLayerAdd', showMapCopyright);
+                
+                showCoords(map.extent.getCenter());
+                
+                var scenarioOptions = {
+                    WebFolder: '/ClimateChangeData',
+                    Legend: '_Legend',
+                    Delimeter: "_",
+                    MapOption: 'depart_change',
+                    AnalyisArea: 'AR4_US_12k',
+                    Model: 'bccr_bcm2_0.1',
+                    Scenario: 'a1b',
+                    Measurement: 'tmean',
+                    Cycle: '14',
+                    TimePeriod: '2040_2069'
+                };
+                
+                climateChangeLayer = new apl.ClimateChangeLayer({
+                    id: 'ClimateChange'
+                });
+                
+                map.addLayer(climateChangeLayer);
+                climateChangeLayer.setOpacity(0.7);
+                climateChangeLayer.setScenarioOptions(scenarioOptions,false);
+                
+                var previewIdentifyBtn = dojo.byId('identifyButton');
+                dojo.connect(previewIdentifyBtn, 'onclick', function(e){
+                    var mapClickEvent = dojo.connect(map, 'onClick', function(evt){
+                        dojo.disconnect(mapClickEvent);
+                        climateChangeLayer.getCellValues(map, evt);
+                    });
+                });
+				
+                iTip = new infoTip("iTipDiv", "infoTip white roundcorner", map.position, false);
+				
+                dojo.subscribe("esri.Error", null, function(e){
+                    console.error(e.message);                    
+                });
+				
+                setupregions();
+                updateregion();
+            }
+			
+            dojo.addOnLoad(init);
+            
+            function MM_preloadImages(){ //v3.0
+                var d = document;
+                if (d.images) {
+                    if (!d.MM_p) d.MM_p = new Array();
+                    var i, j = d.MM_p.length, a = MM_preloadImages.arguments;
+                    for (i = 0; i < a.length; i++) 
+                        if (a[i].indexOf("#") != 0) {
+                            d.MM_p[j] = new Image;
+                            d.MM_p[j++].src = a[i];
+                        }
+                }
+            }
+            
+            function MM_findObj(n, d){ //v4.01
+                var p, i, x;
+                if (!d) d = document;
+                if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+                    d = parent.frames[n.substring(p + 1)].document;
+                    n = n.substring(0, p);
+                }
+                if (!(x = d[n]) && d.all) x = d.all[n];
+                for (i = 0; !x && i < d.forms.length; i++) 
+                    x = d.forms[i][n];
+                for (i = 0; !x && d.layers && i < d.layers.length; i++) 
+                    x = MM_findObj(n, d.layers[i].document);
+                if (!x && d.getElementById) x = d.getElementById(n);
+                return x;
+            }
+            
+            function MM_nbGroup(event, grpName){ //v6.0
+                var i, img, nbArr, args = MM_nbGroup.arguments;
+                if (event == "init" && args.length > 2) {
+                    if ((img = MM_findObj(args[2])) != null && !img.MM_init) {
+                        img.MM_init = true;
+                        img.MM_up = args[3];
+                        img.MM_dn = img.src;
+                        if ((nbArr = document[grpName]) == null) nbArr = document[grpName] = new Array();
+                        nbArr[nbArr.length] = img;
+                        for (i = 4; i < args.length - 1; i += 2) 
+                            if ((img = MM_findObj(args[i])) != null) {
+                                if (!img.MM_up) img.MM_up = img.src;
+                                img.src = img.MM_dn = args[i + 1];
+                                nbArr[nbArr.length] = img;
+                            }
+                    }
+                }
+                else if (event == "over") {
+                    document.MM_nbOver = nbArr = new Array();
+                    for (i = 1; i < args.length - 1; i += 3) 
+                        if ((img = MM_findObj(args[i])) != null) {
+                            if (!img.MM_up) img.MM_up = img.src;
+                            img.src = (img.MM_dn && args[i + 2]) ? args[i + 2] : ((args[i + 1]) ? args[i + 1] : img.MM_up);
+                            nbArr[nbArr.length] = img;
+                        }
+                }
+                else if (event == "out") {
+                    for (i = 0; i < document.MM_nbOver.length; i++) {
+                        img = document.MM_nbOver[i];
+                        img.src = (img.MM_dn) ? img.MM_dn : img.MM_up;
+                    }
+                }
+                else if (event == "down") {
+                    nbArr = document[grpName];
+                    if (nbArr) for (i = 0; i < nbArr.length; i++) {
+                        img = nbArr[i];
+                        img.src = img.MM_up;
+                        img.MM_dn = 0;
+                    }
+                    document[grpName] = nbArr = new Array();
+                    for (i = 2; i < args.length - 1; i += 2) 
+                        if ((img = MM_findObj(args[i])) != null) {
+                            if (!img.MM_up) img.MM_up = img.src;
+                            img.src = img.MM_dn = (args[i + 1]) ? args[i + 1] : img.MM_up;
+                            nbArr[nbArr.length] = img;
+                        }
+                }
+            }
+        </script>
+    </head>
+    <body class="tundra" onload="MM_preloadImages('images/faqdown.png','images/faqover.png','images/ContactUsdown.png','images/ContactUsover.png','images/aboutusdown.png','images/aboutusover.png')">
+        <div id="wrapper">
+            <div id="header">
+                <table width="100%">
+                    <tr>
+                        <th width="25%" scope="col">
+                            <a href="http://www.nature.org/" target="_blank"><img src="images/TNCLogo2.gif" alt="TNC Logo" width="205" height="80" border='0'/></a>
+                        </th>
+                        <th width="47%" scope="col">
+                            <img src="images/CWText.png" alt="Climate Wizard Text" width="402" height="83" />
+                        </th>
+                        <th width="28%" scope="col">
+                            <table width="100%" border="0" cellpadding="3">
+                                <tr>
+                                    <th align="center" valign="middle" scope="col">
+                                        <div align="right">
+                                            <a href="http://www.washington.edu/" target="_blank"><img src="images/Univ_Wash_logo.png" alt="uofwashlogo" width="170" height="37" border='0'/></a>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="middle">
+                                        <div align="right">
+                                            <a href="http://www.usm.edu/index.php" target="_blank"><img src="images/Univ_SMiss_logo.png" alt="uofsouthmisslogo" width="170" height="38" border='0'/></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </th>
+                    </tr>
+                </table>
+                <div id="nav_bar">
+                    <table border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <a href="AboutUs.html" onclick="MM_nbGroup('down','group1','aboutus','images/AboutUsDown.png',1)" onmouseover="MM_nbGroup('over','aboutus','images/AboutUsOver.png','images/AboutUsDown.png',1)" onmouseout="MM_nbGroup('out')"><img src="images/AboutUs.png" alt="" width="155px" height="24px" name="aboutus" border="0" id="howtouse" onload=""/></a>
+                            </td>
+                            <td>
+                                <a href="FAQ.html" onclick="MM_nbGroup('down','group1','faq','images/FAQDown.png',1)" onmouseover="MM_nbGroup('over','faq','images/FAQOver.png','images/FAQDown.png',1)" onmouseout="MM_nbGroup('out')"><img src="images/FAQ.png" width="132px" height="24px" alt="" name="faq" border="0" id="faq" onload=""/></a>
+                            </td>
+                            <td>
+                                <a href="ContactUs.html" onclick="MM_nbGroup('down','group1','contactus','images/ContactUsDown.png',1)" onmouseover="MM_nbGroup('over','contactus','images/ContactUsOver.png','images/ContactUsDown.png',1)" onmouseout="MM_nbGroup('out')"><img src="images/ContactUs.png" width="155px" height="24px" alt="" name="contactus" border="0" id="contactus" onload=""/></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div><!-- end of nav bar -->
+            </div><!-- end of header -->
+            <div id="content" style="padding-bottom:25px;border: thin solid #A0C04D;">
+                <table width="100%" height="29" border="0" cellpadding="0" bordercolor="#E3E3E3" bgcolor="#A0C04D">
+                    <tr class="boldsubs">
+                        <th width="24%" align="center" class="whiteborderwhite" scope="col">
+                            Analysis Area
+                        </th>
+                        <th width="17%" align="center" class="whiteborderwhite" scope="col">
+                            Time Period
+                        </th>
+                        <th width="18%" align="center" class="whiteborderwhite" scope="col">
+                            Map Options
+                        </th>
+                        <th width="18%" align="center" class="whiteborderwhite" scope="col">
+                            Measurement
+                        </th>
+                        <th width="23%" align="center" class="style9" scope="col">
+                            Resources
+                        </th>
+                    </tr>
+                </table>
+                <table width="100%" height="67" border="0">
+                    <tr valign="top" class="bodytype">
+                        <th width="24%" height="63" align="left" valign="top" class="column_3" scope="col">
+                            <input name="grouparea" type="radio" class="style10" id="usarea" value="usarea" checked="checked" onclick="changemap();" />
+							<span class="style4">United States</span>
+                            <input name="grouparea" type="radio" class="style10" id="intarea" value="intarea" onclick="changemap();" />
+							<span class="style4">Global</span>
+                            <br/>
+                            <br/>
+                            <center>
+                                <select name="select2" id="worldregions" onchange="changemap();" style="font-size:11px">
+                                </select>
+                                <select name="select" id="usregions" onchange="changemap();" style="font-size:11px">
+                                </select>
+                            </center>
+                        </th>
+                        <th width="17%" height="63" align="left" valign="top" class="column_3" scope="col">
+                            <label>
+                                <input name="timesel" type="radio" id="past" onclick="changemap();"/><span class="bodytype">Past 50 Years</span>
+                                <br/>
+                            </label>
+                            <label>
+                                <input name="timesel" type="radio" id="mid" onclick="changemap();"/><span class="bodytype">Mid Century (2050s)</span>
+                                <br/>
+                            </label>
+                            <label>
+                                <input name="timesel" type="radio" id="end" checked="checked" onclick="changemap();"/><span class="bodytype">End Century (2080s) </span>
+                                <br/>
+                            </label>
+                        </th>
+                        <th width="18%" height="63" align="left" valign="top" class="column_3" scope="col">
+                            <input type="radio" name="mapoption" id="mapaverage" value="mean" onclick="changemap();"/><span class="bodytype" id="amean">Map of Average</span>
+                            <br/>
+                            <input type="radio" name="mapoption" id="mapdifference" value="depart_change" checked="checked" onclick="changemap();"/><span class="bodytype" id="adepart_change">Map of Change</span>
+                            <br/>
+                            <span id="statbox" style="display:none"><input type="radio" name="mapoption" id="mapsig" value="trend_pVal" onclick="changemap();" /><span class="bodytype" id="atrend_pVal">Statistical Confidence</span></span>
+                            <br/>                            
+					<br/>                                 
+  					<a class="bodytype" href="/apps.html" target="_blank">Compare & Animate Models</a>
+                        </th>
+                        <th width="18%" height="63" align="left" valign="top" class="column_3" scope="col">
+                            <label>
+                                <input type="radio" name="climatevar" id="averagetemp" value='tmean' checked="checked" onclick="changemap();"/><span class="bodytype" id="atmean">Average Temperature</span>
+                            </label>
+                            <br/>
+                            <input type="radio" name="climatevar" id="precip" value='ppt' onclick="changemap();"/><span class="bodytype" id="appt">Precipitation</span>
+                            <br/>
+                            <br/>
+                            <center>
+                                <select name="cycledropdown" id="cycledropdown" onchange="changemap();" style="font-size:11px">
+                                    <option value="14">Annual</option>
+                                    <option value="15">Dec - Feb</option>
+                                    <option value="16">Mar - May</option>
+                                    <option value="17">June - Aug</option>
+                                    <option value="18">Sept - Nov</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </center>
+                        </th>
+                        <th width="23%" height="63" align="left" valign="top" scope="col">
+                            <div style="line-height: 17px; padding:10px">
+                                <span class="bodytype">
+                                	<a id='doclink2' href='casestudies.html'>Case Studies</a>
+                                    <br/>
+                                    <a id="doclink" href="documentation.html">Documentation</a>
+                                    <br/>
+                                    <a id="datalink" href="#" onclick="okit('data');">Data</a> and <a id="maplink" href='#' onclick="okit('map')">Map Image</a> Download 
+                                    <br/>
+                                    <a id="climatecustom" href="http://geo.usm.edu/tncclimate/" target="_blank">ClimateWizard Custom Analysis</a>  
+								<br/>
+									<a href="#" onclick="printwin()">Printer Friendly Version</a>
+                                </span>
+                                <br/>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div id="holder" style="height:600px;width:100%;">
+                    <div id="leftcol">
+                        <table width="100%">
+                            <tr>
+                                <th height="22" bgcolor="#A0C04D" class="boldsubs" scope="col">
+                                    Future Climate Model
+                                </th>
+                            </tr>
+                            <tr>
+                                <th height="15" valign="middle" class="bodyitalic" scope="col">
+                                    <span class="style3"><em>IPCC Fourth Assessment</em></span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th width="43%" align="center" valign="top" scope="col">
+                                    <span class="bodytype">Emission Scenario</span>
+                                    <br/>
+                                    <label>
+                                        <select name="emmiscenario" id="emmiscenario" onchange="changemap();" style="font-size:10px">
+                                            <option value="a2">High A2</option>
+                                            <option value="a1b">Medium A1B</option>
+                                            <option value="b1">Low B1</option>
+                                        </select>
+                                    </label>
+                                    <br/>
+                                    <br/>
+                                    <span class="bodytype">General Circulation Model
+                                        <br/>
+                                    </span>
+                                    <span id='gcm1'>
+                                        <select name="gencircmodel" id="gcmgroup" onchange="changemap();" style="font-size:10px">
+                                            <option value="ensemble">Ensemble Average</option>
+                                            <option value="miroc">MIROC3.2 (medres)</option>
+                                            <option value="csiro">CSIRO-Mk3.0</option>
+                                            <option value="hadcm3">UKMO-HadCM3</option>
+                                        </select>
+                                    </span>
+                                    <span id='gcm2'>
+                                        <select name="gencircmodelfull" id="gcmgroupfull" onchange="changemap();" style="font-size:10px">
+                                            <option value="ensemble|50">Ensemble Average</option>
+                                            <optgroup label="---------------">
+                                                <option value="ensemble|0">Ensemble Lowest</option>
+                                                <option value="ensemble|20">Ensemble 20%</option>
+                                                <option value="ensemble|40">Ensemble 40%</option>
+                                                <option value="ensemble|60">Ensemble 60%</option>
+                                                <option value="ensemble|80">Ensemble 80%</option>
+                                                <option value="ensemble|100">Ensemble Highest</option>
+                                            </optgroup>
+                                            <optgroup label="---------------">
+                                                <option value="bccr_bcm2_0.1">BCCR-BCM2.0</option>
+                                                <option value="cccma_cgcm3_1.1">CGCM3.1 (T47)</option>
+                                                <option value="cnrm_cm3.1">CNRM-CM3</option>
+                                                <option value="csiro_mk3_0.1">CSIRO-Mk3.0</option>
+                                                <option value="gfdl_cm2_0.1">GFDL-CM2.0</option>
+                                                <option value="gfdl_cm2_1.1">GFDL-CM2.1</option>
+                                                <option value="giss_model_e_r.1">GISS-ER</option>
+                                                <option value="inmcm3_0.1">INM-CM3.0</option>
+                                                <option value="ipsl_cm4.1">IPSL-CM4</option>
+                                                <option value="miroc3_2_medres.1">MIROC3.2 (medres)</option>
+                                                <option value="miub_echo_g.1">ECHO-G</option>
+                                                <option value="mpi_echam5.1">ECHAM5/ MPI-OM</option>
+                                                <option value="mri_cgcm2_3_2a.1">MRI-CGCM2.3.2</option>
+                                                <option value="ncar_ccsm3_0.1">CCSM3</option>
+                                                <option value="ncar_pcm1.1">PCM</option>
+                                                <option value="ukmo_hadcm3.1">UKMO-HadCM3</option>
+                                            </optgroup>
+                                        </select>
+                                    </span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th align="center" class="top_rule" scope="col" height="200">
+                                    <span id="grapher"><span class="style3 style4">
+                                            <br/>
+                                            Click Graph To Enlarge
+                                        </span>
+                                        <span id='bgraph' style="margin-left:-12px"></span><a href="" title="View Larger" id='graghlink' target="_blank"><img id='graph' src="images/spacer.gif" alt="" width="195" border="0"/></a></span>
+                                </th>
+                            </tr>
+                        </table>
+                        <br/>
+                        <span id="extratext" style="font-size:10px;display:block;text-align:center;"></span>
+                        <br/>
+                    </div>
+                    <!-- end of leftcol -->
+                    <div id="rightcol">
+                        <div id="titlef">
+                            <span align="center" id="maptitle">Average Annual Mean Temp. 1951-2006 [1985]</span>
+                            <span align="center" id="mapsubtitle">
+                                <br/>
+                                &nbsp;
+                            </span>
+                        </div>
+                        <!-- end of titlef -->
+                        <div id="mappan">
+                            <div class="tundra" id="mapdiv" style="width: 668px;height: 495px;">
+                                <div style="font-size:9pt;background-color:white;border:1px solid #ccc; z-index:999; position:absolute; right:0px; width:90px; top: 2px; padding:3px;">
+                                    <input style="margin-top:5px;" type="checkbox" onclick="showFactoids(this)">Factoids
+                                    </input>
+									<input type="radio" style="margin-top:5px;" name="layerswitch" onclick="changeLayers(this)" value="topo" checked="checked">Topo
+                                    </input>
+                                    <br/>
+                                    <input type="radio" style="" name="layerswitch" onclick="changeLayers(this)" value="worldbase">World
+                                    </input>
+                                </div>
+                                <div id="sliderDiv" style="position:absolute; right:100px; top:2px; z-index:999;background-color:#fff; padding:3px;border:1px solid #ccc;font-size:8pt;">
+                                    <span style="text-align:center;padding-bottom:5px;display:block;">Change Transparency</span>
+                                    <span dojoType="dijit.form.HorizontalSlider" value="0.7" minimum="0" maximum="1" discreteValues="11" intermediateChanges="true" showButtons="false" style="width:150px;" onchange="changeOpacity"></span>
+                                </div>
+                                <div id="identifyDiv" style="font-size:9pt;background-color:white;border:1px solid #ccc; z-index:999; position:absolute; right:100px; width:80px; top: 40px; padding:3px;">
+                                    <input type="button" style="background-color:#EAEAEA; border:1px solid #ccc; width:80px;" id="identifyButton" value="Get Values" title="Click on the map to get cell values">
+                                    </input>
+                                </div><a target="_blank" href="http://www.esri.com/"><img src="images/poweredbyesri.png" width="56px" height="28px" style="position:absolute;left:2px;bottom:0px;z-index:999;" alt=""/></a>
+                                <div id="coordsDiv" style="position:absolute; left:65px; bottom:0px; z-index:1000; background-color:#fff; padding:2px;font-size:8pt;">
+                                </div>
+                                <div id="attribDiv" style="position:absolute; right:75px; bottom:0px; z-index:999; background-color:#fff; padding:2px;font-size:7pt; oveflow:hidden; max-width:360px;">
+                                </div>
+                            </div>
+                            <!-- end of mapdiv -->
+                            <div id="wlegend">
+                                <img id='legend' src="images/spacer.gif" alt="" width="80px" />
+                            </div>
+                            <div id="legendbg">
+                            </div>
+                            <br/>
+                        </div>
+                        <!-- end of mappan -->
+                        <span id="credit" style="display:block;text-align:center;font-family:Arial, Helvetica, sans-serif; text-align:left; font-size:8pt;">
+                            &nbsp;
+                        </span>
+                    </div>
+                    <!-- end of rightcol -->
+                    <br/>
+                    <br/>
+                </div>
+                <!-- end of holder -->
+            </div>
+            <!-- end of content -->
+            </div>
+            <!-- end of wrapper -->			
+					
+            <script type="text/javascript">
+                dojo.require("dijit.Dialog");
+                dojo.require("dijit.layout.ContentPane");
+                dojo.require("dijit.layout.BorderContainer");
+            </script>
+			<script type="text/javascript" src="tnc/resources/APLClimateChangeLayer.js">
+        	</script>	
+			<script type="text/javascript" src="tnc/GetCellValuesDijit/GetCellValues.js">				
+			</script>
+			
+            <!-- analytics code start -->
+            <script type="text/javascript">
+                var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+                document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script>
+            <script type="text/javascript">
+                try {
+                    var pageTracker = _gat._getTracker("UA-11979909-1");
+                    pageTracker._trackPageview();
+                } catch (err) {
+                }
+            </script>
+            <!-- analytics code end -->
+
+        </body>
+    </html>

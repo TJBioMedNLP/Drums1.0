@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<script language="javascript" src="snposition.js"></script>
+<title>SNPosition</title>
+<link rel="stylesheet" type="text/css" href="css/snposition.css" />
+<style type="text/css">
+<!--
+body {
+	background-image: url();
+}
+.style1 {color: #CCCCCC}
+-->
+</style>
+</head>
+
+<body>
+<div align="center">
+  <p><img src="images/snposition/logo.gif" width="801" height="127" border="0" usemap="#Map"></p>
+  <table width="800" border="0">
+    <tr>
+      <td><div align="center"><a href="/SNPosition/yu-bulletin/showBulletins.do">News</a></div></td>
+      <td width="133"><div align="center">
+          <p><a href="/SNPosition/introduction.jsp">Introduction</a></p>
+      </div></td>
+      <td width="133"><div align="center"><a href="/SNPosition/index.jsp">SNPosition</a></div></td>
+      <td><div align="center"><a href="/SNPosition/dbSource.jsp">DB Source</a></div></td>
+      <td><div align="center"><a href="/SNPosition/contact.jsp">Contact</a></div></td>
+      <td><div align="center"><a href="/SNPosition/userManual.jsp">User Manual</a></div></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="133"><div align="left"><img src="/SNPosition/counter.do"></div></td>
+      <td colspan="2"><div align="center">
+        <div align="left"><span class="style_onlineCount">current online people:</span> 1</div>
+      </div>        <div align="center"></div></td>
+      <td width="133"><div align="center"></div></td>
+      <td width="133"><div align="center"></div></td>
+      <td width="133"><div align="center"><a href="/SNPosition/index.jsp"><img src="images/snposition/home.gif" width="51" height="17" border="0"></a></div></td>
+    </tr>
+  </table>
+  <p>      
+    <map name="Map">
+      <area shape="rect" coords="507,2,800,23" href="/SNPosition/index.jsp">
+    </map>
+  </p>
+</div>
+
+<table width="750" border="0" align="center">
+  <tr>
+    <td width="10" bgcolor="#3399FF">&nbsp;</td>
+    <td width="635" bgcolor="#66FFFF">Please past sequence to find SNPs</td>
+    <td width="100" bgcolor="#66FFFF"><DIV align=center><A href="javascript:iupac();">IUPAC code</A></DIV></td>
+  </tr>
+  <tr>
+    <td colspan="3"><form action="matchSeq.do" method="post" name="snposition_form" id="snposition_form">
+      <div align="center">
+        <table width="650" border="0" align="center">
+          <tr>
+            <td><table width="740" border="0">
+                <tr>
+                  <td colspan="4"><div align="left"><strong>Database: 
+                              <select name="build" id="build">
+                                <option value="b126" selected>NCBI dbSNP b126</option>
+                              </select>
+                  </strong></div></td>
+                  <td><div align="right"><strong>
+                    <input name="neighborLen" type="hidden" id="neighborLen" value="700">
+                  </strong></div></td>
+                </tr>
+                <tr>
+                  <td width="100"><div align="left"><strong>Organism:</strong></div></td>
+                  <td width="80"><div align="left">
+                      <input name="organism" type="radio" onClick="chrs(1);" value="human">
+                  human</div></td>
+                  <td width="80"><div align="left">
+                      <input name="organism" type="radio" value="mouse" onClick="chrs(2);">
+                  mouse</div></td>
+                  <td width="80"><div align="left">
+                      <input name="organism" type="radio" onClick="chrs(3);" value="rat" checked>
+                  rat</div></td>
+                  <td width="378"><div align="right">
+                    <input name="errorAllowed" type="hidden" id="errorAllowed" value="10">
+                  </div></td>
+                </tr>
+                <tr>
+                  <td colspan="5"><div align="left">
+                      <p><B>Chromosome:</B></p>
+                      </div>
+                      <table width="626" border="0" align="center">
+                        <tr>
+                          <td width="100"><div align="left">
+                              <input name="chr1" type="checkbox" id="chr1" onClick="clearChrs();ckeckChr(1);" value="1">
+                        chr1</div></td>
+                          <td width="100"><div align="left">
+                              <input name="chr2" type="checkbox" id="chr2" value="2" onClick="clearChrs();ckeckChr(2);">
+                              chr2</div></td>
+                          <td width="100"><div align="left">
+                              <input name="chr3" type="checkbox" id="chr3" value="3" onClick="clearChrs();ckeckChr(3);">
+                              chr                        3</div></td>
+                          <td width="100"><div align="left">
+							  <input name="chr4" type="checkbox" id="chr4" value="4" onClick="clearChrs();ckeckChr(4);">
+						chr4</div></td>
+                          <td width="100"><div align="left">
+                              <input name="chr5" type="checkbox" id="chr5" value="5" onClick="clearChrs();ckeckChr(5);">
+                              chr5</div></td>
+                          <td width="100"><div align="left">
+                              <input name="chr6" type="checkbox" id="chr6" value="6" onClick="clearChrs();ckeckChr(6);">
+                          chr6</div></td>
+                        </tr>
+                        <tr>
+                          <td><div align="left">
+                              <input name="chr7" type="checkbox" id="chr7" value="7" onClick="clearChrs();ckeckChr(7);">
+                              chr7</div></td>
+                          <td><div align="left">
+                              <input name="chr8" type="checkbox" id="chr8" value="8" onClick="clearChrs();ckeckChr(8);">
+                        chr8</div></td>
+                          <td><div align="left">
+                              <input name="chr9" type="checkbox" id="chr9" value="9" onClick="clearChrs();ckeckChr(9);">
+                        chr9</div></td>
+                          <td><div align="left">
+                              <input name="chr10" type="checkbox" id="chr10" value="10" onClick="clearChrs();ckeckChr(10);">
+                              chr10</div></td>
+                          <td><div align="left">
+                              <input name="chr11" type="checkbox" id="chr11" value="11" onClick="clearChrs();ckeckChr(11);">
+                        chr11</div></td>
+                          <td><div align="left">
+                              <input name="chr12" type="checkbox" id="chr12" value="12" onClick="clearChrs();ckeckChr(12);">
+                        chr12</div></td>
+                        </tr>
+                        <tr>
+                          <td><div align="left">
+                              <input name="chr13" type="checkbox" id="chr13" value="13" onClick="clearChrs();ckeckChr(13);">
+                        chr13</div></td>
+                          <td><div align="left">
+                              <input name="chr14" type="checkbox" id="chr14" value="14" onClick="clearChrs();ckeckChr(14);">
+                              chr14</div></td>
+                          <td><div align="left">
+                              <input name="chr15" type="checkbox" id="chr15" value="15" onClick="clearChrs();ckeckChr(15);">
+                              chr15</div></td>
+                          <td><div align="left">
+                              <input name="chr16" type="checkbox" id="chr16" value="16" onClick="clearChrs();ckeckChr(16);">
+                              chr16</div></td>
+                          <td><div align="left">
+                              <input name="chr17" type="checkbox" id="chr17" value="17" onClick="clearChrs();ckeckChr(17);">
+                        chr17</div></td>
+                          <td><div align="left">
+                              <input name="chr18" type="checkbox" id="chr18" value="18" onClick="clearChrs();ckeckChr(18);">
+                        chr18</div></td>
+                        </tr>
+                        <tr>
+                          <td><div align="left">
+                              <input name="chr19" type="checkbox" id="chr19" value="19" onClick="clearChrs();ckeckChr(19);">
+                        chr19</div></td>
+                          <td><div align="left">
+                              <input name="chr20" type="checkbox" id="chr20" value="20" onClick="clearChrs();ckeckChr(20);">
+                        chr20</div></td>
+                          <td><div align="left">
+                              <input name="chr21" type="checkbox" id="chr21" value="21" onClick="clearChrs();ckeckChr(21);">
+                        chr21</div></td>
+                          <td><div align="left">
+                              <input name="chr22" type="checkbox" id="chr22" value="22" onClick="clearChrs();ckeckChr(22);">
+                        chr22</div></td>
+                          <td><div align="left">
+                              <input name="chrX" type="checkbox" id="chrX" value="x" onClick="clearChrs();ckeckChr('X');">
+                              chrX</div></td>
+                          <td><div align="left">
+                              <input name="chrY" type="checkbox" id="chrY" value="y" onClick="clearChrs();ckeckChr('Y');">
+                        chrY</div></td>
+                        </tr>
+                        <tr>
+                          <td><div align="left">
+							  <input name="chrOther" type="checkbox" id="chrOther" value="other" onClick="clearChrs();ckeckChr('Other');">
+						  Other</div></td>
+                          <td colspan="3"><div align="left">
+                            <input name="chrUnknown" type="checkbox" id="chrUnknown" onClick="clearChrs();ckeckChr('Unknown');" value="blatchr" checked>
+                            Unknown
+<input name="chrType" type="hidden" id="chrType" value="blat">
+</div></td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td colspan="6"><div align="left">
+                              </div>                            <div align="left">
+                                                          </div>                            
+                            <div align="center">
+                              <input type="button" name="Submit" value="Reset Chromosome(s)" onClick="clearChrs();">
+                          </div></td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table>                <input name="seqType" type="hidden" id="seqType" value="filtered">
+                example: 1. <a class="styleExample" onClick="inputSeq('human');">human sequence with IUPAC</a> 2. <a class="styleExample" onClick="inputSeq('mouse');">mouse sequence with [dNTP1/dNTP2]</a> 3. <a class="styleExample" onClick="inputSeq('rat');">rat sequence with general</a> 4. <a class="styleExample" href="http://bio.kuas.edu.tw/dynamicSNP/ncbi-compare.jsp">test bank and performance</a></td>
+          </tr>
+          <tr>
+            <td height="23"><div align="center">
+              <span class="style1">
+<textarea name="sequence" cols="90" rows="5" id="sequence">GCAAGGGGAAGGTGAGGCCTCAAGCACACGGCCACACCCAGTTGCCCTCAG</textarea>
+                  </span></div></td>
+          </tr>
+          <tr>
+            <td height="23"><div align="center">
+                <input name="snposition" type="submit" id="snposition" value="SNPosition">
+                <input type="button" name="Submit" value="Clear Seq" onClick="clearSeq();">
+            </div></td>
+          </tr>
+        </table>
+      </div>
+    </form></td>
+  </tr>
+  <tr>
+  	<td colspan="3">&nbsp;</td>
+  </tr>
+</table>
+<style type="text/css">
+<!--
+.style_copyright {
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+-->
+</style>
+<div align="center" class="style_copyright">2006&copy;yuhuei, Taiwan.</div>
+
+</body>
+</html>

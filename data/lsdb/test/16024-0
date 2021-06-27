@@ -1,0 +1,275 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+
+
+
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+    <title>H-DBAS - Human-transcriptome DataBase for Alternative Splicing</title>    
+    <meta name="keywords" content="alternative splicing,as,AS,variant,full-length cDNA,database,h-dbas,H-DBAS">
+    <meta name="description" content="H-DBAS is a human alternative splicing database including evolutionary information.">
+    <link rel="stylesheet" rev="stylesheet" href="css/main.css" type="text/css" >
+    <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
+	<link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
+    <noscript>
+		<!-- <meta http-equiv="Refresh" content="0; URL=error_offjs.jsp"> -->
+		<h3>You need a JavaScript-enabled browser.</h3>
+		<h3>Please return to the top page after you change the setting of JavaScript.</h3>
+	</noscript>
+
+
+
+<link rel="stylesheet" rev="stylesheet" href="css/top.css" type="text/css" >
+</head>
+
+<body>
+<div id="container">
+	
+
+
+
+
+
+
+<script type="text/javascript">
+<!--
+function go_enter(){
+	var keyStr = document.getElementById('form0').keyword.value;
+	var regExp = new RegExp("^[^\{\}\<]*$");
+	if(keyStr.length > 0){
+		if(keyStr.match(regExp)){
+			document.getElementById('form0').submit();
+		}
+		else{
+			window.alert("Invalid input string");
+		}
+	}
+}
+function validation(field,e){
+	var keycode;
+	if (window.event) keycode = window.event.keyCode;
+	else if (e) keycode = e.which;
+	else return true;
+
+	var keyStr = field.value;
+	var regExp = new RegExp("^[^\{\}\<]*$");
+	if (keycode == 13){
+		if(keyStr.length == 0){
+			return false;
+		}
+		else if(keyStr.match(regExp)){
+			return true;
+		}
+		else{
+			window.alert("Invalid input string");
+			return false;
+		}
+	}
+	else{
+	   return true;
+	}
+}
+function clearKeyword(){
+	document.getElementById('form0').keyword.value = "";
+}
+//-->
+</script>
+<div id="navigator">
+	<div id="logo">
+		<a href="index.jsp" target="_top"><img src="images/LOGO.png" alt="H-DBAS" title="H-DBAS" height="50" border="0" /></a>
+	</div>
+
+	<div id="quicksearch">
+		<form name="SearchActionForm" id="form0" method="post" action="/h-dbas/quicksearch.do;jsessionid=BE976426BB57396789B59F42971B36D2">
+		<select name="dbname"><option value="human_flcdna">Human (Full-length cDNA)</option>
+		
+		<option value="human_mrna">Human (mRNA)</option>
+		
+		<option value="mouse_flcdna">Mouse (Full-length cDNA)</option>
+		
+		<option value="mouse_mrna">Mouse (mRNA)</option>
+		
+		<option value="rat_rna">Rat (RNA)</option>
+		
+		<option value="chimpanzee_rna">Chimpanzee (RNA)</option>
+		
+		<option value="macaque_rna">Macaque (RNA)</option>
+		
+		<option value="dog_rna">Dog (RNA)</option></select>
+		[Help
+		<a href="document/H-DBAS_manual.pdf" target="_blank"><img src="images/pdf.gif" alt="PDF" title="PDF" height="16" border="0" /></a>
+		<a href="http://www.youtube.com/watch?v=IbXHqZD776Y" target="_blank"><img src="images/movie.png" alt="Movie" title="Movie" height="16" border="0" /></a>]
+		[<a href="?lang=ja">Japanese</a>]		
+		<br>
+		<input type="text" name="keyword" size="40" value="" onkeypress="return validation(this,event)">
+		<input type="hidden" name="keyword_type" value="Keyword">
+		<input type="hidden" name="searchType" value="simple">
+		<input type="button" name="go" value="Go" onclick="go_enter()">
+		<input type="button" name="reset" value="Clear" onclick="clearKeyword()">
+		</form>
+	</div>
+	
+	<div id="navbar">
+		<table id="navitable">
+		<tr>
+		<th><a href="index.jsp">Top</a></th>
+		<th><a href="as_mechanism.jsp">Mechanism of AS</a></th>
+		<th><a href="material_method.jsp">Materials and methods</a></th>
+		<th><a href="statistics.jsp">Statistics</a></th>
+		<th><a href="download.jsp">Download</a></th>
+		<th><a href="glossary.jsp">Glossary</a></th>
+		<th><a href="link.jsp">Link</a></th>
+		</tr>
+		</table>
+	</div>
+</div>
+
+	<div id="contentbase">
+		<div id="centerbox">
+			<h2>H-DBAS - Human-transcriptome DataBase for Alternative Splicing</h2>
+
+			
+			<h3>News</h3>
+
+<noscript>
+	<font color=red><b>Please reload after the JavaScript is enabled.</b></font>
+</noscript>
+
+<ul>
+<li>2010/09/09: H-DBAS Version 6 was published.</li>
+</ul>
+
+			
+
+			<h3>Search and analysis pages</h3>
+			<ul>
+		    <li>Search item samples for Simple search at upper right (direct links): <a href="locusOverview.do?dbname=human_flcdna&hix=HIX0004914"><b>HIX0004914</b></a>, <a href="quicksearch.do?dbname=human_flcdna&keyword_type=keyword&keyword=PI3K">PI3K</a>, <a href="quicksearch.do?dbname=human_flcdna&keyword_type=keyword&keyword=PI3-kinase p85 subunit alpha">PI3-kinase p85 subunit alpha</a></li>
+		    <li>Search pages: <a href="adv_search.jsp">Advanced search</a>, <a href="http://pollux/blast4hdbas/blasttop.cgi" target=_blank>BLAST search</a></li>
+		    <li>Analysis pages: <a href="comparative_genomics.jsp">Comparative genomics analysis</a>, <a href="http://www.h-invitational.jp/rnaseq4hdbas/" target=_blank>RNA-Seq analysis</a></li>
+			</ul>
+
+			<h3>About H-DBAS</h3>
+			<ul>
+		    <li>H-DBAS is a unique database of alternative splicing (AS) based on <a href="http://www.h-invitational.jp/" target=_blank>H-InvDB</a>. The features of H-DBAS is as follows;</li>
+				<ol>
+		    	<li><b><a href=document/mm_fig2b.png target=_blank>Representative AS variants (RASVs)</a></b> were identified from 8 data sets consist of 6 mammalian model organisms (human, mouse, rat, chimpanzee, macaque and dog). The contents of data sets and the corresponding species are as follows;</li>
+		    		<ul type=circle>
+		    		<li>Full-length cDNA data set: H-Invitational in H-InvDB (Human), FANTOM3 + MGC (Mouse)</li>
+		    		<li>mRNA data set: H-InvDB (Human and Mouse)</li>
+		    		<li>RNA data set: H-InvDB + RefSeq + Ensembl (Rat, Chimpanzee, Macaque and Dog)</li>
+		    		</ul>
+		    	<li><b><a href=document/mm_fig4c.png target=_blank>Equally-spliced variants (ESVs)</a></b> were identified from RASVs between human and mouse, rat, chimpanzee, macaque and dog by using comparative genomics. The combinations of compared data sets are as follows;</li>
+		    		<ul type=circle>
+		    		<li>Human (Full-length cDNA) - Mouse (Full-length cDNA)</li>
+		    		<li>Human (mRNA) - Mouse (mRNA)</li>
+		    		<li>Human (mRNA) - Rat (RNA)</li>
+		    		<li>Human (mRNA) - Chimpanzee (RNA)</li>
+		    		<li>Human (mRNA) - Macaque (RNA)</li>
+		    		<li>Human (mRNA) - Dog (RNA)</li>
+		    		</ul>
+		    	<li>Splice sites and splice motifs affecting SNPs can be observed in human.</li>
+		    	<li>RASVs affecting protein functions (protein motif, GO, subcellular localization signal and transmembrane domain) can be observed in human.</li>
+		    	<li>AS junctions expressed in specified cellular fractions (cytoplasm, nuclear and polysome) were detected by using RNA-Seq tags (human RefSeq).</li>
+		    	</ol>
+			</ul>
+
+			<h3>Version</h3>
+			<ul>
+			<li>H-DBAS: 6, Last update: 2010/09/09</li>
+			<li>Transcript: H-InvDB 7.5 (DDBJ 78)</li>
+			<li>Genome: UCSC hg19</li>
+			<li>SNP: dbSNP 130</li>
+			</ul>
+
+			<h3>References</h3>
+			<ul>
+		    <li>Shimada, M. <i>et al</i>. (2010) A comprehensive survey of human polymorphisms at conserved splice dinucleotides and its evolutionary relationship with alternative splicing.
+		    BMC Evolutionary Biology 10:122
+		    <a href=http://www.ncbi.nlm.nih.gov/pubmed/20433709?dopt=Abstract target=_blank>[PubMed]</a>
+		    <a href=http://www.biomedcentral.com/1471-2148/10/122 target=_blank>[Full Text]</a></li>
+		    <li></>Takeda, J. <i>et al</i>. (2010) H-DBAS: human-transcriptome database for alternative splicing: update 2010.
+		    Nucleic Acids Research 38 (Database Issue), D86-D90
+		    <a href=http://www.ncbi.nlm.nih.gov/pubmed/19969536?dopt=Abstract target=_blank>[PubMed]</a>
+		    <a href=http://nar.oxfordjournals.org/cgi/content/full/38/suppl_1/D86 target=_blank>[Full Text]</a> <b>Latest paper of H-DBAS</b></li>
+		    <li>Takeda, J. <i>et al</i>. (2008) Low conservation and species-specific evolution of alternative splicing in humans and mice: comparative genomics analysis using well-annotated full-length cDNAs. 
+		    Nucleic Acids Research 36 (20), 6386-6395
+		    <a href=http://www.ncbi.nlm.nih.gov/pubmed/18838389?dopt=Abstract target=_blank>[PubMed]</a>
+		    <a href=http://nar.oxfordjournals.org/cgi/content/full/36/20/6386 target=_blank>[Full Text]</a></li>
+		    <li>Takeda, J. <i>et al</i>. (2007) H-DBAS: Alternative splicing database of completely sequenced and manually annotated full-length cDNAs based on H-Invitational. 
+		    Nucleic Acids Research 35 (Database Issue), D104-D109
+		    <a href=http://www.ncbi.nlm.nih.gov/pubmed/17130147?dopt=Abstract target=_blank>[PubMed]</a>
+		    <a href=http://nar.oxfordjournals.org/cgi/content/full/35/suppl_1/D104 target=_blank>[Full Text]</a></li>
+		    <li>Takeda, J. <i>et al</i>. (2006) Large-scale identification and characterization of alternative splicing variants of human gene transcripts using 56,419 completely sequenced and manually annotated full-length cDNAs. 
+		    Nucleic Acids Research 34 (14), 3917-3928
+		    <a href=http://www.ncbi.nlm.nih.gov/pubmed/16914452?dopt=Abstract target=_blank>[PubMed]</a>
+		    <a href=http://nar.oxfordjournals.org/cgi/content/full/34/14/3917 target=_blank>[Full Text]</a></li>
+		    <li>Imanishi,T. <i>et al</i>. (2004) Integrative annotation of 21,037 human genes varidated by full-length cDNA clones. 
+		    PLoS Biology 2 (6), 856-875
+		    <a href=http://www.ncbi.nlm.nih.gov/pubmed/15103394?dopt=Abstract target=_blank>[PubMed]</a>
+		    <a href=http://www.plosbiology.org/article/info:doi/10.1371/journal.pbio.0020162 target=_blank>[Full Text]</a></li>
+			</ul>
+
+			<h3>Product requirements</h3>
+			<ul>
+			<li>OS: Windows XP, VISTA, 7 & Mac OS X Leopard, Snow Leopard</li>
+			<li>Browser (Latest version): Internet Explorer, Firefox, Safari / Plug-in: Adobe Flash Player 9 or later</li>
+			<li>Screen resolution: 800 x 600 or later</li>
+			</ul>
+
+			<h3>Other information</h3>
+			<ul>
+			<li>Release notes: <a href=release_note.jsp>H-DBAS update history</a></li>
+			<li>Members: <a href=member.jsp>H-Invitational AS annotation team</a></li>
+			<li>Contact: j-takeda[at]aist.go.jp</li>
+			</ul>
+
+			<h3>Supported by</h3>
+			<p>
+			<a href="http://unit.aist.go.jp/birc2/english/index.html" target=_blank><img src=images/birc_logo.png alt="BIRC" title="BIRC" border=0></a>
+			<a href="http://www.jbic.or.jp/bio/english/index.html" target=_blank><img src=images/jbic_logo.gif alt="JBiC" title="JBiC" border=0></a>
+			<a href="http://www.aist.go.jp/index_en.html" target=_blank><img src=images/aist_logo.gif alt="AIST" title="AIST" border=0></a>
+			</p>
+		
+			<div id="footer">
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5773430-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- -->
+
+</body>
+</html>
+
+
+
+
+	
+	

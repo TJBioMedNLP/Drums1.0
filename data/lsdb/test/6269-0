@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Intron evolution: Mikl&oacute;s Cs&#369;r&ouml;s</title>
+<base href="http://www.iro.umontreal.ca/~csuros/introns.html" />
+<link rel="stylesheet" href="http://www.iro.umontreal.ca/~csuros/csurosv2.css" type="text/css" />
+<style type="text/css">
+	/* introns */
+html, body {
+        background-color: white;
+        color: rgb(80,40,80);
+        font-size: 11pt;
+}
+
+</style>
+
+
+</head>
+<body>
+<div id="header">
+<p>introns</p>
+</div>
+
+<div id="content">
+<h1>Intro</h1>
+<p>This page contains 
+information related to my work on the evolution of eukaryotic gene structure (exon-intron organization).</p>
+<ul>
+<li>My initial ideas are outlined 
+in the paper <q>Likely scenarios of intron evolution</q>,
+presented at
+the 
+<a href="http://www.gen.tcd.ie/recomb_cg/">Third 
+RECOMB Satellite Workshop on Comparative Genomics</a>
+(Springer LNBI 3678, pp. 47-60, 2005). 
+You can download the preprint here:
+<a href="http://www.iro.umontreal.ca/~csuros/papers/mle-introns.pdf">mle-introns.pdf</a>.
+</li>
+<li>Some further developments are 
+described in the paper
+<q>In search of lost introns</q>, written with 
+Andrew Holey and Igor Rogozin,
+presented at the <a href="http://www.iscb.org/ismbeccb2007/">ISMB/ECCB</a>
+conference in 2007.
+You can 
+<a href="http://dx.doi.org/10.1093/bioinformatics/btm190">
+download the paper 
+from the journal Bioinformatics</a>, or a 
+<a href="http://arxiv.org/abs/q-bio/0702005">preprint from arXiv</a>.
+</li>
+<li>
+My paper entitled <q>Extremely intron-rich genes in the alveolate ancestors inferred with a flexible likelihood approach</q>,
+written with Igor Rogozin and Eugene Koonin, 
+discusses the application of a rates-across-sites model to 
+chromalveolate intron evolution. 
+For further information, see the 
+<a href="introns/Chroma23/">supplemental website</a>.
+</li>
+<li>
+I recently released the Malin software package
+for the analysis of eukaryotic intron evolution. 
+See <a href="introns/malin">Malin's website</a>.
+</li>
+</ul>
+
+
+<h1>In search of lost introns</h1>
+<h2>Downloads</h2>
+<p>There are two Java packages you can download. 
+The first one is <a href="introns/IntronAlignment.jar">IntronAlignment.jar</a>, for 
+(re-)alignment of intron-annotated protein sequences, and the second one
+is <a href="introns/intronRates.jar">intronRates.jar</a>, for optimizing 
+the likelihood and computing histories. 
+Instructions on how to use the programs are
+in the manuals: 
+<a href="introns/intronAlignment-doc.pdf">intronAlignment-doc.pdf</a>
+and
+<a href="introns/intronRates-doc.pdf">intronRates-doc.pdf</a>.
+Please send me an e-mail about your experience 
+if you use the programs. 
+</p>
+<p>What is in the packages?</p>
+<ul>
+<li>Optimization of branch-specific intron gain and loss 
+	rates through likelihood maximization.
+	</li>
+<li>Estimation of ancestral intron counts and 
+	loss/gain events per branch using posterior 
+	probabilities. </li>
+<li>Alignment</li>
+</ul>
+
+
+<h2>Results</h2>
+<p>The method was applied to a newly compiled data set of 
+18 eukaryotes: 8044 orthologous intron positions in 
+483 genes. 
+The species are the following:
+<em>Homo sapiens</em> (Hsap), 
+<em>Rattus norvegicus</em>	(Rnor),
+<em>Takifugu rubripes</em> (Trub),
+<em>Danio rerio</em> (Drer),
+<em>Drosophila melanogaster</em> (Dmel),
+<em>Anopheles gambiae</em> (Agam),
+<em>Apis mellifera</em>	(Amel),
+<em>Caenorhabditis elegans</em> (Cele),
+<em>Caenorhabditis briggsae</em> (Cbri),
+<em>Saccharomyces cerevisiae</em> (Scer),
+<em>Neurospora crassa</em> OR74 (Ncra),
+<em>Schizosaccharomyces pombe</em> 972h- (Spom),
+<em>Ustilago maydis</em> 521 (Umay),
+<em>Cryptococcus neoformans v. n.</em> JEC21 (Cneo),
+<em>Oryza sativa ssp. japonica</em> (Osat),
+<em>Arabidopsis thaliana</em> (Atha),
+<em>Plasmodium falciparum</em> 3D7 (Pfal),
+<em>Plasmodium berghei</em> str. ANKA (Pber). 
+The picture below shows their phylogeny. 
+Double lines show the few edges with significant net intron gain. 
+Framed terminal taxa appear in the data set of Rogozin et al. (2003). 
+</p>
+<img width="400px" src="introns/Euk18-unrooted-gainloss.png" alt="phylogeny of 18 species" />
+
+<p>The following pictures show the inferred 
+intron density at ancestral nodes (error bars denote 95% confidence intervals),
+and gains/losses on branches (empty rectangles for the total gain and loss, and filled rectangles 
+for net change; tree is rooted at node 16). Notice the high intron density at ancestral nodes, and the prevalence of loss. 
+
+</p>
+
+<img width="500px" src="introns/E18m1-400-counts.png" alt="intron counts" />
+&nbsp;
+<img width="500px" src="introns/E18m1-400-gainloss.png" alt="intron count changes" />
+
+<h1>Likely scenarios of intron evolution</h1>
+<h2>Downloads</h2>
+<p>
+I wrote a Java package to 
+perform phylogenetic analysis of a presence-absence data set 
+of introns in homologous positions. 
+You can download the package here: 
+<a href="introns/intronLoss.jar">intronLoss.jar</a>.
+Instructions on how to use it 
+are in the manual:
+<a href="introns/intronLoss-doc.pdf">intronLoss-doc.pdf</a>.
+Please send me an e-mail about your experience 
+if you use the programs. If you are really curious,
+I can send you the source code too.
+</p>
+<p>
+What is in the package?</p> 
+<ul>
+<li>Optimization of branch-specific intron gain and loss 
+	rates through likelihood maximization.
+	</li>
+<li>Estimation of the number of potential intron sites 
+	using an Expectation Maximization procedure.</li>
+<li>Estimation of ancestral intron counts and 
+	loss/gain events per branch using posterior 
+	probabilities. </li>
+<li>Implementation of the Roy-Gilbert formulas 
+	for estimating ancestral intron counts, and 
+	intron gains &amp; losses. </li>
+<li>Dollo parsimony.</li>
+<li>Simulated intron evolution.</li>
+</ul>
+
+
+<h2>Results</h2> 
+<p>The method was applied to a data set 
+compiled by <a href="http://www.ncbi.nlm.nih.gov/CBBresearch/Koonin/people3.html#IRogozin">Igor Rogozin</a>,
+consisting of 7236 homologous intron sites in 8 Eukaryotes. The picture below 
+shows the intron counts at the terminal taxa, and 
+ancestral intron density based on likelihood optimization and posterior
+calculations. Branches are colored according to whether the number of 
+gains is at least twice or at most half as large as the number of losses
+on them.</p>
+<p>
+<img width="400px" src="introns/Ecdysozoa-tree-counts.png" alt="intron evolution in eukaryotes" />
+</p>
+<p>
+It turns out that</p>
+<ul>
+<li>1 out of 7 modern introns 
+	predate the plants-(animals,fungi) split;</li>
+<li>There were 1.56 introns per gene on average at the Crown
+[other estimates:
+	Stoltzfus 0.5-1, Rogozin 1.43, Roy-Gilbert 2.88,  Carmel 1.66];</li>
+<li>1 out of 3 human introns 
+ 	predate the plants-(animals,fungi) split;</li>
+<li>1 out of 3 human introns were gained 
+	after the split with worms and insects.</li>
+</ul>
+
+<h1>Acknowledgments</h1>
+<p>Many thanks to Scott Roy, Igor Rogozin, Liran Carmel, Jasmin Coulombe-Huntington, Jacek Majewski and 
+Herv&eacute; Philippe for helpful comments and discussions.
+</p>
+
+</div> <!-- content -->
+
+<div id="footer">
+<p><a href="./">&lt;&lt; Mikl&oacute;s Cs&#369;r&ouml;s</a>
+&nbsp;&nbsp;&nbsp;last modified: February 26, 2008.</p>
+<p class="validate">
+<a href="http://validator.w3.org/check/referer" title="validate XHTML">v</a>
+<!--
+<a href="http://validator.w3.org/checklink?uri=http%3A%2F%2Fwww.iro.umontreal.ca%2F%7Ecsuros%2Fintrons.html" title="check links">l</a>
+-->
+</p>
+</div>
+
+</body> 
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>pssRNAMiner: A Plant Short Small RNA Regulatory Cascade Analysis Server</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="interface/style.css" type="text/css"></head><body>
+</head>
+
+<body>
+
+<!-- title -->
+<table border="0" cellpadding="0" cellspacing="0" width="90%" align="center">
+  <tbody> 
+  
+  <tr>
+    <td>
+			<table border="0" cellpadding="5" cellspacing="0" width="100%">
+				<tbody>
+				<tr>
+					<td align="right" background="interface/noble_bk.jpg" height="5" valign="top" width="180">&nbsp;</td>
+					<td align="left" background="interface/foundation_bk.jpg" height="5" valign="top">&nbsp;</td>
+				</tr>
+			  </tbody>
+			</table>
+	</td>
+  </tr>
+
+  <tr>
+  	<td bgcolor="#001a81" height="70">
+        <table border="0" cellpadding="5" cellspacing="0" width="100%">
+		 <tbody>
+			<tr>
+				<td align="left" valign="bottom" width="180">
+					<div style="margin-left: 10px;"><a href="http://www.noble.org/" target="_blank"><img src="interface/nflogo.gif" border="0"></a></div>
+				</td>
+				<td align="left" valign="bottom">
+	               <div style="font-size: 14px; font-weight: bold; color: rgb(200, 200, 200); margin-top: 2px; margin-left: 5px; margin-bottom: 10px;">The Zhao Bioinformatics Laboratory</div>
+	               <div style="font-size: 18px; font-weight: bold; color: rgb(255, 255, 255); margin-left: 5px; margin-bottom: 10px; text-align:right; font-style:italic">pssRNAMiner: A Plant Short Small RNA Regulatory Cascade Analysis Server&nbsp;&nbsp;</div>
+			   </td>
+	      </tr>
+         </tbody>
+        </table>
+    </td>
+  </tr>
+</table>
+<!-- menu -->
+<table  width="90%" align="center" cellpadding="0" cellspacing="0" border="0">
+	<tr bgcolor="#EEEEEE">
+	  <td width="70%">&nbsp;</td>
+	  <td align="center"><a href="index.php?dowhat=About" class=text1>About</a></td>
+      <td align="center"><a href="index.php" class=text1>Analysis</a></td>
+	  <td align="center"><a href="index.php?dowhat=Dataset" class=text1>Dataset</a></td>
+      <td align="center"><a href="index.php?dowhat=FAQ"  class=text1>FAQ</a></td>
+	</tr>
+    <tr>
+      <td align="left" valign="bottom" colspan="4" height="30"><b>Location:&nbsp;&nbsp;</b>
+Analysis	  </td>
+    </tr>
+</table>
+
+<script language="javascript" src="demo.js"></script>
+<form action="output.php" method="post" enctype="multipart/form-data" 
+      name="form1" target="_blank">
+<input name="dosubmit" type="hidden" id="dosubmit" value="yes">
+<input type="hidden" name="dowhat" value="tasiRNA"></input>
+
+<table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+  
+  <tr><td colspan="4">&nbsp;</td></tr>
+
+  
+  <tr align="left">
+     <td align="right"><img src="interface/left.png" width="100%" height="25" border="0"></td>
+	 <td align="center"  bgcolor="#DDDDFF" width="120" nowrap><strong>Mandatory Input</strong></td>
+     <td align="left"><img src="interface/right.png" width="100%" height="25" border="0"></td>
+     <td bgcolor="#FFFFFF" width="82%">&nbsp;</td>
+  </tr>
+  
+  
+  
+  <tr>
+    <td bgcolor="#EEEEEE" colspan="4">
+
+
+	<table width="100%" align="center" cellpadding="0" cellspacing="0"  class="table1" border="0">
+  <tr valign="middle" align="left" bgcolor="#DDDDFF">
+    <td width="15">&nbsp;</td>
+    <td>Search phased small RNA clusters: 
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="help.htm#clusterfunction" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a>	&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<a href="#" onclick="javascript:demo1();">[Load demo #1 data]</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="help.htm#demo" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+  </tr>
+
+  <tr valign="middle" align="left">
+    <td width="15"></td>
+    <td>Upload small RNA sequence(s) in simple format or FASTA format:&nbsp;&nbsp;<a href="help.htm#uploadsmallRNASeq" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a>	</td>
+  </tr>
+  <tr>
+    <td width="15"></td>
+	<td>
+	    <input type="file" name="upload_file" size="42">
+	<br>or paste sequences below:<br>
+        <textarea name="seqcon" cols="50" rows="7"></textarea><br>     
+	    <font color='blue'>
+		- file / input sequence size limit: 8 Mb.<br>
+		- invalid small RNAs will be ignored during analysis.</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="help.htm#uploadsmallRNASeq" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a>
+	</td>
+  </tr>
+</table>
+
+
+<table width="100%" align="center" cellpadding="0" cellspacing="0"  class="table1" border="0">
+  <tr valign="middle" align="left">
+    <td colspan="2">&nbsp;</td>
+  </tr>
+
+  <tr valign="top" align="left">
+    <td width="15">&nbsp;</td>
+	<td>Select a transcript/genomic library for mapping input small RNAs:</td>
+  </tr>
+
+  <tr>
+    <td width="15"></td>
+	<td>
+
+		<select name="cdna" size="5" id="cdna">
+          <option value="TAIR6_cdna_20051108.fas">Arabidopsis thaliana TAIR6, cDNA, released 11/08/2005</option>
+          <option value="TAIR7_cdna_20070425.fas">Arabidopsis thaliana TAIR7, cDNA, released 04/25/2007</option>
+          <option value="AGI_R13.fas">Arabidopsis thaliana DFCI Gene Index (AGI) Release 13</option>
+          <option value="ATH1_chr1-5.segment_01222004">Arabidopsis thaliana, Genome(01/22/2004), 3.4K segments from +/- strand with 0.4K overlapped region</option>
+          <option value="BNGI_R3.fas">Brassica napus (oilseed_rape) DFCI Gene Index (BNGI) Release 3</option>
+          <option value="CHRGI_R5.fas">Chlamydomonas reinhardtii DFCI Gene Index (CHRGI) Release 5</option>
+          <option value="Coffea_canephora.seq">Coffea canephora (coffee) SGN unigene, ftp://ftp.sgn.cornell.edu/unigene_builds/Coffea_canephora.seq</option>
+          <option value="FAGI_R1.fas">Festuca_arundinacea (tall_fescue) DFCI Gene Index (FAGI) Release 1</option>
+          <option value="GMGI_R12.fas">Glycine max (soybean) DFCI Gene Index (GMGI) Release 12</option>
+          <option value="CGI_R8.fas">Gossypium (cotton) DFCI Gene Index (CGI) Release 8</option>
+          <option value="CGI_R9.fas">Gossypium (cotton) DFCI Gene Index (CGI) Release 9</option>
+          <option value="HVGI_R9.fas">Hordeum vulgare (barley) DFCI Gene Index (HVGI) Release 9</option>
+          <option value="Tomato.seq">Lycopersicon esculentum (tomato) SGN unigene, ftp://ftp.sgn.cornell.edu/unigene_builds/Tomato.seq</option>
+          <option value="LGI_R11.fas">Lycopersicon esculentum (tomato) DFCI Gene Index (LGI) Release 11</option>
+          <option value="LJGI_R3.fas">Lotus japonicus (lotus) DFCI Gene Index (LJGI) Release 3</option>
+          <option value="MTGI_R8.fas">Medicago truncatula DFCI Gene index (MTGI) Release 8</option>
+          <option value="Mt2_cDNA.fas">Medicago truncatula Mt2.0 putative cDNA library, http://www.medicago.org/</option>
+          <option value="MT3cdna_MTGI9">Medicago truncatula Mt3.0 putative cDNA library plus MTGI9</option>
+          <option value="NBGI_R2.fas">Nicotiana benthamiana DFCI Gene Index (NBGI) Release 2</option>
+          <option value="NTGI_R3.fas">Nicotiana tabacum (tobacco) DFCI Gene Index (NTGI) Release 3</option>
+          <option value="Nicotiana_tabacum.seq">Nicotiana tabacum (tobacco) SGN unigene, ftp://ftp.sgn.cornell.edu/unigene_builds/Nicotiana_tabacum.seq</option>
+          <option value="OSA1R5_cDNA.fas">Oryza sativa (rice) TIGR genome cDNA OSA1 Release 5(OSA1R5)</option>
+          <option value="OGI_R17.fas">Oryza sativa (rice) DFCI Gene index (OGI) Release 17</option>
+          <option value="OSA1R5_genome_segment">Oryza sativa (rice) OSA1R5 Genome, 3.4K segments from +/- strand with 0.4K overlapped region</option>
+          <option value="Moss_JGI_Transcript_v1.1.fas">Physcomitrella patens (moss) JGI Gene Transcripts V1.1, http://genome.jgi-psf.org/Phypa1_1/Phypa1_1.download.ftp.html</option>
+          <option value="Populus_transcripts_1_1_JGI.fasta">Populus trichocarpa (poplar) JGI Gene Transcripts V1.1, http://genome.jgi-psf.org/Poptr1_1/</option>
+          <option value="PPLGI_R3.fas">Populus trichocarpa (poplar) DFCI Gene Index (PPLGI) Release 3</option>
+          <option value="Populus_genome_assem_V1">Populus trichocarpa (poplar) Genome Assembly R1.0, 3.4K segments from +/- strand with 0.4K overlapped region</option>
+          <option value="STGI_R11.fas">Solanum tuberosum (potato) DFCI Gene Index (STGI) Release 11</option>
+          <option value="TAGI_R9.fas">Triticum aestivum (wheat) DFCI Gene Index (TAGI) Release 9</option>
+          <option value="VVGI_R5.fas">Vitis vinifera (grape) DFCI Gene Index (VVGI) Release 5</option>
+          <option value="ZMGI_R17.fas">Zea mays (maize) DFCI Gene Index (ZMGI) Release 17</option>
+		</select>
+   
+   </td>
+  </tr>
+
+  <tr valign="middle" align="left">
+    <td colspan="2">&nbsp;</td>
+  </tr>
+
+  <tr valign="middle" align="left">
+    <td>&nbsp;</td>
+    <td>Mapping ambiguity (<i>maximum hits on transcript/genomic library</i>):&nbsp;&nbsp;<input name="maxambi" type="text" id="maxambi" value="6" size="2">&nbsp;&nbsp;<a href="help.htm#mappingambiguity" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+  </tr>
+
+
+  <tr valign="middle" align="center">
+    <td colspan="2">&nbsp;</td>
+  </tr>
+
+  <tr valign="middle" align="left">
+    <td>&nbsp;</td>
+    <td>Maximum offset from phased position (+/- nt):&nbsp;&nbsp;<input name="phasedoff" type="text" id="phasedoff" value="2" size="2">&nbsp;&nbsp;<a href="help.htm#phasedoff" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+  </tr>
+
+  <tr valign="middle" align="center">
+    <td colspan="2">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td height="30">&nbsp;</td>
+	<td align="left">Your Email (optional): <input name="email" type="text" id="email"></td>
+  </tr>
+
+</table>
+  
+  </td>
+  </tr>
+
+
+  
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr align="left">
+     <td align="right"><img src="interface/left.png" width="100%" height="25" border="0"></td>
+	 <td align="center"  bgcolor="#DDDDFF" width="120" nowrap><strong>Optional Input</strong></td>
+     <td align="left"><img src="interface/right.png" width="100%" height="25" border="0"></td>
+     <td bgcolor="#FFFFFF">&nbsp;</td>
+  </tr>
+
+
+<tr>
+<td bgcolor="#EEEEEE" colspan="4">
+
+<table width="100%" align="center" cellpadding="0" cellspacing="0"  class="table1" border="0">
+  <tr valign="middle" align="left" bgcolor="#DDDDFF">
+    <td width="15" height="30">&nbsp;</td>
+	<td colspan="3">Identify phase-initiator for detected small RNA clusters:&nbsp;&nbsp;<a href="help.htm#cleavagesitefunction" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="javascript:demo2();">[Load demo #2 data]</a>&nbsp;&nbsp;<a href="help.htm#demo" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+  </tr>
+  <tr align="left">
+    <td height="30"></td>
+	<td width="70%" colspan="2">Candidate phase-initiators in FASTA format (miRNA/ta-siRNA): &nbsp;&nbsp;&nbsp;&nbsp;<a href="help.htm#maturemiRNA" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a><br>
+	<textarea name="mirna" cols="50" rows="5"></textarea><br>     
+	    <font color='blue'>- accept up to 300 valid sequences.</font>
+	</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="left">
+    <td height="30"></td>
+	<td>Maximum expectation for searching complimentary fragment: &nbsp;&nbsp;</td>
+    <td><input name="score" type="text" id="score" value="5" size="4">&nbsp;&nbsp;<a href="help.htm#maxexpectation" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="left">
+    <td height="30"></td>
+	<td>Max distance from cleavage site to phased small RNA clusters (nt): &nbsp;&nbsp;</td>
+    <td><input name="DisCleavCluster" type="text" id="DisCleavCluster" value="105" size="4">&nbsp;&nbsp;<a href="help.htm#maxdistancleavageclusters" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="left">
+    <td height="30"></td>
+	<td>Start position of cleavage site in complimentary fragment (nt): &nbsp;&nbsp;</td>
+    <td><input name="cutpos1" type="text" id="cutpos1" value="9" size="4">&nbsp;&nbsp;<a href="help.htm#validcleavageregion" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr align="left">
+    <td height="30"></td>
+	<td>End position of cleavage site in complimentary fragment (nt): &nbsp;&nbsp;</td>
+    <td><input name="cutpos2" type="text" id="cutpos2" value="11"  size="4">&nbsp;&nbsp;<a href="help.htm#validcleavageregion" target="_blank"><img src="interface/help.jpg" width="16" height="21" border="0"></a></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+
+</td>
+</tr>
+
+  
+<tr><td colspan="4">
+
+ <table width="100%" align="center" cellpadding="0" cellspacing="0"  class="table1" border="0">
+  <tr valign="middle" align="center">
+	<td>&nbsp;</td>
+  </tr>
+
+  <tr valign="middle" align="center">
+	<td><hr></td>
+  </tr>
+
+  <tr>
+    <td align="center" height="30">
+	<input type="submit" name="Submit" value="Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <INPUT TYPE="reset">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</td>
+  </tr>
+ </table>
+
+</td></tr>
+
+
+  
+  </tbody>
+</table>
+</form>
+
+
+
+
+<br><br>
+<table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr bgcolor="#A0A0FF">
+    <td width="5%">&nbsp;</td>
+    <td width="90%" align="center"><font size="-1">&copy; 2008 by The Samuel Roberts Noble Foundation, Inc.</font></td>
+    <td width="5%">&nbsp;</td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10617566-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+</body>
+</html>

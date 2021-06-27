@@ -1,0 +1,393 @@
+<HTML>
+<HEAD>
+<TITLE>Mouse oncogene cDNA and EST list for transcript array analysis</TITLE>
+</HEAD>
+
+<BODY BGCOLOR = "beige">
+<CENTER>
+<H1><A HREF=/gob3/credits.html>Mouse ONCOCHIP Design</H1></A>
+</CENTER>
+<H4>Generate a set of mouse cDNA/EST's from the 
+<A HREF= http://www.informatics.jax.org/userdocs/overview.shtml#mgd>
+Mouse Genome Database</A> (MGD) at <A HREF =http://www.jax.org/>The Jackson Laboratories</A> 
+expressed in user specified tissue(s) and ranked by human 
+homology and optionally by inclusion in a named subset of the NCI <A HREF=http://www.nci.nih.gov/initiatives/advanced.html>Advanced Technology Center</A> Human <A HREF=http://nciarray.nci.nih.gov/cgi-bin/gipo>OncoChip</A>, a subset of the <A HREF=http://lymphochip.nih.gov>Staudt Laboratory  
+Lymphochip </A>
+set; any human homology; and at least a putative mouse gene assignment.  For an overview of this tool with a description of 
+input variables and output parameters and links, go to 
+<A HREF=/gob3/mouse_help.html>HELP</A>. Authors and contributors are
+listed in <A HREF=/gob3/credits.html>Credits</A>.
+</H4>
+
+
+<FORM METHOD="POST" ACTION ="mouse_design.cgi">
+
+<DIV>
+Select to<br>
+<INPUT TYPE=RADIO NAME=Order VALUE = rank checked > Rank by inclusion in the NCI/ATC human oncochip subset <br>   
+<INPUT TYPE=RADIO NAME=Order VALUE = note> Rank alphabetically and note inclusion in the NCI/ATC human
+oncochip subset <br>
+<br>
+Input the maximum number of sequences to review (< 500 is HIGHLY recommended!).
+<INPUT TYPE=TEXT NAME=MAXROW VALUE=500 SIZE=4><br>
+Warning! Retrieval of information may take a long time,
+depending on the number of tissue types chosen and the size of the tissue libraries
+<DIV>
+<br>
+Do you wish to start at a specific mouse gene or sequence? <INPUT TYPE=RADIO NAME=cont VALUE=yes> Yes
+<INPUT TYPE=RADIO NAME=cont VALUE=no checked> No<br>
+If yes continue at <INPUT TYPE=RADIO NAME=ident VALUE=sym>Mouse Gene Symbol 
+<INPUT TYPE=RADIO NAME=ident VALUE=genid checked> Mouse AccID 
+<INPUT TYPE=TEXT NAME=code SIZE=9 Value=ID><BR>
+<P>
+
+Select any mouse tissue (one or more). Visit the 
+Mouse 
+<A HREF= http://tumor.informatics.jax.org/FMPro?-db=TumorInstance&-format=mtdp.html&-view>Tumor</A>
+Biology Database at 
+<A HREF =http://www.jax.org/>The Jackson Laboratories</A> for mouse organ specific tumor biology.<BR>
+<A HREF=/gob3/artist.html>
+<IMG src="/gob3/mouse.jpg" align=left width="40%" height="37%"></A> 
+<SELECT NAME=TISSUE MULTIPLE SIZE =6>
+ <OPTION selected> 2 cell embryo
+ <OPTION> 8 cell embryo
+ <OPTION> adipocyte
+ <OPTION> adipose tissue
+ <OPTION> adrenal cortex
+ <OPTION> adrenal cortex tumor
+ <OPTION> adrenal gland
+ <OPTION> adrenal medulla
+ <OPTION> anterior pituitary cell line
+ <OPTION> anterior pituitary gland
+ <OPTION> anterior tibialis muscle
+ <OPTION> aorta
+ <OPTION> aortic endothelium
+ <OPTION> apical ectodermal ridge
+ <OPTION> articular cartilage
+ <OPTION> atrium
+ <OPTION> B-cell leukemia
+ <OPTION> B-cell lymphoma
+ <OPTION> B-lymphoblast
+ <OPTION> B-lymphocyte
+ <OPTION> blastocyst
+ <OPTION> blood
+ <OPTION> bone
+ <OPTION> bone marrow
+ <OPTION> bone marrow tumor
+ <OPTION> brain
+ <OPTION> brain capillary
+ <OPTION> brain capillary endothelial cells
+ <OPTION> brain endothelium
+ <OPTION> brain stem
+ <OPTION> brain tumor
+ <OPTION> brown adipose tissue
+ <OPTION> calvaria
+ <OPTION> cardiac muscle
+ <OPTION> cartilage
+ <OPTION> central nervous system
+ <OPTION> cerebellum
+ <OPTION> cerebellum granule cells
+ <OPTION> cerebral cortex
+ <OPTION> cerebral cortical astrocytes
+ <OPTION> cerebral hemisphere
+ <OPTION> cerebrum
+ <OPTION> cervix
+ <OPTION> chondrocyte
+ <OPTION> choroid plexus
+ <OPTION> choroid plexus tumor
+ <OPTION> cochlea
+ <OPTION> colliculi neurons
+ <OPTION> colon
+ <OPTION> colon crypt
+ <OPTION> connective tissue
+ <OPTION> cornea
+ <OPTION> cornea epithelium
+ <OPTION> cranial tissue
+ <OPTION> craniofacial tissue
+ <OPTION> cytolytic T-lymphocyte
+ <OPTION> cytotoxic T-lymphocyte
+ <OPTION> decidua
+ <OPTION> dendritic cells
+ <OPTION> diaphragm
+ <OPTION> digestive tract
+ <OPTION> ear
+ <OPTION> ectoderm
+ <OPTION> ectoplacental cone
+ <OPTION> egg
+ <OPTION> egg cylinder
+ <OPTION> embryo
+ <OPTION> enamel organ epithelium
+ <OPTION> endoderm
+ <OPTION> endothelium
+ <OPTION> epidermis
+ <OPTION> epididymal fat
+ <OPTION> epididymis
+ <OPTION> epiphyseal cartilage
+ <OPTION> epiphysis
+ <OPTION> epithelium
+ <OPTION> erythroblast
+ <OPTION> erythrocyte
+ <OPTION> erythroleukemia
+ <OPTION> eye
+ <OPTION> fast skeletal muscle
+ <OPTION> fibroblast
+ <OPTION> fibrosarcoma
+ <OPTION> foot pad
+ <OPTION> forebrain
+ <OPTION> gall bladder
+ <OPTION> gastrocnemius muscle
+ <OPTION> germ cells
+ <OPTION> germ layer
+ <OPTION> gonad
+ <OPTION> granule cell
+ <OPTION> granulosa cell
+ <OPTION> gut
+ <OPTION> hair
+ <OPTION> hair follicle
+ <OPTION> head
+ <OPTION> heart
+ <OPTION> heart ventricle
+ <OPTION> helper T-lymphocyte
+ <OPTION> hemangioendothelioma
+ <OPTION> hematopoietic progenitor cells
+ <OPTION> hepatocellular carcinoma
+ <OPTION> hepatoma
+ <OPTION> hindbrain
+ <OPTION> hippocampus
+ <OPTION> hypothalamus
+ <OPTION> incisor
+ <OPTION> inguinal lymph node
+ <OPTION> inner ear
+ <OPTION> insulinoma
+ <OPTION> intestine
+ <OPTION> intestine crypt epithelium
+ <OPTION> intestine epithelium
+ <OPTION> jejunum
+ <OPTION> jejunum epithelium
+ <OPTION> keratinocyte
+ <OPTION> kidney
+ <OPTION> kidney cortex
+ <OPTION> kidney cortical collecting duct
+ <OPTION> kidney epithelium
+ <OPTION> kidney inner medullary collecting duct
+ <OPTION> kidney medullary cells
+ <OPTION> kidney tubular epithelium
+ <OPTION> Kirsten sarcoma virus-immortalized mouse mast cells
+ <OPTION> lacrimal gland
+ <OPTION> lens
+ <OPTION> lens epithelium
+ <OPTION> leukemia
+ <OPTION> leukocyte
+ <OPTION> Leydig cell
+ <OPTION> Leydig cell tumor
+ <OPTION> limb
+ <OPTION> limb bud
+ <OPTION> limb muscle
+ <OPTION> liver
+ <OPTION> liver epithelium
+ <OPTION> lung
+ <OPTION> lung alveolar type II cell
+ <OPTION> lung carcinoma
+ <OPTION> lung tumor
+ <OPTION> lymph node
+ <OPTION> lymph node germinal cells
+ <OPTION> lymphatic tissue
+ <OPTION> lymphoblast
+ <OPTION> lymphocyte
+ <OPTION> lymphoma
+ <OPTION> macrophage
+ <OPTION> mammary gland
+ <OPTION> mammary gland adenocarcinoma
+ <OPTION> mammary gland epithelium
+ <OPTION> mammary gland tumor
+ <OPTION> mandible
+ <OPTION> mandibular condyles
+ <OPTION> mast cell
+ <OPTION> mastocytoma
+ <OPTION> melanocyte
+ <OPTION> melanoma
+ <OPTION> melanoma cell line
+ <OPTION> mesoderm
+ <OPTION> Meth A fibrosarcoma
+ <OPTION> Meth A sarcoma
+ <OPTION> Meth A tumor
+ <OPTION> mid-anterior brain
+ <OPTION> midbrain
+ <OPTION> molar
+ <OPTION> monocyte
+ <OPTION> muscle
+ <OPTION> myeloblast
+ <OPTION> myeloblastic leukemia
+ <OPTION> myeloid tumor
+ <OPTION> myeloma
+ <OPTION> myoblast
+ <OPTION> myofibroblast
+ <OPTION> nasal epithelium
+ <OPTION> natural killer cell
+ <OPTION> neocortical neuroblast
+ <OPTION> neural crest cells
+ <OPTION> neural precursor cells
+ <OPTION> neural retina
+ <OPTION> neural tube
+ <OPTION> neuroblast
+ <OPTION> neuroblastoma
+ <OPTION> neuroepithelium
+ <OPTION> neuron
+ <OPTION> neutrophil
+ <OPTION> notochord
+ <OPTION> occipital cortex
+ <OPTION> odontoblast
+ <OPTION> olfactory epithelium
+ <OPTION> olfactory mucosa
+ <OPTION> olfactory tubercle
+ <OPTION> oligodendroglia
+ <OPTION> oocyte
+ <OPTION> osteoblast
+ <OPTION> osteoclast
+ <OPTION> osteosarcoma
+ <OPTION> ovary
+ <OPTION> oviduct
+ <OPTION> pancreas
+ <OPTION> pancreatic alpha cells
+ <OPTION> pancreatic beta cell
+ <OPTION> pancreatic islet
+ <OPTION> papilloma
+ <OPTION> parietal endoderm
+ <OPTION> parotid salivary gland
+ <OPTION> peritoneal thioglycoltate-elicited cells (PEC)
+ <OPTION> peritoneum
+ <OPTION> pineal gland
+ <OPTION> pituitary gland
+ <OPTION> placenta
+ <OPTION> plasma
+ <OPTION> plasma cell
+ <OPTION> plasmacytoma
+ <OPTION> platelet
+ <OPTION> pooled
+ <OPTION> pre-B-cell lymphoma
+ <OPTION> pre-B-lymphocyte
+ <OPTION> pre-implantation embryos
+ <OPTION> preadipocyte
+ <OPTION> primitive streak
+ <OPTION> pro-B-lymphocyte
+ <OPTION> pro-T-lymphocyte
+ <OPTION> promyelocyte
+ <OPTION> prostate gland
+ <OPTION> quadriceps muscle
+ <OPTION> rectum
+ <OPTION> reticulocyte
+ <OPTION> retina
+ <OPTION> retina neuronal cells
+ <OPTION> retinal pigment epithelium
+ <OPTION> round spermatid
+ <OPTION> salivary gland
+ <OPTION> sarcoma
+ <OPTION> Schwann cell
+ <OPTION> sciatic nerve
+ <OPTION> seminal vesicle
+ <OPTION> seminiferous tubule
+ <OPTION> skeletal muscle
+ <OPTION> skeleton
+ <OPTION> skin
+ <OPTION> small intestine
+ <OPTION> small intestine (Paneth cell)
+ <OPTION> small intestine epithelium
+ <OPTION> smooth muscle
+ <OPTION> soleus muscle
+ <OPTION> sperm
+ <OPTION> spermatid
+ <OPTION> spermatocyte
+ <OPTION> spermatogenic cells
+ <OPTION> spinal cord
+ <OPTION> spleen
+ <OPTION> spleen tumor
+ <OPTION> splenocyte
+ <OPTION> squamous cell
+ <OPTION> squamous cell carcinoma
+ <OPTION> squamous papilloma
+ <OPTION> sternum
+ <OPTION> stomach
+ <OPTION> stomach mucosal layer
+ <OPTION> striatal astrocytes
+ <OPTION> striatum
+ <OPTION> stromal cells
+ <OPTION> sublingual salivary gland
+ <OPTION> submandibular salivary gland
+ <OPTION> submaxillary salivary gland
+ <OPTION> T-cell granuloma
+ <OPTION> T-cell lymphoma
+ <OPTION> T-cell tumor
+ <OPTION> T-lymphocyte
+ <OPTION> tail
+ <OPTION> telencephalon
+ <OPTION> teratocarcinoma
+ <OPTION> testis
+ <OPTION> thorax
+ <OPTION> thymic lymphoma
+ <OPTION> thymocyte
+ <OPTION> thymoma
+ <OPTION> thymus
+ <OPTION> thymus epithelium
+ <OPTION> thymus medullary epithelium
+ <OPTION> thyroid carcinoma
+ <OPTION> thyroid gland
+ <OPTION> tongue epithelium
+ <OPTION> tonsil
+ <OPTION> tooth
+ <OPTION> tooth germinal tissue
+ <OPTION> trachea
+ <OPTION> trigeminal ganglion
+ <OPTION> trophoblast
+ <OPTION> tumor
+ <OPTION> unfertilized egg
+ <OPTION> urinary bladder
+ <OPTION> urogenital ridge
+ <OPTION> uterus
+ <OPTION> vas deferens
+ <OPTION> vasculature
+ <OPTION> vomeronasal organ
+ <OPTION> white adipose tissue
+ <OPTION> yolk sac
+ <OPTION> teratoma
+ <OPTION> joint tissue
+ <OPTION> choroid plexus papilloma
+ <OPTION> duodenum
+ <OPTION> myelomonocyte
+ <OPTION> nerve
+ <OPTION> infundibulum
+ <OPTION> caecum
+ <OPTION> branchial arch
+ <OPTION> inner cell mass
+ <OPTION> astrocyte
+ <OPTION> mesenteric lymph node
+ <OPTION> peritoneal cell
+ <OPTION> thymic lymphocyte
+ <OPTION> pituitary gland tumor
+ <OPTION> neural fold
+ <OPTION> somite
+ <OPTION> dorsal root ganglion
+ <OPTION> eosinophil
+ <OPTION> vascular endothelium
+ <OPTION> acinar cell
+ <OPTION> body
+ <OPTION> two-cell embryo
+ <OPTION> lateral ganglionic eminence
+ <OPTION> extraembryonic component
+
+
+
+
+
+                                                      
+</SELECT>
+
+<center>
+<INPUT TYPE=SUBMIT VALUE="SUBMIT">
+</center>
+<A HREF=/gob3/credits.html><h3 align = right>Credits</A></h2>
+
+</DIV>
+</FORM>
+
+</BODY>
+</HTML>

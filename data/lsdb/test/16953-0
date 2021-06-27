@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+ <link rel="stylesheet" type="text/css" href="css/input.css" />
+ <link rel="stylesheet" type="text/css" href="css/dialog.css" />
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/jquery-ui.js "></script>
+<!-- <script type="text/javascript" src="js/ "></script>-->
+<script type="text/javascript">
+   $(document).ready(function() {
+     $("#js_warning").remove();
+     $("h3.help").remove();
+     $(".help_dialog").dialog({ autoOpen: false});
+     $("a[href='#help_confidence'] > img").click(function(e) {
+       $(".help_dialog").dialog('close');
+       var xy_coor = [ e.pageX - 10, e.pageY - 10];
+       $("#help_confidence").dialog('option', 'position', xy_coor);
+       $("#help_confidence").dialog('open');
+     });
+     $("a[href='#help_classification'] > img").click(function(e) {
+       $(".help_dialog").dialog('close');
+       var xy_coor = [ e.pageX - 10, e.pageY - 10];
+       $("#help_classification").dialog('option', 'position', xy_coor);
+       $("#help_classification").dialog('open');
+     });
+   });
+
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21341487-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<title>DoBo: Protein domain boundary prediction by integrating evolutionary signals and machine learning</title>
+</head>
+<body>
+<h1>DoBo</h1>
+<h2>Protein domain boundary prediction by integrating <br>evolutionary signals and machine learning</h2>   
+<br><p class="clear">Have a question?  Maybe it's answered in the <a href="faq.html">FAQ</a></p>
+<div id="js_warning" class="warning">
+<p>For the most satisfying user experience, please enable javascript.</p>
+</div>
+<form action="http://sysbio.rnet.missouri.edu/cgi-bin/dobo/submit_job.cgi" method="POST">
+<fieldset>
+<legend>Job Details</legend>
+<p><label>Job title (optional)</label><input type="text" class="input-text" name="job_title" /><p>
+<p><label>Sequence</label><textarea name="seq"></textarea></p>
+<p class="fine_print">Plain sequence.  Spaces, newlines and any FASTA header will be ignored.  <br><b>
+Mininum sequence length is 90 residues.</b></p>
+<p><label>Confidence level</label>
+<select name="confidence_value">
+  <option value="95">95%</option>
+  <option value="90">90%</option>
+  <option value="80">80%</option>
+  <option value="70">70%</option>
+  <option value="65">65%</option>
+  <option value="60" selected>60%</option>
+  <option value="50">50%</option>
+  <option value="40">40%</option>
+</select><a href="#help_confidence"><img src="images/help.png" /></a></p>
+<p class="fine_print">Set a minimum threshold for the confidence of domain boundary predictions.</p>
+<p><label>Single/multi-domain classification</label>
+<select name="single_flag">
+  <option value="n" selected>No</option>
+  <option value="y">Yes</option>
+</select><a href="#help_classification"><img src="images/help.png" /><a/></p>
+<p class="fine_print">Run an additional check to classify query as a single or multi-domain protein.</p> 
+<!-- <p><label> </label><input type="text" class="input-text" name="" /><a href="#help_range"><img id="test" src="images/help.png" /></a></p> 
+<p class="fine_print"> </p> -->
+
+<p><input type="submit" class="input_button" value="Submit Job" /><p>
+</fieldset>
+</form>
+
+<br/>
+<p class="clear">&nbsp;</p>
+
+<p><b>Reference:</b><br>J. Eickholt, X. Deng, and J. Cheng. <b>DoBo: Protein Domain Boundary Prediction by <br>Integrating Evolutionary Signals and Machine Learning.</b><i> BMC Bioinformatics</i>. 12:43, 2011.</p>
+
+<!-- Provide divs which will be used as popups.  By default, they are hidden -->
+<h3 class="clear help">Help</h3> 
+
+<!-- id corresponds to anchor point in form, title and text must be supplied -->
+<div id="help_confidence" class="help_dialog" title="Help - Confidence Threshold"><p> Set a confidence level for your job.  A confidence of 80% means that 80 percent of predicted domain boundary sites are likely within 20 residues of a true domain boundary.</p></div>
+<div id="help_classification" class="help_dialog" title="Help - Single/Multi Classification"><p>Run an additional test on the protein sequence to predict if the protein is multi-domain or single domain.</p></div>
+</body>
+</html>
+

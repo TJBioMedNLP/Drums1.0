@@ -1,0 +1,708 @@
+﻿
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>    
+    <meta http-equiv="Content-Language" content="fr-ca">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="title" content="Ancestor v1.0" />
+	<meta name="author" content="Etienne Lord" />
+	<meta name="description" content="Ancestor Web Server" />
+	<META NAME="keywords" CONTENT="Abdoulaye Banire Diallo,Ancestor,Ancestrale sequences reconstruction,Phylogeny,phylogenetic tree,inferring phylogenies,phylogenetic tree,phylogenetic reconstruction,sequence alignment,ClustalX,ClustalW,HGT,LGT,horizontal gene transfer,horisontal gene transfer,lateral gene transfer,recombination,hybridization,hybridisation,reticulogram,reticulograms, reticulations,reticulate evolution,evolutionary network,networks,trees,sequence to distance,NJ,BIONJ,MW,ADDTREE,tree drawing,tree map,transfer detection,bioinformatics software,tree inferring algorithms,tree inferring methods,phylogenetic networks"/>
+	<meta name="robots" content="index, follow" />	
+	<link href="css/default_css.css" rel="stylesheet" type="text/css" />
+	<link href="css/blue_css.css" rel="stylesheet" type="text/css" />
+	
+    <title>
+      Ancestors v1.0
+    </title>
+    <script language="javascript" type="text/javascript">
+            
+	//Based on Douglas Crockford	 www.crockford.com trim function
+	function trim(field) {
+			field.value=field.value.replace(/^\s*(\S*(\s+\S+)*)\s*$/, "$1");
+	}
+    
+	function reload() {
+		display();
+		document.ancestor.actionAncestor.value="";
+		document.ancestor.submit();
+	}
+	
+	function resetFunction() {
+		document.ancestor.actionAncestor.value="reset";
+		reload();
+		}
+	
+	//FONCTION TESTANT L'ACTIVATION DES CHAMPS DE FORMULAIRE SEQUENCE
+	// 		
+			function testUploadSequence() {				
+				try
+				{
+				if ( document.ancestor.fileSequence.value.length < 1 ) {
+					document.ancestor.inputSequence.disabled=false;
+				} else {
+					document.ancestor.inputSequence.disabled=true;
+					reload();
+				}								
+				}
+				catch(err)
+				{		
+					txt="There was an error on this page.\n\n";
+					txt+="Error description: " + err.description + "\n"+err.message+"\n";
+					txt+="Click OK to continue.\n\n";
+					alert(txt);
+				}
+			}
+	
+	function testSequence() {				
+				try
+				{
+				if ( document.ancestor.inputSequence.value.length > 0 ) {
+					trim(document.ancestor.inputSequence);
+					reload();
+				}								
+				}
+				catch(err)
+				{		
+					txt="There was an error on this page.\n\n";
+					txt+="Error description: " + err.description + "\n"+err.message+"\n";
+					txt+="Click OK to continue.\n\n";
+					alert(txt);
+				}
+			}
+	
+		function testUploadArbre() {
+				try
+				{
+				if ( document.ancestor.fileArbres.value.length < 1 ) {
+					document.ancestor.inputArbres.disabled=false;
+				} else {
+					document.ancestor.inputArbres.disabled=true;
+					reload();
+				}
+				}
+				catch(err)
+				  {
+				  txt="There was an error on this page.\n\n";
+				  txt+="Error description: " + err.description + "\n"+err.message+"\n";
+				  txt+="Click OK to continue.\n\n";
+				  alert(txt);
+				  }
+			}
+			
+		
+		function testArbre() {				
+				try
+				{
+				if ( document.ancestor.inputArbres.value.length > 0 ) {
+					trim(document.ancestor.inputArbres);
+					reload();
+				}
+				}
+				catch(err)
+				{		
+					txt="There was an error on this page.\n\n";
+					txt+="Error description: " + err.description + "\n"+err.message+"\n";
+					txt+="Click OK to continue.\n\n";
+					alert(txt);
+				}
+			}
+	                        
+
+    //FONCTION QUI COPIE UN EXEMPLE DE SEQUENCE DANS LE CHAMPS DE FORMULAIRE SEQUENCE
+
+                        function pasteSample1(){                                                        
+                                        var x = document.ancestor;
+                                        x.inputSequence.value =">D29\nGAGTGCCCAGTGGATCGGTGAGG---GTGACATGAAGCCCATCACCAAGGGCAACATGACTTC\n>L5\nGAGTGCGTCGTGGATCGGTGAAG---GCGACATGAAGCCCATCACCAAGGGCAACATGACCTC\n>Bxz2\nCTCGGCGTCGTGGACCG---GCGAGGCCGAGCGCAAGCCGATCACCAAGGGTTCGTTCGGCAA\n>Bxb1\nCTCCGCTCAGTGGATCGGTGAAGGCGACATGAAGCCCAT---CACCAAGGGCAACATGACCAA\n>TM4\nCGGTGAGTCTGCGACT-GACC--CGAAGGGCGTCAAGCCCACCAGCAAGGTGACGTGGGCCAA\n>A118\nTGGTGCTTTTTGGGTAGATGAAGCGGAACGCATTCAAAC---AAGTAAACCAACATTCACAAA\n>phi11\nAGGTGCTTACTGGGTA-GGTGAAGG--TCAAAAAATCGAAACGTCTAAGGCTACTTGGGTTAA";                                
+										reload();
+                        }
+                        
+                        
+    //FONCTION QUI COPIE UN EXEMPLE D'ARBRE DANS LE CHAMPS DE FORMULAIRE ARBRE
+
+                        function pasteSample2(){
+                                        var x = document.ancestor;
+                                        x.inputArbres.value ="((A118:0.23397,phi11:0.23474):0.0954,(((Bxb1:0.12134,(D29:0.08015,\nL5:0.07652):0.02925):0.04350,Bxz2:0.15289):0.08952,TM4:0.27211):0.05803);";                               
+										reload();
+                        }
+                        
+
+    //FONCTION QUI REINITIALISE LES CHAMPS DE FORMULAIRE PAR LE BOUTON CLEAR
+                        
+                        function clearInput(param){
+                                        document.ancestor.inputSequence.value="";
+                                        document.ancestor.fileSequence.value="";
+                                        document.ancestor.inputArbres.value="";
+                                        document.ancestor.fileArbres.value="";
+                                 }
+                        
+    //FONCTION TESTANT L'ACTIVATION DES CHAMP D'ALIGNEMENT
+                        
+                        function testInputAlignment(param){
+                                if(param == '1'){
+                                      
+                                }
+                                else if(param == '2'){
+                                        document.ancestor.inputArbres.disabled=false;
+                                        document.ancestor.fileArbres.disabled=true;
+                                        
+                                        document.ancestor.inputArbres.value="";
+                                        document.ancestor.fileArbres.value="";
+                                }
+								else if(param == '2'){
+                                        document.ancestor.inputArbres.disabled=false;
+                                        document.ancestor.fileArbres.disabled=true;
+                                        
+                                        document.ancestor.inputArbres.value="";
+                                        document.ancestor.fileArbres.value="";
+                                }
+                                else if(param == '2'){
+                                        document.ancestor.inputArbres.disabled=false;
+                                        document.ancestor.fileArbres.disabled=true;
+                                        
+                                        document.ancestor.inputArbres.value="";
+                                        document.ancestor.fileArbres.value="";
+                                }
+                                else{
+                                        document.ancestor.inputArbres.disabled=false;
+                                        document.ancestor.fileArbres.disabled=true;
+                                        
+                                        document.ancestor.inputArbres.value="";
+                                        document.ancestor.fileArbres.value="";
+                                }
+                        }
+                        
+    //FONCTION TESTANT L'ACTIVATION DES BOUTONS RADIO DE LA PROCEDURE
+                        
+                        function testInputExecute(param){
+                        
+                                var m=document.ancestor.cochefixescenario.value;                                
+
+                                if(param == '1'){
+                                        document.ancestor.cochefixescenario.disabled=true;
+                                        document.ancestor.cochepropscenario.disabled=true;
+                                        document.ancestor.cochefixeposterior.disabled=true;
+                                        document.ancestor.cochepropposterior.disabled=true;
+                                        
+                                        document.ancestor.cochefixescenario.value="";
+                                        document.ancestor.cochepropscenario.value="";
+                                    document.ancestor.cochefixeposterior.value="";
+                                    document.ancestor.cochepropposterior.value="";
+                                }
+                                else if(param == '2'){
+                                        document.ancestor.cochefixescenario.disabled=false;
+                                        document.ancestor.cochepropscenario.disabled=false;
+                                        document.ancestor.cochefixeposterior.disabled=true;
+                                        document.ancestor.cochepropposterior.disabled=true;
+                                        
+                                        document.ancestor.cochefixescenario.value="";
+                                        document.ancestor.cochepropscenario.value="";
+                                    document.ancestor.cochefixeposterior.value="";
+                                    document.ancestor.cochepropposterior.value="";
+                                }
+                                
+                                else if(param == '3'){
+                                        document.ancestor.cochefixescenario.disabled=true;
+                                        document.ancestor.cochepropscenario.disabled=true;
+                                        document.ancestor.cochefixeposterior.disabled=true;
+                                        document.ancestor.cochepropposterior.disabled=true;
+                                        
+                                        document.ancestor.cochefixescenario.value="";
+                                        document.ancestor.cochepropscenario.value="";
+                                    document.ancestor.cochefixeposterior.value="";
+                                    document.ancestor.cochepropposterior.value="";
+                                }
+                                else if(param == '4'){
+                                        document.ancestor.cochefixescenario.disabled=true;
+                                        document.ancestor.cochepropscenario.disabled=true;
+                                        document.ancestor.cochefixeposterior.disabled=false;
+                                        document.ancestor.cochepropposterior.disabled=false;
+                                        
+                                        document.ancestor.cochefixescenario.value="";
+                                        document.ancestor.cochepropscenario.value="";
+                                    document.ancestor.cochefixeposterior.value="";
+                                    document.ancestor.cochepropposterior.value="";
+                                }
+                        }       
+                        
+    //FONCTION IMPOSANT DES RESTRICTIONS AUX CHAMPS DU FORMULAIRE
+                        
+                   function valider() {
+                                        var form_err = " ";                             
+
+                                        if ( document.ancestor.inputSequence.value.length < 1 ) {
+                                                form_err = "The multiples sequence alignment field is empty.\n";
+                                        }
+                                                                                                                        
+                                        if ( document.ancestor.inputArbres.value.length < 1 ) {
+                                                form_err += "The rooted tree field is empty.\n";
+                                        }
+                                                                                                                        
+                                        
+                                        if(document.ancestor.cochefixescenario.disabled==false){
+                                                
+                                                var m=document.ancestor.cochefixescenario.value;
+                                                var n=document.ancestor.cochepropscenario.value;
+                                                
+                                                if(document.ancestor.cochefixescenario.value.length >= 1 && document.ancestor.cochepropscenario.value.length >= 1 ||
+                                                   document.ancestor.cochefixescenario.value.length < 1 && document.ancestor.cochepropscenario.value.length < 1)
+                                                   form_err +="Please choose between a fixed or proportional scenario value.\n";
+                                                else if( document.ancestor.cochefixescenario.value.length >= 1 ){
+                                                                if (isNaN(m)) 
+                                                                                form_err +="The fixed scenario value must be a number.\n";                      
+                                                                else {
+                                                                        if (m<0 )       form_err +="Your fixed scenario value must be a number m | m>=0 .\n";
+                                                                }               
+                                                }
+                                                else if ( document.ancestor.cochepropscenario.value.length >= 1 ){
+                                                                if (isNaN(n)) 
+                                                                                form_err +="The proportional scenario value must be a number.\n";                       
+                                                                else {
+                                                                        if (n<0 || n >1 )       form_err +="Your proportional scenario value must be a number n | 0<=n<=1 .\n";
+                                                                }               
+                                                }
+
+                                        }
+                                        
+                                
+                                        if(document.ancestor.cochefixeposterior.disabled==false){
+                                                
+                                                var o=document.ancestor.cochefixeposterior.value;
+                                                var p=document.ancestor.cochepropposterior.value;
+                                                
+                                                if(document.ancestor.cochefixeposterior.value.length >= 1 && document.ancestor.cochepropposterior.value.length >= 1 ||
+                                                   document.ancestor.cochefixeposterior.value.length < 1 && document.ancestor.cochepropposterior.value.length < 1)
+                                                   form_err +="Please choose between a fixed or proportional posterior value.\n";
+                                                else if( document.ancestor.cochefixeposterior.value.length >= 1 ){
+                                                                if (isNaN(o)) 
+                                                                                form_err +="The fixed posterior value must be a number.\n";                     
+                                                                else {
+                                                                        if (o<0 )       form_err +="Your fixed posterior value must be a number o | o>=0 .\n";
+                                                                }               
+                                                }
+                                                else if ( document.ancestor.cochepropposterior.value.length >= 1 ){
+                                                                if (isNaN(p)) 
+                                                                                form_err +="The proportional posterior value must be a number.\n";                      
+                                                                else {
+                                                                        if (p<0 || p >1 )       form_err +="Your proportional posterior value must be a number p | 0<=n<=1 .\n";
+                                                                }               
+                                                }
+
+                                        }
+                                        
+                                        
+                                        if ( document.ancestor.inputInsS.value.length < 1 ) {
+                                                form_err += "InsS field empty.\n";
+                                        }
+                                                                                                                        
+                                        if ( document.ancestor.inputInsE.value.length < 1 ) {
+                                                form_err += "InsE field empty.\n";
+                                        }
+                                                                                
+                                        if ( document.ancestor.inputdelS.value.length < 1 ) {
+                                                form_err += "delS field empty.\n";
+                                        }
+                                        
+                                        if ( document.ancestor.inputdelE.value.length < 1 ) {
+                                                form_err += "delE field empty.\n";
+                                        }
+                                                                        
+                                                var a=document.ancestor.inputInsS.value;
+                                                var b=document.ancestor.inputInsE.value;
+                                                var c=document.ancestor.inputdelS.value;
+                                                var d=document.ancestor.inputdelE.value;
+
+                                        if ( document.ancestor.inputInsS.value.length >= 1 ) {
+                                                if (isNaN(a)) 
+                                                                form_err +="The InsS value must be a number.\n";                        
+                                                else {
+                                                        if (a<=0 || a >1 )      form_err +="Your InsS value must be a number a | 0<a<1 .\n";
+                                                         }
+                                                }
+                                                        
+                                        if ( document.ancestor.inputInsE.value.length >= 1 ) {
+                                                if (isNaN(b)) 
+                                                                form_err +="The InsE value must be a number.\n";                        
+                                                else {
+                                                        if (b<=0 || b >1 )      form_err +="Your InsE value must be a number b | 0<b<1 .\n";
+                                                        }
+                                                }
+                                                                                                        
+                                        if ( document.ancestor.inputdelS.value.length >= 1 ) {
+                                                if (isNaN(c)) 
+                                                                form_err +="The delS value must be a number.\n";                        
+                                                else {
+                                                        if (c<=0 || c >1 )      form_err +="Your delS value must be a number c | 0<c<1 .\n";
+                                                        }
+                                                }
+                                                        
+                                        if ( document.ancestor.inputdelE.value.length >= 1 ) {
+                                                if (isNaN(d)) 
+                                                                form_err +="The delE value must be a number.\n";                        
+                                                else {
+                                                        if (d<=0 || d >1 )      form_err +="Your delE value must be a number d | 0<d<1 .\n";            
+                                                        }
+                                                }
+        
+                                        
+                                        if ( form_err != " ") {
+                                                alert(form_err);
+                                                return false;
+                                        }
+                                        document.ancestor.actionAncestor.value="execute";
+                                        //window.open("wait.php?id=a0c52fb46282c8d3367fb1f7cb96a102&prog=endAncestor&duree=1","_blank","width=300,height=100");
+                                        x.submit();
+                                        //return true
+                                }
+    </script>
+    <style type="text/css">
+	<!--/* set the image to use and establish the lower-right position */ .cssbox, .cssbox_body, .cssbox_head, .cssbox_head h2{ background: transparent url(img.php.png) no-repeat bottom right} .cssbox{ /* intended total box width - padding-right(next) */ width:335px !important; /* IE Win = width - padding */ width: 320px; /* the gap on the right edge of the image (not content padding) */ padding-right:15px; /* use to position the box */ margin:20px auto} /* set the top-right image */ .cssbox_head{background-position:top right; /* pull the right image over on top of border */ margin-right:-15px; /* right-image-gap + right-inside padding */ padding-right:40px} /* set the top-left image */ .cssbox_head h2{ background-position:top left; margin:0; /* reset main site styles*/ border:0; /* ditto */ /* padding-left = image gap + interior padding ... no padding-right */ padding:25px 0 15px 40px; height:auto !important; height:1%} /* IE Holly Hack */ /* set the lower-left corner image */ .cssbox_body{ background-position:bottom left; margin-right:25px; /* interior-padding right */ padding:15px 0 15px 40px} /* mirror .cssbox_head right/left */-->
+    </style>
+  </head>  
+  <body onLoad="init()">
+  <div id="loading" style="position: fixed; _position:absolute; width:100%; text-align:center;left: 0; top: 40%;  width: 100%;  height: 100%;_height:expression(document.body.offsetHeight + "px");">
+  <img src="35-1.gif" border=0>
+  </div>
+  <div id="bordure" style="margin-left: 5cm; margin-top: 1cm; margin-right: 5cm; margin-bottom: 1cm;">
+  <script>
+  //= SCRIPT TO SHOW LOADING ICON
+	 var ld=(document.all);
+	 var ns4=document.layers;
+	 var ns6=document.getElementById&&!document.all;
+	 var ie4=document.all;
+	  if (ns4)
+		ld=document.loading;
+	 else if (ns6)
+		ld=document.getElementById("loading").style;
+	 else if (ie4)
+		ld=document.all.loading.style;
+	 function init()
+	 {
+	 if(ns4){ld.visibility="hidden";}
+	 else if (ns6||ie4) ld.display="none";
+	 }
+	 function display() {
+	 if(ns4){ld.visibility="visible";}
+	 else if (ns6||ie4) ld.display="inline";
+	 }
+	</script>
+						
+    <form name="ancestor" enctype="multipart/form-data" onsubmit="return valider();" form="" method="post" action="index.php">
+      <input type='hidden' name='actionTrex' value='ancestor'> 
+	  <input type='hidden' name='actionAncestor' value=""> 
+	  <div style=
+      "border-top: 0px solid rgb(255, 255, 255); border-left: 0em solid rgb(170, 170, 170); border-bottom: 1px solid rgb(170, 170, 170); padding: 0px 0px 0px 0em; white-space: nowrap; font-weight: normal; font-size: 1.2em; margin-top: 2em; margin-bottom: 1em; color: rgb(51, 51, 51);">
+      Ancestor v1.0
+      </div> 
+	  <span class="" style="font-weight: bold;">Updated (05-12-2010)</span><br style="font-weight: bold;" class="">      
+	  <ul style="font-weight: bold;" class="">        
+		<li>New: Results can be downloaded as a single .ZIP file.</li>
+		<li>New: Results view with the species tree</li>
+		<li>New: Option for multiple sequences alignment (MSA) here. </li>
+		<li>New: Option for rooting directly the trees here.</li>
+       </ul>
+      <div style=
+      "border-top: 0px solid rgb(255, 255, 255); border-left: 0em solid rgb(170, 170, 170); border-bottom: 1px solid rgb(170, 170, 170); padding: 0px 0px 0px 0em; white-space: nowrap; font-weight: normal; font-size: 1.2em; margin-top: 2em; margin-bottom: 1em; color: rgb(51, 51, 51);">
+      Computational inference of ancestral genomes
+      </div>     
+        <table style=
+        "text-align: left; background-color: rgb(234, 234, 234); width: 100%;"
+        border="0" cellpadding="2" cellspacing="2">
+          <tbody>
+            <tr style="font-weight: bold;">
+               <td style="background-color: rgb(234, 234, 234);">
+                Step 1 - Insert a DNA multiples sequence alignment (MSA)
+                in <span lang="en-ca"><font color="black"><a target="_blank"
+                href="http://en.wikipedia.org/wiki/Fasta_format">FASTA</a>
+                format</font><br>
+                <br></span>
+                <div style="text-align: left;">
+                  <div style="margin-left: 40px;">
+                    <span lang="en-ca"><span style=
+                    "font-weight: normal;">Insert sample</span><a style=
+                    "font-weight: normal;" href=
+                    "javascript:pasteSample1()">(Sample1)</a></span>
+                  </div>
+                </div>
+                <div style="text-align: left; margin-left: 40px;">
+                  <span lang="en-ca"><font color="black">
+                  <A href="#sectionSequence"></A>
+				  <textarea rows="16" name="inputSequence" cols="80" style="" onChange="javascript:testSequence();"></textarea></font></span>
+                </div>
+                <p style="text-align: left; margin-left: 40px;">                 
+				  <span lang="en-ca"><font color="black"><span style=
+                  "font-weight: normal;">or upload a file</span> </font></span>
+                  <input name="fileSequence" size="40" style="" onchange="javascript:testUploadSequence();"
+                  style="background-color="" white="" height="" type="file">
+                </p>				
+                <table style=
+                "text-align: left; background-color: white; height: 34px; width: 660px; margin-left: 40px;"
+                border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td style=
+                      "text-align: center; background-color: rgb(201, 214, 255);">
+                      <input name="Alignment" value="radioAlignmentTrue"
+                      onclick="AlignmentMethod.disabled=false" type=
+                      "radio">Multiple sequence alignment : <select name=
+                      "AlignmentMethod" disabled="true">                         
+                          <option name="2" value="ClustalW2">
+                            ClustalW2 2.0.10
+                          </option>
+                          <option name="3" value="Muscle" selected="selected">
+                            Muscle v3.7
+                          </option>
+                          <!-- <option name="4" value="T-Coffee">T-Coffee v8.69</option> -->
+                          <option name="5" value="Mafft">
+                            Mafft v6.171
+                          </option>
+                        </select> <input name="Alignment" value=
+                        "radioAlignmentFalse" onclick=
+                        "AlignmentMethod.disabled=true" checked="checked" type=
+                        "radio"> sequences are already aligned
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: white;"></td>
+            </tr>
+            <tr style="font-weight: bold;">
+              <td style="height: 137px;">
+                <div style="text-align: left;">
+                  Step 2- Insert tree in
+                  <font color="black"><a target="_blank" href="http://evolution.genetics.washington.edu/phylip/newicktree.html">
+                  NEWICK</a></font> format<br>
+                  <br>
+                </div>
+                <div style="margin-left: 40px;">
+                  <span style="font-weight: normal;">Insert
+                  sample</span><a style="font-weight: normal;" href=
+                  "javascript:pasteSample2()">(Sample2)</a><br>
+                </div>
+                <div style="margin-left: 40px;">
+                  <span lang="en-ca"><font color="black">
+                  <A href="#sectionArbres"></A>
+				  <textarea rows="16" name="inputArbres" cols="80" style="" onChange="javascript:testArbre();"></textarea></font></span>
+                </div>
+                <p style="text-align: left; margin-left: 40px;">
+                  <span lang="en-ca"><font color="black"><span style=
+                  "font-weight: normal;">or upload a file</span></font></span>
+                  <input name="fileArbres" style="" size="40" onchange=
+                  "javascript:testUploadArbre();"style="background-color="" white="" type="file">                
+				<font color="red">
+								</font>
+				</p>
+                <table style=
+                "text-align: left; background-color: white; margin-left: 40px; width: 660px; height: 34px;"
+                border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td style=
+                      "text-align: center; background-color: rgb(201, 214, 255);">
+                      <input name="Root" value="radioRootTrue" onclick=
+                      "RootMethod.disabled=false" type="radio"> Root tree
+                      <select name="RootMethod" disabled="disabled">
+                          <option name="1" value="Outgroup">
+                            -Outgroup-
+                          </option>
+						  						  
+                          <option name="2" value="Midpoint">
+                            -Midpoint-
+                          </option>                          
+                        </select> <input name="Root" value="radioRootFalse"
+                        onclick="RootMethod.disabled=true" checked="checked"
+                        type="radio"> tree is already rooted
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: white;">
+                <table style=
+                "text-align: left; background-color: white; margin-left: 40px; width: 660px; height: 34px; font-weight: bold;"
+                border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td style=
+                      "text-align: center; background-color: rgb(201, 214, 255);">
+                      Email me when completed (recommended when submitting large data): <span lang=
+                        "en-ca"><font color="black"><input name="email" value=
+                        "" size="40" style="" disabled="disabled"></font></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table><br>
+                <div style="margin-left: 40px;">
+                  <input value="Compute" name="boutonCompute" style="" type="submit"> 
+				  <input onClick="javascript:resetFunction();"style="" name="boutonClear" type="button" value="Reset">
+                </div>
+              </td><!---->
+            </tr>
+          </tbody>
+        </table>
+        <div style=
+        "border-top: 0px solid rgb(255, 255, 255); border-left: 0em solid rgb(170, 170, 170); border-bottom: 1px solid rgb(170, 170, 170); padding: 0px 0px 0px 0em; white-space: nowrap; font-weight: normal; font-size: 1.2em; margin-top: 2em; margin-bottom: 1em; color: rgb(51, 51, 51);">
+        Advanced options
+        </div><br>
+        <table style=
+        "text-align: left; background-color: rgb(234, 234, 234); width: 100%;"
+        border="0" cellpadding="2" cellspacing="2">
+          <tbody>
+            <tr style="font-weight: bold;">
+              <td>
+                Step 3 - Choose inference method<br>
+                <p style="margin-left: 40px;" align="left">
+                  <span lang="en-ca"><font color="black"><input value=
+                  "radioScenario" name="executer" style="font-weight: 700;"
+                  onclick="javascript:testInputExecute(1);" type=
+                  "radio"><span style="font-weight: normal;">The best
+                  <span style="font-weight: bold;">exact</span>
+                  scenario</span></font></span>
+                </p>
+                <p style="font-weight: normal; margin-left: 40px;" align=
+                "left">
+                  <span lang="en-ca"><font color="black"><input name="executer"
+                  value="radioHeuristique" onclick=
+                  "javascript:testInputExecute(2);" checked="checked" type=
+                  "radio">The best <span style=
+                  "font-weight: bold;">heuristique</span> scenario</font></span>
+                </p>
+                <p style="font-weight: normal; margin-left: 120px;" align=
+                "left">
+                  <span lang="en-ca"><font color="black">Absolute <input name=
+                  "cochefixescenario" value="5" size="2" style=""> 
+                  Proportional <input name="cochepropscenario" value="" size=
+                  "2" style=""> </font></span>
+                </p>
+                <p style="font-weight: normal; margin-left: 40px;" align=
+                "left">
+                  <span lang="en-ca"><font color="black"><input name="executer"
+                  value="radioPosteriord" onclick=
+                  "javascript:testInputExecute(3);" type="radio">The
+                  <span style="font-weight: bold;">exact</span> posterior
+                  decoding</font></span>
+                </p>
+                <p style="font-weight: normal; margin-left: 40px;" align=
+                "left">
+                  <span lang="en-ca"><font color="black"><input name="executer"
+                  value="radioPosteriordh" onclick=
+                  "javascript:testInputExecute(4);" type="radio">The
+                  <span style="font-weight: bold;">heuristique</span> posterior
+                  decoding</font></span>
+                </p>
+                <p style="font-weight: normal; margin-left: 120px;" align=
+                "left">
+                  <span lang="en-ca"><font color="black">Absolute<input name=
+                  "cochefixeposterior" value="" size="2" style="" disabled=
+                  "disabled"> proportional <input name="cochepropposterior"
+                  value="" size="2" style="" disabled="disabled"></font></span>
+                </p>
+                <table style=
+                "text-align: left; margin-left: 40px; width: 400px; height: 58px;"
+                border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td style="background-color: rgb(179, 234, 231);">
+                        <div style="margin-left: 40px;">
+                          <b>Tree Hidden Markov Model probabilities<span lang=
+                          "en-ca"><font color="black">(%)</font></span></b><br>
+                        </div>
+                        <div style="margin-left: 40px; font-weight: bold;">
+                          <span lang="en-ca"><font style="font-weight: normal;"
+                          color="black">Insertion Start </font> <font style=
+                          "font-weight: normal;" color="black"><input name=
+                          "inputInsS" size="4" style="" value=
+                          "0.01"></font><span style=
+                          "font-weight: normal;"></span> <font style=
+                          "font-weight: normal;" color="black">Insertion End
+                          </font>  <font style="font-weight: normal;" color=
+                          "black"><input name="inputInsE" size="4" style=""
+                          value="0.1"></font><span style=
+                          "font-weight: normal;"></span> <br><font style=
+                          "font-weight: normal;" color="black">Deletion Start
+                          </font>   <font style="font-weight: normal;" color=
+                          "black"><input name="inputdelS" size="4" style=""
+                          value="0.01"></font><span style=
+                          "font-weight: normal;"></span> <font style=
+                          "font-weight: normal;" color="black">Deletion
+                          End</font> <font color="black"><input name=
+                          "inputdelE" size="4" style="" value=
+                          "0.1"></font></span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: white;">
+                <div style="margin-left: 40px;">
+                  <input value="Compute" name="boutonCompute" style="" type=
+                  "submit">
+				  <input onClick="javascript:resetFunction();"style="" name="boutonClear" type="button" value="Reset">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </form>
+	      <div id="citation" style=
+      "border-top: 0px solid rgb(255, 255, 255); border-left: 0em solid rgb(170, 170, 170); border-bottom: 1px solid rgb(170, 170, 170); padding: 0px 0px 0px 0em; white-space: nowrap; font-weight: normal; font-size: 1.2em; margin-top: 2em; margin-bottom: 1em; color: rgb(51, 51, 51);">
+      Citations
+      </div>
+      <div style="margin-left: 40px;">
+        <p class="title" style="margin: 0px; font-size: 1.2em;">
+          <span class="Apple-style-span" style=
+          "border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;">
+          <a href="http://www.ncbi.nlm.nih.gov/pubmed/19850756" ref="ordinalpos=1" style=
+          "color: rgb(34, 34, 204);" target="_blank">Ancestors 1.0: a web server for ancestral
+          sequence reconstruction.</a></span>
+        </p>
+        <p class="rprtbody" style="margin: 0.1425em 0px; font-size: 1.1667em;">
+          <span class="Apple-style-span" style=
+          "border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;">
+          Diallo AB, Makarenkov V, Blanchette M.</span>
+        </p>
+        <p class="aux" style=
+        "font-size: 1em; margin-top: 0em; margin-bottom: 0em; line-height: 1.334em;">
+        <span class="Apple-style-span" style=
+        "border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;">
+          <span class="src" style="display: block;"><span class="jrnl" title=
+          "Bioinformatics (Oxford, England)">Bioinformatics</span>. 2010 Jan
+          1;26(1):130-1. Epub 2009 Oct 22.</span><span class="rprtid" style=
+          "display: block; color: rgb(105, 105, 105);">PMID: 19850756 [PubMed -
+          indexed for MEDLINE]</span></span>
+        </p><br>
+        <p class="title" style="margin: 0px; font-size: 1.2em;">
+          <span class="Apple-style-span" style=
+          "border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;">
+          <a href="http://www.ncbi.nlm.nih.gov/pubmed/17572023" ref="ordinalpos=3" style=
+          "color: rgb(34, 34, 204);" target="_blank">Exact and heuristic algorithms for the Indel Maximum Likelihood Problem.</a></span>
+        </p>
+        <p class="rprtbody" style="margin: 0.1425em 0px; font-size: 1.1667em;">
+          <span class="Apple-style-span" style=
+          "border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;">
+          Diallo AB, Makarenkov V, Blanchette M.</span>
+        </p>
+        <p class="aux" style=
+        "font-size: 1em; margin-top: 0em; margin-bottom: 0em; line-height: 1.334em;">
+        <span class="Apple-style-span" style=
+        "border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;">
+          <span class="src" style="display: block;"><span class="jrnl" title=
+          "Methods in molecular biology (Clifton, N.J.)">J Comput Biol. </span>2007 May;14(4):446-61.</span><span class="rprtid" style=
+          "display: block; color: rgb(105, 105, 105);">PMID: 17572023 [PubMed -
+          indexed for MEDLINE]</span></span>
+        </p>
+				<br><br>Ancestor Web interface by : Etienne Lord
+		</div>
+		</div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en   ">
+
+  <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="spatial clustering software, missing data, network module detection, Markov Random Field, EM algorithm, image segmentation, triplet markov field" />
+        <!--
+	<title></title>
+	-->
+	<title>SpaCEM3 software webpage (INRIA/INRA) - Analysis of complex datasets</title>
+        <script language="JavaScript" type="text/javascript">
+        <!--
+        function help_window(helpurl) {
+                HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+        }
+        // -->
+                </script>
+
+<style type="text/css">
+        <!--
+        BODY {
+                margin-top: 3;
+                margin-left: 3;
+                margin-right: 3;
+                margin-bottom: 3;
+                background: #5651a1;
+        }
+        ol,ul,p,body,td,tr,th,form { font-family: verdana,arial,helvetica,sans-serif;font-size:11pt;
+                color: #333333; }
+
+        h1 { font-size: x-large; font-family: verdana,arial,helvetica,sans-serif; }
+        h2 { font-size: large; font-family: verdana,arial,helvetica,sans-serif; }
+        h3 { font-size: medium; font-family: verdana,arial,helvetica,sans-serif; }
+        h4 { font-size: small; font-family: verdana,arial,helvetica,sans-serif; }
+        h5 { font-size: x-small; font-family: verdana,arial,helvetica,sans-serif; }
+        h6 { font-size: xx-small; font-family: verdana,arial,helvetica,sans-serif; }
+
+        pre,tt { font-family: courier,sans-serif }
+
+        a:link { text-decoration:none }
+        a:visited { text-decoration:none }
+        a:active { text-decoration:none }
+        a:hover { text-decoration:underline; color:red }
+
+        .titlebar { color: black; text-decoration: none; font-weight: bold; }
+        a.tablink { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
+        a.tablink:visited { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
+        a.tablink:hover { text-decoration: none; color: black; font-weight: bold; font-size: x-small; }
+        a.tabsellink { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
+        a.tabsellink:visited { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
+        a.tabsellink:hover { text-decoration: none; color: black; font-weight: bold; font-size: x-small; }
+        -->
+</style>
+
+</head>
+
+
+<body>
+
+<script language="JavaScript" type="text/javascript">
+
+function help_window(helpurl) {
+HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+}
+
+function verif()
+{
+
+	var erreur="";
+
+	if (document.getElementById('idFirstName').value=='') {
+		erreur=erreur+"- First Name\n";
+	//	document.getElementById('idFirstName').focus();
+	}
+	if (document.getElementById('idLastName').value=='') {
+		erreur=erreur+"- Last Name\n";
+	//	if (erreur="") {document.getElementById('idLastName').focus();}
+	}
+	if (document.getElementById('idInstitution').value=='') {
+		erreur=erreur+"- Institution\n";
+	//	if (erreur="") {document.getElementById('idInstitution').focus();}
+	}
+	if (document.getElementById('idCountry').value==''){
+		erreur=erreur+"- Country\n";
+	//	if (erreur="") {document.getElementById('idCountry').focus();}
+	}
+	if (document.getElementById('idEmail').value.indexOf('@') == -1) {
+		erreur=erreur+"- Email\n";
+	//	if (erreur="") {document.getElementById('idEmail').focus();}
+	}
+
+	if (document.getElementById('idTextarea').value=='') {
+		erreur=erreur+"- Using of SpaCEM3 \n";
+	//	if (erreur="") {document.getElementById('idTestarea').focus();}
+	}
+
+	if (erreur!="") 
+		alert("Changes information(s) missing or wrong:\n"+erreur);
+	else if ( confirm ("Do you want to download SpaCEM3 ?" )) 
+		document.getElementById('formulaire').submit();
+	}
+
+</script>
+
+
+
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+        <tr>
+                <!-- <td><a href="/"><img src="http://gforge.inria.fr/themes/inria/images/logo.png" border="0" alt="" width="198" height="52" /></a></td> -->
+		<td><a href="http://spacem3.gforge.inria.fr/"><img src="data/logo-mistis-bia.png" height="80" border="0" align=right /></a> </td>
+        </tr>
+
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+        <tr>
+                <td>&nbsp;</td>
+                <td colspan="3">
+
+
+                <!-- start tabs -->
+
+        <tr>
+                <td align="left" bgcolor="#E0E0E0" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/topleft.png" height="9" width="9" alt="" /></td>
+                <td bgcolor="#E0E0E0" width="30"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="30" height="1" alt="" /></td>
+                <td bgcolor="#E0E0E0"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="1" height="1" alt="" /></td>
+                <td bgcolor="#E0E0E0" width="30"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="30" height="1" alt="" /></td>
+                <td align="right" bgcolor="#E0E0E0" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/topright.png" height="9" width="9" alt="" /></td>
+        </tr>
+
+        <tr>
+
+                <!-- Outer body row -->
+
+                <td bgcolor="#E0E0E0"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="10" height="1" alt="" /></td>
+                <td valign="top" width="99%" bgcolor="#E0E0E0" colspan="3">
+
+                        <!-- Inner Tabs / Shell -->
+
+                        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                        <tr>
+                                <td align="left" bgcolor="#ffffff" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+                                <td bgcolor="#ffffff"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="1" height="1" alt="" /></td>
+                                <td align="right" bgcolor="#ffffff" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+                        </tr>
+
+                        <tr>
+                                <td bgcolor="#ffffff"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="10" height="1" alt="" /></td>
+                                <td valign="top" width="99%" bgcolor="white">
+
+        <!-- whole page table -->
+<table width="100%" cellpadding="5" cellspacing="0" border="0">
+<tr><td width="100%" valign="top">
+
+
+	<div style="text-align: center;"></div>
+	<h2 style="text-align: left; background-color: rgb(224, 224, 224);">SpaCEM<sup>3</sup>- Spatial Clustering with EM and Markov Model</h2>
+	<p style="margin-left: 0px;"> 
+	</br>
+	</br>
+	<br/>
+
+	<table border="0" width="100%" cellspacing="0" cellpadding="0">
+ 	<tr>	
+	<td>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</td>
+	<td>
+	<ul> 
+		<li> <a href="#About_the_Software">About the Software</a> </li>
+		<br/>
+		<li> <a href="#Information_/_News">Information/News</a> </li>
+		<br/>		
+		<li> <a href="#Publications">Publications</a> </li>
+		<br/>
+		<li> <a href="#About_the_Team">About the Team</a> </li>
+		<br/>
+		<li> <a href="#Documentation">Documentation</a></li>
+		<br/>
+		<li> <a href="#datasets">Example Data sets</a></li>
+		<br>
+		<li> <a href="#License">License</a></li>
+		<br/>
+		<li> <a href="#Download">Download</a></li>
+		<br/>
+		<li> <a href="#Contact">Contact</a></li>
+	</ul>
+	</td>
+	<td>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</td>
+	<td style="text-align: center;"><a href="captureecran.php"><img src="data/captureecran.png" height=400 border=0 align=left></a> </td>
+	</tr>
+	</table>
+
+	<br />
+	<br />
+	<br />
+
+ <!-- /// About the software -->
+	<h3><a name="About_the_Software"> </a><span style="background-color: rgb(224, 224, 224);">About the Software</span> </h3>
+	<p><div style align="justify">The <b> SpaCEM<sup>3</sup> </b> software is dedicated to <em>Spatial Clustering with EM and Markov Models</em>.
+	It proposes a variety of algorithms for 
+	supervised and unsupervised classification of multidimensional and spatially-located data. The main
+	techniques use the EM algorithm for soft clustering and Markov Random
+	Fields (MRF) for spatial modelling. The learning and inference parts are based
+	on recent developments in mean field-like approximations. Its applications range from <em>image segmentation</em> (e.g.
+	tissue detection in MRI, retrieval of planet surface properties from hyperspectral satellite images...)
+	to <em>gene clustering</em> (e.g. biological module detection), <em>remote sensing</em> and <em>mapping epidemics of ecological species</em>.<br />
+	<br />
+	The main functionalities of the program include:</div></p>
+	<ul>
+		<li>Model-based unsupervised segmentation including the standard EM algorithm for mixtures and Hidden Markov Random Field models </li>
+		<li>Model selection for the Hidden Markov Random Field model</li>
+		<li>Simulation of commonly used Hidden Markov Random Field models</li>
+		<li>Simulation of independent Gaussian noise for noisy images</li>
+		<li>New Markov models including various extensions of the Potts model and triplet Markov models</li>
+		<li>Additional treatment of very high dimensional data using dimension reduction techniques within a classification framework</li>
+		<li>Models and methods allowing supervised classification with new learning and test steps</li>
+		<li>Integrated treatment of missing observations</li>
+		<li>Summary statistics of the data and visualization</li>
+	</ul>
+	<br />
+	<br />
+
+
+ <!-- /// Informations News -->
+	<h3><a name="Information_/_News"> </a><span style="background-color: rgb(224, 224, 224);">Information / News</span><br /></h3>
+	<p><div style align="justify"> &nbsp; &nbsp; <img src="data/ARW04RT.ICO"></a>  A new version spacem3-2.0 is available. <br />
+	This version includes a graphical user interface and is available for Windows and Linux environments (MacOS version should be available in a close future). </div></p>
+	<br />
+
+
+ <!-- /// Publication -->
+	<h3><a name="Publications"> </a><span style="background-color: rgb(224, 224, 224);">Publications</span></h3>
+	<div style align="justify"> The methods using segmentation implemented in this software are explained in the following publications:
+	<p></p>
+	<ul>
+	<li> N. Peyrard. <b>Approximation de type champ moyen des mod&egrave;les de champ de Markov pour la segmentation de donn&eacute;es spatiales.</b>
+	Phd Thesis, Universit&eacute; Joseph Fourier - Grenoble 1, 2001. [in French]</li>
+	<li> F. Forbes and N. Peyrard. <b>Hidden Markov Random Field selection criteria based on Mean Field-like approximations.</b>
+	IEEE trans. on Pattern Analysis and Machine Intelligence, 25(8), 2003. </li>
+	<li> G.Celeux, F.Forbes and N.Peyrard. <b> EM procedures using Mean Field-like approximations for Markov model-based image segmentation.</b>
+	Pattern Recognition, 36(1), pp. 131-144, 2003. </li>
+	<li> J. Blanchet. <b>Mod&egrave;les Markoviens et extensions pour la classification de donn&eacute;es comples.</b>
+	Phd Thesis, Universit&eacute; Joseph Fourier - Grenoble 1, 2007. [in French]</li>
+	<li> J. Blanchet and F. Forbes, <b>Triplet Markov fields for the supervised classification of complex structure data.</b>
+	IEEE PAMI, 30(6), pp. 1055-1067, 2008. </li>
+	<li> J. Blanchet, F. Forbes, S. Chopart and L. Azizi, <b>Le logiciel SpaCEM3 pour la classification de données complexes. </b>
+	La Revue MODULAD, 40, pp.147-166, 2009. [in French]
+	<li> J. Blanchet and M. Vignes, <b>A model-based approach to gene clustering with missing observation reconstruction in a Markov Random Field framework.</b>
+	Journal of Computational Biology, 16(3), pp. 475-486, 2009. </li>
+	<li> M. Vignes and F. Forbes, <b>Gene clustering via integrated  Markov models combining individual and pairwise features.</b>
+	IEEE/ACM trans. on Computational Biology and Bioinformatics, 6(2), pp.260-270, 2009. </li>
+	</ul></div>
+	<br />
+
+
+<!-- /// About the team -->
+	<h3><a name="About_the_Team"> </a><span style="background-color: rgb(224, 224, 224);">About
+	the Team</span> </h3>
+
+	<p><div style align="justify"> <b>SpaCEM<sup>3</sup></b> is the result of several years of research ; first in the former IS2 project and then in the
+	<a href="http://mistis.inrialpes.fr/index_en.html"><u>MISTIS</u></a> project at <a href="http://www.inrialpes.fr/"><u>INRIA
+	Rh&ocirc;ne-Alpes</u></a>. It is also supported by members of <a href="http://carlit.toulouse.inra.fr/wikiz/index.php/Cat%C3%A9gorie:SaABenglish"><u>SaAB</u></a> team (Statistics and Algorithms for Biology)
+	 within <a href="http://carlit.toulouse.inra.fr/wikiz/index.php/Cat%C3%A9gorie:English"><u>BIA Unit</u></a> at the <a href="http://www.toulouse.inra.fr/"><u>INRA Toulouse</u></a>. </div></p>
+
+	<p><div style align="justify">Our research focus on developments of statistical methods to deal
+	with complex systems and complex data. Our applications mainly
+	consist mainly in image processing and spatial data problems with 
+	applications in Biology and Medicine. Our approach is based on the
+	statement that complexity can be handled by working up from simple
+	local assumptions in a coherent way, defining a structured model.This is
+	the key to modelling, computation, inference and
+	interpretation. The methods we consider involve mixture models,
+	Markovian models, and more generally hidden structure models on one
+	hand, and semi and non-parametric methods on the other. </div></p>
+	<!--
+	<br />
+	More information is available on the web site of MISTIS : <a <a href="http://www.inria.fr/recherche/equipes/mistis.fr.html"> <u>http://www.inria.fr/recherche/equipes/mistis.fr.html</u></a>. </p>
+	<br />
+	-->
+	<br />
+
+
+<!-- /// Documentation -->
+	<h3><a name="Documentation"> </a><span style="background-color: rgb(224, 224, 224);">Documentation</span></h3>
+	<p><div style align="justify"> SpaCEM<sup>3</sup> allows the user to perform supervised or unsupervised segmentation and simulation.
+	The new graphical interface provides a user-friendly environment and allows the user to display data and results of segmentation or simulation.
+	Documentation is available on the use of SpaCEM<sup>3</sup>: <a href="http://spacem3.gforge.inria.fr/data/Manual_SpaCEM3.pdf"><u>Documentation</u></a>
+	</div> </p>
+	<br />
+
+
+<!-- /// datasets -->
+	<h3><a name="datasets"> </a><span style="background-color: rgb(224, 224, 224);">Example Data sets</span></h3>
+<p><div style align="justify">Some data sets are available for illustration, in particular those mentioned in the Documentation for unsupervised and supervised
+segmentation examples: <a href="http://spacem3.gforge.inria.fr/data/Data-Examples.zip"><u>Data sets</u></a>. This file includes the data sets
+for the <em>IEEE TCBB</em> and <em>Journal of Computational Biology</em> papers mentioned above.
+Some other toy example datasets come with the sofware.
+<br />
+A presentation of the software was given at ModGraphII satellite of the JOBIM 2010 conference (Montpellier, France).
+Slides can be downloaded <a href="http://spacem3.gforge.inria.fr/data/spacem3-modgraph2010.pdf"><u>here</u></a>.
+</div></p>
+<br />
+
+
+<!-- /// Licence -->
+	<h3><a name="License"> </a><span style="background-color: rgb(224, 224, 224);">License</span>
+	</h3>
+	<p>SpaCEM<sup>3</sup> is distributed under the licence
+	CeciLL-B (<a href="http://cecill.info/"><u>http://cecill.info/ </u></a>).</p>
+	<br />
+
+
+<!-- /// Download -->
+	<h3><a name="Download"> </a><span style="background-color: rgb(224, 224, 224);">Download</span>
+	</h3>
+	<p>Please take some time to complete the form below before downloading the software; we won't make any commercial use of the details you provide. Should you wish to download SpaCEM<sup>3</sup> directly, follow the links below the form. 
+
+
+	<form action="spacem3.php" method="post" id="formulaire">
+		<table bgcolor="#e0e0e0" border="0" cellpadding="5" cellspacing="0">
+		<tbody>
+		<tr>
+		<td colspan="2"> <font style="color: rgb(255, 0, 0); font-size: 8pt; font-weight: bold;">Registration
+		form for SpaCEM<sup>3</sup> (not mandatory).</font> </td>
+		</tr>
+		<tr>
+		<td align="right">First Name:</td>
+		<td><input name="firstname" size="40" type="text" id="idFirstName" /></td>
+		</tr>
+		<tr>
+		<td align="right">Last Name:</td>
+		<td><input name="lastname" size="40" type="text" id="idLastName" /></td>
+		</tr>
+		<tr>
+		<td align="right">Institution:</td>
+		<td><input name="institution" size="40" type="text" id="idInstitution" /></td>
+		</tr>
+		<tr>
+		<td align="right">Country:</td>
+		<td><input name="country" size="40" type="text" id="idCountry" /></td>
+		</tr>
+		<tr>
+		<td align="right">Email:</td>
+		<td><input name="email" size="40" type="text" id="idEmail" /></td>
+		</tr>
+		<tr>
+		<td align="right">Use of SpaCEM<sup>3</sup>:</td>
+		<td><textarea name="using" rows="5" cols="50" id="idTextarea"> </textarea></td>
+		</tr>
+		<tr>
+		<td align="right">Type of system:</td>
+		<td> <select name="type">
+   			 <option value="Windows XP">Windows XP/Vista/...</option>
+			 <option value="Linux-32bit-RPM">Linux-FedoraCore-32bit(.rpm package)</option>
+			 <option value="Linux-64bit-RPM">Linux-FedoraCore-64bit(.rpm package)</option>
+			 <option value="Linux-32bit-DEB">Linux-Ubuntu-32bit(.deb package)</option>
+			 <option value="Linux-64bit-DEB">Linux-Ubuntu-64bit(.deb package)</option>
+			 <option value="Linux-32bit-SH">Linux-32bit(.sh auto-extractible archive)</option>
+			 <option value="Linux-64bit-SH">Linux-64bit(.sh auto-extractible archive)</option>
+<!--<option value="MacOs X - leopard">MacOs</option>
+-->
+		</select> </td>
+		</tr>
+		<tr>
+		<td colspan="2" align="center">
+		<input value=" Submit " type="button" onClick="verif()" />
+		<input value=" Reset " type="reset" /></td>
+		</tr>
+		</tbody>
+		</table>
+	</form>
+	<br />
+	<p><div style align="justify">Direct links to software download for: <a href="http://spacem3.gforge.inria.fr/data/install-spacem3-2.0.0.exe"><u>Windows XP/Vista/...</u></a>,
+	<a href="http://spacem3.gforge.inria.fr/data/spacem3-2.0.0-i386.rpm"><u>Linux-FedoraCore-32bit (.rpm package)</u></a>,
+	<a href="http://spacem3.gforge.inria.fr/data/spacem3-2.0.0-x86_64.rpm"><u>Linux-FedoraCore-64bit (.rpm package)</u></a>
+	<a href="http://spacem3.gforge.inria.fr/data/spacem3-2.0.0-i386.deb"><u>Linux-Ubuntu-32bit (.deb package)</u></a>
+	<a href="http://spacem3.gforge.inria.fr/data/spacem3-2.0.0-x86_64.deb"><u>Linux-Ubuntu-64bit (.deb package)</u></a>
+	<a href="http://spacem3.gforge.inria.fr/data/spacem3-2.0.0-i386.sh"><u>Linux-32bit (.sh auto-extractible archive)</u></a>
+	<a href="http://spacem3.gforge.inria.fr/data/spacem3-2.0.0-x86_64.sh"><u>Linux-64bit (.sh auto-extractible archive)</u></a>.</div/</p>
+	<br />
+
+<h3><a name="Contact"> </a><span style="background-color: rgb(224, 224, 224);">Contact</span>
+	</h3>
+<!--	<p>If you have problems, questions or commentaries on the download or on the software, you can send an email to this #address : <a href="mailto:SpaCEM3-help@lists.gforge.inria.fr"><img src="data/test.png" align=left></a>
+#	</p>  -->
+	<p>If you have questions or comments on the software (installation, use, included features), feel free to contact us at: <a href="mailto:SpaCEM3-help@lists.gforge.inria.fr">SpaCEM3-help@lists.gforge.inria.fr</a>
+	</p>
+	<br />
+	<br />
+
+<p> <font style="font-size: 10pt;"> Last modification : November 2010 </p>
+
+</td>
+
+<td width="35%" valign="top">
+
+                <p>&nbsp;</p>
+</td></tr></table>
+                        &nbsp;<p>
+                          <!-- end main body row -->
+
+
+                                </td>
+                                <td width="10" bgcolor="#ffffff"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="2" height="1" alt="" /></td>
+                        </tr>
+                        <tr>
+                                <td align="left" bgcolor="#E0E0E0" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+                                <td bgcolor="#ffffff"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="1" height="1" alt="" /></td>
+                                <td align="right" bgcolor="#E0E0E0" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
+                        </tr>
+                        </table>
+
+                <!-- end inner body row -->
+
+                </td>
+                <td width="10" bgcolor="#E0E0E0"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="2" height="1" alt="" /></td>
+        </tr>
+        <tr>
+                <td align="left" bgcolor="#E0E0E0" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+                <td bgcolor="#E0E0E0" colspan="3"><img src="http://gforge.inria.fr/themes/inria/images/clear.png" width="1" height="1" alt="" /></td>
+                <td align="right" bgcolor="#E0E0E0" width="9"><img src="http://gforge.inria.fr/themes/inria/images/tabs/bottomright.png" height="9" width="9" alt="" /></td>
+        </tr>
+</table>
+
+<!-- PLEASE LEAVE "Powered By Gforge" on your site -->
+<br />
+<center>
+<a href="http://gforge.org/"><img src="http://gforge.inria.fr/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
+</center>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5738765-1");
+pageTracker._trackPageview();
+</script>
+</body>
+
+</html>

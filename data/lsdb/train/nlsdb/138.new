@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Probabilistic assignments of formulas to mass peaks in metabolomic experiments</title>
+<link href="./metsamp.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="uogdcs">Department of Computing Science</div>
+<div class="headbar"></div>
+<div class="gronbar"></div>
+<div class="mainarea">
+<div class="smallhead">Probabilistic assignments of formulas to mass peaks in metabolomic experiments</div>
+<div class="smallerhead"><a href="http://www.dcs.gla.ac.uk/~srogers">Simon Rogers</a> (a), <a href="http://gbic.biol.rug.nl/spip/spip.php?rubrique5">Richard A. Scheltema</a> (b), <a href="http://www.dcs.gla.ac.uk/~girolami">Mark Girolami</a> (a) and <a href="http://gbic.biol.rug.nl/~rbreitling/">Rainer Breitling</a> (b)</div>
+<div class="smallerhead" style="font-size:12px">(a) <a href="http://www.dcs.gla.ac.uk/inference">Department of Computing Science</a>, University of Glasgow, Glasgow UK</div>
+<div class="smallerhead" style="font-size:12px">(b) <a href="http://www.rug.nl/gbb/research/researchgroups/bioinformatics/index">Groningen Bioinformatics Centre</a>, University of Groningen, The Netherlands</div>
+<div style="padding:10px"><b>Motivation:</b> High-accuracy mass spectrometry is a popular
+technology for high-throughput measurements of cellular metabolites
+(metabolomics). One of the major challenges is the correct
+identification of the observed mass peaks, including the assignment
+of their empirical formula, based on the measured mass.</div>
+<div style="padding:10px">
+<b>Results:</b> We propose a novel probabilistic method for the
+assignment of empirical formulas to mass peaks in high-throughput
+metabolomics mass spectrometry measurements. The method incorporates
+information about possible biochemical transformations between the
+compounds to assign higher weights to formulas that could be created
+from other metabolites in the sample. In a series of experiments we
+show that the method performs well and provides greater insight than
+assignments based on mass alone. In addition, we extend the model to
+incorporate isotope information to achieve even more reliable
+formula identification.</div>
+<div style="padding:10px"><b>Contact:</b><a href="mailto:srogers@dcs.gla.ac.uk">srogers@dcs.gla.ac.uk</a></div>
+<hr />
+<div class="smallerhead">Supplementary document</div>
+<div style="padding:10px">Available for download as a <a href="./downloads/rogerssup.pdf">.pdf</a></div>
+<hr />
+<div class="smallerhead">Code</div>
+<div style="padding:10px">Matlab implementation and example scripts will be available soon.</div>
+<hr />
+<div class="smallerhead">Data</div>
+<div style="padding:10px">The measured masses from the <em>Trypanasoma</em> dataset reported by <a href="http://www.springerlink.com/content/x01808376167kk12/fulltext.html">Breitling et al. (2006)</a> were matched to KEGG metabolites, using a mass window of &plusmn;10 ppm. Matching entries were retrieved with the SOAP interface provided at the <a href="http://www.genome.jp/kegg/">KEGG website</a>. All unique molecular formulas were selected and stored with the mass. The automated matching was performed by the <a href="http://gbic.biol.rug.nl//supplementary/2008/MetabolomeExplorer/">MetabolomeExplorer</a> software (Scheltema et al., in prep.), using a Java implementation based on the KEGG library (<a href="http://www.genome.jp/kegg/soap/">keggapi.jar</a>) utilizing the functions <tt>search_compounds_by_mass</tt> (retrieves all compound KEGG ids within the provided mass range) and <tt>bget</tt> (retrieves all information in the KEGG database for a given id). Dedicated software was written to interpret the results from the <tt>bget</tt> function. The full annotation file is available for <a href="./downloads/tryp10ppm.xls">download</a>.</div>
+<div style="padding:10px">The full list of chemical transformations can be downloaded <a href="./downloads/all_transformations_masses.txt">here</a>.</div>
+</div>
+</body>
+</html>

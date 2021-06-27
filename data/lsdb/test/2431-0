@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html>
+  <head>
+    <title>Investigating Interfaces of Macro-Molecular Complexes with Intervor</title>
+    <link rel="stylesheet" type="text/css" href="../cgal.css">
+    <BASE href="http://cgal.inria.fr/abs/Intervor/index.html">
+  </head>
+
+  <body bgcolor="#FFFFFF">
+
+    <br><hr>
+    <center><h1>Investigating Interfaces of Macro-Molecular Complexes with Intervor</h1></center>
+<center><h2> Protein - Protein; Protein - Nucleic Acid; Protein - Drug</h2></center>
+<!--     <h3> <center><blink>Experimental server!</blink></center></h3> -->
+<!-- </p> -->
+
+
+
+
+
+
+<hr>
+<h2>  PROBLEM SPECIFICATION </h2>
+
+Given a macro-molecular complex featuring two partners and possibly water molecules, an interface between these partners is defined as a collection of Voronoi faces separating them; equivalently, each facet identifies two interface atoms.  See the bibliography below for a precise description of the
+interface. The goal of Intervor is to:
+
+
+<UL>
+<LI>
+ detect interface atoms, as well as water molecules squeezed
+   in-between the partners;
+
+<LI> provide a description of the Voronoi interface in terms of patches,
+   surface area, curvature, atomic composition;
+
+<LI> qualify interface atoms and Voronoi tiles as a function of their
+   depth at the interface.
+</UL>
+
+<p> Addditional notes:
+
+<UL>
+<LI> Intervor is based on the Triangulation_3 and Alpha_shape_3 packages of the <A HREF="http://www.cgal.org"> Computational Geometry Algorithms Library</A>.
+
+<LI> The atomic radii used are the so-called group radii from Chothia and Janin,  Nature 256, 1975.
+<A HREF="std-atomic-radii.txt">Details here.</A>
+</UL>
+
+<hr>
+<h2> BIBLIOGRAPHY</h2>
+
+
+<center>
+<table border>
+<th Align=left>
+
+<p> Algorithms
+<UL>
+
+
+<LI>[C10]
+<a HREF="ftp://ftp-sop.inria.fr/abs/fcazals/papers/voronoi-interfaces-algorithm_prib2010.pdf">
+  Revisiting the Voronoi description of protein - protein interfaces: algorithms</a>;
+F. Cazals;
+Pattern Recongnition in Bioinformatics, 2010.
+
+
+</UL>
+
+<p> Structural studies
+<UL>
+<LI>[CPBJ06]
+<a HREF="ftp://ftp-sop.inria.fr/abs/fcazals/papers/FC_etal_ProtSci-R.pdf">
+Revisiting the Voronoi description of Protein-Protein interfaces;
+</a>
+F. Cazals, F. Proust, and R. Bahadur, J. Janin; 
+Protein Science, 15 (9), 2006.
+
+<LI> [BGNC09]
+<a HREF="ftp://ftp-sop.inria.fr/abs/fcazals/papers/VSO-protein-interfaces.pdf">
+Shelling the Voronoi interface of protein-protein complexes reveals patterns of residue conservation, dynamics and composition;</a>
+Bouvier and R. Grunberg and M. Nilges and F. Cazals;
+Proteins: Structure, Function, and Bioinformatics, 76(3), 2009. 
+
+</UL>
+
+
+ <p> Software
+<UL>
+<LI> [CL10]
+Modeling macro-molecular interfaces with Intervor;
+S. Loriot and F. Cazals;
+Bioinformatics 26 (7); 2010.
+
+<br> Also available as 
+<a HREF="http://hal.archives-ouvertes.fr/inria-00426041">
+INRIA Tech Report </a>.
+</UL>
+
+<p>Misc
+<UL>
+<LI> 
+[TTCG99] The packing density in proteins: standard radii and volumes.
+J. Tsai, R. Taylor, C. Chothia, and M. Gerstein. Journal of Molecular Biology, 290(1):253-266, 1999.
+</UL>
+
+
+
+</th> 
+<th Align=center>
+
+<a HREF="picts/Proteins_cover_small.jpg">
+<IMG ALIGN="MIDDLE" SRC="picts/Proteins_cover_small.jpg" HEIGHT="400">
+</a>
+
+</th> 
+</table>
+</center>
+
+
+
+
+
+
+<hr>
+<h2>INSTRUCTIONS</h2>
+
+<UL>
+<LI> 1. Provide a PDB file, with extension .pdb or .PDB
+
+<LI> 2-3. Specify each partner in the complex, as a collection of
+capital letters identifying the chains. If two or more chains, do not
+insert blanks in between letters
+
+<LI> 4. Click <em>Discard  water molecules</em> if you wish to drop
+all water crystallographic water molecules
+
+<LI> 5. If you wish to discard only water molecules whose temperature
+factor is too high, provide its value, in the range 0..100
+
+<LI> 6a-b. Click <em>Filter large Voronoi facets with M</em> if you
+wish to discard potential large Voronoi facet. If so, provide a value
+M, in the range 0..100
+
+
+  <LI> 7. By default, Voronoi facets are colored by the interaction type corresponding to the two atoms defining the facet. Clicking the check-box makes the coloring scheme depend upon the shelling order of the facet.
+
+  <LI> 8. Upon completion, the server will provide you with a link to a zipped tar file containing the results of the calculation. 
+See
+<a HREF="http://hal.archives-ouvertes.fr/inria-00426041">
+Modeling macro-molecular interfaces with Intervor;
+INRIA Tech report 7069;
+</a> for a detailed description of the result.
+
+</UL>
+
+
+
+<b>Important notes:</b>
+
+<UL>
+<LI> Calculations are based upon the following
+classification of <a HREF="http://cgal.inria.fr/abs/Intervor/convPDB2Intv-norm.txt">  atoms and residues</a>, see [TTCG99].
+  In particular, hydrogen atoms are discarded.
+
+  <LI> This web server requires all occupancy factors to be equal to 1. If not and for a more ellaborate processing, the user should retrieve the binary executable, learn about the strategies offered in case of factors &lt 1, and proceed accordingly.
+
+  <LI> In case of alternates, the first occurance is the one selected.
+</UL>
+
+
+
+<br><hr>
+<h2>RUNNING A CALCULATION</h2>
+
+<center>
+Please send comments / error reports / wishes
+to abs-software@lists-sop.inria.fr 
+</center>
+
+
+<center>
+<em>If you use Intervor for a publication, please notify us at</em> abs-software@lists-sop.inria.fr
+</center>
+
+     <form 
+      enctype="multipart/form-data"
+      action="http://cgal.inria.fr/abs/Intervor/intervor.pl"
+      method="post">
+
+
+      <br> 1.Your data file:
+      <input TYPE="file" NAME="clientfile" SIZE="25" MAXLENGTH="80"></input><br>
+
+      <table>
+	  <tr> 2. First  partner: <INPUT TYPE="TEXT" NAME="partnerA"></input><br></tr>
+	  <tr> 3. Second partner: <INPUT TYPE="TEXT" NAME="partnerB"></input><br></tr>
+	  <tr> 4. Discard strutural water <INPUT TYPE=CHECKBOX NAME="water_01"></input> <br> </tr>
+	  <tr> 5. Filter water molecules. Max temperature factor:  <INPUT TYPE="TEXT" NAME="TempFact_value"></input> <br></tr>
+	  <tr> 6a. Filter  large Voronoi facets with M <INPUT TYPE=CHECKBOX NAME="MFilter_yn"></input> <br></tr>
+	  <tr> 6b. M (default) value: <INPUT TYPE="TEXT" NAME="MFilter_value" VALUE=25></input> <br></tr>
+         <tr> 7. Color interface facets by shelling order <INPUT TYPE=CHECKBOX NAME="color_facets_by_so"></input> <br> </tr>
+
+	    </tr>
+    </table>
+
+
+
+
+
+
+ <br>Your mail (optional): <INPUT TYPE="TEXT" NAME="yourmail"><br>
+ <INPUT TYPE="HIDDEN" NAME="ipadr" VALUE="129.89.57.69" ><br>
+
+<!--       <INPUT TYPE=CHECKBOX NAME="put_on_server">You allow us to put your data on the sever.<br> -->
+<!--       <INPUT TYPE=CHECKBOX NAME="copyright">Confirm that you have the copyright on the data.<br> -->
+
+
+      <table>
+	<tr><td></td>
+	    <td><input type="submit" name="submit"></td>
+	    <td><input type="reset" name="reset"></td>
+	</tr>
+      </table>
+      </form>
+
+<br><hr>
+<h2> DOWNLOADING THE EXECUTABLE</h2>
+
+<b>  Important notes:</b>
+<UL>
+<LI>   Conditions: Free for use in academia, and subject to commercial license for other use.<br>
+
+  <LI> To see all options available, run the program as <em> intervor.exe --help</em>.
+</UL>
+
+
+
+
+
+<br>
+
+     <form
+      enctype="multipart/form-data"
+      action="http://cgal.inria.fr/abs/Intervor/passwd_request.pl"
+      method="post">
+
+      <table>
+          <tr> First name: <INPUT TYPE="TEXT" NAME="fname" MAXLENGTH=50></input> <br></tr>
+          <tr> Last name: <INPUT TYPE="TEXT" NAME="lname" MAXLENGTH=50></input> <br></tr>
+          <tr> Institution: <INPUT TYPE="TEXT" NAME="insti" MAXLENGTH=100></input> <br></tr>
+          <tr> E-mail address: <INPUT TYPE="TEXT" NAME="email" MAXLENGTH=100></input> <br></tr>
+      </table>
+
+      <table>
+        <tr><td></td>
+            <td><input type="submit" name="submit"></td>
+            <td><input type="reset" name="reset"></td>
+        </tr>
+      </table>
+      </form>
+
+
+
+<a HREF="http://cgal.inria.fr/abs/Intervor/exec/index.html">Download page here (authentification requested)</a>
+<br>
+<br>
+
+
+
+
+
+<br><hr>
+<h2> Using Intervor within <a
+	HREF="http://www.ks.uiuc.edu/Research/vmd/">VMD</a> </h2>
+
+<p> The plugin <a HREF="plugins/intervor-vmd.tgz">Intervor-vmd-plugin</a>
+  allows one to run a calculation and see the result in VMD.
+
+  <p> As an alternative, one can (i) run a calculation from 
+  the command-line using the binary executable, (ii) generate a vmd file using the
+vor2vmd.pl perl script available within the 
+  <a HREF="plugins/intervor-vmd.tgz">Intervor-vmd-plugin</a> bundle, and (iii) load this file within 
+VMD using the <a HREF="plugins/fast_load.tgz">Fast load</a> plugin. The bundle provided upon running a calculation from this web site contains the vmd file to be loaded with  <a HREF="plugins/fast_load.tgz">Fast load</a>.
+
+  <p><b> Help to install the plugins:</b>
+<UL>
+<IL> 
+See the <a HREF="http://www.ks.uiuc.edu/Research/vmd"> VMD</a> page for the plugin installation instructions.
+<IL> The header of the plugins files also contain short indications on how to install the plugins.
+
+</UL>
+
+
+
+
+<br><hr>
+<h2> Using Intervor within <a HREF="http://pymol.sourceforge.net/">PyMOL</a> </h2>
+
+<p> The plugin <a HREF="plugins/intervor-pymol.tgz">Intervor-pymol-plugin</a>
+  allows one to run a calculation and see the result in Pymol.
+
+The bundle provided upon running a calculation from this web site contains the pymol file to be
+loaded within Pymol.
+
+
+
+<br><hr>
+<h2>Gallery</h2>
+
+    
+                  
+
+<h3>Complex 1vfb: Protein - Protein</h3>
+<center>
+<table border>
+<th Align=center>
+<IMG ALIGN="MIDDLE" SRC="picts/1vfb-sideview.jpg" HEIGHT="200">
+<p>(a)Side view of complex
+</th> 
+<th Align=center>
+<IMG ALIGN="MIDDLE" SRC="picts/1vfb-ABWmodel-ABinterf.jpg" HEIGHT="200">
+<p>(b)Interface and interface water molecules
+</th> 
+</table>
+</center>
+
+
+<h3>Complex 1KX5: Protein - Nucleic Acid</h3>
+<center>
+<table border>
+<th Align=center>
+<IMG ALIGN="MIDDLE" SRC="picts/1KX5_complex_interface_water_molecules.jpg" HEIGHT="200">
+<p>(a)Complex DNA - histones, with structural water at the interface
+</th> 
+<th Align=center>
+<IMG ALIGN="MIDDLE" SRC="picts/1KX5_interface_A2H__IJ.jpg" HEIGHT="200">
+<p>(b)Interface patches
+</th> 
+</table>
+</center>
+
+<h3>Complex 2ifb: Protein - Drug</h3>
+<center>
+<table border>
+<th Align=center>
+<IMG ALIGN="MIDDLE" SRC="picts/2ifb.jpg" HEIGHT="200">
+<p>Drug trapped in binding site
+</th> 
+</table>
+</center>
+
+
+
+    <hr>
+
+<p>
+<A HREF="mailto:abs-software@lists-sop.inria.fr">Contact: abs-software@lists-sop.inria.fr</A>
+
+<p>
+<a HREF="http://www-sop.inria.fr/geometrica/team/Frederic.Cazals"> Web: F. Cazals</a>
+
+
+
+  </body>
+</html>

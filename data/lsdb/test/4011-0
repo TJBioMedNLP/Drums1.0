@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html lang=en>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<title>LAST: genome-scale sequence comparison</title>
+<style type="text/css">
+  kbd { white-space: nowrap; }
+  p  { margin-bottom: 0; }
+  ul { margin-top: 0; }
+  p:first-letter { font-size: x-large; }
+</style>
+</head>
+<body>
+
+<div>LAST home | <a href="http://lastweb.cbrc.jp/">LAST web
+service</a> | <a href="http://www.cbrc.jp/">CBRC home</a></div>
+
+<hr>
+
+<h1 style="text-align:center"><img src="lastcrop.png" alt="LAST"></h1>
+
+<p>LAST finds similar regions between sequences.</p>
+<ul>
+<li><a href="archive/">Download LAST</a> to use on your own
+computer.</li>
+<li>Try the <a href="http://lastweb.cbrc.jp/">LAST web service</a>
+(lacks some features).
+</ul>
+
+<p style="text-align:center"><img src="lastwebfig.png" alt="sketch of
+similar regions in sequences"></p>
+
+<div style="float: left; width: 47%;">
+
+<p>LAST can:</p>
+<ul>
+<li>Handle <strong>big</strong> sequence data, e.g:
+<ul>
+<li>Compare two vertebrate genomes</li>
+<li>Align billions of DNA reads to a genome</li>
+</ul></li>
+<li>Indicate
+the <a href="http://lastweb.cbrc.jp/about.html">reliability</a> of
+each aligned column.</li>
+<li>Use sequence quality
+data <a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkq010">properly</a>.</li>
+<li>Compare DNA to proteins, with frameshifts.</li>
+<li>Compare PSSMs to sequences</li>
+<li>Calculate the likelihood of chance similarities between random sequences.</li>
+</ul>
+
+<p>LAST cannot (yet):</p>
+<ul>
+<li>Do spliced alignment</li>
+</ul>
+
+<p>Here are the <a href="doc/">documents</a> in the LAST download: the
+main one is <em>last-tutorial.txt</em>.  Here are
+some <a href="mcf-kyoto08.pdf">slides</a> (pdf) that give an
+introduction to sequence comparison and LAST.</p>
+
+<p>What distinguishes LAST
+from <a href="http://www.ncbi.nlm.nih.gov/blast/">BLAST</a> and
+similar tools (e.g. <a href="http://genome.ucsc.edu/">BLAT</a>,
+<a href="http://www.bx.psu.edu/miller_lab/">LASTZ</a>, <a href="http://bioinfo.lifl.fr/yass/">YASS</a>)?</p>
+<ul>
+<li>The main difference is that it copes more efficiently with
+repeat-rich sequences (e.g. genomes).  For example: it can align reads
+to genomes without repeat-masking, without becoming overwhelmed by
+repetitive hits.</li>
+</ul>
+
+<p>What distinguishes LAST from read-mapping tools
+(e.g. <a href="http://bio-bwa.sourceforge.net/">BWA</a>, <a href="http://soap.genomics.org.cn/">SOAP</a>)?</p>
+<ul>
+<li>The main difference is that it can find weak similarities, with
+many mismatches and gaps.</li>
+</ul>
+
+</div>
+
+<div style="float:right; width: 47%;">
+
+<p>Here are some dotplots made using LAST:</p>
+<ul>
+<li><a href="hg18-mm9.png">Human vs. mouse</a>.  This took about 1 day
+on 1 CPU, and less than 2 GB of RAM.</li>
+<li><a href="dm3-dp4.png"><em>Drosophila melanogaster</em>
+vs. <em>Drosophila pseudoobscura</em></a>.  This took about 30 minutes
+and less than 1 GB of RAM.</li>
+</ul>
+
+<p>Publications:</p>
+
+<ul>
+<li><a href="http://genome.cshlp.org/content/early/2011/02/04/gr.113985.110">
+Adaptive seeds tame genomic sequence comparison</a>.
+SM Kielbasa, R Wan, K Sato, P Horton, MC Frith, Genome Research 2011.</li>
+<li><a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkq010">
+Incorporating sequence quality data into alignment improves DNA read mapping</a>.
+MC Frith, R Wan, P Horton, NAR 2010.</li>
+<li><a href="http://www.biomedcentral.com/1471-2105/11/80">
+Parameters for accurate genome alignment</a>.
+MC Frith, M Hamada, P Horton, BMC Bioinformatics 2010.</li>
+</ul>
+
+<p>The main technical innovation is that LAST finds initial matches
+based on their multiplicity, instead of using a fixed length
+(e.g. BLAST uses 11-mers).  To find these variable-length matches, it
+uses a suffix array (inspired
+by <a href="http://www.vmatch.de/">Vmatch</a>).  To achieve high
+sensitivity, it uses a spaced suffix array (or subset suffix array),
+analogous to spaced seeds (or subset seeds).</p>
+
+<p>Development:</p>
+
+<ul>
+<li><a href="trac/">Trac</a>.</li>
+<li><a href="ChangeLog.txt">Change log</a>.</li>
+<li>Browse the <a href="last/">repository</a>.</li>
+<li>Check it out
+using <a href="http://subversion.apache.org/">Subversion</a>: <kbd>svn
+co http://last.cbrc.jp/last</kbd></li>
+</ul>
+
+</div>
+
+</body>
+</html>

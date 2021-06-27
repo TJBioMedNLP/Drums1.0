@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <title>HappieClust - Fast approximate hierarchical clustering using similarity heuristics</title>
+</head>
+<body>
+  <div id="content">
+
+    <div id="top">
+    <p align="center">
+    <img src="happieclust.png" alt="HappieClust logo" align="absmiddle" class="logo" />
+    </p>
+
+    <h1 align="center">HappieClust - Fast approximate hierarchical clustering using similarity heuristics</h1>
+
+    <p id="header" class="special" align="center">
+      <b>Authors: Meelis Kull, Jaak Vilo</b><br />
+      Quretec Ltd., Tartu, Estonia<br />
+      <a href="http://biit.cs.ut.ee">BIIT-group</a>, Institute of Computer Science, University of Tartu<br />
+      Contact: meelis d kull a ut d ee, jaak d vilo a ut d ee (a=@ d=.)<br /> 
+      <br />
+    </p>
+
+    <div>
+    <a href="#publ">Publication</a><br>
+    <a href="#desc">Description</a><br>
+    <a href="#simi">Built-in similarity measures</a><br>
+    <a href="#lice">License</a><br>
+    <a href="#down">Download</a><br>
+    <a href="#exam">Examples</a><br>
+    <hr>
+    </div>
+    <a name="publ"/>
+    <h2>Publication</h2>
+    <a href="http://www.biodatamining.org/content/1/1/9">M. Kull, J. Vilo. Fast approximate hierarchical clustering using similarity heuristics. <i>BioData Mining</i> 2008, <b>1</b>:9 (22 September 2008)</a>
+    
+    <a name="desc"/>
+    <h2>Description</h2>
+    <p>
+    HappieClust is an approximate version of <a href="http://en.wikipedia.org/wiki/Agglomerative_hierarchical_clustering#Agglomerative_hierarchical_clustering">agglomerative hierarchical clustering</a>. 
+    When performing the standard full agglomerative hierarchical clustering, each pair of objects must be inspected to evaluate similarity.
+    This is very time-consuming for large numbers of objects and/or complicated similarity measures.
+    HappieClust performs agglomerative hierarchical clustering with partial information, not requiring all pairwise similarities to be known.
+    HappieClust is further able to use similarity heuristics to carefully choose a subset of pairs for which the similarities are evaluated.
+    </p>
+    <p>
+    HappieClust can be applied on any kind of data. 
+    It has a large set of built-in similarity measures for numeric data vectors and two measures for character strings. 
+    For these cases the similarity heuristics can be applied. 
+    For unsupported data types and similarity measures it is possible to precalculate any subset of similarities with any other tool and then feed the results into HappieClust for clustering. 
+    </p>
+    <p>
+    HappieClust is originally developed for clustering gene expression microarray data (see the publication listed above), but can be applied for any other kind of biological or non-biological data.
+    </p>
+
+    <a name="simi"/>
+    <h2>Built-in similarity measures</h2>
+    <p>
+    HappieClust interprets value 0 as perfect similarity and the increase in value as weakening similarity.
+    In this sense, HappieClust works with distance measures rather than similarity measures.
+    Negative values are not accepted.
+    The built-in distance measures are as follows:
+    </p>
+    <p>
+    <b style="color:red">NB!</b> <font style="color:red">A custom similarity measure</font> can be used by precalculating a subset of similarities with any other tool and then feeding the results into HappieClust for clustering)
+    </p>
+    <h3>For numeric vectors</h3>
+    <table>
+    <tr class="caption"><td>Distance measure</td><td>Description</td></tr>
+    <tr><td>Minkowski distance (with parameter P)</td><td>P-th root of the sum of P-th powers of vector element-wise differences</td></tr>
+    <tr><td>Manhattan distance</td><td>Minkowski distance with p=1</td></tr>
+    <tr><td>Euclidean distance</td><td>Minkowski distance with p=2</td></tr>
+    <tr><td>Pearson correlation distance</td><td>One minus Pearson correlation of the two vectors (centered correlation)</td></tr>
+    <tr><td>Absolute Pearson correlation distance</td><td>One minus the absolute value of Pearson correlation of the two vectors</td></tr>
+    <tr><td>Uncentered correlation distance</td><td>One minus the uncentered correlation of the two vectors</td></tr>
+    <tr><td>Absolute uncentered correlation distance</td><td>One minus the absolute value of the uncentered correlation of the vectors</td></tr>
+    <tr><td>Spearman's rank correlation distance</td><td>One minus Spearman's rank correlation of the two vectors</td></tr>
+    <tr><td>Absolute Spearman's rank correlation distance</td><td>One minus the absolute value of the Spearman's rank correlation of the two vectors</td></tr>
+    <tr><td>Chord distance</td><td>Euclidean distance measured after the normalization of the two vectors</td></tr>
+    <tr><td>Centered chord distance</td><td>Euclidean distance measured after centering and normalizing the vectors</td></tr>
+    <tr><td>Average difference distance</td><td>Average of vector element-wise differences</td></tr>
+    <tr><td>Maximum difference distance</td><td>Maximum of vector element-wise differences</td></tr>
+    <tr><td>Sum of signs distance</td><td>The number of positions where the vectors have opposite-signed values</td></tr>
+    </table>
+    <h3>For character strings</h3>
+    <table>
+    <tr class="caption"><td>Distance measure</td><td>Description</td></tr>
+    <tr><td>Hamming distance</td><td>The number of positions where the strings have different characters</td></tr>
+    <tr><td>Levenshtein (edit) distance</td><td>The number of single character insertions, deletions, replacements it takes to get one string from the other</td></tr>
+    </table>
+
+    <a name="lice"/>
+    <h2>Licence</h2>
+    <p>
+    HappieClust is free for non-commercial use, please cite the publication listed above. 
+    For commercial use contact the authors.
+    </p>
+
+    <a name="down"/>
+    <h2>Download <tt>happieclust</tt> version 1.6.1 binary executables</h2>
+    <ul>
+      <li><a href="happieclust-1.6.1-linux-i686.tar.gz">32-bit Linux (x86)</a></li>
+      <li><a href="happieclust-1.6.1-linux-x86_64.tar.gz">64-bit Linux (x86)</a></li>
+      <li><a href="happieclust-1.6.1-macosx-i386.tar.gz">Intel Mac OS X (x86)</a></li>
+    </ul>
+    <p>Please contact the authors in order to get binaries for other platforms.</p>
+    <h3>Version history</h3>
+    <ul>
+      <li><a href="happieclust-1.6.0-linux-i686.tar.gz">Version 1.6.0 32-bit Linux (x86)</a></li>
+      <li><a href="happieclust-1.6.0-linux-x86_64.tar.gz">Version 1.6.0 64-bit Linux (x86)</a></li>
+      <li><a href="happieclust-1.6.0-macosx-i386.tar.gz">Version 1.6.0 Intel Mac OS X (x86)</a></li>
+      <li><a href="happieclust-1.6.0-win.zip">Version 1.6.0 Windows</a></li>
+    </ul>
+    </h3>
+    <p>
+    The package contains five programs:
+    <ul>
+      <li><code>happieclust</code> - the main binary, which inputs data in <a href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF format</a>, performs hierarchical clustering and outputs results in NetCDF format</li>
+      <li><code>tab2nc</code> - a tool for converting tab-separated text files into NetCDF format, part of the <a href="http://biit.cs.ut.ee/tabcdf/">TabCDF toolkit</a> authored by Tambet Arak and Meelis Kull</li>
+      <li><code>nc2tab</code> - a tool for converting NetCDF files into tab-separated text files, also part of the TabCDF toolkit</li>
+      <li><code>happieclust2cdt</code> - a tool for converting NetCDF files resulting from HappieClust clustering into <a href="http://genome-www5.stanford.edu/help/formats.shtml">Stanford clustered data format</a>, which can be visualized with e.g. <a href="http://jtreeview.sourceforge.net/">Java Treeview</a>
+      <li><code>happieclust_matrix</code> - a convenient script which runs other tools to achieve clustering of a tabular text file with output in Stanford clustered data format
+    </ul>
+    Run each executable without parameters to see help on command line options.
+    </p>
+    <p>
+    The datasets used in the article are available from here in NetCDF format:
+    <ul>
+      <li><a href="shyamsundar05.nc">shyamsundar05.nc</a> (20 MB)</li>
+      <li><a href="lukk08.nc">lukk08.nc</a> (1 GB)</li>
+    </ul>
+    </p>
+
+    <a name="exam"/>
+    <h2>Examples</h2>
+    <div class="example">
+      <div class="example_name">
+      Example 1 (Simple)
+      </div>
+      <div class="example_body">
+       <ul>
+         <li>Input text file <a href="capitals.txt">capitals.txt</a> (monthly average temperatures of 17 capital cities in tab-separated format):<br>
+	 <img src="capitals_in.png" alt="Monthly average temperatures of 17 capital cities" align="absmiddle" class="capitals" />
+	 </li>
+	 <li>Cluster the rows and columns of the temperature matrix, i.e. cluster the cities and months with respect to temperature:<br>
+	 <code class="mycode">happieclust_matrix.sh capitals.txt capitals -d euclidean</code> (Linux and MacOSX)<br>
+	 <code class="mycode">happieclust_matrix.bat capitals.txt capitals -d euclidean</code> (Windows)
+	 </li>
+	 <li>Resulting files in <a href="http://genome-www5.stanford.edu/help/formats.shtml">Stanford clustered data format</a> (can be viewed with e.g. <a href="http://jtreeview.sourceforge.net/">Java Treeview</a>):
+	 <ul>
+	   <li><a href="capitals.cdt">capitals.cdt</a></li>
+	   <li><a href="capitals.gtr">capitals.gtr</a></li>
+	   <li><a href="capitals.atr">capitals.atr</a></li>
+	 </ul>
+	 </li>
+	 <li>Visualization of results with Java Treeview:<br>
+	 <img src="capitals_out.png" alt="Hierarchical clustering of capital cities and months by average temperature" align="absmiddle" class="capitals" />
+	 </li>
+      </div>
+      <div class="example_name">
+      Example 2 (Advanced)
+      </div>
+      <div class="example_body">
+       <ul>
+         <li>Input text file:<br>
+	 <a href="capitals.txt">capitals.txt</a>
+	 </li>
+	 <li>Convert the text file into NetCDF format:<br>
+	 <code class="mycode">tab2nc '{string empty,col_names[c]} r*{string row_names[]; double matrix[][c]}' capitals.txt capitals2.nc</code>
+	 </li>
+         <li>Resulting NetCDF file:<br>
+	 <a href="capitals2.nc">capitals2.nc</a>
+	 </li>
+	 <li>View the header of the NetCDF file (optional, requires <a href="http://www.unidata.ucar.edu/downloads/netcdf/netcdf-4_0">installation of NetCDF</a>):<br>
+         <code class="mycode">ncdump -h capitals2.nc</code>
+	 </li>
+	 <li>Perform full hierarchical clustering using Euclidean distance (no need to use approximation as the dataset is so small):<br>
+	 <code class="mycode">happieclust -i capitals2.nc -o capitals2_rows.nc --output-data -D matrix --cluster rows -d euclidean --all-pairwise</code><br> 
+	 <code class="mycode">happieclust -i capitals2_rows.nc -o capitals2_rowscols.nc --output-data -D matrix --cluster cols -d euclidean --all-pairwise</code> 
+	 </li>
+	 <li>Convert results into Stanford clustered data format:<br>
+	 <code class="mycode">happieclust2cdt capitals2_rowscols.nc capitals2</code>
+	 </li>
+	 <li>Resulting files in <a href="http://genome-www5.stanford.edu/help/formats.shtml">Stanford clustered data format</a> (can be viewed with e.g. <a href="http://jtreeview.sourceforge.net/">Java Treeview</a>):
+	 <ul>
+	   <li><a href="capitals2.cdt">capitals2.cdt</a></li>
+	   <li><a href="capitals2.gtr">capitals2.gtr</a></li>
+	   <li><a href="capitals2.atr">capitals2.atr</a></li>
+	 </ul>
+	 The results are exactly the same as in Example 1.
+	 </li>
+	 <li>Instead of using the Stanford clustered data format, it can be useful to use the resulting NetCDF file directly.
+	 The file contains 7 one-dimensional arrays of length 2*N-1 where N is the number of clustered objects.
+	 For example, the NetCDF file resulting from the command<br>
+	 <code class="mycode">happieclust --input capitals2.nc -D matrix --output capitals2_cols.nc --cluster cols --distance euclidean --all-pairwise --prefix ''</code><br>
+	 contains the following data:<br>
+	 <img src="result_table.png" alt="Tabular representation of the HappieClust result file" align="absmiddle" class="result_table" /><br>
+	 The numbers in grey are independent of the clustered data.
+	 The meaning of the fields is exemplified in the following figure:<br>
+	 <img src="format.png" alt="Dendrogram" align="absmiddle" class="dendrogram" /><br>
+	 </li>
+	 <li><b>A very useful feature:</b> when you cluster a NetCDF variable along some dimension and use the flag --output-data, HappieClust reorders all variables which include this dimension. 
+	 For example, you might have some metadata for each object you cluster, such as the population of a city or the number of days in a month. 
+	 This feature was used above to reorder the temperature matrix and names of cities and months as the Stanford clustered data format requires this.
+	 </li>
+       </ul>
+     </div>
+      <div class="example_name">
+      Example 3 (Approximate clustering given time and memory constraints)
+      </div>
+      <div class="example_body">
+       <ul>
+         <li>Input NetCDF file:<br>
+	 <a href="shyamsundar05.nc">shyamsundar05.nc</a>
+	 </li>
+	 <li>Perform average linkage approximate hierarchical clustering of the genes using Pearson correlation distance:<br>
+	 <code class="mycode">happieclust -i shyamsundar05.nc --data expr -o ex3tmp.nc -d pear -l ave -C rows -O --memory 1 --time 20</code>
+	 </li>
+	 <li>As a result, HappieClust clusters the data as well as it can while trying to fit into 1 GB of memory and 20 seconds of running time. This is achieved by estimating the largest number of object pairs which enables distance calculation for each pair and clustering within the time and memory constraints. By default, half of these pairs are chosen using similarity heuristics and the other half randomly.
+         </li>
+	 <li>Perform the same on conditions with Euclidean distance. As there are only 123 conditions, HappieClust is able to perform full hierarchical clustering within the time and memory constraints.<br>
+	 <code class="mycode">happieclust -i ex3tmp.nc -D expr -o ex3.nc -d eucl -l ave -C cols -O --memory 1 --time 20</code>
+	 </li>
+	 <li>Convert into Stanford clustered data format:<br>
+	 <code class="mycode">happieclust2cdt ex3.nc ex3 -M expr -R genes -C samples</code>
+	 </li>
+	 <li>A small part of the visualization with Java Treeview:<br>
+	 <img src="expr.png" alt="Dendrogram" align="absmiddle" class="dendrogram" /><br>
+	 </li>
+       </ul>
+      </div>
+      <div class="example_name">
+      Example 4 (Approximate clustering given the number of distances)
+      </div>
+      <div class="example_body">
+       <ul>
+         <li>Input NetCDF file:<br>
+	 <a href="shyamsundar05.nc">shyamsundar05.nc</a>
+	 </li>
+	 <li>Perform approximate hierarchical clustering of the genes using Pearson correlation distance by calculating 3 million distances:<br>
+	 <code class="mycode">happieclust -i shyamsundar05.nc --data expr -o ex4.nc -d pear -C rows --num-distances 3000000</code>
+	 </li>
+	 <li>As a result, HappieClust clusters the data as well as it can with 3 million as the limit on the number of distance calculations.
+         </li>
+	 <li>Output NetCDF file:<br>
+	 <a href="ex4.nc">ex4.nc</a>
+	 </li>
+       </ul>
+      </div>
+    </div>
+
+ </div>
+ <div id="updated">
+    <p>
+      Page last updated: Feb 19, 2010
+    </p>
+ </div>
+ </div>
+<!-- BIIT global tracking -->
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3124809-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- HappieClust tracking -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-13071412-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>
+

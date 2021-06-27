@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>RATT - rapid annotation transfer tool</title><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" /><link rel="stylesheet" type="text/css" href="style.css" /></head><body><div id="wrapper"><br /><div id="header"> </div><div id="content"><table align=center><TR><TD><a href="http://www.sanger.ac.uk"><img style="border: 0px solid ; height: 75px;" alt="sanger logo" src="sanger_w100.png" /></a></TD><TD width="500"><div style="text-align: center;"><big><span style="font-weight: bold;"><br /><br /><B>RATT</B>: Rapid Annotation Transfer Tool</span></big></div></TD><TD>&nbsp; &nbsp;<a href="http://www.biomalpar.org/"><img style="border: 0px solid ; height: 75px;" alt="biomalpar" src="biomalpar.jpg" /></a></TD></TR></table><!-- </div>  <div id="content">--><div id="menu"><ul><li></li><li></li><li></li><li></li><li></li><li></li></ul><br /><br /><br /><br /><br /><br /><br /><ul><li><a href="index.html">Home</a></li><li><a href="documentation.html">Documentation</a></li><li><a href="example.html">Example & Screenshots</a></li>
+<li><a href="transform.html">Transformation to/from EMBL format</a></li>
+<li><a href="ratt_windows.htm">For windows - ongoing</a></li><li><a href="download.html">Download</a></li><BR>Third party software:<li><a href="http://mummer.sourceforge.net/">MUMmer</a></li><li><a href="http://www.sanger.ac.uk/Software/Artemis/">Artemis</a></li><BR>Diverse:<li><a href="http://www.sanger.ac.uk/Projects/Pathogens/">PathogenGenomics</a></li><li><a href="http://www.sanger.ac.uk">WTSI</a></li></ul></div><div id="stuff">
+
+<p><B>RATT</B> is software to transfer annotation from a reference (annotated) genome to an unannotated query genome. </p>
+
+<p>It was first developed to transfer annotations between different genome assembly versions. However, it can also transfer annotations between strains and even different species, like <i>Plasmodium chabaudi</i> onto <i> P. berghei</I>, between different Leishmania species or <i>Salmonella enterica</i> onto other Salmonella serotypes. <B>RATT</B> is able to transfer any entries present on a reference sequence, such as the systematic id or an annotator's notes; such information would be lost in a <i>de novo</i> annotation. 
+</P>
+
+<p>
+<B>It is important to notice, that the quality of the transferred annotation onto the query, depends on the quality of the annotation of the reference !!!</B>
+</P>
+
+<p>
+<B>We are happy to annouce that RATT got accepted for publication:<BR>
+<a href="http://nar.oxfordjournals.org/content/early/2011/02/08/nar.gkq1268.abstract">Thomas D. Otto, Gary P. Dillon, Wim S. Degrave and Matthew Berriman, RATT: Rapid Annotation Transfer Tool, Nucleic Acid Research.</a>
+
+</B>
+</P>
+
+<p>
+However, <B>RATT</B> checks whether gene models have changed between the two sequences and can correct changed start and stop codons, or frameshifts. The following figure outlines <B>RATT</B>'s workflow:</p>
+<p align="center"><img src="workflow.png" width="300"></p>
+<b>Figure:</B><i> First synteny between the reference and the query is established (using <a href="http://mummer.sourceforge.net/">nucmer</a>). Indels are used to help define the correct position of each annotation tags. Next, possible errors such as start and stop codons or frameshifts are corrected. Finally, a new annotation file, differences and correction files and statistics are generated.</i>
+<BR><BR>
+<p><B>RATT</B> returns the following statistics and information:
+
+<ul><li>How many tags are transferred correctly.</li><li>Where CDSs different from the parent sequence.</li><li>Which TAGs could not be transferred (usually due to indels or divergent sequence).</li><li>New insertions in the query are shown, for further annotation.</li></ul></p><p><B>RATT</B> is rapid and assigns models with a high level of confidence. Nevertheless, genomes are not static entities and there will be changes between strains/species (often functionally informative). In these cases <B>RATT</B> will flag up all differences and report them to the annotator so they know where to focus their attention. The output of <B>RATT</B> can be best analyzed using <a href="http://www.sanger.ac.uk/Software/Artemis/">Artemis</a> and <a href="http://www.sanger.ac.uk/Software/Act/">Act</a>, see in the <a href="documentation.html#For_the_biological_interpretation">documentation</a>.
+
+<h2>Example</h2>An <a href="example.html">example</a> is given showing the transfer of the <i>Mycobacterium tuberculosis </i> strain H37Rv annotations onto the F11 strain. The data can be downloaded, run, or just visualized. Screenshots are shown.<h2>Download</h2>
+To download <B>RATT</B> please use svn:<BR><BR> 
+  <code>
+            	svn co https://ratt.svn.sourceforge.net/svnroot/ratt ratt
+        	</code><BR>
+
+<h2>Funding</h2>Funding for the development of <B>RATT</B> is provided by the European Union6th Framework Program grant to the <a href="http://www.biomalpar.org/">BioMalPar Consortium</a>[grant number LSHP-LT-2004-503578] and the <a href="http://www.sanger.ac.uk">WellcomeTrust Sanger Institute</a><a>. </a></div><a> </a></div><a> </a><div id="bottom"><a> </a></div><a> </a><p style="text-align: center;"><a href="https://sourceforge.net/">SourceForge</a>&nbsp; &nbsp; &nbsp;<span style="text-decoration: underline;"></span></p><a> </a></div></body></html>

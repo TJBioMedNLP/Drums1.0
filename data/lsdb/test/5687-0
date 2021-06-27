@@ -1,0 +1,743 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+
+<LINK REL=STYLESHEET TYPE='text/css' HREF='/css/en_US/scholarone.css'>
+
+<script language='JavaScript' type='text/javascript'>
+var ALERT_WAIT_FOR_SUBMIT = 'The form has been submitted, please wait until it has completed before pressing any more buttons.';
+var ALERT_TEXT_LIMIT = 'The text limit for this field has been reached. No more text may be added.';
+var ALERT_NO_SEARCH = 'Starting over will mean that the system will not perform this search. Are you sure?';
+var ALERT_TEXT_OVERFLOW = 'Text overflow';
+var PREFER_24HOUR = '0';
+var GMT_STR = 'GMT';
+var AM_STR = 'AM';
+var PM_STR = 'PM';
+</script>
+<script language='JavaScript' type='text/javascript'>
+var ALERT_WAIT_FOR_SUBMIT = 'The form has been submitted, please wait until it has completed before pressing any more buttons.';
+var ALERT_TEXT_LIMIT = 'The text limit for this field has been reached. No more text may be added.';
+var ALERT_NO_SEARCH = 'Starting over will mean that the system will not perform this search. Are you sure?';
+var ALERT_TEXT_OVERFLOW = 'Text overflow';
+var PREFER_24HOUR = '0';
+var GMT_STR = 'GMT';
+var AM_STR = 'AM';
+var PM_STR = 'PM';
+</script>
+<SCRIPT LANGUAGE='JavaScript' src='/common/scholarone.js'></SCRIPT>
+<link type='text/css' rel='StyleSheet' href='/css/en_US/helptip.css'/>
+<script language='JavaScript' src='/common/helptip.js'></script>
+<script language='JavaScript' type='text/javascript'>
+function getSiteURL()
+{
+   return 'null';
+}
+function getLongRequestSiteURL()
+{
+   return 'null';
+}
+function popWindow(url,winname,width,height)
+{
+  winX=Math.round(screen.width/2)-(width/2);
+  winY=Math.round(screen.height/2)-(height/2);
+  winStats='toolbar=no,location=no,directories=no,menubar=no,resizable=yes,'
+  winStats+='scrollbars=yes,width='+width+',height='+height
+  if (navigator.appName.indexOf('Microsoft')>=0) {
+    winStats+=',left='+winX+',top='+winY+''
+  }else{ 
+    winStats+=',screenX='+winX+',screenY='+winY+''
+  }
+  handle = window.open(encodeURI(url),winname,winStats) 
+  if(handle != null)
+  {
+   if (winname != 'add_person_to_pick_pop' && winname != 'mssearch_issue_popup' && winname != 'progress_pop_report' && winname != 'progress_pop_large' && winname != 'transfer_pop' && winname != 'email_popup_stay' && winname != 'forms_instructions_popup') 
+   {
+     addHandleToArray(handle);  
+   }
+   handle.focus();  
+  }
+  if (winname == 'progress_pop_delayed' || winname == 'author_affil_details' || winname == 'sp_char_palette') 
+    return handle;  
+}
+function popWindowSecure(url,winname,width,height)
+{
+  winX=Math.round(screen.width/2)-(width/2);
+  winY=Math.round(screen.height/2)-(height/2);
+  winStats='toolbar=no,location=no,directories=no,menubar=no,status=yes,resizable=yes,'
+  winStats+='scrollbars=yes,width='+width+',height='+height
+  if (navigator.appName.indexOf('Microsoft')>=0) {
+    winStats+=',left='+winX+',top='+winY+''
+  }else{ 
+    winStats+=',screenX='+winX+',screenY='+winY+''
+  }
+  handle = window.open(url,winname,winStats) 
+  if (winname != 'add_person_to_pick_pop' && winname != 'mssearch_issue_popup' && winname != 'progress_pop_report' && winname != 'progress_pop_large' && winname != 'transfer_pop' && winname != 'email_popup_stay') 
+    addHandleToArray(handle);  
+  handle.focus();  
+}
+function popWindowSecureForPortal(url,winname,width,height)
+{
+  winX=Math.round(screen.width/2)-(width/2);
+  winY=Math.round(screen.height/2)-(height/2);
+  winStats='toolbar=yes,location=yes,directories=yes,menubar=yes,status=yes,resizable=yes,'
+  winStats+='scrollbars=yes,width='+width+',height='+height
+  if (navigator.appName.indexOf('Microsoft')>=0) {
+    winStats+=',left='+winX+',top='+winY+''
+  }else{ 
+    winStats+=',screenX='+winX+',screenY='+winY+''
+  }
+  handle = window.open(url,winname,winStats) 
+  if (winname != 'add_person_to_pick_pop' && winname != 'mssearch_issue_popup' && winname != 'progress_pop_report' && winname != 'progress_pop_large' && winname != 'transfer_pop' && winname != 'email_popup_stay') 
+    addHandleToArray(handle);  
+  handle.focus();  
+}
+function showProgressWindow() { 
+  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_UPLOADING_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop', 400, 300); 
+}function showProgressWindowLarge(vPageName) { 
+  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_UPLOADING_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1&PAGE_NAME=' + vPageName + '','progress_pop_large', 800, 600); 
+}function showProgressWindowForReport() {  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_CREATING_REPORT_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 600, 500); 
+} 
+function showProgressWindowForReportSwitchConfig(configId) {  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_CREATING_REPORT_FL=Y&FIRST_TIME_FL=Y&SWITCH_CONFIG_ID_UNDER_POPUP=\'+configId+\'&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 600, 500); 
+} 
+function showProgressWindowRoleChange() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=LOGIN&SHOW_ROLE_CHANGE_TASK=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 800, 600); 
+} 
+function showProgressWindowMSListExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_MS_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowStubsListExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=LOGIN&SPAWN_EXPORT_STUBS_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowMSListExportHistoryExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=LOGIN&SPAWN_EXPORT_MS_LIST_THREAD=Y&FIRST_TIME_FL=Y&CSV_FOR_EXPORT_HISTORY=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowSimpleExportHistory() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_SIMPLE_EXPORT_HISTORY_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressAsyncSearchResultsExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=LOGIN&SPAWN_DOWNLOAD_ASYNC_SEARCH_RESULTS_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 600, 500); 
+} 
+function showProgressWindowMSAddTasks() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_MS_ADD_TASK=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowForIssueLineup(vRadioGroupName, vIssueId) {selVal = GetRadioValue(vRadioGroupName);if(selVal == '3') {javascript:setField('TAG_ACTION', 'EXPORT_ISSUE');  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&EDIT_ISSUE_ID=\'+vIssueId+\'&EXPORT_ISSUE_LINEUP_SELECTED=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} else {  javascript: showProgressWindowForReport();}} 
+function showProgressWindowGeneric(vProgressTypeId) {  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PROGRESS_TYPE_ID=\'+vProgressTypeId+\'&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowForTransfer() {  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_TRANSFERING_TEXT=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','transfer_pop', 400, 300); 
+} 
+function showProgressWindowForIssueTransfer() {  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&POPUP_RELOAD_PARENT_PAGE=PRODUCTION_ISSUE_MANAGEMENT&CURRENT_PAGE_NO=null&SHOW_ISSUE_TRANSFERING_TEXT=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','transfer_pop', 400, 300); 
+} 
+function showProgressWindowForImport() {  javascript: popWindow('?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SHOW_CREATING_IMPORT_FL=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function checkForSomethingToUpload()
+{ 
+  var i=0; 
+  var existsFl = 0; 
+  for (i=0;i<20;i++) { 
+    var metaArray = document.getElementsByName('FILE_TO_UPLOAD'+i); 
+    if (metaArray.length == 1) { 
+     var filename = document.forms[0]['FILE_TO_UPLOAD'+i].value; 
+     if (filename.length > 0) 
+       existsFl = 1; 
+   } 
+  } 
+  if (existsFl == 1) { return true; }  
+  return false; 
+}
+function checkForDuplicateFiles()
+{ 
+  var i=0; 
+  var j=0; 
+  var existsFileFl = 0; 
+  var filename1 = '';
+  var filename2 = '';
+  var noOfFiles = 0;
+  noOfFiles =  document.getElementById('HIDDEN_VALUE_FOR_FILENO').value; 
+  for (i=0;i<noOfFiles && existsFileFl != 1;i++){
+     filename1 = document.forms[0]['FILE_TO_UPLOAD'+i].value; 
+     filename1 = trimAll(filename1.substring(filename1.lastIndexOf('\\')+1));     for(j=i+1; j<noOfFiles && existsFileFl != 1;j++){ 
+       filename2 = document.forms[0]['FILE_TO_UPLOAD'+j].value; 
+       filename2 = trimAll(filename2.substring(filename2.lastIndexOf('\\')+1));       if(filename1!='' && filename1==filename2) existsFileFl = 1; } } 
+  if (existsFileFl == 1) { alert ('A file named ' + filename1 + ' is already present for uploading for this manuscript. If you want to upload this file (e.g. this is a replacement for an existing file) you must rename the new file and then upload it.'); resetIsOk(); return false; }  
+  return true; 
+}
+function checkUploadFields()
+{ 
+   if(window.parent != null && window.parent.frames != null && window.parent.frames.length > 0) { 
+		return checkUploadFieldsLocal(); 
+   }   
+  return true; 
+}
+function checkUploadFieldsLocal()
+{ 
+  return true; 
+}
+function showProgressWindowUserListExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_USER_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowUPlagiarismDocExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_PLAG_DOC_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowRevExport() {  var assigneeRoleId = document.forms[0].ASSIGNEE_ROLE_ID.value;  var docTaskId = document.forms[0].DOCUMENT_TASK_ID.value;  popWindow("/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=LOGIN&SPAWN_EXPORT_REV_THREAD=Y&FIRST_TIME_FL=Y&ASSIGNEE_ROLE_ID=" + assigneeRoleId + "&DOCUMENT_TASK_ID=" + docTaskId + "&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1","progress_pop_report", 480, 400); 
+} 
+function showProgressWindowEmailTagsListExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=LOGIN&SPAWN_EXPORT_EMAIL_TAG_LIST_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+
+var emailWindows = new Array();
+var emailWindowNames = new Array();
+var checkEmailWindowsCalled = false;
+function registerEmailWindow(emailWindow)
+{ 
+   emailWindows[emailWindows.length] = emailWindow;
+   if(emailWindowNames.toString().indexOf(emailWindow.name)==-1)
+   { 
+       emailWindowNames[emailWindowNames.length] = emailWindow.name;
+   }
+   if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+   { 
+       document.forms[0].OPEN_EMAIL_WINDOWS.value = emailWindowNames.toString();
+   }
+} 
+
+function checkEmailWindows()
+{
+if(!checkEmailWindowsCalled)
+{
+   var blPopupsOpen=false;
+   if(false)
+   { 
+     if(document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")==-1 || (document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")!=-1 && document.forms[0].NEXT_PREV_DOCUMENT_ID!=null && document.forms[0].NEXT_PREV_DOCUMENT_ID.value!="" && document.forms[0].DOCUMENT_ID.value != document.forms[0].NEXT_PREV_DOCUMENT_ID.value) || (document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")!=-1 && document.forms[0].PRE_ACTION != null && document.forms[0].PRE_ACTION.value=="PERFORM_HEADER_QUICK_SEARCH" )|| (document.forms[0].NEXT_PAGE.value.indexOf("MANUSCRIPT_DETAILS")!=-1 && document.forms[0].PROXY_TO_ROLE_ID != null && document.forms[0].PROXY_TO_ROLE_ID.value != '' ))
+     { 
+       emailWindows.length=0;
+       for(var i = 0; i<emailWindowNames.length; i++)
+       {
+           emailWindowName = emailWindowNames[i];
+           if (typeof emailWindowName != 'undefined' && emailWindowName != '')
+           { 
+               winHandle=window.open('',emailWindowName);
+               if(typeof winHandle.frames['mainemailwindow'] != 'undefined' && winHandle.frames['mainemailwindow'] != null)
+               {
+                   registerEmailWindow(winHandle);
+               }
+               else
+               {
+                   winHandle.close();
+               }
+           }
+       }
+       if(emailWindows.length > 0)
+       { 
+           for(var i = 0; i<emailWindows.length; i++)
+           {
+               if(!emailWindows[i].closed)
+               {
+                   blPopupsOpen=true;
+                   break;
+               }
+           }
+           if(!blPopupsOpen)
+           { 
+               checkEmailWindowsCalled=true;
+               return true;
+           }
+           if(confirm ('We have detected that there is at least one e-mail window open - these windows will be closed when you move from the details of one manuscript to another. If you would like to retain this text for use later,  please either save the e-mails as drafts or copy them to your hard drive for future reference.\nContinue?'))
+           { 
+               for(var i = 0; i<emailWindows.length; i++)
+               {
+                   if(!emailWindows[i].closed)
+                   {
+                       unRegisterWindow(emailWindows[i].name);
+                       emailWindows[i].close();
+                   }
+               }
+               checkEmailWindowsCalled=true;
+               return true;
+           }
+           else
+           { 
+               if(document.forms[0].NEXT_PREV_DOCUMENT_ID!=null){document.forms[0].NEXT_PREV_DOCUMENT_ID.value='';}
+               if(document.forms[0].PRE_ACTION!=null){document.forms[0].PRE_ACTION.value='';}
+               if(document.forms[0].PROXY_TO_ROLE_ID!=null){document.forms[0].PROXY_TO_ROLE_ID.value='';}
+               if(document.forms[0].CLEAR_SEARCH!=null){document.forms[0].CLEAR_SEARCH.value='';}
+               return false;
+           }
+       }
+       else
+       { 
+           checkEmailWindowsCalled=true;
+           return true;
+       }
+     }
+     else
+     { 
+       checkEmailWindowsCalled=true;
+       return true;
+     }
+   }
+   else
+   {
+       checkEmailWindowsCalled=true;
+       return true;
+   }
+}
+else
+{ 
+   checkEmailWindowsCalled=true;
+   return true;
+}
+}
+
+function getOpenEmailWindows()
+{ 
+   if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+   { 
+       return document.forms[0].OPEN_EMAIL_WINDOWS.value;
+   }
+   else
+   { 
+       return '';
+   }
+} 
+
+function registerEmailWindowByName(emailWindowName)
+{ 
+ if (typeof emailWindowName != 'undefined')
+ { 
+   if(emailWindowNames.toString().indexOf(emailWindowName)==-1)
+   { 
+       emailWindowNames[emailWindowNames.length] = emailWindowName;
+   }
+   if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+   { 
+       document.forms[0].OPEN_EMAIL_WINDOWS.value = emailWindowNames.toString(); 
+   }
+ } 
+} 
+
+function unRegisterWindow(emailWindowName)
+{ 
+  var newEmailWinNames = new Array(); 
+  for(var i = 0, j=0; i<emailWindowNames.length; i++)
+  {
+   if(emailWindowNames[i]!=emailWindowName)
+   { 
+      if(typeof emailWindowNames[i] != 'undefined' && emailWindowNames[i]!='')
+      { 
+         newEmailWinNames[j] = emailWindowNames[i];
+         j++;
+      }
+   }
+  }
+  emailWindowNames.length=0;
+  emailWindowNames=newEmailWinNames;
+  if(document.forms[0].OPEN_EMAIL_WINDOWS!=null)
+  { 
+      document.forms[0].OPEN_EMAIL_WINDOWS.value = emailWindowNames.toString();
+  }
+} 
+
+function showProgressWindowPermissionAuditTrailExport() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&PAGE_NAME=LOGIN&SPAWN_EXPORT_PERMISSION_AUDIT_TRAIL_THREAD=Y&FIRST_TIME_FL=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+function showProgressWindowSubmissionStatisticsExportCSV() {  javascript: popWindow('/LongRequest?NEXT_PAGE=UPLOAD_PROGRESS_POPUP&SPAWN_EXPORT_SUBMISSION_STATISTICS_THREAD=Y&CURRENT_ROLE_ID=1&CURRENT_USER_ID=0&CONFIG_ID=1','progress_pop_report', 400, 300); 
+} 
+</script>
+
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+<body bgcolor="#FFFFFF" style="margin: 0px;">
+<form style='margin:0px;' name='default_form' method='post' TARGET=''  action='http://mc.manuscriptcentral.com:80/null'>
+<input type = 'hidden' name ='PORTAL' value = 'null'>
+<input type = 'hidden' name ='NEXT_PAGE' value = ''>
+<input type = 'hidden' name ='NEXT_PAGE_FOR_REDIRECT' value = ''>
+<input type = 'hidden' name ='CURRENT_PAGE' value='LOGIN'>
+<input type = 'hidden' name ='PRE_ACTION' value=''>
+<input type = 'hidden' name ='POST_ACTION' value=''>
+<input type = 'hidden' name ='CURRENT_ROLE_ID' value='1'>
+<input type = 'hidden' name ='SWITCH_CONFIG_ID' value=''>
+<input type = 'hidden' name ='CHANGE_PORTAL_CONFIG_ID_FOR_LOGIN_PAGE' value=''>
+<input type = 'hidden' name ='SWITCH_CONFIG_ID_PREV' value=''>
+<input type = 'hidden' name ='NEW_USER_CONFIG_ID' value=''>
+<input type = 'hidden' name ='PROXY_TO_PAGE_NAME' value=''>
+<input type = 'hidden' name ='PROXY_TO_ROLE_ID' value=''>
+<input type = 'hidden' name ='PROXY_TO_DOCUMENT_ID' value=''>
+<input type = 'hidden' name ='PROXY_TO_DOCUMENT_TASK_ID' value=''>
+<input type = 'hidden' name ='PAGE_DIRTY_FL' value=''>
+<input type = 'hidden' name ='PAGE_LOADED_FLAG' value=''>
+<input type = 'hidden' name ='DISPLAY' value=''>
+<input type = 'hidden' name ='SANITY_CHECK_DOCUMENT_ID' value=''>
+<input type = 'hidden' name ='DOCUMENT_HASHCODE' value=''>
+<input type = 'hidden' name ='CONFIG_ID' value='1'>
+<input type='hidden' name='SAVE_MS_DETAILS_FL' value=''><input type='hidden' name='SAVE_MS_DETAILS_VALIDATE_FL' value=''><input type = 'hidden' name='CURRENT_USER_ID' value='0'>
+<input type = 'hidden' name ='NATURAL_TIMEOUT' value='false'>
+<input type = 'hidden' name='CURRENT_USER_ID' value='0'>
+<input type = 'hidden' name='LOGIN_SITE_SHORT_NAME' value='null'>
+<input type = 'hidden' name='EXTERNAL_HTTP_REFERRER' value='null'>
+
+
+  <input type = 'hidden' name ='BROWSER_SUPPORTED' value = 'Y'>
+  <input type = 'hidden' name = 'JAVASCRIPT_ENABLED' value = 'N'>
+	
+
+<SCRIPT LANGUAGE='JavaScript'> 
+  
+  function checkJavascript() 
+  {
+    document.forms[0].JAVASCRIPT_ENABLED.value = 'Y';
+    return true;
+  }
+
+  function checkCookies() 
+  {
+    document.cookie = "cookieCheck=1;";
+    return document.cookie != "";
+  }
+
+  function browserOK() 
+  {
+    return document.forms[0].BROWSER_SUPPORTED.value != "N";
+  }
+
+</SCRIPT>    
+  <SCRIPT LANGUAGE='JavaScript'>
+  if (checkJavascript() && checkCookies() && browserOK()) 
+  {
+    setNextPage('LOGIN'); 
+  }
+  </SCRIPT>
+
+<table border=0 cellpadding=0 cellspacing=0 align=left width=100%>
+	<tr>
+		<td class="societylogobg" align=left width=100%>
+			
+			
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<SCRIPT LANGUAGE='JavaScript1.2' src='/common/mouseposition.js'></SCRIPT>
+
+			 
+			<table border=0 cellpadding=0 cellspacing=0 width=100%>
+				<tr>
+						
+	<td><img src='/societyimages/scholarone/journal_logo.gif' border=0></td>
+					
+       
+    <td align=right>
+            <table border=0 cellpadding=0 cellspacing=0 width=1%>
+              <tr>
+
+                <td>
+                  <table border=0 cellpadding=0 cellspacing=0>
+                    <tr>
+                                                                   <td><img src="/images/common/topmenu/topright_left_blank.gif" border=0></td> 
+
+                          <TD><a HREF="javascript:setNextPage('LOGIN')"><img src="/images/en_US/topmenu/topright_login.gif" border=0></a></TD>
+                       
+              
+
+              <td><a HREF="javascript:setDataAndNextPage('PRE_ACTION','ADMIN_ADD_NEW_PERSON','CREATE_ACCOUNT_1')"><img src='/images/en_US/topmenu/topright_create_account.gif' border=0></a></td>
+
+
+               
+
+                        
+                         <td><a HREF="javascript:popWindow('http://mchelp.manuscriptcentral.com/gethelpnow/index.html','SUPPORT_URL', 700, 400)"><img src='/images/en_US/topmenu/topright_get_help_now.gif' border=0></a></td> 
+
+
+                      
+                      
+                      
+                    </tr>
+                  </table>
+                </td>
+
+				</tr>
+				<tr>							
+							 	
+ 	<td align=right> <img src="/images/en_US/layout/scholarone_manuscripts_logo.gif" border=0></td>
+
+					
+
+
+
+
+				</tr>
+			</table>
+		</td>
+		</tr>
+			</table>
+
+		</td>
+	</tr>
+	<tr>
+		<td class="headerbreadcrumbsbg" colspan=2>
+			&nbsp;
+		</td>
+	</tr>
+</table>
+
+<BR CLEAR=ALL>
+
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN=LEFT WIDTH=760>
+  <TR>
+  <TD VALIGN=TOP>
+    <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0 WIDTH=760>
+      <TR><TD>&nbsp;</TD></TR>
+        <TR>
+          <TD>
+            <TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0>
+              <TR>
+                <TD WIDTH=1% VALIGN=TOP><IMG SRC='/images/en_US/layout/requirements.gif' BORDER=0></TD>
+                <TD VALIGN=TOP><P CLASS="pagecontents">You have been directed to this page because either your browser or operating system does not meet our minimum requirements. Please use the links and instructions below to fix the problems, and try visiting the site again. 
+
+<br><br>Please also verify the web address entered in your browser's address bar. You can be directed to this page if there is an apostrophe (') or a quotation mark (") appended to the end of a ScholarOne Manuscripts web address.</P></TD>
+              </TR>
+            </TABLE>
+          </TD>
+        </TR>
+        <TR><TD></TD></TR>
+        <TR>
+          <TD>
+            
+
+
+
+
+
+<TABLE ALIGN=LEFT CELLPADDING=0 CELLSPACING=5 BORDER=0 WIDTH=100%>
+  <TR>
+    <TD CLASS="tablelines">
+      <TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=100%>
+        <TR>
+          <TD><img src='/societyimages/scholarone/journal_logo.gif' border=0></td>
+        </TR>
+
+        <TR id="browser_not_supported" style="display: none">
+          <script language='JavaScript'>
+            if (!browserOK())
+              document.getElementById("browser_not_supported").style.display = '';
+          </script>
+          <TD CLASS="dataentry">
+            <table border=0 cellpadding=3 cellspacing=0>
+              <tr>
+                <td nowrap align=right valign=top><p class='pagecontents'><b>The Problem:</b></p></td>
+                <td>
+                  <p class="pagecontents">
+                    We have detected that you are using Firefox. ScholarOne Manuscripts does not support this browser at this time.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td nowrap align=right valign=top><p class='pagecontents'><b>The Solution:</b></p></td>
+                <td><p class="pagecontents">Use one of the links below to download the latest version of Internet Explorer, Firefox, Safari or Chrome</p></td>
+              </tr>
+            </table>
+          </TD>
+        </TR>
+      
+      <noscript>
+        <TR id=javascript_disabled>
+          <TD CLASS="dataentry">
+            <table border=0 cellpadding=3 cellspacing=0>
+              <tr>
+                <td nowrap align=right valign=top><p class='pagecontents'><b>The Problem:</b></p></td>
+                <td><span class="pagecontents">We have detected that your javascript is not enabled.</span></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td nowrap align=right valign=top><p class='pagecontents'><b>The Solution:</b></p></td>
+                <td>
+                  <span class="pagecontents">
+                    If you are using Internet Explorer and would like to enable javascript follow these instructions:<ol><li>Click Tools on the Toolbar.</li><li>Click Internet Options.</li><li>Click the Security tab and click the Custom level button.</li><li>Scroll to Scripting.</li><li>Scroll to Activing Scripting and select Enable button.</li><li>Click OK, then click OK again.</li><li>Relaunch the browser.</li></ol>If you are using Firefox and would like to enable javascript follow these instructions:<ol><li>Click Tools on the Toolbar.</li><li>Click Options.</li><li>Click Main.</li><li>Check enable JavaScript checkbox.</li><li>Click the "OK" button.</li><li>Relaunch your browser.</li></ol>If you are using Safari and would like to enable javascript follow these instructions:<ol><li>Click the Sarafi menu.</li><li>Click Preferences.</li><li>Click Security.</li><li>Check the Enable JavaScript checkbox.</li><li>Click Close.</li><li>Relaunch your browser.</li></ol>If you are using Chrome, javascript is enabled by default.
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </TD>
+        </TR>
+      </noscript>
+
+        <TR id="cookies_disabled" style="display: none">
+          <script language='JavaScript'>
+            if (!checkCookies())
+              document.getElementById("cookies_disabled").style.display = '';
+          </script>
+          <TD CLASS='dataentry'>
+            <table border=0 cellpadding=3 cellspacing=0>
+              <tr>
+                <td nowrap align=right valign=top>
+                  <p class='pagecontents'>
+                    <b>The Problem:</b>
+                  </p>
+                </td>
+                <td>
+                  <span class='pagecontents'>We have detected that your cookies are not enabled.</span>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td nowrap align=right valign=top>
+                  <p class='pagecontents'><b>The Solution:</b></p>
+                </td>
+                <td>
+                  <span class='pagecontents'>If you are using Internet Explorer and would like to enable cookies follow these instructions:<ol><li>Click Tools on the Toolbar.</li><li>Click Internet Options.</li><li>Click the Privacy tab and click the Sites button.</li><li>Enter "manuscriptcentral.com" into the "Address of Web Site" field, then click the Allow button.</li><li>Click OK, then click OK again.</li><li>Relaunch your browser.</li></ol>If you are using Firefox and would like to enable cookies follow these instructions:<ol><li>Click Tools on the Toolbar.</li><li>Click Options.</li><li>Click Privacy.</li><li>Check the Accept cookies from sites checkbox.</li><li>Click OK, then click OK.</li><li>Relaunch your browser.</li></ol>If you are using Safari and would like to enable cookies follow these instructions:<ol><li>Click the Safari menu.</li><li>Click Preferences.</li><li>Click Security.</li><li>Check the Accept cookies from sites checkbox.</li><li>Click Close.</li><li>Relaunch your browser.</li></ol>If you are using Chrome and would like to enable cookies follow these instructions:<ol><li>Click the "Spanner" tool button in the top right of the browser.</li><li>Click Options.</li><li>Click Under the Hood tab.</li><li>In the dropdown, select Allow all Cookies.</li><li>Click Close.</li><li>Relaunch your browser.</li></ol>
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </TD>
+        </TR>
+        <TR>
+          <TD CLASS='dataentry'>
+            <span class='pagecontents'>
+              
+              This ScholarOne Manuscripts&#0153; web site has been optimized for Microsoft&#0169; Internet Explorer 7.0 and higher, Firefox 3.5, Safari 4.0 and Chrome 3.0. You must have Java installed, cookies enabled, and pop-up blockers disabled to use the site.<br><br>To download the latest version of Internet Explorer, Firefox, Safari, Chrome or Adobe Acrobat Reader, use the links below.
+              <br>
+              <br>
+              If you are using Windows XP, please note you must ensure that Microsoft Java has been uninstalled so that ScholarOne Manuscripts&#0153; will function correctly. For help in uninstalling MS Java, please visit <a href ="http://www.windows-help.net/WindowsXP/howto-21.html" target="_new">http://www.windows-help.net/WindowsXP/howto-21.html</a>. Note that uninstalling MS Java will not cause any Microsoft applications to stop working.
+            </span>
+          </TD>
+        </TR>
+        <TR>
+          <TD CLASS='tablelightcolor'>
+            <table border=0 cellpadding=0 cellspacing=0 width=100%>
+              <tr>
+                <td width=20% align=center><A href='HTTP://www.microsoft.com/windows/ie/' target='_new'><img src='/images/common/buttons/logo_ie.gif' border=0></a></td>
+                <td width=20% align=center><A href='HTTP://www.mozilla.com/en-US/?from=sfx&uid=0&t=438' target='_new'><img src='/images/common/buttons/logo_ff.png' border=0></a></td>
+                <td width=20% align=center><A href='http://www.apple.com/safari/download/' target='_new'><img src='/images/common/buttons/logo_safari.png' border=0></a></td>
+                <td width=20% align=center><A href='http://www.google.com/chrome' target='_new'><img src='/images/common/buttons/logo_chrome.jpg' border=0></a></td>
+                <td width=20% align=center><A href='HTTP://www.adobe.com/products/acrobat/readstep.html' target='_new'><img src='/images/common/buttons/logo_acrobat.gif' border=0></a></td>
+              </tr>
+            </table>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+
+          </TD>
+        </TR>
+      </TABLE>
+      
+
+
+
+
+<table border=0 cellpadding=10 cellspacing=0 align=center width=100%>
+	<tr>
+		<td align=center>
+		<p class="footer">ScholarOne Manuscripts<sup>TM</sup> v4.5.0 (patent #7,257,767 and #7,263,655). © ScholarOne, Inc., 2010. All Rights Reserved.<BR>ScholarOne Manuscripts is a trademark of ScholarOne, Inc. ScholarOne is a registered trademark of ScholarOne, Inc.<br><br><a href="http://www.twitter.com/ScholarOneNews"><img src="/images/en_US/icons/t_mini-a.png" alt="Follow ScholarOneNews on Twitter"/ border=0></a> Follow ScholarOne on Twitter<br><br>
+		<a href="http://mc.manuscriptcentral.com/downloads/terms.htm"
+			target="_new">Terms and Conditions of Use</a> - <a
+			href="http://mc.manuscriptcentral.com/downloads/privacy.htm"
+			target="_new">ScholarOne Privacy Policy</a> - <a
+            href="javascript:popWindow('http://mchelp.manuscriptcentral.com/gethelpnow/index.html','SUPPORT_URL', 700, 400)" >
+             <font color="orange"><b>Get Help Now</b></font></a>
+       </p>			
+		</td>
+	</tr>
+	<tr>
+		<td align=center>
+		<p class="footer">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		&nbsp; &nbsp;
+
+</p>
+		</td>
+	</tr>
+</table>
+
+      
+<script type='text/javascript'>
+if (document.attachEvent) {
+  var links = document.getElementsByTagName('a');
+
+  for( var i = 0, n = links.length; i < n; ++i ) {
+    link = links[i]; 
+    if(link.name == null || link.name == '')
+    {
+      link.attachEvent('onclick', checkSubmitted);
+    }
+  }
+}
+</script>
+
+
+  <!-- Running on server: 0006    -->
+
+
+    </TD>
+  </TR>
+</TABLE>
+<!-- 040628-000085 -->
+<a href="http://www.scholarone.com"><img src='/images/common/layout/1pxtransparent.gif' border=0></a>
+<input type="hidden" name="orgs" value=" null">
+<script language='JavaScript' type='text/javascript'>  setField('CONFIG_ID','1');   setField('PAGE_LOADED_FLAG','Y'); </script></form><script language='JavaScript' type='text/javascript'></script>
+</body>
+</html>

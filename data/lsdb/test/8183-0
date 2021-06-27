@@ -1,0 +1,245 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+  <LINK rel="stylesheet" type="text/css" href="style.css">
+  <TITLE>DILTAG</title>
+  
+</HEAD>
+
+<body>
+<DIV ID="container">
+
+<!-- Genaration des SELECT qui determine les poids -->
+<script language="Javascript">
+// Génère une liste de valeur numérique allant de 'mini' à 'maxi' en incrémentant les valeurs de 'step'. 
+// 'selection' sera le choix par défaut (-1 pour 'choixnull'). 
+// 'choixnull' étant la ligne affichée pour représenter aucun choix (aucune si 'choixnul' == '')
+function creat_list(mini, maxi, step, selection, choixnull) {
+var opt=(choixnull.length>0)?((parseInt(selection)==-1)?'<option value="-1" selected>'+choixnull+'</option>':'<option value="-1">'+choixnull+'</option>'):'';
+document.write(opt);
+
+//Ajout du zero
+//document.write('<option value = 0> 0</option>');
+var the_value;
+for (i = parseInt(mini); (i - 1) <= parseInt(maxi); i += parseInt(step)){
+				    the_value = i;
+				    if(the_value > 1){
+    the_value = the_value - 1;			      
+    }
+    
+    opt = (the_value == parseInt(selection))? '<option value=' + the_value +' selected>' + the_value : '<option value=' + the_value +'>' + the_value;
+      document.write(opt+'</option>');
+    }
+}
+
+//Pour mettre a jour la selection des poids
+function update(chekbox_name, select_name) {
+    
+    if(chekbox_name.checked)
+    {
+    select_name.disabled=false;
+    }
+    
+    else
+    {
+    select_name.disabled=true;
+    }
+}
+    
+
+
+</script>
+
+<H1>Inferring the Evolutionary History of Gene Clusters from Phylogenetic and Gene Order Data.</H1>
+
+<!-- <P>A DETAILED DESCRIPTION OF THE ALGORITHM IS AVAILABLE IN : (paper submitted to Molecular Biology and Evolution).</P>-->
+
+<P><B>Input:</B> a gene tree and a signed order representing the gene's arrangement on the chromosome for a TAG cluster in a single species.<BR/>
+<B>Output:</B> a parsimonious sequence of tandem duplication(s), inverted duplication(s), inversion(s) and deletion(s) explaining the input.</P>
+
+
+
+<FORM name = "DILTAG" TARGET="_BLANK" action="../../cgi-bin/DILTAG/config.cgi" method="post">
+
+
+
+<TABLE>
+  <TR>
+    <TD></TD>
+    <TD ALIGN=center>
+      <TABLE>
+	<TR>
+	  <TD ALIGN=center width="350">
+	    <P><A href="javascript:void(0)" onClick = "document.forms.DILTAG.tree.value = 
+						       '((OR6Q1,((OR10Q1,OR10W1),((OR9I1,(OR9Q1,OR9Q2)),(OR5B21,(OR5B12,(OR5B13,(OR5B17,OR5B2))))))),(OR1S2,OR1S1));\n(((OR6Q1,((OR9I1,(OR9Q1,OR9Q2)),(OR5B21,(OR5B12,(OR5B13,(OR5B17,OR5B2)))))),(OR10Q1,OR10W1)),(OR1S2,OR1S1));\n((OR6Q1,((OR10Q1,OR10W1),((OR9I1,(OR9Q1,OR9Q2)),(OR5B21,(OR5B12,(OR5B2,(OR5B17,OR5B13))))))),(OR1S2,OR1S1));'
+						       document.forms.DILTAG.order.value = 
+						       '( OR6Q1 -OR9I1 OR9Q1 OR9Q2 -OR1S2 OR1S1 -OR10Q1 -OR10W1 -OR5B17 -OR5B13 -OR5B2 -OR5B12 -OR5B21 )'
+						       "> 
+		SAMPLE DATA</A></P>
+	  </TD>
+	  <TD ALIGN=center width="350">
+	    <P><A href="javascript:void(0)" onClick = "document.forms.DILTAG.tree.value = ''
+						       document.forms.DILTAG.order.value = ''
+						       "> 
+		CLEAR DATA</A></P>
+	  </TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+  
+  <TR>
+    <TD>Tree(s):</TD>
+    <TD><TEXTAREA rows="10" cols="130" name="tree"></textarea></TD>
+  </TR>
+  
+  <TR>
+    <TD>Gene order:</TD>
+    <TD><textarea rows="2" cols="130" name="order"></textarea></TD>
+  </TR>
+  
+  <TR> 
+    <TD> Event costs: </TD>
+    <TD>
+      <TABLE>
+	<TR>
+	  <TD> </TD>
+	  <TD> </TD>
+	  <TD ALIGN=center>  <B>a</B> </TD>
+	  <TD ALIGN=center> <B>b</B> </TD>
+	</TR>
+	
+	<TR>
+	  <TD> Tandem duplication </TD>
+	  <TD> <INPUT type="checkbox"   checked="checked" value="USED" name="t_dup"
+		      onclick = "update(document.forms.DILTAG.t_dup, document.forms.DILTAG.a_t_dup)
+				 update(document.forms.DILTAG.t_dup, document.forms.DILTAG.b_t_dup)"
+		      > 
+	  </TD>
+	  <TD> 
+	    <SELECT name="a_t_dup">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '100','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	  <TD>
+	    <SELECT name="b_t_dup">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '1','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	</TR>
+	
+	<TR>
+	  <TD> Inverted duplication </TD>
+	  <TD> <INPUT type="checkbox" checked="checked" value="USED" name="i_dup"
+		      onclick = "update(document.forms.DILTAG.i_dup, document.forms.DILTAG.a_i_dup)
+				 update(document.forms.DILTAG.i_dup, document.forms.DILTAG.b_i_dup)"
+		      > 
+	  </TD>
+	  
+	  <TD>
+	    <SELECT  name="a_i_dup">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '100','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	  <TD>
+	    <SELECT name="b_i_dup">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '1','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	</TR>
+	
+	<TR> 
+	  <TD>Deletion</TD>
+	  <TD><INPUT type="checkbox" checked="checked" value="USED" name="del"
+		     onclick = "update(document.forms.DILTAG.del, document.forms.DILTAG.a_del)
+				update(document.forms.DILTAG.del, document.forms.DILTAG.b_del)"
+		     > 
+	    
+	  </TD>
+	  <TD>
+	    <SELECT name="a_del">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '500','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	  <TD>
+	    <SELECT name="b_del">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '1','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	</TR>
+	
+	<TR>
+	  <TD> Inversion </TD>
+	  <TD> <INPUT type="checkbox" checked="checked" value="USED" name="inv"
+		      onclick = "update(document.forms.DILTAG.inv, document.forms.DILTAG.a_inv)
+				 update(document.forms.DILTAG.inv, document.forms.DILTAG.b_inv)"
+		      > 
+	  </TD>
+	  <TD>
+	    <SELECT name="a_inv">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '500','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	  <TD>
+	    <SELECT name="b_inv">
+	      <script language="javascript">
+		creat_list('1', '1000', '100', '1','');
+	      </script>
+	    </SELECT>
+	  </TD>
+	</TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+
+
+<p><input type="submit" value="Execute"></p>
+</form>
+</BR>
+<HR>
+<H3>Additional instructions</H3>
+<P>The gene tree must be in Newick format. It can contain branch length and bootstrap values, but these are not considered by the present version of the algorithm.
+If the gene tree is unrooted, the algorithm will be applied once for each possible root position, and results will be shown for the position leading to the lowest cost histories.
+The maximum size is 30 leaves for the gene tree.
+You can give up to 10 alternative gene trees for the same cluster as input, and the algorithm will be applied for each one of them.</P>
+
+<P>The gene order is a sequence a genes separated by spaces in parentheses. The genes must have the same labels as in the gene trees, at the exception of the minus signs ("-") used to indicate genes on the opposite DNA strand.</P>
+
+<P>The cost of an event is a+(b * size), where "size" corresponds to the number of genes involved in the event.</P>
+
+<P>Please read the paper to see the capabilities and limitations of the algorithm.</P>
+</BR>
+
+<HR>
+<H3>Reference</H3>
+<UL><LI>
+M. Lajoie, D. Bertrand and N. El-Mabrouk.<BR>
+<A HREF="http://mbe.oxfordjournals.org/cgi/content/abstract/msp271">
+Inferring the Evolutionary History of Gene Clusters from Phylogenetic and Gene Order Data.</A><BR>
+<i>Molecular Biology and Evolution</i>, 2009 (in press).</UL>
+
+
+
+</BR></BR></BR>
+
+</DIV>
+</BODY>
+
+
+</html>

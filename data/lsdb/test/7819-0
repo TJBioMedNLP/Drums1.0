@@ -1,0 +1,529 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0032)http://www.cc.utah.edu/~jw27c60/ -->
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./index_files/filelist.xml">
+<link rel=Edit-Time-Data href="./index_files/editdata.mso">
+<link rel=OLE-Object-Data href="./index_files/oledata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>GLR: a statistical analysis program to identify differentially expressed
+genes from microarray data</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>swang</o:Author>
+  <o:LastAuthor>song wang</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>5</o:TotalTime>
+  <o:Created>2003-06-16T22:00:00Z</o:Created>
+  <o:LastSaved>2003-06-16T22:00:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>628</o:Words>
+  <o:Characters>3582</o:Characters>
+  <o:Company>University of Utah</o:Company>
+  <o:Lines>29</o:Lines>
+  <o:Paragraphs>7</o:Paragraphs>
+  <o:CharactersWithSpaces>4398</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:SimSun;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-language:ZH-CN;}
+h1
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:14.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:0pt;
+	mso-fareast-language:ZH-CN;
+	font-weight:normal;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:18.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-language:ZH-CN;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1053"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p class=MsoBodyText align=center style='text-align:center;line-height:150%'>GLR:
+a statistical analysis program to identify differentially expressed genes from
+microarray data</p>
+
+<p class=MsoNormal style='line-height:150%'><span style='font-size:18.0pt;
+mso-bidi-font-size:12.0pt'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>GLR is a statistical program developed by
+Song Wang to identify differentially expressed genes from microarray data. The
+program is written in Microsoft Visual Basic. It can be run in any PC with
+Windows OS.</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>GLR implements a generalized likelihood
+ratio test based on the two-component model proposed by Rocke and Durbin
+(2001). </p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><b>Download</b>: User can download the
+package as a zip file <span style='font-size:18.0pt;mso-bidi-font-size:12.0pt'><a
+href="http://www.cc.utah.edu/~jw27c60/GLR.zip"><span style='font-size:12.0pt'>GLR.zip</span></a>
+</span>and then unzip it in their computers.</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><b>Installation</b>: Double-click
+“Setup.exe” to start installation. Follow the on-screen instructions. Sometime
+there is an error message about file registering, ignore it. To start GLR program
+click the START button from the windows Taskbar and select
+PROGRAM&gt;GLR&gt;GLR.</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><b>Use the program:</b> Users should have
+the data file in their computer and open that file by clicking the “open”
+button and selecting the file in the opening window. Users should also specify
+the numbers of replicates in control and experimental samples. Analysis begins
+when users click the “Analyze” button. The rank, gene name and GLR test
+statistic –2log<span style='font-family:Symbol;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-char-type:symbol;mso-symbol-font-family:
+Symbol'><span style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>l</span></span>
+for each gene will be displayed in the text box in a descending order.<span
+style="mso-spacerun: yes">&nbsp; </span>The results can be saved to text or
+Richtext file. The running time for the program depends on the number of genes
+in the data set, the sample size and the CPU speed of the computer running it.
+It takes 7 seconds per gene with a sample size 8 in a Pentium III 1GHz CPU.</p>
+
+<p class=MsoBodyText style='text-indent:18.0pt;line-height:150%'><b><span
+style='font-size:12.0pt'>Data File Format</span></b><span style='font-size:
+12.0pt'>: The file format expected is the tab-delimited plain text file. Each
+line in the file represents expression data of a gene. For each gene, data
+include the gene name and background–subtracted expression levels for both
+control and experimental samples. The column heading and extra blank lines at
+the end of the file should be removed. Missing data or data that are below
+background should be coded as ‘0’. The total number of replicates should be
+less than or equal to 50 and the total number of genes should be less than
+40,000.<o:p></o:p></span></p>
+
+<p class=MsoBodyText style='text-indent:18.0pt;line-height:150%'><span
+style='font-size:12.0pt'>Here's an example file:</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>hdeB<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>1.13E-03<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>1.33E-03<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>9.25E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>9.86E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>sanA<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>6.38E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>0<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>3.43E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>5.64E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>yhaS<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>3.96E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>3.26E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>4.08E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>4.24E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>yeiL<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>1.24E-03<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>5.05E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>0<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>3.44E-05</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>nuoJ<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>4.45E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>5.53E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>7.12E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>6.17E-05<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>ycfC<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>0<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>2.61E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>2.61E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>2.65E-04<span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>The first two columns of data are from
+control samples and the last two columns of data are from experimental samples.</p>
+
+<p class=MsoNormal style='line-height:150%'>The IHF data set and the
+permutation data sets used in our paper can be found in <span style='font-size:
+18.0pt;mso-bidi-font-size:12.0pt'><a
+href="http://www.cc.utah.edu/~jw27c60/data.html"><span style='font-size:12.0pt'>data
+folder</span></a></span>. </p>
+
+<h1 style='line-height:150%'><span style='font-size:18.0pt;mso-bidi-font-size:
+12.0pt'>&nbsp;</span>Implementation of the GLR test</h1>
+
+<p class=MsoBodyText style='text-indent:18.0pt;line-height:150%'><span
+style='font-size:12.0pt'>The GLR test is based on the two-component model
+proposed by Rocke and Durbin.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:144.0pt;text-align:justify;text-justify:
+inter-ideograph;text-indent:36.0pt;line-height:150%'><sub><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:84pt;
+ height:18.75pt' o:ole="">
+ <v:imagedata src="./index_files/image001.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=112 height=25
+src="./index_files/image002.gif" v:shapes="_x0000_i1025"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1117284473">
+ </o:OLEObject>
+</xml><![endif]--></sub><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>According to the model, <sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:71.25pt;height:18.75pt'
+ o:ole="">
+ <v:imagedata src="./index_files/image003.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=95 height=25
+src="./index_files/image004.gif" v:shapes="_x0000_i1026"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1026"
+  DrawAspect="Content" ObjectID="_1117284474">
+ </o:OLEObject>
+</xml><![endif]--><span style="mso-spacerun: yes">&nbsp;</span>when <sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:38.25pt;height:18pt' o:ole="">
+ <v:imagedata src="./index_files/image005.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=51 height=24
+src="./index_files/image006.gif" v:shapes="_x0000_i1027"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1027"
+  DrawAspect="Content" ObjectID="_1117284475">
+ </o:OLEObject>
+</xml><![endif]--><span style="mso-spacerun: yes">&nbsp;</span>. Therefore,<sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1028" type="#_x0000_t75" style='width:32.25pt;height:18.75pt'
+ o:ole="">
+ <v:imagedata src="./index_files/image007.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=43 height=25
+src="./index_files/image008.gif" v:shapes="_x0000_i1028"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1028"
+  DrawAspect="Content" ObjectID="_1117284476">
+ </o:OLEObject>
+</xml><![endif]--> can be estimated by the data of genes with the lowest
+expression intensity. While when <sub><!--[if gte vml 1]><v:shape id="_x0000_i1029"
+ type="#_x0000_t75" style='width:41.25pt;height:18pt' o:ole="">
+ <v:imagedata src="./index_files/image009.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=55 height=24
+src="./index_files/image010.gif" v:shapes="_x0000_i1029"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1029"
+  DrawAspect="Content" ObjectID="_1117284478">
+ </o:OLEObject>
+</xml><![endif]-->, <sub><!--[if gte vml 1]><v:shape id="_x0000_i1030" type="#_x0000_t75"
+ style='width:51pt;height:18.75pt' o:ole="">
+ <v:imagedata src="./index_files/image011.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=68 height=25
+src="./index_files/image012.gif" v:shapes="_x0000_i1030"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1030"
+  DrawAspect="Content" ObjectID="_1117284479">
+ </o:OLEObject>
+</xml><![endif]-->, <sub><!--[if gte vml 1]><v:shape id="_x0000_i1031" type="#_x0000_t75"
+ style='width:108pt;height:18pt' o:ole="">
+ <v:imagedata src="./index_files/image013.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=144 height=24
+src="./index_files/image014.gif" v:shapes="_x0000_i1031"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1031"
+  DrawAspect="Content" ObjectID="_1117284480">
+ </o:OLEObject>
+</xml><![endif]-->, <sub><!--[if gte vml 1]><v:shape id="_x0000_i1032" type="#_x0000_t75"
+ style='width:66pt;height:20.25pt' o:ole="">
+ <v:imagedata src="./index_files/image015.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=88 height=27
+src="./index_files/image016.gif" v:shapes="_x0000_i1032"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1032"
+  DrawAspect="Content" ObjectID="_1117284481">
+ </o:OLEObject>
+</xml><![endif]-->. Therefore,<sub><!--[if gte vml 1]><v:shape id="_x0000_i1033"
+ type="#_x0000_t75" style='width:17.25pt;height:20.25pt' o:ole="">
+ <v:imagedata src="./index_files/image017.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=23 height=27
+src="./index_files/image018.gif" v:shapes="_x0000_i1033"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1033"
+  DrawAspect="Content" ObjectID="_1117284482">
+ </o:OLEObject>
+</xml><![endif]--> can be estimated by the data of genes with the highest
+expression intensities.</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:200%'><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>To simplify the analysis, we
+transform data:</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><sub><!--[if gte vml 1]><v:shape id="_x0000_i1034" type="#_x0000_t75"
+ style='width:69.75pt;height:44.25pt' o:ole="">
+ <v:imagedata src="./index_files/image019.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=93 height=59
+src="./index_files/image020.gif" v:shapes="_x0000_i1034"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1034"
+  DrawAspect="Content" ObjectID="_1117284483">
+ </o:OLEObject>
+</xml><![endif]--><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><sub><!--[if gte vml 1]><v:shape id="_x0000_i1035"
+ type="#_x0000_t75" style='width:14.25pt;height:18.75pt' o:ole="">
+ <v:imagedata src="./index_files/image021.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=19 height=25
+src="./index_files/image022.gif" v:shapes="_x0000_i1035"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1035"
+  DrawAspect="Content" ObjectID="_1117284484">
+ </o:OLEObject>
+</xml><![endif]--></sub>is the sum of a normally distributed random variable
+(ε) and a lognormal distributed random variable (<sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1036" type="#_x0000_t75" style='width:27pt;height:18.75pt' o:ole="">
+ <v:imagedata src="./index_files/image023.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=36 height=25
+src="./index_files/image024.gif" v:shapes="_x0000_i1036"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1036"
+  DrawAspect="Content" ObjectID="_1117284486">
+ </o:OLEObject>
+</xml><![endif]-->). The convolution formula can be used to determine the
+density function of <sub><!--[if gte vml 1]><v:shape id="_x0000_i1037" type="#_x0000_t75"
+ style='width:14.25pt;height:18.75pt' o:ole="">
+ <v:imagedata src="./index_files/image025.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=19 height=25
+src="./index_files/image026.gif" v:shapes="_x0000_i1037"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1037"
+  DrawAspect="Content" ObjectID="_1117284487">
+ </o:OLEObject>
+</xml><![endif]-->.</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>Convolution formula:<span
+style="mso-spacerun: yes">&nbsp; </span>For a sum S=X1+X2, where X1 and X2 are
+independent random variables, <sub><!--[if gte vml 1]><v:shape id="_x0000_i1038"
+ type="#_x0000_t75" style='width:141pt;height:26.25pt' o:ole="">
+ <v:imagedata src="./index_files/image027.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=188 height=35
+src="./index_files/image028.gif" v:shapes="_x0000_i1038"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1038"
+  DrawAspect="Content" ObjectID="_1117284488">
+ </o:OLEObject>
+</xml><![endif]--></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>So the density function of <sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1039" type="#_x0000_t75" style='width:14.25pt;height:18.75pt'
+ o:ole="">
+ <v:imagedata src="./index_files/image021.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=19 height=25
+src="./index_files/image029.gif" v:shapes="_x0000_i1039"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1039"
+  DrawAspect="Content" ObjectID="_1117284489">
+ </o:OLEObject>
+</xml><![endif]-->is:</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><sub><!--[if gte vml 1]><v:shape id="_x0000_i1049"
+ type="#_x0000_t75" style='width:276pt;height:109.5pt' o:ole="">
+ <v:imagedata src="./index_files/image030.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=368 height=146
+src="./index_files/image031.gif" v:shapes="_x0000_i1049"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1049"
+  DrawAspect="Content" ObjectID="_1117284490">
+ </o:OLEObject>
+</xml><![endif]--></sub></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>The GLR test statistic for hypothesis <b><sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1041" type="#_x0000_t75" style='width:1in;height:24.75pt' o:ole="">
+ <v:imagedata src="./index_files/image032.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=96 height=33
+src="./index_files/image033.gif" v:shapes="_x0000_i1041"><![endif]></sub></b><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1041"
+  DrawAspect="Content" ObjectID="_1117284491">
+ </o:OLEObject>
+</xml><![endif]--><span style="mso-spacerun: yes">&nbsp;</span>is defined by:</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><sub><!--[if gte vml 1]><v:shape id="_x0000_i1042"
+ type="#_x0000_t75" style='width:398.25pt;height:58.5pt' o:ole="">
+ <v:imagedata src="./index_files/image034.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=531 height=78
+src="./index_files/image035.gif" v:shapes="_x0000_i1042"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1042"
+  DrawAspect="Content" ObjectID="_1117284493">
+ </o:OLEObject>
+</xml><![endif]--><span style="mso-spacerun: yes">&nbsp; </span><o:p></o:p></sub></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>For numeric integration, we use the
+Boole’s rule:</p>
+
+<p class=MsoNormal align=center style='text-align:center;text-indent:18.0pt;
+line-height:150%'><span style='font-size:10.0pt;font-family:Verdana'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><sub><!--[if gte vml 1]><v:shape id="_x0000_i1043"
+ type="#_x0000_t75" style='width:191.25pt;height:49.5pt' o:ole="">
+ <v:imagedata src="./index_files/image036.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=255 height=66
+src="./index_files/image037.gif" v:shapes="_x0000_i1043"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1043"
+  DrawAspect="Content" ObjectID="_1117284494">
+ </o:OLEObject>
+</xml><![endif]--><o:p></o:p></sub></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'><sub><!--[if gte vml 1]><v:shape id="_x0000_i1044"
+ type="#_x0000_t75" style='width:348pt;height:35.25pt' o:ole="">
+ <v:imagedata src="./index_files/image038.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=464 height=47
+src="./index_files/image039.gif" v:shapes="_x0000_i1044"><![endif]><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1044"
+  DrawAspect="Content" ObjectID="_1117284495">
+ </o:OLEObject>
+</xml><![endif]--></sub></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:150%'>with k=2000, x<sub>1</sub>=logu-3 and x<sub>n</sub>=logu+3.
+This produces accurate results.</p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+text-indent:18.0pt;line-height:150%'>To find the maximum likelihood estimator
+of <sub><!--[if gte vml 1]><v:shape id="_x0000_i1045" type="#_x0000_t75"
+ style='width:12pt;height:12.75pt' o:ole="">
+ <v:imagedata src="./index_files/image040.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=16 height=17
+src="./index_files/image041.gif" v:shapes="_x0000_i1045"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1045"
+  DrawAspect="Content" ObjectID="_1117284496">
+ </o:OLEObject>
+</xml><![endif]-->, we solve the equation <sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1046" type="#_x0000_t75" style='width:33.75pt;height:27.75pt'
+ o:ole="">
+ <v:imagedata src="./index_files/image042.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=45 height=37
+src="./index_files/image043.gif" v:shapes="_x0000_i1046"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="_x0000_i1046"
+  DrawAspect="Content" ObjectID="_1117284497">
+ </o:OLEObject>
+</xml><![endif]-->=0 numerically using bisection method.<span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='line-height:150%'><span style='font-size:18.0pt;
+mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

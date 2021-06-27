@@ -1,0 +1,424 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>EST Database of Cotton</title>
+<link rel="shortcut icon" href="images/favicon.ico">
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link href="css/topmenu.css" type="text/css" rel="stylesheet" />
+<link href="css/cotton.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<script LANGUAGE="JavaScript">
+function google()
+{  
+  window.open("http://www.google.com/search?q="+document.forms["googleform"].elements["q"].value+" site:leonxie.com");
+  return false;
+}
+</script>
+<div align="center"><img src='images/cottonhead.jpg' border='0'></div>
+<div id="menuContainer">
+  <ul id='nav'>
+    <li class='top'> <a href="index.php"> Home </a> </li>
+    <li class='top'> <a href="methodology.php"> Methodology </a> </li>
+    <li class='top'> <a href="#"> Statistics </a>
+      <ul class='sub'>
+        <li> <a href="sinfo.php">Sequence Information</a> </li>
+        <li> <a href="ssrange.php">Sequence Distribution</a> </li>
+        <li> <a href="seqsta.php">Sequence Similarity</a> </li>
+        <li> <a href="seqcluster.php">Contig Cluster</a> </li>
+      </ul>
+    </li>
+    <li class='top'> <a href="#"> Search </a>
+      <ul class='sub'>
+        <li> <a href="searchByRaw.php"> Original EST</a> </li>
+        <li> <a href="searchByAnno.php"> Assembled data </a> </li>
+        <li class='fly'><a href="#">MicroRNA</a>
+          <ul>
+            <li> <a href="searchBymicroRNA.php">miRNA</a>
+            <li> <a href="searchByTarget.php">Target</a>
+          </ul>
+        <li> <a href="searchBySSRfromContig.php"> SSR from contig & EST </a> </li>
+        <li> <a href="searchBySSR.php"> SSR from CMD </a> </li>
+        <li> <a href="searchByBlast.php"> BLAST </a> </li>
+      </ul>
+    </li>
+    <li class='top'> <a href="#a"> Function Category</a>
+      <ul class='sub'>
+        <li class='fly'><a href="#">GO</a>
+          <ul>
+            <li> <a href="searchByCC.php">Cellular Component</a>
+            <li> <a href="searchByBP.php">Biological Process</a>
+            <li> <a href="searchByMF.php">Molecular Function</a>
+          </ul>
+        </li>
+        <li> <a href="searchByKEGG.php">Pathway</a> </li>
+      </ul>
+    </li>
+    <li class='top'> <a href="datadownload.php"> Download </a> </li>
+    <li class='top'> <a href="#"> Softwares & Tools </a>
+      <ul class='sub'>
+	    <li> <a href="deepfinder.php"> Deepfinder </a> </li>
+        <li> <a href="shortSeq.php"> Short sequence BLAST</a> </li>
+        <li> <a href="targetAlign.php"> miRNA target alignment </a> </li>
+       <li> <a href="miRNAprimerDesigner.php">miRNA primer designer</a> </li> 
+	   <li> <a href="referencegene.php">Reference genes</a> </li> 
+        <li> <a href="http://150.216.21.101/emboss-explorer/"> Emboss tools package</a> </li>
+        <li> <a href="http://150.216.21.101/biophp/"> BioPHP </a> </li>
+      </ul>
+    </li>
+    <li class='top'> <a href="#"> Contact Us </a>
+      <ul class='sub'>
+        <li> <a href="contactus.php"> Contact Information </a> </li>
+        <li> <a href="onlineguestbook.php"> Online Guestbook </a> </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+ <table  width="950px" align="center">
+  <tr>
+  <td align='right'>  	
+		<form method=GET onSubmit="return google()" name="googleform">
+		Search in leonxie by Google 
+		<input type='text' name='q' size=15 maxlength='255' value="">
+		<input type='submit' name='btnG'  value="Go">
+		</form> 
+	</td>
+  </tr>
+</table>
+<table  width="950px" align="center">
+  <tr>
+    <td>  plant miRNA target alignment<em>>></em>  </td>
+  </tr>
+</table>
+ 
+ 
+<div id="fragment-3">
+  <form name="blast" method="post" action="?type=blast">
+    <table  align='center' border="0" width="950px">
+      <tr>
+      <td align='left'  colspan='2'>You can also download <b><a href="software/targeAlign.rar">Command-line version</a></b>, <b><a href="software/TargetAlignWindow.exe">Window version</a></b>, and <b><a href="software/TargetAlignWindow.rar">Source code</a></b> <br/>
+        </td>
+      </tr>
+	  
+	        <tr>
+        <td align='left'  colspan='2'>
+		<p>If you use Target-align in your research, please cite us:</p>
+		<p><b><a href='http://www.ncbi.nlm.nih.gov/pubmed/20934992' target='_blank'> Xie F, Zhang B. 2010. Target-align: a tool for plant microRNA target identification. Bioinformatics. 26 (23): 3002-3. </a></b></p>		
+		</td>
+      </tr>
+	 
+
+
+	  
+	  
+      <tr>
+        <td align='right'>Sequence 1 in FASTA (miRNAs): </td>
+        <td><textarea  id='sequence1' name="sequence1" rows="5" cols="70"></textarea></td>
+      </tr>
+      <tr>
+        <td align='right'>Sequence 2 in FASTA (mRNAs): </td>
+        <td><textarea  id='sequence2'  name="sequence2" rows="10" cols="70"></textarea></td>
+      </tr>
+      <tr>
+        <td colspan='2'><table>
+            <tr>
+              <td align='right'>maximum score </td>
+              <td><input type='text' name='maxscore' id='maxscore' value='50' >
+              </td>
+              <td align='left'></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td align='right'>maximum mismatches </td>
+              <td><input type='text' name='maxmismatch' id='maxmismatch' value='4' >
+              </td>
+              <td align='right'>maximum gaps </td>
+              <td><input type='text' name='maxgaps' id='maxgaps' value='4' >
+              </td>
+            </tr>
+            <tr>
+              <td align='right'>maximum consecutive mismatches </td>
+              <td><input type='text' name='maxconmismatch' id='maxconmismatch' value='4' >
+              </td>
+              <td align='right'>no mismatches from base </td>
+              <td><input type='text' name='nomisatchesstart' id='nomisatchesstart' value='10' >
+                to base
+                <input type='text' name='nomisatchessend' id='nomisatchessend' value='11' >
+              </td>
+            </tr>
+            <tr>
+              <td align='right'>have maximum mismatches </td>
+              <td><input type='text' name='secmaxmismatch' id='secmaxmismatch' value='2' >
+              </td>
+              <td align='right'>from base </td>
+              <td><input type='text' name='secmaxmismatchstart' id='secmaxmismatchstart' value='1' >
+                to base
+                <input type='text' name='secmaxmismatchend' id='secmaxmismatchend' value='9' >
+              </td>
+            </tr>
+            <tr>
+              <td align='right'>allow G:U wobble ? </td>
+              <td><input type='checkbox' name='allowgu' id='allowgu' value='1' checked >
+              </td>
+              <td align='right'>maximum G:U wobble </td>
+              <td><input type='text' name='maxGU' id='maxGU' value='4' >
+              </td>
+            </tr>
+            <tr>
+              <td align='right'>a G:U wobble means </td>
+              <td><select name="gumismatches" id="gumismatches">
+                  <option value='0.5' selected>--0.5--</option>
+                  <option value='0' >--0--</option>
+                  <option value='1' >--1--</option>
+                </select>
+                mismatches </td>
+              <td align='right'></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td align='right'>match score </td>
+              <td><input type='text' name='matchscore' id='matchscore' value='5' >
+              </td>
+              <td align='right'>mismatch score </td>
+              <td><input type='text' name='mismatchscore' id='mismatchscore' value='-3' >
+              </td>
+            </tr>
+            <tr>
+              <td align='right'>G:U match score </td>
+              <td><input type='text' name='gumatchscore' id='gumatchscore' value='2' >
+              </td>
+              <td align='right'>X / N mismatch score </td>
+              <td><input type='text' name='xnmatchscore' id='xnmatchscore' value='-1' >
+              </td>
+            </tr>
+            <tr>
+              <td align='right'>gap-open score </td>
+              <td><input type='text' name='gapopenscore' id='gapopenscore' value='-8' >
+              </td>
+              <td align='right'>gap-extend score </td>
+              <td><input type='text' name='gapextendscore' id='gapextendscore' value='-2' >
+              </td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td colspan='2' align='center'><input type='button' value='    GO   ' id='blastSearch' >&nbsp;&nbsp;&nbsp;
+          <a id="sample" href="#">Try example</a> &nbsp;&nbsp;&nbsp;&nbsp; <a id="removeSeq" href="#">remove sequence</a> </td>
+      </tr>
+      <script language='javascript'>
+					$("#sample").click(function(){	
+						$("#sequence1").val(">ath-miR395a\nCTGAAGTGTTTGGGGGAACTC"); 				
+					$("#sequence2").val(">AT3G22890.1 | sulfate adenylyltransferase (ATP)\nACTATAAACTCTATAAAAACCAATTTTCACTTCCAATTGAATTGGGAACAAACCAAATCTCTATCTCTCTCCATTAGAGCTTGAAGCAGCCATAGCCTAACAAAACCTTCAACAATGGCTTCAATGGCTGCCGTCTTAAGCAAAACTCCATTCCTCTCTCAACCACTAACCAAATCATCTCCAAACTCCGATCTCCCCTTCGCCGCGGTTTCCTTCCCTTCCAAATCCCTACGCCGCCGCGTAGGATCAATCCGAGCCGGATTAATCGCTCCCGACGGTGGTAAGCTTGTAGAGCTCATCGTGGAAGAGCCAAAGCGGCGAGAGAAGAAACACGAGGCGGCGGATTTGCCACGTGTTGAGCTGACGGCGATTGACTTGCAATGGATGCATGTATTAAGCGAAGGCTGGGCAAGTCCACTCGGAGGTTTCATGAGAGAATCCGAGTTCCTCCAAACTCTTCATTTTAACTCGCTACGTCTTGACGACGGCTCCGTCGTTAACATGTCCGTGCCTATTGTTCTCGCTATTGACGATGAACAAAAAGCACGTATCGGCGAGTCTACACGTGTCGCTCTTTTCAATTCCGATGGTAACCCCGTCGCTATCCTCAGCGATATTGAGATTTATAAGCATCCAAAGGAAGAAAGGATAGCTAGAACATGGGGTACGACGGCTCCAGGTTTGCCTTACGTAGACGAGGCGATAACTAATGCTGGAAACTGGCTCATTGGGGGTGATCTTGAGGTTCTTGAGCCAGTGAAGTACAATGATGGGCTTGATCGTTTCAGGCTTTCGCCTGCTGAGTTACGTAAAGAGTTGGAGAAGCGTAATGCGGATGCGGTGTTTGCTTTCCAGCTGAGGAATCCTGTTCATAATGGTCATGCTCTTCTTATGACTGATACTCGTAGGAGACTTCTTGAGATGGGTTACAAAAACCCTATTCTTTTGCTTCATCCGTTAGGTGGGTTTACAAAGGCTGATGATGTTCCTTTAGATTGGAGGATGAAGCAACACGAGAAGGTTCTAGAGGATGGTGTTCTCGATCCGGAGACTACAGTGGTTTCGATATTCCCGTCACCTATGCATTACGCTGGTCCAACCGAAGTGCAGTGGCACGCAAAGGCTAGAATCAATGCTGGTGCTAACTTTTACATTGTGGGTCGTGATCCTGCTGGGATGGGTCATCCAGTAGAGAAACGTGATCTTTACGATGCTGATCATGGAAAGAAAGTACTAAGCATGGCACCAGGACTCGAACGACTCAACATCCTTCCTTTCAGGGTTGCTGCATATGACAAGACGCAAGGCAAGATGGCTTTCTTCGATCCCTCGAGGCCTCAAGATTTCTTGTTCATCTCCGGCACTAAGATGCGCACATTGGCAAAGAACAACGAAAACCCGCCAGACGGTTTTATGTGCCCAGGTGGATGGAAAGTTCTGGTGGATTACTATGAGAGCTTGACTCCGGCGGGTAATGGTAGACTACCAGAAGTGGTTCCGGTGTAAGACAAAACTGTTCGTTTCAAATTGTAACGTTTGTGTTGTGAAGCCTTGTAGCAACAATCATTGTTGTATTGGGAGAGAAGCCTATGTATAATCTGGCTTGACCTTTTTCCAAATAAAATACAGAAGAAAAAAAGACTGTTTTTCGTTTGCAAGATAATTTACGAAACTTGTAATATTTGGGCCTCAAACTTTGTACCATATTAATGAAACGATTGTTTTTACATATAAGGATTTACGTATTTTTGACTTTTGACTACA");	
+					});
+					
+					
+					$("#removeSeq").click(function(){
+					   $("#sequence1").val("");	
+					   $("#sequence2").val("");
+					   $("#sequence1").focus();					   
+					});	
+					
+					$("#allowgu").click(function(){
+					 
+						if($("#allowgu").attr("checked")==true)
+						{
+							$("#gumatchscore").attr("disabled","");
+							$("#maxGU").attr("disabled","");
+							$("#gumismatches").attr("disabled","");							
+						}
+						else
+					  {
+							$("#gumatchscore").attr("disabled","disabled");
+							$("#maxGU").attr("disabled","disabled");
+							$("#gumismatches").attr("disabled","disabled");		
+					  }				
+						
+						});
+
+       
+
+
+					
+					$("#blastSearch").click(function(){		
+						
+						
+						    if($("#allowgu").attr("checked")==true)
+						    {
+						    	  if($.trim($("#maxGU").val())=="")
+										{
+											alert("maximum G:U wobble should be not empty");
+											$("#maxGU").focus();
+											return false;
+										}	
+						    	
+										if($.trim($("#gumatchscore").val())=="")
+										{
+										alert("G:U match score should be not empty");
+										$("#gumatchscore").focus();
+										return false;
+										}	
+										
+										if($.trim($("#gumismatches").val())=="")
+										{
+										alert("G:U mismatch should be not empty");
+										$("#gumismatches").focus();
+										return false;
+										}											
+										
+								 }
+ 
+									
+					if($.trim($("#sequence1").val())=="")
+					{
+					   alert("sequence 1 should be not empty");
+					   $("#sequence1").focus();
+					   return false;
+					}
+					 if($.trim($("#sequence2").val())=="")
+					{
+					   alert("sequence 2 should be not empty");
+					   $("#sequence2").focus();
+					   return false;
+					}
+					
+					if($.trim($("#maxmismatch").val())=="")
+					{
+					   alert("maxmum mismatches should be not empty");
+					   $("#maxmismatch").focus();
+					   return false;
+					}	
+								
+					if($.trim($("#maxgaps").val())=="")
+					{
+					   alert("maxmum gaps should be not empty");
+					   $("#maxgaps").focus();
+					   return false;
+					}			
+					
+				  if($.trim($("#maxscore").val())=="")
+					{
+					   alert("maxmum score should be not empty");
+					   $("#maxscore").focus();
+					   return false;
+					}	
+					
+				  if($.trim($("#matchscore").val())=="")
+					{
+					   alert("match score should be not empty");
+					   $("#matchscore").focus();
+					   return false;
+					}
+					
+				  if($.trim($("#mismatchscore").val())=="")
+					{
+					   alert("mismatch score should be not empty");
+					   $("#mismatchscore").focus();
+					   return false;
+					}			
+					
+				  if($.trim($("#gapopenscore").val())=="")
+					{
+					   alert("gap-open score should be not empty");
+					   $("#gapopenscore").focus();
+					   return false;
+					}							
+				  if($.trim($("#gapextendscore").val())=="")
+					{
+					   alert("gap-extend score should be not empty");
+					   $("#gapextendscore").focus();
+					   return false;
+					}			
+					
+					
+					if($.trim($("#maxconmismatch").val())=="")
+					{
+					   alert("max consecutive mismatches should be not empty");
+					   $("#maxconmismatch").focus();
+					   return false;
+					}	
+					
+					if($.trim($("#nomisatchesstart").val())=="")
+					{
+					   alert("start site of no mismatch should be not empty");
+					   $("#nomisatchesstart").focus();
+					   return false;
+					}					
+					
+					if($.trim($("#nomisatchessend").val())=="")
+					{
+					   alert("end site of no mismatch should be not empty");
+					   $("#nomisatchessend").focus();
+					   return false;
+					}	
+										
+					if($.trim($("#secmaxmismatch").val())=="")
+					{
+					   alert("second maxmismatches should be not empty");
+					   $("#secmaxmismatch").focus();
+					   return false;
+					}		
+					
+					 if($.trim($("#secmaxmismatchstart").val())=="")
+					{
+					   alert("start site of second maxmismatches should be not empty");
+					   $("#secmaxmismatchstart").focus();
+					   return false;
+					}
+					
+					 if($.trim($("#secmaxmismatchend").val())=="")
+					{
+					   alert("end site of second maxmismatches should be not empty");
+					   $("#secmaxmismatchend").focus();
+					   return false;
+					}		
+					
+
+				  if($.trim($("#xnmatchscore").val())=="")
+					{
+					   alert("X /N match score should be not empty");
+					   $("#xnmatchscore").focus();
+					   return false;
+					}					
+																									
+					document.blast.submit();					
+					});			
+					
+					</script>
+      <tr>
+        <td colspan='2' align='center'  style="font:"Times New Roman", Times, serif">        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- footer start -->
+<!-- footer start -->
+	<link rel="stylesheet" href="js/themes/base/jquery.ui.all.css">
+
+	<script src="js/ui/jquery.ui.core.js"></script>
+	<script src="js//ui/jquery.ui.widget.js"></script>
+	<script src="js/ui/jquery.ui.button.js"></script>
+<br>
+	<script>
+	$(function() {
+		$("input[type='button'], input[type='submit'] , input[type='reset']").button();
+		//$( "input:submit")
+		
+	});
+	</script>
+<br>
+<table align="center" width="950px">
+<tr>
+<td><div id="foot" >
+  <p id="message"><a href="contactus.php">Contact US</a><em>|</em>Copyright @  2010 - 2012 Dr.Zhang's Lab. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Maintained by <a href="mailto:fulxie@gmail.com">Fuliang Xie</a><br/>
+    <a href="http://www.ncbi.nlm.nih.gov/" target="_blank">NCBI</a><em>|</em> <a href="http://www.ebi.ac.uk/"  target="_blank">EBI</a><em>|</em> <a href="http://www.ddbj.nig.ac.jp/index-e.html"  target="_blank">DDBJ</a><em>|</em> <a href="http://www.jcvi.org/"  target="_blank">TIGR</a> <em>|</em> <a href="http://www.arabidopsis.org/"  target="_blank">TAIR</a> <em>|</em> <a href="http://www.cottonmarker.org/"  target="_blank">Cotton Marker Database</a> </p>
+</div></td>
+</tr>
+</table>
+<div style="display:none">
+<script language="javascript" src="http://count43.51yes.com/click.aspx?id=439000754&logo=1" charset="gb2312"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+
+
+<html>
+<head>
+<script language="JavaScript" src="include/toggle.js"></script>
+<script language="JavaScript" type="text/javascript">
+function newWindow(url)
+{
+   eval("page= window.open(url, '" +  "', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=700,height=570');");
+}
+</script>
+</head>
+<TITLE>RAD Website | Study Page</TITLE>
+
+<BODY bgColor=#000080>
+
+
+	<LINK REL="SHORTCUT ICON" HREF="https://www.cbil.upenn.edu/RADQuerier/images/RAD_logo.gif">
+	<!--link rel="stylesheet" type="text/css" href="../yui/build/reset-fonts-grids/reset-fonts-grids.css"-->
+        <!-- CSS for Menu -->
+        <link rel="stylesheet" type="text/css" href="../yui/examples/menu/mymenu.css">
+        <link rel="stylesheet" type="text/css" href="epcondb.css">	
+        <!-- Page-specific styles -->
+        <style type="text/css">
+            #productsandservices {
+                margin:0 0 1px 0;
+            }
+        </style>
+
+                <!-- Namespace source file -->
+
+        <script type="text/javascript" src="../yui/build/yahoo/yahoo.js"></script>
+        <!-- Dependency source files -->
+        <script type="text/javascript" src="../yui/build/event/event.js"></script>
+        <script type="text/javascript" src="../yui/build/dom/dom.js"></script>
+
+        <!-- Container source file -->
+        <script type="text/javascript" src="../yui/build/container/container_core.js"></script>
+
+        <!-- Menu source file -->
+        <script type="text/javascript" src="../yui/build/menu/menu.js"></script>
+
+        <!-- Page-specific script -->
+
+        <script type="text/javascript" defer="true">
+
+            YAHOO.example.onMenuBarReady = function(p_oEvent) {
+                
+                // "beforerender" event handler for the menu bar
+
+                function onMenuBarBeforeRender(p_sType, p_sArgs, p_oMenu) {
+
+                    var oSubmenuData = {
+                    
+                        "resources": [ 
+                        
+                            { text: "Install RAD", url: "RAD-installation.php?" },
+  
+     { text: "Software", submenu: { id: "pim", itemdata: [
+                                    { text: "MAGE-Tab toolkit", url:"http://sourceforge.net/project/showfiles.php?group_id=120325&package_id=219611" },
+                                    { text: "RAD-SA", url:"http://www.cbil.upenn.edu/downloads/RAD/" },
+                                    { text: "PaGE",  url:"http://www.cbil.upenn.edu/PaGE" },
+                                 ] }
+                            
+                            }, 
+  			 { text: "RAD Publications", url: "RAD-publication.php?" },                                              
+ 			 { text: "Tutorial", url: "http://www.cbil.upenn.edu/RAD/RADQuerierInstructions.doc" },                                              
+
+			 { text: "RAD schema", url: "http://www.cbil.upenn.edu/RAD/RADtables.ppt" },                                              
+
+                        ],
+    
+                        "query": [
+    
+                            { text: "Search Experiments", url: "query.php?search=study" },
+                            { text: "Search Genes", url: "query.php?search=gene" },
+                            { text: "Search Arrays", url: "query.php?search=array" },
+                            { text: "Search Protocols", url: "query.php?search=protocol" },
+    
+                        ],
+                        
+                        "tools": [
+    
+                            { text: "XCluster", url: "QXCluster.php?" },
+                            { text: "PaGE", url: "https://www.cbil.upenn.edu/cgi-bin/RAD/page1.pl?" },
+                            { text: "MvA plot", url: "https://www.cbil.upenn.edu/cgi-bin/RAD/mvaplot1.pl?" },
+                            { text: "Expressson Profiles", url: "RAD-tools.php?submenu=profile" },
+                            { text: "Links", url: "RAD-tools.php?submenu=link" },
+                         
+                        ],
+                        
+                        "submission": [
+    
+                            { text: "General submission", url: "RAD-data_sub.php?" },
+                            { text: "For ToxoDB", url: "" },
+			    { text: "For PlasmoDB", url: "" }
+                        
+                        ]
+                    
+                    };
+
+
+                    this.getItem(5).cfg.setProperty("submenu", { id:"resources", itemdata: oSubmenuData["resources"] });
+                    this.getItem(2).cfg.setProperty("submenu", { id:"shopping", itemdata: oSubmenuData["query"] });
+                    this.getItem(3).cfg.setProperty("submenu", { id:"entertainment", itemdata: oSubmenuData["tools"] });
+                    this.getItem(4).cfg.setProperty("submenu", { id:"information", itemdata: oSubmenuData["submission"] });
+
+                }
+
+
+                // Instantiate and render the menu bar
+
+                var oMenuBar = new YAHOO.widget.MenuBar("productsandservices", { autosubmenudisplay:true, showdelay:250, hidedelay:750, lazyload:true });
+
+
+                // Subscribe to the "beforerender" event
+
+								     oMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender, oMenuBar, true);
+
+
+                // Render the menu bar
+
+                oMenuBar.render();
+                
+            }
+
+            // Initialize and render the menu bar when it is available in the DOM
+
+//  YAHOO.util.Event.onContentReady("productsandservices", YAHOO.example.onMenuBarReady);
+// YAHOO.util.Event.onAvailable("productsandservices", YAHOO.example.onMenuBarReady);
+ YAHOO.util.Event.addListener(window, "load", YAHOO.example.onMenuBarReady);
+
+        </script>
+
+<div align='center'>
+<center>
+<TABLE class='bodyTable'>
+  <TBODY>
+  <TR>
+    <TD width=199>
+	<img border='0' src='../images/RAD_logo.gif' width='126' height='67'>&nbsp; 
+    </TD>
+    <TD width=536>
+        <b><font size='5' color='#800000' face='Times New Roman'>RAD (RNA Abundance Database)</font></b>
+	<p>
+	<b><font size='4' color='#000080' face='Times New Roman'>A curated resource for gene expression studies</font></b>
+    </TD>
+    <!-- some info -->
+    <TD vAlign=center align=middle width=77 bgColor=#eeeeee>
+        <FONT face=Arial,Helvetica,SansSerif color=#666666 size=-1>
+	<P>Last Modified: 2006/2/11</P>
+        </FONT>
+    </TD>
+  </TR>
+  <TR>
+    <TD colspan='3' width='812'>
+      <HR color='#000080'>
+    </TD>
+    </TR>
+ <TR>
+    <TD colspan='3' width='812'>
+            <div id="productsandservices" class="yuimenubar">
+                            <div class="bd">
+                                <ul class="first-of-type">
+                                    <li class="yuimenubaritem first-of-type"><a href="index.php?">Home</a></li>
+                                    <li class="yuimenubaritem"><a href=https://www.cbil.upenn.edu/RADQuerier/php/login.php?>Login</a></li>
+                                    <li class="yuimenubaritem"><a href="query.php?">Queries</a></li>
+                                    <li class="yuimenubaritem"><a href="RAD-tools.php?">Tools</a></li>
+				    <li class="yuimenubaritem"><a href="RAD-data_sub.php?">Data Submission</a></li>
+				    <li class="yuimenubaritem">Resources</li>
+                                </ul>
+                            </div>
+                        </div>
+    
+
+  </TD>
+   </TR>
+  </TBODY>
+ </TABLE>
+</center>
+</div>
+<div align="center">
+<center>
+<TABLE cellPadding=6 bgcolor="#FFFFFF" style="border-collapse: collapse" bordercolor="#111111" cellspacing="0" width="812" height="329">
+  <TBODY>
+  <TR>
+    <TD width="208" height="19"></TD>
+    <TD width="1054" height="19"></TD>
+  </TR>
+  <TR>
+    <TD colSpan=2 bgcolor="#FFFFFF" width="1274" style="vertical-align: top" height="255">
+<b>Welcome User: public.</b></br> 
+Study id: <i>1330,</i><br><p><b>Not a valid study id. Please provide valid study id.</b></br>

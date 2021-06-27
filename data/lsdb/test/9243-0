@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<script language="javascript" src="snp-flankplus.js"></script>
+<link rel="stylesheet" type="text/css" href="css/snp-flankplus.css" />
+<title>SNP-Flankplus</title>
+<style type="text/css">
+<!--
+.style1 {font-family: Arial, Helvetica, sans-serif}
+-->
+</style>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="css/snp-flankplus.css" />
+<div align="center">
+    <table width="800" border="0">
+    <tr>
+      <td colspan="6" class="style_logo"><img src="images/snp-flankplus/logo.jpg" width="800" height="100" border="0" usemap="#Map">
+        <map name="Map">
+          <area shape="rect" coords="590,80,795,99" href="http://bio.kuas.edu.tw/snp-flankplus/">
+      </map></td>
+    </tr>
+    <tr>
+      <td width="133"><div align="center" class="style_option"><a href="news.jsp">News</a></div></td>
+      <td width="133"><div align="center" class="style_option"><a href="introduction.jsp">Introduction</a></div></td>
+      <td width="133"><div align="center" class="style_option"><a href="snpin.jsp">SNP-Flankplus</a></div></td>
+      <td width="133"><div align="center" class="style_option"><a href="dbsource.jsp">DB Source</a></div></td>
+      <td width="133"><div align="center" class="style_option"><a href="contact.jsp">Contact</a></div></td>
+      <td width="133"><div align="center" class="style_option"><a href="userManual.jsp">User Manual</a></div></td>
+    </tr>
+  </table>
+</div>
+
+<table width="800" border="0" align="center">
+  <tr>
+    <td><div align="center"><img src="images/snp-flankplus/new.gif" width="45" height="25"><span class="style1">Current online version is v1.2, update from 2010/05/15.</span></div></td>
+    <td><div align="right"><span class="style_font">The counter of users: <img src="/snp-flankplus/counter.do"></span></div></td>
+  </tr>
+</table>
+<table width="680" border="0" align="center">
+  <tr>
+    <td class="style_title">
+        Input Reference cluster ID (rs#) to get SNP flanking sequence</td>
+  </tr>
+  <tr>
+    <td><form action="queryRsInfo.do" method="post" name="rs_form" id="rs_form">
+      <table width="600" border="0" align="center">
+        <tr>
+          <td width="150" class="style_field_inFiled">Reference cluster ID (rs#):</td>
+          <td width="440" class="style_field_inData"><input name="rsId" type="text" id="rsId"> 
+            <input class="style_button" type="submit" name="Submit" value="Query"><input class="style_button" type="reset" name="Submit" value="Clear">
+            <input name="inputType" type="hidden" id="inputType" value="rs"></td>
+        </tr>
+        <tr>
+          <td class="style_field_color"><div align="center">Examples:</div></td>
+          <td class="style_field_color1"><p><EM>1. Anopheles gambiae</EM>: <a class="style_link" onClick="setRsID('rs3268755');">rs3268755</a> or <a class="style_link" onClick="setRsID('3268755');">3268755</a>, <br>
+                <EM>2. Apis mellifera</EM>: <a class="style_link" onClick="setRsID('rs44220713');">rs44220713</a> or <a class="style_link" onClick="setRsID('44220713');">44220713</a>, <br>
+                <EM>3. Bison bison</EM>: <a class="style_link" onClick="setRsID('rs29029673');">rs29029673</a> or <a class="style_link" onClick="setRsID('29029673');">29029673</a>, <br>
+                <EM>4. Bos indicus x Bos taurus</EM>: <a class="style_link" onClick="setRsID('rs17874270');">rs17874270</a> or <a class="style_link" onClick="setRsID('17874270');">17874270</a>, <br>
+                <EM>5. Bos taurus</EM>: <a class="style_link" onClick="setRsID('rs42616830');">rs42616830</a> or <a class="style_link" onClick="setRsID('42616830');">42616830</a>, <br>
+                <EM>6. Caenorhabditis elegans</EM>: <a class="style_link" onClick="setRsID('rs3139948');">rs3139948</a> or <a class="style_link" onClick="setRsID('3139948');">3139948</a>, <br>
+			    <EM>7. Canis familiaris</EM>: <a class="style_link" onClick="setRsID('rs23556521');">rs23556521</a> or <a class="style_link" onClick="setRsID('23556521');">23556521</a>, <br>
+                <EM>8. Danio rerio</EM>: <a class="style_link" onClick="setRsID('rs40921691');">rs40921691</a> or <a class="style_link" onClick="setRsID('40921691');">40921691</a>, <br>
+                <EM>9. Gallus gallus</EM>: <a class="style_link" onClick="setRsID('rs15453344');">rs15453344</a> or <a class="style_link" onClick="setRsID('15453344');">15453344</a>, <br>
+                <EM>10. Homo sapiens</EM>: <a class="style_link" onClick="setRsID('rs11878200');">rs11878200</a> or <a class="style_link" onClick="setRsID('11878200');">11878200</a>, <br>
+                <EM>11. Macaca mulatta</EM>: <a class="style_link" onClick="setRsID('rs45436388');">rs45436388</a> or <a class="style_link" onClick="setRsID('45436388');">45436388</a>, <br>
+                <EM>12. Monodelphis domestica</EM>: <a class="style_link" onClick="setRsID('rs55615896');">rs55615896</a> or <a class="style_link" onClick="setRsID('55615896');">55615896</a>, <br>
+                <EM>13. Mus musculus</EM>: <a class="style_link" onClick="setRsID('rs31909702');">rs31909702</a> or <a class="style_link" onClick="setRsID('31909702');">31909702</a>, <br>
+			    <EM>14. Oryza sativa</EM>: <a class="style_link" onClick="setRsID('rs21784708');">rs21784708</a> or <a class="style_link" onClick="setRsID('21784708');">21784708</a>,<br>
+				<EM>15. 
+				<LABEL>Pan troglodytes</LABEL>
+				</EM>: <a class="style_link" onClick="setRsID('rs26065701');">rs26065701</a> or <a class="style_link" onClick="setRsID('26065701');">26065701</a>,<br>
+                <EM>16. Rattus norvegicus</EM>: <a class="style_link" onClick="setRsID('rs8165185');">rs8165185</a> or <a class="style_link" onClick="setRsID('8165185');">8165185</a>
+	        </p>
+            </td>
+        </tr>
+      </table>
+    </form>
+    </td>
+  </tr>
+  <tr>
+    <td class="style_title">Input NCBI Assay ID (ss#) to get SNP flanking sequence</td>
+  </tr>
+  <tr>
+    <td>
+        <form action="queryRsInfo.do" method="post" name="ss_form" id="ss_form">
+          <table width="600" border="0" align="center">
+            <tr>
+              <td width="150" class="style_field_inFiled">NCBI Assay ID (ss#):</td>
+              <td width="440" class="style_field_inData">                <input name="ssId" type="text" id="ssId"> 
+                <input class="style_button" type="submit" name="Submit" value="Query">                <input class="style_button" type="reset" name="Submit" value="Clear">
+              <input name="inputType" type="hidden" id="inputType" value="ss"></td>
+            </tr>
+            <tr>
+              <td class="style_field_color"><div align="center">Examples:</div></td>
+              <td class="style_field_color1"><EM>1. Anopheles gambiae</EM>: <a class="style_link" onClick="setSsID('ss4525428');">ss4525428</a> or <a class="style_link" onClick="setSsID('4525428');">4525428</a>, <br>
+                <EM>2. Apis mellifera</EM>: <a class="style_link" onClick="setSsID('ss62192072');">ss62192072</a> or <a class="style_link" onClick="setSsID('62192072');">62192072</a>, <br>
+                <EM>3. Bison bison</EM>:<a class="style_link" onClick="setSsID('ss35528969');">ss35528969</a> or <a class="style_link" onClick="setSsID('35528969');">35528969</a> , <br>
+                <EM>4. Bos indicus x Bos taurus</EM>: <a class="style_link" onClick="setSsID('ss28449412');">ss28449412</a> or <a class="style_link" onClick="setSsID('28449412');">28449412</a>, <br>
+                <EM>5. Bos taurus</EM>: <a class="style_link" onClick="setSsID('ss64394964');">ss64394964</a> or <a class="style_link" onClick="setSsID('64394964');">64394964</a>, <br>
+                <EM>6. Caenorhabditis elegans</EM>: <a class="style_link" onClick="setSsID('ss4389687');">ss4389687</a> or <a class="style_link" onClick="setSsID('4389687');">4389687</a>, <br>
+                <EM>7. Canis familiaris</EM>: <a class="style_link" onClick="setSsID('ss34028598');">ss34028598</a> or <a class="style_link" onClick="setSsID('34028598');">34028598</a>, <br>
+                <EM>8. Danio rerio</EM>: <a class="style_link" onClick="setSsID('ss48528328');">ss48528328</a> or <a class="style_link" onClick="setSsID('48528328');">48528328</a> , <br>
+                <EM>9. Gallus gallus</EM>: <a class="style_link" onClick="setSsID('ss26832238');">ss26832238</a> or <a class="style_link" onClick="setSsID('26832238');">26832238</a>, <br>
+                <EM>10. Homo sapiens</EM>: <a class="style_link" onClick="setSsID('ss86044847');">ss86044847</a> or <a class="style_link" onClick="setSsID('86044847');">86044847</a>, <br>
+                <EM>11. Macaca mulatta</EM>: <a class="style_link" onClick="setSsID('ss66537188');">ss66537188</a> or <a class="style_link" onClick="setSsID('66537188');">66537188</a>, <br>
+                <EM>12. Monodelphis domestica</EM>: <a class="style_link" onClick="setSsID('ss74272884');">ss74272884</a> or <a class="style_link" onClick="setSsID('74272884');">74272884</a>, <br>
+                <EM>13. Mus musculus</EM>: <a class="style_link" onClick="setSsID('ss45083358');">ss45083358</a> or <a class="style_link" onClick="setSsID('45083358');">45083358</a>, <br>
+                <EM>14. Oryza sativa</EM>: <a class="style_link" onClick="setSsID('ss32183899');">ss32183899</a> or <a class="style_link" onClick="setSsID('32183899');">32183899</a>, <br>
+				<EM>15. 
+				<LABEL>Pan troglodytes</LABEL>
+				</EM>: <a class="style_link" onClick="setSsID('ss36637341');">ss36637341</a> or <a class="style_link" onClick="setSsID('36637341');">36637341</a>, <br>
+                <EM>16. Rattus norvegicus</EM>: <a class="style_link" onClick="setSsID('ss12557937');">ss12557937</a> or <a class="style_link" onClick="setSsID('12557937');">12557937</a>
+			  </td>
+            </tr>
+          </table>
+        </form>
+    </td>
+  </tr>
+  <tr>
+    <td class="style_title">Paste multiple Reference cluster ID (rs#) and/or NCBI Assay ID (ss#) to get SNP flanking sequences</td>
+  </tr>
+  <tr>
+    <td><form action="queryRsInfo.do" method="post" name="multiple_form" id="multiple_form">
+      <table width="600" border="0" align="center">
+        <tr>
+          <td width="150" class="style_field_inFiled">Multiple Reference cluster ID(rs#) and/or NCBI Assay ID(ss#):</td>
+          <td width="440" class="style_field_inData"><div align="center">
+                  <textarea name="snpids" cols="50" rows="8" id="snpids"></textarea>
+                <br>
+                  <input class="style_button" type="submit" name="Submit" value="Query">
+                  <input class="style_button" type="reset" name="Submit" value="Clear">
+                  <input name="inputType" type="hidden" id="inputType" value="box">
+          </div></td>
+        </tr>
+        <tr>
+          <td class="style_field_color"><div align="center">Examples:</div></td>
+          <td class="style_field_color1"><em>1. multiple rs# </em>: <a class="style_link" onClick="setMutipleID('rs11878200, rs62062585, rs17883687');">mutiple_rs#1</a>, <a class="style_link" onClick="setMutipleID('rs62062584 rs9894946 rs1642782');">mutiple_rs#2</a>, <a class="style_link" onClick="setMutipleID('rs56275308\nrs42616830\nrs3139948');">mutiple_rs#3</a><br>
+              <em>2. <em>multiple ss#</em></em>: <a class="style_link" onClick="setMutipleID('ss86044847, ss90524423, ss74803990');">mutiple_ss#1</a>, <a class="style_link" onClick="setMutipleID('ss74803990 ss40808378 ss82233980');">mutiple_ss#2</a>, <a class="style_link" onClick="setMutipleID('ss74803990\nss64394964\nss4389687');">mutiple_ss#3</a><br>
+            <em>3. <em><em>multiple rs# and ss#</em></em></em>: <a class="style_link" onClick="setMutipleID('rs11878200, ss45083358, rs28934875');">mutiple_rs#ss#1</a>, <a class="style_link" onClick="setMutipleID('rs3268755 ss62192072 rs29029673');">mutiple_rs#ss#2</a>, <a class="style_link" onClick="setMutipleID('rs56275308\nss64394964\nrs3139948');">mutiple_rs#ss#3</a></td>
+        </tr>
+      </table>
+    </form>
+    </td>
+  </tr>
+  <tr>
+    <td class="style_title">Upload file including multiple Reference cluster ID (rs#) and/or NCBI Assay ID (ss#) to get SNP flanking sequences</td>
+  </tr>
+  <tr>
+    <td><form action="snpIDsFileUpload.do" method="post" enctype="multipart/form-data" name="file_form" id="file_form">
+      <table width="600" border="0" align="center">
+        <tr>
+          <td width="150" class="style_field_inFiled">Multiple Reference cluster ID (rs#) and/or NCBI Assay ID (ss#) file:</td>
+          <td width="440" class="style_field_inData"><div align="center">
+              <input name="multiple_filein" type="file" size="50"><br>
+              <input class="style_button" type="submit" name="Submit" value="Query">
+              <input class="style_button" type="reset" name="Submit" value="Clear">
+              <input name="inputType" type="hidden" id="inputType" value="file">
+          </div>
+            </td></tr>
+        <tr>
+          <td class="style_field_color"><div align="center">Example:</div></td>
+          <td class="style_field_color1">1. <a href="fileDownload.do?fp=SNP-FLANKPLUS_EXAMPLE&fn=example_file1.txt" class="style_link"> example_file1</a>, 2. <a href="fileDownload.do?fp=SNP-FLANKPLUS_EXAMPLE&fn=example_file2.txt" class="style_link">example_file2</a>, 3. <a href="fileDownload.do?fp=SNP-FLANKPLUS_EXAMPLE&fn=example_file3.txt" class="style_link">example_file3</a></td>
+        </tr>
+      </table>
+    </form>
+    </td>
+  </tr>
+  <tr>
+    <td><div align="center"><a href="http://s03.flagcounter.com/more/8gFu"><img src="http://s03.flagcounter.com/count/8gFu/bg=FEFFE0/txt=000000/border=CCCCCC/columns=8/maxflags=248/viewers=0/labels=1/pageviews=1/" alt="free counters" border="0"></a></div></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<div align="center"><font size="-1" color="#999999" face="Arial, Helvetica, sans-serif"><hr width="600">
+kuas&amp;kmu&copy;2008-2010 design by yuhuei</font></div>
+
+</body>
+</html>

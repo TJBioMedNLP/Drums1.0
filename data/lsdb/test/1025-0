@@ -1,0 +1,178 @@
+
+<html>
+
+<head>
+	
+<title> MADS+: discovery of differential splicing events from Affymetrix exon junction array data
+</title>
+</head>
+
+
+
+<body bgcolor="#008080">
+
+	
+
+<u>
+
+	
+
+<font color="#FFFF00" size ="5" face="Verdana">
+		
+<b> 
+MADS+: discovery of differential splicing events from Affymetrix exon junction array data
+</b></font><font face="Verdana">
+</font></u>
+
+<p><strong>
+      <font color="#FFFFFF" size="3" face="Verdana"><a href="#Instructions">
+<font color="#FFFFFF">Instructions</font></a> |
+  
+</font><font color="#003366" size="3">
+  
+      <a href="#Prereq"> <font color="#FFFFFF" face="Verdana">Prerequisites</font></a></font><font color="#003366" size="3" face="arial"><font color="#FFFFFF" size="3" face="Verdana"> 
+|
+  
+</font><font color="#003366" size="3">
+  
+      <a href="#Downloads"> <font color="#FFFFFF" face="Verdana">Downloads</font></a></font><font color="#FFFFFF" size="3" face="Verdana"> 
+|
+  
+</font>
+  
+</font><font color="#FFFFFF" size="3" face="Verdana"><a href="#Sample_output">
+<font color="#FFFFFF">Sample output</font></a></font><font color="#003366" size="3" face="arial"><font color="#003366" size="3"><font color="#FFFFFF" face="Verdana"> 
+| </font>	   
+
+      <a href="#Author"> <font color="#FFFFFF" face="Verdana">Author</font></a></font><font color="#FFFFFF" size="3" face="Verdana"> 
+|
+  
+</font><font color="#003366" size="3">
+  
+      <a href="#Feedback"> <font color="#FFFFFF" face="Verdana">Feedback</font></a></font><font color="#FFFFFF" size="3" face="Verdana"> 
+|</font><font color="#003366" size="3" face="Verdana">
+  
+</font>
+  
+</font>
+  
+  </strong>
+  
+</p>
+			
+
+<hr>
+	
+
+<font color="#FFFFFF" face="Verdana" size="4">
+<p>Motivation: The Affymetrix Human Exon Junction Array is a newly designed high-density exon-sensitive microarray for global analysis of alternative splicing. Contrary to the Affymetrix exon 1.0 array, which only contains 4 probes per exon and no probes for exon-exon junctions, this new junction array averages 8 probes per probeset targeting all exons and exon-exon junctions observed in the human mRNA/EST transcripts, representing a significant increase in the probe density for alternative splicing events. Here, we present MADS+, a computational pipeline to detect differential splicing events from the Affymetrix exon junction array data. For each alternative splicing event, MADS+ evaluates the signals of probes targeting competing transcript isoforms to identify exons or splice sites with different levels of transcript inclusion between two sample groups. MADS+ is used routinely in our analysis of Affymetrix exon junction arrays and has a high accuracy in detecting differential splicing events. For example, in a study of a novel epithelial-specific splicing regulator ESRP1, MADS+ detects hundreds of exons whose inclusion levels are dependent on ESRP1, with a RT-PCR validation rate of 88.5% (153 exons validated out of 173 tested).
+</p>
+
+
+<P><font color='yellow'>Update Jan 14, 2010</font>: The Affymetrix Mouse Exon Junction Array (MJAY) annotation files are available <A href="http://www.icts.uiowa.edu/~yxng/MADSplus/MADS_plus_MJAY_library.tar.gz">
+		<FONT face="Verdana" color="#FFFF00" size="4">here</FONT></A>. Please also replace hjay_reformat.py by mjay_reformat.py. 
+</P>
+
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td width="289"><font face="Verdana" color="#FFFFFF" size="4">
+		<a name="Instructions"></a></font><b>
+		<font face="Verdana" size="5" color="#FFFFFF">Instructions</font></b></td>
+		<td width="237"><font face="Verdana" color="#FFFFFF" size="4"><a name="Prereq"></a>
+		</font><b><font face="Verdana" size="5" color="#FFFFFF">Prerequisites</font></b><font face="Verdana" color="#FFFFFF" size="4">
+		</font></td>
+		<td width="273">
+	
+
+<font color="#FFFFFF" face="Verdana" size="4">
+<a name="Downloads"></a><b><font face="Verdana" color="#FFFFFF" size="5">
+		Downloads</font></b>
+</font>
+
+		</td>
+		<td>
+	
+
+<font color="#FFFFFF" face="Verdana" size="5">
+		<a name="Sample_output"></a>
+</font><font size="5" color="#FFFFFF"><b>Sample output</b></font></td>
+	</tr>
+	<tr>
+		<td width="289"><a target="_top" href="instructions.html">
+		<font face="Verdana" color="#FFFF00" size="4">How to prepare data for 
+		MADS+</font></a></td>
+		<td width="237"><font face="Verdana" color="#FFFFFF" size="4">
+		<a href="http://biogibbs.stanford.edu/~kkapur/GeneBase/" target="_blank">
+		<font color="#FFFF00">GeneBASE</font></a></font><font face="Verdana" size="4" color="#FFFF00">
+		</font></td>
+		<td width="273"><a href="MADS_plus_code.tar.gz">
+		<font face="Verdana" color="#FFFF00" size="4">Source code</font></a></td>
+</font>
+
+		<td><a target="_top" href="cassette.html">
+		<font face="Verdana" color="#FFFF00" size="4">Cassette exons</font></a></td>
+	</tr>
+	
+
+<font color="#FFFFFF" face="Verdana" size="4">
+	<tr>
+		<td width="289">
+	
+
+<font color="#FFFFFF" face="Verdana" size="4">
+<a target="_top" href="instructions.html#How_to_run_MADS+">
+		<font face="Verdana" color="#FFFF00" size="4">How to run MADS+</font></a></td>
+		<td width="237"><font face="Verdana" color="#FFFFFF" size="4">
+		<a href="http://www.r-project.org/" target="_blank">
+		<font color="#FFFF00">R</font></a></font><font face="Verdana" size="4" color="#FFFF00">
+		</font></td>
+		<td width="273"><a href="library.html">
+		<font face="Verdana" color="#FFFF00" size="4">Libraries and annotations</font></a></td>
+</font>
+
+		<td><a target="_top" href="35alt.html"><font face="Verdana" color="#FFFF00" size="4">
+		Alternative 3'/5' splice sites</font></a></td>
+	</tr>
+	
+
+	<tr>
+		<td width="289">
+	
+
+
+<a target="_top" href="instructions.html#How_to_interpret_the_results">
+		<font color="#FFFF00" face="Verdana" size="4">How to interpret the 
+		results</font></a></td>
+		<td width="237"><font color="#FFFF00" face="Verdana" size="4">
+		<a href="http://rpy.sourceforge.net/rpy2/doc/html/index.html">
+		<font color="#FFFF00">RPy2</font></a></font></td>
+	
+
+<font color="#FFFFFF" face="Verdana" size="4">
+		<td width="273"><a href="MADS_plus_sample_data.tar.gz">
+		<font face="Verdana" color="#FFFF00" size="4">Sample data</font></a></td>
+</font>
+
+		<td><a target="_top" href="mx.html"><font face="Verdana" color="#FFFF00" size="4">
+		Mutually exclusive exons</font></a></td>
+	</tr>
+	</table>
+
+<p><font face="Verdana" color="#FFFFFF" size="4"><a name="Author"></a> </font>
+<b><font face="Verdana" color="#FFFFFF" size="5">Author</font></b><font face="Verdana" color="#FFFFFF" size="4">
+</font>
+<p><font face="Verdana" color="#FFFFFF" size="4">MADS+ is maintained by the Xing Lab. It is written by Yi Xing and Shihao Shen.
+</font>
+
+
+<p><font face="Verdana" color="#FFFFFF" size="4"><a name="Feedback"></a> </font>
+<b><font face="Verdana" color="#FFFFFF" size="5">Feedback</font></b><font face="Verdana" color="#FFFFFF" size="4">
+</font>
+<p><font face="Verdana" color="#FFFFFF" size="4">Correspondences regarding the MADS+ algorithm should be directed to Prof. Yi Xing (yi-xing at uiowa.edu). Technical questions of running the MADS+ source code should be directed to Prof. Yi Xing (yi-xing at uiowa.edu) and Shihao Shen (shihao-shen at uiowa.edu).
+</font>
+<p>&nbsp;<p><img border="0" src="index.4.jpg" width="879" height="554"><p><font color="#FFFFFF">Sample 
+output of MADS+: SLK cassette exon. The red lines indicate the average gene expression levels of SLK in 4 replicate samples transduced with empty vector (EV) or ESRP1. The individual blue lines indicate the average background-corrected intensities of individual probes in a probeset. All the MADS+ p values (+1.24e-8, +1.13e-26, 
++2.43e-23, -5.41e-9) are shown below the names of the probesets. The p value of 'skip' 
+probeset is at the opposite direction of the p values of 'include' probesets
+(upstream=upstream 'include' exon-exon junction probeset, downstream=downstream 'include' 
+exon-exon junction probeset, exon=exon probeset). The HJAY array data indicate significantly elevated exon inclusion of SLK exon 13 in response to ESRP1 overexpression. </font>

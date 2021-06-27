@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+    BioGRID REST Service   	| BioGRID
+  </title>
+
+  <meta name="generator" content="DokuWiki Release rc2009-12-02 &quot;Mulled Wine&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2010-12-07T07:12:17-0500" />
+<meta name="keywords" content="biogridrest" />
+<link rel="search" type="application/opensearchdescription+xml" href="/lib/exe/opensearch.php" title="BioGRID Help and Support Resources" />
+<link rel="start" href="/" />
+<link rel="contents" href="/doku.php/biogridrest?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="/feed.php?mode=list&amp;ns=" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="/doku.php/biogridrest?do=export_xhtml" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="/doku.php/biogridrest?do=export_raw" />
+<link rel="canonical" href="http://wiki.thebiogrid.org/doku.php/biogridrest" />
+<link rel="stylesheet" media="all" type="text/css" href="/lib/exe/css.php?s=all&amp;t=biogrid3&amp;tseed=1291742352" />
+<link rel="stylesheet" media="screen" type="text/css" href="/lib/exe/css.php?t=biogrid3&amp;tseed=1291742352" />
+<link rel="stylesheet" media="print" type="text/css" href="/lib/exe/css.php?s=print&amp;t=biogrid3&amp;tseed=1291742352" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='';var JSINFO = {"id":"biogridrest","namespace":""};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="/lib/exe/js.php?tseed=1291742352" ></script>
+
+  <link rel="shortcut icon" href="/lib/tpl/biogrid3/images/favicon.ico" />
+
+  </head>
+
+<body>
+<div id="wrap" class="inside">
+    <div id="content">
+    
+    <div id="header" class="inside">
+    
+        <div id="navbar">
+            
+            <div id="logo">
+                <a href="http://thebiogrid.org" title="BioGRID Search for Protein Interactions, Chemical Interactions, and Genetic Interactions">
+                    <span class="unbold">Bio</span>GRID<sup>3.1</sup>
+                </a>
+            </div>
+            
+            <div id="links">
+                <ul>
+                	<li><a href="http://thebiogrid.org" title='Search the BioGRID'>home</a></li>
+                    <li><a href="http://wiki.thebiogrid.org">help wiki</a></li>
+                    <li><a href="http://wiki.thebiogrid.org/doku.php/tools">tools</a></li>
+                    <li><a href="http://wiki.thebiogrid.org/doku.php/contribute">contribute</a></li>
+                    <li><a href="http://wiki.thebiogrid.org/doku.php/statistics">statistics</a></li>
+                    <li><a href="http://thebiogrid.org/download.php">downloads</a></li>
+                    <li><a href="http://wiki.thebiogrid.org/doku.php/partners">partners</a></li>
+                    <li><a href="http://wiki.thebiogrid.org/doku.php/aboutus">about us</a></li>
+                    <!--<li><a class="rightbar" href="{SITE_URL}">about us</a></li>
+                    <li><a href="{SITE_URL}">signup</a></li>
+                    <li><a href="{SITE_URL}">login</a></li>-->
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div id="insidetext">
+            <h1>BioGRID REST Service</h1> 
+        </div>
+    
+	</div>
+    
+<div class="dokuwiki">
+  
+  <div class="stylehead">
+
+    
+	<br />
+
+        <div class="breadcrumbs">
+      <span class="bchead">You are here: </span><a href="/doku.php/start"  title="start">Help and Support Resources</a> &raquo; <a href="/doku.php/biogridrest"  title="biogridrest">BioGRID REST Service</a>    </div>
+    
+  </div>
+  
+  
+  <div class="page">
+    <!-- wikipage start -->
+    <!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="#biogrid_rest_service" class="toc">BioGRID REST Service</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="#examples" class="toc">Examples</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="#list_of_parameters" class="toc">List of Parameters</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+
+
+<h1><a name="biogrid_rest_service" id="biogrid_rest_service">BioGRID REST Service</a></h1>
+<div class="level1">
+
+<p>
+Interaction data in BioGRID can be accessed via the BioGRID REST service. Interactions in various formats can be fetched from the BioGRID REST Service over <acronym title="Hyper Text Transfer Protocol">HTTP</acronym>, programmatically or in a browser,  at
+<a href="http://webservice.thebiogrid.org/resources/interactions/" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/</a>
+This <acronym title="Uniform Resource Locator">URL</acronym> will retrieve the first 10,000 interactions in BioGRID, ordered by the BioGRID Interaction Id as found in .tab2 files. Single interactions can be retrieved by appending this <acronym title="Uniform Resource Locator">URL</acronym> with a Biogrid Interaction ID (e.g. <a href="http://webservice.thebiogrid.org/resources/interactions/103" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/103"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/103</a>). The results list returned can be filtered by appending ?parameter1=value1&amp; parameter2=value2 etc. to the <acronym title="Uniform Resource Locator">URL</acronym>. A full description of possible parameters is given in the table below. 
+A formal description of the REST service, in Web Application Description Language (WADL), can be found at <a href="http://webservice.thebiogrid.org/resources/application.wadl" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/application.wadl"  rel="nofollow">http://webservice.thebiogrid.org/resources/application.wadl</a>. The BioGRID REST service is updated to the latest release of BioGRID on the 2nd of each month and the BioGRID database version being accessed can be determined with the <acronym title="Uniform Resource Locator">URL</acronym>:
+<a href="http://webservice.thebiogrid.org/resources/version" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/version"  rel="nofollow">http://webservice.thebiogrid.org/resources/version</a> . 
+</p>
+
+<p>
+In addition to BioGRID interaction data, interactions from the IMEx databases have been included (see <a href="/doku.php/imex_import" class="wikilink1" title="imex_import">Import of IMEx interactions into BioGRID REST Service</a>) as an option  for retrieval in the REST service data. The <acronym title="Uniform Resource Locator">URL</acronym> parameter “sourceDatabaseList” has a default value of “BioGRID”, but if set to “BioGRID|MINT|INTACT|DIP” the query will retrieve interactions from all databases. Source database origin can be found in the “Source Databases” column of the retrieved data and the “Source Database Identifiers” column (if the parameter format=extendedTab2 is set) allows mapping back to the interaction in the original database. IMEx interaction files are downloaded from their respective websites and integrated into the REST service to coinicide with each monthly BioGRID release. These additional interactions are only available through the BioGRid REST Service and are not currently present in the BioGRID download files.
+</p>
+
+</div>
+
+<h2><a name="examples" id="examples">Examples</a></h2>
+<div class="level2">
+
+</div>
+
+<h4><a name="interactions_for_human_mdm2_gene" id="interactions_for_human_mdm2_gene">Interactions for human MDM2 gene:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions?searchNames=true&amp;geneList=MDM2&amp;includeInteractors=true&amp;includeInteractorInteractions=false&amp;taxId=9606" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions?searchNames=true&amp;geneList=MDM2&amp;includeInteractors=true&amp;includeInteractorInteractions=false&amp;taxId=9606"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions?searchNames=true&amp;geneList=MDM2&amp;includeInteractors=true&amp;includeInteractorInteractions=false&amp;taxId=9606</a>
+</p>
+
+</div>
+
+<h4><a name="interactions_for_human_mdm2_gene_and_interactions_between_all_interactors_of_mdm2" id="interactions_for_human_mdm2_gene_and_interactions_between_all_interactors_of_mdm2">Interactions for human MDM2 gene and interactions between all interactors of MDM2:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=MDM2&amp;taxId=9606&amp;includeInteractors=true&amp;includeInteractorInteractions=true" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=MDM2&amp;taxId=9606&amp;includeInteractors=true&amp;includeInteractorInteractions=true"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=MDM2&amp;taxId=9606&amp;includeInteractors=true&amp;includeInteractorInteractions=true</a>
+</p>
+
+</div>
+
+<h4><a name="first_10_interactions_for_human_mdm2_gene" id="first_10_interactions_for_human_mdm2_gene">First 10 interactions for human MDM2 gene:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=MDM2&amp;includeInteractors=true&amp;includeInteractorInteractions=false&amp;taxId=9606&amp;start=0&amp;max=10" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=MDM2&amp;includeInteractors=true&amp;includeInteractorInteractions=false&amp;taxId=9606&amp;start=0&amp;max=10"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=MDM2&amp;includeInteractors=true&amp;includeInteractorInteractions=false&amp;taxId=9606&amp;start=0&amp;max=10</a>
+</p>
+
+</div>
+
+<h4><a name="interactions_between_s_cerevisiae_cdc27_apc1_and_apc2" id="interactions_between_s_cerevisiae_cdc27_apc1_and_apc2">Interactions between S. cerevisiae CDC27, APC1 and APC2:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27%7Capc1%7Capc2&amp;taxId=4932" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27%7Capc1%7Capc2&amp;taxId=4932"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27|apc1|apc2&amp;taxId=4932</a>
+</p>
+
+</div>
+
+<h4><a name="interactions_from_pubmed_ids_18316726_and_17662948" id="interactions_from_pubmed_ids_18316726_and_17662948">Interactions from pubmed IDs 18316726 and 17662948:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?pubmedList=18316726%7C17662948" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?pubmedList=18316726%7C17662948"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?pubmedList=18316726|17662948</a>
+</p>
+
+</div>
+
+<h4><a name="interactions_between_cdc27_apc1_and_apc2_from_publications_with_50_or_less_interactions" id="interactions_between_cdc27_apc1_and_apc2_from_publications_with_50_or_less_interactions">Interactions between CDC27, APC1 and APC2 from publications with 50 or less interactions:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27%7Capc1%7Capc2&amp;htpThreshold=50&amp;excludePubmeds=true" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27%7Capc1%7Capc2&amp;htpThreshold=50&amp;excludePubmeds=true"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27|apc1|apc2&amp;htpThreshold=50&amp;excludePubmeds=true</a>
+</p>
+
+</div>
+
+<h4><a name="interactions_between_cdc27_apc1_and_apc2_excluding_affinity_capture-ms_and_two-hybrid_data" id="interactions_between_cdc27_apc1_and_apc2_excluding_affinity_capture-ms_and_two-hybrid_data">Interactions between CDC27, APC1 and APC2 excluding ‘Affinity Capture-MS’ and ‘Two-hybrid’ data:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27%7Capc1%7Capc2&amp;evidenceList=Affinity Capture-MS%7CTwo-hybrid" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27%7Capc1%7Capc2&amp;evidenceList=Affinity Capture-MS%7CTwo-hybrid"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?searchNames=true&amp;geneList=cdc27|apc1|apc2&amp;evidenceList=Affinity Capture-MS|Two-hybrid</a>
+</p>
+
+</div>
+
+<h4><a name="interactions_from_pubmed_id18316726_excluding_those_containing_htlf" id="interactions_from_pubmed_id18316726_excluding_those_containing_htlf">Interactions from pubmed ID18316726, excluding those containing HTLF:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?pubmedList=18316726&amp;searchNames=true&amp;geneList=HLTF&amp;excludeGenes=true" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?pubmedList=18316726&amp;searchNames=true&amp;geneList=HLTF&amp;excludeGenes=true"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?pubmedList=18316726&amp;searchNames=true&amp;geneList=HLTF&amp;excludeGenes=true</a>
+</p>
+
+</div>
+
+<h4><a name="interactions_between_genes_with_genbank_dna_gi_82502895_tp53_or_158261704_mdm2_in_extendedtab2_format_with_a_header" id="interactions_between_genes_with_genbank_dna_gi_82502895_tp53_or_158261704_mdm2_in_extendedtab2_format_with_a_header">Interactions between genes with GENBANK_DNA_GI 82502895 (TP53) or 158261704 (MDM2), in extendedTab2 format with a header:</a></h4>
+<div class="level4">
+
+<p>
+
+<a href="http://webservice.thebiogrid.org/resources/interactions/?additionalIdentifierTypes=GENBANK_DNA_GI&amp;geneList=82502895%7C158261704&amp;format=extendedTab2&amp;includeHeader=true" class="urlextern" target="_blank" title="http://webservice.thebiogrid.org/resources/interactions/?additionalIdentifierTypes=GENBANK_DNA_GI&amp;geneList=82502895%7C158261704&amp;format=extendedTab2&amp;includeHeader=true"  rel="nofollow">http://webservice.thebiogrid.org/resources/interactions/?additionalIdentifierTypes=GENBANK_DNA_GI&amp;geneList=82502895|158261704&amp;format=extendedTab2&amp;includeHeader=true</a>
+</p>
+
+</div>
+
+<h2><a name="list_of_parameters" id="list_of_parameters">List of Parameters</a></h2>
+<div class="level2">
+<table class="inline">
+	<tr class="row0">
+		<th class="col0">Parameter</th><th class="col1">Type</th><th class="col2">Default</th><th class="col3">Valid Values</th><th class="col4">Description</th>
+	</tr>
+	<tr class="row1">
+		<td class="col0">start</td><td class="col1">int</td><td class="col2">0</td><td class="col3">0-2147483647</td><td class="col4">Query results are numbered from 0. Results fetched will start at this value e.g. start = 50 will skip the the first 50 results.</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">max</td><td class="col1">int</td><td class="col2">10000</td><td class="col3">1-10000</td><td class="col4">Number of results to fetch; this will be ignored if greater than 10,000, i.e. pagination using several requests is required to retrieve  more than 10,000 interactions.</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">interSpeciesExcluded</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, interactions with interactors from different species will be excluded.</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">selfInteractionsExcluded</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, interactions with one interactor will be excluded.</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0">evidenceList</td><td class="col1">string</td><td class="col2">empty</td><td class="col3">Pipe-separated list of evidence codes from <a href="http://wiki.thebiogrid.org/doku.php/experimental_systems" class="urlextern" target="_blank" title="http://wiki.thebiogrid.org/doku.php/experimental_systems"  rel="nofollow">http://wiki.thebiogrid.org/doku.php/experimental_systems</a></td><td class="col4">Any interaction evidence with its Experimental System in the list will be excluded from the results unless includeEvidence is set to true.</td>
+	</tr>
+	<tr class="row6">
+		<td class="col0">includeEvidence</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If set to true, any interaction evidence with its Experimental System in the evidenceList will be included in the result</td>
+	</tr>
+	<tr class="row7">
+		<td class="col0">geneList</td><td class="col1">string</td><td class="col2">empty</td><td class="col3">Pipe-separated list of gene names or identifiers.</td><td class="col4">Interactions between genes in this list will be fetched. This parameter is ignored if one of searchIds, searchNames, searchSynonyms is not ‘true’ and additionalIdentifierTypes is empty.</td>
+	</tr>
+	<tr class="row8">
+		<td class="col0">searchIds</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, the interactor  ENTREZ_GENE and SYSTEMATIC_NAME (orf) will be examined for a match with the geneList .</td>
+	</tr>
+	<tr class="row9">
+		<td class="col0">searchNames</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, the interactor OFFICIAL_SYMBOL will be examined for a match with the geneList.</td>
+	</tr>
+	<tr class="row10">
+		<td class="col0">searchSynonyms</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, the interactor SYNONYM will be examined for a match with the geneList.</td>
+	</tr>
+	<tr class="row11">
+		<td class="col0">additionalIdentifierTypes</td><td class="col1">string</td><td class="col2">empty</td><td class="col3">Pipe-separated list of identifier types from <a href="http://wiki.thebiogrid.org/doku.php/identifiers" class="urlextern" target="_blank" title="http://wiki.thebiogrid.org/doku.php/identifiers"  rel="nofollow">http://wiki.thebiogrid.org/doku.php/identifiers</a></td><td class="col4">Identifier types on this list are examined for a match with the geneList.</td>
+	</tr>
+	<tr class="row12">
+		<td class="col0">excludeGenes</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, interactions containing genes in the geneList will be excluded from the results. Ignored if one of searchIds, searchNames, searchSynonyms is not ‘true’ and additionalIdentifierTypes is empty.</td>
+	</tr>
+	<tr class="row13">
+		<td class="col0">includeInteractors</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, in addition to interactions between genes on the geneList, interactions will also be fetched which have only one interactor on the geneList i.e. the geneList’s first order interactors will be included</td>
+	</tr>
+	<tr class="row14">
+		<td class="col0">includeInteractorInteractions</td><td class="col1">boolean</td><td class="col2">TRUE</td><td class="col3">true, false</td><td class="col4">If ‘true’ interactions between the geneList’s first order interactors will be included. Ignored if includeInteractors is ‘false’ or if excludeGenes is set to ‘true’.</td>
+	</tr>
+	<tr class="row15">
+		<td class="col0">pubmedList</td><td class="col1">string</td><td class="col2">empty string</td><td class="col3">Pipe-separated list of pubmed IDs</td><td class="col4">Interactions will be fetched whose Pubmed Id is/ is not in this list, depending on the value of excludePubmeds.</td>
+	</tr>
+	<tr class="row16">
+		<td class="col0">excludePubmeds</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘false’, interactions with Pubmed ID in pubmedList will be included in the results; if ‘true’ they will be excluded.</td>
+	</tr>
+	<tr class="row17">
+		<td class="col0">htpThreshold</td><td class="col1">int</td><td class="col2">2147483647 (maximum 32-bit integer)</td><td class="col3">0-2147483647</td><td class="col4">Interactions whose Pubmed ID has more than this number of interactions will be excluded from the results. Ignored if excludePubmeds is ‘false’.</td>
+	</tr>
+	<tr class="row18">
+		<td class="col0">taxId</td><td class="col1">string</td><td class="col2">“All”</td><td class="col3">Any NCBI taxonomy identifier or “All”</td><td class="col4">Only interactions with at least one interactor with this NCBI taxonomy id will be included in the results.</td>
+	</tr>
+	<tr class="row19">
+		<td class="col0">includeHeader</td><td class="col1">boolean</td><td class="col2">FALSE</td><td class="col3">true, false</td><td class="col4">If ‘true’, the first line of the result will be a BioGRID column header, appropriate for the format parameter (‘count’ format has no header).</td>
+	</tr>
+	<tr class="row20">
+		<td class="col0">sourceDatabaseList</td><td class="col1">string</td><td class="col2">“BioGRID”</td><td class="col3">Pipe-separated list of database names, currently including BioGRID, INTACT, MINT, DIP</td><td class="col4">Only interactions with Source Database on this list will be returned.</td>
+	</tr>
+	<tr class="row21">
+		<td class="col0">sourceDatabaseIdList</td><td class="col1">string</td><td class="col2">empty</td><td class="col3">Pipe-separated list of source database identifiers</td><td class="col4">Interactions with interaction ID in the list will be included in the results.</td>
+	</tr>
+	<tr class="row22">
+		<td class="col0">format</td><td class="col1">string</td><td class="col2">“tab2”</td><td class="col3">“tab1”,”tab2,”extendedTab2”,”count”</td><td class="col4">‘tab1’ and ‘tab2’ will return data in .tab or .tab2 format respectively. ‘extendedTab2’ will return data in .tab2 file format with extra fields fields for “Source Database Identifiers”, “Number of Interactions per Publication” and “Additional Identifiers”. “Source Database Identifiers” are listed in order corresponding to the values in “Source Databases” e.g if an interaction has BIOGRID|INTACT|MINT in Source_Database, it might have 821622|EBI-1792672|MINT-1999291</td>
+	</tr>
+</table>
+
+</div>
+
+    <!-- wikipage stop -->
+  </div>
+
+  <div class="clearer">&nbsp;</div>
+
+  
+  <div class="stylefoot">
+
+    <div class="meta">
+      <div class="user">
+              </div>
+      <div class="doc">
+        biogridrest.txt &middot; Last modified: 2010/12/07 07:12 by biogridadmin      </div>
+    </div>
+
+   
+    <div class="bar" id="bar__bottom">
+      <div class="bar-left" id="bar__bottomleft">
+      	      </div>
+      <div class="bar-right" id="bar__bottomright">
+                <form class="button btn_login" method="get" action="/doku.php/biogridrest"><div class="no"><input type="hidden" name="do" value="login" /><input type="hidden" name="sectok" value="18a89b231fcbfba5aab62d19d519aedd" /><input type="submit" value="Login" class="button" title="Login" /></div></form>      </div>
+      <div class="clearer"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="no"><img src="/lib/exe/indexer.php?id=biogridrest&amp;1299215512" width="1" height="1" alt=""  /></div>
+<div id="footer">
+		Copyright &copy; 2011 <a target='_blank' href='http://www.tyerslab.com' title='Mike Tyers Lab'>TyersLab.com</a>, All Rights Reserved.
+</div>
+
+<div id="footer-links">
+	<a href='{WIKI_URL}/doku.php/terms_and_conditions' title="BioGRID Terms and Conditions">Terms and Conditions</a> | 
+    <a href='{WIKI_URL}/doku.php/privacy_policy' title="BioGRID Privacy Policy">Privacy Policy</a> | 
+    <a target='_blank' href='http://biodata.mshri.on.ca/osprey' title="Osprey Network Visualization System">Osprey Network Visualization System</a> |
+    <a target='_blank' href='http://www.tyerslab.com' title='Mike Tyers Lab Webpage'>TyersLab.com</a> |
+    <a target='_blank' href='http://www.yeastgenome.org' title='Saccharomyces Genome Database'>SGD</a>
+</div>
+
+</div>
+</div>
+
+ <script type="text/javascript">
+ var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+ </script>
+ <script type="text/javascript">
+ try {
+ var pageTracker = _gat._getTracker("UA-239330-2");
+ pageTracker._setDomainName(".thebiogrid.org");
+ pageTracker._trackPageview();
+ } catch(err) {}</script>
+
+</body>
+</html>

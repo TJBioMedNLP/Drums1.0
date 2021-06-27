@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>QSCOP--BLAST - Protein Sequence Search</title>
+<link href="/css/came-style.css" rel="stylesheet" type="text/css" media="screen" />
+<script language="javascript">
+function limitCkbSelections(ckb){
+	var count = 0;
+	var struct_arr = new Array();
+	for (j = 0; j < document.superimpose.checkb.length; j++) {
+		if (eval("document.superimpose.checkb[" + j + "].checked") == true) {
+			count++;
+			if (count > 2) {
+				document.superimpose.checkb[ckb].checked = false;
+				alert("Select only two structures!");
+			} else {
+				struct_arr[count-1] = document.superimpose.checkb[j].value;
+			}
+		}
+	}
+	if (struct_arr.length == 2) {
+		var query  = struct_arr[0];
+		var target  = struct_arr[1];
+		return window.open("http://topmatch.services.came.sbg.ac.at/index.php?query=" + query + "&target=" + target, "TopMatchWin", "height=750,width=850,location=0,menubar=0,scrollbars=1,resizable=1,status=1");
+	}
+}
+</script>
+</head>
+<body>
+
+<div id="header_left">
+<a href="http://www.came.sbg.ac.at" title="came-website" target="_blank"><img src="/images/site-design/came-advance.png" alt="came_logo" width="369" height="60" border="0" /></a>
+</div>
+<div id="header_right"><img src="/images/site-design/top_corner.gif" alt="top_corner" width="33" height="60" border="0" /></div>
+<div id="header_center"><h1>QSCOP--BLAST</h1></div>
+<div id="container">
+<div id="wrapper">
+<div id="content">
+<h1 name="res_anchor" id="res_anchor">QSCOP--BLAST - Protein Sequence Search</h1>
+
+<div class='header_body'>Query</div>
+
+<script type="text/javascript">
+//<![CDATA[
+function validate_qscopblast(frm) {
+  var value = '';
+  var errFlag = new Array();
+  var _qfGroups = {};
+  _qfMsg = '';
+
+  value = frm.elements['seq'].value;
+  if (value == '' && !errFlag['seq']) {
+    errFlag['seq'] = true;
+    _qfMsg = _qfMsg + '\n - Sequence is required';
+  }
+
+  value = frm.elements['seq'].value;
+  if (value != '' && value.length > 10000 && !errFlag['seq']) {
+    errFlag['seq'] = true;
+    _qfMsg = _qfMsg + '\n - Sequence is too large';
+  }
+
+  value = frm.elements['grpBlastIter[expect]'].value;
+  if (value == '' && !errFlag['grpBlastIter']) {
+    errFlag['grpBlastIter'] = true;
+    _qfMsg = _qfMsg + '\n - Expect threshold is required';
+  }
+
+  if (_qfMsg != '') {
+    _qfMsg = 'Invalid information entered.' + _qfMsg;
+    _qfMsg = _qfMsg + '\nPlease correct these fields.';
+    alert(_qfMsg);
+    return false;
+  }
+  return true;
+}
+//]]>
+</script>
+
+<form action="/index.php" method="post" name="qscopblast" id="qscopblast" onreset="if (typeof _hs_setupOnReset != 'undefined') { return _hs_setupOnReset(this, ['grpBlastMatrix']); } " onsubmit="try { var myValidator = validate_qscopblast; } catch(e) { return true; } return myValidator(this);">
+<div>
+<table border="0">
+
+	<tr>
+		<td style="white-space: nowrap; background-color: #CCCCCC;" align="left" valign="top" colspan="2"><b>BLAST Paramters</b></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Matrix and Gap Costs:</b></td>
+		<td valign="top" align="left">	<script type="text/javascript">
+//<![CDATA[
+function _hs_findOptions(ary, keys)
+{
+    if (ary == undefined) {
+        return {};
+    }
+    var key = keys.shift();
+    if (!key in ary) {
+        return {};
+    } else if (0 == keys.length) {
+        return ary[key];
+    } else {
+        return _hs_findOptions(ary[key], keys);
+    }
+}
+
+function _hs_findSelect(form, groupName, selectIndex)
+{
+    if (groupName+'['+ selectIndex +']' in form) {
+        return form[groupName+'['+ selectIndex +']']; 
+    } else {
+        return form[groupName+'['+ selectIndex +'][]']; 
+    }
+}
+
+function _hs_unescapeEntities(str)
+{
+    var div = document.createElement('div');
+    div.innerHTML = str;
+    return div.childNodes[0] ? div.childNodes[0].nodeValue : '';
+}
+
+function _hs_replaceOptions(ctl, optionList)
+{
+    var j = 0;
+    ctl.options.length = 0;
+    for (i in optionList) {
+        var optionText = (-1 == String(optionList[i]).indexOf('&'))? optionList[i]: _hs_unescapeEntities(optionList[i]);
+        ctl.options[j++] = new Option(optionText, i, false, false);
+    }
+}
+
+function _hs_setValue(ctl, value)
+{
+    var testValue = {};
+    if (value instanceof Array) {
+        for (var i = 0; i < value.length; i++) {
+            testValue[value[i]] = true;
+        }
+    } else {
+        testValue[value] = true;
+    }
+    for (var i = 0; i < ctl.options.length; i++) {
+        if (ctl.options[i].value in testValue) {
+            ctl.options[i].selected = true;
+        }
+    }
+}
+
+function _hs_swapOptions(form, groupName, selectIndex)
+{
+    var hsValue = [];
+    for (var i = 0; i <= selectIndex; i++) {
+        hsValue[i] = _hs_findSelect(form, groupName, i).value;
+    }
+
+    _hs_replaceOptions(_hs_findSelect(form, groupName, selectIndex + 1), 
+                       _hs_findOptions(_hs_options[groupName][selectIndex], hsValue));
+    if (selectIndex + 1 < _hs_options[groupName].length) {
+        _hs_swapOptions(form, groupName, selectIndex + 1);
+    }
+}
+
+function _hs_onReset(form, groupNames)
+{
+    for (var i = 0; i < groupNames.length; i++) {
+        try {
+            for (var j = 0; j <= _hs_options[groupNames[i]].length; j++) {
+                _hs_setValue(_hs_findSelect(form, groupNames[i], j), _hs_defaults[groupNames[i]][j]);
+                if (j < _hs_options[groupNames[i]].length) {
+                    _hs_replaceOptions(_hs_findSelect(form, groupNames[i], j + 1), 
+                                       _hs_findOptions(_hs_options[groupNames[i]][j], _hs_defaults[groupNames[i]].slice(0, j + 1)));
+                }
+            }
+        } catch (e) {
+            if (!(e instanceof TypeError)) {
+                throw e;
+            }
+        }
+    }
+}
+
+function _hs_setupOnReset(form, groupNames)
+{
+    setTimeout(function() { _hs_onReset(form, groupNames); }, 25);
+}
+
+function _hs_onReload()
+{
+    var ctl;
+    for (var i = 0; i < document.forms.length; i++) {
+        for (var j in _hs_defaults) {
+            if (ctl = _hs_findSelect(document.forms[i], j, 0)) {
+                for (var k = 0; k < _hs_defaults[j].length; k++) {
+                    _hs_setValue(_hs_findSelect(document.forms[i], j, k), _hs_defaults[j][k]);
+                }
+            }
+        }
+    }
+
+    if (_hs_prevOnload) {
+        _hs_prevOnload();
+    }
+}
+
+var _hs_prevOnload = null;
+if (window.onload) {
+    _hs_prevOnload = window.onload;
+}
+window.onload = _hs_onReload;
+
+var _hs_options = {};
+var _hs_defaults = {};
+
+_hs_options['grpBlastMatrix'] = [
+{ 'PAM30': { 'PAM30_7_2': 'Existence: 7, Extension: 2', 'PAM30_6_2': 'Existence: 6, Extension: 2', 'PAM30_5_2': 'Existence: 5, Extension: 2', 'PAM30_10_1': 'Existence: 10, Extension: 1', 'PAM30_9_1': 'Existence: 9, Extension: 1', 'PAM30_8_1': 'Existence: 8, Extension: 1' }, 'PAM70': { 'PAM70_8_2': 'Existence: 8, Extension: 2', 'PAM70_7_2': 'Existence: 7, Extension: 2', 'PAM70_6_2': 'Existence: 6, Extension: 2', 'PAM70_11_1': 'Existence: 11, Extension: 1', 'PAM70_10_1': 'Existence: 10, Extension: 1', 'PAM70_9_1': 'Existence: 9, Extension: 1' }, 'BLOSUM80': { 'BLOSUM80_8_2': 'Existence: 8, Extension: 2', 'BLOSUM80_7_2': 'Existence: 7, Extension: 2', 'BLOSUM80_6_2': 'Existence: 6, Extension: 2', 'BLOSUM80_11_1': 'Existence: 11, Extension: 1', 'BLOSUM80_10_1': 'Existence: 10, Extension: 1', 'BLOSUM80_9_1': 'Existence: 9, Extension: 1' }, 'BLOSUM62': { 'BLOSUM62_9_2': 'Existence: 9, Extension: 2', 'BLOSUM62_8_2': 'Existence: 8, Extension: 2', 'BLOSUM62_7_2': 'Existence: 7, Extension: 2', 'BLOSUM62_12_1': 'Existence: 12, Extension: 1', 'BLOSUM62_11_1': 'Existence: 11, Extension: 1', 'BLOSUM62_10_1': 'Existence: 10, Extension: 1' }, 'BLOSUM45': { 'BLOSUM45_13_3': 'Existence: 13, Extension: 3', 'BLOSUM45_12_3': 'Existence: 12, Extension: 3', 'BLOSUM45_11_3': 'Existence: 11, Extension: 3', 'BLOSUM45_10_3': 'Existence: 10, Extension: 3', 'BLOSUM45_15_2': 'Existence: 15, Extension: 2', 'BLOSUM45_14_2': 'Existence: 14, Extension: 2', 'BLOSUM45_13_2': 'Existence: 13, Extension: 2', 'BLOSUM45_12_2': 'Existence: 12, Extension: 2', 'BLOSUM45_19_1': 'Existence: 19, Extension: 1', 'BLOSUM45_18_1': 'Existence: 18, Extension: 1', 'BLOSUM45_17_1': 'Existence: 17, Extension: 1', 'BLOSUM45_16_1': 'Existence: 16, Extension: 1' } }
+];
+_hs_defaults['grpBlastMatrix'] = ['BLOSUM62', 'BLOSUM62_11_1'];
+//]]>
+</script><select name="grpBlastMatrix[0]" onchange="_hs_swapOptions(this.form, 'grpBlastMatrix', 0);">
+	<option value="PAM30">PAM30</option>
+	<option value="PAM70">PAM70</option>
+	<option value="BLOSUM45">BLOSUM45</option>
+	<option value="BLOSUM62" selected="selected">BLOSUM62</option>
+	<option value="BLOSUM80">BLOSUM80</option>
+</select>&nbsp;<select name="grpBlastMatrix[1]">
+	<option value="BLOSUM62_9_2">Existence: 9, Extension: 2</option>
+	<option value="BLOSUM62_8_2">Existence: 8, Extension: 2</option>
+	<option value="BLOSUM62_7_2">Existence: 7, Extension: 2</option>
+	<option value="BLOSUM62_12_1">Existence: 12, Extension: 1</option>
+	<option value="BLOSUM62_11_1" selected="selected">Existence: 11, Extension: 1</option>
+	<option value="BLOSUM62_10_1">Existence: 10, Extension: 1</option>
+</select></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Iterations and Expect Threshold: </b></td>
+		<td valign="top" align="left">	<select name="grpBlastIter[iter]">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+</select>&nbsp;<input value="10" name="grpBlastIter[expect]" type="text" /></td>
+	</tr>
+	<tr>
+		<td style="white-space: nowrap; background-color: #CCCCCC;" align="left" valign="top" colspan="2"><b>Filter and Results</b></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Layer, Max.-Results: </b></td>
+		<td valign="top" align="left">	<select name="grpLayerResults[layer]">
+	<option value="domain">Domain</option>
+	<option value="equivalent">Equivalent</option>
+	<option value="similar">Similar</option>
+	<option value="related">Related</option>
+	<option value="distant">Distant</option>
+</select>&nbsp;<select name="grpLayerResults[display]">
+	<option value="10">10</option>
+	<option value="30">30</option>
+	<option value="50">50</option>
+	<option value="100">100</option>
+	<option value="200">200</option>
+</select></td>
+	</tr>
+	<tr>
+		<td style="white-space: nowrap; background-color: #CCCCCC;" align="left" valign="top" colspan="2"><b>Protein Sequence Query</b></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><span style="color: #ff0000">*</span><b></b></td>
+		<td valign="top" align="left">	<textarea class="seq_textarea" rows="7" cols="65" name="seq"></textarea></td>
+	</tr>
+	<tr>
+		<td style="white-space: nowrap; background-color: #CCCCCC;" align="left" valign="top" colspan="2"><b>This service is free for academic/non-for-profit users. For all other uses please contact <a href="http://www.proceryon.com" target="_blank" >proceryon.com</a></b></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b></b></td>
+		<td valign="top" align="left">	<input name="submit" value="Submit" type="submit" />&nbsp;<input onclick="javascript:location.href='http://qscop-blast.services.came.sbg.ac.at/';" name="reset" value="Reset" type="reset" /></td>
+	</tr>
+	<tr>
+		<td></td>
+	<td align="left" valign="top"><span style="font-size:80%; color:#ff0000;">*</span><span style="font-size:80%;"> denotes required field</span></td>
+	</tr>
+</table>
+</div>
+</form>
+</div>
+</div>
+<div id="navigation">
+<p><strong>Important Note</strong> <br /><p>This server is no longer maintained and updated. We are planning an entire relaunch of the service with considerably more features until the end of 2008. Please be sure to check our <b>Services</b> page at <a href='http://www.came.sbg.ac.at' target='_blank'>http://www.came.sbg.ac.at</a> for further details and continuous updates.</p> </p>
+<p><strong>Description</strong> <br />
+<p>QSCOP-BLAST is a service that uses <a href="http://www.ncbi.nlm.nih.gov/BLAST/" target="_blank">BLAST</a> to search the <a href="http://qscop.services.came.sbg.ac.at" target="_blank">QSCOP</a> (Quantitative SCOP) server, an extension of classic <a href="http://scop.mrc-lmb.cam.ac.uk/scop" target="_blank">SCOP</a> (Structural Classification of Proteins). QSCOP endows classic SCOP Families with quantified structural information which classic SCOP does not provide. Moreover, QSCOP is concurrent with PDB (the Protein Data Base), containing all protein structures currently available. Although BLAST is a sequence comparison tool, any strong or weak hit found in QSCOP retrieves the complete set of structural homologues classified in QSCOP. The structural diversity and redundancy of the proteins retrieved may be controlled by the user.</p>
+ </p>
+<p><strong>Usage</strong> <br />
+<p>Insert your protein sequence in FASTA format in the text field on the left side, and select the classification layer from the drop down menu to reduce redundancy. The <i>Domain</i> layer results are equal to non-filtered lists whereas the selection of the <i>Distant</i> layer results in hit lists with the lowest redundancy.<br />The given standard BLAST parameters are explained on the BLAST webpage, except the Iterations drop down box, which allows the selection of the PSI-BLAST iterations (1 is equivalent to a standard BLAST run).<br />On the result list you can superimpose and display two structures by marking the accordant check boxes (<i>currently unavailable</i>).
+</p> </p>
+</div>
+<div id="extra">
+<p><strong>Citation</strong> <br />
+<p><a href="http://dx.doi.org/10.1093/nar/gkm264" target="_blank">Suhrer, S.J., Gruber, M. and Sippl, M.J. (2006) QSCOP-BLAST--fast retrieval of quantified structural information for protein sequences of unknown structure. <i>Nucleic Acids Res.</i> [Epub ahead of print]</a></p>
+ </p>
+</div>
+<div id="footer">
+<a href="http://www.uni-salzburg.at" title="uni-salzburg" target="_blank">
+<img src="/images/site-design/uni-logo.png" alt="uni_logo" width="118" height="30" border="0" />
+</a>
+</div>
+</div>
+
+
+</body>
+</html>

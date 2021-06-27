@@ -1,0 +1,689 @@
+
+<html>
+<head>
+<title>Sonography</title>
+<meta name="Description" content="Sonography.it: le tecniche di esecuzione e riconoscimento delle immagini; la tecnica e la semeiotica ecografica">
+<meta name="Keywords" content="tecniche ecografiche">
+<link rel="stylesheet" href="/cm/css/global.css" type="text/css">
+<script language="javascript">
+
+function popnoscroll(linkpop,w,h,scroll) {
+LeftPosition =(screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+window.open(linkpop,'new','width='+w+',height='+h+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+'')
+}
+
+function setBg(r, s)
+{
+if (s=='on') {
+r.bgColor = '#C2D6EB'
+}
+else
+{
+r.bgColor = '#FFFFFF'
+}
+
+}
+
+</script>
+
+<style type="text/css">
+
+#lman{
+position: absolute;
+width:229px;
+height:241px;
+left:133px; 
+top:131px;
+visibility: visible;
+z-index:199
+}
+
+#lpiedi{
+position: absolute;
+width:41px;
+height:21px;
+left:230px; 
+top:353px;
+visibility: hidden;
+z-index:200
+}
+
+#lcaviglie{
+position: absolute;
+width:35px;
+height:18 px;
+left:233px; 
+top:342px;
+visibility: hidden;
+z-index:201
+}
+
+#lginocchia{
+position: absolute;
+width:47px;
+height:30 px;
+left:227px; 
+top:288px;
+visibility: hidden;
+z-index:202
+}
+
+#lanche{
+position: absolute;
+width:49px;
+height:27 px;
+left:226px; 
+top:224px;
+visibility: hidden;
+z-index:202
+}
+
+#lmanosx{
+position: absolute;
+width:23px;
+height:16 px;
+left:136px; 
+top:176px;
+visibility: hidden;
+z-index:202
+}
+
+#lmanodx{
+position: absolute;
+width:21px;
+height:19 px;
+left:344px; 
+top:175px;
+visibility: hidden;
+z-index:202
+}
+
+#lpolsosx{
+position: absolute;
+width:20px;
+height:10 px;
+left:155px; 
+top:174px;
+visibility: hidden;
+z-index:202
+}
+
+#lpolsodx{
+position: absolute;
+width:19px;
+height:10 px;
+left:327px; 
+top:175px;
+visibility: hidden;
+z-index:202
+}
+
+
+#lgomitosx{
+position: absolute;
+width:19px;
+height:15px;
+left:188px; 
+top:173px;
+visibility: hidden;
+z-index:202
+}
+
+#lgomitodx{
+position: absolute;
+width:20px;
+height:16px;
+left:296px; 
+top:172px;
+visibility: hidden;
+z-index:202
+}
+
+
+#lspalle{
+position: absolute;
+width:73px;
+height:22 px;
+left:214px; 
+top:161px;
+visibility: hidden;
+z-index:202
+}
+
+</style>
+<script language="javascript">
+var n=navigator.userAgent.toLowerCase();
+IE=(document.all)?true:false;
+NS6=(!document.all && document.getElementById)?true:false;
+if (IE==false && NS6==false) alert("browser could be not compatible with the system");
+
+function rollover(s)
+{
+if (!NS6) eval("l"+s+".style.visibility='visible'");
+else eval("document.getElementById(\"l"+s+"\").style.visibility='visible'");
+
+}
+
+function rollout(s)
+{
+if (!NS6) eval("l"+s+".style.visibility='hidden'");
+else eval("document.getElementById(\"l"+s+"\").style.visibility='hidden'");
+
+}
+
+
+</script>
+
+
+
+
+<script language="javascript">
+
+var scrollerdelay='3000' 
+var scrollerwidth='240px'
+var scrollerheight='50px'
+var scrollerbgcolor='#ffffff'
+var scrollerbackground=''
+//CONTENUTI
+var messages=new Array()
+
+messages[0]="<font face='Arial'><a href='/cont/3610arc/0509/0601/'>EULAR's First Course on Advanced Rheumatological Ultrasound</a></font>"
+
+messages[1]="<font face='Arial'><a href='/cont/3610arc/0509/0600/'>Introductory Course on Musculoskeletal Ultrasound in Rheumatology</a></font>"
+
+var ie=document.all
+var dom=document.getElementById
+
+if (messages.length>2)
+i=2
+else
+i=0
+
+function move1(whichlayer){
+tlayer=eval(whichlayer)
+if (tlayer.top>0&&tlayer.top<=5){
+tlayer.top=0
+setTimeout("move1(tlayer)",scrollerdelay)
+setTimeout("move2(document.main.document.second)",scrollerdelay)
+return
+}
+if (tlayer.top>=tlayer.document.height*-1){
+tlayer.top-=5
+setTimeout("move1(tlayer)",50)
+}
+else{
+tlayer.top=parseInt(scrollerheight)
+tlayer.document.write(messages[i])
+tlayer.document.close()
+if (i==messages.length-1)
+i=0
+else
+i++
+}
+}
+
+function move2(whichlayer){
+tlayer2=eval(whichlayer)
+if (tlayer2.top>0&&tlayer2.top<=5){
+tlayer2.top=0
+setTimeout("move2(tlayer2)",scrollerdelay)
+setTimeout("move1(document.main.document.first)",scrollerdelay)
+return
+}
+if (tlayer2.top>=tlayer2.document.height*-1){
+tlayer2.top-=5
+setTimeout("move2(tlayer2)",50)
+}
+else{
+tlayer2.top=parseInt(scrollerheight)
+tlayer2.document.write(messages[i])
+tlayer2.document.close()
+if (i==messages.length-1)
+i=0
+else
+i++
+}
+}
+
+function move3(whichdiv){
+tdiv=eval(whichdiv)
+if (parseInt(tdiv.style.top)>0&&parseInt(tdiv.style.top)<=5){
+tdiv.style.top=0+"px"
+setTimeout("move3(tdiv)",scrollerdelay)
+setTimeout("move4(second2_obj)",scrollerdelay)
+return
+}
+if (parseInt(tdiv.style.top)>=tdiv.offsetHeight*-1){
+tdiv.style.top=parseInt(tdiv.style.top)-5+"px"
+setTimeout("move3(tdiv)",50)
+}
+else{
+tdiv.style.top=parseInt(scrollerheight)
+tdiv.innerHTML=messages[i]
+if (i==messages.length-1)
+i=0
+else
+i++
+}
+}
+
+function move4(whichdiv){
+tdiv2=eval(whichdiv)
+if (parseInt(tdiv2.style.top)>0&&parseInt(tdiv2.style.top)<=5){
+tdiv2.style.top=0+"px"
+setTimeout("move4(tdiv2)",scrollerdelay)
+setTimeout("move3(first2_obj)",scrollerdelay)
+return
+}
+if (parseInt(tdiv2.style.top)>=tdiv2.offsetHeight*-1){
+tdiv2.style.top=parseInt(tdiv2.style.top)-5+"px"
+setTimeout("move4(second2_obj)",50)
+}
+else{
+tdiv2.style.top=parseInt(scrollerheight)
+tdiv2.innerHTML=messages[i]
+if (i==messages.length-1)
+i=0
+else
+i++
+}
+}
+
+function startscroll(){
+if (ie||dom){
+first2_obj=ie? first2 : document.getElementById("first2")
+second2_obj=ie? second2 : document.getElementById("second2")
+move3(first2_obj)
+second2_obj.style.top=scrollerheight
+second2_obj.style.visibility='visible'
+}
+else if (document.layers){
+document.main.visibility='show'
+move1(document.main.document.first)
+document.main.document.second.top=parseInt(scrollerheight)+5
+document.main.document.second.visibility='show'
+}
+}
+window.onload=startscroll
+</script>
+</head>
+<body leftmargin="200" rightmargin="0" topmargin="0" bottommargin="0" bgcolor="" onLoad="this.focus()">
+<!-- testata -->
+<table border="0" cellpadding="0" cellspacing="0" style="width:760px" bgcolor="#FFFFFF">
+<tr><td style="width:280px" align="left" valign="top"><a href="/"><img src="/cm/img/logo.gif" border="0"></a></td><td style="width:293px" background="/cm/img/top_s1.gif" align="left" valign="top"><img src="/cm/img/unive.gif"></td><td style="width:187px" background="/cm/img/top_s2.gif" align="left" valign="top"><img src="/cm/img/abbott.gif"></td></tr>
+</table>
+<!-- fine testata -->
+<!-- menu orizzontale -->
+
+<table cellpadding="0" cellspacing="0" class="red"><tr><td>
+<table cellpadding="0" cellspacing="0" border="0"><tr>
+
+<td class="menu_off" width="144" align="center"><a href="/cont/sez.asp?s=191" class="menuo">Sonography</a></td>
+
+<td class="menu_off" width="134"><a href="/cont/sez.asp?s=343" class="menuo">Self-test</a> </td>
+
+<td class="menu_red" width="128"><a href="/cont/sez.asp?s=193" class="menuob">Virtual Board</a></td>
+
+</tr></table>
+</td><td>&nbsp;</td><td align="center"><a href="/" class="menuob">Home</a></td><td align="center"><a href="javascript:popnoscroll('/cont/contatti.asp','345','350','no')" class="menuob">Contacts</a></td><td align="center"><a href="http://www.sonography.it" class="menuob">Italian Site</a></td></tr></table>
+<!-- fine menu orizzontale -->
+<!-- tabella titolo-->
+<table cellpadding="0" cellspacing="0" class="main" style="padding-left:13px; "><tr><td><img src="/cm/img/tit_tecniche.gif"></td></tr></table>
+<!-- fine tabella titolo -->
+<!-- tabella Principale-->
+<table cellpadding="0" cellspacing="0" class="main">
+<tr><td valign="top" style="padding-left:13px; ">
+<!-- tabella tecnica hp -->
+<table class="sx" cellpadding="0" cellspacing="0">
+<tr><td valign="top">
+<table class="testo" width="174" cellpadding="0" cellspacing="0" border="0"><tr>
+  <td> Interactive learning session about sonographic technique and signs<br>
+    <br>Choose an anatomical region:<br>
+    <br></td></tr></table>
+<table cellpadding="0" cellspacing="0" class="testo" border="0">
+
+<!-- commento sezioni tutte attive -->
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('spalle')" onMouseOut="javascript:rollout('spalle');"><b><a href="/cont/2010ant" class="anatlink">Shoulder</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('gomitosx');rollover('gomitodx');" onMouseOut="javascript:rollout('gomitosx');rollout('gomitodx');"><b>
+
+<a href="/cont/2100ant"  class="anatlink">
+
+Elbow
+
+</a>
+
+</b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('polsosx');rollover('polsodx')" onMouseOut="javascript:rollout('polsosx');rollout('polsodx');"><b>
+
+<a href="/cont/2160vol"  class="anatlink">
+
+Wrist
+
+</a>
+
+</b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('manosx');rollover('manodx')" onMouseOut="javascript:rollout('manosx');rollout('manodx');"><b>
+
+<a href="/cont/2260dor"  class="anatlink">
+
+Hand
+
+</a>
+
+</b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('anche')" onMouseOut="javascript:rollout('anche');"><b>
+
+<a href="/cont/2400ant"  class="anatlink">
+
+Hip
+
+</a>
+
+</b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('ginocchia')" onMouseOut="javascript:rollout('ginocchia');"><b>
+
+<a href="/cont/2430sup"  class="anatlink">
+
+Knee
+
+</a>
+
+</b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('caviglie')" onMouseOut="javascript:rollout('caviglie');"><b>
+
+<a href="/cont/2530ant"  class="anatlink">
+
+Ankle
+
+</a>
+
+</b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('piedi')" onMouseOut="javascript:rollout('piedi');"><b>
+
+<a href="/cont/2610pla"  class="anatlink">
+
+Foot
+
+</a>
+
+</b></td></tr>
+<!--<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('spalle')" onMouseOut="javascript:rollout('spalle');"><b><a href="/cont/2010ant/" class="anatlink">Spalla</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('gomitosx');rollover('gomitodx');" onMouseOut="javascript:rollout('gomitosx');rollout('gomitodx');"><b><a href="javascript:alert('Sezione non attiva')"  class="anatlinkdisab">Gomito</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('polsosx');rollover('polsodx')" onMouseOut="javascript:rollout('polsosx');rollout('polsodx');"><b><a href="javascript:alert('Sezione non attiva')"  class="anatlinkdisab">Polso</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('manosx');rollover('manodx')" onMouseOut="javascript:rollout('manosx');rollout('manodx');"><b><a href="/cont/2260dor"  class="anatlink">Mano</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('anche')" onMouseOut="javascript:rollout('anche');"><b><a href="javascript:alert('Sezione non attiva')"  class="anatlinkdisab">Anca</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('ginocchia')" onMouseOut="javascript:rollout('ginocchia');"><b><a href="javascript:alert('Sezione non attiva')"  class="anatlinkdisab">Ginocchio</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('caviglie')" onMouseOut="javascript:rollout('caviglie');"><b><a href="javascript:alert('Sezione non attiva')"  class="anatlinkdisab">Caviglia</a></b></td></tr>
+<tr><td><img src="/cm/img/q.gif"></td><td valign="top" style="padding-top:0px; padding-left:7px;" onMouseOver="javascript:rollover('piedi')" onMouseOut="javascript:rollout('piedi');"><b><a href="/cont/2610pla"  class="anatlink">Piede</a></b></td></tr>-->
+</table>
+</td></tr>
+</table>
+<!-- fine tab tecnica hp -->
+
+</td>
+<td align="left" valign="top">
+<!-- tabella centrale -->
+<table cellpadding="0" cellspacing="0" class="centr" border="0">
+<tr><td>
+
+
+<!--182--><!--werqwerqw-->
+<!-- tabella centrale 1 -->
+<table cellpadding="0" cellspacing="0" style="height:67px;" class="testo">
+<tr><td valign="top">
+<b>Sonography.it</b> is the distance learning website for musculoskeletal sonography education. To enter the website, it is necessary to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/cont/r.asp">register</a>&nbsp;yourself as user.
+</td></tr>
+</table>
+<!-- fine tabella centrale 1 --><!-- tabella i corsi ars -->
+<div id="ltblcentr" style="z-index:100;">
+<table cellpadding="0" cellspacing="0" width="269" >
+<tr><td background="/cm/img/toptab.gif" style="height: 18 px;"> <img src="/cm/img/lbl_ultime_news.gif"></td></tr>
+<tr><td class="hpcentr" style="height:90px;">
+<B>Events </B><BR><I>15th EULAR Sonography Course<BR>08-11 June 2008, Paris, France</I><BR><BR><B>Slide Kit</B><BR><I>E.Filippucci</I><BR><A href="/cont/slidekit/presentazione1.htm" target=_blank>Ultrasound in Rheumatology: an overview</A><BR>
+<!--<div id="placeholder" style="position:relative; width:260px; height:80px;"><br>
+<script language="JavaScript1.2">
+if (document.layers)
+document.write(messages[0])
+</script>
+</layer>
+<layer id="second" left=0 top=0 width=&{scrollerwidth}; visibility=hide>
+<script language="JavaScript1.2">
+if (document.layers)
+document.write(messages[dyndetermine=(messages.length==1)? 0 : 1])
+</script>
+</layer>
+</ilayer>
+
+<script language="JavaScript1.2">
+if (ie||dom){
+document.writeln('<div  id="main2" style="z-index:200;position:absolute;width:'+scrollerwidth+';height:'+scrollerheight+';overflow:hidden;background-color:'+scrollerbgcolor+' ;background-image:url('+scrollerbackground+')">')
+document.writeln('<div style="position:absolute;width:'+scrollerwidth+';height:'+scrollerheight+';clip:rect(0 '+scrollerwidth+' '+scrollerheight+' 0);left:0px;top:0px">')
+document.writeln('<div id="first2" style="z-index:100;position:absolute;width:'+scrollerwidth+';left:0px;top:1px;">')
+document.write(messages[0])
+document.writeln('</div>')
+document.writeln('<div id="second2" style="z-index:200;position:absolute;width:'+scrollerwidth+';left:0px;top:0px;visibility:hidden">')
+document.write(messages[dyndetermine=(messages.length==1)? 0 : 1])
+document.writeln('</div>')
+document.writeln('</div>')
+document.writeln('</div>')
+}
+</script>}
+</script>
+</div>-->
+</td></tr>
+</table>
+<!-- fine tabella i corsi ars -->
+<img src="/cm/img/t.gif" width="5" height="0" border="0">
+<table cellpadding="0" cellspacing="0" width="269">
+<tr><td background="/cm/img/toptab.gif" style="height: 18 px;"><img src="/cm/img/lbl_memorabilia.gif"></td></tr>
+<tr><td class="hpcentr">
+<table class="testo" width="100%" cellpadding="2" cellspacing="0">
+<tr valign="top">
+<td valign="top" style="padding-top:3px; " width="100%"><a href="/cont/3390imm/0703/2000/" class="testonohover">Shoulder. Lateral longitudinal scan. Complete rupture of the...</a></td><td width="65" align="center" ><a href="/cont/3390imm/0703/2000/" class="testonohover"><img src="/dse/resizeimg.aspx?i=/cont/3390imm/0703/2000/12809imhp1.jpg&e=jpg&w=55&h=30" border="0"></a></td>
+</tr>
+</table></td></tr>
+</table>
+
+<!-- <A class=testonohover href="/cont/sez.asp?s=189">Online tutte le foto del corso tenuto a Jesi dal 23 al 25 febbraio 2005</A> -->
+</div> <!--ltblcentr-->
+</td></tr>
+</table>
+<!-- fine tabella centrale -->
+</td>
+<td valign="top">
+<!-- tabella dx -->
+<table cellpadding="0" cellspacing="0" class="dx" border="0">
+<tr valign="top"><td>
+<!-- tabella menu -->
+
+<table class="testo" width="189" cellpadding="0" cellspacing="0">
+<tr><td><img src="/cm/img/t.gif" width="1" height="2"></td></tr>
+
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=352" class="mn">Mission Statement</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=184" class="mn">Image Gallery</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=346" class="mn">Video</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=347" class="mn">Slide Kit</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=349" class="mn">Events</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=187" class="mn">Links</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=186" class="mn">Bibliography</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+<tr><td class="menu" onMouseOver="javascript:this.className='menu_roll'" onMouseOut="javascript:this.className='menu'"><a href="/cont/sez.asp?s=373" class="mn">Books</a></td></tr>
+
+<tr><td><img src="/cm/img/t.gif" width="1" height="7"></td></tr>
+
+</table>
+
+<!-- fine tabella menu -->
+</td></tr>
+</table>
+<!-- fine tabella dx -->
+</td>
+</tr>
+</table>
+<!-- fine tabella principale -->
+
+<!-- bot -->
+<table cellpadding="0" cellspacing="0" class="bot_bord"><tr><td></td></tr></table>
+<table cellpadding="0" cellspacing="0" class="bot"><tr><td width="110" bgcolor="#993333" align="right"><img src="/cm/img/mklogin.gif">&nbsp;</td><td width="77"><a href="javascript:popnoscroll('/pop_Login.asp','280','185')"><img src="/cm/img/login_but.gif" border="0"></a></td>
+
+<td width="573" align="right"><a href="javascript:popnoscroll('/cont/notelegali.asp','345','350','no')" class="menuob">Legal Notes</a>&nbsp;&nbsp;<a href="javascript:popnoscroll('/cont/credits.asp','345','350','no')" class="menuob">Credits</a>&nbsp;&nbsp;<a href="http://www.elsevier.it" class="menuob" target="_blank">&copy; Elsevier Srl Milano</a>&nbsp;</td>
+</tr></table>
+<!-- fine bot -->
+
+<div id="lman">
+<img src="/cm/img/omino.gif" usemap="#Map" border="0">
+</div>
+<div id="lspalle">
+<img src="/cm/img/spalle_on.gif" onMouseOver="javascript:rollover('spalle')" onMouseOut="javascript:rollout('spalle')" border="0" usemap="#map_sp">
+</div>
+<div id="lgomitosx">
+<img src="/cm/img/gomito_sx.gif" onMouseOver="javascript:rollover('gomitosx');javascript:rollover('gomitodx')" onMouseOut="javascript:rollout('gomitosx');rollout('gomitodx');" border="0" usemap="#map_gosx" >
+</div>
+<div id="lgomitodx">
+<img src="/cm/img/gomito_dx.gif" onMouseOver="javascript:rollover('gomitosx');javascript:rollover('gomitodx')" onMouseOut="javascript:rollout('gomitosx');rollout('gomitodx');" border="0" usemap="#map_godx" >
+</div>
+<div id="lpolsosx">
+<img src="/cm/img/polso_sx.gif" onMouseOver="javascript:rollover('polsosx');rollover('polsodx')" onMouseOut="javascript:rollout('polsosx');rollout('polsodx')" border="0" usemap="#map_posx" >
+</div>
+<div id="lpolsodx">
+<img src="/cm/img/polso_dx.gif" onMouseOver="javascript:rollover('polsosx');rollover('polsodx')" onMouseOut="javascript:rollout('polsosx');rollout('polsodx')" border="0" usemap="#map_podx" >
+</div>
+<div id="lmanosx">
+<img src="/cm/img/mano_sx.gif" onMouseOver="javascript:rollover('manosx');rollover('manodx')" onMouseOut="javascript:rollout('manosx');rollout('manodx')" border="0" usemap="#Map_masx" >
+</div>
+<div id="lmanodx">
+<img src="/cm/img/mano_dx.gif" onMouseOver="javascript:rollover('manosx');rollover('manodx')" onMouseOut="javascript:rollout('manosx');rollout('manodx')" border="0" usemap="#Map_madx" >
+</div>
+<div id="lanche">
+<img src="/cm/img/anche_on.gif" onMouseOver="javascript:rollover('anche')" onMouseOut="javascript:rollout('anche')" border="0" usemap="#map_an" >
+</div>
+<div id="lginocchia">
+<img src="/cm/img/ginocchia_on.gif" onMouseOver="javascript:rollover('ginocchia')" onMouseOut="javascript:rollout('ginocchia')" border="0" usemap="#map_gi" >
+</div>
+<div id="lcaviglie">
+<img src="/cm/img/caviglie_on.gif" onMouseOver="javascript:rollover('caviglie')" onMouseOut="javascript:rollout('caviglie')" border="0" usemap="#map_ca" >
+</div>
+<div id="lpiedi">
+<img src="/cm/img/piedi_on.gif" onMouseOver="javascript:rollover('piedi')" onMouseOut="javascript:rollout('piedi')" border="0" usemap="#map_pi" >
+</div>
+
+
+<map name="Map">
+    <area shape="rect" coords="87,227,155,246" onMouseOver="javascript:rollover('piedi')" onMouseOut="javascript:rollout('piedi')" >
+     <area shape="rect" coords="121,211,136,223" onMouseOver="javascript:rollover('caviglie')" onMouseOut="javascript:rollout('caviglie')" >
+  <area shape="rect" coords="97,209,113,224" onMouseOver="javascript:rollover('caviglie')" onMouseOut="javascript:rollout('caviglie')" >
+  <area shape="circle" coords="104,174,11" onMouseOver="javascript:rollover('ginocchia')" onMouseOut="javascript:rollout('ginocchia')" >
+  <area shape="circle" coords="132,176,11" onMouseOver="javascript:rollover('ginocchia')" onMouseOut="javascript:rollout('ginocchia')" >
+  <area shape="rect" coords="89,87,107,127" onMouseOver="javascript:rollover('anche')" onMouseOut="javascript:rollout('anche')" >
+  <area shape="rect" coords="128,88,147,129" onMouseOver="javascript:rollover('anche')" onMouseOut="javascript:rollout('anche')" >
+  <area shape="circle" coords="15,49,13" onMouseOver="javascript:rollover('manosx');rollover('manodx')" onMouseOut="javascript:rollout('manosx');rollout('manodx')">
+  <area shape="circle" coords="219,54,12" onMouseOver="javascript:rollover('manosx');rollover('manodx')" onMouseOut="javascript:rollout('manosx');rollout('manodx')">
+  <area shape="rect" coords="28,41,38,59" onMouseOver="javascript:rollover('polsosx');rollover('polsodx');" onMouseOut="javascript:rollout('polsosx');rollout('polsodx');">
+  <area shape="rect" coords="193,41,206,60" onMouseOver="javascript:rollover('polsosx');rollover('polsodx');" onMouseOut="javascript:rollout('polsosx');rollout('polsodx');">
+  <area shape="circle" coords="64,49,8" onMouseOver="javascript:rollover('gomitosx');rollover('gomitodx');" onMouseOut="javascript:rollout('gomitosx');rollout('gomitodx');">
+  <area shape="circle" coords="170,50,8" onMouseOver="javascript:rollover('gomitosx');rollover('gomitodx');" onMouseOut="javascript:rollout('gomitosx');rollout('gomitodx');">
+  <area shape="rect" coords="82,34,109,53" onMouseOver="javascript:rollover('spalle')" onMouseOut="javascript:rollout('spalle')">
+  <area shape="rect" coords="125,33,151,52" onMouseOver="javascript:rollover('spalle')" onMouseOut="javascript:rollout('spalle')">
+</map>
+
+<map name="Map_pi">
+  <area shape="rect" coords="1,1,39,19" href="/cont/2610pla">
+</map>
+
+
+<map name="Map_ca">
+  <area shape="rect" coords="1,1,13,15" href="/cont/2530ant">
+  <area shape="rect" coords="23,1,35,17" href="/cont/2530ant">
+</map>
+<!--<map name="Map_ca">
+  <area shape="rect" coords="1,1,13,15" href="javascript:alert('Sezione non attiva')">
+  <area shape="rect" coords="23,1,35,17" href="javascript:alert('Sezione non attiva')">
+</map>-->
+
+
+<map name="Map_gi">
+  <area shape="rect" coords="1,1,19,26" href="/cont/2430sup">
+  <area shape="rect" coords="29,1,45,29" href="/cont/2430sup">
+</map>
+<!--<map name="Map_gi">
+  <area shape="rect" coords="1,1,19,26" href="javascript:alert('Sezione non attiva')">
+  <area shape="rect" coords="29,1,45,29" href="javascript:alert('Sezione non attiva')">
+</map>-->
+
+
+<map name="Map_an">
+  <area shape="rect" coords="2,1,18,28" href="/cont/2400ant">
+  <area shape="rect" coords="30,1,52,28" href="/cont/2400ant">
+</map>
+<!--<map name="Map_an">
+  <area shape="rect" coords="2,1,18,28" href="javascript:alert('Sezione non attiva')">
+  <area shape="rect" coords="30,1,52,28" href="javascript:alert('Sezione non attiva')">
+</map>-->
+
+<map name="Map_madx">
+  <area shape="rect" coords="2,2,19,16" href="/cont/2260dor">
+</map>
+
+<map name="Map_masx">
+  <area shape="rect" coords="2,1,21,13" href="/cont/2260dor">
+</map>
+
+<map name="Map_posx">
+  <area shape="rect" coords="2,1,19,7" href="/cont/2160vol">
+</map>
+<!--<map name="Map_posx">
+  <area shape="rect" coords="2,1,19,7" href="javascript:alert('Sezione non attiva')">
+</map>-->
+
+<map name="Map_podx">
+  <area shape="rect" coords="1,1,18,8" href="/cont/2160vol">
+</map>
+<!--<map name="Map_podx">
+  <area shape="rect" coords="1,1,18,8" href="javascript:alert('Sezione non attiva')">
+</map>-->
+<map name="Map_sp">
+  <area shape="rect" coords="1,6,31,20" href="/cont/2010ant">
+  <area shape="rect" coords="42,5,72,22" href="/cont/2010ant">
+</map>
+<!--<map name="Map_sp">
+  <area shape="rect" coords="1,6,31,20" href="javascript:alert('Sezione non attiva')">
+  <area shape="rect" coords="42,5,72,22" href="javascript:alert('Sezione non attiva')">
+</map>-->
+
+<map name="Map_gosx">
+  <area shape="rect" coords="1,1,19,13" href="/cont/2100ant">
+</map>
+<!--<map name="Map_gosx">
+  <area shape="rect" coords="1,1,19,13" href="javascript:alert('Sezione non attiva')">
+</map>-->
+
+<map name="Map_godx">
+  <area shape="rect" coords="3,1,21,15" href="/cont/2160vol">
+</map>
+<!--<map name="Map_godx">
+  <area shape="rect" coords="3,1,21,15" href="javascript:alert('Sezione non attiva')">
+</map>-->
+<script language="JavaScript" src="http://crm.medikey.it/t.js"></script>
+</body></html>

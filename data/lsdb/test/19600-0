@@ -1,0 +1,386 @@
+<link rel="stylesheet" type="text/css" href="bearr_styles.css"/>
+<HTML>
+<TITLE>Batch Extraction and Analysis of cis-Regulatory Regions [BEARR] @ GIS
+</TITLE>
+<BODY>
+<SCRIPT LANGUAGE=JAVASCRIPT>
+<!--
+//function loadPWM(){
+//   if (document.queryform.PWMdefmat.value == "LXRE_STRONG"){
+//      document.queryform.PWMmat.value =
+//                "T 6  0 2 11  5  1 0 0 0 0 4  0 2 11  0  5\n"
+//              + "G 6 15 9  0  0  1 0 0 0 0 0 11 9  0  1  0\n"
+//              + "A 3  0 4  1  1 14 0 0 0 0 6  4 4  1  0 11\n"
+//              + "C 1  1 1  4 10  0 0 0 0 0 6  1 1  4 15  0";
+//      document.queryform.threshpwm.value = "7";
+//   } else if (document.queryform.PWMdefmat.value == "LXRE_WEAK"){ 
+//      document.queryform.PWMmat.value =
+//                "T 6 0 0 1 0 6 0 0 0 0 6 0 0 6 0 0\n"
+//              + "G 1 7 1 0 0 0 0 0 0 0 0 7 1 1 0 0\n"
+//              + "A 0 0 6 0 0 1 0 0 0 0 0 0 6 0 0 1\n"
+//              + "C 0 0 0 6 7 0 0 0 0 0 1 0 0 0 7 6\n";
+//      document.queryform.threshpwm.value = "7";
+//   } else if (document.queryform.PWMdefmat.value == "ERE"){
+//      document.queryform.PWMmat.value =
+//                "A 7  2  1  1  0 13 0 0 0  0  0 10  1  1 2\n"
+//              + "T 3  0  0 13  1  0 0 0 0 13  1  2  4  4 6\n"
+//              + "G 4 15 15  1  2  4 0 0 0  3 15  5  0  0 1\n"
+//              + "C 1  0  1  2 14  0 0 0 0  1  1  0 11 11 5\n";
+//      document.queryform.threshpwm.value = "7";
+//   }
+//
+//   return true;
+//}
+
+function checkOrg(){
+   if (document.queryform.organism.value.substring(0,2) == "hs"){
+      document.queryform.dbtss.disabled = false;
+   } else {
+      document.queryform.dbtss.disabled = true;
+   }
+   return true;
+}
+
+function finalize(){
+   document.queryform.PWMmat.disabled =
+      document.queryform.pwmmaxonly.disabled =
+      document.queryform.threshpwm.disabled =
+      document.queryform.pwmEpval.disabled =
+       !(document.queryform.usePWM.checked);
+}
+
+//-->
+</SCRIPT>
+<CENTER>
+<TABLE BORDER=0 CELLSPACING=0>
+<TR>
+<TD>
+<MAP NAME="map1">
+ <AREA HREF="http://gis.a-star.edu.sg" SHAPE="rect" COORDS="707,127,797,172">
+</MAP>
+<IMG ISMAP SRC="bearrbanner.jpg" WIDTH=800 ALIGN=LEFT USEMAP="#map1">
+</TD></TR>
+</TABLE>
+<TABLE WIDTH=800 CELLSPACING=0 CELLPADDING=0 BORDER=0>
+<TR><TD VALIGN=CENTER BGCOLOR=lightgreen>
+<B>
+<A HREF="index.html">Home</a> | 
+<A HREF="" OnClick="javascript:window.open('FAQ.html','helpwin',
+ 'toolbar=no,height=470,width=550,scrollbars=yes'); return false;">FAQ</A> |
+<A HREF="" OnClick="javascript:window.open('links.html','helpwin',
+ 'toolbar=no,height=470,width=550,scrollbars=yes'); return false;">
+ Useful Links</A> |
+<A HREF="" OnClick="javascript:window.open('tutorial.html','tutwin',
+ 'toolbar=no,height=500,width=722,scrollbars=yes'); return false;">Tutorial</A>
+ | <A HREF="#citation">Citing BEARR</A>
+</B>
+</TD>
+<TD VALIGN=CENTER BGCOLOR=lightgreen ALIGN=RIGHT>
+<B>
+<!--
+<A HREF="#opt">Additional Features</A>
+| --> 
+<A HREF="" OnClick="javascript:window.open('contact.html','helpwin',
+ 'toolbar=no,height=500,width=500,scrollbars=yes'); return false;">Contact Us
+</A>
+<!--
+| <A HREF="">Credits</A>
+-->
+</B>
+</TD></TR>
+<TR><TD></TD><TD ALIGN=RIGHT>
+<FONT SIZE=1>Version 1.0b</FONT>
+</TD></TR>
+</TABLE>
+<!--
+<H1> NOTE! THIS IS A BETA VERSION UNDERGOING CONTINUOUS DEVELOPMENT</H1>
+-->
+<TABLE CELLPADDING=10 WIDTH=800 BORDER=1>
+<FORM ACTION="analyseReq_dbtss.cgi" METHOD="POST" NAME=queryform>
+<TR VALIGN="TOP"><TD>
+<H1>Sequence Extraction</H1>
+<B>Gene IDs</B> (blank separated)
+<A HREF="" OnClick="javascript:newwin=window.open('input_help.html','helpwin',
+'toolbar=no,scrollbars=yes,height=470,width=550'); newwin.opener=self; return false;">
+<IMG SRC=help.jpg><A><BR>
+<TEXTAREA NAME="IDlist" ROWS=5 COLS=36></TEXTAREA>
+<A HREF="convertIID.html" TARGET="convertwin"><BR>
+Format Image ID list</A> | 
+<A HREF=full_ids>Complete list of IDs</A>
+<BR><BR>
+  <B>Organism</B>:
+  <SELECT NAME=organism OnChange=javascript:checkOrg()>
+  <OPTION VALUE="hs_34" >Homo sapiens (Build 34)
+  <OPTION VALUE="hs_33" SELECTED>Homo sapiens (Build 33)
+  <OPTION VALUE="mm_30">Mus musculus (Build 30)
+  <OPTION VALUE="mm_33">Mus musculus (Build 33)
+  </SELECT><BR>
+  <INPUT TYPE=CHECKBOX NAME=dbtss>Use DBTSS annotations and Hs Genome build 28
+<BR><BR>
+<TABLE BORDER=0 CELLSPACING=5>
+<TR>
+ <TD>
+ Upstream of TSS 
+ </TD><TD>
+  <INPUT NAME="fpup" TYPE=TEXT SIZE=7 VALUE=3000> </INPUT>
+ </TD>
+</TR><TR>
+ <TD>
+ Downstream of TSS
+ </TD><TD>
+  <INPUT NAME="fpdw" TYPE=TEXT SIZE=7 VALUE=0> </INPUT>
+ </TD>
+</TR><TR>
+ <TD>
+ Upstream of 3'-terminus
+ </TD><TD>
+  <INPUT NAME="tpup" TYPE=TEXT SIZE=7 VALUE=0> </INPUT>
+ </TD>
+</TR><TR>
+ <TD>
+ Downstream of 3'-terminus
+ </TD><TD>
+  <INPUT NAME="tpdw" TYPE=TEXT SIZE=7 VALUE=0> </INPUT>
+ </TD>
+</TR>
+</TABLE>
+</TD>
+<BR>
+<FONT COLOR=BROWN>
+<TD>
+<H1>Consensus Search</H1>
+</FONT>
+<B>Consensus binding site</B> (one per line)
+<A HREF="" OnClick="javascript:window.open('consensus_help.html','helpwin',
+'toolbar=no,scrollbars=yes,height=470,width=550'); return false;">
+<IMG SRC=help.jpg></A><BR>
+<TEXTAREA NAME="patternList" ROWS=5 COLS=47></TEXTAREA><BR>
+Mutate each consensus by 
+<INPUT TYPE=TEXT NAME=listmin SIZE=2 VALUE=0>
+to
+<INPUT TYPE=TEXT NAME=listmax SIZE=2 VALUE=0>
+basepairs.<BR>
+<A HREF="consensus_list.html" OnClick="javascript:newwin=window.open('consensus_list.html',
+'helpwin','toolbar=no,scrollbars=yes,height=470,width=550');
+newwin.opener=self; return false;">View list of binding site consensus</A> |
+<A HREF="convertIUPAC.html" TARGET="convertwin">Convert IUPAC/IUB patterns</A>
+<BR><BR>
+<!--
+<B>Predefined Consensus</B>
+<SELECT NAME=predefPat>
+<OPTION VALUE="none" SELECTED>None
+<OPTION VALUE="ERE">Estrogen Resp Elmnt
+<OPTION VALUE="GRE">Glucocorticoid RE
+<OPTION VALUE="TATA">TATA-Box
+<OPTION VALUE="CREB">CRE-B
+<OPTION VALUE="HSF">Heat Shock Factor
+<OPTION VALUE="SRE">Serum Resp Elmnt
+<OPTION VALUE="THY">Thyroid Resp Elmnt
+<OPTION VALUE="ARE">Androgen Resp Elmnt
+<OPTION VALUE="AP1">AP1
+<OPTION VALUE="SP1">SP1
+<OPTION VALUE="NF-K">Nf-K
+<OPTION VALUE="P53">p53
+<OPTION VALUE="SoxOct">Sox2-Oct4
+</SELECT>
+-->
+<BR><BR>
+<INPUT TYPE=CHECKBOX NAME=gentwosites VALUE=true
+ OnClick="javascript:document.queryform.firsthalfseq.disabled =
+          document.queryform.secondhalfseq.disabled =
+          document.queryform.halfspacer.disabled =
+          document.queryform.firsthalfmin.disabled =
+          document.queryform.firsthalfmax.disabled =
+          document.queryform.secondhalfmin.disabled =
+          document.queryform.secondhalfmax.disabled =
+          !(document.queryform.gentwosites.checked); return true">
+<B>Tandem Site Consensus</B>
+<TABLE>
+<TR>
+ <TD></TD>
+ <TD ALIGN=CENTER> Left site </TD>
+ <TD ALIGN=CENTER> Spacer </TD>
+ <TD ALIGN=CENTER> Right site </TD>
+</TR>
+<TR>
+ <TD> Consensus </TD>
+ <TD>
+  <INPUT TYPE=TEXT NAME=firsthalfseq SIZE=12 VALUE="AGGTCA" DISABLED>
+ </TD><TD>
+  <INPUT TYPE=TEXT NAME=halfspacer SIZE=3 VALUE=3 DISABLED><BR>
+ </TD><TD>
+  <INPUT TYPE=TEXT NAME=secondhalfseq SIZE=12 VALUE="TGACCT" DISABLED>
+ </TD>
+</TR>
+<TR>
+ <TD> Minimum mutations </TD>
+ <TD ALIGN=CENTER>
+  <INPUT TYPE=TEXT NAME=firsthalfmin SIZE=2 VALUE=1 DISABLED>
+ </TD><TD></TD><TD ALIGN=CENTER>
+  <INPUT TYPE=TEXT NAME=secondhalfmin SIZE=2 VALUE=1 DISABLED>
+ </TD>
+</TR>
+<TR>
+ <TD> Maximum mutations </TD>
+ <TD ALIGN=CENTER>
+  <INPUT TYPE=TEXT NAME=firsthalfmax SIZE=2 VALUE=1 DISABLED>
+ </TD><TD></TD><TD ALIGN=CENTER>
+  <INPUT TYPE=TEXT NAME=secondhalfmax SIZE=2 VALUE=1 DISABLED>
+ </TD>
+</TR>
+</TABLE>
+<!--  <TABLE BORDER=1>
+  <TR><TD>
+  1st site:
+  <INPUT TYPE=TEXT NAME=firsthalfseq SIZE=12 VALUE="AGGTCA" DISABLED><BR>
+  spacer:
+  <INPUT TYPE=TEXT NAME=halfspacer SIZE=3 VALUE=3 DISABLED><BR>
+  2nd site:
+  <INPUT TYPE=TEXT NAME=secondhalfseq SIZE=12 VALUE="TGACCT" DISABLED>
+  </TD><TD>
+  <CENTER>Limit mutation(s) to:<BR></CENTER>
+  at least
+  <INPUT TYPE=TEXT NAME=firsthalfmin SIZE=2 VALUE=1 DISABLED>
+  and at most
+  <INPUT TYPE=TEXT NAME=firsthalfmax SIZE=2 VALUE=1 DISABLED> bp
+  in the 1st site <BR>
+  at least
+  <INPUT TYPE=TEXT NAME=secondhalfmin SIZE=2 VALUE=1 DISABLED>
+  and at most
+  <INPUT TYPE=TEXT NAME=secondhalfmax SIZE=2 VALUE=1 DISABLED> bp
+  in the 2nd site <BR>
+  </TD></TR>
+  </TABLE>
+-->
+</TD></TR>
+<TR><TD COLSPAN=2>
+<FONT COLOR=BROWN>
+<H1>Position Weight Matrix Analysis</H1>
+</FONT>
+<INPUT TYPE=CHECKBOX NAME=usePWM VALUE=true
+ OnClick="javascript:document.queryform.PWMmat.disabled =
+          document.queryform.pwmmaxonly.disabled =
+          document.queryform.threshpwm.disabled =
+          document.queryform.pwmEpval.disabled =
+          /*document.queryform.pwmtransform.disabled =*/
+          /*document.queryform.PWMdefmat.disabled =*/
+           !(document.queryform.usePWM.checked);
+          return true">
+<B>Perform PWM analysis</B>
+<A HREF="" OnClick="javascript:window.open('pwm_help.html','helpwin',
+ 'toolbar=no,scrollbars=yes,height=470,width=550'); return false;">
+<IMG SRC=help.jpg></A>
+<TABLE BORDER=1 CELLPADDING=5>
+ <TR>
+  <TD ALIGN=CENTER>
+  <B>Position Weight Matrix</B>
+  </TD>
+  <TD ALIGN=CENTER>
+  <B>Options</B>
+  </TD>
+ </TR>
+ <TR>
+  <TD>
+  <TEXTAREA NAME="PWMmat" ROWS=5 COLS=55 DISABLED=TRUE></TEXTAREA><BR>
+  <FONT SIZE=-3>You can use both raw or normalized frequency table.<BR>
+  The system will normalize it automatically.</FONT><BR>
+<!--
+  Predefined matrices:
+  <SELECT NAME="PWMdefmat" OnChange="javascript:loadPWM()" DISABLED>
+  <OPTION VALUE="description" SELECTED>Load a predefined PWM matrix
+  <OPTION VALUE="ERE">Estrogen Response Element
+  <OPTION VALUE="LXRE_STRONG">Strong LXRE binding site
+  <OPTION VALUE="LXRE_WEAK">Weak LXRE binding site
+  </SELECT>
+-->
+  <A HREF="convertTFM.html" TARGET="convertwin">Convert TRANSFAC Matrix</A>
+  </TD>
+  <TD>
+  <U>PWM Transformation</U>:<BR>
+  <INPUT TYPE=RADIO VALUE=norm NAME=pwmtransform>Relative frequency
+  <INPUT TYPE=RADIO VALUE=loglh CHECKED NAME=pwmtransform>
+  Log-likelihood<BR><BR>
+  <U>Report</U>:<BR>
+  <INPUT TYPE=CHECKBOX NAME=pwmmaxonly DISABLED=true VALUE=true>
+  only the best hit(s)<BR>
+  <CENTER><B><I>or</I></B></CENTER>
+  hit(s) scored at least
+  <INPUT TYPE=TEXT NAME="threshpwm" SIZE=2 VALUE="0" DISABLED=true><BR>
+  <FONT SIZE=-3>
+<!--  (As a rule of thumb, the threshold should be at least half of the pattern
+  length) -->
+  </FONT>
+  <BR>
+  <U>Calculate</U>:<BR>
+  <INPUT TYPE=CHECKBOX NAME=pwmEpval DISABLED=true VALUE=true>
+  empirical P-value of the hit(s)<BR>
+   <FONT SIZE=-3 COLOR=RED>
+    (Note: This will slow down the analysis substantially)
+   </FONT><BR>
+  </TD>
+ </TR>
+</TABLE>
+</TD></TR>
+</TABLE>
+</CENTER>
+<CENTER>
+<!--
+<A NAME="opt">
+<B>Additional Features (optional)</B>
+<TABLE BORDER=2>
+<TR>
+ <TD>
+ Query ID prefix: <BR>
+ (For easy remembrance)<BR>
+ <STRONG><FONT COLOR=RED>Please do not use spaces</FONT></STRONG>
+ </TD>
+ <TD>
+  <INPUT TYPE=TEXT NAME=qidprefix SIZE=20 VALUE=""><BR>
+ </TD>
+</TR>
+</TABLE>
+-->
+<BR>
+<INPUT TYPE=SUBMIT VALUE="Analyze" Onclick="finalize()">
+<INPUT TYPE=RESET VALUE="Reset Form">
+</CENTER>
+</FORM>
+
+<FONT COLOR=BLACK SIZE=-1>
+<A NAME=citation>
+<B>Citation:</B><BR>
+BEARR: Batch Extraction and Analysis of cis-Regulatory Regions<BR> 
+Vinsensius B. Vega, Dhinoth Kumar Bangarusamy, Lance D. Miller, Edison T. Liu and Chin-Yo Lin<BR>
+<I>Nucleic Acids Res. 2004 Jul 1;32(Web Server Issue):W257-W260</I><BR>
+<A HREF=http://nar.oupjournals.org/cgi/content/full/32/suppl_2/W257>Read</A>
+the paper.
+</FONT>
+<BR>
+<BR>
+
+<SCRIPT LANGUAGE=JAVASCRIPT>
+<!--
+document.queryform.PWMmat.value = "T 0 0 0\n"
+              + "G 0 0 0\n"
+              + "A 0 0 0\n"
+              + "C 0 0 0";
+
+document.queryform.PWMmat.disabled =
+   document.queryform.pwmmaxonly.disabled =
+   document.queryform.threshpwm.disabled =
+   document.queryform.pwmEpval.disabled =
+    !(document.queryform.usePWM.checked);
+//-->
+</SCRIPT>
+
+<BR>
+<CENTER>
+<FONT SIZE=0 COLOR=DARKGREEN>
+<A HREF="javascript:{void(qid=prompt('Enter your query ID:',''))}if(qid)location.href='results/'+qid">Retrieve results from previous queries</A><BR>
+</FONT>
+</CENTER>
+<BR>
+<FONT SIZE=-2>
+</FONT>
+</BODY>
+</HTML>

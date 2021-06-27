@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>JAMIE - Joint Analysis of Multiple IP Experiments</title>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />	
+	<meta http-equiv="imagetoolbar" content="no" />
+	<link href="bl-stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div id="container">
+	<div id="header">
+		<h1>JAMIE</h1>
+		<h2>Joint Analysis of Multiple IP Experiments</h2>
+	</div>
+
+<div id="sidebar">
+	<div>
+	<h3>Content</h3>
+	<a href="index.html#abstract">Abstract</a><br>
+	<a href="index.html#background">Background</a><br>
+	<a href="index.html#method">Method</a><br>
+        <a href="index.html#implementation">Implementation</a><br>
+	<a href="index.html#references">References</a><br>
+	</div>
+
+	<div>	
+	<h3>How To Use</h3>
+        <a href="use.html#download">Download/install</a><br>
+        <a href="use.html#configuration">Configurate</a><br>
+        <a href="use.html#use">Use JAMIE</a><br>
+        <a href="use.html#example">Example</a><br>
+
+	</div>
+	
+	<div>
+	<h3>Contact</h3>
+	       Hongkai Ji <br>
+	       Dept. of Biostatistics<br>
+	       Johns Hopkins University<br>
+		hji @ jhsph.edu				   
+	</div>
+</div>
+
+<div id="content" title="Content">
+<div>
+<p><font size="5">JAMIE: Joint Analysis of Multiple IP Experiments</font> </p><br>
+
+<h3 style="text-align: center" id="abstract">Abstract</h3><p>
+Chromatin immunoprecipitation followed by genome tiling
+array hybridization (ChIP-chip) is a powerful approach to identify
+transcription factor binding sites (TFBSs) in target genomes.
+When multiple related ChIP-chip datasets are available,
+analyzing them jointly allows one to borrow
+information across datasets to improve peak detection. This is particularly useful
+for analyzing noisy datasets.
+<p>
+We propose a hierarchical mixture model and develop an R package
+<bf>JAMIE</br> (<u>J</u>oint <u>A</u>nalysis of <u>M</u>ultiple <u>I</u>P <u>E</u>xperiments) 
+to perform the joint analysis.
+The genome is assumed to consist of background and
+potential binding regions (PBRs). PBRs
+have context-dependent probabilities to become bona
+fide binding sites in individual datasets.
+This model captures the correlation
+among datasets, which provides
+basis for sharing information across experiments.
+Real data tests illustrate the advantage of
+JAMIE over a strategy that analyzes individual datasets separately.
+
+</p>                 				
+<br>
+<h3 id="background"><b>Background</b></h3><br>
+ChIP-chip is a powerful approach to study protein-DNA interactions.
+With rapid growth of ChIP-chip data in public repositories such as
+Gene Expression Omnibus (Barrett <i>et al.</i> 2009), 
+it becomes more and more common 
+that multiple datasets related to the same TF,
+pathway or biological system are collected.
+When multiple such datasets are available,
+it is often desirable to analyze them jointly.
+<p>
+The motivation of this project can be illustrated in below Figure 1, 
+which shows four related ChIP-chip experiments (GEO access numbers GSE11062
+and GSE17682) performed by two different labs 
+using Affymetrix Mouse Promoter 1.0R arrays. 
+The first experiment has low signal-to-noise ratio due to 
+technological and biological reasons. A careful examination of the data 
+shows that peaks in these four datasets are correlated. 
+The peaks from different datasets tend to occur at the same locations in the genome. 
+This correlation can be potentially used to improve statistical inference. 
+For example, the weak peak highlighted by the solid box in the first dataset 
+in Figure 1(a) cannot be easily distinguished from background noise if 
+one looks at this dataset alone. However, if all datasets are analyzed together, 
+the observation that all other datasets have strong peaks at the same location 
+suggests that the weak peak in the first dataset is a real binding site. 
+By contrast, the peak highlighted by the dashed box has approximately 
+the same magnitude in the first dataset, but no binding signal has been 
+observed in the other datasets, suggesting that it is less likely to be a real binding signal. 
+When multiple datasets are analyzed jointly, it is also important to keep in 
+mind that some TFB are condition-specific. For example, the genomic location 
+shown in Figure 1(b) has strong binding signal only in the second dataset.
+In this case, even without referring to the other datasets, the enrichment
+ is strong enough and should be called a peak. In this case, we should also 
+avoid claiming that other datasets have peaks at this region only because 
+there is a strong peak in the second dataset. Ideally, there should be 
+a mechanism that automatically integrates and weighs different pieces of information, 
+then ranks peaks according to the combined evidence. 
+<center><img border="0" src="img/motivation.png" width="550"></center>
+
+<font color="black" width="550" font-family="sans-serif" text-align="center">
+Figure 1: Motivation of JAMIE. (a) Four Gli ChIP-chip datasets show cooccurrence 
+of binding sites at the same genomic locus. This correlation may help distinguish 
+real and false TFBSs. Each bar in the plot corresponds to a probe. 
+Height of the bar is the log2 ratio between IP and control intensities. 
+(b) An example that shows context dependency of TF-DNA binding.</font></p>
+<p>
+<br>
+<h3 id="method"><b>Method</b></h3>
+<p>
+To capture the locational correlation among datasets, 
+we introduced the concept of potential binding region (PBR), 
+which is defined as a genomic region can potentially be bound by some TFs. 
+We further assumed that the active binding event for a dataset 
+depends on condition such as cellular context, but they can only happen at the PBRs.
+<p>
+Based on these assumptions, we proposed a hierarchical model, as illustrated in Figure 2,
+to jointly model data from multiple chip-chips. Assume the genome 
+is split into non-overlapping window of a certain length, such as 1000 bps. 
+At the top level we assumed that a priori, a window can become a PBR with 
+probability &pi;, or become background with probability 1-&pi;. 
+We define B<sub>i</sub> to be the indicator for the ith window being PBR or not. 
+At the next level, if a window is a PBR, in dataset d, we assume it can either 
+become an active binding site with probability q<sub>d</sub>, 
+or remain silent with probability 1-q<sub>d</sub>. 
+A<sub>id</sub> is defined to indicate the active binding 
+event for window i in dataset d. We assume that conditional on B<sub>i</sub>=1, 
+A<sub>id</sub>'s are independent, 
+or the active binding events are independent among datasets at PBRs. 
+At the next level, the chip-chip signals, as denoted by <b>Y</b>, 
+are generated according to the active binding status in each dataset. 
+If there is no active binding, the probe signals are from background distribution. 
+If there is active binding, there will be a peak in the region.
+But instead of forcing the peak to occupy the whole region, 
+we assumed that the peak  can be of any length and at
+any relative location within the PBR. This assumption allows much 
+flexibility because some TFs 
+bind at the same gene promoter but recognize different DNA motifs, so their peaks don't
+exactly overlap. Finally, we assume the probe signals follow two different distributions, 
+f<sub>0</sub> for backgrounds and f<sub>1</sub> for peaks. 
+In this model, we observed <b>Y</b>, 
+the probe signals. B<sub>i</sub> and A<sub>id</sub> are missing indicators. 
+Model parameters are &pi;, q<sub>d</sub>'s, 
+and probe distributions f<sub>0</sub> and f<sub>1</sub>.
+
+<br>
+<center><p><img border="0" src="img/model.png" width="350"></p></center>
+<center><font color="black" width="550" font-family="sans-serif" text-align="center">
+Figure 2: Illustration of JAMIE hierarchical model.</font></center>
+
+<p>
+Based on the model,  the joint likelihood of the observed and missing data
+can be derived and  the parameters are estimated via EM algorithm (Dempster <i>et al</i> 1977).
+We then scan the genome by the joint model and 
+compute the posterior probabilities of each probe starting a peak. 
+The peaks then can be detected and ranked from these posterior probabilities.
+<p>
+<br>
+<h3 id="implementation"><b>Implementation</b></h3><br>
+JAMIE was implemented as an R package. The engine functions were written in C 
+for better performance. It takes CEL and BPMAP files (for Affymetrix tiling arrays) 
+or a single text file (all other platforms) for raw intensities, 
+and a text configuration file. In two lines of R code, JAMIE will output 
+a list of peaks ranked by their posterior probabilities for each dataset. 
+<p>
+JAMIE provides reasonable performance although
+the computation is much more intensive compared to some other
+ChIP-chip peak detection software such as TileMap (Ji <i>et al.</i> 2005) or
+MAT (Johnson <i>et al.</i> 2006).
+In a test run with four datasets, 
+each with 3 IP, 3 control and 3.8 millions probes, 
+the whole analysis took around 15 minutes on a PC 
+running Linux with 2.2GHz CPU and 4G RAM.
+
+<p>
+<br>
+<h3 id="references">References</h3>
+<ol>
+<li>Barrett, T., Troup, D.B., Wilhite, S.E., <i>et al</i>. (2009) 
+NCBI GEO: archive for high-throughput functional genomic data, 
+<i>Nucleic Acids Res</i>, <b>37</b>(Database issue), D5-15.
+
+<li>Dempster, A.P., Laird, N.M. and Rubin, D.B. (1977) 
+Maximum likelihood from incomplete data via the EM algorithm, 
+<i>J Roy Stat Soc B</i>, <b>39</b>, 1-38.
+
+<li>Ji, H. and Wong, W.H. (2005) 
+TileMap: create chromosomal map of tiling array hybridizations, 
+<i>Bioinformatics</i>, <b>21</b>, 3629-3636.
+
+<li>Johnson, W.E., Li, W., Meyer, C.A. <i>et al</i>. (2006) 
+Model-based analysis of tiling-arrays for ChIP-chip, 
+<i>Proc Natl Acad Sci USA</i>, <b>103</b>, 12547-12462.
+
+<li>Wu H. and Ji H. (2010) JAMIE: Joint analysis of multiple ChIP-chip experiments. 
+<i>Bioinformatics</i>. In press.
+</ol>
+
+</div>
+</div><!--content-->
+</div><!--container-->
+      				
+</body>
+</html>

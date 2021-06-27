@@ -1,0 +1,753 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>IUPHAR DATABASE OF RECEPTORS AND ION CHANNELS</title>
+	<meta name="description" content="IUPHAR database of G protein-coupled receptors (GPCRs) and ion channels. Peer-reviewed
+pharmacological, chemical, genomic, functional and anatomical information on human, mouse
+and rat GPCRs, voltage-gated and ligand-gated ion channels from the International Union
+of Basic and Clinical Pharmacology."/>
+        <link rel="stylesheet" type="text/css" href="test.css" />
+        <link rel="stylesheet" type="text/css" href="print.css" media="print"/>
+        <link rel="shortcut icon" href="/images/favicon.ico"/>
+        <script type="text/javascript" src="common.js"> </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+        <script src="js/highcharts.js" type="text/javascript"></script>
+        
+
+        <script type="text/javascript">
+            var genes = [351, 140, 70, 48];
+            var gpcrs = [272, 49, 19, 11];
+            var orphans = [85, 34, 7, 0];
+            var ligands = [1540, 899, 210, 78, 23, 6];
+        </script>
+
+    </head>
+    <body>
+        <div id="header">
+            
+      <p id="title"><a href="/index.jsp">IUPHAR DATABASE</a></p>
+      <p id="header_links"><a href="/disclaimer.jsp">DISCLAIMER</a> | <a href="/copyright.jsp">COPYRIGHT INFORMATION</a></p>
+   
+        </div>  
+        <div id="sidebar">
+            <ul>
+    <li>GPCRs
+	<ul>
+            <li>
+                <a 
+                
+                    
+                    
+                        href="/DATABASE/ReceptorFamiliesForward?type=GPCR">
+                    
+		
+                Database</a>
+            </li>
+            <li><a 
+                
+                    
+                    
+                        href="/DATABASE/GPCRListForward">
+                    
+                
+                7TM Receptor List</a>
+            </li>
+            <li><a 
+                href="/latestPairings.jsp">Latest Pairings</a>
+            </li>
+	</ul>
+   </li>
+
+   <li>Ion Channels
+    	<ul>
+            <li>
+                <a 
+                
+                    
+                    
+                        href="/DATABASE/ReceptorFamiliesForward?type=IC">
+                    
+                
+                Database</a>
+            </li>
+            <li>
+                <a 
+                
+                    
+                    
+                        href="/DATABASE/VoltageGatedSubunitListForward">
+                    
+                
+                VGIC List</a>
+            </li>
+            <li>
+                <a 
+                
+                    
+                    
+                        href="/DATABASE/LigandGatedSubunitListForward">
+                    
+                
+                LGIC List</a>
+            </li>
+	</ul>
+    </li>
+
+    <li>Nuclear Hormone Receptors
+        <ul>
+            <li>
+                <a 
+                
+                    
+                    
+                        href="/DATABASE/ReceptorFamiliesForward?type=NHR">
+                    
+                
+                Database</a>
+            </li>
+            <li>
+                <a 
+                
+                    
+                    
+                        href="/DATABASE/NHRListForward">
+                   
+                
+                NHR List</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a 
+        
+            
+            
+                href="/DATABASE/LigandListForward">
+            
+        
+        Ligand List</a>
+    </li>
+
+    <li>
+        <a 
+        href="/hotTopics.jsp">Hot Topics</a>&nbsp;<img src="images/hot_topic.gif" width="20px" height="20px">
+    </li>
+    <li>
+        <a 
+        href="/helpPage.jsp">Help Page</a>
+    </li>
+
+</ul>
+<p class="redline"><img src="images/redLine.gif" alt="spacer" width="170px" height="1px"/></p>
+
+
+
+
+<ul>
+    <li>
+        <a href="/nomenclature.html">Nomenclature Guidelines</a>
+    </li>
+    <li> 
+        <a href="/termsAndSymbols.pdf">Terms and Symbols</a>
+    </li>
+    <li>
+        <a href="http://www.iuphar.org/nciuphar_arti.html">Publications</a>
+    </li>
+    <li>
+        <a href="/citing.jsp">Citing the Database</a>
+    </li>
+    <li>
+        <a href="/linking.jsp">Linking to us</a>
+    </li>
+    <li>
+        <a href="/AboutNC-IUPHAR.pdf">About NC-IUPHAR</a>
+    </li>
+    <li>
+        <a href="http://www.iuphar.org/about_intro.html">About IUPHAR</a>
+    </li>
+    <li>
+        <a href="/subscribe.jsp">Subscribe</a> <span class="invisible_link"><a href="http://feeds.feedburner.com/IUPHAR-DB" title="Subscribe via RSS"><img style="vertical-align:middle;" src="images/rss.gif" alt="Subscribe via RSS"/></a></span>
+    </li>
+    <li>
+        <a href="/links.jsp">Useful links</a>
+    </li>
+</ul>
+<p class="redline"><img src="images/redLine.gif" alt="spacer" width="170px" height="1px"/></p>
+
+
+<div id="new_search" align="center">
+
+        <form method="get" 
+            
+                
+                
+                    action="/DATABASE/DatabaseSearchForward"
+                
+            
+        >
+		
+                    <fieldset>
+                        <span style="text-align:left">Quick text search:</span><br/>
+                        <input type="text" size="18" maxlength="200" name="searchString"/>
+                        <br/>
+			<input type="hidden" name="searchCategories" value="all"/>
+			<input type="hidden" name="species" value="none"/>
+			<input type="hidden" name="type" value="all"/>
+			<input type="hidden" name="comments" value="includeComments"/>
+                        <input type="hidden" name="order" value="rank"/>
+                        <input type="submit" name="submit" value="Search the database"/>
+                        
+                            
+                            
+                                <p style="text-align:left;margin:5px"><a style="font-weight:bold;color:blue;" href="/searchPage.jsp">>>> Receptor search</a></p>
+                                <p style="text-align:left;margin:5px"><a style="font-weight:bold;color:blue;" href="/DATABASE/chemSearch.jsp">>>> Ligand search</a></p>
+                              
+                        
+                  </fieldset>
+         </form>
+
+</div>
+
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.iuphar.org"><img src="images/iuphar_big.gif" alt="IUPHAR Home" height="80px"/></a>
+</p>
+<p class="centered_logo">
+    Supported by:
+</p>
+
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.bps.ac.uk"><img src="images/bps_logo.jpg" alt="BPS Home"/></a>
+</p>
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.servier.com"><img src="images/servier.jpg" alt="Servier Home" width="180px"/></a>
+</p>
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.novartis.com"><img src="images/novartis.png" alt="Novartis Home"/></a>
+</p>
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.gsk.com"><img src="images/gsk.png" alt="GSK Home" width="180px"/></a>
+</p>
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.abbott.com/"><img src="images/abbott.jpg" alt="Abbott Home" width="103px" height="86px"/></a>
+</p>
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.wyeth.com"><img src="images/wyeth.png" alt="Wyeth Home"/></a>
+</p>
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.millipore.com/drugdiscovery"><img src="images/millipore.gif" alt="Millipore Drug Discovery" width="98px" height="72px"/></a>
+</p>
+<p class="centered_logo">
+    <a style="color:white;" href="http://www.unesco.org"><img src="images/unesco.gif" alt="UNESCO Home"/></a>
+</p>
+
+        </div>
+        <div id="main">
+            
+            <p id="site_introduction"><a name="top"></a>
+                Welcome to the official database of the <span class="introhighlight">IUPHAR</span> 
+                Committee on Receptor Nomenclature and Drug Classification.
+            </p>
+	    <p class="introduction">
+		Incorporating detailed pharmacological, functional and pathophysiological information on G Protein-Coupled Receptors, Voltage-Gated Ion Channels, Ligand-Gated Ion Channels and Nuclear Hormone Receptors.
+	    </p>
+            
+            <p class="section_title">Database content:</p>
+    
+         <table style="width: 100%;">
+             <tr>
+                 <td style="border:1px solid #AAAAAA; border-right:none; vertical-align:top;">
+                     <div id="receptor_stats_chart" style="width: 270px; height: 300px;">There should be some charts here, you may need to enable JavaScript!</div>
+                     <script type="text/javascript">
+                        var chart1 = new Highcharts.Chart({
+                             chart: {
+                                renderTo: 'receptor_stats_chart',
+                                margin: [45, 0, 80, 0],
+                                plotBackgroundColor: 'none',
+                                plotBorderWidth: 0,
+                                plotShadow: false
+                             },
+                             title: {
+                                text: 'Number of human genes'
+                             },
+                             plotArea: {
+                                 shadow: null,
+                                 borderWidth: null,
+                                 backgroundColor: null
+                             },
+                             plotOptions: {
+                                 series: {
+                                    cursor: 'pointer',
+                                    point: {
+                                       events: {
+                                          click: function() {
+                                              if(this.name == 'GPCRs'){
+                                                   self.location.href = '/DATABASE/ReceptorFamiliesForward?type=GPCR';
+                                              }
+                                              if(this.name == 'VGICs' || this.name == 'LGICs'){
+                                                    self.location.href = '/DATABASE/ReceptorFamiliesForward?type=IC';
+                                              }
+                                              if(this.name == 'NHRs'){
+                                                   self.location.href = '/DATABASE/ReceptorFamiliesForward?type=NHR';
+                                              }
+
+                                          }
+                                       }
+                                    }
+                                 }
+                              },
+
+                             tooltip: {
+                                    formatter: function() {
+                                             return '<b>'+ this.point.name +'</b>: '+ this.y;
+                                    }
+                             },
+                             legend: {
+                                    enabled: true,
+                                    labelFormatter: function() {
+                                            if(this.name == 'GPCRs'){
+                                                return '<b>GPCRs</b>: ' + genes[0];
+                                            }
+                                            else if(this.name == 'VGICs'){
+                                                return '<b>VGICs</b>: ' + genes[1];
+                                            }
+                                            else if(this.name == 'LGICs'){
+                                                return '<b>LGICs</b>: ' + genes[2];
+                                            }
+                                            else if(this.name == 'NHRs'){
+                                                return '<b>NHRs</b>: ' + genes[3];
+                                            }
+                                    }
+                                 },
+                             series: [{
+                                 type: 'pie',
+                                 name: 'genes',
+                                 size: '90%',
+                                 data: [
+                                     { name: 'GPCRs', y: genes[0], color: '#FF9D58',
+                                         events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/ReceptorFamiliesForward?type=GPCR';
+                                            }
+                                         }
+                                     },
+                                     { name: 'VGICs', y: genes[1], color: '#C08773',
+                                         events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/ReceptorFamiliesForward?type=IC';
+                                            }
+                                         }
+                                     },
+                                    { name: 'LGICs', y: genes[2], color: '#6AB298',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/ReceptorFamiliesForward?type=IC';
+                                            }
+                                        }
+                                    },
+                                    { name: 'NHRs', y: genes[3], color: '#CAFFEB',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/ReceptorFamiliesForward?type=NHR';
+                                            }
+                                        }
+                                    }
+                                 ],
+                                 dataLabels: {
+                                    enabled: true,
+                                    color: '#000000',
+                                    connectorColor: '#000000',
+                                    formatter: function() {
+                                         return this.y;
+                                    }
+                                 }
+
+                              }]
+
+                        });
+                    </script>
+                 </td>
+                 <td style="border:1px solid #AAAAAA; border-left:none; border-right:none;vertical-align:top;">
+                      <div id="gpcr_stats_chart" style="width: 270px; height: 320px;"></div>
+                      <script type="text/javascript">
+                        var chart2 = new Highcharts.Chart({
+                             chart: {
+                                renderTo: 'gpcr_stats_chart',
+                                margin: [45, 0, 100, 0],
+                                plotBackgroundColor: 'none',
+                                plotBorderWidth: 0,
+                                plotShadow: false
+                             },
+                             title: {
+                                text: 'GPCR classes'
+                             },
+                             subtitle: {
+                                 text: 'Inner circle: number of orphans*'
+                             },
+                             plotArea: {
+                                 shadow: null,
+                                 borderWidth: null,
+                                 backgroundColor: null
+                             },
+                             tooltip: {
+                                    formatter: function() {
+                                        return '<b>'+ this.point.name + ' ' + this.series.name +'</b>: '+ this.y;
+                                    }
+                             },
+                             plotOptions: {
+                                 series: {
+                                    cursor: 'pointer',
+                                    point: {
+                                       events: {
+                                          click: function() {
+                                              if(this.name == 'Class A'){
+                                                   if(this.series.name == 'orphans'){
+                                                       self.location.href = '/DATABASE/FamilyMenuForward?familyId=16';
+                                                   }
+                                                   else{
+                                                        self.location.href = '/DATABASE/GPCRListForward?class=A';
+                                                   }
+                                              }
+                                              if(this.name == 'Class B'){
+                                                   if(this.series.name == 'orphans'){
+                                                       self.location.href = '/DATABASE/FamilyMenuForward?familyId=17';
+                                                   }
+                                                   else{
+                                                        self.location.href = '/DATABASE/GPCRListForward?class=B';
+                                                   }
+                                              }
+                                              if(this.name == 'Class C'){
+                                                  if(this.series.name == 'orphans'){
+                                                        self.location.href = '/DATABASE/FamilyMenuForward?familyId=18';
+                                                   }
+                                                   else{
+                                                        self.location.href = '/DATABASE/GPCRListForward?class=C';
+                                                   }
+                                              }
+                                              if(this.name == 'Frizzled'){
+                                                   self.location.href = '/DATABASE/GPCRListForward?class=Frizzled';
+                                              }
+                                          }
+                                       }
+                                     }
+                                  }
+                             },
+
+                             legend: {
+                                enabled: true,
+                                labelFormatter: function() {
+                                    if(this.series.name == 'genes'){
+                                        if(this.name == 'Class A'){
+                                            return '<b>Class A</b>: ' + gpcrs[0] + ' (orphans: ' + orphans[0] + ')';
+                                        }
+                                        else if(this.name == 'Class B'){
+                                            return '<b>Class B</b>: ' + gpcrs[1] + ' (orphans: ' + orphans[1] + ')';
+                                        }
+                                        else if(this.name == 'Class C'){
+                                            return '<b>Class C</b>: ' + gpcrs[2] + ' (orphans: ' + orphans[2] + ')';
+                                        }
+                                        else if(this.name == 'Frizzled'){
+                                            return '<b>Frizzled</b>: ' + gpcrs[3] + ' (orphans: ' + orphans[3] + ')';
+                                        }
+                                    }
+                                }
+                             },
+                             series: [{
+                                 type: 'pie',
+                                 name: 'orphans',
+                                 size: '45%',
+                                 innerSize: '10%',
+                                 showInLegend: false,
+                                 data: [
+                                     { name: 'Class A', y: orphans[0], color: '#FF9D58' },
+                                    { name: 'Class B', y: orphans[1], color: '#C08773' },
+                                    { name: 'Class C', y: orphans[2], color: '#6AB296' },
+                                    { name: 'Frizzled', y: orphans[3], color: '#CAFFEA' }
+                                    
+                                 ],
+                                 dataLabels: {
+                                   enabled: true,
+                                    color: '#000000',
+                                    connectorColor: '#000000',
+                                    formatter: function() {
+                                         return this.y;
+                                    }
+                                 }
+                              }, {
+                                 type: 'pie',
+                                 name: 'genes',
+                                 innerSize: '45%',
+                                 size: '90%',
+                                 data: [
+                                    { name: 'Class A', y: gpcrs[0], color: '#FF9D58',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/GPCRListForward?class=A';
+                                            }
+                                         }
+                                    },
+                                    { name: 'Class B', y: gpcrs[1], color: '#C08773',
+                                         events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/GPCRListForward?class=B';
+                                            }
+                                         }
+                                    },
+                                    { name: 'Class C', y: gpcrs[2], color: '#6AB296',
+                                         events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/GPCRListForward?class=C';
+                                            }
+                                         }
+                                    },
+                                    { name: 'Frizzled', y: gpcrs[3], color: '#CAFFEA',
+                                         events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/GPCRListForward?class=Frizzled';
+                                            }
+                                         }
+                                    }
+                                 ],
+                                 dataLabels: {
+                                    enabled: true,
+                                    color: '#000000',
+                                    connectorColor: '#000000',
+                                    formatter: function() {
+                                        return this.y;
+                                    }
+                                 }
+                              }]
+
+                       });
+                    </script>
+                 </td>
+                 <td style="border:1px solid #AAAAAA; border-left:none; vertical-align:top;">
+                     <div id="ligand_stats_chart" style="width: 270px; height: 340px;"></div>
+                     <script type="text/javascript">
+                        var chart3 = new Highcharts.Chart({
+                             chart: {
+                                renderTo: 'ligand_stats_chart',
+                                margin: [45, 0, 120, 0],
+                                plotBackgroundColor: 'none',
+                                plotBorderWidth: 0,
+                                plotShadow: false
+                             },
+                             title: {
+                                text: 'Ligand classes'
+                             },
+                             plotArea: {
+                                 shadow: null,
+                                 borderWidth: null,
+                                 backgroundColor: null
+                             },
+                             plotOptions: {
+                                 series: {
+                                    cursor: 'pointer',
+                                    point: {
+                                       events: {
+                                          click: function() {
+                                              if(this.name == 'Synthetics'){
+                                                    self.location.href = '/DATABASE/LigandListForward?type=Synthetic-organic';
+                                              }
+                                              if(this.name == 'Small organics'){
+                                                    self.location.href = '/DATABASE/LigandListForward?type=Small-organic';
+                                              }
+                                              if(this.name == 'Natural products'){
+                                                    self.location.href = '/DATABASE/LigandListForward?type=Natural-product';
+                                              }
+                                              if(this.name == 'Peptides'){
+                                                    self.location.href = '/DATABASE/LigandListForward?type=Peptide';
+                                              }
+                                              if(this.name == 'Inorganics'){
+                                                    self.location.href = '/DATABASE/LigandListForward?type=Inorganic';
+                                              }
+                                              if(this.name == 'Others'){
+                                                    self.location.href = '/DATABASE/LigandListForward?type=Other';
+                                              }
+                                          }
+                                       }
+                                     }
+                                  }
+                             },
+                             tooltip: {
+                                    formatter: function() {
+                                        return '<b>' + this.point.name +'</b>: '+ this.y;
+                                    }
+                             },
+                             legend: {
+                                enabled: true,
+                                labelFormatter: function() {
+                                    return '<b>' + this.name + '</b>: ' + this.y;
+                                }
+                             },
+                             series: [{
+                                 type: 'pie',
+                                 name: 'Ligand classes',
+                                 size: '90%',
+                                 borderWidth: 0,
+                                 data: [
+                                    { name: 'Synthetics', y: ligands[0], color: '#FF9D58',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/LigandListForward?type=Synthetic-organic';
+                                            }
+                                         }
+                                    },
+                                    { name: 'Peptides', y: ligands[1], color: '#C08773',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/LigandListForward?type=Peptide';
+                                            }
+                                         }
+                                    },
+                                    { name: 'Small organics', y: ligands[2], color: '#6AB296',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/LigandListForward?type=Small-organic';
+                                            }
+                                         }
+                                    },
+                                    { name: 'Natural products', y: ligands[3], color: '#CAFFEA',
+                                         events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/LigandListForward?type=Natural-product';
+                                            }
+                                         }
+                                    },
+                                    { name: 'Inorganics', y: ligands[4], color: '#FFBEB5',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/LigandListForward?type=Inorganic';
+                                            }
+                                        }
+                                    },
+                                    { name: 'Others', y: ligands[5], color: '#0D86A6',
+                                        events: {
+                                             legendItemClick: function(event) {
+                                               event.preventDefault();
+                                               self.location.href = '/DATABASE/LigandListForward?type=Other';
+                                            }
+                                        }
+                                    }
+                                 ]
+                              }]
+
+                       });
+
+                    </script>
+                 </td>
+            </tr>
+         </table>
+           
+           
+            <span style="font-size:85%">* Orphans are defined as proteins having similarity to receptors but whose endogenous ligands have not yet been conclusively identified.</span>
+            
+            <p>[<a style="color:blue;" href="/citing.jsp">Cite the database</a>]&nbsp;[<a style="color:blue;" href="/helpPage.jsp#about">About</a>]</p>
+            
+            <p class="section_title">Recent updates (February 2011) include:</p>
+            <ul>
+                <li class="frontpage">
+                    <span class="list_item" style="font-size:110%;">New annotation for GPCRs, including:</span><br/>
+                    <ul>
+                        <li class="frontpage">The <a style="color:blue;" href="/DATABASE/FamilyMenuForward?familyId=48">Hydroxycarboxylic acid (HCA)</a> family of receptors (formerly called the Nicotinic acid receptor family);</li>
+                        <li class="frontpage">The <a style="color:blue;" href="/DATABASE/FamilyMenuForward?familyId=36">Lysophospholipid</a> (LPA and S1P) receptors (preliminary annotation awaiting review);</li>
+                        <li class="frontpage">Two <a style="color:blue;" href="/DATABASE/FamilyMenuForward?familyId=25">Frizzled</a> family receptors: <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?objectId=231&familyId=25">FZD3</a> and <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?objectId=232&familyId=25">FZD4</a>;</li>
+                        <li class="frontpage">Annotation of several orphan GPCRs, including <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=16&objectId=105"><i>GPR39</i></a>, <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=16&objectId=163"><i>LPAR6</i></a>, <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=16&objectId=102"><i>GPR35</i></a>, <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=16&objectId=122"><i>GPR87</i></a> and <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=16&objectId=165"><i>P2RY10</i></a>;</li>
+                        <li class="frontpage">Graphs of GPCR gene expression in mouse tissues adapted from Regard <i>et al.</i> (2008). <i>Cell</i>, <b>135</b>(3): 561-71.</li>
+
+                    </ul>
+		</li>
+                <li class="frontpage">
+                    <span class="list_item" style="font-size:110%;">New annotation for ion channels, including:</span><br/>
+                    <ul>
+                        <li class="frontpage">The <a style="color:blue;" href="/DATABASE/FamilyMenuForward?familyId=75">Ionotropic glutamate</a> ligand-gated ion channel subunits have been added to the database with nomenclature and database links; full annotation is provided for the <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=75&objectId=445">GluA2</a> subunit;</li>
+                        <li class="frontpage">Complete annotation of several ligand-gated ion channel subunits, with more to follow soon, including the <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=72&objectId=416">&delta;</a>, <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=72&objectId=417">&epsilon;</a>, <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=72&objectId=418">&theta;</a> and <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=72&objectId=419">&pi;</a> <a style="color:blue;" href="/DATABASE/FamilyMenuForward?familyId=72">GABA<sub>A</sub></a> subunits and the <a style="color:blue;" href="/DATABASE/ObjectDisplayForward?familyId=77&objectId=484">P2X7</a> subunit.</li>
+                    </ul>
+		</li>
+                <li class="frontpage">
+                    <span class="list_item" style="font-size:110%;">New database links and other datasets:</span><br/>
+                    <ul>
+                        <li class="frontpage"><a href="javascript:newWindow('http://www.ebi.ac.uk/interpro/')">InterPro</a> - protein sequence analysis and classification;</li>
+                        <li class="frontpage"><a href="javascript:newWindow('http://www.treefam.org/')">TreeFam</a> - database of phylogenetic trees of animal genes;</li>
+                        <li class="frontpage">Data on mouse phenotypes, alleles and disease models from <a style="color:blue;" href="javascript:newWindow('http://www.informatics.jax.org/phenotypes.shtml')">MGI</a>.</li>
+                    </ul>
+		</li>
+            </ul>
+		
+            <p class="section_title">Useful links:</p>
+           
+            <table class="useful_links_table">
+                
+                 <tr>
+                    <td style="text-align:center;vertical-align:top;width:50%;padding-right:20px;padding-bottom:20px;">
+                        <a href="http://www.genenames.org/"><img class="frontpage_logo" src="images/hgnc.png" alt="HGNC logo"/> </a>
+                        <br/><a href="http://www.genenames.org/"> HUGO Gene Nomenclature committee</a>
+                    </td>
+                  
+                    <td style="text-align:center;vertical-align:top;width:50%;padding-left:20px;padding-bottom:20px;">
+                        <a href="http://pharmrev.aspetjournals.org/"><img class="frontpage_logo" src="images/pharm.gif" alt ="Pharmacological Reviews logo"/> </a>
+                        <br/><a href="http://pharmrev.aspetjournals.org/">Pharmacological reviews</a>
+                   </td>
+                </tr>
+            
+                <tr>
+                    <td style="text-align:center;vertical-align:top;width:50%;padding-right:20px;padding-bottom:20px;">
+                        <a href="http://www3.interscience.wiley.com/journal/122684220/issue"><img class="frontpage_logo" src="images/grac.gif" alt ="GRAC logo"/> </a>
+                        <br/><a href="http://www3.interscience.wiley.com/journal/122684220/issue">
+                        BJP Guide to Receptors and Channels<br/>
+                        A FREE ONLINE laboratory handbook containing concise summaries, with key references, of the molecular, pharmacological and signal transduction properties of receptors, ion channels & transporters</a>
+                    </td>
+                  
+                    <td style="text-align:center;vertical-align:top;width:50%;padding-left:20px;padding-bottom:20px;">
+                        <a href="http://www.pharmacocareers.org"><img class="frontpage_logo" src="images/PharmacoCareers.jpg" alt="PharmacoCareers logo"/> </a>
+                        <br/><a href="http://www.pharmacocareers.org">IUPHAR Career Centre</a>
+                   </td> 
+                </tr>
+                
+            </table>
+            
+            <p>
+                We welcome all questions, comments and suggestions - Email us: <a href="mailto:curators@iuphar-db.org">curators@iuphar-db.org</a>
+            </p>
+            
+            <p>
+                &copy; IUPHAR 2011
+            </p>
+	<p>
+		<i>These pages are best viewed with <a style="color:blue" href="http://www.mozilla.org/products/firefox/">Firefox</a></i>
+	</p>
+	<p>
+		<i>Page last updated 15th February 2011</i>
+	</p>
+            <p style="text-align:center">
+                <a style="color:blue" href="mailto:curators@iuphar-db.org">Contact us</a> | <a style="color:blue" href="javascript:window.print()">Print</a> | <a style="color:blue;" href="#top">Back to top</a> | <a style="color:blue" href="/helpPage.jsp">Help</a>
+            </p>
+            
+        </div>
+        <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2713603-1";
+urchinTracker();
+</script>
+    </body>
+</html>

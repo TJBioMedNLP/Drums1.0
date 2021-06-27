@@ -1,0 +1,91 @@
+
+
+<html>
+<head>
+  <TITLE>MoSDi -- Motif Statistics and Discovery</TITLE>
+</head>
+
+<body>
+<h1>WEBSITE HAS MOVED</h1>
+
+ <font color=red size=+3>Please visit the new website of the <a href="http://mosdi.googlecode.com/">MoSDi software package</a>.</font>
+
+<h1>Historical page</h1>
+For historical reasons, I keep the old content online below.
+<h2>MoSDi -- Motif Statistics and Discovery</h2>
+Biological sequence analysis is often concerned with the search for structure in
+long strings like DNA, RNA or amino acid sequences. Frequently, "search for
+structure" means to look for patterns that occur very often. Here, two problems arise:
+<ul>
+<li> Sensibly define a measure of over-representation (i.e. a score).
+<li> Discover motifs with good (or even optimal) score.
+</ul>
+A huge number of (often ad-hoc) score functions and (often heuristic) motif discovery algorithms have been proposed over the last years. In our research, we seek to address the motif discovery problem in an exact and statistically rigorous manner. To this end, we recently introduced <em>probabilistic arithmetic automata</em>, a theoretical framework allowing for fast and exact motif statistics (see [1]). In [2] we present an algorithm to discover the optimal motif with respect to its p-value.
+
+<h3>Software</h3>
+All motif statistics and motif discovery algorithms explained in [1] and [2] (and more) has been implemented in JAVA in a software package called MoSDi. This software is currently in an experimental/alpha stage. All algorithms from [1] and [2] are, however, fully usable and tested.
+
+<h3>Download</h3>
+<ul>
+<li> MoSDi Revision 468 (as of 2009/01/13): <a href="./mosdi_r468.jar"> JAR-File</a>
+<li> MoSDi uses <a href="http://jopt-simple.sourceforge.net/">jopt-simple</a> to parse command line options. Right now, a version prior to 3.0 must be used (interface is not backwards-compatible and we haven't ported our code yet). The last 2.x version is <a href="http://repo2.maven.org/maven2/net/sf/jopt-simple/jopt-simple/2.4.1/">2.4.1</a>.
+</ul>
+
+<h3>Source Code</h3>
+A source code release is planned for the near future.
+
+<h3>How to use MoSDi for DNA motif discovery</h3>
+<ul>
+<li>This example has been tried in a bash shell under Linux. It should work on any other Unix-like OS without any problems. If you use Windows, you may want to try <a href="http://www.cygwin.com">cygwin</a>.
+<li>MoSDi is configured to look for the file jopt-simple.jar in the directory of the MoSDi JAR-file. The easiest way to satisfy this requirement is to create a link named jopt-simple.jar in the same directory as the MoSDi JAR-file:
+<pre>
+$ cd &lt;path-to-mosdi-jar&gt;
+$ ln -s &lt;path-to-jopt-simple&gt;/jopt-simple-&lt;version&gt;.jar jopt-simple.jar
+</pre>
+<li>To test motif discovery, please download <a href="./example-sequences"> this file with (toy-)example sequences</a>. (Format: one sequence per line, fasta format is currently not supported). For convenience, save the file in the same directory as the MoSDi JAR-file.
+<li>In our toy example, we wish to examine all IUPAC motifs of length 8 with at most 2 of the characters R, Y, W, S, K, M (two-nucleotide-wildcards) and with at most 2 Ns (four-nucleotide-wildcard). At first, we need to generate a list of abelian patterns that satisfy these conditions:
+<pre>
+$ java -jar mosdi_r468.jar iupac_abelian_gen -M 8,2,0,2 8 &gt; abelian_patterns
+</pre>
+<li>Now we examine the example sequences with respect to these abelian patterns
+<pre>
+$ java -jar mosdi_r468.jar discovery -t 1e-15 -F example-sequences abelian_patterns |grep '&gt;&gt;' &gt; results
+</pre>
+The switch "-t 1e-15" tells the algorithm to look for motifs with a p-value below 1e-15. Grepping for &gt;&gt; saves us from the software's rather detailed output. Note that, in order to parallelize the computation, we may split the file abelian_patterns into chunks and process them on different cores/machines.
+<li>Sorting results by p-value gives us the winner motif (along with some statistics):
+<pre>
+>>p_value>> 3.617957e-37 LIN >>stats>> TAARASGA 1 9 9 17 5.170981e-02 >>poisson>> 5.170981e-02 1.000000e+00 >>runtimes>> 0.000000e+00 0.000000e+00 0.000000e+00
+</pre>
+<li>The motif discovery process is as yet restricted to i.i.d. background models. Thus we might want to re-evaluate all returned motifs with respect to a Markovian background model. Firstly, we create a list of all returned motifs:
+<pre>
+$ grep '>>p_value>' results | cut -d ' ' -f 5 > motifs
+</pre>
+Then, we re-evaluate these motifs w.r.t. an third order Markov model (M3):
+<pre>
+$ java -jar mosdi_r468.jar calc_scores -M3 -F example-sequences motifs |grep '>>' > results_M3
+</pre>
+</ul>
+
+<h2>Contact</h2>
+If you have any questions, suggestions, or comments, please feel free to contact Tobias Marschall.
+<br>
+E-mail: <b>tobias.marschall<img src="/resources/pics/at.gif" alt="$" />tu-dortmund.de</b>
+
+
+<h2>References</h2>
+
+
+<table width="100%">
+<tr><td width="50" valign="top"> [1]</td><td> Tobias Marschall and Sven Rahmann. Probabilistic arithmetic automata and their application to pattern matching statistics. In Paolo Ferragina and Gad Landau, editors, <em> Combinatorial Pattern Matching (CPM'08)</em>, volume 5029 of <em> LNCS</em>, pages 95-106. Springer, 2008.
+
+<br>
+</td></tr><tr><td width="50" valign="top"> [2]</td><td> Tobias Marschall and Sven Rahmann. Efficient exact motif discovery. Bioinformatics (Proceedings of ISMB), 25(12):i356-364, 2009. DOI: 10.1093/bioinformatics/btp188.
+</td></tr>
+</table>
+
+<br>
+Last changed 2010/10/11
+
+</body>
+</html>
+

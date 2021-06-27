@@ -1,0 +1,1145 @@
+
+<html>
+ <head>
+	<TITLE> Augur :: The protein prediction, classification and analysis pipeline </title>
+	<link href="http://141.50.94.20/augur/style.css" title="STYLE" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+
+<body>
+<div class="wrap">
+<a NAME="top"></a><table cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+	<tr>
+      	 <th colspan="3" class= "head" height="80" align="center"> Augur :: The protein prediction, classification and analysis pipeline </th>
+      	</tr>
+	
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+
+<tr valign="TOP">
+	<td>
+		<head>
+
+<style type="text/css">
+<!--
+
+    TABLE.PopupMenu
+    {
+    	background-image:url(http://141.50.94.20/augur/image/header02.jpg);
+		border-style: outset;
+        border-color: #CCCCCC;
+        border-width: 1px;
+        z-Index: 2;
+    }
+
+    TD.PopupMenu
+    {
+        padding: 4px;
+        border-style: solid;
+        border-width: 1px;
+        border-bottom-width: 1px;
+        border-color: #CCCCCC;
+    }
+
+    TABLE.HorizontalPopupMenu
+    {
+        background-color: #000000;
+        border-style: outset;
+        border-color: #C0C0C0;
+        border-width: 1px;
+        z-Index: 2;
+    }
+
+    TD.HorizontalPopupMenu
+    {
+        padding: 4px;
+        border-style: solid;
+        border-width: 0px;
+        border-right-width: 1px;
+        border-color: #D0D0D0;
+    }
+
+    TD.PopupMenuItem
+    {
+        padding-right: 20px;
+	font-size: 11;
+/* 	font-family: Sans-Serif; */
+	
+    }
+
+    TD#PopupMenuBottom
+    {
+        border-width: 1px;
+    }
+    
+    TD#PopupMenuTop
+    {
+        border-width: 1px;
+    }
+
+    A.PopupMenuItem:link, A.PopupMenuItem:visited
+    {
+        color: #CCCCCC;
+        font-size: 100%;
+        font-family: Sans-Serif;graphic.php
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .Hover
+    {
+    }
+
+//-->
+</style>
+
+<script language="JavaScript" type="text/javascript" src="http://141.50.94.20/augur/bibliothek.js">
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+    /** Internet Explorer? */
+    var IE = navigator.appName == 'Microsoft Internet Explorer' && navigator.userAgent.indexOf( 'Opera' ) == -1;
+
+    /** document object model supported? */
+    var DOM = !!document.getElementById;
+
+    /** interval after which all menus are closed if the menu is not used anymore */
+    var HIDE_AFTER = 100;
+
+    /** arrow image */
+    var ARROW_IMAGE = null;
+
+    /** the z-Index of the displayed arrow */
+    var ARROW_ZINDEX = '2';
+
+    /** size of the displayed arrow */
+    var ARROW_SIZE = 5;
+
+    /** the color of the displayed arrow */
+    var ARROW_COLOR = '#C0C0FF';
+
+    /** the width of the icon */
+    var ICON_WIDTH = 20;
+
+    /** the height of the icons */
+    var ICON_HEIGHT = 20;
+
+    /** the timer that hides the menu after a interval */
+    var m_Timer = null;
+
+    /**
+     * The MenuRegistry holds all Menus in a map for each registered link.
+     */
+    function MenuRegistry()
+    {
+        this.m_Links = new Array();
+        this.m_Children = new Array();
+        this.m_HoveredLinks = new Array();
+
+        this.appendChild = MenuRegistry_appendChild;
+        this.addHoveredLink = MenuRegistry_addHoveredLink;
+        this.createHoveredLinks = MenuRegistry_createHoveredLinks;
+        this.create = MenuRegistry_create;
+        this.revalidate = MenuRegistry_revalidate;
+        this.hideAll = MenuRegistry_hideAll;
+        this.startTimer = MenuRegistry_startTimer;
+        this.stopTimer = MenuRegistry_stopTimer;
+    }
+
+    /**
+     * Appends a menu to the menu registry.
+     * @param child the menu
+     */
+    function MenuRegistry_appendChild( child )
+    {
+        this.m_Children[this.m_Children.length] = child;
+    }
+
+    /**
+     * Adds a hovered link.
+     * @param hoveredLink the hovered link
+     */
+    function MenuRegistry_addHoveredLink( hoveredLink )
+    {
+        this.m_HoveredLinks[this.m_HoveredLinks.length] = hoveredLink;
+    }
+
+    /**
+     * Creates the hovered links.
+     */
+    function MenuRegistry_createHoveredLinks()
+    {
+        var i;
+        for ( i=0; i < this.m_HoveredLinks.length; i++ )
+        {
+            this.m_HoveredLinks[i].create();
+        }
+    }
+
+    /**
+     * Adds mouse over events to all registered link.
+     */
+    function MenuRegistry_create()
+    {
+        var i, j, left, top;
+        var links = document.getElementsByTagName( 'A' );
+        var arrow;
+
+        for ( i=0; i < links.length; i++ )
+        {
+            for ( j=0; j < this.m_Children.length; j++ )
+            {
+                if ( links[i].href.indexOf( this.m_Children[j].getUrl() ) != -1 && links[i].parentLink && links[i].parentLink.className == 'PopupMenuItem' )
+                {
+                    links[i].menu = this.m_Children[j];
+                    links[i].oldmenumouseover = links[i].onmouseover;
+                    links[i].onmouseover = function()
+                    {
+                        if ( this.oldmenumouseover )
+                        {
+                            this.oldmenumouseover();
+                        }
+                        window.menuRegistry.hideAll();
+                        window.menuRegistry.stopTimer();
+                        this.menu.show( this );
+                    };
+                    links[i].oldmenumouseout = links[i].onmouseout;
+                    links[i].onmouseout = function()
+                    {
+                        if ( this.oldmenumouseout )
+                        {
+                            this.oldmenumouseout();
+                        }
+                        window.menuRegistry.startTimer();
+                    };
+
+                    left = getAbsoluteLeft( links[i].hover );
+                    top = getAbsoluteTop( links[i].hover );
+
+                    if ( this.m_Children[j].getDirection() == 'HORIZONTAL' && top > 10 )
+                    {
+                        arrow = createArrow( ARROW_IMAGE, ARROW_ZINDEX, ARROW_SIZE, ARROW_COLOR );
+                        arrow.style.left = getAbsoluteLeft( links[i].hover ) + links[i].hover.offsetWidth - ARROW_SIZE - 7;
+                        arrow.style.top = getAbsoluteTop( links[i].hover ) + links[i].hover.offsetHeight / 2 - ARROW_SIZE / 2;
+                        document.body.appendChild( arrow );
+                        links[i].arrow = arrow;
+                    }
+
+                    this.m_Links[this.m_Links.length] = links[i];
+                }
+            }
+        }
+    }
+
+    /**
+     * Revalidates the layout of the menubar.
+     **/
+    function MenuRegistry_revalidate()
+    {
+        var i;
+        for ( i=0; i < this.m_Links.length; i++ )
+        {
+            if ( this.m_Links[i].arrow )
+            {
+                this.m_Links[i].arrow.style.left = getAbsoluteLeft( this.m_Links[i].hover ) + this.m_Links[i].hover.offsetWidth - ARROW_SIZE - 7;
+                this.m_Links[i].arrow.style.top = getAbsoluteTop( this.m_Links[i].hover ) + this.m_Links[i].hover.offsetHeight / 2 - ARROW_SIZE / 2;
+            }
+        }
+    }
+
+    /**
+     * Hides all opened menus.
+     */
+    function MenuRegistry_hideAll()
+    {
+        var i;
+        for ( i=0; i < this.m_Children.length; i++ )
+        {
+            this.m_Children[i].hide();
+        }
+    }
+
+    /**
+     * Starts the timer.
+     */
+    function MenuRegistry_startTimer()
+    {
+        m_Timer = window.setTimeout( 'window.menuRegistry.hideAll();', HIDE_AFTER );
+    }
+
+    /**
+     * Stops the timer.
+     */
+    function MenuRegistry_stopTimer()
+    {
+        if ( m_Timer != null )
+        {
+            window.clearTimeout( m_Timer );
+        }
+        m_Timer = null;
+    }
+
+    /**
+     * The menu is shown on a mouseover event.
+     */
+    function Menu()
+    {
+        this.m_Icon = '';
+        this.m_Url = '';
+        this.m_Target = '';
+        this.m_Text = '#';
+        this.m_Children = new Array();
+        this.m_Shown = false;
+        this.m_Table = null;
+        this.m_Link = null;
+        this.m_IsMenu = false;
+        this.m_Parent = null;
+        this.m_Direction = 'HORIZONTAL';
+        this.m_Adjustment = 'VERTICAL';
+        this.m_MenuClassName = 'PopupMenu';
+        this.m_ItemClassName = 'PopupMenuItem';
+
+        this.setIcon = Menu_setIcon;
+        this.getIcon = Menu_getIcon;
+        this.setUrl = Menu_setUrl;
+        this.getUrl = Menu_getUrl;
+        this.setTarget = Menu_setTarget;
+        this.getTarget = Menu_getTarget;
+        this.setText = Menu_setText;
+        this.getText = Menu_getText;
+        this.setParent = Menu_setParent;
+        this.setLink = Menu_setLink;
+        this.getLink = Menu_getLink;
+        this.setDirection = Menu_setDirection;
+        this.getDirection = Menu_getDirection;
+        this.setAdjustment = Menu_setAdjustment;
+        this.getAdjustment = Menu_getAdjustment;
+        this.setMenuClassName = Menu_setMenuClassName;
+        this.getMenuClassName = Menu_getMenuClassName;
+        this.setItemClassName = Menu_setItemClassName;
+        this.getItemClassName = Menu_getItemClassName;
+
+        this.isShown = Menu_isShown;
+        this.isMenu = Menu_isMenu;
+        this.isHorizontal = Menu_isHorizontal;
+        this.appendChild = Menu_appendChild;
+        this.show = Menu_show;
+        this.hide = Menu_hide;
+        this.hideAllChildren = Menu_hideAllChildren;
+        this.create = Menu_create;
+        this.registerEvents = Menu_registerEvents;
+    }
+
+    /**
+     * Sets the icon.
+     * @param icon the icon
+     */
+    function Menu_setIcon( icon )
+    {
+        this.m_Icon = icon;
+    }
+
+    /**
+     * Returns the icon.
+     * @return the icon
+     */
+    function Menu_getIcon()
+    {
+        return this.m_Icon;
+    }
+
+    /**
+     * Sets the url.
+     * @param url the url
+     */
+    function Menu_setUrl( url )
+    {
+        this.m_Url = url;
+    }
+
+    /**
+     * Returns the url.
+     * @return the url
+     */
+    function Menu_getUrl()
+    {
+        return this.m_Url;
+    }
+
+    /**
+     * Sets the target.
+     * @param target the target
+     */
+    function Menu_setTarget( target )
+    {
+        this.m_Target = target;
+    }
+
+    /**
+     * Returns the target.
+     * @return the target
+     */
+    function Menu_getTarget()
+    {
+        return this.m_Target;
+    }
+
+    /**
+     * Sets the text.
+     * @param text the text
+     */
+    function Menu_setText( text )
+    {
+        this.m_Text = text;
+    }
+
+    /**
+     * Returns the text.
+     * @return the text
+     */
+    function Menu_getText()
+    {
+        return this.m_Text;
+    }
+
+    /**
+     * Sets the link html element.
+     * @param link the link
+     */
+    function Menu_setLink( link )
+    {
+        this.m_Link = link;
+    }
+
+    /**
+     * Returns the link html element.
+     * @return the link
+     */
+    function Menu_getLink()
+    {
+        return this.m_Link;
+    }
+
+    /**
+     * Sets the direction. HORIZONTAL or VERTICAL.
+     * @param direction the direction
+     */
+    function Menu_setDirection( direction )
+    {
+        this.m_Direction = direction;
+    }
+
+    /**
+     * Returns the direction.
+     * @return the direction
+     */
+    function Menu_getDirection()
+    {
+        return this.m_Direction;
+    }
+
+    /**
+     * Sets the adjustment.
+     * @param adjustment the adjustment
+     */
+    function Menu_setAdjustment( adjustment )
+    {
+        this.m_Adjustment = adjustment;
+    }
+
+    /**
+     * Returns the adjustment.
+     * @return the adjustment
+     */
+    function Menu_getAdjustment()
+    {
+        return this.m_Adjustment;
+    }
+
+    /**
+     * Sets the menu class name.
+     * @param className the menu class name
+     */
+    function Menu_setMenuClassName( className )
+    {
+        this.m_MenuClassName = className;
+    }
+
+    /**
+     * Returns the menu class name.
+     * @return the menu class name
+     */
+    function Menu_getMenuClassName()
+    {
+        return this.m_MenuClassName;
+    }
+
+    /**
+     * Sets the item class name.
+     * @param className the item class name
+     */
+    function Menu_setItemClassName( className )
+    {
+        this.m_ItemClassName = className;
+    }
+
+    /**
+     * Returns the item class name.
+     * @return className the item class name
+     */
+    function Menu_getItemClassName( className )
+    {
+        return this.m_ItemClassName;
+    }
+
+    /**
+     * Returns if the menu is currently shown.
+     * @return Menu is shown?
+     */
+    function Menu_isShown()
+    {
+        return this.m_Shown;
+    }
+
+    /**
+     * Returns if the menu is really a menu (has at least one child).
+     * @return has the menu at least one child
+     */
+    function Menu_isMenu()
+    {
+        return this.m_IsMenu;
+    }
+
+    /**
+     * Appends a menu item to the menu.
+     * @param child the menu item
+     */
+    function Menu_appendChild( child )
+    {
+        this.m_Children[this.m_Children.length] = child;
+        child.setParent( this );
+        this.m_IsMenu = true;
+    }
+
+    /**
+     * Sets the parent menu.
+     * @param parent the parent menu
+     */
+    function Menu_setParent( parent )
+    {
+        this.m_Parent = parent;
+    }
+
+    /**
+     * Is the menu horizontal.
+     * @return Menu horizontal?
+     */
+    function Menu_isHorizontal()
+    {
+        return this.m_Direction == 'HORIZONTAL';
+    }
+
+    /**
+     * Creates and shows the menu.
+     * @param the link that called the show()
+     */
+    function Menu_show( link )
+    {
+        if ( this.m_Shown )
+        {
+            return;
+        }
+
+        var left, top;
+        if ( this.m_Table == null )
+        {
+            this.m_Table = this.create();
+        }
+        left = getAbsoluteLeft( link.hover );
+        top = getAbsoluteTop( link.hover );
+        if ( left == -1 || top == -1 )
+        {
+            return;
+        }
+
+        if ( this.m_Direction == 'HORIZONTAL' && top > 10 )
+        {
+            left += link.hover.offsetWidth;
+        }
+        else
+        {
+            top += link.hover.offsetHeight;
+        }
+
+        this.m_Table.style.left = left;
+        this.m_Table.style.top = top;
+
+        document.body.appendChild( this.m_Table );
+        this.m_Shown = true;
+
+        window.menuRegistry.createHoveredLinks();
+
+        this.registerEvents();
+    }
+
+    /**
+     * Always hides the menu.
+     */
+    function Menu_hide()
+    {
+        if ( this.m_Shown && this.m_Table != null )
+        {
+            var i;
+            for ( i=0; i < this.m_Children.length; i++ )
+            {
+                if ( this.m_Children[i].isMenu() && this.m_Children[i].isShown() )
+                {
+                    this.m_Children[i].hide();
+                }
+                if ( this.m_Children[i].getLink() && this.m_Children[i].getLink().hoverContainer )
+                {
+                    document.body.removeChild( this.m_Children[i].getLink().hoverContainer );
+                }
+                if ( this.m_Children[i].getLink() && this.m_Children[i].getLink().arrow )
+                {
+                    document.body.removeChild( this.m_Children[i].getLink().arrow );
+                }
+            }
+
+            document.body.removeChild( this.m_Table );
+            this.m_Shown = false;
+            this.m_Table = null;
+        }
+    }
+
+    /**
+     * Hides all child menus of the menu.
+     */
+    function Menu_hideAllChildren()
+    {
+        var i;
+        for ( i=0; i < this.m_Children.length; i++ )
+        {
+            if ( this.m_Children[i].isMenu() && this.m_Children[i].isShown() )
+            {
+                this.m_Children[i].hide();
+            }
+        }
+    }
+
+    /**
+     * Creates the html element for the menu.
+     */
+    function Menu_create()
+    {
+        var popupRow, popupCell, row, cell, img, link;
+        var cellIdx = 0;
+        var popupTable = document.createElement( 'TABLE' );
+        popupTable.className = this.getMenuClassName();
+        popupTable.style.position = 'absolute';
+
+        if ( this.m_Adjustment == 'HORIZONTAL' )
+        {
+            popupRow = popupTable.insertRow( 0 );
+        }
+
+        for ( i=0; i < this.m_Children.length; i++ )
+        {
+            if ( this.m_Adjustment == 'VERTICAL' )
+            {
+                popupRow = popupTable.insertRow( i );
+                popupCell = popupRow.insertCell( 0 );
+            }
+            else
+            {
+                popupCell = popupRow.insertCell( i );
+            }
+            popupCell.className = this.getMenuClassName();
+            if ( i == this.m_Children.length-1 )
+            {
+                popupCell.id = 'PopupMenuBottom';
+            }
+            else if ( i == 0 )
+            {
+                popupCell.id = 'PopupMenuTop';
+            }
+
+            var table = document.createElement( 'TABLE' );
+            table.border = '0';
+            table.cellSpacing = '0';
+            table.cellPadding = '2';
+
+            cellIdx = 0;
+            row = table.insertRow( 0 );
+
+            if ( this.m_Children[i].getIcon() )
+            {
+                cell = row.insertCell( cellIdx++ );
+                img = document.createElement( 'IMG' );
+                if ( IE && this.m_Children[i].getIcon().indexOf( '.png' ) != -1 )
+                {
+                    img.src = 'http://141.50.94.20/augur/image/spacer.gif';
+                    img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.m_Children[i].getIcon() + "', sizingMethod='scale')";
+                }
+                else
+                {
+                    img.src = this.m_Children[i].getIcon();
+                }
+                img.width = ICON_WIDTH;
+                img.height = ICON_HEIGHT;
+                img.border = '0';
+                cell.appendChild( img );
+            }
+
+            cell = row.insertCell( cellIdx++ );
+            cell.className = this.getItemClassName();
+
+            link = document.createElement( 'A' );
+            link.className = this.getItemClassName();
+            link.href = this.m_Children[i].getUrl();
+            link.target = this.m_Children[i].getTarget();
+
+            link.appendChild( document.createTextNode( this.m_Children[i].getText() ) );
+
+            cell.appendChild( link );
+
+            this.m_Children[i].setLink( link );
+
+            popupCell.appendChild( table );
+        }
+
+        return popupTable;
+    }
+
+    /**
+     * Register the events for the childs.
+     */
+    function Menu_registerEvents()
+    {
+        var i, link, arrow;
+        for ( i=0; i < this.m_Children.length; i++ )
+        {
+            link = this.m_Children[i].getLink().childLink;
+            link.parentMenu = this;
+            link.oldmouseover = link.onmouseover;
+            link.oldmouseout = link.onmouseout;
+
+            if ( link.href == '#' )
+            {
+                link.onclick = function() { return false; };
+            }
+            if ( this.m_Children[i].isMenu() )
+            {
+                link.menu = this.m_Children[i];
+                link.onmouseover = function()
+                {
+                    if ( this.oldmouseover )
+                    {
+                        this.oldmouseover();
+                    }
+                    this.parentMenu.hideAllChildren();
+                    window.menuRegistry.stopTimer();
+                    this.menu.show( this );
+                };
+                link.onmouseout = function()
+                {
+                    if ( this.oldmouseout )
+                    {
+                        this.oldmouseout();
+                    }
+                    window.menuRegistry.startTimer();
+                };
+
+                if ( this.m_Children[i].getDirection() == 'HORIZONTAL' )
+                {
+                    arrow = createArrow( ARROW_IMAGE, ARROW_ZINDEX, ARROW_SIZE, ARROW_COLOR );
+                    arrow.style.left = getAbsoluteLeft( link.hover ) + link.hover.offsetWidth - ARROW_SIZE - 5;
+                    arrow.style.top = getAbsoluteTop( link.hover ) + link.hover.offsetHeight / 2 - ARROW_SIZE / 2;
+                    document.body.appendChild( arrow );
+                    this.m_Children[i].getLink().arrow = arrow;
+                }
+            }
+            else
+            {
+                link.onmouseover = function()
+                {
+                    if ( this.oldmouseover )
+                    {
+                        this.oldmouseover();
+                    }
+                    this.parentMenu.hideAllChildren();
+                    window.menuRegistry.stopTimer();
+                };
+                link.onmouseout = function()
+                {
+                    if ( this.oldmouseout )
+                    {
+                        this.oldmouseout();
+                    }
+                    window.menuRegistry.startTimer();
+                };
+            }
+        }
+    }
+//-->
+</script>
+
+<script language="JavaScript" type="text/javascript" src="http://141.50.94.20/augur/hover.js">
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+if ( DOM )
+{
+window.menuRegistry = new MenuRegistry();
+
+window.popupHoveredLink = new HoveredLink( 'TD', 'PopupMenu' );
+window.popupHoveredLink.setHoverClassName( 'Hover' );
+window.menuRegistry.addHoveredLink( window.popupHoveredLink );
+
+var hoveredLink = new HoveredLink( 'TD', 'HorizontalPopupMenu' );
+window.menuRegistry.addHoveredLink( hoveredLink );
+
+
+//**************************************************************************
+var menu = new Menu();
+menu.setUrl( 'http://141.50.94.20/augur/surf/surfMain.php' );
+
+var submenu = new Menu();
+submenu.setUrl('http://141.50.94.20/augur/surf/singSurfMain.php' );
+submenu.setText( 'specific surface prediction' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/surf/compSurfMain.php' );
+submenu.setText( 'comparative surface prediction' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/surf/sumMain.php' );
+submenu.setText( 'summary of surface analyses' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/surf/singSecreMain.php' );
+submenu.setText( 'single secretome analysis' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/surf/compSecreMain.php' );
+submenu.setText( 'comparative secretome analysis' );
+
+menu.appendChild( submenu );
+
+window.menuRegistry.appendChild( menu );
+
+//**************************************************************************
+
+//**************************************************************************
+var menu = new Menu();
+menu.setUrl( 'http://141.50.94.20/augur/scop/scopMain.php' );
+
+var submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/scop/scopSingMain.php' );
+submenu.setText( 'whole organism classification' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/scop/scopCompMain.php' );
+submenu.setText( 'comparative classification' );
+
+menu.appendChild( submenu );
+
+window.menuRegistry.appendChild( menu );
+
+//**************************************************************************
+
+//**************************************************************************
+var menu = new Menu();
+menu.setUrl( 'http://141.50.94.20/augur/cog/cogMain.php' );
+
+var submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/cog/wholeCog.php' );
+submenu.setText( 'whole organism classification' );
+
+menu.appendChild( submenu );
+
+var submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/cog/batchCog.php' );
+submenu.setText( 'batch gene classification' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/cog/compCogMain.php' );
+submenu.setText( 'comparative / batch classification' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/cog/micCogMain.php' );
+submenu.setText( 'microarray data classification [single]' );
+
+menu.appendChild( submenu );
+
+submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/cog/micCogMainMulti.php' );
+submenu.setText( 'microarray data classification [multiple]' );
+
+menu.appendChild( submenu );
+
+window.menuRegistry.appendChild( menu );
+
+//**************************************************************************
+
+//**************************************************************************
+var menu = new Menu();
+menu.setUrl( 'http://141.50.94.20/augur/about/aboutAugur.php' );
+
+var submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/about/download_augur.php' );
+submenu.setText( 'download section' );
+
+menu.appendChild( submenu );
+
+var submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/about/tut.php' );
+submenu.setText( 'Augur tutorial' );
+
+menu.appendChild( submenu );
+
+var submenu = new Menu();
+submenu.setUrl( 'http://141.50.94.20/augur/about/idRet.php' );
+submenu.setText( 'identifier retrieval' );
+
+menu.appendChild( submenu );
+
+window.menuRegistry.appendChild( menu );
+
+//**************************************************************************
+
+
+document.onclick = function()
+{
+    window.menuRegistry.hideAll();
+}
+
+window.onload = function()
+{
+    window.popupHoveredLink.create();
+    window.menuRegistry.create();
+}
+window.onresize = function()
+{
+    window.menuRegistry.revalidate();
+}
+}
+//-->
+</script>
+
+</head>
+<!-- <body> -->
+
+<table width="100%">
+<tr>
+<td width="95%">
+
+    <table border="0" cellspacing="0" cellpadding="0" class="PopupMenu" width="100%">
+        <tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/augur.png"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/index.php" class="PopupMenuItem" onMouseOver="window.menuRegistry.hideAll()">Home</a></td>
+                </tr>
+            </table></td>
+        </tr>
+        <tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/bacteria_surface.jpg"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/surf/surfMain.php" class="PopupMenuItem">surface protein prediction</a></td>
+                </tr>
+            </table></td>
+        </tr>
+        <tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/LMOEG_lysM.gif"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/scop/scopMain.php" class="PopupMenuItem">structural classification of proteins</a></td>
+                </tr>
+            </table></td>
+        </tr>
+	<tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/cog.gif"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/cog/cogMain.php" class="PopupMenuItem">COG classification</a></td>
+                </tr>
+            </table></td>
+        </tr>
+	<tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/mg.gif"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/search/searchMain.php" class="PopupMenuItem">Search DB</a></td>
+                </tr>
+            </table></td>
+        </tr>
+        <tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/core.gif"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/search/searchCoreMain.php" class="PopupMenuItem">Search for Core</a></td>
+                </tr>
+            </table></td>
+        </tr>
+	<tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/question_mark.jpg"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/faq/faq.php" class="PopupMenuItem">FAQ</a></td>
+                </tr>
+            </table></td>
+        </tr>
+	 <tr>
+            <td class="PopupMenu"><table border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td><img src="http://141.50.94.20/augur/image/augur.png"></td>
+                    <td class="PopupMenuItem"><a href="http://141.50.94.20/augur/about/aboutAugur.php" class="PopupMenuItem">About Augur</a></td>
+                </tr>
+            </table></td>
+        </tr>
+    </table>
+
+</td>
+<td width="5%">&nbsp;</td>
+</tr>
+</table>
+
+<table width="100%">
+	<tr>
+		<td>
+			<form method="POST" action="http://141.50.94.20/augur/checkUsr.php">
+				Username:
+				<input type="text" name="username" size="26">
+				Password:
+				<input type="password" name="passwd" size="26">
+				<input type="submit" value=" ok " name="B1">
+				<input type="reset" value="reset" name="B2">
+			</form>
+		</td>
+	</tr>
+</table>
+
+
+<!-- </body> -->
+	</td>
+	
+<td width="100%" align="center">
+
+
+
+
+<body>
+
+<table BORDER=0 CELLSPACING=1 CELLPADDING=1 WIDTH="100%">
+<tr>
+    <th ALIGN="LEFT" class="head_1">
+	<b> ::: Augur Mainpage</b>
+    </th>
+</tr>
+
+<tr>
+ <td class="right">
+ <p class="MsoNormal"><span lang="EN-GB">We </span>would like to
+ <span lang="EN-GB">present an automated pipeline, </span>AUGUR<span lang="EN-GB">, 
+ which integrates multiple computational tools for surface protein prediction<br> and 
+ functional classification of proteins from gram-positive bacteria. </span><br><br>
+ <span lang="EN-GB">Augur consists of tools for identifying 
+ all major surface proteins, through signal peptide prediction, transmembrane 
+ protein prediction<br> and all types of surface anchors e.g. lipoproteins or LPXTG proteins.
+ It also annotates the genome using the SCOP protein<br> 
+ structural database, and the COG functional classification.</span></p>
+ 
+ <table border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="#006699" width="100%">
+		<tr>
+			<td>
+				<table width="100%" border="0" cellspacing="1" cellpadding="2">
+				<tr>
+					<td bgcolor="#eeeeee" width="100%"><big>Augur update</big>
+					<br><small>Posted by <a href="mailto:andre.billion@mikrobio.med.uni-giessen.de">Andre</a></small></td>
+				</tr>
+				<tr>
+					<td colspan="1" bgcolor="#ffffff">
+					Thursday 22 July 2010<p>
+					
+					<blink>update done</blink><br><br>
+					
+					Have a look at the "listeria only" <a href="http://141.50.94.20/augurlis/index.php">Augur</a><br><br>
+					
+					A complete organism list is available under: <a href="http://141.50.94.20/augur/about/idRet.php">Link</a>
+					<br><br>
+					
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+ </table>
+ </td>
+</tr>
+</table>
+</body>
+
+</td>
+
+
+<td width="160" align="right"><br>
+
+
+
+</td>
+
+
+
+</tr>
+</table>
+	<table border="0" cellspacing="0" cellpadding="0" width="100%">
+		<tr>
+			<th align="left" class="footer">
+		
+			<table border="0" cellspacing="1" cellpadding="1" width="100%">
+			
+			<tr>
+				<td align="left" width="50%">
+					<font style="font-size:10px; font-weight: normal">-- &copy; <a href="mailto:andre.billion@mikrobio.med.uni-giessen.de">André Billion</a> 2006 --</font>
+				</td>
+				
+				<td align="right" width="50%">
+					<font style="font-size:10px"><a href="#top">top</a></font>
+				</td>
+			</tr>
+			</table>
+			</th>
+		</tr>
+	</table>
+</td>
+</tr>
+</table>
+
+</BODY>
+</HTML>

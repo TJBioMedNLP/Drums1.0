@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<title>Index of /bioqint/label_distribution</title>
+<style fprolloverstyle="">A:hover {color: green; font-weight: bold}
+</style>
+</head><body alink="#cc9933" background="selivanov_files/btztilea.gif" bgcolor="#ffffff" text="#000000" vlink="#336666" link="#333399">
+<table border="0" cellpadding="4" cellspacing="0" width="959" height="138">
+<tbody><tr>
+<td width="132" height="130" align="center"><a href="http://www.ub.es/">
+<img src="selivanov_files/ubweb.gif" width="90" height="90"></a></td>
+<td valign="top" width="711" height="130"><p align="center"><font face="Verdana, Arial, Helvetica"><font color="#000080" face="Trebuchet MS"><font size="+3"><b>&nbsp;Label distribution</b></font></font></p>
+<p align="center"></p><p align="center">
+<font face="Verdana, Arial, Helvetica"><font color="#000080" size="6" face="Trebuchet MS">Vitaly Selivanov</font></font></p></td>
+<td valign="right" width="232" height="160"><img src="selivanov_files/scheme.png" width="330" height="160"></td>
+</tr>
+</tbody></table>
+<p style="margin-top: 0pt; margin-bottom: 0pt;" align="justify">
+<font face="Verdana, Arial, Helvetica"><font size="4" face="Trebuchet MS">If substrates of cellular metabolism contain labeled atoms (as <sup>13</sup>C isotopes), metabolic networks introduces them into the intermediates and products in accord with the internal metabolic fluxes. Therefore, the resulting label distribution 
+carries the information about the cellular metabolic fluxes. The distribution 
+could be assessed experimentally with NMR or GC/MS technique; analysis of these 
+data requires tracing of huge amount of possible isotopomers (a substance of n 
+carbon atoms is represented by 2<sup>n</sup> isotopomers).&nbsp; A method of 
+authomatical construction of the respective huge system of differential 
+equations is described here:</font><i>
+                V. A. Selivanov, J. Puigjaner, A. Sillero, J.J. Centelles, A. Ramos-Montoya, P.W.N. Lee, M. Cascante. 
+	An Optimized Algorithm for Flux Estimation from Isotopomer Distribution in Glucose Metabolites.
+                <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/20/18/3387?maxtoshow=&amp;HITS=10&amp;hits=10&amp;RESULTFORMAT=&amp;author1=selivanov&amp;andorexactfulltext=and&amp;
+searchid=1118402799389_1050&amp;stored_search=&amp;FIRSTINDEX=0&amp;sortspec=relevance&amp;resourcetype=1&amp;
+journalcode=bioinfo">Bioinformatics, 2004,20,3387-3397.</a></p></i>
+<p></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;" align="justify">
+<font face="Verdana, Arial, Helvetica"><font size="4" face="Trebuchet MS">&nbsp;&nbsp; This 
+method was realized as a "Mathematica" (Wolfram Inc) program: <b><a href="http://www.bq.ub.es/bioqint/label_distribution/fitting.nb">fitting.nb</a> </b>
+
+This program first calculates total metabolite concentrations and fluxes for glycolytic and 
+pentose phosphate pathways and then uses the linked program <b><a href="http://www.bq.ub.es/bioqint/label_distribution/check1.exe">check1.exe</a> </b>to calculate 
+concentrations of all possible isotopomers. This program was written in C, which 
+makes these time-consuming calculations faster. </p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;" align="justify">
+<font face="Verdana, Arial, Helvetica"><font size="4" face="Trebuchet MS">
+The present approach allows implementing 
+in the isotopomer analysis the available "classical" enzyme kinetic information, 
+which restricts ambiguity in the possible estimated sets of fluxes. The 
+software, which accounts for the detailed kinetic mechanism of transketolase (TK) and 
+transaldolase (TA)	reactions, is present in several versions, one of which, "Mathematica"-version, is described here: 
+</font></font></font></font><i>V.A. Selivanov, 
+L.E. Meshalkina, O.N. Solovjeva, P.W. Kuchel, A.Ramos-Montoya, G.A. Kochetov, P.W.N. Lee, M. Cascante. 
+Rapid simulation and analysis of isotopomer distributions using constraints based on enzyme mechanisms: an 
+example from HT29 cancer cells. </i><a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/bti573v1?maxtoshow=&amp;HITS=10&amp;hits=10&amp;RESULTFORMAT=&amp;author1=selivanov&amp;andorexactfulltext=and&amp;
+searchid=1120837007619_1701&amp;stored_search=&amp;FIRSTINDEX=0&amp;sortspec=relevance&amp;resourcetype=1&amp;
+journalcode=bioinfo">Bioinformatics, 2005, 21, 3558-3564.</a></p><p></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;" align="justify">
+<font face="Verdana, Arial, Helvetica"><font size="4" face="Trebuchet MS">
+The "Mathematica" program is in the file &#8220;rib-ot.nb&#8221; located in the archive 
+<a href="http://www.bq.ub.es/bioqint/label_distribution/Bioinform2005Math.zip">
+Bioinform2005Math</a>. This contains also the executable &#8220;rrib.exe&#8221;, 
+which is linked to the main program; supplementary file &#8220;TK-scheme.nb&#8221;, which 
+shows the details of implementation of the isotope-exchange fluxes produced in TK and TA 
+reactions. This program also has an algorithm for parameter optimization, which minimizes &#967;<sup>2</sup> by coordinate descent, estimates the goodness of fit and formal standard errors for parameters. Development of new algorithm was necessary because the standard &#8220;Mathematica&#8221; algorithms for optimization do not work properly with differential equations because of falling to the area of parameters where the system becomes 
+stiff and solution could not be obtained.</p>
+
+<p class="MsoNormal">
+The supplementary file &#8220;TK-substrate.nb&#8221;, simulating substrate accumulation in 
+TK reaction is located in the archive <a href="http://www.bq.ub.es/bioqint/label_distribution/TK-substrate.zip">
+TK-substrate</a>. </p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;" align="justify">
+A C++ console application &#8220;coli530.exe&#8221; computes the distribution of all
+isotopomers (though only mass isotopomers are included in the output)
+accounting for, in addition to that present in the "Mathematica" version, the competition between 
+the TK substrates, Krebs cycle and anaplerotic reactions. It is located in the
+archive <a href="http://www.bq.ub.es/bioqint/label_distribution/Bioinform2005-C++.zip">
+Bioinform2005-C++</a>, also containing the scheme of the reaction pathway, 
+&#8220;reaction scheme.jpg&#8221;; the scheme of TK-reaction accounting for the substrate 
+competition implemented in &#8220;coli530.exe&#8221;, &#8220;TK-compet.jpg&#8221;; the scheme for the 
+TA-reaction, &#8220;TA.jpg&#8221;, and other files described in details in the user guide 
+&#8220;readme console.doc&#8221;, also located in the same archive. &nbsp;</p>
+
+<p style="margin-top: 0pt; margin-bottom: 0pt;" align="justify">
+A &#8220;Windows&#8221; application  (&#8220;wst602.exe&#8221;) is located in the archive "<a href="http://www.bq.ub.es/bioqint/label_distribution/windows.zip">windows</a>", which contains also all the files necessary for the correct execution of &#8220;wst602.exe&#8221; and the user guide with the name &#8220;readme windows.doc&#8221;. This windows 
+application uses the same format of files with experimental data &#8220;exper.dat&#8221; and 
+parameters &#8220;nv.txt&#8221; as the console application. </p><p></p>
+
+<p style="margin-top: 0pt; margin-bottom: 0pt;" align="justify">
+The archive "<a href="http://www.bq.ub.es/bioqint/label_distribution/fit.tar.gz">fit</a>", represents a next generation of the program described in
+ <a href=http://bioinformatics.oxfordjournals.org/cgi/reprint/22/22/2806?maxtoshow=&HITS=10&hits=10&RESULTFORMAT=&fulltext=selivanov&searchid=1&FIRSTINDEX=0&resourcetype=HWCIT>
+Bioinformatics, 2006, 22, 2806-2812.</a>. It analyses the metabolic network consisted of glucose input, 
+glycolysis, glycogen metabolism, Pentose Phosphate Pathway with detailed scheme 
+for isotope-exchange fluxes created by transketolase and transaldolase catalysis 
+accounting for competition between the substrates, Krebs cycle, anaplerotic 
+reactions, and various fluxes connecting this part&nbsp; with whole metabolic 
+system. In the present example it is customized for rat liver cell metabolism 
+and simulates different experiments where labeled glucose or labeled lactate 
+were used. It also has a procedure for &nbsp;&#967;<sup>2</sup> minimization based on Simulated Annealing algorithm for 
+global optimization, which  uses Powell's method in a local area. It also 
+analyses the sensitivity to parameters and evaluates formal standard deviations 
+for the adjusted parameters. The brief user guide "<b>readme.doc</b>" describes 
+the most essential details mecessary for using this tool.</font></font></p>
+<p></p>
+<p><font face="Verdana, Arial, Helvetica"><b><font size="4" face="Trebuchet MS">
+<a href="http://www.bq.ub.es/bioqint/SetupPyrenome.zip">Noraybio</a></font></b></font></p>
+<p ></p>
+<p align="justify"><b><font color="#FF0000" size="4">NEW: Mitochondrial Respiration</font></b><img src="selivanov_files/resp.png" width="290" height="230">
+<p align="justify"><font size="4" face="Trebuchet MS"><u><i>Model of mitochondrial respiration 
+and ROS production</i></u> is a tool for the analysis of experimental data 
+related with mitochondrial respiration and coupled reactive oxygen species (ROS) 
+production. It describes the redox state of the complex, which is composed of 
+concentrations of 400 different combinations of oxidized or reduced states of 
+electron transporters: cytochrome Bh, cytochrome Bl, cytochrome C1, Fe-S complex 
+of Rieske protein, and ubiquinone/semiquinone/ubiquinol bound on cytosolic or 
+matrix sides of the complex. </font><b><font face="Trebuchet MS" size="4"><a href="ros.tar.gz">
+Click here to download the model.</a></font></b></p>
+
+<p ></p>
+<p></p>
+<p></p>
+<p></p>
+<div align="center"><font face="Verdana, Arial, Helvetica">&nbsp;</font></div>
+<p><font face="Verdana, Arial, Helvetica"><font face="Trebuchet MS"><i><a href="http://www.bq.ub.es/info/grups_seleccio.php">Research Groups
+of the Department</a></i>
+<br><i><a href="http://www.bq.ub.es/">Department of Biochemistry
+and Molecular Biology</a></i> </font>
+
+</font></p><address>
+<font face="Verdana, Arial, Helvetica"><font face="Trebuchet MS">
+<font color="#000080">Comments:</font> <a href="mailto:sib@bq.ub.es">webmaster</a></font></font></address>
+
+<p>
+
+<font face="Verdana, Arial, Helvetica"><font face="Trebuchet MS">
+
+<br><font color="#000080">Last update: July, 14<sup>th</sup>&nbsp; 2008</font></font></font></p>
+
+</body></html>

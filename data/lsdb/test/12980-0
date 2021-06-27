@@ -1,0 +1,1146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>MicroScope Home - MaGe: Microbial Genome Annotation Platform - MicroScope - Web Interface System &amp; Specialized Databases for (re)Annotation and Analysis of Microbial Genomes</title>	
+<meta http-equiv='content-type' content='text/html; charset=iso-8859-1' />
+<link type="text/css" rel="stylesheet" media="screen"  href="../web/css/style.css" />
+<link type="text/css" rel="stylesheet" media="screen"  href="../web/css/default_theme.css" />
+
+<script type="text/javascript" src="../web/javascript/common.js"></script>
+<script type="text/javascript" src="../web/javascript/jquery.js"></script>
+<script type="text/javascript" src="../web/javascript/jqueryplugins.js"></script>
+<script type="text/javascript" src="../web/javascript/exec/exec.js"></script>
+
+<script type="text/javascript">
+<!---
+// Initialisation du nom de la fenetre pour les target
+window.name="";
+
+// Construction des tableaux de paniers de genes
+
+
+// Systeme Toggle Show/Hide du menu gauche 
+ $(document).ready(function() {
+   $('#toggle').hide(); 
+});
+
+// Tableaux initialisation formulaires du Search by Keywords tool
+
+//-->
+</script>
+
+</head>
+
+<body onload="self.focus();initIt();waitPreloadPage();">
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+
+<div id="header">
+
+	<div id="bannerup" align="left"></div>
+	<div id="banner" align="left">	
+	<a href="../home/index.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122"><img src="../web/pictures/microscopesmall.png" border="0" alt="microscopelogosmall" /></a>	
+		
+		
+
+		
+		<form id="headerlogin" name="formLogin" action="https://www.genoscope.cns.fr/agc/microscope/home/index.php?" method="post" onsubmit="waitSubmitPage();"><input type="hidden" name="wwwpkgdb" value="d17f5ab52320c937b2c05ad254f31122" />
+ 		<div class="A12 white" >
+			<table border="0"><tr>
+			<td valign="middle">Welcome guest&nbsp;<br /><a href="../userpanel/requestpassword.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="white A10" title="Click here if you lost your account password and need to regenerate a new one">( Lost password? )</a></td>
+			<td valign="middle">
+			<input type="text" name="Login" value="username" maxlength="15" size="8" onclick="clickclear(this, 'username')" />&nbsp;
+			<input type="password" name="Pass" value="password" maxlength="10" size="8" onclick="clickclear(this, 'password')" onfocus="clickclear(this, 'password')"  />&nbsp;
+			<input type="submit" name="SUBMIT" value="LOGIN" onclick="waitSubmitPage();" />
+			</td></tr></table>
+		</div> 	
+		</form>
+ 		
+
+		<div id="headerorgname" align="right" class="A12 b"></div>	
+
+		
+
+		
+
+		<!-- Debut Menu de Navigation style="line-height:1em;padding:0.5em;" --> 
+		<ul id="menuDeroulant">		 
+			
+			<li >
+			<h3 class= "A12 b"><a href="../mage/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= " " onclick="waitSubmitPage();">MaGe</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../mage/viewer.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Genome Browser</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../mage/viewer_options.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Genome Browser Options</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../mage/doubloonGenes.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Identical Gene Names</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../mage/overlapCDS.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Overlapping CDS</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../mage/bilanAnnotationExpert.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Expert Annotation Summary</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../genomic/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= "classforlongname " onclick="waitSubmitPage();">Genomic<br />Tools</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../genomic/overview.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Genome Overview</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../genomic/cgview.php?part=all&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Circular Genome Viewer</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../genomic/syntenyTandem.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Tandem Duplications</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../genomic/classifCOG.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">COG Automatic Classification</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../genomic/minGeneSet.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Minimal Gene Set</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../compgenomics/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= "classforlongname " onclick="waitSubmitPage();">Comparative<br />Genomics</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../compgenomics/phyloprofil.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Gene Phyloprofile</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../compgenomics/genomicIsland.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Regions of Genomic Plasticity</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../compgenomics/linePlotForm.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">LinePlot</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../compgenomics/fusfis.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Fusion / Fission</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../compgenomics/GOstats.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">PkGDB Synteny Statistics</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../compgenomics/RefSeqstats.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">RefSeq Synteny Statistics</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../metabolism/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= " " onclick="waitSubmitPage();">Metabolism</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../metabolism/kegg.php?region=G&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Kegg</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../metabolism/microcyc.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">MicroCyc</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../metabolism/metabolicprofil.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Metabolic Profiles</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../metabolism/syntenyPath.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Pathway Synteny</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../search/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= " " onclick="waitSubmitPage();">Searches</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../search/blast.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Blast &amp; Pattern Searches</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../search/keywords.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Search by Keywords</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../export/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= " " onclick="waitSubmitPage();">Export</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../export/exportForm.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Download Data</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../expdata/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= "classforlongname " onclick="waitSubmitPage();">Experimental<br />Data</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../expdata/mutantcollec.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Mutant Collections</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../userpanel/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= " " onclick="waitSubmitPage();">User Panel</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../userpanel/displaypref.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Display Preferences</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../userpanel/genesbasket.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Gene Carts</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../userpanel/requestpassword.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Lost Password?</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+			
+			<li >
+			<h3 class= "A12 b"><a href="../about/index.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class= " " onclick="waitSubmitPage();">About</a></h3>
+		  		<ul class="sousMenu">
+		   		
+		   		<li><h4 class= "A10 b"><a href="../about/microscope.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">MicroScope</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../about/tutorial.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Tutorial Access</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../about/collabprojects.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Collaborative Projects</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../about/protrainings.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Professional Trainings</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../about/labgem.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">LABGeM</a></h4></li>		   		
+		   		
+		   		<li><h4 class= "A10 b"><a href="../about/othertools.php?&wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" class="" onclick="waitSubmitPage();">Other Tools ...</a></h4></li>		   		
+		   		
+		  		</ul>
+			</li>
+						
+		</ul>
+		<!-- Fin Menu de Navigation --> 
+	</div>
+	<div align="left" id="bannerbottom">
+			<div id="prepage" class="loadingdata A12 i" ><img src="../web/pictures/loadingdata.gif" border="0" style="vertical-align:middle;padding-right:15px;" alt="loadingdata" /><blink>Loading Data ...</blink></div>
+	</div>	
+
+	<table border="0" id="navmenu">
+	<tr>
+		<td nowrap="nowrap" align="left" valign="top" style="padding-left:10px;">
+			<a href="../home/index.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" id="homelink" title="MicroScope Home" onclick="waitSubmitPage();"></a>
+		</td>	
+		<td nowrap="nowrap" align="left" valign="top" class="A10 b" style="padding-top:3px;">		
+			
+					
+		</td>
+		<td nowrap="nowrap" style="width:100%;">
+			
+		</td>	
+		<td nowrap="nowrap" align="center" valign="top" style="width:auto;padding-top:3px;">
+			<a class="menuleft_OFF A10 b" href="javascript:html_to_text_ini()" title="Extract this webpage in text format">Text Format</a>
+		</td>
+		<td nowrap="nowrap" align="center" valign="top" style="width:auto;padding-top:3px;padding-right:10px;">
+			<a class="menuleft_OFF A10 b" href="https://www.genoscope.cns.fr/agc/website/spip.php?page=related&amp;section=home" onclick="return openPopup(this, 'Mage Help', 'full')" target="Help" title="Tutorial access related to this webpage">Help</a>
+		</td>		
+	</tr>
+	</table>	
+</div>
+
+<div id="toggle" align="right">
+	
+<a id="togglerclose" title="Show/Hide left menu"><img src="../web/pictures/menuLeft.png" alt="Show/Hide" /></a>
+<center>	
+	
+	
+	
+	
+
+	
+	
+</center>
+</div>
+
+<!-- Debut Content -->
+<div id="content" class=" rightmarged_content" align="left">
+
+<a id="toggler" title="Show/Hide left menu"><img src="../web/pictures/menuRight.png" alt="Show/Hide" /></a>
+	
+	<center>
+	<div id="headertitles" align="center">
+		<table border="0">
+		<tr>
+		
+		<td valign="middle" align="center">
+		<h1 ></h1>
+		</td>
+		</tr>
+		</table>
+
+		<h2 class="A12 b"></h2>	
+		<div class="A16 b"></div>
+	</div>
+	</center>
+
+
+
+
+<center>
+<div id="headertitles" align="center">		
+		<h1 id='hometitle' align="center">MicroScope <br /><i>Microbial Genome Annotation Platform</i></h1>		
+</div>
+
+<div align="justify" class='A14'>
+
+<b>Located at Genoscope - the French National Sequencing Center - our bioinformatics team ( <a href="../about/labgem.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" >LABGeM</a> ) has developed the MicroScope platform to support microbial genomes (re)annotation projects; 
+it is made of three major components:</b><br />
+<ul>
+    <li style="margin-left:60px;"> A set of syntactic and functional annotation tools.</li>
+    <li style="margin-left:60px;"> A relational database, Prokaryotic Genome DataBase, (PkGDB) which is linked to metabolic pathway databases (<a href="../metabolism/microcyc.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" rel="nofollow">MicroCyc</a>) created using the Pathway Tools software.</li>
+    <li style="margin-left:60px;"> A graphical interface, Magnifying Genome (MaGe), which allows to perform relevant expert annotation (combinaison of synteny results and metabolic network predictions).</li>
+</ul>
+
+<br /><br />
+
+<b>The access to the MicroScope web platform is available upon request:</b><br />
+<ul>  
+	<li style="margin-left:60px;">Priority is given to the bacterial genomes being sequenced at Genoscope - Depending on our workload, collaborations are also set up for genomes produced in other sequencing centers (Pasteur Institute, DOE, etc).</li>
+	<li style="margin-left:60px;">To initiate a collaborative project, please contact LABGeM team at <a href="Mailto:mage@genoscope.cns.fr">mage@genoscope.cns.fr</a>.</li>
+	<li style="margin-left:60px;">Our current collaborative projects are available <a href="../about/collabprojects.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122">here</a>.</li>
+
+</ul>
+
+<br /><br />
+
+<b>Setting up a new MicroScope project includes the following steps</b><br />
+<ul>
+    <li style="margin-left:60px;">Step 1. Gathering the set of chromosomes/plasmids to be analyzed : newly sequenced genomes (finished or not) and others available related sequences (finished or not, published or not). </li>
+    <li style="margin-left:60px;">Step 2. Pipeline of automatic annotation including synteny groups computation with complete microbial proteomes. </li>
+    <li style="margin-left:60px;">Step 3. Setting up the thematic databases : genomeScope (genomic and proteomic data) and genomeCyc (metabolic data). </li>
+    <li style="margin-left:60px;">Step 4.<a href="../about/protrainings.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122" >Training courses</a> on MaGe and organization of the expert annotation. </li>
+</ul>
+
+</div>
+
+
+
+<br />
+<br />
+<br />
+
+<table border="0">
+<tr>
+<td align="center" valign="top">
+
+<form id="selectOrga" action="../mage/viewer.php?" method="get" name="main" onsubmit="waitSubmitPage();"><input type="hidden" name="wwwpkgdb" value="d17f5ab52320c937b2c05ad254f31122" />
+<div class="cadre_couleur padding10" style="width:450px;">
+<div class="A12 b">557 Available Organisms</div>
+<select name='O_id' id='O_id' class='A12' size="15"  >
+<option value="563">Acaryochloris marina MBIC11017</option>
+<option value="758">Acidaminococcus fermentans DSM 20731</option>
+<option value="538">Acidithiobacillus ferrooxidans ATCC 53993</option>
+<option value="838">Acinetobacter baumannii 6013113</option>
+<option value="839">Acinetobacter baumannii 6013150</option>
+<option value="841">Acinetobacter baumannii 6014059</option>
+<option value="823">Acinetobacter baumannii AB0057</option>
+<option value="826">Acinetobacter baumannii AB056</option>
+<option value="827">Acinetobacter baumannii AB058</option>
+<option value="828">Acinetobacter baumannii AB059</option>
+<option value="824">Acinetobacter baumannii AB307-0294</option>
+<option value="829">Acinetobacter baumannii AB900</option>
+<option value="825">Acinetobacter baumannii ACICU</option>
+<option value="241">Acinetobacter baumannii ATCC 17978</option>
+<option value="830">Acinetobacter baumannii ATCC 19606</option>
+<option value="56">Acinetobacter baumannii AYE</option>
+<option value="59">Acinetobacter baumannii SDF</option>
+<option selected='selected' value="31">Acinetobacter baylyi ADP1</option>
+<option value="831">Acinetobacter calcoaceticus RUH2202</option>
+<option value="832">Acinetobacter haemolyticus ATCC 19194</option>
+<option value="833">Acinetobacter johnsonii SH046</option>
+<option value="834">Acinetobacter junii SH205</option>
+<option value="835">Acinetobacter lwoffii SH145</option>
+<option value="836">Acinetobacter radioresistens SH164</option>
+<option value="837">Acinetobacter radioresistens SK82</option>
+<option value="842">Acinetobacter sp ATCC 27244</option>
+<option value="822">Acinetobacter sp DR1</option>
+<option value="843">Acinetobacter sp RUH2624</option>
+<option value="844">Acinetobacter sp SH024</option>
+<option value="604">Aeromicrobium marinum DSM_15272</option>
+<option value="36">Aeropyrum pernix K1</option>
+<option value="407">Agrobacterium radiobacter K84</option>
+<option value="332">Agrobacterium tumefaciens C58</option>
+<option value="411">Agrobacterium tumefaciens K84</option>
+<option value="406">Agrobacterium vitis S4</option>
+<option value="422">Alcanivorax borkumensis SK2</option>
+<option value="211">Alkalilimnicola ehrlichei MLHE-1</option>
+<option value="409">Alkaliphilus metalliredigens QYMF</option>
+<option value="386">Alkaliphilus oremlandii OhILAs</option>
+<option value="871">Amycolatopsis mediterranei U32</option>
+<option value="347">Anabaena variabilis ATCC 29413</option>
+<option value="244">Archaeoglobus fulgidus DSM 4304</option>
+<option value="577">Arthrobacter aurescens TC1 TC1; ATCC BAA-1386</option>
+<option value="579">Arthrobacter chlorophenolicus A6</option>
+<option value="580">Arthrobacter sp FB24</option>
+<option value="308">Azorhizobium caulinodans ORS 571</option>
+<option value="653">Azospirillum sp B510</option>
+<option value="295">Bacillus amyloliquefaciens FZB42</option>
+<option value="57">Bacillus anthracis 'Ames Ancestor'</option>
+<option value="53">Bacillus anthracis Ames</option>
+<option value="52">Bacillus cereus ATCC 10987</option>
+<option value="50">Bacillus cereus ATCC 14579</option>
+<option value="1">Bacillus halodurans C-125</option>
+<option value="61">Bacillus licheniformis ATCC 14580</option>
+<option value="7">Bacillus subtilis 168</option>
+<option value="64">Bacillus thuringiensis serovar konkukian 97-27</option>
+<option value="205">Bartonella bacilliformis KC583</option>
+<option value="531">Bartonella grahamii as4aup</option>
+<option value="206">Bartonella henselae Houston-1</option>
+<option value="207">Bartonella quintana Toulouse</option>
+<option value="333">Bartonella tribocorum CIP 105476</option>
+<option value="280">Baumannia cicadellinicola Hc (Homalodisca coagulata)</option>
+<option value="108">Bdellovibrio bacteriovorus HD100</option>
+<option value="815">Beutenbergia cavernae DSM 12333</option>
+<option value="743">Bifidobacterium animalis subsp lactis AD011</option>
+<option value="744">Bifidobacterium animalis subsp lactis Bl-04; ATCC SD5219</option>
+<option value="745">Bifidobacterium animalis subsp lactis DSM 10140</option>
+<option value="748">Bifidobacterium animalis subsp. lactis HN019</option>
+<option value="749">Bifidobacterium bifidum NCIMB 41171</option>
+<option value="750">Bifidobacterium breve DSM 20213</option>
+<option value="746">Bifidobacterium longum NCC2705</option>
+<option value="680">Blattabacterium sp Blattella germanica Bge Alboraia</option>
+<option value="681">Blattabacterium sp Periplaneta americana BPLAN</option>
+<option value="71">Bordetella bronchiseptica RB50</option>
+<option value="72">Bordetella parapertussis 12822</option>
+<option value="73">Bordetella pertussis Tohama I</option>
+<option value="430">Bordetella petrii DSM 12804</option>
+<option value="177">Borrelia afzelii PKo</option>
+<option value="23">Borrelia burgdorferi B31</option>
+<option value="74">Borrelia garinii PBi</option>
+<option value="100">Bradyrhizobium japonicum USDA 110</option>
+<option value="106">Bradyrhizobium sp. BTAi1</option>
+<option value="105">Bradyrhizobium sp. ORS278</option>
+<option value="566">Brucella abortus S19</option>
+<option value="567">Brucella abortus bv 1 9-941</option>
+<option value="568">Brucella canis ATCC 23365</option>
+<option value="569">Brucella melitensis ATCC 23457</option>
+<option value="576">Brucella melitensis biovar Abortus 2308</option>
+<option value="578">Brucella melitensis bv 1 16M</option>
+<option value="612">Brucella microti CCM 4915</option>
+<option value="614">Brucella ovis ATCC 25840</option>
+<option value="615">Brucella suis 1330</option>
+<option value="616">Brucella suis ATCC 23445</option>
+<option value="84">Buchnera aphidicola APS</option>
+<option value="85">Buchnera aphidicola Bp</option>
+<option value="279">Buchnera aphidicola Cc (Cinara cedri)</option>
+<option value="86">Buchnera aphidicola Sg</option>
+<option value="164">Burkholderia cenocepacia AU 1054</option>
+<option value="89">Burkholderia mallei ATCC 23344</option>
+<option value="90">Burkholderia pseudomallei K96243</option>
+<option value="776">Burkholderia sp CCGE1002</option>
+<option value="143">Burkholderia sp. 383</option>
+<option value="165">Burkholderia thailandensis E264</option>
+<option value="436">Burkholderia vietnamiensis G4</option>
+<option value="166">Burkholderia xenovorans LB400</option>
+<option value="382">Campylobacter fetus 82-40</option>
+<option value="383">Campylobacter hominis ATCC BAA-381</option>
+<option value="118">Campylobacter jejuni RM1221</option>
+<option value="46">Campylobacter jejuni subsp. jejuni NCTC 11168</option>
+<option value="676">Candidatus Accumulibacter phosphatis clade IIA UW-1</option>
+<option value="281">Candidatus Blochmannia floridanus</option>
+<option value="282">Candidatus Blochmannia pennsylvanicus BPEN</option>
+<option value="286">Candidatus Carsonella ruddii PV</option>
+<option value="584">Candidatus Hamiltonella defensa T5A (Acyrthosiphon pisum)</option>
+<option value="587">Candidatus Hodgkinia cicadicola Dsem</option>
+<option value="292">Candidatus Methylomirabilis oxyfera</option>
+<option value="186">Candidatus Nitrospira defluvii</option>
+<option value="891">Candidatus Sulcia muelleri CARI</option>
+<option value="378">Candidatus Sulcia muelleri GWSS</option>
+<option value="583">Candidatus Sulcia muelleri SMDSEM</option>
+<option value="890">Candidatus Zinderia insecticola CARI</option>
+<option value="547">Carboxydothermus hydrogenoformans Z-2901</option>
+<option value="600">Cellulomonas flavigena DSM 20109</option>
+<option value="893">Cenarchaeum symbiosum A</option>
+<option value="15">Chlamydia trachomatis D/UW-3/CX</option>
+<option value="16">Chlamydophila pneumoniae J138</option>
+<option value="123">Cloacamonas acidaminovorans</option>
+<option value="39">Clostridium acetobutylicum ATCC 824</option>
+<option value="387">Clostridium beijerinckii NCIMB 8052</option>
+<option value="389">Clostridium botulinum A Hall</option>
+<option value="850">Clostridium cellulolyticum H10; ATCC 35319</option>
+<option value="869">Clostridium cellulovorans 743B</option>
+<option value="779">Clostridium difficile CD196</option>
+<option value="778">Clostridium difficile R20291</option>
+<option value="390">Clostridium kluyveri DSM 555</option>
+<option value="816">Clostridium ljungdahlii ATCC 49587</option>
+<option value="391">Clostridium novyi NT</option>
+<option value="178">Clostridium perfringens ATCC 13124</option>
+<option value="392">Clostridium perfringens str. 13</option>
+<option value="394">Clostridium phytofermentans ISDg</option>
+<option value="870">Clostridium saccharolyticum WM1</option>
+<option value="238">Clostridium sticklandii DSM 519</option>
+<option value="179">Clostridium tetani E88</option>
+<option value="396">Clostridium thermocellum ATCC 27405</option>
+<option value="544">Comamonas testosteroni KF-1</option>
+<option value="879">Corynebacterium diphtheriae NCTC 13129</option>
+<option value="35">Corynebacterium efficiens YS-314</option>
+<option value="79">Corynebacterium glutamicum ATCC 13032</option>
+<option value="246">Corynebacterium glutamicum R</option>
+<option value="163">Cupriavidus metallidurans CH34</option>
+<option value="144">Cupriavidus taiwanensis LMG19424</option>
+<option value="657">Cyanobacterium UCYN-A</option>
+<option value="560">Cyanothece sp PCC 7424</option>
+<option value="559">Cyanothece sp PCC 7425</option>
+<option value="840">Cyanothece sp PCC 8801</option>
+<option value="562">Cyanothece sp PCC 8802</option>
+<option value="808">Dehalococcoides ethenogenes 195</option>
+<option value="804">Dehalococcoides sp BAV1</option>
+<option value="805">Dehalococcoides sp CBDB1</option>
+<option value="806">Dehalococcoides sp GT</option>
+<option value="807">Dehalococcoides sp VS</option>
+<option value="429">Delftia acidovorans SPH-1</option>
+<option value="65">Desulfotalea psychrophila LSv54</option>
+<option value="448">Desulfotomaculum reducens MI-1</option>
+<option value="907">Desulfovibrio aespoeensis Aspo-2</option>
+<option value="908">Desulfovibrio desulfuricans subsp desulfuricans ATCC 27774</option>
+<option value="802">Desulfovibrio desulfuricans subsp desulfuricans G20</option>
+<option value="911">Desulfovibrio fructosovorans JJ</option>
+<option value="598">Desulfovibrio magneticus RS-1</option>
+<option value="909">Desulfovibrio piger ATCC 29098</option>
+<option value="905">Desulfovibrio salexigens DSM 2638</option>
+<option value="910">Desulfovibrio sp 3_1_syn3</option>
+<option value="912">Desulfovibrio sp FW1012B</option>
+<option value="799">Desulfovibrio vulgaris DP4</option>
+<option value="800">Desulfovibrio vulgaris Hildenborough</option>
+<option value="906">Desulfovibrio vulgaris Miyazaki F</option>
+<option value="87">Erwinia carotovora subsp. atroseptica SCRI1043</option>
+<option value="601">Escherichia albertii TW07627</option>
+<option value="131">Escherichia coli 042</option>
+<option value="452">Escherichia coli 101-1</option>
+<option value="180">Escherichia coli 536</option>
+<option value="130">Escherichia coli 55989</option>
+<option value="732">Escherichia coli APEC AGI-5</option>
+<option value="188">Escherichia coli APEC O1</option>
+<option value="456">Escherichia coli ATCC 8739</option>
+<option value="545">Escherichia coli B REL606</option>
+<option value="453">Escherichia coli B171</option>
+<option value="450">Escherichia coli B7A</option>
+<option value="83">Escherichia coli CFT073</option>
+<option value="454">Escherichia coli E110019</option>
+<option value="451">Escherichia coli E22</option>
+<option value="455">Escherichia coli E24377A</option>
+<option value="125">Escherichia coli ED1a</option>
+<option value="902">Escherichia coli ETEC H10407</option>
+<option value="449">Escherichia coli F11</option>
+<option value="296">Escherichia coli HS</option>
+<option value="121">Escherichia coli IAI1</option>
+<option value="126">Escherichia coli IAI39</option>
+<option value="149">Escherichia coli K12</option>
+<option value="457">Escherichia coli LF82</option>
+<option value="752">Escherichia coli O103:H2 12009</option>
+<option value="753">Escherichia coli O111:H- 11128</option>
+<option value="458">Escherichia coli O127:H6 E2348/69</option>
+<option value="82">Escherichia coli O157:H7</option>
+<option value="459">Escherichia coli O157:H7 EC4115</option>
+<option value="2">Escherichia coli O157:H7 EDL933</option>
+<option value="751">Escherichia coli O26:H11 11368</option>
+<option value="120">Escherichia coli S88</option>
+<option value="460">Escherichia coli SE11</option>
+<option value="903">Escherichia coli SE15</option>
+<option value="461">Escherichia coli SMS-3-5</option>
+<option value="127">Escherichia coli UMN026</option>
+<option value="156">Escherichia coli UTI89</option>
+<option value="300">Escherichia coli W3110</option>
+<option value="138">Escherichia fergusonii ATCC 35469T</option>
+<option value="665">Francisella novicida U112</option>
+<option value="674">Francisella philomiragia subsp philomiragia ATCC 25017</option>
+<option value="666">Francisella tularensis mediasiatica FSC147</option>
+<option value="673">Francisella tularensis subsp holarctica FTNF002-00</option>
+<option value="667">Francisella tularensis subsp holarctica OSU18</option>
+<option value="671">Francisella tularensis subsp tularensis FSC 198</option>
+<option value="670">Francisella tularensis subsp tularensis WY96-3418</option>
+<option value="151">Francisella tularensis subsp. tularensis SCHU S4</option>
+<option value="54">Frankia alni ACN14a</option>
+<option value="103">Frankia sp. CcI3</option>
+<option value="104">Frankia sp. EAN1pec</option>
+<option value="162">Fusobacterium nucleatum subsp. nucleatum ATCC 25586</option>
+<option value="856">Gallionella capsiferriformans ES-2</option>
+<option value="516">Geodermatophilus obscurus DSM 43160</option>
+<option value="556">Gloeobacter violaceus PCC 7421</option>
+<option value="880">Gordonia bronchialis DSM 43247</option>
+<option value="42">Haemophilus influenzae Rd KW20</option>
+<option value="245">Haloarcula marismortui ATCC 43049</option>
+<option value="247">Halobacterium sp. NRC-1</option>
+<option value="1019">Halomonas elongata DSM 2581 DSM 2581</option>
+<option value="248">Haloquadratum walsbyi DSM 16790</option>
+<option value="175">Helicobacter acinonychis Sheeba</option>
+<option value="115">Helicobacter hepaticus ATCC 51449</option>
+<option value="117">Helicobacter pylori 26695</option>
+<option value="145">Helicobacter pylori B38</option>
+<option value="416">Helicobacter pylori G27</option>
+<option value="171">Helicobacter pylori HPAG1</option>
+<option value="116">Helicobacter pylori J99</option>
+<option value="420">Helicobacter pylori P12</option>
+<option value="381">Helicobacter pylori Shi470</option>
+<option value="96">Herminiimonas arsenicoxydans</option>
+<option value="249">Hyperthermus butylicus DSM 5456</option>
+<option value="602">Janibacter HTCC2649</option>
+<option value="299">Janthinobacterium sp. Marseille</option>
+<option value="812">Jonesia denitrificans DSM 20603</option>
+<option value="896">Klebsiella pneumoniae 342</option>
+<option value="898">Klebsiella pneumoniae NTUH-K2044</option>
+<option value="897">Klebsiella pneumoniae subsp pneumoniae MGH 78578</option>
+<option value="605">Kribbella flavida DSM 17836</option>
+<option value="32">Kuenenia stuttgartiensis</option>
+<option value="738">Lactobacillus acidophilus NCFM</option>
+<option value="571">Lactobacillus casei ATCC 334</option>
+<option value="572">Lactobacillus casei BL23</option>
+<option value="740">Lactobacillus delbrueckii subsp bulgaricus ATCC 11842</option>
+<option value="739">Lactobacillus delbrueckii subsp bulgaricus ATCC BAA-365</option>
+<option value="527">Lactobacillus fermentum IFO 3956</option>
+<option value="760">Lactobacillus johnsonii FI9785</option>
+<option value="761">Lactobacillus johnsonii NCC 533</option>
+<option value="781">Lactobacillus paracasei subsp paracasei 8700:2</option>
+<option value="759">Lactobacillus plantarum JDM1</option>
+<option value="528">Lactobacillus plantarum WCFS</option>
+<option value="573">Lactobacillus rhamnosus GG (ATCC 53103)</option>
+<option value="575">Lactobacillus rhamnosus HN001</option>
+<option value="574">Lactobacillus rhamnosus Lc 705</option>
+<option value="529">Lactobacillus salivarius UCC118</option>
+<option value="741">Lactococcus lactis subsp cremoris MG1363</option>
+<option value="742">Lactococcus lactis subsp cremoris SK11</option>
+<option value="780">Lactococcus lactis subsp lactis IL1403</option>
+<option value="747">Lactococcus lactis subsp lactis KF147</option>
+<option value="290">Lawsonia intracellularis PHE/MN1-00</option>
+<option value="81">Leptospira biflexa serovar Patoc Patoc 1</option>
+<option value="184">Leptospira borgpetersenii serovar Hardjo-bovis JB197</option>
+<option value="185">Leptospira borgpetersenii serovar Hardjo-bovis L550</option>
+<option value="78">Leptospira interrogans serovar Copenhageni Fiocruz L1-130</option>
+<option value="77">Leptospira interrogans serovar lai 56601</option>
+<option value="613">Leptothrix cholodnii SP-6</option>
+<option value="395">Listeria monocytogenes EGD-e</option>
+<option value="777">Listeria monocytogenes HCC23</option>
+<option value="672">Magnetite-containing magnetic vibrio MV-1</option>
+<option value="322">Magnetococcus sp. MC-1</option>
+<option value="550">Magnetospirillum gryphiswaldense MSR-1</option>
+<option value="403">Marinobacter aquaeolei VT8</option>
+<option value="101">Mesorhizobium loti MAFF303099</option>
+<option value="250">Metallosphaera sedula DSM 5348</option>
+<option value="255">Methanobrevibacter smithii ATCC 35061</option>
+<option value="13">Methanocaldococcus jannaschii DSM 2661</option>
+<option value="251">Methanococcoides burtonii DSM 6242</option>
+<option value="274">Methanococcus aeolicus Nankai-3</option>
+<option value="252">Methanococcus maripaludis C5</option>
+<option value="275">Methanococcus maripaludis C7</option>
+<option value="253">Methanococcus maripaludis S2</option>
+<option value="276">Methanococcus vannielii SB</option>
+<option value="254">Methanocorpusculum labreanum Z</option>
+<option value="256">Methanoculleus marisnigri JR1</option>
+<option value="257">Methanopyrus kandleri AV19</option>
+<option value="258">Methanosaeta thermophila PT</option>
+<option value="235">Methanosarcina acetivorans C2A</option>
+<option value="236">Methanosarcina barkeri Fusaro</option>
+<option value="237">Methanosarcina mazei Go1</option>
+<option value="259">Methanosphaera stadtmanae DSM 3091</option>
+<option value="260">Methanospirillum hungatei JF-1</option>
+<option value="12">Methanothermobacter thermautotrophicus Delta H</option>
+<option value="603">Methylibium petroleiphilum PM1</option>
+<option value="542">Methylobacillus flagellatus KT</option>
+<option value="155">Methylobacterium extorquens AM1</option>
+<option value="147">Methylobacterium extorquens DM4</option>
+<option value="218">Methylobacterium extorquens PA1</option>
+<option value="312">Methylobacterium populi BJ001</option>
+<option value="311">Methylobacterium radiotolerans JCM 2831</option>
+<option value="297">Methylobacterium sp. 4-46</option>
+<option value="541">Methylocella silvestris BL2</option>
+<option value="540">Methylococcus capsulatus Bath</option>
+<option value="581">Micrococcus luteus NCTC 2665</option>
+<option value="354">Microcystis aeruginosa NIES-843</option>
+<option value="408">Microcystis aeruginosa PCC 7806</option>
+<option value="546">Moorella thermoacetica ATCC 39073</option>
+<option value="368">Mycobacterium abscessus ATCC 19977T</option>
+<option value="369">Mycobacterium avium 104</option>
+<option value="167">Mycobacterium avium subsp. paratuberculosis K-10</option>
+<option value="168">Mycobacterium bovis AF2122/97</option>
+<option value="370">Mycobacterium bovis BCG Pasteur 1173P2</option>
+<option value="371">Mycobacterium gilvum PYR-GCK</option>
+<option value="173">Mycobacterium marinum M</option>
+<option value="174">Mycobacterium smegmatis MC2 155</option>
+<option value="366">Mycobacterium sp. JLS</option>
+<option value="367">Mycobacterium sp. KMS</option>
+<option value="170">Mycobacterium sp. MCS</option>
+<option value="6">Mycobacterium tuberculosis CDC1551</option>
+<option value="372">Mycobacterium tuberculosis F11</option>
+<option value="374">Mycobacterium tuberculosis H37Ra; ATCC 25177</option>
+<option value="4">Mycobacterium tuberculosis H37Rv</option>
+<option value="375">Mycobacterium ulcerans Agy99</option>
+<option value="376">Mycobacterium vanbaalenii PYR-1</option>
+<option value="69">Mycoplasma genitalium G37</option>
+<option value="861">Mycoplasma hominis PG21</option>
+<option value="287">Mycoplasma hyopneumoniae 232</option>
+<option value="288">Mycoplasma hyopneumoniae 7448</option>
+<option value="289">Mycoplasma hyopneumoniae J</option>
+<option value="19">Mycoplasma pneumoniae M129</option>
+<option value="261">Nanoarchaeum equitans Kin4-M</option>
+<option value="262">Natronomonas pharaonis DSM 2160</option>
+<option value="34">Neisseria gonorrhoeae FA 1090</option>
+<option value="423">Neisseria gonorrhoeae NCCP11945</option>
+<option value="373">Neisseria lactamica ST640</option>
+<option value="377">Neisseria meningitidis 053442</option>
+<option value="243">Neisseria meningitidis FAM18</option>
+<option value="30">Neisseria meningitidis MC58</option>
+<option value="99">Neisseria meningitidis NEM8013</option>
+<option value="21">Neisseria meningitidis Z2491</option>
+<option value="536">Neisseria meningitidis alpha14</option>
+<option value="901">Neisseria meningitidis alpha710</option>
+<option value="193">Nitrobacter hamburgensis X14</option>
+<option value="194">Nitrobacter winogradskyi Nb-255</option>
+<option value="195">Nitrosomonas europaea ATCC 19718</option>
+<option value="197">Nitrosomonas eutropha C71</option>
+<option value="277">Nocardia farcinica IFM 10152</option>
+<option value="594">Nocardioides sp JS614</option>
+<option value="405">Nostoc punctiforme ATCC 29133; PCC 73102</option>
+<option value="346">Nostoc sp PCC 7120</option>
+<option value="68">Oceanobacillus iheyensis HTE831</option>
+<option value="380">Ochrobactrum anthropi ATCC 49188</option>
+<option value="520">Oligotropha carboxidovorans OM5; ATCC 49405</option>
+<option value="914">Opitutus terrae PB90-1</option>
+<option value="335">Orientia tsutsugamushi Boryong</option>
+<option value="355">Oscillatoria sp PCC 6506</option>
+<option value="530">Pediococcus pentosaceus ATCC 25745</option>
+<option value="203">Photobacterium profundum SS9</option>
+<option value="70">Photorhabdus asymbiotica</option>
+<option value="8">Photorhabdus luminescens TTO1</option>
+<option value="263">Picrophilus torridus DSM 9790</option>
+<option value="535">Polynucleobacter necessarius subsp. asymbioticus QLW-P1DMWA-1</option>
+<option value="534">Polynucleobacter necessarius subsp. necessarius STIR1</option>
+<option value="352">Prochlorococcus marinus AS9601</option>
+<option value="353">Prochlorococcus marinus MIT 9301</option>
+<option value="592">Propionibacterium acnes KPA171202</option>
+<option value="606">Propionibacterium sp oral taxon 191 F0233</option>
+<option value="27">Pseudoalteromonas haloplanktis TAC125</option>
+<option value="582">Pseudomonas UK4</option>
+<option value="610">Pseudomonas aeruginosa LESB58</option>
+<option value="26">Pseudomonas aeruginosa PAO1</option>
+<option value="608">Pseudomonas aeruginosa UCBPP-PA14</option>
+<option value="58">Pseudomonas entomophila L48</option>
+<option value="113">Pseudomonas fluorescens Pf-5</option>
+<option value="607">Pseudomonas fluorescens Pf0-1</option>
+<option value="611">Pseudomonas fluorescens SBW25</option>
+<option value="554">Pseudomonas putida F1</option>
+<option value="555">Pseudomonas putida GB-1</option>
+<option value="48">Pseudomonas putida KT2440</option>
+<option value="139">Pseudomonas syringae pv. phaseolicola 1448A</option>
+<option value="114">Pseudomonas syringae pv. syringae B728a</option>
+<option value="47">Pseudomonas syringae pv. tomato DC3000</option>
+<option value="97">Psychrobacter arcticus 273-4</option>
+<option value="264">Pyrobaculum aerophilum IM2</option>
+<option value="212">Pyrobaculum arsenaticum DSM 13514</option>
+<option value="265">Pyrobaculum calidifontis JCM 11548</option>
+<option value="266">Pyrobaculum islandicum DSM 4184</option>
+<option value="14">Pyrococcus abyssi GE5</option>
+<option value="91">Pyrococcus furiosus DSM 3638</option>
+<option value="92">Pyrococcus horikoshii OT3</option>
+<option value="181">Ralstonia eutropha H16</option>
+<option value="137">Ralstonia eutropha JMP134</option>
+<option value="543">Ralstonia pickettii 12J</option>
+<option value="462">Ralstonia solanacearum CFBP2957</option>
+<option value="344">Ralstonia solanacearum CMR15</option>
+<option value="49">Ralstonia solanacearum GMI1000</option>
+<option value="399">Ralstonia solanacearum Ipo1609</option>
+<option value="400">Ralstonia solanacearum Molk2</option>
+<option value="410">Ralstonia solanacearum PSI07</option>
+<option value="801">Ralstonia solanacearum UW551</option>
+<option value="157">Rhizobium etli CFN 42</option>
+<option value="866">Rhizobium leguminosarum bv trifolii WSM1325</option>
+<option value="867">Rhizobium leguminosarum bv trifolii WSM2304</option>
+<option value="109">Rhizobium leguminosarum bv. viciae 3841</option>
+<option value="324">Rhodobacter sphaeroides 2.4.1</option>
+<option value="326">Rhodobacter sphaeroides ATCC 17025</option>
+<option value="325">Rhodobacter sphaeroides ATCC 17029</option>
+<option value="645">Rhodococcus erythropolis PR4 (= NBRC 100887)</option>
+<option value="647">Rhodococcus jostii RHA1</option>
+<option value="646">Rhodococcus opacus B4</option>
+<option value="110">Rhodopseudomonas palustris CGA009</option>
+<option value="797">Rhodospirillum centenum SW; ATCC 51521</option>
+<option value="323">Rhodospirillum rubrum ATCC 11170</option>
+<option value="339">Rickettsia akari Hartford</option>
+<option value="340">Rickettsia bellii OSU 85-389</option>
+<option value="190">Rickettsia bellii RML369-C</option>
+<option value="341">Rickettsia canadensis McKiel</option>
+<option value="189">Rickettsia conorii Malish 7</option>
+<option value="161">Rickettsia felis URRWXCal2</option>
+<option value="336">Rickettsia massiliae MTU5</option>
+<option value="22">Rickettsia prowazekii Madrid E</option>
+<option value="338">Rickettsia rickettsii 'Sheila Smith'</option>
+<option value="337">Rickettsia rickettsii Iowa</option>
+<option value="191">Rickettsia typhi Wilmington</option>
+<option value="424">Salinispora arenicola CNS-205</option>
+<option value="425">Salinispora tropica CNB-440</option>
+<option value="107">Salmonella enterica subsp. enterica serovar Choleraesuis SC-B67</option>
+<option value="28">Salmonella enterica subsp. enterica serovar Typhi</option>
+<option value="29">Salmonella typhimurium LT2</option>
+<option value="881">Segniliparus rotundus DSM 44985</option>
+<option value="40">Shewanella oneidensis MR-1</option>
+<option value="904">Shewanella piezotolerans WP3</option>
+<option value="913">Shewanella violacea DSS12</option>
+<option value="140">Shigella boydii Sb227</option>
+<option value="141">Shigella dysenteriae Sd197</option>
+<option value="45">Shigella flexneri 2a 2457T</option>
+<option value="233">Shigella flexneri 2a 301</option>
+<option value="301">Shigella flexneri 5 8401</option>
+<option value="122">Shigella sonnei Ss046</option>
+<option value="817">Sinorhizobium medicae WSM419</option>
+<option value="102">Sinorhizobium meliloti 1021</option>
+<option value="283">Sodalis glossinidius 'morsitans'</option>
+<option value="393">Staphylococcus aureus subsp. aureus JH1</option>
+<option value="37">Staphylococcus aureus subsp. aureus Mu50</option>
+<option value="267">Staphylothermus marinus F1</option>
+<option value="384">Stenotrophomonas maltophilia K279a</option>
+<option value="213">Streptococcus agalactiae 2603V/R</option>
+<option value="214">Streptococcus agalactiae A909</option>
+<option value="215">Streptococcus agalactiae NEM316</option>
+<option value="216">Streptococcus mutans UA159</option>
+<option value="208">Streptococcus pneumoniae D39</option>
+<option value="209">Streptococcus pneumoniae R6</option>
+<option value="38">Streptococcus pneumoniae TIGR4</option>
+<option value="220">Streptococcus pyogenes MGAS10394</option>
+<option value="221">Streptococcus pyogenes MGAS10750</option>
+<option value="222">Streptococcus pyogenes MGAS6180</option>
+<option value="223">Streptococcus pyogenes MGAS8232</option>
+<option value="224">Streptococcus pyogenes MGAS9429</option>
+<option value="232">Streptococcus pyogenes Manfredo</option>
+<option value="219">Streptococcus pyogenes SF370</option>
+<option value="225">Streptococcus pyogenes SSI-1</option>
+<option value="226">Streptococcus sanguinis SK36</option>
+<option value="230">Streptococcus suis 05ZYH33</option>
+<option value="231">Streptococcus suis 98HAH33</option>
+<option value="227">Streptococcus thermophilus CNRZ1066</option>
+<option value="228">Streptococcus thermophilus LMD-9</option>
+<option value="229">Streptococcus thermophilus LMG 18311</option>
+<option value="202">Streptomyces avermitilis MA-4680</option>
+<option value="55">Streptomyces coelicolor A3(2)</option>
+<option value="565">Streptomyces griseus subsp griseus NBRC 13350</option>
+<option value="268">Sulfolobus acidocaldarius DSM 639</option>
+<option value="11">Sulfolobus solfataricus P2</option>
+<option value="269">Sulfolobus tokodaii 7</option>
+<option value="176">Sulfurimonas denitrificans DSM 1251</option>
+<option value="348">Synechococcus elongatus PCC6301</option>
+<option value="557">Synechococcus sp JA-2-3B a 2-13</option>
+<option value="558">Synechococcus sp JA-3-3Ab</option>
+<option value="561">Synechococcus sp PCC 7002</option>
+<option value="349">Synechococcus sp. CC9311</option>
+<option value="350">Synechococcus sp. CC9605</option>
+<option value="17">Synechocystis sp. PCC 6803</option>
+<option value="895">Syntrophomonas wolfei subsp wolfei Goettingen</option>
+<option value="894">Syntrophus aciditrophicus SB NULL</option>
+<option value="270">Thermococcus kodakarensis KOD1</option>
+<option value="421">Thermodesulfovibrio yellowstonii DSM 11347</option>
+<option value="271">Thermofilum pendens Hrk 5</option>
+<option value="272">Thermoplasma acidophilum DSM 1728</option>
+<option value="93">Thermoplasma volcanium GSS1</option>
+<option value="351">Thermosynechococcus elongatus BP-1</option>
+<option value="24">Thermotoga maritima</option>
+<option value="762">Thermus thermophilus HB8</option>
+<option value="664">Thiomicrospira crunogena XCL-2</option>
+<option value="182">Thiomonas sp. 3As</option>
+<option value="76">Treponema denticola ATCC 35405</option>
+<option value="75">Treponema pallidum subsp. pallidum Nichols</option>
+<option value="345">Trichodesmium erythraeum IMS101</option>
+<option value="593">Tropheryma whipplei TW08 27</option>
+<option value="882">Tsukamurella paurometabola DSM 20162</option>
+<option value="658">Variovorax paradoxus S110</option>
+<option value="43">Vibrio cholerae N16961</option>
+<option value="198">Vibrio fischeri ES114</option>
+<option value="329">Vibrio harveyi ATCC BAA-1116</option>
+<option value="199">Vibrio parahaemolyticus RIMD 2210633</option>
+<option value="204">Vibrio splendidus LGP32</option>
+<option value="94">Vibrio vulnificus CMCP6</option>
+<option value="200">Vibrio vulnificus YJ016</option>
+<option value="88">Wigglesworthia glossinidia endosymbiont of Glossina brevipalpis</option>
+<option value="284">Wolbachia endosymbiont TRS of Brugia malayi</option>
+<option value="683">Wolbachia endosymbiont of Culex quinquefasciatus Pel wPip</option>
+<option value="285">Wolbachia pipientis wMel</option>
+<option value="682">Wolbachia sp Wolbachia endosymbiont of Drosophila simulans wRi</option>
+<option value="119">Wolinella succinogenes DSM 1740</option>
+<option value="857">Xanthomonas campestris pv musacearum NCPPB4381</option>
+<option value="62">Xenorhabdus bovienii</option>
+<option value="153">Xenorhabdus nematophila</option>
+<option value="599">Xylanimonas cellulosilytica DSM 15894</option>
+<option value="44">Xylella fastidiosa 9a5c</option>
+<option value="63">Yersinia enterocolitica 8081</option>
+<option value="356">Yersinia pestis Angola</option>
+<option value="358">Yersinia pestis Antiqua</option>
+<option value="623">Yersinia pestis CA88-4125</option>
+<option value="3">Yersinia pestis CO92</option>
+<option value="618">Yersinia pestis D106004</option>
+<option value="619">Yersinia pestis D182038</option>
+<option value="10">Yersinia pestis KIM</option>
+<option value="359">Yersinia pestis Nepal516</option>
+<option value="620">Yersinia pestis Pestoides A</option>
+<option value="360">Yersinia pestis Pestoides F</option>
+<option value="624">Yersinia pestis biovar Antiqua B42003004</option>
+<option value="625">Yersinia pestis biovar Antiqua E1979001</option>
+<option value="626">Yersinia pestis biovar Antiqua UG05-0454</option>
+<option value="627">Yersinia pestis biovar Mediaevalis K1973002</option>
+<option value="361">Yersinia pestis biovar Microtus str. 91001</option>
+<option value="628">Yersinia pestis biovar Orientalis F1991016</option>
+<option value="629">Yersinia pestis biovar Orientalis IP275</option>
+<option value="621">Yersinia pestis biovar Orientalis India 195</option>
+<option value="630">Yersinia pestis biovar Orientalis MG05-1020</option>
+<option value="622">Yersinia pestis biovar Orientalis PEXU2</option>
+<option value="363">Yersinia pseudotuberculosis IP 31758</option>
+<option value="362">Yersinia pseudotuberculosis IP 32953</option>
+<option value="617">Yersinia pseudotuberculosis PB1/+</option>
+<option value="364">Yersinia pseudotuberculosis YPIII</option>
+<option value="273">uncultured methanogenic archaeon RC-I</option>
+</select>
+
+<br /><br />
+<!-- zone de texte pour filtrer les organismes -->			
+<input type="text" id="searchtext" size="50" class="A12" value="Type Here To Filter Genome List" onclick="javascript:clickclear(this, 'Type Here To Filter Genome List')" onkeyup="javascript:liste.MAJListe();" /><br />
+<input type="submit" name="submit" value="LOAD INTO GENOME BROWSER" style="margin-top:10px;" onclick="waitSubmitPage();" />
+<!-- fonction javascript de filtre des organismes en relation avec la zonne de txte precedente -->
+<script type="text/javascript">var liste=new SearchList(document.getElementById("O_id"),document.getElementById("searchtext"));</script>
+</div>
+</form>
+
+
+</td>
+<td align="center" valign="top">
+
+
+<div class="cadre_couleur padding10" style="width:450px;">
+<form id="selectProject" action="../about/collabprojects.php?" method="get" name="main" onsubmit="waitSubmitPage();"><input type="hidden" name="wwwpkgdb" value="d17f5ab52320c937b2c05ad254f31122" />
+<div class="A12 b">82 Available Projects</div>
+<select name='P_id' id='P_id' class='A12' size="15"  >
+<option value="99">AGI5Scope</option>
+<option value="23">AcidothermuScope</option>
+<option value="1">AcinetoScope</option>
+<option value="94">AdelgidScope</option>
+<option value="51">AgrobacterScope</option>
+<option value="28">AnaeroScope</option>
+<option value="2">AnammoScope</option>
+<option value="4">ArsenoScope</option>
+<option value="49">ArthroScope</option>
+<option value="39">AzospirilluScope</option>
+<option value="102">BDVWScope</option>
+<option value="9">BacilluScope</option>
+<option value="52">Bartonella2Scope</option>
+<option value="38">BartonellaScope</option>
+<option value="8">BaumannoScope</option>
+<option value="93">BeggiatoaScope</option>
+<option value="86">BrucellaScope</option>
+<option value="31">Burkhol2Scope</option>
+<option value="10">BurkholScope</option>
+<option value="48">CarnouleScope</option>
+<option value="77">CloacaMaximaScope</option>
+<option value="5">CloacamonaScope</option>
+<option value="73">ClostridioScope</option>
+<option value="17">ColiBScope</option>
+<option value="11">ColiScope</option>
+<option value="41">CorynebacScope</option>
+<option value="88">CrenothriScope</option>
+<option value="33">Cupriavidu2Scope</option>
+<option value="18">CupriaviduScope</option>
+<option value="68">CyanoScope</option>
+<option value="45">DaMoScope</option>
+<option value="105">DelahocoScope</option>
+<option value="42">EctocarpuScope</option>
+<option value="47">EndoScope</option>
+<option value="6">FrankiaScope</option>
+<option value="76">GeoScope</option>
+<option value="80">GlomeriScope</option>
+<option value="109">KlebsiellaScope</option>
+<option value="82">LactoScope</option>
+<option value="27">LegionellaScope</option>
+<option value="50">MagnetoScope</option>
+<option value="22">MarinoScope</option>
+<option value="103">MetaBenzScope</option>
+<option value="83">MethanoScope</option>
+<option value="26">MethyloScope</option>
+<option value="75">MicrocystiScope</option>
+<option value="84">MobiloScope</option>
+<option value="44">MycobacterioScope</option>
+<option value="12">NeisseriaScope</option>
+<option value="32">NitrospiraScope</option>
+<option value="40">NocardiaScope</option>
+<option value="78">OligotroScope</option>
+<option value="74">PantoeaScope</option>
+<option value="90">PhaeoScope</option>
+<option value="13">PhotoScope</option>
+<option value="106">PseudoFluoScope</option>
+<option value="66">Pseudomona2Scope</option>
+<option value="14">PseudomonaScope</option>
+<option value="7">PsychroScope</option>
+<option value="72">PutidaScope</option>
+<option value="19">PyloriScope</option>
+<option value="70">RalstoEvolScope</option>
+<option value="67">RalstoniaScope</option>
+<option value="100">RepliColScope</option>
+<option value="3">RhizoScope</option>
+<option value="91">RhodocoScope</option>
+<option value="34">RickettsiaScope</option>
+<option value="89">RubrivivaxScope</option>
+<option value="79">RuminoScope</option>
+<option value="97">SinorhizoScope</option>
+<option value="43">SmallScope</option>
+<option value="96">SphingoScope</option>
+<option value="15">SpiroScope</option>
+<option value="37">StreptococcuScope</option>
+<option value="104">SulfatoScope</option>
+<option value="87">TetrasphaeraScope</option>
+<option value="92">VariovoraScope</option>
+<option value="35">VibrioScope</option>
+<option value="69">WWE3Scope</option>
+<option value="98">WolbachiaScope</option>
+<option value="24">XenorhabduScope</option>
+<option value="16">YersiniaScope</option>
+</select>
+
+<br /><br />
+<!-- zone de texte pour filtrer les projets -->			
+<input type="text" id="searchtext2" size="50" class="A12" value="Type Here To Filter Projects List" onclick="javascript:clickclear(this, 'Type Here To Filter Projects List')" onkeyup="javascript:liste2.MAJListe();" /><br />
+<input type="submit" name="submit" value="GET PROJECTS INFOS" style="margin-top:10px;" onclick="waitSubmitPage();" />
+<!-- fonction javascript de filtre des organismes en relation avec la zonne de txte precedente -->
+<script type="text/javascript">var liste2=new SearchList(document.getElementById("P_id"),document.getElementById("searchtext2"));</script>
+
+
+</form>
+</div>
+
+</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+
+<div align="justify" class='A14'>
+<b>References:</b>
+<ul>
+<li><a href="http://www.ncbi.nlm.nih.gov/pubmed/20157493" target="_blank">&laquo;MicroScope: a platform for microbial genome annotation and comparative genomics.&raquo; Database (Oxford). 2009;</a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/pubmed/16407324" target="_blank">&laquo;MaGe: a microbial genome annotation system supported by synteny results.&raquo; Nucleic Acids Res. 2006 Jan 10;</a></li>
+</ul>
+</div>
+
+
+</center>
+   
+<div id='cadre_news'><div class='A14 b' align='center'>Latest News</div>
+<br />
+
+
+	
+	
+	
+	<div class="A12 b">MicroScope: Metabolic Pathway training course</div>	
+	
+	<div class="A10 b i">											
+		Posted on: Tuesday 1 March 2011					
+	</div>
+
+	<div class="A10" style="margin-top:5px;">
+		
+<p class="A10" align="justify">Dear MicroScope users,</p>
+
+<p class="A10" align="justify">We would like to advertise our new training course called «Bacterial metabolic networks prediction, comparison and annotation». It will take place on the 5th and 6th of april 2011 at the INSTN training center in Saclay (France).
+<a href="http://www-instn.cea.fr/Bacterial-metabolic-networks-prediction-comparison-and-annotation_theme_form_id1452.html" class="spip_out b">Check here for more information</a>.</p>
+
+<p class="A10" align="justify">You can register to this training course from our <a href="https://www.genoscope.cns.fr/agc/website/spip.php?page=forma_register&amp;lang=en&amp;session=1905" class="spip_out b">register form</a>.</p>
+
+<p class="A10" align="justify">Please note that registrations will soon be closed (2 weeks).
+See you at <a href="http://www.genoscope.cns.fr/agc/microscope" class="spip_out b">www.genoscope.cns.fr/agc/microscope</a></p>
+
+<p class="A10" align="justify">The MicroScope team.</p>
+
+	</div>
+
+		
+
+	<hr style="margin:10px;height:1px;border:0;color:#444444;background-color:#444444;" />		
+	
+	
+	
+	
+	
+	<div class="A12 b">Survey on MicroScope platform training courses</div>	
+	
+	<div class="A10 b i">											
+		Posted on: Tuesday 15 February 2011					
+	</div>
+
+	<div class="A10" style="margin-top:5px;">
+		
+<p class="A10" align="justify">Dear current and future MicroScope users,</p>
+
+<p class="A10" align="justify">We would like to improve our services, especially in term of training courses.
+Please, could you fill in this very short survey (5mn):</p>
+
+<p class="A10" align="justify"><a href="https://spreadsheets.google.com/viewform?formkey=dFFoNVlXbVNVX2NoQ1RvZnNsMzVYdWc6MQ" class="spip_out b">Click here to fill it out</a>.</p>
+
+<p class="A10" align="justify">Thank you very much for your help.</p>
+
+	</div>
+
+		
+
+	<hr style="margin:10px;height:1px;border:0;color:#444444;background-color:#444444;" />		
+	
+	
+	
+	
+	
+	<div class="A12 b">MicroScope platform: v2.1.7 deployed</div>	
+	
+	<div class="A10 b i">											
+		Posted on: Tuesday 11 January 2011					
+	</div>
+
+	<div class="A10" style="margin-top:5px;">
+		
+<p class="A10" align="justify">The v2.1.7 of the platform is now deployed:
+<br /><img src="dist/puce.gif" width="10" height="10" alt="-" />&nbsp;<a href="https://www.genoscope.cns.fr/agc/microscope/compgenomics/genomicIsland.php?" class="spip_out b">Regions of Genomic Plasticity </a> tool now integrates a Gene Basket Export function.
+<br /><img src="dist/puce.gif" width="10" height="10" alt="-" />&nbsp;HTML/PHP optimizations (please clear your browser cache if you encounter some display problems).</p>
+
+	</div>
+
+		
+
+	<hr style="margin:10px;height:1px;border:0;color:#444444;background-color:#444444;" />		
+	
+	
+	
+	
+	
+	<div class="A12 b">MicroScope platform: v2.1.5 deployed</div>	
+	
+	<div class="A10 b i">											
+		Posted on: Friday 26 November 2010					
+	</div>
+
+	<div class="A10" style="margin-top:5px;">
+		
+<p class="A10" align="justify">The v2.1.5 of the platform is now deployed:
+<br /><img src="dist/puce.gif" width="10" height="10" alt="-" />&nbsp;<a href="https://www.genoscope.cns.fr/agc/microscope/expdata/rnaseqProjects.php?" class="spip_out b">RNAseq Projects </a> tool is now online.
+<br />The tutorial related to the use of this tool will be updated soon.</p>
+
+	</div>
+
+		
+
+	<hr style="margin:10px;height:1px;border:0;color:#444444;background-color:#444444;" />		
+	
+	
+
+
+
+<div class='A10 b i' align='center'><a href='../home/news.php?wwwpkgdb=d17f5ab52320c937b2c05ad254f31122'>View all past news ...</a></div></div>	</div>
+	<!-- Fin Content  (voir header/headerpopup pour debut) -->
+	
+	
+	<form name="posthtml" action="../export/HtmlToText.php" method="post"><input type="hidden" name="wwwpkgdb" value="d17f5ab52320c937b2c05ad254f31122" />
+	<input type="hidden" name="htmlcontent" />
+	<input type="hidden" name="webpage" />
+	</form>
+
+	<!-- Debut pied  -->
+	<div id="footer" align="center">
+		<div class="cadre_footer">
+			<span class="cadre_logo"><a href="http://www.genoscope.cns.fr/agc/" target ="_blank" title="LaBGEM website"><img alt="Logo" border="0" src="../web/pictures/agc_logo100.png" height="50" width="50" /></a></span>		
+			<span class="cadre_logo"><a href="http://www.genoscope.cns.fr/" target ="_blank" title="Genoscope website"><img alt="Logo" border="0" src="../web/pictures/genoscope_logo100.png" height="50" width="50" /></a></span>
+			<span class="cadre_logo"><a href="http://www-dsv.cea.fr/en/instituts/institut-de-genomique-ig" target ="_blank" title="IG website"><img alt="Logo" border="0" src="../web/pictures/ig_logo100.png" height="50"  /></a></span>
+			<span class="cadre_logo"><a href="http://www.cea.fr" target ="_blank" title="CEA website"><img alt="Logo" border="0" src="../web/pictures/cea_logo100.png" height="50" width="50" /></a></span>
+			<span class="cadre_logo"><a href="http://www.cnrs.fr" target ="_blank" title="CNRS website"><img alt="Logo" border="0" src="../web/pictures/cnrs_logo100.png" height="50" width="50" /></a></span>
+
+			<div class="cadre_contact">
+				<font class="A12 b">&copy; 2002-2011 LABGeM - v 2.1.7 - </font>
+				<a href="Mailto:mage@genoscope.cns.fr" class="lien1">Contact Us</a>				
+				<a href="#" class="menuleft_OFF A10 b" onclick="window.scrollTo(0,0); return false" style="float:right;margin-right:10px;">Back to Top</a>
+			</div>
+ 			
+		</div>
+		<div id="bannerfooter" align="left"></div>
+	</div>
+	<!-- Fin pied  -->
+	
+</body>
+</html>
+
+

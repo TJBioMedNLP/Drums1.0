@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+  <title>Supplementary information for "Incorporating Functional Inter-relationships Into Protein Function Prediction Algorithms"</title>
+</head>
+
+
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" alink="#000099" link="#000099" vlink="#990099">
+
+<a href="http://www.biomedcentral.com/1471-2105/10/142"><big style="font-weight: bold; color: rgb(0, 0, 153);"><big><span style="font-family: Helvetica,Arial,sans-serif;">Incorporating Functional Inter-relationships Into Protein Function Prediction Algorithms</a> (BMC Bioinformatics, 10:142)<br>
+
+<br>
+
+</span></big></big><big style="color: rgb(0, 0, 153);"><big><span style="font-family: Helvetica,Arial,sans-serif;"><small>Please contact <a href="www.cs.umn.edu/~gaurav">Gaurav Pandey</a> at <a href="mailto:gaurav@cs.umn.edu">gaurav@cs.umn.edu</a> in case of any problems with the information provided below.<br>
+
+<br>
+
+<a href="functionalsimilarity_matlab_source.tar.gz">Matlab<small> </small>source code</a> (Includes readme file detailing how to use the package)<br>
+
+<br>
+
+Input data files (Required)<br>
+
+</small></span></big></big>
+<ol>
+
+  <li><span style="font-family: Helvetica,Arial,sans-serif;"></span><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="go_structure_data.tar.gz">GO structure data</a>:
+Contains term ids, parent-child and ancestor-descendant relationships
+constituting each ontology in GO as Matlab matrices, and some information about the GO Biological Process ontology and the set of GO BP classes selected for evaluation in this paper as text files. Note that all contents of this archive must be placed in the same directory as the scripts in the source code package above. Derived from data
+downloaded from the GO website (<a href="http://www.geneontology.org">www.geneontology.org</a>) in February, 2008.<br>
+    <br>
+
+    </span></span></li>
+
+  <li><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="yeast_go_mapping.mat">GO annotations for yeast proteins</a>:
+Functional annotations of yeast proteins with terms in each of the
+three ontologies in GO as Matlab matrices. Contents include both the
+most specific term annotations obtained from the GOA database
+(go_*_annotations; *=cc,mf,bp), as well as those obtained by
+propagating these annotations to the ancestors </span></span><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;">(extended_go_*_annotations; *=cc,mf,bp)</span></span><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;">. Also includes the selected annotations with the GO BP terms used (selected_go_bp_annotations). </span></span><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;">Note that this file must be placed in the same directory as the scripts in the source code package above. Derived from data downloaded from the GO website (<a href="http://www.geneontology.org/">www.geneontology.org</a>) in February, 2008.<br>
+    <br>
+
+    </span></span></li>
+
+  <li><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="mnaimneh_data_annotations.mat">Sample data set</a> (Large file!):
+Formatted input data derived from Mnaimneh et al. (2004)'s microarray
+data set as Matlab matrices. Contents include the gene names
+(genelist), gene expression data matrix (data: 6307 genesX215
+conditions) and the selected GO BP annotations (</span></span><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;">final_annotation_matrix:
+6307 genesX138 classes). Also includes the relevant data used for the
+cross-validation experiments in the paper, namely gene names
+(useful_gene_names), gene expression data (useful_genex_matrix),
+corresponding pairwise correlation matrix (genegenecorrmatrix) and
+annotation matrix (useful_label_matrix). Also included are the
+gene-gene correlation matrix derived from the genes in the data set
+also annotated in GO (fullgenegenecorrmatrix) and the indices of the
+training genes (trainingindices; same as genes used for
+cross-validation) and test genes (testindices; genes not annotated with
+any of the 138 classes used in the paper). Finally, the AUC scores of
+the base k-NN classifiers (avg_basecase_auc_perclass), and those of the
+label similarity-incorporated classifiers, using only the 138 classes
+(avg_filtersim_auc_perclass) and using all terms in the GO BP ontology (</span></span><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;">avg_filtersim_auc_perclass_allgo), all using k=20, are also provided for verification purpose. Note that results are produced only for 137 classes due to the requirement of at least ten members in each class to be considered for cross-validation tests and prediction of test examples.</span></span></li>
+
+</ol>
+
+<big style="color: rgb(0, 0, 153);"><big><span style="font-family: Helvetica,Arial,sans-serif;"><small>Additional files<br>
+
+</small></span></big></big>
+<ol>
+  <li><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="evaluation_class_details.xls">Additional file 1</a>:
+Details of the 138 functional classes from the GO Biological Process ontology whose subsets (classes having at least 10 members in the corresponding data set) are used for evaluation using several genomic data sets in this study.<br>
+    <br>
+
+    </span></span></li>
+
+  <li><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="go_similar_classes.png">Additional file 2</a>:
+This figure shows the arrangement of the functional classes aiding the
+improvement of the AUC score of the GO:0051049 (regulation of
+transport) class (listed in Table 4) in the GO biological process
+ontology. Their structural proximity to the target class (GO:0051049)
+suggests their potential to help improve the predictions for this class.<br>
+    <br>
+
+    </span></span></li>
+
+  <li><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="gest_comparison.eps">Additional file 3</a>:
+This figure shows the comparison of the performance of our functional similarity-incorporated k-NN classifiers with individual GEST classifiers for Mnaimneh et al's data set.
+    <br> <br>
+
+    </span></span></li>
+
+  <li><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="mnaimneh_ranked_predictions.xls">Additional file 4</a>:
+A detailed list of ranked predictions produced by the label
+similarity-incorporated kNN classifiers (first worksheet) and base kNN
+classifiers (second worksheet) for the test genes extracted from the
+Mnaimneh gene expression data set. The GO terms, arranged in columns,
+are sorted from left to right in the order of decreasing AUC
+improvements by incorporating functional relationships into the base
+classifier for the term. The genes in each column are ranked in
+descending order by the score assigned by the corresponding kNN classifier. Genes with the same score (mostly
+in the case when the score is 0) were sorted by their ORF name.<br>
+    <br>
+
+    </span></span></li>
+
+  <li><span style="color: rgb(0, 0, 153);"><span style="font-family: Helvetica,Arial,sans-serif;"><a style="font-weight: bold;" href="rosetta_ranked_predictions.xls">Additional file 5</a>:
+A detailed list of ranked predictions produced by the label
+similarity-incorporated kNN classifiers (first worksheet) and base kNN
+classifiers (second worksheet) for the test genes extracted from the
+Rosetta gene expression data set. The GO terms, arranged in columns,
+are sorted from left to right in the order of decreasing AUC
+improvements by incorporating functional relationships into the base
+classifier for the term. The genes in each column are ranked in
+descending order by the score assigned by the corresponding kNN
+classifier. Genes with the same score (mostly in the case when the
+score is&nbsp;0) were sorted by their ORF name.<br>
+
+    </span></span></li>
+
+</ol>
+<div id="eXTReMe"><a href="http://extremetracking.com/open?login=bmcpaper">
+<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;"
+height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a>
+<script type="text/javascript"><!--
+var EXlogin='bmcpaper' // Login
+var EXvsrv='s11' // VServer
+EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"?
+EXb=EXs.colorDepth:EXb=EXs.pixelDepth;EXsrc="src";
+navigator.javaEnabled()==1?EXjv="y":EXjv="n";
+EXd=document;EXw?"":EXw="na";EXb?"":EXb="na";
+EXd.write("<img "+EXsrc+"=http://e2.extreme-dm.com",
+"/"+EXvsrv+".g?login="+EXlogin+"&amp;",
+"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;",
+"l="+escape(EXd.referrer)+" height=1 width=1>");//-->
+</script><noscript><div id="neXTReMe"><img height="1" width="1" alt=""
+src="http://e2.extreme-dm.com/s11.g?login=bmcpaper&amp;j=n&amp;jv=n" />
+</div></noscript></div>
+
+
+</body>
+</html>

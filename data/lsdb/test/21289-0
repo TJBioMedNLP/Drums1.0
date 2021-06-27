@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>GRIP : GPCRs Interaction Partners</title>
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="/GRIP/pages/css/import_top.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="/GRIP/pages/js/grip.js"></script>
+
+</head>
+<body>
+<form action="javascript:execButtonHandler('/GRIP')" method="post" enctype="multipart/form-data" name="inputForm">
+
+  <input type="hidden" name="EVALUE_BLAST" value="1" />
+  <input type="hidden" name="IDENTITY_MAFFT" value="50" />
+  <input type="hidden" name="LENGTH_SEQ_L" value="1.2" />
+  <input type="hidden" name="LENGTH_SEQ_S" value="0.8" />
+
+
+
+
+
+
+
+
+<div id="container">
+
+<div id="head">
+
+  <div id="head_logo">
+    <h1><img src="/GRIP/pages/images/top_header_logo.jpg" width="325" height="60" alt="GRIP GPCRs Interaction Partners" /></h1>
+  </div>
+
+  <div id="head_text">
+    <p>&nbsp;G-protein coupled receptor interaction partners (GRIP) is the web application to predict protein-protein interaction interfaces for G-protein coupled receptor oligomerization. This application provides predicted interfaces by Spatial Cluster Detection (SCD), Predicted interfaces are displayed interactively by using Jmol. The information on this site is useful to investigate the molecular mechanisms of signal transduction via GPCRs. In addition, it will be useful in drug discovery for GPCR oligomerization by "peptide mimic approach" that targets the transmembrane a-helices constituting the interfaces.</p>
+  </div>
+
+  <div id="head_buttons">
+    <a href="/GRIP/pages/help.html" target="_blank">
+    <img src="/GRIP/pages/images/common_header_btn_help.jpg" alt="Help" class="btn_image" /></a>
+  </div>
+
+</div><!--/head-->
+
+<div id="contents">
+
+  <div class="contents_box">
+
+    <div class="contents_box_content" id="message">
+      <div id="contents_box_errorarea" style="visibility:hidden" >    
+        <p><img src="/GRIP/pages/images/common_contents_icon_error.jpg" width="36" height="36" alt="" />Error Message Error Message</p>
+      </div><hr />
+      <div class="contents_box_content_left">
+      
+        <h2><img src="/GRIP/pages/images/common_contents_icon_search.jpg" width="30" height="35" alt="" /><img src="/GRIP/pages/images/top_contents_title_inputsequence02.jpg" width="290" height="20" alt="Input Sequence (FASTA Format)" />
+        
+        <a href="javascript:legendWindow('/GRIP/pages/Legend_Sequence.html','Legend','width=500,height=200,menubar=0,scrollbar=0,status=0,toolbar=0,resizable=0')">
+        <img src="/GRIP/pages/images/common_contents_btn_help.gif" alt="Help" class="btn_image" /></a>
+        
+        <input type="button" value="Clear" class="btn_normal" onclick="seqClear();"/></h2>
+        <textarea id="sequence" name="SEQUENCE" rows="10" cols="80"></textarea>
+        <h2><img src="/GRIP/pages/images/common_contents_title_oruploadyourfile.jpg" width="200" height="20" alt="Or Upload Your File" /></h2>
+        <p>Being able to up-load is only a file of the plain text.</p>        
+        <input type="file" name="UPFILE" id="upfile" size="70" class="form_text" />
+      
+      </div>
+      <div class="contents_box_content_right">
+      
+        <h2><img src="/GRIP/pages/images/top_contents_icon_gear.jpg" width="36" height="35" alt="" /><img src="/GRIP/pages/images/top_contents_title_parameters.jpg" width="120" height="20" alt="Parameters" />
+        
+        <a href="javascript:legendWindow('/GRIP/pages/Legend_Parameters.html','Legend','width=500,height=300,menubar=0,scrollbar=0,status=0,toolbar=0,resizable=0')">
+        <img src="/GRIP/pages/images/common_contents_btn_help.gif" alt="Help" class="btn_image" /></a>
+        
+        
+        <input type="button" value="Default" class="btn_normal" onclick="paramClear();"/></h2>
+        <table class="tbl-layout" summary="param">
+          <caption>Parameters</caption>
+          <tbody>
+
+<!--
+            <tr>
+              <th>E-value for BLAST search :</th>
+              <td>
+              <select name="EVALUE_BLAST" disabled>
+                <option value="1" selected="selected">1E-003</option>
+                <option value="2" >1E-002</option>
+                <option value="3" >1E-001</option>
+                <option value="4" >1E+000</option>
+                <option value="5" >1E+001</option>
+                <option value="6" >1E+002</option>
+                <option value="7" >1E+003</option>
+              </select>
+              </td>
+            </tr>
+            <tr>
+              <th>%Identity threshold :</th>
+              <td>
+              <select name="IDENTITY_MAFFT" disabled>
+                <option value="90" >90</option>
+                <option value="80" >80</option>
+                <option value="70" >70</option>
+                <option value="60" selected="selected">60</option>
+                <option value="50" >50</option>
+                <option value="40" >40</option>
+                <option value="30" >30</option>
+              </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Length threshold L :</th>
+              <td><input type="text" name="LENGTH_SEQ_L" value="1.2" disabled/></td>
+            </tr>
+            <tr>
+              <th>Length threshold S :</th>
+              <td><input type="text" name="LENGTH_SEQ_S" value="0.8" disabled/></td>
+            </tr>
+//-->
+            <tr>
+              <th><b><font color="red">Input type <sup>*</sup> </font></b></th>
+              <td><b>:</b>
+              <select name="FILE_FORM"><!--
+                <option value="1" >1</option>^M
+                <option value="2" >2</option>^M
+
+/-->
+                <option value="3" selected="selected">1</option>^M
+                <option value="4" >2</option>^M
+              </select>
+              </td>
+            </tr>
+	    <tr>
+              <th>Template Structure </th>
+              <td><b>:</b>
+              <select name="TEMP_NAME">
+                <option value="1n3ma" selected="selected" >Rhodopsin : 1n3mA</option>
+<option value="1f88a" >Rhodopsin : 1f88A</option>
+<option value="1l9ha" >Rhodopsin : 1l9hA</option>
+<option value="2vt4a" >&beta;1AR : 2vt4A</option>
+<option value="2r4ra" >&beta;2AR : 2r4rA</option>
+<option value="2r4sa" >&beta;2AR : 2r4sA</option>
+<option value="2rh1a" >&beta;2AR : 2rh1A</option>
+<option value="3d4sa" >&beta;2AR : modfied 3d4sA</option>
+
+              </select>
+              </td>  
+            </tr>
+            <tr>
+              <th>Significance level </th>
+              <td><b>:</b>
+              <select name="PVALUE_SC">
+                <option value="0.01"  selected="selected" >0.01</option>
+                <option value="0.05" >0.05</option>
+              </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Number of Prediction </th>
+              <td><b>:</b>
+              <select name="ITERATION_SC">
+                <option value="1" >1</option>
+                <option value="2" selected="selected">2</option>
+              </select>
+              </td>
+            </tr>
+<!--
+            <tr>
+              <th>File format :</th>
+              <td>
+              <select name="FILE_FORM">
+                <option value="1" >1</option>
+                <option value="2" >2</option>
+                <option value="3" selected="selected">1</option>
+                <option value="4" >2</option>
+              </select>
+              </td>
+            </tr>
+//-->       
+          </tbody>
+        </table>
+      <h3>&nbsp;<font color="red">*</font>[1:Multiple Sequence Alignment <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">WITHOUT</font> bovine rhodopsin sequence]<br />
+             &nbsp;&nbsp;&nbsp;[2:Multiple Sequence Alignment already <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">ALIGNED TO</font> the template sequence]
+
+<br /><a href="/GRIP/pages/Examples/examples.html" target="_blank" style="color:#FF0000">Examples</a>&nbsp;&nbsp;&nbsp;
+<!--
+               <a href="/GRIP/pages/D2R_4.html" target="_blank" style="color:#FF0000">ex2 (Input type 2)</a><br />
+//-->
+             ,  <a href="/GRIP/pages/all_fas.html" target="_blank" style="color:#FF0000">Template Sequences</a> for Input type <font color="red">2</font>.
+        </h3>
+      </div>
+
+      <hr />
+
+      <div class="contents_box_content_decision" id="contents_box_content_decision">
+        <a href="javascript:void(0);execButtonHandler('/GRIP')">
+        <img src="/GRIP/pages/images/common_contents_btn_execute.jpg" alt="Execute" class="btn_image" />
+        </a>
+      </div>
+
+    </div>
+
+    <div class="contents_box_bottom"><img src="/GRIP/pages/images/common_contents_bg_bottom.jpg" width="960" height="8" alt="" /></div>
+
+  </div><!--/contents_box-->
+
+
+  <div class="contents_box">
+
+    <div class="contents_box_top"><img src="/GRIP/pages/images/common_contents_bg_top.jpg" width="960" height="8" alt="" /></div>
+
+     <div class="contents_box_content">
+      <h2><img src="/GRIP/pages/images/common_contents_icon_info.jpg" width="36" height="32" alt="" /><img src="/GRIP/pages/images/common_contents_title_information.jpg" width="180" height="20" alt="Information" /></h2>
+     <div id="infomation_area">
+      
+      <font color="#FF0000">19 Jan 2011</font> : GRIP will temporarily not be available for updating the data from 15 o'clock on 19th Jan 2011.<br/>
+<font color="#FF0000">26 Nov 2010</font> : GRIP will temporarily not be available for electrical power outrage from the evening 26 to 29 Nov 2010. We are sorry for this inconvenience.<br/>
+<font color="#FF0000">04 Jun 2010</font> : Network in our institute is slightly unstable around noon. Sometimes, a user cannot connect to our server or our retrieval system does not work correctly. We are now investigating the reason for this trouble. We are really sorry for this inconvenience.<br/>
+26 Feb 2010 : <a href="http://grip.cbrc.jp/cgi-bin/recommendedstructure.cgi">BLAST for Appropriate Template Structure Selection</a> is now available.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This program may be useful when we are not sure which structure should be used for the template.<br><br><br>
+
+01 Dec 2009 : GRIP Server &amp; GRIP DB will temporarily not be available for data update from on December 25th 2009  to 4th Jan 2010.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sorry for inconvinience.<br>
+18 Nov 2009 : GRIP Server &amp; GRIP DB will temporarily not be available for electrical power outage and server maintenance from the end of this month.<br>
+31 Jul 2009 : <a href="http://grip.cbrc.jp/cgi-bin/recommendedstructure.cgi">BLSAT for Appropriate Template Structure Selection</a> is now available.<br>
+24 May 2009 : GRIP is not available from <font color="red">9 AM </font> to <font color="red">1 PM on 24 June (JST)</font> for system maintenance.<br>
+28 May 2009 : GRIP is not available from <font color="red">28 May 2009 </font> to <font color="red">2 June 2009</font> for system maintenance.<br>
+18 May 2009 : GRIP is not available from <font color="red">10:30 to 12:00 (JST) on 18 May 2009</font> for system maintenance.<br>
+10 May 2009 : At the moment, we cannot predict the interfaces by using other GPCRS, for example beta2 Adrenergic receptor as a template. We are now updating the main program, which can deal with beta2 adrenergic receptors, D2 dopamine receptors, and A1 adenosine receptors as a template. <br> 
+8 May 2009 : GRIP (this service) will be unavailable for a short time for the maintenance of the program. <br>
+31 Mar 2009 : GRIP (this service) will be unavailable for a short time on March 31th , 2009 for the maintenance of the another service on the same server. We apologize for the inconvenience and short notice. <br>
+5 Mar 2009 : GRIP (this service) will be unavailable for a short time on March 7th, 2009 for the maintenance of the another service on the same server. We deeply apologize for the inconvenience.<br>
+1 Sep 2008 : GRIP1.0 is now available as web server<br>
+
+      </div>
+        
+    </div>
+    <div class="contents_box_bottom"><img src="/GRIP/pages/images/common_contents_bg_bottom.jpg" width="960" height="8" alt="" /></div>
+
+  </div><!--/contents_box-->
+
+<div class="contents_box_banner">
+  <ul>
+<!--    <li><a href="http://www.cbrc.jp/index.eng.html" target="_blank"><img src="/GRIP/pages/images/common_contents_banner_cbrc.gif" width="87" height="37" alt="CBRC Banner" /></a></li>0
+//-->
+    <li><a href="http://www.aist.go.jp/index_en.html" target="_blank"><img src="/GRIP/pages/images/aist_wl.gif" width="60" height="45" alt="AIST Banner" /></a></li>
+    <li><a href="http://www.cbrc.jp/index.eng.html" target="_blank"><img src="/GRIP/pages/images/common_contents_banner_cbrc.gif" width="87" height="37" alt="CBRC Banner" /></a></li>
+    <li><a href="http://grip.cbrc.jp/GDB/index.html" target="_blank"><img src="/GRIP/pages/images/head_logo.png" width="166" height="45" alt="CBRC Banner" /></a></li>
+
+
+  </ul>
+</div>
+
+
+</div><!--/contents-->
+
+
+
+
+</div><!--/container-->
+
+</form>
+</body>
+</html>

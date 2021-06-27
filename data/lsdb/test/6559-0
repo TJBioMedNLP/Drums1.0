@@ -1,0 +1,933 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en">
+
+  
+    
+    
+    
+    
+    
+
+  
+
+  <head>
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=utf-8" />
+<!-- HEG: Title Page/Portal-Tausch, &mdash zu ':' -->
+   <title>
+          Lehrstuhl I12, TUM
+        :
+        Protein Classification Using Vorolign Kernels
+   </title>
+<!-- HEG: Ende -->
+    
+      
+        <base href="http://wwwkramer.in.tum.de/research/applications/vorolign-kernel/protein_structure" />
+      
+    
+
+    <meta name="generator" content="Plone - http://plone.org" />
+
+
+    <!-- Plone ECMAScripts -->
+    
+      
+        
+            
+                <script type="text/javascript"
+                        src="http://wwwkramer.in.tum.de/portal_javascripts/Plone%20Default/ploneScripts8379.js">
+                </script>
+                
+            
+            
+                <script type="text/javascript"
+                        src="http://wwwkramer.in.tum.de/portal_javascripts/Plone%20Default/ploneScripts8753.js">
+                </script>
+                
+            
+        
+    
+    
+
+    
+	
+          
+        
+            
+                
+                    
+                    
+                        <style type="text/css"><!-- @import url(http://wwwkramer.in.tum.de/portal_css/Plone%20Default/ploneStyles5018.css); --></style>
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="http://wwwkramer.in.tum.de/portal_css/Plone%20Default/ploneStyles6100.css"
+                          title="Small Text" />
+                    
+                    
+                
+            
+            
+                
+                    <link rel="alternate stylesheet"
+                          type="text/css" media="screen"
+                          href="http://wwwkramer.in.tum.de/portal_css/Plone%20Default/ploneStyles1246.css"
+                          title="Large Text" />
+                    
+                    
+                
+            
+            
+                
+                    
+                    
+                        <style type="text/css" media="all"><!-- @import url(http://wwwkramer.in.tum.de/portal_css/Plone%20Default/ploneStyles8962.css); --></style>
+                    
+                    
+                
+            
+        
+    
+        
+        
+    
+
+    <!-- Internet Explorer CSS Fixes -->
+    <!--[if IE]>
+        <style type="text/css" media="all">@import url(http://wwwkramer.in.tum.de/IEFixes.css);</style>
+    <![endif]-->
+
+    <link rel="shortcut icon" type="image/x-icon"
+          href="http://wwwkramer.in.tum.de/favicon.ico" />
+
+    <link rel="home" href="http://wwwkramer.in.tum.de"
+          title="Front page" />
+    <link rel="search"
+          href="http://wwwkramer.in.tum.de/search_form"
+          title="Search this site" />
+    <link rel="author"
+          href="http://wwwkramer.in.tum.de/author/kramer"
+          title="Author information" />
+    <link rel="contents"
+          href="http://wwwkramer.in.tum.de/sitemap"
+          title="Site Map" />
+
+    
+
+    
+
+    <link rel="up"
+          href="http://wwwkramer.in.tum.de/research/applications"
+          title="Up one level" />
+
+    
+
+    <!-- Disable IE6 image toolbar -->
+    <meta http-equiv="imagetoolbar" content="no" />
+    
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+    
+      
+      
+    
+
+  </head>
+
+  <body class="section-research" dir="ltr">
+
+    <div id="visual-portal-wrapper">
+
+      <div id="portal-top">
+
+        <div id="portal-header">
+          <p class="hiddenStructure">
+            <a accesskey="2"
+               href="http://wwwkramer.in.tum.de/research/applications/vorolign-kernel#documentContent">Skip to content.</a> |
+
+            <a accesskey="6"
+               href="http://wwwkramer.in.tum.de/research/applications/vorolign-kernel#portlet-navigation-tree">Skip to navigation</a>
+          </p>
+<!-- HEG: macros: site_actions quick_search portal_logo skin_tabs portal_tabs  entfernt -->
+<!-- HEG: eigene Headerzeile gemäß TUM corporate design -->
+             <table width="100%" class="i12headline">
+<!-- THE PORTAL HEADLINE DEFINITION:  TUM corporate style
+     a one-line 100%-wide table with 3 columns:
+       - TUM-Logo_102 (linked to TUM hompepage)  left-bound
+       - I12-header 2 lined table                center bound
+         with I12-logo and 2 headlines text
+       - Fakultät-Logo 102 (linked to faculty homepage) right-bond
+-->
+  <tbody><tr>
+    <td align="center" width="255">
+      <a href="http://www.tum.de"><img src="TUM-Logo-102"></a>
+    </td>
+    <td align="center">
+       <table><tr>
+         <td rowspan="2" width="60">
+            <a href="/"><img src="logo.jpg" width="60"></a></td>
+       </tr><tr>
+         <td align="left">
+              <a href="/">
+              Lehrstuhl XII:<br />
+              &nbsp;&nbsp;&nbsp;<span id="Inf">Bioinformatik</span></a>
+         </td>
+       </tr></table></td>
+    <td align="center" width="218">
+      <a href="http://www.in.tum.de"><img src="Fakultaet_logo_102"></a>
+    </td>
+  </tr></tbody>
+</table>
+<!-- HEG: Ende -->
+          </div>
+
+          <div id="portal-personaltools-wrapper">
+
+<h5 class="hiddenStructure">Personal tools</h5>
+
+<ul id="portal-personaltools">
+   
+
+    
+        <li>
+            <a href="http://wwwkramer.in.tum.de/login_form">
+               Log in
+            </a>
+        </li>
+    
+
+</ul>
+</div>
+
+           <div id="portal-breadcrumbs">
+
+    <span id="breadcrumbs-you-are-here">You
+are here:</span>
+    <a href="http://wwwkramer.in.tum.de">Home</a>
+    <span class="breadcrumbSeparator">
+        &rarr;
+        
+    </span>
+    <span dir="ltr">
+        
+            <a href="http://wwwkramer.in.tum.de/research">Research</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            <a href="http://wwwkramer.in.tum.de/research/applications">Applications</a>
+            <span class="breadcrumbSeparator">
+                &rarr;
+                
+            </span>
+            
+         
+    </span>
+    <span dir="ltr">
+        
+            
+            
+            <span>Protein Classification Using Vorolign Kernels</span>
+         
+    </span>
+
+</div>
+      </div>
+
+      <div class="visualClear" id="clear-space-before-wrapper-table"><!-- --></div>
+
+      
+
+      <table id="portal-columns">
+        <tbody>
+          <tr>
+            
+            <td id="portal-column-one">
+              <div class="visualPadding">
+                
+                  
+
+    
+        
+
+        
+            
+
+<dl class="portlet" id="portlet-navigation-tree">
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="http://wwwkramer.in.tum.de/sitemap"
+           class="tile">Navigation</a>
+       
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem lastItem">
+        <ul class="portletNavigationTree navTreeLevel0">
+
+            <li class="navTreeItem">
+                
+                   <div class="visualIcon contenttype-plone-site">
+                       <a class=" visualIconPadding"
+                          href="http://wwwkramer.in.tum.de"
+                          title="Lehrstuhl 12 der Fakultät für Informatik, Technische Universität München: Machine Learning and Data Mining in Bioinformatics">
+                       Home
+                       
+                       </a>
+                   </div>
+                
+            </li>
+            
+
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/news"
+           class="state-published visualIconPadding"
+           title="">News</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/events"
+           class="state-published visualIconPadding"
+           title="">Events</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/teaching"
+           class="state-published visualIconPadding"
+           title="">Teaching</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research"
+           class="state-published visualIconPadding"
+           title="">Research</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel2">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/data_mining"
+           class="state-published visualIconPadding"
+           title="">Data Mining</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/machine_learning"
+           class="state-published visualIconPadding"
+           title="">Machine Learning</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications"
+           class="state-published visualIconPadding"
+           title="">Applications</a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel3">
+        
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/molecular-feature-mining"
+           class="state-visible visualIconPadding" title="">Molecular Feature Mining</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/biological-information-in-sars"
+           class="state-visible visualIconPadding" title="">Biological Information in SARs</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/chemical-information-in-sars"
+           class="state-visible visualIconPadding" title="">Chemical Information in SARs</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/gene-expression-analysis"
+           class="state-visible visualIconPadding" title="">Gene Expression Analysis</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/gene-regulation-prediction"
+           class="state-visible visualIconPadding" title="">Gene Regulation Prediction</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/learning-transferring-and-adapting-distance-measures-for-quantitative-structure-activity-relationships-1"
+           class="state-visible visualIconPadding" title="">Learning, Transferring and Adapting Distance Measures for Quantitative Structure-Activity Relationships</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/biodegradation"
+           class="state-published visualIconPadding"
+           title="">Biodegradation</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/hiv-resistances"
+           class="state-published visualIconPadding"
+           title="Supplement for work presented at ILP2009">HIV-Resistances</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/vorolign-kernel"
+           class="state-published visualIconPadding navTreeCurrentItem"
+           title="">Protein Classification Using Vorolign Kernels</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/applications/predicting-a-small-molecule-kinase-interaction-map-a-machine-learning-approach"
+           class="state-published visualIconPadding"
+           title="">Predicting a Small Molecule-Kinase Interaction Map: A Machine Learning Approach</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-bibliographyfolder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/pubs"
+           class="state-published visualIconPadding"
+           title="">Publications</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/research/projects"
+           class="state-published visualIconPadding"
+           title="Folder for research projects">Projects</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-facultystaffdirectory">
+        
+        <a href="http://wwwkramer.in.tum.de/people"
+           class="state-published visualIconPadding"
+           title="">People</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-folder">
+        
+        <a href="http://wwwkramer.in.tum.de/resources"
+           class="state-published visualIconPadding"
+           title="">Resources</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+    <div class="visualIcon contenttype-document">
+        
+        <a href="http://wwwkramer.in.tum.de/contact"
+           class="state-published visualIconPadding"
+           title="">Contact</a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+        </ul>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+
+
+        
+
+        
+
+        
+    
+    
+        
+
+        
+            
+
+    <!-- The calendar, rendered as a table -->
+
+    <table class="ploneCalendar" id="thePloneCalendar"
+           summary="Calendar">
+        <thead>
+            <tr>
+                <th id="calendar-previous">
+                    <a href="http://wwwkramer.in.tum.de/research/applications/vorolign-kernel/protein_structure/document_view?None&amp;month:int=2&amp;year:int=2011&amp;orig_query=None"
+                       rel="nofollow" title="Previous month">&laquo;</a>
+                </th>
+                <th colspan="5">
+                    
+                        March
+                        2011
+                    
+                </th>
+                  <th id="calendar-next">
+                    <a href="http://wwwkramer.in.tum.de/research/applications/vorolign-kernel/protein_structure/document_view?None&amp;month:int=4&amp;year:int=2011&amp;orig_query=None"
+                       rel="nofollow" title="Next month">&raquo;</a>
+                </th>
+            </tr>
+            <tr class="weekdays">
+                
+                    <td>Su</td>
+                
+                
+                    <td>Mo</td>
+                
+                
+                    <td>Tu</td>
+                
+                
+                    <td>We</td>
+                
+                
+                    <td>Th</td>
+                
+                
+                    <td>Fr</td>
+                
+                
+                    <td>Sa</td>
+                
+            </tr>
+        </thead>
+
+        
+        <tbody>
+            <tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td
+    class="todaynoevent">4</td><td>5</td>
+            </tr>
+            <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td>
+            </tr>
+            <tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
+            </tr>
+            <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td>
+            </tr>
+            <tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+        
+
+        
+
+        
+    
+
+                
+                &nbsp;
+              </div>
+            </td>
+            
+
+            
+            <td id="portal-column-content">
+
+              
+                <div id="content" class="">
+
+                  
+
+                  <div class="documentContent" id="region-content">
+
+                    <a name="documentContent"></a>
+
+                    
+
+    
+
+
+
+                    
+
+                    
+    
+
+        <div class="documentActions">
+    
+
+    <h5 class="hiddenStructure">Document Actions</h5>
+
+    <ul>
+    
+        <li>
+            <a href="http://wwwkramer.in.tum.de/research/applications/vorolign-kernel/protein_structure/sendto_form">
+
+                <img src="http://wwwkramer.in.tum.de/mail_icon.gif"
+                     alt="Send this page to somebody"
+                     title="Send this page to somebody"
+                     id="icon-sendto" />
+            </a>
+        </li>
+    
+    
+        <li>
+            <a href="javascript:this.print();">
+
+                <img src="http://wwwkramer.in.tum.de/print_icon.gif"
+                     alt="Print this page"
+                     title="Print this page" id="icon-print" />
+            </a>
+        </li>
+    
+
+    </ul>
+    
+
+    
+
+</div>
+
+        <h1 class="documentFirstHeading">Protein Classification Using Vorolign Kernels</h1>
+    
+        
+
+        
+        
+    
+        <div class="plain">
+            <p><span style="font-weight: bold;">Motivation:</span> The slow growth of expert-curated databases compared to experimental databases makes it necessary to build upon highly accurate automated processing pipelines to make the most of the data until <br />curation becomes available. We address this problem in the context of protein structures and their classification into structural and functional classes, more specifically, the structural classification of <br />proteins (SCOP). Structural alignment methods like Vorolign already provide good classification results, but effectively work in a 1-Nearest Neighbor mode. Model-based (in contrast to instance-based) approaches <br />so far have been shown to be of limited values due to small classes arising in such classification schemes.<br /><span style="font-weight: bold;">Results:</span> In the paper, we describe how kernels defined in terms of Vorolign scores can be used in SVM learning, and explore variants of combined instance-based and model-based learning, up to exclusively <br />model-based learning. Our results suggest that kernels based on Vorolign scores are effective and that model-based learning can yield the best structure alignment based classification results for the prediction of SCOP families to date.</p><p>Publication:</p><p>Hamp, T, Birzele, F, <a href="../../../people/buchwald">Buchwald, F</a>, and <a href="../../../people/kramer">Kramer, S</a>                              (submitted).                <a title="" href="../research/pubs/ECCB_2010_VorolignKernels">                                         <strong>Improving Structure Alignment Based Prediction of SCOP Families Using Vorolign Kernels</strong>               </a>              <span>In: Proceedings of the 9th European Conference on Computational Biology .</span><br /><br />&nbsp;<br />Software:</p><p>Software will be available soon.</p>
+        </div>
+
+        <div id="relatedItems">
+    
+        
+            
+        
+    
+</div>
+    
+    
+
+
+                    
+                      
+                 
+    
+        
+    
+
+                    
+
+                  </div>
+
+                </div>
+
+              
+            </td>
+            
+
+            
+            
+            
+          </tr>
+        </tbody>
+      </table>
+      
+
+      <div class="visualClear" id="clear-space-before-footer"><!-- --></div>
+
+
+      <hr class="netscape4" />
+
+      
+
+        <div id="portal-footer">
+<!-- HEG: eigener Footer, bis jetzt nur Impressum-Link & Plone -->
+      <a href="/i12plone/impressum">Impressum
+      </a>
+       &nbsp;&nbsp;&nbsp;
+      <a href="http://plone.org" class="colophonIcon"
+         title="This Plone site was built using Plone CMS, the Open Source Content Management System. Click for more information."
+         alt="Powered by Plone CMS, the Open Source Content Management System">
+      <img src="/i12plone/portal_skins/plone_images/plone_powered.gif">
+      </a>
+<!-- HEG: Ende -->
+</div>
+
+<!-- HEG macro colophon entfernt -->
+
+      
+
+    </div>
+
+<!--
+<script type="text/javascript">
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+<script type="text/javascript">
+
+var pageTracker = _gat._getTracker("UA-4479480-4");
+
+pageTracker._trackPageview();
+
+</script>
+-->
+</body>
+</html>
+
+

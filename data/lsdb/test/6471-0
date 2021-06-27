@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>
+MaizeGDB
+</title>
+<style TYPE="text/css">
+td, th {
+font-family: Verdana,Arial,serif;
+font-size: 85%;
+}
+a {
+text-decoration: none;
+color: blue;
+}
+a:hover {
+text-decoration: underline;
+color: #009966;
+}
+td.top {
+font-size: 85%;
+text-align: right;
+}
+form.tiny {
+margin-bottom: 0px;
+margin-top: 0px;
+padding-bottom: 0px;
+font-size: 100%;
+}
+input.small, select.small {
+font-family: verdana,arial,helvetica,sans-serif;
+font-size: 90%;
+}
+h1.small { font-size: 115%; margin-bottom: 7px; }
+p { margin-top: 5px; font-size: 100%; margin-bottom: 10px;}
+p.feedback { margin-top: 0px; margin-bottom: 0px; }
+td.small { font-size: 85%; }
+h4 { margin-bottom: 8px; padding-bottom: 0px; font-size: 110%;}
+h4.leftbar { font-size: 110%; 
+margin-bottom: 11px; }
+body { margin: 0px; }
+acronym {
+border-bottom: 1px dashed #00cc00;
+cursor: help;
+}
+form { font-size: 100%; }
+pre { font-family: Courier New, Courier, sans-serif; }
+</STYLE>
+<script type="text/javascript">
+function sf()
+{
+document.f.pattern.focus();
+}
+function newWindow(file,window) {
+msgWindow=open(file,window,'resizable=no,width=200,height=400');
+if (msgWindow.opener == null) msgWindow.opener = self;
+}
+
+function setForm(arg) {
+opener.document.basic_form.variable_id.value = arg;
+self.close();
+}
+
+</script>
+</head>
+<body BGCOLOR="white" marginheight=0 marginwidth=0>
+<table summary="The main layout of the page is contained by this table." WIDTH="100%" BORDER=0 CELLPADDING=0 CELLSPACING=0><tr BGCOLOR="WHITE">
+<th scope="col"></th>
+<th scope="col"></th></tr>
+<tr BGCOLOR="WHITE">
+<td WIDTH="100%" VALIGN="bottom">
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="200"><a href="/"><img border=0 SRC="/images/logo-test4.gif" WIDTH="265" HEIGHT="60" ALT="MaizeGDB"></a></td>
+<td ALIGN="right" VALIGN="bottom" BGCOLOR="WHITE" CLASS="top"><form action="" style="margin-bottom: 3px;" method="get"><a href="/jobs.php">jobs</a> | <a href="/calendar.php">upcoming events</a> | <a href="/sitemap.php">sitemap</a><label for="gourl1">&nbsp;</label><br>
+<select id="gourl1" name="gourl" class="small" onChange="location=this.options[this.selectedIndex].value;">
+<option value="/">Useful Pages
+<option value="/">MaizeGDB Home
+<option value="/site_tour.php">&nbsp;&nbsp;&nbsp;&nbsp;Site Tour
+<option value="http://mnl.maizegdb.org">&nbsp;&nbsp;&nbsp;&nbsp;Maize News Letter
+<option value="/tutorial/index.php">&nbsp;&nbsp;&nbsp;&nbsp;Tutorial
+<option value="/education.php">&nbsp;&nbsp;&nbsp;&nbsp;Education
+<option value="/POPcorn">POPcorn
+<option value="/tools.php">Tools
+<option value="/blast.php">&nbsp;&nbsp;&nbsp;&nbsp;BLAST
+<option value="/cgi-bin/bin_viewer.cgi">&nbsp;&nbsp;&nbsp;&nbsp;bin viewer
+<option value="/gbrowse.php">&nbsp;&nbsp;&nbsp;&nbsp;genome browser
+<option value="/cgi-bin/locuscoordsearch_marker.cgi?id=IBM2&locus=">&nbsp;&nbsp;&nbsp;&nbsp;locus lookup
+<option value="/cgi-bin/imagebrowser.cgi">&nbsp;&nbsp;&nbsp;&nbsp;image browser
+<option value="/browse.php">Data Centers
+<option value="/cytogenetics.php">&nbsp;&nbsp;&nbsp;&nbsp;Cytogenetics
+<option value="/gene_product.php">&nbsp;&nbsp;&nbsp;&nbsp;Gene Products
+<option value="/locus.php">&nbsp;&nbsp;&nbsp;&nbsp;Loci
+<option value="/map.php">&nbsp;&nbsp;&nbsp;&nbsp;Maps
+<option value="/metabolic_pathway.php">&nbsp;&nbsp;&nbsp;&nbsp;Metabolic Pathways
+<option value="/microarray.php">&nbsp;&nbsp;&nbsp;&nbsp;Microarrays
+<option value="/person.php">&nbsp;&nbsp;&nbsp;&nbsp;People/Organizations
+<option value="/phenotype.php">&nbsp;&nbsp;&nbsp;&nbsp;Phenotypes/Mutants
+<option value="/probe.php">&nbsp;&nbsp;&nbsp;&nbsp;Probes/Molec. Markers
+<option value="/bac.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;BACs
+<option value="/est.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;ESTs
+<option value="/mo17snp.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Mo17 SNP
+<option value="/overgo.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Overgos
+<option value="/ssr.php">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;SSRs
+<option value="/qtl.php">&nbsp;&nbsp;&nbsp;&nbsp;QTLs
+<option value="/reference.php">&nbsp;&nbsp;&nbsp;&nbsp;References
+<option value="/sequence.php">&nbsp;&nbsp;&nbsp;&nbsp;Sequences
+<option value="/stock.php">&nbsp;&nbsp;&nbsp;&nbsp;Stocks
+<option value="/variation.php">&nbsp;&nbsp;&nbsp;&nbsp;Variations/Polymorph/Alleles
+</select>&nbsp;| <a href="/doc.php" title="documentation related to this site">docs</a> | <a href="/reports.php" title="view some interesting reports extracted from the MaizeGDB data">bulk data</a> | <a href="/browse.php" title="browse through the maize data contained here">browse data</a> | <a href="/tools.php" title="use various bioinformatics tools to analyze your sequence information">tools</a> | <a href="/annotation.php" title="information about public annotation">login / register</a> | <a href="/links.php" title="links to relevant resources">links</a>&nbsp;
+</form></td>
+</tr></table></td></tr>
+<tr bgcolor="#33cc33"><td colspan="2" style="height: 1px;"><img src="/images/1.gif" width="1" height="1" border="0" alt=""></td></tr>
+<tr BGCOLOR="#33cc33">
+<td WIDTH="100%" COLSPAN=2 CLASS="top"   VALIGN="BOTTOM">
+<table WIDTH="100%"><tr><td WIDTH="20%" COLSPAN=1  ALIGN="left" VALIGN="BOTTOM">
+&nbsp;Be sure to <a href='cite.php'>cite</a> us!</td><td WIDTH="80%" COLSPAN=1 CLASS="top" ALIGN="right" VALIGN="BOTTOM">
+<form method="get" style="margin-bottom: 0px;" action="/supersearch.php" class="tiny" name="f">
+<a href="/">home</a> |&nbsp;<a href="#" onKeyPress="javascript:window.open('/topsearchhelp.html','topsearchhelp','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=480,height=550,left=50,top=50');" onClick="javascript:window.open('/topsearchhelp.html','topsearchhelp','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=480,height=550,left=50,top=50');"><img alt="A popup window providing help for using the search form to the right" src="/images/question.gif" height="15" width="15" border=0></a><label for="showlist1">&nbsp;Search</label>
+<select name="show" class="small" id="showlist1">
+<option value="anything" selected>all data
+<option value="goog">all static web pages
+<option value="gp">gene products
+<option value="gb">genome browser - BAC-based
+<option value="agp">genome browser - B73 RefGen_v1
+<option value="refgenv2">genome browser - B73 RefGen_v2
+<option value="go">GO terms
+<option value="loc">loci
+<option value="map">maps
+<option value="mp">metabolic pathways
+<option value="person">people/organizations
+<option value="pheno">phenotypes/mutants
+<option value="probe" >probes/molecular markers
+<option value="bac">&nbsp;-&nbsp;BACs
+<option value="est">&nbsp;-&nbsp;ESTs
+<option value="snp">&nbsp;-&nbsp;Mo17 SNP
+<option value="overgo">&nbsp;-&nbsp;overgos
+<option value="ssr">&nbsp;-&nbsp;SSRs
+<option value="qtl">QTL experiments
+<option value="ref">references
+<option value="seq">sequences
+<option value="stock">stocks
+<option value="trait">traits
+<option value="var">variations/polymorphs/alleles
+<option value="id">i.d. number
+</select>
+<label for="strl">for </label>
+<input class="small" id="strl" type="text" name="pattern" value="" size="30">
+ <input type="submit" value="Go!" class="small">&nbsp;</form>
+</td></tr></table></td>
+</tr>
+<tr bgcolor="#33cc33"><td colspan="2" style="height: 1px;"><img src="/images/1.gif" width="1" height="1" border="0" alt="" ></td></tr>
+<tr>
+<td WIDTH="100%" COLSPAN=2 VALIGN="top">
+
+<TABLE CELLPADDING=6 CELLSPACING=4 BORDER=0 WIDTH="100%">
+<TR><TD WIDTH="18%" STYLE="border: 1px dashed #9c6;" BGCOLOR="#CCFF99" VALIGN="TOP" CLASS="small">
+<p style="margin-bottom: 8px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">INFORMATION</span></p>
+
+<p>
+<p><b><u>Project</u></b><br>
+<a href="sitemap.php">Site Map</a> | <a href="personnel.php">Contact Us</a> | <a href="http://outreach.maizegdb.org/">MaizeGDB Tutorial</a> | <a href="data_contribution.php">Contribute Data</a>
+</p>
+<p>
+<p><b><u>POPcorn Project</u></b><br>
+<table>
+<tr>
+<td rowspan="2">
+<center><a href="http://popcorn.maizegdb.org/"><img style="border-style: none" src="popcorn.png" /></a><br> </center></td>
+<td><a href="http://popcorn.maizegdb.org/"> A Project Portal for corn </a><font color=red><i>New! </i></font> </td>
+</tr>
+<tr>
+<td><a href="http://popcorn.maizegdb.org/search/project_search/project_search.php?search_type=project">100  projects </a> | <a href="http://popcorn.maizegdb.org/search/project_search/project_search.php?search_type=resource">129  resources </a></td>
+</tr>
+</table>
+</p>
+
+<p><b><u>Community</u></b><br>
+<a href="cooperators.php">Cooperators</a><br>
+<a href="mgec.php">Executive Committee</a><br>
+<a href="http://maizeresearch.org/">Maize Research Blog</a><br>
+<a href="maize_meeting">Maize Meeting</a><br>
+<a href="sitemap.php#community">more...</a></p>
+
+<p><b><u>Tools</u></b><br>
+<a href="http://blast.maizegdb.org/">BLAST</a><br>
+<a href="cgi-bin/bin_viewer.cgi">Bin Viewer</a><br>
+&nbsp;&nbsp;<a href="cgi-bin/chromosome_viewer.cgi?chrom=1">1</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=2">2</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=3">3</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=4">4</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=5">5</a><br>
+&nbsp;&nbsp;<a href="cgi-bin/chromosome_viewer.cgi?chrom=6">6</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=7">7</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=8">8</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=9">9</a> | <a href="cgi-bin/chromosome_viewer.cgi?chrom=10">10</a><br>
+&nbsp;&nbsp;<a href="cgi-bin/displaylgrecord.cgi?id=11064">B</a><br>
+<a href="http://maizecyc.maizegdb.org/">MaizeCyc</a><br>
+<p><b><u>B73 Assembly Tools</u></b><br>
+<form method="get" style="margin-bottom: 0px;" action="/cgi-bin/locus_lookup_refgenv2.cgi" class="tiny" name="f">
+<a href="http://gbrowse.maizegdb.org/cgi-bin/gbrowse/maize_v2/"> Genome Browser</a> 
+<br>
+<a href="http://blast.maizegdb.org/">BLAST</a><br>
+<a href="/cgi-bin/locus_lookup.cgi?id=IBM2&locus=">Locus lookup</a><br>
+&nbsp;&nbsp;&nbsp;<input class="inputtext" id="strl" type="text" name="locus" value="" size="8">
+<input type="hidden" name="id" class="inputtext" id="showlist1" value="IBM2" >
+ <input type="submit" value="Go!" class="inputtext">&nbsp;</form>
+<a href="/cgi-bin/locus_pair_lookup.cgi">Locus pair lookup</a><br>
+<a href="http://ftp.maizegdb.org/MaizeGDB/FTP/">FTP</a><br>
+<a href="http://outreach.maizegdb.org/">Tutorial</a><br>
+<a href="genome_browser_survey.php">more...</a><br></p> 
+<p><b><u>Search<br>Data Centers</u></b><br>
+<b>Genetic</b><br>
+<a href="map.php">Maps</a> | <a href="locus.php">Loci</a> | <a href="qtl.php">QTL</a> | <a href="stock.php">Stocks</a> | <a href="cytogenetics.php">Cytogenetics</a> | <a href="variation.php">Variations Alleles Polymorphisms</a><br>
+<b>Genomic</b><br>
+<a href="probe.php">Molecular Markers & Probes</a> | <a href="sequence.php">Sequences</a><br>
+<b>Functional</b><br>
+<a href="gene_product.php">Gene Products</a> | <a href="cgi-bin/imagebrowser.cgi">Images</a> | <a href="metabolic_pathway.php">Metabolic Pathways</a> | <a 
+href="phenotype.php">Mutant Phenotypes</a><br>
+<b>Colleagues</b>
+<a href="person.php">People/Organizations</a> | <a href="reference.php">References</a></p>
+</TD>
+<TD VALIGN="TOP" WIDTH="60%">
+<table  width="100%" cellpadding=0 cellspacing=0>
+<tr><td valign=top width="100%">
+
+<p style="margin-bottom: 8px; margin-top: 10px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;"><b>New and noteworthy! <font color='red'>Are you planning to assemble and/or annotate the maize genome?</font></b></span></p>
+
+<p>From community surveys by the Maize Genetics Executive Committee and community discussions at the 2010 Maize Meeting, the maize community desires, <b>as top priorities</b>, to have the maize B73 DNA <b>sequence assembly improved and annotated</b>. MaizeGDB accepts updates to the B73 Reference Genome Assembly (currently B73 RefGen_v2) and is committed to working with members of the community to release new assemblies annually.  In addition, MaizeGDB works with various groups that are involved in both structural and functional genome annotation.  <a href="assembly.php">Click here</a> to read the MaizeGDB Assembly and Annotation Manifesto! </p>
+
+<hr size=1 width="100%">
+<p style="margin-bottom: 8px; margin-top: 10px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">Maize Genome Sequencing</span></p>
+<p>
+<table style="border-collapse: collapse;" width="100%"  cellspacing=4 cellpadding=6>
+	<tr style="border-bottom: 1px solid #999999;">
+		<th style="border-right: 1px solid #999999;"> </th> <th style="border-right: 1px solid #999999;" align="left"><center>Genome Browsing</center></th> <th align="left">Other Links</th>
+	</tr>
+	<tr style="border-bottom: 1px solid #999999;">
+		<td  style="border-right: 1px solid #999999;"><center><font size="4">B73</font></center></td><td style="border-right: 1px solid #999999;"><center><a href="http://gbrowse.maizegdb.org/cgi-bin/gbrowse/maize_v2/" ><img style="border: none;" ALT="MaizeGDB Genome Browser" src="../icons/gbrowse.jpg"  title="MaizeGDB Genome Browser" /></a><br><br><a href="http://www.maizesequence.org/index.html" ><img style="border: none;" ALT="MaizeSequence.org" src="../icons/maizesequence.jpg"  title="MaizeSequence.org" /></a></center>
+</td>
+<td><a href="http://genome.wustl.edu/genomes/view/zea_mays_mays_cv._b73/">Status</a><br><br><a href="http://maizegdb.org/sequencing_project.php">Information</a><br><br><a href="http://www.sciencemag.org/cgi/content/short/326/5956/1112">Publication</a></td>
+	</tr>
+	<tr style="border-bottom: 1px solid #999999;">
+		<td style="border-right: 1px solid #999999;"><center><font size="4">Mo17</font></center></td><td style="border-right: 1px solid #999999;"><center><a href="http://www.phytozome.net/maize.php" ><img style="border: none;" ALT="Phytozome" src="../icons/phytozome.jpg"  title="Phytozome" /></a></center></td>
+		<td><a href="http://maizegdb.org/cgi-bin/displayrefrecord.cgi?id=1232822">Publication</a></td>
+	</tr>
+	<tr>
+		<td style="border-right: 1px solid #999999;"><center><font size="4">Palomero Toluque&#241;o</font></center></td><td style="border-right: 1px solid #999999;"><center><a href="http://www.palomerotoluqueno.org/" ><img style="border: none;" ALT="Palomero " src="../icons/palomero.jpg"  title="Palomero " /></a></center></td>
+		<td><a href="http://www.sciencemag.org/cgi/content/full/326/5956/1078">Publication</a></td>
+	</tr>
+
+</table><br>
+For more information, please visit our <a href="http://www.maizegdb.org/sequence_resources.php">sequence resource page</a>.
+<p>
+
+
+<hr size=1 width="100%">
+
+<p style="margin-bottom: 8px; margin-top: 10px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">Be on Top of Recent Advances!</span>  <a href="../editorial_board_news_feed.php" ><img style="border: none;" ALT="Subscribe to Editorial Board RSS Feed" src="../icons/rss_editorial_sm.gif"  title="Subscribe to RSS Feed" /></a></p>
+
+<a href="editorial_board.php"><font color=red><i>Check here for Hot Papers!</i></font></a> The <b>MaizeGDB <a href="editorial_board.php">Editorial Board</a></b> recommends noteworthy primary literature of interest to maize researchers that is appropriate for use by journal clubs on a monthly basis.  The inaugural board was convened in 2005 by Virginia Walbot.  The 2010 members are:  Patrick J. Brown, Erik Vollbrecht, Paula McSteen, Nick Lauter, and Mario Arteaga-Vazquez. 
+
+</p>
+<p><a href="web_newgene.php"><font color=red><i>Add Newly Characterized Genes to MaizeGDB!</i></font></a> Add genes that have been recently discovered and/or characterized to <a href="web_newgene.php">the list</a> by <a href="mailto:carson.andorf@ars.usda.gov">email</a>. Also visit the Maize Newsletter's <a href="http://www.maizegenereview.org">Maize Gene Review</a> to browse in-depth descriptions of genes contributed by community members.</p>
+
+<hr size=1 width="100%">
+<p style="margin-bottom: 8px; margin-top: 10px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">Project Oversight</span></p>
+<p>MaizeGDB is guided by members of the community of maize geneticists through feedback sent to us through the website, and by guidance from the MaizeGDB <a href="working_group.php">Working Group</a>.  Current membership includes Alice Barkan, Owen Hoekenga, Anne-Francoise Lamblin, Thomas Lubberstedt, Eric Lyons, Karen McGinnis, Lukas Mueller, Mihai Pop, Marty Sachs, Pat Schnable, and Anne Sylvester. MaizeGDB's areas of concentration for the next five years are described on <a href="objectives.php">this page</a>.</p>
+
+<hr size=1 width="100%">
+<table><tr><td valign='bottom'>
+<p style="margin-bottom: 8px; margin-top: 0px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">Funding Source</span></p>
+<p><a href="http://www.usda.gov/"><img src="/images/usdalogo.jpg" alt="USDA" border=0></a> <a href="http://www.ars.usda.gov/"><img src="/images/arslogo.jpg" alt="ARS" border=0></a> &nbsp; <a href="http://www.ars.usda.gov">USDA Agricultural Research Service</a>
+</p>
+</td><td valign='bottom'>
+<p>
+<a href="http://www.nsf.gov/"><img height="50px" src="/images/nsf.jpg" alt="NSF" border=0></a>  &nbsp; <a href="http://www.nsf.gov/">National Science Foundation</a>
+</p>
+</td></tr></table>
+<hr size=1 width="100%">
+<p><i>This page last updated 10:02 am, Mar 02, 2011.</i></p>
+</td></tr></table>
+</td>
+<TD WIDTH="22%" VALIGN="TOP" STYLE="border: 1px dashed #bd8;" BGCOLOR="#DDFFAF" CLASS="small">
+<!--<p style="margin-bottom: 8px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">WE ARE HIRING</span></p>-->
+<!--<font color=red>A POPcorn programmer:  For details and application instructions click <a href="http://maizegdb.org/jobs.php#27">here.</a></font> -->
+<p style="margin-bottom: 8px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">WHAT'S NEW</span> <a href="maizegdb_news_feed.php" ><img style="border: none;" ALT="Subscribe to RSS Feed" src="../icons/rss_new_sm.gif"  title="Subscribe to What's New RSS Feed" /></a> <a href="http://www.facebook.com/pages/MaizeGDB/124113357600388" ><img style="border: none;" ALT="Become a fan on Facebook" src="../icons/fb.gif"  title="Become a fan on Facebook" /></a></p>
+
+<p><strong>March 2: </strong> Agilent microarray probes from the Walbot Lab available via the <a href="http://gbrowse.maizegdb.org/cgi-bin/gbrowse/maize_v2">Genome Browser</a>.</p>
+<p><strong>February 22: </strong> The <a href="http://gbrowse.maizegdb.org/cgi-bin/gbrowse/maize_v2">Genome Browser</a> B73 RefGen_v2 track has been updated to show more detail.</p>
+<p><strong>February 16: </strong>Brutnell group expression data available via the <a href="http://gbrowse.maizegdb.org/cgi-bin/gbrowse/maize_v2">Genome Browser</a>. Turn on additional tracks (bottom of browser) to see all tracks.</p>
+<p><b><i><a href="whatsnew.php">See older items...</a></i></b></p>
+
+<p><a href="addwhatsnew.php">Add 'What's New'</a> to your website!</p>
+
+<p style="margin-bottom: 8px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">UPCOMING</span></p>
+
+<p>Anticipated in July: The release of B73_RefGen_v3 along with its respective annotations.</p>
+<p style="margin-bottom: 8px;"><span style="font-family: Verdana, Arial, sans-serif; font-size: 110%; font-weight: bold; margin-bottom: 6px;">DATABASE</span>
+</p>
+<span id="update">
+<p><i><u>Last Database Update</u></i>:<br>&nbsp;&nbsp;&nbsp; February 1, 2011<br>
+<i><u>Next Scheduled Update</u></i>:<br>&nbsp;&nbsp;&nbsp; March 8, 2011<br>
+</span>
+<i>Production updates generally occur on the first Tuesday of the month.</i></p>
+</TD></TR></TABLE>
+
+</TD>
+</TR>
+<tr bgcolor="#33cc33"><td colspan="2" style="height: 1px; margin-top: 6px;"><img src="/images/1.gif" width="1" height="1" border="0" alt="" ></td></tr>
+<TR BGCOLOR="#33CC33">
+<TD WIDTH="100%" COLSPAN=2 CLASS="top" ALIGN="right">
+<form method="get" action="/supersearch.php" class="tiny">
+<a href="/">home</a> |&nbsp;<label for="showlist">&nbsp;Search</label>
+<select name="show" class="small" id="showlist">
+<option value="anything" selected>all data
+<option value="goog">all static web pages
+<option value="gp">gene products
+<option value="gb">genome browser - BAC-based
+<option value="agp">genome browser - B73 RefGen_v1
+<option value="refgenv2">genome browser - B73 RefGen_v2
+<option value="go">GO terms
+<option value="loc">loci
+<option value="map">maps
+<option value="mp">metabolic pathways
+<option value="person">people/organizations
+<option value="pheno">phenotypes/mutants
+<option value="probe" >probes/molecular markers
+<option value="bac">&nbsp;-&nbsp;BACs
+<option value="est">&nbsp;-&nbsp;ESTs
+<option value="snp">&nbsp;-&nbsp;Mo17 SNP
+<option value="overgo">&nbsp;-&nbsp;overgos
+<option value="ssr">&nbsp;-&nbsp;SSRs
+<option value="qtl">QTL experiments
+<option value="ref">references
+<option value="seq">sequences
+<option value="stock">stocks
+<option value="trait">traits
+<option value="var">variations/polymorphs/alleles
+<option value="id">i.d. number
+</select>
+<label for="strin2">for </label>
+<input class="small" id="strin2" type="text" name="pattern" onClick="document.getElementById('strin2').value='';" value="enter terms here" size="30">
+ <input type="submit" value="Go!" class="small">&nbsp;</form>
+</TD>
+</TR>
+<tr bgcolor="#33cc33"><td colspan="2" style="height: 1px;"><img src="/images/1.gif" width="1" height="1" border="0" alt=""></td></tr>
+<tr><td colspan="2">
+<table width="100%" cellpadding=6 cellspacing=3 summary="A footer table at the bottom that contains feedback links and page status info">
+<tr>
+<td class="small" width="60%">
+<p class="feedback">If you have some comments about this page, or about the site in general, fill out our easy to use <a title="Clicking here will launch a small separate window that will allow you to give us feedback.  Once you're done, you'll be able to close the window as you wish." onKeyPress="javascript:window.open('/feedback.php?call=MaizeGDB&amp;uri=http%3A%2F%2Fwww.maizegdb.org%2F','announcement','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=400,height=520,left=50,top=50');" onClick="javascript:window.open('/feedback.php?call=MaizeGDB&amp;uri=http%3A%2F%2Fwww.maizegdb.org%2F','announcement','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,width=400,height=520,left=50,top=50');" href="#">feedback form</a> without leaving this page!</p></td>
+<td class="small" width="10%" style="border: 1px dashed #9c6;" bgcolor="#CCFF99" align="center">
+<p>Be sure to <a href="/cite.php">cite</a> us!</p></td>
+<td class="small" width="30%" valign=top align=right>
+<a href="http://validator.w3.org/check/referer" title="This page is HTML 4.01 valid!"><img alt="This page is HTML 4.01 valid!" border="0" src="/images/valid-html401.gif" height="31" width="88"></a> &nbsp; 
+</td></tr></table>
+</td></tr>
+</TABLE>	
+	<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-8209265-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+	
+	</BODY>
+</HTML>

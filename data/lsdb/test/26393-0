@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>PhyloPars: estimation of missing parameters using phylogeny</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<meta name="description" content="Bioinformatics Unit, Vrije Unversiteit Amsterdam">
+
+<meta name="keywords" content="VU, Vrije, Free, University, academic, research, learned, education, science, DNA, proteins, meetings, analysis tools, bioinformatics, unit, Amsterdam, database searches, database mining, secondary structure prediction, prediction, sequence alignment, genomics, quest, praline, repro, mathematical biology, bioinfo, mathbio, repeats, gene, rna, dna, protein, bioinformatics, molecular, genetics, software, databases, genomics, sequencing, protein, computational biology, nucleotide, FASTA, BLAST, SRS, ClustalW, DNA, RNA, BioInformer, science, leading edge, SD, PDB, Bioinformatics industry, Genomes, Proteomes, Embl-bank, Swissprot+swiss-prot, Trembl, Sptr, Webin, Autodep, Microarray, Pandit, Ensembl, Intact, Integr8, Intenz, Taxonomy, Interpro., Interproscan, Protein, nucleotide, Sequences">
+
+<link rel="stylesheet" type="text/css" href="style_l.css">
+
+<SCRIPT TYPE="text/javascript">
+<!--
+function newImage (arg) {
+	if (document.images) {
+		rslt = new Image();
+		rslt.src = arg;
+		return rslt;
+	}
+}
+
+function changeImages () {
+    if (document.images ) {
+        for (var i=0; i<changeImages.arguments.length; i+=2) {
+            document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
+        }
+    }
+}
+
+function MM_swapImgRestore () { //v3.0
+    var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages () { //v3.0
+    var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj (n, d) { //v4.01
+    var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+    if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+    for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+    if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage () { //v3.0
+    var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function addBookmark () {
+    var title = document.title;
+    var url = window.location.href;
+    if (window.sidebar) { // Mozilla Firefox Bookmark
+        window.sidebar.addPanel(title, url, "");
+    } else if (window.external) { // IE Favorite
+        window.external.AddFavorite( url, title);
+    } else if (navigator.userAgent.match('Safari')) {
+	    alert("Please press Command-D (Open-Apple-D) to bookmark a page in Safari.");
+	} else if (window.opera && window.print) { // Opera Hotlist
+        return true;
+    }
+}
+//-->
+</SCRIPT>
+
+
+<style type="text/css">
+<!--
+TABLE.blue {
+        color: black;
+		background-color: #003366;
+}
+TABLE.green {
+        color: black;
+        background-color: #005500;
+}
+TABLE.white {
+        color: black;
+        background-color: #FFFFFF;
+}
+A:LINK {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:VISITED {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:ACTIVE {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:HOVER {
+	color: #FF0000;
+	font-weight: bold;
+	text-decoration: underline;
+}
+TR.blue {
+        color: #FFFFFF;
+        font-size: 14px;
+        background-color: #003366;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.green {
+        color: #FFFFFF;
+        font-size: 14px;
+        background-color: #005500;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.grey {
+        color: #FFFFFF;
+        font-size: 12px;
+        background-color: #666666;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.lightgrey {
+        color: #000000;
+        font-size: 13px;
+        background-color: #E4E4E4;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.darkgrey {
+        color: #000000;
+        font-size: 13px;
+        background-color: #D2D2D2;
+        font-family: Arial, Helvetica, sans-serif;
+}
+-->
+</style>
+
+</head>	
+
+<body style="background-color:#FFFFFF; color:#000000; margin-left:0; margin-top:0;" onLoad="MM_preloadImages('/images/homeon.gif','/images/researchon.gif','/images/confon.gif','/images/progon.gif','/images/memon.gif','/images/pubon.gif','/images/vacon.gif','/images/linkon.gif')">
+
+<table width="100%"><tr valign="top"><td bgcolor="#000000" width="29"><a href="http://www.ibi.vu.nl"><img src="/images/sidebar-main.gif"  alt="sidebar-main" border="0"></a></td><td>
+
+<table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <TR valign="bottom"> 
+    <TD align="left" width="512"> <img src="/images/title.gif" alt="title" width="512" height="57" vspace="0" hspace="0" align="bottom"></TD>
+    <td rowspan="2" style="background-image:url(/images/back1.gif);" width="100%" height="113" align="left" valign="top"> 
+      <div align="center"><img src="/images/griff.gif" alt="griff" width="77" height="75" vspace="2" hspace="2"></div>
+    </td>
+    <td rowspan=2 width="35%" align="left"> 
+      <TABLE WIDTH=277 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+        <TR> 
+          <TD ROWSPAN=2> <IMG SRC="/images/banner-button_01.gif" WIDTH=67 HEIGHT=113 ALT="banner-button_0"></TD>
+          <TD> <A HREF="/contact"
+				ONMOUSEOVER="changeImages('banner_button_Layer_7', '/images/banner-button_Layer-7-over.gif', 'banner_button_03', '/images/banner-button_03-banner-but.gif', 'banner_button_Layer_4', '/images/banner-button_Layer-4-banne.gif', 'banner_button_05', '/images/banner-button_05-banner-but.gif',
+'banner_button_Layer_5', '/images/banner-button_Layer-5-banne.gif',
+'banner_button_07', '/images/banner-button_07-banner-but.gif'); return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_7', '/images/banner-button_Layer-7.gif', 'banner_button_03', '/images/banner-button_03.gif', 'banner_button_Layer_4', '/images/banner-button_Layer-4.gif', 'banner_button_05', '/images/banner-button_05.gif',
+'banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07',
+'/images/banner-button_07.gif'); return true;"> <IMG NAME="banner_button_Layer_7"
+SRC="/images/banner-button_Layer-7.gif" WIDTH=18 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-7"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_03" SRC="/images/banner-button_03.gif" WIDTH=17 HEIGHT=113 ALT="banner_button_03"></TD>
+          <TD> <A HREF="http://www.few.vu.nl/en/sitemap.asp"
+				ONMOUSEOVER="changeImages('banner_button_Layer_4', '/images/banner-button_Layer-4-over.gif', 'banner_button_05', '/images/banner-button_05-banner--11.gif', 'banner_button_Layer_5', '/images/banner-button_Layer-5-ba-14.gif', 'banner_button_07', '/images/banner-button_07-banner--18.gif');
+return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_4', '/images/banner-button_Layer-4.gif', 'banner_button_05', '/images/banner-button_05.gif', 'banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07', '/images/banner-button_07.gif');
+return true;"> <IMG NAME="banner_button_Layer_4" SRC="/images/banner-button_Layer-4.gif" WIDTH=17 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-4"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_05" SRC="/images/banner-button_05.gif" WIDTH=17 HEIGHT=113 ALT="banner-button_05"></TD>
+          <TD> <A HREF="mailto:ibivu@cs.vu.nl"
+				ONMOUSEOVER="changeImages('banner_button_Layer_5', '/images/banner-button_Layer-5-over.gif', 'banner_button_07', '/images/banner-button_07-banner--19.gif'); return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07', '/images/banner-button_07.gif'); return true;"> 
+            <IMG NAME="banner_button_Layer_5" SRC="/images/banner-button_Layer-5.gif" WIDTH=17 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-5"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_07" SRC="/images/banner-button_07.gif" WIDTH=124 HEIGHT=113 ALT="banner-button_07"></TD>
+        </TR>
+        <TR> 
+          <TD> <IMG SRC="/images/banner-button_08.gif" WIDTH=18 HEIGHT=32 ALT="banner-button_08"></TD>
+          <TD> <IMG SRC="/images/banner-button_09.gif" WIDTH=17 HEIGHT=32 ALT="banner-button_09"></TD>
+          <TD> <IMG SRC="/images/banner-button_10.gif" WIDTH=17 HEIGHT=32 ALT="banner-button_10"></TD>
+        </TR>
+      </TABLE>
+    </td>
+  </tr>
+  <TR valign="bottom"> 
+    <TD height="56" width="512" align="left"><img src="/images/banner-left.gif" width="512" height="56" align="bottom" vspace="0" hspace="0" alt="Bioinformatics Unit banner"></TD>
+  </tr>
+</table>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="99%">
+  <tr> 
+    <td height="46">&nbsp;&nbsp;</td>
+    <td colspan="2" height="46" valign="bottom">
+
+<a href="/" onMouseOut="MM_swapImgRestore()"
+  onMouseOver="MM_swapImage('Home','','/images/homeon.gif',1)"><img name="Home" border="0" src="/images/homeoff.gif" alt="homeoff" width="97" height="46" align="bottom"></a><a href="/research" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Research','','/images/researchon.gif',1)"><img name="Research" border="0" src="/images/researchoff.gif" alt="researchoff" width="97" height="46" align="bottom"></a><a href="/teaching" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Teaching','','/images/confon.gif',1)"><img name="Teaching"  border="0" src="/images/confoff.gif" alt="confoff" width="97" height="46" align="bottom"></a><a href="/programs"><img src="/images/progon.gif" alt="progon" align="bottom" border="0"></a><a href="/members" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Members','','/images/memon.gif',1)"><img name="Members" border="0" src="/images/memoff.gif"  alt="memoff" width="97" height="46" align="bottom"></a><a href="/publications" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Pubs','','/images/pubon.gif',1)"><img name="Pubs" border="0" src="/images/puboff.gif" alt="puboff" width="97" height="46" align="bottom"></a><a href="/vacancies" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Vacancies','','/images/vacon.gif',1)"><img name="Vacancies" border="0" src="/images/vacoff.gif" alt="vacoff" width="97" height="46" align="bottom"></a><a href="/links" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Links','','/images/linkon.gif',1)"><img name="Links" border="0" src="/images/linkoff.gif" alt="linkoff" width="97" height="46" align="bottom"></a></td>
+  </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="90%">
+  <tr valign="top"> 
+    <td rowspan="2" nowrap>&nbsp;&nbsp;</td>
+    <td rowspan="2" width="32" nowrap><img src="/images/tabfoot.gif" alt="tabfoot" width="32" height="81" vspace="0" hspace="0" align="top" border="0"></td>
+    <td height=25 nowrap><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=32 height=25 align="top"></td>
+  </tr>
+  <tr align="left"> 
+    <td nowrap> 
+    <h2 style="font-family:Arial,Helvetica,sans-serif;color:#003366;">PhyloPars: estimation of missing parameter values using phylogeny</h2>
+ </td>
+  </tr>
+</table>
+
+	
+	
+<blockquote class="phylopars" style="width:750px;">
+
+
+<script type="text/javascript" src="overlib/overlib.js">
+	<!-- overLIB (c) Erik Bosrup -->
+</script>
+<!--	
+<script language="javascript" type="text/javascript">
+	    function onHelp(a) {
+	        window.open(a.href, 'help', 'width=400,height=200,scrollbars=yes,menubar=no,status=no,resizable=yes,titlebar=no,toolbar=no');
+	        return false;
+	    }
+	    function onLoad() {
+	        onDistanceSourceChange();
+	        onCriterionChange();
+	    }
+	    function onDistanceSourceChange() {
+	        if (document.getElementById('radioPhylogeny').checked) {
+	            document.getElementById('tdPhylogeny').style.display = '';
+	            document.getElementById('tdDistanceMatrix').style.display = 'none';
+	        }
+	        else {
+	            document.getElementById('tdPhylogeny').style.display = 'none';
+	            document.getElementById('tdDistanceMatrix').style.display = '';
+	        }
+	    }
+	    function onCriterionChange() {
+	        if (document.getElementById('selectCriterion').selectedIndex==2) {
+	            document.getElementById('trErrorWeight').style.display = '';
+	        }
+	        else {
+	            document.getElementById('trErrorWeight').style.display = 'none';
+	        }
+	    }
+	    
+</script>
+-->
+<script language="javascript" type="text/javascript">
+	function myonload() {
+		useexample(document.forms[0].useexample.value=='True');
+	}
+	
+	window.onload = myonload;
+
+	function useexample(usetest) {
+		if (usetest) {
+			document.getElementById('trFeatureMatrix').style.display = 'none';
+			document.getElementById('trPhylogeny').style.display = 'none';
+			document.getElementById('trExample').style.display = '';
+			document.forms[0].useexample.value = 'True';
+		}
+		else {
+			document.getElementById('trFeatureMatrix').style.display = '';
+			document.getElementById('trPhylogeny').style.display = '';
+			document.getElementById('trExample').style.display = 'none';
+			document.forms[0].useexample.value = 'False';
+		}
+	}
+</script>
+
+    <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+
+<table border="0">
+<tr><td style="vertical-align:top;">
+<img src="logo.png" style="margin-right:5px;" alt="PhyloPars logo">
+</td><td>
+	
+	<p class="phylopars">
+		A wealth of information on the metabolic parameters of a species or strain can be inferred
+		from observations on species of strains that are phylogenetically related. PhyloPars provides
+		an efficient and statistically consistent method of combining any number of
+		empirical observations with the phylogenetic tree to arrive at complete set of
+		estimates for missing parameter values. Documentation is available as a
+		<a href="help/methodology.pdf" target="_blank">complete technical description of the methodology</a>, and as a
+		<a href="help/glossary.html" target="_blank">glossary of terms used</a>.
+	</p>
+
+	<p class="phylopars">
+		PhyloPars takes an incomplete feature matrix and a phylogeny as input, which you can provide below.
+		Additionally you can configure some properties of the evolutionary model used.
+		Click on the <img src="info.png" alt="help icon" style="vertical-align:middle"> below for concise help.</p>
+
+	<p class="phylopars">
+		An example of PhyloPars output for a dataset for freshwater phytoplankton is available <a href="example/">here</a> 
+		(see also <a href="phytoplankton.php">Phyto-PhyloPars</a>).
+		You can also <a href="javascript:useexample(true);">use the sample dataset</a> in a new analysis.
+	</p>
+	
+<br>
+	<form action="" enctype="multipart/form-data" method="post">
+		<table cellspacing="0" cellpadding="0">
+			<tr>
+				<td>&nbsp;
+				</td>
+				<td>
+	<table class="phylopars" style="background:lightblue;border:1px solid black;">
+			<tr id="trExample" style="display:none">
+			    <td colspan="2">A sample dataset for freshwater phytoplankton will be used (<a href="features.txt">feature matrix</a>, 
+	<a href="tree.txt">phylogeny</a>).<br>Click <a href="javascript:useexample(false);">here</a> to use your own data instead.
+
+
+	<input type="hidden" name="useexample" value="False"></td>
+			</tr>
+			<tr id="trFeatureMatrix">
+			    <td>Feature matrix <img class="infoicon" src="info.png" alt="Click for help" onclick="return overlib('The feature matrix describes all observations for the different species or strains. It must be supplied as a tab-separated text file with one line per node and one column per feature. The file should contain both row and column labels.<br><br><a href=&quot;help/glossary.html#Feature matrix&quot; target=&quot;_blank&quot;>More information</a>', STICKY, CAPTION,'Feature matrix',CENTER,CLOSECLICK);" onmouseout="return nd();"></td>
+			    <td><input class="phylopars" type="file" name="featurematrix"></td>
+			</tr>
+			<tr id="trPhylogeny">
+			    <td>Phylogeny <img class="infoicon"  src="info.png" alt="Click for help" onclick="return overlib('The phylogeny must be provided in Newick format, which is an ASCII representation of a phylogenetic tree. A good overview of the Newick specification can be found <a href=&quot;http://evolution.genetics.washington.edu/phylip/newicktree.html&quot; target=&quot;_blank&quot;>here</a>, and a formal description <a href=&quot;http://evolution.genetics.washington.edu/phylip/newick_doc.html&quot; target=&quot;_blank&quot;>here</a>.', STICKY, CAPTION,'Phylogeny',CENTER,CLOSECLICK);" onmouseout="return nd();"></td>
+			    <td><input class="phylopars" type="file" name="tree"></td>
+			</tr>
+<!--			
+			<tr>
+			    <td><input id="radioPhylogeny" name="distancesource" type="radio" checked onclick="onDistanceSourceChange()" value="0"></td>
+			    <td><label for="radioPhylogeny">Phylogeny</label> <a class="info" href="help/phylogeny.htm" onclick="return onHelp(this);">info</a></td>
+			    <td id="tdPhylogeny"><input type="file" name="tree"></td>
+			</tr>
+			<tr>
+			    <td><input id="radioDistanceMatrix" name="distancesource" type="radio" onclick="onDistanceSourceChange()" value="1"></td>
+			    <td><label for="radioDistanceMatrix">Distance matrix</label> <a class="info" href="help/distancematrix.htm" onclick="return onHelp(this);">info</a></td>
+			    <td id="tdDistanceMatrix"><input type="file" name="distancematrix"></td>
+			</tr>
+-->			
+			<tr>
+			    <td colspan="2"><input id="checkboxCorrelatedEvolution" type="checkbox" name="correlatedevolution" value="True" checked>
+			    <label for="checkboxCorrelatedEvolution">Allow correlated evolution of the different features.</label> <img class="infoicon" src="info.png" alt="Click for help" onclick="return overlib('The default model assumes that each feature changes independently through evolutionary time. However, this assumption can be incorrect for some feature combinations, e.g., the length and weight of a species are likely to be positively correlated. To allow for such correlations, activate this option.<br><br>Note that this option increases the number of model parameters, resulting in longer processing time.', STICKY, CAPTION,'Correlated evolution',CENTER,CLOSECLICK);" onmouseout="return nd();"></td>
+			</tr>
+			<tr>
+			    <td colspan="2"><input id="checkboxIntraspecificVariability" type="checkbox" name="intraspecificvariability" value="True" checked>
+			    <label for="checkboxIntraspecificVariability">Allow for intraspecific variability of features.</label> <img class="infoicon" src="info.png" alt="Click for help" onclick="return overlib('The default model assumes that each feature value is the exact mean for the corresponding species. If feature values are single samples rather than means, the model can account for this by introducing an additional layer of variability between the species and sample level. To do this, select this option.<br><br>Note that this option increases the number of model parameters, resulting in longer processing time.', STICKY, CAPTION,'Intraspecific variability',CENTER,CLOSECLICK);" onmouseout="return nd();"></td>
+			</tr>
+<!--		
+			<tr>
+			    <td>Optimize by minimizing:</td>
+			    <td><select name="criterion" id="selectCriterion" onchange="onCriterionChange()">
+			        <option value="0">Absolute error</option>
+			        <option value="1">Relative error</option>
+			        <option value="2" selected>Combination of absolute and relative error</option>
+			    </select></td>
+			</tr>
+			<tr id="trErrorWeight">
+			    <td>Weight for relative error (0-1):</td>
+			    <td><input type="text" name="relerrorweight" value="0.5"></td>
+			</tr>
+-->			
+		<tr><td colspan="2">
+		  <input type="hidden" name="mbjob[method]" value="phylopars">
+			<input type="hidden" name="mbjob[description]" value="step 1">
+			<input class="phylopars" type="submit" name="start" value="Estimate heritability and missing feature values">
+		</td></tr>
+		</table>
+		</td></tr>
+		</table>
+	</form>
+
+</td></tr>	
+</table>
+
+<br><hr>
+<div><b>Please cite:</b>
+Bruggeman J, Heringa J and Brandt BW. (2009)
+PhyloPars: estimation of missing parameter values using phylogeny.
+<a href="http://nar.oxfordjournals.org/cgi/content/abstract/37/suppl_2/W179">Nucleic Acids Research 37: W179-W184</a>.
+</div>
+
+<br><br><br>
+        <a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401-blue"  alt="Valid HTML 4.01 Transitional" height="31" width="88" border="0"></a>
+        <a href="http://www.bosrup.com/web/overlib/">       <img src="power.gif" alt="Popups by overLIB!"           height="31" width="88" border="0"></a>
+
+</blockquote>
+
+<br>
+
+<font style="font-family: Arial,Helvetica,sans-serif; font-size: 11px">
+(c) IBIVU 2011. If you are experiencing problems with the
+site, please contact the <a href="mailto:ibivu@cs.vu.nl">webmaster</a>.
+</font>
+
+</td></tr></table>
+
+

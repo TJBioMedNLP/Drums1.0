@@ -1,0 +1,292 @@
+<HTML>
+<HEAD>
+  <title>FireDock Server</title>
+  <meta name="KEYWORDS" content="protein docking refinement">
+  <meta name="DESCRIPTION" content="FireDock algorithm">
+ <link rel=stylesheet type=text/css href="hs.css">
+<script language="Javascript" type="text/javascript">
+<!--
+// This script came from  
+// Uncle Jim's Javascript Examples 
+// JDStiles.com
+
+function selectAll(theField) {
+var tempval=eval("document."+theField)
+tempval.focus()
+tempval.select()
+}
+//-->
+</script>
+<style>
+//A{color:red; text-decoration:none}
+A:hover{color:blue}
+A:visited:{color:#000066}
+</style>
+<script language="javascript">
+<!--
+
+/*############################################################################
+This script is made by bratta from www.bratta.com and can be used freely
+as long as this msg is intact. Visit www.bratta.com for more great scripts.
+############################################################################*/
+
+
+	var n = (document.layers) ? 1:0;
+	var ie = (document.all) ? 1:0;
+
+/*The function for "making" the objects
+######################################################################################*/
+	function makeObj(obj){				
+    	this.css=(n) ? eval('document.'+obj):eval(obj+'.style')		
+		this.hideIt=b_hideIt;
+		this.showIt=b_showIt;					
+		this.css.visibility="hidden"
+		return this
+	}
+/*The functions for showing and hiding
+######################################################################################*/
+	function b_showIt(){
+    	this.css.visibility="visible"
+	}
+	function b_hideIt(){
+        this.css.visibility="hidden"
+	}
+//######################################################################################
+	function init(){
+	//making the objects to show and hide:
+	text1=new makeObj('divText1')
+	}
+//-->
+
+function Disab(val) {
+frm=document.forms[0]
+if(val=="1")
+{
+frm.recChain.disabled=true;
+frm.ligChain.disabled=true;
+frm.modelFile.disabled=true;
+
+frm.receptor.disabled=false;
+frm.recfile.disabled=false;
+frm.ligand.disabled=false;
+frm.ligfile.disabled=false;
+frm.transFile.disabled=false;
+}
+else
+{
+frm.recChain.disabled=false;
+frm.ligChain.disabled=false;
+frm.modelFile.disabled=false;
+
+frm.receptor.disabled=true;
+frm.recfile.disabled=true;
+frm.ligand.disabled=true;
+frm.ligfile.disabled=true;
+frm.transFile.disabled=true;
+}
+}
+
+
+</script>
+</HEAD>
+<body onLoad="init()">
+<form action="bin/htmlInvokeFireDock.pl" method="post" ENCTYPE="multipart/form-data">
+  <table>
+    <tbody>
+      <tr>
+	<td><img src="figures/logo.png" height="80" alt="FireDock"> <br>
+	&nbsp;  &nbsp; <strong><font size=2.5 color=gray>Fast Interaction REfinement in molecular DOCKing</font> </strong>
+<!-- 	 <br>  &nbsp; &nbsp; &nbsp;&nbsp; <strong>WebServer </strong> -->
+</td>
+    </tr>
+      <tr>
+        <td valign="top"> 
+       [<a href="index.html">Web Server</a>] 
+       [<a href="firedock.html">About</a>]
+       [<a href="http://bioinfo3d.cs.tau.ac.il/cgi-bin/pdownload/progdownload.pl/?pname=FireDock">Download</a>] 
+       [<a href="faq.html">FAQ</a>]
+       [<a href="help.html">Help</a>]
+       [<a href="refs.html">References</a>]
+       &nbsp; Contact: <a href="mailto:ppdock@tau.ac.il">ppdock@tau.ac.il</a>
+        </td>
+      </tr>
+</table>
+<br>
+<table cellspacing="0" cellpadding="5" width="85%">
+<tbody>
+<tr>
+   <td colspan="5">
+   FireDock is an efficient method for refinement and re-scoring of rigid-body protein-protein docking solutions.<br> <br>
+   </td>
+   
+</tr>
+
+<tr>
+   <td colspan="5">Please choose one of the options below <br>
+                <hr size="2" width="500"  align="left"></td>
+</tr>
+<tr>
+<td colspan="5"> <input type="radio" name="option" value="1" onClick="Disab(this.value)" checked>
+<strong><font color=blue >Option 1 </font>(use transformation file, a faster option) </strong></td>
+</tr>
+<tr>
+<td width=100><font color=blue><a href="help.html#receptor"><b>Receptor Molecule:</b></a> </td>
+<td width=270><input type=text name=receptor size=10 MAXLENGTH=10 value=""> (PDB:chainId e.g. 2kai:AB) </td>
+<td width=70 align="center"><b>or</b></td>
+<td width=80>upload file:</td>
+<td><input type=file name=recfile size=10></td>
+</tr>
+<tr>
+<td><font color=blue><a href="help.html#ligand"><b>Ligand Molecule:</b></a> </td>
+<td><input type=text name=ligand size=10 MAXLENGTH=10 value=""> (PDB:chainId e.g. 2kai:I)</td>
+<td align="center"><b>or</b></td>
+<td>upload file:</td>
+<td><input type=file name=ligfile size=10></td>
+</tr>
+<tr>
+<td><a href="help.html#trans"><b> Transformations File:</b></a> </td>
+<td colspan="4"><input type=file name=transFile size=10 align="left"> (up to 1000 transformations) <br>
+</tr>
+<tr>
+<td colspan="5">(<u>Example</u>: Receptor Molecule: <i>2kai:AB</i>, Ligand Molecule: <i>2kai:I</i>, Transformations File:<a href = "2kai_trans.txt">2kai_trans.txt</a>)</td>
+</tr>
+<tr>
+<td colspan="5"><hr size="2" width="500"  align="left"></td>
+</tr>
+
+<tr>
+<td colspan="5"> <input type="radio" name="option" value="2"  onClick="Disab(this.value)">
+<strong><font color=blue >Option 2 </font>(use models file, a much slower option) </strong></td>
+</tr>
+<tr>
+<td><strong><a href="help.html#model"> Models File:</a></strong></td>
+<td><input type=file name=modelFile size=10 disabled> (up to 100)<br> 
+<td colspan = "2">Receptor chains: <input type=text name=recChain size=3 MAXLENGTH=10 value=""  disabled></td>
+<td>Ligand chains: <input type=text name=ligChain size=3 MAXLENGTH=10 value=""  disabled></td>
+</tr>
+<tr>
+<td colspan="5">(<u>Example</u>: Models File:<a href="models_example.ent">models_example.ent</a>, Receptor chain: <i>E</i>, Ligand chain: <i>I</i>)
+</td>
+</tr>
+<tr>
+<td colspan="5"><hr size="2" width="500"  align="left"></td>
+</tr>
+
+<!-- <tr> -->
+<!-- <td><strong><a href="help.html#resnum"> No. of output complexes:</a></strong></td> -->
+<!-- <td colspan="4"> <SELECT name=outputNo><\!-- output2pdb-results-number -\-> -->
+<!--      <OPTION>5 <OPTION SELECTED>10 <OPTION>20<OPTION>30</SELECT></td> -->
+<!-- </tr> -->
+
+<!-- <tr> -->
+<!--    <td><strong><a href="help.html#outPDB"> Number of output structures: </a></strong></td> -->
+<!--    <td> <input type=text name=outPDBs size=10 MAXLENGTH=10 value="10"> (up to 100)</td> -->
+<!--    <td rowspan="2" colspan="3" align="right" ><TABLE width="300" cellpadding="5" border="2">  -->
+<!--    <tbody><td> <b>If you use this program, please cite:</b><br>   -->
+<!--    N. Andrusier, R. Nussinov and H. J. Wolfson. FireDock: Fast Interaction Refinement in Molecular Docking.<br>  -->
+<!--    <span style="font-style: italic;">Proteins</span> (2007), 69(1):139-159.</td></table></td> -->
+<!-- </tr> -->
+<tr>
+   <td><strong><a href="help.html#outPDB"> Number of output structures: </a></strong></td>
+   <td> <input type=text name=outPDBs size=10 MAXLENGTH=10 value="10"> (up to 100)</td>
+</tr>
+<tr>
+   <td><strong><a href="help.html#mail"> Your e-mail address:</a></strong></td>
+   <td class="lineBorder" colspan="4"><input type="text" name="email"></td>
+</tr>
+
+</tbody>
+</table>
+
+<table cellspacing="0" cellpadding="5" width="90%">
+<tbody>
+<tr>
+   <td><input class="butt" type="submit"> <input class="butt" type="reset" name="Clear" value="Clear"></td>
+</tr>
+</tbody>
+</table>
+<br><br>
+<font color=blue><strong>Advanced Options:</font> (optional)</strong><div id="divMain">
+
+<!--Show, hide and showhide the first div-->
+
+[<a href="javascript:text1.showIt()">show</a>][<a href="javascript:text1.hideIt()">hide</a>]
+
+<!--Show, hide and showhide the second div-->
+<!--  <p>[<a href="javascript:text2.hideIt()">hide2</a>] [<a href="javascript:text2.showIt()">show2</a>]</p>-->
+
+<!--Show, hide and showhide both divs on mouseover and mouseout.-->
+
+</div>
+<br>
+
+<div id="divText1">
+<table>
+<tbody>
+<tr>
+   <td><strong><a href="help.html#complexType"> Complex Type: </a></strong></td>
+   <td> <SELECT name=complexType>
+      <OPTION SELECTED>Default
+      <OPTION>Antibody Antigen
+      <OPTION>Enzyme Inhibitor
+      </SELECT></td>
+</tr>
+<tr>
+   <td><strong><a href="help.html#RefLevel"> Refinement Level: </a></strong></td>
+   <td> <SELECT name=refLevel>
+      <OPTION SELECTED>Restricted<OPTION>Full</SELECT>
+   </td>
+</tr>
+<tr>
+   <td><strong><a href="help.html#RboCycles"> Number of RBO Cycles: </a></strong></td>
+   <td> <input type=text name=RboCycles size=10 MAXLENGTH=10 value="50"></td>
+</tr>
+<tr>
+   <td><strong><a href="help.html#Radius"> Atomic Radius Scale: </a></strong></td>
+   <td> <input type=text name=radius size=10 MAXLENGTH=10 value="0.8"></td>
+</tr>
+
+<tr>
+   <td><font color=blue> <strong><a href="help.html#bound"> Bound/Unbound:</a></strong></td>
+   <td>Receptor: <SELECT name=RecBU><OPTION SELECTED>Unbound<OPTION>Bound</SELECT></td>
+   <td width=30> </td> 
+   <td>Ligand: <SELECT name=LigBU><OPTION SELECTED>Unbound<OPTION>Bound</SELECT></td>
+</tr>
+
+<tr>
+   <td><font color=blue> <strong><a href="help.html#FixedRes"> Fixed Residues Files:</a></strong></td>
+   <td>Receptor:<input type=file name=RecFixedFile size=10> </td>
+   <td width=30> </td> 
+   <td>Ligand:<input type=file name=LigFixedFile size=10></td>
+</tr>
+
+<tr>
+   <td><font color=blue> <strong><a href="help.html#FlexRes"> Flexible Residues Files:</a></strong></td>
+   <td>Receptor:<input type=file name=RecFlexFile size=10> </td>
+   <td width=30> </td> 
+   <td>Ligand:<input type=file name=LigFlexFile size=10></td>
+</tr>
+
+</tbody>
+</table>
+<br>
+
+</tbody>
+</table>
+
+<table>
+<tbody>
+<tr>
+   <td><input class="butt" type="submit"> <input class="butt" type="reset" name="Clear" value="Clear"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr size="2" width="500"  align="left">
+<!-- <b>If you use this program, please cite:</b><br>   -->
+<!--    N. Andrusier, R. Nussinov and H. J. Wolfson. FireDock: Fast Interaction Refinement in Molecular Docking.<br>  -->
+<!--    <span style="font-style: italic;">Proteins</span> (2007), 69(1):139-159.<br><br> -->
+
+</form>
+</BODY>
+</HTML>

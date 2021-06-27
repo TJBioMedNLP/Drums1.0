@@ -1,0 +1,517 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>CROC - Finding chromosomal clusters in eukaryotic genomes</title>
+<link rev="made" href="mailto:Miguel%20Pignatelli%20miguel.pignatelli%40uv.es" />
+<meta name="keywords" content="cluster genomic chromosomal" />
+<meta name="copyright" content="copyright 2007 Miguel Pignatelli" />
+<link rel="stylesheet" type="text/css" href="/styles/croc.css" />
+<script src="/javaScript/DynamicOptionList.js" type="text/javascript"></script>
+
+<script src="/javaScript/webcroc.js" type="text/javascript"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body onload="initDynamicOptionLists();loadDefaults();">
+
+<script type="text/javascript" src="/javaScript/wz_tooltip.js"></script>
+<style type="text/css">
+#Div2,#RT2,#help
+{
+DISPLAY: none;
+}
+</style>
+<script type="text/javascript">
+var versionGenome = new DynamicOptionList();
+versionGenome.addDependentFields("genome","assembly");
+versionGenome.forValue("Rnorvergicus").addOptions("rn4 (Nov 2004)","RGSC34 (Ensembl v53)");
+versionGenome.forValue("Ptroglodytes").addOptions("panTro2 (Mar 2006)");
+versionGenome.forValue("Mmusculus").addOptions("NCBIM37 (Ensembl v52)","mm9 (Jul 2007)");
+versionGenome.forValue("Dmelanogaster").addOptions("dm3 (Apr 2006)","dm2 (Apr 2004)","BDGP54 (Flybase 2008)");
+versionGenome.forValue("Scerevisiae").addOptions("SGD101 (SGD 1.01)");
+versionGenome.forValue("Ggallus").addOptions("galGal3 (May 2006)");
+versionGenome.forValue("Hsapiens").addOptions("hg18 (Mar 2006)","hg17 (May 2004)","NCBI36 (Ensemble v52)");
+versionGenome.forValue("Celegans").addOptions("ce4 (Jan 2004)");
+</script>
+<img src="/CROC/imgs/croc-logo2.gif" alt="CROC logo" />
+<div id='download'>CROC is available for <a href='/CROC/scripts/croc-0.02.tar.gz'>download</a></div><form method="post" action="/CROC/fileUploader.pl" enctype="multipart/form-data" name="windowsel">
+<input type="hidden" name="dest" value="" id="dest" /><input type="hidden" name="rg" value="" id="rg" /><input type="hidden" name="rf" value="" id="rf" /><table>
+	<tr align="left">
+		<td><table class="genoc_table">
+			<tr align="left">
+				<td><table class="genoc_tabledef">
+					<tr>
+						<td class="genoc_tdtit">Featured Genes: <a href="javascript:showhelp('      &lt;h2&gt;Featured Genes&lt;/h2&gt;
+&lt;p&gt;The program expects you to provide a list of genes.&lt;/p&gt;
+&lt;p&gt;This list must have one name per line.&lt;/p&gt;
+&lt;p&gt;The identification ID depends on the selected reference genome (Ensembl IDs, NCBI names, refSeqs, etc..)&lt;/p&gt;
+&lt;p&gt;For examples, click on any sample organism in the &quot;Example&quot; box.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you can upload a single file containing this list.&lt;/p&gt;
+
+')">?</a></td>
+					</tr>
+					<tr align="left">
+						<td class="genoc_tdopt_odd">Please, enter a list of <b><span class="globbed" onmouseover="Tip('Enter one gene per line.<br />IDs must be valid IDs in the selected reference genome<br />Examples are:<p>Ag5r<br />CG10918<br />NM_140389</p>', WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">gene ids</span></b></td>
+					</tr>
+					<tr align="left">
+						<td class="genoc_tdopt_odd"><table>
+							<tr>
+								<td><textarea name="reg"  rows="5" cols="40" id="reg" onclick="remove_default_text()">-- copy and paste your ids here --</textarea> <td><input type="button"  name="Clear data" value="Clear" onclick="javascript:clearInput()" onmouseover="javascript:Tip('Clear')" onmouseout="javascript:UnTip()" /></td></td>
+							</tr>
+						</table>
+						</td>
+						<td class="genoc_tdopt_odd"><table>
+							<tr align="left">
+								<th>
+									<span class="globbed" onmouseover="Tip('Select a sample data from one of the species below', WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Examples</span>:
+								</th>
+							</tr>
+							<tr align="center">
+								<td><a href="javascript:example(&quot;Dmelanogaster&quot;,&quot;dm3 (Apr 2006)&quot;)">fly</a></td>
+							</tr>
+							<tr align="center">
+								<td><a href="javascript:example(&quot;Hsapiens&quot;,&quot;hg18 (Mar 2006)&quot;)">human</a></td>
+							</tr>
+							<tr align="center">
+								<td><a href="javascript:example(&quot;Mmusculus&quot;,&quot;mm9 (Jul 2007)&quot;)">mouse</a></td>
+							</tr>
+							<tr align="center">
+								<td><a href="javascript:example(&quot;Celegans&quot;,&quot;ce4 (Jan 2004)&quot;)">worm</a></td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+					<tr align="left">
+						<td>Or a <span class="globbed" onmouseover="Tip('You can enter the gene IDs by uploading a file containing them',WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()"><b>file</b></span> containing them</td>
+					</tr>
+					<tr align="left">
+						<td><input type="file" name="regfile"  onchange="JavaScript:changeTarget(&quot;iframeUpload&quot;,&quot;LoadFile&quot;);submit()" id="my_file_element" /></td>
+					</tr>
+					<tr align="left">
+						<td><div id="LoadFile" >Status: No file selected</div>
+<iframe name="iframeUpload" style="display:none"></iframe></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr align="left">
+				<td><table class="genoc_tabledef" border=1>
+				    <tr>
+				      <td colspan=2 class="genoc_tdtit"><span class="globbed"onmouseover="Tip('Select the genome and Database / assembly version accordingly with your data', WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Reference Genome</span>: <a href="javascript:showhelp('&lt;h2&gt;Reference Genome&lt;/h2&gt;
+&lt;p&gt;
+The software allows you to select between several reference genomes from diverse genome databases (UCSC, Ensembl, Flybase, SGD...).
+The IDs you provide in the &quot;Featured genes&quot; list must be valid IDs of the selected database.
+&lt;/p&gt;
+&lt;p&gt;
+Alternatively, it is possible to upload a custom reference.
+This should include a first block of lines containing the chromosome abbreviation
+and its total length (in base pairs).
+After that, a blank line should be included.
+Finally, the information of each individual feature/gene should be provided following the UCSCs refGene format. (See, for example &lt;a href=&quot;http://genome.csdb.cn/cgi-bin/hgTables?hgsid=3837&amp;hgta_doSchemaDb=hg18&amp;hgta_doSchemaTable=refGene&quot;&gt;here&lt;/a&gt; for a description of the required fields).
+&lt;/p&gt;
+&lt;p&gt;
+Note: The downloadable version of CROC accepts a simpler format for reference genomes (just &lt;ID&gt;&lt;Chromosome&gt;&lt;Start&gt;&lt;End&gt;&lt;Name&gt;), so if you do not mind to loose the visual capabilities offered by the CROC web server, you may want to run CROC locally with reference genomes.&lt;br /&gt;
+Note2: If you upload reference genomes or gene lists, please allow the web server to complete the upload before starting the analysis.
+&lt;/p&gt;
+')">?</a></td>
+				    </tr>
+				    <tr>
+				    <td class="genoc_tdopt_new">
+        <input id="StandardReference" type="radio" name="reference_type" value="fromdb" onclick="toggle2('RT1')" checked/>Genome<br />
+      </td>
+				      <td rowspan=2 class="genoc_tdopt_new">
+				       <div id='RT1'>
+				        <table>
+					  <tr>
+				            <td>genome:</td>
+				            <td class="genoc_tdopt_new">
+	      <select name="genome" id="genome_sel">
+	        <option value=Celegans>C.elegans</option>
+	        <option value=Dmelanogaster selected>D.melanogaster</option>
+	        <option value=Ggallus>G.gallus</option>
+                <option value=Hsapiens>H.sapiens</option>
+                <option value=Mmusculus>M.musculus</option>
+	        <option value=Ptroglodytes>P.troglodytes</option>
+	        <option value=Rnorvergicus>R.norvergicus</option>
+	        <option value=Scerevisiae>S.cerevisiae</option>
+	      </select>
+            </td>
+				          </tr>
+				          <tr>
+					    <td class="genoc_tdopt_new">assembly:</td>
+				            <td class="genoc_tdopt_new">
+					      <select name="assembly"><script type="text/javascript">versionGenome.printOptions("assembly")</script>
+				              </select>
+				            </td>
+				          </tr>
+				        </table>
+				       </div>
+				       <div id='RT2'>
+				         <label>Upload your reference:
+				          <input type="file" name="reffile" id='my_ref_file' onchange='javascript:changeTarget("ref_iframeUpload","LoadRef");submit()'>
+					   <div id="LoadRef">Status: No file selected</div>
+					   <iframe name="ref_iframeUpload" style="display:none">
+					   </iframe>
+					 </label>
+				       </div>
+				      </td>
+				    </tr>
+				    <tr>
+				      <td class="genoc_tdopt_new">
+      <nobr><input id="CustomReference" type="radio" name="reference_type" value="customref" onclick="toggle2('RT2')" />Custom reference</nobr><br />
+      </td>
+				    </tr>
+				  </table>
+				
+				</td>
+			</tr>
+			<tr align="left">
+				<td><table class="genoc_tabledef">
+					<tr align="left">
+						<td class="genoc_tdtit"><span class="globbed" onmouseover="Tip('You can select between gene-based windows or DNA length-based windows', WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Window type</span>: <a href="javascript:showhelp(&quot;
+&lt;h2&gt;Window type&lt;/h2&gt;
+&lt;p&gt;
+CROC performs hypergeometric distribution tests in a sliding window.
+Two types of windows can be defined:
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows of fixed length ( in kbs )&lt;/li&gt;
+&lt;li&gt;Windows defined by the number of genes in there&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Fixed length windows have the drawback of being affected by the size of the genes.
+If you define a window of 50kb, you will never be able to find clusters having genes with length &gt;= 50kb.
+&lt;/p&gt;
+
+&lt;p&gt;In the other hand, windows defined by the number of genes are of variable length.
+&lt;/p&gt;
+&lt;p&gt;Our experience is that most significant clusters are stably found regardless of the method you use to define the window (provided that the window is wide enough),
+whereas dubious clusters may appear when using one method but not the other.
+Our advice is that you run your analysis with different windows types / sizes and see which clusters are more consistent.
+&lt;/p&gt;
+&lt;p&gt;Note: In fixed length windows you must provide an offset between windows. In windows defined by number of genes, the offset is always set to 1 gene.
+&lt;/p&gt;
+&quot;)">?</a></td>
+					</tr>
+					<tr align="left">
+						<td class="genoc_tdopt_odd"><table class="genoc_tabledef">
+						<tr>
+							<td>
+	  <input id="geneWindowType" type="radio" name="window_type" value="genes" onclick="toggle('Div1')" checked />genes<br />
+	  <input type="radio" name="window_type" value="nucleotides" onclick="toggle('Div2')"/>nucleotides<br />
+	</td>
+							<td>
+							<div id="Div1"><table>
+						   <tr>
+						     <td>Number of genes per window:</td>
+						     <td>
+       <select name="gwindow">
+         <option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option selected value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>;
+       </select>
+     </td>
+						  </tr>
+						</table>
+						</div>
+							<div id="Div2">
+						<table>
+						  <tr>
+						   <td>Window size (in kb):</td>
+						   <td>
+     <select name="window"
+        onChange="changeOffset(document.windowsel.window.options[document.windowsel.window.selectedIndex].value)">
+       <option selected value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35">35</option>
+<option value="36">36</option>
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+<option value="58">58</option>
+<option value="59">59</option>
+<option value="60">60</option>
+<option value="61">61</option>
+<option value="62">62</option>
+<option value="63">63</option>
+<option value="64">64</option>
+<option value="65">65</option>
+<option value="66">66</option>
+<option value="67">67</option>
+<option value="68">68</option>
+<option value="69">69</option>
+<option value="70">70</option>
+<option value="71">71</option>
+<option value="72">72</option>
+<option value="73">73</option>
+<option value="74">74</option>
+<option value="75">75</option>
+<option value="76">76</option>
+<option value="77">77</option>
+<option value="78">78</option>
+<option value="79">79</option>
+<option value="80">80</option>
+<option value="81">81</option>
+<option value="82">82</option>
+<option value="83">83</option>
+<option value="84">84</option>
+<option value="85">85</option>
+<option value="86">86</option>
+<option value="87">87</option>
+<option value="88">88</option>
+<option value="89">89</option>
+<option value="90">90</option>
+<option value="91">91</option>
+<option value="92">92</option>
+<option value="93">93</option>
+<option value="94">94</option>
+<option value="95">95</option>
+<option value="96">96</option>
+<option value="97">97</option>
+<option value="98">98</option>
+<option value="99">99</option>
+<option value="100">100</option>
+     </select>
+   </td>
+						  </tr>
+						  <tr>
+						   <td>Offset between windows (in kb):</td>
+						   <td>
+     <select name="offset">
+       <option selected value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+     </select>
+   </td>
+						  </tr>
+						</table>
+						</div>
+							</td>
+						</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr align="left">
+				<td>
+				<table class="genoc_tabledef">
+				  <tr>
+				    <td class="genoc_tdtit"><span class="globbed" onmouseover="Tip('Minimum number of selected genes that define a cluster', WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Minimum number of interesting genes in a cluster:</span> <a href="javascript:showhelp('      &lt;h2&gt;Minimum number of interesting genes in a cluster&lt;/h2&gt;
+&lt;p&gt;This parameter defines the minimum number of &quot;featured&quot; genes in a cluster.&lt;/p&gt;
+&lt;p&gt;It is a filter that assures you that clusters with less than X &quot;featured&quot; genes will not be selected as possitives (regardless of their p-values).
+Playing simultaneously with this parameter and the window type you can select different types of search.&lt;/p&gt;
+
+&lt;p&gt;For example, to find groups adjacent featured genes (at least 2 genes), you can set:&lt;/p&gt;
+&lt;pre&gt;
+Window type: genes&lt;br /&gt;
+Window size : 2 genes&lt;br /&gt;
+Minimum number of interesting genes in a cluster: 2&lt;br /&gt;
+&lt;/pre&gt;
+')">?</a></td>
+				  </tr>
+				  <tr>
+				    <td class="genoc_tdopt_even">
+     <select name="mingenes">
+       <option value="2">2</option>
+<option selected value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+     </select>
+    </td>
+				  </tr>
+				</table>
+				</td>
+			</tr>
+			<tr align="left">
+				<td>    <table class="genoc_tabledef">
+					<tr>
+					   <td class="genoc_tdtit"><span class="globbed" onmouseover="Tip('Method to apply to correct multiple testing issues', WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Method for multiple testing correction</span> <a href="javascript:showhelp('&lt;h2&gt;Method for multiple testing correction&lt;/h2&gt;
+&lt;P&gt;Because many statistical tests are performed in each CROC analysis, the results obtained should be corrected to avoid multiple testing issues.
+You can select between 4 different methods for correct them:
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;Bonferroni&lt;/b&gt;: The most conservative one.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Holms&lt;/b&gt;: Is a variation of Bonferroni test that pretends to be more accurate. In practice, if your list of &quot;featured&quot; genes is very short, it performs similar to Bonferroni test.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Benjamini &amp; Hochberg&lt;/b&gt;: The least conservative one. Probably is the most widely used in this kind of software and the default in CROC analysis.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Benjamini &amp; Liu&lt;/b&gt;: A variation of the Benjamini &amp; Hochberg method. In practice, when there are only a few of positive windows, it performs similar to Bonferroni test&lt;/li&gt;
+')">?</a></td>
+				        </tr>
+				        <tr>
+				           <td class="genoc_tdopt_even">
+	     <select name="multtest">
+	       <option value="NO">No correction</option>
+  	       <option value="BO">Bonferroni</option>
+	       <option value="HO">Holms</option>
+	       <option value="BH" selected>Benjamini & Hochberg</option>
+	       <option value="BL">Benjamini & Liu</option>
+	     </select>
+	   </td>
+				       </tr>
+				    </table>
+				</td>
+			</tr>
+			<tr align="left">
+				<td>    <table class="genoc_tabledef">
+					<tr>
+					 <td class="genoc_tdtit"><span class="globbed" onmouseover="Tip('Tells the program to use the entire genome or each chromosome as reference in the statistical calculations', WIDTH, 250, TITLE, 'CROC Configuration', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Reference type for the statistical analysis</span> <a href ="javascript:showhelp('    &lt;h2&gt;Type of reference for statistical analysis&lt;/h2&gt;
+&lt;p&gt;We provide 2 possible configurations for choosing the reference in the statistical analysis. The hypergeometric tests done in each window can take the whole genome as reference or the current chromosome being analyzed&lt;/p&gt;
+&lt;p&gt;If you want to use the entire genome as the reference for the statistical tests, choose &quot;Entire genome&quot;, otherwise, the reference would be each chromosome.&lt;/p&gt;
+&lt;p&gt;In practice, if the featured genes are more or less equally distributed along the chromosomes, both methods should give similar results. If you expect some bias in the distribution of your genes of interest, you can treat each chromosome independently (Each chromosome option) or the entire genome as a whole (Entire Genome).
+&lt;/p&gt;
+')">?</a></td>
+					</tr>
+					<tr>
+					<td class="genoc_tdopt_even">
+	<select name="refForStat">
+	 <option value="genome">Entire Genome</option>
+	 <option value="chromosome" selected>By Chromosome</option>
+	</select>
+	</td>
+					</tr>
+				     </table>
+				</td>
+			</tr>
+			<tr align="left">
+				<td><input type="button"  name="Find Clusters" value="Find Clusters" onclick="JavaScript:xmlhttpPost(&quot;/CROC/procCroc2.pl&quot;)" onmouseover="javaScript:Tip('Analyze your data &lt;br /&gt;Check results below')" onmouseout="javaScript:UnTip()" /></td>
+			</tr>
+			<tr align="left">
+				<td><div id="alert_results"></div></td>
+			</tr>
+		</table>
+		</td>
+		<td><div id="help"><div id="helpContent"></div>[<a href="javascript:hidehelp()">Hide</a>]</div></td>
+	</tr>
+</table>
+</form><br />
+<hr />
+<br />
+<h3>
+	>> <span class="globbed" onmouseover="Tip('Simple statistics of the analysis', WIDTH, 250, TITLE, 'CROC Results', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Stats</span>
+</h3>
+<a onmouseover="Tip('Show or hide this section', WIDTH, 250, TITLE, 'CROC Results', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" href="javascript:hideshow('stats')" onmouseout="UnTip()">[+/-]</a>
+<div class="STATSshow" id="stats">
+<p>
+	No analysis performed yet
+</p>
+</div>
+<br />
+<h3>
+	>> <span class="globbed" onmouseover="Tip('Results by chromosome', WIDTH, 250, TITLE, 'CROC Results', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Chromosomes</span>
+</h3>
+<a onmouseover="Tip('Show or hide this section', WIDTH, 250, TITLE, 'CROC Results', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" href="javascript:hideshow('chroms')" onmouseout="UnTip()">[+/-]</a>
+<div class="CHROMShide" id="chroms">
+<p>
+	No analysis performed yet
+</p>
+</div>
+<br />
+<h3>
+	>> <span class="globbed" onmouseover="Tip('Results by cluster', WIDTH, 250, TITLE, 'CROC Results', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" onmouseout="UnTip()">Clusters</span>
+</h3>
+<a onmouseover="Tip('Show or hide this section', WIDTH, 250, TITLE, 'CROC Results', SHADOW, true, FADEIN, 300, FADEOUT, 300, STICKY, 1, CLOSEBTN, true, CLICKCLOSE, true)" href="javascript:hideshow('cluster')" onmouseout="UnTip()">[+/-]</a>
+<div class="CLUSTERShide" id="cluster">
+<p>
+	No analysis performed yet
+</p>
+</div>
+<br />
+<hr />
+<div id="footer">
+<p class="footer">Please contact the <a href="mailto:miguel.pignatelli@uv.es">web master</a> with your questions, comments or suggestions.</p>
+<p>&#169;2008 Miguel Pignatelli</p>
+<p><img src="./imgs/logos.gif"></p>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5863023-1");
+pageTracker._trackPageview();
+</script>
+
+</body>
+</html>

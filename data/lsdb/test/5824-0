@@ -1,0 +1,91 @@
+<html>
+<title>An alignment-free method to identify candidate orthologous enhancers in multiple Drosophila genomes</title>
+
+<body link="#0000ff" bgcolor="#fffff">
+
+<h2 align=center>
+
+An alignment-free method to identify candidate orthologous enhancers in multiple Drosophila genomes
+
+</h2>
+<h3 align=center>
+<P>
+</h3><hr>
+
+This manual page describes the program's command-line and input/output files required to run the enhancer detection program.
+
+<p>
+<h3>
+<b>Abstract</b></h3>
+
+Evolutionarily conserved non-coding genomic sequences represent a
+potentially rich source for the discovery of gene regulatory region
+such as transcriptional enhancers. However, detecting orthologous
+enhancers using alignment-based methods in higher eukaryotic genomes
+is particularly challenging, as regulatory regions can undergo
+considerable sequence changes while maintaining their functionality.
+We have developed an alignment-free method which identifies conserved
+enhancers in multiple diverged species. Our method is based on
+similarity metrics between two sequences based on the co-occurrence of
+sequence patterns regardless of their order and orientation, thus
+tolerating sequence changes observed in non-coding evolution.  We show
+that our method is highly successful in detecting orthologous
+enhancers in distantly related species without requiring additional
+information such as knowledge about transcription factors involved, or
+predicted binding sites.  By estimating the significance of similarity
+scores, we are able to discriminate experimentally validated
+functional enhancers from seemingly equally conserved candidates
+without function. We demonstrate the effectiveness of this approach on
+a wide range of enhancers in Drosophila, and also present encouraging
+results to detect conserved functional regions across large
+evolutionary distances. Our work provides encouraging steps on the way
+to ab initio unbiased enhancer prediction to complement ongoing
+experimental efforts.
+</p>
+
+<p>
+<h3>
+<b> Description </b></h3>
+
+This method searches for orthologous enhancer region in a related species for a given known enhancer.
+
+<p>
+ Input sequences are read from a fasta file, repeats and the low-complexity regions in the control sequences are masked. This method identifies conserved enhancers in related species in a non-alignment fashion. All possible patterns of a given window are enumerated for evaluation of their contribution to the overall similarity measure. The number of instances of each pattern in both sequences explains its contribution of the total similarity between them [1].
+</p>
+<p>
+The given known enhancer region is scanned against the control region in a pairwise sliding window fashion in both strands. The mixed metric score is computed for each window that generates a similarity profile. The window with the global maximum mixed metric score is considered and the consecutive windows that exceeds the threshold value are merged. The region that exceeds the threshold value is reported as a potential orthologous enhancer region in the related species.
+</P>
+<p>
+This method is evaluated by applying to different data sets demonstrated the flexibility of the alignment-free method [2] [3] [4] [5].
+</p>
+</p>
+
+<p>
+<h3>
+<b>running Enhancer_detection.pl</b></h3>
+Please refer to the provided <a href="Arunachalam/README">README</a> for detailed instructions on how to run Enhancer_detection.pl.
+</p>
+
+<p>
+<h3>
+<b>Downloads</b></h3>
+
+<a href="Arunachalam/Enhancer.tar"><b>Dataset</b></a>
+This includes the program, an example input dataset and the results.
+<br>
+</p>
+
+<br>
+
+
+<p>
+[1] van Helden, J., <b> Metrices for comparing regulatory sequences on the basis of pattern counts.</b> <it> Bioinformatics </it> 2004, 20:399-406. </p>
+<p>
+[2] Berman et.al., <b> Computational identification of developmental enhancers: conservation and function of transcription factor binding site clusters in Drosophila melanogaster and Drosophila pseudoobscura.</b> <it> Genome Biol </it> 2004, 5:R61. </p>
+<p>
+[3] Papatsenko, D. and Levine, M., <b> Quantitative analysis of binding motifs mediating diverse spatial readouts of the Dorsal gradient in the Drosophila embryo </b> <it> PNAS </it> 2005, 102:4966-5971.</P>
+<p>
+[4] Gallo, S. M., Li, L., Hu Z, and Halfon, M, S., <b> REDfly: a Regulatory Element Database for Drosophila</b> <it> Bioinformatics </it> 2006, 22:381-383.</p>
+<p>
+[5] Hare et.al., <b> Sepsid even-skipped enhancers are functionally conserved in Drosophila despite lack of sequence conservation</b> <it> PLoS Genet </it> 2008, 4:c1000106.</p>
+</html>

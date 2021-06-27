@@ -1,0 +1,353 @@
+<!-- Updated by Alison Visser 22/06/2010 -->
+
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<meta name="author" content="Christopher Reynolds" />
+	<meta name="keywords" content="PDB, proteins, bioinformatics" />
+	<meta name="description" content="Web server to analyse protein-protein associations from 3D structures" />
+	<meta name="robots" content="all" />
+	<meta http-equiv="Page-Enter" content="blendTrans(Duration=0.2)">
+	<meta http-equiv="Page-Exit" content="blendTrans(Duration=0.2)">
+<!--	<link href="Webstuff/style.css" type="text/css" rel="stylesheet"> -->
+	<LINK REL="stylesheet" HRef="style.css" Type="text/css">
+	<link rel="shortcut icon" href="http://www.sussex.ac.uk/favicon.ico" type="image/x-icon" />
+
+<script language="JavaScript">
+<!--
+
+// Preload images
+var preload_image_object = new Image();
+
+// Set image names
+var image_list = new Array("reset","submit","index","data","help","protype","intro","score","params","refs","sample");
+
+var i;
+var j;
+var myfilename;
+for(i=0; i < image_list.length; i++) {
+	for(j=0; j<=1; j++) {
+		myfilename = "Webstuff/images/buttons/button_" + image_list[i] + j;
+		if (i<2) {
+			myfilename += ".gif";
+		}
+		else {
+			myfilename += ".png";
+		}
+		preload_image_object.src = myfilename;
+	}
+}
+
+for(j=0; j<=1; j++) {
+	preload_image_object.src = "Webstuff/images/buttons/button_home" + j + ".jpg";
+}
+
+
+// This validates the data entered into the form
+function validate() {
+
+
+	var errorlist = new Array();	//This array contains all the errors that occur
+	var errorstring="";
+	var i;
+
+	if (document.form1.multiset[0].checked && ! document.form1.pdbdata.value) {
+		errorlist.push("a PDB coordinate set");
+	}
+	if (document.form1.multiset[1].checked && ! document.form1.pdblistfile.value) {
+		errorlist.push("a delimited list of files");
+	}
+	if (document.form1.multiset[2].checked && ! document.form1.pdbfile.value) {
+		errorlist.push("a single PDB file");
+	}
+
+	if (document.form1.multiset[2].checked) {
+		if (! (document.form1.chain1.value && document.form1.chain2.value)) {
+			if (document.form1.chain1.value || document.form1.chain2.value) {
+				errorlist.push("another chain identifier");
+			}
+			else {
+				errorlist.push("two chain identifiers");
+			}
+		}
+		else {
+			if (document.form1.chain1.value.toString().toLowerCase() == document.form1.chain2.value.toString().toLowerCase()) {
+				errorlist.push("dissimilar chain identifiers");
+			}
+		}
+	}
+
+	//Structure name no longer required
+	//if (! document.form1.structurename.value) {
+	//	errorlist.push("a structure name");
+	//}
+
+	if (! document.form1.email.value && document.form1.multiset[1].checked) {
+		//Submitting a delimited set of files requires the user to submit an e-mail address
+		errorlist.push("an e-mail address when you have selected a delimited list of files");
+	}
+	if (document.form1.email.value) {
+		// This checks the validity of the e-mail address, if the user has entered one, using a regular expression taken from 
+		// the regexlib.com regular expression library. Regular expression written by Nick Bennett, 
+		// and recognises IP e-mail addresses and the newer longer domain names.
+		if(! document.form1.email.value.match(/^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$/i)) {
+			errorlist.push("a valid e-mail address");
+		}
+	}
+
+
+	for (i=0;i<errorlist.length;i++) {
+		if (i>0) {
+			errorstring+=", ";
+		}
+		if (i==errorlist.length-1 && errorlist.length>1) {
+			errorstring+="and ";
+		}
+		errorstring+=errorlist[i];
+	}
+
+
+	if (errorstring.length > 0) {
+		alert("You must enter " + errorstring + "!");
+		return false;//Prevent the form being submitted
+	}
+	else {
+		return true; // Submit the form
+	}
+
+
+
+}
+
+	//These are the colors for (1) disabled, and (2) enabled, text boxes, (3) Chain A enabled (4) Chain B enabled (5) Chain labels disabled
+	var mycolor = new Array("#e0e0e0", "#ffffdf", "#ffdfdf", "#dfffdf", "#888888");
+
+// This switches between the two different ways of entering PDB coordinate sets
+function MultiSet(v) {
+	v = parseInt(v);	// Make sure that v is an integer
+	document.form1.pdbfile.disabled = (v != 0);
+	document.form1.pdbdata.disabled = (v != 1);
+	document.form1.pdblistfile.disabled = (v != 2);
+	document.form1.chain1.disabled = (v != 0);
+	document.form1.chain2.disabled = (v != 0);
+	
+	document.form1.pdbfile.style.backgroundColor = mycolor[0];
+	document.form1.pdbdata.style.backgroundColor = mycolor[0];
+	document.form1.pdblistfile.style.backgroundColor = mycolor[0];
+
+	switch(v) {
+		case 0:
+			document.form1.pdbfile.style.backgroundColor = mycolor[1];
+			document.form1.chain1.style.backgroundColor = mycolor[2];
+			document.form1.chain2.style.backgroundColor = mycolor[3];
+      //codelabel.style.color = mycolor[4];
+			//chainlabel.style.color = "#000050";
+			document.form1.chain1.style.color = "#690000";
+			document.form1.chain2.style.color = "#003c00";
+		break;
+		case 1:
+			document.form1.pdbdata.style.backgroundColor = mycolor[1];
+			document.form1.chain1.style.backgroundColor = mycolor[0];
+			document.form1.chain2.style.backgroundColor = mycolor[0];
+			//codelabel.style.color = "#000050";
+			//chainlabel.style.color = mycolor[4];
+			document.form1.chain1.style.color = "#826666";
+			document.form1.chain2.style.color = "#668266";
+		break;
+		case 2:
+			document.form1.pdblistfile.style.backgroundColor = mycolor[1];
+			document.form1.chain1.style.backgroundColor = mycolor[0];
+			document.form1.chain2.style.backgroundColor = mycolor[0];
+			//codelabel.style.color = mycolor[4];
+			//chainlabel.style.color = mycolor[4];
+			document.form1.chain1.style.color = "#826666";
+			document.form1.chain2.style.color = "#668266";
+	}
+	return false;
+}
+
+function load_event() {
+	if (document.form1.multiset[2].checked) {MultiSet(0);}
+	if (document.form1.multiset[0].checked) {MultiSet(1);}
+	if (document.form1.multiset[1].checked) {MultiSet(2);}
+}
+
+
+//-->
+</script>
+
+<style>
+	#chainlabel { font: bold; color: #000050; }
+	#codelabel { font: bold; color: #000050; }
+</style>
+
+</head>
+
+<BODY onLoad="load_event()">
+	
+	<TABLE border="0" cellpadding="0" cellspacing="0">
+	 <TR bgcolor="#e9f7d2">
+	 	 <TD VALIGN="top"><img border="0" src="./images/protorp9.png"></td>
+		 <td WIDTH=405 HEIGHT=64><FONT size="+1"><i><CENTER>A tool to analyse the properties of interfaces in the 3D structures of protein-protein associations.</i> </CENTER></FONT></TD>
+	  </TR>
+	  <tr height="5"></tr>
+	</TABLE>
+	
+<TABLE>
+
+  <TR>
+  
+   <TD VALIGN="top" width=145 bgcolor="#e9f7d2">
+	<BR>
+	
+		&nbsp; &curren; <A HREF="http://www.bioinformatics.sussex.ac.uk/protorp/index.html" target="_blank"> 
+		<FONT SIZE="-1">Home</FONT></sup></A> <BR>
+		
+	<!--	&nbsp; &curren; <A HREF="http://www.bioinformatics.sussex.ac.uk/protorp/info.html" target="_blank"> 
+		<FONT SIZE="-1">Information </FONT></sup></A> <BR> -->
+		
+		&nbsp; &curren; <A HREF="http://www.bioinformatics.sussex.ac.uk/protorp/params.html" target="_blank"> 
+		<FONT SIZE="-1">Parameters</FONT></A> <BR>
+		
+		&nbsp; &curren; <A HREF="http://www.bioinformatics.sussex.ac.uk/protorp/sample.html" target="_blank"> 
+		<FONT SIZE="-1">Sample Output</FONT></A> <BR>
+		
+		&nbsp; &curren; <A HREF="http://www.bioinformatics.sussex.ac.uk/protorp/data.html" target="_blank"> 
+		<FONT SIZE="-1">Dataset Results</FONT></A> <BR>
+		
+		&nbsp; &curren; <A HREF="http://www.bioinformatics.sussex.ac.uk/protorp/refs.html" target="_blank"> 
+		<FONT SIZE="-1">References</FONT></A><BR>
+		
+		&nbsp; &curren; <A HREF="http://www.bioinformatics.sussex.ac.uk/protorp/help.html" target="_blank"> 
+		<FONT SIZE="-1">Help</FONT></A><BR>
+				
+		<BR>
+		
+		<hr>
+		<table width=135 align=center>
+		<td><font size=-1>PROTORP requires Netscape v6.0 or Internet Explorer v4.0 and Java script enabled.</font> </td>
+		</table>
+		<br><br>
+		
+	</TD>
+		
+	<TD WIDTH = 550>
+    <!--  	<FORM NAME="INPUTparam" ENCTYPE="multipart/form-data"  ACTION="./cgi-bin/sharp2.cgi" METHOD=POST> -->
+			<P>Introduction to the Protein-Protein Interface Analysis Server</P>
+
+			<table width=540 align=center>
+				<td>
+					The <B>PROTORP</B> server is a bioinformatics tool designed to analyse the interfaces between protein chains in protein-protein associations. 
+					The server takes input based on PDB formatted files (Protein Data Bank) (Berman et al., 2000). A user can submit to the server either a PDB file, or a list of PDB entries, along with the chains to analyse the interface between for each PDB file. 
+					For the analysis of a protein interface, the <B>PROTORP</B> server incorporates a suite of analytical packages to calculate a set of physiochemical parameters exhibited by each protein interface. Once the parameters have been calculated, a link to the data is e-mailed to the user. This data can be downloaded as a text file, and is intended to assist users by automating the analysis of individual or large numbers of protein-protein associations.
+					<br><br>
+					In addition, different catergories of datasets have been processed using the server and the mean and sd for parameter values for these datasets are available for comparison. This data is available by selecting "Dataset Results" on the right hand menu.
+				</td>
+			</table>
+		
+		<br>
+		<p>
+			Data Entry
+		</p>
+	
+	<form name="form1" action="cgi-bin/PPanalyse.pl" method="post" encType="multipart/form-data">
+
+
+
+
+<!-- Option 1 -->
+<TABLE WIDTH = 550 bgcolor="#f6f7ef">
+	 <TR><TD>
+	 	<h3><input type="radio" class="input_radio" id="inputop2" onclick="MultiSet(1)" value="1" name="multiset" checked="checked">&nbsp;OPTION 1: Enter a single PDB code and chain identifiers of a protein-protein complex: e.g. 1cdt A B</h3>
+	 	Protein ID&nbsp;&nbsp;&nbsp;Chain1&nbsp;&nbsp;&nbsp;Chain2<br>
+		<input size="45" name="pdbdata" type="text">
+		<br><br>
+	</td></tr>
+</table>
+<br>
+<!-- Option 2 -->
+<TABLE WIDTH = 550 bgcolor="#f6f7ef">
+	 <TR><TD>
+	 	<h3><input type="radio" class="input_radio" id="inputop3" onclick="MultiSet(2)" value="2" name="multiset">&nbsp;OPTION 2: Upload a list of PDB codes and chains in the format. <br>1cdt A B<br>1gde C F</h3>
+    <input type="file" name="pdblistfile" size="30">
+		<br><br>
+	</td></tr>
+</table>
+<br>
+<!-- Option 3 -->
+<TABLE WIDTH = 550 bgcolor="#f6f7ef">
+	 <TR><TD>
+	 	<h3><input type="radio" class="input_radio" id="inputop1" onclick="MultiSet(0)" value="0" name="multiset">&nbsp;OPTION 3: Upload coordinates of one protein-protein complex in PDB file format (File < 8.5 MB):</h3>
+		<input type="file" name="pdbfile" size="30"><br><br>
+		<!-- Option 3 Chain Identifier boxes for -->
+		Enter the chain identifiers of the protein-protein interface: <br>
+		Chain 1 &nbsp;<input type="text" maxLength="1" size="2" name="chain1" style="text-transform: uppercase; font-weight: bold; text-align:center;"> &nbsp;Chain 2 &nbsp;<input maxLength="1" size="2" name="chain2" style="text-transform: uppercase; font-weight: bold; text-align:center;">
+		<br><br>
+	</td></tr>
+</table>
+<br>
+<!-- Optional name of structure and e-mail address -->
+<TABLE WIDTH = 550 bgcolor="#f6f7ef">
+	 <TR><TD>
+	 	Enter the name of the structure (<i>Optional</i>):<br>
+		<input size="45" name="structurename" type="text"><br>
+		Enter E-mail (<i>Option 2 results will be emailed</i>):<br>
+		<input size="27" name="email" type="text">
+		
+		<br><br>
+	</td></tr>
+	
+				
+	<!-- Submission and clear buttons -->
+	<tr>
+	<td colspan="2">
+	
+	
+	<INPUT TYPE="reset" onClick="document.form1.reset();return MultiSet(1);">
+	<INPUT TYPE="submit" VALUE="Submit" onClick="return validate();">
+	
+<!--	<input type="image" 
+	onclick="this.src='Webstuff/images/buttons/button_reset1.gif';document.form1.reset();return MultiSet(1);"
+	src="Webstuff/images/buttons/button_reset0.gif" height="30" width="95" border="0" alt="Clear all fields"
+	onmouseup="this.className='BluemouseBeUp'" class="BluemouseBeOffMe" 
+	onmousedown="this.className='BluemouseBeDown'" 
+	onmouseover="this.src='Webstuff/images/buttons/button_reset1.gif';this.className='BluemouseBeOnMe';" 
+	onmouseout="this.src='Webstuff/images/buttons/button_reset0.gif';this.className='BluemouseBeOffMe';" 
+	
+	<input type="image" 
+	onClick="return validate();"
+	src="Webstuff/images/buttons/button_submit0.gif" height="30" width="95" border="0" alt="Submit"
+	onmouseup="this.className='BluemouseBeUp'" class="BluemouseBeOffMe" 
+	onmousedown="this.className='BluemouseBeDown'" 
+	onmouseover="this.src='Webstuff/images/buttons/button_submit1.gif';this.className='BluemouseBeOnMe';" 
+	onmouseout="this.src='Webstuff/images/buttons/button_submit0.gif';this.className='BluemouseBeOffMe';" 
+	>
+	> -->
+	</td></tr>
+</table>	
+
+<!--  An options box for future use -->
+<!--
+		<table class="flatblue">
+		<tr><td valign="middle" width="20%"><b><font size="+1"><nobr>Option A: Options : </nobr></font></b></td><td>
+		<a style="background-color:transparent" href="#">
+			<input type="image"
+			src="Webstuff/images/buttons/help_button0.gif" height="30" width="30" border="0" alt="Help"
+			onmouseup="this.className='TealmouseBeUp'" class="TealmouseBeOffMe" 
+			onmousedown="this.className='TealmouseBeDown'" 
+			onmouseover="this.src='Webstuff/images/buttons/help_button1.gif';this.className='TealmouseBeOnMe';" 
+			onmouseout="this.src='Webstuff/images/buttons/help_button0.gif';this.className='TealmouseBeOffMe';" 
+			>		
+		</a></td></tr>
+		<tr><td colspan="2">This is text</td></tr>
+		</table>
+		 -->
+	</td></tr></tbody></table>
+	</form>
+	
+	
+	
+</BODY>
+</body>
+</html>

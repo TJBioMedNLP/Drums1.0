@@ -1,0 +1,462 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+
+
+<html>
+<head>
+ <title>TAIR - AraCyc</title>
+ <link rel="Shortcut Icon" href="/favicon.ico" />
+ <link rel="stylesheet" type="text/css" href="/css/main.css?1270072414000" />
+ <link rel="stylesheet" type="text/css" href="/css/search.css?1218672190000" />
+ <link rel="stylesheet" type="text/css" href="/css/base.css?1269030864000" />
+
+ <link rel="stylesheet" type="text/css" href="/css/page/pagelevels.css" />
+
+ <script type="text/javascript" src="/js/prototype.js"></script>
+ <script type="text/javascript" src="/js/global.js?20091013141700"></script>
+ <script type="text/javascript" src="/js/menu.js"></script>
+ <script type="text/javascript" src="/js/footerNew.js"></script>
+ <script type="text/javascript" src="/js/init.js"></script>
+</head>
+<body>
+
+<div id="container">
+
+  
+
+  <div id="nav">
+    <ul id="search_cont">
+      <li id="search">
+
+        <form name="search_textbox_form" action="/servlets/Search" method="get" onsubmit="return doSearch()" id="search_textbox_form">
+          <div>
+            <input type="hidden" name="type" value="general">
+            <input type="hidden" name="search_action">
+            <input type="hidden" name="method">
+            <input type="hidden" name="show_obsolete">
+            <input type="text" name="name" size="10" id="searchfield">
+            <select name="sub_type">
+              <option value="google">Google TAIR website</option>
+              <option value="aracyc">Metabolic Pathways</option>
+              <option value="textpresso">Textpresso full text</option>
+              <option value="any">Exact name search</option>
+              <option value="clone_end">EST or BAC end</option>
+              <option value="clone">Clone</option>
+              <option value="community">Person or lab</option>
+              <option value="ecotype">Ecotype</option>
+              <option value="gene" selected>Gene</option>
+              <option value="germplasm">Germplasm</option>
+              <option value="keyword">Keyword</option>
+              <option value="library">Library</option>
+              <option value="marker">Marker</option>
+              <option value="polyallele">Polymorphisms</option>
+              <option value="protein">Protein</option>
+              <option value="seed">Seed stock</option>
+              <option value="stock">DNA stock</option>
+              <option value="vector">Vector</option>
+            </select>
+            <input type="submit" alt="search" value="Search" id="searchbutton">
+            <input type="hidden" name="SEARCH_EXACT" value="4">
+            <input type="hidden" name="SEARCH_CONTAINS" value="1">
+          </div>
+        </form>
+
+        <form name="google_form" method="get" action="http://www.google.com/custom" id="google_form">
+          <input type="hidden" name="q" size="10" maxlength="255" value="">
+          <input type="hidden" name="cof" value="L:http://www.arabidopsis.org/images/logosmall.gif;AH:left;GL:0;S:http://www.arabidopsis.org;AWFID:56b9e4624af96ab2;">
+          <input type="hidden" name="domains" value="arabidopsis.org">
+          <input type="hidden" name="sitesearch" value="arabidopsis.org">
+        </form>
+
+        <form name="aracyc_form" method="get" action="http://www.plantcyc.org:1555/ARA/substring-search" id="aracyc_form">
+          <input type="hidden" name="type" size="10" maxlength="255" value="NIL">
+          <input type="hidden" name="object" size="10" maxlength="255" value="">
+        </form>
+
+        <form name="textpresso_form" method="get" action="http://www.textpresso.org/cgi-bin/arabidopsis/search" id="textpresso_form" onclick="javascript:urchinTracker('/outgoing/textpresso');">
+          <input type="hidden" name="searchstring" value="">
+          <input type="hidden" name="cat1" value="Select category 1 from list above">
+          <input type="hidden" name="cat2" value="Select category 2 from list above">
+          <input type="hidden" name="cat3" value="Select category 3 from list above">
+          <input type="hidden" name="cat4" value="Select category 4 from list above">
+          <input type="hidden" name="literature" value="Arabidopsis">
+          <input type="hidden" name="target" value="abstract">
+          <input type="hidden" name="target" value="body">
+          <input type="hidden" name="target" value="title">
+          <input type="hidden" name="target" value="author">
+          <input type="hidden" name="sentencerange" value="sentence">
+          <input type="hidden" name="sort" value="score%20%28hits%29">
+          <input type="hidden" name="mode" value="boolean">
+          <input type="hidden" name="search" value="Search%21">
+          <input type="hidden" name="searchfilename" value="%2Ftmp%2Ftextpresso%2F%2F%2Ftmp%2Ffilee3vsZ0">
+          <input type="hidden" name="tqueryfilename" value="%2Ftmp%2Ftextpresso%2F%2F%2Ftmp%2FfileZ8Qwvj">
+          <input type="hidden" name="filteredfilename" value="%2Ftmp%2Ftextpresso%2F%2F%2Ftmp%2FfilelHtU1B">
+          <input type="hidden" name="disp_author" value="on">
+          <input type="hidden" name="disp_accession" value="on">
+          <input type="hidden" name="disp_type" value="on">
+          <input type="hidden" name="disp_abstract" value="on">
+          <input type="hidden" name="disp_title" value="on">
+          <input type="hidden" name="disp_citation" value="on">
+          <input type="hidden" name="disp_journa" value="on">
+          <input type="hidden" name="disp_year" value="on">
+          <input type="hidden" name="disp_supplementals" value="on">
+          <input type="hidden" name="disp_epp" value="5">
+          <input type="hidden" name="disp_matches" value="1">
+          <input type="hidden" name="disp_textlinks" value="on">
+          <input type="hidden" name="disp_searchterm-highlighting" value="on">
+          <input type="hidden" name="disp_expand-sentences" value="on">
+          <input type="hidden" name="page" value="1">
+          <input type="hidden" name=".cgifields" value="casesensitive">
+          <input type="hidden" name=".cgifields" value="target">
+          <input type="hidden" name=".cgifields" value="fuabstracts">
+          <input type="hidden" name=".cgifields" value="mtabstracts">
+          <input type="hidden" name=".cgifield" value="exactmatch">
+          <input type="hidden" name="disp_search-options" value="on">
+        </form>
+      </li>
+    </ul>
+
+    <div id="logo">
+      <a href="/index.jsp"><img src="/i/logo2.gif" width="87" height="61" alt="tair"></a>
+    </div>
+
+    
+    <ul id="topnav">
+      <li><a href="/index.jsp">Home</a></li>
+      <li><a href="/help/index.jsp">Help</a></li>
+      <li><a href="/contact/index.jsp">Contact</a></li>
+      <li><a href="/about/index.jsp">About Us</a></li>
+      <li class="not_logged_in"><a href="/servlets/Community?action=login">Login/Register</a></li>
+      <li class="is_logged_in" style="display:none"><a href="/servlets/Community?action=login">My Home</a></li>
+      <li class="is_logged_in" style="display:none"><a href="/servlets/Community?action=logout">Logout</a></li>
+    </ul>
+
+    
+    <ul id="secondnav">
+      <li>
+        <a href="/servlets/Search?type=general&amp;action=new_search" class="firstlink">Search</a>
+        <ul class="lesswidth">
+          <li><a href="/servlets/Search?type=general&amp;action=new_search">Search Overview</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=dna">DNA/Clones</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=ecotype">Ecotypes</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=gene">Genes</a></li>
+          <li><a href="/tools/bulk/go/index.jsp">GO Annotations</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=keyword">Keywords</a></li>
+          <li><a href="/tools/bulk/locushistory/index.jsp">Locus History</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=marker">Markers</a></li>
+          <li><a href="/tools/bulk/microarray/index.jsp">Microarray Element</a></li>
+          <li><a href="/servlets/Search?type=expr&amp;search_action=new_search">Microarray Experiment</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=expression">Microarray Expression</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=community">People/Labs</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=polyallele">Polymorphisms/Alleles</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=protein">Proteins</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=protocol">Protocols</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=publication">Publication</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=germplasm">Seed/Germplasm</a></li>
+          <li><a href="http://www.textpresso.org/arabidopsis/" onclick="javascript:urchinTracker('/outgoing/textpresso');">Textpresso Full Text</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/browse/index.jsp">Browse</a>
+        <ul>
+          <li><a href="/browse/index.jsp">Browse Overview</a></li>
+          <li><a href="/servlets/Order?state=catalog">ABRC Catalog</a></li>
+          <li><a href="/portals/masc/projects.jsp">2010 Projects</a></li>
+          <li><a href="/browse/Cereon/index.jsp">Monsanto SNP and Ler Collections</a></li>
+          <li><a href="/browse/genefamily/index.jsp">Gene Families</a></li>
+          <li><a href="/servlets/processor?type=transposonfamily&amp;update_action=browse">Transposon Families</a></li>
+          <li><a href="/servlets/processor?type=genesymbol&amp;update_action=view_symbol">Gene Class Symbols</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=keyword">Ontologies/Keywords</a></li>
+          <li><a href="/browse/electricarab.jsp">Archived e-Journals</a></li>
+          <li><a href="http://www.aspb.org/publications/arabidopsis/">The Arabidopsis Book (TAB)</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/tools/index.jsp">Tools</a>
+        <ul>
+          <li><a href="/tools/index.jsp">Tools Overview</a></li>
+          <li><a href="/cgi-bin/gbrowse/arabidopsis/">GBrowse</a></li>
+          <li><a href="/cgi-bin/gbrowse_syn/arabidopsis/">Synteny Viewer</a></li>
+          <li><a href="/servlets/sv">Seqviewer</a></li>
+          <li><a href="/servlets/mapper">Mapviewer</a></li>
+          <li><a href="/biocyc/index.jsp">AraCyc Metabolic Pathways</a></li>
+          <li><a href="/tools/nbrowse.jsp">N-Browse</a></li>
+          <li><a href="/Blast/index.jsp">BLAST</a></li>
+          <li><a href="/wublast/index2.jsp">WU-BLAST</a></li>
+          <li><a href="/cgi-bin/fasta/nph-TAIRfasta.pl">FASTA</a></li>
+          <li><a href="/cgi-bin/patmatch/nph-patmatch.pl">Patmatch</a></li>
+          <li><a href="/tools/bulk/motiffinder/index.jsp">Motif Analysis</a></li>
+          <li><a href="/tools/bulk/microarray/analysis/index.jsp#vx">VxInsight</a></li>
+          <li><a href="/tools/bulk/microarray/analysis/index.jsp#jtv">Java Tree View</a></li>
+          <li><a href="/tools/bulk/index.jsp">Bulk Data Retrieval</a></li>
+          <li><a href="/jsp/ChromosomeMap/tool.jsp">Chromosome Map Tool</a></li>
+          <li><a href="/cgi-bin/patmatch/RestrictionMapper.pl">Restriction Analysis</a></li>
+          <li><a href="/portals/nomenclature/symbol_main.jsp">Gene Symbol Registry</a></li>
+          <li><a href="http://www.textpresso.org/arabidopsis/" onclick="javascript:urchinTracker('/outgoing/textpresso');">Textpresso Full Text</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/portals/index.jsp">Portals</a>
+        <ul>
+          <li><a href="/portals/index.jsp">Portals Overview</a></li>
+          <li><a href="/portals/clones_DNA/index.jsp">Clones/DNA Resources</a></li>
+          <li><a href="/portals/education/index.jsp">Education and Outreach</a></li>
+          <li><a href="/portals/expression/index.jsp">Gene Expression Resources</a></li>
+          <li><a href="/portals/genAnnotation/index.jsp">Genome Annotation</a></li>
+          <li><a href="/portals/masc/index.jsp">MASC/Functional Genomics</a></li>
+          <li><a href="/portals/mutants/index.jsp">Mutant and Mapping Resources</a></li>
+          <li><a href="/portals/nomenclature/index.jsp">Nomenclature</a></li>
+          <li><a href="/portals/proteome/index.jsp">Proteomics Resources</a></li>
+          <li><a href="/portals/metabolome/index.jsp">Metabolomics Resources</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="ftp://ftp.arabidopsis.org/home/tair">Download</a>
+        <ul>
+          <li><a href="/download/index.jsp">Download Overview</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Genes/">Genes</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Ontologies/">GO and PO Annotations</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Maps">Maps</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Pathways/">Metabolic Pathways</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/Polymorphisms">Polymorphisms</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Proteins/">Proteins</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Protocols/">Protocols</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Microarrays/">Microarray Data</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Sequences/">Sequences</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/Software/">Software</a></li>
+          <li><a href="ftp://ftp.arabidopsis.org/home/tair/User_Requests/">User Requests</a></li>
+          <li><a href="/tools/bulk/index.jsp">Bulk Data Retrieval</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/submit/index.jsp">Submit</a>
+        <ul>
+          <li><a href="/submit/index.jsp">Submit Overview</a></li>
+          <li><a href="/submit/abrc_submission.jsp">ABRC Stock Donation</a></li>
+          <li><a href="/submit/ExternalLinkSubmission.jsp">External Links</a></li>
+          <li><a href="/portals/nomenclature/symbol_main.jsp">Gene Class Symbol Registration</a></li>
+          <li><a href="/submit/genefamily_submission.jsp">Gene Family Data</a></li>
+          <li><a href="/submit/functional_annotation.submission.jsp">Gene Functional Annotations</a></li>
+          <li><a href="/submit/gene_annotation.submission.jsp">Gene Structure Annotations</a></li>
+          <li><a href="/submit/locus_identifier_request.jsp">Locus Identifier Request</a></li>
+          <li><a href="/submit/marker_submission.jsp">Marker and Polymorphism Data</a></li>
+          <li><a href="/submit/pathway_submission.jsp">Metabolic Pathway Data</a></li>
+          <li><a href="/submit/phenotype_submission.jsp">Phenotypes</a></li>
+          <li><a href="/submit/protocol_submission.jsp">Protocols</a></li>
+          <li><a href="/submit/submit_2010.jsp">2010 Functional Genomics Gene List</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/news/index.jsp">News</a>
+        <ul class="short">
+          <li><a href="/news/index.jsp">News Overview</a></li>
+          <li><a href="/doc/news/breaking_news/140">TAIR News</a></li>
+          <li><a href="/news/newsgroup.jsp">Arabidopsis Newsgroup</a></li>
+          <li><a href="/news/events.jsp">Conferences and Events</a></li>
+          <li><a href="/news/jobs.jsp">Job Postings</a></li>
+          <li><a href="/help/faq.jsp#jobs">How to Post a Job</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="/abrc/index.jsp" class="lastlink">ABRC Stocks</a>
+        <ul>
+          <li><a href="/abrc/index.jsp">Stocks Overview</a></li>
+          <li><a href="http://abrc.osu.edu/?" onclick="javascript:urchinTracker('/outgoing/www_biosci_ohio-state_edu/abrchome_htm');">ABRC Home</a></li>
+          <li><a href="/servlets/Order?state=catalog">Browse ABRC Catalog</a></li>
+          <li><a href="/abrc/major_stocks.jsp">Supplement to ABRC Catalog</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=dna">Search ABRC DNA/Clone Stocks</a></li>
+          <li><a href="/servlets/Search?action=new_search&amp;type=germplasm">Search ABRC Seed/Germplasm Stocks</a></li>
+          <li><a href="/servlets/Order?state=search&amp;mode=stock_number">ABRC Stock Order History</a></li>
+          <li><a href="/abrc/fees.jsp">ABRC Fee Structure</a></li>
+          <li><a href="/servlets/Order?state=checkLogin">Place ABRC Order</a></li>
+          <li><a href="/servlets/Order?state=search&amp;mode=user">Search My ABRC Orders</a></li>
+          <li><a href="/servlets/Search?type=invoice&amp;search_action=userdetailform">Search ABRC Invoices</a></li>
+          <li><a href="/abrc/payment.jsp">How to Make Payments to ABRC</a></li>
+          <li><a href="/submit/abrc_submission.jsp">ABRC Stock Donation</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+  <!-- THIS FILE MUST CONTAIN EXACTLY ONE XML ELEMENT TO MAKE FACLETS HAPPY -->
+<div style="display: none">
+<script src="https://ssl.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-1945230-1";
+urchinTracker();
+</script>
+</div>
+
+
+<div id="content" class="clearfix">
+
+<script type="text/javascript">is_logged_in(false)</script>
+
+
+
+
+
+<div id="breadcrumbs"><a href="/index.jsp">Home</a> &gt;
+        <a href="/tools/index.jsp">Tools</a> &gt;
+        AraCyc Pathways</div>
+
+
+
+<!-- end dyn_header.jsp -->
+
+<!-- SIDEBAR -->
+
+
+
+
+
+<div id="leftcolumn">
+<!-- menu start -->
+<!-- active = AraCyc -->
+<ul id="leftnav">
+	<li class="selected"><a href="/biocyc/index.jsp">AraCyc</a><!-- start submenu for AraCyc -->
+<!-- menu start -->
+<!-- active = AraCyc -->
+<ul>
+	<li><a href="http://www.plantcyc.org:1555/ARA/server.html">Search AraCyc</a></li>
+	<li><a href="http://www.plantcyc.org:1555/ARA/expression.html">OMICS Viewer for experimental data overlay</a></li>
+	<li><a href="http://www.plantcyc.org:1555/ARA/new-image?type=OVERVIEW">Metabolic Map</a></li>
+	<li><a href="/biocyc/introduction.jsp">More information</a></li>
+	<li><a href="http://www.plantcyc.org/feedback/data_submission.faces">Pathway Data Submission Forms</a></li>
+	<li><a href="http://www.plantcyc.org/release_notes/aracyc/aracyc_release_notes.faces">Release Notes</a></li>
+	<li><a href="/biocyc/tools.jsp">Other AraCyc Tools</a></li>
+</ul>
+<!-- menu end -->
+<!-- end submenu for AraCyc -->
+</li>
+	<li><a href="../../help/tutorials/aracyc_intro.jsp">AraCyc Tutorials</a></li>
+	<li><a href="/biocyc/downloads.jsp">Downloads/FTP</a><!-- start submenu for Downloads/FTP -->
+<!-- menu start -->
+<!-- active = AraCyc -->
+<ul>
+	<li><a href="ftp://ftp.arabidopsis.org/home/tair/Pathways/" onClick="javascript:urchinTracker('/outgoing/ftp/home/tair/Pathways/');">AraCyc Pathways</a></li>
+	<li><a href="ftp://ftp.arabidopsis.org/home/tair/Pathways/" onClick="javascript:urchinTracker('/outgoing/ftp/home/tair/Pathways/');">AraCyc Compounds</a></li>
+	<li><a href="http://www.plantcyc.org/downloads/license_agreement.faces">AraCyc Database</a></li>
+	<li><a href="/biocyc/perlcyc/index.jsp">PerlCyc</a></li>
+	<li><a href="/biocyc/perlcyc/index.jsp">JavaCyc</a></li>
+</ul>
+<!-- menu end -->
+<!-- end submenu for Downloads/FTP -->
+</li>
+	<li><a href="/biocyc/databases.jsp">Other DataBases</a><!-- start submenu for Other DataBases -->
+<!-- menu start -->
+<!-- active = AraCyc -->
+<ul>
+	<li><a href="http://www.plantcyc.org:1555/PLANT/server.html?" onClick="javascript:urchinTracker('/outgoing/plantcyc_org:1555/PLANT/server.html?/');">PlantCyc</a></li>
+	<li><a href="http://www.plantcyc.org/" onClick="javascript:urchinTracker('/outgoing/plantcyc_org');">Plant Metabolic Network (PMN)</a></li>
+	<li><a href="http://www.metacyc.org/" onClick="javascript:urchinTracker('/outgoing/metacyc_org');">MetaCyc</a></li>
+	<li><a href="http://www.genome.jp/kegg/" onClick="javascript:urchinTracker('/outgoing/genome_jp/kegg/');">KEGG</a></li>
+	<li><a href="http://www.brenda.uni-koeln.de/" onClick="javascript:urchinTracker('/outgoing/brenda_uni-koeln_de');">Brenda</a></li>
+	<li><a href="http://www.expasy.uniprot.org/" onClick="javascript:urchinTracker('/outgoing/expasy_uniprot_org');">UniProt</a></li>
+	<li><a href="http://www.chem.qmul.ac.uk/iubmb/enzyme/" onClick="javascript:urchinTracker('/outgoing/chem_qmul_ac_uk/iubmb/enzyme/');">Enzyme Nomenclature</a></li>
+</ul>
+<!-- menu end -->
+<!-- end submenu for Other DataBases -->
+</li>
+	<li><a href="/biocyc/contributors.jsp">Contributors</a></li>
+</ul>
+<!-- menu end -->
+</div>
+
+
+
+
+<div id="rightcolumn">
+<!-- CONTENT IN HERE -->
+<p style="float: left;" class="mainheader">AraCyc</p>
+<p style="float: left; text-indent: 120px;"><img src="aracyc_files/aracyc_logo.gif" width="100" height="58" /></p>
+<p style="float: left; text-indent: 115px;"><a href="http://www.plantcyc.org:1555/ARA/server.html?"><img src="/i/pmn_logo_small.gif" width="112" height="55" /></a></p>
+<!-- <p class="mainheader">AraCyc 4.0 <img src="aracyc_files/fire.gif" width="60" height="70"></p> -->
+<!-- <p>We are glad to announce the release of the latest version (4.0) of AraCyc. This new version represents <strong>a milestone</strong> in the development of the database, whose content has been majorly improved. Please visit our <a href="releasenotes.jsp">release notes</a> to find out more about its content.</p> -->
+
+<p style="clear: both;">This section compiles a series of links which provides you with a brief history of the creation of AraCyc, information on its current data content, access to the database and ways to submit new pathways/enzyme or updates to improve AraCyc. </p>
+
+<dl>
+	<dd><b>Breaking News:<a href="http://www.plantcyc.org/release_notes/aracyc/aracyc_release_notes.faces"> Arayc 6.0 Release - October 2009!</a></b></dd>
+
+
+	<dd><b><a href="http://www.plantcyc.org:1555/ARA/server.html">Search AraCyc</a> </b>This link allows you to search or browse the information (Pathways, Compounds, Enzymes...) contained in the AraCyc database. Plus you can quickly connect to metabolic information from other plant species through the <a href="http://www.plantcyc.org">Plant Metabolic Network</a></dd>
+	
+	<dd><b><a href="http://www.plantcyc.org:1555/ARA/expression.html">OMICS Viewer</a> </b>You can use this tool to <strong>overlay your data</strong> from gene expression, proteomic, or metabolomic experiments on a metabolic map. Please visit our <a href="/help/tutorials/aracyc5.jsp">Tutorial</a> or <a href="/help/tutorials/aracycexpr.mov">Quicktime Demo</a> for help with uploading your data and interpreting the results. </dd>
+	
+	<dd><b><a href="http://www.plantcyc.org:1555/ARA/new-image?type=OVERVIEW">Metabolic Map</a> </b>The Metabolic map provides you with a 'bird's eye' view of <em>Arabidopsis</em> metabolism currently stored in AraCyc. (<strong>Note:</strong> This page may take a moment to load). For more info, visit the <a href="/../../help/tutorials/aracyc4.jsp">Tutorial</a> or view the <a href="/help/tutorials/aracycmap.mov">QuickTime Demo</a>. </dd>
+	
+	<dd><b><a href="introduction.jsp">More information</a> </b>You will find here all the information you need concerning the creation of AraCyc and the current status of its content. A recommended short read!</dd>
+	
+	<dd><b><a href="downloads.jsp">Data Downloads</a> </b>You can download the AraCyc database files from the <a href="http://www.plantcyc.org">Plant Metabolic Network</a> website. </dd>
+	
+	<dd><b><a href="http://www.plantcyc.org/feedback/data_submission.faces">Pathway, Enzyme, and Compound Data Submission Forms</a> </b>Your input is invaluable! Our preformatted Excel Forms allow you to send us your suggestions: pathway updates (comments, enzymes...), new pathways or even to point out mistakes.</dd>
+	
+	<dd><b><a href="http://www.plantcyc.org/release_notes/aracyc/aracyc_release_notes.faces">Release Notes</a> </b>What's new in the latest AraCyc release? You will find it here along with comprehensive lists of pathways that have been added to and deleted from AraCyc over time in our <a href="archives/archives.jsp">archives</a>.</dd>
+	
+	<dd><b><a href="tools.jsp">Other AraCyc Tools</a> </b>A few other tools for mining the data in AraCyc are provided including the <a href="http://www.plantcyc.org:1555/ARA/comp-genomics?">Comparative Analysis</a> tool and an <a href="http://www.plantcyc.org:1555/query.html">Advanced Query Page</a>. </dd>
+	
+	<dd><b><a href="/portals/metabolome/index.jsp">Metabolomics Portal</a> </b>Would you like easy access to additional tools and resources related to metabolism? This portal provides many helpful links.</dd>
+</dl>
+
+<strong>Troubleshooting </strong>
+  <p>Pathway Tools <strong>uses a non-standard port (:1555)</strong>. This means that if you work behind a firewall (common in commercial companies), you will not get any response from AraCyc. The solution to this problem is to have your network administrator open the :1555 port on the firewall. </p>
+  <p>Note also that Pathway Tools' <strong>chromosome map tool is not supported in AraCyc</strong>. Please use the <a href="http://www.arabidopsis.org/servlets/mapper">MapViewer </a> or <a href="http://www.arabidopsis.org/servlets/sv">SeqViewer </a> tools for that purpose. </p>
+</div>
+<!-- Footer -->
+	<p id="printer_friendly"><img src="/i/icon_print.gif" alt="" /><a href="#" onclick="pf(); return false; javascript:urchinTracker('/outgoing/printer');">printer-friendly version</a></p> 
+	</div>	
+	        <div id="footer">
+                <div class="footerText">
+                        <div class="logos">
+			<a href="http://carnegiedpb.stanford.edu" onClick="javascript:urchinTracker('/outgoing/carnegiedpb_stanford_edu');">
+			<img src="/i/cis_logo.jpg" width="69" height="35" alt="carnegie logo" /></a>
+                        <a href="http://abrc.osu.edu/" onClick="javascript:urchinTracker('/outgoing/www_biosci_ohio-state_edu/abrchome_htm');">
+			<img src="/i/abrc.gif" width="65" height="24" alt="abrc logo" /></a>
+            <a href="http://www.nsf.gov/">
+            <img src="/i/nsf.jpg" width="40" height="40" alt="nsf logo" /></a>
+                        </div>
+                        General comments or questions: <a href="javascript:location.href='mailto:curator@arabidopsis.org?SUBJECT=' + document.title + '&BODY=' +'URL: ' + escape(location.href)" onClick="javascript:urchinTracker('/outgoing/curator_at_arabidopsis_org');">curator@arabidopsis.org</a>
+                        <br />
+                        Seed or DNA stock questions (donations, availability, orders, etc): 
+			<a href="mailto:abrc@arabidopsis.org" onClick="javascript:urchinTracker('/outgoing/abrc_at_arabidopsis_org');">abrc@arabidopsis.org</a>
+            	</div>
+        	</div>
+</div>
+
+<script type="text/javascript">
+
+//Detect if <IE7 and add iframe so dropdown go in front of input boxes
+version=0
+if (navigator.appVersion.indexOf("MSIE")!=-1){
+                temp=navigator.appVersion.split("MSIE")
+                version=parseFloat(temp[1])
+
+                if (version<7.0) //NON IE browser will return 0
+                {
+                document.write('<iframe id=\"iefix\" src=\"javascript:false;\" scrolling=\"no\" frameborder=\"0\" style=\"position:absolute; top: 0px; left: 0px; display:none;\"><\/iframe> ');
+                }
+}
+</script>
+
+
+</body>
+</html>
+<!-- End template -->
+
+

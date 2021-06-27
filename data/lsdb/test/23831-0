@@ -1,0 +1,262 @@
+<HTML>
+
+<HEAD>
+  
+    <TITLE>MUSC Microarray Database</TITLE>
+
+    <META name="musc_sitemanager" content="argraveg@musc.edu">
+    <META name="musc_public" content="yes">
+    <META name="musc_department" content="CellBioAnat">
+
+    <link rel="stylesheet" href="supportStyle.css" type="text/css">
+    <style>
+      tdxx  { font-family:verdana,arial; font-size:10pt; }
+    </style>
+  <script>
+function dhtmlObjShow2(_v,id)
+{ newBrowser = (document.getElementById);
+  var _a = newBrowser ? document.getElementById(id).style : document.id;
+  if (_v == 0)      {  _a.visibility="hidden";  _a.display="none";  }
+  else if (_v == 1) {  _a.visibility="visible"; _a.display="block"; }
+}
+</script>
+  <META NAME="description" CONTENT="Microarray database for MUSC related experiments.">
+  <META NAME="keywords" CONTENT="microarray database, proteomics, bioinformatics">
+
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="expires" CONTENT="-1">
+</HEAD>
+
+
+    <BODY class=s0 bgcolor=white style="font-family:verdana,arial;">
+      <table id=top border=0 cellpadding=0 cellspacing=0 style="margin-bottom:4;">
+      <tr valign=bottom>
+        <td valign=top><img border=0 src="images/MUSC_Logo_No_Shadow.gif"></td>
+        <td width=15></td>
+        <td><img src="images/MUSC_DB_Banner_2.gif"></td>
+      </tr></table>
+<!---- Top Menu Start ---->
+<script> 
+     var siteMenuURL  ='black'; 
+     var selBgcSaved  ='white';
+     var selColorSaved='';
+
+     function optionHoverOut(op)
+     { return
+       with(op.style) 
+       { background = selBgcSaved; 
+         color = selColorSaved;
+       }
+     }
+     function optionHoverIn(op)
+     { return
+       with(op.style) 
+       { selBgcSaved = background;
+	 selColorSaved = color;
+	 background = '#2080c0'; 
+	 color = 'yellow';
+       }
+     }
+
+     function siteMenuGo()
+     { if (siteMenuURL) window.location.href = siteMenuURL;
+     }
+     function siteMenuChange(sel_obj)
+     { siteMenuURL = sel_obj.options[ sel_obj.selectedIndex ].value;
+     }
+   </script>
+<table border=0 width=100% cellpadding=0 cellspacing=0 
+             style="margin-bottom:5; margin-top:5;">
+          <tr height=25>
+            <td align=right width=747>
+<SELECT style="font-size:8pt; background:#e8e8ff; margin-right:3px;"
+       onchange="javascript: siteMenuChange(this); siteMenuGo();">
+<OPTION style="background:#e0f0e0;" value="">Databases and Tools at MUSC</OPTION>
+<OPTION SELECTED value="musc_madb.php?page=home&act=manage" style="background:white; color:black;padding-left:8px;">1. MUSC DNA Microarray Database</OPTION>
+<OPTION  value="nasa_madb.php?page=home&act=manage" style="padding-left:8px;">2. NASA DNA Microarray Database</OPTION>
+<OPTION  value="arrayQuest.php?page=home&act=manage" style="padding-left:8px;">3. ArrayQuest DNA Microarray Analysis</OPTION>
+<OPTION> </OPTION>
+<OPTION style="background:#e0f0e0; " value="">Out Links</OPTION>
+<OPTION  value="/" style="padding-left:8px;">4. MUSC Proteogenomics Home</OPTION>
+<OPTION  value="http://www.nasa.gov/home/index.html?skipIntro=1" style="padding-left:8px;">5. NASA Homepage</OPTION>
+<OPTION  value="http://calspace.ucsd.edu/epscor/" style="padding-left:8px;">6. NASA EPSCoR</OPTION>
+<OPTION  value="http://www.arraygenetics.com/about_seqit.php" style="padding-left:8px;">7. SeqIt Protein Sequence Search</OPTION>
+<OPTION  value="http://www.arraygenetics.com/about_arrayQuest.php?#mb" style="padding-left:8px;">8. MendelBase Proteomic Resource</OPTION>
+</SELECT><input type=button value=Go style="font-size:8pt;" 
+                   onclick="javascript: siteMenuGo();">
+</td><td><!--Elongation Cell-->&nbsp;</td></tr></table>
+<!-- Main Menu End -->
+<script> siteMenuURL='musc_madb.php?page=home&act=manage'; </script>
+
+<!-- Content Start ---->
+<script>
+function dhtmlObjShow(_v,id)
+{ newBrowser = (document.getElementById);
+  var _a = newBrowser ? document.getElementById(id).style : document.id;
+  if (_v == 0)      {  _a.visibility="hidden";  _a.display="none";  }
+  else if (_v == 1) {  _a.visibility="visible"; _a.display="block"; }
+}
+</script>
+
+<script type="text/javascript">
+	
+  function dl2(p,fn,u)
+  { // download uArrayDB linked data files thru here to control logging and users notes.
+    // host is proteogenomics.musc.edu/ma/
+    
+      var URL, uArrDB_dl_win;
+      URL = 'uArrDB_download.php?u=' + escape(u) + '&fn=' + escape(fn) + '&p='  + escape(p);
+      uArrDB_dl_win = window.open(URL, 'http://proteogenomics.musc.edu/ma/uArrDB_download', 'height=300, width=400, scrollbars=yes, resizable=yes, menubar=0, status=0, toolbar=0');
+      uArrDB_dl_win.focus();
+  }
+  
+</script>
+
+<!--------- Page Header --------------->
+
+    <table border=0 width=100% cellspacing=0 cellpadding=0 
+         style="margin-top:5; font-family:verdana,arial; font-size:10px;">
+    <tr>
+      <td class=s0 width=747 style="padding: 4 0 4 2;">
+        <b><div class=s6 style="padding:5; margin-bottom:3;">Welcome to the MUSC DNA Microarray Database and Project Management System</div></b>
+<div align=right>
+ <span class=s1 style="background:#e8e8ff; padding:7 4 1 4;
+              border:0px solid; margin-left:0;">
+	      <a href=#bottom><img border=0 src=images/down_arrow_page_bottom.jpg> Bottom</a></span>
+<span style="background:#e8e8ff; padding:4 4 1 4;
+              border:0px solid; margin-left:0;">
+ <input id="fold_CB_0" type=checkbox class=s1 name=hintDisplaySw
+               onclick="javascript: dhtmlObjShow2(this.checked,'momDivPageHint');" > <img src=images/Light_Bulb_2.jpg><span class=s1> Tips</span></span>
+<div align=left id="momDivPageHint" class=s0 style="border: solid 1px; padding:5; margin:4 0 4 0;
+              width:auto; height:auto; overflow:auto; display:none;">
+<div class=s6 style="padding:2px;">
+              <img src=images/lightbulb.gif> Tip Page: MUSC DNA Microarray DB &nbsp;&nbsp; <b>home>manage</b>
+</div><p>
+<font size="2"><span style="font-family: verdana, arial, helvetica, sans-serif; ">Full access to the MUSC DNA Microarray Project Management System and the MUSC DNA Microarray Database is free but requires that you <a href="http://proteogenomics.musc.edu/ma/musc_madb.php?page=home&act=manage&process=Login">register</a> as a user. However, searching and downloading of publicly available DNA microarray data can be done without registration (see links below). </span></font></div>
+
+</div>
+</td>
+<td class=s0><!--Elongation Cell-->&nbsp;</td>
+</tr>
+</table>
+<!--img alt="Message Page: MUSC DNA Microarray DB    home>manage.1
+" src=images/info5.gif-->
+       <table align=right border=0 style="margin-left:3; margin-top:3;" 
+          bgcolor=#aaaaaa cellpadding=0 cellspacing=1>
+	    <tr bgcolor=#f0f0f0><td style="font-size:8pt;">1</td></tr></table> <img align="left" alt="uArrayDB Logo" src="images/uArrayDB_1.jpg" />
+
+<span style="font-family: verdana,arial,helvetica,sans-serif;"><font size="2">
+Welcome to the Medical University of South Carolina DNA Microarray Project Management System and the MUSC DNA Microarray Database. The database is a repository for DNA microarray data generated by MUSC investigators as well as researchers in the global research community. At the discretion of the contributors, DNA microarray data is placed into the public domain and can be viewed and freely downloaded via the web interface. A manuscript has been published that describes the MUSC DNA Microarray Database (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=14668234&dopt=Abstract" target="_blank">Argraves et al., 2003</a>).
+</font></span><!--table valign=top align=right><tr><td><sup>1</sup></td></tr></table--><span style="background:#e8e8ff; padding-top:3; padding-bottom:2;">
+ <input id="fold_CB_0" type=checkbox class=s1 name=hintDisplaySw
+               onclick="javascript: dhtmlObjShow(this.checked,'momDivGenUse1');" > ...more</span>
+<div id="momDivGenUse1" class=s1 style="border: solid 1px; 
+      padding:5; margin-top:4; margin-bottom:4; margin-right:4;
+      width:auto; height:auto; overflow:auto; display:none;">
+<!--img alt="Message Page: MUSC DNA Microarray DB    home>manage.2
+" src=images/info5.gif-->
+       <table align=right border=0 style="margin-left:3; margin-top:3;" 
+          bgcolor=#aaaaaa cellpadding=0 cellspacing=1>
+	    <tr bgcolor=#f0f0f0><td style="font-size:8pt;">2</td></tr></table> <font size="2" style="font-family: verdana,arial,helvetica,sans-serif;">
+The MUSC DNA Microarray Database was developed using
+<a href="http://www.arraygenetics.com/uArrDB_fe.php3" target="_blank">µArrayDB</a>,
+a web-based relational database system for
+archiving and exchanging DNA microarray data. Information pertinent to
+cRNA targets (e.g., project description, experimental details, chip
+specification) is entered into a MySQL database via web forms and is
+appended to corresponding raw and analyzed hybridization data
+(e.g., .DAT, .CEL, .CHP, .RPT, .EXP and .CAB files). All information in
+the MUSC DNA Microarray Database can be interrogated using a web browser
+and downloaded through the HTTP file transfer protocol. In addition,
+data contained within the MUSC DNA Microarray Database can be analyzed
+using the web-based program
+<a href="http://proteogenomics.musc.edu/ma/arrayQuest.php?page=home&act=manage">ArrayQuest</a>.</font><!--table valign=top align=right><tr><td><sup>2</sup></td></tr></table--></div>
+<style>li{margin-top:6;} </style>
+<ul style="list-style-image: url(images/go.gif); padding-top:10;"></li>
+<li><a href="/ma/musc_madb.php?page=home&act=manage&process=Login"><img alt=login src=images/login2.gif border=0> Login</a> to access or deposit DNA microarray data. <a href='http://proteogenomics.musc.edu/downloads/ArrayDB_Target_Entry.pdf' target='_blank'>Help</a></li>
+<li ><a href="/ma/musc_madb.php?page=home&act=manage&process=Stat_Snap_Shot"><img alt=viewPage src=images/view2.gif border=0> View</a> and download <img alt=download src=images/download1.gif border=0> publicly available microarray data in the MUSC database.</li>
+ <form name=uArrDB_mine action="/ma/musc_madb.php" method=GET> 
+	    <li><img alt=find src=images/find.gif border=0> Search 
+	    and download <img alt=download src=images/download1.gif border=0> publicly available microarray data in the MUSC database:	      
+	     <blockquote style="margin-top:0; margin-bottom:5;"> 
+              <input type=hidden name=page value=home>
+              <input type=hidden name=act value=manage>
+              <input type=hidden name=process value=Search_Results>
+	      <input type=hidden name=userSearchReqFlag value=1>
+	      <br><table border=0 bgcolor=black cellspacing=1 cellpadding=2 style=margin-bottom:4;>
+       <tr bgcolor=white>
+         <td>Organism <select name=Organism><option>-- Select One --</option>
+<option>Arabidopsis</option>
+<option>Chicken</option>
+<option>E. coli</option>
+<option>Human</option>
+<option>Mouse</option>
+<option>Pig</option>
+<option>P. aeruginosa</option>
+<option>Rat</option>
+<option>Yeast</option>
+<option>Zebrafish</option>
+<option>Other</option>
+<option>All</option>
+</select></td>
+         <td>Other&nbsp;<input type=text name=otherOrganism value=''></td></tr>
+
+       <tr bgcolor=white>
+         <td>Tissue&nbsp;&nbsp;&nbsp;&nbsp; <select name=Tissue><option>None<option selected>All<option>Other</select></td>
+         <td>Other&nbsp;<input type=text name=otherTissue value=''></td></tr>
+
+       <tr bgcolor=white>
+         <td>Cell Line&nbsp; <select name=CellLine><option>None<option selected>All<option>Other</select></td>
+         <td>Other&nbsp;<input type=text name=otherCellLine value=''></td></tr>
+
+      </table>
+
+              <div style="background:#e8e8ff; padding:4 0 4 0; width:380;">
+	        <center><input type=submit value="Search Database" style="font-size:8pt;"></center></div>
+	     </blockquote>
+            </form>
+           </li>
+ <form name=uArrDB_access action="/ma/musc_madb.php" method=GET>
+	    <li><img alt=uArr src=images/uArr4.gif border=0> View 
+	      and download <img alt=download src=images/download1.gif border=0> individual &micro;ArrayDB&#153; cRNA target records:
+	      <blockquote style="margin-top:4; margin-bottom:0;"> 
+              <input type=hidden name=page value=home>
+              <input type=hidden name=act value=manage>
+              <input type=hidden name=process value=Accession_No_Search_Result>
+              <input type=hidden name=Email value="uArrayDBuser@yahoo.com">
+              <input type=hidden name=scode value="d046b637">
+	      <table border=0 cellspacing=1 cellpadding=2 bgcolor=black style="margin-top:5; margin-bottom:5;">
+	        <tr bgcolor=white>
+	        <td> Enter a record number (RecNo):</td>
+	        <td> <input type=text name=maRecNo></td></tr></table>
+              <div style="background:#e8e8ff; padding:4 0 4 0; width:380;">
+	        <center><input type=submit value="Go Get cRNA Record" style="font-size:8pt;"></center></div>
+	      </blockquote>
+            </form>
+           </li>
+<li><a href="/ma/musc_madb.php?page=home&act=manage&process=MUSC_DNA_Microarray_Database_Topography"><img alt=topo src=images/Blocks_1.gif border=0> Topography</a> diagram of the MUSC DNA Microarray Database.
+<li><a href="/ma/musc_madb.php?page=home&act=manage&process=File_Decompression_Tools"><img alt=unZip src=images/Uncompress_1.gif border=0> File decompression tools</a><li><a href="/ma/musc_madb.php?page=home&act=manage&process=DNA_Microarray_Analysis_Tools"><img alt=tools src=images/Tools_1.gif border=0> DNA microarray analysis tools</a><li><img alt=comment src=images/comment3.jpg border=0> Please e-mail comments or questions to: 
+      <a href="mailto:argraves@musc.edu">Dr. Scott Argraves</a></li></ul>
+<br>
+    <div style="font-family:verdana,arial; font-size:10px; background-color:#f0f0f0; border:none;">
+    The <a href="http://www.musc.edu/" target=_blank>MUSC</a> DNA
+    Microarray and Bioinformatics Facility is supported by grants from the
+    National Cancer Institute <a href="http://crisp.cit.nih.gov/crisp/CRISP_LIB.getdoc?textkey=6710661&p_grant_num=5R24CA095841-03&p_query=&ticket=7725521&p_audit_session_id=34837625&p_keywords=" target=_blank>(R24CA095841)</a>
+    and the National Heart Lung and Blood Institute <a href="http://commons.cit.nih.gov/crisp3/CRISP_LIB.getdoc?textkey=6651825&p_grant_num=5P20RR016434-029003&p_query=&ticket=1693566&p_audit_session_id=8858178&p_keywords=" target=_blank>(P20RR016434)</a> as well as funds from the <a href="http://www.musc.edu/new/urrf.shtml" target=_blank>University Research Resource Foundation.</a>
+    &micro;ArrayDB&#153; (&copy; 2002) is a product of <a href="mailto:garyargraves@sbcglobal.net">ProSoft Systems</a>.
+</div>
+<!-- End Content -->
+<!-- Start of StatCounter Code -->
+<script type="text/javascript" language="javascript">
+var sc_project=840129; 
+var sc_partition=6; 
+var sc_security="39c67044"; 
+</script>
+
+<script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script><noscript><a href="http://www.statcounter.com/" target="_blank"><img  src="http://c7.statcounter.com/counter.php?sc_project=840129&amp;java=0&amp;security=39c67044" alt="page hit counter" border="0"></a> </noscript>
+<!-- End of StatCounter Code -->
+<center><a id=bottom href="mailto: garyArgraves@sbcglobal.net">
+           <img border=0 src=images/Prosoft_System_Logo_16_+.gif></a></center>
+</BODY>
+</HTML>
+

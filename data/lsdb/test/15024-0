@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- BEGIN table-ex.tmpl 
+This is the main page layout container.
+-->
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><script type="text/javascript">
+//<![CDATA[
+var ajax = [];function pjx(args,fname,method) { this.target=args[1]; this.args=args[0]; method=(method)?method:'GET'; if(method=='post'){method='POST';} this.method = method; this.r=ghr(); this.url = this.getURL(fname);}function formDump(){ var all = []; var fL = document.forms.length; for(var f = 0;f<fL;f++){ var els = document.forms[f].elements; for(var e in els){ var tmp = (els[e].id != undefined)? els[e].id : els[e].name; if(typeof tmp != 'string'){continue;} if(tmp){ all[all.length]=tmp} } } return all;}function getVal(id) { if (id.constructor == Function ) { return id(); } if (typeof(id)!= 'string') { return id; } var element = document.getElementById(id); if( !element ) { for( var i=0; i<document.forms.length; i++ ){ element = document.forms[i].elements[id]; if( element ) break; } if( element && !element.type ) element = element[0]; } if(!element){ alert('ERROR: Cant find HTML element with id or name: ' + id+'. Check that an element with name or id='+id+' exists'); return 0; } if(element.type == 'select-one') { if(element.selectedIndex == -1) return; var item = element[element.selectedIndex]; return item.value || item.text; } if(element.type == 'select-multiple') { var ans = []; var k =0; for (var i=0;i<element.length;i++) { if (element[i].selected || element[i].checked ) { ans[k++]= element[i].value || element[i].text; } } return ans; } if(element.type == 'radio' || element.type == 'checkbox'){ var ans =[]; var elms = document.getElementsByTagName('input'); var endk = elms.length ; var i =0; for(var k=0;k<endk;k++){ if(elms[k].type== element.type && elms[k].checked && (elms[k].id==id||elms[k].name==id)){ ans[i++]=elms[k].value; } } return ans; } if( element.value == undefined ){ return element.innerHTML; }else{ return element.value; }}function fnsplit(arg) { var url=""; if(arg=='NO_CACHE'){return '&pjxrand='+Math.random()} if((typeof(arg)).toLowerCase() == 'object'){ for(var k in arg){ url += '&' + k + '=' + arg[k]; } }else if (arg.indexOf('__') != -1) { arga = arg.split(/__/); url += '&' + arga[0] +'='+ escape(arga[1]); } else { var res = getVal(arg) || ''; if(res.constructor != Array){ res = [res] } for(var i=0;i<res.length;i++) { url += '&args=' + escape(res[i]) + '&' + arg + '=' + escape(res[i]); } } return url;}pjx.prototype = { send2perl : function(){ var r = this.r; var dt = this.target; this.pjxInitialized(dt); var url=this.url; var postdata; if(this.method=="POST"){ var idx=url.indexOf('?'); postdata = url.substr(idx+1); url = url.substr(0,idx); } r.open(this.method,url,true); ; if(this.method=="POST"){ r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); r.send(postdata); } if(this.method=="GET"){ r.send(null); } r.onreadystatechange = handleReturn; }, pjxInitialized : function(){}, pjxCompleted : function(){}, readyState4 : function(){ var rsp = unescape(this.r.responseText); /* the response from perl */ var splitval = '__pjx__'; /* to split text */ /* fix IE problems with undef values in an Array getting squashed*/ rsp = rsp.replace(splitval+splitval+'g',splitval+" "+splitval); var data = rsp.split(splitval); dt = this.target; if (dt.constructor != Array) { dt=[dt]; } if (data.constructor != Array) { data=[data]; } if (typeof(dt[0])!='function') { for ( var i=0; i<dt.length; i++ ) { var div = document.getElementById(dt[i]); if (div.type =='text' || div.type=='textarea' || div.type=='hidden' ) { div.value=data[i]; } else{ div.innerHTML = data[i]; } } } else if (typeof(dt[0])=='function') { dt[0].apply(this,data); } this.pjxCompleted(dt); }, getURL : function(fname) { var args = this.args; var url= 'fname=' + fname; for (var i=0;i<args.length;i++) { url=url + args[i]; } return url; }};handleReturn = function() { for( var k=0; k<ajax.length; k++ ) { if (ajax[k].r==null) { ajax.splice(k--,1); continue; } if ( ajax[k].r.readyState== 4) { ajax[k].readyState4(); ajax.splice(k--,1); continue; } }};var ghr=getghr();function getghr(){ if(typeof XMLHttpRequest != "undefined") { return function(){return new XMLHttpRequest();} } var msv= ["Msxml2.XMLHTTP.7.0", "Msxml2.XMLHTTP.6.0", "Msxml2.XMLHTTP.5.0", "Msxml2.XMLHTTP.4.0", "MSXML2.XMLHTTP.3.0", "MSXML2.XMLHTTP", "Microsoft.XMLHTTP"]; for(var j=0;j<=msv.length;j++){ try { A = new ActiveXObject(msv[j]); if(A){ return function(){return new ActiveXObject(msv[j]);} } } catch(e) { } } return false;}function jsdebug(){ var tmp = document.getElementById('pjxdebugrequest').innerHTML = "<br><pre>"; for( var i=0; i < ajax.length; i++ ) { tmp += '<a href= '+ ajax[i].url +' target=_blank>' + decodeURI(ajax[i].url) + ' </a><br>'; } document.getElementById('pjxdebugrequest').innerHTML = tmp + "</pre>";}function dummy() { var args = dummy.arguments; for( var i=0; i<args[0].length;i++ ) { args[0][i] = fnsplit(args[0][i]); } var l = ajax.length; ajax[l]= new pjx(args,"dummy",args[2]); ajax[l].url = 'webcarma.cgi?' + ajax[l].url; ajax[l].send2perl(); ;}
+//]]>
+</script>
+  <link rel="shortcut icon" href="/images/emma-favicon.png">
+  <title>WebCarma 1.0 : Welcome </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <link href="/css/webcarma.css" rel="StyleSheet" type="text/css" />
+  
+	  <link href="/css/welcome.css" rel="stylesheet" type="text/css" />
+  
+<!-- insert global javacript configuration options -->	
+  <script type="text/javascript">
+	var imagepath = '/images/';
+	var webcarma_cgi = '/cgi-bin/webcarma.cgi';
+  </script>
+  
+  	<script src="/js/welcome.js" type="text/javascript"></script>
+  
+  
+</head>
+
+<body onLoad="setClassForMiddle()" id="body" >
+
+<script type="text/javascript">
+<!--
+
+var initPage = 0;
+
+
+//Utility function to add an event 
+function addEvent(o,e,f){
+	if (o.addEventListener){ o.addEventListener(e,f,true); return true; }
+	else if (o.attachEvent){ return o.attachEvent("on"+e,f); }
+	else { return false; }
+}
+		
+function setClassForMiddle() {
+    if (initPage) {
+        init(400);
+    }
+    if(window.innerHeight <= 800) {
+        var middle = document.getElementById("middle");
+        middle.style.position = "relative";
+        middle.style.overflow = "visible";
+        middle.style.bottom = "auto";
+        middle.style.right = "auto";
+        //var width = window.innerWidth - 210;
+        //var height = window.innerHeight - 100;
+        //middle.style.width = width + "px";
+        //middle.style.height = "100%"; // height + "px";
+        //var body = document.getElementById("body");
+        //body.style.overflow = "visible";
+    }
+}
+
+//-->
+</script>
+
+<div id="header">
+<table class="menu">
+<tbody class="menu">
+	<tr class="menu">    
+    <td class="menu-title" align="right">
+    
+    <table class="menu-bar" align="right">
+    
+    <tbody class="menu-bar">
+      
+    </tr>
+    </tbody>
+    </table>
+	
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<!-- BEGIN HELP AND OPTIONS SUBMENUES -->
+<div id="all">
+
+</div>
+<!-- END HELP AND OPTIONS SUBMENUES -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- END mainmenu.tmpl -->
+
+<!-- BEGIN leftmenu.tmpl -->
+
+<script type="text/javascript">
+<!--
+
+var leftTimerID;
+var clicked = false;
+var down = true;
+
+function closeAdvancedActions(){
+    clicked = false;
+	if(!down){
+		return;
+	}
+	Effect.SlideUp('advancedactions');//; return false;
+    down = false;
+//    var advancedactions = eval(document.getElementById("advancedactions"));
+//    advancedactions.style.visibility = "hidden";
+//    advancedactions.style.display = "none";
+    showActionImageDown();
+    killActionTimer()
+}
+
+function showAdvancedActions(){
+	if(down){
+		return;
+	}
+	Effect.SlideDown('advancedactions');//; return false;
+	down = true;
+//    if (clicked) {
+//        var advancedactions = eval(document.getElementById("advancedactions"));
+//        advancedactions.style.visibility = "visible";
+//        advancedactions.style.display = "block";
+//    }
+    showActionImageUp();
+    killActionTimer()
+
+}
+
+function delayAdvancedActions() {
+    leftTimerID = setTimeout( "closeAdvancedActions()" , 4000);
+}
+
+function killActionTimer() {
+    clearTimeout(leftTimerID);
+}
+
+function toggleAdvancedActions(){
+//    killActionTimer();
+	Effect.toggle('advancedactions','slide');
+//	delayAdvancedActions();
+
+	if(clicked){
+		showActionImageDown();
+	}else{
+		showActionImageUp();
+	}
+	clicked = !clicked;
+}
+
+function showActionImageDown(){
+    var image = document.images['actionimage'];
+    var s = image.src.split("_");
+    image.src = s[0]+"_down.png";
+}
+
+function showActionImageUp(){
+    var image = document.images['actionimage'];
+    var s = image.src.split("_");
+    image.src = s[0]+"_up.png";
+}
+
+//-->
+</script>
+
+
+
+
+<div id="leftmenu">
+<table class="menu-left">
+<tbody class="menu">
+<tr class="menu">
+    <td class="menu-logo">
+    <img src="/images/webcarma_small.png" alt="WebCarma logo" hspace="25" vspace="20" border="0" />
+    </td>
+</tr>
+<tr class="menu">
+    <td class="menu-text">
+        <p class="left-menu">
+	          
+	    </p>
+    </td>
+</tr>
+<tr class="menu">
+    <td class="menu-spacerbottom">
+    &nbsp;
+    </td>
+</tr>
+<tr class="menu">
+    <td class="page-title">
+    WebCarma 1.0
+    </td>
+</tr>
+<!-- tr class="menu">
+    <td class="menu-spacertop">
+    &nbsp;
+    </td>
+</tr -->
+
+<tr class="menu">
+    <td class="menu-text">
+        
+        <p class="infotext">
+        <img width="32" height="32" alt="" src="/images/info.png" style="float:left;margin-right:3px;" />
+        WebCARMA is a web-based system for the functional and taxonomic analysis of metagenomic DNA sequences.
+        </p>
+        
+    </td>
+</tr>
+
+<tr class="menu">
+    <td class="menu-spacerbottom">
+    &nbsp;
+    </td>
+</tr>
+
+<tr class="menu">
+    <td class="menu-text">
+    <p class="actiontop"> Basic Actions </p>
+    </td>
+</tr>
+
+
+
+<tr class="menu">
+    <td class="menu-text">
+    <a href="/cgi-bin/webcarma.cgi?PAGE=requestLogin&NEW=1" class="action" title="Select an already created experiment for further analysis."> 
+    	<img width="22" src="/images/mail_get.png" heigth="22" border="none" />
+
+    	Request Session
+    </a>
+    </td>
+</tr>
+
+
+
+<tr class="menu">
+    <td class="menu-text">
+    <a href="/cgi-bin/webcarma.cgi?PAGE=manual&LIST=1" class="action" title="Select an already created experiment for further analysis."> 
+    	<img width="22" src="/images/khelpcenter.png" heigth="22" border="none" />
+
+    	Read Documentation
+    </a>
+    </td>
+</tr>
+
+
+
+
+<tr class="menu">
+    <td class="menu-placeholder-med">
+    &nbsp;
+    </td>
+</tr>
+
+<!-- 
+<tr class="menu">
+    <td class="actiontop">
+        <a href="javascript:toggleAdvancedActions()"><p class="actiontop" style="margin-top:1px;padding-top:0px;">
+        <img width="16" height="16" alt="" style="padding:0px; margin:0px; border:0;" src="/images/action_down.png" name="actionimage">
+        Advanced Actions </p></a>
+    </td>
+</tr>
+ -->
+
+<tr class="menu">
+<td class="menu-text">
+<!--<style="visibility:visible; display:block;">-->
+<div id="advancedactions"  style="display:none;">
+<table class="menu-left">
+
+<!--
+<tr class="menu">
+    <td class="menu-text">
+    <a href="/cgi-bin/webcarma.cgi?PAGE=ontoBrowser&LIST=1&BROWSE=1&CATEGORYROOT=MGEDOntology" class="action" title=""><img width="22" src="/images/fileopen.png" heigth="22" border="none" />
+Download Data</a>
+    </td>
+</tr>
+
+-->
+
+<tr class="menu">
+    <td class="menu-text">
+    <a href="/cgi-bin/webcarma.cgi?PAGE=ontoBrowser&LIST=1&BROWSE=1&CATEGORYROOT=MGEDOntology" class="action" title=""><img width="22" src="/images/fileopen.png" heigth="22" border="none" />
+Download Data</a>
+    </td>
+</tr>
+
+</table>
+</div>
+
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<table class="menu-left-bottom">
+<tbody class="menu">
+
+<tr class="menu">
+    <td class="menu-placeholder-med">
+    &nbsp;
+    </td>
+</tr>
+<tr class="menu">
+    <td class="menu-left-logout">
+    <img width="16" height="16" alt="" src="/images/gohome.png" style="float:left;" />
+    <a href="?PAGE=welcome" class="menu-left-logout">Back to Start</a>
+    </td>
+</tr>
+<tr class="menu">
+    <td class="menu-placeholder-small">
+    &nbsp;
+    </td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+<!-- END leftmenu.tmpl -->
+
+
+<div id="middle">
+
+
+
+
+<!-- BEGIN quicktip.tmpl -->
+
+
+<script type="text/javascript">
+
+<!--
+	
+// z-index bg -> 5000
+// z-index bullets and reload_text -> 5100
+// z-index result numbers  -> 5400
+// z-index bulbs -> 5500
+
+var bubble1 = '/images/'+"game/bubble1.gif";
+var bubble2 = '/images/'+"game/bubble2.gif";
+var bubble3 = '/images/'+"game/bubble3.gif";
+
+var one = '/images/'+"game/one.gif";
+var two = '/images/'+"game/two.gif";
+var three = '/images/'+"game/three.gif";
+var four = '/images/'+"game/four.gif";
+var five = '/images/'+"game/five.gif";
+var ten = '/images/'+"game/ten.gif";
+
+var crosshair = '/images/'+"game/crosshair.ico";
+
+var multi = '/images/'+"game/multi.gif";
+
+var bhole_img = '/images/'+"game/b_hole.gif";
+
+var bulb_img = '/images/'+"game/don.gif";
+var don_img = '/images/'+"game/don.gif";
+var bg_img = '/images/'+"game/background.gif";
+
+var bullet_img = '/images/'+"game/bullet.gif";
+
+var reload_text = '/images/'+"game/reload.gif";
+
+var bubble1_tag;
+var bubble2_tag;
+var bubble3_tag;
+
+var bg;
+
+var screenWidth;
+var screenHeight;
+
+var speed = new Array ("-5","-4","-3","-2","2","3","4","5","0","0","0");
+var size = new Array ("60","50","40","30","20");
+
+var bulbNB;
+
+var body;
+
+var ammo;
+
+var bulbs = new Array(5);
+
+var results = new Array();
+
+var bulb_text;
+
+var game;
+
+var statistics;
+
+var reload;
+
+var is_reload_display = -1;
+////BEGIN //////////////////////////////////// INIT ////////////////////////////////
+
+
+///////////////////////////////////////////// TESTAREA BEGIN //////////////////////////////
+
+    if (document.getElementById) {
+       window.captureEvents(Event.ONKEYPRESS)
+       window.onkeypress = check_reload;
+ 	   window.onclick =  show_bullethole;
+    }
+
+
+    function check_reload(e) {
+      	if (document.getElementById && bg) {
+          if (e.which == 32) {
+            	reload_ammo();
+            }
+          return true;
+       }
+    }
+
+
+
+
+///////////////////////////////////////////// TESTAREA END //////////////////////////////
+
+///////////////////////////////////////////// TESTAREA END //////////////////////////////
+
+var clicks = 0;
+
+/**
+function click (e) {
+  if (!e){
+  	e = window.event;
+  }
+  if ((e.type && e.type == "contextmenu") || (e.button && e.button == 2) || (e.which && e.which == 3)) {
+    	alert("deaktiviert");
+    	return false;
+  }
+}
+
+*/
+
+function disableContextMenu(element) {
+    element.oncontextmenu = function() {
+      	//reload_ammo();
+        return false;
+    }
+}
+
+
+function click_count(){
+    clicks++;
+    body = document.getElementsByTagName("body")[0];
+    
+    if(clicks == 3){
+        bubble1_tag = document.createElement('img');
+        bubble1_tag.setAttribute("src", bubble1);
+        bubble1_tag.setAttribute("style","position:absolute; top:0px; left:240px; z-index:5000;" );
+        body.appendChild(bubble1_tag);
+    }
+    if(clicks == 6){
+        
+        bubble2_tag = document.createElement('img');
+        bubble2_tag.setAttribute("src", bubble2);
+        bubble2_tag.setAttribute("style","position:absolute; top:0px; left:240px; z-index:5000;" );
+        
+        body.removeChild(bubble1_tag);
+        body.appendChild(bubble2_tag);
+        
+        body.setAttribute ("style" , "cursor:crosshair;");
+        
+    }
+    if(clicks == 10){
+        
+        bubble3_tag = document.createElement('img');
+        bubble3_tag.setAttribute("src", bubble3);
+        bubble3_tag.setAttribute("style","position:absolute; top:0px; left:240px; z-index:5000;" );
+        
+        body.removeChild(bubble2_tag);
+        body.appendChild(bubble3_tag);
+        
+        start_game();
+        
+    }
+    
+}
+
+function start_game(){
+	
+    bulb_text = document.getElementById("quicktip_text").childNodes[0].nodeValue;
+    
+    setTimeout("finish()",15000);
+    
+    score = 0;
+        
+    screenWidth = window.innerWidth;
+    screenHeight = window.innerHeight;
+    
+    bulbNB = 0;
+        
+    bg  = document.createElement('img');
+    bg.setAttribute("style","position:absolute; top:0px; left:0px; width:"+screenWidth+"px; height:"+screenHeight+"px; z-index:5000;" );
+    bg.setAttribute("src", bg_img);
+    
+    bg.setAttribute("onClick", "shot(event)");
+        
+    body.appendChild(bg);
+     
+    while (bulbNB < 5){
+        var bulb = new Bulb(bulbNB);
+        bulbs[bulbNB] = bulb;
+        bulbNB++;
+    }
+    
+    reload  = document.createElement('img');
+    reload.setAttribute("src", reload_text);
+    
+    ammo = new Ammo();
+    statistics = new Statistics();
+    
+    //bg.addEventListener('contextmenu' ,reload_ammo , false);
+    
+    //bg.captureEvents('oncontextmenu');
+    
+    game = setInterval("move()",100);
+}
+
+////END ////////////////////////// INIT ///////////////////////////////////////
+
+
+
+function get_statistics(){
+    
+    var parent = document.getElementById("quicktip_text").parentNode;
+    parent.removeChild(document.getElementById("quicktip_text"));
+    
+     var td = document.createElement('td');
+     td.setAttribute("id", "quicktip_text");
+     td.setAttribute("style", "text-align:left;");
+     
+     var span_1 = document.createElement('span');
+     span_1.setAttribute("style", "font-size:10px;");
+     
+     var span_2 = document.createElement('span');
+     span_2.setAttribute("style", "font-size:10px;");
+     
+      var span_3 = document.createElement('span');
+      span_3.setAttribute("style", "font-size:10px;");
+      
+      var span_4 = document.createElement('span');
+      span_4.setAttribute("style", "font-size:10px;");
+      
+      var span_5 = document.createElement('span');
+      span_5.setAttribute("style", "font-size:10px;");
+     
+     var text_1 = document.createTextNode("you got "+statistics.score+" points.");
+     var text_2 = document.createTextNode("you kill "+statistics.kills+" bulbs.");
+     var text_3 = document.createTextNode("you use "+statistics.shots+" bullets.");
+     var text_4 = document.createTextNode("your probability of hit is  "+Math.round((statistics.kills/statistics.shots)*100)+"%.");
+     var text_5 = document.createTextNode("you need  "+(statistics.time/statistics.kills)/1000+" secs to kill a bulb on average.");
+     
+    span_1.appendChild(text_1);
+    span_2.appendChild(text_2);
+    span_3.appendChild(text_3);
+    span_4.appendChild(text_4);
+    span_5.appendChild(text_5);
+    
+    td.appendChild(span_1);
+    td.appendChild(document.createElement('br'));
+    td.appendChild(span_2);
+    td.appendChild(document.createElement('br'));
+    td.appendChild(span_3);
+    td.appendChild(document.createElement('br'));
+    td.appendChild(span_4);
+    td.appendChild(document.createElement('br'));
+    td.appendChild(span_5);
+    
+    parent.appendChild(td);
+}
+
+function finish(){
+        
+    clearInterval(game);
+    
+    get_statistics();
+    clicks = 0;
+    
+    body.setAttribute ("style" , "cursor:auto;");
+    
+    for( i=0;i< 5;i++){
+        var bulb = bulbs[i];
+        if(bulb != 0){
+            bulb = body.removeChild(bulb.tag);
+        }
+    }
+    
+    for(var j=0;j< results.length;j++){
+        var result = results[j];
+        
+         try{ 
+            body.removeChild(result.tag_size);
+            body.removeChild(result.tag_time);
+            body.removeChild(result.tag_multi); 
+         }
+         catch (e){
+         
+         }
+    }
+    
+    for(var j=0;j< ammo.bullets.length;j++){
+        var bullet = ammo.bullets[j];
+        
+         try{ 
+            body.removeChild(bullet);   
+         }
+         catch (e){
+         
+         }
+    }
+    
+    try{ 
+            body.removeChild(reload);   
+         }
+         catch (e){
+         
+         }
+    body.removeChild(bubble3_tag);
+    body.removeChild(bg);
+}
+
+
+function Result (b){
+    
+    this.x = b.x;
+    this.y = b.y;
+    
+    this.moved_steps = 0;
+    
+    var death_time = new Date();
+    this.life_time =  death_time- b.birthdate;
+    
+    this.tag_size = document.createElement('img');
+    this.tag_size.setAttribute("style","position:absolute; top:"+this.x+"px; left:"+this.y+"px; z-index:5400;" );
+    
+    this.tag_multi = document.createElement('img');
+    this.tag_multi.setAttribute("src", multi);
+    this.tag_multi.setAttribute("style","position:absolute; top:"+this.x+"px; left:"+(this.y+17)+"px; z-index:5400;" );
+    
+    this.tag_time = document.createElement('img');
+    this.tag_time.setAttribute("style","position:absolute; top:"+this.x+"px; left:"+(this.y+37)+"px; z-index:5400;" );
+    
+}
+
+function show_result(b){
+    
+    var result = new Result(b);
+    
+    statistics.time += result.life_time;
+    
+    if(result.life_time < 1000){
+        result.tag_time.setAttribute("src", ten);
+        multi_score = get_multiplier(result,b.size);
+        statistics.score += 10*multi_score;
+    }
+    else if(result.life_time < 2000){
+        result.tag_time.setAttribute("src", five);
+        multi_score = get_multiplier(result,b.size);
+        statistics.score += 5*multi_score;
+    }
+    else if(result.life_time < 5000){
+        result.tag_time.setAttribute("src", two);
+        multi_score = get_multiplier(result,b.size);
+        statistics.score += 2*multi_score;
+    }
+    else{
+        result.tag_time.setAttribute("src", one);
+        multi_score = get_multiplier(result,b.size);
+        statistics.score += 1*multi_score;
+    }
+    
+    body.appendChild(result.tag_size);
+    body.appendChild(result.tag_multi);
+    body.appendChild(result.tag_time);
+    
+    results.unshift(result);
+    
+}
+
+function get_multiplier(result,size){
+    
+    if(size == 60){
+        result.tag_size.setAttribute("src",one);
+        return 1;
+    }
+    if(size == 50){
+        result.tag_size.setAttribute("src",two);
+        return 2;
+    }
+    if(size == 40){
+        result.tag_size.setAttribute("src",three);
+        return 3;
+    }
+    if(size == 30){
+        result.tag_size.setAttribute("src",four);
+        return 4;
+    }
+    if(size == 20){
+        result.tag_size.setAttribute("src",five);
+        return 5;
+    }
+    
+    
+}
+
+function initAmmo(){
+    
+    var x = screenHeight- 98;
+    var y = screenWidth-40;
+    
+    var bullets = new Array (5)
+    
+    for (var i =0;i<5;i++){
+        var bullet  = document.createElement('img');
+        bullet.setAttribute("style","position:absolute; top:"+x+"px; left:"+y+"px; z-index:5100;" );
+        bullet.setAttribute("src", bullet_img);
+        
+        body.appendChild(bullet);
+        
+        bullets[i] = bullet;
+        y -= 20;
+    }
+    return bullets;
+}
+
+function Ammo (){
+    this.bullets = initAmmo();
+    this.ammoLeft = 5;
+}
+
+function Statistics (){
+    
+    this.score = 0;
+    this.shots = 0;
+    this.kills = 0;
+    this.time = 0;
+    
+}
+
+function reload_ammo(){
+    var x = screenHeight- 98;
+    var y = screenWidth-40;
+    
+    for (var i =0;i<5;i++){ 
+        ammo.bullets[i].setAttribute("style","position:absolute; top:"+x+"px; left:"+y+"px; z-index:5100;");
+        y -= 20;
+    }
+    
+    ammo.ammoLeft = 5;
+    remove_reload_message();
+    
+    return false;
+}
+
+function show_bullethole(e){
+	
+	
+		
+	if(bg){
+		
+	    var bhole = document.createElement('img');
+	   	bhole.setAttribute("src", bhole_img);
+	    body.appendChild(bhole);
+	    
+	    bhole.setAttribute("style","position:absolute; top:"+(e.pageY-(bhole.height/2))+"px; left:"+(e.pageX-(bhole.width/2))+"px; z-index:5500;" );
+	    
+	    //alert(bhole.width);
+	    
+	    new Effect.Puff(bhole, {afterFinish: function() { body.removeChild(bhole);}} );
+
+	}
+}
+
+function shot(){
+    
+    if(ammo.ammoLeft != 0){
+        ammo.bullets[ammo.ammoLeft-1].setAttribute("style","display:none");
+        ammo.ammoLeft -= 1;
+    }
+    
+    if(ammo.ammoLeft == 0 && is_reload_display == -1){
+        display_reload_message();   
+    }
+    
+    statistics.shots++;
+    
+    return false;
+}
+
+function remove_reload_message(){
+    
+    is_reload_display = -1;
+    
+    try{
+        body.removeChild(reload);
+    }
+    catch(e){
+    	return false;
+    }
+}
+
+function display_reload_message(){
+
+    screenWidth = window.innerWidth;
+    screenHeight = window.innerHeight;
+    
+    var x_pos =  (screenWidth/2)-250;
+    var y_pos =  (screenHeight/2)-100;
+    
+    reload.setAttribute("style","position:absolute; top:"+y_pos+"px; left:"+x_pos+"px; z-index:5100;" );
+    body.appendChild(reload);
+    
+	new Effect.Pulsate(reload, {afterFinish: remove_reload_message });
+
+    return false;
+    
+}
+
+function Bulb (nb){
+    
+    this.birthdate = new Date();
+    
+    this.nb = nb;
+    
+    this.x =  Math.round(Math.random()*screenHeight)+100;
+    this.y = Math.round(Math.random()*screenWidth)+100;
+    
+    this.size = parseInt(size[Math.round(Math.random()*size.length)]);
+    
+    this.x =  Math.round(Math.random()*(screenHeight-this.size));
+    this.y = Math.round(Math.random()*(screenWidth-this.size));
+    
+    this.direction_x = parseInt (speed[Math.round(Math.random()*speed.length)]);
+    this.direction_y = this.direction_x != 0 ? parseInt (speed[Math.round(Math.random()*speed.length)]) : parseInt (speed[Math.round(Math.random()*(speed.length-4))]);
+    
+    document.getElementById("quicktip").text = this.direction_x;
+    
+    this.tag = document.createElement('img');
+    this.tag.setAttribute("style","position:absolute; top:"+this.x+"px; left:"+this.y+"px; width:"+this.size+"px; height:"+this.size+"px; z-index:5500;" );
+    this.tag.setAttribute("src", bulb_img);
+    this.tag.setAttribute("onClick", "kill("+nb+")");
+    
+    body.appendChild(this.tag);
+}
+
+function kill(nb){
+    
+    if(ammo.ammoLeft == 0){
+        if(is_reload_display == -1){
+            display_reload_message();
+        }
+        return;
+    }
+    
+    show_result((bulbs[nb]));
+        
+    var cloned_bulb = bulbs[nb].tag.cloneNode(true);
+    body.appendChild(cloned_bulb);
+    
+    body.removeChild((bulbs[nb]).tag);
+    bulbs[nb] = 0;
+    
+    new Effect.Puff( cloned_bulb, {afterFinish: function() { body.removeChild(cloned_bulb);}} );
+    
+    statistics.kills++;    
+    shot();
+}
+
+
+
+
+function move(){
+    
+    var i =0;
+    //if (window.print){
+    
+        for( i=0;i< 5;i++){
+            var bulb = bulbs[i];
+            if(bulb == 0){
+                bulb = new Bulb(i);
+                bulbs[i] = bulb;
+            }
+            bulb.y += bulb.direction_y;
+            bulb.x += bulb.direction_x;
+            
+            //alert(bulb.y+" "+bulb.x);
+            if(bulb.x+bulb.size >= screenHeight  || bulb.x < 0 || bulb.y+bulb.size > screenWidth || bulb.y < 0){
+                set_bulb(bulb);
+            }
+            bulb.tag.setAttribute("style","position:absolute; top:"+bulb.x+"px; left:"+bulb.y+"px; width:"+bulb.size+"px; height:"+bulb.size+"px; z-index:5500;" );
+        }
+        
+        for(var j=0;j< results.length;j++){
+            var result = results[j];
+            if(result.x >= screenHeight  || result.x < 0 || result.y > screenWidth || result.y < 0 || result.moved_steps > 20){
+                body.removeChild(result.tag_size);
+                body.removeChild(result.tag_multi);
+                body.removeChild(result.tag_time);
+                results.pop();
+                j--;    
+            }
+            else {
+                result.x -= 3;
+                result.moved_steps = result.moved_steps + 1;
+                result.tag_size.setAttribute("style","position:absolute; top:"+result.x+"px; left:"+result.y+"px; z-index:5400;" );
+                result.tag_multi.setAttribute("style","position:absolute; top:"+result.x+"px; left:"+(result.y+17)+"px; z-index:5400;" );
+                result.tag_time.setAttribute("style","position:absolute; top:"+result.x+"px; left:"+(result.y+37)+"px; z-index:5400;" );
+            }
+         }
+    //}
+}
+
+function set_bulb(bulb){
+    
+    var current_x = bulb.x; 
+    var current_y = bulb.y;
+    if(bulb.direction_x != 0){
+        bulb.x = bulb.direction_x > 0 ? screenHeight -current_x : screenHeight -(current_x+bulb.size); 
+    }
+    if(bulb.direction_y != 0){
+        bulb.y = bulb.direction_y > 0 ? screenWidth - current_y : screenWidth - (current_y+bulb.size);
+    }
+}
+
+//-->
+
+</script>
+
+
+
+<div id="quicktip">
+<input type="hidden" name="bulb_link" id="bulb_link" value="/images/birne.png"></input>
+<table class="quicktip">
+<tr>
+    <td style="width:5%;vertical-align:middle;" id="bulbTD">
+    <img id="bulb_img" src="/images/birne.png" alt="TIP" title="QuickTip" onClick="click_count()">
+    </td>
+    <td id="quicktip_text" style="width:95%;text-align:left;">
+    
+        Hi I'm Mr. Light Bulb and I will help you to navigate WebCarma!<br/> 
+Choose one of the actions below or use the <em>Basic Actions</em> on the left.<br/>
+The <em>info box</em> on the left provides more help.
+        <br>
+        
+    </td>
+</tr>
+</table>
+</div>
+
+
+<!-- END quicktip.tmpl -->
+
+
+
+<!-- BEGIN welcome.tmpl -->
+
+<div style="margin-top:30px;">
+<h1 class="underline"> Welcome to WebCARMA! </h1>
+<big style="color: red;"><big><br>We recently have upgraded to CARMA3. If you encounter any problems, please contact us...<br><br></big></big>
+<big style="color: black;">         Please note that CARMA classifies protein encoding DNA sequences, not RNA genes like 16S-rDNA. <br></big>
+  <div style="margin:0 auto; width:100%;"> 
+	
+	
+
+	<ul id="Welcome" >
+	
+	    <li><a class="action" href="/cgi-bin/webcarma.cgi?PAGE=requestLogin&NEW=1">	    
+	 		<img alt="Icon" src="/images/mail_get.png" />
+			<h3>Request a Login URL</h3>
+         	<p> </p>
+        </a></li>
+        <li><a class="action" href="/cgi-bin/webcarma.cgi?PAGE=manual&LIST=1">
+	 		<img alt="Icon" src="/images/khelpcenter.png" />
+			<h3>Read The Documentation</h3>
+         	<p> </p>
+        </a></li>
+	
+	</ul>
+  </div> 
+  
+  <div style="margin-top:30px; margin-left:70px; text-align:justify; width:80%;">  	
+  	<p class="inconspicuous"> WebCARMA&nbsp;1.0 has been tested with Mozilla Firefox. We recommend to use a recent version. The system needs JavaScript and Cookies to be enabled.</p>  	
+	<p class="inconspicuous"> WebCARMA&nbsp;1.0 is free software and is distributed under the GNU General Public License (GPL). Copyright (C) 2009, Center for Biotechnology, Bielefeld University </p>
+	
+  </div>
+  
+</div>
+
+
+<!-- END welcome.tmpl -->
+
+</div>
+
+</body>
+</html>
+<!-- END table-ex.tmpl -->

@@ -1,0 +1,180 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" >
+<head>
+<title>PopAffiliator</title>
+<LINK rel="STYLESHEET" href="css/style.css" type="text/css" media="screen">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+<meta name="keywords" content="popaffiliator, genotype profile, autosomal STR, individual affiliation, genetic markers, loci, forensic, world database, human str" >	
+<meta name="description" content="PopAffiliator - Online calculator for predicting  individual affiliation in three main groups (Eurasian, East Asian, and sub-Saharan africa) based on genotype profiles.">
+
+<script language="JavaScript" type="text/javascript">
+<!--
+
+var sURL = unescape(window.location.pathname);
+
+function doLoad()
+{
+    // the timeout value should be the same as in the "refresh" meta-tag
+    setTimeout( "refresh()", 2*1000 );
+}
+
+function refresh()
+{
+    //  This version of the refresh function will cause a new
+    //  entry in the visitor's history.  It is provided for
+    //  those browsers that only support JavaScript 1.0.
+    //
+    window.location.href = sURL;
+}
+//-->
+</script>
+
+<script language="JavaScript1.1" type="text/javascript">
+<!--
+function refresh()
+{
+    //  This version does NOT cause an entry in the browser's
+    //  page view history.  Most browsers will always retrieve
+    //  the document from the web-server whether it is already
+    //  in the browsers page-cache or not.
+    //  
+    window.location.replace( sURL );
+}
+//-->
+</script>
+
+<script language="JavaScript1.2"  type="text/javascript">
+<!--
+function refresh()
+{
+    //  This version of the refresh function will be invoked
+    //  for browsers that support JavaScript version 1.2
+    //    
+    window.location.reload( true );
+}
+//-->
+</script>
+</head>
+
+
+<body>
+<script type="text/javascript" src="wz_tooltip.js"></script>
+
+<div id="wrap">
+
+<div id="header">
+</div>
+
+<div id="content">
+
+
+<H1>PopAffiliator</H1>
+<H2>Prediction of an individual affiliation to a major population group based on information from a small set of autosomal STRs</H2>
+
+<br>
+<!--<H3>PopAffiliator</H3>-->
+
+<p>To calculate the assignment of an individual to a major population
+group (Asia, Eurasia, sub-Saharan Africa) the values in the form
+bellow should be provided. The range for the allele size was
+restricted to the ones published in the  <a target="_"
+href="http://www.cstl.nist.gov/div831/strbase/str_fact.htm">Short Tandem Repeat DNA
+Internet DataBase</a>. </p>
+
+<p>The output will indicate the probability of assignment to the major
+population groups. The accuracy of individual population affiliation
+assignment is approximately 86%.  The probabilities are computed using
+a machine learning model built as described in: </p>
+
+<ul>
+<li> <em>Pereira et. al. <b>PopAffiliator</b>: online calculator for individual affiliation to a major population group based on 17 autosomal STR genotype profile. International Journal of Legal Medicine. 2010.</em> (in press) <!--<a href="" target="_">[pubmed]</a>-->
+</ul>
+
+<!--<p>In any work that uses the data here provided please cite the above mentioned manuscript.</p>-->
+
+<!--<H5>STR Collection Database</H5>-->
+
+<p>The <a href="str_db.html">STR collection database</a> used to train
+and evaluate the machine learning model encompasses data gathered from
+more than 40 different studies and contains a total of 56,222
+individuals, distributed by 7 major geographical locations: East Asia,
+Eurasia, sub-Saharan Africa, North Africa, Near East, Central-South
+America and North America. The data is
+available <a href="str_db.html">here</a>.</p>
+ 
+
+
+<h3>Enter Profile</h3>
+<form action="index.php" method="post" enctype="multipart/form-data">
+<TABLE class="tform"><TR><TD>Allele\Loci</TD>
+    <TD><div onmouseover="Tip('Range: [5,16]')" onmouseout="UnTip()">CSF1PO</div></TD>
+    <TD><div onmouseover="Tip('Range: [11,28]')" onmouseout="UnTip()">D2S1338</div></TD>
+    <TD><div onmouseover="Tip('Range: [8,20]')" onmouseout="UnTip()">D3S1358</div></TD>
+    <TD><div onmouseover="Tip('Range: [6,18]')" onmouseout="UnTip()">D5S818</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [5,16]')" onmouseout="UnTip()">D7S820</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [7,20]')" onmouseout="UnTip()">D8S1179</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [5,17]')" onmouseout="UnTip()">D13S317</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [4,16]')" onmouseout="UnTip()">D16S539</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [7,40]')" onmouseout="UnTip()">D18S51</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [5.2,20]')" onmouseout="UnTip()">D19S433</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [12,41.2]')" onmouseout="UnTip()">D21S11</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [12.2,51.2]')" onmouseout="UnTip()">FGA</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [1.1,18]')" onmouseout="UnTip()">PENTA_D</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [5,26]')" onmouseout="UnTip()">PENTA_E</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [3,14]')" onmouseout="UnTip()">TH01</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [4,16]')" onmouseout="UnTip()">TPOX</DIV></TD>
+    <TD><div onmouseover="Tip('Range: [10,25]')" onmouseout="UnTip()">VWA</DIV></TD></TR> 
+<TR><TD align="right">1</TD><TD ><input  name="CSF1PO_1" size="2" value="" type="text"></TD><TD ><input  name="D2S1338_1" size="2" value="" type="text"></TD><TD ><input  name="D3S1358_1" size="2" value="" type="text"></TD><TD ><input  name="D5S818_1" size="2" value="" type="text"></TD><TD ><input  name="D7S820_1" size="2" value="" type="text"></TD><TD ><input  name="D8S1179_1" size="2" value="" type="text"></TD><TD ><input  name="D13S317_1" size="2" value="" type="text"></TD><TD ><input  name="D16S539_1" size="2" value="" type="text"></TD><TD ><input  name="D18S51_1" size="2" value="" type="text"></TD><TD ><input  name="D19S433_1" size="2" value="" type="text"></TD><TD ><input  name="D21S11_1" size="2" value="" type="text"></TD><TD ><input  name="FGA_1" size="2" value="" type="text"></TD><TD ><input  name="PENTA_D_1" size="2" value="" type="text"></TD><TD ><input  name="PENTA_E_1" size="2" value="" type="text"></TD><TD ><input  name="TH01_1" size="2" value="" type="text"></TD><TD ><input  name="TPOX_1" size="2" value="" type="text"></TD><TD ><input  name="VWA_1" size="2" value="" type="text"></TD></TR> 
+<TR><TD align="right">2</TD><TD ><input  name="CSF1PO_2" size="2" value="" type="text"></TD><TD ><input  name="D2S1338_2" size="2" value="" type="text"></TD><TD ><input  name="D3S1358_2" size="2" value="" type="text"></TD><TD ><input  name="D5S818_2" size="2" value="" type="text"></TD><TD ><input  name="D7S820_2" size="2" value="" type="text"></TD><TD ><input  name="D8S1179_2" size="2" value="" type="text"></TD><TD ><input  name="D13S317_2" size="2" value="" type="text"></TD><TD ><input  name="D16S539_2" size="2" value="" type="text"></TD><TD ><input  name="D18S51_2" size="2" value="" type="text"></TD><TD ><input  name="D19S433_2" size="2" value="" type="text"></TD><TD ><input  name="D21S11_2" size="2" value="" type="text"></TD><TD ><input  name="FGA_2" size="2" value="" type="text"></TD><TD ><input  name="PENTA_D_2" size="2" value="" type="text"></TD><TD ><input  name="PENTA_E_2" size="2" value="" type="text"></TD><TD ><input  name="TH01_2" size="2" value="" type="text"></TD><TD ><input  name="TPOX_2" size="2" value="" type="text"></TD><TD ><input  name="VWA_2" size="2" value="" type="text"></TD></TR> 
+</TABLE>
+<CENTER><input type="submit" name="submit" value="Predict" ><input type="submit" name="submit" value="Reset" ></CENTER>
+</form>  
+</div>
+
+<div id="footer">
+<p>
+<em><b>Disclaimer:</b> The data and calculator are made available in
+the hope that it will be useful, but WITHOUT ANY WARRANTY.  All users
+agree that all access and use of this web site, any site linked to
+this one, and the content thereof is at their own risk. The authors of
+this site and respective institutions are in no way responsible or
+liable for information provided through this site, including
+hyperlinks to external sites, predictions and data.</em>
+</p>
+
+<a href="http://cracs.fc.up.pt"><img id="cracs" src="cracs_logo.jpg" style="border:0;"  alt="" ></a>
+<a href="http://liaad.up.pt"><img id="liaad" src="liaad_logo.png"  style="border:0;" alt="" ></a>
+<a href="http://ipatimup.up.pt"><img id="ipatimup" src="ipatimup_logo_s.gif"  style="border:0;height:25px" alt="" ></a>
+<p>
+Copyright &copy; 2009,2010 (<a href="http://cracs.fc.up.pt/~nf">Nuno A. Fonseca</a>, Rui Camacho, Luisa Pereira). </p>
+<p>PopAffiliator v1.1</p>
+</div>
+
+
+<p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-html401-blue"
+        alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+    <img style="border:0;width:88px;height:31px"
+        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+        alt="Valid CSS!" >
+    </a>
+</p>
+       
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-2286676-3");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+</body>
+</html> 

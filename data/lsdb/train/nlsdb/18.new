@@ -1,0 +1,58 @@
+<TITLE> GANN - Genetic Algorithm Neural Networks for Regulatory Region Identification </TITLE>
+
+<CENTER> <img src="GANNSmall.jpg">
+
+<H2> Genetic Algorithm Neural Networks for Regulatory Region Identification </H2>
+<H3> Robert G. Beiko and Robert L. Charlebois </H3>
+
+</CENTER>
+
+<H3> Overview </H3>
+
+GANN is a machine learning method designed with the complexities of transcriptional regulation in mind.
+The key principle is that regulatory regions are composed of features such as consensus strings, characterized binding sites, and DNA structural properties. GANN identifies these features in a set of sequences, and then identifies combinations of features that can differentiate between the positive set (sequences with known or putative regulatory function) and the negative set (sequences with no regulatory function). Once these features have been identified, they can be used to classify new sequences of unknown function.
+
+<ul>
+   <li> Artificial Neural Networks are used for pattern detection, because they can model complex interactions between input variables (i.e., the features). This can be potentially very important if the positive set contains different types of regulatory regions that must all be classified. </li>
+   <li> The number of sequence encodings that can be generated is practically infinite, and even a reasonable number (a few hundred) are too much to present to the neural network at once. The Outer Genetic Algorithm (OGA) was designed to test different subsets from the pool of available representations, and generate new subsets using evolutionary operations. </li>
+</ul>
+
+<H3> Implementation </H3>
+
+The GANN suite is a set of Perl scripts and C++ programs that extract genomic sequences of interest, extract the desired sequence features, and identify useful combinations of these features with the core machine learning algorithm. The modular design of the suite allows the input of tabular data from outside sources, and analysis of observed sequence properties with more traditional statistical analysis methods.
+
+GANN is currently in Version 2.0; there are many more features that I would like to implement but the time frame for these changes is not determined. Requests for modifications and bug reports are welcome.
+
+Alternatively, since the source code is released under the GPL and available for download and inspection (and is hopefully not too inscrutable), you can always implement changes yourself :^>
+
+<H3> Documentation </H3>
+
+<a href=GANN2flow.pdf> GANN 2.0 flowchart (.pdf) </a> </P>
+The GANN 2.0 Manual <a href=Gann2Manual.txt> (txt)</a> / <a href=Gann2Manual.doc>(doc)</a> / <a href=Gann2Manual.pdf> (PDF) </a> </P>
+
+<H3> Download GANN </H3>
+
+<H4> Win32 </H4>
+
+<a href=GANN_Win32.zip> Win32 executables + Perl scripts </a> </P>
+
+<H4> Source code </H4>
+
+<a href=GANN_source.tar.gz> Source code for Win32 and UNIX </a> </P>
+
+Each of the 4 C++ programs has its own <B>makefile</B>; simply type 'make' in the appropriate directory to generate the executable. </P>
+The .mcp files included are project files associated with <B>MetroWorks CodeWarrior for Windows</B>; if you have CodeWarrior open these to compile the source code.</P>
+Unfortunately due to differences in C++ string stream libraries the current implementation of GANN will not compile properly on Mac OS X.
+
+<H3> Citing GANN </H3>
+
+The main citation for GANN is: </P>
+
+Beiko, R.G. and Charlebois, R.L. (2005). GANN: genetic algorithm neural networks for the detection of conserved combinations of features in DNA. <I>BMC Bioinformatics</I> <B>6</B>: 36. </P>
+
+<H3> Contact </H3>
+
+You can E-mail me your comments at  <a href="mailto:r.beiko@imb.uq.edu.au">r.beiko@imb.uq.edu.au</a>
+</P>
+</br>
+<I> &copy 2004-2006 Robert G. Beiko </I>

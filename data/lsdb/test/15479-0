@@ -1,0 +1,97 @@
+<html>
+<head>
+  <script type="text/javascript" src="ppc.js"></script>
+</head>
+<body>
+<title> Protinfo PPC - protein complex structure prediction </title>
+
+<h1> Protinfo PPC </h1>
+
+<ul>
+  <li> Kittichotirat W, Guerquin M, Bumgarner RE, Samudrala R. <a
+  href="publications/samudrala_2009i.pdf">Protinfo PPC: A web server
+  for atomic level prediction of protein complexes</a>. <i>Nucleic Acids
+  Research</i> 37: W519-25, 2009.
+</ul>
+
+<p> This server module predicts the atomic level structure of a
+protein complex.  Given at least two protein sequences, this module
+first searches for homologs in a database of subunit sequences of
+experimentally determined protein complex structures. If all input
+sequences are homologous to subunits of an experimentally determined
+complex, our multimeric comparative modeling will be used to build
+three dimensional protein complex models for the sequences. Results
+are sent out by email in PDB format. (In some cases, several models
+are predicted and the best five are returned.) This service provides a
+user friendly way for researchers to create all atom models of protein
+complexes of interest. The all atom models can provide a useful
+insights into the functional and mechanistic details of the protein
+complexes as well as information on the residues that mediate protein
+complex interactions. </p>
+
+<p> The protein complex library was last updated on September 9, 2009
+and contains 20,588 protein complex templates.  New users may want to
+look at <a href="tutorial.html">this short tutorial</a> which includes
+<a href="tutorial.html#emaill_compat">some notes on how different
+mailers handle returned data</a>. </p>
+
+<hr>
+
+<form name="protinfo_ppc" method="post" action="/cgi-bin/protinfo_ppc" enctype="multipart/form-data">
+<table id="input_table">
+<tr>
+  <td>Target name:</td>
+  <td><input name="TARGET-NAME" size="20"></td>
+</tr>
+<tr>
+  <td>Email:</td>
+  <td><input name="REPLY-E-MAIL" size="20"></td>
+</tr>
+<tr>
+  <td>Sequence 1:</td>
+  <td><textarea name="SEQUENCE_1" cols="83" rows="10"></textarea></td>
+</tr>
+<tr>
+  <td>Sequence 2:</td>
+  <td><textarea name="SEQUENCE_2" cols="83" rows="10"></textarea></td>
+</tr>
+</table>
+
+<p> <button id="more_button" type="button" onClick="more(); return false;">Add another sequence</button> </p>
+
+<p>
+<input name="MARK-CONTACT_RESIDUES" type="checkbox"> Mark interacting residues using temperature factor column <br>
+<input name="SEND-INTIAL-MODELS" type="checkbox"> Send initial models (without loops) also <br>
+<input type="submit" value="submit"> <input type="reset" value="clear">
+</p>
+
+<p>
+<input type="button" value="Test using HIV-1 protease dimer sequences (PDB identifier: 1msm)" onClick="document.protinfo_ppc.SEQUENCE_1.value='PQITLWKRPLVTIKIGGQLKEALLDTGADDTVIEEMSLPGRWKPKMIGGIGGFIKVRQYDQIIIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF'; document.protinfo_ppc.SEQUENCE_2.value='PQITLWKRPLVTIKIGGQLKEALLDTGADDTVIEEMSLPGRWKPKMIGGIGGFIKVRQYDQIIIEICGHKAIGTVLVGPTPVNIIGRNLLTQIGCTLNF'">
+</p>
+
+<p> A PDB file containing a custom protein complex template can 
+optionally be supplied. The uploaded PDB file will be used as
+the template to model your target sequences (without using any other
+templates from our template library). Please make sure that the 
+submitted file has a ".pdb" extension (extension other than .pdb will
+not be processed). Please also make sure that the
+number of protein chains in the uploaded PDB file is the same as the
+number of target sequences above. Sequences of the uploaded complex
+template structure must also exhibit some similarity to the target
+sequences.  </p>
+
+<p> Template PDB file: <input name="TEMPLATE-PDB-FILE" size="20" type="file"> </p>
+
+<p> <b>[<a href="monitor.html">monitor</a>]</b> </p>
+
+</form>
+
+<hr>
+<a href="http://protinfo.compbio.washington.edu">Protinfo</a> <b>||</b>
+<a href="http://bioverse.compbio.washington.edu">Bioverse</a> <b>||</b>
+<a href="http://compbio.washington.edu">Samudrala Computational Biology Research Group</a> <b>||</b>
+<var><a href="mailto:protinfo@compbio.washington.edu">protinfo@compbio.washington.edu</a></var>
+
+<hr>
+</body>
+</html>

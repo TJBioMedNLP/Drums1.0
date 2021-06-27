@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Pupasuite 3.1</title>
+	<link rel="shortcut icon" href="images/favicon.jpg"/>
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/bioinfo.min.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/bioinfo-js.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="resources/js/widget/user-login-widget.css"></link> 
+	<link rel="stylesheet" type="text/css" media="screen" href="css/pupasuite.css"/>
+	
+	
+	<!-- Common js files -->
+	<script type="text/javascript" src="resources/js/bioinfo.externals.min.js"></script>
+	<script type="text/javascript" src="resources/js/bioinfo.min.js"></script>
+	<script type="text/javascript" src="resources/js/utils/bioinfo.utils.min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery/bioinfo.jquery.min.js"></script>	
+
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#work-area").css("width", "100%");
+			openLogin("WUM_SERVER","3","bioinfo-session-id3");
+			//INSERT YOUR JAVASCRIPT HERE
+
+			//Check cookies avalaibility
+			if (navigator.cookieEnabled == false)
+			{
+				ssui_show_error_message("Your browser's cookie functionality is turned off. Please turn it on.")
+			}
+			
+		});
+
+		
+
+</script>
+
+	</head>	
+	
+	<body>			
+			<table id="main-frame">
+				<!-- Debug -->
+				<tr style="display:none"><td id="app-debug"></td></tr>				
+				<tr style="display:none"><td id="ss-debug"></td></tr>
+				<!-- Header -->
+				<tr><td id="app-header">
+						
+					<table width="100%">
+						<tr>
+							<!-- Application Title -->
+							<td>
+								<a class="app-title" href="./">Pupasuite 3</a><br><br><font class="app-subtitle">prioritization of SNPs in genotyping experiments based on functional properties</font>
+							</td>
+							<!-- 
+								<td>
+									<a href="index.html"><img alt="title" class="app-title" src="images/title.png"></img></a>
+								</td>
+							 -->
+							<!-- WUM area -->
+							<td id="app-secondary-links-area">
+								
+								<table id="app-secondary-links">									
+									<tr>									
+										<td class="app-secondary-link">
+											<a class="app-secondary-link" href="index.html">home</a>
+										</td>
+										<td class="app-secondary-link-separator">&#160;|&#160;</td>								
+										<td class="app-secondary-link">
+											<a class="app-secondary-link" target="_blank" href="http://docs.bioinfo.cipf.es/wiki/pupasuite">help</a>
+										</td>
+										<td class="app-secondary-link-separator">&#160;|&#160;</td>
+										<td class="app-secondary-link">
+											<a class="app-secondary-link" target="_blank" href="http://bioinfo.cipf.es/pupaswiki">tutorial</a>
+										</td>
+										<td class="app-secondary-link-separator">&#160;|&#160;</td>
+										<td class="app-secondary-link">
+											<a class="app-secondary-link" id='wum-contact' href='javascript:void(0)' onclick='contact_us()'>contact</a>
+										</td>
+									</tr>
+								</table>
+									
+							</td>
+						</tr>
+											
+					</table>						
+				</td></tr>
+			
+			
+				
+				<!-- Body -->
+				<tr><td id="app-body" class="app-area">
+						<div id="info-area" class="wum-message wum-info-message"></div>
+					<div id='DivProgress' class='UpdateProgressNormal'>
+						<table style='width:100%; height:100%'>
+							<tr valign='middle'>
+								<td align='center'><img src='resources/images/icons/Waiting.gif' alt='' /></td>
+							</tr>
+						</table>
+					</div> 
+										
+					<div id="wum-messages-container">
+						<div id="info-area" class="wum-message wum-info-message"></div>						
+						<div id="warning-area" class="wum-message wum-warning-message"></div>						
+						<div id="error-area" class="wum-message wum-alert-message"></div>						
+					</div>
+					
+					
+					 
+					<table width="100%">
+						<tr>
+							<!-- Application Title -->
+							<td id="work-area-container">
+							
+								<table id='work-area'>
+									<tr>
+										<td id='work-area-title' class='sub-title'>
+										<!-- INSERT YOUR TITLE HERE -->						
+										</td>
+									</tr>
+									<tr>
+										<td id='work-area-content'>
+												<br/>
+												<br/>
+												<div id="wellcome"  style="text-align: justify">
+												
+												<blockquote>
+												<b>New features in Pupasuite 3.1:</b> 
+													<ul>
+														<li><b>Tools: </b>Some tools have been upgraded and some fixes have been done</li>
+														<li><b>Performance improvements: </b>Many libraries have been upgraded and some tools have been rewritten to speed up analysis</li>
+														<li><b>Bandwith usage: </b>A more intelligent server communication has been developed, by doing this the bandwith has been reduce in almost 90%</li>
+														<li><b>Bug fixes: </b>Some small bugs have been detected and fixed</li>
+													</ul>
+												</blockquote>
+												<br/>
+												<br/>
+												<b>PupaSuite</b> is an interactive web-based SNP analysis tool that allows for the selection of relevant SNPs within a gene, based on different characteristics of the SNP itself, such as validation status, type, frequency/population data and putative functional properties (pathological SNPs, SNPs disrupting potential transcription factor binding sites, intron/exon boundaries...). Also, PupaSuite provides information about LD parameters (based on genotype data from HapMap) and identifies haplotype blocks and tag SNPs (using the Haploview software)
+												<br/><br/>
+												<b>PupaSuite</b> was created to join PupaSNP & PupasView in a single, integrated suite, to improve their functionality and to implement new facilities such as the analysis of user's data to derive haplotypes with functional information. A new estimator of putative effect of polymorphisms has been included that uses evolutionary information. Also SNPeffect database predictions have been included.
+												<br/><br/>
+												<b>Pupasuite</b> has been extensively re-engineered and now it includes the use of web services and Web 2.0 technology features, a new user interface with persistent sessions and a new extended database of SNP identifiers. Pupasuite is available at <a href="http://pupasuite.bioinfo.cipf.es">http://pupasuite.bioinfo.cipf.es</a>
+												<br/>
+												<br/>
+												Homepage: <a href="http://pupasuite.bioinfo.cipf.es">http://pupasuite.bioinfo.cipf.es</a>
+												</div>	
+										</td>
+										
+										<td style="padding: 10px; border-style:solid; border-width: 0px 1px 0px 0px; border-color: #aaa; width:30px">
+										</td>
+										
+										<td style="text-align:center; width: 40%">
+											<div id='user-area' style="text-align:center; padding:15px"></div>
+											<div id='login-messages-area' style="color: red;"></div>
+										</td>
+									</tr>
+								</table>
+														
+							</td>
+							
+						</tr>
+					</table>
+							
+				</td></tr>
+				
+				<!-- Footer -->
+				<tr><td id="app-footer" class="app-area">
+						
+						<table width="100%">
+							<tr>
+								<!-- Foot comments -->
+								<td id="app-foot-comments">
+									<div class='big-comment'>Pupasuite 3.1.0</div><br/>
+									<div class='small-comment'>
+										<a class="app-link" href="http://bioinfo.cipf.es">http://bioinfo.cipf.es</a> &#160;|&#160;										
+										<a class="app-link" href="http://pupasuite.bioinfo.cipf.es">http://pupasuite.bioinfo.cipf.es</a>										
+									</div>									
+								</td>					
+							</tr>
+						</table>
+						
+				</td></tr>				
+			</table>
+			
+		
+			
+	</body>
+		
+</html>

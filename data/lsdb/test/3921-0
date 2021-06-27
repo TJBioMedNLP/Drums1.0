@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GLay Homepage</title>
+<link href="styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="oneColFixCtrHdr">
+
+<div id="container">
+  <div id="header" name="header">
+  <!-- end #header --></div>
+  <div id="navigator"><ul><li><a href="#intro">Intro</a></li><li><a href="#installation">Installation</a></li><li><a href="#usage">Usage</a></li>
+  <li><a href="#comparison">Comparison</a></li>
+  <li><a href="#gallery">Gallery</a></li><li><a href="#references">References</a></li></ul></div>
+  <div id="mainContent">
+    <!-- Introduction----------------------->
+	<div id="intro" name="intro" class="chapter">
+    <h5>Introduction</h5>
+    GLay is a cytoscape plugin that offers an assorted collection of community analysis algorithms and layout functions, dynamically linked from igraph.
+    <br/><br/>
+    <div class="backToTop"><a href="#header">Back to top</a></div>
+    </div>
+    <!-- Installation----------------------->
+    <div id="installation" name="installation" class="chapter">
+    <h5>Installation</h5>
+    <div>To install, simply extract, and put glay.dll and glay.jar into <code>cytoscape/plugins/</code> folder. Currently we only provide C++ binaries for windows vista/7 64bit platform. Binaries for other platforms will be released in the future. <br/><br/>
+        The latest build of GLay can be downloaded here: <br/><br/>
+        
+        <span style="color:#CC0033;">Note: due to the swingx upgrade of Cytoscape 2.7.0, the old version of GLay is not compatible. Please download the latest version for Cytoscape 2.7.0+ </span><br/><br/>
+        
+        <div class="downloadlink"><a href="files/GLay.zip">For Cytoscape 2.6.3 and before</a></div>         
+        <div class="downloadlink"><a href="files/GLay_C2.7.0.zip">For Cytoscape 2.7.0+</a></div>
+        <br/>
+		<br/>
+        
+        Here's a rush release of the JAVA and C++ source files for GLay. The cleaned versions will be released in the near future. <br/><br/>
+        <div class="downloadlink"><a href="files/GLay_source.zip">GLay Netbeans workspace</a></div>         
+        <div class="downloadlink"><a href="files/GLay_CPP.zip">GLay windows c++ files</a></div>
+        <br/><br/>
+        <div style="border:1px dashed #888;padding: 5px;">
+        <strong>Instructions on compiling on Linux</strong><br/>
+        Samad Lotia from Agilent Technologies offered some help on compiling the source code on Linux OS. In order to do so, you will need the following jar libs, in addition to Cytoscape source jars:<br/><br/>
+        <div class="downloadlink"><a href="files/jna.jar">JNA 3.2.5</a> </div>
+        <div class="downloadlink"><a href="files/mdsj.jar">MDSJ</a> </div>
+        <br/>
+        And he offered a build file to compile the java code. <span style="color:#CC0033;">Please modify the build.xml file to let it point to the correct location of Cytoscape, JNA and MDSJ libs.</span><br/><br/>
+        <div class="downloadlink"><a href="files/build.xml">build.xml</a></div><br/>
+        
+        Here's he's procedure to compile the C++ code of GLay on Linux. You will need igraph library:<br/><br/>
+		<div class="downloadlink"><a href="files/instructions.txt">instructions on compile glay C++ on linux</a></div><br/>
+        
+        Finally, you will need this java source to compile GLay on Linux (The Netbeans workspace file detects whether platform is windows. If not, the plugin will set all GLay C++ functions not accessible)<br/><br/>
+        <div class="downloadlink"><a href="files/GLay_C2.7.0_linux.zip">GLay C2.7.0 Linux Java source</a></div><br/>
+        </div>
+        <br/>
+    </div>
+    <div class="backToTop"><a href="#header">Back to top</a></div>
+    </div>
+    <!-- Usage----------------------->
+    <div id="usage" name="usage" class="chapter">
+    <h5>Usage</h5>
+    <div>
+    <strong>Basics:</strong>
+    <ul>
+    	<li>
+        	To load community analysis, go to Cytoscape->Plugins->GLay
+        </li>
+        <li>
+        	To use igraph layout, go to Cytoscape->Layout->GLay-igraph
+        </li>
+    </ul>
+    
+	<strong>Community Algorithms:</strong><br>
+    <ul>
+    	<li>
+        	<span class="strongLabel">FastGreedy(G)</span>: A fast algorithm with greedy optimization of the modularity score. The algorithm is described in detail by Clauset et al. in the paper <a href="http://www.ece.unm.edu/ifis/papers/community-moore.pdf" target="top">here</a>. The algorithm begins by setting each node into a separate community and progressively merge those with the maximum increase to the modularity score. The hierarchical merging tree is cut at the point where maximum modularity is achieved. This (G) version is a Java implementation and can run on all platforms. It works on both connected and disconnected networks.<br/>
+        	<br/>
+        </li>
+        <li>
+        	<span class="strongLabel">FastGreedy(HE,HN,HEN)</span>: It has been proposed by Wakita et. al in this <a href="http://www2007.org/posters/poster950.pdf" target="top">paper</a> that sometimes FastGreedy algorithm tend to produce unbalanced communities, with one or a few very big community and many other very small communities. They add a cluster size or edge density penalty at each merging step to penalize those merges which result in giant communities. The result is a slightly compromised modularity score but with much balanced community size distrition. Please refer to the paper for further details. These are also Java implementation and are therefore platform independent.<br/><br/>   
+        </li>
+        <li>
+        	<span class="strongLabel">Cluster Connected Components(I)</span>: This is an igraph function calculates connected components of a network using Breadth-first search. The resultant clusters are connected subnetworks from the original network. The user may select a component, the choose File->New->Network->Selected Nodes, all Edges(Ctrl+N) to create a new connected subnetwork. This function can be used to isolate the large connected components in a network from the small connected components and singletons.<br/><br/>
+        </li>
+        <li>
+        	<span class="strongLabel">Fast Greedy(I)</span>: This is the igraph version of the fast greedy algorithm, more efficient than our Java implementation.<br/><br/>
+        </li>
+        <li>
+        	<span class="strongLabel">Walk Trap(I)</span>: This is an igraph function using random walks to detect community structure. The basic idea is that short random walks tend to stay in the same community(From igraph R function description). The original paper by Pons et. al is <a href="http://arxiv.org/abs/physics/0512106" target="top">here</a>. Note that it only works on connected networks, which can be obtained using Cluter Connected Components.<br/><br/>    
+        </li>
+        <li>
+        	<span class="strongLabel">Label Propagation(I)</span>: This is a very efficient igraph function using label propagation algorithm. Each node is in a unique community to begin wih, then the communities are assigned progressively via majority vote in the neighbourhood. This algorithm works on both connected and disconnected networks. For details about this algorithm, please refer to the paper by Raghavan et. al <a href="http://arxiv.org/abs/0709.2938" target="top">here</a>.<br/><br/>
+        </li>
+        <li>
+        	<span class="strongLabel">Edge Betweenness(I)</span>: This is one of the earliest community detection algorithms proposed my Newman et. al. Edge betweenness is a score which measures the number of shortest path flows through a certain edge. Edges with a high betweenness is thus considered as a bridge connecting communities with densely connected nodes. By gradually remove the edges with the highest betweenness score we will get a dendrogram, in which the root is the entire network and the leafs are individual vertices. The original paper by Newman et. al can be found <a href="http://portal.ncibi.org/gateway/pdf/newman%20community%20struct%20networks%20phys%20rev.pdf" target="top">here</a>. This algorithm works only on connected networks.<br/><br/>   
+        </li>
+        <li>
+        	<span class="strongLabel">Spin Glass(I)</span>: This is an igraph function tries to find communities via spin-glass model and simulated annealing. The original paper by Reichardt can be found <a href="http://arxiv.org/abs/cond-mat/0603718" target="top">here</a>. This algorihm also works only on connected networks.<br/><br/> 
+        </li>
+        <li>
+        	<span class="strongLabel">Spin Glass Single(I)</span>: Similar algorithm as the previous one, this method allows identification of community surrounding one or a few nodes, without computing the global community structure. To use this algorithm the user needs to select one mor a few nodes as seeds. This algorithm also works only on connected networks.<br/><br/>   
+        </li>
+    	<li>
+        	<span class="strongLabel">Leading Eigenvector(I)</span>: This is an igraph function finding communities by calculating the leading non-negative eigenvector of the modularity matrix. From igraph R package reference manual, "The heart of the method is the definition of the modularity matrix, B, which is B=A-P, A being the adjacency matrix of the (undirected) network, and P contains the probability that certain edges are present according to the ‘configuration model’. In other words, a P[i,j] element of P is the probability that there is an edge between vertices i and j in a random network in which the degrees of all vertices are the same as in the input graph. The leading eigenvector method works by calculating the eigenvector of the modularity matrix for the largest positive eigenvalue and then separating vertices into two community based on the sign of the corresponding element in the eigenvector. If all elements in the eigenvector are of the same sign that means that the network has no underlying comuunity structure." For more details, please refer to the original paper by Newman et. al <a href="http://arxiv4.library.cornell.edu/abs/physics/0605087" target="top">here</a>.<br/>
+        </li>
+    	      
+    </ul>
+    <div style="padding:3px; color:#666;">Legends in community algorithms:<br/> 
+      <img src="images/link_1.png" width="16" height="16" /> This algorithm works only on connected network<br/>
+      <img src="images/link_break.png" width="16" height="16" /> This algorithm works both on connected and disconnected network<br/>
+      <img src="images/chart_pie_link.png" width="16" height="16" /> This algorithm works on connected network, and requires one of more selected nodes as seed<br/>
+      </div><br/><br/>    
+    
+    <strong>Layout Algorithms:</strong>
+    <ul>
+    	<li>
+        	<span class="strongLabel">GraphOPT</span>: a port of graphopt layout by Michael Schmuhl. The original library can be found <a href="http://www.schmuhl.org/graphopt/" target="top">here</a>. It optimizes network layouts. <br/><br/>
+        </li>
+        <li>
+        	<span class="strongLabel">DRL</span>: Force directed layout algorithm tailored for very large networks. (Currently got some problems.)<br/><br/>
+        </li>
+            	<li>
+        	<span class="strongLabel">Fruchterman Reingold</span>: Force based layout algorithm proposed by Fruchterman and Reingold.<br/><br/>
+        </li>
+            	<li>
+        	<span class="strongLabel">Kamada Kawai</span>: Force based layout algorithm proposed by Kamada Kawai. It works better on a connected network.<br/><br/>
+        </li>    	
+        <li>
+        	<span class="strongLabel">Reingold Tilford Tree/Circular</span>: Generates hierarchical layout, either circular or tree-like. Need to define a node as root.<br/><br/>
+        </li>
+            	<li>
+        	<span class="strongLabel">Fruchterman Reingold Grid</span>: similar to Fruchterman algorithm with repelling force calculated only between vertices that are closer within a limit. It's very efficient on large networks.<br/><br/>
+        </li>
+        	    	<li>
+        	<span class="strongLabel">LGL</span>: For large connected graphs, similar to Large Graph Layout software at <a href="http://bioinformatics.icmb.utexas.edu/lgl" target="top">here</a>. The algorithm needs to define a node as root. If not specified, the algorithm picks one at random.<br/><br/>
+        </li>
+            	<li>
+        	<span class="strongLabel">MDS</span>: 2D multi-dimensional scaling based on the distance matrix computed from shortest paths. Not suitable for large networks. 
+        </li><br/>
+        
+    </ul>
+    <div style="padding:3px; color:#666;">Legends in layout algorithms:<br/> 
+      <img src="images/bullet_green.png" width="16" height="16" /> This algorithm requires selected node a seed/root. If not specified, a node will be chosen at random.<br/>
+      <img src="images/link.png" width="16" height="16" /> This algorithm works only or better on connected network<br/>
+      <img src="images/link_add.png" width="16" height="16" /> This algorithm works on connected network, and requires one selected node as seed/root. If not specified, a node will be chosen at random.<br/>
+      </div><br/><br/>
+    </div>
+    
+    <strong>User Interface:</strong><br/><br/>
+    <center>
+    	<img src="images/ui.png" width="600" height="603" />
+    </center>
+        
+    <br/><br/>
+    The above figure explains the functions can be executed from the user interface. Parameters for layout algorithms can be tuned in the layout config dialogue. Note that the default settings are adequate for majority of operations.<br/><br/>
+    <div class="backToTop"><a href="#header">Back to top</a></div>
+    </div>
+    
+    <!-- Comaprison ------>
+    <div id="comparison" name="comparison" class="chapter">
+    <h5>Comparison</h5>
+    A Brief comparison with other graph clustering methods<br/><br/>
+    
+    <strong><a href="http://baderlab.org/Software/MCODE" target="top">MCODE</a></strong><br/>
+    This plugin is designed for detecting clusters with strongly connected nodes from a network. Compared with commmunity algorithms, MCODE tend to produce smaller clusters; also it doesn't necessarily assign membership to all the nodes. In our test on a network of 5781 nodes and 83316 edges, the computation time for MCODE is 148s and 15s for igraph fast-greedy community algorithm. <br/><br/>
+    
+    <strong><a href="http://baderlab.bme.jhu.edu/baderlab/index.php/NeMo" target="top">NEMO</a></strong><br/>
+    This plugin is similar to MCODE. It scores a pair of nodes based on the likelihood of them sharing the same neighbour. NEMO halted after ~ 5 minutes of execution on the same network mentioned before.<br/>
+    <br/>
+    
+    <strong><a href="http://www.cgl.ucsf.edu/cytoscape/cluster/clusterMaker.html" target="top">ClusterMaker</a></strong><br/>
+    This package provides several nice methods for network clustering, including Hierarchical Clustering, K-means and MCL. The major difference between these methods and community algorithms is that they require at least one numerical attribute, such as microarray gene expression, for computing distance matrices. <br/><br/> 
+    
+    Screenshots of <strong>GLay</strong>, <strong>MCODE</strong> and <strong>NEMO</strong> are given below. Note that MCODE and NEMO tend to produce small clusters.<br/><br/>
+    <!--use center tag seems to be the most easy way to center image-->
+    <center>
+    <img style="text-align:center;display:block;" src="images/GLay.png"/>
+    </center><br/><br/>
+    
+      <center>
+    <img style="text-align:center;display:block;" src="images/MCODE.png"/>
+    </center><br/><br/>
+    
+      <center>
+    <img style="text-align:center;display:block;" src="images/NEMO.png"/>
+    </center><br/><br/>
+    
+    <div class="backToTop"><a href="#header">Back to top</a></div>
+    </div>
+    
+    
+    <!-- Gallery----------------------->
+    <div id="gallery" name="gallery" class="chapter">
+    <h5>Gallery</h5>
+    Some Screenshots from GLay examples<br/><br/>
+    
+    Bind-human dataset, largest connnected component, GLay dark style w/ community algorithm, Fruchterman-Reingold Grid layout<br/><br/>
+    <center>
+    <img style="text-align:center;display:block;" src="images/bind_human.png"/>
+    </center><br/><br/>
+    
+    GalFiltered, Reingold-tilford circular, GLay light style<br/><br/>
+    <center>
+    <img style="text-align:center;display:block;" src="images/circular.png"/>
+    </center><br/><br/>
+    
+    
+    <div class="backToTop"><a href="#header">Back to top</a></div>
+    </div>
+    
+    <!-- References----------------------->
+    <div id="references" name="references" class="chapter">
+    <h5>References</h5>
+    List of external links and references<br/><br/>
+    
+    <a href="http://www.cytoscape.org/" target="top">Cytoscape</a><br/>
+    <a href="http://igraph.sourceforge.net/" target="top">igraph</a><br/>
+    <a href="https://jna.dev.java.net/" target="top">Java Native Access (JNA)</a><br/>
+    
+    
+    <div class="backToTop"><a href="#header">Back to top</a></div>
+    </div>
+    
+    
+	<!-- end #mainContent --></div>
+  <div id="footer" name="footer">
+    <div>2010 Microarray Lab, site created and maintained by Gang Su. <a href="mailto:sugang@umich.edu">Email: sugang@umich.edu</a><br/>
+    Last updated: 7/27/2010
+    </div>
+  <!-- end #footer --></div>
+<!-- end #container --></div>
+</body>
+</html>

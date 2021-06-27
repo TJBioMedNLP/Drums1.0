@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>The Inferelator</title>
+
+<style type="text/css">
+.style1 {
+   border-width: 0;
+	margin-left: 40px;
+   font-size: medium;
+}
+.style2 {
+   font-size: x-large;
+	color: blue;
+}
+.style3 {
+   border-width: 0;
+   font-size: medium;
+   font-style: italic;
+}
+.style4 {
+   font-size: medium;
+   color: red;
+}
+.style5 {
+	font-size: large;
+	color: blue;
+}
+.style6 {
+   font-size: small;
+}
+.style7 {
+   font-size: small;
+	color: purple; 
+}
+.style8 {
+   font-size: small;
+   color: green;
+}
+
+</style>
+</head>
+<body title="The Inferelator">
+<span class="style2"><br />
+The Inferelator - genetic regulatory networks inference algorithm<br />
+</span>
+
+ <span class="style1"><br /> 
+  Here you can:<br /> <span class="style4">1)</span> download the inferelator<br /> <span class="style4">2)</span> gets hands on experience 
+  with the inferelator 
+ <br>
+ <span class="style4">*</span><span class="style6"> For more information about the inner workings of the inferelator read 
+  <a href="http://genomebiology.com/2006/7/5/R36">InferelatorPaper</a>,
+  <a href="http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0009803">DREAM3 top performer paper</a>,
+  DREAM4 top performer paper (coming up soon).<br />
+  <span class="style4">**</span>For a systems-biology application of the inferelator (on <span style="font-style: italic;"> Halobacter</span>) read
+   <a href="http://www.cell.com/content/article/abstract?uid=PIIS009286740701416X">cellPaper</a>.</span>
+ <hr style="height: -7px" /><br />
+ 
+ <span class="style2">Dowloading the Inferelator </span><br /><br />
+
+<p> You need to input a username and password to download the Inferelator.
+This password can be found on the home page of our google group "Inferelator announcement".
+Please join the group with your academic email address to recieve the download password and notification of new releases and bug
+fixes. Feel free to post discussions to the group.</p>
+
+<p> Download top performer   <a href="http://wiki.c2b2.columbia.edu/dream/index.php/The_DREAM_Project">DREAM4</a>
+ pipeline: <a href="files/dream4pipelineV1.4.1.zip">dream 4 pipeline V:1.4.1</a>.<br />
+<p> Download the original Inferelator code (tutorial below): <a href="files/inferelator.zip">Inferelator V:1.1</a>.
+
+
+<p>Registeration is simple:</p>
+
+<p><em>note: If you don't want to receive any email from the group, please
+remember to set the 'Delivery' type of your account as 'No Email'.</em>
+
+
+<table border=0 style="background-color: #fff; padding: 5px;" cellspacing=0>
+  <tr><td>
+    <img src="http://groups.google.com/groups/img/3/groups_bar.gif"
+         height=26 width=132 alt="Google Groups Beta">
+
+  </td></tr>
+  <tr><td style="padding-left: 5px">
+    <b>Subscribe to Inferelator announcements</b>
+
+  </td></tr>
+  <form action="http://groups.google.com/group/inferelator-announcements/boxsubscribe">
+  <tr><td style="padding-left: 5px;">
+    Email: <input type=text name=email>
+
+           <input type=submit name="sub" value="Subscribe">
+  </td></tr>
+</form>
+<tr><td>
+  <p> <a href="http://groups.google.com/group/inferelator-announcements">Visit this group</a>
+</td></tr>
+</table></p>
+
+
+ <hr style="height: -7px" /><br />
+ <span class="style2"> Inferelator Tutorial for version 1.1 </span><br /><br />
+
+ <br /><span class="style4">1)</span> extract the the inferelator folder from inferelator.zip.<br />
+ <br /><span class="style4">2)</span> you should now see one inferelator folder, and under it three more folders:<br />
+ ---data (here we have the input data structures);<br /> 
+ ---R_scripts (all scripts required, for now you should only pay attention to main.R);<br />
+ ---output (here the output of a run is saved).<br />
+ <br /><span class="style4">3)</span> open the data folder, and see 4 main data structures:<br />
+ ---tfNames (has the names of putative transcription factors we consider as predictors);<br />
+ ---ratios (this is the expression matrix, rows are genes, columns are conditions);<br />
+ ---clusterStack (to reduce complexity of whole genomes you may want to cluster genes, each cluster is then a transcriptional unit);<br />
+ ---colMap (the inferelator learns causation out of time series data, but uses equilibrium measurements as well to increase statistical power, thus it requires a data structure that keeps a tab on which conditions belong to a time-series experiment).<br />
+ <br /><span class="style4">4)</span> open R interface (Next sections assume familiarity with the R statistical language).<br />
+ <br /><span class="style4">5)</span> load the four data-structures for e.coli: (this data-structures are required for an inferelator run)<br />
+ ---type tfNames to see a list of b-numbers used as gene names in e.coli (this list is taken from <a href="http://regulondb.ccg.unam.mx">regulonDB</a>)<br />
+ ---type str(ratios) to see a matrix containing the expression data (each column is a microarray experiment, and we have more then 4000 mRNA measurements in each experiment).<br />
+ ---type length(clusterStack), this is the first non trivial data-structure: (note that there are only ~370 clusters, thus we reduced the number of measurements from ~4000 to ~370)<br />
+ ---type str(clusterStack[[1]]), this shows you an object for the first bicluster out of a list of ~370 clusters (it should look something like this)<br />
+ <br />(<span class=style7>purple</span>=text copied from R interface, <span class=style8>green</span>=comments to help you make sense out of it)<br />
+<br /><span class=style7> 
+	$ nrows    : int 41 <span class="style8">(number of genes in cluster 1)</span><br />
+	 $ ncols    : int 285 <span class="style8">(this is actually a bicluster so here are the number of conditions in the cluster, a bicluster is simply a cluster over rows and columns)</span><br />
+	 $ rows     : chr [1:41] "B3786" "B3620" "B3166" "B4161" ... <span class="style8">(names of 41 genes in the cluster)</span><br />
+	 $ cols     : chr [1:276] "luc___U_N0025_r2" "mazF___U_N0025_r1" "mazF___U_N0025_r2" "mazF___U_N0025_r3" ... <span class="style8">(names of 276 coditions in the cluster)</span><br />
+	 $ p.clust  : num -4.33 <span class="style8">(associated confidence level we have for this cluster)</span><br />
+	 $ e.val    : num 4.8e-05 <span class="style8">(associated confidence level we have for this cluster)</span><br />
+ 	$ k        : int 1 <span class="style8">(this is the k'th cluster in clusterStack)</span><br />
+ 	$ resid    : num 0.309 <span class="style8">(a measure of how similar the expression of all the genes in the cluster is)</span><br />
+ 	$ net.p.old: Named num [1:6] 1.00e-30 1.00e-30 7.67e-13 2.00e+00 1.00e-30 ... <span class="style8">(not important for us)</span><br />
+ 	 ..- attr(*, "names")= chr [1:6] "prolinks.GC" "prolinks.GN" "prolinks.PP" "prolinks.RS" ...<br />
+ 	$ motif.out:List of 4 <span class="style8">(not important for us)</span><br />
+ 	 ..$ p.values: Named num [1:41] -6.04 -0.65 -4.35 -4.46 -2.51 ...<br />
+ 	 .. ..- attr(*, "names")= chr [1:41] "B3786" "B3620" "B3166" "B4161" ...<br />
+ 	 ..$ e.values: num [1:3] 4.8e-05 4.4 96<br />
+ 	 ..$ pssms   :List of 3<br />
+ 	 .. ..$ : num [1:25, 1:4] 0.1 0.1 0 0 0 0.2 0.8 0.2 0.2 0 ...<br />
+ 	 .. ..$ : num [1:21, 1:4] 0 0 0 0.2 0.3 0 0 0.1 0 0 ...<br />
+ 	 .. ..$ : num [1:20, 1:4] 0 0 1 0 0.2 0 0 0 0 0.4 ...<br />
+ 	 ..$ diagrams: Named chr [1:41] "26_[-1]_9_[-2]_9_[+3]_40_[+1]_1_[+1]" "[-2]_18_[-2]_4_[-3]_20_[-3]_14_[+3]_14_[-1]_4" "40_[+2]_1_[+1]_31_[-3]_4_[+1]_34" "35_[+3]_3_[-3]_90_[+3]_13" ...<br />
+ 	 .. ..- attr(*, "names")= chr [1:41] "B3786" "B3620" "B3166" "B4161" ...<br />
+ 	$ redExp   : Named num [1:445] 0.511 0.521 0.466 0.418 0.417 ... <span class="style8">(this is the average expression, over genes that belong to this cluster; thus we get a vector of the cluster expression in all 445 conditions)</span><br />
+ 	 ..- attr(*, "names")= chr [1:445] "dinI___U_N0025_r1" "dinI___U_N0025_r2" "dinI___U_N0025_r3" "dinP___U_N0025_r1" ...<br />
+</span>
+<br />in order to use the inferelator with your own data you will need to create clusterStack (each cluster could be a single gene!) containing $nrows,$ncols,$rows,$cols and $redExp.<br />
+ ---type length(colMap) this is the number of conditions in our data set <br />
+ ---type str(colMap[[200]]), this shows you an object for condition 200 out of 445 coditions total in colMap <br />
+	<br /><span class=style7>
+	 $ isTs     : logi TRUE <span class="style8">(True because this condition is part of a Time series)</span><br />
+	 $ is1stLast: Factor w/ 4 levels "e","f","m","l": 3 <span class="style8">(it is "m" for middle of a time series; the other three options are: "e"=equilibrium/not-Time-series, "f"=first-in-Ts and "l"=last-in-Ts)</span><br />
+	 $ prevCol  : chr "T0_N0025_r3" <span class="style8"> (the previous time-point/condition-name was "T0_N0025_r3")</span><br />
+	 $ del.t    : int 24 <span class="style8">(between the previous and current time-points 24 minutes have passed)</span><br />
+	 $ condName : Named chr "T24_N0000_r3" <span class="style8">(this condition name is "T24_N0000_r3", thus this is the name of condition 200)</span><br />
+ 	 ..- attr(*, "names")= chr "alias"<br />
+	</span>
+<br />the other option is that a condition is not part of a time series (unilike most other methods, the inferelator can use both time-series and equilibrium data simultaniously, thus increasing statistical power)<br />
+---type str(colMap[[1]]), this shows you that the first condition is not part of a time series<br />
+	<span class=style7>
+	 $ isTs     : logi FALSE<span class="style8"> (False because this condition is not part of a time series)</span><br />
+	 $ is1stLast: Factor w/ 4 levels "e","f","m","l": 1<span class="style8"> (it is "e" for equilibrium, thus condition 1 is not part of a time-series experiment)</span><br />
+	 $ prevCol  : logi NA<span class="style8"> (it has no meaningful previous conditions/column, because it is not part of a time series, thus we set it to NA)</span><br />
+	 $ del.t    : logi NA<span class="style8"> (del.t is not defined as it is not part of a time series, thus we set it to NA)</span><br />
+	 $ condName : Named chr "dinI___U_N0025_r1"<span class="style8"> (this is the name of condition 1)</span><br />
+ 	 ..- attr(*, "names")= chr "alias"<br />
+	</span>
+<br />in order to use the inferelator with your own data you will need to create the colMap data structure.<br />
+<br /><span class="style4">6)</span> in your favorite editor open R_scripts/main.R (we will take a look at the first few lines where we set the run parameters)<br />
+<br /><span class=style7>
+	#////////////////// USER PARAMS #//////////////////<br />
+	trunc.cs <- T<span class="style8"> (here you can choose to truncate clusterStack as we will do here, if not truncated the inferelator will get a model for all transcription units in clusterStack) </span><br />
+	# trunc.cs.i <- 900000000 ## 20<span class="style8"> (if you don't truncate set this to very big value, i.e. bigger value then the number of clusters in clusterStack)</span><br />
+	trunc.cs.i <- 2<span class="style8"> (we will truncate the run after infering models for 1 and 2 clusters out of clusterStack)</span><br />
+	organism = "halo" # organism == "ecoli"<span class="style8"> (here we set a run for halo, change this for ecoli as we loaded data for ecoli)</span><br />
+	mod.bi.cols <- FALSE<span class="style8"> (not important)</span><br />
+	plot.it <- TRUE<span class="style8"> (set to True if you want plots to show under the output folder at the end of the run)</span><br />
+	singleInfer <- "all" # singleInfer <- 350<span class="style8"> (similarly to truncation we can choose to infer a model for only one bicluster, or for all)</span><br />
+	# set how many predictor max you want per transcriptional unit<br />
+	num.single.pred = 7; num.inter.pred = 5<span class="style8"> (here we set the maximum number of single predictors and interaction predictors, the actuall number of surviving predictors is shrinked further using L1-shrinkage)</span><br />
+	# set correlation by which interaction predictors are filtered (if bigger)<br />
+	max.inter.corr.cutoff = 0.75<span class="style8"> (we want our predictors to be different from each other, this does not allow for two interaction predictors correlated with each other by more then 0.75)</span><br />
+	# set correlation by which single predictors are filtered (if bigger)<br />
+	max.single.corr.cutoff = 0.9<span class="style8"> (similar to above only for single predictors)</span><br />
+	# set the time scale (should be around the expected half-life-time of mRNA in minutes)<br />
+	tau=15 <span class="style8"> (this is the time scale for mRNA reactions in minutes, for bacteria e.coli this is probably around 10 minutes)</span><br />
+	</span>
+<br /><span class="style4">7)</span> run main.R from inferelator folder, i.e type source("R_scripts/main.R") in R interactive shell.<br /> 
+ ---this starts an inferelator run, and infers a model for the first 2 clusters in clusterStack (should take about 30 seconds per cluster on a modest single processor).<br />
+<br /><span class="style4">8)</span> after the run ends, open output folder, in it you will see four files:<br />
+---2 plot files showing the L1-shrinkage process for each of the biclusters.<br />
+---1 log.txt file that gives information about the run time for each cluster.<br />
+---A modles.RData file containing the shrinked models for each cluster.<br />
+
+<br /><span class="style4">9)</span> load models.RData, into the R interactive shell.<br />
+---type str(models) to see a list of the two models corresponding to the two infered clusters.<br />
+<br /><span class=style7>
+List of 2<br />
+ $ : Named num [1:12] 0.20875 0.08486 0.04205 0.04009 0.00644 ...<br />
+  ..- attr(*, "names")= chr [1:12] "VNG6389G" "VNG5163G" "VNG1237C" "VNG1510C" ...<br />
+ $ : Named num [1:12] 0.1391 0.0624 0.0628 0.0836 0.0000 ...<br />
+  ..- attr(*, "names")= chr [1:12] "VNG5163G" "VNG1237C" "VNG6389G" "VNG1383G" ...<br />
+</span><br />
+---in this list each single/interaction predictor is assigned a negative or positive weight that corresponds to a repressor or activator respectively. The absolute value of the weight corresponds to the strenght of the predictor with respect to the other predictors. Note, some predictors are assigned a weight of zero, and thus were "shrinked" out of the model.<br />
+
+<br /><span class="style4">10)</span> repeat steps 5 to 9 for <span class="style3"> Halobacter </span>. (note that <span class="style3"> Halobacter </span> has an extra data structure, lambda, that needs to be loaded, it has to do with the custom microarray used for the experiments, and in general is not required for an inferelator run) 
+<hr style="height: -7px" /><br />
+</span>
+The Inferelator algorithm is continually developed at the <a href="http://biology.as.nyu.edu/object/facilities.gsb.html">Center for Genomics and Systems Biology</a>
+ by the <a href="http://homepages.nyu.edu/%7erb133/">Bonneau research group</a>.<br />
+ For questions about the inferelator algorithm or suggestions/corrections for the web-site please contact <a href="http://homepages.nyu.edu/~am2654/Aviv_Madar.html">Aviv Madar</a>.
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

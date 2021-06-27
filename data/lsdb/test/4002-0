@@ -1,0 +1,337 @@
+<html>
+    <head>
+        <title>DisProt</title>
+        <meta name="author" content="Vladimir Vacic (vladimir@vacic.org)">
+        <link rel="stylesheet" href="predictor/predictor.css" type="text/css">
+    </head>
+    <body>
+
+    <table width="800" align="center" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="780" height="60" nowrap>
+                <a href="http://www.ist.temple.edu"><img src="images/temple_logo.gif" width="53" height="60" border="0" hspace="0" vspace="0" align="left"></a>
+                <img src="images/title_predictor.gif" width="677" height="60" border="0" hspace="0" vspace="0" align ="left">
+                <a href="http://www.compbio.iupui.edu"><img src="images/indiana_logo.gif" width="60" height="60" border="0" hspace="0" vspace="0" align="right"></a>
+            </td>
+        </tr>
+        
+
+            <tr>
+                <td valign="top" bgcolor="#CCCCCC" height="32">
+                    <table height="32" border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr><td align="center" width="70"><b><a href="index.php">Home</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td height="1" bgcolor="#990033"><img src="images/cherry.gif" width="667"
+                    height="1" border="0"></td>
+            </tr>
+
+           <tr>
+                <td valign="top">
+                    <br><br><br>
+
+<p class="protein" align="left"><b>DisProt Predictor of Intrinsically Disordered Regions</b></p>
+<br>
+
+<form  action="Predictors_action.html" method="post" name="PredictorForm" onSubmit="return ValidateForm()">
+
+<table width="90%">
+
+
+                    <tr>
+                        <td valign="top">Download:</td>
+                        <td colspan="2" height="1">
+                        The VSL2 predictor package can also be downloaded
+                        <a href="download/VSL2.tar.gz">
+                        here</a>. You can choose whether to use computationally demanding
+                        features derived from PSI-BLAST profiles and/or secondary structure
+                        predictions. Here are some <a href="readmeVSL2.htm">detailed
+                        instructions</a> about how to setup it on your own machine.
+                        </td>
+                    </tr>
+
+
+  <tr>
+    <td colspan="2" height="1"><BR><img src="images/back_dot.gif" width="100%" height="1"><br><br></td>
+  </tr>
+
+  <tr>
+    <td valign="top">Note:</td>
+    <td>
+
+    Due to available computational resources we can provide only a 
+    limited number of predictions per day. For the VL2, VL3, VL3H, and VSL2B
+    predictors we can provide up to 100 predictions per IP address 
+    per day. The maximum length of a query sequence is limited to 
+    5,000 residues. For the VL3E and VSL2P predictors, up to 10 queries no 
+    longer than 500 residues can be processed per IP address per 
+    day.
+
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="1"><br><img src="images/back_dot.gif" width="100%" height="1"><br><br></td>
+  </tr>
+
+  <tr>
+    <td valign="top">!!!!!</td>
+    <td>
+    We have been experiencing occasional problems with web-based prediction system. If you submit a prediction job and don't get a response within 24 hours, please contact
+    our <a href="mailto:predictor@ist.temple.edu">system administrator</a>.
+    </td>
+  </tr>
+
+                    <tr>
+                        <td colspan="2" height="1"><br><img src="images/back_dot.gif"
+                            width="100%" height="1"><br><br></td>
+                    </tr>
+
+
+  <tr>
+    <td valign="top" width="150">
+      Input sequence:
+    </td>
+    <td>
+       <textarea name="sequence" rows=10 cols=60 wrap="VIRTUAL"></textarea>
+       <br><br>Please enter the sequence (without the Fasta header) using the <a href="help.php#code">single-letter AA code</a>.<br><br>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">Predictor:</td>
+    <td>
+        <input type="radio" name="predictor" value="vl2">VL2 (linear, 4 models)<br><br>
+        <input type="radio" name="predictor" value="vl3">VL3 (neural network based)<br>  
+        <input type="radio" name="predictor" value="vl3h" checked>VL3H (neural network based)<br>
+        <input type="radio" name="predictor" value="vl3e"
+                            >VL3E (neural network based)<br><br>
+        <input type="radio" name="predictor" value="VSLB">VSL2B (using 26 sequence-based features only)<br>
+        <input type="radio" name="predictor" value="VSLP"
+                            >VSL2P (also using 22 additional PSI-BLAST profile based features)<br><BR>
+            </td>
+  </tr>
+  <tr>
+    <td valign="top"><br>Output Window Length:</td>
+    <td><br>
+        <select name="window">
+	    <option selected value="1">1</option>
+	    <option value="11">11</option>
+	    <option value="21">21</option>
+	    <option value="31">31</option>
+	    <option value="41">41</option>
+	    <option value="51">51</option>
+	    <option value="61">61</option>
+	    <option value="71">71</option>
+	    <option value="81">81</option>
+	    <option value="91">91</option>
+	    <option value="101">101</option>
+	    <option value="111">111</option>
+	    <option value="121">121</option>
+        </select>
+     </td>
+  </tr>
+  <tr>
+     <td valign="top">E-mail address:</td>
+     <td><input type="text" name="email"><br><br>
+
+     If an e-mail address is provided, the predictions will be sent by e-mail upon completion. This is especially encouraged for VL3E and VSL2P predictors, which can take several minutes to process a sequence.
+
+</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><br>
+      <input type="submit" value="Submit">
+      <input type="reset" value="Clear form">
+    </td>
+  </tr>
+
+<tr><td> </td><td> </td></tr>
+
+
+
+  <tr>
+    <td colspan="2" height="1"><br><img src="images/back_dot.gif" width="100%" height="1"><br><br></td>
+  </tr>
+  <tr>
+    <td valign="top">Citation:</td>
+    <td>
+
+For VL2 predictor please refer to:
+
+<blockquote>
+Vucetic S., Brown C.J., Dunker A.K. and Obradovic Z., <a
+href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=12910457&dopt=Abstract">Flavors
+of protein disorder</a> (2003). Proteins 52 (4); 573-584.
+</blockquote>
+
+For VL3 and VL3H predictors please refer to:
+
+<blockquote>
+Obradovic Z., Peng K., Vucetic S., Radivojac P., Brown C. and Dunker A.K.,
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=14579347&dopt=Abstract">Predicting intrinsic disorder from amino acid sequence</a> 
+(2003). Proteins 53 (S6); 566-572.
+</blockquote>
+
+For VL3, VL3H and VL3E predictors please refer to:
+
+<blockquote>
+Peng K., Vucetic S., Radivojac P., Brown C. J. , Dunker A. K. and Obradovic Z.,
+<a href="predictor/JBCB_Peng_rev2nd.pdf">Optimizing Intrinsic Disorder Predictors with Protein Evolutionary
+Information</a> (2005). Journal of Bioinformatics and Computational Biology 3 (1); 35-60.
+</blockquote>
+
+For VSL2B and VSL2P predictors please refer to:
+
+<blockquote>
+Peng K., Radivojac P., Vucetic S., Dunker A.K., and Obradovic Z., Length-Dependent Prediction of Protein Intrinsic Disorder, BMC Bioinformatics 7:208, 2006. 
+</blockquote>
+
+<blockquote>
+Obradovic Z., Peng K., Vucetic S., Radivojac P., and Dunker A.K., Exploiting Heterogeneous Sequence Properties Improves Prediction of Protein Disorder, Proteins 61(S7):176-182, 2005.
+</blockquote>
+
+    </td>
+  </tr>
+</table>
+
+</form>
+<script language="JavaScript">
+
+function trim(trimObject)
+{
+    var trimString;
+    trimString = trimObject.value;
+
+    if (trimString.length == 0)
+    {
+        return false;
+    }
+
+    while('' + trimString.charAt(0)== ' ')
+    {
+        trimString = trimString.substring(1, trimString.length);
+    }
+
+    if(trimString.length == 0)
+    {
+        trimObject.value = "";
+        return false;
+    }
+
+    while(trimString.charAt(trimString.length - 1) == ' ')
+    {
+        trimString = trimString.substring(0, trimString.length - 1);
+    }
+
+    if(trimString.length == 0)
+    {
+        trimObject.value = "";
+        return false;
+    }
+
+    trimObject.value = trimString;
+    return true;
+}
+
+function ValidateEmail(emailObject)
+{ 	
+    var emailString = emailObject.value;
+    var seenAt      = false;
+    var c, i;
+
+    for(i = 0; i < emailString.length; i++)
+    { 
+        c = emailString.charAt(i);        
+
+        if (c == '@')
+        {
+            seenAt = true;
+        }
+
+        if(seenAt)
+        {                
+            if (c == '.')
+            {
+                return true;
+            }
+        }
+    }            
+
+    return false;
+}
+
+function ValidateForm()
+{
+
+    var sequence_ = document.PredictorForm.elements["sequence"],
+        email_    = document.PredictorForm.elements["email"];
+
+    if (!trim(sequence_))
+    {
+        alert("WARNING: No sequence specified!");
+        return false;
+    }
+
+    if (trim(email_))
+    {
+        if (!ValidateEmail(email_))
+        {
+            alert("Please enter a proper e-mail address.");
+            return false;
+        }
+    }
+}
+
+</script>
+
+<html>
+<head>
+<title>Disprot-footer</title>
+<meta http-equiv="Content-Type" content="text/html;">
+<!--Fireworks MX 2004 Dreamweaver MX 2004 target.  Created Tue Dec 21 15:43:31 GMT-0500 (US Eastern Standard Time) 2004-->
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "Century Gothic", Arial, sans-serif;
+	font-size: x-small;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table align = "center" border="0" cellpadding="0" cellspacing="0" width="782">
+
+<tr>
+<td><img name="footer_r3_c1" src="images/footer_r3_c1.jpg" width="163" height="16" border="0" alt=""></td>
+<td><img name="footer_r3_c2" src="images/footer_r3_c2.jpg" width="68" height="16" border="0" alt=""></td>
+<td><img name="footer_r3_c3" src="images/footer_r3_c3.jpg" width="76" height="16" border="0" alt=""></td>
+<td><img name="footer_r3_c4" src="images/footer_r3_c4.jpg" width="182" height="16" border="0" alt=""></td>
+<td><img name="footer_r3_c5" src="images/footer_r3_c5.jpg" width="81" height="16" border="0" alt=""></td>
+<td><img name="footer_r3_c6" src="images/footer_r3_c6.jpg" width="57" height="16" border="0" alt=""></td>
+<td><img name="footer_r3_c7" src="images/footer_r3_c7.jpg" width="155" height="16" border="0" alt=""></td>
+</tr>
+<tr>
+<td rowspan="2"><img name="footer_r4_c1" src="images/footer_r4_c1.jpg" width="163" height="65" border="0" alt=""></td>
+<td rowspan="2"><a href="http://medicine.iu.edu/"><img name="footer_r4_c2" src="images/footer_r4_c2.jpg" width="68" height="65" border="0" alt=""></a></td>
+<td rowspan="2"><img name="footer_r4_c3" src="images/footer_r4_c3.jpg" width="76" height="65" border="0" alt=""></td>
+<td><img name="footer_r4_c4" src="images/footer_r4_c4.jpg" width="182" height="46" border="0" alt=""></td>
+<td rowspan="2"><img name="footer_r4_c5" src="images/footer_r4_c5.jpg" width="81" height="65" border="0" alt=""></td>
+<td rowspan="2"><a href = "http://www.temple.edu/"><img name="footer_r4_c6" src="images/footer_r4_c6.jpg" width="57" height="65" border="0" alt=""></a></td>
+<td rowspan="2"><img name="footer_r4_c7" src="images/footer_r4_c7.jpg" width="155" height="65" border="0" alt=""></td>
+
+</tr>
+<tr>
+<td>
+<center><a href="contact.php"><b>Contact us</b></a></center>
+</td>
+</tr>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,314 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link type="text/css" href="http://www.atgc-montpellier.fr/style.css" rel="stylesheet" />
+  
+  <link type="image/x-icon" href="http://www.atgc-montpellier.fr/favicon.ico" rel="shortcut icon" />
+  <title>ATGC: PhyML</title>
+
+  <script type="text/javascript" src="http://www.atgc-montpellier.fr/include/utils.js"></script>
+  <script type="text/javascript" src="http://www.atgc-montpellier.fr/phyml/functions.js"></script></head>
+<body onload="DoLoad()">
+ <div id="page">
+<table id="banner" border="0" width="100%" cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr class="top">
+  <td class="top_middle">A T G C</td>
+ </tr>
+ <tr class="middle"><td></td></tr>
+ <tr class="bottom">
+  <td class="bottom_middle">
+   <a href="http://www.atgc-montpellier.fr/">South of France bioinformatics platform</a>
+  </td>
+ </tr>
+ </tbody>
+</table>
+<div id="menu">
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/">Home</a>
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/organization">Organization</a>
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/index.php?type=st">Citations &amp; Statistics</a>
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/index.php?type=pt">Partners</a>
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/index.php?type=pg">Online programs</a>
+ <hr class="niv1" />
+ <a class="niv2" href="http://www.atgc-montpellier.fr/phyml/">PhyML</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/benchmarks/">Benchmarks</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/datasets.php">Datasets</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/binaries.php">Downloads</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/faq.php">FAQ</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/news.php">News</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/">Online execution</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/paper.php">Papers &amp; contacts</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/versions.php">PhyML versions</a>
+ <hr class="invisible" />
+ <a class="niv3" href="http://www.atgc-montpellier.fr/phyml/usersguide.php">User guide</a>
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/index.php?type=bn">Binaries</a>
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/index.php?type=db">Databases</a>
+ <hr class="niv1" />
+ <a class="niv1" href="http://www.atgc-montpellier.fr/index.php?type=dt">Datasets</a>
+</div>
+  <div id="paragraphe">
+<h2>PhyML 3.0: new algorithms, methods and utilities</h2>
+<div>
+ Please cite:<br />
+ <a href="http://www.atgc-montpellier.fr/download/papers/phyml_2003.pdf" title="PhyML paper">
+  "A simple, fast, and accurate algorithm to estimate large phylogenies by maximum likelihood."
+ </a>
+</div>
+<div class="auteur">Guindon S., Gascuel O.</div>
+<div class="ref">Systematic Biology, 52(5):696-704, 2003.</div>
+   <hr />
+<h3>Server load: 100%</h3>
+<img width="100%" height="25" alt="100%" title="server load" src="http://www.atgc-montpellier.fr/pictures/serverload.jpg" />
+<hr />
+   <h3>PhyML online execution</h3>
+<!--
+<div class="important">
+An electrical shutdown occured on December 6th at 08:00 (GMT +1).<br />
+All running jobs were lost.<br />
+We apologize for the inconvenience.<br />
+</div>
+-->
+<form method="post" action="execution.php" enctype="multipart/form-data" name="options" onsubmit="return validate()">
+<input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
+<input type="hidden" name="ServerLoad" value="100" />
+ <table class="formulaire">
+  <caption>Input Data</caption>
+  <tr>
+   <td width="34%">Sequences<br />(PHYLIP format)</td>
+   <td><input name="userfile" type="file" size="15" /></td>
+   <td align="right" width="17%">
+    File<input type="radio" name="DataOption" value="" onclick="inputFileChanged(0)" checked="checked" />
+   </td>
+   <td width="17%">
+    <input type="radio" name="DataOption" value="phyml_ex.txt" onclick="inputFileChanged(0)" />Example <a href="http://www.atgc-montpellier.fr/phyml/phyml_ex.txt">file</a>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">Data Type</td>
+   <td align="right">
+    DNA<input type="radio" name="SequenceTypeOption" value="nt" onclick="sequenceTypeChanged()" checked="checked" />
+   </td>
+   <td>
+    <input type="radio" name="SequenceTypeOption" value="aa" onclick="sequenceTypeChanged()" />Amino-Acids
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">Sequence file</td>
+   <td align="right">
+    interleaved<input type="radio" name="SequenceFormatOption" value=" " checked="checked" />
+   </td>
+   <td>
+    <input type="radio" name="SequenceFormatOption" value=" -q" />sequential
+   </td>
+  </tr>
+  <tr class="last">
+   <td>Number of data sets</td>
+   <td colspan="3"><input name="NbDataSets" value="1" size="15" maxlength="15" /></td>
+  </tr>
+ </table>
+ <br />
+ <table class="formulaire">
+  <caption>Substitution Model</caption>
+  <tr>
+   <td width="34%">Substitution model</td>
+   <td colspan="3">
+    <select name="ModelName" onchange="modelChanged()"><option /></select>
+    <span class="note" id="ModelNote">
+     <a href="http://www.atgc-montpellier.fr/models/index.php?model=lg">LG model</a> is new and tends to outperform JTT and WAG
+    </span>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">Equilibrium frequencies</td>
+   <td align="right" width="17%">
+    <span id="Fq_left"></span>
+    <input type="radio" name="FqOption" value="m" />
+   </td>
+   <td width="17%">
+    <input type="radio" name="FqOption" value="e" checked="checked" />
+    <span id="Fq_right"></span>
+   </td>
+  </tr>
+  <tr>
+   <td>Transition / transversion ratio <br />(DNA models)</td>
+   <td><input name="Kappa" size="15" maxlength="15" /></td>
+   <td align="right">
+    fixed<input type="radio" name="KappaOption" onclick="kappaOptionChanged()" value="" />
+   </td>
+   <td width="17%">
+    <input type="radio" name="KappaOption" onclick="kappaOptionChanged()" value="e" checked="checked" />estimated
+   </td>
+  </tr>
+  <tr>
+   <td>Proportion of invariable sites</td>
+   <td><input name="Invar" value="0.0" size="15" maxlength="15" /></td>
+   <td align="right">
+    fixed<input type="radio" name="InvarOption" value="" checked="checked" />
+   </td>
+   <td>
+    <input type="radio" name="InvarOption" value="e" />estimated
+   </td>
+  </tr>
+  <tr>
+   <td>Number of substitution rate categories</td>
+   <td colspan="3"><input name="NbCatg" onchange="nbCatgChanged()" value="4" size="15" maxlength="15" /></td>
+  </tr>
+  <tr class="last">
+   <td>Gamma shape parameter</td>
+   <td><input name="Gamma" size="15" maxlength="15" /></td>
+   <td align="right">
+    fixed<input type="radio" name="GammaOption" onclick="gammaOptionChanged()" value="" />
+   </td>
+   <td>
+    <input type="radio" name="GammaOption" onclick="gammaOptionChanged()" value="e" checked="checked" />estimated
+   </td>
+  </tr>
+ </table>
+ <br />
+ <table class="formulaire">
+  <caption>Tree Searching</caption>
+  <tr>
+   <td width="34%">Starting tree(s)</td>
+   <td><input name="StartingTree" type="file" size="15" /></td>
+   <td align="right" width="17%">
+    File<input type="radio" name="StartingTreeOption" onclick="startingTreeChanged()" value="" />
+   </td>
+   <td width="17%">
+    <input type="radio" name="StartingTreeOption" onclick="startingTreeChanged()" value="BIONJ" checked="checked" />BIONJ
+   </td>
+  </tr>
+  <tr>
+   <td>Type of tree improvement</td>
+   <td colspan="3"><select name="MovementName" onchange="movementNameChanged()"><option /></select></td>
+  </tr>
+  <tr>
+   <td>Number of random starting tree</td>
+   <td><select name="RandomNum"><option /></select></td>
+   <td align="right">
+    yes<input type="radio" name="OptRandomOption" onclick="randomOptionChanged()" value="y" />
+   </td>
+   <td>
+    <input type="radio" name="OptRandomOption" onclick="randomOptionChanged()" value="n" checked="checked" />no
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">Optimise topology</td>
+   <td align="right">
+    yes<input type="radio" name="OptTopoOption" onclick="optimiseTopoOptionChanged()" value="y" checked="checked" />
+   </td>
+   <td>
+    <input type="radio" name="OptTopoOption" onclick="optimiseTopoOptionChanged()" value="n" />no
+   </td>
+  </tr>
+  <tr class="last">
+   <td colspan="2">Optimise branch lengths</td>
+   <td align="right">
+    yes<input type="radio" name="OptBranchesOption" onclick="optimiseBranchesOptionChanged()" value="y" checked="checked" />
+   </td>
+   <td>
+    <input type="radio" name="OptBranchesOption" onclick="optimiseBranchesOptionChanged()" value="n" />no
+   </td>
+  </tr>
+ </table>
+ <br />
+ <table class="formulaire">
+  <caption>Branch Support</caption>
+  <tr>
+   <td width="34%">Compute aLRT</td>
+   <td>
+    <select name="TestName"><option /></select>
+   </td>
+   <td class="note">
+     Use <a href="http://www.atgc-montpellier.fr/phyml/paper.php">aLRT</a> to save computing time
+   </td>
+   <td align="right" width="17%">
+    yes<input type="radio" name="OptaLRTOption" onclick="aLRTOptionChanged()" value="y" checked="checked" />
+   </td>
+   <td width="17%">
+    <input type="radio" name="OptaLRTOption" onclick="aLRTOptionChanged()" value="n" />no
+   </td>
+  </tr>
+  <tr class="last">
+   <td>Perform bootstrap</td>
+   <td colspan="2"><input name="NbBtsDataSets" value="100" size="15" maxlength="15" /></td>
+   <td align="right">
+    yes<input type="radio" name="OptBootOption" onclick="bootOptionChanged()" value="y" />
+   </td>
+   <td>
+    <input type="radio" name="OptBootOption" onclick="bootOptionChanged()" value="n" checked="checked" />no
+   </td>
+  </tr>
+ </table>
+
+ <br /><hr /><br />
+ <table class="formulaire">
+  <tr>
+   <td width="34%">Your name</td>
+   <td><input name="Name" size="25" /></td>
+  </tr>
+  <tr class="last">
+   <td>Your email</td>
+   <td colspan="3"><input name="Email" size="25" /></td>
+  </tr>
+ </table>
+<br />
+      <div align="center">
+      <input class="button" type="submit" value="Execute &amp; email results" />
+      </div>
+      </form>  </div>
+<div id="footer">
+ Webmaster: <a href="mailto:vincent.lefort@lirmm.fr?subject=%5BPlatform%5D">Vincent Lefort</a>, LIRMM.
+ <table>
+  <tr>
+   <td align="center" width="25%">
+    <a target="blank" href="http://www.cnrs.fr/ins2i/">
+     <img alt="CNRS-Ing&eacute;nierie" title="CNRS-INS2I"
+          src="http://www.atgc-montpellier.fr/pictures/logo_cnrs.gif" />
+    </a>
+   </td>
+
+   <td align="center" width="25%">
+    <a href="http://www.cirad.fr/">
+     <img alt="Logo CIRAD" title="CIRAD"
+          src="http://www.atgc-montpellier.fr/pictures/logo_cirad.png" />
+    </a>
+   </td>
+
+   <td align="center" width="25%">
+    <a href="http://www.ird.fr/">
+     <img alt="Logo IRD" title="IRD"
+          src="http://www.atgc-montpellier.fr/pictures/logo_ird.gif" />
+    </a>
+   </td>
+
+   <td align="center" width="25%">
+    <a target="blank" href="http://www.univ-montp2.fr/">
+     <img alt="Universit&eacute;e Montpellier 2" title="Universit&eacute;e Montpellier 2"
+          src="http://www.atgc-montpellier.fr/pictures/logo_UM2.gif" />
+    </a>
+   </td>
+  </tr>
+ </table>
+</div>
+ </div>
+</body>
+</html>

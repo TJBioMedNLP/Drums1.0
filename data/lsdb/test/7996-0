@@ -1,0 +1,169 @@
+
+<html>
+    <head>
+    <title>Searching the Gene Database</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Description" CONTENT="database of function predictions for organisms S. cerevisiae M. tuberculosis E.coli allowing search by orfname from gene ontology for above organisms">
+<meta name="Keywords" CONTENT="bioinformatics, gene function prediction, gene ontology, S. cerevisiae, M. tuberculosis, E. coli, ILP, inductive logic programming, orf function, orf prediction, gene prediction, Aberystwyth, computational biology, Amanda Clare, Ross King, Paul Wise, dna">
+    </head>
+<body background="http://www.genepredictions.org/jpegs/newTile.jpg">
+<script type="text/javascript" src="checkForm.js"></script>
+<table width="100%" cellspacing = "0" cellPadding = "4" border="1">
+ <tr>
+  <td align="middle"><a href="http://www.genepredictions.org/"><img src="jpegs/greenbanner2.gif" alt="Welcome to www.genepredictions.org" border="0"></a></td>
+</tr>
+
+<tr>
+
+<td>
+<table>
+<tr>
+<td>
+
+<table width="80%" cellspacing = "0" cellPadding = "4" border="1">
+<tr>
+
+<td>
+Welcome to www.genepredictions.org, a database of function
+prediction. This database can be searched by <b>ORF names</b> or 
+by <b>functional class</b>.<p>
+<ul>
+<li>If searching by <b>ORF names</b> please enter 
+the ORF names in the text box, or send us a file of space-separated 
+names.<p>
+
+<li>If searching for ORFs predicted to have a particular 
+<b>functional class</b>, please select <b>CLASS</b>, and submit. You will be 
+prompted to choose a class from the list available in our database.<p>
+</ul>
+In either case, your search can be restricted to a specific ORGANISM
+or INSTITUTE and you can request predictions made after a particular
+date (MONTH and YEAR).<p>
+
+If you chose to download the results as a file rather than as a web
+page, the file will be in tab separated format, suitable for viewing
+in a spreadsheet.<p>
+
+We are happy to host predictions of functional class. If you would
+like us to include your predictions in this database, please <a
+href="mailto:rdk@aber.ac.uk">email us</a>.
+
+</td>
+
+
+</tr>
+</table>
+</td>
+
+
+ <form action="index.php" name="geneForm" onSubmit="return check();" enctype="multipart/form-data" method="POST">
+
+<td>
+    <table width="70%" cellspacing = "0" cellPadding = "4" border="1">
+     <tr>
+      <td><b>ORGANISM</b></td>
+      <td><b>INSTITUTE</b></td>
+     </tr>
+     <tr>   
+      <td>
+
+<select name="chooseOrganism" onChange="setEditable();">
+	<option value="A. thaliana">A. thaliana</option>
+	<option value="E. coli">E. coli</option>
+	<option value="M. tuberculosis">M. tuberculosis</option>
+	<option value="S. cerevisiae">S. cerevisiae</option>
+	<option value="All">All</option>
+</select>			    
+      </td>		    
+<td>
+
+<select name="chooseInstitute" onChange="setEditable();">
+	<option value="All">All</option>
+	<option value="University of Wales Aberystwyth">University of Wales Aberystwyth</option>
+</select></td>
+     </tr>
+     <tr>
+      <td><b>MONTH</b></td>
+      <td><b>YEAR</b></td>
+      </tr>
+      <tr>
+<td><select name="month">
+	<option value="0">
+	<option value="1">January
+	<option value="2">February
+	<option value="3">March
+	<option value="4">April
+	<option value="5">May
+	<option value="6">June
+	<option value="7">July
+	<option value="8">August
+	<option value="9">September
+	<option value="10">October
+	<option value="11">November
+	<option value="12">December</select></td><td><select name="year">
+	<option value="">
+	<option value="2003">2003
+	<option value="2002">2002
+	<option value="2001">2001
+	<option value="2000">2000
+	<option value="1999">1999</select></td>      </tr>     
+      <tr>
+      <td><b>CLASS OR ORF NAMES</b></td>
+      <td><b>RESULT FORMAT</b></td>
+      </tr>     
+      <tr>
+      <td>
+<select name="classOrGene" size="1" onChange="setEditable();">
+        <option value="gene">ORF names</option>
+        <option value="class">Class</option>
+       </select>
+      </td>
+     <td>
+       <select name="resultFormat" size=1>
+	<option value="webPage">As a web page</option>
+	<option value="file">As a file</option>
+       </select>
+      </td>
+      </tr>
+      <tr>
+      <td colspan="2"><b>IF YOU CHOOSE TO SEARCH BY ORF NAMES<br>
+      ENTER YOUR ORF NAMES INTO THE BOX<br>(not available if searching by class)</b></td>
+      </tr>
+      <tr>        
+      <td colspan="2"><textarea name="geneName" ROWS="10" COLS="40"></textarea></td>
+      </tr>
+      <tr>
+      <td colspan="2"><b>OR SEND A FILE OF ORF NAMES</b></td>
+      </tr>
+      <tr>
+      <td colspan ="2"><INPUT TYPE="file" name="upfile">&nbsp;</td>  
+      </tr>
+        <tr>
+     <td><input type="submit" name="request" value="Submit">&nbsp;</td> 
+     <td><input type="reset" name="reset" value="Reset">&nbsp;</td> 
+    </tr>
+</table>
+</td>
+
+</form>
+
+</td>
+</tr>
+</table>
+
+
+
+
+</tr>
+</table>
+
+<table border="0" width="100%">
+<tr>
+<td>Maintained by: <a href="mailto:afc@aber.ac.uk">afc@aber.ac.uk</a><br />
+  Last modified	March 27 2006</td>
+<td align="right"><a href="">www.genepredictions.org</a></td>
+</tr>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>Pathway Miner</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<form method="post" action="/Pathway/getPathway" enctype="multipart/form-data"> 
+  <center>
+    <img src="/images/buttons/head/topbutton_bar.gif" width="800" height="92" usemap="#Map" border="0" align="middle">
+    <map name="Map"> 
+      <area shape="rect" coords="537,72,580,89" href="http://www.biorag.org/index.html">
+      <area shape="rect" coords="583,72,630,92" href="http://www.biorag.org/query.html">
+      <area shape="rect" coords="634,73,681,91" href="http://www.biorag.org/update.html">
+      <area shape="rect" coords="685,72,741,89" href="http://www.biorag.org/overview.html">
+      <area shape="rect" coords="745,73,775,89" href="http://www.biorag.org/help.html#pathway" target=_blank>
+    </map>
+  </center>
+  
+  
+  
+<table cellpadding="5" width="800" border="1" align="center">
+      
+      <tr valign="top"> 
+	      <td bgcolor="#FFFFFF" colspan="2" height="82"> 
+	        <p><img src="images/webgif/pathban2.jpg" width="62" height="72" align="left"><b><u>Pathway 
+	          Miner -Classify and Extract Network of Associated Genes/Proteins based 
+	          on Pathways </u></b> </p><center><u>Version 1.1</u></center>
+	        <p align="center"> For more information click on the <b>Help</b> button in the top bar or read <a href="http://www.biorag.org/papers/bth215.pdf">Pandey et al.,2004</a>. </p>
+	      </td>
+      </tr>
+      <tr>
+    <td  height=30 valign="top" align="left" bgcolor="#D1EFEF" colspan="4"> 
+        <p align="center"><b><u><h5><font color="red">Biorag website will be
+	down from Tuesday August 22 2006, 2.00 pm Arizona time (MST) to Tuesday
+	September 5 for maintenance and updates.	</u></b></h5></font> </p>
+      </td>
+    </tr>
+     <tr valign="top"> 
+      <td bgcolor="#D1EFEF" height="34" colspan="2"> 
+        <p align="center"><b>1. Search by Accessions: </b><a href="pathway_sample.html" target="_blank">Click 
+          Here for Sample Data</a></p>
+      </td>
+    </tr>  
+    
+    <tr valign="top"> 
+    <td width="450"  bgcolor="#D1EFEF" >
+       <p><font color="#990000">Submit one or more of accessions ( One Accession 
+          per line )</font><font color="#996600"> </font> <br> <br> 
+          <textarea name="acc" rows="8" cols="40" wrap="virtual"></textarea>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><br>
+        <b>OR</b><br><br>
+        <font color="#990000">Upload a text file containing Gene Accession numbers 
+        & logratio. </font> <br><br>
+        <input type="file" name="upload_file"  size="50" maxlength="80" />
+    </td>
+    <td width="350" valign="top">
+	    <table border="1">
+	     
+	     <tr>
+	         <td width="250" valign="top" bgcolor="#D1EFEF" height="40"><p> <font color="#990000">1. Log2 ratio values? </font></p></td>
+	         <td width="100" valign="top" bgcolor="#D1EFEF" align="center" height="40">
+	                  <p> 
+		          <input type="radio" name="logratio" value="Yes" checked/>
+		          Yes 
+		          <br><input type="radio" name="logratio" value="No"  />
+		          No </p>
+	         </td>
+	     </tr>
+	     
+	     <tr>
+	         <td width="250" valign="top" bgcolor="#D1EFEF" height="40"><p> <font color="#990000">2. No. of Columns of log2 <br>&nbsp;&nbsp;&nbsp;&nbsp;ratios? &nbsp;&nbsp;&nbsp;&nbsp;(Max = 4) </font></p></td>
+	         <td width="100" valign="middle" align="center" bgcolor="#D1EFEF" height="40">
+	                  <select name="numlog">
+		          <option value="0"></option>
+		          <option selected value="1">one</option>
+		          <option value="2">two</option>
+		          <option value="3">three</option>
+		          <option  value="4">Four</option>
+		        </select>
+	         </td>
+	     </tr>
+	     
+	     <tr>
+	         <td width="250" valign="top" bgcolor="#D1EFEF" height="40"><p> <font color="#990000">3. Filter by Fold Change?  </font></p></td>
+	         <td width="100" valign="middle" align="center" bgcolor="#D1EFEF" height="40">
+	                <select name="filter">
+		          <option selected value="0">No Filter</option>
+		          <option value="0.6">1.5</option>
+		          <option value="1">2</option>
+		          <option value="1.7">3</option>
+		          <option  value="2">4</option>
+		        </select>
+	         </td>
+	     </tr>
+	     
+	      <tr>
+	         <td width="250" valign="top" bgcolor="#D1EFEF" height="40"><p> <font color="#990000">4. Perform statistical analysis and <br>
+			        &nbsp;&nbsp;&nbsp;&nbsp;rank pathways based on p values</font>
+			         <br>&nbsp;&nbsp;&nbsp;
+			        <font color="blue">
+			        <a href="http://www.biorag.org/help.html#pathway">Please read the help file </a>before  <br>&nbsp;&nbsp;&nbsp; choosing this option
+			        </font> </p></td>
+	         <td width="100" valign="middle" align="center" bgcolor="#D1EFEF" height="40">
+		  <p> 
+	          <input type="radio" name="newop" value="Yes" />
+	          Yes 
+	          <br><input type="radio" name="newop" value="No" checked />
+	          No </p>
+	         </td>
+	     </tr>
+	     
+	     <tr>
+	         <td colspan="2"  bgcolor="#D1EFEF"><img src="/images/buttons/scheme.gif"></td>
+	     </tr>
+	    </table>
+    </td>
+    </tr>
+    
+    
+    <tr>
+        <td colspan="2" valign="top" align="center"  bgcolor="#D1EFEF" height="45">
+         <input type="submit" name="submit2" value="submit" />&nbsp;&nbsp;&nbsp;
+         <input type="reset" value="reset" name="reset2" />
+        </td>
+    </tr>
+    
+    <tr>
+      <td valign="top" colspan="2" bgcolor="#D1EFEF" height="79"> 
+        <div align="center"> 
+          <p><b>2. Search by a Keyword: </b> <br> <br>
+            <font color="#990000">Enter a term to find all the pathways associated 
+            with the term. </font><br> <br>
+            <input type="text" name="keyword" size="50">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          </p>
+          <p> 
+            <input type="submit" name="submit" value="submit" />
+            <input type="reset" value="reset" name="reset" />
+          </p>
+        </div>
+      </td>  
+    </tr>
+    
+</table>    
+
+<table width="800" align="center">
+ <TR bgcolor="#84D3E6"> 
+      <TD HEIGHT=134  valign="top"> 
+        <p align="justify"> <u><font size="2" face="Arial, Helvetica, sans-serif">Citing 
+          Biorag</font></u><font size="2" face="Arial, Helvetica, sans-serif"> 
+          : If you have used or are using BioRag for your research please cite 
+          or acknowledge this resource in your publications as &quot;BioRag (Bioresource 
+          for array genes) at www.biorag.org&quot;. </font> 
+        <hr>
+        <font size="-1">For any comments or questions contact </font><a href="mailto:ritu@u.arizona.edu"><font size="-1">Dr. 
+        Ritu Pandey</font></a><font size="-1"> or </font><a href="mailto:mount@u.arizona.edu"><font size="-1">Prof. 
+        David Mount</font></a><font size="-1">.</font> 
+        <hr>
+        <font size="-1">BioRag database is maintained by the Bioinformatics group 
+        at Arizona Cancer Center. The material presented here is compiled from 
+        different public databases. BioRag is hosted by the Biotechnology Computing 
+        Facility of the University of Arizona.&copy; 2002,2003 University of Arizona. 
+        All Rights Reserved. </font></TD>
+    </TR>
+  </TABLE>
+  </form>
+<p>&nbsp;
+</body></html>

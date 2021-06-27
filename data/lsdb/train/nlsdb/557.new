@@ -1,0 +1,53 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN"
+        "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<title>Cister</title>
+<link type="text/css" rel="stylesheet" href="mystyle.css">
+<script type="text/javascript" language="JavaScript">
+   function spamGuard(name,domain) {
+      var email = name + "@" + domain;
+      location = "mailto:" + email;
+   }
+</script>
+</head>
+
+<body>
+<h1 style="Color: black;">Cister : <span style="Color: red;">Cis</span>-element Clus<span style="Color: red;">ter</span> Finder</h1>
+<p><a href="cister_instructions.html">Instructions</a></p>
+<form method="post" action="/mfrith/cgi-bin/cister.cgi" enctype="multipart/form-data">
+Paste a <a href="cister_instructions.html#sequence-format">DNA sequence</a> into the box or enter a <a href="cister_instructions.html#gi-format">GenBank identifier</a>:<br />
+<textarea name="sequence" rows=5 cols=50></textarea><br />
+OR upload a DNA sequence from a file: <input type="file" name="seqfile"  /><br />
+(Optional) <a href="cister_instructions.html#subsequence">Set subsequence</a> From: <input type="text" name="from" size="6" /> To: <input type="text" name="to" size="6" />
+<hr>
+Choose a bunch of cis-elements:
+<table cellspacing=8>
+<tr><td><input type="checkbox" name="motifs" value="TATA" /> <a href="NucFreqMat.html#TATA">TATA</a></td><td><input type="checkbox" name="motifs" value="Sp1" /> <a href="NucFreqMat.html#Sp1">Sp1</a></td><td><input type="checkbox" name="motifs" value="CRE" /> <a href="NucFreqMat.html#CRE">CRE</a></td><td><input type="checkbox" name="motifs" value="ERE" /> <a href="NucFreqMat.html#ERE">ERE</a></td><td><input type="checkbox" name="motifs" value="NF-1" /> <a href="NucFreqMat.html#NF-1">NF-1</a></td><td><input type="checkbox" name="motifs" value="E2F" /> <a href="NucFreqMat.html#E2F">E2F</a></td><td><input type="checkbox" name="motifs" value="Mef-2" /> <a href="NucFreqMat.html#Mef-2">Mef-2</a></td><td><input type="checkbox" name="motifs" value="Myf" /> <a href="NucFreqMat.html#Myf">Myf</a></td></tr>
+<tr><td><input type="checkbox" name="motifs" value="CCAAT" /> <a href="NucFreqMat.html#CCAAT">CCAAT</a></td><td><input type="checkbox" name="motifs" value="AP-1" /> <a href="NucFreqMat.html#AP-1">AP-1</a></td><td><input type="checkbox" name="motifs" value="Ets" /> <a href="NucFreqMat.html#Ets">Ets</a></td><td><input type="checkbox" name="motifs" value="Myc" /> <a href="NucFreqMat.html#Myc">Myc</a></td><td><input type="checkbox" name="motifs" value="GATA" /> <a href="NucFreqMat.html#GATA">GATA</a></td><td><input type="checkbox" name="motifs" value="LSF" /> <a href="NucFreqMat.html#LSF">LSF</a></td><td><input type="checkbox" name="motifs" value="SRF" /> <a href="NucFreqMat.html#SRF">SRF</a></td><td><input type="checkbox" name="motifs" value="Tef" /> <a href="NucFreqMat.html#Tef">Tef</a></td></tr>
+</table>
+AND / OR <a href="cister_instructions.html#cis-element-format">enter your own cis-elements:</a><br />
+(Get cis-element matrices from <a href="http://www.gene-regulation.com/">TRANSFAC</a> - free registration required)<br />
+<textarea name="userpssms" rows=7 cols=40></textarea><br />
+AND / OR upload cis-elements from a file: <input type="file" name="pssmfile"  />
+<hr>
+Parameters: (use the defaults if in doubt)<br />
+<a href="cister_instructions.html#params">a</a> average distance between motifs within a cluster <input type="text" name="alpha" value="35" size="6" /><br />
+<a href="cister_instructions.html#params">b</a> average number of motifs in a cluster <input type="text" name="beta" value="6" size="6" /><br />
+<a href="cister_instructions.html#params">g</a> average distance between clusters <input type="text" name="gamma" value="30000" size="12" /><br />
+<a href="cister_instructions.html#params">w</a> half-width of sliding window for local base composition <input type="text" name="window" value="1000" size="12" /><br />
+<a href="cister_instructions.html#params">Motif probability threshold</a> <input type="text" name="threshold" value="0.1" size="6" /><br />
+<a href="cister_instructions.html#params">Pseudocount</a> <input type="text" name="pseudocount" value="1" size="6" />
+<hr>
+<input type="submit" name=".submit" />
+<input type="reset" value="RESET" />
+<input type="hidden" name=".cgifields" value="motifs" />
+</form>
+<p style="text-align: center;">Return to <a href="/zlab/gene.shtml">Zlab Gene Regulation Hub</a></p>
+<p style="text-align: right; font-style: italic">
+Contact: <a href="javascript:spamGuard('mfrith','zlab.bu.edu')">Martin Frith</a><br>
+Last modified: Monday, 18-Feb-2008 20:39:06 EST
+</p>
+</body>
+</html>

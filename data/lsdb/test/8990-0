@@ -1,0 +1,642 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- *************************************************************
+Date: 7 January 2003
+Author: Adrian Akpor
+
+Copyright (c) 2003: Adrian Akpor Bioinformatics Orengo Group, Biochemistry department UCL
+
+Function: EyeSite home page:
+ 
+************************************************************* -->
+
+<html>
+<head>
+<title>EyeSite Homepage</title>
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<meta name="keywords" content="eyesite, Eye, eyesight, sight, cornea, trabecularmeshwork, retina,iris,optic nerve,rpe choroid,fovea,ciliary body">
+<script language="JavaScript" type="text/javascript"  src="http://eyesite.cryst.bbk.ac.uk/eyescripts/eye.js"></script>
+
+<script language="javascript" type="text/javascript">
+<!--
+ var picDflt, picClBd, picCorn, picFove, picIris, picLens, picOpNv, picRtna, picRpCh, picTrab;
+    var btnDflt, btnClBd, btnCorn, btnFove, btnIris, btnLens, btnOpNv, btnRtna, btnRpCh, btnTrab;
+    var picThis, btnThis, btnOn, btnOff, btnPrev, picImage;
+        // Load buttons first, they're faster to load and cause fewer error messages
+        // that occur when the curson happend to be over a button and it is defined
+        // (loaded) yet.  These loads are not included in a function, they must be
+        // loaded for the page to operate properly.
+	btnAllOn   = new Image(68,24);  btnAllOn.src    = "/images2/BtnWholeOn.gif";
+	btnAllOff  = new Image(68,24);  btnAllOff.src   = "/images2/BtnWholeOff.gif";
+        btnClBdOn  = new Image(68,32);  btnClBdOn.src  = "/images2/BtnCiliaryBodyOn.gif";
+        btnClBdOff = new Image(68,32);  btnClBdOff.src = "/images2/BtnCiliaryBodyOff.gif";
+        btnCornOn  = new Image(68,32);  btnCornOn.src  = "/images2/BtnCorneaOn.gif";
+        btnCornOff = new Image(68,32);  btnCornOff.src = "/images2/BtnCorneaOff.gif";
+        btnFoveOn  = new Image(68,32);  btnFoveOn.src  = "/images2/BtnFoveaOn.gif";
+        btnFoveOff = new Image(68,32);  btnFoveOff.src = "/images2/BtnFoveaOff.gif";
+        btnIrisOn  = new Image(68,32);  btnIrisOn.src  = "/images2/BtnIrisOn.gif";
+        btnIrisOff = new Image(68,32);  btnIrisOff.src = "/images2/BtnIrisOff.gif";
+        btnLensOn  = new Image(68,32);  btnLensOn.src  = "/images2/BtnLensOn.gif";
+        btnLensOff = new Image(68,32);  btnLensOff.src = "/images2/BtnLensOff.gif";
+        btnOpNvOn  = new Image(68,32);  btnOpNvOn.src  = "/images2/BtnOpticNerveOn.gif";
+        btnOpNvOff = new Image(68,32);  btnOpNvOff.src = "/images2/BtnOpticNerveOff.gif";
+        btnRtnaOn  = new Image(68,32);  btnRtnaOn.src  = "/images2/BtnRetinaOn.gif";
+        btnRtnaOff = new Image(68,32);  btnRtnaOff.src = "/images2/BtnRetinaOff.gif";
+        btnRpChOn  = new Image(68,32);  btnRpChOn.src  = "/images2/BtnRpeChoroidOn.gif";
+        btnRpChOff = new Image(68,32);  btnRpChOff.src = "/images2/BtnRpeChoroidOff.gif";
+        btnTrabOn  = new Image(68,32);  btnTrabOn.src  = "/images2/BtnTrabMeshOn.gif";
+        btnTrabOff = new Image(68,32);  btnTrabOff.src = "/images2/BtnTrabMeshOff.gif";
+        picDflt = new Image(400,340);   picDflt.src = "/images2/Eye.jpg";
+	picAll  = new Image(400,340);   picAll.src = "/images2/All.jpg";
+        picClBd = new Image(400,340);   picClBd.src = "/images2/CiliaryBody.jpg";
+        picCorn = new Image(400,340);   picCorn.src = "/images2/Cornea.jpg";
+        picFove = new Image(400,340);   picFove.src = "/images2/Fovea.jpg";
+        picIris = new Image(400,340);   picIris.src = "/images2/Iris.jpg";
+        picLens = new Image(400,340);   picLens.src = "/images2/Lens.jpg";
+        picOpNv = new Image(400,340);   picOpNv.src = "/images2/OpticNerve.jpg";
+        picRtna = new Image(400,340);   picRtna.src = "/images2/Retina.jpg";
+        picRpCh = new Image(400,340);   picRpCh.src = "/images2/RpeChoroid.jpg";
+        picTrab = new Image(400,340);   picTrab.src = "/images2/TrabMesh.jpg";
+	
+        function FnEyeStr(picImage, picThis, btnThis, btnOn, btnOff) {
+	
+          if (picThis != null) {picImage.src = picThis.src}; // Always has a value, may be a default
+          if (btnThis != null) {btnThis.src = btnOn.src};    // null is used for missing value
+          if (btnPrev != null && btnPrevOff != null) {btnPrev.src = btnPrevOff.src};
+          btnPrev = btnThis;
+          btnPrevOff = btnOff;
+        
+	}//end of FnEyeStr
+	
+	
+	
+	//********* Get Todays date *********************
+	var date = "";
+	var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+	
+	//create an array for appending the right suffix to the date e.g 1(st),21(st) 3(rd) 2(nd)
+	var suffix = new Array(32);
+	suffix[0] = "";    suffix[1] = "st";  suffix[2] = "nd";  suffix[3] = "rd";  suffix[4] = "th";  suffix[5] = "th";  suffix[6] = "th"; 
+	suffix[7] = "th";  suffix[8] = "th";  suffix[9] = "th";  suffix[10] = "th"; suffix[11] = "th"; suffix[12] = "th"; suffix[13] = "th"; 
+	suffix[14] = "th"; suffix[15] = "th"; suffix[16] = "th"; suffix[17] = "th"; suffix[18] = "th"; suffix[19] = "th"; suffix[20] = "th"; 
+	suffix[21] = "st"; suffix[22] = "nd"; suffix[23] = "rd"; suffix[24] = "th"; suffix[25] = "th"; suffix[26] = "th"; suffix[27] = "th";
+	suffix[28] = "th"; suffix[29] = "th"; suffix[30] = "th"; suffix[31] = "st";
+       
+        var today = new Date();
+	
+	//get the day of the month
+	var dayOfMonth = today.getUTCDate() + suffix[today.getUTCDate()];  
+	
+	//get the day 
+	var day = days[today.getDay()];
+	
+	//get the month
+	var month = months[today.getUTCMonth()];
+	
+	//get the year 
+	var year = today.getUTCFullYear();
+	
+        
+        date = day + " " + dayOfMonth + " " + month + " " + year;
+  
+    //    -->	
+</script>
+
+<link rel="stylesheet" type="text/css" href="http://eyesite.cryst.bbk.ac.uk/eyescripts/eyesite.css" >
+
+</head>
+
+<body bgcolor="#ffffff" link="#21005" alink="#ff0000" vlink="#cc9966">
+
+<!-- Start of main table has one row and two columns -->
+<table cellpadding="3" cellspacing="0" border="0" align="left" bgcolor="#ffffff">
+
+<tr><!-- row containing logos and names of collaborators -->
+  <td colspan="2">
+    <!-- table containing college logo and names of organizers has one row and three columns-->
+    <table cellpadding="2" cellspacing="2" border="0" bordercolor="blue" width="595">
+      <tr>
+      
+      	<td valign="bottom">
+	  <img src="/images/birkbecklogo.gif" alt="Birkbeck Logo" title="Birkbeck Logo" width="220" height="90" valign="bottom">
+	</td>
+	
+	<!-- Column containing table of collaborators for this project -->
+	<td valign="center">
+	  <table cellpadding="0" cellspacing="0" border="0" bordercolor="green" width="280" >
+	    <tr>
+	      <td class="collaborator">A Collaboration Between:</td>
+	    </tr>
+	    
+	    <tr>
+	      <td class="collaborator">Christine Slingsby at <a class="collaborator" href="http://www.bbk.ac.uk/" target="_blank">Birkbeck College</a></td>
+	    </tr>
+	    
+	    <tr>
+	      <td class="collaborator">David Lee at <a class="collaborator" href="http://www.ucl.ac.uk/" target="_blank">UCL</a></td>
+	    </tr>
+	    
+	    <tr>
+	      <td class="collaborator">
+	        Graeme Wistow at an<a class="collaborator" href="http://neibank.nei.nih.gov/index.shtml" target="_blank"> NEIBank</a>
+	      </td>
+	    </tr>
+	    
+	    <tr>
+	      <td class="collaborator">Christine Orengo at <a class="collaborator" href="http://www.ucl.ac.uk/" target="blank"> UCL</a></td>
+	    </tr>
+	  </table>
+	</td>
+	<!-- End of column containing table of collaborators for this project -->
+	
+	<td valign="bottom" align="left">
+	  <img src="/images/EyeSiteLogo.jpg" alt="EyeSite Logo" title="EyeSite Logo" width="180" height="90"  valign="bottom">
+	</td>
+	
+      </tr>
+      
+      <tr>
+        <td colspan="3" class="bbk" align="center">
+	  Birkbeck College - University of London Malet Street London WC1E 7HX - UK &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <span align="rigth"><script language="javascript">document.write(date)</script></span>
+	</td>
+      </tr> 
+      
+
+    </table>
+    <!-- end of table  containing college logo and names of organizers -->
+  </td>
+</tr><!-- end of row containing logos and names of collaborators -->
+   
+
+
+<tr><!-- this row contains two columns that both contain search tool and additional contents -->
+
+  <td valign="top">
+   <!-- start of table containing additional contents -->
+   <table  cellpadding="0" cellspacing="0" border="0" bordercolor="yellow" width="500" bgcolor="#ffffff">
+     <tr><td>&nbsp;</td></tr>	
+  
+   
+     <!-- ==== additional material goes between these tags any these must be added between the tags <tr><td> ... </td><tr> ====== -->
+   <tr><td colspan="2"><h2><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi" style="color:#639c18;">
+	Browse the EyeSite Database</a></h2></td>
+   <tr>
+     <td><!-- start of column contains table containing eye image and buttons to eye regions this table has 2 row and 2 columns-->
+       <table hspace="0" vspace="0"  border="0" cellpadding="0" cellspacing="0" bordercolor="blue" bgcolor="#000000">
+
+	 <tr>
+	   <td valign="center"><!-- 1st column contains a table with buttons to  different eye regions -->
+	     <table border="0" bgcolor="#000000" width="70" valign="top" hspace="0" vspace="0" cellpadding="0" cellspacing="4" bordercolor="red" align="center">
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Ciliary+Body&EYE_REGION_ID=8">
+	         <img border="0" width="68" height="32" name="btnClBd" usemap="#BtnClBdMap" src="images2/BtnCiliaryBodyOff.gif"
+		 alt="Ciliary Body" title="Ciliary Body"></a></td>
+    	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Cornea&EYE_REGION_ID=1">
+	         <img border="0" width="68" height="32" name="btnCorn" usemap="#BtnCornMap" src="images2/BtnCorneaOff.gif"
+	         alt="Cornea" title="Cornea"></a></td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Fovea&EYE_REGION_ID=5">
+	         <img border="0" width="68" height="32" name="btnFove" usemap="#BtnFoveMap" src="images2/BtnFoveaOff.gif"
+	         alt="Fovea" title="Fovea"></a></td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a  href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Iris&EYE_REGION_ID=9">
+	         <img border="0" width="68" height="32" name="btnIris" usemap="#BtnIrisMap" src="images2/BtnIrisOff.gif"
+	         alt="Iris" title="Iris"></a></td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Lens&EYE_REGION_ID=2">
+	         <img border="0" width="68" height="32" name="btnLens" usemap="#BtnLensMap" src="images2/BtnLensOff.gif"
+	         alt="Lens" title="Lens"></a></td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32">
+	        <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Optic+Nerve&EYE_REGION_ID=6">
+	         <img border="0" width="68" height="32" name="btnOpNv"  usemap="#BtnOpNvMap" src="images2/BtnOpticNerveOff.gif"
+	         alt="Optic nerve" title="Optic nerve"></a></td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Retina&EYE_REGION_ID=3">
+	         <img border="0" width="68" height="32" name="btnRtna" usemap="#BtnRtnaMap" src="images2/BtnRetinaOff.gif"
+	         alt="Retina" title="Retina"></a></td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=RPE+Choroid&EYE_REGION_ID=4">
+	         <img border="0" width="68" height="32" name="btnRpCh" usemap="#BtnRpChMap" src="images2/BtnRpeChoroidOff.gif"
+	         alt="RPE/Choroid" title="RPE/Choroid"></a></td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="68" height="32"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list?TISSUE=Trabecular+Meshwork&EYE_REGION_ID=7">
+	         <img border="0" width="68" height="32" name="btnTrab" usemap="#BtnTrabMap"src="images2/BtnTrabMeshOff.gif"
+	         alt="Trabecular meshwork" title="Trabecular meshwork"></a></td>
+	       </tr>
+	       
+	       <tr>
+	         <td bgcolor="#000000" width="68" height="24"><a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi">
+		<img border="0" width="68" height="24" name="btnAll" usemap="#BtnAllMap" 
+		 src="images2/BtnWholeOff.gif" alt="Whole Eye" Title="Whole Eye">
+	         </td>
+	       </tr>
+	       
+	       <tr><td bgcolor="#000000" width="5" height="5">&nbsp</td></tr>
+	     </table>
+	   </td><!-- end of 1st column containing a table with buttons to  different eye regions -->	
+	   
+	   <td><!-- 2nd column contains an image of the eye -->
+	     <img border="0" width="400" height="340" name="EyePic" usemap="#EyeMap" src="images2/Eye.jpg"
+      	     alt="Eye image map" title="Eye image map">
+	   </td><!-- end of 2nd column contains an image of the eye -->
+	   
+	 </tr>
+	 
+	 
+	 
+	 <tr bgcolor="#ffffff">
+	   <td colspan="2" style="font-size:8pt">
+	     Image used with permission of artist <a href="mailto:sfgordon@tir.com"> Stephen F. Gordon</a>
+	     as part of a collaboration with <a href="http://neibank.nei.nih.gov/index.shtml" target="_blank">NEIBank</a>
+	   </td>
+	 </tr>
+	 
+	 <tr bgcolor="#ffffff"><td colspan="2">&nbsp;</td></tr>
+	 
+	 <tr bgcolor="#ffffff">
+	   <td colspan="2">
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Ciliary+Body&EYE_REGION_ID=8" class="links">Ciliary&nbsp;Body</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Cornea&EYE_REGION_ID=1" class="links">Cornea</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Fovea&EYE_REGION_ID=5" class="links">Fovea</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Iris&EYE_REGION_ID=9" class="links">Iris</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Lens&EYE_REGION_ID=2" class="links">Lens</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Optic+Nerve&EYE_REGION_ID=6" class="links">Optic&nbsp;nerve</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Retina&EYE_REGION_ID=3" class="links">Retina</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=RPE+Choroid&EYE_REGION_ID=4" class="links">RPE/Choroid</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Trabecular+Meshwork&EYE_REGION_ID=7" class="links">Trabecular&nbsp;meshwork</a> |
+	     <a href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi" class="links">Whole Eye</a>
+	   </td>
+	 </tr>
+	 
+
+	 
+	 <tr bgcolor="#ffffff"><td colspan="2">&nbsp;</td></tr>
+	 
+	 <!-- ============== A bit about the eyesite database ================== -->
+	 <tr bgcolor="#ffffff">
+	   <td colspan="2" class="summary">
+	     The EyeSite database is an information and modelling resource for families of proteins that function in the eye.
+             Homologues are collected from all species and clustered according to tissue type, function and sequence similarity. 
+	   </td>
+	 </tr>
+	 
+	 <tr bgcolor="#ffffff"><td colspan="2">&nbsp;</td></tr>
+	 
+	 <tr bgcolor="#ffffff">
+	   <td colspan="2" class="summary">
+	     A principal feature of the site is structural annotations,which range from experimentally solved structures to close structural
+	     neighbours to distant structure predictions.  Many pre-generated homology models are provided.
+	   </td>
+	 </tr>
+	 
+	 <tr bgcolor="#ffffff"><td colspan="2">&nbsp;</td></tr>
+	 
+	 <tr bgcolor="#ffffff">
+	   <td colspan="2" class="summary">
+	     Other features include domain architecture analysis and pre-generated sequence alignments, and the site is extensively linked
+	     to other bioinformatic resources on the Web
+	   </td>
+	 </tr>
+	 <tr bgcolor="#ffffff"><td colspan="2">&nbsp;</td></tr>
+	 
+	 <tr bgcolor="#ffffff">
+	   <td colspan="2" class="summary">
+	    Click <a href="javascript:aboutEyeSite()">here</a> for a description of how the EyeSite is constructed and how the sequences within it are clustered.
+	   </td>
+	 </tr>
+ 
+	 <tr bgcolor="#ffffff"><td colspan="2">&nbsp;</td></tr>
+	 
+	 <tr bgcolor="#ffffff"> 
+           <td colspan="2" class="collaborator"><hr noshade>
+             Birkbeck - University of London Malet Street - London WC1E 7HX -  United Kingdom
+          </td>
+        </tr>
+	
+	<tr bgcolor="#ffffff"><td colspan="2">&nbsp;</td></tr>
+	
+	<tr bgcolor="#ffffff">
+          <td colspan="2" class="pageFooter">
+	    Site created by Sandrine Fefeu
+	    and  <a href="http://www.biochem.ucl.ac.uk/~akpor" target="_blank">Adrian Akpor </a>&nbsp;&nbsp; 
+	  </td>
+	</tr> 
+	      
+       </table>     
+     </td><!-- end of column contains table containing eye image and buttons to eye regions-->
+   </tr>
+      
+
+     <!-- ===================   end of additional material =======================================================================  -->
+     
+   </table>
+   <!-- end of table containing additional contents -->
+  </td><!-- end of first column -->
+  
+  <td align="right" valign="top"><!-- start of second column -->
+    <!-- start of table containing search tool -->
+    <table hspace="0" vspace="0" width="200" border="0" cellpadding="0" cellspacing="0"  bgcolor="white" bordercolor="purple">
+      <tr><td class="genericName" style="font-size:12pt;font-weight:bold" align="center">-- Search the EyeSite --</td></tr>
+      
+      <tr>
+        <td align="right">&nbsp;
+          <a href="javascript:howToSearch()">How to search</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+      </tr>
+      
+      <tr><!-- start of row containing search tool -->
+        <td align="center" width="180">
+	  <form action="http://eyesite.cryst.bbk.ac.uk/cgi-bin/search_eyesite.cgi" method="get" name="searchEyeSiteByKeyword" onSubmit="return validateForm(this)">
+	    <!-- start of table contained in the form  -->
+	    <table border="0" hspace="0" vspace="0"  cellpadding="2" cellspacing="4" width="180" bordercolor="green" bgcolor="#f7ffce">
+	      <tr><td class="bbksearchHeader" colspan="2">Keyword Search</td></tr>
+	      
+	      <!-- ADDITION STARTS HERE -->
+	      <tr>
+	        <td colspan="2" class="bbksearch" align="center">Select one of the options
+		</td>
+	      </tr>
+	      
+	      <tr>
+	        <td colspan="2" class="bbksearch" style="text-decoration:underline">Perform search on:</td>
+	      </tr>
+	  
+	      <tr>
+	        <td class="bbksearch">(1) All sequences</td>
+		<td><input type="radio" name="keyword_search_target" value="whole_eye" checked/></td>
+	      <tr>
+	      </tr>	
+		<td class="bbksearch">(2) List of Families</td>
+		<td><input type="radio" name="keyword_search_target" value="families"/></td>
+	      </tr>
+	      <tr><td colspan="2" class="bbksearch" align="center"> -----------------------------</td></tr>
+	      <!-- ADDITION ENDS HERE -->
+	      
+	      	      
+	      <tr><td class="bbksearch" colspan="2">Retrieve sequences with:</td></tr>
+	      <tr><td class="bbksearch" colspan="2">The word(s):</td></tr>
+	      <tr><td class="bbksearch" colspan="2"><input type="text" name="keyword_and"></td></tr>
+	      <tr><td class="bbksearch" colspan="2">And with any of the word(s)<span class="optional"> (optional)</span>:</td></tr>
+	      <tr><td class="bbksearch" colspan="2"><input type="text" name="keyword_or" ></td></tr>
+	      <tr><td class="bbksearch" colspan="2">And without the word(s)<span class="optional"> (optional)</span>:</td></tr>
+	      
+	      <tr>
+	        <td colspan="2">
+		  <input type="text"  name="keyword_not"><br>
+		  <input type="hidden" name="species_code_list"
+		  value="0">
+		  <input type="hidden" name="species_name_list" value="0">
+	        </td>
+	      </tr>	      
+              
+	      
+	      <tr valign="top">
+	        <td class="bbksearch" valign="top" colspan="2">
+		  And within species <input type="button" value=">>" onclick="javascript:getDisplaySpecies(searchEyeSiteByKeyword)" class="buttons">
+		  <br><span class="optional" valign="bottom"> (optional with option (1) only)</span>
+		</td>
+	      </tr>
+	      
+	      <tr><td colspan="2"><input type="hidden" name="search_form" value="keyword_form"></tr>
+	      
+	      <tr>
+	        <td colspan="2" valign="bottom">
+		  <input type="submit" value="Search" class="buttons">&nbsp;<input type="reset" value="Clear All" class="buttons">
+		</td>
+	      </tr>
+	      
+	    </table>
+	    <!-- end of table contained in the form  -->
+	  </form>
+	</td>
+      </tr><!-- end of row containing search tool -->
+      
+      <tr><td>&nbsp;</td></tr>
+      
+      <!-- code search form -->
+      <tr>
+        <td align="center" valign="top">	
+	  <form action="http://eyesite.cryst.bbk.ac.uk/cgi-bin/search_eyesite.cgi" method="get" name="searchEyeSiteById"
+	  onSubmit="return validateCodeForm(this)" name="gi_search">
+	    <table border="0" hspace="0" vspace="0"  cellpadding="2" cellspacing="4" width="180" bordercolor="green" bgcolor="#f7ffce">
+	      <tr><td class="bbksearchHeader">Search by Code</td></tr>
+	      <tr><td><input type="hidden"></td></tr>
+	      <tr>
+	        <td class="bbksearch" valign="center">Select code type &nbsp;
+		  <select class="search" name="code_option">
+		    <option value="gi_code" selected>Gi code</option>
+		    <option value="sprot_id">Sprot id</option>
+		    <option value="locus_id">Locus id</option>
+		    <option value="omim_num">Omim id</option>
+		  </select>
+	        </td>
+	      </tr>
+	      
+	      <tr>
+	        <td class="bbksearch">Enter code &nbsp;<input type="text" size="16" name="code_value"></td>
+	      </tr>
+	      
+	      <tr>
+	        <td><input type="submit" value="Search" class="buttons">&nbsp;<input type="reset" value="Clear All" class="buttons"></td>
+	      </tr>
+	      
+	      <tr>
+	        <td><input type="hidden" name="search_form" value="code_form"></td>
+	      </tr>
+	    </table>
+	  </form>
+	</td>
+      </tr>
+      <!-- end of code search -->
+      
+      <tr><td>&nbsp;</td></tr>
+
+      
+      <!--tr bgcolor="#ffffff">
+        <td class="summary"> &nbsp; &nbsp; Download PDF version of <br> &nbsp; &nbsp; 
+	  <a class="links" href="http://eyesite.cryst.bbk.ac.uk/EyeSite_paper.pdf">EyeSite paper
+	  </a>  
+	</td>
+      </tr -->
+      
+     <tr>
+       <td valign="bottom" align="left" class="collaborator">
+        <br> &nbsp; &nbsp; The EyeSite is sponsored by:<p> &nbsp; &nbsp; 
+        <a class="links" href="http://www.mrc.ac.uk" target="blank">
+	<img src="images/mrcLogo.gif" alt="EyeSite Logo" title="EyeSite Logo" width="135" height="70"  valign="bottom" align="center">
+	</a>
+       </td>
+     </tr>
+	
+    
+    </table>
+    <!-- end of table containing search tool -->
+    
+  </td><!-- end of second column -->
+  
+</tr><!-- this row contains two columns that both contain search tool and additional contents -->
+	   	 
+</table><!-- End of main table -->
+<!-- Image maps for the highlighting text buttons -->
+<!-- Hotspot areas are stacked in the order defined, first area identified is
+     used, is on top.  The definition for some "dead" space around the active
+     image area is a couple of pixels wide.  This allows the computer running
+     the browser to have enough time to "see" the mouse movement and react.
+     Without the dead space the browser will post the wrong image when the mouse
+     runs across the hot spots quickly. -->
+<map name="BtnAllMap">
+   <area shape="rect" coords="1,1,67,23" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi"
+	alt="All" title="All" 
+	OnMouseOver="FnEyeStr(EyePic, picAll, btnAll, btnAllOn, btnAllOff)">
+   <area shape="rect" coords="0,0,68,24" href="#"
+	alt="" title=""
+      onCLick="return false" 
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+<map name="BtnClBdMap">
+   <area shape="rect" coords="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Ciliary+Body&EYE_REGION_ID=8"
+      alt="Ciliary Body" title="Ciliary Body"
+      OnMouseOver="FnEyeStr(EyePic, picClBd, btnClBd, btnClBdOn, btnClBdOff)">
+   <area shape="rect" coords="0,0,68,32" href="#" alt="" title="" 
+      onCLick="return false" 
+       OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">    
+</map>
+
+<map name="BtnCornMap">
+   <area shape="rect" coords="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Cornea&EYE_REGION_ID=1"
+      alt="Cornea" title="Cornea"
+      OnMouseOver="FnEyeStr(EyePic, picCorn, btnCorn, btnCornOn, btnCornOff)">
+   <area shape="rect" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<map name="BtnFoveMap">
+   <area shape="RECT" coords="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Fovea&EYE_REGION_ID=5"
+      alt="Fovea" title="Fovea"
+      OnMouseOver="FnEyeStr(EyePic, picFove, btnFove, btnFoveOn, btnFoveOff)">
+   <area shape="RECT" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<map name="BtnIrisMap">
+   <area shape="rect" coords="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Iris&EYE_REGION_ID=9"
+      alt="Iris" title="Iris"
+      OnMouseOver="FnEyeStr(EyePic, picIris, btnIris, btnIrisOn, btnIrisOff)">
+   <area shape="rect" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<map name="BtnLensMap">
+   <area shape="rect" coords="1,1,67,31"  href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Lens&EYE_REGION_ID=2"
+      alt="Lens" title="Lens"
+      OnMouseOver="FnEyeStr(EyePic, picLens, btnLens, btnLensOn, btnLensOff)">
+   <area shape="rect" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<map name="BtnOpNvMap">
+   <area shape="rect" coords="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Optic+Nerve&EYE_REGION_ID=6"
+      alt="Optic nerve" title="Optic nerve"
+      OnMouseOver="FnEyeStr(EyePic, picOpNv, btnOpNv, btnOpNvOn, btnOpNvOff)">
+   <area shape="rect" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<map name="BtnRtnaMap">
+   <area shape="rect" coords="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Retina&EYE_REGION_ID=3"
+      alt="Retina" title="Retina"
+      OnMouseOver="FnEyeStr(EyePic, picRtna, btnRtna, btnRtnaOn, btnRtnaOff)">
+   <area shape="rect" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<map name="BtnRpChMap">
+   <area shape="rect" coords="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=RPE+Choroid&EYE_REGION_ID=4"
+      alt="RPE/Choroid" title="RPE/Choroid"
+      OnMouseOver="FnEyeStr(EyePic, picRpCh, btnRpCh, btnRpChOn, btnRpChOff)">
+
+   <area shape="rect" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<map name="BtnTrabMap">
+   <area shape="rect" COORDS="1,1,67,31" href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Trabecular+Meshwork&EYE_REGION_ID=7"
+      alt="Trabecular meshwork" title="Trabecular meshwork"
+      OnMouseOver="FnEyeStr(EyePic, picTrab, btnTrab, btnTrabOn, btnTrabOff)">
+   <area shape="rect" coords="0,0,68,32" href="#"
+      alt="" title=""
+      onCLick="return false"
+      OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)">
+</map>
+
+<!-- Image map for the picture -->
+
+<map name="EyeMap">
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Fovea&EYE_REGION_ID=5" alt="Fovea" title="Fovea" OnMouseOver="FnEyeStr(EyePic, picFove, btnFove, btnFoveOn, btnFoveOff)" SHAPE="POLY" COORDS="338,157,340,160,340,163,340,168,340,170,339,172,337,174,334,172,334,171,332,167,332,162,332,159,333,157,334,156">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Retina&EYE_REGION_ID=3" ALT="Retina" TITLE="Retina" OnMouseOver="FnEyeStr(EyePic, picRtna, btnRtna, btnRtnaOn, btnRtnaOff)" SHAPE="POLY" COORDS="328,227,325,233,322,240,318,248,313,255,309,259,304,264,300,270,295,274,291,277,285,282,278,286,271,291,264,295,257,298,248,302,243,304,236,306,231,308,225,309,218,311,211,311,202,311,195,311,186,311,181,310,168,308,163,308,162,304,158,302,154,300,150,298,147,292,144,289,141,284,137,280,137,276,137,272,136,270,136,267,134,266,132,263,131,258,131,253,128,249,126,245,126,241,125,237,125,235,125,233,126,230,125,227,127,225,131,218,135,212,137,206,140,199,143,190,145,184,146,174,146,165,145,155,143,149,141,142,138,134,134,125,130,116,127,112,126,104,125,101,125,97,125,93,127,89,127,86,128,83,130,80,130,75,131,72,133,69,134,66,135,65,137,60,138,56,141,51,145,48,148,44,152,42,155,39,159,36,163,36,167,34,169,32,172,29,180,28,195,27,213,28,222,29,227,31,233,32,238,34,242,36,248,38,252,39,257,42,261,44,265,45,269,48,272,50,276,52,283,57,288,61,293,64,297,69,305,77,
+312,85,318,94,324,104,331,121,334,128,335,135,337,142,338,148,338,157,333,155,331,160,331,167,332,173,337,174,340,179,340,184,339,190,338,197,336,200,331,198,328,199,326,202,324,206,322,212,322,216,323,220,326,223,329,224">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Trabecular+Meshwork&EYE_REGION_ID=7" ALT="Trabecular meshwork" TITLE="Trabecular meshwork" OnMouseOver="FnEyeStr(EyePic, picTrab, btnTrab, btnTrabOn, btnTrabOff)" SHAPE="POLY" COORDS="101,71,103,70,104,71,105,73,104,74,103,76,101,77,100,77,99,75,100,73">
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Trabecular+Meshwork&EYE_REGION_ID=7" ALT="Trabecular meshwork" TITLE="Trabecular meshwork" OnMouseOver="FnEyeStr(EyePic, picTrab, btnTrab, btnTrabOn, btnTrabOff)" SHAPE="POLY" COORDS="97,260,94,260,92,258,91,256,92,253,94,254,97,257,97,260">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Ciliary+Body&EYE_REGION_ID=8" alt="Ciliary Body" title="Ciliary Body" OnMouseOver="FnEyeStr(EyePic, picClBd, btnClBd, btnClBdOn, btnClBdOff)" shape="POLY" coords="140,45,139,45,137,48,134,50,132,52,130,54,128,58,126,61,125,63,123,66,122,71,122,75,122,80,122,82,122,85,121,88,120,92,118,94,115,94,113,92,113,90,113,89,112,88,111,88,110,87,109,85,109,82,109,80,109,79,108,77,106,77,104,78,104,76,105,74,106,73,109,70,110,68,112,66,114,63,115,62,118,60,120,57,122,56,124,54,127,51,130,49,133,47,135,45,137,44,139,42,140,42">
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Ciliary+Body&EYE_REGION_ID=8" alt="Ciliary Body" title="Ciliary Body" OnMouseOver="FnEyeStr(EyePic, picClBd, btnClBd, btnClBdOn, btnClBdOff)" SHAPE="POLY" COORDS="98,261,97,258,99,258,100,260,102,261,103,263,106,263,106,261,107,253,108,252,109,250,109,249,109,247,110,246,112,246,114,246,114,248,114,250,115,252,116,253,118,254,119,256,119,258,118,261,119,264,120,268,120,271,121,275,122,278,123,283,127,287,128,289,125,287,122,286,118,283,116,281,114,279,111,276,109,274,106,270,102,265,100,262">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Cornea&EYE_REGION_ID=1" alt="Cornea" title="Cornea" OnMouseOver="FnEyeStr(EyePic, picCorn, btnCorn, btnCornOn, btnCornOff)" SHAPE="POLY" COORDS="98,75,96,75,94,76,91,76,88,76,86,76,78,76,74,79,70,80,65,82,60,85,57,87,54,89,48,94,45,97,42,98,38,101,36,104,34,107,32,110,29,113,26,118,22,122,19,127,15,134,13,140,11,144,11,150,9,156,8,162,8,173,9,179,10,184,11,190,13,195,14,199,17,203,18,208,20,212,23,217,26,222,30,227,34,232,38,236,44,240,48,242,51,244,55,247,60,249,64,252,68,252,72,254,78,255,82,255,84,255,87,257,90,257,92,255,91,251,89,249,86,246,84,244,82,243,78,240,76,237,74,235,72,233,69,230,66,226,63,223,61,220,60,218,58,215,57,212,55,209,54,206,53,202,51,199,51,196,50,193,49,190,48,187,48,184,47,180,46,157,47,154,48,148,49,142,51,136,53,130,54,126,56,123,57,120,59,117,61,114,63,111,66,108,69,105,72,101,74,98,77,95,80,92,84,89,88,86,95,81,97,79,99,78">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Iris&EYE_REGION_ID=9" alt="Iris" title="Iris" OnMouseOver="FnEyeStr(EyePic, picIris, btnIris, btnIrisOn, btnIrisOff)" SHAPE="POLY" COORDS="100,78,97,79,94,82,85,88,80,93,77,95,74,98,72,101,69,104,65,109,61,114,59,118,57,120,56,123,54,127,53,131,51,135,50,141,48,146,47,152,46,159,46,165,47,182,48,189,50,195,51,199,54,206,56,210,60,218,63,222,67,227,69,230,73,234,78,240,82,242,89,249,92,252,94,253,95,254,96,255,97,256,99,258,103,261,101,255,100,251,100,248,99,244,98,240,97,236,97,233,95,224,94,220,94,215,93,209,92,205,91,200,88,202,87,204,85,206,83,207,80,209,75,209,72,209,70,208,66,206,64,202,61,197,59,192,57,187,56,181,55,174,55,165,56,160,57,156,57,151,58,148,60,143,63,138,66,133,71,130,75,128,79,127,84,128,88,131,91,134,92,138,95,138,96,134,96,130,97,125,97,122,98,119,99,115,100,109,101,105,102,100,103,97,103,92,104,89,105,86,106,84,106,78,103,77">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Lens&EYE_REGION_ID=2" alt="Lens" title="Lens" OnMouseOver="FnEyeStr(EyePic, picLens, btnLens, btnLensOn, btnLensOff)" SHAPE="POLY" COORDS="115,103,112,104,109,105,106,107,105,111,103,115,101,119,99,127,97,135,96,141,95,145,94,148,94,153,93,162,92,180,93,196,94,202,94,206,95,209,96,213,97,217,97,221,99,224,100,228,102,232,104,236,107,237,111,237,115,236,118,233,122,230,124,227,126,224,128,221,130,218,132,215,134,212,135,209,137,206,138,202,139,199,140,196,141,194,143,191,143,187,144,185,145,182,145,179,145,176,145,173,145,169,145,166,145,163,145,161,144,158,144,155,143,152,143,149,142,146,141,143,140,140,139,137,137,133,136,130,134,126,132,123,131,120,130,118,128,115,126,112,125,110,122,107,120,105,118,104,115,103">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=Optic+Nerve&EYE_REGION_ID=6" alt="Optic nerve" title="Optic nerve" OnMouseOver="FnEyeStr(EyePic, picOpNv, btnOpNv, btnOpNvOn, btnOpNvOff)" SHAPE="POLY" COORDS="373,233,374,230,374,227,374,224,374,221,374,217,374,213,375,211,374,209,373,208,371,207,364,206,359,206,354,206,348,206,344,205,340,203,337,202,335,200,333,199,331,198,328,200,326,202,326,202,325,206,324,208,323,210,322,213,322,216,323,220,327,223,329,224,332,223,334,223,337,223,340,224,344,227,350,229,355,231,358,233,362,233,368,236,371,236">
+
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=RPE+Choroid&EYE_REGION_ID=4" alt="RPE/Choroid" title="RPE/Choroid" OnMouseOver="FnEyeStr(EyePic, picRpCh, btnRpCh, btnRpChOn, btnRpChOff)" SHAPE="POLY" COORDS="181,24,185,23,199,23,215,23,230,26,237,28,243,30,248,32,254,35,258,37,262,39,266,41,269,42,273,45,280,49,288,54,293,59,299,64,302,67,305,70,308,74,310,76,312,79,315,83,319,89,321,91,325,98,328,104,332,113,334,119,337,126,339,134,340,141,343,149,343,153,343,157,344,163,344,169,344,178,344,184,343,186,343,190,343,193,343,197,342,199,343,202,341,204,339,202,337,202,337,200,337,199,338,197,339,192,340,186,340,170,340,163,340,159,339,154,338,150,337,141,335,135,334,128,331,123,329,118,328,113,326,109,324,104,322,100,318,93,313,86,310,83,306,78,303,75,294,66,291,63,287,60,282,56,276,52,272,50,269,48,266,46,262,44,256,41,252,39,248,38,245,36,238,34,235,33,228,31,217,29,212,28,197,27,192,27,187,27,182,28,178,28,173,29,168,29,174,26,177,25">
+<area href="http://eyesite.cryst.bbk.ac.uk/cgi-bin/get_family_list.cgi?TISSUE=RPE+Choroid&EYE_REGION_ID=4" alt="RPE/Choroid" title="RPE/Choroid" OnMouseOver="FnEyeStr(EyePic, picRpCh, btnRpCh, btnRpChOn, btnRpChOff)" SHAPE="POLY" COORDS="334,223,333,227,331,230,330,233,327,239,325,244,322,249,319,252,316,257,313,260,310,264,306,268,302,272,297,276,292,280,285,285,279,289,274,292,269,295,263,298,257,301,252,303,246,305,242,307,237,308,230,310,226,311,223,312,217,313,210,314,196,314,188,313,183,313,178,312,174,311,168,310,165,308,172,309,183,311,189,311,195,311,209,311,221,310,226,308,234,307,242,304,249,301,253,300,261,296,269,292,275,287,283,283,291,277,298,270,305,264,309,259,315,252,319,246,322,240,325,235,328,229,330,224">
+
+<AREA HREF="#" ALT="" TITLE="" onCLick="return false" OnMouseOver="FnEyeStr(EyePic, picDflt, null, null, null)" SHAPE="RECT" COORDS="0,0,399,339">
+</map>
+<!-- Hotspot areas are stacked in the order defined, first area identified is used,
+     is on top.  The definition for the trabecular meshwork appears out of alphabetic
+     order as it is so small that must be set first otherwise the defined area will
+     belong to another structure. -->
+<!-- <AREA HREF="RetLib1/EyeSeqHtml/EyeSeq3RetLib1.shtml"  -->
+<!-- <AREA HREF="RpeLib5/EyeSeqHtml/EyeSeqRpeLib5.shtml" -->
+<!-- DMS 19990121 - Left the definition of the sclera in place.  The trabecular meshwork will occupy the same space as the sclera.  No PhotoShop color overlays have been made/updated since this was removed. -->
+<!-- AREA HREF="main/NbEyeSclera.shtml" ALT="Sclera" TITLE="Sclera" OnMouseOver="if (picScla != null) {main/NbEye.src=picScla.src}" SHAPE="POLY"
+COORDS="104,75,101,76,98,75,95,75,93,76,89,77,88,74,89,71,92,68,94,65,97,62,100,59,102,56,105,53,108,50,111,47,115,44,117,42,121,39,124,36,127,34,131,32,136,29,139,27,142,26,146,23,149,22,153,20,157,19,161,17,165,16,168,14,172,14,176,13,180,12,184,11,189,11,193,11,195,10,199,10,203,10,208,10,211,11,215,11,218,11,221,11,225,12,229,13,233,14,238,15,241,16,246,17,248,18,251,19,255,20,259,22,263,23,266,25,271,27,275,29,278,31,282,32,285,35,289,37,293,39,296,42,299,44,303,47,306,50,309,52,313,57,316,60,319,63,322,66,325,70,328,73,331,77,334,81,336,84,338,88,340,91,343,95,344,99,346,103,348,107,350,111,352,115,353,119,354,122,355,125,355,128,357,133,358,138,358,140,359,144,360,148,361,153,361,156,362,162,362,165,362,168,362,172,362,175,362,179,361,183,361,187,361,190,360,193,361,196,364,198,371,198,371,202,371,206,369,206,367,206,364,206,361,206,358,206,355,206,352,206,347,206,343,204,342,202,343,199,343,195,343,192,343,190,343,186,344,183,344,180,344,177,344,175,344,172,344,168,
+344,165,344,162,343,159,343,156,343,153,343,150,342,147,341,144,340,140,340,137,339,134,338,131,337,128,337,125,335,122,334,119,334,116,332,113,331,110,329,107,328,104,326,100,325,98,323,95,322,92,320,90,318,87,315,84,313,80,311,77,309,75,306,73,304,70,302,67,300,65,297,63,294,60,292,58,289,56,285,53,283,51,282,51,278,48,275,46,272,44,269,42,266,41,263,39,260,38,257,36,254,35,251,33,248,32,244,30,238,28,235,27,232,26,229,26,226,25,223,24,219,23,215,23,211,23,210,23,207,23,204,23,201,23,198,23,195,23,193,23,190,23,187,23,184,23,180,24,176,25,174,26,171,26,168,27,165,28,163,29,160,30,157,32,154,33,151,35,147,37,144,39,141,41,139,42,136,45,134,46,130,49,126,52,123,54,121,57,118,60,115,63,112,66,109,69,108,71,106,73"
+-->
+<!-- AREA HREF="main/NbEyeSclera.shtml" ALT="Sclera" TITLE="Sclera" OnMouseOver="if (picScla != null) {main/NbEye.src=picScla.src}" SHAPE="POLY"
+COORDS="128,289,125,288,122,286,117,282,113,278,111,276,108,273,106,270,103,267,101,264,99,261,97,259,97,257,96,255,94,254,91,255,90,257,88,258,86,257,86,258,87,261,88,265,92,270,95,274,98,278,102,282,105,285,109,289,115,294,118,297,124,301,128,304,134,308,141,313,147,316,152,318,159,320,169,323,178,325,186,326,196,326,209,326,217,325,223,324,228,323,232,323,237,322,243,320,251,318,258,316,266,313,274,310,278,308,283,305,287,303,292,300,300,294,307,289,314,283,321,277,328,268,333,261,337,255,340,250,341,248,343,245,343,243,347,244,349,245,353,246,355,246,360,246,367,246,369,243,369,236,362,233,356,232,352,230,348,228,343,225,337,224,334,224,334,227,332,229,331,231,330,234,328,237,327,240,325,243,324,246,322,250,318,255,315,258,312,263,306,269,302,272,299,274,292,280,288,283,278,290,272,294,266,297,261,299,255,302,249,304,243,307,238,308,231,310,226,311,221,312,214,313,200,314,193,314,186,313,180,312,174,311,169,310,165,309,159,308,154,305,149,303,146,301,140,298,136,295,131,292"
+-->
+</body>
+</html>
+<!-- ===== STOP_EYESITE_TEMPLATE_BACK_END === -->

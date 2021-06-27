@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+<HEAD>
+<TITLE>HaploSNPer</TITLE>
+<LINK href="RTQualitySNP_files/style_tools.css" type=text/css rel=STYLESHEET>
+<LINK title="style wur" href="RTQualitySNP_files/blauw_01.css" type=text/css rel=STYLESHEET>
+<SCRIPT language=JavaScript>
+	function unselectall(number){
+            if(number == 1){
+              for(i = 0; i < document.forms[0].method.length; i++){
+                 document.forms[0].method[i].checked = false;
+              }
+            }
+            if(number == 0){
+              for(i = 0; i < document.forms[0].method.length; i++){
+                 document.forms[0].method[i].checked = true;
+              }
+            }
+
+         }
+
+</SCRIPT>
+
+<!--
+  -- Removed as much as possible all MS-dependent shit! JackL, 28-Feb-2008.
+  --
+  -->
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<SCRIPT language=JavaScript type=text/JavaScript>
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+rec_value = new Array("95","95","95")
+
+function show_value(id){
+  document.form1.sim.value = rec_value[id];
+}
+function popupwindow(URL, WinTitle, WinWidth, WinHeight, WinLeft, WinTop)
+{
+	attr = "resizable=1,width=" + WinWidth + ",height=" + WinHeight + ",screenX=" + WinLeft + ",screenY=" + WinTop + ",left=" + WinLeft + ",top=" + WinTop + "";
+	msgWindow=open(URL, WinTitle, attr);
+	if (msgWindow.opener == null) {msgWindow.opener = self;}
+	if(window.focus){msgWindow.focus();}
+}
+
+var newwindow = '';
+
+function popitup(URL, WinTitle, WinWidth, WinHeight, WinLeft, WinTop)
+{
+	if (!newwindow.closed && newwindow.location)
+	{
+		newwindow.location.href = url;
+	}
+	else
+	{
+		attr = "resizable=1,width=" + WinWidth + ",height=" + WinHeight + ",screenX=" + WinLeft + ",screenY=" + WinTop + ",left=" + WinLeft + ",top=" + WinTop + "";
+		newwindow=window.open(URL, WinTitle, attr);
+		if (!newwindow.opener) newwindow.opener = self;
+	}
+	//if (window.focus) {newwindow.focus()}
+	//return false;
+}
+
+ -->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.2668" name=GENERATOR>
+
+<style type="text/css">
+a.header:link {color: white; text-decoration: underline;} /* unvisited link */
+a.header:active {color: white; text-decoration: underline;}
+a.header:visited {color: white; text-decoration: underline;} /* visited link */
+a.header:hover {color: white;
+background-color:green; text-decoration: underline;} /* mouse over link */
+</style>
+</HEAD>
+<BODY bgProperties=fixed leftMargin=0 topMargin=0 rightMargin=0 marginheight="0" marginwidth="0" bottomMargin=0 align="center" onLoad="javascript:popupwindow('startHaploSNPer.html','QuickstartHaploSNPer',900,750,150,100)">
+<FORM name=form1 action=snpfinder4.php method=post encType="multipart/form-data" onReset ="show_value(0)">
+<TABLE height="50%" width="50%" align=center bgProperties=fixed border=0>
+  <TBODY>
+  <TR>
+    <TD>
+
+<font size="+2" color="#000080"> </font>
+<img border=0 width=400 height=100 src="haplosnper_01.png" alt=HaploSNPer>
+&nbsp;&nbsp;
+<font size="+2" color="#000080">allele and SNP detection tool</font>
+	</TD></TR>
+  <TR>
+    <TD>
+      <H2>User Input &nbsp;</H2>
+      <DIV align=justify valign="top">
+      <TABLE width="85%" height=160 border=0>
+        <TBODY>
+        <TR>
+          <TD width="85%"  vAlign=top >
+		  <table class="boxed" width="100%" height=100% border="0">
+            <tbody>
+              <tr>
+                <td class="header">Seed sequence (<a
+                              href="seedexample.htm"
+                              target="_blank">example</a>)</td>
+                <td class="header">Other similar sequences (<a
+                              href="referenceexample.htm"
+                              target="_blank">example</a>)</td>
+              </tr>
+              <tr>
+                <td><textarea name="seedseq" rows="8" cols="50"></textarea></td>
+                <td><textarea name="referencedseq" rows="8" cols="50"></textarea></td>
+              </tr>
+              <tr>
+                <td><input type="file" size="40" name="seedfile" /></td>
+                <td><input type="file" size="40" name="referencefile" /></td>
+              </tr>
+              <tr>
+                <td><table class="boxed" width="100%"  border="0" id="table3">
+                    <tbody>
+                      <tr>
+                        <td class="header">Select a database  (<a href="databaseinfo.html" target="_blank">data info</a>)</td>
+                      </tr>
+                      <tr>
+                        <td align="right"><p align="center">
+                            <select size="1" name="database">
+                              <option value="test" selected>- - - Select species data set - - -</option>
+                              <option value="cattle">Bos taurus (cattle)</option>
+			      <option value="dog">Canis familiaris (dog)</option>
+                              <option value="zebrafish">Danio rerio (zebrafish)</option>
+                              <option value="chicken">Gallus gallus (chicken)</option>
+			      <option value="fruitfly">Drosophila melanogaster (fruit fly)</option>
+                              <option value="est_hum">Homo sapiens (human)</option>
+                              <option value="est_mus">Mus musculus + domesticus (mouse)</option>
+                              <option value="rat">Rattus sp. (rat)</option>
+                              <option value="pig">Sus scrofa (pig)</option>
+                              <option value="test"> </option>
+                              <option value="arabidopsis">Arabidopsis thaliana (thale cress)</option>
+                              <option value="brassica">Brassica</option>
+			      <option value="soybean">Glycine max (soybean)</option>
+                              <option value="barley">Hordeum vulgare + subsp. vulgare (barley) </option>
+                              <option value="tomato">Lycopersicon esculentum (tomato)</option>
+                              <option value="apple">Malus x domestica (apple tree)</option>
+                              <option value="rice">Oryza sativa (rice)</option>
+                              <option value="sugarcane">Saccharum officinarum (sugarcane)</option>
+                              <option value="potato">Solanum tuberosum (potato)</option>
+			      <option value="sorghum">Sorghum bicolor (sorghum)</option>
+                              <option value="wheat">Triticum aestivum (wheat)</option>
+			      <option value="winegrape">Vitis vinifera (wine grape)</option>
+                              <option value="maize">Zea mays (maize)</option>
+                            </select>
+                        </p></td>
+                      </tr>
+                    </tbody>
+                </table></td>
+                <td><table class="boxed" width="100%" border="0" id="table9">
+                    <tbody>
+                      <tr>
+                        <td class="header">Select a sequence alignment program </td>
+                      </tr>
+                      <tr>
+                        <td align="right"><p align="center">
+                            <select size="1" name="assembler" onchange = "show_value(this.selectedIndex)">
+                              <option selected="selected" value="cap3">CAP3</option>
+                              <option value="phrap">PHRAP</option>
+			      <!-- option value="clustalw">ClustalW</option -->
+                            </select>
+                        </p></td>
+                      </tr>
+                    </tbody>
+                </table></td></tr>
+            </tbody>
+          </table></TD>
+          <TD width="15%" height=160 valign=top align=left>
+		  <table width="100%"  height=100% border="0" class="boxed" id="table1">
+            <tbody>
+              <tr>
+                <td class="header"><p style="text-align:center">Help</p></td>
+              </tr>
+              <tr>
+                <td><ul>
+                    <li>
+                      <p><a
+				href="startHaploSNPer.html" 
+				target="_blank"><i><U>Quick start</U></i></a> </p>
+                    </li>
+                    <li>
+                      <p><a 
+                                href="manuals/HaploSNPer_manual.html" 
+                                target="_blank"><i><U>Online manual</U></i></a> </p>
+                    </li>
+                  <li>
+                      <p><a
+                                href="manuals/HaploSNPer_manual.pdf"
+                                target="_blank"><i><U>Download manual (PDF)</U></i></a> </p>
+                  </li>
+                </ul></td>
+              </tr>
+              <tr>
+                <td class="header"><p style="text-align:center">Related publications</p></td>
+              </tr>
+              <tr>
+                <td><ul>
+                    <li>
+                      <p><a 
+                                href="http://www.biomedcentral.com/1471-2105/7/438"
+                                target="_blank"><i><U>QualitySNP (BMC bioinformatics)</U></i></a> </p>
+                    </li>
+                 
+                </ul></td>
+              </tr>
+            </tbody>
+          </table>
+        </TBODY></TABLE>
+      </DIV>
+	<H2>Pre-processing of sequences</H2>
+      <DIV align=justify valign= top>
+        <table width="100%" border="0">
+          <tr>
+            <td width="49%"><table class="boxed" width="100%" align="left" border="0">
+              <tbody>
+                <tr>
+                  <td class="header" height="18">Remove vectors </td>
+                </tr>
+                <tr>
+                  <td height="30"><input type="checkbox" name="rmvector" value="ON" />
+                    Use Cross_match to remove vectors </td>
+                </tr>
+              </tbody>
+            </table></td>
+            <td width="51%"><table class="boxed" width="100%" align="left" border="0">
+              <tbody>
+                <tr>
+                  <td class="header" height="18">Mask repeats </td>
+                </tr>
+                <tr>
+                  <td height="30"><input type="checkbox" name="mkrepeat" value="ON" />
+                    Use RepeatMasker to mask repeats </td>
+                </tr>
+              </tbody>
+            </table></td>
+          </tr>
+        </table>
+      </DIV>
+      <H2>Parameters</H2>
+      <DIV align=justify>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width="49%" vAlign=top>
+            <TABLE class=boxed width="100%" align=left border=0>
+              <TBODY>
+              <TR>
+                <TD class=header height="18">BLAST / CAP3 and PHRAP</TD></TR>
+              <TR>
+                <TD height="30"><i>E</i>-value 
+                  <INPUT size=6 name=evalue value="1e-60">
+              </TD></TR>
+              <TR>
+                <TD height="30">Similarity for CAP3 and PHRAP <INPUT size=5 name=sim value="95"> 
+                percent (must be &gt; 65) 
+              </TD>
+              </TR></TBODY></TABLE></TD>
+          <TD vAlign=top width="51%">
+            <TABLE class=boxed width="100%" align=left border=0 id="table8">
+              <TBODY>
+              <TR>
+                <TD class=header height="18">Haplotype construction</TD></TR>
+              <TR>
+                <TD height="30">Similarity per polymorphic site
+				<INPUT size=5 name=sim1 value="0.75"> [0..1]</TD></TR>
+              <TR>
+                <TD height="30">Similarity over all polymorphic sites
+				<INPUT size=5 name=sim2 value="0.80"> [0..1] </TD></TR>
+              </TBODY></TABLE></TD></TR>
+        <TR>
+          <TD vAlign=top>
+            <TABLE class=boxed width="100%" align=left border=0 id="table6">
+              <TBODY>
+              <TR class=boxed borderColor=#339966>
+                <TD class=header height=18> Low quality region</TD></TR>
+              <tr>
+                <TD>LQ length from 5'side <INPUT size=4 name=lq5 value="30"> nucleotides</TD>
+				</tr>
+				<tr>
+                <TD height="30">LQ length from 3'side 
+				  <input size=4 name=lq3 value="20">
+				percent of the whole sequence</TD>
+				</tr>
+				<tr>
+                <TD height="30">The weight value of LQ region 
+				  <INPUT size=4 name=weightlq value="0.5"> [0..1]</TD>
+				</tr>
+				</TBODY></TABLE></TD>
+          <TD vAlign=top>
+            <TABLE class=boxed width="100%" align=left border=0 id="table10">
+              <TBODY>
+              <TR class=boxed borderColor=#339966>
+                <TD class=header height=18> SNP detection</TD></TR>
+              <tr>
+                <TD>Minimum cluster size <INPUT size=5 name=clustersize value="4">
+                sequences  </TD>
+				</tr>
+				<tr>
+                <TD height="30">Minimum redundancy of each allele
+				<INPUT size=5 name=allelenum value="2">
+				sequences  </TD>
+				</tr>
+				<tr>
+                <TD height="30">Minimum confidence score
+				<select name="coscore">
+				<option value="1">1</option>				                              
+				<option selected="selected" value="2">2</option>
+                  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>			  
+				 </select> 
+				[1..5]</TD>
+				</tr>
+				</TBODY></TABLE>
+			</TD></TR></TBODY></TABLE></DIV>
+      <H2 align=justify>Output format</H2>
+	  <DIV align=justify>  
+      <TABLE width="100%" border=0>
+		<TBODY>
+			<TR>
+				<TD width="49%" height="100" vAlign=top>
+				<TABLE class=boxed width="100%" height="100" align=left border=0 id="table7">
+					<TBODY>
+						<TR>
+							<TD class=header height=18>Output format </TD>
+						</TR>
+						<TR>
+							<TD><LABEL>
+							<INPUT type=radio value=seedcluster
+                  name=output> Only cluster containing the seed sequence</LABEL><BR>
+							<LABEL>
+							<INPUT
+                  type=radio CHECKED value=allclusters name=output> All clusters related
+				to the seed sequence</LABEL>
+				</TD></TR>
+					</TBODY>
+				</TABLE></TD>
+				<TD vAlign=top width="51%" height="100">
+				<TABLE width="100%" height="100" border=0 align=left class=boxed id="table2">
+					<TBODY>
+						<TR>
+							<TD colSpan=2 class=header height=18><STRONG>Submit your job to 
+                  HaploSNPer</STRONG></TD>
+						</TR>
+						<TR>
+						<TD>Your e-mail address (<a href=manuals/HaploSNPer_manual.html#email target="_blank">optional</a>): </TD><TD><INPUT type=text size=30 name=useremail></TD>
+					   </TR>
+						<TR>
+							<TD>(Output returned by email instead of waiting)</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;
+<INPUT type=submit value="Submit" name=submit onClick="javascript:popitup('processing.html','HaploSNPerprocess',400,100,400,300)">
+							 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <INPUT type=reset value="Reset" name=reset></TD>
+						</TR>
+					</TBODY></TABLE>
+				  </TD></TR></TBODY></TABLE></DIV>
+		</TD></TR>
+					<TR><TD><P><EM><FONT size=1>© 2008 Laboratory of Bioinformatics, WUR</FONT></EM></P></td></tr>
+					<tr><td>
+					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0><TBODY>
+         <TR>
+    <TD bgColor=#003366 colSpan=2><IMG height=1 
+      src="RTQualitySNP_files/shim.gif" width=182 border=0></TD></TR>
+  <TR vAlign=top>
+    <TD align=left class=footer>
+      <P><EM>Last Modified <!-- #BeginDate format:Sw1 -->March 23, 2009<!-- #EndDate --> </EM></P></TD>
+    <TD align=right><A href="http://www.wur.nl/" target=_blank><IMG 
+      alt="To homepage Wageningen UR" hspace=0   src="/images/wur_logo.gif" align=right
+      border=0 name=woordmerk></A></TD> </TR></TBODY></TABLE>
+     <script language=JavaScript>show_value(0)</script>
+  </td></tr></TBODY></TABLE>
+</FORM></BODY></HTML>

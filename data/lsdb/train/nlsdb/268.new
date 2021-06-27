@@ -1,0 +1,278 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Reactome</title>
+<link type="application/rss+xml" rel="alternate" href="/xml/rss.xml" />
+<meta content="Reactome is an open-source and manually curated pathway database that provides pathway analysis tools for life science researchers." name="description" />
+<meta content="reactome, pathway, pathways, pathway database, pathway analysis, pathways analysis, bioinformatics software, genomics, proteomics, metabolomics, data mining, gene expression" name="keywords" />
+<link rel="stylesheet" type="text/css" href="/stylesheet.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<script type="text/javascript" src="/javascript/yui/build/yahoo/yahoo-min.js"></script>
+<script type="text/javascript" src="/javascript/yui/build/dom/dom-min.js"></script>
+<script type="text/javascript" src="/javascript/yui/build/event/event-min.js"></script>
+<script type="text/javascript" src="/javascript/yui/build/connection/connection-min.js"></script>
+<script language="JavaScript">
+var previousImage;
+var previousColor;
+var previousBg;
+
+var offsetxpoint=0;
+var offsetypoint=0;
+var ie=document.all;
+var ns6=document.getElementById && !document.all;
+
+function ietruebody(){
+    return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body;
+}
+
+function change(db,sp,id){
+    var img_src = "/img-fp/" + db + "/" + sp + "/" + id + ".png";
+    previousImage = document.getElementById("rm_image").src;
+    document.getElementById("rm_image").src = img_src;
+    previousBg = document.getElementById(id).style.backgroundColor;
+    document.getElementById(id).style.backgroundColor = "#B0C4DE";
+    previousColor = document.getElementById(id).style.color;
+    document.getElementById(id).style.color = "#000000";
+}
+
+function unchange(id){
+    document.getElementById("rm_image").src = previousImage;
+    document.getElementById(id).style.backgroundColor = previousBg;
+    document.getElementById(id).style.color = previousColor;
+    //previousImage = null;
+}
+
+function change2(db,sp_id,idArray){
+    previousImage = document.getElementById("rm_image").src;
+    previousBg = document.getElementById(idArray[0]).style.backgroundColor;
+    previousColor = document.getElementById(idArray[0]).style.color;
+    var img_src = "/img-fp/" + db + "/" + sp_id + "/" + idArray[0];
+    document.getElementById(idArray[0]).style.backgroundColor = "#B0C4DE";
+    document.getElementById(idArray[0]).style.color = "#000000";
+    for (var i=1; i<idArray.length; i++) {
+        document.getElementById(idArray[i]).style.backgroundColor = "#B0C4DE";
+        document.getElementById(idArray[i]).style.color = "#000000";
+        img_src += "_" + idArray[i];
+    }
+    img_src += ".png";
+    document.getElementById("rm_image").src = img_src;
+}
+
+function unchange2(idArray){
+    document.getElementById("rm_image").src = previousImage;
+    for (var i=0; i<idArray.length; i++) {
+        document.getElementById(idArray[i]).style.backgroundColor = previousBg;
+        document.getElementById(idArray[i]).style.color = previousColor;
+    }
+    //previousImage = null;
+}
+
+function preloadImages() {
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function handleClick(id,e) {
+    if (id) {
+	document.reactionmap.ID.value = id;
+    }
+    document.reactionmap.submit();
+    return false;
+}
+
+function handleFocusSpeciesChange(evt) {
+    evt = (evt) ? evt : ((window.event) ? window.event : null);
+    if (evt) {
+        // equalize W3C/IE models to get event target reference
+        var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (elem) {
+	    document.cookie = "FOCUS_SPECIES=" + escape(elem.options[elem.selectedIndex].value);
+        }
+    }
+}
+
+function loadUseMapForImgId (imgId) {
+    var img = YAHOO.util.Dom.get(imgId);
+    var mapsrc = img.src.replace(/png/, "usemap");
+    var callback = {
+      scope: this,
+      customevents:{
+	onSuccess: function(eventType, args) {
+	    var mapEl = YAHOO.util.Dom.get("img_map");
+	    mapEl.innerHTML = args[0].responseText;
+	    img.useMap = "#img_map";
+	}, 
+	onFailure: function(eventType, args) {
+	    //alert("Failed to load " + mapsrc + ": " + args[0].statusText);
+	}
+      }
+    };
+    YAHOO.util.Connect.asyncRequest('GET', mapsrc, callback);
+}
+</script>
+<div id="dhtmltooltip" class="dhtmltooltip"></div>
+<script language="javascript" src="/javascript/tooltip.js"></script>
+<script src="/javascript/yui/build/yahoo-dom-event/yahoo-dom-event.js" type="text/javascript"></script>
+<script src="/javascript/yui/build/container/container_core-min.js" type="text/javascript"></script>
+<script src="/javascript/yui/build/menu/menu.js" type="text/javascript"></script>
+<script src="/javascript/pulldown_menu.js" type="text/javascript"></script>
+
+<script language="JavaScript" type="text/javascript">
+var browser=navigator.appName;
+var nua=navigator.userAgent;
+var op=(nua.indexOf('Opera')!=-1);
+var saf=(nua.indexOf('Safari')!=-1);
+var konq=(!saf && (nua.indexOf('Konqueror')!=-1) ) ? true : false;
+var ffx=(nua.indexOf('Firefox')!=-1 );
+var moz=( (!saf && !konq && !ffx) && ( nua.indexOf('Gecko')!=-1 ) ) ? true : false;
+var ie=(browser=="Microsoft Internet Explorer") || ((nua.indexOf('MSIE')!=-1)&&!op);
+if (konq || moz) {
+	document.write("<TABLE id=\"navigation_bar\"> <TR> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/frontpage?DB=gk_current\" target=\"_top\"><img SRC=\"/icons/R-purple.png\" BORDER=\"0\" ALIGN=\"left\" HEIGHT=\"100%\" WIDTH=\"26\">&nbsp;&nbsp;&nbsp;Home</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/about.html\" target=\"_top\">About Reactome</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/news.html\" target=\"_top\">News</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Reactomes\" target=\"_top\">Other Reactomes</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/disclaimer.html\" target=\"_top\">Disclaimer</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/toc?DB=gk_current\" target=\"_top\">Table of Contents</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/doi_toc?DB=gk_current\" target=\"_top\">DOIs</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/classbrowser?DB=gk_current\" target=\"_top\">Database Schema</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Reactome_Calendar\" target=\"_top\">Editorial Calendar</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/stats.html\" target=\"_top\">Statistics</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/userguide/Usersguide.html\" target=\"_top\">User Guide</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/data_model.html\" target=\"_top\">Data Model</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/electronic_inference.html\" target=\"_top\">Orthology Prediction</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/object_relational_mapping.html\" target=\"_top\">Object/Relational mapping</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Main_Page\" target=\"_top\">Wiki</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/referring2GK.html\" target=\"_top\">Linking to Reactome</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/extendedsearch?DB=gk_current\" target=\"_top\">Advanced Search</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/small_molecule_search?DB=gk_current\" target=\"_top\">Small molecule Search</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/pathfinder?DB=gk_current\" target=\"_top\">PathFinder</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/skypainter2?DB=gk_current\" target=\"_top\">SkyPainter</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://brie8.cshl.edu:8084\" target=\"_top\">User Interface II (beta)</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/cgi-bin/mart\" target=\"_top\">BioMart: query, link</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"/download/index.html\" target=\"_top\">Download</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"mailto:help@reactome.org\" target=\"_top\">Contact Us</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Reactome_Training\" target=\"_top\">Training</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Reactome_Publications\" target=\"_top\">Publications</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Citing_Reactome\" target=\"_top\">Citing Reactome</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Reactome_Resource_Guide\" target=\"_top\">Resource Guide</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://wiki.reactome.org/index.php/Outreach_Calendar\" target=\"_top\">Outreach Calendar</A></TD> <TD CLASS=\"navigation\"><A onMouseout=\"hideddrivetip()\" HREF=\"http://mail.reactome.org/mailman/listinfo/reactome-announce\" target=\"_top\">Announcements</A></TD> </TR> </TABLE> ")
+} else {
+	document.write("<div id=\"navigation_bar\" class=\"yui-skin-sam\"> <div id=\"productsandservices\" class=\"yui-main yui-b yuimenubar yuimenubarnav yui-module yui-overlay visible\"> 	<div class=\"bd\"> 	<ul> 		<li><a class=\"yuimenubaritemlabel home\"  HREF=/cgi-bin/frontpage?DB=gk_current target=\"_top\"><img SRC=\"/icons/R-purple.png\" BORDER=\"0\" ALIGN=\"left\" HEIGHT=\"100%\" WIDTH=\"26\">&nbsp;&nbsp;&nbsp;Home</a> </li> 		<li><a class=\"yuimenubaritemlabel\"  HREF=/about.html target=\"_top\">About</a> 		<div class=\"yuimenu\"> 		<div class=\"bd\"> 		<ul> 			<li><a class=\"yuimenuitemlabel\"  HREF=/about.html target=\"_top\">About Reactome</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/news.html target=\"_top\">News</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Reactomes target=\"_top\">Other Reactomes</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/disclaimer.html target=\"_top\">Disclaimer</a> </li> 		</ul> 		</div> 		</div> </li> 		<li><a class=\"yuimenubaritemlabel\"  HREF=/cgi-bin/toc?DB=gk_current target=\"_top\">Content</a> 		<div class=\"yuimenu\"> 		<div class=\"bd\"> 		<ul> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/toc?DB=gk_current target=\"_top\">Table of Contents</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/doi_toc?DB=gk_current target=\"_top\">DOIs</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/classbrowser?DB=gk_current target=\"_top\">Database Schema</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Reactome_Calendar target=\"_top\">Editorial Calendar</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/stats.html target=\"_top\">Statistics</a> </li> 		</ul> 		</div> 		</div> </li> 		<li><a class=\"yuimenubaritemlabel\"  HREF=/userguide/Usersguide.html target=\"_top\">Documentation</a> 		<div class=\"yuimenu\"> 		<div class=\"bd\"> 		<ul> 			<li><a class=\"yuimenuitemlabel\"  HREF=/userguide/Usersguide.html target=\"guide_popout\">User Guide</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/data_model.html target=\"_top\">Data Model</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/electronic_inference.html target=\"_top\">Orthology Prediction</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/object_relational_mapping.html target=\"_top\">Object/Relational mapping</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Main_Page target=\"_top\">Wiki</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/referring2GK.html target=\"_top\">Linking to Reactome</a> </li> 		</ul> 		</div> 		</div> </li> 		<li><a class=\"yuimenubaritemlabel\">Tools</a> 		<div class=\"yuimenu\"> 		<div class=\"bd\"> 		<ul> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/extendedsearch?DB=gk_current target=\"_top\">Advanced Search</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/small_molecule_search?DB=gk_current target=\"_top\">Small molecule Search</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/pathfinder?DB=gk_current target=\"_top\">PathFinder</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/skypainter2?DB=gk_current target=\"_top\">SkyPainter</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://brie8.cshl.edu:8084 target=\"guide_popout\">User Interface II (beta)</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=/cgi-bin/mart target=\"_top\">BioMart: query, link</a> </li> 		</ul> 		</div> 		</div> </li> 		<li><a class=\"yuimenubaritemlabel\"  HREF=/download/index.html target=\"_top\">Download</a> </li> 		<li><a class=\"yuimenubaritemlabel\"  HREF=mailto:help@reactome.org target=\"_top\">Contact Us</a> </li> 		<li><a class=\"yuimenubaritemlabel\"  HREF=http://wiki.reactome.org/index.php/Outreach target=\"_top\">Outreach</a> 		<div class=\"yuimenu\"> 		<div class=\"bd\"> 		<ul> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Reactome_Training target=\"_top\">Training</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Reactome_Publications target=\"_top\">Publications</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Citing_Reactome target=\"_top\">Citing Reactome</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Reactome_Resource_Guide target=\"_top\">Resource Guide</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://wiki.reactome.org/index.php/Outreach_Calendar target=\"_top\">Outreach Calendar</a> </li> 			<li><a class=\"yuimenuitemlabel\"  HREF=http://mail.reactome.org/mailman/listinfo/reactome-announce target=\"_top\">Announcements</a> </li> 		</ul> 		</div> 		</div> </li> 	</ul> 	</div> </div><!-- id=\"productsandservices\" --> </div><!-- class=\"yui-skin-sam\" --> ")
+}
+</script>
+<script language="JavaScript" type="text/javascript">
+var browser=navigator.appName;
+var nua=navigator.userAgent;
+var ie=(browser=="Microsoft Internet Explorer") || ((nua.indexOf('MSIE')!=-1)&&!op);
+if (ie) {
+document.write("<DIV CLASS=\"search_no_popups\"> <TABLE ALIGN=\"center\" WIDTH=\"600\" CLASS=\"search\" CELLSPACING=\"0\" BORDER=\"0\"> <FORM method=\"get\" action=\"/cgi-bin/search2\" enctype=\"application/x-www-form-urlencoded\"> <input type=\"hidden\" name=\"DB\" value=\"gk_current\"  /> <input type=\"hidden\" name=\"OPERATOR\" value=\"ALL\"  />	<TR> 		<TD CLASS=\"search\">Search for:</TD> 		<TD CLASS=\"search\"><input type=\"text\" name=\"QUERY\"  size=\"20\" /></TD> 		<TD CLASS=\"search\">in</TD> 		<TD CLASS=\"search\"><select name=\"SPECIES\" id=\"popup_3\"> <option  value=\"\" >All species</option> <option  value=\"170905\" >Arabidopsis thaliana</option> <option  value=\"68320\" >Caenorhabditis elegans</option> <option  value=\"104249\" >Cryptococcus neoformans A/D</option> <option  value=\"176783\" >Cyanidioschyzon merolae</option> <option  value=\"170941\" >Dictyostelium discoideum</option> <option  value=\"56210\" >Drosophila melanogaster</option> <option  value=\"176753\" >Entamoeba histolytica</option> <option  value=\"159879\" >Escherichia coli</option> <option  value=\"49591\" >Gallus gallus</option> <option selected=\"selected\" value=\"48887\" >Homo sapiens</option> <option  value=\"170929\" >Methanocaldococcus jannaschii</option> <option  value=\"48892\" >Mus musculus</option> <option  value=\"176806\" >Mycobacterium tuberculosis</option> <option  value=\"176745\" >Neurospora crassa</option> <option  value=\"186860\" >Oryza sativa</option> <option  value=\"170928\" >Plasmodium falciparum</option> <option  value=\"48895\" >Rattus norvegicus</option> <option  value=\"68322\" >Saccharomyces cerevisiae</option> <option  value=\"68324\" >Schizosaccharomyces pombe</option> <option  value=\"170902\" >Sulfolobus solfataricus</option> <option  value=\"176770\" >Synechococcus sp.</option> <option  value=\"170951\" >Tetraodon nigroviridis</option> <option  value=\"176778\" >Thalassiosira pseudonana</option> </select> </TD> 		<TD CLASS=\"search\"><input type=\"submit\" name=\"SUBMIT\" value=\"Go!\" /></TD> 	</TR> </FORM> </TABLE> </DIV> ")
+} else {
+document.write("<DIV CLASS=\"search_no_popups\"> <TABLE ALIGN=\"center\" WIDTH=\"500\" CLASS=\"search\" CELLSPACING=\"0\" BORDER=\"0\"> <FORM method=\"get\" action=\"/cgi-bin/search2\" enctype=\"application/x-www-form-urlencoded\"> <input type=\"hidden\" name=\"DB\" value=\"gk_current\"  /> <input type=\"hidden\" name=\"OPERATOR\" value=\"ALL\"  />	<TR> 		<TD CLASS=\"search\">Search for:</TD> 		<TD CLASS=\"search\"><input type=\"text\" name=\"QUERY\"  size=\"20\" /></TD> 		<TD CLASS=\"search\">in</TD> 		<TD CLASS=\"search\"><select name=\"SPECIES\" id=\"popup_3\"> <option  value=\"\" >All species</option> <option  value=\"170905\" >Arabidopsis thaliana</option> <option  value=\"68320\" >Caenorhabditis elegans</option> <option  value=\"104249\" onMouseover=\"ddrivetip('Cryptococcus neoformans A/D','#DCDCDC', 250)\" onMouseout=\"hideddrivetip()\">Cryptococcus neoforman...</option> <option  value=\"176783\" >Cyanidioschyzon merolae</option> <option  value=\"170941\" >Dictyostelium discoideum</option> <option  value=\"56210\" >Drosophila melanogaster</option> <option  value=\"176753\" >Entamoeba histolytica</option> <option  value=\"159879\" >Escherichia coli</option> <option  value=\"49591\" >Gallus gallus</option> <option selected=\"selected\" value=\"48887\" >Homo sapiens</option> <option  value=\"170929\" onMouseover=\"ddrivetip('Methanocaldococcus jannaschii','#DCDCDC', 250)\" onMouseout=\"hideddrivetip()\">Methanocaldococcus jan...</option> <option  value=\"48892\" >Mus musculus</option> <option  value=\"176806\" onMouseover=\"ddrivetip('Mycobacterium tuberculosis','#DCDCDC', 250)\" onMouseout=\"hideddrivetip()\">Mycobacterium tubercul...</option> <option  value=\"176745\" >Neurospora crassa</option> <option  value=\"186860\" >Oryza sativa</option> <option  value=\"170928\" >Plasmodium falciparum</option> <option  value=\"48895\" >Rattus norvegicus</option> <option  value=\"68322\" >Saccharomyces cerevisiae</option> <option  value=\"68324\" >Schizosaccharomyces pombe</option> <option  value=\"170902\" >Sulfolobus solfataricus</option> <option  value=\"176770\" >Synechococcus sp.</option> <option  value=\"170951\" >Tetraodon nigroviridis</option> <option  value=\"176778\" >Thalassiosira pseudonana</option> </select> </TD> 		<TD CLASS=\"search\"><input type=\"submit\" name=\"SUBMIT\" value=\"Go!\" /></TD> 	</TR> </FORM> </TABLE> </DIV> ")
+}
+</script>
+<TABLE ALIGN="center" WIDTH="100%" CLASS="frontpagetitle"><TR><TD CLASS="frontpagetitle">Reactome - a curated knowledgebase of biological pathways</TR></TABLE>
+<form method="get" action="/cgi-bin/frontpage" enctype="multipart/form-data">
+<DIV STYLE="margin-bottom:10px;color:red;background-color:navy;border:thin solid #B0C4DE;text-align:center;font-weight:bold;">The data displayed is for <input type="hidden" name="DB" value="gk_current"  /><select name="FOCUS_SPECIES"  onchange="handleFocusSpeciesChange(event);submit();">
+<option value="Arabidopsis thaliana">Arabidopsis thaliana</option>
+<option value="Caenorhabditis elegans">Caenorhabditis elegans</option>
+<option value="Cryptococcus neoformans A/D">Cryptococcus neoformans A/D</option>
+<option value="Cyanidioschyzon merolae">Cyanidioschyzon merolae</option>
+<option value="Dictyostelium discoideum">Dictyostelium discoideum</option>
+<option value="Drosophila melanogaster">Drosophila melanogaster</option>
+<option value="Entamoeba histolytica">Entamoeba histolytica</option>
+<option value="Escherichia coli">Escherichia coli</option>
+<option value="Gallus gallus">Gallus gallus</option>
+<option selected="selected" value="Homo sapiens">Homo sapiens</option>
+<option value="Methanocaldococcus jannaschii">Methanocaldococcus jannaschii</option>
+<option value="Mus musculus">Mus musculus</option>
+<option value="Mycobacterium tuberculosis">Mycobacterium tuberculosis</option>
+<option value="Neurospora crassa">Neurospora crassa</option>
+<option value="Oryza sativa">Oryza sativa</option>
+<option value="Plasmodium falciparum">Plasmodium falciparum</option>
+<option value="Rattus norvegicus">Rattus norvegicus</option>
+<option value="Saccharomyces cerevisiae">Saccharomyces cerevisiae</option>
+<option value="Schizosaccharomyces pombe">Schizosaccharomyces pombe</option>
+<option value="Sulfolobus solfataricus">Sulfolobus solfataricus</option>
+<option value="Synechococcus sp.">Synechococcus sp.</option>
+<option value="Tetraodon nigroviridis">Tetraodon nigroviridis</option>
+<option value="Thalassiosira pseudonana">Thalassiosira pseudonana</option>
+</select>. Use the menu to change the species. Check <label><input type="checkbox" name="MULTISPECIES" value="on" onclick="submit();" /> </label>for cross-species comparison.<div><input type="hidden" name=".cgifields" value="MULTISPECIES"  /></div>
+</form></DIV><DIV ID="reactionmap_and_table">
+<TABLE ALIGN="center" WIDTH="903" CLASS="reactionmap"><form method="get" action="/cgi-bin/eventbrowser" enctype="multipart/form-data" name="reactionmap">
+<input type="hidden" name="DB" value="gk_current"  /><INPUT TYPE="hidden" NAME="ZOOM" VALUE="2" /><INPUT TYPE="hidden" NAME="ID" VALUE="" /><TR><TD><MAP NAME="img_map" ID="img_map"></MAP><IMG ID="rm_image" HEIGHT="150" WIDTH="900" BORDER="0" SRC="/img-fp/gk_current/48887/48887.png"></TD></TR></form><TR><TD ALIGN="center"><IMG SRC="/icons/event_reactionmap_key.png"></TD></TR></TABLE>
+<script language="JavaScript">loadUseMapForImgId('rm_image');</script><DIV CLASS="section">
+<TABLE WIDTH="100%" CLASS="frontpageitems" CELLSPACING="0"><TR><TD CLASS="frontpageitem2"><A ID="109581" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=109581&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","109581");' ONMOUSEOUT='unchange("109581");'>Apoptosis</A> </TD><TD CLASS="frontpageitem2"><A ID="422475" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=422475&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","422475");' ONMOUSEOUT='unchange("422475");'>Axon guidance</A> </TD><TD CLASS="frontpageitem2"><A ID="211859" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=211859&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","211859");' ONMOUSEOUT='unchange("211859");'>Biological oxidations</A> </TD><TD CLASS="frontpageitem2"><A ID="168799" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=168799&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","168799");' ONMOUSEOUT='unchange("168799");'>Botulinum neurotoxicity</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="446728" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=446728&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","446728");' ONMOUSEOUT='unchange("446728");'>Cell junction organization</A> </TD><TD CLASS="frontpageitem2"><A ID="69620" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=69620&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","69620");' ONMOUSEOUT='unchange("69620");'>Cell Cycle Checkpoints</A> </TD><TD CLASS="frontpageitem2"><A ID="69278" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=69278&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","69278");' ONMOUSEOUT='unchange("69278");'>Cell Cycle, Mitotic</A> </TD><TD CLASS="frontpageitem2"><A ID="73894" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=73894&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","73894");' ONMOUSEOUT='unchange("73894");'>DNA Repair</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="69306" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=69306&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","69306");' ONMOUSEOUT='unchange("69306");'>DNA Replication</A> </TD><TD CLASS="frontpageitem2"><A ID="381150" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=381150&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","381150");' ONMOUSEOUT='unchange("381150");'>Diabetes pathways</A> </TD><TD CLASS="frontpageitem2"><A ID="163200" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=163200&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","163200");' ONMOUSEOUT='unchange("163200");'>Electron Transport Chain</A> </TD><TD CLASS="frontpageitem2"><A ID="157858" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=157858&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","157858");' ONMOUSEOUT='unchange("157858");'>Gap junction trafficking and regulation</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="74160" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=74160&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","74160");' ONMOUSEOUT='unchange("74160");'>Gene Expression</A> </TD><TD CLASS="frontpageitem2"><A ID="109582" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=109582&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","109582");' ONMOUSEOUT='unchange("109582");'>Hemostasis</A> </TD><TD CLASS="frontpageitem2"><A ID="162906" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=162906&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","162906");' ONMOUSEOUT='unchange("162906");'>HIV Infection</A> </TD><TD CLASS="frontpageitem2"><A ID="168254" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=168254&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","168254");' ONMOUSEOUT='unchange("168254");'>Influenza Infection</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="163685" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=163685&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","163685");' ONMOUSEOUT='unchange("163685");'>Integration of energy metabolism</A> </TD><TD CLASS="frontpageitem2"><A ID="216083" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=216083&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","216083");' ONMOUSEOUT='unchange("216083");'>Integrin cell surface interactions</A> </TD><TD CLASS="frontpageitem2"><A ID="73923" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=73923&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","73923");' ONMOUSEOUT='unchange("73923");'>Metabolism of lipids and lipoproteins</A> </TD><TD CLASS="frontpageitem2"><A ID="199991" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=199991&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","199991");' ONMOUSEOUT='unchange("199991");'>Membrane Trafficking</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="71291" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=71291&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","71291");' ONMOUSEOUT='unchange("71291");'>Metabolism of amino acids and derivatives</A> </TD><TD CLASS="frontpageitem2"><A ID="71387" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=71387&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","71387");' ONMOUSEOUT='unchange("71387");'>Metabolism of carbohydrates</A> </TD><TD CLASS="frontpageitem2"><A ID="202131" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=202131&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","202131");' ONMOUSEOUT='unchange("202131");'>Metabolism of nitric oxide</A> </TD><TD CLASS="frontpageitem2"><A ID="15869" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=15869&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","15869");' ONMOUSEOUT='unchange("15869");'>Metabolism of nucleotides</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="351202" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=351202&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","351202");' ONMOUSEOUT='unchange("351202");'>Metabolism of polyamines</A> </TD><TD CLASS="frontpageitem2"><A ID="189445" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=189445&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","189445");' ONMOUSEOUT='unchange("189445");'>Metabolism of porphyrins</A> </TD><TD CLASS="frontpageitem2"><A ID="392499" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=392499&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","392499");' ONMOUSEOUT='unchange("392499");'>Metabolism of proteins</A> </TD><TD CLASS="frontpageitem2"><A ID="532600" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=532600&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","532600");' ONMOUSEOUT='unchange("532600");'>Metabolism of RNA</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="196854" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=196854&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","196854");' ONMOUSEOUT='unchange("196854");'>Metabolism of vitamins and cofactors</A> </TD><TD CLASS="frontpageitem2"><A ID="397014" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=397014&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","397014");' ONMOUSEOUT='unchange("397014");'>Muscle contraction</A> </TD><TD CLASS="frontpageitem2"><A ID="75071" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=75071&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","75071");' ONMOUSEOUT='unchange("75071");'>mRNA Processing</A> </TD><TD CLASS="frontpageitem2"><A ID="525793" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=525793&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","525793");' ONMOUSEOUT='unchange("525793");'>Myogenesis</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="71406" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=71406&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","71406");' ONMOUSEOUT='unchange("71406");'>Pyruvate metabolism and Citric Acid (TCA) cycle</A> </TD><TD CLASS="frontpageitem2"><A ID="186712" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=186712&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","186712");' ONMOUSEOUT='unchange("186712");'>Regulation of beta-cell development</A> </TD><TD CLASS="frontpageitem2"><A ID="211000" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=211000&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","211000");' ONMOUSEOUT='unchange("211000");'>Regulatory RNA pathways</A> </TD><TD CLASS="frontpageitem2"><A ID="201451" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=201451&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","201451");' ONMOUSEOUT='unchange("201451");'>Signaling by BMP</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="177929" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=177929&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","177929");' ONMOUSEOUT='unchange("177929");'>Signaling by EGFR</A> </TD><TD CLASS="frontpageitem2"><A ID="190236" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=190236&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","190236");' ONMOUSEOUT='unchange("190236");'>Signaling by FGFR</A> </TD><TD CLASS="frontpageitem2"><A ID="372790" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=372790&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","372790");' ONMOUSEOUT='unchange("372790");'>Signaling by GPCR</A> </TD><TD CLASS="frontpageitem2"><A ID="186797" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=186797&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","186797");' ONMOUSEOUT='unchange("186797");'>Signaling by PDGF</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="168256" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=168256&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","168256");' ONMOUSEOUT='unchange("168256");'>Signaling in Immune system</A> </TD><TD CLASS="frontpageitem2"><A ID="74752" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=74752&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","74752");' ONMOUSEOUT='unchange("74752");'>Signaling by Insulin receptor</A> </TD><TD CLASS="frontpageitem2"><A ID="166520" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=166520&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","166520");' ONMOUSEOUT='unchange("166520");'>Signalling by NGF</A> </TD><TD CLASS="frontpageitem2"><A ID="157118" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=157118&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","157118");' ONMOUSEOUT='unchange("157118");'>Signaling by Notch</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="111885" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=111885&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","111885");' ONMOUSEOUT='unchange("111885");'>Opioid Signalling</A> </TD><TD CLASS="frontpageitem2"><A ID="194315" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=194315&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","194315");' ONMOUSEOUT='unchange("194315");'>Signaling by Rho GTPases</A> </TD><TD CLASS="frontpageitem2"><A ID="170834" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=170834&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","170834");' ONMOUSEOUT='unchange("170834");'>Signaling by TGF beta</A> </TD><TD CLASS="frontpageitem2"><A ID="194138" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=194138&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","194138");' ONMOUSEOUT='unchange("194138");'>Signaling by VEGF</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="195721" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=195721&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","195721");' ONMOUSEOUT='unchange("195721");'>Signaling by Wnt</A> </TD><TD CLASS="frontpageitem2"><A ID="112316" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=112316&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","112316");' ONMOUSEOUT='unchange("112316");'>Synaptic Transmission</A> </TD><TD CLASS="frontpageitem2"><A ID="157579" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=157579&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","157579");' ONMOUSEOUT='unchange("157579");'>Telomere Maintenance</A> </TD><TD CLASS="frontpageitem2"><A ID="74159" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=74159&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","74159");' ONMOUSEOUT='unchange("74159");'>Transcription</A> </TD></TR>
+<TR><TD CLASS="frontpageitem2"><A ID="382551" CLASS="curated" HREF="/cgi-bin/eventbrowser?DB=gk_current&ID=382551&ZOOM=2" ONMOUSEOVER='change("gk_current","48887","382551");' ONMOUSEOUT='unchange("382551");'>Transmembrane transport of small molecules</A> </TD><TD CLASS="frontpageitem2">&nbsp;</TD><TD CLASS="frontpageitem2">&nbsp;</TD><TD CLASS="frontpageitem2">&nbsp;</TD></TR>
+</TABLE>
+</DIV>
+</DIV><!-- reactionmap_and_table -->
+<TABLE CLASS="newsandnotes" BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%">
+  <TR>
+    <TH CLASS="newsandnotes" WIDTH="46%">About <B>Reactome</B></TH>
+    <TH CLASS="spacer" WIDTH="2">&nbsp;</TH>
+    <TH CLASS="newsandnotes" WIDTH="46%">News and Notes</TH>
+  </TR>
+  <TR>
+<TD CLASS="about">
+<IMG SRC="/icons/R-purple.png" ALIGN="left" HEIGHT="80" WIDTH="80">
+
+<B>REACTOME is a free, online, open-source, curated pathway database encompassing many areas of human biology. </B>
+Information is authored by expert biological researchers, maintained by the Reactome editorial staff and cross-referenced to a wide range of standard biological databases.
+<P>
+These include <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=gene">NCBI Entrez Gene</a>, <a href="http://www.ensembl.org">Ensembl</a> and <a href="http://www.ebi.uniprot.org">UniProt</a> databases, the <a href="http://genome.ucsc.edu/cgi-bin/hgGateway">UCSC </a> and <a href="http://www.hapmap.org">HapMap</a> Genome Browsers, the KEGG <a href="http://www.genome.jp/dbget-bin/www_bfind?compound"> Compound </a>and <a href="http://www.ebi.ac.uk/chebi/init.do"> ChEBI</a> small molecule databases, <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?CMD=&DB=PubMed">PubMed,</a> and <a href="http://www.geneontology.org">GO</a>.
+The curated human data are used to <a href ="../electronic_inference.html">infer orthologous events </a>
+in 22 non-human species including mouse, rat, chicken, puffer fish, worm, fly, yeast, two plants and E.coli.
+Tools for pathway analysis include <a href="http://reactome.org/cgi-bin/skypainter2?DB=gk_current"> Skypainter </a> and <a href= "http://reactome.org/cgi-bin/mart"> Biomart</a>.
+<p>
+Pathway data can be exported in <a href="/download"> SBML</a> and <a href="/download"> BioPAX</a>
+formats.
+<p>
+A description of Reactome has been published in
+<b><a href ="http://genomebiology.com/2007/8/3/r39"> Genome Biology </a></b> and <b><a href ="http://nar.oxfordjournals.org/cgi/content/full/gkn863?
+ijkey=sVeuauFiBaN9VhL&keytype=ref">Nucleic Acids Research</a></b>.
+<br><a href="/download"> Protein-protein interaction datasets</a>,<a href="/stats.html"> statistics </a> and the <a href="http://wiki.reactome.org/index.php/Reactome_Calendar">editorial calendar </a> are available.
+The Reactome team thanks users for their comments on the pathway analysis and <a href="/entitylevelview/PathwayBrowser.html#DB=test_reactome_30_pathway_diagram"> pathway visualization</a> tools.
+<p>
+Click on <a href="mailto:help@reactome.org">contact </a> to reach us, on <a href="mailto:editorial@reactome.org">editorial </a>to contribute to Reactome content,
+and on <a href="http://mail.reactome.org/mailman/listinfo/reactome-announce"> subscribe</a> to receive Reactome announcements.<br>
+<p>
+Please take note of our <a href="/disclaimer.html">disclaimer.</a>
+
+</TD>
+<TD></TD>
+<TD CLASS="newsandnotes">
+<UL>
+<li  class="normalsize" id="March_16_2010"><b>March 16, 2010 Version 32 Released</b><br>
+
+
+Version 32 includes the new topic the role of CDO in <a href="/cgi-bin/eventbrowser_st_id?ST_ID=REACT_21303.1  ">Myogenesis</a>.
+Topics revised and updated with new events and/or revisions to existing events in this release include:
+Synaptic Transmission (<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_21312.1">Activation of Kainate receptors upon glutamate binding</a>),
+Signaling by insulin receptor (<a href="/cgi-bin/eventbrowser_st_id?ST_ID=REACT_21387.1">Energy dependent regulation of mTOR by LKB1-AMPK </a>),
+DNA repair (<a href="/cgi-bin/eventbrowser_st_id?ST_ID=REACT_18410.1">Fanconi Anemia Pathway</a>),
+Toll Receptor Cascades (<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_6783.3">Toll Like Receptor 3(TLR3) cascade</a>),
+<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_15488.2">Olfactory Signaling Pathway</a>,
+<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_152.4">Cell Cycle Pathways</a>, metabolic pathways for
+<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_13.3">Amino Acids</a>,
+<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_474.5">Carbohydrates</a>, and
+<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_1698.7">Nucleotides</a>, and the
+<a href="/cgi-bin/eventbrowser_st_id?ST_ID= REACT_1046.4">TCA cycle</a>.<br>
+
+
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Katajisto+P%5BAuthor%5D">P Katajisto</a>,
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Makela+T%5BAuthor%5D">T Makela</a>, and
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Wu+J%5BAuthor%5D">J Wu</a>
+are our external authors in this release.
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Huang+T%5BAuthor%5D">T Huang</a>,
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Krauss+R%5BAuthor%5D">R Krauss</a>,
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Tukey+D%5BAuthor%5D">D Tukey</a>,
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Vosshall+L%5BAuthor%5D">L Vosshall</a>,
+and
+<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term=Zheng+B%5BAuthor%5D">B Zheng</a>
+are our external reviewers.<br>
+
+As part of the HUPO Proteomics Standards Initiative (PSI), we now annotate modified residues of proteins using
+<a HREF="http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=MOD">MOD</a> terms,
+and provide listings of protein-protein interactions in  <a HREF="http://wiki.reactome.org/index.php/PSI-MITAB_interactions"> PSI-MITAB</a> format.<br>
+Reactome data is now <a HREF="http://reactome.org/download/index.html"> available</a> in <a HREF="http://www.biopax.org/"> BioPAX</a> level 3(release 1.0) and level 2 format.<br>
+Reactome is now on <a HREF="http://www.facebook.com/group.php?gid=244908260192">Facebook</a>,
+<a HREF="http://twitter.com/reactome"> Twitter</a>, and <a HREF="http://www.linkedin.com/groups?gid=2118372">LinkedIn</a>.</li><li  class="normalsize" id="October_5_2009"><b>January 15, 2010 Feedback Request - Target Species for Orthology Inference</b><br> Reactome provides orthology-based pathway projections from human to other species. We are currently reviewing the list of target species. Please <a href="mailto:help@reactome.org">let us know </a> if you would like to include a species that's not in the <a href ="../species_list.html">planned target species list</a>.</li>
+<li class="normalsize"><A HREF="/news.html">More...</A></LI></UL>
+    </TD>
+  </TR>
+</TABLE>
+<TABLE CLASS="footer" WIDTH="100%"><TR><TD CLASS="footer">The development of Reactome is supported by a grant from the US National Institutes of Health (P41 HG003751), EU grant LSHG-CT-2005-518254 "ENFIN", and the EBI Industry Programme. Information on topic-specific funding can be found <A HREF="/content_funding.html">here</A>.</TD></TR></TABLE>
+<TABLE WIDTH="100%"><TR CLASS="footer"><TD><I>Date: 2010-04-05 02:03:24</I></TD><TD ALIGN="right"><ADDRESS><A HREF="mailto:help@reactome.org">Help</A></ADDRESS></TD></TR></TABLE>
+<!-- FOOTER END -->
+
+</body>
+</html>

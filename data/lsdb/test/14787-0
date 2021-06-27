@@ -1,0 +1,216 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<base href="http://spruce.ornl.gov:8080/Shewanella/">
+
+		<title>Shewanella Microbes Knowledgebase</title>
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords"
+			content="Shewanella,DOE,Data Bioinformatics">
+		<meta http-equiv="description" content="DOE Shewanella Knowledgebase">
+
+		
+		
+		
+		<link rel="stylesheet" type="text/css" href="css/niftyCorners.css">
+		<link rel="stylesheet" type="text/css" href="css/styles2.css">
+
+		<script type="text/javascript" src="script/niftycube.js"></script>
+		<script type="text/javascript" src="script/general.js"></script>
+		
+		
+		<script type="text/javascript">
+			window.onload=function(){
+				
+				Nifty("div#topPanel","bottom");
+				Nifty("div#welcomePanel","bottom");
+				Nifty("div#footer","big");
+				Nifty("div#home","top");
+				Nifty("div#species","top");
+				Nifty("div#mutants","top");
+				Nifty("div#shewFed","top");
+				Nifty("div#expnts","top");
+				Nifty("div#pub","top");
+				Nifty("div#papers","top");
+				Nifty("div#fedRes","top");
+				Nifty("div#comRes","top");
+
+				
+				Nifty("div#rPanelItemSponcer","left");
+				Nifty("div#mainContent","big");
+			}
+						
+			function genesSearch() {
+			
+				var qry = document.getElementById('searchString').value;
+				if(qry == "") {
+				
+					alert('Please type some text and click Search');
+					return false;
+				}
+					
+				return true;
+			} 
+
+		</script>
+		<style type="text/css">
+	/* Inactive   DARK */
+	div#shewFed, div#species, div#mutants, div#expnts, div#pub, div#papers, div#fedRes, input.in, div#comRes, div#mainContent, div#footer {
+   		background: #88975e; /*  0  */ 
+   		/* background: #6a6a5a; /*  1  */ 
+		/* background: #cccc99; /*  2  */ 
+		/* background: #999966; /*  3  */ 
+		/* background: #666666; /*  4  */  
+		/* background: #cc9752; /*  5  */ 
+		/* background: #81a594; /*  6  */ 
+		/* background: #666633; /*  7  */ 
+		/* background: #1F4864; /*  8  */
+   	}
+   	
+	
+	/* Active LIGHT */
+	div.cInner, div#home, div#welcomePanel {
+   		background: #cddba6; /*  0  */ 
+   		/* background: #cccc99; /*  1  */ 
+		/* background: #ffffcc; /*  2  */  
+		/* background: #ffffff; /*  3  */  
+		/* background: #cccccc; /*  4  */  
+		/* background: #f3efe0; /*  5  */ 
+		/* background: #e6e6dc; /*  6  */ 
+		/* background: #CCCC99; /*  7  */ 
+		/* background: #D7E2E9; /*  8  */
+   	}
+   	
+		</style>
+		
+
+	</head>
+
+	<body>
+		
+		 
+		<div style="width: 900px;">
+		
+			
+						<div style="float: left; width: 1050px; color: #000;">
+				<!-- 
+				<div id="topPanel">Login | Register | Search: <input class="in" type="text" /> 
+					<input class="in" type="button" value="Go"/>
+				</div> -->
+				<div style="margin-left: 0px; text-align: center; spacing-left: 0px; margin-top: 0px; spacing-top: 0px; float: left; width: 900px;" >
+					<div id="home"><a class="topMenuNew" href="">Home</a></div>
+					<div id="shewFed"><a  class="topMenuNew"  href="gbrowserLanding.jsp">ShewRegDB</a></div>
+					<div id="expnts"><a  class="topMenuNew" href="experiments.jsp">Projects</a></div>
+					<div id="comRes"><a  class="topMenuNew"  href="analysisLanding.jsp">Tools</a></div>
+					<div id="mutants"><a  class="topMenuNew" href="mutants.jsp">Mutants</a></div>
+					<div id="species"><a  class="topMenuNew" href="species.jsp">Species</a></div>
+					<div id="pub"><a  class="topMenuNew"  href="shewcyc.jsp">ShewCyc</a></div>
+					<div id="papers"><a  class="topMenuNew"  href="publication.jsp">Publications</a></div>
+					<div id="fedRes"><a  class="topMenuNew"  href="resources.jsp">Resources</a></div>
+					
+					
+					<div id="welcomePanel" style="margin-left: 0px; spacing-left: 0px; margin-top: 0px; spacing-top: 0px; float: left; width: 900px; color: #000;">
+					<table><tr>
+						<td>
+						<div style="font-family: arial, 'lucida console', sans-serif; font-size: 27px; text-color: #ffffff; vertical-align: middle; height: 54px; font-weight: bold; text-align: left; padding: 10px 0 10px 30px;"><img src="images/shew2.gif" style="float:left; margin-right: 10px; " /></div>
+						</td><td valign="middle" >
+						<div style="font-family: arial, verdana; font-size: 27px; color: #000; vertical-align: middle; height: 54px; font-weight: bold; text-align: left; margin-right: 20px; margin-top: 15px; ">Shewanella Knowledgebase</div>
+						</td>
+						<td>						
+							<form action="genesSearchAjaxServer.jsp" method="get" onsubmit="return genesSearch()"><!-- select class="inputText" style="width: 110px;" name="searchType" ><option>Select All</option></select-->
+							<input class="inputText" type="text" style="width: 130px; height: 1.5em;" name="searchString" id="searchString" value="" />
+							<input class="in" type="submit" value=" Search " style="color: #000; height: 1.6em;" /> <a href="advanceSearch.jsp" class="topMenuNew" style="font-weight: normal; font-size: 12px;">Advanced Search</a></form>						
+							
+						</td>						
+						</tr>
+					</table>
+
+					</div> <!--  End of Welcome Panel -->
+			  </div>
+			</div>
+	
+			
+			<div id="contentPane" style="width: 900px; float: left; margin-left: 0px;">
+
+				<div id="mainContent" class="securityNoticeBox" style="margin-left: 0px;" ><b>&nbsp;</b>					
+					<div class="cInner" >
+						<table style="margin-left: auto; margin-right: auto; width: 95%;">
+						<tr>
+						
+						<td valign="top">
+							<div style="color: #000; text-align: left; margin-top: 20px; padding: 10px 10px 0px 10px; font-size:12px;">
+								<ul id="navlist" >
+									<li><a href="federation.jsp" class="topMenuNew">Shewanella Federation</a></li>
+									<li><a href="experiments.jsp" class="topMenuNew">Projects</a></li>
+									<li><a href="dataSelection.jsp?org=9&proj=5&exp=x" class="topMenuNew">Tools</a></li>
+									<li><a href="mutants.jsp" class="topMenuNew">Mutants</a></li>
+									<li><a href="species.jsp" class="topMenuNew">Species</a></li>
+									<li><a href="publication.jsp" class="topMenuNew">Publications</a></li>
+									<li><a href="shewcyc.jsp" class="topMenuNew">ShewCyc</a></li>
+									<li><a href="resources.jsp" class="topMenuNew">Federation Resources</a></li>
+									<li><a href="allData.jsp" class="topMenuNew">Available Data</a></li>
+									<li><a href="gbrowserLanding.jsp" class="topMenuNew">ShewRegDB</a></li>
+									<li><a href="mailComments.jsp?title=Feedback" class="topMenuNew">Contact Us</a></li>									
+								</ul>
+							</div>
+							
+							
+							
+							<div style="padding-left:10px; font-size: 12px; text-align:left;color: #000;">
+								<div style="font-size: 15px; font-weight: bold;padding-bottom: 10px;"><a  class="topMenuNew" href="reports.jsp">Reports/Posters/Presentations</a></div>
+																	
+							</div>
+							
+														
+						  </td>
+						  
+						<td valign="top">
+							<div id="imageFramed" style="text-align: justify;  margin-top: 20px; padding: 10px; color: #000;">
+								The <i>Shewanella</i> Knowledgebase is a data and knowledge integration environment that allows investigators to query 
+								across the <i>Shewanella</i> Federation experimental datasets, link to <i>Shewanella</i> and other community resources, and 
+								visualize the data in a cell systems context.   The <a href="http://www.shewanella.org/" target="_blank" class="topMenuNew" >Shewanella Federation</a> is a cross-institution consortium 
+								consisting of teams of scientists from academia, national laboratories, and private industry working collaboratively 
+								to achieve a systems-level understanding of how <i>Shewanella oneidensis</i> MR-1 (<i>S. oneidensis</i>) senses and responds to 
+								its environment. Part of the U.S. Department of Energy's (DOE's) Office of Biological and Environmental Research (OBER) 
+								<a href="http://genomicsgtl.energy.gov/index.shtml" target="_blank" class="topMenuNew" >Genomics:Genomes to Life</a> Program, the <i>Shewanella</i> Federation is using genomics to address fundamental questions 
+								regarding energy metabolism, cell growth and regulation, as well as sensing of and response to environmental signals. 
+								An area of particular interest is electron transport and the role of the many different c-type cytochromes encoded 
+								in the genome for anaerobic respiration. 
+								<!-- <img src="images/newPathwayV.gif" /> &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/newPercentageV.gif" /> -->
+							</div>
+							<div style="margin-bottom: 10px; padding-bottom: 10px;">
+								<table cellspacing="10" ><tr><td>
+									<img src="images/DOELogo.gif" style="margin-top: 5px;"/></td><td>
+									<img src="images/gtlLogo.png" style="margin-top: 5px;"/></td>
+								</tr></table>
+							</div>
+						</td>
+
+						  </tr>
+						</table>						
+					</div> <!--  End of Inner -->
+				</div>
+	
+			</div>  <!--  End of Content Pane -->
+
+			<!--  Cleaner -->
+			<div class="cleaner">&nbsp;</div>
+
+			<div style="float: left; margin-left: 0px; text-align: left; width: 900px;">
+				<div id="footer" style="margin-left: 0px; padding-left: 0px; text-align: center;  padding-top: 8px; padding-bottom: 8px; color: #000; margin-top: 10px; "> 
+					<a href="http://genomicsgtl.energy.gov/roadmap/index.shtml" Style="color: #000000;">Sponsor</a> | <a href="securityNotice.jsp" Style="color: #000000;">Security Notice</a> | <a href="mailComments.jsp?title=Feedback" Style="color: #000000;">Comments</a>
+				</div>
+				<div style="text-align: center; width: 900px; color: #000; font-size: 9px;">Version:0.2.21a Copyrights &copy; 2006 Shewanella Knowledgebase. All rights reserved.
+				</div>
+			</div> <!-- End of footer -->
+			
+		</div> <!-- End of main divider -->
+	</body>
+</html>

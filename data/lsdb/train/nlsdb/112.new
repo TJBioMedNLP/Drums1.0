@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>RAPIDO - Rapid Alignment of Protein Structure in case of Domain motions</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <link rel="stylesheet" href="/rapido/rapido.css" type="text/css" />
+  <script language="JavaScript" type="text/javascript">
+  //--------------- LOCALIZEABLE GLOBALS ---------------
+  
+  function ltrim(testStr) { 
+    if (testStr == "") 
+      return ""; 
+    else { 
+      var pattern = /[^\s]+.*/; 
+      result = testStr.match(pattern); 
+      return result[0]; 
+    } 
+  }
+  
+  function rtrim(testStr) { 
+    if (testStr == "") 
+      return ""; 
+    else { 
+      var pattern = /.*[\S]/; 
+      result = testStr.match(pattern); 
+      return result[0]; 
+    } 
+  } 
+
+  function trim(testStr) { 
+    return rtrim(ltrim(testStr)); 
+  } 
+
+  function checkPdbIds( pdbIds ) {
+    if( !pdbIds || pdbIds.length==0 )
+      return false;
+    pdbSingleIds = pdbIds.split(",");
+    
+    for( i = 0; i < pdbSingleIds.length; i++ ){
+    	pdbId = trim( pdbSingleIds[i] );
+    	if( pdbId.length != 4 ) return false;
+		}      
+    
+    return true;
+  }
+
+  function clearPdbList() {
+    document.getElementById("pdb_ids").value="";
+  }
+
+  function clearTarball() {
+    document.getElementById("tarball_filename").value="";
+  }
+  
+  <!-- Original:  ArjoGod, Shauna Merritt -->
+  <!-- Modified By:  Ronnie T. Moore, Editor -->
+  <!-- This script and many more are available free online at -->
+  <!-- The JavaScript Source!! http://javascript.internet.com -->
+  <!-- Begin
+  extArray = new Array(".tar.gz", ".tgz");
+  function checkForm() {
+    var file=document.getElementById("tarball_filename").value;
+    var email=document.getElementById("email_address").value;
+    var pdbIds=document.getElementById("pdb_ids").value;
+    
+    document.getElementById("tarball_filename").style.color = "black";
+    document.getElementById("email_address").style.color = "black";
+    document.getElementById("pdb_ids").style.color = "black";
+
+    if( email.length==0 || 
+      email.lastIndexOf("@") == -1 ||
+      email.lastIndexOf(".") < email.lastIndexOf("@") ) {
+      document.getElementById("email_address").style.color = "red";
+      alert("Please insert a correct e-mail address.");
+      document.getElementById("email_address").focus();
+      document.getElementById("email_address").select();
+      return false;
+    }
+
+    if (!file || file.length==0) {
+      // Check if there is a valid list of PDB ids
+      if( !checkPdbIds(pdbIds) ) {
+        document.getElementById("pdb_ids").style.color = "red";
+        alert("Please choose a file to upload or insert a valid comma separated " +
+        "list of PDB IDs, then press the Submit button.");
+        document.getElementById("pdb_ids").focus();
+        document.getElementById("pdb_ids").select();
+        return false;
+      } else
+        return true;
+    }
+    
+    if( pdbIds.length != 0 ) {
+      document.getElementById("tarball_filename").style.color = "red";
+      document.getElementById("pdb_ids").style.color = "red";
+      alert( "You cannot enter a file to upload and a list of PDB IDs at the same " +
+             "time. Plase check that the data you entered are correct, then press the Submit button." );
+      document.getElementById("pdb_ids").focus();
+      document.getElementById("pdb_ids").select();
+      return false;    
+    } 
+
+    while (file.indexOf("\\\\") != -1)
+    file = file.slice(file.indexOf("\\\\") + 1);
+
+    var li = file.lastIndexOf(".");
+
+    var allowSubmit = false;
+    while( li != -1 ) {
+      ext = file.slice(li).toLowerCase();
+      for (var i = 0; i < extArray.length; i++) {
+        if (extArray[i] == ext) { allowSubmit = true; break; }
+      }
+      li = file.lastIndexOf(".",li-1);
+    }
+
+    if (allowSubmit) // alert("Extension "+ext+" is ok, submitting...");
+      return true;
+    else {
+      document.getElementById("tarball_filename").style.color = "red";
+      alert("Please only upload files with extensions: " 
+      + (extArray.join("  ")) + "\\nPlease select a new "
+      + "file to upload and submit again.");
+      document.getElementById("tarball_filename").focus();
+      document.getElementById("tarball_filename").select();
+      return false;
+    }
+  }
+  //  End -->
+  //---------------   END LOCALIZEABLE   ---------------
+  </script>
+  <style type="text/css">
+  </style>
+</head>
+<body>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <col width=40>
+    <col width=*>
+    <col width=40>
+    
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+        <h1><img src="/rapido/images/rapido_title.png"></h1>
+        <form action="http://webapps.embl-hamburg.de/cgi-bin/rapido/escetlauncher.py"
+              enctype="multipart/form-data" method="post" onsubmit="return checkForm()">
+             <table border="0" cellspacing="0" cellpadding="5"  width="100%">
+               <tr>
+                 <td colspan="4">
+                   <p>RAPIDO is an algorithm for the 3D alignment of protein structures. In order to align your protein structures:.</p>
+                   <ol>
+                     <li><span class="emphasis">Choose the structures</span> either by providing a comma
+                         separated list of PDB IDs or by uploading a zipped tarball of you PDB files (use
+                         the unix command: <span style="font-family:monospace">tar czvf tarball.tgz <i>&lt;list-of-pdb-files&gt;</i></span>).<br />
+                         <!-- <span style="color:red;"><i>Please be aware that the PDB files you provide should contain
+                         a valid 'HEADER' record with a PDB id that must be unique for every file.</i></span> --></li>
+                     <li><span class="emphasis">Insert your e-mail address</span>. An email with a confirmation and a link
+                     for accessing the results will be sent to this e-mail address.<a href="#note1"><sup>1</sup></a></li>
+                     <li>Press the <span class="emphasis">submit</span> button</li>
+                   </ol>
+                    <p>A help page for RAPIDO is available <a href="javascript:void(0)" onclick="window.open('rapidohelp.html')">here</a>.</p>
+                   <br />
+                 </td>
+               </tr>
+               <tr>
+                 <td>
+                   <table width="100%" class="inputtable">
+                     <col width="20">
+                     <col width="150">
+                     <tr>
+                       <td>&nbsp</td>
+                       <td nowrap style="height:45px">File to upload:</td>
+                       <td colspan="2"><input type="file" id="tarball_filename" name="tarball_filename" size="40" onchange="clearPdbList()"></td>
+                     <tr>
+                     <tr>
+                       <td>&nbsp</td>
+                       <td colspan="3" style="text-align:center;color:red"><big><strong>OR</strong></big></td>
+                     </tr>
+                     <tr>
+                       <td>&nbsp</td>
+                       <td nowrap style="height:45px">List of PDB IDs:</td>
+                       <td colspan="2"><input type="text" id="pdb_ids" name="pdb_ids" value="1ulz, 1dv2" size="40" onchange="clearTarball()"></td>
+                     </tr>
+                   </table>
+                 </td>
+               </tr>
+               <tr>
+                 <td>&nbsp;</td>
+               <tr>
+                 <td>
+                   <table width="100%" class="inputtable">
+                     <col width="20">
+                     <col width="150">
+                     <tr>
+                       <td>&nbsp</td>                        
+                       <td nowrap style="height:45px">Email address:</td>
+                       <td colspan="2"><input type="text" id="email_address" name="email_address" value="Your email address..." size="40">
+                       <input type="submit" value="submit"></td>
+                     </tr>
+                   </table>
+                   <br />
+                   <p>In citing RAPIDO please refer to:</p>
+		   <p style="margin-left:1cm;margin-right:1cm;">Roberto Mosca, Barbara Brannetti,
+		     Thomas R Schneider, <i>Alignment of protein structures in the presence of
+		     domain motions</i>, BMC Bioinformatics 2008, 9:352, doi:10.1186/1471-2105-9-352
+		     <a target="null" href="http://www.biomedcentral.com/1471-2105/9/352">[link]</a></p>
+                   <p style="margin-left:1cm;margin-right:1cm;">Roberto Mosca, Thomas R. Schneider,
+                     <i>RAPIDO: a web server for the alignment of protein structures in the presence
+                     of conformational changes</i>, Nucleic Acids Research 2008;
+                     doi: 10.1093/nar/gkn197 <a target="null" href="http://nar.oxfordjournals.org/cgi/content/full/gkn197?ijkey=xfzxsZlvgO3xFZz&keytype=ref">[link]</a></p>
+                 </td>
+               </tr>
+             </table>
+       </form>
+       <table width="100%" class="disclaimertable">
+         <col width="20">
+         <col width="*">
+         <col width="20">
+         <tr>
+           <td>&nbsp</td>
+           <td><p class="disclaimer">
+             RAPIDO. Software for the structural alignment of protein structures in
+             the presence of conformational changes.</p>
+      
+             <p class="disclaimer">Copyright 2005-2006 <a target="window" href="http://www.ifom-firc.it/">FIRC Institute of Molecular Oncology (IFOM)</a><br />
+             Copyright 2005-2006 <a target="window" href="http://www.ieo.it">European Institute of Oncology (IEO)</a><br />
+             Copyright 2007-2008 <a target="window" href="http://www.embl-hamburg.de">European Molecular Biology Laboratory (EMBL)</a></p>
+      
+             <p class="disclaimer">RAPIDO was developed by T.R. Schneider and R. Mosca at the
+             <a target="window" href="http://www.ifom-firc.it/">FIRC Institute of Molecular
+             Oncology</a>, <a target="window" href="http://www.ieo.it">European Institute of Oncology</a>
+             and <a target="window" href="http://www.embl-hamburg.de">EMBL Hamburg</a>.<br />The development of RAPIDO was supported by a grant from the
+              <a target="window" href="http://www.airc.it/">Associazione Italiana per la Ricerca sul Cancro (AIRC)</a>.</p>
+      
+             <p class="disclaimer">Pages on this server were created by Roberto Mosca (<a href="mailto:roberto.mosca@embl-hamburg.de">roberto.mosca at embl-hamburg.de</a>)
+             and Thomas R. Schneider (<a href="mailto:thomas.schneider@embl-hamburg.de">thomas.schneider at embl-hamburg.de</a>).
+             RM and TRS accept full responsibility for the content of these pages, for which EMBL is not
+             responsible by any means.</p>
+      
+             <p class="disclaimer"><i>Last Edited: 09 June 2008</i></p>
+           </td>
+           <td>&nbsp</td>
+         </tr>
+       </table>
+       <p class="pagenotes"><span id="note1"><sup>(1)</sup></span>&nbsp;The results will be kept on the server for at least 48 hours under
+           a randomly generated URL directly accessible from outside. The provider of
+           this service will not be liable for any direct, indirect or consequential
+           loss or damage arising from a unauthorized access to the data.</p>
+       <p class="footnote">For questions and suggestions please write to <a href="mailto:rapido@embl-hamburg.de">rapido@embl-hamburg.de</a>.</p>
+     </td>
+     <td>&nbsp;</td>
+   </tr>
+ </table>
+</body>
+</html>

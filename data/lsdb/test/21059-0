@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<META name="GENERATOR" content="IBM WebSphere Studio Homepage Builder Version 10.0.1.0 for Windows">
+<meta name="robots" content="noindex,nofollow">
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+<title>FTGI supporting page</title>
+</head>
+
+<body>
+<br>
+<FONT face="Times New Roman">
+
+<FONT size="+2"><b><FONT size="5">Supporting Page of "Efficiently Finding Genome-wide Three-way Gene
+Interactions from Transcript- and Genotype-Data"</FONT></b></FONT><BR>
+<FONT size="+1"><b><FONT size="4">by Mitsunori Kayano, Ichigaku Takigawa, Motoki Shiga, Koji Tsuda and
+Hiroshi Mamitsuka,</FONT></b></FONT><BR>
+<br>
+
+<hr>
+
+
+<br>
+Binary files of <b>FTGI</b> (Fast finding Three-way Gene Interactions) are available.<br>
+This supporting page shows a brief summary for running the binary file.<br>
+An online readme file is available <a href="readme.html">here</a>.
+<br>
+
+
+<div class="section">
+<h2 id="html-down"><FONT size="+2"><b>Download</b></FONT></h2>
+
+Each of the following compressed files includes a binary file ("ftgi"), sample files (<a href="geno.txt">geno.txt</a>, <a href="exp.txt">exp.txt</a>, <a href="allele.txt">allele.txt</a>, <a href="out_sample.txt">out_sample.txt</a>) and a readme file.<br>
+<br>
+<table border=1 width=35%>
+<tr>
+<th>Platform</th>
+<th>File</th>
+<!--<th>Version</th>-->
+</tr>
+
+<tr>
+<td>Linux (x86_64) </td>
+<td><a href="ftgi_linux.tar.gz">ftgi_linux.tar.gz</a> (test version)</td>
+<!--<td>v1.00</td>-->
+</tr>
+<tr>
+<td> Apple Mac (i386, PPC)</td>
+<td><a href="ftgi_mac.dmg">ftgi_mac.dmg</a> (test version)</td>
+<!--<td>v1.00</td>-->
+</tr>
+<tr>
+<td> Microsoft Windows (Win32)</td>
+<td><a href="ftgi_win.zip">ftgi_win.zip</a> (test version)</td>
+<!--<td>v1.00</td>-->
+</tr>
+</table>
+
+<br>
+The result of the sample input (geno.txt, exp.txt, allele.txt) was outputted in "out_sample.txt".<br>
+These input files include synthetic data of two SNPs and expression values of seven genes for 30 individuals.<br>
+<br>
+
+
+<div class="section">
+<h2 id="html-howto"><FONT size="+2"><b>How to run</b></FONT></h2>
+
+A tutorial is found <a href="readme.html#html-howto">here</a>.<br>
+<br>
+<u>Example</u> <!--The following is an examplefor Linux and Mac.--><BR>
+Please type the following command at a terminal window of Linux and Mac.<br>
+<pre>
+     <b>>> ./ftgi -g geno.txt -e exp.txt -a allele.txt -o out.txt </b>
+     <b>>> threshold of MC test's pvalue?: </b><font face="Times New Roman" size="+1">(enter a threshold value, for example 0.001)</font>
+</pre></P>
+<!--Where MC test stands for mean-covariance test.<br>
+<br>-->
+The command for windows is given by replacing "./ftgi" by "ftgi" in the above.<BR>
+<br>
+<u>Options</u><br>
+'-g' specifies a data file for genotypes "geno.txt".<br>
+'-e' specifies a data file for expression values of genes "exp.txt".<br>
+'-a' specifies a data file for alleles "allele.txt".<br>
+'-o' specifies an output file "out.txt".<br>
+<br>
+
+<div class="section">
+<h2 id="html-format"><FONT size="+2"><b>Data format</b></FONT></h2>
+
+Each of input files contains numerical or characteristic data which are written as a matrix formulation: <br>
+<br>
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<TD valign="top" width="80">
+ <u>data type</u><br>
+ genotype:<BR>
+ expression:<BR>
+ allele:<BR>
+<TD valign="top" width="150">
+ <u>size (rows &times columns)</u><br>
+ n &times 2 #SNPs <BR>
+ #genes &times n <BR>
+ #SNPs &times 2 <BR>
+<TD valign="top" width="120">
+  <u>delimiters</u><br>
+ white space / tab<br>
+ white space / tab<br>
+ white space / tab<br>
+<TD valign="top" width="150">
+ <u>sample</u><br>
+ <a href="geno.txt">"geno.txt"</a><BR> <!--(30 &times 4)-->
+ <a href="exp.txt">"exp.txt" </a><BR> <!--(7 &times 30)-->
+ <a href="allele.txt">"allele.txt" </a><BR> <!--(2 &times 2)-->
+</tr>
+</tbody>
+</table>
+<br>
+Where n is the number of the individuals. <br>
+<br>
+
+Both white space and tab are available as delimiters of data.<br>
+However, continuing spaces and continuing tabs are NOT ALLOWED.<br>
+<br>
+
+
+<div class="section">
+<h2 id="html-result"><FONT size="+2"><b>Results</b></FONT></h2>
+
+The result will be printed in <a href="out_sample.txt">"out.txt"</a>:<br>
+--------------------------------------------------------------------<br>
+Results of FTGI:<BR>
+threshold = 0.001<br>
+SNP Gene1 Gene2 flag p-value(MC) likelihood(LDA) p-value(IT)<BR>
+0 0 1 0 -0.246028 1.0 1.0<BR>
+0 0 2 0 -0.824060 1.0 1.0<br>
+...<BR>
+1 5 6 1	-4.747279 -32.584872 -6.618216<br>
+--------------------------------------------------------------------
+<pre>
+<font face="times new roman" size="+1">
+1st column: SNP number (0, 1, ..., #SNPs-1)
+2nd column: Gene1 number (0, 1, ..., #Genes-2)
+3rd column: Gene2 number (1, 2, ..., #Genes-1)
+4th column: flag for the prunings* (0, 1, 2)
+5th column: log10(p-value) of MC test 
+6th column: log-likelihood value by LDA
+7th column: log10(p-value) of the IT (Interaction Test)
+</font></pre></p>
+* : flag = 0 (pruned by MC test), =1 (not pruned), =2(pruned by LDA).<br>
+
+<br>
+<br>
+
+
+</body>
+</html>

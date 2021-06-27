@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>DCA: Divide-and-Conquer Multiple Sequence
+  Alignment</title>
+        <link rel="SHORTCUT ICON" href="/favicon.ico" title="external:/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="/bibi/bibiserv.css" /> 
+        
+        <meta name="generator" content=
+  "HTML Tidy for Solaris (vers 13 April 2006), see www.w3.org" />
+        <script src="/bibi/bibiserv.js" type="text/javascript"></script> 
+        
+    </head>
+    <body>
+        <table class="bibi_table">
+            <tr class="bibi_tr">
+                <td class="bibi_td">
+                    <img class="bibi_img" src="/bibi/images/bibiserv_logo.png" alt="BiBiServ Logo"/>
+                </td>
+                <td class="bibi_td" style="width:100%; text-align:center;">
+                    <table class="bibi_table">
+                        <tr class="bibi_tr">
+                            <td class="bibi_td">
+                                <div class="server_maintenance">
+                                    <span class="bold">Attention:</span><br/>
+                                    Due to technical maintenance some tools might be unavailable. <br/>
+                                    See <a href="/bibi/unavailable.html">maintenance information</a>.
+                                </div>
+                                <div class="news">
+                                   <a href="/cgi-bin/news.cgi"><img class="bibi_img" src="/bibi/images/news.png" alt="News"/>
+                                </div>
+                            </td>
+                            <td class="bibi_td">
+                                <img class="bibi_img" src="/bibi/images/bibiserv_head.png" alt="BiBiServ -
+                                    Bielefeld         University Bioinformatic Service"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="bibi_td"/>
+            </tr>
+            <tr class="bibi_tr">
+                <td class="bibi_td" colspan="3">
+                    <img class="bibi_img" src="/bibi/images/bibiserv_separator1.png" alt=""/>
+                </td>
+            </tr>
+            <tr class="bibi_tr">
+                <td class="bibi_td"/>
+                <td class="bibi_td"><table class="bibi_table" style="width:100%"><tr class="bibi_tr"><td class="bibi_td" style="width:33%"><table class="bibi_table"><tr class="bibi_tr"><td class="bibi_td"><img class="bibi_img" id="Toolsleft" src="/bibi/images/button/Tools_left_active.png" alt=""/></td><td class="bibi_td" style="width:100%;text-align:center;background-image:url(/bibi/images/button/Tools_bg_active.png)" onclick="window.open('/bibi/Tools.html','_self');" onmouseover="fi('Tools','/bibi/images/button/Tools_active_over.png');" onmouseout="fi('Tools','/bibi/images/button/Tools_active.png');"> <a href="/bibi/Tools.html"><img class="bibi_img" id="Tools" src="/bibi/images/button/Tools_active.png" alt="Tools"/></a></td><td class="bibi_td"><img class="bibi_img" id="Toolsright" src="/bibi/images/button/Tools_right_active.png" alt=""/></td></tr></table></td><td class="bibi_td" style="width:33%"><table class="bibi_table"><tr class="bibi_tr"><td class="bibi_td" style="width:100%;text-align:center;background-image:url(/bibi/images/button/Education_bg.png)" onclick="window.open('/bibi/Education.html','_self');" onmouseover="fi('Education','/bibi/images/button/Education_over.png');" onmouseout="fi('Education','/bibi/images/button/Education.png');"> <a href="/bibi/Education.html"><img class="bibi_img" id="Education" src="/bibi/images/button/Education.png" alt="Education"/></a></td><td class="bibi_td"><img class="bibi_img" id="Educationright" src="/bibi/images/button/Education_right.png" alt=""/></td></tr></table></td><td class="bibi_td" style="width:33%"><table class="bibi_table"><tr class="bibi_tr"><td class="bibi_td" style="width:100%;text-align:center;background-image:url(/bibi/images/button/Administration_bg.png)" onclick="window.open('/bibi/Administration.html','_self');" onmouseover="fi('Administration','/bibi/images/button/Administration_over.png');" onmouseout="fi('Administration','/bibi/images/button/Administration.png');"> <a href="/bibi/Administration.html"><img class="bibi_img" id="Administration" src="/bibi/images/button/Administration.png" alt="Administration"/></a></td><td class="bibi_td"><img class="bibi_img" id="Administrationright" src="/bibi/images/button/Administration_right.png" alt=""/></td></tr></table></td></tr></table>
+</td>
+                <td class="bibi_td" style="vertical-align:bottom">
+                    <img class="bibi_img" src="/bibi/images/bibiserv_separator3.png" alt=""/>
+                </td>
+            </tr>
+            <tr class="bibi_tr">
+                <td class="bibi_td" style="vertical-align:top;"><table class="bibi_table"><tr class="bibi_tr"><td class="bibi_td" style="height:450px;"></td><td class="bibi_td" style="vertical-align:top;background-color:#669933"><table class="bibi_table" style="width:140px; background-color:#669933">
+<!-- left side menu (START) -->
+<tr class="bibi_tr"><td class="bibi_td"><img class="bibi_img" src="/bibi/images/menu/Tools_header.png" alt="Tools"/></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Genome_Comparison.html"><img class="menuleft" id="genomecomparison" onmouseover="fi('genomecomparison','/bibi/images/menu/Tools_genomecomparison_over.png');" onmouseout="fi('genomecomparison','/bibi/images/menu/Tools_genomecomparison.png');"src="/bibi/images/menu/Tools_genomecomparison.png" alt="Genome Comparison"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/gecko" target="_self"><img class="menuleft" id="gecko" onmouseover="fi('gecko','/bibi/images/menu/Tools_gecko_over.png');" onmouseout="fi('gecko','/bibi/images/menu/Tools_gecko.png');"src="/bibi/images/menu/Tools_gecko.png" alt="Gecko"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/reputer" target="_self"><img class="menuleft" id="reputer" onmouseover="fi('reputer','/bibi/images/menu/Tools_reputer_over.png');" onmouseout="fi('reputer','/bibi/images/menu/Tools_reputer.png');"src="/bibi/images/menu/Tools_reputer.png" alt="REPuter"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Genome_Comparison.html" target="_self"><img class="menuleft" id="more0" onmouseover="fi('more0','/bibi/images/menu/Tools_more0_over.png');" onmouseout="fi('more0','/bibi/images/menu/Tools_more0.png');"src="/bibi/images/menu/Tools_more0.png" alt="...more"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Alignments.html"><img class="menuleft" id="alignments" onmouseover="fi('alignments','/bibi/images/menu/Tools_alignments_over.png');" onmouseout="fi('alignments','/bibi/images/menu/Tools_alignments.png');"src="/bibi/images/menu/Tools_alignments.png" alt="Alignments"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/e2g" target="_self"><img class="menuleft" id="e2g" onmouseover="fi('e2g','/bibi/images/menu/Tools_e2g_over.png');" onmouseout="fi('e2g','/bibi/images/menu/Tools_e2g.png');"src="/bibi/images/menu/Tools_e2g.png" alt="e2g"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/possumsearch" target="_self"><img class="menuleft" id="possumsearch" onmouseover="fi('possumsearch','/bibi/images/menu/Tools_possumsearch_over.png');" onmouseout="fi('possumsearch','/bibi/images/menu/Tools_possumsearch.png');"src="/bibi/images/menu/Tools_possumsearch.png" alt="PoSSuMsearch"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Alignments.html" target="_self"><img class="menuleft" id="more1" onmouseover="fi('more1','/bibi/images/menu/Tools_more1_over.png');" onmouseout="fi('more1','/bibi/images/menu/Tools_more1.png');"src="/bibi/images/menu/Tools_more1.png" alt="...more"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Primer_Design.html"><img class="menuleft" id="primerdesign" onmouseover="fi('primerdesign','/bibi/images/menu/Tools_primerdesign_over.png');" onmouseout="fi('primerdesign','/bibi/images/menu/Tools_primerdesign.png');"src="/bibi/images/menu/Tools_primerdesign.png" alt="Primer Design"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/genefisher" target="_blank"><img class="menuleft" id="genefisher" onmouseover="fi('genefisher','/bibi/images/menu/Tools_genefisher_over.png');" onmouseout="fi('genefisher','/bibi/images/menu/Tools_genefisher.png');"src="/bibi/images/menu/Tools_genefisher.png" alt="GeneFisher"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_RNA_Studio.html"><img class="menuleft" id="rnastudio" onmouseover="fi('rnastudio','/bibi/images/menu/Tools_rnastudio_over.png');" onmouseout="fi('rnastudio','/bibi/images/menu/Tools_rnastudio.png');"src="/bibi/images/menu/Tools_rnastudio.png" alt="RNA Studio"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/rnashapes" target="_self"><img class="menuleft" id="rnashapes" onmouseover="fi('rnashapes','/bibi/images/menu/Tools_rnashapes_over.png');" onmouseout="fi('rnashapes','/bibi/images/menu/Tools_rnashapes.png');"src="/bibi/images/menu/Tools_rnashapes.png" alt="RNAshapes"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/rnaforester" target="_self"><img class="menuleft" id="rnaforester" onmouseover="fi('rnaforester','/bibi/images/menu/Tools_rnaforester_over.png');" onmouseout="fi('rnaforester','/bibi/images/menu/Tools_rnaforester.png');"src="/bibi/images/menu/Tools_rnaforester.png" alt="RNAforester"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/rnahybrid" target="_self"><img class="menuleft" id="rnahybrid" onmouseover="fi('rnahybrid','/bibi/images/menu/Tools_rnahybrid_over.png');" onmouseout="fi('rnahybrid','/bibi/images/menu/Tools_rnahybrid.png');"src="/bibi/images/menu/Tools_rnahybrid.png" alt="RNAhybrid"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_RNA_Studio.html" target="_self"><img class="menuleft" id="more2" onmouseover="fi('more2','/bibi/images/menu/Tools_more2_over.png');" onmouseout="fi('more2','/bibi/images/menu/Tools_more2.png');"src="/bibi/images/menu/Tools_more2.png" alt="...more"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Evolutionary_Relationships.html"><img class="menuleft" id="evolutionaryrelationship" onmouseover="fi('evolutionaryrelationship','/bibi/images/menu/Tools_evolutionaryrelationship_over.png');" onmouseout="fi('evolutionaryrelationship','/bibi/images/menu/Tools_evolutionaryrelationship.png');"src="/bibi/images/menu/Tools_evolutionaryrelationship.png" alt="Evolutionary Relationship"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/rose" target="_self"><img class="menuleft" id="rose" onmouseover="fi('rose','/bibi/images/menu/Tools_rose_over.png');" onmouseout="fi('rose','/bibi/images/menu/Tools_rose.png');"src="/bibi/images/menu/Tools_rose.png" alt="ROSE"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Evolutionary_Relationships.html" target="_self"><img class="menuleft" id="more3" onmouseover="fi('more3','/bibi/images/menu/Tools_more3_over.png');" onmouseout="fi('more3','/bibi/images/menu/Tools_more3.png');"src="/bibi/images/menu/Tools_more3.png" alt="...more"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Others.html"><img class="menuleft" id="others" onmouseover="fi('others','/bibi/images/menu/Tools_others_over.png');" onmouseout="fi('others','/bibi/images/menu/Tools_others.png');"src="/bibi/images/menu/Tools_others.png" alt="Others"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/xendb" target="_self"><img class="menuleft" id="xendb" onmouseover="fi('xendb','/bibi/images/menu/Tools_xendb_over.png');" onmouseout="fi('xendb','/bibi/images/menu/Tools_xendb.png');"src="/bibi/images/menu/Tools_xendb.png" alt="XenDB"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/jpredictor" target="_self"><img class="menuleft" id="jpredictor" onmouseover="fi('jpredictor','/bibi/images/menu/Tools_jpredictor_over.png');" onmouseout="fi('jpredictor','/bibi/images/menu/Tools_jpredictor.png');"src="/bibi/images/menu/Tools_jpredictor.png" alt="jPREdictor"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/bibi/Tools_Others.html" target="_self"><img class="menuleft" id="more4" onmouseover="fi('more4','/bibi/images/menu/Tools_more4_over.png');" onmouseout="fi('more4','/bibi/images/menu/Tools_more4.png');"src="/bibi/images/menu/Tools_more4.png" alt="...more"/></a></td></tr>
+</table></td></tr>
+</table>
+<!-- MENU (END) -->
+</td>
+                <td class="bibi_td" style="vertical-align:top; padding:20px">
+  <h4>DCA: Divide-and-Conquer Multiple Sequence Alignment -
+  Welcome</h4>
+
+  <table width="100%">
+    <tr>
+      <td><i>Divide-and-Conquer Multiple Sequence Alignment</i>
+      (<b>DCA</b>) is a program for producing fast, high quality
+      <a href="/dca/alignments/">simultaneous multiple sequence
+      alignments</a> of amino acid, RNA, or DNA sequences. The
+      program is based on the <a href="/dca/algorithm/">DCA
+      algorithm</a>, a heuristic approach to sum-of-pairs (SP)
+      optimal alignment that has been developed at the <a href=
+      "http://www.Mathematik.Uni-Bielefeld.DE/fsp-math/">FSPM</a>
+      over the years 1995-97. The latest description on DCA can be
+      found in: <i>J. Stoye, Multiple Sequence Alignment with the
+      Divide-and-Conquer Method, Gene 211, GC45-GC56,
+      1998</i>.</td>
+
+      <td><img src="/dca/images/dcalogo.gif" alt="logo" /></td>
+    </tr>
+  </table>
+
+  <p><b>Note</b>: Any process using more than 500 Mbytes of memory
+  on our server is stopped automatically. If you want to run DCA on
+  larger sequence families, you should <a href=
+  "/download/tools/dca.html">download DCA</a> and install it
+  locally.</p>Further Information on DCA:
+
+  <ul>
+    <li><a href="/dca/alignments/">Simultaneous Multiple Sequence
+    Alignment</a></li>
+
+    <li><a href="/dca/svialignment/">Simultaneous versus Iterative
+    Multiple Alignments</a></li>
+
+    <li><a href="/dca/algorithm/">The DCA Algorithm</a></li>
+
+    <li><a href="/dca/fdca/">The FDCA Heuristic</a></li>
+
+    <li><a href="/dca/parameters/">Parameters of DCA</a></li>
+
+    <li><a href="/dca/example/">Example DCA Alignment</a></li>
+  </ul>
+
+  <div style="background:#EBF4E1; font-size:smaller;">
+    If you use DCA in your own research, please cite:<br />
+    <b><a href=
+    "ftp://ftp.uni-bielefeld.de/pub/papers/techfak/pi/Report97-02.ps.gz">
+    Divide-and-Conquer Multiple Sequence Alignment</a></b><br />
+    <i>J. Stoye</i><br />
+    Dissertation Thesis. Universit&auml;t Bielefeld,
+    Forschungsbericht der Technischen Fakult&auml;t, Abteilung
+    Informationstechnik, Report 97-02, 1997. (ISSN 0946-7831)<br />
+    <br />
+    <a name="BRI:DRE:PER:STO:1997B" id="BRI:DRE:PER:STO:1997B"></a>
+  </div>
+</td>
+                <td class="bibi_td" style="vertical-align:top;"><!-- right side menu (START) -->
+<table class="bibi_table" style="width:130px;background-color:#99CC66">
+<tr class="bibi_tr"><td class="bibi_td" style="background-color:#FFFFFF; height:100px"></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="welcome.html"><img class="menuright" id="welcome" onmouseover="fi('welcome','/dca/images/framework_welcome_over.png');" onmouseout="fi('welcome','/dca/images/framework_welcome.png');"src="/dca/images/framework_welcome.png" alt="Welcome"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="submission.html"><img class="menuright" id="submission" onmouseover="fi('submission','/dca/images/framework_submission_over.png');" onmouseout="fi('submission','/dca/images/framework_submission.png');"src="/dca/images/framework_submission.png" alt="Submission"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="references.html"><img class="menuright" id="references" onmouseover="fi('references','/dca/images/framework_references_over.png');" onmouseout="fi('references','/dca/images/framework_references.png');"src="/dca/images/framework_references.png" alt="References"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="manual.html"><img class="menuright" id="manual" onmouseover="fi('manual','/dca/images/framework_manual_over.png');" onmouseout="fi('manual','/dca/images/framework_manual.png');"src="/dca/images/framework_manual.png" alt="Manual"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="webservice.html"><img class="menuright" id="webservice" onmouseover="fi('webservice','/dca/images/framework_webservice_over.png');" onmouseout="fi('webservice','/dca/images/framework_webservice.png');"src="/dca/images/framework_webservice.png" alt="WebService"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="/download/tools/dca.html"><img class="menuright" id="download" onmouseover="fi('download','/dca/images/framework_download_over.png');" onmouseout="fi('download','/dca/images/framework_download.png');"src="/dca/images/framework_download.png" alt="Download"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><a href="contact.html"><img class="menuright" id="contact" onmouseover="fi('contact','/dca/images/framework_contact_over.png');" onmouseout="fi('contact','/dca/images/framework_contact.png');"src="/dca/images/framework_contact.png" alt="Contact"/></a></td></tr>
+<tr class="bibi_tr"><td class="bibi_td"><img class="bibi_img" src="/bibi/images/bibiserv_footer.png" alt=""/></td></tr>
+</table>
+<!-- MENU (END) -->
+</td>
+            </tr>
+            <tr class="bibi_tr">
+                <td class="bibi_td" style="vertical-align:top">
+                    <img class="bibi_img" style="width:140px; height:2px;"
+                        src="/bibi/images/bibiserv_separator2.png" alt=""/>
+                </td>
+                <td class="bibi_td">
+                    <table class="bibi_table">
+                        <tr class="bibi_tr">
+                            <td class="bibi_td" style="vertical-align:top; width:100%;">
+                                <img class="bibi_img" style="width:100%; height:2px;"
+                                    src="/bibi/images/bibiserv_separator2.png" alt=""/>
+                            </td>
+                            <td class="bibi_td">
+                                <img class="bibi_img" src="/bibi/images/bibiserv_separator4.png"
+                                    alt=""/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="bibi_td" style="vertical-align:bottom">
+                    <img class="bibi_img" style="width:100%; height:2px"
+                        src="/bibi/images/bibiserv_separator2.png" alt=""/>
+                </td>
+            </tr>
+        </table>
+        <div style="width:100%; text-align:right; font-size:xx-small"> Thu Sep 18 11:55:36 2008</div>
+
+    </body>
+</html>

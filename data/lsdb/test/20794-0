@@ -1,0 +1,532 @@
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<meta name="Keywords" content="GEMDOCK, BioXGEm, 3D-Blast, structural alignment" />
+<title>Protein-Protein Interaction Search</title>
+<link href="tm/style.css" rel="stylesheet" type="text/css">
+</head>
+<script language="javascript">
+function OpenWindow(url,w,h)
+{
+  window.open(url,'GEMDOCK','width='+w+',height='+h+',toolbar=0,menubar=0,location=0,directories=0,status=0');
+}
+</script>
+<body >
+
+<!--  Header  Begin   -->
+<div id="banner"><a href="http://bioxgem.life.nctu.edu.tw/bioxgem/index.php">BioXGEM</a>.<span class="loc">Protein-Protein Interaction Search</span></div>
+<div id="bannerimg">
+  <a href="http://bioxgem.life.nctu.edu.tw/bioxgem/index.php">
+    <img src="./images/BioXGEM.png" border="0">
+  </a>
+</div>
+<!--  Header  End     -->
+
+<!--  NavMenu  Begin  -->
+<div id="nav">
+  <table cellspacing="0">
+    <tr>
+      <td><a href="index.php">Home</a></td>
+    </tr>
+  </table>
+</div>
+<!--  NavMenu  End    -->
+
+
+
+<!--  LeftMenu  Begin -->
+<div id="links">
+  <table>
+    <tr><td>
+      <a href="index.php">Home</a><br \><br \>
+      <a href="sample1.php">Sample 1</a><br \><br \>
+      <a href="sample2.php">Sample 2</a><br \><br \>
+      <a href="help.php">Help</a><br \><br \>
+      <a href="contact.php">Contact us</a><br \><br \>
+    </td></tr>
+  </table>
+</div>
+<!--  LeftMenu  End   -->
+
+
+<!--  Body  Begin     -->
+<div id="content">
+  <table border=0>
+    <tr>
+      <td valign="top" height="500px" bgcolor="#FFFFFF">
+
+
+<!--  Main  Begin     -->
+
+<html>
+<head>
+<!--
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<META HTTP-EQUIV="expires" CONTENT="Thu, 27 Jun 2009 10:56:57 GMT"/>
+<META HTTP-EQUIV="cache-control" CONTENT="public"/>
+<META HTTP-EQUIV="age" CONTENT="9999"/>
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<meta http-equiv="Expires" content="Mon,12 May 2001 00:20:00 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+</head>
+
+<body >
+<SCRIPT LANGUAGE="JavaScript">
+function cleartext(formObj) 
+{
+   for (var i=0;i < formObj.length;i++) 
+   {
+      fldObj = formObj.elements[i];
+      if (fldObj.type == 'textarea')
+      {
+         fldObj.value = ""; 
+      }
+      if (fldObj.type == 'text')
+      {
+         fldObj.value = ""; 
+      }      
+   }
+}
+</SCRIPT> 
+<script language="javascript">
+function chkTextBox()
+{
+var len = document.getElementsByName('pdb_chainsp').length - 1;
+//alert(len);
+if(document.getElementsByName('pdb_chainsp')[len].checked == true)
+    {
+        document.getElementById('othersp').disabled = false;
+    }
+    else
+    {
+        document.getElementById('othersp').disabled = true;
+        document.getElementById('othersp').value = "";
+    
+    }
+}
+//@
+//function ChkUniProtText (strParner1){
+//
+////var strParner1 = document.
+//
+//		if(true){
+//				
+//			
+//		}	
+//			
+//}
+</script>
+<script language="javascript">
+/* ---------------------------------------
+   author: Vincent Puglia, GrassBlade Software
+   site:   http://members.aol.com/grassblad
+------------------------------------------- */
+
+function selectAll(formObj, isInverse) 
+{
+   for (var i=0;i < formObj.length-1;i++) 
+   {
+      fldObj = formObj.elements[i];
+      if (fldObj.type == 'checkbox')
+      { 
+         if(isInverse)
+            fldObj.checked = (fldObj.checked) ? false : true;
+         else fldObj.checked = false; 
+       }
+   }
+}
+
+function clearAll(formObj) 
+{
+	fldObj = formObj.elements[formObj.length-1];
+	fldObj.checked = false; 
+}
+</script>
+<script language="JavaScript1.2" src="checkinput.js"></script>
+<h1>Protein-Protein Interaction Search</h1>
+<p><h4>Input an interacting protein pair as a query to search its homologous interactions across multiple species</h4></p>
+<p>Press the <img border="0" src="images/HELP.GIF" width="12" height="16">
+to obtain more information on that specific field.</p>
+<form name="ppisearch" method="post" action="getinput.php" enctype="multipart/form-data" onSubmit="return checkForm(this);">
+<table width="750" border="0">
+  <tr>
+    <td width="100%" colspan="4"><hr width="100%" align="left"></td>
+  </tr>
+  <tr width="100%">&nbsp;
+    <td width="10%" colspan="4">
+		</td>
+  </tr>
+  <tr>
+    <td width="10%" colspan="4"><div align="left"><b>Query protein pair (sequences in FASTA format or <a href="http://ca.expasy.org/sprot/userman.html#ID_line" target=_blank>UniProt ID</a>) : </b></div></td>   
+  </tr>
+   <tr>
+    <td colspan="4">
+      <input id="otherlimit_query1" name="query_check" type="radio" value="x" checked>&nbsp;Input sequences in FASTA format&nbsp;
+    </td>   
+  </tr>
+  <tr>    
+  	<td width="30"></td>
+ 		<td width="20%">
+      Interacting partner 1:</td>
+    <td colspan="2">
+        <div align="left"><textarea rows="5" cols="66" name="query1" value="" onfocus="document.getElementById('otherlimit_query1').checked=true;">
+>sp|P61967|AP1S1_MOUSE
+MMRFMLLFSRQGKLRLQKWYLATSDKERKKMVRELMQVVLARKPKMCSFLEWRDLKVVYK
+RYASLYFCCAIEGQDNELITLELIHRYVELLDKYFGSVCELDIIFNFEKAYFILDEFLMG
+GDVQDTSKKSVLKAIEQADLLQEEDESPRSVLEEMGLA
+</textarea></div></td>
+
+    <td>
+  </tr>
+  <tr>
+  	<td width="30"></td>
+ 		<td width="20%">
+      Interacting partner 2:</td>
+    <td colspan="2">
+        <div align="left"><textarea rows="5" cols="66" id="query2" name="query2" value="" size="" onfocus="document.getElementById('otherlimit_query1').checked=true;">
+>sp|P22892|AP1G1_MOUSE
+MPAPIRLRELIRTIRTARTQAEEREMIQKECAAIRSSFREEDNTYRCRNVAKLLYMHMLG
+YPAHFGQLECLKLIASQKFTDKRIGYLGAMLLLDERQDVHLLMTNCIKNDLNHSTQFVQG
+LALCTLGCMGSSEMCRDLAGEVEKLLKTSNSYLRKKAALCAVHVIRKVPELMEMFLPATK
+NLLNEKNHGVLHTSVVLLTEMCERSPDMLAHFRKLVPQLVRILKNLIMSGYSPEHDVSGI
+SDPFLQVRILRLLRILGRNDDDSSEAMNDILAQVATNTETSKNVGNAILYETVLTIMDIK
+SESGLRVLAINILGRFLLNNDKNIRYVALTSLLKTVQTDHNAVQRHRSTIVDCLKDLDVS
+IKRRAMELSFALVNGNNIRGMMKELLYFLDSCEPEFKADCASGIFLAAEKYAPSKRWHID
+TIMRVLTTAGSYVRDDAVPNLIQLITNSVEMHAYTVQRLYKAILGDYSQQPLVQVAAWCI
+GEYGDLLVSGQCEEEEPIQVTEDEVLDILESVLISNMSTSVTRGYALTAIMKLSTRFTCT
+VNRIKKVVSIYGSSIDVELQQRAVEYNALFKKYDHMRSALLERMPVMEKVTTNGPSEIVQ
+TNGETEPAPLETKPPPSGPQPTSQANDLLDLLGGNDITPVIPTAPTSKPASAGGELLDLL
+GDITLTGAPAAAPTPASVPQISQPPFLLDGLSSQPLFNDIAPGIPSITAYSKNGLKIEFT
+FERSNTNPSVTVITIQASNSTELDMTDFVFQAAVPKTFQLQLLSPSSSVVPAFNTGTITQ
+VIKVLNPQKQQLRMRIKLTYNHKGSAMQDLAEVNNFPPQSWQ
+</textarea></div></td>
+
+  </tr>
+ 	<tr>
+ 		<td colspan="4">
+      <input id="otherlimit_query2" name="query_check" type="radio" value="y">&nbsp;Input UniProt ID&nbsp;(Ex: AP1S1_MOUSE)
+ 		</td> 		
+ 	</tr>
+ 	<tr>
+ 		<td>&nbsp;</td>
+ 		<td colspan="3">
+ 			Interacting partner 1:&nbsp;&nbsp;
+      <input id="query1_ac" name="query1_ac" type="text" value="AP1S1_MOUSE" onchange="ChkUniProtText(this.value)"; size="13" onfocus="document.getElementById('otherlimit_query2').checked=true;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 			Interacting partner 2:&nbsp;&nbsp;
+      <input id="query2_ac" name="query2_ac" type="text" value="AP1G1_MOUSE" size="13" onfocus="document.getElementById('otherlimit_query2').checked=true;">
+ 		</td> 		
+ 	</tr>
+ 	<!-- /@
+ 	<div name="InterParnerCheck1" disabled = true ><tr>Test</tr></div>
+ 	-->
+  <tr>
+    <td width="15%" colspan="3">　</td>
+    <td width="490">      
+      <div align="right">
+        <input type="submit" value="Search">
+				<input type="button" value="Clear" onclick="cleartext(this.form)"><!--this.form-->
+        </div></td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <hr width="100%" align="left"></td>
+  </tr>
+<!--  <tr>
+    <td width="35%" colspan="3">
+    	<table border="0" width="300">
+    		<tr>
+    			<td><p align="left" colspan="3"><b>Upload file:</b></td>
+ 					<td><input type="file" name="file"></td><!--&nbsp;&nbsp;<a href="index-upload.php">Upload</a>-->
+<!-- 			</tr>
+    	</table>
+    </td>
+    <td width="65%" colspan="2">
+		</td>
+  </tr>
+    <tr>
+    <td width="100%" colspan="4">
+      <div align="left">
+  <hr width="100%" align="left">
+      </div>    </td>
+    </tr>
+  <tr>-->
+    <td colspan="4"><b>Options:</b></td>
+    </tr>
+
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685"><i>E</i>-value cut-off threshold for homolog searching
+    &nbsp&nbsp<a HREF="help.php#evalue"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+    <td width="55">
+      　</td>
+    <td colspan="3" width="685">
+    	<input name="evalue" type="radio" value="10">
+      10</sup>
+      <input name="evalue" type="radio" value="-1">
+      10<sup>-1</sup>
+      <input name="evalue" type="radio" value="-10"  checked>
+      10<sup>-10</sup>&nbsp;(Default)      
+      <input id="otherlimit" name="evalue" type="radio" value="x">Other:&nbsp;
+      <input name="evalue_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit').checked=true;">
+      (Ex: -50 = 10<sup>-50</sup>)
+    </td>
+  </tr>
+  <tr><td width="55">　</td><td colspan="3" width="685">　</td></tr>
+
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">Joint <i>E</i>-value&nbsp;&nbsp;<a href="help.php#jevalue"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">
+    	<input name="jevalue" type="radio" value="-100">
+      10<sup>-100</sup>
+      <input name="jevalue" type="radio" value="-40" checked>
+      10<sup>-40</sup>&nbsp;(Default)
+      <input name="jevalue" type="radio" value="-10">
+      10<sup>-10</sup>   
+      <input id="otherlimit2" name="jevalue" type="radio" value="x">Other:&nbsp;
+      <input name="jevalue_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit2').checked=true;">
+      (Ex: -50 = 10<sup>-50</sup>)
+
+    </td>
+    <!--other:<input id="othersp" name="othersp" type="text" size="3" disabled>-->
+  </tr>
+  <tr><td width="55">　</td><td colspan="3" width="685"></td></tr>  
+
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">Number of homologous interactions in each species ( Ranking by Joint <i>E</i>-value )&nbsp;&nbsp;<a href="help.php#rank"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">
+    	<input name="rank" type="radio" value="1">
+      Best-match
+      <input name="rank" type="radio" value="3">
+      Three
+      <input name="rank" type="radio" value="All" checked >
+      All (Default)
+      <input id="otherlimit3" name="rank" type="radio" value="x">Other:&nbsp;
+      <input name="rank_o" type="text" size="4" maxlength="2" onfocus="document.getElementById('otherlimit3').checked=true;">
+    </td>
+    <!--other:<input id="othersp" name="othersp" type="text" size="3" disabled>-->
+  </tr>
+  <tr><td width="55">　</td><td colspan="3" width="685"></td></tr>  
+
+
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">The conservation ratio (<i>CRD</i>) of a domain-domain pair 
+    &nbsp&nbsp<a HREF="help.php#CRD"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+    <td width="55">
+      　</td>
+    <td colspan="3" width="685">
+    	<input name="SRD" type="radio" value="1.00">
+      1.00
+      <input name="SRD" type="radio" value="0">
+      All
+      <input name="SRD" type="radio" value="0.60"  checked>
+      0.60&nbsp;(Default)      
+      <input id="otherlimit_SRD" name="SRD" type="radio" value="x">Other:&nbsp;
+      <input name="SRD_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit_SRD').checked=true;">
+      (Input Range: 0.01 ~ 0.99)
+    </td>
+  </tr>
+  <tr><td width="55">　</td><td colspan="3" width="685">　</td></tr>
+
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">The conservation ratio (<i>CRF</i>) of a molecular function term pair
+    &nbsp&nbsp<a HREF="help.php#CRF"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+    <td width="55">
+      　</td>
+    <td colspan="3" width="685">
+    	<input name="SRF" type="radio" value="1.00">
+      1.00
+      <input name="SRF" type="radio" value="0">
+      All
+      <input name="SRF" type="radio" value="0.60"  checked>
+      0.60&nbsp;(Default)      
+      <input id="otherlimit_SRF" name="SRF" type="radio" value="x">Other:&nbsp;
+      <input name="SRF_o" type="text" size="4" maxlength="4" onfocus="document.getElementById('otherlimit_SRF').checked=true;">
+      (Input Range: 0.01 ~ 0.99)
+    </td>
+  </tr>
+  <tr><td width="55">　</td><td colspan="3" width="685">　</td></tr>
+<!--
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">Criteria for identifying homologous sequences of the query proteins&nbsp;&nbsp;<a href="help.php#hits"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">Identity:&nbsp;&nbsp;&nbsp;
+		  <select name="identity">
+		    <option value="1">100%</option>
+		    <option value="0.95">95%</option>
+		    <option value="0.90">90%</option>
+		    <option value="0.85">85%</option>
+		    <option value="0.80">80%</option>
+		    <option value="0.75">75%</option>
+		    <option value="0.70">70%</option>
+		    <option value="0.65">65%</option>
+		    <option value="0.60">60%</option>
+		    <option value="0.55">55%</option>
+		    <option value="0.50">50%</option>
+		    <option value="0.45">45%</option>
+		    <option value="0.40" selected="selected">40%</option>
+		    <option value="0.35">35%</option>
+		    <option value="0.30">30%</option>
+		    <option value="0.25">25%</option>
+		    <option value="0.20">20%</option>
+		  </select>&nbsp;&nbsp;&nbsp;
+			Coverage:&nbsp;&nbsp;&nbsp;
+		  <select name="coverage">
+		    <option value="1">100%</option>
+		    <option value="0.95">95%</option>
+		    <option value="0.90">90%</option>
+		    <option value="0.85">85%</option>
+		    <option value="0.80">80%</option>
+		    <option value="0.75">75%</option>
+		    <option value="0.70">70%</option>
+		    <option value="0.65">65%</option>
+		    <option value="0.60">60%</option>
+		    <option value="0.55">55%</option>
+		    <option value="0.50">50%</option>
+		    <option value="0.45">45%</option>
+		    <option value="0.40" selected="selected">40%</option>
+		    <option value="0.35">35%</option>
+		    <option value="0.30">30%</option>
+		    <option value="0.25">25%</option>
+		    <option value="0.20">20%</option>
+		  </select>		  
+    </td>
+  </tr>
+  <tr><td width="55">　</td><td colspan="3" width="685"></td></tr>  
+
+-->
+
+  <tr>
+    <td width="55">　</td>
+    <td colspan="3" width="685">Choose output species&nbsp&nbsp<a HREF="help.php#species"><img border="0" src="images/HELP.GIF" width="12" height="16"></a></td>
+  </tr>
+    <tr>
+    	<td>&nbsp;</td>
+      <td colspan="3">
+      	<table border="0">
+      	<tr>
+      		<td>
+    				<input type="checkbox" name="human" value="1" onclick="clearAll(this.form);"><i>Homo sapiens</i>
+    			</td>
+    			<td>    	
+    				<input type="checkbox" name="worm" value="1" onclick="clearAll(this.form);"><i>Caenorhabditis elegans</i>
+    			</td>
+    			<td rowspan="4" valign="top">
+    				<input type="checkbox" id="otherlimit_others" name="others_species" value="1" onclick="clearAll(this.form);">Others (<a href=./taxid.php>Taxonomy ID</a>) Ex: 9913;9598;...<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="others_o" type="text" size="25" onfocus="document.getElementById('otherlimit_others').checked=true;" onclick="clearAll(this.form);">
+    			</td>
+    		</tr>
+    		<tr>
+      		<td colspan="1">
+    				<input type="checkbox" name="fly" value="1" onclick="clearAll(this.form);"><i>Drosophila melanogaster</i>
+    			</td>
+    			<td colspan="1">    	
+    				<input type="checkbox" name="athali" value="1" onclick="clearAll(this.form);"><i>Arabidopsis thaliana</i>
+    			</td>
+    		</tr>
+    		<tr>
+      		<td colspan="1">
+    				<input type="checkbox" name="yeast" value="1" onclick="clearAll(this.form);"><i>Saccharomyces cerevisiae</i>
+    			</td>
+    			<td colspan="1">    	
+    				<input type="checkbox" name="mouse" value="1" onclick="clearAll(this.form);"><i>Mus musculus</i>
+    			</td>
+    		</tr>
+    		<tr>
+      		<td colspan="1">
+    				<input type="checkbox" name="rat" value="1" onclick="clearAll(this.form);"><i>Rattus norvegicus</i>
+    			</td>
+    			<td colspan="1">    	
+    				<input type="checkbox" name="all" value="1"  onclick="selectAll(this.form,0);" checked>All&nbsp;(Default)
+    			</td>
+    		</tr>
+    		</table>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="3">&nbsp;</td>
+    </tr>
+  <tr>
+    <td width="100%" colspan="4">
+      <div align="left">
+  		<hr width="100%" align="left">
+      </div>    </td>
+  </tr>
+
+  <tr>
+    <td width="100%" colspan="4">
+      <div align="left">
+  		<b>Reference:</b>
+      </div>    </td>
+  </tr> 
+  <tr>
+    <td width="55">
+    </td>
+    <td width="100%" colspan="4">
+		1. Chen, C.-C., Lin, C.-Y., Lo, Y.-S. and Yang, J.-M. <a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkp309" target=_blank>PPISearch: a web server for searching homologous protein-protein interactions across multiple species</a>. <i>Nucleic Acids Research</i> 37:W376-W383 (2009). (Impact factor: 6.878)
+		</td>
+  </tr>
+    <td width="100%" colspan="4">
+      <div align="left">
+  		<hr width="100%" align="left">
+      </div>    </td>
+  </tr>  
+ 
+  <tr><td colspan="4">
+  <p><span class="SMALL1">Last updated 2009/11/16</p>
+  </td></tr>
+</table>
+</form>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
+
+<!--  Main  End       -->
+
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--  Footer  Begin
+<div id="footer">
+	Copyright &copy; 2006 BioXGEM Lab.&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	Institute of Bioinformatics&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	National Chiao-Tung University&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	Hsinchu, Taiwan, R.O.C.&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	All rights reserved.&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+Footer  Begin  -->
+
+<!--  Body  End       -->
+
+</body>
+</html>

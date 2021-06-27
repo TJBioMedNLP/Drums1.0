@@ -1,0 +1,924 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+		<meta name="metaTitle" content="" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="atomz_keywords" content="  microarray, microarrays, whole-genome, dna chips, genechips, dna microarrays, arrays, chips, affy, microarray, Affymetrix, GeneChip, GeneChip Array, Gene Chip, Netaffx, pharmacogenomics, NetAffx Analysis Center, genotyping, array, Affymetrics, Affimetrix, Affimetrics, snp genotyping" />
+<script src="/js/jquery1.2.6.js"></script>
+<script src="/js/affyUtil.js"></script>
+<script src="/js/richCart.js"></script>
+<script src="/js/jquery-1.3.2.min.js"></script>
+<!-- added for TeamSite integration -->
+<script type="text/javascript" src="/js/display.js"></script>
+<script type="text/javascript" src="/js/content_tab.js"></script>
+<script type="text/javascript" src="/js/form.js"></script>
+<script type="text/javascript" src="/js/nav.js"></script>
+<script type="text/javascript" src="/js/nav2.js"></script>
+<script type="text/javascript" src="/js/jquery.hoverIntent.minified.js" ></script>
+<script type="text/javascript" src="/js/thickbox.js"></script>
+<script type="text/javascript" src="/js/imagebox.js"></script>
+<script type="text/javascript" src="/js/windowname.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/AC_RunActiveContent.js"></script>
+<script type="text/javascript" src="/js/swfobject.js"></script>
+<script type="text/javascript" src="/js/ui.core.js" ></script>
+<script type="text/javascript" src="/js/ui.accordion.js" ></script>
+<script language="JavaScript" type="text/javascript" src="/js/omni/s_code.js"></script>
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/iepngfix_tilebg.js"></script>
+<script type="text/javascript">
+	function toBreakWord(intLen, obj){
+		var strContent=obj.html();
+		var strTemp="";
+		while(strContent.length>intLen){
+			strTemp+=strContent.substr(0,intLen)+"<br/>";
+			strContent=strContent.substr(intLen,strContent.length);
+		}
+		strTemp+= strContent;
+		obj.html(strTemp);
+	}
+	
+	function tobreakWordForCsr(intLen, obj){
+		 strContent=obj.html();
+		 first = strContent.indexOf('<br>');
+		 if(first==-1)first= strContent.indexOf('<BR>');
+		 last =strContent.indexOf('</p>');
+		  if(last==-1)last=strContent.indexOf('</P>');
+		 var csrContent=strContent.substr(first, last);
+		 var title = strContent.substring(0, first);
+		 var words = csrContent.split(/\s+/);
+		 var flag=0;
+		 var strTemp="";
+		for(var i=0; i< words.length; i++){
+			if(words[i].length> intLen){
+				words[i] = addSpan(words[i] , intLen);
+				flag=1;
+			}
+		}
+		if(flag==1){
+			for(var f=0 ; f < words.length ; f++){
+			if(f==0) strTemp = words[0];
+			else strTemp = strTemp +"<span> </span>" + words[f];
+			}
+			strTemp = title + strTemp+'</P>';
+		}else{
+			strTemp =strContent;
+		}
+		obj.html(strTemp);
+	}
+	
+	
+	function toBreakWordWithSpan(intLen, obj){
+		var strContent=obj.html();
+		var strEnd="";
+		var flag=0;
+		var words = strContent.split(/\s+/);
+		for(var i=0; i< words.length; i++){
+			if(words[i].length> intLen){
+				words[i] = addSpan(words[i] , intLen);
+				flag=1;
+			}
+		}
+		if(flag==1){
+			for(var f=0 ; f < words.length ; f++){
+				if(f==0) strEnd = words[0];
+				else strEnd = strEnd +"<span> </span>" + words[f];
+			}
+		}else{strEnd=strContent;}
+		obj.html(strEnd);
+		return strEnd;
+	}
+	
+	function addSpan(strContent ,intLen){
+		var strTemp="";
+		strTemp=strContent.substr(0,intLen)+'<span> </span>';
+		if(strContent.length > 2*intLen){
+			strTemp= strTemp + addSpan(strContent.substr(intLen,strContent.length) ,intLen);
+		}else{
+			strTemp=strTemp +strContent.substr(intLen,strContent.length);
+		}
+		return strTemp;
+	}
+</script>
+
+<![if !IE]>
+		<script>
+		var view = document.defaultView;
+		var symboltab = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8704,0,8707,0,0,8715,0,0,8727,0,0,8722,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8773,913,914,935,8710,917,934,915,919,921,977,922,923,924,925,927,928,920,929,931,932,933,962,8486,926,936,918,0,8756,0,8869,0,8254,945,946,967,948,949,966,947,951,953,981,954,955,956,957,959,960,952,961,963,964,965,982,969,958,968,950,0,0,0,8764,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,978,8242,8804,8725,8734,402,9827,9830,9829,9824,8596,8592,8593,8594,8595,176,177,8243,8805,215,8733,8706,8226,247,8800,8801,8776,8230,0,0,8629,8501,8465,8476,8472,8855,8853,8709,8745,8746,8835,8839,8836,8834,8838,8712,8713,8736,8711,174,169,8482,8719,8730,8901,172,8743,8744,8660,8656,8657,8658,8659,9674,9001,174,169,8482,8721,0,0,0,0,0,0,0,0,0,0,0,9002,8747,8992,0,8993,0,0,0,0,0,0,0,0,0,0];
+		
+		function convNode(n) {
+			 
+			var n1;
+			if (n == null) return;
+			if (n.nodeType == 3) { 
+				elem = n.parentNode;
+				var st = view.getComputedStyle(elem, null);
+				var val = st.getPropertyValue('font-family');
+				if (val.toLowerCase() == 'symbol') {
+					var s0 = n.data, s1 = '', len = s0.length, ch;
+					for (i = 0; i < len; i++) {
+						ch = s0.charCodeAt(i);
+						if (ch < 256 && symboltab[ch] != 0) ch = symboltab[ch]; s1 += String.fromCharCode(ch);
+					}
+					n.data = s1;
+				}
+			}
+			n1 = n.firstChild;
+			while (n1 != null) {
+				convNode(n1);
+				n1 = n1.nextSibling;
+			}
+		}
+		 
+		</script>
+<![endif]><title>Affymetrix - Support</title>
+	<!-- Axiom CSS below, dont change the order -->	
+    <link rel="stylesheet" type="text/css" href="/css/netaffx/axiom/reset.css">	
+    <link rel="stylesheet" type="text/css" href="/css/netaffx/axiom/layers.css">
+    <link id=css1 rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/css/left-nav-flyoutNew.css">
+    <link rel="stylesheet" type="text/css" href="/css/netaffx.css">
+    <link rel="stylesheet" type="text/css" href="/css/secondary_navigation.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/popup.css">
+    <link rel="stylesheet" type="text/css" href="/css/solutionsSummary.css">
+    <link rel="stylesheet" type="text/css" href="/css/imagebox.css">
+    <link rel="stylesheet" type="text/css" href="/css/thickbox.css"  media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="/css/horizontalNav.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/multicol-dropdown.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/css/collapsible.css">
+    <link rel="stylesheet" type="text/css" href="/css/collapsibleForEvents.css">
+    <link rel="stylesheet" type="text/css" href="/css/ui.accordion.css">	
+    <link rel="stylesheet" type="text/css" href="/css/ui.theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/content_tab.css"> 
+		<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="/css/styleSheetIE6.css" media="screen" />
+    <style type="text/css">
+	  img, div, a, input {behavior:url(/js/iepngfix.htc) }
+    </style>	<![endif]-->
+    <style type="text/css">
+      .p7TP_tabs{display: block;}.p7TPcontent div{display:none;}
+      .p7TPcontent div div{display:block;}
+      #p7tpc1_1 {display:block;}
+      #p7tpc2_1 {display:block;}
+      #p7tpc3_1 {display:block;}
+      #p7tpc4_1 {display:block;}
+      #p7tpc5_1 {display:block;}
+      #p7tpc6_1 {display:block;}
+      #p7tpc7_1 {display:block;}
+      #p7tpc8_1 {display:block;}
+      #p7tpc9_1 {display:block;}
+      #p7tpc10_1 {display:block;}
+    </style>	
+		<script type="text/javascript" src="/js/print.js"></script>
+		<script type="text/javascript" src="/js/main.js"></script>
+		<script type="text/javascript" src="/js/form.js"></script>
+		<script>
+			$(function(){
+				P7_initPM(1,0,0,-20,10);
+			});
+			$(function(){
+				P7_initTP(2,0); 
+			});			
+		</script>
+		<script type="text/javascript">
+			var aURL = ""+window.location;
+			var iURL = aURL.indexOf("axiomtg");
+			if (iURL != -1){
+				document.getElementById('css1').href = 'http://media.affymetrix.com/pxy/media/axiom/css/styles.css';
+			}
+
+		</script>
+		</head>
+	
+	<body onLoad="P7_initTP(2,0);P7_initPM(1,0,0,-20,10);init('lnk0','lyr0'); P7_TPurl();"  onUnload="window.focus()" onResize="fixIt()">
+		<div id="globalWrapper">
+			<div id="header">
+				<script>
+	$(document).ready(
+			function() {
+				setSearchOptions(2);
+				$("#userloginEmailId").focus( function() {
+					if ($("#userloginEmailId").val() == "Login Email")
+						$("#userloginEmailId").val("");
+				});
+				$("#userloginEmailId").blur( function() {
+					if ($("#userloginEmailId").val() == "")
+						$("#userloginEmailId").val("Login Email");
+				});
+				$("#userloginPasswordId").focus( function() {
+					if ($("#userloginPasswordId").val() == "Password")
+						$("#userloginPasswordId").val("");
+				});
+				$("#userloginPasswordId").blur( function() {
+					if ($("#userloginPasswordId").val() == "")
+						$("#userloginPasswordId").val("Password");
+				});
+
+				$("#localeCountryList").change(
+						function() {
+							var userRegionParam = document
+									.getElementById("userRegionParameterId");
+							userRegionParam.value = $("#localeCountryList")
+									.val();
+							$("#changeLocaleForm").submit();
+						});
+			});
+
+
+
+		function setSearchOptions(idElement){
+			/* Total Tabs above the input field (in this case there are 3 tabs: web, images, videos) */
+
+					
+			var toolbar=["site","productCatalog","quickOrder"];
+
+			tot_tab = 3;
+			tab		= document.getElementById('tab'+idElement);
+			search_option = document.getElementById('searchopt');
+			for(i=1; i<=3; i++){
+				if(i==idElement){
+					tab.className = "selected";
+					document.getElementById(toolbar[i-1]).style.display="block";
+					search_option.value=idElement;
+				} else {
+					document.getElementById('tab'+i).className = "";
+					document.getElementById(toolbar[i-1]).style.display="none";
+				}
+			}
+
+		}
+
+
+		var header={type:"POST", success:handleReponse };	
+
+//header search ajax begin
+
+		function ajaxSearch(idElement){
+				header.url="/estore/ajax/header_searchName.jsp?ajax=true&id="+idElement;
+				$.ajax(header);
+				setSearchOptions(idElement);
+			}
+
+		function handleReponse(data){	}
+
+//header search ajax end
+
+		
+// redirect to current page upon login
+function redirect(loginUrl) {
+
+    var toUrl="";
+
+	if(window.location.pathname.indexOf("/index.jsp")>0){
+		toUrl="";
+	}else{
+		toUrl=escape(window.location.pathname + window.location.search);
+	}
+	var url = loginUrl + '?toURL=' + toUrl;
+	document.getElementById("loginLink").href = url;
+}
+</script>
+
+<script>
+		var singleItemCartParam={
+		type:"POST",
+		success:handleReponseAddOneItemToCart
+		};
+
+		function addOneItemToCart(productId,skuId,quantity) 
+		{ 
+		  if(!checkForAddItemToCart(productId,skuId,quantity))
+		  {
+		      return;
+		  }
+		  if(quantity=="")
+		  {
+		    quantity=1;
+		  }
+		  setDataToForm(productId,skuId,quantity);
+	      var ctx="/estore"
+		  singleItemCartParam.url=ctx+"/global/addSingleItemToCartInfo.jsp?ajax=true";
+		  singleItemCartParam.data=getFormData("#singleItemAddCartForm");    
+		  $.ajax(singleItemCartParam);
+		}
+		
+		function checkForAddItemToCart(productId,skuId,quantity)
+		{
+	        if(productId=="")
+			{
+			    alert("The product id is empty!");
+				return false;
+			}
+		    if(skuId=="")
+			{
+				alert("The sku id is empty!");
+				return false;
+			}
+			
+			var patrn = /^[0-9]{1,4}$/;
+			if(quantity!=""&&!patrn.exec(quantity))
+		    {
+			  alert("The quantity is invalid number!");
+			  return false;
+			}
+			return true;
+		}
+
+		function setDataToForm(productId,skuId,quantity)
+		{
+	        $("#productIdAddToCart").val(productId);
+			$("#skuIdAddToCart").val(skuId);
+			$("#quantityAddToCart").val(quantity);
+		}
+		function handleReponseAddOneItemToCart(data){
+			var returnInfo=eval("("+data+")");	
+			if(returnInfo.succesFlag)
+			{
+				window.location.href=returnInfo.succesUrl;
+			}
+			else
+			{
+				alert(returnInfo.errorInfo);
+			}
+		}
+	</script>
+	<div style="display:none;">
+		<form action="/estore/global/;jsessionid=BDE013235E227E6DCA06371A0C4EF665#" id="singleItemAddCartForm"><input value="UTF-8" type="hidden" name="_dyncharset"></input><input value="8610376653508420004" type="hidden" name="_dynSessConf"></input><input value="" type="hidden" name="/atg/commerce/order/FullShoppingCartFormHandler.productId" id="productIdAddToCart"><input value=" " type="hidden" name="_D:/atg/commerce/order/FullShoppingCartFormHandler.productId"><input value="" type="hidden" name="/atg/commerce/order/FullShoppingCartFormHandler.catalogRefIds" id="skuIdAddToCart"><input value=" " type="hidden" name="_D:/atg/commerce/order/FullShoppingCartFormHandler.catalogRefIds"><input value="" type="hidden" name="/atg/commerce/order/FullShoppingCartFormHandler.quantityArrayStr" id="quantityAddToCart"><input value=" " type="hidden" name="_D:/atg/commerce/order/FullShoppingCartFormHandler.quantityArrayStr"><input type="submit" name="/atg/commerce/order/FullShoppingCartFormHandler.mutipleProductsAndSkusToOrder"><input value=" " type="hidden" name="_D:/atg/commerce/order/FullShoppingCartFormHandler.mutipleProductsAndSkusToOrder"><input value="/estore/global/addSingleItemToCart.jsp" type="hidden" name="_DARGS"></input></form></div>
+<div id="header-new">
+<div id="logo-new"><a href="/estore/index.jsp"><img src="/images/header/logo-new.jpg" alt="Affymetrix.com" border="0"></a></div>
+<div id="navigation-top">
+<ul id="navlist" style="margin:0px 50px 0px 90px;width:300px;">
+
+	Welcome, <b>Guest</b>!&nbsp;(<a id="loginLink" href="#" onclick="redirect('/estore/user/login.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665');">Log In</a> | <a href="/estore/user/termsOfUse.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Register</a>)
+					</ul>
+</div>
+
+<!--
+<div id="header-change">
+
+
+	United States &nbsp;
+		 (<a style="color:#4D4F53;text-decoration:underline;"href="/estore/global/changeLanguage.jsp">change</a>)
+
+
+</div>
+ -->
+ 		
+
+			<div id="cart" onclick="event.cancelBubble=true;">
+				<ul><script>
+	$(function(){
+		richCart.id="richCart";
+		richCart.url= "/estore/cart/includes/cartContents.jsp?ajax=true";
+		richCart.maskDivId="maskDivId";
+		richCart.itemCountClass="checkouttext";
+		$("body").bind("click",function(event){
+			if(richCart.isOpened==true){
+				if(event.target.id!="addToCart"){
+					richCart.forceCloseCart();
+				}
+			}
+		});
+		
+		$("#viewCart").bind('mouseenter',function(){
+			 richCart.showCart();
+		});
+		$("#viewCart").bind('mouseleave',function(){
+			richCart.closeCartDelay();
+		});
+	})
+</script>
+
+<style>
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:active {text-decoration: none;}
+a:hover {text-decoration: none;}
+</style> 
+
+	<div  id="viewCart" style="width:53px;height:30px">
+	<a href="/estore/cart/myShoppingCart.jsp?event=scView">
+		<span id="checkouttext"><font color="#666">
+					0 Items
+		</font></span>
+	</a>
+	<input type="hidden" id="productItemSize" value="0"/>
+	<div id="richCart" style="margin-left:-200px;*margin-left:-246px;"></div>
+</div>
+<div class="maskIframe" style="margin-left:-200px;*margin-left:-246px;margin-top:20px;" id="maskDivId"></div>
+</ul>
+			</div>
+
+			<div id="search-new">
+					<ul class="search-options">
+						<li id="tab1" ><a href="#" onclick="ajaxSearch(1);hiddenQuickOrderErrorMsg();">Site</a></li>
+						<li id="tab2" ><a href="#" onclick="ajaxSearch(2);hiddenQuickOrderErrorMsg();">Product Catalog</a></li>
+						<li id="tab3" class="selected"><a href="#" onclick="ajaxSearch(3)">Quick Order</a></li>
+					</ul>
+					<input type="hidden" name="searchopt" id="searchopt" />
+					<input type="hidden" id="searchopt" />
+
+					<div id="site"				style="display:none"><script type="text/javascript" >
+  $(function() {
+    fadedInput('searchQuery', 'Search Site', 'fadedInput');
+      $("#searchQuery").bind("keydown", function(evt){
+        if(evt.keyCode==13){
+          $("#searchButton").focus();
+        }
+      });
+    }
+  )
+  </script>
+  <div id="search-bar">
+    <form method="get" action="/thirdparty/atomz/search.affx">
+     <input type="hidden" value="keywords" name="sp_x_2"/>
+        	<input type="hidden" value="all" name="sp_p"/>
+        	<input type="hidden" value="s" name="scope"/>
+        	<input type="hidden" value="search_alt_atg" name="sp_t"/>
+        	<input type="hidden" value="loc" name="sp_x_3"/>
+        	<input type="hidden" value="us" name="sp_q_3"/>
+        	<input type="hidden" value="1" name="sp_q_required_3"/>
+        	<input type="hidden" value="sp1001209f" name="sp_a"/>
+        	<div style="float:left;margin-top:7px;*margin-top:4px;">
+        <input style="background-color:#D5D5D5;border:1px solid #4F4F4F;width:190px;" name="sp_q" type="text" value="Search Site" maxlength="70" id="searchQuery" />
+      </div>
+      <div style="float:left;margin-top:5px;*margin:top:6px;">
+        <input type="image" id="searchButton" src="/images/header/go.gif" iclass="button" style="height:18px;"/>
+      </div>
+    </form>
+  </div>
+</div>
+					<div id="productCatalog"	style="display:none"><script type="text/javascript" >
+$(function(){
+		fadedInput('searchQuery1','Enter Keyword / Product #','fadedInput');
+		$("#searchQuery1").bind("keydown",function(evt){
+				
+				if(evt.keyCode==13){
+					$("#searchButton1").focus();
+					
+				}
+		});
+	}
+)
+
+function check(){
+   	var obj=document.getElementById("searchQuery1");
+	//if(obj.value=="Enter Keyword / Product #"||obj.value==""){
+	//	alert("???search.IsEmpty???");
+	//	      return false;
+	//}
+}
+
+</script>
+<div id="search-bar"  >
+
+
+  <form action="/estore/search/searchResultContainer.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?headerSelected=productCatalogLink&_DARGS=/estore/includes/search.jsp" onsubmit="return check()" method="post"><input value="UTF-8" type="hidden" name="_dyncharset"></input><input value="8610376653508420004" type="hidden" name="_dynSessConf"></input><div style="float:left;margin-top:7px;*margin-top:4px;">
+			<input value="Enter Keyword / Product #" type="text" onfocus="this.value=''" style="background-color:#D5D5D5;border:1px solid #4F4F4F;width:190px;" name="/atg/commerce/catalog/CatalogSearch.searchInput" onblur="if(!this.value){this.value='Enter Keyword / Product #';}" id="searchQuery1"><input value=" " type="hidden" name="_D:/atg/commerce/catalog/CatalogSearch.searchInput"></div>
+		 <div style="float:left;margin-top:5px;*margin-top:5px;">
+			<input type="image" class="button" style="height:18px;" src="/images/header/go.gif" name="/atg/commerce/catalog/CatalogSearch.search" id="searchButton1"><input value=" " type="hidden" name="_D:/atg/commerce/catalog/CatalogSearch.search"></div>
+		<input value="/estore/search/searchResultContainer.jsp?headerSelected=productCatalogLink" type="hidden" name="/atg/commerce/catalog/CatalogSearch.successURL"><input value=" " type="hidden" name="_D:/atg/commerce/catalog/CatalogSearch.successURL"><input value="/estore/search/searchResultContainer.jsp?headerSelected=productCatalogLink" type="hidden" name="/atg/commerce/catalog/CatalogSearch.errorURL"><input value=" " type="hidden" name="_D:/atg/commerce/catalog/CatalogSearch.errorURL"><input value="/estore/includes/search.jsp" type="hidden" name="_DARGS"></input></form></div></div>
+					<div id="quickOrder"		style="display:block"><script type="text/javascript" src="/js/affyUtil.js"></script>
+<script type="text/javascript" >
+$(
+	function(){
+		$("#quickOrderId").bind("keydown",function(evt){
+				if(evt.keyCode==13){
+					$("#quickOrderSubmit").focus();
+				}
+		});
+		
+		
+	}
+)
+function checkInputIfEnterPart(){
+    var action=$("#quickOrderForm").attr("action");
+	action=action.replace(/requestid/, "");
+	$("#quickOrderForm").attr("action",action);
+	var input = $("#quickOrderId").val();
+	if(input=="Enter Part #" || input=="" ){
+		alert("please input external id");
+		return false;
+	}
+	var flag = false;
+	for(i=0;i<input.length;i++){
+		if(input.charAt(i)!=" "){
+			flag = true;
+		}
+	}
+	if(flag){
+		return true;
+	}else{
+		alert("please input external id");
+		return false;
+	}
+	return true;
+}
+ function hiddenQuickOrderErrorMsg()
+ {
+	if($("#quickOrderErrorId")!=null)
+	{
+		$("#quickOrderErrorId").attr("style","display:none;");
+	}
+ }
+
+</script>
+<div id="search-bar">
+	<form action="/estore/teamsite/generic.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?_DARGS=/estore/quickOrder/quickOrder.jsp" onsubmit="return checkInputIfEnterPart()" method="post" id="quickOrderForm"><input value="UTF-8" type="hidden" name="_dyncharset"></input><input value="8610376653508420004" type="hidden" name="_dynSessConf"></input><div style="float:left;margin-top:7px;*margin-top:4px;">
+			<input value="Enter Part #" type="text" onfocus="this.value=''" style="background-color:#D5D5D5;border:1px solid #4F4F4F;width:190px;" name="/affymetrix/quickOrder/QuickOrderFormHandler.partSku" onblur="if(!this.value){this.value='Enter Part #';}" id="quickOrderId"><input value=" " type="hidden" name="_D:/affymetrix/quickOrder/QuickOrderFormHandler.partSku"></div>
+		 <div style="float:left;margin-top:5px;">
+			<input type="image" class="button" style="height:18px;" src="/images/header/go.gif" name="/affymetrix/quickOrder/QuickOrderFormHandler.quickOrder" id="quickOrderSubmit"><input value=" " type="hidden" name="_D:/affymetrix/quickOrder/QuickOrderFormHandler.quickOrder"></div>
+		<input value="/estore/support/index.affx?headerQuickOrder=quickOrderLink" type="hidden" name="/affymetrix/quickOrder/QuickOrderFormHandler.quickOrderErrorURL"><input value=" " type="hidden" name="_D:/affymetrix/quickOrder/QuickOrderFormHandler.quickOrderErrorURL"><input value="/estore/cart/myShoppingCart.jsp?headerQuickOrder=quickOrderLink" type="hidden" name="/affymetrix/quickOrder/QuickOrderFormHandler.oneSkuURL"><input value=" " type="hidden" name="_D:/affymetrix/quickOrder/QuickOrderFormHandler.oneSkuURL"><input value="/estore/quickOrder/quickOrderList.jsp" type="hidden" name="/affymetrix/quickOrder/QuickOrderFormHandler.multipleSkuURL"><input value=" " type="hidden" name="_D:/affymetrix/quickOrder/QuickOrderFormHandler.multipleSkuURL"><input value="/estore/quickOrder/quickOrder.jsp" type="hidden" name="_DARGS"></input></form><input id="product_key" type="hidden" value=""/>
+	</div>
+					
+				</div>
+
+			</div>
+
+</div>
+
+	<div id="primaryNavContainer" style="position: absolute;top:78px;float:left;padding-left:200px;z-index:3; ">
+		<div id="primaryNav"><head>
+	<title>CatalogNav</title>
+</head>
+
+	
+
+<ul id="p7PMnav">
+  <li>
+      <!--/browse/level-0-landingpage.jsp?category=34000&amp;categoryIdClicked=34000-->
+	    <!--   -->
+	<a href="/estore/browse/level-0-landingpage.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34000&categoryIdClicked=34000&rootCategoryId=34000&navMode=34000&aId=productsNav" class="p7PMtrg" id="productsNav">Products</a><ul class="p7PMhide" style="margin-left: 0px; margin-top: 0px;"><li>
+			<a href="/estore/browse/level-0-landingpage.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=35810&categoryIdClicked=35810&rootCategoryId=34000&navMode=35810&parent=35810&aId=productsNav">Products</a></li>
+		<li>
+			<a href="/estore/search/searchAToZContainer.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=35798&categoryIdClicked=35798&rootCategoryId=34000&navMode=35798&parent=35798&aId=productsNav">Products Listed A-Z</a></li>
+		<li>
+			<a href="/estore/browse/combined_promotions.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=35925&categoryIdClicked=35925&rootCategoryId=34000&navMode=35925&parent=35925&aId=productsNav">Promotions</a></li>
+		</ul></li>
+  <li>
+      <!--/browse/brand/brandOverview.jsp?category=35677&amp;categoryIdClicked=35677-->
+	    <!--   -->
+	<a href="/estore/browse/brand/brandOverview.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=35677&categoryIdClicked=35677&rootCategoryId=35677&navMode=35677&aId=brandsNav" class="p7PMtrg" id="brandsNav">Brands</a><ul class="p7PMhide" style="margin-left: 0px; margin-top: 0px;"><li>
+			<a href="/estore/browse/brand/affymetrixMicroarraySolutions/brandAffymetrixMicroarraySolutions-overview.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=35722&categoryIdClicked=35722&rootCategoryId=35677&navMode=35722&parent=35722&aId=affymetrixmicroarraybrandsNav">Affymetrix Microarray Brands</a></li>
+		<li>
+			<a href="/estore/browse/brand/anatrace/anatrace-overview.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=35858&categoryIdClicked=35858&rootCategoryId=35677&navMode=35858&parent=35858&aId=anatraceNav">Anatrace</a></li>
+		<li>
+			<a href="/estore/browse/brand/usb/usb.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=35689&categoryIdClicked=35689&rootCategoryId=35677&navMode=35689&parent=35689&aId=usbNav">USB</a></li>
+		<li>
+			<a href="http://www.panomics.com/index.php?id=products_genomeRNAAnalysis">QuantiGene</a></li>
+		<li>
+			<a href="http://www.panomics.com/index.php?id=product_87">QuantiGene ViewRNA</a></li>
+		<li>
+			<a href="http://www.panomics.com/index.php?id=product_35">Procarta</a></li>
+		</ul></li>
+  <li>
+      <!--/support/index.affx?category=34001&amp;categoryIdClicked=34001-->
+	    <!--   -->
+	<a href="/estore/support/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34001&categoryIdClicked=34001&rootCategoryId=34001&navMode=34001&aId=supportNav" class="p7PMtrg" id="supportNav">Support</a><ul class="p7PMhide" style="margin-left: 0px; margin-top: 0px;"><li>
+			<a href="/estore/support/mas/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=cat120004&categoryIdClicked=cat120004&rootCategoryId=34001&navMode=cat120004&parent=cat120004&aId=supportNav">Affymetrix Microarray Solutions</a></li>
+		<li>
+			<a href="/estore/support/technical/anatrace/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=cat120006&categoryIdClicked=cat120006&rootCategoryId=34001&navMode=cat120006&parent=cat120006&aId=supportNav">Anatrace</a></li>
+		<li>
+			<a href="/estore/support/technical/usb/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=cat120008&categoryIdClicked=cat120008&rootCategoryId=34001&navMode=cat120008&parent=cat120008&aId=supportNav">USB</a></li>
+		</ul></li>
+  <li>
+      <!--/partners_programs/index.affx?category=34002&amp;categoryIdClicked=34002-->
+	    <!--   -->
+	<a href="/estore/partners_programs/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34002&categoryIdClicked=34002&rootCategoryId=34002&navMode=34002&aId=partnersNav" class="p7PMtrg" id="partnersNav">Partners &amp; Programs</a><ul class="p7PMhide" style="margin-left: 0px; margin-top: 0px;"><li>
+			<a href="/estore/partners_programs/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34015&categoryIdClicked=34015&rootCategoryId=34002&navMode=34015&parent=34015&aId=partnersNav">Overview</a></li>
+		<li>
+			<a href="/estore/partners_programs/instrument_program/owner_chip.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=cat130008&categoryIdClicked=cat130008&rootCategoryId=34002&navMode=cat130008&parent=cat130008&aId=partnersNav">OwnerChip Program</a></li>
+		<li>
+			<a href="/estore/partners_programs/genechip_compatible/genechip_compatible.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34016&categoryIdClicked=34016&rootCategoryId=34002&navMode=34016&parent=34016&aId=partnersNav">GeneChip-compatible&trade; Software Providers</a></li>
+		<li>
+			<a href="/estore/partners_programs/service_providers/service-providers.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34017&categoryIdClicked=34017&rootCategoryId=34002&navMode=34017&parent=34017&aId=partnersNav">Service Providers</a></li>
+		<li>
+			<a href="/estore/partners_programs/programs/developer/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34018&categoryIdClicked=34018&rootCategoryId=34002&navMode=34018&parent=34018&aId=partnersNav">Developers&#39; Network</a></li>
+		<li>
+			<a href="/estore/partners_programs/programs/consortia.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34019&categoryIdClicked=34019&rootCategoryId=34002&navMode=34019&parent=34019&aId=partnersNav">Consortia Program</a></li>
+		<li>
+			<a href="/estore/partners_programs/core.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34020&categoryIdClicked=34020&rootCategoryId=34002&navMode=34020&parent=34020&aId=partnersNav">Core Lab Program</a></li>
+		<li>
+			<a href="/estore/partners_programs/pba_partners/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34021&categoryIdClicked=34021&rootCategoryId=34002&navMode=34021&parent=34021&aId=partnersNav">Powered by Affymetrix&trade; Partners</a></li>
+		</ul></li>
+  <li>
+      <!--/about_affymetrix/index.affx?category=34003&amp;categoryIdClicked=34003-->
+	    <!--   -->
+	<a href="/estore/about_affymetrix/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34003&categoryIdClicked=34003&rootCategoryId=34003&navMode=34003&aId=aboutNav" class="p7PMtrg" id="aboutNav">About Affymetrix</a><ul class="p7PMhide" style="margin-left: 0px; margin-top: 0px;"><li>
+			<a href="/estore/about_affymetrix/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34022&categoryIdClicked=34022&rootCategoryId=34003&navMode=34022&parent=34022&aId=aboutNav">Overview</a></li>
+		<li>
+			<a href="/estore/about_affymetrix/media/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34023&categoryIdClicked=34023&rootCategoryId=34003&navMode=34023&parent=34023&aId=aboutNav">News & Events</a></li>
+		<li>
+			<a href="http://investor.affymetrix.com/phoenix.zhtml?c=116408&p=irol-IRHome">Investors</a></li>
+		<li>
+			<a href="/estore/about_affymetrix/legal/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34025&categoryIdClicked=34025&rootCategoryId=34003&navMode=34025&parent=34025&aId=aboutNav">Licensing</a></li>
+		<li>
+			<a href="/estore/about_affymetrix/outreach/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34026&categoryIdClicked=34026&rootCategoryId=34003&navMode=34026&parent=34026&aId=aboutNav">Outreach</a></li>
+		<li>
+			<a href="/estore/browse/contactUs.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34027&categoryIdClicked=34027&rootCategoryId=34003&navMode=34027&parent=34027&aId=aboutNav">Contact Us</a></li>
+		</ul></li>
+  <li>
+      <!--/careers/index.affx?category=34004&amp;categoryIdClicked=34004-->
+	    <!--   -->
+	<a href="/estore/careers/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34004&categoryIdClicked=34004&rootCategoryId=34004&navMode=34004&aId=careersNav" class="p7PMtrg" id="careersNav">Careers</a><ul class="p7PMhide" style="margin-left: 0px; margin-top: 0px;"><li>
+			<a href="/estore/careers/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34028&categoryIdClicked=34028&rootCategoryId=34004&navMode=34028&parent=34028&aId=careersNav">Overview</a></li>
+		<li>
+			<a href="/estore/careers/job_search.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34029&categoryIdClicked=34029&rootCategoryId=34004&navMode=34029&parent=34029&aId=careersNav">Job Search</a></li>
+		</ul></li>
+  <li>
+      <!--/analysis/index.affx?category=34005&amp;categoryIdClicked=34005-->
+	    <!--   -->
+	<a href="/estore/analysis/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665?category=34005&categoryIdClicked=34005&rootCategoryId=34005&navMode=34005&aId=netAffxNav" class="p7PMtrg" id="netAffxNav">NetAffx</a></li>
+  </ul>
+  </div>
+		<div style="float:right;">
+			<a target="affy_jp" href="http://www.affymetrix.com/jp/index.affx"><img border="0" alt="Affymetrix Japan" title="Affymetrix Japan" src="/images/word3.gif"/></a>
+		</div>
+	</div>
+
+</div>
+			<div id="mainContent">					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="microarray, microarrays, whole-genome, dna chips, genechips, dna microarrays, arrays, chips, affy, microarray, Affymetrix, GeneChip, GeneChip Array, Gene Chip, Netaffx, pharmacogenomics, NetAffx Analysis Center, genotyping, array, Affymetrics, Affimetrix, Affimetrics, snp genotyping, support, affymetrix, genechip, microarray, learning center, affymetrix univeristy">
+<meta name="atomz_keywords" content="support, affymetrix, genechip, microarray, learning center, affymetrix univeristy">
+<meta name="description" content="Support">
+
+<script type="text/javascript">
+<!--
+window.onload = function(){  
+   P7_initTP(2,0);
+   P7_initPM(1,0,0,-20,10);
+   init('lnk0','lyr0');
+   P7_TPurl();
+   
+} 
+window.onUnload= function(){
+	 window.focus();
+}
+-->
+</script>
+<!-- SiteCatalyst code version: H.19.3.
+Copyright 1997-2009 Omniture, Inc. More info available at
+http://www.omniture.com -->
+<script language="JavaScript" type="text/javascript" src="/_includes/scripts/omni/s_code.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+/* You may give each page an identifying name, server, and channel on the next lines. */
+s.pageName="/support:Support"
+s.channel="support"
+s.prop1="support:na"
+s.prop2=""
+s.prop3=""
+s.prop4=""
+s.prop9=""
+s.prop14=s.channel;
+s.prop21="Anonymous"
+/* Conversion Variables */
+s.campaign="";
+s.state=""
+s.zip=""
+s.events=""
+s.products=""
+s.purchaseID=""
+s.eVar1=""
+s.eVar2=""
+s.eVar8=""
+s.eVar21=s.prop21;
+
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+<!-- End SiteCatalyst code version: H.19.3. -->
+
+      
+
+  <div id="secondaryColumn">
+    <div><img src="/_media/images/support.jpg" width="179" height="25" alt="Support"></div>
+
+	<div id="ResearchSolutionsMenuBox" class="SecondaryNavigationBox SNBOpen" >
+		<h3 class="Open" onclick="javascript:toggleElementClassById('ResearchSolutionsMenuBox', 'SecondaryNavigationBox SNBOpen', 'SecondaryNavigationBox SNBClosed');toggleHeadingClass(this);toggleElementDisplay('ResearchSolutionsMenu');"><a href="/support/index.affx" style="color: #B71234; text-decoration: none;">Overview</a></h3>
+  </div>
+
+  <div class="subNav"><a href="/support/mas/index.affx">Affymetrix</a></div>
+  <div class="subNav"><a href="/support/technical/anatrace/index.affx">Anatrace</a></div>
+  <div class="subNav"><a href="/support/technical/usb/index.affx">USB</a></div>
+        
+	
+<div class="box">
+      <h1>Scientific Publications</h1>
+      <!--
+
+
+
+<p><a target="external" class="grayText" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&list_uids=15494404&dopt=Abstract">Neuroprotective effects of phenylbutyrate in the N171-82Q transgenic mouse model of Huntington's Disease ></a></p><p><a target="external" class="grayText" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15307835">Kidney transplant rejection and tissue injury by gene profiling of biopsies and peripheral blood lymphocytes. ></a></p>
+
+-->
+      <p> <a class="grayText" href="/publications/index.affx">Search our database of <b>22946</b> publications.</a></p>
+	<!--PER MARTHA MANION DO NOT ADD THIS LINK HERE   <p><a class="quote" href="/publications/index.affx">View All &#62;</a></p>-->
+
+    </div>
+
+  </div>
+
+  
+<div id="primaryColumn">
+	<div id="breadCrumbs">
+		<a href="/">Home</a> &gt; <span class=On>Support</span>
+	</div>
+	<div class="primaryColumnHeader">
+		<div class="primaryColumnTitle">
+			<h1>Support</h1>
+		</div>
+	</div>
+<div style="clear:both;"></div>
+<p>Part of our commitment to helping you includes providing free informational resources for download. Here you'll find specific product information, references for product applications, technical articles, and much more. Be sure to check back often, as we update and add to this section frequently.</p>
+<div style="clear:both;"></div>
+<div id="multiple">
+	<div class="firstBox">
+		<h2 class="red">Affymetrix Microarray Solutions</h2>
+		<div class="imgBorder">
+		<img src="/fa/images/logos/2009-11-affy-brand-logo.jpg"/>
+		</div>
+			<div id="products" style="width:225px;float:right">
+				<ul>
+				<li><a href="/support/technical/index.affx">Technical Documentation ></a></li>
+				<li><a href="/support/mas/index.affx#1_1">Support Documents ></a></li>
+				<li><a href="/analysis/index.affx">NetAffx&#153; Analysis Center ></a></li>
+				<li><a href="/browse/contactUs.jsp#1_3">Contact Us ></a></li>
+				<li><a href="/browse/contact_us-call_for_price.jsp">Get Help ></a></li>
+				</ul>
+			</div>
+		<div style="clear:both"></div>
+		</div>
+	<div class="lastBox" style="width:368px !important">
+		<h2 class="red">Anatrace Detergents and Lipids</h2>
+		<div class="imgBorder">
+		<img src="/fa/images/logos/2009-11-anatrace-brand-logo.jpg"/>
+		</div>
+			<div id="products" style="width:225px;float:right">
+				<ul>
+				<li><a href="/support/technical/anatrace/index.affx#1_3">Technical Documentation ></a></li>
+				<li><a href="/support/technical/anatrace/index.affx#1_1">MSDS ></a></li>
+				<li><a href="/support/technical/anatrace/index.affx#1_2">Literature ></a></li>
+				<li><a href="/browse/contactUs.jsp#1_4">Contact Us ></a></li>
+				<li><a href="/browse/contact_us-call_for_price.jsp">Get Help ></a></li>
+				</ul>
+			</div>
+		<div style="clear:both"></div>
+	</div>
+</div>
+<div class="line">
+	<img alt="" src="/_media/images/spacer.gif"/>
+</div>
+<div id="multiple">
+	<div class="firstBox">
+		<h2 class="red">USB Molecular Biology Reagents and Biochemicals</h2>
+		<div class="imgBorder">
+		<img src="/fa/images/logos/2009-11-usb-brand-logo.jpg"/>
+		</div>
+			<div id="products" style="width:225px;float:right">
+				<ul>
+				<li><a href="/support/technical/usb/index.affx#1_4">Technical Documentation ></a></li>
+				<li><a href="/support/technical/usb/index.affx#1_1">Protocols ></a></li>
+				<li><a href="/support/technical/usb/index.affx#1_2">MSDS ></a></li>
+				<li><a href="/support/technical/usb/index.affx#1_3">Literature ></a></li>
+				<li><a href="/browse/contactUs.jsp#1_5">Contact Us ></a></li>
+				<li><a href="/browse/contact_us-call_for_price.jsp">Get Help ></a></li>
+				</ul>
+			</div>
+		<div style="clear:both"></div>
+	</div>
+	<div class="lastBox" style="width:368px !important">
+		<h2 class="red">QuantiGene and Procarta Solutions from Affymetrix (Formerly Panomics)</h2>
+		<div class="imgBorder">
+		<img src="/fa/images/logos/2009-11-panomics-brand-logo.jpg"/>
+		</div>
+			<div id="products" style="width:225px;float:right">
+				<ul>
+				<li><a href="http://www.panomics.com/sfSupportKB/">FAQ's ></a></li>
+				<li><a href="http://www.panomics.com/resources/tutorials/">Literature ></a></li>
+				<li><a href="http://www.panomics.com/papers/">Papers Citing Panomics ></a></li>
+				<li><a href="http://www.panomics.com/index.php?id=company_contactUs">Contact Us ></a></li>
+				<li><a href="/browse/contact_us-call_for_price.jsp">Get Help ></a></li>
+				</ul>
+			</div>
+		<div style="clear:both"></div>
+		</div>
+</div>
+</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+	var teamSiteFileExtension=".jsp,.affx";
+    function isTeamSiteFileExtension(url)
+	{
+		var teamSiteFileExtensionArray=teamSiteFileExtension.split(",");
+		for(i=0;i<teamSiteFileExtensionArray.length;i++)
+		{
+			if((url.indexOf(teamSiteFileExtensionArray[i])>0))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	$(document).ready(function(){
+		$("#secondaryColumn a").each(function(){
+			var newHerfContent;
+			var herfContent=$(this).attr("href");
+			if(isTeamSiteFileExtension(herfContent))
+			{
+				var s = herfContent.indexOf("?");
+				if(s>0){
+					newHerfContent = herfContent+"&hightlight=true";
+				}
+				else{
+					newHerfContent = herfContent+"?hightlight=true";
+				}
+				newHerfContent = newHerfContent+"&rootCategoryId=";
+				$(this).attr("href",newHerfContent);
+			}
+		});
+		
+		$("#primaryColumn a").each(function(){
+			var newPrimaryHerfContent;
+			var primaryHerfContent=$(this).attr("href");
+			if(""!=""){
+				var newParameter = "/"+""+"/";
+				if(primaryHerfContent.indexOf(newParameter)>=0){
+				    if(isTeamSiteFileExtension(primaryHerfContent))
+					{
+						var s = primaryHerfContent.indexOf("?");
+						if(s>0){
+							newPrimaryHerfContent = primaryHerfContent+"&hightlight=true";
+						}
+						else{
+							newPrimaryHerfContent = primaryHerfContent+"?hightlight=true";
+						}
+						newPrimaryHerfContent = newPrimaryHerfContent+"&rootCategoryId=";
+						$(this).attr("href",newPrimaryHerfContent);
+					}
+				}
+			}
+		});
+	});
+</script>
+<div style="clear: both;"></div>
+				<div id="footer">
+					<p>
+	&copy; 2009 Affymetrix, Inc. All rights reserved.
+	<a href="/estore/browse/contactUs.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Contact Us</a> |
+	<a href="/estore/browse/contact_us-call_for_price.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Help</a> |
+	<a href="/estore/customers/feedback/index.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Web Feedback</a> |
+	<a href="/estore/browse/terms.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Terms of Use</a> |
+	<a href="/estore/browse/privacy.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Privacy Policy</a> | 
+	<a href="/estore/browse/termOfSales.jsp;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Terms of Sale</a> |
+	<a href="/estore/about_affymetrix/legal/trademark-guidelines.affx;jsessionid=BDE013235E227E6DCA06371A0C4EF665">Trademarks</a><div style="float:right; margin-right:5px;margin-top:-17px;">
+		<!-- <a style="margin-top:15px;" href="/estore/global/changeLanguage.jsp">Change Your Language</a> -->
+		
+	</div>
+</p>
+</div>
+			</div>			
+		</div>
+                <script type='text/javascript' language='JavaScript' src='http://media.affymetrix.com/elqNow/elqCfg.js'></script>
+                <script type='text/javascript' language='JavaScript' src='http://media.affymetrix.com/elqNow/elqImg.js'></script>
+
+	</body>
+</html>

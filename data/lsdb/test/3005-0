@@ -1,0 +1,412 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>	
+<meta name="application-name" content="T-Coffee Server"/>
+<meta name="application-url" content="/apps/tcoffee"/>
+
+<title>T-Coffee Server</title>
+<meta name="description" content="T-Coffee is a multiple sequence alignment server. It can align Protein, DNA and RNA sequences. You can use T-Coffee to align sequences or to combine the output of your favorite alignment methods into one unique alignment. It is also able to combine sequence information with protein structural information, profile information or RNA secondary structures." />
+<meta name="keywords" content="t-coffee, tcoffee, t_coffee, T-Coffee server, web server, alignment server, server, msa, multiple sequence alignment, dna, rna, protein sequence, protein structure, Ceric Notredame, Comparative Bioinformatics" />
+<meta name="google-site-verification" content="h3pS1Y9xQdTbZlkoBNPeMtEt269Gdc_mDoia6kC0ASM" />
+
+<link rel="shortcut icon" type="image/x-icon" href="/public/images/favicon.ico"  /> 
+<link href="/public/layout.css" rel="stylesheet" type="text/css" />
+ 
+<style type="text/css">
+/* some css here */
+
+#logo {
+	position: relative;
+	top: 12px;
+	left:-5px;
+
+	background:  url(/apps/tcoffee/public/images/tcoffeelogo-2.png) no-repeat 0% 0%;
+	float: left;
+	font-size: 1px;
+	text-indent: -9999px;
+	width: 300px;
+	height: 70px;
+	
+}
+
+/* some colors */
+
+#content {
+	color: #444;
+	font-weight: normal;
+	font-size: 15px;
+	
+}
+
+#content h1 {
+	font-weight: 500;
+}
+
+#content h1 small {
+	font-weight: normal;
+}
+
+#content label small {
+	font-size: 12px;
+	font-weight: 300;
+} 
+
+#content .box,
+#content fieldset,
+#content .box h2 span,
+#content fieldset h2 span
+
+ {
+	background-color: #f4f4f4; 
+}
+
+/* highlight color */
+#content em,
+#content h1 small 
+{
+	color: #0c8aa3;
+}
+
+#content a,
+#footer a
+{
+	color: #0c8aa3;
+	border-color: #0c8aa3; 
+}
+
+
+/* 
+ * declarative menu 
+ */
+ 
+#navigation li a {
+	color: #e3e3e3; 
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5); 
+	-webkit-border-radius: 14px; 
+	-moz-border-radius: 14px; 
+	border-radius: 14px;
+	
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out; 
+	-o-transition: all 0.3s ease-in-out; 
+	transition: all 0.3s ease-in-out;	
+	
+}
+
+#navigation li a:hover, 
+#navigation li a:focus {
+	color: #fff; 
+	background: rgba(255, 255, 255, 0.15);
+} 
+ 
+#navigation.index .index a,
+#navigation.history .history a,
+#navigation.references .references a,
+#navigation.tutorial .tutorial a,
+#navigation.contacts .contacts a
+
+{
+	color: #24bae0;	
+}
+
+
+/* 
+ * Home page 
+ */
+ 
+#content .cite {
+	color: #888;
+	border: none;
+} 
+
+#content #mirrors a {
+	border: none;
+	color: #444;
+}
+
+</style>
+ 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" ></script>
+<script type="text/javascript" src="/public/javascripts/jquery.cookie.js" ></script>
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="/public/javascripts/jquery.pngFix.pack.js"></script>
+<script type="text/javascript" >
+$(document).ready(function(){  $(document).pngFix(); }); 
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#sysmsg .close').click(function() { $('#sysmsg').hide(300); $.cookie('sysmsg_closed','', {expires: 7, path: '/'}) } );
+} )
+</script>
+</head>
+
+<body class="tcoffee">
+
+<div id="wrapper"> 
+	<div id="header"> 
+		<h1 id="logo"><a href="/apps/tcoffee" >T-Coffee Server</a></h1> 
+		<span id="placeholder"></span>
+
+		<div id="navigation" class="index">
+				<ul>
+ <li class="index"><a href="/apps/tcoffee/index.html" ><span>Home</span></a></li>
+ <li class="history"><a href="/apps/tcoffee/history.html"><span>History</span></a></li>
+ <li class="tutorial"><a href="/apps/tcoffee/tutorial.html"><span>Tutorial</span></a></li>
+ <li class="references"><a href="/apps/tcoffee/references.html"><span>References</span></a></li>
+ <li class="contacts"><a href="/apps/tcoffee/contacts.html"><span>Contacts</span></a></li>
+</ul>
+				</div>
+	</div> 
+
+
+	<div id="content" >
+		
+	<h1>T-Coffee
+<small>
+A collection of tools for Computing, Evaluating and Manipulating 
+Multiple Alignments of DNA, RNA, Protein Sequences and Structures
+</small>
+</h1>
+
+<div class="box" >
+<h2><span>Alignment</span></h2>
+
+<table class="c-home" >
+<tbody>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=regular">T-Coffee</a>
+	</td>
+	
+	<td class="c-val">Aligns DNA, RNA or Proteins using the default T-Coffee 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12824354,10964570" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=mcoffee">M-Coffee</a>
+	</td>
+	
+	<td class="c-val">Aligns DNA, RNA or Proteins by combining the output of popular aligners 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=17526519,16556910,10964570" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=rcoffee">R-Coffee</a>
+	</td>
+	
+	<td class="c-val">Aligns RNA sequences using predicted secondary structures 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=18483080,18420654,10964570" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=expresso">Expresso</a>
+	</td>
+	
+	<td class="c-val">Aligns protein sequences using structural information 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=16845081,15201059,15215345,10964570" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=psicoffee">PSI-Coffee</a>
+	</td>
+	
+	<td class="c-val">Aligns distantly related proteins using homology extension (slow and accurate) 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/pubmed/19648142" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=accurate">Accurate</a>
+	</td>
+	
+	<td class="c-val">Automatically combine the most accurate modes for DNA, RNA and Proteins (experimental!) 
+			
+	</td>
+	</tr>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=combine">Combine</a>
+	</td>
+	
+	<td class="c-val">Combines two (or more) multiple sequence alignments into a single one 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12824354,10964570" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+</tbody>
+</table>
+<h2><span>Evaluation</span></h2>
+
+<table class="c-home" >
+<tbody>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=core">Core</a>
+	</td>
+	
+	<td class="c-val">Evaluates your Alignment and outputs a Colored version indicating the local reliability. 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12824354,10964570" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+<tr>
+	<td class="c-lbl" >
+		<a href="/apps/tcoffee/play?name=irmsd">iRMSD-APDB</a>
+	</td>
+	
+	<td class="c-val">Evaluates Multiple Sequence Alignment using structural information with APDB and iRMSD. 
+		<small class="cite" >&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;<a class="cite" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=16873492,17032685,12855461" target="_blank" >Cite</a> </small> 	
+	</td>
+	</tr>
+ 
+</tbody>
+</table>
+</div>
+
+
+<!-- 
+	USEFUL LINKS section
+ -->
+
+<h2>
+<span>Useful links</span>
+</h2>
+
+<table class="c-home">
+<tbody>
+
+<tr>
+	<td class="c-lbl"><a href="http://groups.google.com/group/tcoffee" target="_blank" >Google Group</a> </td>
+	<td class="c-val">Support and discussion group </td>
+</tr>
+
+
+
+<tr>
+<td class="c-lbl" style="padding-left: 0px; margin-left: 0px">
+	<a target="_blank" href="http://www.tcoffee.org/Projects_home_page/t_coffee_home_page.html">tcoffee.org</a>
+</td>
+<td class="c-val">Find out more about T-coffee project and documentation</td>
+</tr>
+
+
+<tr>
+<td class="c-lbl">
+	<a target="_blank" href="http://www.twitter.com/tcoffeemsa">Twitter</a>
+</td>
+<td class="c-val"> Check it out for latest T-Coffee developments and new tips </td>
+</tr>
+
+<tr>
+<td class="c-lbl">
+<a href="http://en-gb.facebook.com/people/T-Coffee-Msa/100002039268111" target="_TOP" title="T-Coffee on Facebook" >Facebook</a></td>
+<td class="c-val"> T-Coffee has a page on Facebook</td>
+</tr>
+
+</tbody>
+</table>
+
+<!-- 
+	MIRROR SITES section
+ 	-->
+<h2>
+<span>Mirror sites</span>
+</h2>
+
+<div class="box" style="float: right; width: 200px; text-align: center;"  >
+<a href="http://www.amazon.com/gp/product/0470089857?ie=UTF8&tag=wwwtcoffeeorg-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0470089857" 
+target="_blank" style="border: none" ><img src="/apps/tcoffee/public/images/bio-for-dummies.jpg" width="127" height="160"/></a>
+
+<br/>
+<small>
+The Book <a target="_blank" href="http://www.amazon.com/gp/product/0470089857?ie=UTF8&tag=wwwtcoffeeorg-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0470089857" >Bioinformatics For Dummies</a> 
+contains a T-Coffee tutorial and many other <a target="_blank" href="http://www.dummies.com/WileyCDA/DummiesTitle/productCd-0470089857,page-1.html" >online resources</a>. 
+</small>
+</div>
+
+<table id="mirrors" class="c-home">
+<tbody>
+
+<tr>
+<td class="c-lbl"><a href="http://tcoffee.vital-it.ch/cgi-bin/Tcoffee/tcoffee_cgi/index.cgi" target="_blank"><img src="/apps/tcoffee/public/images/mirror_vitalch.gif" /></a> </td>
+<td class="c-val"><a href="http://tcoffee.vital-it.ch/cgi-bin/Tcoffee/tcoffee_cgi/index.cgi" target="_blank">Vital-IT, Swiss Institute of Bioinformatics (SIB)</a> </td>
+</tr>
+
+<tr>
+<td class="c-lbl"> <a href="http://www.ebi.ac.uk/Tools/t-coffee/" target="_blank"><img src="/apps/tcoffee/public/images/mirror_ebi.gif" /></a></td>
+<td class="c-val"> <a href="http://www.ebi.ac.uk/Tools/t-coffee/" target="_blank">EBI, European Bioinformatics Institute</a></td>
+</tr>
+
+<tr>
+<td class="c-lbl" > <a href="http://www.igs.cnrs-mrs.fr/Tcoffee/" target="_blank"><img src="/apps/tcoffee/public/images/mirror_cnrs.jpg" /></a>&nbsp;</td>
+<td class="c-val"> <a href="http://www.igs.cnrs-mrs.fr/Tcoffee/" target="_blank">IGS lab., CNRS</a></td>
+</tr>
+
+<tr>
+<td class="c-lbl"><a href="http://toolkit.tuebingen.mpg.de/t_coffee" target="_blank"> <img src="/apps/tcoffee/public/images/mirror_maxplank.gif" /></a></td>
+<td class="c-val"><a href="http://toolkit.tuebingen.mpg.de/t_coffee" target="_blank">Max-Planck Institute for Developmental Biology</a></td>
+</tr>
+
+<tr>
+<td class="c-lbl"><a href="http://cbsuapps.tc.cornell.edu/t_coffee.aspx" target="_blank"> <img src="/apps/tcoffee/public/images/mirror_cbsu.jpg" /></a></td>
+<td class="c-val"><a href="http://cbsuapps.tc.cornell.edu/t_coffee.aspx" target="_blank">Cornell</a></td>
+</tr>
+
+<tr>
+<td class="c-lbl"><a href="http://www.es.embnet.org/Services/MolBio/t-coffee/" target="_blank"><img src="/apps/tcoffee/public/images/mirror_EMBnetCNB.png" /></a> </td>
+<td class="c-val"><a href="http://www.es.embnet.org/Services/MolBio/t-coffee/" target="_blank">EMBNet-Spain</a></td>
+</tr>
+
+</tbody>
+</table>	</div>	
+
+	<div id="push"></div> 
+</div>
+
+<div id="footer"> 
+    <div class="separator" ></div>
+	<p class="copy-note" >
+	<img src="/public/images/crg.png" height="18" width="18" /> T-Coffee Server is hosted by the <a href="http://www.crg.es" target="_blank">Centre for Genomic Regulation</a> (CRG) of Barcelona 
+	</p>
+	<p class="fly-away">
+		<a href="#">Back to top</a>
+	</p>
+</div> 
+
+<script type="text/javascript" charset="utf-8"><!--
+/* 
+ * Google tracking code 
+ */
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16712397-4']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+//--></script> 
+</body>
+</html>

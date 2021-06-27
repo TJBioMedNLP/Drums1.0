@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <title>Erik van Nimwegen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta name="description" content="Publications of Erik van Nimwegen" />
+	<meta name="keywords" content="Erik van Nimwegen, publications,
+	  bioinformatics,phylogibbs,phylogibbs download, SPA, SPA download, PROCSE, PROCSE download, probabalistic methods, transcription factors" />
+	  <link href="http://www.biozentrum.unibas.ch/~nimwegen/default.css"
+	    rel="stylesheet" type="text/css" />
+  </head>
+  
+  <body>
+    <table>
+      <tr>
+	<td id="mondrian">
+	  <img src="images/mondrian_200x141.gif" alt="Mondrian Piet: Red Tree" />
+	</td>
+	<td id="title">
+	  Erik van Nimwegen Group <br />
+	    Bioinformatics and Systems Biology 
+	</td>
+      </tr>
+      <tr>
+      <td id="navbar" valign="top">
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=research">
+	  Research
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=projects">
+	  Projects
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=publications1">
+	  Publications
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=databases">
+	  Databases
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=software">
+	  Software
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=teaching">
+	  Teaching
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=openpositions">
+	  Open Positions
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=people">
+	  People
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=contact">
+	  Contact
+	</a>
+	<a href="/~nimwegen/cgi-bin/page.cgi?page=links">
+	  Links 
+	</a>
+      </td>
+      <td id="content" valign="top">
+	
+
+    <h2>
+      PhyloGibbs
+    </h2>
+    <div id="page_navbar">
+      <a href="#overview">Overview</a>
+      <a href="#features">Features</a>
+      <a href="#citing">Citing</a>
+      <a href="#download">Download</a>
+      <a href="#online">Online tools</a>
+      <a href="#feedback">Feedback</a>
+      <a href="#acknowledgements">Acknowledgements</a>
+    </div>
+    <ol>
+      <li>
+    <h3>
+      <a name="overview"></a>Overview
+    </h3>
+    
+    <p>
+      PhyloGibbs is an algorithm for discovering regulatory sites in a
+      collection of DNA sequences, including multiple alignments of
+      orthologous sequences from related organisms. Many existing approaches
+      to either search for sequence-motifs that are overrepresented in the
+      input data, or for sequence-segments that are more conserved
+      evolutionary than expected. PhyloGibbs combines these two approaches
+      and identifies significant sequence-motifs by taking both
+      over-representation and conservation signals into account.
+    </p>
+    
+    <p>
+      PhyloGibbs runs on arbitrary collections of multiple local sequence
+      alignments of orthologous sequences. The algorithm searches over all
+      ways in which an arbitrary number of binding sites for an arbitrary
+      number of transcription factors can be assigned to the multiple
+      sequence alignments.  These binding site configurations are scored by
+      a Bayesian probabilistic model that treats aligned sequences by an
+      explicit model for the evolution of binding sites and \'background\'
+      intergenic DNA that takes the phylogenetic relationship between the
+      species in the alignment into account. The algorithm uses simulated
+      annealing and Monte-Carlo Markov-chain sampling to rigorously assign
+      posterior probabilities to all the binding sites that it reports.
+    </p>
+  </li>    
+    <li>
+    <h3>
+      <a name="features"></a>List of the most important features:
+    </h3>
+    <ul>
+      <li>
+	The algorithm can search for an arbitrary number of sites for
+	an arbitrary number of different regulatory motifs. The user can
+	either specify the total number of sites and motifs that PhyloGibbs
+	needs to search for, or it can supply PhyloGibbs with a guess for the
+	total number of sites and motifs in the data.
+      </li>
+      <li>
+	The algorithm rigorously takes into account the phylogenetic
+	relationships of the species from which the input data derive. This allows
+	PhyloGibbs to distinguish conservation that is due to the occurrence
+	of functional sites from spurious conservation that is due to the
+	evolutionary proximity of the species. Example phylogenetic trees for
+	commonly used species can be downloaded from the 
+	<a href="#download">download page.</a>
+      </li>
+      <li>
+	PhyloGibbs uses an anneal+track strategy that rigorously
+	assigns posterior probabilities to the sites it reports. In the anneal
+	stage the globally maximum-a-posterior-probability set of binding
+	sites is identified and their posterior probabilities are calculated
+	in the tracking stage.
+      </li>
+      <li>
+	The program can also be used to calculate the statistical
+	significance of a pre-specified set of putative binding sites.
+      </li>
+      <li>
+	Background probabilities for nonfunctional sequences are
+	implemented as Markov models of arbitrary order (to be specified by
+	the user). Background models can be calibrated from externally
+	supplied files with background sequences.
+      </li>
+      <li>
+	Users can specify informative priors for the motifs by
+	supplying an external file with weight matrices. This allows the
+	algorithm to automatically identify new binding sites for motifs for
+	which one or more binding sites are already known.
+      </li>
+    </ul>
+  </li>
+    <li>
+    <h3>
+      <a name="citing"></a>Citing
+    </h3>
+    <p>
+      PhyloGibbs should be cited as:
+    </p>
+    <ul>
+      <li>
+                Rahul Siddharthan, Eric D. Siggia, and Erik van Nimwegen<br />
+                <span class="paper_title">
+                  PhyloGibbs: A Gibbs Sampling Motif Finder That Incorporates Phylogeny
+                </span>
+                <br />
+                <a href="http://compbiol.plosjournals.org/perlserv/?request=get-document&amp;doi=10.1371/journal.pcbi.0010067">
+                 PLoS Comput Biol 1(7): e67 2005
+                </a><br />
+                <a href="../scripts/phylogibbs.pdf">
+                  PDF
+                </a>
+      </li>
+    </ul>
+  </li>
+    <li>
+    <h3>
+      <a name="download"></a>Download
+    </h3>
+    
+    <p>
+      Please supply your name, institution, and email address when you
+      download the code. The code is actively being developed and this way
+      we can keep you up to date with the latest versions including bug
+      fixes and newly implemented features. The source code is freely
+      available under the 
+      <a href="http://www.gnu.org/copyleft/gpl.html">
+	GNU Public license.
+      </a>
+    </p>
+    
+    <form method="post" action="/~nimwegen/cgi-bin/phylogibbs.cgi" enctype="multipart/form-data">
+<table class="form"><tr><th>Name*</th><td><input type="text" name="name"  size="50" /></td></tr><tr><th>E-mail*</th><td><input type="text" name="email"  size="50" /></td></tr><tr><th>Institution*</th><td><textarea name="institution" rows="2" cols="40"></textarea></td></tr><tr><th>Notes</th><td><textarea name="notes" rows="5" cols="40"></textarea></td></tr></table><div id="validate"><textarea name="val_email" rows="1" cols="10"></textarea></div><input type="submit" name=".submit" value="Submit" class="button" /><div></div></form><p class="text"><b>*</b> - are required fields.</p>
+    
+    <ul>
+      <li>
+	<a href="http://www.biozentrum.unibas.ch/~nimwegen/cgi-bin/download.cgi?version=linux_static">
+	  Linux executable with static libraries
+	</a>
+	<br /><br />
+	tar-archive containing binary, man pages, and examples of usage with
+	example output. Should run on as is on most Linux systems.
+      </li>
+      <li>
+	<a href="http://www.biozentrum.unibas.ch/~nimwegen/cgi-bin/download.cgi?version=linux_dynamic">
+	  Linux executable with dynamic libraries
+	</a>
+	<br /><br />
+	tar-archive containing binary, man pages, and examples of usage with
+	example output. It requires 
+      <a href="http://www.gtk.org/">
+	  glib</a> library and 
+	<a href="http://www.gnu.org/software/gsl/">
+	  GSL</a> library being installed.
+      </li>
+      <li>
+	<a href="http://www.biozentrum.unibas.ch/~nimwegen/cgi-bin/download.cgi?version=win">
+	  Windows executable
+	</a>
+	<br /><br />
+	zip archive containing phylogibbs.exe executable (compiled under
+	<a href="http://www.cygwin.com/">
+	  cygwin</a>
+	on Windows XP) and required DLL\'s from 
+	<a href="http://www.cygwin.com/">
+	  cygwin</a>
+	. Also contains	man pages and usage examples.
+      </li>
+      <li>
+	<a href="http://www.biozentrum.unibas.ch/~nimwegen/cgi-bin/download.cgi?version=mac">
+	  MAC OSX executable
+	</a>
+	<br /><br />
+	archive with executable, manpages, and usage examples.
+      </li>
+      <li>
+	<a href="http://www.biozentrum.unibas.ch/~nimwegen/cgi-bin/download.cgi?version=source">
+	  Source code
+	</a>
+	<br /><br />
+	tar-archive, including instructions on compiling and usage
+	(start with README), and example output. Requires the 
+	<a href="http://www.gnu.org/software/gsl/">
+	  GNU Scientific Library (GSL)</a> 
+	and
+	<a href="http://www.gtk.org/">
+	  glib</a>
+	libraries and headers installed (standard on most linux
+	systems). Should compile on most Unix-like systems, and on Microsoft
+	Windows in the Cygwin environment.
+      </li>
+    </ul>
+    <p>
+    You can try our <a href="http://www.phylogibbs.unibas.ch">web interface to phylogibbs</a>.
+    </p>
+  </li>
+  <li>
+    <h3>
+      <a name="online"></a>Online Tools
+    </h3>
+    <p>
+      You can try our <a href="http://www.phylogibbs.unibas.ch">web
+      interface to Phylogibbs</a>. The online tool supports all
+      options available in standalone version and features convinient
+      way of displaying results.
+      </p>
+      <p>
+      There is another <a
+      href="http://doric.cimr.cam.ac.uk/CoMoDis_PhyloGibbs.html">online
+      implementation of Phylogibbs</a> by <a
+      href="http://hscl.cimr.cam.ac.uk/">group of Dr. Bertie
+      Goettgens</a>. This tool is designed to search TFBS specifically
+      in human and mouse genomes.
+    </p>
+  </li>
+    <li>
+    <h3>
+      <a name="feedback"></a>Feedback
+    </h3>
+    <p>
+      Please report bugs and problems to us 
+      (<a href="mailto:erik.vannimwegen@unibas.ch">erik.vannimwegen@unibas.ch</a>). We welcome all
+      feedback on the program. If there is a feature you particularly would
+      like to see, please let us know. If you successfully compiled the
+      program on another platform please let us know and we will distribute
+      the executable here acknowledging you.
+    </p>
+  </li>
+    <li>
+    <h3>
+      <a name="acknowledgements"></a>Acknowledgments
+    </h3>
+    
+    <p>The PhyloGibbs algorithm was developed by:</p>
+    <ul>
+      <li>
+	<a href="http://www.imsc.res.in/~rsidd/">Rahul
+	  Siddharthan</a>,
+      </li>
+      <li>
+      <a href="http://www.physics.rockefeller.edu/~siggia/">Eric
+	  D. Siggia</a>, 
+      </li>
+      <li>
+	<a href="http://www.biozentrum.unibas.ch/~nimwegen/">Erik van
+	  Nimwegen</a>
+      </li>
+      </ul>
+    <p>The code was written by Rahul Siddharthan and Erik van Nimwegen.</p>
+  </li>
+  </ol>
+
+      </td>
+     </tr>
+    </table>
+   </body>
+</html>
+

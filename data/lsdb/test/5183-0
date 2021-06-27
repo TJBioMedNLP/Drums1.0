@@ -1,0 +1,407 @@
+<html> <head> <title>SAM: UCSC's Sequence Alignment and Modeling System</title>
+<body background=./backgrounds/dna2.gif>
+</HEAD>
+
+<center>
+<IMG SRC="images/sam_logo.gif"><br>
+<H1>Sequence Alignment and Modeling System</H1>
+</center>
+
+
+<hr>
+<strong> <A HREF=HMM-apps/HMM-applications.html>SAM-T02 HMM WWW Servers</a>
+<br> </strong>
+<hr>
+<strong>SAM 3.5 (July 2005) is available!</strong><br>
+The <a
+href=papers/sam_doc/sam_doc.html>SAM documentation</a> (the 175 page,
+manual is also available in <a href=papers/sam_doc.pdf>PDF</a> and <a href=papers/sam_doc.ps>PS</a>)
+discusses the changes from previous versions.
+<p>
+If you are a college, university, U.S. government lab, or nonprofit,
+you can download the software from the 
+<a href=sam2src>SAM distribution page</a>.
+If you are interested in SAM for commercial use, please request more
+information from  <a href="mailto:sam-info@cse.ucsc.edu">sam-info@cse.ucsc.edu</a>
+<hr>
+Martin Madera and Julian Gough have written a perl converter between
+SAM and HMMer 2.0 formats. You can <a href=
+http://www.mrc-lmb.cam.ac.uk/genomes/julian/convert/convert.html>
+get it from them</a> (be sure to read their excellent documentation!)
+or <a href=sam2src/convert.pl.gz>download a 10/24/2000 copy</a>.
+<hr>
+<strong>Please read the ISMB99 <a href=ismb99.tutorial.html>
+tutorial on using HMMs</a></strong>
+<hr>
+A linear hidden Markov model is a sequence of nodes, each
+corresponding to a column in a multiple alignment.  In our HMMs, each
+node has a match state (square), insert state (diamond) and delete
+state (circle).  Each sequence uses a series of these states to
+traverse the model from start to end.  Using a match state indicates
+that the sequence has a character in that column, while using a delete
+state indicates that the sequence does not.  Insert states allow
+sequences to have additional characters <EM>between</EM> columns.  In
+many ways, these models correspond to profiles.  
+
+
+<P>
+<IMG SRC="images/sam_testmod.gif">
+<P>
+The primary advantage of these models over
+<A
+HREF="http://twod.med.harvard.edu/seqanal">
+standard methods of sequence search
+</A>
+is their ability to characterize an entire family of sequences.  Thus,
+each position has a distribution of bases, as do <EM>transitions</EM>
+between states.  That is, these linear HMMs have position-dependent
+character distributions and position-dependent insertion and deletion
+gap penalties.   The alignment of each of a family to a trained model
+automatically yields a multiple alignment among those sequences.
+ <P>
+The <B>SAM</B> software system is a collection of tools for creating 
+and using these models.  
+ <P>
+The algorithms and methods used by <B>SAM</B> and other HMM systems
+were initially described  
+in several papers from the University of California, Santa Cruz.
+These papers, several of which are described below, are available 
+in the 
+<A HREF="http://www.cse.ucsc.edu/research/compbio/">
+	UCSC Computational Biology</A>	
+group's
+ <a
+href="ftp://ftp.cse.ucsc.edu/pub/protein">Protein FTP
+directory.</a>
+
+<P>
+
+The complete <B>SAM</B>  documentation
+is available in 
+<A HREF="papers/sam_doc.ps.gz"> 
+compressed (.gz) postscript</A> and as a series of 
+<A HREF="papers/sam_doc/sam_doc.html"> 
+WWW pages</A>.
+We also have a
+<A HREF="papers/samslides6.ps.gz">2-page overview of SAM in
+postscript</A>. 
+
+<P>
+
+<B>SAM</B> runs on Unix workstation.  
+Building a model using <B>SAM</B> can require minutes to several hours
+on a workstation depending on the length of the model, the number of
+sequences, and other factors.
+<P>
+
+<B>SAM</B> makes use of UCSC's <A
+HREF="dirichlets/index.html">Dirichlet mixture 
+regularizer research.</A>
+<P>
+The creation and distribution  of <B>SAM</B> has been supported in
+part by <a href=//www.nsf.gov>NSF</a> grants 
+CDA-9115268, IRI-9123692, DBI-9408579 and
+DBI-9808007; <a href=//www.onr.navy.mil>ONR</a> grant N00014-91-J-1162; <a
+href=//www.nih.gov>NIH</a> 
+grants  GM17129 and 1 R01 GM068570-01; <a href=//www.doe.gov>DOE</a>
+grant DE-FG03-95ER62112; a grant 
+from the Danish Natural Science Research Council; and the <a
+href=http:http://www.cbse.ucsc.edu/>UCSC Center for Biomolecular
+Science and Engineering</a>;  
+<P>
+Sean Eddy has written another program suite based on these methods
+called <A HREF="http://genome.wustl.edu/eddy/hmm.html">HMMER</a>, 
+which may also be of interest.  SAM includes conversion programs
+between the two systems' formats.
+
+<P>
+Hidden Markov models are used extensively in<A
+ HREF="http://www.cs.brown.edu/research/ai/dynamics/tutorial/Documents/HiddenMarkovModels.html"> 
+ speech recognition.</A>
+
+
+<H3>UCSC Specific papers of interest (<A HREF="sampapers.html">Click here
+to see abstracts as well</A>)</H3>
+
+<UL>
+<LI>
+<CITE> 
+<A HREF="ftp://ftp.cse.ucsc.edu/pub/protein/hmm.part1.ps.Z"> 
+Hidden  Markov  models in computational biology: Applications to
+protein modeling.    </A>
+A. Krogh, M. Brown, I. S. Mian, K. Sjolander, and D. Haussler.
+<EM> Journal of Molecular Biology</EM> , 235:1501--1531, February
+1994.</CITE>
+The original journal article.
+
+<LI> 
+<CITE>
+<EM>   Hidden Markov models for sequence analysis: Extension and
+analysis of the basic method.</EM> 
+R. Hughey and A. Krogh,
+CABIOS 12(2): 95-107, 1996.
+<A HREF="http://www.cse.ucsc.edu/research/compbio/html_format_papers/hughkrogh96/cabios.html">
+(HTML version) 
+</A>
+or
+<A HREF="papers/HughKrogh96.ps.Z">
+(POSTSCRIPT version)
+</A>
+</CITE>
+<BR>
+Experimental evaluation of noise methods and regularizers, with
+discussions of surgery, the parallel SAM code, and finding motifs.
+
+
+
+<li>
+<cite>
+<em>
+Hidden Markov Models for Detecting Remote Protein Homologies
+</em>
+K. Karplus, C. Barrett, and R. Hughey, Bioinformatics 14(10):846--856, 1998.
+<a href=
+http://www.cse.ucsc.edu/research/compbio/html_format_papers/w9824/>
+(HTML version)</a> or <a href=http://www.cse.ucsc.edu/research/compbio/papers/w9824.ps>(postscript)</a>.
+
+</cite><br>
+Detailed discussion of the SAM-T98 method we applied to CASP3 to
+predict protein structure.
+
+
+<li>
+<cite>
+<em>
+Predicting protein structure using hidden Markov models
+</em>
+K. Karplus, K. Sjolander, C. Barrett, M. Cline, D. Haussler,
+R. Hughey, L. Hold, C. Sander, Proteins:  Structure, Function, and
+Genetics.  Pp. 134--139, Supplement 1, 1997
+<a href=
+http://www.cse.ucsc.edu/research/compbio/html_format_papers/casp2/>
+(HTML version)</a>
+</cite><br>
+Discussion of our CASP2 methods for using hidden Markov models to
+predict protein structure.
+
+<LI> 
+<CITE>
+<EM>   Weighting Hidden Markov Models for Maximum Discrimination.</EM> 
+R. Karchin and A. Hughey,
+Bioinformatics, 14(9):772--782, 1998.
+<A HREF="html_format_papers/weighting/weighting.html">
+(HTML version with mangled table headings) 
+</A> and <a href=papers/weighting.ps> postscript</a>.
+</CITE>
+<BR>
+Adding internal weighting to SAM to create SAM Version 2.0.  Includes
+a comparison of SAM to HMMer, Meta-MEME, and Probabistic Smith
+Waterman (from Agarawal and States paper) based on 67 discrimination
+tests from Pearson.
+
+<LI>
+<CITE>C. Tarnas and R. Hughey
+<A HREF="papers/samspace/samspace.html">
+Reduced space hidden Markov model training</A>
+14(5):401--406, 1998.
+Also available in <A HREF="papers/samspace.ps"> 
+postscript </A> 
+and <a href="papers/samspace.pdf">pdf</a>.
+</CITE>
+<br>
+Discussion and analysis of the implementation of the checkpoint method
+(see Grice, below) in SAM. 
+
+
+
+<li>
+<cite>
+<A HREF="casp2/slide01.html">Transparencies</A> from our
+<A HREF="http://iris4.carb.nist.gov/casp2/" ADD_DATE="824879852"
+LAST_VISIT="825482390" LAST_MODIFIED="824879846">CASP2</A> talk, at
+which UCSC's hidden Markov model methods were
+among the very top overall scores among threading-based predictions of
+protein structure.
+<LI> 
+<CITE>
+<A HREF="papers/nullmod/nullmod.html">
+Scoring Hidden Markov Models</A>
+C. Barrett and R. Hughey and K. Karplus
+CABIOS 13(2):191-199, 1997.
+Available in
+ <A HREF="papers/nullmod.ps"> 
+postscript </A>  and
+ <A HREF="papers/nullmod.ps.gz"> 
+compressed (.gz) postscript </A> 
+as well.
+</CITE>
+Experimental evaluation of several different scoring methods using
+both SAM and HMMer.
+
+<LI>
+<CITE>
+<A HREF="papers/ismb96_tutorial.ps">
+Tutorial: Stochastic Modeling Techniques: Understanding and using hidden
+Markov models.</A>
+L. Grate, R. Hughey, K. Karplus, K. Sj&#246;lander. University of
+California, Santa Cruz, CA, June 1996. SAM and HMMER tutorial used at
+ISMB last June 1996. (<A HREF="papers/ismb96_tutorial.ps.Z">compressed
+postscript (.ps.Z)</a>)
+</CITE>
+
+<LI>
+<cite>	
+<A href="papers/generalized-profile.ps.gz">
+	"A Flexible Motif Search Technique based on Generalized Profiles"
+(compressed postscript) </a>
+	Philipp Bucher, Kevin Karplus, Nicolas Moeri, and Kay Hoffman,
+	<em> Computers and Chemistry </em>
+       Jan 1996, 20(1)  3--24. (<A href="papers/generalized-profile.ps">
+	postscript).</a>
+
+</cite> An evaluation of search techniques for linead hidden Markov
+	models and generalized profiles.
+<LI>
+<CITE> J Alicia Grice, Richard
+Hughey, and Don Speck
+<A HREF="papers/traceback.ps"> 
+Reduced Space Sequence Alignment</A>
+CABIOS 13(1):45-53, 1997. 
+</CITE>
+To be part of SAM2.0, this checkpoint method has many advantages over
+the divide-and-conquer method.
+
+
+<LI> 
+<CITE>
+<A HREF="papers/sam_doc.ps.gz"> 
+  SAM : Sequence alignment and modeling software system.
+</A>
+R. Hughey and A. Krogh,
+ Technical Report UCSC-CRL-95-7, University of California,
+Santa Cruz, CA, January 1995.  (Regularly updated.)
+</CITE>
+The SAM documentation.
+
+<LI>
+<CITE> 
+<A HREF="ftp://ftp.cse.ucsc.edu/pub/protein/dirichlet/dirichlet.jnl.ps.Z"> 
+Dirichlet Mixtures: A Method for Improving
+Detection of Weak but Significant Protein Sequence Homology.
+    </A>
+Sjolander, K,
+Karplus, K., Brown, M., Hughey, R., Krogh, A., Mian, I.S., and Haussler, D.
+</CITE>
+The most up-to-date discussion of Dirichlet Mixtures.  The method is
+an option in SAM.
+
+<LI> 
+<CITE>  
+<A HREF="ftp://ftp.cse.ucsc.edu/pub/protein/dirichlet/ismb93.ps.Z"> 
+ Using Dirichlet mixture priors to derive hidden  Markov models for
+  protein families.
+</A>
+M. P. Brown, R. Hughey, A. Krogh, I. S. Mian, K. Sjolander, and
+D. Haussler. 
+ In L. Hunter, D. Searls, and J. Shavlik, editors,  <EM>Proc. of First
+  Int. Conf. on Intelligent Systems for Molecular Biology</EM> ,
+  pages 47--55, Menlo Park, CA, July 1993. AAAI/MIT Press.
+</CITE>
+The original Dirichlet paper.
+
+<LI> 
+<CITE>
+<EM> Massively parallel biosequence analysis.
+R. Hughey.</EM> 
+ Technical Report UCSC-CRL-93-14, University of California, Santa
+  Cruz, CA, April 1993. 
+<A HREF="http://www.cse.ucsc.edu/research/compbio/html_format_papers/ucsc93.14/t.html">
+(HTML version)  
+</A>
+or
+<A HREF="ftp://ftp.cse.ucsc.edu/pub/protein/tr93.14.ps.Z">
+(POSTCRIPT version)
+</A> 
+</CITE>
+<BR>
+Parallel sequence analysis on specialized hardware, and the parallel
+SAM code. 
+</UL>
+
+<H3>Other papers and pointers of interest (please <a
+href="mailto:sam-info@cse.ucsc.edu">email</A> new pointers!)</H3> 
+<UL>
+
+  <li> <a href=ftp://ftp.genetics.wustl.edu/pub/eddy/papers/hmmreview-bioinformatics-98.pdf>
+       "Profile Hidden Markov Models"</a> Sean R. Eddy (1998)
+       Bioinformatics 14(9), review of HMMs.
+  <li> <A HREF=ftp://ftp.genetics.wustl.edu/pub/eddy/papers/hmm-max-discrim.pdf>
+       "Maximum Discrimination Hidden Markov Models of Sequence Consensus"
+       </A> Sean R. Eddy, Graeme Mitchison, and Richard Durbin (1995).
+       J. Computational Biology 2:9-23. PostScript; 30 pages.
+       Describes an alternative to maximum likelihood parameter optimization
+       for HMMs which compensates for the biased sequence representation
+       caused by phylogenetic relationships.
+  <li> <A HREF="ftp://ftp.genetics.wustl.edu/pub/eddy/papers/sim-annealing.pdf">
+       "Multiple Alignment Using Hidden Markov Models" </A>
+       Sean R. Eddy (1995).      
+       Proc. Third Int. Conf. Intelligent Systems for Molecular Biology,
+       C. Rawlings et al., eds. AAAI Press, Menlo Park. pp. 114-120. 
+       PostScript; 7 pages.
+       Describes a simulated annealing algorithm for HMM training and
+       a probabilistic suboptimal alignment algorithm. Compares HMM-based
+       multiple alignment to CLUSTALW.
+
+<li> <A HREF="papers/McClureISMB96.ps">
+Parameterization studes for the SAM and HMMER methods of hidden Markov
+model generation</A> Marcella A. McClure, Chris Smith, and Pete Elton.
+       Proc. Fourth Int. Conf. Intelligent Systems for Molecular Biology,
+       D. States et al., eds. AAAI Press, Menlo Park. pp. 155-164. A
+       detailed comparison of HMM training methods for constructing
+       multiplie alignments.
+
+<li>    <A HREF="http://www.sdsc.edu/~tbailey/papers/ismb94.ps">
+        "Fitting a mixture model by expectation maximization to discover motifs in biopolymers" </A>,
+        Timothy L.  Bailey and Charles Elkan, 
+        <I>Proceedings of the Second International Conference on Intelligent
+        Systems for Molecular Biology</I>, (28-36), AAAI Press, 1994, and
+        an associated <A HREF="http://meme.sdsc.edu/">MEME server</A>.
+
+<LI>    <A HREF="http://noble.gs.washington.edu/papers/metameme.html">
+       "Meta-MEME: Motif-based Hidden Markov Models of Protein Families"</A>.
+        Grundy, William N., Timothy L. Bailey, Charles P. Elkan and Michael E. Baker.
+        <I>Computer Applications in the Biosciences</I>, 3(4):397-406, 1997, and
+        an associated <A HREF="http://metameme.sdsc.edu/">Meta-MEME server</A>.
+
+<LI>    <A HREF="http://noble.gs.washington.edu/papers/bailey_searching.html">
+        Searching for statistically significant regulatory modules</A>.
+        Timothy L. Bailey and William Stafford Noble       
+        <I>Bioinformatics (Proceedings of the European Conference on Computational Biology).</I>,
+        19(Suppl. 2):ii16-ii25, 200 and
+        an associated <A HREF="http://mcast.sdsc.edu/">MCAST server</A>.
+
+<P>
+
+</UL>
+</BODY>
+
+<HR>
+
+<TABLE cellspacing=10>
+<TR><TD>
+
+<ADDRESS>
+<a href="mailto:sam-info@cse.ucsc.edu">
+sam-info@cse.ucsc.edu</a><BR>
+<A HREF="http://www.cse.ucsc.edu/research/compbio/">
+UCSC Computational Biology Group
+</A>
+</ADDRESS>
+
+ <A HREF="http://www.cse.ucsc.edu">
+        <IMG ALIGN=BOTTOM SRC="http://www.cse.ucsc.edu/icons/slug-icon.gif"></A>
+
+</TD><TD>
+
+</TR>
+</TABLE>

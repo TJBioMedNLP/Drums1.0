@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link type="text/css" rel="stylesheet" href="splicevisualiser.css">
+<title>SROOGLE - Input sequences</title>
+</head>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." 
+: "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + 
+"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6785193-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<body>
+<div style="text-align:right;">
+		<a href="help.html" target="_blank">help</a>
+</div>	
+<img src="images/sroogle.JPG"/>		 
+	 
+<p>This server provides a graphic display of splicing related data on DNA segments. These include:</p>
+<ul>
+	<li>Splice site scores, based on different metrics</li>
+	<li>Mapping of putative exonic and intronic splicing regulatory sequences (SRSs).</li>
+	<li>Data regarding SRSs that would occur as a result of point mutations.</li>
+	<li>Percentile scores, comparing your target exon to precompiled datasets of constitutive and alternative exons. </li>
+
+</ul>
+
+
+<p>Please enter your target exon along with the introns flanking it.
+This service can be tested using <a href="javascript:useSample();">sample segments.</a></p>
+<form method="post" enctype="multipart/form-data" onsubmit="return validateInput();" 
+action="/cgi-bin/scripts221208/visualise.cgi" target="_blank" >
+<b>Upstream intron:<br/>
+<textarea id="intron1" name="intron1" rows="7" cols="70"></textarea><br/>
+Exon:<br/>
+<textarea id="exon" name="exon" rows="7" cols="70"></textarea><br/>
+Downstream intron:<br/>
+</b>
+<textarea id="intron2" name="intron2" rows="7" cols="70"></textarea><br/>
+<input id="submit" type="submit" value="SROOGLE it!" /> 
+<input type="reset" value="Reset" /> 
+<div style="text-align:center;">
+	<small> For further information visit the <a href="http://www.tau.ac.il/~gilast/" target="_blank">Ast lab website</a>, or contact Schragas at post.tau.ac.il for questions. </small> 
+</div>	
+
+</form>
+</body>
+<script type="text/javascript">
+var inputs = [document.getElementById('intron1'), document.getElementById('exon'), document.getElementById('intron2')]
+
+function validateInput(){
+	var anySequence = false;
+	for(var index in inputs){
+		var input = inputs[index];
+		input.style.border = "";
+		if(!isSequenceValid(input)){
+			input.style.border = "solid 1px red";
+			input.focus();
+			alert("Invalid sequence");
+			return false;
+		}
+		if(input.value.length > 0)
+			anySequence = true;
+	}
+	if(!anySequence){
+		alert("Please insert segment sequences.");
+		return false;
+	}
+	return true;
+}
+var validationRegExp = /[^acgtnACGTN\s\d]/;
+function isSequenceValid(textBox){
+	var sequence = textBox.value;
+	return !validationRegExp.test(sequence);
+}
+function useSample(){
+	inputs[0].value = 
+		"AGCAGAGACACCTGCTGCAGACAGCGGGGCCTAGTGGTCTGATAAAGCCAGAGGGGGCCA" +
+		"CTCTCGGGGTCAGGGACTGACACGGAGTCAGTGGCCTGATCCACAGGAGGGGCTGTGCCA" +
+		"AGGTCCCTGAATGCGCAATCCTGATGAAGGGTGGGTCAGGGTGGTGTGCCTGAGAGCCTG" +
+		"CGGCTTGGCTGGGAGCAGAGCCAGGCAGCTCCTGGGAGGAAGCTCCATGAGGGGCATGAG" +
+		"TGTTCAGTGAGCGGCAATGGGATCGCAGCTACTGACTCTTATTTCCCACAG";
+	inputs[1].value =
+		"AAAATGAGCCACAGAGCAAGCTGACCCCAGCGACACAGCCCCCCAGCCCTACTGTATTTC" +
+		"CGTTCCTATCAAAAAATGGATGACTCGGAGACAGGTTTCAATCTGAAAGTCGTCCTGGTC" +
+		"AGTTTCAAGCAGTGTCTCGATGAGAAGGAAGAGGTCTTGCTGGACCCCTACATTGCCAGC" +
+		"TGGAAGGGCCTGGTCAG";
+	inputs[2].value =
+		"GTGCGTGTGCCAGGGCTGCCTCCTGAGGTGGGCGCTCCCCTGGCCCGAGTCCCATATGTG" +
+		"GCATCTGCCTCCCGACTGCCTGTCCCCACCAGCTTTGCTGCCCGTTTCCAGATGGGTGTG" +
+		"AGCCCCCGCAGGCTGGGCAGCGTCCCCTGCACCCCAGGCGGGCTGCCCCAGGCCTGGGCG" +
+		"AGGACTCGAGCCCCGCTCCCTTCCACAG";
+	document.getElementById('submit').focus();	
+}
+</script>
+</html>

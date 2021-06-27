@@ -1,0 +1,211 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+ <meta http-equiv="content-type" content="text/html;charset=iso-8859-1" >
+ <meta http-equiv="content-style-type" content="text/css" >
+ <meta http-equiv="Content-Script-Type" content="text/javascript">
+ <title>PiSITE - Home</title>
+ <link rel="stylesheet" href="/pisite.css" type="text/css" >
+ <script type= "text/javascript" charset="iso-8859-1" src="/pisite.js"></script>
+</head><body>
+<!-- header -->
+<div id="header">
+<table class='header'><tr>
+<td>
+<span style='font-family:Times;font-weight:bold;font-size:14pt;color:white;padding:2px 15px;'>
+PiSITE</span>
+</td>
+<td align=right>
+<a href='/index.html' class='header_menu'>Home</a>
+&nbsp;
+<a href='/about.html' class='header_menu'>About</a>
+&nbsp;
+<a href='/tutorial.html' class='header_menu'>Tutorial</a>
+&nbsp;
+<a href='/examples.html' class='header_menu'>Examples</a>
+&nbsp;
+<a href='/statistics.html' class='header_menu'>Statistics</a>
+&nbsp;
+<a href='/download.html' class='header_menu'>Download</a>
+&nbsp;
+<script type="text/javascript">
+<!-- 
+escrambles("w3pisite","hgc.jp") 
+// -->
+</script>
+
+</td>
+</tr>
+</table>
+</div>
+<!-- header end -->
+<div class='static'>
+<div class='index_title'>
+<img src="/img/logo.png" style='margin:15px 10px 10px 20px';>
+<br>
+<div style="font-size:150%;font-weight:bold">
+Database of 
+<font style="color:#A02030">P</font>rotein
+<font style="color:#A02030">i</font>nteraction
+<font style="color:#A02030">SITE</font>s
+</div>
+<br>
+ <div style='margin:5px 30px;'>
+ <a href="about.html">About PiSITE</a> &nbsp; | &nbsp; 
+ <a href="tutorial.html">Tutorial</a> &nbsp; | &nbsp; 
+ <a href='/statistics.html'>Statistics</a>  &nbsp; | &nbsp; 
+ <a href='/download.html'>Download</a> &nbsp; | &nbsp; 
+ <script type="text/javascript">
+<!-- 
+escramblec("w3pisite","hgc.jp") 
+// -->
+</script>
+ </div>
+</div>
+
+<div class='short_abstract'>
+<p>
+PiSITE is a web-based database of protein interaction sites.
+The PiSITE provides not only information of interaction sites of a protein from single PDB entry,
+but also information of interaction sites of a protein from multiple PDB entries including 
+similar proteins.
+In the PiSITE, The identification of the binding sites of protein chains
+ is performed by searching the same proteins with different binding states in PDB at first,
+ and then mapping those binding sites onto the query proteins.
+</p>
+</div>
+
+<hr width='98%'>
+
+<div class='search'>
+ <h2>Browse PiSITE from List</h2>
+ <ul>
+  <li><a href='sociable_list.html'>Sociable proteins (transient hub-proteins)</a>
+  <!--  
+  <li><a href='supermolecule_list.html'>Supermolecule (stable hub-proteins) </a>
+  -->
+ </ul> 
+
+ <h2>Search PiSITE by Keyword</h2>
+ <form method="POST" name="kwdsearch" action="/cgi-bin/search.cgi">	  
+  <p style='margin-left:10px;'>
+  Enter keywords (ex.
+   <a href="/cgi-bin/search.cgi?type=keyword&keywords=Ras">Ras</a>,  
+   <a href='/cgi-bin/search.cgi?type=keyword&keywords="DNA binding"'>"DNA binding"</a>
+   <a href='/cgi-bin/search.cgi?type=pdbid&keywords=1BYU'>1BYU</a>
+  ): 
+  <br>
+  <input type="text" size="50" name='keywords'>
+  <br>
+  Search by 
+  <input type='radio' name='type' value='keyword' checked>keyword 
+  <input type='radio' name='type' value='pdbid'>PDB ID
+  
+  <br>
+   <span id='search_options'>
+    <span onClick='change_display("search_options_show", "search_options")' style='font-weight:bold'>
+    <img src='/img/tri_h.gif' > Search options
+    </span>
+   </span>
+   <span id='search_options_show'>
+    <span onClick='change_display("search_options", "search_options_show")' style='font-weight:bold'>
+    <img src='/img/tri_v.gif' > Search options
+    </span>
+    <br>
+  <table>
+   <tr>
+    <td><input type=text size=4 name='minsimprot'></td>
+    <td> &lt; </td>
+    <td>Number of similar proteins</td>
+    <td> &lt; </td>
+    <td><input type=text size=4 name='maxsimprot'></td>
+   </tr>
+   <tr>
+    <td><input type=text size=4 name='minbs'></td>
+    <td> &lt; </td>
+    <td>Number of binding states</td>
+    <td> &lt; </td>
+    <td><input type=text size=4 name='maxbs'></td>
+   </tr>
+   <tr>
+    <td><input type=text size=4 name='minbp'></td>
+    <td> &lt; </td>
+    <td>Number of binding partners</td>
+    <td> &lt; </td>
+    <td><input type=text size=4 name='maxbp'></td>
+   </tr>
+  </table>
+  </span>
+  <br>
+  <input type="submit" value="search">
+  <input type="reset" value="clear">
+  </p>
+ </form>
+
+ <h2>Search PiSITE by Sequence</h2>
+  <form method="POST" name="seqsearch" action="/cgi-bin/seqsearch.cgi">
+  <textarea name="sequence" cols=60 rows=6></textarea>
+  <br>
+  <input type="submit" value="search">
+  <input type="reset" value="clear">
+  </form> 
+
+</div>
+
+<hr width='98%'>
+
+<div class='system_requirement'>
+<h3>System Requirement</h3>
+<p>
+Visualization of interaction site is performed by a Java applet,
+'<a href='http://www.pdbj.org/jV/TOP.html'>jV</a>'. 
+The jV applet requires 
+<a href='http://java.sun.com/'>JAVA</a> Runtime Environment (JRE) 1.4.2 or later.
+Generally, JRE is installed by default or  web-browsers automatically
+ start to download JRE, if JRE is not installed.
+If there is some trouble, users can also install JRE by manually.
+</p>
+<ul>
+<li><a href='http://java.sun.com/javase/6/webnotes/install/index.html'>JRE download</a>
+</ul>
+
+<h5 class='notice'>For more comfortable browsing</h5>
+<p>
+The jV applet drawing graphics using 3D library, JOGL (Java binding for OpenGL).
+Java applet and required libraries are automatically downloaded by using  
+<a href='https://applet-launcher.dev.java.net/'>applet-launcher</a>.
+However, users can browse PiSITE more comfortably by installing the library 
+for the local computer.
+JOGL library can be downloaded from following.
+</p>
+<ul>
+<li> <a href="https://jogl.dev.java.net/">JOGL homepage</a>
+</ul>
+</div>
+
+<h3>Reference</h3>
+<a href="http://nar.oxfordjournals.org/cgi/content/full/gkn659?ijkey=vnxazrrKRMzMHl8&keytype=ref">
+PiSite: a database of protein interaction sites using multiple binding states in the PDB,
+<br>
+Miho Higurashi, Takashi Ishida and Kengo Kinoshita, 
+<i>Nucleic Acids Research</i> 2009 <b>37</b>(Database issue):D360-D364</a></div>
+
+<!-- footer -->
+<div id="footer">
+Copyright &copy; 2008 Miho Higurashi, Takashi Ishida and Kengo Kinoshita. All rights reserved.
+</div>
+<!-- footer end -->
+
+<script type="text/javascript">
+<!--
+document.write("<img src='http://pisite.hgc.jp/cgi-bin/acc/acclog.cgi?");
+document.write("referrer="+document.referrer+"&");
+document.write("width="+screen.width+"&");
+document.write("height="+screen.height+"&");
+document.write("color="+screen.colorDepth+"'>");
+// -->
+</script>
+
+</body>
+</html>

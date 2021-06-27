@@ -1,0 +1,74 @@
+<HTML>
+<TITLE>Promoter Predictor Based On Maximal Segment Pair Score </TITLE>
+<style>
+<!--
+  /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Times New Roman";}
+-->
+</style>
+
+<BODY  BGCOLOR="c7ae6f" LINK="#0000FF" VLINK="#660099" ALINK="#660099">
+
+<FORM ACTION="./" METHOD = POST NAME="MainForm" ENCTYPE= "multipart/form-data">
+<B><Br><FONT face=Geneva,Arial,Helvetica color=#333399 size=5>Local Alignment Promoter Predictor (LAPP)*</FONT></B><Br><Br>
+<DD><FONT face=Geneva,Arial,Helvetica color=#223333 size=4>Bioinformatics Group, Sun Yat-Sen (Zhongshan) University, Guangzhou 510275, CHINA</FONT>
+<Br><FONT face=Geneva,Arial,Helvetica color=#223333 size=2><Br><DD><DD><DD><DD><DD><DD>* Funded by the National Natural Science Foundation of China under Grant 30170039</FONT><Br><hr width=800 align=left>
+<table class=MsoNormalTable border=0 cellpadding=0 width=756 style='width:20.0cm'>
+ <tr>
+  <td width=752 style='width:564.0pt;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal style='margin-left:24.65pt;text-indent:24.75pt'><span
+  lang=EN-US style='font-size:12.0pt'>LAPP is a web tool for the prediction of
+  promoter sequences. Prediction is performed by a dynamic programming algorithm
+  based on maximal segment pair measure with scores above some cutoff against
+  each sequence in a refined promoter database. LAPP exhibits a superior
+  predicting ability measuring on the refined database of homologous promoters
+  whereas this tool reveals moderate accuracy when the analysis is based on
+  that of heterogeneous promoters. </span></p>
+  </td>
+ </tr>
+</table>
+
+<hr width=800 align=left><ol>
+
+<P>
+Enter sequence below in <a href="docs/fasta.html">FASTA</a>  format
+<BR><P>
+<textarea name="SEQUENCE" rows=8 cols=68>
+</textarea>
+<BR><P>
+Or load it from disk
+<INPUT TYPE="file" size="35" NAME="SEQFILE">
+<P>
+<Br>
+Promoter database:  <select name = "DATALIB">baculovirus_pro300_se
+  <option value="baculovirus_pro300_se" selected> baculovirus_pro300 excluding SeNPV
+  <option value="fasta_db_refined_Se3x" > Refined fragments excluding SeNPV
+ <option value="fasta_db_refined_3x" > All refined fragments of baculovirus promoters
+  </select>&nbsp;&nbsp;
+
+<Br><Br>
+Predicted Promoter Score (PPS):
+<input type=text name = "score_limit" value=5 size=5>
+&nbsp;
+
+<Br><P>
+
+<input type=hidden name = "identity_limit" value="50">
+<input type=hidden name = "least_score" value="50">
+<input type=hidden name = "ALIGNMENTS" value="500">
+<input type=hidden name = "EXPECT" value="program decide">
+<input type=hidden name = "fixed_font" value="true">
+<input type=hidden name = "MAT_PARAM" value="BLOSUM62	 11	 1">
+<Br><DD>
+<INPUT TYPE="reset" VALUE=" Reset ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<INPUT TYPE="submit" VALUE="Search">
+</FORM></ol>
+<BR>
+</BODY>
+</HTML>

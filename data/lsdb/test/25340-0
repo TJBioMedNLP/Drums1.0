@@ -1,0 +1,103 @@
+<html><head><title>WEB-THERMODYN</title></head>
+
+<body   
+
+      bgcolor    = "#F0F0F0" vlink="#0000FF">
+
+<CENTER>
+
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0 WIDTH=450>
+
+<TR>
+
+<TD BGCOLOR="#00319c" COLSPAN=4 align=center>
+
+<FONT SIZE=4 FACE="Helvetica,arial" color="#ffffff"><B>WEB-THERMODYN</B></FONT>
+
+</TD>
+
+</TR>
+
+<TR>
+
+<TD ALIGN=Center BGCOLOR="$cceeee" COLSPAN=4><B><font size=3>
+
+<a href="README.html">README</a>|<A HREF="ref.html">REFERENCES</A>|<A HREF="admin.cgi">ADMINPAGE</A></font></B></TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<table bgcolor="#C0C0C0" width=680><tr><td>
+
+<P><BR><B>FILL IN THE BLANKS BELOW TO ANALYZE THE HELICAL STABILITY PROFILE OF A DNA DUPLEX.</B> <hr>
+
+<form  enctype="multipart/form-data" method="POST" action="webthermodyn.cgi">
+
+<B>Condition Parameters and Molecule Information:</B>
+
+<table><tr><td width=300>Temperature(&deg; C): <input type=text name=temperature value=37 size=5> 
+<INPUT TYPE="checkbox" NAME="sign" VALUE="positive">
+
+</td><td width=350>Salt Concentration (mM): <input type=text name=saltconc value=10 size=10></td></tr><tr><td>Name of DNA: <input type=text name=molecule size=15></td><td>Shape of DNA Molecule: <select name="shape">
+
+<option>Linear
+
+<option>Circular
+
+</select></td></tr></table>
+
+<HR width=660 align=left><B>DNA Sequence Information:</B><BR>
+
+<INPUT TYPE="radio" NAME="inputmode" VALUE="loadfile" > Import From File: Format:<select name="FORMAT">
+
+<option>ASCII/TXT
+
+<option>GENBANK_HTML/TXT
+
+<option>FASTA_TXT
+
+<option>FASTA_HTML
+
+</select><BR>   Enter a file path: <input type="file" size="40" name="UploadedFile"><BR>
+
+<BR><INPUT TYPE="radio" NAME="inputmode" VALUE="input" CHECKED> DNA Sequence Query (5' to 3' strand):<BR>
+
+ <textarea COLS="50" ROWS="6" name="sequence"></textarea>
+
+<HR width=660 align=left><B>Analysis Parameters:</B>
+
+<BR><INPUT TYPE="radio" NAME="allpart" VALUE="ALL" CHECKED > Analyze the WHOLE molecule
+
+<BR><INPUT TYPE="radio" NAME="allpart" VALUE="PART"> Analyze PART of molecule FROM Position <input type=text name=start size=8> TO Position <input type=text name=end size=8>
+
+<table> <tr align=center> <td with=300>Step Size: <input type=text name=step value=50 size=10></td><td width=350>Window Size: <input type=text value=100 name=windowsize size=10></td></tr></table>Number of Energy Minima Markers: <input type=text value=1 name=marknum size=10>
+
+<HR width="660" align=left >
+
+Maximum Computing Time(sec):<select name="timelimit" align=left>
+
+<option>30
+
+<option>60
+
+<option>90
+
+</select><B> <input type=submit value="SUBMIT QUERY">  <input type=reset value="RESET">
+
+</B>
+
+</form><CENTER>
+
+<hr><B>&#169 Yanlin Huang, David Kowalski, Dept. of Cancer Genetics, Roswell Park Cancer Institute, Buffalo, NY 14263</B></CENTER></td></tr></table>
+
+
+
+</CENTER>
+
+
+
+</body></HTML>
+

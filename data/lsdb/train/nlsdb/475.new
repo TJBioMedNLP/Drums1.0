@@ -1,0 +1,1060 @@
+<head>
+<title>AliasServer</title>
+<link rel='SHORTCUT ICON' href='images/as.ico'>
+<meta name="Author" content="Aurélien BARRE [Centre de Bioinformatique Bordeaux]">
+<meta name="description" content="Bioinformatics project for synonym identifiers search">
+<meta name="keywords" content="identifier, bordeaux, proteins, alias, synonym, matching, TIM">
+</head>
+
+
+<body alink=blue vlink=blue>
+<form name=formulaire action=result.php method=post ENCTYPE=multipart/form-data>
+<table cellpadding=10 border=0 align=center bgcolor=#FFFFFF>
+<TR>
+<TD align=center><img src="images/AliasServer.jpg" border=0></TD>
+<TD align=center colspan=2><a href="http://cbi.labri.fr" target=_blank>
+<IMG src="images/Logo_cbib_gabare.jpg" title="CBiB web site" border=0></a></TD>
+</TR>
+<TR><TD colspan=3>
+<HR>
+</TD></TR>
+<TR valign=middle><TD width=50%>
+<B>Enter your list of identifier </B>
+<a href="javascript:popup('aide.php?type=1',550,500)"><img src="images/note.png" border=0></a>
+<BR>
+<input type=text name=list_id size=50>
+<a href=javascript:trans('formulaire','list_id','')><IMG src="images/clear.jpg" border=0 title="clear list"></a>
+<BR><BR>
+<B>Or give a path to a file </B><BR>
+<input type=file name=listfile size=53>
+<BR><BR>
+<a href=seq.php><B> You can also submit a proteic sequence </B></a>
+<BR><BR>
+<B> Search for </B>
+&nbsp; &nbsp;
+<select name=species onchange="javascript:adapt()">
+<option value="all"> All species 
+<option value=3702 > Arabidopsis thaliana  
+<option value=162425 > Aspergillus nidulans  
+<option value=224308 > Bacillus subtilis  
+<option value=107806 > Buchnera aphidicola  
+<option value=6239 > Caenorhabditis elegans  
+<option value=5478 > Candida glabrata  
+<option value=4959 > Debaryomyces hansenii  
+<option value=7227 > Drosophila melanogaster  
+<option value=83333 > Escherichia coli K12  
+<option value=71421 > Haemophilus influenzae Rd kw20  
+<option value=85962 > Helicobacter pylori str 26695  
+<option value=85963 > Helicobacter pylori str J99  
+<option value=9606 > Homo sapiens  
+<option value=28985 > Kluyveromyces lactis  
+<option value=220668 > Lactobacillus plantarum WCFS1  
+<option value=272623 > Lactococcus lactis  
+<option value=169963 > Listeria monocytogenes  
+<option value=2151 > Mesoplasma florum  
+<option value=10090 > Mus musculus  
+<option value=233150 > Mycoplasma gallisepticum  
+<option value=2097 > Mycoplasma genitalium  
+<option value=295358 > Mycoplasma hyopneumoniae  
+<option value=267748 > Mycoplasma mobile  
+<option value=44101 > Mycoplasma mycoides subsp. mycoides SC  
+<option value=28227 > Mycoplasma penetrans  
+<option value=2104 > Mycoplasma pneumoniae  
+<option value=2107 > Mycoplasma pulmonis  
+<option value=5141 > Neurospora crassa  
+<option value=100379 > Onion yellows phytoplasma  
+<option value=5833 > Plasmodium falciparum  
+<option value=10116 > Rattus norvegicus  
+<option value=248485 > SARS cornavirus  
+<option value=4932 > Saccharomyces cerevisiae  
+<option value=4896 > Schizosaccharomyces pombe  
+<option value=2130 > Ureaplasma urealyticum  
+<option value=666 > Vibrio cholerae  
+<option value=4952 > Yarrowia lipolytica  
+</select>
+</TD>
+<TD align=center>
+<B> Which type submited ? </B><BR>
+<select multiple size=10 name=source[]>
+<option value="all" selected> All 
+<option value=AFFYMETRIX_ID> AFFYMETRIX_ID 
+<option value=CRC64> CRC64 
+<option value=EMBL_AC> EMBL_AC 
+<option value=EMBL_ID> EMBL_ID 
+<option value=GENBANK_AC> GENBANK_AC 
+<option value=GENE_NAME> GENE_NAME 
+<option value=GENPEPT_ID> GENPEPT_ID 
+<option value=GI> GI 
+<option value=HGNC_ID> HGNC_ID 
+<option value=LOCALIZATION> LOCALIZATION 
+<option value=LOCUSLINK_ID> LOCUSLINK_ID 
+<option value=MGD_ID> MGD_ID 
+<option value=MGI_ID> MGI_ID 
+<option value=OMIM_ID> OMIM_ID 
+<option value=PIR_ID> PIR_ID 
+<option value=RATMAP_ID> RATMAP_ID 
+<option value=REFSEQ> REFSEQ 
+<option value=RGD_ID> RGD_ID 
+<option value=SGD_ID> SGD_ID 
+<option value=SGD_ID2> SGD_ID2 
+<option value=SWISSPROT_AC> SWISSPROT_AC 
+<option value=SWISSPROT_ID> SWISSPROT_ID 
+<option value=SYSTEMATIC> SYSTEMATIC 
+<option value=TIGR_ID> TIGR_ID 
+<option value=TIGR_LOCUS> TIGR_LOCUS 
+<option value=TREMBL_AC> TREMBL_AC 
+<option value=TREMBL_ID> TREMBL_ID 
+<option value=UNIGENE> UNIGENE 
+</select>
+</TD>
+<td align=center><B> Which type in result ? </B><BR><select multiple size=10 name=source2[]><option value="all" selected> All <option value=AFFYMETRIX_ID> AFFYMETRIX_ID <option value=CRC64> CRC64 <option value=EMBL_AC> EMBL_AC <option value=EMBL_ID> EMBL_ID <option value=GENBANK_AC> GENBANK_AC <option value=GENE_NAME> GENE_NAME <option value=GENPEPT_ID> GENPEPT_ID <option value=GI> GI <option value=HGNC_ID> HGNC_ID <option value=LOCALIZATION> LOCALIZATION <option value=LOCUSLINK_ID> LOCUSLINK_ID <option value=MGD_ID> MGD_ID <option value=MGI_ID> MGI_ID <option value=OMIM_ID> OMIM_ID <option value=PIR_ID> PIR_ID <option value=RATMAP_ID> RATMAP_ID <option value=REFSEQ> REFSEQ <option value=RGD_ID> RGD_ID <option value=SGD_ID> SGD_ID <option value=SGD_ID2> SGD_ID2 <option value=SWISSPROT_AC> SWISSPROT_AC <option value=SWISSPROT_ID> SWISSPROT_ID <option value=SYSTEMATIC> SYSTEMATIC <option value=TIGR_ID> TIGR_ID <option value=TIGR_LOCUS> TIGR_LOCUS <option value=TREMBL_AC> TREMBL_AC <option value=TREMBL_ID> TREMBL_ID <option value=UNIGENE> UNIGENE </select></td></TR><TR valign=middle><TD></TD><TD colspan=2 align=center><input type=checkbox name=onlyone><B> Only retrieve one synonym </B></TD></TR><TR><TD align=center colspan=3><INPUT type=image title="SUBMIT" src="images/submit2.jpg"><HR></TD></TR><TR><TD colspan=3><TABLE border=0><TR><TD><a href="asdoc.pdf"><IMG src="images/pdf.png" border=0></a></TD><TD><a href="asdoc.pdf">Documentation</a></TD><TD align=right><a href="API_SOAP.html"><IMG src="images/html.png" border=0></a></TD><TD align=left><a href="API_SOAP.html">API SOAP</a></TD><TD align=right><a href="download.php"><IMG src="images/tgz_small.png" border=0></a></TD><TD align=left><a href="download.php">Data</a></TD></TR><TR><TD><a href=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15059813 target=_BLANK><IMG src="images/kedit.png" border=0></a></TD><TD colspan=5><a href=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15059813 target=_BLANK>AliasServer: a web server to handle multiple aliases used to refer to proteins.<BR>Iragne F, Barre A, Goffard N, De Daruvar A.</TR></TABLE></TD></TR></TABLE></body>
+
+
+
+
+
+
+
+
+<script language="JavaScript">
+
+function trans(formulaire,quoi,val)
+{ document.forms[formulaire].elements[quoi].value=val; }
+
+function popup(page,largeur,hauteur)
+{  
+  var top=(screen.height-hauteur)/2;  
+  var left=(screen.width-largeur)/2;
+  window.open(page,"","top="+top+",left="+left+",width="+largeur+",height="+hauteur+",location=no , menubar=no, status=no , scrollbars=yes");
+}
+
+function adapt()
+{
+  var taxid=document.forms['formulaire'].elements['species'].value;
+
+  while (document.forms['formulaire'].elements['source[]'].options[0] != null) 
+    { document.forms['formulaire'].elements['source[]'].options[0] = null; }
+  document.forms['formulaire'].elements['source[]'].options[0] = new Option('All','all');
+  document.forms['formulaire'].elements['source[]'].options[0].selected=true;
+
+  while (document.forms['formulaire'].elements['source2[]'].options[0] != null) 
+    { document.forms['formulaire'].elements['source2[]'].options[0] = null; }
+  document.forms['formulaire'].elements['source2[]'].options[0] = new Option('All','all');
+  document.forms['formulaire'].elements['source2[]'].options[0].selected=true;
+
+   if(taxid=='all')
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('AFFYMETRIX_ID','AFFYMETRIX_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('AFFYMETRIX_ID','AFFYMETRIX_ID'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('EMBL_AC','EMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('EMBL_AC','EMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('EMBL_ID','EMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('EMBL_ID','EMBL_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('GENBANK_AC','GENBANK_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('GENBANK_AC','GENBANK_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('HGNC_ID','HGNC_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('HGNC_ID','HGNC_ID'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('LOCALIZATION','LOCALIZATION'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('LOCALIZATION','LOCALIZATION'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('LOCUSLINK_ID','LOCUSLINK_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('LOCUSLINK_ID','LOCUSLINK_ID'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('MGD_ID','MGD_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('MGD_ID','MGD_ID'); 
+document.forms['formulaire'].elements['source[]'].options[13] = new Option('MGI_ID','MGI_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[13] = new Option('MGI_ID','MGI_ID'); 
+document.forms['formulaire'].elements['source[]'].options[14] = new Option('OMIM_ID','OMIM_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[14] = new Option('OMIM_ID','OMIM_ID'); 
+document.forms['formulaire'].elements['source[]'].options[15] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[15] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[16] = new Option('RATMAP_ID','RATMAP_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[16] = new Option('RATMAP_ID','RATMAP_ID'); 
+document.forms['formulaire'].elements['source[]'].options[17] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[17] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[18] = new Option('RGD_ID','RGD_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[18] = new Option('RGD_ID','RGD_ID'); 
+document.forms['formulaire'].elements['source[]'].options[19] = new Option('SGD_ID','SGD_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[19] = new Option('SGD_ID','SGD_ID'); 
+document.forms['formulaire'].elements['source[]'].options[20] = new Option('SGD_ID2','SGD_ID2'); 
+document.forms['formulaire'].elements['source2[]'].options[20] = new Option('SGD_ID2','SGD_ID2'); 
+document.forms['formulaire'].elements['source[]'].options[21] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[21] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[22] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[22] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[23] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[23] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[24] = new Option('TIGR_ID','TIGR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[24] = new Option('TIGR_ID','TIGR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[25] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[25] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[26] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[26] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[27] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[27] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source[]'].options[28] = new Option('UNIGENE','UNIGENE'); 
+document.forms['formulaire'].elements['source2[]'].options[28] = new Option('UNIGENE','UNIGENE'); 
+}
+if(taxid==4932)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SGD_ID','SGD_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SGD_ID','SGD_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SGD_ID2','SGD_ID2'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SGD_ID2','SGD_ID2'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==4896)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==2097)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==2104)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==2107)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==666)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==2130)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==2151)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==4952)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==4959)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==5141)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==5478)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==28227)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==28985)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==44101)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==100379)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==162425)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==233150)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==248485)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENBANK_AC','GENBANK_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENBANK_AC','GENBANK_AC'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+}
+if(taxid==267748)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==295358)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==85962)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+}
+if(taxid==85963)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==224308)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==71421)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GENPEPT_ID','GENPEPT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==169963)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==9606)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('AFFYMETRIX_ID','AFFYMETRIX_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('AFFYMETRIX_ID','AFFYMETRIX_ID'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('HGNC_ID','HGNC_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('HGNC_ID','HGNC_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('LOCALIZATION','LOCALIZATION'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('LOCALIZATION','LOCALIZATION'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('LOCUSLINK_ID','LOCUSLINK_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('LOCUSLINK_ID','LOCUSLINK_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('MGD_ID','MGD_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('MGD_ID','MGD_ID'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('OMIM_ID','OMIM_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('OMIM_ID','OMIM_ID'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[13] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[13] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[14] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[14] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[15] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[15] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source[]'].options[16] = new Option('UNIGENE','UNIGENE'); 
+document.forms['formulaire'].elements['source2[]'].options[16] = new Option('UNIGENE','UNIGENE'); 
+}
+if(taxid==83333)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==7227)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==3702)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('EMBL_AC','EMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('EMBL_AC','EMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('EMBL_ID','EMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('EMBL_ID','EMBL_ID'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==5833)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==6239)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==10090)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('MGI_ID','MGI_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('MGI_ID','MGI_ID'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+}
+if(taxid==10116)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENBANK_AC','GENBANK_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENBANK_AC','GENBANK_AC'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('RATMAP_ID','RATMAP_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('RATMAP_ID','RATMAP_ID'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('RGD_ID','RGD_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('RGD_ID','RGD_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TIGR_ID','TIGR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TIGR_ID','TIGR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[12] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source[]'].options[13] = new Option('UNIGENE','UNIGENE'); 
+document.forms['formulaire'].elements['source2[]'].options[13] = new Option('UNIGENE','UNIGENE'); 
+}
+if(taxid==272623)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==220668)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('PIR_ID','PIR_ID'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[9] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[10] = new Option('TREMBL_AC','TREMBL_AC'); 
+document.forms['formulaire'].elements['source[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[11] = new Option('TREMBL_ID','TREMBL_ID'); 
+}
+if(taxid==107806)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source2[]'].options[3] = new Option('GI','GI'); 
+document.forms['formulaire'].elements['source[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source2[]'].options[4] = new Option('REFSEQ','REFSEQ'); 
+document.forms['formulaire'].elements['source[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source2[]'].options[5] = new Option('SWISSPROT_AC','SWISSPROT_AC'); 
+document.forms['formulaire'].elements['source[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source2[]'].options[6] = new Option('SWISSPROT_ID','SWISSPROT_ID'); 
+document.forms['formulaire'].elements['source[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source2[]'].options[7] = new Option('SYSTEMATIC','SYSTEMATIC'); 
+document.forms['formulaire'].elements['source[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+document.forms['formulaire'].elements['source2[]'].options[8] = new Option('TIGR_LOCUS','TIGR_LOCUS'); 
+}
+if(taxid==6239999)
+{
+document.forms['formulaire'].elements['source[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source2[]'].options[1] = new Option('CRC64','CRC64'); 
+document.forms['formulaire'].elements['source[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+document.forms['formulaire'].elements['source2[]'].options[2] = new Option('GENE_NAME','GENE_NAME'); 
+}
+	  
+}
+
+
+</script>

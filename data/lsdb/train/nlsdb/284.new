@@ -1,0 +1,707 @@
+<!--copyright
+Please do not remove this notice
+
+      MLST SQL Server / ASP / XML  Version 1.0	  
+      Multi Locus Sequence Typing Database Query Software
+	  
+      by David Aanensen(d.aanensen@ic.ac.uk)
+      
+	  Copyright (C) 2002
+      This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
+      License as published by the Free Software Foundation (version 2) of the License.
+      
+      This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+      implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU General Public License for more details.
+      
+      You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software
+      Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+end copyright-->
+
+<html>
+<head>
+<SCRIPT LANGUAGE="JavaScript">
+
+<!-- This script and many more are available free online at -->
+<!-- The JavaScript Source!! http://javascript.internet.com -->
+<!-- Original:  Premshree Pillai (premshree@hotmail.com ) -->
+<!-- Web Site:  http://www.qiksearch.com -->
+<!-- Begin
+
+window.onerror = null;
+ var bName = navigator.appName;
+ var bVer = parseInt(navigator.appVersion);
+ var NS4 = (bName == "Netscape" && bVer >= 4);
+ var IE4 = (bName == "Microsoft Internet Explorer" 
+ && bVer >= 4);
+ var NS3 = (bName == "Netscape" && bVer < 4);
+ var IE3 = (bName == "Microsoft Internet Explorer" 
+ && bVer < 4);
+ var blink_speed=400;
+ var i=0;
+ 
+if (NS4 || IE4) {
+ if (navigator.appName == "Netscape") {
+ layerStyleRef="layer.";
+ layerRef="document.layers";
+ styleSwitch="";
+ }else{
+ layerStyleRef="layer.style.";
+ layerRef="document.all";
+ styleSwitch=".style";
+ }
+}
+
+//BLINKING
+function Blink(layerName){
+ if (NS4 || IE4) { 
+ if(i%2==0)
+ {
+ eval(layerRef+'["'+layerName+'"]'+
+ styleSwitch+'.visibility="visible"');
+ }
+ else
+ {
+ eval(layerRef+'["'+layerName+'"]'+
+ styleSwitch+'.visibility="hidden"');
+ }
+ } 
+ if(i<1)
+ {
+ i++;
+ } 
+ else
+ {
+ i--
+ }
+ setTimeout("Blink('"+layerName+"')",blink_speed);
+}
+//  End -->
+</script>
+<title>MLST - Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>MLST</title>
+<LINK REL="SHORTCUT ICON" href="favicon.ico">
+<link rel=stylesheet href="http://www.mlst.net/mlststyle.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript">
+
+
+function remove_XS_whitespace(item)
+
+{
+
+  item.value = item.value.replace(/\r/g, " ");
+
+	
+
+  //There are regex switchs for printing /nonprinting characters 
+
+  //but they stripped some characters either needed or left some not wanted,
+
+  //thats why the following replacement exists.
+
+  item.value = item.value.replace(/[^ A-Za-z0-9`~!@#\$%\^&\*\(\)-_=\+\\\|\]\[\}\{'";:\?\/\.>,<]/g, "");
+
+ 
+
+  item.value = item.value.replace(/'/g, "");
+
+  
+
+  item.value = item.value.replace(/ +/g, " ");  
+
+	
+
+  item.value = item.value.replace(/^\s/g, "");
+
+  item.value = item.value.replace(/\s$/g, "");	
+
+  
+
+  if (item.value == ' '){item.value = ''};
+
+}
+
+//  End -->
+
+</script>
+
+<script language="JavaScript">
+<!--
+window.name="main";
+<!--
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+
+//-->//-->
+</script>
+
+<style type="text/css">
+<!--
+
+.tooltiptitle{COLOR: #FFFFFF; TEXT-DECORATION: none; CURSOR: Default; font-family: arial; font-weight: bold; font-size: 8pt}
+.tooltipcontent{COLOR: #000099; TEXT-DECORATION: none; CURSOR: Default; font-family: arial; font-size: 08pt}
+
+#ToolTip{position:absolute; width: 100px; top: 0px; left: 0px; z-index:4; visibility:hidden;}
+
+-->
+</style>
+<script language = "javascript">
+<!--
+
+var ie = document.all ? 1 : 0
+var ns = document.layers ? 1 : 0
+
+if(ns){doc = "document."; sty = ""}
+if(ie){doc = "document.all."; sty = ".style"}
+
+
+
+var initialize = 0
+var Ex, Ey, topColor, subColor, ContentInfo
+
+
+if(ie){
+Ex = "event.x"
+Ey = "event.y"
+
+topColor = "#000080"
+subColor = "#ffffff"
+}
+
+if(ns){
+Ex = "e.pageX"
+Ey = "e.pageY"
+window.captureEvents(Event.MOUSEMOVE)
+window.onmousemove=overhere
+
+topColor = "#000080"
+subColor = "#ffffff"
+}
+
+
+
+function MoveToolTip(layerName, FromTop, FromLeft, e){
+if(ie){eval(doc + layerName + sty + ".top = "  + (eval(FromTop) + document.body.scrollTop))}
+if(ns){eval(doc + layerName + sty + ".top = "  +  eval(FromTop))}
+eval(doc + layerName + sty + ".left = " + (eval(FromLeft) + 15))
+}
+
+
+
+
+
+
+function ReplaceContent(layerName){
+
+if(ie){document.all[layerName].innerHTML = ContentInfo}
+
+
+if(ns){
+
+with(document.layers[layerName].document) 
+{ 
+   open(); 
+   write(ContentInfo); 
+   close(); 
+}
+
+}
+
+
+}
+
+
+
+function Activate(){initialize=1}
+function deActivate(){initialize=0}
+
+
+function overhere(e){
+if(initialize){
+
+MoveToolTip("ToolTip", Ey, Ex, e)
+eval(doc + "ToolTip" + sty + ".visibility = 'visible'")
+}
+
+else{
+MoveToolTip("ToolTip", 0, 0)
+eval(doc + "ToolTip" + sty + ".visibility = 'hidden'")
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+function EnterContent(layerName, TTitle, TContent){
+
+ContentInfo = '<table border="0" width="150" cellspacing="0" cellpadding="0">'+
+'<tr><td width="100%" bgcolor="#000000">'+
+
+'<table border="0" width="100%" cellspacing="1" cellpadding="0">'+
+'<tr><td width="100%" bgcolor='+topColor+'>'+
+
+'<table border="0" width="90%" cellspacing="0" cellpadding="0" align="center">'+
+'<tr><td width="100%">'+
+
+'<font class="tooltiptitle">&nbsp;'+TTitle+'</font>'+
+
+'</td></tr>'+
+'</table>'+
+
+'</td></tr>'+
+
+'<tr><td width="100%" bgcolor='+subColor+'>'+
+
+'<table border="0" width="90%" cellpadding="0" cellspacing="1" align="center">'+
+
+'<tr><td width="100%">'+
+
+'<font class="tooltipcontent">'+TContent+'</font>'+
+
+'</td></tr>'+
+'</table>'+
+
+'</td></tr>'+
+'</table>'+
+
+'</td></tr>'+
+'</table>';
+
+
+ReplaceContent(layerName)
+
+}
+
+
+
+
+
+//-->
+</script>
+
+<style type="text/css">
+<!--
+
+.tooltiptitle{COLOR: #FFFFFF; TEXT-DECORATION: none; CURSOR: Default; font-family: arial; font-weight: bold; font-size: 8pt}
+.tooltipcontent{COLOR: #000099; TEXT-DECORATION: none; CURSOR: Default; font-family: arial; font-size: 08pt}
+
+#ToolTip{position:absolute; width: 100px; top: 0px; left: 0px; z-index:4; visibility:hidden;}
+
+-->
+</style>
+<script language = "javascript">
+
+var ie = document.all ? 1 : 0
+var ns = document.layers ? 1 : 0
+
+if(ns){doc = "document."; sty = ""}
+if(ie){doc = "document.all."; sty = ".style"}
+
+
+
+var initialize = 0
+var Ex, Ey, topColor, subColor, ContentInfo
+
+
+if(ie){
+Ex = "event.x"
+Ey = "event.y"
+
+topColor = "#000080"
+subColor = "#ffffff"
+}
+
+if(ns){
+Ex = "e.pageX"
+Ey = "e.pageY"
+window.captureEvents(Event.MOUSEMOVE)
+window.onmousemove=overhere
+
+topColor = "#000080"
+subColor = "#ffffff"
+}
+
+
+
+function MoveToolTip(layerName, FromTop, FromLeft, e){
+if(ie){eval(doc + layerName + sty + ".top = "  + (eval(FromTop) + document.body.scrollTop))}
+if(ns){eval(doc + layerName + sty + ".top = "  +  eval(FromTop))}
+eval(doc + layerName + sty + ".left = " + (eval(FromLeft) + 15))
+}
+
+
+
+
+
+
+function ReplaceContent(layerName){
+
+if(ie){document.all[layerName].innerHTML = ContentInfo}
+
+
+if(ns){
+
+with(document.layers[layerName].document) 
+{ 
+   open(); 
+   write(ContentInfo); 
+   close(); 
+}
+
+}
+
+
+}
+
+
+
+function Activate(){initialize=1}
+function deActivate(){initialize=0}
+
+
+function overhere(e){
+if(initialize){
+
+MoveToolTip("ToolTip", Ey, Ex, e)
+eval(doc + "ToolTip" + sty + ".visibility = 'visible'")
+}
+
+else{
+MoveToolTip("ToolTip", 0, 0)
+eval(doc + "ToolTip" + sty + ".visibility = 'hidden'")
+}
+
+
+}
+
+function EnterContent(layerName, TTitle, TContent){
+
+ContentInfo = '<table border="0" width="150" cellspacing="0" cellpadding="0">'+
+'<tr><td width="100%" bgcolor="#000000">'+
+
+'<table border="0" width="100%" cellspacing="1" cellpadding="0">'+
+'<tr><td width="100%" bgcolor='+topColor+'>'+
+
+'<table border="0" width="90%" cellspacing="0" cellpadding="0" align="center">'+
+'<tr><td width="100%">'+
+
+'<font class="tooltiptitle">&nbsp;'+TTitle+'</font>'+
+
+'</td></tr>'+
+'</table>'+
+
+'</td></tr>'+
+
+'<tr><td width="100%" bgcolor='+subColor+'>'+
+
+'<table border="0" width="90%" cellpadding="0" cellspacing="1" align="center">'+
+
+'<tr><td width="100%">'+
+
+'<font class="tooltipcontent">'+TContent+'</font>'+
+
+'</td></tr>'+
+'</table>'+
+
+'</td></tr>'+
+'</table>'+
+
+'</td></tr>'+
+'</table>';
+
+
+ReplaceContent(layerName)
+
+}
+
+
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+
+//
+
+</script>
+<SCRIPT LANGUAGE="JavaScript">
+<!-- //FrameBuster
+     if (self != top) top.location.replace(self.location);
+//-->
+</SCRIPT>
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<span style="position: absolute; left: 0; top: 0">
+
+<table border="0" cellpadding="0" cellspacing="0" width="768">
+  <!--<tr>
+   <td><img src="images/spacer.gif" width="314" height="1" border="0"></td>
+   <td><img src="images/spacer.gif" width="194" height="1" border="0"></td>
+   <td><img src="images/spacer.gif" width="260" height="1" border="0"></td>
+   <td><img src="images/spacer.gif" width="1" height="1" border="0"></td>
+  </tr>-->
+  <tr> 
+    <td rowspan="2"><a href="http://www.mlst.net"><img name="home_r1_c1_r1_c1" src="http://www.mlst.net/images/home_r1_c1_r1_c1.gif" width="314" height="63" border="0"></a></td>
+    <td colspan="2"><img name="home_r1_c1_r1_c2" src="http://www.mlst.net/images/home_r1_c1_r1_c2.gif" width="454" height="49" border="0"></td>
+    <td><img src="http://www.mlst.net/images/spacer.gif" width="1" height="49" border="0"></td>
+  </tr>
+  <tr> 
+    <td><a href="#" class=navlink onClick="MM_openBrWindow('http://www.mlst.net/misc/policy.htm','policy','scrollbars=yes,width=500,height=400,top=1,left=1')">Policy 
+      Document</a></td>
+    <td> 
+      <div align="right"> 
+        <script language="JavaScript"><!-- Begin
+  today=new Date();
+  xddate=today.getDate();
+  xdyear=today.getYear();
+  xdmonth=today.getMonth()+1;
+  xdweekday=today.getDay();
+  if (xddate==1) xdend=("st");
+  else if (xddate==2) xdend=("nd");
+  else if (xddate==3) xdend=("rd");
+  else if (xddate==21) xdend=("st");
+  else if (xddate==22) xdend=("nd");
+  else if (xddate==23) xdend=("rd");
+  else if (xddate==31) xdend=("st");
+  else xdend=("th");
+  if (xdmonth==1) xdname=("January");
+  else if (xdmonth==2) xdname=("February");
+  else if (xdmonth==3) xdname=("March");
+  else if (xdmonth==4) xdname=("April");
+  else if (xdmonth==5) xdname=("May");
+  else if (xdmonth==6) xdname=("June");
+  else if (xdmonth==7) xdname=("July");
+  else if (xdmonth==8) xdname=("August");
+  else if (xdmonth==9) xdname=("September");
+  else if (xdmonth==10) xdname=("October");
+  else if (xdmonth==11) xdname=("November");
+  else xdname=("December");
+  if (xdweekday==1) xdday=("Monday");
+  else if (xdweekday==2) xdday=("Tuesday");
+  else if (xdweekday==3) xdday=("Wednesday");
+  else if (xdweekday==4) xdday=("Thursday");
+  else if (xdweekday==5) xdday=("Friday");
+  else if (xdweekday==6) xdday=("Saturday");
+  else xdday=("Sunday");
+  if (xdyear<1000) xdyear=1900 + xdyear;
+  xddateinfo = (xdday + " " + xddate + xdend + " " + xdname + " " + xdyear);
+  document.write(xddateinfo);
+                // End --></script>
+      </div>
+    </td>
+    <td><img src="http://www.mlst.net/images/spacer.gif" width="1" height="14" border="0"></td>
+  </tr>
+  </table>
+<table width="768" cellpadding="0" cellspacing="0" border="0">
+  <tr> 
+    <td width="20" align="center" valign="top"><img src="images/h_tc_bg1.gif" width="20" height="70"></td>
+    <!-- spacing column left side //-->
+    <td width="179" align="center" valign="top"> 
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr > 
+          <td align="left" valign="middle" height="37" width="180" colspan="2" background="images/h_tc_bg5.gif">&nbsp;</td>
+        </tr>
+        <tr> 
+          <td align="left" valign="bottom" height="34" width="180" class="nave" colspan="2"><a href="http://linux.mlst.net/burst.htm" class=nav>DATA 
+            ANALYSIS</a></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="top" height="10" width="180"><img src="images/h_nav_hline.gif" height="6" width="170" border="0" alt=""></td>
+          <td align="left" valign="top" height="10" width="9"><img src="images/h_nav_linecurve.gif" height="10" width="9" border="0" alt=""></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="bottom" height="30" width="180" class="title" colspan="2"><a href="http://www.mlst.net/databases/default.asp" class=nav>DATABASES</a></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="top" height="10" width="180" class="lrgtitle"><img src="images/h_nav_hline.gif" height="6" width="170" border="0" alt=""></td>
+          <td align="left" valign="top" height="10" width="9"><img src="images/h_nav_linecurve.gif" height="10" width="9" border="0" alt=""></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="bottom" height="30" width="180" class="title" colspan="2"><a href="http://www.mlst.net/submissions/default.asp" class=navnerve>SUBMISSIONS</a></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="top" height="10" width="180"><img src="images/h_nav_hline.gif" height="6" width="170" border="0" alt=""></td>
+          <td align="left" valign="top" height="10" width="9"><img src="images/h_nav_linecurve.gif" height="10" width="9" border="0" alt=""></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="bottom" height="30" width="180" class="title" colspan="2"><a href="http://www.mlst.net/news/" class=nav>NEWS</a></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="top" height="10" width="180"><img src="images/h_nav_hline.gif" height="6" width="170" border="0" alt=""></td>
+          <td align="left" valign="top" height="10" width="9"><img src="images/h_nav_linecurve.gif" height="10" width="9" border="0" alt=""></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="bottom" height="30" width="180" colspan="2"class="nav" ><a href="http://www.mlst.net/links/default.asp" class=nav>LINKS</a></td>
+        </tr>
+        <tr> 
+          <td align="left" valign="top" height="10" width="180"><img src="images/h_nav_hline.gif" height="6" width="170" border="0" alt=""></td>
+          <td align="left" valign="top" height="10" width="9"><img src="images/h_nav_linecurve.gif" height="10" width="9" border="0" alt=""></td>
+        </tr>
+      </table>
+      <p><a class= navlink href="misc/new_schemes.asp">NEW MLST SCHEMES<br>
+        IN DEVELOPMENT</a></p>
+      <p><a href="#" class=navlink onClick="MM_openBrWindow('http://www.mlst.net/misc/requirements.asp','requirements','scrollbars=yes,width=500,height=400,top=1,left=1')">Site requirements</a></p>
+    </td>
+    <td width="20" align="center" valign="top"><img src="images/h_tc_bg1.gif" width="20" height="70"></td>
+    <!-- spacing column middle/left side //-->
+    <td width="548" align="center" valign="top"> 
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr> 
+          <td width="1" background="images/dark_grey_pix.gif"><img src="images/dark_grey_pix.gif" border="0" height="1" width="1"></td>
+          <td width="546" height="70" align="right" valign="bottom" background="images/h_tc_bg1.gif">&nbsp;</td>
+          <td width="1" background="images/dark_grey_pix.gif"><img src="images/dark_grey_pix.gif" border="0" height="1" width="1"></td>
+        </tr>
+        <tr> 
+          <td width="548" height="155" align="left" valign="top" colspan="3"> 
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr> 
+                <td width="13" background="images/h_indent_left.gif"><img src="images/h_indent_left.gif" border="0" height="100%" width="13"></td>
+                <td width="522" height="155" align="left" valign="top" class="feat2"><p align="center"><a  class=nav><br>
+                  Welcome to the Multi Locus Sequence Typing 
+                    home page</a>                 
+                
+                  
+                  <p align="justify">MLST is a nucleotide sequence based approach for the unambiguous 
+                    characterisation of isolates of bacteria and other organisms 
+                  via the internet. </p>
+                  <p>The aim of MLST is to provide a portable, accurate, and
+                    highly  discriminating typing system that can be used for
+                    most bacteria 
+                    and some other organisms. It is envisaged that this approach
+                    will  be particularly helpful for the typing of bacterial
+                    pathogens. 
+                  </p>
+                  <p>To achieve this aim we have taken the proven concepts of 
+                    multilocus enzyme electrophoresis (MLEE) and have adapted 
+                    them so that alleles at each locus are defined directly, by 
+                    nucleotide sequencing, rather than indirectly from the electrophoretic 
+                    moblity of their gene products. </p>
+                  <p>MLST was developed in the laboratories of Martin Maiden, 
+                    Dominique Caugant, Ian Feavers, Mark Achtman and Brian Spratt.<br>
+                    <br> 
+                    This site is hosted at <a class=navlink href="http://www.imperial.ac.uk/medicine/dide" target="_blank">Imperial
+                    College</a> with funding from the <a class=navlink href="http://www.wellcome.ac.uk" target="_blank">Wellcome 
+                    Trust</a>.<br> 
+                    The location of the subsites for the individual 
+                    species are shown on their respective front pages.</p>
+                  <p>For general information please <a class=navlink href="misc/further.asp">Click 
+                    here</a> or to register feedback or interest <a class=navlink href="mailto:d.aanensen@ic.ac.uk">Click 
+                    here<br>
+                    </a></p>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                    <tr bgcolor="#CCCCCC">
+                      <td width="16%"> <strong> News</strong></td>
+                      <td colspan="2"><div align="right"><a href="/news/">more news</a></div></td>
+                    </tr>
+					<tr>
+					   <td>18 Aug 2008</td>
+                       <td colspan="2"><div align="right"><em>Leptospira spp </em> MLST scheme launched<a href="http://leptospira.mlst.net" target="_blank" class=navlink><br>
+                          Click
+                          here to visit the site </a></div></td>
+                    </tr>
+					
+					 <tr>
+					   <td>24 Jun  2008</td>
+                       <td colspan="2"><div align="right"><em>Borrelia burgdorferi </em>                          MLST scheme launched<a href="http://borrelia.mlst.net" target="_blank" class=navlink><br>
+                          Click
+                          here to visit the site </a></div></td>
+                    </tr>
+					<tr>
+                      <td valign="top">15 Jun   2007</td>
+					  <td width="7%" valign="top"><img src="earth/earth.png" width="37" height="35"></td>
+                      <td width="77%"><div align="justify"><span class="style1"><strong>MLST-maps</strong> </span>:
+                        a facility for mapping the global distribution of
+                        Sequence Types. 
+                        The MLST databases have been made available to view
+                        using either Google Maps or Google Earth. <a href="http://maps.mlst.net" target="_blank" class="navlink" >Click
+                          here to visit the site</a><br>
+                          <br>
+                      </div>
+                      <div align="center"><a href="http://maps.mlst.net" target="_blank" class="navlink" ></a></div></td>
+					</tr>
+					
+                  </table>
+                  <p><a class=navlink href="mailto:d.aanensen@ic.ac.uk">                    </a></p>
+                  <p align="center"><strong>For comments, queries, bugs or suggestions please contact 
+                          <a class=navlink href="mailto:d.aanensen@ic.ac.uk">David 
+                          Aanensen</a></strong></p>
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" bordercolor="#000099">
+                    <tr>
+                      <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr> 
+                            <td> <div align="center"></div>
+                              <div align="center"><img src="images/SPACER.GIF" width="." height="1"><img src="images/SPACER.GIF" width="25" height="1"></div>
+                              <div align="left"><a href="http://www.wellcome.ac.uk" target="_blank"> 
+                                </a></div>
+                              <div align="center"></div></td>
+                            <td><div align="left"></div></td>
+                          </tr>
+                         
+                        </table></td>
+                    </tr>
+                  </table>
+                
+                 </td>
+                <td width="13" background="http://www.mlst.net/images/h_indent_right.gif"><img src="http://www.mlst.net/images/h_indent_right.gif" border="0" height="1" width="13"></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr> 
+          <td width="548" height="26" align="center" valign="top" colspan="3"><img src="http://www.mlst.net/images/l_page_bottom.gif" height="26" width="548" border="0"></td>
+        </tr>
+        <tr> 
+          <td width="548" height="26" align="center" valign="top" colspan="3">
+            <div align="left"><noscript> </noscript> </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+<p>&nbsp;</p>
+<script type="text/javascript"> var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E")); </script> <script type="text/javascript"> try { var pageTracker = _gat._getTracker("UA-7503370-2"); pageTracker._trackPageview(); } catch(err) {}</script>
+</body>
+</html>       

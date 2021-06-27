@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <head>
+    <title>Compid</title>
+     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="compid.css" />
+    <link rel="SHORTCUT ICON" href="resources/compid_logo_16x16.ico" />  
+ </head>
+  
+  <body>
+  
+    <div id="header">
+    <table border="0" cellspacing="5" style="header">
+      <tr>
+      <td align="center">
+        <img src="resources/compid_logo_140x143.png" alt="143" />
+      </td>
+      <td>
+        <h1>Compid</h1>
+        Tool for integrating and comparing protein identification
+        results from Mascot and Paragon
+      </td>
+      </tr>
+    </table>
+    </div>
+    
+    <div id="nav">
+    <ul>
+      <li>
+        <a href="index.html">Main page</a>
+      </li>
+      <li>
+        <a href="downloads.html">Downloads</a>
+      </li>
+      <li>
+        <a href="screenshots.html">Screenshots</a>
+      </li>
+    </ul>
+    </div>
+
+
+
+    
+    <div id="content">
+      <h1>Main page</h1>
+      <p>To get Compid, go to the <a href="downloads.html">Downloads</a> section.</p>
+
+      <h2>Starting Compid</h2>
+      <p>
+        Compid doesn't work by clicking compid.jar file, because the
+        default memory heap settings are usually too small. Please
+        use the startup scripts provided.
+      </p>
+      <ul>
+        <li>On Windows systems, click file: <b>compid.cmd</b></li>
+        <li>On UNIX-like platforms, run: <b>compid.sh</b></li>
+      </ul>
+      <h2>Requirements</h2>
+      <p>Compid requires Java Version 6 or newer.</p>
+      
+      <h2>Importing Mascot DAT files</h2>
+      <p>
+        Compid supports using the freely available Mascot Parser plugin from
+        Matrix Science to import DAT files created by Mascot. To enable this
+        functionality, obtain the correct Mascot Parser version for your platform
+        from <a href="http://www.matrixscience.com/parser_support.html">Matrix Science</a>.
+      </p>
+      <p>
+        Unarchive the file and place the two files in java subdirectory
+        to Compid's lib subdirectory from where Compid will implicitly
+        find and utilize them. An alternative placement is ".compid"
+        directory in your home folder. The files are named msparser.jar
+        and [msparserj.dll (for Windows) or libmsparserj.so (for Linux)].
+        It is imperative to get both files from the same archive.
+      </p>
+
+      <h2>Concerning Memory</h2>
+      <p>
+        Compid uses quite a lot of memory for some operations.
+      </p>
+      <p>
+        If memory runs out (you see OutOfHeapSpace exceptions), edit
+        the startup script file (compid.cmd or compid.sh) and increase
+        the -Xmx parameter. A good idea would be to do it in 50 MiB
+        increments.
+      </p> 
+      <p>
+        If you use Mascot Parser plugin and it crashes the software with
+        ACCESS_VIOLATION errors, it is usually because too much memory
+        is allocated. To fix this, lower the -Xmx and -Xms parameters in
+        startup scripts.
+      </p>
+      <p>
+        Default values for -Xms and -Xmx Java parameters, which seem to
+        work well for most computers with at least 1 GiB of memory are:
+        -Xms128m -Xmx850m
+      </p>
+      <p>
+        Remember to start Compid with the script in question and not by
+        running compid.jar.
+      </p>
+      
+      <h2>License</h2>
+      <p>  
+        Compid itself is licensed with GNU General Public License 3 (or later).
+        For information on licenses of other software included in Compid,
+        see NOTICE file. The source code for Compid is available 
+        <a href="downloads/">here</a>.
+      </p>
+
+      <h2>Publications</h2>
+      <p>
+        A Technical Note about Compid has been published: <b>J. Proteome Res.,
+        2010, 9 (12), pp 6795–6800</b>. The article is available
+        <a href="http://pubs.acs.org/doi/abs/10.1021/pr100824w">here</a>.
+      </p>
+    </div>
+
+
+    <div id="footer">
+      &copy; 2010, 2011 Lari Natri
+    </div>    
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+  <head>
+    <title>Rankprop</title>
+    <META name="Author" content="Iain Melvin"/>
+    <link href="rankprop.css" rel="stylesheet" type="text/css" />
+
+
+    <script language = "JavaScript">
+      function preloader() {
+        heavyImage = new Image(); heavyImage.src = "images/rankprop_logo_ran.gif";
+        heavyImage = new Image(); heavyImage.src = "images/rankprop_logo_kpanim.gif";
+        heavyImage = new Image(); heavyImage.src = "images/rankprop_logo_rop.gif";
+        heavyImage = new Image(); heavyImage.src = "images/rankprop_logo.gif";
+      }
+    </script>
+
+  </head>
+ 
+   <a href="index.php"><img id=title_image src="images/rankprop_logo.gif"/></a></td>
+   <br/>
+<body>
+
+
+<form action="query_submit.php" enctype="multipart/form-data" method="post">
+
+   
+  <h2>Protein Ranking by Network Propagation 
+    <font size=-1>
+      [<a href="info.php">more info</a>]
+    </font>
+  </h2>
+
+   Enter your protein sequence into the the text area:
+   <br/>
+   (Raw sequence or FASTA format)
+   <br/>
+
+   <textarea name="input_string" cols="80" rows="8"></textarea>
+
+
+   <br/>
+   <input type="submit" name="submit_query_raw_fasta" value="Submit"></input>
+
+
+    <br/>
+    <br/>
+    <strong>OR</strong> 
+    <br/>
+    Select the sequence file you wish to use (in FASTA format):
+    <br/>
+    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+    <input type="file" name="input_filename" size="60" maxlength="512" />
+    <br/>
+    <input type="submit" name="submit_query_fasta_file" value="Submit"></input>
+    <br/>
+
+<br/>
+For long sequences, you may want to limit the number of PSI-BLAST iterations here:
+<select name="iterations">
+<option value="1">1</option> 
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10" selected="selected">10</option>
+</select> 
+
+</form>
+
+

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"   "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <META NAME="Description" content="miRror provides a unified platform for the up-to-date compendium of microRNAs. 
+it allows converting all major miRNA-target predictors into a unified platform.">
+
+   <META NAME="Keywords" content="microRNA, predict, genes, proteomic, miRNA, biology, mouse, drosophila, human, prediction, database, bioinformatics, bioinformatics webtools,microRNA-target, PITA, PicTar, TargetRank, TargetScan, miRBase, microRNA.org,microT,MirZ" >
+   <META NAME="rating" CONTENT="General">
+   <title>miRror </title>
+
+   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+   <!--[if IE 6]><link rel="stylesheet" href="css/style.ie6.css" type="text/css" media="screen" /><![endif]-->
+   <!--[if IE 7]><link rel="stylesheet" href="css/style.ie7.css" type="text/css" media="screen" /><![endif]-->
+   <!--[if gte IE 8.0]><link rel="stylesheet" href="css/style.ie7.css" type="text/css" media="screen" /><![endif]-->
+
+   <link type="text/css" rel="stylesheet" href="js/sortableTable/sortableTable.css" media="all">
+   <link rel="stylesheet" href="js/sexyalertbox/sexyalertbox.css" type="text/css" media="all">
+
+   <script type="text/javascript" src="js/mootools-core-1.3-full-compat-yc.js"></script>
+   <script type="text/javascript" src="js/mootools-1.3-more.js"></script>
+   <script type="text/javascript" src="js/MooTooltips.js"></script>
+
+   <script type="text/javascript" src="script.js"></script>
+
+   <script type="text/javascript" src="js/sortableTable/sortableTable.js"></script>
+   <script type="text/javascript" src="js/site.js"></script>
+   <link rel="stylesheet" href="css/extra.css" type="text/css" media="screen">
+
+   <script src="js/sexyalertbox/sexyalertbox.v1.2.moo.mini.js" type="text/javascript"></script>
+
+   <script type="text/javascript" src="js/Observer.js"></script>
+   <script type="text/javascript" src="js/Autocompleter.js"></script>
+   <script type="text/javascript" src="js/Autocompleter.Local.js"></script>
+   <link rel="stylesheet" href="js/Autocompleter.css" type="text/css" media="screen">
+
+
+<script type="text/javascript">
+function show_tips(tip_class) {
+  if($$(tip_class).length > 0)  {
+    var tips = new Tips($$(tip_class),{hideDelay:200,showDelay:200});
+    tips.addEvent('show', function(tip){tip.fade('in');});
+    tips.addEvent('hide', function(tip){tip.fade('out');});
+     $$(tip_class).each(function(el){
+      var children = el.getChildren();
+      children.each(function(tip_html){
+	if (tip_html.hasClass('tip_title')) el.store('tip:title', tip_html.get('html'));
+	if (tip_html.hasClass('tip_text')) el.store('tip:text', tip_html.get('html'));
+	}); 
+       });
+  }
+ }
+window.addEvent('domready', function(){
+    show_tips(".Tips2");
+    Sexy = new SexyAlertBox();
+});
+</script>
+
+</head>
+
+<body>
+
+<div id="art-page-background-simple-gradient"></div>
+<div id="art-page-background-glare">
+    <div id="art-page-background-glare-image"></div>
+</div>
+
+<div id="art-main">
+        <div class="art-Sheet" >
+            <div class="art-Sheet-tl"></div>
+            <div class="art-Sheet-tr"></div>
+            <div class="art-Sheet-bl"></div>
+            <div class="art-Sheet-br"></div>
+            <div class="art-Sheet-tc"></div>
+            <div class="art-Sheet-bc"></div>
+            <div class="art-Sheet-cl"></div>
+            <div class="art-Sheet-cr"></div>
+            <div class="art-Sheet-cc"></div>
+            <div class="art-Sheet-body">
+                              <div class="art-Header">
+                    <div class="art-Header-jpeg"></div>
+                    <div class="art-Logo">
+                        <h1 id="name-text" class="art-Logo-name"><a href="index.php">miRror Suite</a></h1>
+                        <div id="slogan-text" class="art-Logo-text">A dual view on sets of microRNAs and their targets
+		   <br/><div class="art-Logo-text2"><a href="http://www.cs.huji.ac.il">The Hebrew University of Jerusalem</a> &amp; <a href="http://www.sccb.huji.ac.il">The Sudarsky Center for Computational Biology</a></div>
+		        </div>
+
+                    </div>
+                </div>
+              <div class="art-nav" id="drop_down_menu">
+   <div class="l"></div>
+   <div class="r"></div>
+
+   <ul class="art-menu">
+   <li><a href="index.php" class="active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a></li>
+   <li class="menu">
+       <a href="#" ><span class="l"></span><span class="r"></span><span class="t">Tools</span></a>
+       <ul  class="links">
+          <li><a href="search.php">miRror</a></li>
+          <li><a href="psi.php">PSI-miRror</a></li>
+          <li><a href="mirnet.php">miRrorNet</a></li>
+       </ul>
+   </li>
+
+   <li><a href="help.php" ><span class="l"></span><span class="r"></span><span class="t">Help</span></a></li>		
+   <li><a href="faq.php" ><span class="l"></span><span class="r"></span><span class="t">FAQ</span></a></li>		
+   <li><a href="links.php" ><span class="l"></span><span class="r"></span><span class="t">Links</span></a></li>		
+   <li><a href="contact.php" ><span class="l"></span><span class="r"></span><span class="t">Contact</span></a></li>		
+
+   </ul>
+
+</div>
+                <div class="art-contentLayout">
+                    <div class="art-content">
+                        <div class="art-Post">
+                            <div class="art-Post-body">
+                                <div class="art-Post-inner">
+<script type="text/javascript">
+window.addEvent('domready', function(){
+if (Browser.ie) {
+  Sexy.alert('This website is best viewed on Firefox or Safari. Performance issues are under work for Internet Explorer. Thanks for your patience!');
+ }
+  });
+</script>
+
+
+                                        <h2 class="art-PostHeader">
+                                            <img src="images/PostHeaderIcon.png" width="32" height="32" alt="PostHeaderIcon" />
+                                            miRror Suite
+                                        </h2>
+                                        <div class="art-PostContent">
+
+
+<h3>Analysis tools for the cooperative regulation by microRNAs on gene sets and pathways</h3>
+<table width="100%"><tr>
+<td>Welcome to the <b>miRror Suite</b>! 
+<br/><br/>
+You can browse our tools or download and read our <a href='tutorial.pdf'>tutorial</a>.
+</td>
+<td><a href='tutorial.pdf'><img src='images/tutorial.jpg' width='100' heigh='12'><br/>Download the Tutorial</a>
+</td></tr></table>
+<br/><br/>
+
+
+                                            <table class="table" width="100%">
+                                            	<tr>
+                                            		<td width="33%" valign="top">
+                                            		<div class="art-Block">
+                                            			<div class="art-Block-body">
+                                            				<div class="art-BlockHeader">
+                                                      <div class="l"></div>
+                                            				  <div class="r"></div>
+                                            				  <div class="t"><center><a href="search.php">miRror 2.0</a></center></div>
+                                            			  </div>
+                                            				<div class="art-BlockContent">
+                                            					<div class="art-PostContent">
+
+
+
+<div class='mirrorcolor'>
+<h3><a href="search.php">A Dual View on Sets of MicroRNAs and their Targets</a></h3>
+<ul>
+<li>For a set of miRNAs, miRror 2.0 reports a ranked list of gene-targets according to their likelihood to be targeted by this miRNA set.</li>
+<li>For a set of genes, miRror 2.0 reports a ranked list of miRNAs according to their likelihood to coordinately target this gene set.</li>
+<li>miRror 2.0 supports the analysis for human, mouse, rat, fly, worm and Zebrafish. </li>
+<li>miRror 2.0 tool provides a statistical standardizing for about 15 miRNA-target prediction databases.</li>
+</ul>
+<p>
+<a href='help.php#mirror'>More about miRror...</a>
+</div>
+
+                                            					</div>
+                                            				</div>
+                                            			</div>
+                                            		</div>
+                                            		</td>
+                                            		<td width="33%" valign="top">
+                                            		<div class="art-Block">
+                                            			<div class="art-Block-body">
+                                            				<div class="art-BlockHeader">
+                                                      <div class="l"></div>
+                                            				  <div class="r"></div>
+                                            				  <div class="t"><center><a href="psi.php">PSI-miRror</a></center></div>
+                                            			  </div>
+                                            				<div class="art-BlockContent">
+                                            					<div class="art-PostContent">
+
+
+<div class='psicolor'>
+<h3><a href="psi.php">Probability Supported Iterative miRror</a></h3>
+<ul>
+<li>PSI-miRror refines miRror 2.0 results through an iterative protocol. </li>
+<li>PSI-miRror refines the input set by including or removing genes / miRNAs that are unrelated to the rest of the set. </li>
+<li>PSI-miRror provides an advanced platform to miRror 2.0  with for the userrefines the input set by including or removing genes / miRNAs that are unrelated to the rest of the set. </li>
+</ul>
+<p>
+<a href='help.php#psimirror'>More about PSI-miRror...</a>
+</div>
+
+                                            					</div>
+                                            				</div>
+                                            			</div>
+                                            		</div>
+                                            		</td>
+                                            		<td width="33%" valign="top">
+                                            		<div class="art-Block">
+                                            			<div class="art-Block-body">
+                                                    <div class="art-BlockHeader">
+                                                      <div class="l"></div>
+                                            				  <div class="r"></div>
+                                            				  <div class="t"><center><a href="mirnet.php">miRorNet</a></center></div>
+                                            			  </div>
+                                            				<div class="art-BlockContent">
+                                            					<div class="art-PostContent">
+
+
+<div class='mirnetcolor'>
+<h3><a href="mirnet.php">Disconnect regulatory pathways by sets of miRNAs</a></h3>
+<ul>
+<li>miRorNet searchs for miR-Trios for ~100 pathways that maximize the disruption of the pathway of interest. 
+<li>miRrorNet supports the analysis for human and mouse for KEGG pathways.
+<li>miRrorNet tool apply exhaustive search for all possible miR-Trios that are relevant for the subjected pathway graph using up to 15 miRNA-Target prediction databases.
+</ul>
+<p>
+<a href='help.php#mirnet'>More about miRorNet...</a>
+</div>
+
+                                            					</div>
+                                            				</div>
+                                            			</div>
+                                            		</div>
+                                            		</td>
+                                            	</tr>
+                                            </table>
+
+
+
+
+
+
+
+
+                                           <div class="cleared"></div>
+                                        </div>
+                                    <div class="cleared"></div>
+                                </div>
+                        
+                        	<div class="cleared"></div>
+                            </div>
+                        </div>
+		                     <div class="cleared"></div>
+                <div class="art-Footer">
+                    <div class="art-Footer-inner">
+                        <a href="#" class="art-rss-tag-icon" title="RSS"></a>
+                        <div class="art-Footer-text">
+                            <p><a href="contact.php">Contact Us</a>                                | Copyright &copy; 2010 - HUJI - All Rights Reserved.</p>
+                        </div>
+                    </div>
+                    <div class="art-Footer-background"></div>
+                </div>
+       		<div class="cleared"></div>
+            </div>
+        </div>
+        <div class="cleared"></div>
+        <p class="art-page-footer">Designed by <a href="http://www.skarsenty.com">SK</a>.</p>
+    </div>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1129585-19']);
+_gaq.push(['_trackPageview']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+</script>
+</body>
+</html>

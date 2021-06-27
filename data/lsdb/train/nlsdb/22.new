@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>PhyloWidget: Web Visualizations for the Tree of Life</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="shortcut icon" href="img/pw.ico"/>
+<script type="text/javascript">
+function showFull(myTree)
+{
+  var s = "./full/index.html?tree='" + myTree + "'";
+  //open(s);
+  window.location = s;
+}
+function showLite(myTree)
+{
+  var s = "./lite/index.html?tree='" + myTree + "'";
+  //open(s);
+  window.location = s;
+}
+/*
+ *  This function causes the newick input box to be selected fully once.
+ */
+var selected = false;
+function selectOnce(el)
+{
+  if (selected)return;
+  el.select();
+  selected = true;
+}
+// Wrapper function to get an object from the DOM via its ID attribute.
+function getObject(id){
+	var el = document.getElementById(id);
+	return (el);
+};
+
+</script>
+
+</head>
+<body>
+
+<div id="content-wrapper">
+
+<div id="header">
+<img src='img/pw-logo.png' class="brd" style="vertical-align:text-bottom"/>
+<br/>from Jordan and Piel, <em>Bioinformatics</em> 2008 (<a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btn235v1">link</a>)
+</div>
+
+<div id="content" style="">
+
+<div id="quickstart">
+<h1>PhyloWidget Quickstart</h1>
+<input name="treeText" id="treeText" onFocus="if(this.value.indexOf('Paste') != -1)selectOnce(this);" value="Paste your Newick-formatted tree here.">
+</input>
+<br/>
+<span style="font-size:80%"><em>Note: a URL pointing to your favorite Newick or Nexus file is also valid input for PhyloWidget Full.</em></span>
+
+<div >
+<ul class="boxlist">
+	<li>
+		<a onmouseover="javascript:getObject('tooltip').innerHTML = 'PhyloWidget Full: slower to load than the Lite version, but allows file saving / loading and PDF export.';" href="javascript:showFull(getObject('treeText').value);">
+			<img src='img/pw-icon.png'/>Open in PhyloWidget Full
+		</a>
+	</li>
+	<li>
+		<a onmouseover="javascript:getObject('tooltip').innerHTML = 'PhyloWidget Lite: a lighter-weight applet that lacks some of the advanced functionality of PhyloWidget Full.';" href="javascript:showLite(getObject('treeText').value);">
+			<img src='img/pw-icon.png'/>Open in PhyloWidget Lite
+		</a>
+	</li>
+</ul>
+<div id="tooltip" style="height:10px;font-size:80%;width:50%;margin:auto;">
+</div>
+</div>
+</div>
+
+<!-- Content! -->
+<h1>Information</h1>
+<h2>What is PhyloWidget?</h2>
+<p>
+PhyloWidget is a program for viewing, editing, and publishing phylogenetic trees online.
+It is small, contains a simple yet powerful user interface, and contains many novel features not available in other phylogenetic viewers (<a href="#screenshots">see the screenshots</a>).  
+</p>
+<h2>What is it used for?</h2>
+<p>
+PhyloWidget is specifically designed for:
+<ul class='innerlist'>
+<li><b>Visually exploring</b> small, medium and large phylogenetic trees</li>
+<li><b>Editing trees</b> with a simple, intuitive user interface</li>
+<li>Creating <b>publication-quality</b> tree figures</li>
+<li>Interfacing with databases through a <b>URL-based API</b></li>
+</ul>
+<h2>Who wrote it?</h2>
+<p>
+The software was written by <a href="http://www.embl-ebi.ac.uk/Information/Staff/person_maintx.php?s_person_id=928">Gregory Jordan</a> as a <a href="http://code.google.com/soc/">Google Summer of Code</a> project under the mentorship of <a href="http://www.treebase.org/~piel/">Bill Piel</a>.
+Many thanks are also due to Hilmar Lapp, a secondary mentor on the project and the lead organizer of the <a href="https://www.nescent.org/wg_phyloinformatics/Phyloinformatics_Summer_of_Code_2007">Phyloinformatics Summer of Code 2007</a>.
+</p>
+<a name="citation"></a>
+<h2>Citations</h2>
+<p>
+If PhyloWidget has played an important role in your publication, please cite us!
+</p><p>
+PhyloWidget: web-based visualizations for the tree of life<br/>
+Gregory E. Jordan; William H. Piel<br/>
+Bioinformatics 2008 24: 1641-1642<br/>
+<a href="http://www.ncbi.nlm.nih.gov/pubmed/18487241">PubMed</a> | <a href="http://www.citeulike.org/user/gjuggler/article/2970082">CiteULike</a>
+<a name="contact"></a>
+</p>
+<h2>Contact Information</h2>
+<p>
+All queries regarding the general use, integration, or availability of PhyloWidget should be directed towards <a href="mailto:phylowidget@gmail.com">phylowidget@gmail.com</a>.
+<p>
+Bugs may be reported using the <a href="http://code.google.com/p/phylowidget/issues/list">Issue Tracker</a> on Google Code.
+<p>
+For more general queries, requests for collaboration, etc., please contact <a href="http://www.treebase.org/~piel/">Bill Piel</a> and/or <a href="http://www.ebi.ac.uk/Information/Staff/person_maintx.php?s_person_id=928">Gregory Jordan</a> directly.
+<a name="screenshots"></a><h1>Screenshots</h1>
+<div id="screenshots">
+<script type="text/javascript">
+var images = ['ui','web','cladogram','diag','circular'];
+for (var i in images)
+{
+	var img = images[i];
+	document.write("<a href='img/screenshots/"+ img +".png''>");
+	document.write("<img src='img/screenshots/"+ img +"-thumb.png' style='height:125px;'/>");
+	document.write("</a>");
+}
+
+</script>
+</div>
+
+<h1>Documentation</h1>
+<p style="padding:0px;">
+Extensive documentation for PhyloWidget has been produced in the form a series of short vignettes, collectively
+titled <em>PhyloWidget Step-by-Step</em>:
+<ul class="boxlist" style="text-align:center;">
+<li>
+<a href="vignettes/index.html"><img src='img/pw-icon.png'/>PhyloWidget Step-by-Step</a>
+</li>
+</ul>
+<em>NB: the entire HTML and Javascript source code to the Step-by-Step documentation is available <a href="http://phylowidget.googlecode.com/svn/trunk/PhyloWidget/web/vignettes/">here</a>.
+This is a very useful resource if you are attempting to use the advanced functionality of PhyloWidget.</em>
+</p>
+<p style="padding:0px;">
+In the spirit of <a href="http://en.wikipedia.org/wiki/Literate_programming">Literate Programming</a>, we've documented some of
+PhyloWidget's more interesting configuration parameters within the code itself. All of the source code can be reached via the
+<a href="http://code.google.com/p/phylowidget/source/browse">Google code browser</a>. Here are the most useful links:
+<ul>
+<li><a href="http://code.google.com/p/phylowidget/source/browse/trunk/PhyloWidget/src/org/phylowidget/ui/PhyloConfig.java#18">UI configuration parameters</a></li>
+<li><a href="http://code.google.com/p/phylowidget/source/browse/trunk/PhyloWidget/src/org/phylowidget/UsefulConstants.java#1">Supported NHX annotations and extensions</a></li>
+</ul>
+</p>
+<h1>Troubleshooting</h1>
+<p style="padding:0px;">
+A list of known problems and potential solutions can be found on the Troubleshooting Page:
+<ul class="boxlist" style="text-align:center;">
+<li>
+<a href="troubleshooting.html"><img src='img/pw-icon.png'/>Troubleshooting PhyloWidget</a>
+</li>
+</ul>
+ 
+<h1>Downloads</h1>
+<p style="padding:0px;">
+The following downloads are automatically generated by the PhyloWidget build script. They should reflect the current version of PhyloWidget
+that is available on the website. To access the absolute latest source code, please use the <a href="http://code.google.com/p/phylowidget/source/checkout">Google Code SVN repository</a>. 
+<p style="padding:0px;">
+You may choose between:
+<ul>
+<li><a href="zip/phylowidget_standalone.zip">Standalone version (zip)</a></li>
+<li><a href="zip/phylowidget_project.zip">Entire project (zip)</a></li>
+<li><a href="zip/phylowidget_src.zip">Source code only (zip)</a></li>
+</ul>
+
+
+<h1>Links</h1>
+<h3>Further information</h3>
+<ul>
+<li><a href="http://code.google.com/p/phylowidget/">Google Code project page</a> - to browse the source code, submit bugs, etc.</li>
+</ul>
+<h3>Open source projects used by PhyloWidget</h3>
+<ul>
+<li><a href="http://www.processing.org/">Processing</a> (graphics)</li>
+<li><a href="http://jgrapht.sourceforge.net/">JGraphT</a> (graph manipulations)</li>
+<li><a href="http://www.lowagie.com/iText/">iText</a> (PDF generation)</li>
+</ul>
+
+</div>
+
+<div id="footer">
+Copyright © 2008 Gregory Jordan. Code released under the <a href="http://www.fsf.org/licensing/licenses/info/GPLv2.html">GPL v2</a> license.
+</div>
+
+<div id="footer2">
+Created with <a href="http://processing.org/">Processing</a>.
+</div>
+
+</div>
+</div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3446911-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

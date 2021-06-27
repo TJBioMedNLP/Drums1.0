@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Ensemblepail upload</title>
+<script language="javascript">
+function FormCheck() {
+  	if(uploadForm.FILE.value.length == 0 && uploadForm.txtContent.value.length == 0){  	
+    	alert("Please Paste protein sequence or submit a file!");
+    	return false;
+    }      
+}
+</script>
+<style type="text/css">
+TABLE {font-family: Arial, sans-serif;font-size : 16px;}
+TD {font-family: Arial, sans-serif;font-size : 16px;}
+H1 {color: #000000;font-family: Arial, sans-serif;font-weight: bold;font-size: 20px;}
+H2 {color: #000000;font-family: Arial, sans-serif;font-weight: bold;font-size: 18px;}
+H3 {color: #000000;font-family: Arial, sans-serif;font-weight: bold;font-size: 16px;}
+P {color: #000000;font-family: Arial, sans-serif, sans-serif; font-size: 16px; text-align: justify;}
+ul {font-family: Arial, sans-serif;font-size : 14px;}
+li {font-family: Arial, sans-serif;font-size : 12px; text-align: justify;}
+input {color: #000000;font-family: Arial, sans-serif, sans-serif; font-size: 15px;}
+.bulk {color: #000000; font-family: Arial, sans-serif;font-size: 12px; text-align: justify; font-weight: normal;}
+.nav {color: #000000;font-family: Arial, sans-serif, sans-serif;font-size: 10px; font-weight: normal;}
+.search {color: #000000;font-family: Arial, sans-serif, sans-serif;font-size: 10px;font-weight: normal;}
+a:link{color: #FFFFFF}
+a:active{color: #FFFFFF}
+a:visited{color: #FFFFFF}
+a:hover {color: #FFFFFF}
+a.news4:link {color: #0000ff}
+a.news4:visited {color: #0000ff}
+a.news4:active {color: #ff0000}
+a.news4:hover {color: #ff0000}
+</style>
+</head>
+
+<body>
+
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><div align="center"><img width="934" height="150" src="EnsemblePail.png"></div></td>
+  </tr>
+    <tr>
+    <td><table width="100%" height="0%"  border="0" cellpadding="2" cellspacing="2">
+        <tr>
+          <td width="34%" height="100%" bgcolor="#654321"><div align="center"><strong><span class="style1"><a href="intro.jsp">Introduction</a></span></strong></div></td>
+          <td width="33%" bgcolor="#654321"><div align="center"><strong><span class="style1"><a href="index.html">Predict</a></span></strong></div></td>
+          
+          <td width="33%" bgcolor="#654321"><div align="center"><strong><span class="style1"><a href="contact.jsp">Contact</a></span></strong></div></td>
+        </tr>
+      </table>
+	</td>
+  </tr>
+  <tr>
+    <td>
+      <h3 align="left"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></h3><p></p>
+
+      <em>Paste a single protein sequence or multiple protein sequences in <strong><font color=blue>FASTA</font></strong> format <strong>(<a href="Example.txt"><font color=red>Example</font></a>)</strong> into the field below:</em> <br>
+ <form name="uploadForm" method="post" action="result.jsp"  enctype="multipart/form-data"  onSubmit="return FormCheck()"> 
+  <p>
+  <TextArea rows="4" name="txtContent" cols="60"></textarea>
+  </p>
+  <p><em>Or upload a file containing sequence(s) in <strong><font color=blue>FASTA </font></strong> format from local disk:</em></p>
+  <p>    
+      <INPUT TYPE="FILE" NAME="FILE" SIZE="50">
+    
+  </p>
+   <p>Threshold:
+    <select name="threshold" size="1">
+      <option value="Low" selected>Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      
+    </select>
+</p>  
+  <p>     
+      <INPUT TYPE="SUBMIT" VALUE=" Predict ">
+      <input type="reset" name="Submit" value=" Reset ">  
+  </p>
+
+</form>	</td>
+  </tr>
+  <tr>
+    <td>
+    <table width="100%" border="0" align="center" cellpadding="4" cellspacing="0">
+    <tr>
+    <td width="50%"><hr><h3 align="left"><strong>Reference:</strong></h3>
+     <p align="left">Yan Xu, Xiaobo Wang, Jun Ding, Ling-Yun Wu, Naiyang Deng. (2009) Lysine Acetylation sites prediction using ensembles of Support Vector Machine classifiers (submitted).</p>
+     <hr>
+    </td>   
+  </tr>
+    </table>
+  </td>   
+  </tr>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,787 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="google-site-verification" content="QcV6UhrVW09Wk6v6IxKi-WdrSJqQ9EBq9iqgTy6PzW0" />
+  <link rel="stylesheet" href="/includes/index_style.css?organism_id=all" type="text/css"/>
+  <title>
+    VectorBase.org  </title>
+    <script type="text/javascript" src="/includes/js_cookie_functions.js"></script>
+  <script language="Javascript" type="text/javascript">
+  var prefs = null;
+  function Prefs() { }
+  function Pref(key, value, persist) {
+    this.key = key;
+    this.value = value;
+    this.persist = persist;
+  }
+  Prefs.prototype.toString = function prefsToString() {
+    var str = "Prefs:\n";
+    for (var key in this) {
+      if (key == "toString") { continue; }
+      str += "  " + key + " => " + this[key] + "\n";
+    }
+    return str;
+  }
+  Pref.prototype.toString = function prefToString() {
+    var str = "[" + this.key + "=" + this.value + " (";
+    if (this.persist) { str += "cookie"; } else { str += "session"; }
+    str += ")]";
+    return str;
+  }
+  function initPrefs() {
+    prefs = new Prefs();
+    
+    prefs.putative_logged_in = new Pref('putative_logged_in', false, false);
+    prefs.putative_domain = new Pref('putative_domain', '', false);
+  }
+  function setPref(pref, value, persist) {
+    var pref = new Pref(pref, value, persist);
+    if (pref.persist) {
+      // Cookie
+      var date = new Date();
+      var days = 365;
+      date.setTime(date.getTime() + (days * 24*3600*1000));
+      var expires = "; expires=" + date.toGMTString();
+      document.cookie = 'prefs[javascript][' + pref.key + ']=' + pref.value + expires + "; path=/";
+    }
+    var url = "/includes/setPref.php?key=" + pref.key + "&value=" + pref.value;
+    var req = false;
+    if (window.XMLHttpRequest) {
+      try { req = new XMLHttpRequest(); } catch(e) { req = false; }
+    } else  if (window.ActiveXObject) {
+      try { req = new ActiveXObject("Msxml2.XMLHTTP"); } catch(e) { try { req = new ActiveXObject("Microsoft.XMLHTTP"); } catch(e) { req = false; } }
+    }
+    if (req) {
+      // Note: no onreadystatechange handler; we're just firing this off and hoping it sticks
+      req.open("GET", url, true);
+      req.send("");
+    }
+    // Set the local preferences for this open page
+    prefs[pref.key] = pref;
+  }
+</script>
+  <script type="text/javascript" src="/includes/browser_detect.js"></script>
+  <script type="text/javascript" src="/includes/behaviour.js"></script> 
+  <script type="text/javascript" src="/includes/vb_behaviours.js"></script>
+  <script type="text/javascript" src="/includes/help_floater.php"></script> 
+  <script type="text/javascript" src="/includes/helper_functions.js"></script> 
+  <script type="text/javascript" src="/includes/get_manual_model.js"></script>
+  <script type="text/javascript" src="/includes/soapclient.js"></script>
+  <script type="text/javascript" src="/includes/browser_detect.js"></script>
+  <script type="text/javascript" src="/includes/archive.js.php"></script>
+  <script type="text/javascript" language="javascript">
+    function crossBrowserListen(obj, event, fcn) {
+      if (obj.addEventListener) {
+        obj.addEventListener(event, fcn, false);
+        return true;
+      } else if (obj.attachEvent) {
+        var r = obj.attachEvent("on"+event, fcn);
+        return r;
+      } else {
+        return false;
+      }
+    }
+    function functionsAfterLoad() {
+      if (window.doBodyOnLoad) { doBodyOnLoad(); }
+      if (window.initScripts) { initScripts(); }
+      if (window.blastInitScripts) { blastInitScripts(); }
+      /*
+      var email = document.getElementById('Web:email_help');
+      if (email) {
+        email.href = email.href.replace(/ aht /, '@');
+        email.href = email.href.replace(/ dawt /, '.');
+      }
+      */
+      for (var i = 0; i < document.getElementsByName('Web:email_help').length; i++) {
+        var email = document.getElementsByName('Web:email_help')[i];
+        if (email) {
+          email.href = email.href.replace(/( |%20)aht( |%20)/, '@');
+          email.href = email.href.replace(/( |%20)dawt( |%20)/, '.');
+/*
+          email.innerHTML = email.innerHTML.replace(/ aht /, '@');
+          email.innerHTML = email.innerHTML.replace(/ dawt /, '.');
+*/
+        }
+      }
+    }
+    function functionsAtUnload() {
+      if (window.doBodyOnUnload) { doBodyOnUnload(); }
+    }
+    crossBrowserListen(window, 'load', functionsAfterLoad);
+    crossBrowserListen(window, 'unload', functionsAtUnload);
+    crossBrowserListen(window, 'mousedown', newHelpOff);
+    
+    
+  </script>
+
+</head>
+<body id="ensembl-webpage">
+        <table id="main_table" cellspacing="0" cellpadding="0" class="main_table_normal" align="center">
+      <!-- Top Spacer -->
+      <tr>
+        <td>
+          <br/>
+        </td>
+        <td>
+        	<img src="/imgs/blank.gif" alt="blank"/>
+        </td>
+      </tr>
+      <!-- Top Bar -->
+      <tr>
+      	<td>
+      	  <img src="/imgs/blank.gif" alt="blank"/>
+      	</td>
+        <td>  
+<!--
+<div id="outageAlert" style="display:block; margin-bottom:20px; margin-top:10px; width:97%; border:1px solid #888a00; background-color:#c3c517; font:bold 10px Sans-serif; padding:4px 8px;">
+ Attention VectorBase Users: The web site will be down this Monday, December 14 from 4am to 1pm EST. Our hosting facility is installing new power equipment and requiring us to shut down for half of the day. We appreciate your patience and patronage.
+</div>
+-->
+
+          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="bottom">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="site_title">
+                      <a href="http://www.vectorbase.org" class="site_title" style="text-decoration:none;">VectorBase</a>                    </td>
+                  </tr>
+                  <tr>
+                    <td height="1" bgcolor="#cbcbcb">
+
+                    </td>
+                  </tr>
+                </table>
+              </td>
+              <td valign="bottom" align="right" style="width:250px">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                  	<td align="right" valign="bottom"><a class="hashelp" name="Web:homepage" href="http://www.vectorbase.org">
+<img border="0" alt="All organisms" src="/imgs/all_on.gif"/></a></td>
+<td align="right" valign="bottom"><a class="hashelp" name="Web:agambiae_homepage" href="http://agambiae.vectorbase.org"">
+<img border="0" alt="A. gambiae" src="/imgs/agambiae_off.gif"/></a></td>
+<td align="right" valign="bottom"><a class="hashelp" name="Web:aaegypti_homepage" href="http://aaegypti.vectorbase.org"">
+<img border="0" alt="A. aegypti" src="/imgs/aaegypti_off.gif"/></a></td>
+<td align="right" valign="bottom"><a class="hashelp" name="Web:iscapularis_homepage" href="http://iscapularis.vectorbase.org"">
+<img border="0" alt="I. scapularis" src="/imgs/iscapularis_off.gif"/></a></td>
+<td align="right" valign="bottom"><a class="hashelp" name="Web:cquinquefasciatus_homepage" href="http://cquinquefasciatus.vectorbase.org"">
+<img border="0" alt="C. quinquefasciatus" src="/imgs/cquinquefasciatus_off.gif"/></a></td>
+<td align="right" valign="bottom"><a class="hashelp" name="Web:phumanus_homepage" href="http://phumanus.vectorbase.org"">
+<img border="0" alt="P. humanus" src="/imgs/phumanus_off.gif"/></a></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <!-- Help Bar -->
+      <tr>
+        <td>
+			<img src="/imgs/blank.gif" alt="blank"/>
+        </td>
+        <td bgcolor="#005500" >
+          <table border="0" cellspacing="0" width="100%" cellpadding="0">
+            <tr>
+              <td width="10" class="status_bar">
+                &nbsp;<b style="color:#ffffff;">&nbsp;</b>
+              </td>
+              <td id="help_cell" class="status_bar">
+                
+              </td>
+              <td align="right" class="status_bar">
+                <a class="contact hashelp" id="Web:Get_Help" href="http://www.vectorbase.org/Help/Web:Get_Help"><b style="color:#ffffff;">Get VectorBase Help</b></a>&nbsp;&nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+      	<td>
+      	</td>
+        <td class="horz_seperator">
+        </td>
+      </tr>
+      <!--Data Sections Items-->
+      <tr>
+        <td>
+			<!-- Outside left table-->        
+        </td>
+        <td>
+          <table border="0" cellspacing="0" width="100%" cellpadding="0">
+            
+            <tr>
+              <td class="vert_seperator"><img src="/imgs/blank.gif" alt="."/></td>
+              <td id="Web:sequence_data" align="center" class="menu_bar hashelp">
+                <a class="menu_link" href="/SequenceData/">
+                  Sequence Data
+                </a>
+              </td>
+              <td id="Web:expression_data" align="center" class="menu_bar hashelp">
+                <a class="menu_link" href="/ExpressionData/">
+                  Expression Data
+                </a>
+              </td>
+              <td id="Web:images" align="center" class="menu_bar hashelp">
+                <a class="menu_link" href="/Images/">
+                  Images
+                </a>
+              </td>
+              <td id="Web:population_data" align="center" class="menu_bar hashelp">
+                <a class="menu_link" href="/PopulationData/">
+                  Population Data
+                </a>
+              </td>
+              <td id="Web:irbase" align="center" class="menu_bar hashelp">
+                <a class="menu_link" href="/IRbase/">
+                  IRbase
+                </a>
+              </td>
+              <td id="Web:documentation" align="center" class="menu_bar hashelp">
+                <a class="menu_link" href="/Docs/">
+                  Documents
+                </a>
+              </td>
+              <td id="Web:all_more" align="center" class="menu_bar hashelp">
+                <a class="menu_link" href="/Other/">
+                  More...
+                </a>
+              </td>
+              <td class="vert_seperator"><img src="/imgs/blank.gif" alt="."/></td>
+              <td id="Web:tools" align="center" class="common_menu_bar hashelp">
+                <a class="common_menu_link" href="/Tools/">
+                  Tools
+                </a>
+              </td>
+              <td id="Web:get_data" align="center" class="common_menu_bar hashelp">
+                <a class="common_menu_link" href="/GetData/">
+                  Get Data
+                </a>
+              </td>
+              <td id="Web:forum" align="center" class="common_menu_bar hashelp">
+                <a class="common_menu_link" href="/sections/Forum/">
+                  Forum
+                </a>
+              </td>
+              <td id="Web:search" align="center" class="common_menu_bar hashelp">
+                <a class="common_menu_link" href="/Search">
+                  Search
+                </a>
+              </td>
+              <td class="vert_seperator"><img src="/imgs/blank.gif" alt="."/></td>
+              <td id="Web:user" align="center" class="common_menu_bar hashelp">
+                <a class="common_menu_link" href="/User/">
+                  User
+                </a>
+              </td>
+              <td class="vert_seperator"><img src="/imgs/blank.gif" alt="."/></td>
+            </tr>
+            
+          </table>
+        </td>
+      </tr>
+      <tr>
+      	 <td>	 
+      	 </td>
+         <td class="horz_seperator">
+         </td>
+      </tr>
+      <!-- Content Window -->
+      <tr>
+      	<td valign="top" align="right">
+   			      	</td>
+        <td class="content_window">
+          
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <!-- Left Bar -->
+    <td class="left_content">
+      <table border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tr>
+          <td class="main_logo_bar" colspan="2">
+            <table border="0" cellspacing="4" cellpadding="0" width="100%">
+              <tr>
+                <td class="sub_title">
+                  &nbsp;Welcome To VectorBase!
+                </td>
+              </tr>
+              <tr>
+                <td align="left">
+                  &nbsp;
+                  &nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;                </td>
+              </tr>
+              <tr>
+                <td class="">
+                 &nbsp;&nbsp;&nbsp;An <a style="color:#aa3333;" href="http://www.brc-central.org/" target="_NEW" id="Web:niaid_link" class="hashelp">NIAID Bioinformatics Resource Center</a> for <br/>&nbsp;&nbsp;&nbsp;Invertebrate Vectors of Human Pathogens.
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <table border="0" cellspacing="8" cellpadding="2" width="100%">
+              <tr>
+                <td>
+                  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                      <td class="services_title">
+                        VectorBase Services:
+                      </td>
+                    </tr>
+                                          <tr>
+                      <td>
+                        <table border="0" cellspacing="6" cellpadding="0" width="100%">
+                          <tr>
+                            <td class="icon"><img src="/imgs/dot.gif" alt="*"/></td>
+                            <td>
+                              <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="home_item">Organisms&nbsp;&raquo;</td>
+                                </tr><tr>
+                                  <td bgcolor="#BBEEBB" height="1"><img src="/imgs/blank.gif" alt="."/></td>
+                                </tr><tr>
+                                  <td>
+                                    <a class="ql_link hashelp" id="Web:agambiae_homepage" href="http://agambiae.vectorbase.org">A. gambiae</a>,                                     <a class="ql_link hashelp" id="Web:aaegypti_homepage" href="http://aaegypti.vectorbase.org">A. aegypti</a>,                                     <a class="ql_link hashelp" id="Web:ixscapularis_homepage" href="http://iscapularis.vectorbase.org">I. scapularis</a>,                                     <a class="ql_link hashelp" id="Web:cquinquefasciatus_homepage" href="http://cquinquefasciatus.vectorbase.org">C. quinquefasciatus</a>,                                     <a class="ql_link hashelp" id="Web:phumanus_homepage" href="http://phumanus.vectorbase.org">P. humanus</a>,                                     <a class="ql_link hashelp" id="Web:additional_organisms" href="/Other/AdditionalOrganisms/">Additional Organisms</a>,                                     <a class="ql_link hashelp" id="Web:species_summary" href="/organisms">Summary of VectorBase Species</a>                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table border="0" cellspacing="6" cellpadding="0" width="100%">
+                          <tr>
+                            <td class="icon"><img src="/imgs/dot.gif" alt="*"/></td>
+                            <td>
+                              <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="home_item">Data Sections&nbsp;&raquo;</td>
+                                </tr><tr>
+                                  <td bgcolor="#BBEEBB" height="1"><img src="/imgs/blank.gif" alt="."/></td>
+                                </tr><tr>
+                                  <td>
+                                    <a class="ql_link hashelp" id="Web:sequence_data" href="/SequenceData/">Sequence Data</a>,                                     <a class="ql_link hashelp" id="Web:expression_data" href="/ExpressionData/">Gene Expression Data</a>,                                     <a class="ql_link hashelp" id="Web:images" href="/Images/">Images</a>,                                     <a class="ql_link hashelp" id="Web:population_data" href="/PopulationData/">Population Data</a>,                                     <a class="ql_link hashelp" id="Web:release_guidelines" href="/DataReleaseGuidelines/">Data Release Guidelines</a>                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table border="0" cellspacing="6" cellpadding="0" width="100%">
+                          <tr>
+                            <td class="icon"><img src="/imgs/dot.gif" alt="*"/></td>
+                            <td>
+                              <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="home_item">Tools&nbsp;&raquo;</td>
+                                </tr><tr>
+                                  <td bgcolor="#BBEEBB" height="1"><img src="/imgs/blank.gif" alt="."/></td>
+                                </tr><tr>
+                                  <td>
+                                    <a class="ql_link hashelp" id="Web:blast" href="/Tools/BLAST/">BLAST</a>,                                     <a class="ql_link hashelp" id="Web:clustalw" href="/Tools/ClustalW/">ClustalW</a>,                                     <a class="ql_link hashelp" id="Web:HMMER" href="/Tools/HMMER/">HMMER</a>,                                     <a class="ql_link hashelp" id="Web:search_cvsearch" href="/Search/CVSearch/">Controlled Vocabulary Search</a>,                                     <a class="ql_link hashelp" id="Community_Annotation:Submission_User_Guide" href="/Help/Community_Annotation:Submission_User_Guide">Manual Annotation Submission Tool</a>                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table border="0" cellspacing="6" cellpadding="0" width="100%">
+                          <tr>
+                            <td class="icon"><img src="/imgs/dot.gif" alt="*"/></td>
+                            <td>
+                              <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="home_item">Retrieve Data&nbsp;&raquo;</td>
+                                </tr><tr>
+                                  <td bgcolor="#BBEEBB" height="1"><img src="/imgs/blank.gif" alt="."/></td>
+                                </tr><tr>
+                                  <td>
+                                    <a class="ql_link hashelp" id="Web:download" href="/GetData/Downloads/">Download Data</a>,                                     <a class="ql_link hashelp" id="Web:biomart" href="http://biomart.vectorbase.org/biomart/martview/">BioMart</a>                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table border="0" cellspacing="6" cellpadding="0" width="100%">
+                          <tr>
+                            <td class="icon"><img src="/imgs/dot.gif" alt="*"/></td>
+                            <td>
+                              <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="home_item">VectorBase Documentation&nbsp;&raquo;</td>
+                                </tr><tr>
+                                  <td bgcolor="#BBEEBB" height="1"><img src="/imgs/blank.gif" alt="."/></td>
+                                </tr><tr>
+                                  <td>
+                                    <a class="ql_link hashelp" id="Web::Help" href="/Help/">Help Wiki</a>,                                     <a class="ql_link hashelp" id="Web:FAQ" href="/Help/FAQ">FAQ</a>,                                     <a class="ql_link hashelp" id="Web::BRC" href="/Help/BRC">BRC Information</a>,                                     <a class="ql_link hashelp" id="Web::Mailing_lists" href="/Help/Mailing_lists">Mailing Lists</a>,                                     <a class="ql_link hashelp" id="Web::Tutorials" href="/Help/VectorBase_tutorials">Tutorials</a>                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table border="0" cellspacing="6" cellpadding="0" width="100%">
+                          <tr>
+                            <td class="icon"><img src="/imgs/dot.gif" alt="*"/></td>
+                            <td>
+                              <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tr>
+                                  <td class="home_item">Additional Resources&nbsp;&raquo;</td>
+                                </tr><tr>
+                                  <td bgcolor="#BBEEBB" height="1"><img src="/imgs/blank.gif" alt="."/></td>
+                                </tr><tr>
+                                  <td>
+                                    <a class="ql_link hashelp" id="Web:links" href="/Other/Links/">Links</a>,                                     <a class="ql_link hashelp" id="Web:vectorbase_pubs" href="/Docs/ShowDoc/?doc=VectorBasePubs">VectorBase Publications</a>,                                     <a class="ql_link hashelp" id="Web:white_papers" href="/Help/Category:White_paper">Genome White Papers</a>                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="right_content_dotter">
+            <table border="0" cellspacing="8" cellpadding="0" width="100%">
+              <tr>
+                <td valign="bottom">
+                  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                      <td align="center">
+                        <img border="0" src="/imgs/iscapularis.jpg" alt="I. scapularis"/>
+<!--
+<a href="downloads/public_data/documents/Request_for_Proposals_VectorBase_DBP.pdf">
+<img src="imgs/RFPrequest.png" height="104" width="153"/>
+</a>
+-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="small" align="center">
+<!--
+                        <a href="http://iscapularis.vectorbase.org/SequenceData/Genome/" style="text-decoration:none;font-size:11px;color:red;">New <i>I. scapularis</i> IscaW1.1 gene build released</a>
+-->
+<!--
+<a href="downloads/public_data/documents/Request_for_Proposals_VectorBase_DBP.pdf">Download the full RFP</a>
+<br /><a href="http://www.vectorbase.org/sections/Forum/viewtopic.php?f=2&t=715">Frequently Asked Questions</a>
+-->
+                      </td>
+                    </tr>
+                  </table>
+                  <br/>
+                  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                      <td class="services_title">
+                        Recent News:
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table border="0" cellspacing="4" cellpadding="2" width="100%">
+                          <tr><td><span class="news_date">Mar 26th, 2010:</span><br/><a style="color: #aa3333;" href="/Other/News/?id=107" class="news_link hashelp" id="Web:news_detail">BioMarts are now up to date.&nbsp;&raquo;</a></td></tr><tr><td><span class="news_date">Feb 11th, 2010:</span><br/><a href="/Other/News/?id=106" class="news_link hashelp" id="Web:news_detail">Update taxonomy for Culex!&nbsp;&raquo;</a></td></tr><tr><td><span class="news_date">Feb 03rd, 2010:</span><br/><a href="/Other/News/?id=105" class="news_link hashelp" id="Web:news_detail">RFP for Driving Biological Projects announced&nbsp;&raquo;</a></td></tr><tr><td><span class="news_date">Jan 05th, 2010:</span><br/><a href="/Other/News/?id=104" class="news_link hashelp" id="Web:news_detail">RNAi reagent design tool&nbsp;&raquo;</a></td></tr><tr><td><span class="news_date">Dec 16th, 2009:</span><br/><a href="/Other/News/?id=103" class="news_link hashelp" id="Web:news_detail">Follow VectorBase on Twitter&nbsp;&raquo;</a></td></tr>                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>      
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <!-- Right Bar -->
+    <td align="center" valign="top" class="right_content">
+	  <table width="100%" cellspacing="0" cellpadding="0" border="0">
+<!--	    <tr>
+	      <td height="5"></td>
+	    </tr>
+-->
+	    <form action="/Search/Keyword/" method="get">
+    	    <tr>
+    	      <td>   
+                  <input type="hidden" name="quicksearch" value="true"/>
+                  <table border="0" cellspacing="1" cellpadding="0">
+                    <tr>
+                      <td bgcolor="#666666" style="padding:3px;"><img src="/imgs/mg.gif" alt="mg"/></td>
+                      <td width="210" bgcolor="#e5e5e5" align="left">&nbsp;<b>VectorBase Quick Search</b></td>
+                    </tr>
+                    <tr>
+                      <td bgcolor="#f0f0f0" colspan="2" align="center">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td align="center" style="padding:3px;">
+                              <input type="text" name="term" size="22" class="small hashelp" id="Web:search_input"/>
+                            </td>
+                            <td align="center" width="50">
+                              <input type="submit" class="small hashelp" value="Go"  id="Web:search_submit"/>
+                            </td>
+                          </tr>
+                        </table>
+                      </td> 
+                    </tr>
+                    <tr>
+                      <td align="center" colspan="2" style="padding:3px;" bgcolor="#e0e0e0">
+                      <select name="organism_id" class="small hashelp" id="Web:search_organism">
+                        <option value="all">All organisms</option>
+<option value="agambiae">A. gambiae</option>
+<option value="aaegypti">A. aegypti</option>
+<option value="iscapularis">I. scapularis</option>
+<option value="cquinquefasciatus">C. quinquefasciatus</option>
+<option value="phumanus">P. humanus</option>
+                      </select>
+                        &bull;
+                        <select class="small" name="search_field">
+                          <option value="genome">Genome</option>
+                          <!--<option value="images">Images</option>-->
+                        </select>
+                                      
+                      </td>
+                    </tr>
+                  </table>
+
+    	  	  </td>
+    	  	</tr>
+        </form>
+        <tr>
+	      <td height="5">
+	      </td>
+	</tr>
+	    <tr>
+	      <td>
+	        <table border="0" cellspacing="1" cellpadding="3" width="100%">
+	          <tr>
+	           	<td colspan="2" bgcolor="#e5e5e5" valign="top" align="left" style="padding:3px;"> 
+			      <span class="news_date">Contact VectorBase</span>	        
+	      		</td>
+	      	  </tr>
+	          <tr>
+	          	<td bgcolor="#fafafa" style="padding:0px;width:50px;">
+					<img src="/imgs/envelopes.png">
+	          	</td>
+	            <td bgcolor="#f3f3f3" class="small" align="left" style="padding:4px;">
+	              Need help or have feedback? Please contact us at <a href="mailto:info aht vectorbase dawt org" name="Web:email_help" class="hashelp">info aht vectorbase dawt org</a>
+	            </td>
+	          </tr>
+	        </table>
+	      </td>
+	    </tr>
+
+        <tr>
+            <td height="5"></td>
+        </tr>
+        
+        <tr>
+            <td>
+                <table width="100%" border="0" cellspacing="1" cellpadding="3">
+                    <tr>
+
+                      <td bgcolor="#e5e5e5" align="left" style="padding:3px;" colspan="2">&nbsp;<b>VectorBase Newsletter</b></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#f3f3f3;padding:0px;width:50px;" align="center">
+                            <img src="/imgs/newsletter.png" border="0" alt="newsletter"/>
+                        </td>
+                        <td align="center" style="padding:3px;background-color:#f3f3f3;">
+                            <table border="0" cellspacing="4" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <span style="font-size:12px;">February 2010 - #8</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <a href="/Help/Newsletter">More Information</a>                            
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="5"></td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" border="0" cellspacing="1" cellpadding="3">
+                    <tr>
+
+                      <td bgcolor="#e5e5e5" align="left" style="padding:3px;" colspan="2">&nbsp;<b>Current Genome Releases</b></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#f3f3f3;padding:0px;width:30px;" align="center">
+                            <img src="/imgs/ag_icon.jpg" border="0" alt="newsletter"/>
+                        </td>
+                        <td align="center" style="padding:3px;background-color:#f3f3f3;">
+                            <table border="0" cellspacing="4" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <a href="http://agambiae.vectorbase.org/SequenceData/Genome/"><i>A. gambiae</i> PEST</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        AgamP3.5, September 2009
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#f3f3f3;padding:0px;width:30px;" align="center">
+                            <img src="/imgs/aa_icon.jpg" border="0" alt="newsletter"/>
+                        </td>
+                        <td align="center" style="padding:3px;background-color:#f3f3f3;">
+                            <table border="0" cellspacing="4" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <a href="http://aaegypti.vectorbase.org/SequenceData/Genome/"><i>A. aegypti</i> Liverpool</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        AaegL1.2, September 2009
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#f3f3f3;padding:0px;width:30px;" align="center">
+                            <img src="/imgs/cp_icon.jpg" border="0" alt="newsletter"/>
+                        </td>
+                        <td align="center" style="padding:3px;background-color:#f3f3f3;">
+                            <table border="0" cellspacing="4" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <a href="http://cquinquefasciatus.vectorbase.org/SequenceData/Genome/"><i>C. quinquefasciatus</i> JHB</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        CpipJ1.2, June 2008
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td style="background-color:#f3f3f3;padding:0px;width:30px;" align="center">
+                            <img src="/imgs/is_icon.jpg" border="0" alt="newsletter"/>
+                        </td>
+                        <td align="center" style="padding:3px;background-color:#f3f3f3;">
+                            <table border="0" cellspacing="4" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <a href="http://iscapularis.vectorbase.org/SequenceData/Genome/"><i>I. scapularis</i> Wikel</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        IscaW1.1, December 2008
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>                    
+                </table>
+                
+            </td>
+        </tr>
+      
+	  </table>
+
+    </td>
+  </tr>
+</table>
+        </td>
+      </tr>
+      <tr>
+      	<td>
+      	</td>
+        <td class="footer">
+          <table border="0" align="center" cellspacing="0" cellpadding="0" width="70%">
+  <tr>
+    <td align="left">
+    			VectorBase Last Updated March 26th, 2010		
+    </td>
+    <td align="right">
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center">
+            <img src="/imgs/mail.gif"border="0" alt="mail"/>
+          </td>
+          <td align="center">&nbsp;<a href="mailto:webmaster@vectorbase.org" class="hashelp" name="Web:email_help" style="color:#ffffff;">Contact Webmaster</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        	<img src="/imgs/blank.gif" alt="blank"/>
+        </td>
+        <td align="center">
+          <table width="100%" height="50" cellspacing="0" cellpadding="4">
+            <tr>
+              <td valign="middle" align="center">
+		        <img src="/imgs/nd.png" border="0" alt="ND"/>
+              </td>
+              <td valign="middle" align="center">
+		        <img src="/imgs/ensembl.png" border="0" alt="Ensembl"/>
+              </td>
+              <td valign="middle" align="center">
+		        <img src="/imgs/imbb.png" border="0" alt="IMBB"/>
+              </td>
+              <td valign="middle" align="center">
+		        <img src="/imgs/harvard.png" border="0" alt="Harvard"/>
+              </td>
+              <td valign="middle" align="center">
+		        <img src="/imgs/imperial_logo_small.png" border="0" alt="Imperial College"/>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+	<script type="text/javascript" src="http://www.vectorbase.org/sections/clickheat/js/clickheat.js"></script><script type="text/javascript"><!--
+		clickHeatSite = 'vectorbase.org';clickHeatGroup = document.title;clickHeatServer = 'http://www.vectorbase.org/sections/clickheat/click.php';initClickHeat(); //-->
+	</script>
+ <script type="text/javascript">
+         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+
+ <script type="text/javascript">
+         try {
+         var pageTracker = _gat._getTracker("UA-6417661-1");
+         pageTracker._setDomainName(".vectorbase.org");
+         pageTracker._trackPageview();
+         } catch(err) {}
+ </script>
+
+  </body>
+</html>

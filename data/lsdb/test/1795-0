@@ -1,0 +1,130 @@
+// conceptual galactose model in Dizzy format
+// options to obtain estimated variance in batch mode:  
+//  -simulator ODEtoJava-dopr54-adaptive -computeFluctuations -stopTime 1000.0
+// this runs model for 1000 minutes to obtain steady-state
+// then estimates the standard deviation of a stochastic simulation
+// time required to obtain steady-state depends on initial condition
+// see Help for instructions
+
+//list of species
+iGa=1e7;
+inductflag = 1;  //set to zero for no induction
+g4 = 22;       // GAL4
+g4d = 50;      // GAL4 dimer
+g7 = 1384;      // GAL7
+g7d = 1126;      // GAL7 dimer
+g80 = 183;     // GAL80
+g80d = 20;     // GAL80 dimer
+g3 = 326;      // GAL3
+GAI = (1*10^7 – 1975) * inductflag;         // internal galactose
+g3i = 4 * inductflag;       // GAL3-galactose
+g4dg80d = 54;  // GAL4-dimer-GAL80-dimer
+g80g3i = 1971 * inductflag;    // GAL80-GAL3-galactose
+r3 = 4;        // mRNA-GAL3
+r80 = 4;       // mRNA-GAL80
+r7 = 3;        // mRNA-GAL7
+
+//gal3 and gal 80 promoters in bound or unbound states
+d3b1 = 1;
+d3b1g4d = 0;
+d3b1g4dg80d = 0;
+d80b1 = 1;
+d80b1g4d = 0;
+d80b1g4dg80d = 0;
+
+//gal7 promoters in bound or unbound states
+d7xxxx = 1.0;
+d7g4xx = 0.0;
+d7xxg4 = 0.0;
+d7g4g4 = 0.0;
+d7g8xx = 0.0;
+d7xxg8 = 0.0;
+d7g4g8 = 0.0;
+d7g8g4 = 0.0;
+d7g8g8 = 0.0;
+
+//dimerization and complex formation
+c1,  g4 + g4 -> g4d , 0.1;
+c2,  g4d  -> g4 + g4, 1.0;
+c3,  g7 + g7 -> g7d , 0.1;
+c4,  g7d  -> g7 + g7, 170.2;
+c5,  g80 + g80 -> g80d , 0.1;
+c6,  g80d  -> g80 + g80, 170.2;
+c7,  g3 + GAI -> g3i , 0.001;
+c8,  g3i  -> g3 + GAI, 8.9*10^5;
+c9,  g4d + g80d -> g4dg80d , 0.1;
+c10,  g4dg80d  -> g4d + g80d, 1.82588;
+c11,  g80 + g3i -> g80g3i , 0.1;
+c12,  g80g3i  -> g80 + g3i, 0.03023*20;
+
+//binding and unbinding with gal3 and gal80 promoter regions
+b3r1,  d3b1 + g4d -> d3b1g4d , 0.1;
+b3r2,  d3b1g4d  -> d3b1 + g4d, 1.14676;
+b3r3,  d3b1g4d + g80d -> d3b1g4dg80d , 0.1;
+b3r4,  d3b1g4dg80d  -> d3b1g4d + g80d, 1.82588;
+b80r1,  d80b1 + g4d -> d80b1g4d , 0.1;
+b80r2,  d80b1g4d  -> d80b1 + g4d, 1.14676;
+b80r3,  d80b1g4d + g80d -> d80b1g4dg80d , 0.1;
+b80r4,  d80b1g4dg80d  -> d80b1g4d + g80d, 1.82588;
+
+//binding and unbinding with gal7 promoter regions
+q = 30.0;  //cooperativity factor
+b7r1, d7xxxx + g4d -> d7g4xx, 0.1;           
+b7r2, d7g4xx -> d7xxxx + g4d, 1.14676;
+b7r3, d7xxxx + g4d -> d7xxg4, 0.1;
+b7r4, d7xxg4 -> d7xxxx + g4d, 1.14676;
+b7r5, d7xxg4 + g4d -> d7g4g4, 0.1;
+b7r6, d7g4g4 -> d7xxg4 + g4d, 1.14676;
+b7r7, d7xxg4 + g80d -> d7xxg8, 0.1;
+b7r8, d7xxg8 -> d7xxg4 + g80d, 1.82588;
+b7r9, d7g4xx + g4d -> d7g4g4, 0.1;
+b7r10, d7g4g4 -> d7g4xx + g4d, 1.14676;
+b7r11, d7g4xx + g80d -> d7g8xx, 0.1;
+b7r12, d7g8xx -> d7g4xx + g80d, 1.82588;
+b7r13, d7g4g4 + g80d -> d7g8g4, 0.1;
+b7r14, d7g8g4 -> d7g4g4 + g80d, 1.82588;
+b7r15, d7g4g4 + g80d -> d7g4g8, 0.1;
+b7r16, d7g4g8 -> d7g4g4 + g80d, 1.82588;
+b7r17, d7g8g4 + g80d -> d7g8g8, q * 0.1;
+b7r18, d7g8g8 -> d7g8g4 + g80d, 1.82588;
+b7r19, d7g4g8 + g80d -> d7g8g8, q * 0.1;
+b7r20, d7g8g8 -> d7g4g8 + g80d, 1.82588;
+b7r21, d7xxg8 + g4d -> d7g4g8, 0.1;
+b7r22, d7g4g8 -> d7xxg8 + g4d, 1.14676;
+b7r23, d7g8xx + g4d -> d7g8g4, 0.1;
+b7r24, d7g8g4 -> d7g8xx + g4d, 1.14676;
+
+// RNA creation
+r3r1,   d3b1g4d -> d3b1g4d + r3 , 1.44385;     
+r80r1,  d80b1g4d -> d80b1g4d + r80 , 1.44385;      
+r7r1,   d7g4xx -> d7g4xx + r7 , 5.3284; 
+r7r2,   d7xxg4 -> r7 + d7xxg4, 5.3284; 
+r7r3,   d7g4g4 -> r7 + d7g4g4, 5.3284; 
+r7r4,   d7g4g8 -> r7 + d7g4g8,  5.3284;
+r7r5,   d7g8g4 -> r7 + d7g8g4,  5.3284;
+
+// translation and species creation
+p1,  r3  -> r3 + g3, 4.3807;          // gal3 translation
+p2,  r80  -> r80 + g80, 2.19036;       // gal80 translation
+p3,  r7  -> r7 + g7, 4.3807;          // gal7 translation 
+p4,   -> g4 , 0.86181;
+p5, -> GAI , 1.0*10^7 * 0.003747 * inductflag; 
+
+// RNA decay
+dr1,  r3  -> , 0.159193;
+dr2,  r80  -> , 0.159193;
+dr3,  r7  -> , 0.159193;
+
+// protein decay
+dp1,  g3  -> , 0.003747;
+dp2,  g80  -> , 0.003747;
+dp3,  g7  -> , 0.003747;
+dp4,  g4  -> , 0.003747;
+dp5,  g80d  -> , 0.003747;
+dp6,  g7d  -> , 0.003747;
+dp7,  g4d  -> , 0.003747;
+dp8,  g3i  -> , 0.003747;
+dp9,  g4dg80d  -> , 0.003747;
+dp10,  g80g3i  -> , 0.003747;
+dp11, GAI -> , 0.003747;
+

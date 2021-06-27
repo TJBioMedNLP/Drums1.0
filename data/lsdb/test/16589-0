@@ -1,0 +1,1434 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<style type="text/css">
+
+/*Example CSS for the two demo scrollers*/
+
+#pscroller2{
+width: 385px;
+height: 37px;
+border: 0px;
+padding: 3px;
+vertical-align: middle;
+}
+
+#pscroller2 a{
+text-decoration: none;
+}
+
+.someclass{ //class to apply to your scroller(s) if desired
+}
+
+</style>
+
+
+
+
+
+
+<script type="text/javascript">
+
+/***********************************************
+* Pausing up-down scroller- © Dynamic Drive (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+
+function pausescroller(content, divId, divClass, delay){
+this.content=content //message array content
+this.tickerid=divId //ID of ticker div to display information
+this.delay=delay //Delay between msg change, in miliseconds.
+this.mouseoverBol=0 //Boolean to indicate whether mouse is currently over scroller (and pause it if it is)
+this.hiddendivpointer=1 //index of message array for hidden div
+document.write('<div id="'+divId+'" class="'+divClass+'" style="position: relative; overflow: hidden"><div class="innerDiv" style="position: absolute; width: 100%" id="'+divId+'1">'+content[0]+'</div><div class="innerDiv" style="position: absolute; width: 100%; visibility: hidden" id="'+divId+'2">'+content[1]+'</div></div>')
+var scrollerinstance=this
+if (window.addEventListener) //run onload in DOM2 browsers
+window.addEventListener("load", function(){scrollerinstance.initialize()}, false)
+else if (window.attachEvent) //run onload in IE5.5+
+window.attachEvent("onload", function(){scrollerinstance.initialize()})
+else if (document.getElementById) //if legacy DOM browsers, just start scroller after 0.5 sec
+setTimeout(function(){scrollerinstance.initialize()}, 500)
+}
+
+// -------------------------------------------------------------------
+// initialize()- Initialize scroller method.
+// -Get div objects, set initial positions, start up down animation
+// -------------------------------------------------------------------
+
+pausescroller.prototype.initialize=function(){
+this.tickerdiv=document.getElementById(this.tickerid)
+this.visiblediv=document.getElementById(this.tickerid+"1")
+this.hiddendiv=document.getElementById(this.tickerid+"2")
+this.visibledivtop=parseInt(pausescroller.getCSSpadding(this.tickerdiv))
+//set width of inner DIVs to outer DIV's width minus padding (padding assumed to be top padding x 2)
+this.visiblediv.style.width=this.hiddendiv.style.width=this.tickerdiv.offsetWidth-(this.visibledivtop*2)+"px"
+this.getinline(this.visiblediv, this.hiddendiv)
+this.hiddendiv.style.visibility="visible"
+var scrollerinstance=this
+document.getElementById(this.tickerid).onmouseover=function(){scrollerinstance.mouseoverBol=1}
+document.getElementById(this.tickerid).onmouseout=function(){scrollerinstance.mouseoverBol=0}
+if (window.attachEvent) //Clean up loose references in IE
+window.attachEvent("onunload", function(){scrollerinstance.tickerdiv.onmouseover=scrollerinstance.tickerdiv.onmouseout=null})
+setTimeout(function(){scrollerinstance.animateup()}, this.delay)
+}
+
+
+// -------------------------------------------------------------------
+// animateup()- Move the two inner divs of the scroller up and in sync
+// -------------------------------------------------------------------
+
+pausescroller.prototype.animateup=function(){
+var scrollerinstance=this
+if (parseInt(this.hiddendiv.style.top)>(this.visibledivtop+5)){
+this.visiblediv.style.top=parseInt(this.visiblediv.style.top)-5+"px"
+this.hiddendiv.style.top=parseInt(this.hiddendiv.style.top)-5+"px"
+setTimeout(function(){scrollerinstance.animateup()}, 50)
+}
+else{
+this.getinline(this.hiddendiv, this.visiblediv)
+this.swapdivs()
+setTimeout(function(){scrollerinstance.setmessage()}, this.delay)
+}
+}
+
+// -------------------------------------------------------------------
+// swapdivs()- Swap between which is the visible and which is the hidden div
+// -------------------------------------------------------------------
+
+pausescroller.prototype.swapdivs=function(){
+var tempcontainer=this.visiblediv
+this.visiblediv=this.hiddendiv
+this.hiddendiv=tempcontainer
+}
+
+pausescroller.prototype.getinline=function(div1, div2){
+div1.style.top=this.visibledivtop+"px"
+div2.style.top=Math.max(div1.parentNode.offsetHeight, div1.offsetHeight)+"px"
+}
+
+// -------------------------------------------------------------------
+// setmessage()- Populate the hidden div with the next message before it's visible
+// -------------------------------------------------------------------
+
+pausescroller.prototype.setmessage=function(){
+var scrollerinstance=this
+if (this.mouseoverBol==1) //if mouse is currently over scoller, do nothing (pause it)
+setTimeout(function(){scrollerinstance.setmessage()}, 100)
+else{
+var i=this.hiddendivpointer
+var ceiling=this.content.length
+this.hiddendivpointer=(i+1>ceiling-1)? 0 : i+1
+this.hiddendiv.innerHTML=this.content[this.hiddendivpointer]
+
+this.animateup()
+}
+}
+
+pausescroller.getCSSpadding=function(tickerobj){ //get CSS padding value, if any
+if (tickerobj.currentStyle)
+return tickerobj.currentStyle["paddingTop"]
+else if (window.getComputedStyle) //if DOM2
+return window.getComputedStyle(tickerobj, "").getPropertyValue("padding-top")
+else
+return 0
+}
+
+</script>
+
+
+
+
+
+<title>Plenary, Day 5</title>
+
+
+<link href="../health_cast/healthcast_2.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="prototype.js"></script>
+
+<style type="text/css">
+<!--
+
+.playerdiv
+	{
+	position: relative;
+	}
+
+.howtoview
+	{
+	position: absolute;
+	overflow: auto;
+	width: 386px;
+	height: 0px;
+	}
+
+.playlist
+	{
+	position: absolute;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 386px;
+	height: 279px;
+	}
+
+.playlist_entry
+	{
+	overflow: hidden;
+	width: 372px;
+	}
+
+.playlist_detail
+	{
+	overflow: hidden;
+	width: 372px;
+	height: 0px;
+	}
+
+.playlist_detailinner
+	{
+	}
+
+.playlist_divider
+	{
+	}
+
+
+.outerdetail
+	{
+	overflow: hidden;
+	width: 380px;
+	height: 0px;
+	}
+
+.innerdetail
+	{
+
+	}
+
+.tabcontent
+	{
+	overflow: hidden;
+	margin: 1px;
+	width: 386px;
+	height: 278px;
+	}
+#Layer1 {
+	position:absolute;
+	width:323px;
+	height:42px;
+	z-index:1;
+	left: 18px;
+	top: 390px;
+}
+
+-->
+</style>
+
+<script language="javascript">
+<!--
+
+var vidUrlHigh = "mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv";
+var vidUrlLow = "";
+
+
+var config = new Object();
+config.lists = new Array();
+
+///////////////////////////////////////
+// Playlist configuration...
+///////////////////////////////////////
+
+// The "color_closed" setting might need to be duplicated in the html/css if
+// it's intended to take effect upon page load; these javascript settings
+// only affect the colors after user actions, like mouse movements.
+config.color_closed = '#ffffff';
+config.color_open = '#eef2f5';
+config.color_mouseover = '#fcfaf4';
+config.howtoview_height = 279;
+config.button_plus = '../images/vid_player/plus.gif';
+config.button_minus = '../images/vid_player/minus.gif';
+
+
+// config.autoplay sets the clip which will start playing immediately upon page load.
+config.autoplay =
+	{
+	listname: 'mainlist',
+	entrynumber: '1'
+	};
+
+
+// ADDED FOR INTRO (Note that "duration" should be a total estimated time, in seconds,
+// to download and play the entire intro clip.  It's used to guess how long to wait before playing
+// the autoplay clip, if the browser does not support directly querying the mediaplayer object.)
+
+	config.use_introvideo = true;
+	config.introvideo =
+		{
+		url: 'mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/aids2008_open_256k.wmv',
+		width: '320',
+		height: '307',
+		skipamount: '0',
+		duration: 16
+		};
+	
+
+config.lists[0] = $H(); // This is required to initialize each list.
+config.lists[0].listname = 'mainlist'; // Names cannot contain any spaces or punctuation.
+config.lists[0].autocollapse = true; // If true, only one entry will remain expanded at a time.
+config.lists[0].delay = 100; // Number of milliseconds for list to collapse or expand.
+	// This time is only very approximate, depending on the browser.
+
+config.lists[0].videos =
+	{
+
+
+	'1':
+		{
+		url: 'mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv',
+		width: '320',
+		height: '307',
+		skipamount: '0'
+
+		
+		},
+		
+	'2':
+		{
+		url: 'mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv',
+		width: '320',
+		height: '307',
+		skipamount: '0'
+		
+		},
+		
+	'3':
+		{
+		url: 'mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv',
+		width: '320',
+		height: '307',
+		skipamount: '0'
+		
+		},
+		
+	'4':
+		{
+		url: 'mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv',
+		width: '320',
+		height: '307',
+		skipamount: '0'
+		
+		},
+		
+	'5':
+		{
+		url: 'mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv',
+		width: '320',
+		height: '307',
+		skipamount: '0'
+		
+		},
+		
+	'6':
+		{
+		url: 'mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv',
+		width: '320',
+		height: '307',
+		skipamount: '0'
+		
+		}
+		
+	};
+
+///////////////////////////////////////
+// End of playlist configuration
+///////////////////////////////////////
+
+var playlists = $H();
+var current_video_url = ""; // Used to avoid reloading the video in IE
+
+var mediaplayernum = 1; // This is incremented each time the mediaplayer div is re-written.  (Embedded object bug workaround)
+var mediaplayerid = "mediaplayer" + mediaplayernum; // This is updated each time the mediaplayer div is re-written.  (Embedded object bug workaround)
+
+
+function swapHighLowURL(ourName,speed)
+{
+	for(var c=0; c<config.lists.length; c++) {
+		if (config.lists[c].listname == ourName) {
+			for(var i=1; i<5 + 2; i++) {
+			  if (speed == "high") {
+//					alert("swapping to high: " + i + ": " + vidUrlHigh);
+					config.lists[c].videos[i].url = vidUrlHigh;
+				}
+				else {
+//					alert("swapping to low: " + i + ": " + vidUrlLow);
+					config.lists[c].videos[i].url = vidUrlLow;
+				}
+			}
+		}
+	}
+
+	// Change the external link
+  if (speed == "high") {
+		document.getElementById('extLink').href = vidUrlHigh;
+	}
+	else {
+		document.getElementById('extLink').href = vidUrlLow;
+	}
+
+	// The following code is needed as a workaround for visibility issues;
+	// if howtoview's CSS is initially set to display:none or visibility:hidden,
+	// then Element.show('howtoview') doesn't work.
+	Element.hide('howtoview');
+	Element.setStyle('howtoview', {height: config.howtoview_height+'px'});
+
+	// Automatically start playing the specified video.
+	if(config.autoplay) {
+		if (curPlaying != 0) {
+			PlaylistClick(config.autoplay.listname, curPlaying);
+		}
+		else {
+			PlaylistClick(config.autoplay.listname, config.autoplay.entrynumber);
+		}
+	}
+	return;
+}
+
+
+function PlayerInitialize()
+{
+	// Create the Playlist objects based on configuration.
+	for(var c=0; c<config.lists.length; c++)
+		{
+		playlists[config.lists[c].listname] = new Playlist(
+			config.lists[c].listname,
+			config.lists[c].autocollapse,
+			config.lists[c].delay,
+			config.lists[c].videos);
+		}
+
+	// Make sure the radio buttons are right
+	
+
+	// The following code is needed as a workaround for visibility issues;
+	// if howtoview's CSS is initially set to display:none or visibility:hidden,
+	// then Element.show('howtoview') doesn't work.
+	Element.hide('howtoview');
+	Element.setStyle('howtoview', {height: config.howtoview_height+'px'});
+
+	// Automatically start playing the specified video.
+	if(config.use_introvideo)
+		{
+		Play(config.introvideo);
+		setTimeout("PlayerIntroStart()", 400); // This delay is to make sure that the embedded
+			// object created by the Play() function has been properly initialized by the
+			// browser before its "playState" value is tested.
+		}
+	else if(config.autoplay)
+		{
+		// Email a clip code
+		document.getElementById('emailclip').disabled = false;
+		PlaylistClick(config.autoplay.listname, config.autoplay.entrynumber);
+		}
+}
+
+
+// PlayerIntroStart() is called, after creating the intro video object and delaying a bit,
+// to set up a browser-specific routine that detects the end of the intro video.  After
+// the end of the intro video, the main video will be loaded.
+function PlayerIntroStart()
+	{
+	if(eval("document." + mediaplayerid).playState == undefined)
+		{
+		// This isn't IE, so use a workaround to guess when the intro video is finished.
+		setTimeout("PlayerIntroDone()", config.introvideo.duration * 600);
+		}
+	else
+		{
+		// This is IE, so keep polling until the intro video is finished.
+		PlayerIntroPoll();
+		}
+	}
+
+
+function PlayerIntroPoll()
+	{
+	if(eval("document." + mediaplayerid).playState == 0)
+		{
+		PlayerIntroDone();
+		}
+	else if(curPlaying == 0) // Only continue polling if the user hasn't already clicked an entry.
+		{
+		setTimeout("PlayerIntroPoll()", 300);
+		}
+	}
+
+
+function PlayerIntroDone()
+	{
+	//document.getElementById('emailclip').style.display = 'block';
+	//document.getElementById('emailclip').visible = true;
+	
+	// Email a clip code
+	document.getElementById('emailclip').disabled = false;
+	//alert("done waiting");
+	// Only start autoplaying if the user hasn't already clicked
+	// an entry while the intro was playing.
+	if(config.autoplay && (curPlaying == 0))
+		{
+		//alert("playing next clip");
+		PlaylistClick(config.autoplay.listname, config.autoplay.entrynumber);
+		}
+	}
+
+
+
+var curPlaying = 0;
+var firstPlay = true;
+
+function PlaylistToggle(listname, entrynumber) // Helper function that just calls the appropriate Playlist object's toggle() function.
+	{
+	return(playlists[listname].toggle(entrynumber));
+	}
+
+function PlaylistMouseover(listname, entrynumber)
+	{
+	return(playlists[listname].mouseover(entrynumber));
+	}
+
+function PlaylistMouseout(listname, entrynumber)
+	{
+	return(playlists[listname].mouseout(entrynumber));
+	}
+
+function PlaylistClick(listname, entrynumber)
+	{
+	curPlaying = entrynumber;
+	playlists[listname].click(entrynumber);
+
+	if(! playlists[listname].disabled)
+		{
+		PlaylistDisable(listname);
+		Play(playlists[listname].videos[entrynumber]);
+		//alert(playlists[listname].videos[entrynumber].url);
+		setTimeout("PlaylistEnable('" + listname + "')", 100); // This is to prevent double clicks.
+
+		}
+
+    var anchor = "#clip_"+entrynumber;
+    setTimeout("jumpToAnchor('" + anchor + "')",300);
+
+	return(false);
+	}
+
+function jumpToAnchor(anchor)
+    {
+	window.location.href=anchor;
+	}
+
+function PlaylistDisable(listname)
+	{
+	playlists[listname].disabled = true;
+	}
+
+function PlaylistEnable(listname)
+	{
+	playlists[listname].disabled = false;
+	}
+
+
+// Definition of Playlist object.
+
+function Playlist(listname, autocollapse, delay, videos)
+	{
+	this.running = false; // Set to true during entry-resize process.
+
+	this.listname = listname;
+	this.autocollapse = autocollapse;
+	this.delay = delay; // Milliseconds to spend between fully collapsed and fully expanded.
+	this.videos = videos;
+
+	this.intervaltime = 20; // Milliseconds between updates.
+	this.runningtimeleft = 0; // Time until updating stops.
+	this.disabled = false; // If set to true, playlist clicks will not update the video area.
+
+	this.entries = $H();
+	this.entrynumbers = new Array();
+	for(entrynumber in videos)
+		{
+		this.entries[entrynumber] = new PlaylistEntry(listname, entrynumber);
+		this.entrynumbers.push(entrynumber);
+		}
+	}
+
+
+Playlist.prototype.toggle = function(entrynumber)
+	{
+	var entry = this.entries[entrynumber];
+
+	entry.toggle();
+
+	if(entry.state == "opening")
+		{
+		if(entry.getFullHeight() > 0)
+			{
+			this.runningtimeleft = this.delay * (entry.getFullHeight()-entry.getCurrentHeight()) / entry.getFullHeight();
+			}
+
+		if(this.autocollapse)
+			{
+			//alert(this.entries[3].entrynumber);
+			for(var n=0; n<this.entrynumbers.length; n++)
+				{
+				var entryn = this.entrynumbers[n];
+				var collapse_entry = this.entries[entryn];
+				//alert(collapse_entry.entrynumber);
+				if(collapse_entry.entrynumber != entrynumber &&
+					collapse_entry.state != "closed")
+					{
+					collapse_entry.startClosing();
+					}
+				}
+			}
+		}
+	else if(entry.state == "closing")
+		{
+		if(entry.getFullHeight() > 0)
+			{
+			this.runningtimeleft = this.delay * Math.ceil(entry.getCurrentHeight() / entry.getFullHeight());
+			}
+		}
+
+
+	if(! this.running)
+		{
+		this.running = true;
+		this.jsinterval = setInterval(this.update.bind(this), this.intervaltime);
+		}
+	}
+
+
+Playlist.prototype.mouseover = function(entrynumber)
+	{
+	var entry = this.entries[entrynumber];
+	entry.mouseover();
+	}
+
+
+Playlist.prototype.mouseout = function(entrynumber)
+	{
+	var entry = this.entries[entrynumber];
+	entry.mouseout();
+	}
+
+
+Playlist.prototype.click = function(entrynumber)
+	{
+	var entry = this.entries[entrynumber];
+	if(entry.state == "closed")
+		{
+		this.toggle(entrynumber);
+		}
+	}
+
+
+Playlist.prototype.update = function()
+	{
+	this.runningtimeleft -= this.intervaltime; // Count down timer.
+
+	//for(entrynumber in this.entries)
+	for(var n=0; n<this.entrynumbers.length; n++)
+		{
+		var entrynumber = this.entrynumbers[n];
+		var entry = this.entries[entrynumber];
+
+		if(entry.state == "opening")
+			{
+			if(this.runningtimeleft <= 0)
+				{
+				entry.setCurrentHeight(entry.getFullHeight());
+				entry.state = "open";
+				}
+			else
+				{
+				var remainingheight = entry.getFullHeight() - entry.getCurrentHeight();
+
+				if(remainingheight > 0)
+					{
+					var heightchange = remainingheight / (this.runningtimeleft/this.intervaltime);
+					entry.setCurrentHeight(entry.getCurrentHeight() + heightchange);
+					}
+				}
+			}
+		else if(entry.state == "closing")
+			{
+			if(this.runningtimeleft <= 0)
+				{
+				entry.setCurrentHeight(0);
+				entry.state = "closed";
+				}
+			else
+				{
+				var remainingheight = entry.getCurrentHeight();
+
+				if(remainingheight > 0)
+					{
+					var heightchange = remainingheight / (this.runningtimeleft/this.intervaltime);
+					entry.setCurrentHeight(entry.getCurrentHeight() - heightchange);
+					}
+				}
+			}
+		}
+
+	if(this.runningtimeleft <= 0)
+		{
+		this.running = false;
+		clearInterval(this.jsinterval);
+		//alert("done.");
+		}
+	}
+
+// Definition of PlaylistEntry object:
+
+function PlaylistEntry(listname, entrynumber)
+	{
+	this.listname = listname;
+	this.entrynumber = entrynumber;
+
+	this.state = "closed";
+	this.resizing = false; // Set to true when in the process of resizing.
+	this.preciseheight = this.getCurrentHeight(); // Allow for fractional pixels
+	}
+
+
+PlaylistEntry.prototype.toggle = function()
+	{
+	if(this.state == "closed" || this.state == "closing")
+		{
+		this.startOpening();
+		}
+	else if(this.state == "open" || this.state == "opening")
+		{
+		this.startClosing();
+		}
+	}
+
+
+PlaylistEntry.prototype.startOpening = function()
+	{
+	this.state = "opening";
+
+	Element.setStyle(this.listname + '_entry_' + this.entrynumber, {backgroundColor: config.color_open});
+	Element.setStyle(this.listname + '_detail_' + this.entrynumber, {backgroundColor: config.color_open});
+
+	$(this.listname + '_button_' + this.entrynumber).src = config.button_minus;
+	}
+
+
+PlaylistEntry.prototype.startClosing = function()
+	{
+	this.state = "closing";
+
+	Element.setStyle(this.listname + '_entry_' + this.entrynumber, {backgroundColor: config.color_closed});
+	Element.setStyle(this.listname + '_detail_' + this.entrynumber, {backgroundColor: config.color_closed});
+
+	$(this.listname + '_button_' + this.entrynumber).src = config.button_plus;
+	}
+
+
+PlaylistEntry.prototype.open = function()
+	{
+	var innerheight = Element.getHeight(this.listname + '_detailinner_' + this.entrynumber);
+
+	Element.setStyle(this.listname + '_entry_' + this.entrynumber, {backgroundColor: config.color_open});
+	Element.setStyle(this.listname + '_detail_' + this.entrynumber, {backgroundColor: config.color_open, height: innerheight+'px'});
+
+	$(this.listname + '_button_' + this.entrynumber).src = config.button_minus;
+
+	this.state = "open";
+
+	return(false);
+	}
+
+
+PlaylistEntry.prototype.getFullHeight = function()
+	{
+	return(Element.getHeight(this.listname + '_detailinner_' + this.entrynumber));
+	}
+
+
+PlaylistEntry.prototype.getCurrentHeight = function()
+	{
+	var pixelheight = Element.getHeight(this.listname + '_detail_' + this.entrynumber);
+
+	if(Math.abs(pixelheight - this.preciseheight) < 1)
+		{
+		return(this.preciseheight);
+		}
+	else
+		{
+		return(pixelheight);
+		}
+	}
+
+
+PlaylistEntry.prototype.setCurrentHeight = function(height)
+	{
+	if(height < 0) height = 0;
+
+	this.preciseheight = height;
+
+	Element.setStyle(this.listname + '_detail_' + this.entrynumber, {height: Math.floor(this.preciseheight)+'px'});
+	}
+
+
+PlaylistEntry.prototype.mouseover = function()
+	{
+	if(this.state == "closed")
+		{
+		Element.setStyle(this.listname + '_entry_' + this.entrynumber, {backgroundColor: config.color_mouseover});
+		}
+	}
+
+
+PlaylistEntry.prototype.mouseout = function()
+	{
+	if(this.state == "closed")
+		{
+		Element.setStyle(this.listname + '_entry_' + this.entrynumber, {backgroundColor: config.color_closed});
+		}
+	}
+
+
+// Misc functions.
+
+function GetStyleObject(id)
+	{
+	if(document.layers) return(document.layers[id]);
+	else if(document.all && !document.getElementById) return(document.all[id].style);
+	else if(document.getElementById && document.body.style) return(document.getElementById(id).style);
+
+	return(false);
+	}
+
+// This function was updated for Email a Clip functionality make sure the currentPosition in the object and embed tags are set to the newoffset variable
+function Play(video)
+	{
+	// video object must contain parameters: url, width, height, skipamount
+	var newposition = 0;
+	var intro = "no video";
+	if(config.introvideo != undefined) {
+		intro = config.introvideo.url; 
+	}
+	if(video.url != intro)
+		CheckForLiveVideo(video.url);
+	if((video.url != current_video_url) ||
+		!document.all)
+		{
+		// Replace the entire video div if this is a new video, or if it's a non-IE browser.
+
+		// First come up with a new id for this embedded object, as a workaround for
+		// Firefox/Windows Media Player bugs.
+		mediaplayernum += 1;
+		mediaplayerid = "mediaplayer" + mediaplayernum;
+		
+		var newoffset = parseInt(video.skipamount);
+		if(video.url != intro  && firstPlay == true){
+			if(parseInt(0) > 0) {
+				newoffset = parseInt(0);
+			}
+			else {
+				newoffset = video.skipamount;
+			}
+			firstPlay = false;
+		}
+		
+		
+		$('playerdiv').innerHTML =
+			'<object classid="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95" '+'type="application/x-oleobject" width=' + video.width + ' height=' + video.height + ' align="top" standby="Loading Windows Media Player components..." name="' + mediaplayerid + '" id="' + mediaplayerid + '"> '
+			+'<param name="ShowStatusBar" value="1">'
+			+'<param name="ShowDisplay" value="0">'
+			+'<param name="ShowControls" value="1"> '
+			+'<param name="AutoStart" value="1"> '
+			+'<param name="AutoRewind" value="1">'
+			+'<param name="PlayCount" value="1">'
+			+'<param name="currentPosition" value="' + newoffset +'">'
+			+'<param name="Appearance" value="0">'
+			+'<param name="BorderStyle" value="0">'
+			+'<param name="FileName" value="' + video.url + '"> '
+			+'<embed name="' + mediaplayerid + '" id="' + mediaplayerid + '" src="' + video.url + '" '
+			+'width="' + video.width + '" height="' + video.height + '" '
+			+'autostart="1" loop="false" align="top" type="application/x-mplayer2" '
+			+'pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" '
+			+'currentPosition="' + newoffset
+			+' controls="true" showdisplay="0" showcontrols="1" showstatusbar="1" '
+			+'autorewind="1" playcount="1" moviewindowheight="' + video.height + '" moviewindowwidth="' + video.width + '" '
+			+'filename="' + video.url + '"> '
+			+'</embed>'
+			+'</object>';
+		}
+	else if(document.all)
+		{
+		// This is IE, and the link is to a new position within the same video file.
+		eval("document." + mediaplayerid).CurrentPosition = video.skipamount;
+		}
+
+	current_video_url = video.url;
+
+	return(false);
+	}
+	
+	function CheckForLiveVideo(url)
+	{
+		var emailButton = document.getElementById('emailclip');
+		var extension = url.substr(url.length-4, 4);
+		//alert(extension);
+		if(extension != '.wma' && extension != '.wmv' && extension != '.wvx') {
+			emailButton.visible = false;
+			emailButton.style.display = 'none';
+		}
+		else {
+			emailButton.visible = true;
+			emailButton.style.display = '';
+		}
+	}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+//#####################################################
+//
+// Javascript for the Email a Clip functionality 
+// 
+// Code taken from: http://blog.paranoidferret.com/?p=4
+//
+//#####################################################
+
+var sliderIntervalId = 0;
+var sliderWidth = 0;
+var startWidth = 415;
+var sliding = false;
+var slideSpeed = 10;
+var emailButton;
+
+function Slide()
+{
+   if(sliding)
+      return;
+   sliding = true;
+   if(sliderWidth == startWidth)
+      sliderIntervalId = setInterval('SlideUpRun()', 30);
+   else {
+		updateIFrame();
+		sliderIntervalId = setInterval('SlideDownRun()', 30);
+   }	  
+}
+
+function SlideUpRun()
+{
+   slider = document.getElementById('exampleSlider');
+   emailButton = document.getElementById('emailclip');
+   emailButton.src = "../images/email_a_clip_default.gif";
+   //var scroller = document.getElementById('pscroller2');
+   //scroller.style.display = '';
+   if(sliderWidth <= 0)
+   {
+      sliding = false;
+      sliderWidth = 0;
+      slider.style.width = '0px';
+      clearInterval(sliderIntervalId);
+   }
+   else
+   {
+      sliderWidth -= slideSpeed;
+      if(sliderWidth <0)
+         sliderWidth = 0;
+      slider.style.width = sliderWidth + 'px';
+   }
+}
+
+function SlideDownRun()
+{  
+   slider = document.getElementById('exampleSlider');
+   emailButton = document.getElementById('emailclip');
+   emailButton.src = "../images/email_a_clip_open.gif";
+   //var scroller = document.getElementById('pscroller2');
+   //scroller.style.display = 'none';
+   if(sliderWidth>= startWidth)
+   {
+      sliding = false;
+      sliderWidth = startWidth;
+      slider.style.width = '415px';
+      clearInterval(sliderIntervalId);
+   }
+   else
+   {
+      sliderWidth += slideSpeed;
+      if(sliderWidth> startWidth)
+         sliderWidth = startWidth;
+      slider.style.width = sliderWidth + 'px';
+   }
+}
+function updateIFrame() {
+	if(curPlaying > 1) {
+		var title = document.getElementById('clipTitle'+(curPlaying-1));
+		var sec = document.getElementById('clipSec'+(curPlaying-1));
+		var min = document.getElementById('clipMin'+(curPlaying-1));
+	}
+	else {
+		var title = document.getElementById('clipTitle1');
+		var sec = document.getElementById('clipSec1');
+		var min = document.getElementById('clipMin1');
+	}
+	
+	var player = document.getElementById(mediaplayerid);
+	if(document.all)
+	document.getElementById('ifEmail').src = 'emailClip.cfm?dur=' + parseInt(player.currentPosition) + '&id=4383.&player=' + curPlaying + '&max=' + parseInt(player.Duration);
+	else
+	document.getElementById('ifEmail').src = 'emailClip.cfm?dur=' + playlists[config.autoplay.listname].videos[curPlaying].skipamount + '&id=4383.&player=' + curPlaying + '&max=' + ((0 * 3600)+(parseInt(0)*60)+(parseInt(0)));
+   
+}
+
+//#################################################
+//#################################################
+
+function EmailClip() {
+	window.open('emailclip.cfm?id=#URL.id#&play=' + curPlaying + '&mark=' + playlists[config.autoplay.listname].videos[curPlaying].controls.currentPosition, 'mywin');
+}
+//-->
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="PlayerInitialize();" bgcolor="#183966">
+<table width="770" border="0" cellspacing="0" cellpadding="0" bgcolor="#183966">
+  <tr height="59" valign="middle">
+    <td colspan="2">
+<a href="http://www.kaisernetwork.org" target="_blank"><img src="../images/vid_player/player_title.gif" alt="kaisernetwork.org" width="332" height="47" border="0" align="left" /></a>
+
+		
+
+	</td>
+  </tr>
+  <tr height="335">
+    <td width="8"></td>
+    <td valign="top" align="left">
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="342" height="335" rowspan="2" background="../images/vid_player/player_back_blank2.gif">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#8DA2B9">
+              <tr >
+                <td>
+				
+
+ <div id="playerdiv" class="playerdiv" style="margin-top: -65px;">
+                    <!-- player area gets inserted here -->
+                  </div>
+
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="10" valign="top"><img src="../images/vid_player/player_divider.gif" width="10" height="331" /></td>
+          <td width="405" height="335" valign="top" background="../images/vid_player/player_right_back.gif">
+            <!-- playlist area goes here -->
+            <table width="387" border="0" cellspacing="0" cellpadding="0">
+              <tr height="12">
+                <td></td>
+              </tr>
+              <tr>
+                <td background="../images/vid_player/player_right_topback.gif"><a href="#" onclick="Element.show('mainlist'); Element.hide('howtoview'); this.blur(); return(false);"><img src="../images/vid_player/playlist_white.gif" alt="Playlist" name="playlist" width="58" height="18" border="0" id="playlist" onclick="MM_swapImage('playlist','','../images/vid_player/playlist_white.gif','needhelp','','../images/vid_player/needhelp_blue.gif',0)" /></a><a href="#" onclick="Element.hide('mainlist'); Element.show('howtoview'); this.blur(); return(false);"><img src="../images/vid_player/needhelp_blue.gif" alt="Need Help?" name="needhelp" width="88" height="18" border="0" id="needhelp" onclick="MM_swapImage('playlist','','../images/vid_player/playlist_off.gif','needhelp','','../images/vid_player/needhelp_white.gif',0)" /></a></td>
+              </tr>
+              <tr>
+                <td>
+                  <div id="tabcontent" class="tabcontent">
+                    <div id="mainlist" class="playlist">
+                      
+                        <div id="mainlist_entry_1" class="playlist_entry" onmouseover="PlaylistMouseover('mainlist',1);" onmouseout="PlaylistMouseout('mainlist',1);">
+                          <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                            <tr>
+                              <td width="15" valign="top"><a href="#" onclick="this.blur(); return(PlaylistToggle('mainlist',1));"><img id="mainlist_button_1" src="../images/vid_player/plus.gif" alt="Expand or collapse this entry." width="11" height="11" border="0" /></a></td>
+                              <td valign="top" class="playerboxtext" onclick="PlaylistClick('mainlist',1);"><a href="#" onclick="this.blur(); return(PlaylistClick('mainlist',1));" class="playerclosed">
+															<span class="playerclosed">Full Video - Plenary, Day 5</span></a>&nbsp;
+							  </td>
+                            </tr>
+                          </table>
+                          
+<script language="JavaScript" type="text/JavaScript">
+<!--
+							
+function playerPopUp(URL) {
+	day = new Date();
+	id = day.getTime();
+	eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=1,scrollbars=1,location=1,statusbar=1,menubar=1,resizable=1,addressbar=1,left = 340,top = 212');");
+	if (eval("page" + id))
+		document.getElementById('blocked').style.display = 'none';
+	else
+		document.getElementById('blocked').style.display = 'block';
+}
+
+//-->
+</script>
+                          
+							<br />
+							&nbsp; <span class="playerboxtext">
+								<a href="javascript:playerPopUp('/health_cast/hcast_index.cfm?display=detail&hc=2941')" >
+                                View transcript and additional resources for this event
+                                </a><br />
+							</span>
+                          
+                        </div>
+                        <div id="mainlist_detail_1" class="playlist_detail">
+                          <div id="mainlist_detailinner_1" class="playlist_detailinner">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                              <tr>
+                                <td width="15" valign="top">&nbsp;</td>
+                                <td width="15" valign="top">&nbsp;</td>
+                                <td valign="top" class="playerboxtext">
+
+																	<p style="margin-top:3px;margin-bottom:0px"></p>
+																	
+																	<p style="margin-top:0px;margin-bottom:4px"></p>
+
+								</td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="playlist_divider">
+													<img src="../images/vid_player/player_right_divider.gif" width="373" height="3" />
+											  </div>
+												
+
+    	                      <div id="mainlist_entry_2" class="playlist_entry" onmouseover="PlaylistMouseover('mainlist',2);" onmouseout="PlaylistMouseout('mainlist',2);">
+    	                        <a name="clip_2" id="clip_2" href="javascript:void(0);"></a>
+
+   	                         <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                            	  <tr>
+                          	      <td width="15" valign="top">&nbsp;</td>
+                        	        <td width="15" valign="top"><a href="#" onclick="this.blur(); return(PlaylistToggle('mainlist',2));"><img id="mainlist_button_2" src="../images/vid_player/plus.gif" alt="Expand or collapse this entry." width="11" height="11" border="0" /></a></td>
+
+												  				
+                      	          <td valign="top" class="playerboxtext"><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000;">Co-Chairs</span>
+																		<p style="margin-top:10px;margin-bottom:0px"></p><table width="100%"><tr valign="top"><td width="100%" class="timeclips"><ul><li><strong>Jean Francois Delfraissey<br /></strong>France<br /><br /></li><li><strong>Julio Frenk, M.D., Ph.D., M.P.H.<br /></strong>Senior Fellow, <a href="http://www.gatesfoundation.org/default.htm" target="_blank">Global Health Program<br />Bill and Melinda Gates Foundation</a><br /><br /></li><li><strong>Sigrun M&oslash;gedal<br /></strong>State Secretary of International Development Government <br />Norway<br /><br /></li><li><strong>Nafis Sadik, M.D.<br /></strong><a href="http://www.unaids.org/en/AboutUNAIDS/Leadership/SpecialEnvoys/" target="_blank">Special Envoy for AIDS in Asia</a><br />Pakistan</li></ul></td></tr></table><p style="margin-top:0px;margin-bottom:1px"></p><input type="Hidden" id="clipTitle1" name="clipTitle1" value="Co-Chairs"></td>
+									
+                	              </tr>
+           	              		</table>
+            	              </div>
+	          	              <div id="mainlist_detail_2" class="playlist_detail">
+        	                    <div id="mainlist_detailinner_2" class="playlist_detailinner">
+																<table width="100%" border="0" cellspacing="0" cellpadding="4">
+																	<tr>
+ 	 	                                <td width="15" valign="top">&nbsp;</td>
+	                                  <td width="15" valign="top">&nbsp;</td>
+ 	                                 	<td valign="top" class="playerboxtext">
+ 	                               	    <!-- The entry's detail html goes here. -->
+                              	      <ul class="playerboxtext">
+                            	          
+   	           	                      </ul>
+     	        	                    </td>
+       	    	                    </tr>
+         		                    </table> 
+       	  	                  </div>
+      	                    </div>
+    	                      
+  	                          <div class="playlist_divider"> <img src="../images/vid_player/player_right_divider.gif" width="373" height="3" /> </div>
+	                          
+
+    	                      <div id="mainlist_entry_3" class="playlist_entry" onmouseover="PlaylistMouseover('mainlist',3);" onmouseout="PlaylistMouseout('mainlist',3);">
+    	                        <a name="clip_3" id="clip_3" href="javascript:void(0);"></a>
+
+   	                         <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                            	  <tr>
+                          	      <td width="15" valign="top">&nbsp;</td>
+                        	        <td width="15" valign="top"><a href="#" onclick="this.blur(); return(PlaylistToggle('mainlist',3));"><img id="mainlist_button_3" src="../images/vid_player/plus.gif" alt="Expand or collapse this entry." width="11" height="11" border="0" /></a></td>
+
+												  				
+                      	          <td valign="top" class="playerboxtext"><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000;">HIV and TB</span>
+																		<p style="margin-top:10px;margin-bottom:0px"></p><table width="100%"><tr valign="top"><td width="100%" class="timeclips"><p><strong>Chakaya Jeremiah Muhwa, M.D., M.Sc.<br /></strong>Chief Research Officer, Centre for Respiratory Diseases Research<br />Chair,&nbsp;<a href="http://www.stoptb.org/wg/dots_expansion/" target="_blank">DOTS Expansion Working Group</a><br />Vice Chair, <a href="http://www.stoptb.org/cb/about/" target="_blank">Stop TB Partnership Coordinating Board</a><br />Kenya</p></td></tr></table><p style="margin-top:0px;margin-bottom:1px"></p><input type="Hidden" id="clipTitle2" name="clipTitle2" value="HIV and TB"></td>
+									
+                	              </tr>
+           	              		</table>
+            	              </div>
+	          	              <div id="mainlist_detail_3" class="playlist_detail">
+        	                    <div id="mainlist_detailinner_3" class="playlist_detailinner">
+																<table width="100%" border="0" cellspacing="0" cellpadding="4">
+																	<tr>
+ 	 	                                <td width="15" valign="top">&nbsp;</td>
+	                                  <td width="15" valign="top">&nbsp;</td>
+ 	                                 	<td valign="top" class="playerboxtext">
+ 	                               	    <!-- The entry's detail html goes here. -->
+                              	      <ul class="playerboxtext">
+                            	          
+                          	              <li> <a href="../health_cast/uploaded_files/Muhwa_bio.pdf" target="_blank">Bio</a></li>
+                        	              
+   	           	                      </ul>
+     	        	                    </td>
+       	    	                    </tr>
+         		                    </table> 
+       	  	                  </div>
+      	                    </div>
+    	                      
+  	                          <div class="playlist_divider"> <img src="../images/vid_player/player_right_divider.gif" width="373" height="3" /> </div>
+	                          
+
+    	                      <div id="mainlist_entry_4" class="playlist_entry" onmouseover="PlaylistMouseover('mainlist',4);" onmouseout="PlaylistMouseout('mainlist',4);">
+    	                        <a name="clip_4" id="clip_4" href="javascript:void(0);"></a>
+
+   	                         <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                            	  <tr>
+                          	      <td width="15" valign="top">&nbsp;</td>
+                        	        <td width="15" valign="top"><a href="#" onclick="this.blur(); return(PlaylistToggle('mainlist',4));"><img id="mainlist_button_4" src="../images/vid_player/plus.gif" alt="Expand or collapse this entry." width="11" height="11" border="0" /></a></td>
+
+												  				
+                      	          <td valign="top" class="playerboxtext"><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000;">HIV Prevention: What Have we Learned from Community Experiences in Concentrated Epidemics?</span>
+																		<p style="margin-top:10px;margin-bottom:0px"></p><table width="100%"><tr valign="top"><td width="100%" class="timeclips"><p><strong>Bruno Spire, Ph.D.<br /></strong>Social Researcher, <a href="http://www.aixmarseille-universite.fr/index.htm" target="_blank">University of Marseilles</a>/AIDES<br />France</p></td></tr></table><p style="margin-top:0px;margin-bottom:1px"></p><input type="Hidden" id="clipTitle3" name="clipTitle3" value="HIV Prevention: What Have we Learned from Community Experiences in Concentrated Epidemics?"></td>
+									
+                	              </tr>
+           	              		</table>
+            	              </div>
+	          	              <div id="mainlist_detail_4" class="playlist_detail">
+        	                    <div id="mainlist_detailinner_4" class="playlist_detailinner">
+																<table width="100%" border="0" cellspacing="0" cellpadding="4">
+																	<tr>
+ 	 	                                <td width="15" valign="top">&nbsp;</td>
+	                                  <td width="15" valign="top">&nbsp;</td>
+ 	                                 	<td valign="top" class="playerboxtext">
+ 	                               	    <!-- The entry's detail html goes here. -->
+                              	      <ul class="playerboxtext">
+                            	          
+                          	              <li> <a href="../health_cast/uploaded_files/Spire_bio.pdf" target="_blank">Bio</a></li>
+                        	              
+   	           	                      </ul>
+     	        	                    </td>
+       	    	                    </tr>
+         		                    </table> 
+       	  	                  </div>
+      	                    </div>
+    	                      
+  	                          <div class="playlist_divider"> <img src="../images/vid_player/player_right_divider.gif" width="373" height="3" /> </div>
+	                          
+
+    	                      <div id="mainlist_entry_5" class="playlist_entry" onmouseover="PlaylistMouseover('mainlist',5);" onmouseout="PlaylistMouseout('mainlist',5);">
+    	                        <a name="clip_5" id="clip_5" href="javascript:void(0);"></a>
+
+   	                         <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                            	  <tr>
+                          	      <td width="15" valign="top">&nbsp;</td>
+                        	        <td width="15" valign="top"><a href="#" onclick="this.blur(); return(PlaylistToggle('mainlist',5));"><img id="mainlist_button_5" src="../images/vid_player/plus.gif" alt="Expand or collapse this entry." width="11" height="11" border="0" /></a></td>
+
+												  				
+                      	          <td valign="top" class="playerboxtext"><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000;">Criminal Statutes and Criminal Prosecutions in the Epidemic: Help or Hindrance?</span>
+																		<p style="margin-top:10px;margin-bottom:0px"></p><table width="100%"><tr valign="top"><td width="100%" class="timeclips"><strong>Edwin Cameron<br /></strong>Justice, <a href="http://www.law.wits.ac.za/sca/index.php" target="_blank">Supreme Court of Appeal</a><br />South Africa</td></tr></table><p style="margin-top:0px;margin-bottom:1px"></p><input type="Hidden" id="clipTitle4" name="clipTitle4" value="Criminal Statutes and Criminal Prosecutions in the Epidemic: Help or Hindrance?"></td>
+									
+                	              </tr>
+           	              		</table>
+            	              </div>
+	          	              <div id="mainlist_detail_5" class="playlist_detail">
+        	                    <div id="mainlist_detailinner_5" class="playlist_detailinner">
+																<table width="100%" border="0" cellspacing="0" cellpadding="4">
+																	<tr>
+ 	 	                                <td width="15" valign="top">&nbsp;</td>
+	                                  <td width="15" valign="top">&nbsp;</td>
+ 	                                 	<td valign="top" class="playerboxtext">
+ 	                               	    <!-- The entry's detail html goes here. -->
+                              	      <ul class="playerboxtext">
+                            	          
+                          	              <li> <a href="../health_cast/uploaded_files/Cameron_bio.pdf" target="_blank">Bio</a></li>
+                        	              
+   	           	                      </ul>
+     	        	                    </td>
+       	    	                    </tr>
+         		                    </table> 
+       	  	                  </div>
+      	                    </div>
+    	                      
+  	                          <div class="playlist_divider"> <img src="../images/vid_player/player_right_divider.gif" width="373" height="3" /> </div>
+	                          
+
+    	                      <div id="mainlist_entry_6" class="playlist_entry" onmouseover="PlaylistMouseover('mainlist',6);" onmouseout="PlaylistMouseout('mainlist',6);">
+    	                        <a name="clip_6" id="clip_6" href="javascript:void(0);"></a>
+
+   	                         <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                            	  <tr>
+                          	      <td width="15" valign="top">&nbsp;</td>
+                        	        <td width="15" valign="top"><a href="#" onclick="this.blur(); return(PlaylistToggle('mainlist',6));"><img id="mainlist_button_6" src="../images/vid_player/plus.gif" alt="Expand or collapse this entry." width="11" height="11" border="0" /></a></td>
+
+												  				
+                      	          <td valign="top" class="playerboxtext"><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #000000;">Investing in Gender Equality: Why Women and Girls Matter in the AIDS Response</span>
+																		<p style="margin-top:10px;margin-bottom:0px"></p><table width="100%"><tr valign="top"><td width="100%" class="timeclips"><span><strong>Zonibel Woods<br /></strong><a href="http://www.fordfound.org/" target="_blank">The Ford Foundation</a><br />Canada</span></td></tr></table><p style="margin-top:0px;margin-bottom:1px"></p><input type="Hidden" id="clipTitle5" name="clipTitle5" value="Investing in Gender Equality: Why Women and Girls Matter in the AIDS Response"></td>
+									
+                	              </tr>
+           	              		</table>
+            	              </div>
+	          	              <div id="mainlist_detail_6" class="playlist_detail">
+        	                    <div id="mainlist_detailinner_6" class="playlist_detailinner">
+																<table width="100%" border="0" cellspacing="0" cellpadding="4">
+																	<tr>
+ 	 	                                <td width="15" valign="top">&nbsp;</td>
+	                                  <td width="15" valign="top">&nbsp;</td>
+ 	                                 	<td valign="top" class="playerboxtext">
+ 	                               	    <!-- The entry's detail html goes here. -->
+                              	      <ul class="playerboxtext">
+                            	          
+                          	              <li> <a href="../health_cast/uploaded_files/Woods_bio.pdf" target="_blank">Bio</a></li>
+                        	              
+   	           	                      </ul>
+     	        	                    </td>
+       	    	                    </tr>
+         		                    </table> 
+       	  	                  </div>
+      	                    </div>
+    	                       </div>
+                    <!-- After playlist div -->
+                    <div id="howtoview" class="howtoview"  style="display:none;">
+                      <table width="95%" border="0" cellspacing="0" cellpadding="4">
+                        <tr>
+                          <td class="playerboxtext">
+                            <p>
+                              <!-- How-to-view content goes here. -->
+                           <strong>Viewing Kaisernetwork Video Feeds</strong><br />
+                            Kaisernetwork HealthCasts may be viewed using the free Windows Media Player. For best results you should view the HealthCasts with the most recent version of the player, which may be downloaded from the Microsoft <a href="http://www.microsoft.com/windows/windowsmedia/download/AllDownloads.aspx?displang=en&amp;qstechnology=" target="_blank">Windows Media Player website</a>.</p>
+							<p>
+							<strong>Viewing Slides, Bios, and other Media Elements</strong><br />
+                            Many HealthCasts provide links to content in Flash and PDF formats. Download the most recent versions of these plugins from the following locations:
+							<ul>
+															<li>
+																<a href="http://www.adobe.com/go/getflashplayer" target="_blank">Adobe Flash Player</a>
+															</li>
+															<li>
+																<a href="http://www.adobe.com/products/acrobat/readstep2.html" target="_blank">Adobe PDF Reader</a>
+															</li>
+							</ul>
+													</p>
+							<p>
+							<strong>Viewing in an External Window</strong><br />
+                            If you are having problems watching the video or prefer to view in an external Windows Media Player, please click on "Video not playing? Click here to view externally" in the lower-left corner of the player box.</p>
+						<!--	<p>
+							<strong>Changing Connection Speed</strong><br />
+                            If you want to change your connection speed while the video is playing, simply click on either the high or low speed boxes on the player. Changing your video speed may improve video quality or make it easier to watch live webcasts.</p>-->
+							<p>
+							<strong>Mac Users</strong><br />
+                            If you are experiencing problems with the video please <a href="http://www.microsoft.com/mac/downloads.aspx?pid=download&location=/mac/download/misc/winmp_osx.xml&secid=80&ssid=8&flgnosysreq=True" target="_blank">download</a> Microsoft's Media Player for Mac.</p>
+							<p>
+							<strong>Have other questions? Visit our <a href="http://www.kaisernetwork.org/faqs/faqs.cfm?action=display&cat=9" target="_blank">FAQ section</a> or e-mail <a href="mailto:healthcast@kaisernetwork.org">healthcast@kaisernetwork.org</a>.</strong><br />
+		  </p></td></tr></table></div></div></td></tr></table></td>
+        </tr><tr><td colspan="3"><img src="../images/vid_player/dailyreports.gif" alt="Daily Reports" width="392" height="18" hspace="10" /><br /><table width="412" border="0" cellpadding="0" cellspacing="0"><tr>
+					<td width="11">&nbsp;</td>
+					<td class="drlinks">
+					
+					</td>
+				  </tr>
+				</table>
+			   </td>
+			</tr>
+			
+      </table>
+    </td>
+  </tr>
+
+  
+
+</table>
+
+<div style="position:absolute;left:10px;top:425px;">
+	<table cellspacing="0" cellpadding="0" border="0" width="320px">
+	<tr><td align="center" class="notplayingtext">
+		
+			<a id="extLink" href="mms://kaiserfam.wmod.llnwd.net/a2355/o23/mexico/080808_ias_plenary_multi_256k.wmv">Video not playing? Click here to view externally.</a><br/>
+			Double click on the video for a full screen view.
+		
+	</td></tr></table>
+	</div>
+
+         <table id="Layer1" width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+               <td align="right" style="text-size:9pt;" valign="top" >
+				  
+				  <input type="image" id="emailclip" onclick="javascript:Slide();" src="../images/email_a_clip_default.gif" disabled="true">
+				  
+               </td>
+            </tr>
+         </table> 
+   <div id="exampleSlider" style="position:absolute;top:54px;left:344px;width:0px;height:408px;overflow:hidden;">
+      <table width="100%" height="100%">
+         <tr>
+            <td valign="top" style="padding:3px;">
+              
+   
+<span id="spanFrame" name="spanFrame">
+<iframe width="415px" height="408px" frameborder="0" id="ifEmail" src="emailClip.cfm?id=4383.&player=0&dur=1&title=0&max=0"></iframe>
+</span> 
+</td>
+</tr>
+</table>
+</td></tr></table>
+
+
+            </td>
+         </tr>
+      </table>   
+   </div>
+
+<!-- Begin: Google Analytics Tracking Code -->
+<script src="/js/taglinks.js" type="text/javascript"></script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1537879-14");
+pageTracker._setDomainName("kaisernetwork.org");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- END: Google Analytics Tracking Code -->
+
+</body>
+</html>

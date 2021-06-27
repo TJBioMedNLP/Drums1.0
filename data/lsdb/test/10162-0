@@ -1,0 +1,245 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>GSK Clinical Trial Register Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+@import url("gsktrials_1.css");
+@import url("GSK_IE_hacks.css");
+</style>
+
+<script type="text/javascript" src="./js/jquery-1.2.1.min.js"></script>
+<script type="text/javascript" src="./common.js"></script>
+<script type="text/javascript" src="./hoverhelp.js"></script>
+
+<script language="javascript" type="text/javascript">
+	function toggleDisplay(objname,text) {	
+		var obj=document.getElementById(objname);
+		var objlink=document.getElementById('toggle'+objname);
+		
+		if (obj.className=="collapsed") {
+			obj.className="expanded";
+			obj.style.display="block";
+			text=text.replace(/%k/,"hide");
+			objlink.innerHTML='<img src="./images/arrow_down.gif" /> '+text;
+		}
+		
+		else {
+			obj.className="collapsed";
+			obj.style.display="none";
+			text=text.replace(/%k/,"view");			
+			objlink.innerHTML='<img src="./images/arrow_up.gif" /> '+text;
+						
+		}
+	
+	}
+
+	
+</script>
+
+
+</head>
+
+<body id="home">
+<div id="container">
+
+<div id="header">
+<a href="index.jsp"><img src="./images/logo.gif" /></a>
+<form style="margin-top: 20px;" method="get" action="http://search.gsk-clinicalstudyregister.com/search">
+<input style="margin-bottom: 0;" name="q" type="text" value="Search this site:" size="20" onFocus="if (this.value == 'Search this site:') this.value='';" onBlur="if (this.value == '') this.value='Search this site:';"/> <br />
+<input id="search" name="submit" type="image" value="submit" src="./images/search.gif" alt="search" width="60" height="17" />
+<input type="hidden" name="site" value="gsktrials" />
+<input type="hidden" name="client" value="default_frontend" />
+<input type="hidden" name="proxystylesheet" value="default_frontend" />
+<input type="hidden" name="output" value="xml_no_dtd" />
+</form>
+</div> <!--end header div-->
+
+
+<ul id="nav"><!--Global Nav-->
+    <li id="navhome"><a href="index.jsp" title="Home"><span>Home</span></a></li>
+    <li id="navprotocol"><a href="protocol_compounds.jsp" title="Protocol Summaries"><span>Protocol Summaries</span></a></li>
+    <li id="navresult"><a href="result_compounds.jsp" title="Results Summaries"><span>Result Summaries</span></a></li>
+    <li><a href="http://www.gsk.com/products/prescription-medicines/index.htm" title="GSK Prescription Medicines" target="_blank"><span>GSK Prescription Medicines</span></a></li>
+    <li><a href="http://www.gsk.com/worldwide.htm" target="_blank" title="Contact Us"><span>Contact GSK</span></a></li>
+</ul><!--End Global Nav-->
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+	//reset the select lists when the document is loaded
+	$(document).ready(function() {
+	
+		$("select").each(function () {
+        	this.selectedIndex = 0;
+      	});
+ 	
+ 	});
+	
+</script>
+
+
+<div id="mid">
+<!--Image is split into three to allow text to wrap to curve-->
+<img src="./images/home_top.gif"/>
+<img src="./images/home_mid.gif"/>
+<img src="./images/home_bottom.gif"/ id="lasti">
+<h1>Clinical Study Register</h1>
+<p id="last">The GlaxoSmithKline (GSK) Clinical Study Register provides an easily accessible repository of data from
+<span id="gsk" class="hasHelp">GSK-Sponsored Clinical Studies,</span> supplementing communication
+in journals, at scientific meetings, in letters to healthcare professionals, and in approved prescribing information.
+
+It is important to emphasise that approved prescribing information must continue to guide appropriate use of GSK medicines. This 
+information may vary from country to country. <b>Before prescribing any product mentioned in the Register, Healthcare Professionals should consult
+prescribing information approved in their country.</b></p>
+
+<blockquote id="gskHelp" class="helpContents"><b>GSK-sponsored clinical studies</b> are those for which GSK is ultimately responsible for all aspects of the study even if some or all of these activities are transferred to another party.</blockquote>
+
+<div id="quicksearch">
+<h5>Quick Search</h5>
+<form method="GET" action="quick-search.jsp" >
+<label for="By Medical Condition">By Medical Condition:</label><br />
+<select name="letterrange" id="letterrange" title="Please select:" onchange="if (this.selectedIndex != 0) form.submit();">
+	<option value="">Please Select ... </option>
+	<option value="A-F">A-F</option>
+	<option value="G-K">G-K</option>
+	<option value="L-P">L-P</option>
+	<option value="Q-U">Q-U</option>
+	<option value="V-Z">V-Z</option>
+</select>
+<input type="hidden" id="type" name="type" value="Medical Condition"/>
+</form>
+
+<form method="GET" action="quick-search.jsp" >
+<label for="By Medical Condition">By Compound Name:</label><br />
+<select name="letterrange" id="letterrange" title="Please select:" onchange="if (this.selectedIndex != 0) form.submit();" >
+	<option value="">Please Select ... </option>
+	<option value="A-F">A-F</option>
+	<option value="G-K">G-K</option>
+	<option value="L-P">L-P</option>
+	<option value="Q-U">Q-U</option>
+	<option value="V-Z">V-Z</option>
+	<option value="0-9">0-9</option>
+</select>
+<input type="hidden" id="type" name="type" value="Compound"/>
+</form>
+
+<form method="GET" action="quick-search-studyid.jsp" >
+<label for="GSK Study ID">By GSK Study ID:</label><br />
+<input title="Enter ID" class="input" type="text" maxlength="20" size="18" name="studyId" id="studyId" value="Enter ID" onfocus="if (this.value == 'Enter ID') this.value = '';" onblur="if (this.value == '') this.value = 'Enter ID';"/>
+<input type="image" src="./images/go.gif" value="" alt="go" onclick="if (this.value == 'Enter ID' || this.value == '') return; form.submit();"/>
+<input type="hidden" id="type" name="type" value="GSK Study ID"/>
+</form>
+
+<!---<form id="keyword" method="get" action="http://search.gsktrialsqa.veritasmedicine.com/search">
+<label for="By Keyword">Search this site:</label><br />
+<input title="Enter keyword" class="input" type="text" maxlength="20" size="20" name="q" id="keyword" value="Enter keyword" onFocus="if (this.value == 'Enter keyword') this.value='';" onBlur="if (this.value == '') this.value='Enter keyword';"/>
+<input type="image" name="submit" value="submit" src="./images/go.gif" alt="go"/>
+<input type="hidden" name="site" value="gsktrialsqa" />
+<input type="hidden" name="client" value="default_frontend" />
+<input type="hidden" name="proxystylesheet" value="default_frontend" />
+<input type="hidden" name="output" value="xml_no_dtd" />
+</form>--->
+
+</div><!--end quicksearch div-->
+
+<h2>About the Register</h2>
+<p class="highlight">This register helps you to:</p>
+<h3><a href="protocol_compounds.jsp">Find a protocol summary</a></h3>
+<p>The Register provides summary protocol information for <span id="gsk2" class="hasHelp">GSK sponsored clinical studies</span>.
+Clinical studies are categorised as recruiting, not yet recruiting, no longer recruiting, terminated, or completed.</p>
+<h3><a href="result_compounds.jsp">Find a result summary</a></h3>
+<p>The register provides scientific, non-promotional summaries of clinical studies in a consistent format, irrespective of whether the results
+may be viewed as positive or negative for GSK medicines.</p>
+<p>The Register includes clinical studies of marketed products and other studies that are relevant to patient care.</p>
+
+</div><!--end mid div-->
+<blockquote id="gsk2Help" class="helpContents"><b>GSK-sponsored clinical trials</b> are those for which GSK is ultimately responsible for all aspects of the study even if some or all of these activities are transferred to another party.</blockquote>
+
+
+
+ 
+
+
+<div id="leftnav">
+<ul>
+<li id="leftnavprotocol"><a href="protocol_compounds.jsp"title="Protocol Summary"><span>Protocol Summaries</span></a></li>
+<li id="leftnavresult"><a href="result_compounds.jsp" title="Results Summaries"><span>Result Summaries</span></a></li>
+<li><a href="http://www.gsk.com/products/prescription-medicines/index.htm" title="GSK Prescription Medicines" target="_blank">GSK Prescription Medicines</a></li>
+<li><a href="http://www.gsk.com/worldwide.htm" target="_blank" title="Contact Us">Contact GSK</a></li>
+<li id="leftnavglossary"><a href="glossary.jsp" title="Glossary of Terms"><span>Glossary of Terms</span></a></li>
+<li id="leftnavterms"><a href="terms.jsp" title="Terms and Conditions"><span>Terms and Conditions</span></a></li>
+</ul>
+
+
+
+
+<p>Useful Links to Clinical Study Registers and Databases</p>
+<ul id="useful_links">
+<li><a href="http://www.clinicaltrials.gov" class="hasHelp" id="ct" target="_blank" onclick="javascript:alert('The website you are about to visit is not part of GSK. The site is not under GSK control, and GSK is not responsible for the information or links you may find there.');">ClinicalTrials.gov</a></li>
+
+<li><a href="http://www.ifpma.org" class="hasHelp" id="IFPMA" target="_blank" onclick="javascript:alert('The website you are about to visit is not part of GSK. The site is not under GSK control, and GSK is not responsible for the information or links you may find there.');">www.IFPMA.org</a></li>
+
+<li><a href="http://www.clinicalstudyresults.org" class="hasHelp" id="csr" target="_blank" onclick="javascript:alert('The website you are about to visit is not part of GSK. The site is not under GSK control, and GSK is not responsible for the information or links you may find there.');">www.ClinicalStudyResults.org</a></li>
+
+<li><a href="https://eudract.ema.europa.eu/" class="hasHelp" id="eudra" target="_blank" onclick="javascript:alert('The website you are about to visit is not part of GSK. The site is not under GSK control, and GSK is not responsible for the information or links you may find there.');">eudract.ema.europa.eu</a></li>
+
+</ul>
+<p>Useful Links to Information Provided by Regulatory Authorities</p>
+<ul id="useful_links">
+<li><a href="http://www.emea.europa.eu/htms/human/epar/eparintro.htm" target="_blank" onclick="javascript:alert('The website you are about to visit is not part of GSK. The site is not under GSK control, and GSK is not responsible for the information or links you may find there.');">European Public Assessment Reports</a></li>
+<li><a href="http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Search.Search_Drug_Name" target="_blank" onclick="javascript:alert('The website you are about to visit is not part of GSK. The site is not under GSK control, and GSK is not responsible for the information or links you may find there.');">FDA Approved Drug Products</a></li>
+<li><a href="http://www.fda.gov/Drugs/DrugSafety/PostmarketDrugSafetyInformationforPatientsandProviders/default.htm" target="_blank" onclick="javascript:alert('The website you are about to visit is not part of GSK. The site is not under GSK control, and GSK is not responsible for the information or links you may find there.');">FDA Postmarket Drug Safety Information for Patients and Providers</a></li>
+</ul>
+
+<blockquote id="ctHelp" class="helpContents"><p><b>ClinicalTrial.gov</b> is a database that provides summary protocol information for ongoing clinical trials.</p></blockquote>
+<blockquote id="IFPMAHelp" class="helpContents"><p><b>IFPMA.org</b> is a search portal provided by the International Federation of Pharamceutical Manufacturers & Associations (IFPMA).</p><p>This portal provides a single entry point to search for industry sponsored clinical trials which are on existing registers and databases.</p></blockquote>
+<blockquote id="csrHelp" class="helpContents"><p><b>ClinicalStudyResults.org,</b> a database administered by The Pharmaceutical Research and Manufacturers of America (PhRMA), is a respository of results from industry sponsored clinical trials. To maximise access to clinical trial data, results that are posted on the GSK Clinical Trial Register are also posted on this database.</p></blockquote>
+<blockquote id="eudraHelp" class="helpContents"><p><b>EudraCT</b> is a database of all clinical trials commencing in the European Community from 1 May 2004 onwards. It has been established in accordance with Directive 2001/20/EC.</p></blockquote>
+
+
+<p style="padding:5px; font-size: .9em; font-weight: bold; color:#666666;">
+Questions about a clinical study?  Call +1 877-379-3718
+</p>
+</div>
+
+
+ 
+
+
+<div id="footer">
+<p><a href="http://www.gsk.com/worldwide.htm" target="_blank">Contact GSK</a> | <a href="terms.jsp">Terms and Conditions</a></p>
+<p>&copy; 2001-2008 GlaxoSmithKline plc. All rights reserved<br />
+Registered in England and Wales No. 3888792<br />
+Registered office: 980 Great West Road, Brentford, Middlesex, TW8 9GS, United Kingdom.
+</p>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3527706-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+</body>
+</html>

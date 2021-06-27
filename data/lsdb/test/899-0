@@ -1,0 +1,1133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>The Synergizer: biological id mapping tool</title>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+    <meta name="keywords" content="synergizer, documentation, license, api, database, synonym"/>
+    <meta name="description" content="General documentation for the Synergizer database."/>
+    <meta name="robots" content="noarchive"/>
+    <link title="Synergizer style" rel="stylesheet"
+          href="/synergizer/css/synergizer_doc.css" type="text/css"/>
+    <link rel="home" href="/" title="Home page for Roth Lab's website"/>
+  </head>
+  <body>
+
+<div id="wrapper">
+
+<div id="navigation">
+  <p class="navhead">Contents:</p>
+  <p class="links">
+    <a href="#Intro">Introduction</a><span class="dot">·</span>
+    <a href="#Interfaces">Interfaces</a><span class="dot">·</span>
+    <a href="#Design">Design & methods</a><span class="dot">·</span>
+    </p>
+  <hr>
+  <p class="navhead">Other:</p>
+  <p class="links">
+    <a href="/synergizer/translate"><abbr title="Translate">Use the Synergizer</a><span class="dot">·</span>
+    <a href="/"><abbr title="Home">Roth Lab Home</a><span class="dot">·</span>
+    </p></div>
+</div> <!-- navigation -->
+
+<!-- <div id="spacer"></div> -->
+
+<div id="content">
+
+<h1>The Synergizer</h1>
+
+<h4>What is The Synergizer?</h4>
+
+<p>The Synergizer is a service for translating between sets of
+biological identifiers. It can, for example, translate Ensembl Gene
+IDs to Entrez Gene IDs, or IPI IDs to HGNC gene symbols, and much
+more. Unlike some other tools for this purpose, The Synergizer is
+simple and easy to learn. The Synergizer works via a web interface
+(for users who are not programmers) or through a web service (for
+programmatic access).</p>
+
+<h2 id="Intro">Introduction</h2>
+
+<p>The Synergizer project aims to collect sets of "synonym
+relationships" between biological database identifiers that have been
+published by authoritative source (or "authorities" in our usage), and
+make them freely available to the research community through a range
+of interfaces, both interactive and programmatic.</p>
+
+<p>The Synergizer project consists of two main components: 1) a
+backend database of "synonym relationships" gleaned from various
+authorities; and 2) a web service with a very simple API, which allows
+programmers to write client applications to access the data in the
+backend database.  These applications can range from one-time programs
+written by researchers for their individual use to interactive
+applications for wide research community.</p>
+
+<p><!-- The database behind the Synergizer service has been designed to -->
+<!-- enable joint curation by dispersed collaborating groups.   -->Any
+authoritative organization interested in having their synonym
+relationships served through the Synergizer system,
+please <a href="mailto:gberriz@hms.harvard.edu">drop us a
+line.</a></p>
+
+<h2 id="Interfaces">Interfaces</h2>
+
+<p>The Synergizer service is currently available through two basic
+interfaces: an interactive web interface and a programmatic web
+service interface.  All interfaces use the same database of synonym
+relationships as backend, and serve the same mappings using different
+formats.</p>
+
+<h3>Interactive Web Interface</h3>
+
+<p>The Synergizer's interactive web interface is the quickest way to
+become acquainted with the Synergizer service.  It is available at
+
+<div class="url">
+<a href="http://llama.med.harvard.edu/synergizer/translate">
+http://llama.med.harvard.edu/synergizer/translate</a>
+</div>
+</p>
+
+<h4 id="interactive_input">Input Basics</h4>
+
+<p>The interactive web interface for the Synergizer looks like this:</p>
+
+<p><img src="img/synergizer_entry_form.png" width="100%"/></p>
+
+<p>To see the tool in action, click on the button that says "Insert
+sample inputs" and then hit "Submit" near the bottom of the page.  Try
+also changing the selection in the '"TO" namespace' field before
+hitting the "Submit" button.</p>
+
+<h4 id="interactive_fields">Input Fields</h4>
+
+<p>Following is a brief description of the fields in this form.  <!-- (For -->
+<!-- more details, please consult the <a href="#Design">Design</a> section -->
+<!-- below.) -->  Note that the choices available for some fields depend on
+the choices made on fields above it.  Also, in some rare cases, it may
+happen that only one choice is available, in which case it will be
+pre-selected for you.
+
+<ol>
+<li>
+
+<b>Authority.</b> We use the term "authority" to refer to any
+authoritative sources of identifier-mapping information.  Authorities
+may differ significantly in the species and the namespaces they
+support.  (They even differ sometimes in the name they give to these
+namespaces.)  Examples: ensembl, ncbi.
+
+</li>
+
+<li>
+
+<b>Species.</b> Note that the range of species supported depends on
+the choice of authority.  Examples: Homo sapiens, Mus musculus.
+
+</li>
+
+<li>
+
+<b>"FROM" namespace.</b> This is the "namespace" (naming scheme) of
+the database identifiers the user wishes to translate.  Hence it is
+also called the "domain namespace", in analogy with the common
+mathematical terminology for functions and relations.  The choices
+available for this field depend on the choices made for authority and
+species.  For some authorities, the pseudo-namespace "__ANY__" may be
+used when there's uncertainty about the correct namespace, but this
+carries some risks (as discussed further below).  Next to each choice
+in this selection box there is a string in square brackets.  This is a
+sample identifier in that namespace, to help users figure out which
+namespace is the one that contains their identifiers.  Examples: embl,
+ipi.
+</li>
+
+<li>
+
+<b>"TO" namespace.</b> This is the "namespace" (naming scheme) to
+which the user wishes to translate the input identifiers.  Hence it is
+also called the "range namespace", again, in analogy with the common
+mathematical terminology for functions and relations.  The choices
+available for this field depend on the choices made for authority,
+species, and sometimes for the domain namespace as well.  As in the
+previous field, the strings in square brackets are sample identifiers
+in the corresponding namespaces.  Examples: ipi, embl.
+
+</li>
+
+<li>
+
+<b>File containing IDs to translate.</b> Please make sure that the
+file has the right permissions to be uploaded by your browser.  The
+Synergizer service expects the identifiers in this file to be
+separated by whitespace (that is, spaces, tabs, or line separators),
+and it ignores their case.  The Synergizer will preserve the original
+ordering of the identifiers, and will not remove duplicates.  Examples
+of IDs: U18670, stat1, 6772.
+
+</li>
+
+<li>
+
+<b>IDs to translate.</b> This field is very similar to the previous
+one.  The only difference is that here the identifiers are entered
+directly into the input form, rather than being in a file.  The same
+considerations apply: whitespace to separate the identifiers,
+case-insensitivity, and preservation of the original order and of
+duplicates, if any.
+
+</li>
+
+<li>
+
+<b>Spreadsheet output.</b> Optionally users my request to receive the
+results in spreadsheet form.  If so, the document sent by Synergizer
+will be a simple tab-delimited plain text file, although it tags this
+file with a MIME type that causes many browsers to open the file with
+a spreadsheet program, such as Microsoft Excel, Open Office, or
+Gnumeric.
+</li>
+
+</ol>
+
+Note that the first four fields (that is, all those that have
+drop-down menus) are mandatory, and that at least one of the remaining
+two fields ("File containing IDs to translate" and "IDs to translate")
+must be filled.  (If both of these fields are filled, the two sets of
+identifiers will be concatenated, starting with those contained in the
+file.)
+
+</p>
+
+<h4>Output</h4>
+
+<p>
+Upon hitting the "Submit" button, the translation request is sent to
+the Synergizer server.  After a few seconds (the actual time may vary
+based on server load and the number of IDs to translate) a two-column
+table showing the desired translations will appear to the right of the
+input fields, as shown on the illustration below.  (If your window is
+too narrow, you may have to scroll to the right, or widen the window,
+to see this table.)
+</p>
+
+<p><img src="img/synergizer_output.png" width="100%"/></p>
+
+<p>The results table itself is largely self-expanatory.  But note the
+following.
+
+<ul>
+
+<li>
+
+Clicking on the "One-column view" button produces a one-column table
+consisting only of the translations.  This facilitates cutting and
+pasting the translation column by itself.  (To return to the
+two-column view, click on the "Two-column view" button that is visible
+in the one-column view.)
+
+</li>
+
+<li>Each identifier in the input list may have 0, 1, or more
+translated IDs, or translates, according to the chosen authority.
+Furthermore, it is possible, in principle, for multiple input
+identifiers to be translated to the same identifiers in the range
+namespace.
+
+<li>Also note that Synergizer disregards the input identifiers' case.</li>
+
+<li>In the example above there are two identifiers for which there are
+no translates, "actn3" and "maybe_a_typo".  Note that Synergizer
+displays them differently.  This is because it knows that "actn3" does
+indeed belong to the selected domain namespace, hgnc_symbol (given the
+selected authority and species), but the same is not true for
+"maybe_a_typo".  To flag a possible error, Synergizer highlights the
+latter in red, and shows a warning.</li>
+
+</ul>
+</p>
+
+<h4>Spreadsheet output</h4>
+
+<p id="spreadsheet_output">
+The spreadsheet version of the same result is illustrated in the
+accompanying figure.  Each row of this output is a tab-separated,
+newline-terminated list.
+
+<img src="img/synergizer_output_ss.png" style="float: left; margin: 1em 1em 0 0;"/>
+
+The first row consists of the names of the domain ("FROM") and range
+("TO") namespaces.  In all the subsequent rows, the first element is
+an identifier in the domain namespace, and the second one is a
+space-separated list of translations.</p>
+
+<p>
+In contrast to the web browser output, the spreadsheet form does not
+include any warning messages.  Furthermore, input identifiers that are
+not found in the domain namespace are flagged with the string "!?".
+</p>
+
+<!-- <p> -->
+<!-- Browsers differ how they handle the downloaded spreadsheet output. -->
+<!-- Some browsers (e.g. Mozilla's Firefox 2.0) generate a name for the -->
+<!-- downloaded file based on the URL in the location bar, and save the -->
+<!-- file under that name in a fixed, predetermined directory without -->
+<!-- requesting any input from the user.  Users of such browsers should -->
+<!-- locate the downloaded file and assign it a suitable name and extension -->
+<!-- (such as .txt, .tsv, .tab, .xls, etc.). -->
+<!-- </p> -->
+
+<!-- <p>Following is a brief description of the fields in this form.  (For -->
+<!-- more details, please consult the <a href="#Design">Design</a> section -->
+<!-- below.) -->
+
+<!-- <ol> -->
+<!-- <li> -->
+<!-- <b>Species.</b> This item is pretty self-explanatory. -->
+<!-- To see the list of currently supported species, please visit The -->
+<!-- Synergizer webpage, and click on the "Species" selector. -->
+<!-- </li> -->
+
+<!-- <li> -->
+
+<!-- <b>Authority.</b> For some species, users may choose from several -->
+<!-- authoritative sources of synonym data.  In the case of those species -->
+<!-- for which only one authoritiy is available, the interface shows the -->
+<!-- name of this authority in un-editable form, only for the user's -->
+<!-- information. -->
+
+<!-- </li> -->
+
+<!-- <li> -->
+
+<!-- <b>"FROM" namespace.</b> This is the "namespace" (naming scheme) of -->
+<!-- the database identifiers the user wishes to translate.  Hence it is -->
+<!-- also called the "domain namespace", in analogy with the common -->
+<!-- mathematical terminology for functions and relations.  The -->
+<!-- pseudo-namespace "__ANY__" may be used when there's uncertainty about -->
+<!-- the correct namespace, but this carries some risks, as discussed in -->
+<!-- the <a href="#Design">Design</a> section below.  Next to each choice -->
+<!-- in this selection box (with the exception of "__ANY__") there is a -->
+<!-- string in square brackets.  This is a sample identifier in that -->
+<!-- namespace, to help users figure out which namespace is the one that -->
+<!-- contains their identifiers. -->
+<!-- </li> -->
+
+<!-- <li> -->
+
+<!-- <b>"TO" namespace.</b> This is the "namespace" (naming scheme) to -->
+<!-- which the user wishes to translate the input identifiers.  Hence it is -->
+<!-- also called the "range namespace", again, in analogy with the common -->
+<!-- mathematical terminology for functions and relations.  As in the -->
+<!-- previous menu, the strings in square brackets are sample identifiers -->
+<!-- in the corresponding namespaces. -->
+<!-- </li> -->
+
+<!-- <li> -->
+
+<!-- <b>Input list.</b> This is the list of identifiers that Synergizer -->
+<!-- will translate.  Users may provide them in a file and/or in the field -->
+<!-- provided.  (In case both methods are used, the identifiers from the -->
+<!-- text field will simply be appended to those read from the file.)  In -->
+<!-- either case, the identifiers should be separated by newlines, carriage -->
+<!-- returns, or tabs.  Any sequence of these characters constitutes a -->
+<!-- valid separator.  Synergizer will preserve the original order of the -->
+<!-- identifiers, and will not remove duplicates.  Also note that the -->
+<!-- Synergizer disregards the case of the identifiers. -->
+
+<!-- </li> -->
+
+<!-- <li> -->
+
+<!-- <b>Spreadsheet output.</b> Optionally users my request to receive the -->
+<!-- results in spreadsheet form.  If so, the document sent by Synergizer -->
+<!-- will be a simple tab-delimited plain text file, although it tags this -->
+<!-- file with a MIME type that causes many browsers to open the file with -->
+<!-- a spreadsheet program, such as Microsoft Excel, Open Office, or -->
+<!-- Gnumeric. -->
+<!-- </li> -->
+
+<!-- </ol> -->
+<!-- </p> -->
+
+<!-- <h4>Output</h4> -->
+
+<!-- <p> -->
+<!-- The output that Synergizer produces upon a successful translation is a -->
+<!-- two-column table, like the one shown below.  (The image shows the -->
+<!-- output as would be shown by a web browser; the format for the -->
+<!-- spreadsheet version of the output is slightly different, and is -->
+<!-- discussed below.) -->
+<!-- </p> -->
+
+<!-- <p><img src="img/result.png" width="100%"/></p> -->
+
+<!-- <p>The results table is largely self-expanatory.  But note the following. -->
+
+<!-- <ul> -->
+
+<!-- <li>Each identifier in the input list may have 0, 1, or more -->
+<!-- translates, according to the chosen authority.  Furthermore, it is -->
+<!-- possible for multiple input identifier to be translated to the same -->
+<!-- identifiers in the range namespace (e.g. compare the translates for -->
+<!-- lrrn6d and RORC).  See the discussion on "translation anomalies" in -->
+<!-- the <a href="#Design">Design</a> section below.</li> -->
+
+<!-- <li>Also note that Synergizer disregards the case of the -->
+<!-- identifiers.</li> -->
+
+<!-- <li>In the example above there are two identifiers for which there are -->
+<!-- no translates, ZFYVE26 and myfave.  Note that Synergizer displays them -->
+<!-- differently.  This is because it knows that ZFYVE26 does indeed belong -->
+<!-- to the selected domain namespace, hgnc_symbol (given the selected -->
+<!-- species and the selected authority), but the same is not true for -->
+<!-- myfave.  To flag a possible typo, Synergizer highlights the latter in -->
+<!-- red, and shows a warning at the top of the page.</li> -->
+
+<!-- </ul> -->
+<!-- </p> -->
+
+<h3 id="web_service_json">Web Service (JSON) Interface</h3>
+
+<p>
+This is the most convenient interface to use the Synergizer service
+programmatically.  It uses the
+popular <a href="http://www.json.org/">JSON</a> data interchange
+standard for the communication between server and client, and adheres
+to the format specified by the
+proposed <a href="http://json-rpc.org/">JSON-RPC</a> standard.
+
+The service is hosted at
+
+<div class="url">
+<a href="http://llama.med.harvard.edu/cgi/synergizer/serv">
+http://llama.med.harvard.edu/cgi/synergizer/serv</a>
+</div>
+</p>
+
+<div class="warning">
+<p><strong>IMPORTANT:</strong>
+
+The Synergizer has been designed for <em>bulk translation</em> of
+identifiers.  A typical use of this service should require only one
+call to the server per execution of a client-side program, and never
+more than one call per ordered pair of namespaces.  If your program
+needs to make more than one call to the server, please follow the
+following guidelines.
+
+<ul>
+<li>Have your program sleep between requests.  To determine how long
+your program should sleep for, keep track of the time it takes each
+request to execute, and use double this time, or 3 seconds, whichever
+is longer.
+</li>
+<li>Run your program on weekends or between 9 pm and 5 am ET weekdays.</li>
+</ul>
+
+<em>Failure to follow these guidelines may result in having your host
+machine banned from using this service.</em>
+</p>
+</div>
+
+
+<h4>Examples</h4>
+
+<p>For those unfamiliar with JSON or JSON-RPC, the following short
+Perl script illustrates a simple JSON-encoded interaction with the
+Synergizer service.  The script uses the core Perl
+module <span class="code">LWP::UserAgent</span> to handle the HTTP
+communication with the Synergizer server.
+
+<pre class="code">
+
+ 1  use constant SERVER_URL =>
+ 2    'http://llama.med.harvard.edu/cgi/synergizer/serv';
+
+ 4  use LWP::UserAgent;
+
+ 6  my $req_content = '{"method":"version","params":[],"id":0}';
+ 7  my $ua = LWP::UserAgent->new;
+ 8  my $res =
+ 9    $ua->post(
+10               SERVER_URL,
+11               'Content' => $req_content,
+12               'Content-Type' => 'application/json',
+13               'Content-Length' => length( $req_content )
+14             );
+
+16  my $res_content;
+
+18  if ( $res->is_success ) {
+19    $res_content = $res->content;
+20  }
+
+22  if ( defined( $res_content ) ) {
+23    # next line should print something like
+24    # {"error":null,"id":0,"result":"0.01"}
+25    print $res_content . "\n";
+26  }
+27  else {
+28    die 'server error';
+29  }
+
+</pre>
+
+The JSON-encoded method call is defined on line 06.  It consists of a
+JSON object with various members.  The member called "method" has as
+its value the string "version", which is the name of one of the
+methods in the Synergizer API (see below).  The member called "params"
+should always take an array as argument, containing the arguments to
+be passed to remote method.  The "version" method happens to take no
+arguments, so this array is empty in this case.  The "id" member is
+currently not used by our server; it is included only to conform to
+the JSON-RPC specification, which specifies that its value must be an
+integer.</p>
+
+<p>
+The content type of the request is set
+to <span class="code">application/json</span> on line 12.  The content
+of the response is accessed on line 19.  It is a string representing a
+JSON object, having members "result", "error", and "id".  As already
+mentioned, the "id" member is not currently used by our server.  If
+the remote call was successful, the value of the "result" member will
+be the returned value (in this case, a string like "0.01"), and the
+value of the "error" member will be null.  Otherwise, the value of the
+"result" member will be null, and the value of "error" member will be
+an Error object.  The description of the Error class is given in
+the <a href="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal#error-object">JSON-RPC
+spec proposal page</a>.</p>
+
+<p>
+
+For production work, it is best to use existing tools for encoding and
+decoding between JSON and the language of your choice.  For Perl, for
+example, one can use the excellent <span class="code">JSON::XS</span>
+module.  For example, the following listing is another Perl script
+that uses a simple Synergizer client
+module, <a href="Synergizer/DemoClient.pm"><span class="code">Synergizer::DemoClient</span></a>
+(which uses <span class="code">JSON::XS</span>) to perform a
+translation.
+
+<pre class="code">
+
+01  use Synergizer::DemoClient ':all';
+
+03  my $args =
+04    +{
+05       authority => 'ensembl',
+06       species   => 'Homo sapiens',
+07       domain    => 'hgnc_symbol',
+08       range     => 'entrezgene',
+09       ids       => [ qw( c1ql4 scn5A IL1RL1 il1rl1
+10                          ?test? pxn RORC MYC lnx1 ) ]
+11     };
+
+13  my $translated = translate( $args );
+14  my @unrecognized = cull( $translated );
+
+16  print fmt( $_ ) for @$translated;
+17  print "\nunrecognized:\n";
+18  print "$_\n" for @unrecognized;
+
+</pre>
+
+</p>
+
+<!-- <p>As a further example, the Python -->
+<!-- module <a href="synergizer/democlient.py"><span class="code">synergizer.democlient</span></a> -->
+<!-- is straightforward port of -->
+<!-- <span class="code">Synergizer::DemoClient</span>. -->
+<!-- </p> -->
+
+<p>As a further example, <a href="/~mtasan">Dr. Murat Tasan</a> has
+written a suite that implements
+a <a href="synergizer_java_client">Synergizer client in Java</a>.
+
+<h4>API</h4>
+
+<p>Every request to this service must be a POST, must
+have <span class="code">application/json</span> as the value of the
+Content-type header, and must have as payload a string representing a
+JSON object with three members: "method", "params", and "id".  E.g.:
+
+<pre class="json">
+{"method":"my_method","params":["some","args"],"id":123}
+</pre>
+
+The member called "method" has as its value a string representing the
+name of one of the methods in the Synergizer API (see below).  The
+member called "params" should always take an array as argument,
+containing the arguments to be passed to remote method.  The "id"
+member is currently not used by our server; it is included only to
+conform to the JSON-RPC specification, which specifies that its value
+must be an integer.
+</p>
+
+<p>The output of every method of this service will be a JSON object
+with three members, "result", "error", and "id".  (Again, this
+structure is in conformance with the current JSON-RPC proposed
+standard.)  E.g.:
+
+<pre class="json">
+{"result":["a","b","c"],"error":null,"id":123}
+</pre>
+
+When the remote call is successful, the value of the "result" member
+will be the value returned by the call, and the value of the "error"
+member will be null.  Otherwise, the value of the "result" member will
+be null, and the value of "error" member will be an Error object.  The
+description of the Error class is given in
+the <a href="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal#error-object">JSON-RPC
+spec proposal page</a>, but briefly, it has at least two members,
+"code" and "message", and optionally a third one, "data".  Of these
+three members, our server currently uses only "message".
+</p>
+
+<p>The main method in the service's API is
+<span class="code">translate</span>.</p>
+
+<h4>translate( args )</h4>
+
+<p>The sole parameter <span class="code">args</span> is a JSON object
+whose keys correspond to the Web interface's fields.  Namely:
+<span class="code">authority</span>, <span class="code">species</span>,
+<span class="code">domain</span>, <span class="code">range</span>, and
+<span class="code">ids</span>.  With the exception
+of <span class="code">ids</span>, which takes as value a JSON array of
+strings, the values for all keys in <span class="code">args</span> are
+simple strings.</p>
+
+<p>Here is an example of a JSON request payload, with extra whitespace
+added for clarity:
+
+<pre class="json">
+{
+  "method": "translate",
+  "params": [
+              {
+                "authority": "ensembl",
+                "species": "Homo sapiens",
+                "domain": "hgnc_symbol",
+                "range": "entrezgene",
+                "ids": [ "snph", "chac1", "actn3", "maybe_a_typo",
+                         "pja1", "prkdc", "RAD21L1", "Rorc", "kcnk16" ]
+              }
+            ],
+  "id":0
+}
+</pre>
+
+The actual payload may look something closer to this:
+
+<pre class="json">
+{"method":"translate","params":[{"authority":"ensembl","species":"Homo sapie
+ns","domain":"hgnc_symbol","range":"entrezgene","ids":["snph","chac1","actn3
+","maybe_a_typo","pja1","prkdc","RAD21L1","Rorc","kcnk16"]}],"id":0}
+</pre>
+
+</p>
+
+<p>Valid values for the species, authority, domain, and range
+parameters are exactly as those displayed in the <a
+href="/synergizer/translate">Synergizer's web interactive
+interface form.</a>  (More precisely, this page shows all the valid
+<i>combinations</i> of values for these parameters, as the choice of
+authority determines the possible choices for the species, the
+authority and the species determine the possible choices for domain
+namespace, and, the authority, the species, and the domain namespace
+determine the possible choices for range namespace.)</p>
+
+<p>When the <span class="code">translate</span> method executes
+successfully, its output is a JSON array of JSON arrays of strings.
+For each identifier in the input list
+(i.e. the <span class="code">ids</span> parameter) there is one inner
+JSON array, whose first element is this identifier, and whose
+remaining elements, if any, are either its translations to the range
+namespace, or the single JSON value <span class="code">null</span> to
+indicate that the identifier was not found in the domain namespace.
+</p>
+
+<p>Here's the payload of the server's response for
+the <span class="code">translate</span> request shown earlier:
+
+<pre class="json">
+{"result":[["snph","9751"],["chac1","79094"],["actn3"],["maybe_a_typo",null]
+,["pja1","64219"],["prkdc","5591","731751"],["RAD21L1","9751"],["Rorc","6097
+"],["kcnk16","83795"]],"error":null,"id":0}
+</pre>
+
+</p>
+
+<p>In addition to <span class="code">translate</span>, the API
+supports five additional "meta-methods".</p>
+
+<h4>version()</h4>
+
+<p>Returns current version of the Synergizer server as a string.</p>
+
+<h4>available_authorities()</h4>
+
+<p>Returns a JSON array of strings corresponding to the currently
+available authorities.</p>
+
+<h4>available_species( authority )</h4>
+
+<p>This method takes as parameter a single string, representing an
+authority, and returns a JSON array of strings corresponding to the
+currently available species for the chosen authority.</p>
+
+<h4>available_domains( authority, species )</h4>
+
+<p>Takes as parameters two strings, representing an authority and a
+species, and returns a JSON array of strings corresponding to the
+currently available domain namespaces for the chosen authority and
+species.</p>
+
+<h4>available_ranges( authority, species, domain )</h4>
+
+<p>Takes as parameters three strings, representing an authority, a
+species, and a domain namespace, and returns a JSON array of strings
+corresponding to the currently available range namespaces for the
+chosen authority, species, and domain namespace.</p>
+
+<h2 id="Design">Synergizer design and methods</h2>
+
+<h3 id="namespaces">Namespaces</h3>
+<p>
+What is a namespace?  By this term we refer to the collection of
+identifiers used as keys in some database.  The set of all Entrez gene
+ids, for example, is a namespace.  So is the set of all IPI protein
+IDs, or Affymetrix HG-U133A probe set IDs.  For our purposes, an ideal
+namespace contains one, and only one, identifier for each member in a
+set of biological entities of interest.  For example, if we consider
+the set of all human genes, we are interested in all collections of
+database identifiers that assign a single identifier to each one of
+these genes.
+</p><p>
+In practice, however, there is no such thing as an ideal namespace.
+The most important reason for this is simply that we cannot yet speak
+unequivocally of collections like "the set of all human genes," even
+though the ability to think about such concepts is arguably what
+characterizes the young field of genomics.  Indeed, even though
+researchers in genomics routinely refer to such notional collections,
+there is always a tacit understanding among them that the exact
+characterization of such collections remains the subject of active
+research, and could still be far from being definitive.  Since our
+understanding of such collections is still very much in flux, it is
+not surprising that our schemes for identifying these entities in our
+databases, i.e. our namespaces, are imperfect.  In particular, we can
+expect that these namespaces will have gaps and redundancies.
+</p><p>
+In sum, the notion of a namespace, as we use it here, is ultimately
+somewhat fuzzy, and inherits many of the caveats that we must still
+attach to concepts such as "the set of all human genes."
+</p><p>
+But what makes namespaces truly problematic is not this conceptual
+fuzziness, but rather their great proliferation.  The move from
+thinking about individual genes or proteins to entire genomes or
+proteomes has been accompanied by an ever-growing number of publicly
+accessible databases of biological information, and it is common for
+several of these databases to independently assign identifiers to the
+same underlying collection of biological entities.  This gives rise
+to the problem of mapping identifiers across these various naming
+schemes.  This is the problem that the Synergizer service aims to
+address.
+</p>
+
+<h3 id="pegs">Pegs</h3>
+<p>
+The Synergizer scheme for performing this mapping is based on the
+metaphor of a "peg" (a place to hang other objects).  A peg is simply
+an internal Synergizer identifier that is assigned to all the external
+database identifiers that refer to the same biological entity.  The
+process of mapping one identifier from namespace X to the
+corresponding identifier (or identifiers) in namespace Y amounts to
+first determining its "peg id", and then retrieving all the
+identifiers in namespace Y that have that same peg id.
+</p>
+
+<p>
+Generally, for each combination of authority, species, and namespace,
+the backend database has a table that associates each identifier in
+the namespace with at least one peg id.  The procedure for translation
+from namespace X to namespace Y consists of finding all the input
+identifiers in the table for namespace X, and then finding those
+identifiers in the table for namespace Y that have the same peg ids.
+</p>
+
+<h3 id="methods">Methods</h3>
+<p>
+The data for the Synergizer database comes from established
+authoritative sources, or "authorities" for short, that publish
+mappings between namespaces.  Currently these are Ensembl and NCBI,
+but the system has been designed to accommodate an unlimited number of
+such authorities.
+</p><p>
+In all cases we use a collection of scripts and custom Perl modules to
+download the data from the authority and load it onto the database.
+However, the specifics of these data loading pipelines vary radically
+from one authority to the other due to the large differences that
+exist in the ways these authorities organize and publish their
+information.  (In fact, it could be argued that the most fundamental
+utility of the Synergizer service is to provide a uniform and simple
+interface to an otherwise exceedingly heterogeneous, unwieldy, and
+very large body of information.)  In all cases, however, we keep our
+processing of the downloaded information to the minimum.
+</p><p>
+We obtain the data from Ensembl using its XML-based BioMart
+programmatic interface.  We first download the table of all
+Ensembl gene ids, and assign a unique internal peg id to each of them.
+Then we download one two-column table per additional namespace of
+interest (X): the first column is always the Ensembl gene id, and the
+second column the corresponding identifier in namespace X.  We use the
+mappings encoded in these downloaded tables and the prior assignment
+of peg ids to Ensembl gene ids, to assign peg ids to the identifiers
+on the second column of these tables.
+</p><p>
+
+The information from NCBI comes primarily from their file
+gene2accession, which they publish regularly via their FTP site
+(<a href="ftp://ftp.ncbi.nih.gov/gene/DATA">ftp://ftp.ncbi.nih.gov/gene/DATA</a>).
+For most of the NCBI namespaces covered we use a procedure analogous
+to the one described for Ensembl, but in this case we use the Entrez
+gene id as the basis for assigning peg ids, and we derive the desired
+mappings directly from the records in gene2accession.  (The mapping
+between versioned accession numbers and gi numbers is stored and
+served directly, without the use of a peg id.)
+</p>
+
+<h3 id="trans_err">Translation errors</h3>
+
+<p>
+The most general solution to the translation problem would require,
+for each authority and each species, on the order of
+<span class="math">~ N<span class="superscript">2</span></span>
+two-column tables, where <span class="math">N</span> is the number of
+namespaces.  That is, one table per each unordered pair of distinct
+identifiers.
+</p>
+
+<p>
+In contrast, the peg-based organization requires only one table per
+namespace, so its space requirement grows linearly with the number of
+namespaces.
+</p>
+
+<p>
+There is a price to pay for this efficiency, though, and that is the
+potential for a loss of resolution.  For example, HGNC symbols SNPH
+and RAD21L1 map to HGNC IDs 15931 and 16271, respectively.  However,
+The Synergizer gives both 15931 and 16271 as translations for SNPH,
+and also as translations for RAD21L1.  This translation is correct at
+the gene level (both of these correspond to the same Ensembl Gene ID
+ENSG00000101298).  However, the two IDs correspond to two distinct
+alternatively spliced transcripts of the same gene, and that
+resolution is lost in translation.
+</p>
+
+<p>To see how this loss of resolution can occur, imagine that two
+identifiers in namespace <span class="math">X</span>,
+say, <span class="math">x<span class="subscript">1</span></span>
+and <span class="math">x<span class="subscript">2</span></span>, both
+map to the same peg id <span class="math">p</span>, a situation we
+call a <em>collision</em> on <span class="math">p</span>.  And now
+imagine that also two identifiers in
+namespace <span class="math">Y</span>,
+say, <span class="math">y<span class="subscript">1</span></span>
+and <span class="math">y<span class="subscript">2</span></span> also
+all map to peg id <span class="math">p</span>.  In this case, even if
+the correct mapping
+for <span class="math">x<span class="subscript">1</span></span>
+in <span class="math">Y</span> were
+<span class="math">y<span class="subscript">1</span></span> the
+Synergizer would incorrectly say
+that <span class="math">x<span class="subscript">1</span></span> maps
+to both <span class="math">y<span class="subscript">1</span></span>
+and <span class="math">y<span class="subscript">2</span></span>.
+Similarly for
+<span class="math">x<span class="subscript">2</span></span>.
+
+</p>
+
+<p>
+
+If we want to preserve the peg-based scheme, the only way to avoid the
+problem described above amounts basically to increasing the average
+number of peg ids per database identifier.  This would come at a cost
+of increased space and time requirements, but would minimize the
+potential for loss of mapping resolution.  We have selected the
+current number of pegs to provide the fastest service to the greatest
+number of users given the limited computational resources.  We will
+consider increasing the resolution based on user input in the future
+releases of The Synergizer.
+
+</p>
+
+<!-- </p><p> -->
+<!-- ** Namespaces -->
+<!-- </p><p> -->
+<!-- The design of the Synergizer revolves around the concept of a -->
+<!-- <i>namespace</i>.  A namespace is basically a <i>controlled</i> -->
+<!-- collection of identifiers.  The term "controlled" refers to the fact -->
+<!-- that these identifiers are generated by an authoritative organization -->
+<!-- according to some rules.  For our purposes, the most important of -->
+<!-- these rules is the requirement that no two identifiers in the -->
+<!-- namespace refer to the same entity in the "real world".  (In the case -->
+<!-- of a namespace for genes, this means that, at least in principle, any -->
+<!-- two identifiers in this namespace must refer to different genes.) -->
+<!-- </p><p> -->
+<!-- These namespaces arise as organizations attempt to store data about -->
+<!-- entities in the world using computerized databases.  The identifiers -->
+<!-- in the organization's namespace are simply the tags the organization -->
+<!-- uses to uniquely identify each entity it is storing data about. -->
+<!-- </p><p> -->
+<!-- In biology several organizations have done precisely this, leading to -->
+<!-- a large number of biological namespaces.  Examples of biological -->
+<!-- namespaces are the set of all NCBI's EntrezGene identifiers, or the -->
+<!-- set of all SGD identifiers. -->
+<!-- </p><p> -->
+<!-- ** Synonyms -->
+<!-- </p><p> -->
+<!-- It often happens that two different biological namespaces refer to the -->
+<!-- same collection of real-world entities (or <i>entity set</i>). -->
+<!-- Whenever this happens, we say that the two namespaces <i>overlap</i>. -->
+<!-- </p><p> -->
+<!-- For example, Ensembl uses strings of the form ENSxxxxxxxxxxx (where -->
+<!-- the 'x's stand for digits) to identify human genes.  This collection -->
+<!-- of strings is what Synergizer calls the "Ensembl (human) gene" -->
+<!-- namespace (or, more precisely, the "ensemble_gene" namespace, -->
+<!-- restricted to species "Homo sapiens", or ensembl_gene|human for -->
+<!-- short).  On the other hand, the HUGO Gene Nomenclature Committee uses -->
+<!-- short strings (typically not longer than 6 characters) consisting of -->
+<!-- uppercase letters and digits to designate human genes.  Synergizer -->
+<!-- calls this the "hgnc_symbol" namespace.  We say that namespaces -->
+<!-- ensembl_gene|human and hgnc_symbol overlap, because the both name -->
+<!-- entities in the same <i>entity set</i>, i.e. the set of all human -->
+<!-- genes. -->
+<!-- </p><p> -->
+
+<!-- ** Authorities -->
+
+<!-- </p><p> -->
+
+<!-- Whenever two different namespaces overlap it soon becomes necessary to -->
+<!-- translate between them.  This translation is not a simple task, since -->
+<!-- it requires considerable expertise to determine when two different -->
+<!-- identifiers, from different namespaces, actually refer to the same -->
+<!-- real-world entity.  In fact, disagreement among experts on such a -->
+<!-- determination are not uncommon.  For this reason the Synergizer does -->
+<!-- not attempt to make this determination, and instead defers to the -->
+<!-- opinion of established <i>authorities</i>.  Currently the most -->
+<!-- important authoritaties (as defined here) are Ensembl and NCBI. -->
+
+<!-- </p><p> -->
+
+<!-- When an authority states that an identifier <span -->
+<!-- class="math">x</span> in namespace <span class="math">A</span> and an -->
+<!-- identifier <span class="math">y</span> in namespace <span -->
+<!-- class="math">B</span> both refer to the same entity (e.g. the same -->
+<!-- gene), we call the relationship between <span class="math">x</span> -->
+<!-- and <span class="math">y</span> a <i>synonym relationship.</i> The -->
+<!-- Synergizer database is nothing more than a compilation of such synonym -->
+<!-- relationships, as published by various authorities. -->
+
+<!-- </p><p> -->
+
+<!-- It is important to keep in mind that, in this documentation, we use -->
+<!-- the term <i>authority</i> in the very restricted sense described -->
+<!-- above.  In particular, an organization that publishes a particular -->
+<!-- namespace (for example, a model organism database), and therefore it -->
+<!-- is authoritative (in the usual sense of the term) as far as that -->
+<!-- namespace goes, but it is <b>not</b> an authority according to our -->
+<!-- restricted definition, unless that organization also formally -->
+<!-- publishes synonym relationships between namespaces. -->
+
+<!-- </p><p> -->
+
+<!-- A key principle in the design of the Synergizer database is that of -->
+<!-- keeping the synonym relationships from different authorities separate. -->
+<!-- The reason for this is that authorities often disagree on what should be -->
+<!-- regarded as a synonym relationship.  The possible reasons for these -->
+<!-- disagreements are numerous, and range from trivial lags between data -->
+<!-- sources all the way to fundamental disagreements on the underlying -->
+<!-- science.  Although the disagreements between authorities correspond to -->
+<!-- only a small fraction of synonym relationships, the absolute number of -->
+<!-- those conflicts is large enough that it becomes impractical to attempt -->
+<!-- to resolve them. -->
+
+<!-- </p><p> -->
+
+<!-- This design principle imposes some important constraints on the use of -->
+<!-- the Synergizer for identifier translation. -->
+<!-- </p><p> -->
+<!-- First, only those namespaces that are supported by such -->
+<!-- (synonym-relationship-publishing) authorities can be represented in the -->
+<!-- Synergizer scheme. -->
+<!-- </p><p> -->
+<!-- Second, it means that the Synergizer is optimized to translate only -->
+<!-- between pairs of namespaces both of which are supported by the same -->
+<!-- authority.  To translate between namespaces across two authorities requires -->
+<!-- translating first to an intermediate namespace that is supported by -->
+<!-- both authorities. -->
+<!-- </p><p> -->
+<!-- In sum, it is important to keep in mind that the Synergizer database -->
+<!-- does not store identifiers, but rather "synonym relationships" -->
+<!-- (between identifiers) published by authoritative sources -->
+<!-- ("authorities"). -->
+<!-- </p><p> -->
+
+<!-- ** Translation anomalies -->
+
+<!-- * Methods -->
+<!-- </p><p> -->
+<!-- ** Pegs -->
+
+
+<!-- In this new version, in addition to addressing the referees' -->
+<!-- criticisms, we have made some important enhancements. -->
+
+<!-- The referees' criticisms can be summarized as follows -->
+
+<!-- 1. the added value of the proposed service, in light of other similar -->
+<!--    services already available, was not sufficiently clear. -->
+
+<!-- 2. the interface of the web service was not sufficiently clear. -->
+
+<!-- 3. the original paper did not provide sufficient detail on how the -->
+<!--    Synergizer's data is collected and maintained. -->
+
+
+<!-- The first two objections, we now realize, owe much to our choice of -->
+<!-- words, and to our having given undue weight in the original report to -->
+<!-- the service's web interface. -->
+
+<!-- For example, we used the term "synonym" in the sense used in the field -->
+<!-- of databases, which differs from what many genomics researchers -->
+<!-- understand for the term.  For example, one of the reviewers objected -->
+<!-- that "the repository looks more like a database of identifiers than a -->
+<!-- gene/protein synonym database."  Indeed, the Synergizer is intended -->
+<!-- precisely as a repository of correspondences between database -->
+<!-- identifiers for biological entities like genes and proteins. -->
+<!-- Currently there exist many such identifiers corresponding to each such -->
+<!-- biological entity, and we used the term "synonym" to refer to all -->
+<!-- these more or less equivalent ways to identify a biological entity. -->
+<!-- The sole aim of the Synergizer system is to provide such -->
+<!-- correspondences in bulk, and in a fast, progragrammatically convenient -->
+<!-- way.  The canonical problem that guided the design of the Synergizer -->
+<!-- is the high-throughput pipeline that receive thousands of gene -->
+<!-- identifiers as input, expressed using a particular nomenclature scheme -->
+<!-- (e.g. Entrezgene identifiers), and must automatically map them to a -->
+<!-- different nomenclature scheme.  To our knowledge, the Synergizer is -->
+<!-- the first system designed to meet this need. -->
+
+<!-- A second feature of our original submission that contributed to a -->
+<!-- misperception of the Synergizer's unique utility was an undue emphasis -->
+<!-- on its web interface.  In fact, the Synergizer is primarily a web -->
+<!-- service, and its web interface is just one of many possible clients of -->
+<!-- this service.  In fact, we expect that many users will soon find -->
+<!-- direct programmatic access of the service to be far more powerful and -->
+<!-- convenient than the interactive use afforded by its web interface.  In -->
+<!-- our resubmission we have attempted to make this clearer, by -->
+<!-- illustrating, in addition, a second client of the Synergizer service, -->
+<!-- in the form of a simple Perl script. -->
+
+
+
+<!-- What is a namespace?  By this term we refer the collection of -->
+<!-- identifiers used as keys in some database.  The set of all Entrez gene -->
+<!-- ids, for example, is a namespace.  For our purposes, an ideal -->
+<!-- namespace contains one, and only one, identifier for each member in a -->
+<!-- set of biological entities of interest.  For example, if we consider -->
+<!-- the set of all human genes, we are interested in all collections of -->
+<!-- database identifiers that assign a single identifier to each one of -->
+<!-- these genes. -->
+
+<!-- In practice, however, there is no such thing as an ideal namespace. -->
+<!-- The most important reason for this is simply that we cannot yet speak -->
+<!-- unequivocally of collections like "the set of all human genes," even -->
+<!-- though the ability to think about such concepts is arguably what -->
+<!-- characterizes the young field of genomics.  Indeed, even though -->
+<!-- researchers in genomics routinely refer to such notional collections, -->
+<!-- there is always a tacit understanding among them that the exact -->
+<!-- characterization of such collections remains the subject of active -->
+<!-- research, and could still be far from being definitive.  Since our -->
+<!-- understanding of such collections is still very much in flux, it is -->
+<!-- not surprising that our schemes for identifying these entities in our -->
+<!-- databases, i.e. our namespaces, are imperfect.  In particular, we can -->
+<!-- expect that these namespaces will have gaps and redundancies. -->
+
+<!-- In sum, the notion of a namespace, as we use it here, is ultimately -->
+<!-- somewhat fuzzy, and inherits many of the caveats that we must still -->
+<!-- attach to concepts such as "the set of all human genes." -->
+
+<!-- But what makes namespaces truly problematic is not this conceptual -->
+<!-- fuzziness, but rather their great proliferation.  The move from -->
+<!-- thinking about individual genes or proteins to entire genomes or -->
+<!-- proteomes has been accompanied by an ever-growing number of publicly -->
+<!-- accessible databases of biological information, and it is common for -->
+<!-- several of these databases to independently assign identifiers to the -->
+<!-- same underlying collection of biological entities.  Which gives rise -->
+<!-- to the problem of mapping identifiers across these various naming -->
+<!-- schemes. -->
+
+<!-- The Synergizer scheme for performing this mapping is based on the -->
+<!-- metaphor of a "peg".  A peg is simply an internal Synergizer -->
+<!-- identifier that is assigned to all the external database identifiers -->
+<!-- that refer to the same biological entity.  The process of mapping one -->
+<!-- identifier from namespace X to the corresponding identifier (or -->
+<!-- identifiers) in namespace Y amounts to first determining its "peg id", -->
+<!-- and then retrieving all the identifiers in namespace Y that have that -->
+<!-- same peg id. -->
+
+<!-- The data for the Synergizer database comes from established -->
+<!-- authoritative sources, or "authorities" for short, that publish -->
+<!-- mappings between namespaces.  Currently these are Ensembl and NCBI, -->
+<!-- but the system has been designed to accommodate an unlimited number of -->
+<!-- such authorities. -->
+
+<!-- In all cases we use a collection of scripts and custom Perl modules to -->
+<!-- download the data from the authority and load it onto our database. -->
+<!-- However, the specifics of these data loading pipelines vary radically -->
+<!-- from one authority to the other due to the large differences that -->
+<!-- exist in the ways these authorities organize and publish their -->
+<!-- information.  (In fact, it could be argued that the most fundamental -->
+<!-- utility of the Synergizer service is to provide a uniform and simple -->
+<!-- interface to an otherwise exceedingly heterogeneous, unwieldy, and -->
+<!-- very large body of information.)  In all cases, however, we keep our -->
+<!-- processing of the downloaded information to the minimum. -->
+
+<!-- We obtain the data from Ensembl using its XML-based BioMart -->
+<!-- programmatic interface.  We first download the table of all -->
+<!-- Ensembl gene ids, and assign a unique internal peg id to each of them. -->
+<!-- Then we download one two-column table per additional namespace of -->
+<!-- interest N: the first column is always the Ensembl gene id, and the -->
+<!-- second column the corresponding identifier in namespace N.  We use the -->
+<!-- mappings encoded in these downloaded tables and the prior assignment -->
+<!-- of peg ids to Ensembl gene ids, to assign peg ids to the identifiers -->
+<!-- on the second column of these tables. -->
+
+<!-- The information from NCBI comes primarily from their file -->
+<!-- gene2accession, which they publish regularly via their FTP site.  In -->
+<!-- this case, for most of the namespaces covered we use a procedure -->
+<!-- analogous to the one described for Ensembl, but in this case we use -->
+<!-- the Entrez gene id as the basis for assigning peg ids, and we derive -->
+<!-- the desired mappings directly from the records in gene2accession. -->
+<!-- (The mapping between versioned accession numbers and gi numbers is -->
+<!-- stored and served directly, without the use of a peg id.) -->
+
+<!-- </p> -->
+
+</div>
+
+</div>
+
+<hr size="1"/>
+<div class="footer">
+For questions, bug reports, and comments about this page contact
+<a href="mailto:gberriz@hms.harvard.edu">gberriz@hms.harvard.edu</a>
+</div>
+<hr size="1"/>
+
+</body>
+</html>

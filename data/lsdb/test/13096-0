@@ -1,0 +1,143 @@
+<html>
+<head>
+  <title>ProteomeCommons.org Java Analysis Framework</title> 
+  <style type="text/css">
+  <!--
+  body {
+    font-family:helvetica;
+    font-size:12pt;
+    margin-left:20px;
+  }
+  h1 {
+    font-family:helvetica;
+    font-size:18pt;
+    margin-bottom:5px;
+    padding-bottom:0px;
+  }
+  h2 {
+    font-family:helvetica;
+    font-size:16pt;
+    margin-bottom:3px;
+    padding-bottom;0px;
+  }
+  h3 {
+    font-family:helvetica;
+    font-size:14pt;
+    margin-bottom:3px;
+    padding-bottom;0px;
+  }
+  // -->
+  </style>
+</head>
+<body>
+<h1>ProteomeCommons.org Java Analysis Framework 2.0</h1>
+<p>This is a proper Java framework for abstracting commonly used information in proteomics projects such as atoms and residues. Anyone who wishes to use this informaiton may simply include the ProteomeCommons.org-JAF.jar in their classpath and all of the information will be readily available. In addition to providing the raw information, this project includes several helper classes and functions that simplify use of the code.</p>
+<p>The goal of this framework is to completely abstract all of the atomic information and standard and non-standard residue information that proteomics software projects may need.</p>
+<p>The current version of this project's code and documentation may always be found at <a href="http://www.proteomecommons.org/current/511/">http://www.proteomecommons.org/current/511/</a>.</p>
+<ul>
+  <li><a href="#credits">Credits</a></li>
+  <li><a href="#changes">Changes</a></li>
+  <li><a href="#peptideStringFormat">String format for peptides</a></li>
+  <li><a href="docs/dev.html">Developer Docs</a></li>
+  <ul>
+    <li>TODO List</li>
+    <li><a href="docs/api/index.html">Java API Documentation</a></li>
+  </ul>
+  <li><a href="docs/tools.html">Tools and Example Code</a></li>
+  <ul>
+    <li><a href="PeptideCalculator.jnlp">Peptide Mw/pI Calculator</a></li>
+    <li><a href="ResidueCombinationCalculator.jnlp">Residue Combination Calculator</a></li>
+  </ul>
+  <li>References</li>
+  <ul>
+    <li><a href="docs/atom-reference.html">A reference for the common atoms, including isotopes.</a></li>
+    <li><a href="docs/residue-reference.html">A reference for the common amino-acids.</a></li>
+    <li><a href="docs/residue-combination-reference.html">Table of residue combinations sorted by mass.</a> (big file)</li>
+  </ul>
+  <li><a href="#license">Licensing Information</a></li>
+</ul>
+
+<h2><a name="credits">Credits</a></h2>
+<p>This is a project supported and contributed to by many different people. Here is a formal list of all of those who have submitted code and/or documentation.</p>
+<ul>
+  <li>Jayson Falkner - jfalkner@umich.edu</li>
+  <li>Peter Ulintz - pulintz@umich.edu</li>
+  <li>Jarret Falkner</li>
+</ul>
+<p>Support for this project, in part, comes from the <a href="http://www.proteomeconsortium.org">National Resource for Proteomics and Pathways (NRPP), http://www.proteomeconsortium.org</a>.</p>
+
+<h2><a name="changes">Changes since 2.0</a></h2>
+<ul>
+  <li>Several minor cosmetic changes have been made to the atom, residue, and residue combination references.</li>
+  <li>Added two methods for approximating pI for a given peptide, see org.proteomecommons.jaf.util.PICalculator</li>
+  <li>Added codon information about common residues. This allows calculation of SNPs for each common residue.</li>
+</ul>
+<h2>Changes since 1.1</h2>
+<ul>
+  <li>Residue modifications have been abstracted. You can now make any modified residue by simply specifying which atoms were lost or gained. n-term and c-term specific modifications may also now be specified.</li>
+  <li>Added a standard syntax for writing a peptide as a string, including support for parsing arbitrary modifications.</li>
+  <li>Added the ModifiedResidue class for abstracting generic residue modifications, and added helper methods for adding and removing residues from the list of 'all residues'.</li>
+  <li>Several enhancements to the Peptide class, including helper methods to consider amino acid modifications.</li>
+  <li>All residues now have a getFASTAChar() method, which returns the character that would appropriately describe the residue in a FASTA file.</li>
+</ul>
+<h2>Changes since 1.1</h2>
+<ul>
+  <li>Added Pyroglutamine to the list of known residues, both from Glutamine and Glutamic Acid.</li>
+  <li>Added Oxidized Methionine to the list of known residues.</li>
+</ul>
+
+<h2><a>Changes since 1.0</a></h2>
+<ul>
+  <li>Changed the cache code to use full residue names instead of abbreviations. This prevents conflicts due to residues that are abbreviated with the same letter.</li>
+  <li>Added Cysteine.</li>
+  <li>Fixed Tryptophan to have the correct atomic makeup.</li>
+  <li>Added residues for the common cysteine reductions.</li>
+  <li>Added residue combination calculator tool.</li>
+  <li>Added residue combination charts.</li>
+</ul>
+<h2>Features of 1.0</h2>
+<ul>
+  <li>Full support for the 20 common amino acids.</li>
+  <li>Full support for C, H, N, O, S, and P atoms, including isotopes.</li>
+  <li>Example code for displaying atomic and residue information in an easy-to-read format.</li>
+  <li>Example code for calculating isotope distributions.</li>
+</ul>
+
+<h2><a name="peptideStringFormat">Peptide String Format</a></h2>
+<p>There are many situations where you want to convert a string to a peptide, i.e. ACDR in to a Java object that knows all about peptide properties such as mass, fragmentation, etc. To make this simple, we've added a standard syntax for writing out a peptide. For simply peptides, use the string that represents the peptide, using either upper or lower case (e.g. ACDK or PEPTIDE are both valid). In cases where you would like to specify a modification, use the base residue's FASTA character followed by the name of the modification, e.g. an oxidized methionine would be "M(Oxidation)" and it might occur in a peptide sequence such as "ACM(Oxidation)K".</p>
+<p>That is it. The format is intended to be simple, and it only allows for simple, single-residue modifications. However, note that you must use modification names that are known by the JAF framework or you must add in your own modifications in order to use them.</p>
+
+<h2><a name="examples">Examples</a></h2>
+<p>This library is useful for several different things. The following examples illustrate some of the more common uses of this framework.</p>
+<ul>
+  <li><a href="#calculator">Residue Combination Calculator</a></li>
+  <li><a href="#printing">How to print/display residue information.</a></li>
+  <li><a href="#isotopeDist">Calculating isotope distributions.</a></li>
+</ul>
+
+<h2><a name="calculator">Residue Combination Caclulator</a></h2>
+<p>This is a tool that calculates how much mass combinations of residues have. It keeps all the calculations cached and you may rapidly query a known mass to see what residues could add it to equal it. The entire tools is presented as a one-click program that can be launched from your web browser. Click the following link to try it out.</p>
+<ul>
+  <li><a href="ResidueCombinationCalculator.jnlp">Click here to run the program (requires Java Web Start)</a></li>
+  <li><a href="src/org/proteomecommons/jaf/util/ResidueCombinationCalculator.java">Source-Code for the Web Start App</a></li>
+  <li><a href="src/org/proteomecommons/jaf/util/ResidueCombinationCache.java">ResidueCombinationCache.java</a></li>
+  <li><a href="src/org/proteomecommons/jaf/util/ResidueCombinationCacheEntry.java">ResidueCombinationCacheEntry.java</a></li>
+</ul>
+
+<h2><a name="printing">PrintCommonResidues.java</a></h2>
+<p>This tool displays a list of the currnent common residues in an easy-to-read format.</p>
+<ul>
+  <li><a href="src/org/proteomecommons/jaf/util/PrintCommonResidues.java">Source-Code</a></li>
+</ul>
+
+<h2><a name="isotopeDist">CalculateIsotopeDistribution.java</a></h2>
+<p>This tool quickly approximates isotope distributions and displays the results. Distributions can be calculated for a set of atoms, a set of residues, or for a given mass.</p>
+<ul>
+  <li><a href="src/org/proteomecommons/jaf/util/CaclulateIsotopeDistribution.java">PrintPeakList.java</a></li>
+</ul>
+
+<h2><a name="license">Licensing Information</a></h2>
+<p>The goal of this project is to provide free, open-source code that anyone may use as they please; However, everyting in this project is strictly licensed under the Apache 2.0 license. This protects the authors and contributors of this project, and it encourages fair use of the code. A copy of the Apache 2.0 license may be found on-line at <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> or as plain text in the LICENSE.txt file included in this archive.</p>
+<p>In addition to the Apache 2.0 license it is requested that any person or organization that uses the Falk Model Project properly reference this project. In at least one public, appropriate place, please note that the "Falk Model Project" is being used, and provide a URL to the proteomecommons.org copy of this archive.</p>
+</body>
+</html>

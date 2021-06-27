@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><title>Jumping Profile HMM (jpHMM)</title>
+  
+  <link rel="stylesheet" type="text/css" href="jphmm_blue.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="DC.Publisher" content="Institute of Microbiology and Genetics, Department of Bioinformatics, Goettingen.">
+  <meta name="DC.Format" content="text/html">
+  <meta name="DC.Language" scheme="ISO639-1" content="en">
+  <meta name="DC.Title" content="jphmm Online">
+  <meta name="DC.Subject" content="HIV subtyping service">
+  <meta name="DC.Description" content="web interface for jphmm">
+  <meta name="DC.Type" content="Service">
+  <meta name="DC.Identifier" content="http://jphmm.gobics.de/jphmm.html">
+  <meta name="DC.Date" content="2005-11-09">
+  <meta name="robots" content="index, follow"></head>
+
+<body>
+
+<div class="headline" id="headline">
+<a href="http://www.uni-goettingen.de/">University of Göttingen</a> &nbsp;|&nbsp; 
+<a href="http://www.uni-goettingen.de/de/sh/16918.html">Faculty of Biology</a> &nbsp;|&nbsp; 
+<a href="http://www.img.bio.uni-goettingen.de/">Institute of Microbiology and Genetics</a> &nbsp;|&nbsp; 
+<a href="http://gobics.de/">Dept. of Bioinformatics</a>
+
+<h1 class="title" id="title"><a href="jphmm.html" id="applink" name="applink">jpHMM-HIV</a> <span class="subtitle" id="subtitle">[Main page]</span></h1>
+</div>
+<div id="appnav"> <ul>
+<li><a href="jphmm.html">Main page</a></li>
+<li><a href="method.html">Method</a></li>
+<li><a href="submission.html">Online submission</a></li>
+<li><a href="download.html">Download</a></li>
+<li><a href="references.html">References</a></li>
+<li><a href="limitations.html">Program limitations</a></li>
+</ul></div>
+
+
+<div class="main" id="main">
+
+<!--<p style="padding-top: 15px;">-->
+
+<h3>jpHMM</h3>
+<p>
+jpHMM (jumping profile Hidden Markov Model) is a probabilistic approach 
+to compare a sequence to a multiple alignment of a sequence family. 
+The jpHMM web server at GOBICS is a tool for the detection of genomic recombinations in HIV-1.
+<br><br>
+For a query sequence phylogenetic recombination breakpoints are predicted 
+and each region of the sequence is assigned to one HIV-1 subtype. 
+This prediction is based on a pre-calculated multiple alignment of the major HIV-1 subtypes. 
+A detailed description of the algorithm and some information about the evaluation can be found 
+<a href="method.html">here</a>. 
+For information about the output format please see the <a href="submission">online submission</a> page. 
+<br>
+<h4>New features of the Web Interface: <img src="new.gif" ALT=""> </h4>
+<ul>
+<li>
+The output of jpHMM now includes information about the reliability of the predicted recombination breakpoints and parental subtypes in the form of <a href="method.html">uncertainty regions</a> and <a href="method.html">breakpoint intervals</a>.<br>
+(The original recombination prediction containing precise breakpoint positions is still available.)
+</li>
+<li>
+We now use <a href="http://www.hiv.lanl.gov/content/sequence/HIV/REVIEWS/HXB2.html">HXB2 numbering</a> to predefine a local alignment of the query sequence to the multiple sequence alignment. This reduces the search space for jpHMM and, as a consequence, the runtime of jpHMM, especially for short sequences.
+</li>
+<li>
+The alignment of the query sequence to the <a href="http://www.hiv.lanl.gov/content/sequence/HIV/REVIEWS/HXB2.html">HXB2 sequence</a>, which is part of the multiple alignment we use to build the model, defined by jpHMM is now available. This provides additional information about the quality of the jpHMM prediction.
+</li>
+</ul>
+
+<br>
+<p>
+<a href="submission"><b>Online submission</b></a> form for jpHMM.
+</p><p>
+<a href="download.html"><b>Download</b></a> the command line version of jpHMM.
+</p><p>
+<br> 
+This project is a collaborative effort between the <a href="http://gobics.de">Department of Bioinformatics</a> of the University of G&ouml;ttingen 
+and the <a href="http://www.hiv.lanl.gov">Los Alamos HIV Sequence Database Group</a>.
+<br><br>
+In case of questions concerning jpHMM algorithm details or bugs, please contact <a href="mailto:jphmm-web@gobics.de">jphmm-web@gobics.de</a>. For HIV-1 subtyping questions, please contact <a href="mailto:seq-info@lanl.gov"> seq-info@lanl.gov</a>.
+</p>
+
+<h3>References</h3>
+<p>
+Please cite one of the following papers if you use this tool in your publication 
+(a list of all references can be found <a href="references.html">here</a>):
+</p>
+<ul>
+<li>
+A.-K. Schultz, M. Zhang, I. Bulla, T. Leitner, B. Korber, B. Morgenstern, M. Stanke.
+<a HREF="http://nar.oxfordjournals.org/cgi/content/full/37/suppl_2/W647">
+jpHMM: Improving the reliability of recombination prediction in HIV-1.</a>
+<i>Nucleic Acids Research</i>, 37:W647-51. 2009
+<UL>
+<li>
+<a href="test_data.tar.gz">test data</a>
+</li>
+</UL>
+</li>
+<li>
+M. Zhang, A.-K. Schultz, C. Calef, C. Kuiken, T. Leitner, B. Korber, B. Morgenstern, M. Stanke. 
+<a href="http://nar.oxfordjournals.org/cgi/content/full/34/suppl_2/W463"> 
+jpHMM at GOBICS: a web server to detect genomic recombinations in HIV-1.</a>
+<i>Nucleic Acids Research</i>, 34:W463-5. 2006.
+<br>
+<!--(This paper describes this jpHMM web server and its usage.)-->
+</li>
+<li>
+A.-K. Schultz, M. Zhang, T. Leitner, C. Kuiken, B. Korber, B. Morgenstern, M. Stanke. 
+<a href="http://www.biomedcentral.com/1471-2105/7/265/abstract"> 
+A Jumping Profile Hidden Markov Model and Applications to Recombination Sites in HIV and HCV Genomes.</a> 
+<i> BMC Bioinformatics</i>  7:265. 2006.
+<br> 
+<!--(This paper describes the jpHMM algorithm and the evaluation of the program.)-->
+<UL>
+<li>Sequence test sets used in Fig.8. <a href="http://jphmm.gobics.de/paper_data/easy-ACRF-with-all-ref.fas">Inter-subtype sequences</a>; <a href="http://jphmm.gobics.de/paper_data/hard-ACRF-with-all-ref.fas">Inter sub-subtype sequences</a>;</li><li>Raw test result for plotting Fig.8. <a href="http://jphmm.gobics.de/paper_data/easy_ACRF_hmm-sim-1000nt.pdf">Inter-subtype sequence results</a>; <a href="http://jphmm.gobics.de/paper_data/hard_ACRF_hmm-sim-1000nt.pdf">Inter sub-subtype sequence results</a>.</li></ul>    
+</li>
+</ul>
+
+<p class="centered">Questions or comments? <a href="mailto:jphmm-web@gobics.de">Email contact</a><br>
+<a href="http://gobics.de/">Copyright © 2005-2006 Dept. of Bioinformatics (IMG)</a>
+</p>
+</div>
+</body>
+</html>

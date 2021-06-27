@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+  <head>
+    <title>GeneRecon: MCMC Based Fine-Scale Association Mapping</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+  </head>
+  <body>
+    <h1>
+       <img class="icon" align="absmiddle" src="img/generecon-icon.png"/>
+       GeneRecon
+    </h1>
+
+    <div class="menu">
+     <span style="float: left;">
+     [<a href="../association-mapping/">Assoc. Mapping</a>]
+     </span>
+     [<a href="#about">About</a>]
+     [<a href="#installation">Installation</a>]
+     [<a href="#usage">Usage</a>]
+<!--     [<a href="#examples">Example Scripts</a>] -->
+     [<a href="#contact">Contact</a>]
+   </div>
+
+   <a name="about"><h2>About GeneRecon</h2></a>
+   <p>
+     GeneRecon is a software package for linkage disequilibrium
+     mapping using coalescent theory. It is based on a Bayesian
+     Markov-chain Monte Carlo (MCMC) method for fine-scale
+     linkage-disequilibrium gene mapping using high-density marker
+     maps. GeneRecon explicitly models the genealogy of a sample of
+     the case chromosomes in the vicinity of a disease locus. Given
+     case and control data in the form of genotype or haplotype
+     information, it estimates a number of parameters, most
+     importantly, the disease position.  Some of the theory underlying
+     GeneRecon is described in:
+   </p>
+
+   <blockquote>
+       <b>High-resolution multipoint linkage-disequilibrium mapping
+       in the context of a human genome sequence.</b> Rannala, B. and
+       Reeve, J.P. (2001).  <em>Am. J. Hum. Genet.</em> 69: 159&ndash;178.
+   </blockquote>
+   <blockquote>
+       <b>Fine-scale mapping of disease loci via shattered
+       coalescent modeling of genealogies.</b> Morris, A.P.,
+       Whittaker, J.C., and Balding, D.J. (2002).
+       <em>Am. J. Hum. Genet.</em> 70:686&ndash;707.
+   </blockquote>
+   <blockquote>
+       <b>The Icelandic Cancer Project &mdash; a population-wide
+       approach to studying cancer.</b> Rafnar, T., Thorlacius, S.,
+       Steingrimsson, E., Schierup, M.H., Madsen, J.N., Calian, V.,
+       Eldon, B.J., Jonsson, T., Hein, J., and Thorgeirsson,
+       S.S. (2004).  <em>Nature Reviews Cancer.</em> 4:488&ndash;492.
+   </blockquote>
+
+   <p>
+      To cite GeneRecon, please use:
+   </p>
+   <blockquote>
+     <a href="http://www.daimi.au.dk/~mailund/ps/generecon-appnote.pdf">
+      <b>GeneRecon&mdash;A coalescent based tool for fine-scale
+      association mapping.</b></a> Mailund, T. Schierup, M.H. 
+      Pedersen, C.N.S. Madsen, J.N. Hein, J. and Schauser, L.
+      <em> 
+          Bioinformatics 2006 <b>22</b> (18): 2317&ndash;2318;
+          <a
+           href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btl153?ijkey=kmNWzzwxg6CdVzW&keytype=ref">doi:10.1093/bioinformatics/btl153.</a>
+      </em>
+   </blockquote>
+
+   <p>
+     GeneRecon is developed in collaboration between <a
+     href="http://www.bioinformatics.dk/">Bioinformatics ApS</a> and
+     <a href="http://www.birc.dk/">Bioinformatics Research Center
+     (BiRC)</a> and released under the <a
+     href="http://www.gnu.org/copyleft/gpl.html">GNU General Public
+     License</a>.
+   </p>
+
+   <a name="installation"><h2>Installation</h2></a>
+   <p>
+     GeneRecon is written in C++ and <a
+     href="http://www.gnu.org/software/guile/guile.html">Guile
+     Scheme</a> and is available as source code (under the GNU General
+     Public License, GPL) and as binary versions as Linux RPM or Debian files.
+     The source code has been successfully compiled on various Linux
+     and UNIX systems, under OS X and under Windows with Cygwin.  As I
+     have only limited access to architectures other than Linux, it is
+     not possible for me to make binary distributions for other
+     platforms, but if anyone is willing to build the distributions I
+     will be more than happy to put them on this site.
+   </p>
+   <p>
+     The most recent versions can be downloaded below, older versions
+     are available <a href="./download">from here.</a>
+   </p>
+
+   <h3>Binary Distributions</h3>
+   <ul>
+     <li>
+       <a href="./download/generecon-1.2.1-1.i386.rpm">
+         generecon-1.2.1-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/generecon-1.2.0-1.i386.rpm">
+         generecon-1.2.0-1.i386.rpm
+       </a>
+     </li>
+     <li>
+       <a href="./download/generecon-1.1.0-1.i386.rpm">
+         generecon-1.1.0-1.i386.rpm
+       </a>
+     </li>
+   </ul>
+   <ul>
+     <li>
+       <a href="./download/generecon_1.2.1_.i386.deb">
+         generecon_1.2.1_i386.deb
+       </a>
+     </li>
+   </ul>
+   <p>
+     The rpm-files were built on Linux Fedora Core 4, and the Debian files on
+     Ubuntu Feisty Fawn.  If you have problems installing on other Red Hat or
+     Debian based systems, please let me know.
+   </p>
+   
+   <h3>Source Code Distributions</h3>
+   <ul>
+     <li>
+       <a href="./download/generecon-1.2.1.tar.gz">
+         generecon-1.2.1.tar.gz
+       </a>
+     </li>
+     <li>
+       <a href="./download/generecon-1.2.0.tar.gz">
+         generecon-1.2.0.tar.gz
+       </a>
+     </li>
+     <li>
+       <a href="./download/generecon-1.1.0.tar.gz">
+         generecon-1.1.0.tar.gz
+       </a>
+     </li>
+   </ul>
+   <p>
+     To build the source files, first uncompress and untar the file,
+     then run 'configure' and finally 'make'.  To test that the build
+     was successful, run 'make check'.  To install the program,
+     run 'make install'.
+   </p>
+      <code><pre>
+    $ tar zxf generecon-<em>version</em>.tar.gz
+    $ cd generecon-<em>version</em>
+    $ ./configure
+    $ make
+    $ make check
+    $ make install</pre></code>
+
+      <p>You will need to install the program, not just build it, for
+      the Scheme modules to load correctly (or manually set the
+      GUILE_LOAD_PATH environment variable, see <a
+      href="./download/getting-started-1.2.pdf">Getting Started</a>
+      for more details).
+     </p>
+
+     <p>
+       For the <a href="http://www.gentoo.org">Gentoo system</a>, Neil
+       Shephard &lt;nshephard -at- gmail.com&gt;, has provided an ebuild
+       package.  To use it, unpack it in the appropriate place,
+       e.g. /usr/local/portage, and then run emerge:
+     </p>
+      <code><pre>
+    $ cp generecon-ebuild.tar.bz2 /usr/local/portage/
+    $ cd /usr/local/portage
+    $ tar xjvf generecon-ebuild.tar.bz2
+    $ emerge -av genercon </pre></code>
+
+     <a name="usage"><h2>Usage</h2></a>
+
+      <p>GeneRecon is started from the command-line; the input data
+      and parameters for the analysis are described in one or more
+      configuration scripts written in the Scheme programming
+      language.  Starting GeneRecon with the configuration script
+      <tt>input.scm</tt> is done as:
+
+      <pre>
+    $ generecon input.scm
+</pre>
+
+      <p>Run <tt>generecon --help</tt> to get a complete list of
+      command-line options accepted by GeneRecon, or see <a
+      href="./download/getting-started-1.2.pdf">Getting Started</a>
+      for a quick guide to running GeneRecon, and the
+      <a href="./download/generecon-manual-1.2.pdf">GeneRecon Users' Manual</a>
+      for more details.
+      </p>
+
+      <p>Consult the <a href="./refman/index.html">reference
+      manual</a> for a list of the GeneRecon specific Scheme
+      functions.  
+      </p>
+
+<!--
+   <a name="examples"><h2>Example Scripts</h2></a>
+
+   <p>
+     A number of smaller example scripts are included in the
+     distribution.  These are briefly described in the <a
+     href="./download/getting-started-1.2.pdf"> Getting Started</a>
+     manual.  Below are examples of more complex scripts and a short
+     description of the projects in which they have been used.
+   </p>
+-->
+
+   <a name="contact"><h2>Contact</h2></a>
+    <p>
+      For bug-reports or feature requests, please use our <a
+      href="http://www.daimi.au.dk/~mailund/bugtrack/login_page.php">
+      bug-tracking software.</a>
+    </p>
+    <p>
+      For comments or questions, please contact Thomas Mailund &lt;<A
+      href="mailto:mailund@birc.au.dk">mailund@birc.au.dk</a>&gt;,
+      Bioinformatics Research Center (BiRC), University of Aarhus,
+      H&oslash;egh-Guldbergsgade 10, DK-8000 &Aring;rhus C.
+    </p>
+
+   <address>
+     Contact: 
+     <A href="mailto:mailund@birc.au.dk">mailund@birc.au.dk</a>
+   </address>
+  </body>
+</html>

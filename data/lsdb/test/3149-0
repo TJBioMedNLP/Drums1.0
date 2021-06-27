@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>UEA Computational Biology Laboratory</title>
+	<link rel="stylesheet" type="text/css" href="http://theoval.cmp.uea.ac.uk/includes/style.css" title="Default" />
+	<link rel="stylesheet" type="text/css" href="http://theoval.cmp.uea.ac.uk/includes/research_topics2.css" title="Default" />
+	</head>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2529058-1";
+urchinTracker();
+</script>
+<body>
+	<div id="skiptocontent">
+		<p><a href="#content" title="Skip to page content">Skip to content</a></p>
+	</div>
+	<div id="wrap">
+		<div id="header">
+			<div id="logo"></div>
+			<div id="title">
+				<h1><a href="http://www.cmp.uea.ac.uk/Research/cbg/" title="UEA Computational Biology Laboratory"><span class="hidden">UEA Computational Biology Laboratory</span></a></h1>
+			</div>
+		</div>
+		<div id="container">
+			<div id="sidebar">
+				<h2>On this Site</h2>
+				<ul>
+					<li><a href="/cbl/bred/index.shtml" title="Bayesian Regulatory Element Detection (BRED)">Bayesian Regulatory Element Detection</a></li>
+					<li><a href="/cbl/disorder/index.shtml" title="Identification of Disordered Proteins">Identification of Disordered Proteins</a></li>
+				</ul>
+				<h2>Related Websites</h2>
+				<ul>
+					<li><a href="http://www.cmp.uea.ac.uk/Research/cbg" title="Computational Biology Laboratory, UEA">Computational Biology Laboratory, UEA</a></li>
+					<li><a href="http://www.cmp.uea.ac.uk/" title="UEA School of Computing Sciences">UEA School of Computing Sciences</a></li>
+				</ul>
+			</div>
+<!--PLEASE DO NOT MODIFY THIS LINE-->
+
+<!--PLEASE ONLY MODIFY THE IMAGE FILENAMES AND THE TEXT -->
+
+<div id="content">
+<div id="banner">					
+
+
+<!-- PLEASE ENTER YOUR TITLE BELOW -->
+
+<h2><object><div id="valign">Bayesian Gene Slection for Cancer Classification</div></object></h2>
+
+<h3>Introduction</h3>
+
+<p>
+Cancer classification based on micro-array data is one of the classic 
+applications of machine learning in computational biology.  The aim is to 
+identify biomarker genes, the expression of which are diagnostic of a 
+particular form of cancer.  In this project, we extended the sparse logistic
+regression algorithm of Shevade and Keerthi [1] to provide Bayesian 
+regularisation, where the regularisation parameter controlling sparsity is 
+integrated out analytically, using an uninformative Jeffrey's prior (c.f.
+[2]).  This not only obviates the need for costly cross-validation based model
+selection procedures but also entirely eliminates the possibility of selection
+bias - a common pitfall in this application [3].  The results obtained using
+this approach are competitive with those obtained via cross-validation based
+regularisation and the with the Relevance Vector Machine (RVM) [4,5] on the
+well known colon cancer [6] and leukaemia [7] benchmark datasets.  This page
+contains supplementary information for [8].
+</p>
+
+<h3>Software</h3>
+
+<p>
+A MATLAB implementation of the BLogReg algorithm is made available for
+research purposes under the GNU General Public License (GPL).  For efficiency,
+it is implemented as a C-language MEX file.  If you download both files then,
+provided you have configured <tt>mex</tt> correctly, <tt>blogreg</tt> should
+automatically (an transparently) compile itself the first time it is executed.
+</p>
+
+<ul class="ovalul">
+
+   <li> Bayesian logistic regression routine
+        (<a href="software/blogreg.c">blogreg.c</a>)
+   <li> Online help file
+        (<a href="software/blogreg.m">blogreg.m</a>)
+   <li> Minimal demonstration using Leukaemia dataset 
+        (<a href="software/demo.m">demo.m</a>)
+   <li> MAT file containing the Leukaemia dataset
+        (<a href="software/leukaemia.mat">leukaemia.mat</a>)
+
+</ul>
+
+<h3>Acknowledgements</h3>
+
+<p>
+This work was supported by grants from the U.K. Biotechnology and Biological
+Sciences Research Council (BBSRC) under the Exploiting Genomics initiative
+(grant numbers and 83/EGM16126 and 83/EGM16128 "Computational approaches to
+identifying gene regulatory systems in <i>Arabidopsis</i>").  N.B. the BLogReg
+algorithm was originaly developed for use in detection of transcription
+factor binding sites, see e.g. [9], this work in currently in progress.
+</p>
+
+<h3>References</h3>
+
+<p>
+N.B. doi represents a link to on-line material via the Digital Object
+Identifier <a href="www.doi.org">DOI</a> system, where available, while www
+represents a link to on-line materials available via the publisher's web-site.
+</p>
+
+<p>
+[1] S. K. Shevade and S. S. Keerthi, "A simple and efficient algorithm for
+gene selection using sparse logistic regression", <i>Bioinformatics</i>,
+vol. 19, no. 17, pp. 2246-2253, 2003. 
+(<a href="http://dx.doi.org/10.1093/bioinformatics/btg308">doi</a>)
+<br></br>
+[2] Buntine, W. L. and Weigend, A. S., "Bayesian backpropagation", Complex Systems, vol. 5, pp 603-643, 1991.
+<br>
+[3] Ambroise, C. and McLachlan, G. J., "Selection bias in gene extraction on
+the basis of microarray gene-expression data", <em>PNAS</em>, vol.99, pp. 6562-6566, 2002.
+(<a href="http://dx.doi.org/10.1073/pnas.102102699">doi</a>)
+<br></br>
+[4] M. E. Tipping, "Sparse Bayesian learning and the Relevance Vector
+Machine", <i>Journal of Machine Learning Research</i>, vol. 1., pp. 211-244,
+June 2001. (<a href="http://jmlr.csail.mit.edu/papers/v1/tipping01a.html">www</a>)
+<br></br>
+[5] M. E. Tipping, and A. C. Faul, "Fast marginal likelihood maximisation for
+sparse Bayesian models", In C. M. Bishop and B. J. Frey (Eds.), Proceedings of
+the Ninth International Workshop on Artificial Intelligence and Statistics,
+Key West, FL, Jan 3-6 2003. 
+(<a href="http://research.microsoft.com/conferences/aistats2003/proceedings/papers.htm">www</a>)
+<br></br>
+[6]  T. R. Golub, D. K. Slonim, P. Tamayo, C. Huard, M. Gaasenbeek, J. P. Mesirov, H. Coller, M. L. Loh, J. R. Downing, M. A. Caligiuri, C. D. Bloomfield and E. S. Lander, "Molecular Classification of Cancer: Class Discovery and Class Prediction by Gene Expression Monitoring", <em>Science</em>, vol. 286, no. 5439, pp. 531-537, 15 October 1999.
+(<a href="http://dx.doi.org/10.1126/science.286.5439.531">doi</a>)
+<br>
+[7] U. Alon, N. Barkai, D. A. Notterman, K. Gish, S. Ybarra, D. Mack and A. J.
+Levine, "Broad patterns of gene expression revealed by clustering analysis of
+tumor and normal colon tissues probed by oligonucleotide arrays", PNAS,
+vol. 96, no. 12, pp. 6745-6750, June 1999.
+(<a href="http://www.pnas.org/cgi/content/abstract/96/12/6745">www</a>)
+<br></br>
+[8] G. C. Cawley and N. L. C. Talbot, "Gene selection in cancer classification
+using Sparse Logistic Regression with Bayesian Regularisation", <i>Bioinformatics</i>, volume 22, number 19, pages 2348-2355, October 2006.
+(<a href="http://dx.doi.org/10.1093/bioinformatics/btl386">doi</a>,
+ <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/22/19/2348.pdf">pdf</a>)
+<br></br>
+[9] Y. Li, K. K. Lee, S. Walsh, C. Smith, S. Hadingham, K. Sorefan, G. Cawley
+and M. W. Bevan, "Establishing glucose- and ABA-regulated transcription
+networks in Arabidopsis by microarray analysis and promoter classification
+using a Relevance Vector Machine", <i>Genome Reseach</i>, vol. 16, no. 3,
+pp. 414-427, March 2006.
+(<a href="http://dx.doi.org/10.1101/gr.4237406">doi</a>)
+<br></br>
+</p>
+
+</div>
+
+<p class="teamlist">
+<b>Research Team:</b> 
+<a href="http://www.cmp.uea.ac.uk/people/gcc">Gavin Cawley</a>,
+<a href="http://theoval.cmp.uea.ac.uk/~nlct">Nicola Talbot</a>.
+</p>	
+
+</div>
+</div>
+<!--PLEASE DO NOT MODIFY THIS LINE-->
+<hr class="hidden" />
+		<div id="footercontainer">
+			<div id="footer">
+				<div id="copyrightnotice">
+					<p><em>&copy; 2004-2005 Computational Biology Laboratory, UEA.</em></p>
+				</div>
+				<div id="minorlinks">
+					<p id="w3c"><a href="http://validator.w3.org/check/referer" title="Check for valid XHTML 1.1"><img src="http://www.cmp.uea.ac.uk/Research/cbg/images/w3c/valid-xhtml11.gif" title="Valid XHTML 1.1!" alt="Valid XHTML 1.1!" /></a> <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check for valid CSS"><img src="http://www.cmp.uea.ac.uk/Research/cbg/images/w3c/valid-css.gif" title="Valid CSS!" alt="Valid CSS!" /></a></p>
+				</div>
+				<div class="clearleft"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>	

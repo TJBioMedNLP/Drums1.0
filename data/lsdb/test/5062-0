@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Analyzing circadian expression data by harmonic regression based on autoregressive spectral estimation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="Simplex webtemplate"/>
+    <meta name="keywords" content="Circadian rhythms, ARSER,harmonic regression,autoregressive spectral estimation"/>
+    <meta name="author" content="Analyzing circadian expression data by harmonic regression based on autoregressive spectral estimation"/>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+<!--
+.style18 {font-size: 12px}
+.style19 {font-size: 10px}
+-->
+    </style>
+  </head>
+
+<body>
+  <div id="main">
+
+    
+
+    <div id="header">
+      <span class="title">LSPR</span><br/>
+    </div>
+
+
+    <div id="content">
+      
+
+
+      <h3>Introduction<a name="1" id="1"></a></h3>
+LSPR is a Matlab package used to detect periodic expression profiles in DNA microarray time-series data.</p>
+      <h3>Pre-installation<a name="2" id="2"></a></h3>
+
+Before running this package, make sure you have installed the following software and related toolboxes:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- program environments:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Matlab version R2009 or newer <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- related toolboxes in Matlab:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. signal processing toolbox<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. statistics toolbox<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. bioinformatics toolbox
+      <h3>Usage<a name="3" id="3"></a></h3>
+      <p>Command-line running:<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- usage:<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. create a text file named start.command and input following commands:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matlab –r "cd LSPRpackagePath;  LSPR('inputFilename.txt',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'outputFilename.txt','inputPath','outputPath',defaultPeriod,lower,upper)&quot;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- explanation:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inputFilename &nbsp;&nbsp;&nbsp;-&gt; input text file name<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputFilename&nbsp;-&gt; output text file name<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inputPath&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; load input file from<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputPath&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; save output file to<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaultPeriod&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; use a default period (i.e. 24 for circadian microarray data) to do &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;harmonic analysis when no periods could be detected in &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[lower,upper]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lower/upper&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; endpoints of period range<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- example:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matlab -r "cd /home/user/LSPR; 	LSPR('inputExample.txt','outputExample.txt', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/home/user/LSPR/input/',&nbsp;'/home/user/LSPR/output/',24,20,28)"<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. run command file:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ at now -f start.command<br/>
+    <br/>
+    Matlab environment:<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- usage:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;LSPR('inputFilename.txt','outputFilename.txt','inputPath','outputPath',defaultPeriod,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lower,upper)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- example: <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;LSPR('inputExample.txt','outputExample.txt','input/',&nbsp;'output/',24,20,28) <br/>    
+      <h3>Input/Output File<a name="4" id="4"></a></h3>
+      <p>&lt;Input&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file type: tab delimited text file<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file format:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1st row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- sampled time points<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1st column&nbsp;&nbsp;&nbsp;- probesets names<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;others&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- a NxM matrix representing N genes (probes) with M expression level &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;measurements/samples over time.<br/>
+  <br />
+&lt;Output&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file type: text file<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file format:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1st column&nbsp;&nbsp;&nbsp;- probe names<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2nd column&nbsp;&nbsp;- filter type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd column&nbsp;&nbsp;&nbsp;- method<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th column&nbsp;&nbsp;&nbsp;- number of oscillations<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5th column&nbsp;&nbsp;&nbsp;- period<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6th column&nbsp;&nbsp;&nbsp;- amplitude<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7th column&nbsp;&nbsp;&nbsp;- phase<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8th column&nbsp;&nbsp;&nbsp;- R square<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9th column&nbsp;&nbsp;&nbsp;- pvalue<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10th column&nbsp;- qvalue<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11th column&nbsp;- FDR-BH<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- explanation:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter type&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preprocess microarray data with Savitzky-Golay filter or not<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 1' -&gt; microarray data have been detrended and filtered<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'-1' -&gt; microarray data have been detrended<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;method for harmonic analysis<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'LSPR'&nbsp; &nbsp;&nbsp;-> do harmonic analysis with  periods detected in [lower,upper]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'default'&nbsp;-> do harmonic analysis with a default period<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of oscillations&nbsp;&nbsp;-&nbsp;&nbsp; number of different oscillations detected by LSPR <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;detected periods in [lower,upper] or a given default period<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amplitude&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amplitude of  harmonic models<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phase&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phase of harmonic models<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R&nbsp;square&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R square of regression curve<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pvalue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>p-</em>value in harmonic analysis<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qvalue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false discovery rate computed by <em>q-</em>value method<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FDR-BH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false discovery rate computed by Benjamini-Hochberg method 
+      <h3>Supplementary Material<a name="5" id="5"></a></h3>
+	  Supplementary material are available at <a href="http://bioinformatics.cau.edu.cn/LSPR/supplementaryMaterial.pdf" target="_blank">here</a>.
+	  <h3>Download<a name="6" id="6"></a></h3>
+  Source codes are available at <a href="http://bioinformatics.cau.edu.cn/LSPR/LSPR.zip" target="_blank">here</a>.
+  <h3>Web Server<a name="7" id="7"></a></h3>
+  A web server of LSPR algorithm is under construction and will be available soon.
+  <h3>FAQ<a name="8" id="8"></a></h3>
+
+	<p>1. How to deal with missing values?<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LSPR will ignore those time-series whose values are missing more than 50% of<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sampling time points. The output parameters corresponding to them will be assigned <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values of "NaN".
+Samples missing less than 50% of sampling time points will be<br/>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;analyzed&nbsp;based on existing experiment values and corresponding time points.<br/>
+  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- example:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents of input file:    
+	<table width="95%"  border="0" align="center">
+      <tr>
+        <td><div align="left"><span class="style19">probe</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">4</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">8</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">12</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">16</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">20</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">24</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">28</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">32</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">36</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">40</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">44</span></div></td>
+      </tr>
+      <tr>
+        <td><div align="left"><span class="style19">example01</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">1</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.4</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.4</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+      </tr>
+      <tr>
+        <td><div align="left"><span class="style19">example02</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.5</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.5</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+      </tr>
+      <tr>
+        <td><div align="left"><span class="style19">example03</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+      </tr>
+      <tr>
+        <td><div align="left"><span class="style19">example04</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">1</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.5</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.7</span></div></td>
+      </tr>
+      <tr>
+        <td><div align="left"><span class="style19">example05</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">1</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.4</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">1</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.8</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.4</span></div></td>
+        <td width="8%"><div align="center"><span class="style19">0.6</span></div></td>
+      </tr>
+    </table>
+	<p>
+				    <span class="style18">
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents of output file:</span>    
+	<table width="95%"  border="0" align="center">
+      <tr>
+        <td><span class="style19">probe</span></td>
+        <td><div align="center"><span class="style19">filter type</span></div></td>
+        <td><div align="center"><span class="style19">method</span></div></td>
+        <td><div align="center"><span class="style19">num.</span></div></td>
+        <td><div align="center"><span class="style19">period</span></div></td>
+        <td><div align="center"><span class="style19">amplitude</span></div></td>
+        <td><div align="center"><span class="style19">phase</span></div></td>
+        <td><div align="center"><span class="style19">R square</span></div></td>
+        <td><div align="center"><span class="style19">pvalue</span></div></td>
+        <td><div align="center"><span class="style19">qvalue</span></div></td>
+        <td><div align="center"><span class="style19">FDR-BH</span></div></td>
+      </tr>
+      <tr>
+        <td><span class="style19">example01</span></td>
+        <td><div align="center"><span class="style19">-1</span></div></td>
+        <td><div align="center"><span class="style19">LSPR</span></div></td>
+        <td><div align="center"><span class="style19">1</span></div></td>
+        <td><div align="center"><span class="style19">24.55</span></div></td>
+        <td><div align="center"><span class="style19">0.26</span></div></td>
+        <td><div align="center"><span class="style19">23.37</span></div></td>
+        <td><div align="center"><span class="style19">0.92</span></div></td>
+        <td><div align="center"><span class="style19">0.006&nbsp;</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">0.009</span></div></td>
+      </tr>
+      <tr>
+        <td><span class="style19">example02</span></td>
+        <td><div align="center"><span class="style19">-1</span></div></td>
+        <td><div align="center"><span class="style19">LSPR</span></div></td>
+        <td><div align="center"><span class="style19">1</span></div></td>
+        <td><div align="center"><span class="style19">27.75</span></div></td>
+        <td><div align="center"><span class="style19">0.16</span></div></td>
+        <td><div align="center"><span class="style19">22.13</span></div></td>
+        <td><div align="center"><span class="style19">0.95</span></div></td>
+        <td><div align="center"><span class="style19">0.009&nbsp;</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">0.009</span></div></td>
+      </tr>
+      <tr>
+        <td><span class="style19">example03</span></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+      </tr>
+      <tr>
+        <td><span class="style19">example04</span></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+      </tr>
+      <tr>
+        <td><span class="style19">example05</span></td>
+        <td><div align="center"><span class="style19">-1</span></div></td>
+        <td><div align="center"><span class="style19">LSPR</span></div></td>
+        <td><div align="center"><span class="style19">1</span></div></td>
+        <td><div align="center"><span class="style19">23.1</span></div></td>
+        <td><div align="center"><span class="style19">0.23</span></div></td>
+        <td><div align="center"><span class="style19">4.67</span></div></td>
+        <td><div align="center"><span class="style19">0.81</span></div></td>
+        <td><div align="center"><span class="style19">0.0004</span></div></td>
+        <td><div align="center"><span class="style19">NaN</span></div></td>
+        <td><div align="center"><span class="style19">0.001</span></div></td>
+      </tr>
+    </table>
+	<p><br/>
+      2.  What data sets can LSPR analyze?<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LSPR can detect oscillations of circadian, cell-cycle microarray data and other temporal<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expression profiles.<br/>    
+<br/>
+3. How are periodic genes determined?<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For a single input gene expression profile, periodicity can be determined by <em>p-</em>value. <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usually, a gene with <em>p</em>-value < 0.05 is considered to be periodic.<br/>
+		<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For large-scale microarray data, periodic genes could be determined by the false<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discovery rate (<em>q</em>-value or FDR-BH value), instead. Generally, the Benjamini-Hochberg<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method (FDR-BH) is more&nbsp;stringent than the <em>q</em>-value method to evaluate the false &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discovery rate .<br/>
+<br/>
+4. How are genes whose output parameters are "NaN" values dealt with?<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Genes with missing values for more than 50% of sampling time points, or that fit linear<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(i.e. y = x+c) or constant expression values (i.e. y = c), will be assigned values of<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"NaN" in the output&nbsp;parameters. <br/>  
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;get a better result, we suggest to remove genes of this kind and re-analyze the <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rest by the LSPR program. <br/> 
+ <br/>
+ 5. What is the minimum/maximum number of time points? How many genes can the<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;application handle at a time?<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ideally, at least six time points for the input time-series according to
+   our analysis <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and there is no upper limit for the length.<br/>
+		<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LSPR analyzes one time-series at a time. If the user's computer has enough<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;computing capacity, there will be no limitations for how many gene LSPR can handle <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at
+		  a time.   
+	<h3>Contact<a name="9" id="9"></a></h3>
+
+Please contact us if you have suggestions for improvement, or 
+   if you have any problem with the program 
+  or with the interpretation of the results.<br>
+  <br>
+  <table width="80%" border="0">
+        <tr>
+          <td width="50%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chen ZHANG </td>
+          <td width="50%" align="left">Rendong Yang</td>
+        </tr>
+        <tr>
+          <td width="50%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;College of Science</td>
+          <td width="50%" align="left">College of Biological Sciences</td>
+        </tr>
+        <tr>
+          <td width="50%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;China Agricultural University</td>
+          <td width="50%" align="left">China Agricultural University</td>
+        </tr>
+        <tr>
+          <td width="50%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P.O.Box 0590 </td>
+          <td width="50%" align="left">P.O.Box B1061</td>
+        </tr>
+        <tr>
+          <td width="50%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100083, Beijing, China </td>
+          <td width="50%" align="left">100193, Beijing, China</td>
+        </tr>
+        <tr>
+          <td width="50%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tel: +86-13811497473</td>
+          <td width="50%" align="left"> tel: +86-10-62734385</td>
+        </tr>
+        <tr>
+          <td width="50%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: zcreation@yahoo.cn </td>
+          <td width="50%" align="left">email: cauyrd@gmail.com</td>
+        </tr>
+      </table>
+  </p>
+<div id="footer">
+      &copy; 2010 <a href="http://bioinformatics.cau.edu.cn/ZhenSuLab/index.htm" target="_blank">Zhen Su's Lab</a> - <a href="http://bioinformatics.cau.edu.cn/" target="_blank">Bioinformatics Center</a> - <a href="http://www.cau.edu.cn/" target="_blank">China Agricultural University</a>      </div>
+    </div>
+
+  <div id="lefty">
+    <div id="menu">
+      <a href="#1">Introduction</a>
+      <a href="#2">Pre-installation</a>
+      <a href="#3">Usage</a>
+      <a href="#4">Input/Output File</a>
+	  <a href="#5">Supplementary Material</a><a href="#6">Download</a><a href="#7">Web Server</a>
+	  <a href="#8">FAQ</a>
+	  <a href="#9">Contact</a>
+    </div>
+    
+  </div>
+</div>
+
+</body>
+</html>

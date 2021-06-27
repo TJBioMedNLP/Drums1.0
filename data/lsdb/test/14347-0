@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>Mobyle portal
+      
+      
+    </title>
+    <link href="/portal/css/mobyle.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="/portal/css/local.css" rel="stylesheet" type="text/css" media="screen">
+    <script src="portal_properties.py" id="pp" type="text/javascript"></script>
+    <script src="/portal/js/prototype-1.7.js" type="text/javascript"></script>
+    <script src="/portal/js/rsh.js" type="text/javascript"></script>
+    <script src="/portal/js/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
+    <script src="/portal/js/mobyle.js" type="text/javascript"></script>
+    <script src="/portal/js/mobyle_ga.js" type="text/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+    <meta name="description" content="Mobyle is a framework and web portal specifically aimed at the integration of bioinformatics software and databanks.">
+    
+    
+    <meta name="author" content="Institut Pasteur Logiciels et Banques de Données Team and Ressource Parisienne en Bioinformatique Structurale">
+  </head>
+  <body>
+    <noscript>
+      <div class="unavailable">
+        <div>
+          <strong><a href="https://projets.pasteur.fr/wiki/mobyle/">Mobyle</a> is a
+            framework and web portal specifically aimed at the integration of
+            bioinformatics software and databanks.</strong>
+        </div>
+        <div>
+          Sorry, the Mobyle Portal requires javascript support. Please
+          use a browser that supports javascript.
+        </div>
+      </div>
+    </noscript>
+    <div class="unavailable" id="nocookie" style="display:none; visibility:hidden;">
+      <div>
+        Sorry, the Mobyle Portal requires that you accept <strong>cookies</strong>. Please
+        configure your browser to accept cookies from our server.
+      </div>
+    </div>
+    <div id="userPopupOverlay" class="popup_overlay" style="display: none; z-index: 99999">
+      <span id="insertHere" class="popup_background"></span>
+      <span id="wait" class="loading">loading...</span>
+    </div>
+    <table id="banner" style="width: 100%;">
+      <tr>
+        <td rowspan="2" style="width: 50%;">
+          <h1 id="mobyleHead">Mobyle</h1>
+        </td>
+        <td style="width: 50%; text-align: right; vertical-align: top;">
+          <div>
+            <span style="font-weight: bold;" id="userEmail"></span>
+            <span style="font-weight: bold; font-style: italic;" id="userStatus"></span>
+          </div>
+          <div>
+            <ul id="userOptions">
+              <li>
+                <a style="font-weight: bold;" href="#user::email" class="modalLink" title="enter your email">set email</a>
+              </li>
+              <li>
+                <a style="font-weight: bold;" href="#user::signin" class="modalLink" title="sign in to a registered account">sign-in</a>
+              </li>
+              <!-- OPENID -->
+              
+              <li>
+                <a style="font-weight: bold;" href="#user::activate" class="modalLink" title="activate a registered account">activate</a>
+              </li>
+              <li>
+                <a style="font-weight: bold;" href="#user::signout" class="modalLink" title="sign out from this account">sign-out</a>
+              </li>
+            </ul>
+          </div>
+          <a class="refresh_link" href="#">refresh workspace</a>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 80%;">
+          
+        </td>
+      </tr>
+      
+    </table>
+    <!-- -->
+    <form style="display: none" name="preload_info">
+      <input value="157286.40" id="sessionLimit"><input value="True" id="anonymousSession"><input value="True" id="authenticatedSession"><input value="120" id="autoRefreshFreq"><input value="UA-15305936-2" id="ga_code">
+      
+    </form>
+    <form style="display: none" name="file_upload" action="data_upload.py" method="POST" enctype="multipart/form-data" target="data_upload_target">
+      <input type="file" name="data_input_upload"><input type="hidden" name="datatype_class"><input type="hidden" name="datatype_superclass"><input type="hidden" name="data_format">
+    </form><iframe name="data_upload_target" id="data_upload_target" style="display: none"></iframe>
+    <table id="mainContainer">
+      <tr>
+        <td id="navbar">
+          <dl id="drawer" class="accordion">
+            <dd id="programsMenu">
+              <form id="programSearch" name="programSearch" action="programs_list.py" method="post">
+                <table style="width: 100%">
+                  <tr>
+                    <td>
+                      <input type="search" id="searchString" name="searchString" size="10" title="Enter a search string here" autofocus="autofocus"><input id="searchSubmit" name="plSubmit" type="submit" value="Search"><span id="listAllSubmitBlock">
+                        or <input id="listAllSubmit" name="plSubmit" class="programsForm" type="submit" value="All">
+                    </td>
+                    <td>
+                      <a id="advancedProgramSearchToggle" href="#advancedProgramSearch" class="blindLink closed" title="Click here to access more search/display options">[more]</a>
+                    </td>
+                  </tr>
+                </table>
+                <div id="advancedProgramSearch" style="display: none; left-margin:2px;">
+                  <hr>
+                  <div>
+                    Classify:
+                    <label>
+                      by category <input type="radio" id="classifyByCategory" name="classifyBy" value="category" checked="checked">
+                    </label>
+                    <label>
+                      by package <input type="radio" id="classifyByPackage" name="classifyBy" value="package">
+                    </label>
+                  </div>
+                  <div>
+                    Workflows and programs:
+                    <label>
+                      separate <input type="radio" id="serviceTypeSortSeparated" name="serviceTypeSort" value="separate" checked="checked">
+                    </label>
+                    <label>
+                      mixed <input type="radio" id="serviceTypeSortMixed" name="serviceTypeSort" value="mixed">
+                    </label>
+                  </div>
+                </div>
+              </form>
+              <div class="channel" id="programs_list_channel">
+              </div>
+            </dd>
+            <dt href="#dataMenu" class="blindLink menu data">
+              Data Bookmarks
+              <a href="#data::overview" style="float:right" title="Data bookmarks management" class="link">[overview]</a>
+            </dt>
+            <dd id="dataMenu">
+              <div class="sessionList" id="files_list">
+                <ul id="filesListUl">
+                </ul>
+              </div>
+            </dd>
+            <dt href="#jobsMenu" class="blindLink menu jobs">
+              Jobs
+              <a href="#jobs::overview" style="float:right" title="Jobs management" class="link">[overview]</a>
+            </dt>
+            <dd id="jobsMenu">
+              <div class="sessionList" id="jobs_list">
+                <ul id="jobsListUl">
+                </ul>
+              </div>
+            </dd>
+            <dt href="#tutorialsMenu" class="blindLink menu tutorials">
+              Tutorials
+            </dt>
+            <dd id="tutorialsMenu">
+              <ul id="tutorials_menu">
+                <li>
+                  <a href="#tutorials::stepbystep" title="Step-by-step" class="link">How to use Mobyle? A step by step tutorial</a>
+                </li>
+                <li>
+                  <a href="#tutorials::register" title="Registration information" class="link">Registration
+                    information</a>
+                </li>
+                <li>
+                  <a href="#tutorials::seqfmt" title="Sequence formats" class="link">Sequence formats</a>
+                </li>
+                <li>
+                  <a href="#tutorials::alifmt" title="Alignment formats" class="link">Alignment
+                    formats</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+        </td>
+        <td id="portalMain">
+          <ul class="handlesList">
+            <li class="menu welcome">
+              <a class="link" href="#welcome">Welcome</a>
+            </li>
+            <li class="menu forms">
+              <a class="link" href="#forms">Forms</a>
+            </li>
+            <li class="menu data">
+              <a class="link" href="#data">Data Bookmarks</a>
+            </li>
+            <li class="menu jobs">
+              <a class="link" href="#jobs">Jobs</a>
+            </li>
+            <li class="menu tutorials">
+              <a class="link" href="#tutorials">Tutorials</a>
+            </li>
+          </ul>
+          <div class="panelsList">
+          <div id="ms-welcome" class="tabPanel" style="display: none;">
+            <div id="welcome_header">
+              <h3 align="center">Welcome to Mobyle, a portal for bioinformatics analyses</h3>
+              <div>
+                <object data="http://mobyle.pasteur.fr/portal/html/welcome_page.html" style="height: 40em" type="text/html"></object>
+                
+              </div>
+            </div>
+            <div id="welcome_footer">
+              <fieldset>
+                <legend>
+                  <b>Credits</b>
+                </legend>
+                <div>
+                  Mobyle is a platform developed jointly by the <a href="http://www.pasteur.fr" target="_blank">Institut Pasteur</a>
+                  <a href="http://www.pasteur.fr/recherche/unites/LBD" target="_blank">"Logiciels et Banques de Données" Team</a> and the <a href="http://bioserv.rpbs.univ-paris-diderot.fr" target="_blank">Ressource
+                    Parisienne en Bioinformatique Structurale</a>.
+                </div>
+                <div>
+                  More information about this project can be found <a href="https://projets.pasteur.fr/wiki/mobyle/" target="_blank">here</a>.
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div id="ms-forms" class="tabPanel" style="display: none;">
+            <ul class="handlesList">
+            </ul>
+            <div class="panelsList">
+            </div>
+          </div>
+          <div id="ms-data" class="tabPanel" style="display: none;">
+            <ul class="handlesList">
+              <li class="menu data">
+                 <a class="link" href="#data::overview">Overview</a>
+              </li>
+            </ul>
+            <div class="panelsList" href="">
+              <div id="ms-data::overview" class="tabPanel">
+                <br>
+                <div>
+                  This page lets you control the data bookmarks stored on the
+                  server.
+                </div>
+                <div id="sessionDataSummary">
+                  Session usage:
+                  <div id="sessionSpace">
+                    <div id="sessionUsage">
+                    </div>
+                  </div>
+                  (total space available: <span id="sessionLimit">157286.40</span>KiB)
+                </div>
+                <form name="bookmark" action="data_remove.py" method="post">
+                  <div style="text-align: right">
+                    <input type="submit" id="job_#{key}" value="remove selected bookmarks">
+                  </div>
+                  <table>
+                    <tbody id="dataManagement" class="dataTable">
+                    </tbody>
+                  </table>
+                </form>                
+              </div>
+            </div>
+          </div>
+          <div id="ms-jobs" class="tabPanel" style="display: none;">
+            <ul class="handlesList">
+              <li class="menu jobs">
+                <a class="link" href="#jobs::overview">Overview</a>
+              </li>
+            </ul>
+            <div class="panelsList" href="">
+              <div id="ms-jobs::overview" class="tabPanel">
+                <br>
+                <form name="session_job_remove" action="session_job_remove.py" method="post">
+                  <div style="text-align: right">
+                    <input type="submit" id="job_#{key}" value="remove selected jobs">
+                  </div>
+                  <table>
+                    <tbody id="jobsManagement" class="dataTable">
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div id="ms-tutorials" class="tabPanel"></div>
+          </div>
+          </tr>
+        </table>
+        </body>
+      </html>
+

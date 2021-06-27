@@ -1,0 +1,65 @@
+<html>
+<head>
+
+    <title>Inferring Meta-covariates in Classification</title>  
+
+    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+
+    <link rel="stylesheet" type="text/css" href="css/basic.css"/>
+
+    <script src='js/em.js' type='text/javascript'></script>
+
+</head>
+<body>
+<div id='wrap'>
+<div id='header'>
+<div id='header_lower'>
+<h1><a href='index.html'>Inferring Meta-covariates in Classification</a></h1>
+
+<div>
+<p class='authors'>
+Keith Harris, Lisa Hopcroft & Mark Girolami
+</p>
+<p class='address'>
+Inference Research Group<br/>
+Department of Computing Science, University of Glasgow, UK
+</p>
+</div>
+
+<div id='nav'>
+<ul>
+<li><a href='model.html'>The Model</a></li>
+<li><a href='publications.html'>Publications</a></li>
+<li><a href='download.html'>Download</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id='main'>
+
+<p>
+Our meta-covariate method is a novel approach to analysing microarray data, which overcomes and, in the case of correlated expression patterns, exploits the statistical properties of gene expression data, with a view to improving prediction and identifying biologically relevant structure in the data <a href='publications.html#ref1'>[1]</a>. Initially, the D probes are grouped into K clusters, using gene expression similarity across the N samples and a standard Gaussian mixture model. An N-dimensional &quot;meta-covariate&quot; vector is then generated from each cluster and predictions are made by weighting these meta-covariates in a probit regression model. We then take the novel step of using the prediction performance to update the clustering structure, the meta-covariates and the regression weights. This iterative procedure is repeated until convergence (see <a href="#figure1">Figure 1</a>).
+</p>
+
+<div class="figure" id="figure1">
+<img src="img/meta_covariate_method.png" alt="The meta-covariate method" width="100%"/>
+<p class="caption">
+<span>Figure 1.</span> The meta-covariate method.  Expression data are used to form clusters of probes (clustering is represented by the D&times;K matrix of responsibilities &gamma;).  N-dimensional meta-covariates (&theta;<sub>k</sub>) are calculated from these clusters and used to make predictions in a probit regression model (with regression coefficients w).  The novelty of our method is highlighted in turquoise: the prediction performance is used to update &gamma;, &theta;<sub>k</sub> and w, thereby iteratively improving the cluster structure and the prediction performance.
+</p>
+</div>
+
+</div>
+<div id="footer">
+
+    <span style='float:left;'>
+        <img  src="img/unidept.bmp" alt="The University of Glasgow" style='width: 250px;'/>
+    </span>
+
+    <p>
+        <script src="js/lastmodified.js" type="text/javascript"></script>
+    </p>
+
+</div>
+</div>
+</body>
+</html>

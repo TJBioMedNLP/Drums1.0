@@ -1,0 +1,742 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+    
+
+    
+    <head>
+    <title>
+    Galaxy | 
+Published Page | 
+    FASTQ manipulation tools
+</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    
+    
+    <link href="/static/style/base.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/static/style/panel_layout.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/static/style/jquery.rating.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+    <style type="text/css">
+    #center {
+            left: 0;
+    }
+    </style>
+
+    <link href="/static/style/autocomplete_tagging.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/static/style/embed_item.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/static/style/trackster.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/static/style/jquery.rating.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+    
+    <style type="text/css">
+        .page-body {
+            padding: 10px;
+        }
+        .page-meta {
+            float: right;
+            width: 27%;
+            padding: 0.5em;
+            margin: 0.25em;
+            vertical-align: text-top;
+            border: 2px solid #DDDDDD;
+            border-top: 4px solid #DDDDDD;
+        }
+        
+        .historyItemContainer, .toolForm {
+            max-width: 500px;
+        }
+        
+        div.toolForm{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .historyItemContainer {
+            padding-right: 3px;
+            border-right-style: solid;
+            border-right-color: #66AA66;
+        }
+    </style>
+
+    <link href="/static/style/base.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/static/style/history.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/static/style/autocomplete_tagging.css?v=3" media="screen" rel="Stylesheet" type="text/css" />
+    <style type="text/css">
+        .toggle-contract { display: none; }
+        .embedded-item h4 {
+            margin: 0px;
+        }
+        .page-body table {
+            padding: 8px 5px 5px;
+            min-width: 500px; 
+            border: none;
+        }
+        .page-body caption { 
+            text-align: left;
+            background: #E4E4B0; 
+            padding: 5px; 
+            font-weight: bold; 
+        }
+        .page-body td {
+            width: 25%;
+            padding: 0.2em 0.8em;
+        }
+    </style>
+
+    
+    
+    
+    <!--[if lt IE 7]>
+    <script src="/static/scripts/IE7.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/ie7-recalc.js?v=8" type="text/javascript"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var image_path = '/static/images';
+    </script>
+    <script src="/static/scripts/jquery.js?v=8" type="text/javascript"></script>
+
+    <script src="/static/scripts/jquery.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/jquery.tipsy.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/galaxy.base.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/json2.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/class.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/jquery.jstore.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/jquery.autocomplete.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/jquery.rating.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/autocomplete_tagging.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/trackster.js?v=8" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        
+        // Handle click on community tag.
+        function community_tag_click(tag_name, tag_value) {
+            
+    
+            var href = '/page/list_published';
+            href = href + "?f-tags=" + tag_name;
+            if (tag_value != undefined && tag_value != "") {
+                href = href + ":" + tag_value;
+            }
+            self.location = href;
+        }
+        
+        // Map item rating to number of stars to show.
+        function map_rating_to_num_stars(rating) {
+            if (rating <= 0)
+                return 0;
+            else if (rating > 0 && rating <= 1.5)
+                return 1;
+            else if (rating > 1.5 && rating <= 2.5)
+                return 2;
+            else if (rating > 2.5 && rating <= 3.5)
+                return 3;
+            else if (rating > 3.5 && rating <= 4.5)
+                return 4;
+            else if (rating > 4.5)
+                return 5;
+        }
+        
+        // Init. on document load.
+        $(function() {
+            // Set links to Galaxy screencasts to open in overlay.
+            $(this).find("a[href^='http://screencast.g2.bx.psu.edu/']").each( function() {
+                $(this).click( function() {
+                    var href = $(this).attr('href');
+                    show_in_overlay(
+                        {
+                            url: href,        
+                            width: 640,
+                            height: 480,
+                            scroll: 'no'  
+                        }
+                    );
+                    return false;
+                });
+            });
+            
+            // Init history boxes.
+            init_history_items( $("div.historyItemWrapper"), false, "nochanges" );
+            
+            // Init user item rating.
+            $('.user_rating_star').rating({
+                callback: function(rating, link) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/page/rate_async",
+                        data: { id : "cd0d8ada19d98f27", rating : rating },
+                        dataType: 'json',
+                        error: function() { alert( "Rating submission failed" ); },
+                        success: function( community_data ) {
+                            $('#rating_feedback').show();
+                            $('#num_ratings').text(Math.round(community_data[1]*10)/10);
+                            $('#ave_rating').text(community_data[0]);
+                            $('.community_rating_star').rating('readOnly', false);
+                            $('.community_rating_star').rating('select', map_rating_to_num_stars(community_data[0])-1);
+                            $('.community_rating_star').rating('readOnly', true);
+                        }
+                    });
+                },
+                required: true // Hide cancel button.
+            });
+        });    
+    </script>
+
+    <script type="text/javascript">
+    
+        $(function() {
+
+            // Setup embedded content:
+            //  (a) toggles for showing/hiding embedded content;
+            //  (b) ...
+            $('.embedded-item').each( function() {
+                var container = $(this);
+            
+                // Show embedded item.
+                var show_embedded_item = function() {
+                    var ajax_url = container.find("input[type=hidden]").val();
+                    // Only get item content if it's not already there.
+                    var item_content = $.trim(container.find(".item-content").text());
+                    if (!item_content) {
+                        $.ajax({
+                            type: "GET",
+                            url: ajax_url,
+                            error: function() { alert("Getting item content failed."); },
+                            success: function( item_content ) {
+                                container.find(".summary-content").hide("fast");
+                                container.find(".item-content").html(item_content).show("fast");
+                                container.find(".toggle-expand").hide();
+                                container.find(".toggle-contract").show();
+
+                                // Init needed for history items.
+                                init_history_items( container.find("div.historyItemWrapper"), "noinit", "nochanges" ); 
+                                container.find( "div.historyItemBody:visible" ).each( function() {
+                                    if ( $.browser.mozilla ) {
+                                        $(this).find( "pre.peek" ).css( "overflow", "hidden" );
+                                    }
+                                    $(this).hide();
+                                });
+                                make_popup_menus();
+                            }
+                        });
+                    } else {
+                        container.find(".summary-content").hide("fast");
+                        container.find(".item-content").show("fast");
+                        container.find(".toggle-expand").hide();
+                        container.find(".toggle-contract").show();
+                    }
+                };
+            
+                // Hide embedded item.
+                var hide_embedded_item = function() {
+                    container.find(".item-content").hide("fast");
+                    container.find(".summary-content").show("fast");
+                    container.find(".toggle-contract").hide();
+                    container.find(".toggle-expand").show();
+                };
+            
+                // Setup toggle expand.
+                var toggle_expand = $(this).find('.toggle-expand');
+                toggle_expand.click( function() {
+                    show_embedded_item();
+                    return false;
+                });
+            
+                // Setup toggle contract.
+                var toggle_contract = $(this).find('.toggle-contract');
+                toggle_contract.click( function() {
+                    hide_embedded_item();
+                    return false;
+                });
+            
+                // Setup toggle embed.
+                var toggle_embed = $(this).find('.toggle-embed');
+                toggle_embed.click( function() {
+                    if (container.find(".item-content").is(":visible")) {
+                        hide_embedded_item();
+                    } else {
+                        show_embedded_item();
+                    }
+                    return false;
+                });
+            });
+        });
+    
+    </script>
+
+    </head>
+    
+    <body scroll="no" class="">
+	<div id="everything" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-width: 600px;">
+        <div id="background"></div>
+        <div id="masthead">
+            
+
+    <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center">
+    
+    <table class="tab-group" border="0" cellspacing="0" style="margin: auto;">
+    <tr>
+    
+    
+    
+
+    
+    
+        
+        <td class="tab" style="">
+                <a target="_parent" href="/root">Analyze Data</a>
+        </td>
+    
+    
+    
+    
+        
+        <td class="tab" style="">
+                <a target="_parent" href="/workflow">Workflow</a>
+        </td>
+    
+    
+    
+    
+        
+        <td class="tab active" style="">
+                <a target="_parent" href="/library">Shared Data</a>
+                <div class="submenu">
+                <ul>
+                        <li>
+                                
+                                <a href="/library">Data Libraries</a></li>
+                        <li>
+                            <hr style="color: inherit; background-color: gray"/></li>
+                        <li>
+                                
+                                <a href="/history/list_published">Published Histories</a></li>
+                        <li>
+                                
+                                <a href="/workflow/list_published">Published Workflows</a></li>
+                        <li>
+                                
+                                <a href="/visualization/list_published">Published Visualizations</a></li>
+                        <li>
+                                
+                                <a href="/page/list_published">Published Pages</a></li>
+                </ul>
+                </div>
+        </td>
+    
+    
+    
+    
+        
+        <td class="tab" style="display: none;">
+                <a>Lab</a>
+                <div class="submenu">
+                <ul>
+                        <li>
+                                
+                                <a href="/requests">Sequencing Requests</a></li>
+                        <li>
+                                
+                                <a href="/requests/find_samples_index">Find Samples</a></li>
+                        <li>
+                                
+                                <a target="galaxy_main" href="http://main.g2.bx.psu.edu/u/rkchak/p/sts">Help</a></li>
+                </ul>
+                </div>
+        </td>
+    
+
+        
+    
+        
+        <td class="tab" style="">
+                <a target="_parent" href="/visualization/list">Visualization</a>
+                <div class="submenu">
+                <ul>
+                        <li>
+                                
+                                <a href="/tracks">New Track Browser</a></li>
+                        <li>
+                                
+                                <a href="/visualization/list">Saved Visualizations</a></li>
+                </ul>
+                </div>
+        </td>
+    
+
+    
+    
+        
+        <td class="tab admin-only" style="display: none;">
+                <a target="_parent" href="/admin">Admin</a>
+        </td>
+    
+    
+    
+    
+        
+        <td class="tab" style="">
+                <a>Help</a>
+                <div class="submenu">
+                <ul>
+                        <li>
+                                
+                                <a href="mailto:galaxy-bugs@bx.psu.edu">Email comments, bug reports, or suggestions</a></li>
+                        <li>
+                                
+                                <a target="_blank" href="http://bitbucket.org/galaxy/galaxy-central/wiki">Galaxy Wiki</a></li>
+                        <li>
+                                
+                                <a target="_blank" href="http://galaxycast.org">Video tutorials (screencasts)</a></li>
+                        <li>
+                                
+                                <a target="_blank" href="http://bitbucket.org/galaxy/galaxy-central/wiki/Citations">How to Cite Galaxy</a></li>
+                </ul>
+                </div>
+        </td>
+    
+    
+    
+    
+        
+        <td class="tab" style="">
+                <a>User</a>
+                <div class="submenu">
+                <ul>
+                        <li>
+                                
+                                <a target="galaxy_main" href="/user/login">Login</a></li>
+                        <li>
+                                
+                                <a target="galaxy_main" href="/user/create">Register</a></li>
+                </ul>
+                </div>
+        </td>
+    
+    
+        
+        <td class="tab" style="display: none;">
+                <a>User</a>
+                <div class="submenu">
+                <ul>
+                        <li>
+                                <li>Logged in as <span id="user-email"></span></li>
+                        <li>
+                                
+                                <a target="galaxy_main" href="/user">Preferences</a></li>
+                        <li>
+                                
+                                <a target="galaxy_main" href="/user/dbkeys">Custom Builds</a></li>
+                        <li>
+                                
+                                <a target="_top" href="/user/logout">Logout</a></li>
+                        <li>
+                            <hr style="color: inherit; background-color: gray"/></li>
+                        <li>
+                                
+                                <a target="galaxy_main" href="/history/list">Saved Histories</a></li>
+                        <li>
+                                
+                                <a target="galaxy_main" href="/dataset/list">Saved Datasets</a></li>
+                        <li>
+                                
+                                <a target="_top" href="/page/list">Saved Pages</a></li>
+                        <li>
+                                
+                                <a target="galaxy_main" href="/user/api_keys">API Keys</a></li>
+                </ul>
+                </div>
+        </td>
+    
+    
+    </tr>
+    </table>
+    
+    </div>
+    
+    <div class="title" style="position: absolute; top: 0; left: 0;">
+        <a href="/">
+        <img border="0" src="/static/images/galaxyIcon_noText.png" style="width: 26px; vertical-align: top;">
+        Galaxy
+        </a>
+    </div>
+    
+
+        </div>
+        <div id="messagebox" class="panel--message">
+        </div>
+    
+    
+    
+
+    <div id="overlay"
+    style="display: none;"
+    >
+    <div id="overlay-background" style="position: absolute; width: 100%; height: 100%;"></div>
+    
+    <table class="dialog-box-container" border="0" cellpadding="0" cellspacing="0"
+        style="display: none;"
+    ><tr><td>
+    <div class="dialog-box-wrapper">
+        <div class="dialog-box">
+        <div class="unified-panel-header">
+            <div class="unified-panel-header-inner"><span class='title'></span></div>
+        </div>
+        <div class="body"></div>
+        <div>
+            <div class="buttons" style="display: none; float: right;"></div>
+            <div class="extra_buttons" style="display: none; padding: 5px;"></div>
+            <div style="clear: both;"></div>
+        </div>
+        </div>
+    </div>
+    </td></tr></table>
+    </div>
+
+        <div id="center">
+            
+	
+    
+    
+    
+	
+
+    
+    <div class="unified-panel-header" unselectable="on">
+		<div class="unified-panel-header-inner">
+	                <a href="/page/list_published">Published Pages</a> | 
+	                <a href="/page/list_published?f-username=dan">dan</a>
+			| 
+    FASTQ manipulation tools
+	    </div>
+    </div>
+    
+    <div class="unified-panel-body">
+        <div style="overflow: auto; height: 100%;">        
+            <div class="page-body">
+                <div style="float: right">
+                    
+
+                </div>
+                <div>
+                    
+
+                </div>
+                
+                
+    <h1>Manipulation of FASTQ data with Galaxy</h1><p><em>This document is a live copy of supplementary materials for Galaxy's FASTQ manipulation tools; a set of screencasts and the results of vetting the toolset against published test files are presented. </em></p><p>The proliferation of next generation sequencing technologies has created numerous data management and analysis issues. The most troubling of these issues stems from the lack of standardized sequencer output and tools. As even the <em>de facto</em> standard output, FASTQ (see <a href="http://www.ncbi.nlm.nih.gov/pubmed/20015970">Cock et al., 2009</a>), comes in a number of format variants, preparing and quality checking produced sequencing data can be particularly troublesome. <strong>Galaxy contains set of tools that is able to handle all known FASTQ 
+variants</strong> and is intended to simplify the first steps following data acquisition. These steps typically follow the workflow of 1) parsing sequencer output, 2) calculating and 3) visualizing summary statistics on quality scores and nucleotide distributions, 4) trimming reads if necessary, 5) filtering reads by quality score and other various manipulations. The FASTQ tools are found under the <em>NGS: QC and manipulation</em> tool section.</p><h2>Screencasts</h2><ol><li><a href="http://screencast.g2.bx.psu.edu/galaxy/quickie_13_fastq_basic/flow.html" title="Basic FASTQ Manipulation">Basic</a> FASTQ manipulation: groomer, splitter and joiner, quality statistics and boxplot</li><li><a href="http://screencast.g2.bx.psu.edu/galaxy/quickie_14_fastq_adv/flow.html" title="Advanced FASTQ manipulation">Advanced</a> FASTQ manipulation: filtering, trimming, etc...</li></ol><h2>Typical Workflow of FASTQ Manipulation</h2><p><br /><img alt="FASTQ Workflow" src="http://www.bx.psu.edu/%7Edan/pages/fastq/fastq_workflow.png" title="Typical Workflow of FASTQ Manipulation" /></p><h2>Implementation</h2><p>This toolset was implemented in Python and is distributed as part of the standard Galaxy distribution, available from <a href="http://getgalaxy.org" title="http://getgalaxy.org">http://getgalaxy.org</a>. The specific sections of code are found in <a href="http://bitbucket.org/galaxy/galaxy-central/src/tip/lib/galaxy_utils/sequence/" title="Galaxy FASTQ Parser Code">${GALAXY_ROOT}/lib/galaxy_utils/sequence/</a><a href="$%7BGALAXY_ROOT%7D/lib/galaxy_utils/sequence/" title="FASTQ Parser Code"></a> and <a href="http://bitbucket.org/galaxy/galaxy-central/src/tip/tools/fastq/" title="Galaxy FASTQ Tool Source">${GALAXY_ROOT}/tools/fastq/</a>.</p><h2>Test Results<img src="file:///Users/dan/Library/Caches/TemporaryItems/moz-screenshot.png" /></h2><p>The FASTQ Groomer tool, which shares a common parser with the entire toolset, was run against test files provided in (Cock PJ, Fields CJ, Goto N, Heuer ML, Rice PM. (2009) The Sanger FASTQ file format for sequences with quality scores, and the Solexa/Illumina FASTQ variants. Nucleic Acids Res.) and the results are presented here. Along with their description of the FASTQ format, Cock et al. provides a set of test files to ensure that tools working with this format are able to properly handle the intricacies of the different variants. The results in Galaxy compare favorably to those expected by Cock et al., with a deviation allowing some of the test files originally marked as <em>invalid</em>&#160;to be <em>groomed</em> within Galaxy (in particular, certain out-of-range / invalid quality score values do not prevent successful grooming; see <em>Invalid FASTQ Files</em> table).</p><h4>The actions below shown as <em>convert to</em> were performed using the FASTQ Groomer tool within Galaxy; when converting, the input and output types are as indicated.</h4><table summary="this is summary"><caption>Valid FASTQ Files</caption><tbody><tr><td><strong>File Name</strong></td><td><strong>Action</strong></td><td><strong>Cock et al. behavior</strong></td><td><strong>Galaxy Behavior</strong></td></tr><tr><td>longreads_original_sanger.fastq</td><td>convert to Sanger</td><td>longreads_as_sanger.fastq</td><td>longreads_as_sanger.fastq</td></tr><tr><td>longreads_original_sanger.fastq</td><td>convert to Illumina</td><td>longreads_as_illumina.fastq</td><td>longreads_as_illumina.fastq</td></tr><tr><td>longreads_original_sanger.fastq</td><td>convert to Solexa</td><td>longreads_as_solexa.fastq</td><td>longreads_as_solexa.fastq</td></tr><tr><td>wrapping_original_sanger.fastq</td><td>convert to Sanger</td><td>wrapping_as_sanger.fastq</td><td>wrapping_as_sanger.fastq</td></tr><tr><td>wrapping_original_sanger.fastq</td><td>convert to Illumina</td><td>wrapping_as_illumina.fastq</td><td>wrapping_as_illumina.fastq</td></tr><tr><td>wrapping_original_sanger.fastq</td><td>convert to Solexa</td><td>wrapping_as_solexa.fastq</td><td>wrapping_as_solexa.fastq</td></tr><tr><td>illumina_full_range_original_illumina.fastq</td><td>convert to Sanger</td><td>illumina_full_range_as_sanger.fastq</td><td>illumina_full_range_as_sanger.fastq</td></tr><tr><td>illumina_full_range_original_illumina.fastq</td><td>convert to Illumina</td><td>illumina_full_range_as_illumina.fastq</td><td>illumina_full_range_as_illumina.fastq</td></tr><tr><td>illumina_full_range_original_illumina.fastq</td><td>convert to Solexa</td><td>illumina_full_range_as_solexa.fastq</td><td>illumina_full_range_as_solexa.fastq</td></tr><tr><td>sanger_full_range_original_sanger.fastq</td><td>convert to Sanger</td><td>sanger_full_range_as_sanger.fastq</td><td>sanger_full_range_as_sanger.fastq</td></tr><tr><td>sanger_full_range_original_sanger.fastq</td><td>convert to Illumina</td><td>sanger_full_range_as_illumina.fastq</td><td>sanger_full_range_as_illumina.fastq</td></tr><tr><td>sanger_full_range_original_sanger.fastq</td><td>convert to Solexa</td><td>sanger_full_range_as_solexa.fastq</td><td>sanger_full_range_as_solexa.fastq</td></tr><tr><td>solexa_full_range_original_solexa.fastq</td><td>convert to Sanger</td><td>solexa_full_range_as_sanger.fastq</td><td>solexa_full_range_as_sanger.fastq</td></tr><tr><td>solexa_full_range_original_solexa.fastq</td><td>convert to Illumina</td><td>solexa_full_range_as_illumina.fastq</td><td>solexa_full_range_as_illumina.fastq</td></tr><tr><td>solexa_full_range_original_solexa.fastq</td><td>convert to Solexa</td><td>solexa_full_range_as_solexa.fastq</td><td>solexa_full_range_as_solexa.fastq</td></tr><tr><td>misc_dna_original_sanger.fastq</td><td>convert to Sanger</td><td>misc_dna_as_sanger.fastq</td><td>misc_dna_as_sanger.fastq</td></tr><tr><td>misc_dna_original_sanger.fastq</td><td>convert to Illumina</td><td>misc_dna_as_illumina.fastq</td><td>misc_dna_as_illumina.fastq</td></tr><tr><td>misc_dna_original_sanger.fastq</td><td>convert to Solexa</td><td>misc_dna_as_solexa.fastq</td><td>misc_dna_as_solexa.fastq</td></tr><tr><td>misc_rna_original_sanger.fastq</td><td>convert to Sanger</td><td>misc_rna_as_sanger.fastq</td><td>misc_rna_as_sanger.fastq</td></tr><tr><td>misc_rna_original_sanger.fastq</td><td>convert to Illumina</td><td>misc_rna_as_illumina.fastq</td><td>misc_rna_as_illumina.fastq</td></tr><tr><td>misc_rna_original_sanger.fastq</td><td>convert to Solexa</td><td>misc_rna_as_solexa.fastq</td><td>misc_rna_as_solexa.fastq</td></tr></tbody></table><h4>The actions below shown as <em>parse</em>&#160;were performed using the FASTQ Groomer tool within Galaxy; when parsing, the input and output type were assumed to both be Sanger.</h4><table summary="this is summar"><caption>Invalid FASTQ Files</caption><tbody><tr><td><strong>File Name</strong></td><td><strong>Action</strong></td><td><strong>Cock et al. behavior</strong></td><td><strong>Galaxy behavior</strong></td></tr><tr><td>error_diff_ids.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_double_qual.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_double_seq.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_long_qual.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_no_qual.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_qual_del.fastq</td><td>parse</td><td>unable to parse</td><td>non-printing / out of range ASCII character is groomed to highest allowed quality score</td></tr><tr><td>error_qual_escape.fastq</td><td>parse</td><td>unable to parse</td><td>non-printing / out of range ASCII character is groomed to lowest allowed quality score</td></tr><tr><td>error_qual_null.fastq</td><td>parse</td><td>unable to parse</td><td>non-printing / out of range ASCII character is groomed to lowest allowed quality score</td></tr><tr><td>error_qual_space.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_qual_tab.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_qual_unit_sep.fastq</td><td>parse</td><td>unable to parse</td><td>non-printing / out of range ASCII character is groomed to lowest allowed quality score</td></tr><tr><td>error_qual_vtab.fastq</td><td>parse</td><td>unable to parse</td><td>non-printing / out of range ASCII character is groomed to lowest allowed quality score</td></tr><tr><td>error_short_qual.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_spaces.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_tabs.fastq</td><td>parse</td><td>unable to parse</td><td>tabs within sequence string are allowed to pass through groomed output and non-printing / out of range ASCII character is groomed to lowest allowed quality score</td></tr><tr><td>error_trunc_at_seq.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_trunc_at_plus.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_trunc_at_qual.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_trunc_in_title.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_trunc_in_seq.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_trunc_in_plus.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr><tr><td>error_trunc_in_qual.fastq</td><td>parse</td><td>unable to parse</td><td>unable to parse</td></tr></tbody></table>
+
+            </div>
+        
+
+        </div>
+    </div>
+
+
+        </div>
+            <div id="right-border"><div id="right-border-inner" style="display: none;"></div></div>
+            <div id="right">
+                
+
+    
+    
+	
+
+
+    <div class="unified-panel-header" unselectable="on">
+        <div class="unified-panel-header-inner">
+            About this 
+Page
+        </div>
+    </div>
+    
+    <div class="unified-panel-body">
+        <div style="overflow: auto; height: 100%;">
+            <div style="padding: 10px;">
+            
+                <div style="float: right;"><img src="http://www.gravatar.com/avatar/55de821fabf3165a63a3d8fbaa4bdb5d?d=identicon"></div>
+            
+                <h4>Author</h4>
+                
+                <p>dan</p>
+                
+                <h4>Related Pages</h4>
+                <p>
+                    <a href="/page/list_published">All published pages</a><br>
+                    <a href="/page/list_published?f-username=dan">Published pages by dan</a>
+                
+                <h4>Rating</h4>
+
+                
+                <div style="padding-bottom: 0.75em; float: left">
+                    Community<br>
+                    <span style="font-size:80%">
+                        (<span id="num_ratings">1</span> rating, 
+                         <span id="ave_rating">4.0</span> average)
+                    <span>
+                </div>
+                <div style="float: right">
+                    <input name="star1" type="radio" class="community_rating_star star" disabled="disabled" value="1"
+                    
+                    />
+                    <input name="star1" type="radio" class="community_rating_star star" disabled="disabled" value="2"
+                    />
+                    <input name="star1" type="radio" class="community_rating_star star" disabled="disabled" value="3"
+                    />
+                    <input name="star1" type="radio" class="community_rating_star star" disabled="disabled" value="4"
+                        checked="checked"
+                    />
+                    <input name="star1" type="radio" class="community_rating_star star" disabled="disabled" value="5"
+                    />
+                </div>
+                <div style="clear: both;"></div>
+                <div style="clear: both;"></div>
+                        
+                <h4>Tags</h4>
+                <p>
+                <div>
+                    Community:
+                    
+    
+    
+    
+    <div class="tag-element"
+            id="7415664065775345664"
+            style="display: none"
+    >
+        <div class="tag-area 
+        ">
+
+            
+        </div>
+    </div>
+
+    
+    <script type="text/javascript">
+        init_tag_click_function($('#7415664065775345664'), community_tag_click);
+    </script>
+
+                        none
+                </div>
+            </div>    
+        </div>
+    </div>
+
+
+            </div>
+	</div>
+    </body>
+    
+    <script src="/static/scripts/jquery.event.drag.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/jquery.event.hover.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/jquery.form.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/jquery.rating.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/galaxy.base.js?v=8" type="text/javascript"></script>
+<script src="/static/scripts/galaxy.panels.js?v=8" type="text/javascript"></script>
+    <script type="text/javascript">
+        
+    ensure_dd_helper();
+        
+        
+            var rp = make_right_panel( $("#right"), $("#center"), $("#right-border" ) );
+            handle_minwidth_hint = rp.handle_minwidth_hint;
+            force_right_panel = rp.force_panel;
+    
+    </script>
+    <![if !IE]>
+    <script type="text/javascript">
+        var upload_form_error = function( msg ) {
+            if ( ! $("iframe#galaxy_main").contents().find("body").find("div[class='errormessage']").size() ) {
+                $("iframe#galaxy_main").contents().find("body").prepend( '<div class="errormessage" name="upload_error">' + msg + '</div><p/>' );
+            } else {
+                $("iframe#galaxy_main").contents().find("body").find("div[class='errormessage']").text( msg );
+            }
+        }
+        jQuery( function() {
+            $("iframe#galaxy_main").load( function() {
+                $(this).contents().find("form").each( function() { 
+                    if ( $(this).find("input[galaxy-ajax-upload]").length > 0 ){
+                        $(this).submit( function() {
+                            // Only bother using a hidden iframe if there's a file (e.g. big data) upload
+                            var file_upload = false;
+                            $(this).find("input[galaxy-ajax-upload]").each( function() {
+                                if ( $(this).val() != '' ) {
+                                    file_upload = true;
+                                }
+                            });
+                            if ( ! file_upload ) {
+                                return true;
+                            }
+                            // Make a synchronous request to create the datasets first
+                            var async_datasets;
+                            var upload_error = false;
+                            $.ajax( {
+                                async:      false,
+                                type:       "POST",
+                                url:        "/tool_runner/upload_async_create",
+                                data:       $(this).formSerialize(),
+                                dataType:   "json",
+                                success:    function(array_obj, status) {
+                                                if (array_obj.length > 0) {
+                                                    if (array_obj[0] == 'error') {
+                                                        upload_error = true;
+                                                        upload_form_error(array_obj[1]);
+                                                    } else {
+                                                        async_datasets = array_obj.join();
+                                                    }
+                                                } else {
+                                                    // ( gvk 1/22/10 ) FIXME: this block is never entered, so there may be a bug somewhere
+                                                    // I've done some debugging like checking to see if array_obj is undefined, but have not
+                                                    // tracked down the behavior that will result in this block being entered.  I believe the
+                                                    // intent was to have this block entered if the upload button is clicked on the upload
+                                                    // form but no file was selected.
+                                                    upload_error = true;
+                                                    upload_form_error( 'No data was entered in the upload form.  You may choose to upload a file, paste some data directly in the data box, or enter URL(s) to fetch data.' );
+                                                }
+                                            }
+                            } );
+                            if (upload_error == true) {
+                                return false;
+                            } else {
+                                $(this).find("input[name=async_datasets]").val( async_datasets );
+                                $(this).append("<input type='hidden' name='ajax_upload' value='true'>");
+                            }
+                            // iframe submit is required for nginx (otherwise the encoding is wrong)
+                            $(this).ajaxSubmit( { iframe: true } );
+                            if ( $(this).find("input[name='folder_id']").val() != undefined ) {
+                                var library_id = $(this).find("input[name='library_id']").val();
+                                var show_deleted = $(this).find("input[name='show_deleted']").val();
+                                if ( location.pathname.indexOf( 'admin' ) != -1 ) {
+                                    $("iframe#galaxy_main").attr("src","/library_common/browse_library?username=dan&slug=fastq?cntrller=library_admin&id=" + library_id + "&created_ldda_ids=" + async_datasets + "&show_deleted=" + show_deleted);
+                                } else {
+                                    $("iframe#galaxy_main").attr("src","/library_common/browse_library?username=dan&slug=fastq?cntrller=library&id=" + library_id + "&created_ldda_ids=" + async_datasets + "&show_deleted=" + show_deleted);
+                                }
+                            } else {
+                                $("iframe#galaxy_main").attr("src","/tool_runner/upload_async_message?username=dan&slug=fastq");
+                            }
+                            return false;
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <![endif]>
+
+</html>

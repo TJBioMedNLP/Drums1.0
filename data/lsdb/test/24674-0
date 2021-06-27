@@ -1,0 +1,689 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<link rel='stylesheet'  type='text/css' href='/ztrap/faces/a4j_3_1_4.GAcss/toolBar.xcss/DATB/eAGLZKr5DAADWQHL;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C' /><link rel='stylesheet'  type='text/css' href='/ztrap/faces/a4j_3_1_4.GAcss/dropdownmenu.xcss/DATB/eAGLZKr5DAADWQHL;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C' /><link rel='stylesheet'  type='text/css' href='/ztrap/faces/a4j_3_1_4.GAcss/menucomponents.xcss/DATB/eAGLZKr5DAADWQHL;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C' /><script type='text/javascript' src='/ztrap/faces/a4j_3_1_4.GAorg.ajax4jsf.javascript.PrototypeScript'></script><script type='text/javascript' src='/ztrap/faces/a4j_3_1_4.GAorg.ajax4jsf.javascript.AjaxScript'></script><script type='text/javascript' src='/ztrap/faces/a4j_3_1_4.GAscripts/menu.js'></script><script type='text/javascript' src='/ztrap/faces/a4j_3_1_4.GAorg/richfaces/renderkit/html/scripts/utils.js'></script><script type='text/javascript' src='/ztrap/faces/a4j_3_1_4.GAorg/ajax4jsf/javascript/scripts/form.js'></script><script type='text/javascript' src='/ztrap/faces/a4j_3_1_4.GAorg/richfaces/renderkit/html/scripts/form.js'></script><meta content="no-cache" http-equiv="Pragma" />
+<meta content="no-cache" http-equiv="Cache-Control" />
+<meta content="no-store" http-equiv="Cache-Control" />
+<meta content="max-age=0" http-equiv="Cache-Control" />
+<meta content="1" http-equiv="Expires" />
+<title>zTrap Kawakami Lab. Find Image</title>
+<script type="text/javascript" src="/ztrap/theme/com/sun/rave/web/ui/defaulttheme/javascript/formElements.js"></script>
+<link rel="stylesheet" type="text/css" href="/ztrap/theme/com/sun/rave/web/ui/defaulttheme/css/css_master.css" />
+
+<script type="text/javascript">
+var sjwuic_ScrollCookie = new sjwuic_ScrollCookie('/image/ImageBrowse.jsp', '/ztrap/faces/image/ImageBrowse.jsp'); 
+</script>
+<meta id="_id0" name="keywords" content="zfish, zebrafish, construct, tol2, ztrap, gene trapping, gene, kawakami, knockout ," />
+<meta id="_id1" name="description" content="Kawakami Lab.  " />
+<meta id="_id2" name="robots" content="index,follow" />
+<script type="text/javascript">var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-20821621-1']);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script><link id="link1" rel="stylesheet" type="text/css" href="/ztrap/resources/stylesheet.css" />
+<link id="_id3" rel="stylesheet" type="text/css" href="/ztrap/resources/scripts/prototip/css/prototip.css" />
+<script charset="shift_jis" src="/ztrap/resources/scripts/prototype.js" type="text/javascript" language="javascript">
+				//
+				//</script><script charset="shift_jis" src="/ztrap/resources/scripts/scriptaculous/effects.js" type="text/javascript" language="javascript">
+				//
+				//</script><script charset="shift_jis" src="/ztrap/resources/scripts/prototip/js/prototip.js" type="text/javascript" language="javascript">
+				//
+				//</script><script type="text/javascript" src="/ztrap/resources/scripts/mediaplayer/swfobject.js">
+					//
+					//</script><script type="text/javascript" language="javascript">
+				//
+					function init(path, ztrap) {
+					  if(ztrap == "false") {
+						  location.href = path + '/faces/insertion/FindInsertion.jsp';
+					  }
+						tip_init(path);
+						fav_init(path);
+					}
+					
+					function tip_init(path) {
+						//var images = $$("img");
+						var images = $$("table");
+						for(var i = 0; i < images.length; i++) {
+							var id = images[i].getAttribute("id");
+							if(id == null) continue;
+							//if(id.match(/imageHyperLink/i) == null) continue;
+							if(id.match(/mainForm:image_cell_/i) == null) continue;
+							var imageid = id.match(/_(\d+)_/);
+							var url = path + '/servlet/showImageInfo?id=' + imageid[1];
+							var json = "{ajax: {url:'" + url + "'}, className:'pattern'}";
+							var obj = eval("(" + json + ")");
+							new Tip(images[i], obj);
+						}
+					}						
+						
+					function fav_init(path) {
+						var divs = $$("div");
+						for(var i=0; i < divs.length; i++) {
+							var id = divs[i].getAttribute("id");
+							if(id == null || id.indexOf("FAV", 0) != 0) continue;
+							var imageid = id.replace("FAV", "");
+							var url = path + "/servlet/FishImage%3Fimageid%3D" + imageid + "%26size%3Dflv";
+							var options = "autostart=true&repeat=always&controlbar=none&wmode=transparent";
+								// + "&menu=true&shuffle=false&wmode=transparent&usefullscreen=true&showstop=true&showicons=true&showdigits=true&displaylink=true";
+							var player = new SWFObject(path + "/resources/scripts/mediaplayer/player.swf", "player", "100", "75", "9", "#FFFFFF");
+							player.addParam('allowfullscreen','true');
+							player.addParam('allowscriptaccess','always');
+							player.addParam('flashvars', "file="+url+"&"+options);
+							player.write(id);
+						}
+					}
+					
+					
+				//</script></head>
+<body id="body1" style="-rave-layout: grid" onload="init('/ztrap', 'true'); return body1_jsObject.setInitialFocus();" onunload="return body1_jsObject.setScrollPosition();">
+<script type="text/javascript">
+		//
+		//	history.forward();
+		//</script><form id="headerFormPublic" class="form" method="post" action="/ztrap/faces/image/ImageBrowse.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" enctype="application/x-www-form-urlencoded">
+<div style=""><head>
+<meta content="no-cache" http-equiv="Pragma" />
+<meta content="no-cache" http-equiv="Cache-Control" />
+<meta content="no-store" http-equiv="Cache-Control" />
+<meta content="max-age=0" http-equiv="Cache-Control" />
+<meta content="1" http-equiv="Expires" />
+<title></title>
+<script type="text/javascript" src="/ztrap/theme/com/sun/rave/web/ui/defaulttheme/javascript/formElements.js"></script>
+<link rel="stylesheet" type="text/css" href="/ztrap/theme/com/sun/rave/web/ui/defaulttheme/css/css_master.css" />
+
+<script type="text/javascript">
+var sjwuic_ScrollCookie = new sjwuic_ScrollCookie('/image/ImageBrowse.jsp', '/ztrap/faces/image/ImageBrowse.jsp'); 
+</script>
+<link id="headerFormPublic:Header:icon" rel="icon" type="image/x-icon" href="/ztrap/resources/zTrap_16.ico" />
+<link id="headerFormPublic:Header:link1" rel="stylesheet" type="text/css" href="/ztrap/resources/stylesheet.css" />
+<link id="headerFormPublic:Header:_id39" rel="stylesheet" type="text/css" href="/ztrap/resources/scripts/prototip/css/prototip.css" />
+</head>
+<table id="headerFormPublic:Header:header" border="0" cellpadding="0" cellspacing="0" lang="en" style="width:100%; background-color:#FFFFFF;">
+<tbody>
+<tr>
+<td><table id="headerFormPublic:Header:gridPanel2" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+<tbody>
+<tr>
+<td><table id="headerFormPublic:Header:gridPanel7_ztrap" border="0" cellpadding="0" cellspacing="0" style="background-repeat:no-repeat; background-color:#87CEFA;width:100%;vertical-align:bottom;height:61px;">
+<tbody>
+<tr>
+<td><img id="headerFormPublic:Header:image1" src="/ztrap/resources/database_logo.gif;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" alt="" border="0" /></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><table id="headerFormPublic:Header:spaceGridPanel" border="0" cellpadding="0" cellspacing="0" style="width:100%;height: 3px;background-color:#FFFFFF; ">
+<tbody>
+<tr>
+<td><span id="headerFormPublic:Header:dummu2"></span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><table id="headerFormPublic:Header:gridPanel6" border="0" cellpadding="0" cellspacing="0" style="width:100%;background-color:#87CEFA;height:28px;vertical-align:center;text-align:left;padding-left:50px;">
+<tbody>
+<tr>
+<td><span id="headerFormPublic:Header:zTrapGroupPanel" style="font-color:#000000; font-family:Arial;Helvetica; font-size:12px; font-weight:bold;"><a id="headerFormPublic:Header:home_ztrap" href="http://kawakami.lab.nig.ac.jp/index.html">Kawakami Lab Home</a> | <a id="headerFormPublic:Header:searchImage_ztrap" href="/ztrap/faces/image/ImageBrowse.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C">Find Image</a> | <a id="headerFormPublic:Header:searchUAS_ztrap" href="/ztrap/faces/image/UASBrowse.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C">Find UAS</a> | <a id="headerFormPublic:Header:searchInsertion_ztrap" href="/ztrap/faces/insertion/FindInsertion.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C">Find Insertion</a> | <a id="headerFormPublic:Header:searchGene_ztrap" href="/ztrap/faces/ens/FindEns.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C">Gene to Insertion</a> | <span id="headerFormPublic:Header:groupPanel_ztrap" style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;"><a id="headerFormPublic:Header:loginPage_ztrap" href="/ztrap/faces/login/Login.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C">Login</a>
+<a id="headerFormPublic:Header:logoutPage_ztrap" class="hidden" onclick="return hyperlink_submit(this, 'headerFormPublic', null);" href="#">Logout</a></span></span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<input id="headerFormPublic_hidden" name="headerFormPublic_hidden" value="headerFormPublic_hidden" type="hidden" />
+
+</form>
+<div align="center"><div xmlLang="en" style="" lang="en"></div></div><table id="titleGridPanel" class="InputParentGridPanel ">
+<tbody>
+<tr class="alignLeftGridPanelRow">
+<td class="alignLeftGridPanelRow"><table id="titleSubGridPanel" cellpadding="1" cellspacing="1">
+<tbody>
+<tr class="alignLeftGridPanelRow">
+<td class="alignMiddleGridPanelRow"><span id="titleStaticText" class="MainTitle">Find Image</span></td>
+<td class="alignMiddleGridPanelRow"><a id="hyperlinkAdvancedSearch" class="alignLeftGridPanelRow" href="/ztrap/faces/image/FindImage.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C">advanced search<img id="advancedSearchGraphicImage" src="/ztrap/resources/images/other/search.gif;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" class="iconImage" alt="" /></a></td>
+<td class="alignMiddleGridPanelRow"><a id="helpHyperLink" class="alignLeftGridPanelRow" href="/ztrap/help/FindImage.html;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" target="_blank">help <img id="help1" src="/ztrap/resources/images/titledbox/titledbox_help_roll.gif;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" alt="help" class="iconImage" /></a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<form id="mainForm" class="form" method="post" action="/ztrap/faces/image/ImageBrowse.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" enctype="application/x-www-form-urlencoded">
+<table id="mainForm:mainGridPanel" class="InputParentGridPanel" style="vertical-align:top;width:100%;height:100%;">
+<tbody>
+<tr>
+<td class="alignTopGridPanelRow alignTopGridPanelRow"><table id="mainForm:twoColumnGridPanel" style="vertical-align:top:text-align:left;">
+<tbody>
+<tr class="alignTopLeftGridPanelRow alignTopLeftGridPanelRow">
+<td class="alignTopLeftGridPanelRow alignTopLeftGridPanelRow"><table id="mainForm:leftGridPanel" style="vertical-align:top;height:100%;">
+<tbody>
+<tr class="alignTopLeftGridpanelRow">
+<td><table id="mainForm:hierarchicalListsGridPanel" cellpadding="0px" cellspacing="3px" style="vertical-align:top;height:100%;">
+<tbody>
+<tr>
+<td class="imageBrowseListboxesGridPanel imageBrowseListboxesGridPanel imageBrowseListboxesGridPanel"><table id="mainForm:regionSelectGridPanel" class="imageBrowseListboxGridPanel" cellpadding="0px" cellspacing="0px">
+<tbody>
+<tr>
+<td><a id="mainForm:byRegionLink" style="font-weight:bold;" href="" target="_blank">by region</a></td>
+</tr>
+<tr>
+<td><select class="imageBrowseListbox Lst" id="mainForm:regionMultiSelectListbox" name="mainForm:regionMultiSelectListbox" size="50" multiple="multiple" onchange="common_timeoutSubmitForm(this.form,  'regionMultiSelectListbox');;listbox_changed('mainForm:regionMultiSelectListbox');  return false;">
+	<option class="LstOpt" value="0">ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+	<option class="LstOpt" value="38">lens</option>
+	<option class="LstOpt" value="1">brain/head</option>
+	<option class="LstOpt" value="2">(forebrain)</option>
+	<option class="LstOpt" value="3">(midbrain)</option>
+	<option class="LstOpt" value="4">(mhb)</option>
+	<option class="LstOpt" value="5">(hindbrain)</option>
+	<option class="LstOpt" value="6">spinal cord</option>
+	<option class="LstOpt" value="7">(floor plate)</option>
+	<option class="LstOpt" value="26">pns/lateral line/neuromast</option>
+	<option class="LstOpt" value="36">pineal gland</option>
+	<option class="LstOpt" value="17">nose</option>
+	<option class="LstOpt" value="18">eye</option>
+	<option class="LstOpt" value="19">otic vesicle</option>
+	<option class="LstOpt" value="27">skin</option>
+	<option class="LstOpt" value="13">gill arches/jaw</option>
+	<option class="LstOpt" value="32">thymus</option>
+	<option class="LstOpt" value="8">notochord</option>
+	<option class="LstOpt" value="9">somite/muscle</option>
+	<option class="LstOpt" value="16">heart</option>
+	<option class="LstOpt" value="24">blood</option>
+	<option class="LstOpt" value="25">blood vessel</option>
+	<option class="LstOpt" value="30">fin</option>
+	<option class="LstOpt" value="21">gut</option>
+	<option class="LstOpt" value="37">(intestine)</option>
+	<option class="LstOpt" value="20">(liver)</option>
+	<option class="LstOpt" value="22">(pancreas)</option>
+	<option class="LstOpt" value="23">(pronephros)</option>
+	<option class="LstOpt" value="34">(swim bladder)</option>
+	<option class="LstOpt" value="29">mouth</option>
+	<option class="LstOpt" value="14">hatching gland</option>
+	<option class="LstOpt" value="15">yolk</option>
+	<option class="LstOpt" value="12">post-vent region (tail)</option>
+	<option class="LstOpt" value="28">whole organism</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="imageBrowseListboxesGridPanel imageBrowseListboxesGridPanel imageBrowseListboxesGridPanel"><table id="mainForm:constructSelectGridPanel" class="imageBrowseListboxGridPanel" cellpadding="0px" cellspacing="0px">
+<tbody>
+<tr>
+<td><a id="mainForm:byConstructLink" style="font-weight:bold;" href="/ztrap/faces/about/construct.html;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" target="_blank">by construct</a></td>
+</tr>
+<tr>
+<td><select class="imageBrowseListbox Lst" id="mainForm:constructMultiSelectListbox" name="mainForm:constructMultiSelectListbox" size="50" multiple="multiple" onchange="common_timeoutSubmitForm(this.form,  'constructMultiSelectListbox');;listbox_changed('mainForm:constructMultiSelectListbox');  return false;">
+	<option class="LstOpt" value="0">ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+	<option class="LstOpt" value="27">XIG</option>
+	<option class="LstOpt" value="1">SAG</option>
+	<option class="LstOpt" value="8">gata6SAG</option>
+	<option class="LstOpt" value="2">HG</option>
+	<option class="LstOpt" value="16">hspGGFF</option>
+	<option class="LstOpt" value="7">hspGFF</option>
+	<option class="LstOpt" value="11">hspGFFDMC</option>
+	<option class="LstOpt" value="3">SAGFF(LF)</option>
+	<option class="LstOpt" value="5">SAIGFF</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="imageBrowseListboxesGridPanel imageBrowseListboxesGridPanel imageBrowseListboxesGridPanel"><table id="mainForm:numberSelectGridPanel" class="imageBrowseListboxGridPanel" cellpadding="0px" cellspacing="0px">
+<tbody>
+<tr>
+<td><a id="mainForm:byNumberLink" style="font-weight:bold;" href="" target="_blank">by number</a></td>
+</tr>
+<tr>
+<td><select class="imageBrowseListbox Lst" id="mainForm:numberMultiSelectListbox" name="mainForm:numberMultiSelectListbox" size="50" multiple="multiple" onchange="common_timeoutSubmitForm(this.form,  'numberMultiSelectListbox');;listbox_changed('mainForm:numberMultiSelectListbox');  return false;">
+	<option class="LstOpt" value="ALL">ALL&nbsp;&nbsp;&nbsp;&nbsp;</option>
+	<option class="LstOpt" value="1A">1A</option>
+	<option class="LstOpt" value="1B">1B</option>
+	<option class="LstOpt" value="1C">1C</option>
+	<option class="LstOpt" value="2A">2A</option>
+	<option class="LstOpt" value="3A">3A</option>
+	<option class="LstOpt" value="3B">3B</option>
+	<option class="LstOpt" value="4A">4A</option>
+	<option class="LstOpt" value="4B">4B</option>
+	<option class="LstOpt" value="4C">4C</option>
+	<option class="LstOpt" value="5A">5A</option>
+	<option class="LstOpt" value="6A">6A</option>
+	<option class="LstOpt" value="6B">6B</option>
+	<option class="LstOpt" value="6C">6C</option>
+	<option class="LstOpt" value="6D">6D</option>
+	<option class="LstOpt" value="7A">7A</option>
+	<option class="LstOpt" value="7B">7B</option>
+	<option class="LstOpt" value="8A">8A</option>
+	<option class="LstOpt" value="9B">9B</option>
+	<option class="LstOpt" value="9C">9C</option>
+	<option class="LstOpt" value="10A">10A</option>
+	<option class="LstOpt" value="10B">10B</option>
+	<option class="LstOpt" value="10C">10C</option>
+	<option class="LstOpt" value="11A">11A</option>
+	<option class="LstOpt" value="11B">11B</option>
+	<option class="LstOpt" value="12A">12A</option>
+	<option class="LstOpt" value="12B">12B</option>
+	<option class="LstOpt" value="12C">12C</option>
+	<option class="LstOpt" value="13A">13A</option>
+	<option class="LstOpt" value="13F">13F</option>
+	<option class="LstOpt" value="13G">13G</option>
+	<option class="LstOpt" value="14A">14A</option>
+	<option class="LstOpt" value="14B">14B</option>
+	<option class="LstOpt" value="14C">14C</option>
+	<option class="LstOpt" value="15A">15A</option>
+	<option class="LstOpt" value="16B">16B</option>
+	<option class="LstOpt" value="17A">17A</option>
+	<option class="LstOpt" value="17B">17B</option>
+	<option class="LstOpt" value="17C">17C</option>
+	<option class="LstOpt" value="18A">18A</option>
+	<option class="LstOpt" value="19A">19A</option>
+	<option class="LstOpt" value="19B">19B</option>
+	<option class="LstOpt" value="19C">19C</option>
+	<option class="LstOpt" value="20A">20A</option>
+	<option class="LstOpt" value="20B">20B</option>
+	<option class="LstOpt" value="21A">21A</option>
+	<option class="LstOpt" value="21B">21B</option>
+	<option class="LstOpt" value="21C">21C</option>
+	<option class="LstOpt" value="21E">21E</option>
+	<option class="LstOpt" value="21K">21K</option>
+	<option class="LstOpt" value="22A">22A</option>
+	<option class="LstOpt" value="23A">23A</option>
+	<option class="LstOpt" value="23C">23C</option>
+	<option class="LstOpt" value="25A">25A</option>
+	<option class="LstOpt" value="26A">26A</option>
+	<option class="LstOpt" value="27A">27A</option>
+	<option class="LstOpt" value="27C">27C</option>
+	<option class="LstOpt" value="28A">28A</option>
+	<option class="LstOpt" value="28B">28B</option>
+	<option class="LstOpt" value="28C">28C</option>
+	<option class="LstOpt" value="29A">29A</option>
+	<option class="LstOpt" value="30A">30A</option>
+	<option class="LstOpt" value="30B">30B</option>
+	<option class="LstOpt" value="31A">31A</option>
+	<option class="LstOpt" value="31B">31B</option>
+	<option class="LstOpt" value="31C">31C</option>
+	<option class="LstOpt" value="32A">32A</option>
+	<option class="LstOpt" value="33A">33A</option>
+	<option class="LstOpt" value="34A">34A</option>
+	<option class="LstOpt" value="34B">34B</option>
+	<option class="LstOpt" value="35A">35A</option>
+	<option class="LstOpt" value="35B">35B</option>
+	<option class="LstOpt" value="36B">36B</option>
+	<option class="LstOpt" value="37A">37A</option>
+	<option class="LstOpt" value="37B">37B</option>
+	<option class="LstOpt" value="38A">38A</option>
+	<option class="LstOpt" value="38B">38B</option>
+	<option class="LstOpt" value="39A">39A</option>
+	<option class="LstOpt" value="39B">39B</option>
+	<option class="LstOpt" value="41A">41A</option>
+	<option class="LstOpt" value="41C">41C</option>
+	<option class="LstOpt" value="45A">45A</option>
+	<option class="LstOpt" value="46A">46A</option>
+	<option class="LstOpt" value="46B">46B</option>
+	<option class="LstOpt" value="46C">46C</option>
+	<option class="LstOpt" value="47A">47A</option>
+	<option class="LstOpt" value="47B">47B</option>
+	<option class="LstOpt" value="49A">49A</option>
+	<option class="LstOpt" value="50A">50A</option>
+	<option class="LstOpt" value="51A">51A</option>
+	<option class="LstOpt" value="51B">51B</option>
+	<option class="LstOpt" value="53A">53A</option>
+	<option class="LstOpt" value="53B">53B</option>
+	<option class="LstOpt" value="54A">54A</option>
+	<option class="LstOpt" value="55A">55A</option>
+	<option class="LstOpt" value="55B">55B</option>
+	<option class="LstOpt" value="55C">55C</option>
+	<option class="LstOpt" value="56A">56A</option>
+	<option class="LstOpt" value="56B">56B</option>
+	<option class="LstOpt" value="56D">56D</option>
+	<option class="LstOpt" value="57A">57A</option>
+	<option class="LstOpt" value="57B">57B</option>
+	<option class="LstOpt" value="60B">60B</option>
+	<option class="LstOpt" value="60C">60C</option>
+	<option class="LstOpt" value="61A">61A</option>
+	<option class="LstOpt" value="62A">62A</option>
+	<option class="LstOpt" value="62B">62B</option>
+	<option class="LstOpt" value="63A">63A</option>
+	<option class="LstOpt" value="63F">63F</option>
+	<option class="LstOpt" value="65A">65A</option>
+	<option class="LstOpt" value="67A">67A</option>
+	<option class="LstOpt" value="67B">67B</option>
+	<option class="LstOpt" value="68B">68B</option>
+	<option class="LstOpt" value="69A">69A</option>
+	<option class="LstOpt" value="70A">70A</option>
+	<option class="LstOpt" value="71A">71A</option>
+	<option class="LstOpt" value="72A">72A</option>
+	<option class="LstOpt" value="72C">72C</option>
+	<option class="LstOpt" value="72F">72F</option>
+	<option class="LstOpt" value="73A">73A</option>
+	<option class="LstOpt" value="74A">74A</option>
+	<option class="LstOpt" value="75A">75A</option>
+	<option class="LstOpt" value="75B">75B</option>
+	<option class="LstOpt" value="76A">76A</option>
+	<option class="LstOpt" value="78A">78A</option>
+	<option class="LstOpt" value="79A">79A</option>
+	<option class="LstOpt" value="81A">81A</option>
+	<option class="LstOpt" value="81B">81B</option>
+	<option class="LstOpt" value="81D">81D</option>
+	<option class="LstOpt" value="84A">84A</option>
+	<option class="LstOpt" value="85A">85A</option>
+	<option class="LstOpt" value="85B">85B</option>
+	<option class="LstOpt" value="85C">85C</option>
+	<option class="LstOpt" value="86A">86A</option>
+	<option class="LstOpt" value="87A">87A</option>
+	<option class="LstOpt" value="87C">87C</option>
+	<option class="LstOpt" value="88A">88A</option>
+	<option class="LstOpt" value="89A">89A</option>
+	<option class="LstOpt" value="90A">90A</option>
+	<option class="LstOpt" value="91A">91A</option>
+	<option class="LstOpt" value="91B">91B</option>
+	<option class="LstOpt" value="92A">92A</option>
+	<option class="LstOpt" value="94A">94A</option>
+	<option class="LstOpt" value="97A">97A</option>
+	<option class="LstOpt" value="99A">99A</option>
+	<option class="LstOpt" value="99B">99B</option>
+	<option class="LstOpt" value="99C">99C</option>
+	<option class="LstOpt" value="99D">99D</option>
+	<option class="LstOpt" value="99E">99E</option>
+	<option class="LstOpt" value="100A">100A</option>
+	<option class="LstOpt" value="102B">102B</option>
+	<option class="LstOpt" value="103C">103C</option>
+	<option class="LstOpt" value="105A">105A</option>
+	<option class="LstOpt" value="106A">106A</option>
+	<option class="LstOpt" value="107A">107A</option>
+	<option class="LstOpt" value="109A">109A</option>
+	<option class="LstOpt" value="114A">114A</option>
+	<option class="LstOpt" value="115B">115B</option>
+	<option class="LstOpt" value="118A">118A</option>
+	<option class="LstOpt" value="119A">119A</option>
+	<option class="LstOpt" value="120A">120A</option>
+	<option class="LstOpt" value="122A">122A</option>
+	<option class="LstOpt" value="124A">124A</option>
+	<option class="LstOpt" value="125A">125A</option>
+	<option class="LstOpt" value="126A">126A</option>
+	<option class="LstOpt" value="126B">126B</option>
+	<option class="LstOpt" value="126D">126D</option>
+	<option class="LstOpt" value="127A">127A</option>
+	<option class="LstOpt" value="127D">127D</option>
+	<option class="LstOpt" value="128A">128A</option>
+	<option class="LstOpt" value="130A">130A</option>
+	<option class="LstOpt" value="130B">130B</option>
+	<option class="LstOpt" value="131A">131A</option>
+	<option class="LstOpt" value="131B">131B</option>
+	<option class="LstOpt" value="134A">134A</option>
+	<option class="LstOpt" value="147A">147A</option>
+	<option class="LstOpt" value="148A">148A</option>
+	<option class="LstOpt" value="151A">151A</option>
+	<option class="LstOpt" value="152A">152A</option>
+	<option class="LstOpt" value="153A">153A</option>
+	<option class="LstOpt" value="155A">155A</option>
+	<option class="LstOpt" value="157A">157A</option>
+	<option class="LstOpt" value="157B">157B</option>
+	<option class="LstOpt" value="158A">158A</option>
+	<option class="LstOpt" value="158B">158B</option>
+	<option class="LstOpt" value="164B">164B</option>
+	<option class="LstOpt" value="164C">164C</option>
+	<option class="LstOpt" value="167A">167A</option>
+	<option class="LstOpt" value="168A">168A</option>
+	<option class="LstOpt" value="170A">170A</option>
+	<option class="LstOpt" value="170B">170B</option>
+	<option class="LstOpt" value="171A">171A</option>
+	<option class="LstOpt" value="177A">177A</option>
+	<option class="LstOpt" value="178B">178B</option>
+	<option class="LstOpt" value="178C">178C</option>
+	<option class="LstOpt" value="178D">178D</option>
+	<option class="LstOpt" value="178E">178E</option>
+	<option class="LstOpt" value="178F">178F</option>
+	<option class="LstOpt" value="178H">178H</option>
+	<option class="LstOpt" value="178L">178L</option>
+	<option class="LstOpt" value="179A">179A</option>
+	<option class="LstOpt" value="181A">181A</option>
+	<option class="LstOpt" value="182A">182A</option>
+	<option class="LstOpt" value="183A">183A</option>
+	<option class="LstOpt" value="184A">184A</option>
+	<option class="LstOpt" value="186A">186A</option>
+	<option class="LstOpt" value="187A">187A</option>
+	<option class="LstOpt" value="187C">187C</option>
+	<option class="LstOpt" value="193A">193A</option>
+	<option class="LstOpt" value="193B">193B</option>
+	<option class="LstOpt" value="195A">195A</option>
+	<option class="LstOpt" value="195B">195B</option>
+	<option class="LstOpt" value="196B">196B</option>
+	<option class="LstOpt" value="196C">196C</option>
+	<option class="LstOpt" value="199B">199B</option>
+	<option class="LstOpt" value="206A">206A</option>
+	<option class="LstOpt" value="206B">206B</option>
+	<option class="LstOpt" value="208A">208A</option>
+	<option class="LstOpt" value="209A">209A</option>
+	<option class="LstOpt" value="212A">212A</option>
+	<option class="LstOpt" value="212C">212C</option>
+	<option class="LstOpt" value="212E">212E</option>
+	<option class="LstOpt" value="212F">212F</option>
+	<option class="LstOpt" value="212G">212G</option>
+	<option class="LstOpt" value="213A">213A</option>
+	<option class="LstOpt" value="214A">214A</option>
+	<option class="LstOpt" value="214B">214B</option>
+	<option class="LstOpt" value="214C">214C</option>
+	<option class="LstOpt" value="217A">217A</option>
+	<option class="LstOpt" value="217B">217B</option>
+	<option class="LstOpt" value="223A">223A</option>
+	<option class="LstOpt" value="223B">223B</option>
+	<option class="LstOpt" value="224A">224A</option>
+	<option class="LstOpt" value="226A">226A</option>
+	<option class="LstOpt" value="226B">226B</option>
+	<option class="LstOpt" value="226C">226C</option>
+	<option class="LstOpt" value="226D">226D</option>
+	<option class="LstOpt" value="226F">226F</option>
+	<option class="LstOpt" value="228A">228A</option>
+	<option class="LstOpt" value="228B">228B</option>
+	<option class="LstOpt" value="228C">228C</option>
+	<option class="LstOpt" value="228D">228D</option>
+	<option class="LstOpt" value="231A">231A</option>
+	<option class="LstOpt" value="231B">231B</option>
+	<option class="LstOpt" value="233A">233A</option>
+	<option class="LstOpt" value="234A">234A</option>
+	<option class="LstOpt" value="234B">234B</option>
+	<option class="LstOpt" value="234C">234C</option>
+	<option class="LstOpt" value="234D">234D</option>
+	<option class="LstOpt" value="235A">235A</option>
+	<option class="LstOpt" value="237A">237A</option>
+	<option class="LstOpt" value="237B">237B</option>
+	<option class="LstOpt" value="237C">237C</option>
+	<option class="LstOpt" value="237D">237D</option>
+	<option class="LstOpt" value="237E">237E</option>
+	<option class="LstOpt" value="240A">240A</option>
+	<option class="LstOpt" value="242A">242A</option>
+	<option class="LstOpt" value="242B">242B</option>
+	<option class="LstOpt" value="243A">243A</option>
+	<option class="LstOpt" value="246A">246A</option>
+	<option class="LstOpt" value="246B">246B</option>
+	<option class="LstOpt" value="247A">247A</option>
+	<option class="LstOpt" value="251A">251A</option>
+	<option class="LstOpt" value="269A">269A</option>
+	<option class="LstOpt" value="270A">270A</option>
+	<option class="LstOpt" value="298A">298A</option>
+	<option class="LstOpt" value="337A">337A</option>
+	<option class="LstOpt" value="352A">352A</option>
+	<option class="LstOpt" value="m11A">m11A</option>
+	<option class="LstOpt" value="m11B">m11B</option>
+	<option class="LstOpt" value="m11C">m11C</option>
+	<option class="LstOpt" value="m11D">m11D</option>
+	<option class="LstOpt" value="m11E">m11E</option>
+	<option class="LstOpt" value="m14A">m14A</option>
+	<option class="LstOpt" value="m17A">m17A</option>
+	<option class="LstOpt" value="m17B">m17B</option>
+	<option class="LstOpt" value="m17C">m17C</option>
+	<option class="LstOpt" value="m18A">m18A</option>
+	<option class="LstOpt" value="m18B">m18B</option>
+	<option class="LstOpt" value="m18C">m18C</option>
+	<option class="LstOpt" value="m1A">m1A</option>
+	<option class="LstOpt" value="n10A">n10A</option>
+	<option class="LstOpt" value="n10B">n10B</option>
+	<option class="LstOpt" value="n12B">n12B</option>
+	<option class="LstOpt" value="n12C">n12C</option>
+	<option class="LstOpt" value="n12F">n12F</option>
+	<option class="LstOpt" value="n12H">n12H</option>
+	<option class="LstOpt" value="n12J">n12J</option>
+	<option class="LstOpt" value="n14C">n14C</option>
+	<option class="LstOpt" value="n15A">n15A</option>
+	<option class="LstOpt" value="n15B">n15B</option>
+	<option class="LstOpt" value="n15C">n15C</option>
+	<option class="LstOpt" value="n16A">n16A</option>
+	<option class="LstOpt" value="n20A">n20A</option>
+	<option class="LstOpt" value="n20B">n20B</option>
+	<option class="LstOpt" value="n20C">n20C</option>
+	<option class="LstOpt" value="n20D">n20D</option>
+	<option class="LstOpt" value="n20E">n20E</option>
+	<option class="LstOpt" value="n21A">n21A</option>
+	<option class="LstOpt" value="n22A">n22A</option>
+	<option class="LstOpt" value="n22B">n22B</option>
+	<option class="LstOpt" value="n23A">n23A</option>
+	<option class="LstOpt" value="n25A">n25A</option>
+	<option class="LstOpt" value="n25B">n25B</option>
+	<option class="LstOpt" value="n25C">n25C</option>
+	<option class="LstOpt" value="n25D">n25D</option>
+	<option class="LstOpt" value="n26A">n26A</option>
+	<option class="LstOpt" value="n26B">n26B</option>
+	<option class="LstOpt" value="n28A">n28A</option>
+	<option class="LstOpt" value="n28C">n28C</option>
+	<option class="LstOpt" value="n2A">n2A</option>
+	<option class="LstOpt" value="n30A">n30A</option>
+	<option class="LstOpt" value="n31A">n31A</option>
+	<option class="LstOpt" value="n31B">n31B</option>
+	<option class="LstOpt" value="n32A">n32A</option>
+	<option class="LstOpt" value="n32B">n32B</option>
+	<option class="LstOpt" value="n33A">n33A</option>
+	<option class="LstOpt" value="n33B">n33B</option>
+	<option class="LstOpt" value="n33C">n33C</option>
+	<option class="LstOpt" value="n33D">n33D</option>
+	<option class="LstOpt" value="n33E">n33E</option>
+	<option class="LstOpt" value="n34A">n34A</option>
+	<option class="LstOpt" value="n34B">n34B</option>
+	<option class="LstOpt" value="n36A">n36A</option>
+	<option class="LstOpt" value="n39A">n39A</option>
+	<option class="LstOpt" value="n39B">n39B</option>
+	<option class="LstOpt" value="n39C">n39C</option>
+	<option class="LstOpt" value="n39D">n39D</option>
+	<option class="LstOpt" value="n42A">n42A</option>
+	<option class="LstOpt" value="n42D">n42D</option>
+	<option class="LstOpt" value="n43A">n43A</option>
+	<option class="LstOpt" value="n43B">n43B</option>
+	<option class="LstOpt" value="n44A">n44A</option>
+	<option class="LstOpt" value="n44B">n44B</option>
+	<option class="LstOpt" value="n44E">n44E</option>
+	<option class="LstOpt" value="n46C">n46C</option>
+	<option class="LstOpt" value="n46E">n46E</option>
+	<option class="LstOpt" value="n46F">n46F</option>
+	<option class="LstOpt" value="n47A">n47A</option>
+	<option class="LstOpt" value="n50A">n50A</option>
+	<option class="LstOpt" value="n50B">n50B</option>
+	<option class="LstOpt" value="n50D">n50D</option>
+	<option class="LstOpt" value="n50E">n50E</option>
+	<option class="LstOpt" value="n50G">n50G</option>
+	<option class="LstOpt" value="n53D">n53D</option>
+	<option class="LstOpt" value="n54A">n54A</option>
+	<option class="LstOpt" value="n54B">n54B</option>
+	<option class="LstOpt" value="n5A">n5A</option>
+	<option class="LstOpt" value="n5B">n5B</option>
+	<option class="LstOpt" value="n62A">n62A</option>
+	<option class="LstOpt" value="n62B">n62B</option>
+	<option class="LstOpt" value="n63B">n63B</option>
+	<option class="LstOpt" value="n6A">n6A</option>
+	<option class="LstOpt" value="n7A">n7A</option>
+	<option class="LstOpt" value="n8E">n8E</option>
+	<option class="LstOpt" value="n8H">n8H</option>
+	<option class="LstOpt" value="n9A">n9A</option>
+	<option class="LstOpt" value="p11A">p11A</option>
+	<option class="LstOpt" value="p22A">p22A</option>
+	<option class="LstOpt" value="p22B">p22B</option>
+	<option class="LstOpt" value="p33A">p33A</option>
+	<option class="LstOpt" value="p47A">p47A</option>
+	<option class="LstOpt" value="p49A">p49A</option>
+	<option class="LstOpt" value="p49B">p49B</option>
+	<option class="LstOpt" value="p4A">p4A</option>
+	<option class="LstOpt" value="p53A">p53A</option>
+	<option class="LstOpt" value="p53B">p53B</option>
+	<option class="LstOpt" value="p57A">p57A</option>
+	<option class="LstOpt" value="p61A">p61A</option>
+	<option class="LstOpt" value="p84A">p84A</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="alignTopLeftGridPanelRow alignTopLeftGridPanelRow"><table id="mainForm:rightGridPanel">
+<tbody>
+<tr class="alignTopLeftGridPanelRow">
+<td><table id="mainForm:imageViewGridPanel" style="vertical-align:top;text-align:left;width:500px;height:100%;">
+<tbody>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
+<input id="mainForm_hidden" name="mainForm_hidden" value="mainForm_hidden" type="hidden" />
+
+</form>
+<form id="footerForm" class="form" method="post" action="/ztrap/faces/image/ImageBrowse.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" enctype="application/x-www-form-urlencoded">
+<div><div align="center" xmlLang="en" style="" lang="en"><table id="footerForm:Footer1:gridPanel1" class="alignCenterGridPanelRow" style="border-top: solid #cccccc 1px; text-align:center; width:100%;">
+<tbody>
+<tr>
+<td><table id="footerForm:Footer1:gridPanel1_1" class="alignRightGridPanelRow" style="text-align:right">
+<tbody>
+<tr>
+<td><span id="footerForm:Footer1:groupPanel1_1_1" style="text-align:right"></span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span id="footerForm:Footer1:groupPanel_ztrap" style=" color: rgb(102, 102, 102); text-align: center"><a id="footerForm:Footer1:helpHyperlink_ztrap" class="footerMenu" style="    color: rgb(102, 102, 102);     margin-left: 5px;     margin-right: 5px; " href="http://kawakami.lab.nig.ac.jp/about_ztrap.html" target="_blank">About</a>|<a id="footerForm:Footer1:supportHyperlink_ztrap" class="footerMenu" style="    color: rgb(102, 102, 102);     margin-left: 5px;     margin-right: 5px; " href="/ztrap/faces/Help.jsp;jsessionid=25246DD017A5627C6F6D9DB6A7371E0C" target="_blank">Contact</a></span></td>
+</tr>
+<tr>
+<td><a id="footerForm:Footer1:acknowledgeHyperlink" class="footerMenu" style="font-size:6pt; color: rgb(102, 102, 102); margin-left: 5px;  margin-right: 5px;" href="http://www.genome-sci.jp/" target="_blank">This work was supported by Grant-in-Aid for Scientific Research on Priority Areas Comprehensive Genomics from the Ministry of Education, Culture, Sports, Science and Technology of Japan.</a></td>
+</tr>
+<tr>
+<td><img id="footerForm:Footer1:graphicImage1_1_1_1" src="http://kawakami.lab.nig.ac.jp/cgi-bin/cmfcount.cgi?mode=count&amp;name=top&amp;beam=6&amp;img=b" alt="" /></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<input id="footerForm_hidden" name="footerForm_hidden" value="footerForm_hidden" type="hidden" />
+
+</form>
+
+<script type="text/javascript">
+var body1_jsObject = new Body('');
+</script>
+</body>
+</html>

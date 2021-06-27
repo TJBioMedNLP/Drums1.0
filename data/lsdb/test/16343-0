@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Hirst Group Homepage</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="robots" content="index,follow" />
+	<meta name="Description" content="The Hirst group nottingham, free web interfaces for circular and linear dichroism calculation and glycosylation prediction." /> 
+	<meta name="Keywords" content="dichroism calculations calculation protein circular linear interface spectrum spectra PDB ab initio matrix method glycosylation" />
+	<link rel="stylesheet" href="/layout/styles.css" type="text/css" />
+	<script type="text/javascript">
+/* <![CDATA[ */
+	/***********************************************
+	 * Ultimate Fade-In Slideshow (v1.51): © Dynamic Drive (http://www.dynamicdrive.com)
+	 * This notice MUST stay intact for legal use
+	 * Visit http://www.dynamicdrive.com/ for this script and 100s more.
+	 ***********************************************/
+ 
+var fadeimages=new Array()
+	//SET IMAGE PATHS. Extend or contract array as needed
+	fadeimages[0]=["/files/transsurface.png", "", ""]
+	fadeimages[1]=["/files/actincomplex.png", "", ""]
+	fadeimages[2]=["/files/conformers.png", "", ""]
+	fadeimages[3]=["/files/3tim.png", "", ""]
+	fadeimages[4]=["/files/comfa.png", "", ""]
+	fadeimages[5]=["/files/potential.png", "", ""]
+	fadeimages[6]=["/files/soluteco2.png", "", ""]
+	fadeimages[7]=["/files/pocket.png", "", ""]
+	fadeimages[8]=["/files/peptidect.png", "", ""]
+	fadeimages[9]=["/files/ndi.png", "", ""]
+
+	 
+// var fadeimages2=new Array() //2nd array set example. Remove or add more sets as needed.
+// 	//SET IMAGE PATHS. Extend or contract array as needed
+// 	fadeimages2[0]=["photo1.jpg", "", ""] //plain image syntax
+// 	fadeimages2[1]=["photo2.jpg", "http://www.cssdrive.com", ""] //image with link syntax
+// 	fadeimages2[2]=["photo3.jpg", "http://www.javascriptkit.com", "_new"] //image with link and target syntax
+	 
+	var fadebgcolor="white"
+
+	////NO need to edit beyond here/////////////
+	 
+var fadearray=new Array() //array to cache fadeshow instances
+var fadeclear=new Array() //array to cache corresponding clearinterval pointers
+	 
+var dom=(document.getElementById) //modern dom browsers
+	var iebrowser=document.all
+	 
+	function fadeshow(theimages, fadewidth, fadeheight, borderwidth, delay, pause, displayorder){
+		this.pausecheck=pause
+			this.mouseovercheck=0
+			this.delay=delay
+			this.degree=10 //initial opacity degree (10%)
+			this.curimageindex=0
+			this.nextimageindex=1
+			fadearray[fadearray.length]=this
+			this.slideshowid=fadearray.length-1
+			this.canvasbase="canvas"+this.slideshowid
+			this.curcanvas=this.canvasbase+"_0"
+			if (typeof displayorder!="undefined")
+				theimages.sort(function() {return 0.5 - Math.random();}) //thanks to Mike (aka Mwinter) :)
+					this.theimages=theimages
+					this.imageborder=parseInt(borderwidth)
+					this.postimages=new Array() //preload images
+					for (p=0;p<theimages.length;p++){
+						this.postimages[p]=new Image()
+							this.postimages[p].src=theimages[p][0]
+					}
+		 
+		var fadewidth=fadewidth+this.imageborder*2
+			var fadeheight=fadeheight+this.imageborder*2
+			 
+			if (iebrowser&&dom||dom) //if IE5+ or modern browsers (ie: Firefox)
+				document.write('<div id="master'+this.slideshowid+'" style="float:right;position:relative;width:'+fadewidth+'px;height:'+fadeheight+'px;overflow:hidden;"><div id="'+this.canvasbase+'_0" style="position:absolute;width:'+fadewidth+'px;height:'+fadeheight+'px;top:0;left:0;filter:progid:DXImageTransform.Microsoft.alpha(opacity=10);opacity:0.1;-moz-opacity:0.1;-khtml-opacity:0.1;background-color:'+fadebgcolor+'"></div><div id="'+this.canvasbase+'_1" style="position:absolute;width:'+fadewidth+'px;height:'+fadeheight+'px;top:0;left:0;filter:progid:DXImageTransform.Microsoft.alpha(opacity=10);opacity:0.1;-moz-opacity:0.1;-khtml-opacity:0.1;background-color:'+fadebgcolor+'"></div></div>')
+			else
+				document.write('<div><img name="defaultslide'+this.slideshowid+'" alt="Slide Show" src="'+this.postimages[0].src+'" /></div>')
+					 
+					if (iebrowser&&dom||dom) //if IE5+ or modern browsers such as Firefox
+						this.startit()
+					else{
+						this.curimageindex++
+							setInterval("fadearray["+this.slideshowid+"].rotateimage()", this.delay)
+					}
+	}
+
+function fadepic(obj){
+	if (obj.degree<100){
+		obj.degree+=10
+			if (obj.tempobj.filters&&obj.tempobj.filters[0]){
+				if (typeof obj.tempobj.filters[0].opacity=="number") //if IE6+
+					obj.tempobj.filters[0].opacity=obj.degree
+				else //else if IE5.5-
+					obj.tempobj.style.filter="alpha(opacity="+obj.degree+")"
+			}
+			else if (obj.tempobj.style.MozOpacity)
+				obj.tempobj.style.MozOpacity=obj.degree/101
+			else if (obj.tempobj.style.KhtmlOpacity)
+				obj.tempobj.style.KhtmlOpacity=obj.degree/100
+			else if (obj.tempobj.style.opacity&&!obj.tempobj.filters)
+				obj.tempobj.style.opacity=obj.degree/101
+	}
+	else{
+		clearInterval(fadeclear[obj.slideshowid])
+			obj.nextcanvas=(obj.curcanvas==obj.canvasbase+"_0")? obj.canvasbase+"_0" : obj.canvasbase+"_1"
+			obj.tempobj=iebrowser? iebrowser[obj.nextcanvas] : document.getElementById(obj.nextcanvas)
+			obj.populateslide(obj.tempobj, obj.nextimageindex, obj.fadewidth, obj.fadeheight)
+			obj.nextimageindex=(obj.nextimageindex<obj.postimages.length-1)? obj.nextimageindex+1 : 0
+			setTimeout("fadearray["+obj.slideshowid+"].rotateimage()", obj.delay)
+	}
+}
+ 
+fadeshow.prototype.populateslide=function(picobj, picindex, fadewidth, fadeheight){
+	var slideHTML=""
+		if (this.theimages[picindex][1]!="") //if associated link exists for image
+			slideHTML='<a href="'+this.theimages[picindex][1]+'" target="'+this.theimages[picindex][2]+'">'
+				slideHTML+='<img src="'+this.postimages[picindex].src+'" alt="Slide Show" width="'+this.fadewidth+'px" border="'+this.imageborder+'px" />'
+				if (this.theimages[picindex][1]!="") //if associated link exists for image
+					slideHTML+='</a>'
+						picobj.innerHTML=slideHTML
+}
+ 
+fadeshow.prototype.rotateimage=function(){
+	if (this.pausecheck==1) //if pause onMouseover enabled, cache object
+		var cacheobj=this
+			if (this.mouseovercheck==1)
+				setTimeout(function(){cacheobj.rotateimage()}, 100)
+			else if (iebrowser&&dom||dom){
+				this.resetit()
+					var crossobj=this.tempobj=iebrowser? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+					crossobj.style.zIndex++
+					fadeclear[this.slideshowid]=setInterval("fadepic(fadearray["+this.slideshowid+"])",50)
+					this.curcanvas=(this.curcanvas==this.canvasbase+"_0")? this.canvasbase+"_1" : this.canvasbase+"_0"
+			}
+			else{
+				var ns4imgobj=document.images['defaultslide'+this.slideshowid]
+					ns4imgobj.src=this.postimages[this.curimageindex].src
+			}
+	this.curimageindex=(this.curimageindex<this.postimages.length-1)? this.curimageindex+1 : 0
+}
+ 
+fadeshow.prototype.resetit=function(){
+	this.degree=10
+		var crossobj=iebrowser? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+		if (crossobj.filters&&crossobj.filters[0]){
+			if (typeof crossobj.filters[0].opacity=="number") //if IE6+
+				crossobj.filters(0).opacity=this.degree
+			else //else if IE5.5-
+				crossobj.style.filter="alpha(opacity="+this.degree+")"
+		}
+		else if (crossobj.style.MozOpacity)
+			crossobj.style.MozOpacity=this.degree/101
+		else if (crossobj.style.KhtmlOpacity)
+			crossobj.style.KhtmlOpacity=this.degree/100
+		else if (crossobj.style.opacity&&!crossobj.filters)
+			crossobj.style.opacity=this.degree/101
+}
+ 
+ 
+fadeshow.prototype.startit=function(){
+	var crossobj=iebrowser? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+		this.populateslide(crossobj, this.curimageindex, this.fadewidth, this.fadeheight)
+		if (this.pausecheck==1){ //IF SLIDESHOW SHOULD PAUSE ONMOUSEOVER
+			var cacheobj=this
+				var crossobjcontainer=iebrowser? iebrowser["master"+this.slideshowid] : document.getElementById("master"+this.slideshowid)
+				crossobjcontainer.onmouseover=function(){cacheobj.mouseovercheck=1}
+			crossobjcontainer.onmouseout=function(){cacheobj.mouseovercheck=0}
+		}
+	this.rotateimage()
+}
+/* ]]> */
+</script>
+
+</head>
+
+<body>
+	<div id="header">
+	<div id="header_left">
+		<a href="http://comp.chem.nottingham.ac.uk/home/index.html"><img id="title-logo" src="/layout/title-logo.gif" width="120" height="80" alt="Home Page" /></a><img id="title-header" src="/layout/title-header.gif" alt="The Hirst Group Home Page" width="480" height="80" />
+	</div>
+	
+	<div id="header_right">
+		<a href="http://www.nottingham.ac.uk/"><img id="title-uni" src="/layout/title-uni.gif" width="160" height="80" alt="The University of Nottingham" /></a>
+	</div>
+</div>
+
+	<div id="NaviSideBar">
+	<span class="sidelink">
+		<a href="/home/index.html">Home</a> 
+		<a href="/members/index.html">Group Members</a> 
+		<a href="/positions/index.html">Open Positions</a> 
+		<a href="/research/index.html">Research Topics</a> 
+		<a href="/publications/index.html">Publications</a> 
+		<a href="/collaborators/index.html">Collaborators</a> 
+		<!--a href="/funding/index.html">Funding Record</a --> 
+		<span class="NaviGroup">Web Services</span>
+                <a href="/debt"><img src="/layout/spacer.gif" height="5" width="15" alt="DEBT" />DEBT</a>
+		<a href="/dichrocalc"><img src="/layout/spacer.gif" height="5" width="15" alt="DichroCalc" />DichroCalc</a> 
+                <a href="/disspred"><img src="/layout/spacer.gif" height="5" width="15" alt="DISSPred" />DISSPred</a>
+		<a href="/glyco"><img src="/layout/spacer.gif" height="5" width="15" alt="GlycoPred" />GlycoPred</a> 
+		<a href="/trespasser"><img src="/layout/spacer.gif" height="5" width="15" alt="TRESPASSER" />TRESPASSER</a>
+		<a href="/alumni/index.html">Alumni</a> 
+		<a href="/schedule/index.html">Seminar Schedule</a> 
+		<a href="/download/index.html">Download</a>
+		<a href="/teaching/index.html">Teaching</a>
+		
+		
+		
+		<a href="http://www.nottingham.ac.uk/chemistry/">School of Chemistry</a>
+                <a href="http://theory.chem.nottingham.ac.uk">UoN Theory</a>
+		
+	</span>
+	
+	<div id="W3Clogo">
+		<a href="http://validator.w3.org/check?uri=referer">
+			<img src="http://www.w3.org/Icons/valid-xhtml10-blue"
+				alt="Valid XHTML 1.0 Strict" height="31" width="88" />
+		</a>
+	</div>
+</div>
+
+	<div id="NaviTopBar">
+	<div class="NaviSpacer">&nbsp;</div>
+	<div class="NaviTopLink"><a href=""></a></div>
+</div>
+
+	
+	<div id="maincontent">
+		<div id="flags">
+			<a href="/home/index.html"><img src="/files/uk.gif" alt="English Version" /></a>
+			<a href="/home/index-cn.html"><img src="/files/china.gif" alt="Chinese Version" /></a>
+		</div>
+		
+		<a name="TopOfPage" id="TopOfPage"></a>
+		
+		<h3 class="aligncenter">
+			<strong>Welcome to the Hirst Group Home Page.</strong>
+		</h3>
+
+		<h4 class="aligncenter">
+			<strong>We are part of Nottingham's 
+				<a name="CompChem" id="CompChem" href="http://www.nottingham.ac.uk/chemistry/research/research_physical_and_theoretical.php">
+					Physical and Theoretical Division
+				</a>,<br /> and we also have research interests in 
+				<a name="BiolChem" id="BiolChem" href="http://www.nottingham.ac.uk/chemistry/research/research_organic_and_biological.php">
+					Biological Chemistry
+				</a> .<br />
+			Click on a picture to learn more about some of our research.</strong>
+		</h4>
+
+	<p>&nbsp;</p>
+	
+	<table class="tablecenter" cellspacing="0" cellpadding="0">
+		<colgroup>
+			<col width="400"/>
+			<col width="400"/>
+		</colgroup>
+
+		<tr><td style="vertical-align: top;">
+		<table class="tablecenter" cellspacing="0" cellpadding="0">
+			<colgroup>
+				<col width="100" />
+				<col width="250" />
+			</colgroup>
+			
+			<tr>
+				<td><strong>Contact:</strong></td>
+				<td>Professor Jonathan D. Hirst</td>
+			</tr>
+			
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					School of Chemistry<br />
+					University of Nottingham<br />
+					University Park<br />
+					Nottingham<br />
+					NG7 2RD<br />
+				</td>
+			</tr>
+			<tr>
+				<td><strong>Phone</strong></td>
+				<td>+44 115 951 3478</td>
+			</tr>
+			<tr>
+				<td><strong>FAX</strong></td>
+				<td>+44 115 951 3562</td>
+			</tr>
+			<tr>
+				<td><strong>eMail</strong></td>
+				<td><img src="../files/mail-hirst.gif" alt="Mail address Jonathan Hirst" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td> <td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td> <td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td> <td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><b>Of interest?</b></td>
+				<td><a href="http://www.rsc.org/theoretical">
+				The new RSC Book Series on Theoretical and Computational Chemistry</a></td>
+			</tr> 
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+	</td>
+	<td>
+		
+			<script type="text/javascript">
+			//new fadeshow(IMAGES_ARRAY_NAME, slideshow_width, slideshow_height, borderwidth, delay, pause (0=no, 1=yes), optionalRandomOrder)
+			new fadeshow(fadeimages, 300, 240, 10, 5000, 0, "R")
+			<!--new fadeshow(fadeimages2, 140, 225, 0, 3000, 0)-->
+			</script>
+		
+	</td></tr>
+</table>
+
+		
+		<p>&nbsp;</p>
+		
+		<table class="tablecenter" cellspacing="0" cellpadding="0">
+			<colgroup>
+				<col width="200" />
+				<col width="200" />
+				<col width="200" />
+				<col width="200" />
+			</colgroup>
+			
+			<tr>
+				<td>
+					<a href="http://dx.doi.org/10.1039/B905187B"><img src="/publications/graphics/PCCP.2009.11.6060.png" height="190" alt="PCCP Cover" /></a>
+				</td>
+				<td>
+					<a href="/research/index.html#formamide"><img src="/research/formamide.gif" width="170" height="190" alt="Image" /></a>
+				</td>
+				<td>
+					<a href="/research/index.html#lattice"><img src="/research/lattice.gif" width="170" height="190" alt="Image" /></a>
+				</td>
+				<td>
+					<a href="/research/index.html"><img src="/research/dhfr.gif" width="170" height="190" alt="Image" /></a>
+				</td>
+			</tr>
+		</table>
+	
+		<p>&nbsp;</p>
+	
+		<div id="footer">
+	<div class="FooterLeft"><a class="footerlink" href="http://www.nottingham.ac.uk/chemistry/">School of Chemistry</a></div>
+	<div class="FooterCenter"><a class="footerlink" href="/index.html">Back to Home Page</a></div>
+	<div class="FooterRight"><a class="footerlink" href="#TopOfPage">Top of page</a></div>
+	<p>&nbsp;</p>
+</div>
+
+		
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,884 @@
+<!DOCTYPE html PUBLIC "HTML 4.01 Strict">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta name="verify-v1" content="X4UVFLrxhcx6U5/TKWTiXgWtTqurSO3LFFcOXNqP0xo=" />
+<link rel="stylesheet" type="text/css" media="screen" href="http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/web/css/playmoby.css">
+<link rel="icon"  href="http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/web/img/playmoby.png" type="png">
+<title>PlayMOBY</title>
+</head>
+
+<body>
+
+<div align="center"><img src="http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/web/img/playmoby.png"/></div>
+
+
+<p><b> Configured for http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby</b></p>
+<ul>
+    <p>Check these links:</p>
+    <li><p>RDF directory web access: <a href='http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/rdf/index.html'>http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/rdf/</a></p></li>
+	<li><p>CGI directory web access and ExecCGI option: <a href='http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/cgi/index.cgi'>http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/cgi/index.cgi</a></p></li>
+
+<p>
+If CGI script is not executed, you should modify your apache httpd.conf file (you must be root/sudoer).<br />
+Then, add a ScripAlias directive :
+<p/>
+<table>
+<tr><td class="code">
+ScriptAlias /biomoby/playmoby/cgi/ "/www/www-bioinfo/biomoby/playmoby/cgi/"
+</td></tr>
+</table>
+</ul>
+
+
+<br/>
+<hr/>
+<br/>
+
+<ul>
+
+	<li><a href="#copyright">COPYRIGHT</a></li>
+	<li><a href="#download">DOWNLOAD</a></li>
+	<li><a href="#hurry">HURRY ?</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#first_install">FIRST INSTALL</a></li>
+	<li><a href="#deploying_a_webservice">DEPLOYING A WEBSERVICE</a></li>
+	<ul>
+
+		<li><a href="#i__mobyle_xml_file_generation">I. Mobyle XML file generation</a></li>
+		<li><a href="#ii__mobyle_parsing_and_creation_of_a_webservice_tarball">II.	Mobyle parsing and creation of a webservice tarball</a></li>
+		<li><a href="#iii__webservice__de_registration_and_test">III.	Webservice [de]registration and test</a></li>
+	</ul>	
+	<li><a href="#monitoring">MONITORING SERVICES</a></li>
+
+	<li><a href="#dependancies">DEPENDANCIES</a></li>
+	<ul>
+		<li><a href="#i__perl">I. Perl Modules</a></li>
+		<li><a href="#ii__binaries">II. Linux Binaries</a></li>
+	</ul>	
+
+	<li><a href="#samples">SAMPLE SCRIPTS</a></li>
+	
+	<li><a href="#authors">AUTHORS</a></li>
+	<li><a href="#contact">CONTACT</a></li>
+
+</ul>
+
+<br>
+<br>
+<h2><a name="copyright">COPYRIGHT</a></h2>
+
+<p>PlayMOBY is governed by the CeCILL license under French law.</p>
+
+<ul>
+    <li><a href="http://www.cecill.info/" target="cecill">The CeCILL license in french</a></li>
+    <li><a href="http://www.cecill.info/index.en.html" target="cecill">The CeCILL license in english</a></li>
+</ul>
+
+<br>
+<br>
+
+<h2><a name="download">DOWNLOAD</a></h2>
+
+<p>PlayMOBY tarball is available at the following address:<br/>
+<a href="http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby.tar.bz2">http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby.tar.bz2</a>
+<br />
+If you want to be informed about main updates, please send an email to <a href="mailto:sebastien.carrere@toulouse.inra.fr?subject=[PlayMOBY] subscribe" > Sebastien Carrere </a>
+</p>
+<br>
+<br>
+
+
+<h2><a name="hurry">HURRY ?</a></h2>
+
+<table><tr><td class="code">
+<pre><strong><code>
+% tcsh
+% cd /full/path/to
+% wget http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby.tar.bz2
+% tar xfj playmoby.tar.bz2
+% cd playmoby
+% ./pmb_configure.pl --unix_path=<i>/www/www-bioinfo/biomoby/playmoby</i> --http_path=<i>http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby</i> --auth_uri=<i>demo.lipm-bioinfo.toulouse.inra.fr</i> --email=<i>sebastien.carrere@toulouse.inra.fr</i> --timeout=10
+% source .setenv
+% ./sample/PrintHello --mobyle > ./sample/Nicknames.mobyle
+% cd services
+% $PMBBIN/pmb_MobyleParser.pl --xmlfile=/www/www-bioinfo/biomoby/playmoby/sample/Nicknames.mobyle --tmp_dir=/tmp --service_contact=<i>sebastien.carrere@toulouse.inra.fr</i> --bin_fullpath=<i>/www/www-bioinfo/biomoby/playmoby/sample/PrintHello</i>
+<font color="#555555">Give a test file for article Nicknames : </font><i>/www/www-bioinfo/biomoby/playmoby/sample/nicknames.txt</i>
+
+<font color="#555555">
+WelcomeProgram.bz2 has been created.
+Next step: deploy your WelcomeProgram WS using PlayMOBY environnement.
+</font>
+% tar xjf WelcomeProgram.bz2
+% $PMBBIN/pmb_DeployWS.pl --all --services=WelcomeProgram --central=opencentral
+
+<p><b><i>Opencentral presents some problems to deregister services (very long, timeout ...). I have no explanation at this moment from BioMOBY community<br />
+That's why you will prefer to use public registry "mobycentral" to do your tests also.<br />
+Nevertheless, don't forget to mention your services as testing ones (using a "test" prefix in service name for example) and overall to clean registry (deregister your test services).
+</i></b></p>
+
+
+
+</code></strong>
+</pre>
+</td></tr></table><br>
+
+
+
+<h2><a name="synopsis">SYNOPSIS</a></h2>
+<p>
+First of all, a little word on how we consider webservices: for us, it is just a script/executable wrapping.<br>
+That's why our webservices are based on a system call of a standalone script handling infiles and outfiles.<br>
+By this way, we can continue to use these programs using command line call, or embed them into programming pipeline
+or CGIs.<br>
+<br>
+Deploying a webservice using PlayMOBY is a three step protocol.<br>
+<br>
+The first one, is to generate/get a <a href="http://bioweb2.pasteur.fr/projects/mobyle/">Mobyle</a> description of your executable. One aim of Mobyle project (C.Letondal <i>et al.</i>) is to describe any program using XML language. As for an example, they plan to describe all EMBOSS suite programs like they have done before with <i>Pise</i>. <br>
+So we collaborate with the Mobyle team to fit our needs.<br>
+<br>
+We developped a perl module called <i><a href="doc/Appli.html">Appli.pm</a></i> to generate easily a Mobyle valid XML file; the description of your program is embedded into the program itself and is structured into perl hashes. <br>
+<br>
+The main constraints are: <br>
+</p>
+<ul>
+	<li>input and ouput data have to be written into files</li>
+	<li>any message written on standard error stream will be catch as an error</li>
+	<li>any message written on standard output stream will be lost</li>
+
+</ul>
+
+<br>
+
+<p>
+The second step consists in analyse the Mobyle data to principally generate a configuration file.<br>
+We choose to use a pivot format to avoid direct dependancies with Mobyle: by this way, if Mobyle specifications move in the future, we will just have to modify our Mobyle to configuration file parser without modify the third part protocol (see below).<br>
+<br>
+</p>
+<img src="http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/web/img/stepI.jpg" alt="stepI"/>
+<p>
+<br>
+<br>
+The third part is the publication and the test of the new webservice. Here again, we choose to separate this step from the previous one in order to be more robust according to the BioMOBY's specifications evolutions.<br>
+We use two different webservice templates (<a href="tmpl/service.template">synchronous one</a> [<a href="doc/service.template.html">doc</a>]and <a href="tmpl/service-async.template">asynchronous one </a>[<a href="doc/service-async.template.html">doc</a>]) to write the perl module.<br>
+The generated webservice (the perl module and a configuration file) has to be under the PlayMOBY environment control to be available.
+<br><br>
+</p>
+
+<img src="http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/web/img/stepII.jpg" alt="stepII"/>
+
+<br>
+<br>
+
+
+
+
+
+<h2><a name="first_install">FIRST INSTALL</a></h2>
+<p>
+When you install PlayMOBY environnement for the first time you have to configure it.<br>
+The script <i>pmb_configure.pl</i> will modify many files (config files, perl modules) to tune PlayMOBY according to your system.<br>
+It will also check your system configuration (perl modules, binaries).
+</p>
+
+<table><tr><td class="code">
+<pre><strong><code>
+% tcsh
+% ./pmb_configure.pl --http_path=http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby --auth_uri=demo.lipm-bioinfo.toulouse.inra.fr [--timeout=10] [--unix_path=/www/www-bioinfo/biomoby/playmoby]
+</code></strong>
+</pre>
+</td></tr></table><br>
+
+
+<pre>
+        
+        --http_path:   	Your PlayMOBY URL
+                    	this is the &quot;apache path&quot; to the PlayMOBY directory; because of webservice technology , the rest of the world should access
+                      	to this directory using http protocol, and especially &quot;rdf&quot; directory and &quot;cgi/dispatcher.cgi&quot; should be accessible
+                      	NB1: do not forget to add ExecCGI option onto &quot;cgi&quot; directory
+                      	NB2: try to access these directories using a web browser (using http_path root URL) from an external IP class (to avoid problems of security access)
+
+		           RDF directory: http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/rdf/
+		           CGI directory: http://lipm-bioinfo.toulouse.inra.fr/biomoby/playmoby/cgi/index.cgi
+		            
+        --email   :    this PlayMoby instance administrator email
+
+        --auth_uri:    the authority URI is a signature for your Webservices deployed under one instance of PlayMOBY
+
+        --timeout :    the timeout parameter corresponds to the SOAP request Time out (in minutes) (LWP::UserAgent timeout) ; by default, we use 10 minutes
+                      there's also another timeout in your apache server, so take care to be synchronized with this one
+                      if you want to modify apache timeout, contact your administrator (maybe he should prefer to use a virtual host with specific timeout)
+
+	--unix_path:   	the full path where you untar PlayMOBY tarball; in fact it's the directory where is &quot;pmb_configure.pl&quot; script
+
+</pre>
+
+
+<p>The script <i>pmb_configure.pl</i> also gernerates a setenv (.setenv) file containing two environment variables: PMBBIN and PMBCFG</p>
+<ul>
+        <li>$PMBBIN points to the usefull PlayMOBY scripts directory /www/www-bioinfo/biomoby/playmoby/bin</li>
+        <li>$PMBCFG points to configuration directory /www/www-bioinfo/biomoby/playmoby/cfg (which contains especially central/registry configuration files)</li>
+</ul>
+
+<p>To use these environment variables, type the following command each time you connect to your PlayMOBY environment</p>
+
+<table><tr><td class="code">
+<pre>
+<strong><code>
+% tcsh
+% source .setenv
+</code></strong>
+</pre>
+</td></tr></table>
+
+
+
+<h2><a name="deploying_a_webservice">DEPLOYING A WEBSERVICE</a></h2>
+<p>
+First of all, a little word on how we consider webservices: for us, it is just a script/executable embedding.<br>
+That's why our webservices are based on a system call of a standalone script handling infiles and outfiles.<br>
+By this way, we can continue to use these programs using command line call, or embed these into programming pipeline
+or CGIs.
+</p>
+
+<p>Deploying a BioMoby webservice using PlayMOBY environment is a 3 steps protocol:</p>
+
+<h3><a name="i__mobyle_xml_file_generation">I. Mobyle XML file generation</a></h3>
+
+<p>
+We based our protocol onto the Mobyle XML format to describe our programs.<br>
+To generate Mobyle-xml files we developped a perl Module called <i><a href="doc/Appli.html">Appli.pm</a></i>.<br>
+It's based on a description of inputs, outputs and parameters using perl hashes.<br>
+Here's a sample code  (<i><a href="doc/ParamParser.html">ParamParser.pm</a></i> module is also a LIPM perl module provided within PlayMOBY tarball):
+
+<table><tr><td class="code"><pre><code>
+#!/usr/bin/perl
+
+=pod 
+
+=head1 NAME
+
+PrintHello - A test program who say hello and more
+
+=head1  SYNOPSIS 
+
+PrintHello --nicknames_file=&lt;file&gt; --output_file=&lt;file&gt; [--question="&lt;sentence to add&gt;"] [--mobyle] [--pmbtest]
+
+=head1 DESCRIPTION
+
+    This program takes a list of nicknames as input and print a welcome sentence
+    foreach one. 
+    You can provide a question to add to the welcoming message.
+    The mobyle switch produce Mobyle XML data for this program.
+
+=head1 AUTHORS
+
+    	Sebastien.Carrere@toulouse.inra.fr
+
+=cut
+
+BEGIN
+{
+    my ($dirprg, $nameprg) = $0 =~ /(.+)\/(.+)/;
+    unshift(@INC, "$dirprg/../lib");
+}
+
+use strict;
+use ParamParser;
+use Appli;
+use IO::File;
+use Cwd 'abs_path';
+
+MAIN:
+{
+    my $o_param = New ParamParser('GETOPTLONG', ("nicknames_file=s", "output_file=s", "question=s", "mobyle", "pmbtest"));
+
+    my %h_appli_general = (
+        name  =&gt; 'WelcomeProgram',
+        descr =&gt; "This program takes a list of nicknames as input and print a welcome sentence foreach one.",
+        category =&gt; 'Service',                              #from BioMoby Service Type Ontology
+        authors  =&gt; 'Sebastien.Carrere@toulouse.inra.fr',
+        cmd =&gt; abs_path($0),
+        doclink =&gt; ['http://lipm-bioinfo.toulouse.inra.fr/biomoby']
+        );
+
+    my %h_appli_inputs = (
+        'Nicknames' =&gt; {
+                        descr        =&gt; "List of nicknames",
+                        namespace    =&gt; '',                             #from BioMoby Namespace Ontology
+                        type_biomoby =&gt; 'List_Text',                    #from BioMoby Object Type Ontology
+                        cmd          =&gt; '--nicknames_file=$value'
+          }
+          );
+
+    my %h_appli_outputs = (
+        'WelcomeMessage' =&gt; {
+                             descr        =&gt; "The resulting welcome message",
+                             namespace    =&gt; '',                                #from BioMoby Namespace Ontology
+                             type_biomoby =&gt; 'text-formatted',                  #from BioMoby Object Type Ontology
+                             cmd          =&gt; '--output_file=$value'
+          }
+          );
+
+    my %h_appli_parameters = (
+        'a_question' =&gt; {
+                         datatype     =&gt; 'string',                           #Mobyle type
+                         descr        =&gt; 'A question you want to ask for',
+                         type_biomoby =&gt; 'String',                           #String,Boolean,DateTime,Integer, Float
+                         default      =&gt; '',
+                         cmd          =&gt; '--question=\"$value\"'
+          }
+          );
+
+    my $o_appli = New Appli(-general =&gt; \%h_appli_general);
+    $o_appli-&gt;SetInputs(%h_appli_inputs);
+    $o_appli-&gt;SetOutputs(%h_appli_outputs);
+    $o_appli-&gt;SetParams(%h_appli_parameters);
+
+    if ($o_param-&gt;IsDefined('mobyle'))
+    {
+        print STDOUT $o_appli-&gt;GetMobyleXml();
+        exit;
+    }
+
+    if ($o_param-&gt;IsDefined('pmbtest'))
+    {
+        print STDOUT $o_appli-&gt;GetPlaymobyTestXml();
+        exit;
+    }
+    $o_param-&gt;AssertFileExists('nicknames_file');
+    $o_param-&gt;AssertDefined('output_file');
+
+    my $fh_nicknames = new IO::File($o_param-&gt;Get('nicknames_file'));
+    die($!) if (!defined $fh_nicknames);
+
+    my $fh_output = new IO::File('&gt;' . $o_param-&gt;Get('output_file'));
+
+    while (my $nickname = &lt;$fh_nicknames&gt;)
+    {
+        chomp $nickname;
+        print $fh_output "Welcome $nickname! ";
+        print $fh_output $o_param-&gt;Get('question') . '?'
+          if ($o_param-&gt;IsDefined('question') &amp;&amp; ($o_param-&gt;Get('question') ne ''));
+        print $fh_output "\n";
+    }
+
+    $fh_nicknames-&gt;close;
+    $fh_output-&gt;close;
+
+}
+
+</code></pre></td></tr></table>
+
+
+<br>
+<p>The Mobyle XML file produced when the program is executed with --mobyle swith is:</p>
+<br>
+<br>
+
+<table><tr><td class="code"><pre><code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;program&gt;
+  &lt;head&gt;
+    &lt;name&gt;WelcomeProgram&lt;/name&gt;
+    &lt;version&gt;0.0&lt;/version&gt;
+    &lt;doc&gt;
+      &lt;title&gt;WelcomeProgram&lt;/title&gt;
+      &lt;description&gt;This program takes a list of nicknames as input and print a welcome sentence foreach one.&lt;/description&gt;
+      &lt;authors&gt;Sebastien.Carrere@toulouse.inra.fr&lt;/authors&gt;
+      &lt;doclink&gt;http://lipm-bioinfo.toulouse.inra.fr/biomoby&lt;/doclink&gt;
+    &lt;/doc&gt;
+    &lt;category&gt;Service&lt;/category&gt;
+  &lt;/head&gt;
+  &lt;parameters&gt;
+    &lt;parameter iscommand="1" ishidden="1"&gt;
+      &lt;name&gt;WelcomeProgram&lt;/name&gt;
+      &lt;prompt&gt;command&lt;/prompt&gt;
+      &lt;type&gt;
+        &lt;datatype&gt;
+          &lt;class&gt;String&lt;/class&gt;
+        &lt;/datatype&gt;
+      &lt;/type&gt;
+      &lt;format&gt;
+        &lt;code proglang="perl"&gt;" /www/www-bioinfo/biomoby/playmoby/sample/PrintHello"&lt;/code&gt;
+        &lt;code proglang="python"&gt;" /www/www-bioinfo/biomoby/playmoby/sample/PrintHello"&lt;/code&gt;
+      &lt;/format&gt;
+    &lt;/parameter&gt;
+    &lt;parameter ismaininput="1"&gt;
+      &lt;name&gt;Nicknames&lt;/name&gt;
+      &lt;prompt&gt;List of nicknames&lt;/prompt&gt;
+      &lt;type&gt;
+        &lt;datatype&gt;
+          &lt;class&gt;Text&lt;/class&gt;
+        &lt;/datatype&gt;
+        &lt;card&gt;1,1&lt;/card&gt;
+        &lt;biomoby&gt;
+          &lt;datatype&gt;List_Text&lt;/datatype&gt;
+        &lt;/biomoby&gt;
+      &lt;/type&gt;
+      &lt;format&gt;
+        &lt;code proglang="perl"&gt;" --nicknames_file=$value"&lt;/code&gt;
+        &lt;code proglang="python"&gt;" --nicknames_file=%s" % value&lt;/code&gt;
+      &lt;/format&gt;
+    &lt;/parameter&gt;
+    &lt;parameter ishidden="1"&gt;
+      &lt;name&gt;WelcomeMessage_name&lt;/name&gt;
+      &lt;prompt&gt;WelcomeMessage output file name&lt;/prompt&gt;
+      &lt;type&gt;
+        &lt;datatype&gt;
+          &lt;class&gt;Filename&lt;/class&gt;
+        &lt;/datatype&gt;
+      &lt;/type&gt;
+      &lt;vdef&gt;
+        &lt;value&gt;WelcomeMessage.out&lt;/value&gt;
+      &lt;/vdef&gt;
+      &lt;format&gt;
+        &lt;code proglang="perl"&gt;" --output_file=$value"&lt;/code&gt;
+        &lt;code proglang="python"&gt;" --output_file=%s" % value&lt;/code&gt;
+      &lt;/format&gt;
+    &lt;/parameter&gt;
+    &lt;parameter isout="1"&gt;
+      &lt;name&gt;WelcomeMessage&lt;/name&gt;
+      &lt;prompt&gt;The resulting welcome message&lt;/prompt&gt;
+      &lt;type&gt;
+        &lt;datatype&gt;
+          &lt;class&gt;Text&lt;/class&gt;
+        &lt;/datatype&gt;
+        &lt;card&gt;1,1&lt;/card&gt;
+        &lt;biomoby&gt;
+          &lt;datatype&gt;text-formatted&lt;/datatype&gt;
+        &lt;/biomoby&gt;
+      &lt;/type&gt;
+      &lt;filenames&gt;
+        &lt;code proglang="perl"&gt;$WelcomeMessage_name&lt;/code&gt;
+        &lt;code proglang="python"&gt;WelcomeMessage_name&lt;/code&gt;
+      &lt;/filenames&gt;
+    &lt;/parameter&gt;
+    &lt;parameter&gt;
+      &lt;name&gt;a_question&lt;/name&gt;
+      &lt;prompt&gt;A question you want to ask for&lt;/prompt&gt;
+      &lt;type&gt;
+        &lt;datatype&gt;
+          &lt;class&gt;String&lt;/class&gt;
+        &lt;/datatype&gt;
+        &lt;biomoby&gt;
+          &lt;datatype&gt;String&lt;/datatype&gt;
+        &lt;/biomoby&gt;
+      &lt;/type&gt;
+      &lt;vdef&gt;
+        &lt;value&gt;&lt;/value&gt;
+      &lt;/vdef&gt;
+      &lt;format&gt;
+        &lt;code proglang="perl"&gt;" --question="$value""&lt;/code&gt;
+        &lt;code proglang="python"&gt;(""," --question=%s" % value)[value is not None]&lt;/code&gt;
+      &lt;/format&gt;
+    &lt;/parameter&gt;
+  &lt;/parameters&gt;
+&lt;/program&gt;
+</code></pre></td></tr></table>
+
+<p>Nevertheless, you can use whatever you want to produce a valid Mobyle-xml file.</p>
+
+<h3><a name="ii__mobyle_parsing_and_creation_of_a_webservice_tarball">II.	Mobyle parsing and creation of a webservice tarball</a></h3>
+
+
+
+
+<p>This step will produce a standalone tarball: we analyse the Mobyle-xml to generate a Webservice configuration file.<br>
+N.B: We use such a configuration file to be independant of Mobyle DTD modification: if the Mobyle file change, we just have to modify our Mobyle parser and not all the downstream programs (using our configuration file).<br>
+<br>
+This step leads to the creation of tarball containing the configuration file but also data to test the webservice and a log file.<br>
+To produce this tarball, please use the &quot;pmb_MobyleParser.pl&quot; script:</p>
+
+<table><tr><td class="code">
+<pre>
+<strong><code>
+% tcsh
+% source .setenv
+% $PMBBIN/pmb_MobyleParser.pl --xmlfile=path_to_xml_mobyle_file
+</code></strong>
+</pre>
+</td></tr></table>
+
+
+
+
+<p>The following parameters are optional (but if you do not defined them, the system will ask for)</p>
+
+<pre>
+
+                --tmp_dir=&lt;temporary directory&gt;
+                        this directory should be apache writable (/tmp is okay)
+
+                --service_contact=&lt;werbservice support email&gt;
+
+                --bin_fullpath=&lt;full path to the binary/script embedded in the webservice&gt; 
+                        this parameter is already defined in the Mobyle-xml file, but we redefine it here because you could imagine
+                        to generate the Mobyle file on a serverA and then deploy your webservice on serverB; in this case,
+                        there is a chance that the executable is not in the same path.
+
+		--async whether or not to deploy your web-service as an asynchronous one (Perl module WSFR::Lite is mandatory)
+</pre>		
+
+<p>Then the program will ask you for test data for each input. You just have to give raw data an PlayMOBY will convert it into BioMoby XML format.</p>
+
+
+<h3><a name="iii__webservice__de_registration_and_test">III.	Webservice [de]registration and test</a></h3>
+
+
+
+
+<p>Once the tarball is generated, you have to go into PlayMOBY/services directory.<br>
+First of all you have to make a directory where you will store your webservices.<br>
+A good practice is to create a directory by service type: for example you can create a <i>proteic</i> directory to store your 
+proteic analyses webservices and a <i>nucleic</i> directory to store your services dealing with nucleic sequences.<br>
+Another good practice is to create a directory by user in the case of a multi-user project.
+</p>
+
+<p>Then untar your webservice tarball in this new directory.</p>
+
+<table><tr><td class="code">
+<pre>
+<strong><code>
+% tar jxf myWebService.bz2
+</code></strong>
+</pre>
+</td></tr></table>
+
+
+
+
+<p>The final step is to register and test your webservice. You have to choose in which registry you want to register your service.<br>
+A good practice is to first register it in the <i>opencentral</i> registry which is a test one. Once all the tests passed, you can
+deregister your service from <i>opencentral</i> and register it in the public production one called <i>mobycentral</i>.<br>
+<br>
+
+To register, deregister and test your webservice, please use the &quot;pmb_DeployWS.pl&quot; script:</p>
+
+<table><tr><td class="code">
+<pre><strong><code>
+% tcsh
+% source .setenv
+% $PMBBIN/pmb_DeployWS.pl
+</code></strong>
+</pre>
+</td></tr></table>
+
+
+
+
+<pre>
+        The mandatory parameters are :
+        
+                --services=&lt;service name&gt;
+                        this can be the service directory or the service configuration file &quot;myWebService.cfg&quot; located in the service directory;
+                        You can provide a list of services (separator = space)
+			Example: /www/www-bioinfo/biomoby/playmoby/services/WelcomeProgram
+                        
+                --central=&lt;central name&gt;
+                        this is the central name where the service is/will be registered;
+                        By default the public central (<i>mobycentral</i>) is used but we provide also the official test registry information (<i>opencentral</i>)
+                        
+        
+                --register      : this switch will call the register procedure leading to the registration into the central and the production of a rdf file
+or/and          --deregister    : this switch will call the deregister procedure (empty the rdf file, then call the Rdf-Agent)
+or/and          --test          : this switch will call the test procedure, i.e. execute the webservice with the test data you provided during step II
+                                  if you want to use special parameters for your webservice (secondary articles), you have to create a file
+                                  called <i>parameters</i> into the <i>myWebService/test</i> directory; the syntax of this file is 
+                                        
+                                        parameter_name1=value1
+                                        parameter_name2=value2
+                                        ...
+                                        
+        
+or              --all           : consist in a sequential call of deregister + register + test
+
+or              --pm            : only produce the myWebService.pm file
+
+</pre>
+
+<p>This script will first generate the perl module corresponding to your webservice (myWebService.pm). <br/>
+This module contains few subroutines among which is <b>myWebService</b>, the effective function called by the dispatcher.<br/>
+The test procedure will execute your webservice; then log messages are written in the <b>myWebservice/log</b> file.<br/>
+If you want to stop logging your services, just create a log.stop file in your webservice directory (touch myWebservice/log.stop) . <br />
+</p>
+<br>
+<br>
+<h2><a name="monitoring">MONITORING SERVICES</a></h2>
+<p>
+To monitor the availability and stability of your webservices, you can use the program <i>pmb_CheckWS.pl</i> within a <i>cron</i>.<br>
+This program checks:
+</p>
+
+<ul>
+	<li>RDF file availability</li>
+	<li>Central registration</li>
+	<li>Webservice answer</li>
+</ul> 
+
+<p>
+There are two ways to test the webservice answer produced with the test inputs (and parameters):
+</p>
+
+<ul>
+	<li>If you place a <b><i>myWebService.pmb.t</i></b> into the webservice test directory, then <i>pmb_CheckWS.pl</i> will use this defined test<br />
+In order to help you in generating such a test file, please have a look to <i><a href="doc/Appli.html">Appli.pm</a></i>. Nevertheless, it looks like:</li>
+<table>
+<tr>
+<td class="code">
+<pre><code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;playmoby:test&gt;
+  &lt;playmoby:service name="WelcomeProgram"&gt;
+    &lt;playmoby:article name="WelcomeMessage"&gt;
+      &lt;playmoby:format&gt;&lt;![CDATA[
+
+#these are default tests for format consistancy
+#you can/should write your own test 
+#your test MUST return a boolean and a free text
+
+return (0, "empty article") if ($_ eq '');
+return (1, "ok");
+]]&gt;&lt;/playmoby:format&gt;
+      &lt;playmoby:content&gt;&lt;![CDATA[
+
+#these are default tests for content analysis
+#you can/should write your own test 
+#your test MUST return a boolean and a free text
+
+return (0, "empty article") if ($_ eq '');
+return (1, "ok");
+]]&gt;&lt;/playmoby:content&gt;
+    &lt;/playmoby:article&gt;
+  &lt;/playmoby:service&gt;
+&lt;/playmoby:test&gt;
+</code></pre>
+</td>
+</tr>
+</table>
+
+	<li>Else, <i>pmb_CheckWS.pl</i> will compare the service output to a reference one (<i>myWebService/test/myWebService.xml</i>). If this file does not exist, the first execution of <i>pmb_DeployWS --test</i> or <i>pmb_CheckWS.pl</i> will produce it</li>
+</ul> 
+
+<p>To use this script :</p>
+
+<table><tr><td class="code"><strong><code>% ./pmb_CheckWS.pl</code></strong></td></tr></table><br>
+
+<pre>
+        --ws_dir=&lt;directory&gt;
+		directory where are located webservices
+
+        --central=&lt;central name&gt;
+                this is the central name where the service is/will be registered;
+        	By default the public central (<i>mobycentral</i>) is used but we provide also the official test registry information (<i>opencentral</i>)
+            
+    	--nomail    : 	this switch makes the program only produce xml report without sending any mail (EXCEPT FOR ERRONEOUS SERVICES)
+			If this switch is not specified, all service developpers will receive an email foreach one of the services they deployed.
+			Nevertheless, the PlayMOBY administrator (see <i>PlayMOBY/cfg/CheckWS.cfg</i>) will receive an email with the URL of the global report.
+			
+	--bioworkflow	: to generate BioWorkFlow consortium report
+
+
+</pre>
+
+<p> This script produces 3 XML reports.<br />
+	<ul>
+		<li>a native PlayMOBY format (<a href='doc/playmoby_monitoring.dtd'>dtd</a>)</li>
+		<li>a BioWorkFlow XML format (<a href='doc/bioworkflow_monitoring.dtd'>dtd</a>)</li>
+		<li>a BioWorkFlow RSS feed </li>
+	</ul>
+<br />	
+You will find samples of such files at 	<a href='http://lipm-bioinfo.toulouse.inra.fr/biomoby'>http://lipm-bioinfo.toulouse.inra.fr/biomoby</a>
+</p>	
+
+
+<br>
+<br>
+
+<h2><a name="dependancies">DEPENDANCIES</a></h2>
+<p>
+PlayMOBY is mainly written in perl and use some linux binaries.<br>
+</p>
+
+<h3><a name="i__perl">I. Perl Modules</a></h3>
+
+<ul>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=UNIVERSAL" target="cpan">UNIVERSAL qw(isa)</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=version" target="cpan">version</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Carp" target="cpan">Carp</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=CGI" target="cpan">CGI</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Cwd" target="cpan">Cwd</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Data::Dumper" target="cpan">Data::Dumper</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=DBD::mysql" target="cpan">DBD::mysql</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=DBI" target="cpan">DBI</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Error" target="cpan">Error</a> [distributed with PlayMOBY] </li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Error::IOException" target="cpan">Error::IOException</a> [distributed with PlayMOBY] </li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Exporter" target="cpan">Exporter</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=IO::Dir" target="cpan">IO::Dir</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=IO::File" target="cpan">IO::File</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=File::Basename" target="cpan">File::Basename</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=File::Copy" target="cpan">File::Copy</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=File::Listing" target="cpan">File::Listing</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=File::Spec" target="cpan">File::Spec</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=File::Path" target="cpan">File::Path</a></li>
+	
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=File::Which" target="cpan">File::Which</a> [distributed with PlayMOBY] </li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Getopt::Long" target="cpan">Getopt::Long</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Getopt::Std" target="cpan">Getopt::Std</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=HTML::Entities" target="cpan">HTML::Entities</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=MIME::Base64" target="cpan">MIME::Base64</a></li>
+
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=URI" target="cpan">URI</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=URI::Escape target="cpan">URI::Escape</a></li>
+
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=LS::ID" target="cpan">LS::ID</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=LS::Service::Fault" target="cpan">LS::Service::Fault</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=LS::Service::Response" target="cpan">LS::Service::Response</a></li>
+	
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=WSRF::Lite" target="cpan">WSRF::Lite [if you want to deploy asynchronous webservices]</a></li>
+	
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=LWP" target="cpan">LWP</a> [distributed with PlayMOBY] </li>
+
+
+	<li>MOBY [distributed with PlayMOBY] </li>
+	
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Scalar::Util" target="cpan">Scalar::Util</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=WSRF::Lite" target="cpan">WSRF::Lite 0.8.2.2</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=SOAP::Lite" target="cpan">SOAP::Lite</a></li>
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=Text::Shellwords" target="cpan">Text::Shellwords</a></li>
+
+
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=XML::LibXML" target="cpan">XML::LibXML</a></li>
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=XML::Twig" target="cpan">XML::Twig</a></li>
+	
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=XML::Twig" target="cpan">XML::RSS</a> [distributed with PlayMOBY]</li>
+	
+	<li><a href="http://search.cpan.org/search?mode=module&amp;query=String::Diff" target="cpan">String::Diff</a> [distributed with PlayMOBY]</li>
+</ul>
+
+<p>
+NB: We distribute some of them within PlayMOBY archive for strong dependancies reasons (compatibility of releases).<br>
+<br>
+Moreover we distribute perl Modules developped by our team at LIPM:
+</p>
+
+<ul>
+
+    <li><a href="doc/Enum.html">Enum</a></li>
+    <li><a href="doc/General.html">General</a></li>
+    <li><a href="doc/LipmError.html">LipmError</a></li>
+    <li><a href="doc/LipmError/ParameterException.html">LipmError::ParameterException</a></li>
+    <li><a href="doc/LipmError/IOException.html">LipmError::IOException</a></li>
+    <li><a href="doc/LipmError/ObjectException.html">LipmError::ObjectException</a></li>
+    <li><a href="doc/Appli.html">Appli</a></li>
+    <li><a href="doc/OntologyMap.html">OntologyMap</a> and its <a href="data/BioMobyMobyleDictionnary.xml">dictionnary</a></li>
+    <li><a href="doc/Biomoby/Object.html">Biomoby::Object</a></li>
+    <li><a href="doc/Biomoby/Article.html">Biomoby::Article</a></li>
+    <li><a href="doc/Biomoby/PrimaryArticle.html">Biomoby::PrimaryArticle</a></li>
+    <li><a href="doc/Biomoby/SecondaryArticle.html">Biomoby::SecondaryArticle</a></li>
+    <li><a href="doc/Biomoby/Service.html">Biomoby::Service</a></li>
+    
+    <li><a href="doc/BiomobyUtils.html">BiomobyUtils</a></li>
+    <li><a href="doc/MobyleElement.html">MobyleElement</a></li>
+    <li><a href="doc/MobyleParser.html">MobyleParser</a></li>
+    <li><a href="doc/PmbTest.html">PmbTest</a></li>
+
+    <li><a href="doc/ParamParser.html">ParamParser</a></li>
+    <li><a href="doc/Auth.html">Auth (authentication perl module)</a></li>
+</ul>
+
+<h3><a name="ii__binaries">II. Linux binaries</a></h3>
+
+<p>
+<ul>
+    <li>apache web server</li>
+    <li>xsltproc</li>
+    <li>find</li>
+    <li>Mail</li>
+    <li>cat</li>
+    <li>tar</li>
+    <li>bzip2</li>
+</ul>
+
+</p>
+<br>
+<br>
+
+
+<h2><a name="samples">SAMPLES</a></h2>
+<p>
+Here is a list of sample scripts that can be deployed as web services
+</p>
+
+<ul>
+	<li><p><a href="sample/PrintHello">PrintHello</a> <i>This program takes a list of nicknames as input and print a welcome sentence foreach one.</i></p></li>
+	<li><p><a href="sample/PrintHello_secure">PrintHello_secure</a> <i>This program takes a list of nicknames as input and print a welcome sentence foreach one.It uses perl module Auth.pm to identify the user if provided, and modify output in consequence.</i></p></li>
+	<li><p><a href="sample/PrintHello_Async">PrintHello_Async</a> <i>This program takes a list of nicknames as input, sleeps 60 seconds and prints a welcome sentence foreach one.</i></p></li>
+	<li><p><a href="sample/msf2fasta">msf2fasta</a> <i>Converts Msf file into a Fasta file</i></p></li>
+	<li><p><a href="sample/msf2phylip">msf2phylip</a> <i>Converts Msf file into a a Phylip interleaved file</i></p></li>
+	<li><p><a href="sample/tab2fas">tab2fasta</a> <i>Converts tabulated file into a Fasta file</i> </p></li>
+	<li><p><a href="sample/compare_liste">compare_list</a> <i>Compares two lists of words</i></p></li>
+	<li><p><a href="sample/blastp_swissprot">blastp_swissprot</a> <i>Blastp against Swiss-Prot database sample</i></p></li>
+	<li><p><a href="sample/a_simple_blastp">a_simple_blastp</a> <i>Blastp against Swiss-Prot or Enzyme database sample</i></p></li>
+	<li><p><a href="sample/fastaCollection2multifasta">fastaCollection2multifasta</a> <i>Merge of a list of fasta files into one (UseCase to deal with input collection)</i></p></li>
+	<li><p><a href="sample/multifasta2fastaCollection">multifasta2fastaCollection</a> <i>Split of a multi-fasta file into a list of single fasta sequence files (UseCase to deal with output collection)</i></p></li>
+
+</ul>
+
+<br>
+<br>
+
+<h2><a name="authors">AUTHORS</a></h2>
+<p>
+Main contributors are members of the <a href="http://lipm-bioinfo.toulouse.inra.fr">LIPM Bioinformatics team</a>:
+</p>
+
+<ul>
+	<li>Sebastien Letort (ANR LEGOO Genoplante 2006) <code>@ <i>Sebastien.Letort(at)toulouse.inra.fr</i></code></li>
+	<li>Sebastien Carrere <code>@ <i>Sebastien.Carrere(at)toulouse.inra.fr</i></code></li>
+	<li>Jerome Gouzy <code>@ <i>Jerome.Gouzy(at)toulouse.inra.fr</i></code></li>
+
+</ul>
+
+<br>
+<br>
+
+
+<h2><a name="contact">CONTACT</a></h2>
+<p>
+
+For bug report, information request, please contact Sebastien Carrere
+<code>Sebastien.Carrere(at)toulouse.inra.fr</code>
+
+</p>
+<br>
+<br>
+<br>
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+</body>
+
+</html>

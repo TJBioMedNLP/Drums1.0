@@ -1,0 +1,1050 @@
+<html><head>
+<link href="http://protein.cribi.unipd.it/status.css" rel="stylesheet" type="text/css">
+
+<script language="JavaScript" type="text/javascript">
+    function WinOpen(url) {
+    var param='"toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width='+650+',height='+500+',screenX=100,screenY=100"';
+    url='http://protein.cribi.unipd.it/'+url;
+    msg=open(url,'_help',param);
+    }
+</script>
+
+<script src="http://protein.cribi.unipd.it/tese/tooltip.js"></script><script language="Javascript">
+
+	var help1 = "";
+	var help2 = "";
+	var help3 = "";
+	var help4 = "";
+	var rand  = "";
+
+	function prepara1()
+	{
+		if(document.form2.wizard1.selectedIndex == 0)
+		{
+			help1 = "";
+			document.form2.value1_1.value = '';
+		}
+		if(document.form2.wizard1.selectedIndex == 1)
+		{
+			help1 = "INS node of CATH tree, e.g. '1' or '1.10' ... or 1.10.8.50.1.1.1.1.1";
+			document.form2.value1_1.value = '1.10';
+		}
+		if(document.form2.wizard1.selectedIndex == 2)
+		{
+			help1 = "INS node of CATH tree, e.g. '1' or '1.10' ... or 1.10.8.50.1.1.1.1.1";
+			document.form2.value1_1.value = '1.10';
+		}
+		if(document.form2.wizard1.selectedIndex == 3)
+		{
+			help1 = "INS minimum number of AA";
+			document.form2.value1_1.value = '120';
+		}
+		if(document.form2.wizard1.selectedIndex == 4)
+		{
+			help1 = "INS maximum number of AA";
+			document.form2.value1_1.value = '200';
+		}				
+	}
+
+
+	function prepara2()
+	{
+		if(document.form2.wizard2.selectedIndex == 0)
+		{
+			help2 = "";
+			document.form2.value2_1.value = '------';
+			document.form2.random.disabled = true;
+		}
+		if(document.form2.wizard2.selectedIndex == 1)
+		{
+			help2 = "Find <i>n</i> proteins for each Class level";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+
+		}
+		if(document.form2.wizard2.selectedIndex == 2)
+		{
+			help2 = "Find <i>n</i> proteins for each Architecture level";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+		}
+		if(document.form2.wizard2.selectedIndex == 3)
+		{
+			help2 = "Find <i>n</i> proteins for each Topology level";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+
+		}	
+		if(document.form2.wizard2.selectedIndex == 4)
+		{
+			help2 = "Find <i>n</i> proteins for each Homology level";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+		}	
+		if(document.form2.wizard2.selectedIndex == 5)
+		{
+			help2 = "Find <i>n</i> proteins for each S level (same H and almost 35% similarity)";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+		}
+		if(document.form2.wizard2.selectedIndex == 6)
+		{
+			help2 = "Find <i>n</i> proteins for each O level (same S and almost 60% similarity)";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+		}
+		if(document.form2.wizard2.selectedIndex == 7)
+		{
+			help2 = "Find <i>n</i> proteins for each L level (same O and almost 95% similarity)";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+		}
+		if(document.form2.wizard2.selectedIndex == 8)
+		{
+			help2 = "Find <i>n</i> proteins for each I level (same L and almost 100% similarity)";
+			document.form2.value2_1.value = '1';
+			document.form2.random.disabled = false;
+		}
+
+	}
+
+	function prepara3()
+	{
+		if(document.form2.wizard3.selectedIndex == 0)
+		{
+			help3 = "INS maximum resolution (999 is translated to NMR)";
+			document.form2.value3_1.value = '2';
+		}
+		if(document.form2.wizard3.selectedIndex == 1)
+		{
+			help3 = "INS minimum resolution";
+			document.form2.value3_1.value = '1';
+		}
+		if(document.form2.wizard3.selectedIndex == 2)
+		{
+			help3 = "INS minimum R-free factor";
+			document.form2.value3_1.value = '0.2';
+		}	
+		if(document.form2.wizard3.selectedIndex == 3)
+		{
+			help3 = "INS maximum R-free factor";
+			document.form2.value3_1.value = '0.3';
+		}	
+		if(document.form2.wizard3.selectedIndex == 4)
+		{
+			help3 = "INS minimum TAP [0:1]";
+			document.form2.value3_1.value = '0.5';
+		}
+		if(document.form2.wizard3.selectedIndex == 5)
+		{
+			help3 = "INS maximum TAP [0:1]";
+			document.form2.value3_1.value = '0.7';
+		}
+		if(document.form2.wizard3.selectedIndex == 6)
+		{
+			help3 = "INS minimum PDB-Finder quality [0:1]";
+			document.form2.value3_1.value = '0.3';
+		}
+		if(document.form2.wizard3.selectedIndex == 7)
+		{
+			help3 = "INS maximum PDB-Finder quality [0:1]";
+			document.form2.value3_1.value = '0.8';
+		}
+
+	}
+
+	function prepara4()
+	{
+		if(document.form2.wizard4.selectedIndex == 0)
+		{
+			help4 = "INS minimum number of AA";
+			document.form2.value4_1.value = '120';
+		}
+		else if(document.form2.wizard4.selectedIndex == 1)
+		{
+			help4 = "INS maximum number of AA";
+			document.form2.value4_1.value = '200';
+		}
+		else if(document.form2.wizard4.selectedIndex == 5)
+		{
+			help4 = "INS minimum year of PDB";
+			document.form2.value4_1.value = '1995';
+		}
+		else if(document.form2.wizard4.selectedIndex == 6)
+		{
+			help4 = "INS maximum year of PDB";
+			document.form2.value4_1.value = '2007';
+		}
+		else 
+		{
+			help4 = "";
+			document.form2.value4_1.value = '------';
+		}
+
+		
+	}
+
+
+	function scrivi1()
+	{
+		if(document.form2.wizard1.selectedIndex == 0)
+		{
+			alert("Please, continue by choosing more constrained conditions!");
+			document.form1.param.value = document.form1.param.value + 'INCLUDE\t1\n';
+			document.form1.param.value = document.form1.param.value + 'INCLUDE\t2\n';
+			document.form1.param.value = document.form1.param.value + 'INCLUDE\t3\n';
+			document.form1.param.value = document.form1.param.value + 'INCLUDE\t4\n';
+		}		
+		if(document.form2.wizard1.selectedIndex == 1)
+		{
+			document.form1.param.value = document.form1.param.value + 'INCLUDE\t' + document.form2.value1_1.value + '\n';
+		}
+		if(document.form2.wizard1.selectedIndex == 2)
+		{
+			document.form1.param.value = document.form1.param.value + 'EXCLUDE\t' + document.form2.value1_1.value + '\n';
+		}
+	}
+
+	function scrivi5()
+	{
+		if(document.form2.wizard5.selectedIndex == 0)
+                        document.form1.param.value = document.form1.param.value + 'INCLUDE      1\n';
+		if(document.form2.wizard5.selectedIndex == 1)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2\n';
+		if(document.form2.wizard5.selectedIndex == 2)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3\n';
+		if(document.form2.wizard5.selectedIndex == 3)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      4\n';
+		if(document.form2.wizard5.selectedIndex == 4)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      1.10\n';
+		if(document.form2.wizard5.selectedIndex == 5)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      1.20\n';
+		if(document.form2.wizard5.selectedIndex == 6)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      1.25\n';
+		if(document.form2.wizard5.selectedIndex == 7)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      1.40\n';
+		if(document.form2.wizard5.selectedIndex == 8)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      1.50\n';
+		if(document.form2.wizard5.selectedIndex == 9)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.10\n';
+		if(document.form2.wizard5.selectedIndex == 10)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.20\n';
+		if(document.form2.wizard5.selectedIndex == 11)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.30\n';
+		if(document.form2.wizard5.selectedIndex == 12)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.40\n';
+		if(document.form2.wizard5.selectedIndex == 13)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.50\n';
+		if(document.form2.wizard5.selectedIndex == 14)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.60\n';
+		if(document.form2.wizard5.selectedIndex == 15)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.70\n';
+		if(document.form2.wizard5.selectedIndex == 16)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.80\n';
+		if(document.form2.wizard5.selectedIndex == 17)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.90\n';
+		if(document.form2.wizard5.selectedIndex == 18)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.100\n';
+		if(document.form2.wizard5.selectedIndex == 19)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.102\n';
+		if(document.form2.wizard5.selectedIndex == 20)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.105\n';
+		if(document.form2.wizard5.selectedIndex == 21)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.110\n';
+		if(document.form2.wizard5.selectedIndex == 22)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.115\n';
+		if(document.form2.wizard5.selectedIndex == 23)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.120\n';
+		if(document.form2.wizard5.selectedIndex == 24)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.130\n';
+		if(document.form2.wizard5.selectedIndex == 25)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.140\n';
+		if(document.form2.wizard5.selectedIndex == 26)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.150\n';
+		if(document.form2.wizard5.selectedIndex == 27)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.160\n';
+		if(document.form2.wizard5.selectedIndex == 28)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      2.170\n';
+		if(document.form2.wizard5.selectedIndex == 29)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.10\n';
+		if(document.form2.wizard5.selectedIndex == 30)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.15\n';
+		if(document.form2.wizard5.selectedIndex == 31)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.20\n';
+		if(document.form2.wizard5.selectedIndex == 32)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.30\n';
+		if(document.form2.wizard5.selectedIndex == 33)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.40\n';
+		if(document.form2.wizard5.selectedIndex == 34)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.50\n';
+		if(document.form2.wizard5.selectedIndex == 35)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.55\n';
+		if(document.form2.wizard5.selectedIndex == 36)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.60\n';
+		if(document.form2.wizard5.selectedIndex == 37)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.65\n';
+		if(document.form2.wizard5.selectedIndex == 38)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.70\n';
+		if(document.form2.wizard5.selectedIndex == 39)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.75\n';
+		if(document.form2.wizard5.selectedIndex == 40)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.80\n';
+		if(document.form2.wizard5.selectedIndex == 41)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.90\n';
+		if(document.form2.wizard5.selectedIndex == 42)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      3.100\n';
+		if(document.form2.wizard5.selectedIndex == 43)
+		                        document.form1.param.value = document.form1.param.value + 'INCLUDE      4.10\n';
+
+	}
+
+	function scrivi6()
+	{
+		if(document.form2.wizard6.selectedIndex == 0)
+                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      1\n';
+		if(document.form2.wizard6.selectedIndex == 1)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2\n';
+		if(document.form2.wizard6.selectedIndex == 2)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3\n';
+		if(document.form2.wizard6.selectedIndex == 3)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      4\n';
+		if(document.form2.wizard6.selectedIndex == 4)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      1.10\n';
+		if(document.form2.wizard6.selectedIndex == 5)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      1.20\n';
+		if(document.form2.wizard6.selectedIndex == 6)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      1.25\n';
+		if(document.form2.wizard6.selectedIndex == 7)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      1.40\n';
+		if(document.form2.wizard6.selectedIndex == 8)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      1.50\n';
+		if(document.form2.wizard6.selectedIndex == 9)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.10\n';
+		if(document.form2.wizard6.selectedIndex == 10)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.20\n';
+		if(document.form2.wizard6.selectedIndex == 11)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.30\n';
+		if(document.form2.wizard6.selectedIndex == 12)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.40\n';
+		if(document.form2.wizard6.selectedIndex == 13)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.50\n';
+		if(document.form2.wizard6.selectedIndex == 14)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.60\n';
+		if(document.form2.wizard6.selectedIndex == 15)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.70\n';
+		if(document.form2.wizard6.selectedIndex == 16)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.80\n';
+		if(document.form2.wizard6.selectedIndex == 17)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.90\n';
+		if(document.form2.wizard6.selectedIndex == 18)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.100\n';
+		if(document.form2.wizard6.selectedIndex == 19)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.102\n';
+		if(document.form2.wizard6.selectedIndex == 20)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.105\n';
+		if(document.form2.wizard6.selectedIndex == 21)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.110\n';
+		if(document.form2.wizard6.selectedIndex == 22)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.115\n';
+		if(document.form2.wizard6.selectedIndex == 23)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.120\n';
+		if(document.form2.wizard6.selectedIndex == 24)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.130\n';
+		if(document.form2.wizard6.selectedIndex == 25)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.140\n';
+		if(document.form2.wizard6.selectedIndex == 26)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.150\n';
+		if(document.form2.wizard6.selectedIndex == 27)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.160\n';
+		if(document.form2.wizard6.selectedIndex == 28)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      2.170\n';
+		if(document.form2.wizard6.selectedIndex == 29)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.10\n';
+		if(document.form2.wizard6.selectedIndex == 30)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.15\n';
+		if(document.form2.wizard6.selectedIndex == 31)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.20\n';
+		if(document.form2.wizard6.selectedIndex == 32)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.30\n';
+		if(document.form2.wizard6.selectedIndex == 33)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.40\n';
+		if(document.form2.wizard6.selectedIndex == 34)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.50\n';
+		if(document.form2.wizard6.selectedIndex == 35)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.55\n';
+		if(document.form2.wizard6.selectedIndex == 36)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.60\n';
+		if(document.form2.wizard6.selectedIndex == 37)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.65\n';
+		if(document.form2.wizard6.selectedIndex == 38)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.70\n';
+		if(document.form2.wizard6.selectedIndex == 39)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.75\n';
+		if(document.form2.wizard6.selectedIndex == 40)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.80\n';
+		if(document.form2.wizard6.selectedIndex == 41)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.90\n';
+		if(document.form2.wizard6.selectedIndex == 42)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      3.100\n';
+		if(document.form2.wizard6.selectedIndex == 43)
+		                        document.form1.param.value = document.form1.param.value + 'EXCLUDE      4.10\n';
+
+	}
+
+
+function scrivi2()
+	{
+		if(document.form2.wizard2.selectedIndex == 0)
+		{
+			document.form1.param.value = document.form1.param.value;
+		}
+		if(document.form2.wizard2.selectedIndex == 1)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tC\t' + document.form2.value2_1.value;
+			if(document.form2.random.checked == true)
+			{
+			       document.form1.param.value = document.form1.param.value + '\tRND\n';
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}
+		}
+		if(document.form2.wizard2.selectedIndex == 2)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tA\t' + document.form2.value2_1.value;
+			if(document.form2.random.checked == true)
+			{
+			       document.form1.param.value = document.form1.param.value + '\tRND\n';
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}
+		}
+		if(document.form2.wizard2.selectedIndex == 3)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tT\t' + document.form2.value2_1.value ;
+			if(document.form2.random.checked == true)
+			{
+			       document.form1.param.value = document.form1.param.value + '\tRND\n';			
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}
+		}
+		if(document.form2.wizard2.selectedIndex == 4)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tH\t' + document.form2.value2_1.value;
+			if(document.form2.random.checked == true)
+			{
+       				document.form1.param.value = document.form1.param.value + '\tRND\n';			
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}		
+		}
+		if(document.form2.wizard2.selectedIndex == 5)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tS\t' + document.form2.value2_1.value;
+			if(document.form2.random.checked == true)
+			{
+			       document.form1.param.value = document.form1.param.value + '\tRND\n';			
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}		
+		}
+		if(document.form2.wizard2.selectedIndex == 6)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tO\t' + document.form2.value2_1.value;
+			if(document.form2.random.checked == true)
+			{
+			       document.form1.param.value = document.form1.param.value + '\tRND\n';						
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}
+		
+		}
+		if(document.form2.wizard2.selectedIndex == 7)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tL\t' + document.form2.value2_1.value;
+			if(document.form2.random.checked == true)
+			{
+			       document.form1.param.value = document.form1.param.value + '\tRND\n';	
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}		
+		}
+		if(document.form2.wizard2.selectedIndex == 8)
+		{
+			document.form1.param.value = document.form1.param.value + 'FILTER\tI\t' + document.form2.value2_1.value;
+			if(document.form2.random.checked == true)
+			{
+			       document.form1.param.value = document.form1.param.value + '\tRND\n';						
+			}
+			else
+			{
+			       document.form1.param.value = document.form1.param.value + '\n';
+			}
+		}
+	
+	}
+
+	function scrivi3()
+	{
+		if(document.form2.wizard3.selectedIndex == 0)
+		{
+			document.form1.param.value = document.form1.param.value + 'MAX_RESOLUTION\t' + document.form2.value3_1.value + '\n';
+		}
+		if(document.form2.wizard3.selectedIndex == 1)
+		{
+			document.form1.param.value = document.form1.param.value + 'MIN_RESOLUTION\t' + document.form2.value3_1.value + '\n';
+		}
+		if(document.form2.wizard3.selectedIndex == 2)
+		{
+			document.form1.param.value = document.form1.param.value + 'MIN_R_FREE\t' + document.form2.value3_1.value + '\n';
+		}
+		if(document.form2.wizard3.selectedIndex == 3)
+		{
+			document.form1.param.value = document.form1.param.value + 'MAX_R_FREE\t' + document.form2.value3_1.value + '\n';
+		}
+		if(document.form2.wizard3.selectedIndex == 4)
+		{
+			document.form1.param.value = document.form1.param.value + 'MIN_TAP\t' + document.form2.value3_1.value + '\n';
+		}
+		if(document.form2.wizard3.selectedIndex == 5)
+		{
+			document.form1.param.value = document.form1.param.value + 'MAX_TAP\t' + document.form2.value3_1.value + '\n';
+		}
+		if(document.form2.wizard3.selectedIndex == 6)
+		{
+			document.form1.param.value = document.form1.param.value + 'MIN_QUALITY\t' + document.form2.value3_1.value + '\n';
+		}
+		if(document.form2.wizard3.selectedIndex == 7)
+		{
+			document.form1.param.value = document.form1.param.value + 'MAX_QUALITY\t' + document.form2.value3_1.value + '\n';
+		}
+	}
+
+function scrivi4()
+	{
+		if(document.form2.wizard4.selectedIndex == 0)
+		{
+			document.form1.param.value = document.form1.param.value + 'MIN_LENGTH\t' + document.form2.value4_1.value + '\n';
+		}		
+		if(document.form2.wizard4.selectedIndex == 1)
+		{
+			document.form1.param.value = document.form1.param.value + 'MAX_LENGTH\t' + document.form2.value4_1.value + '\n';
+		}
+		if(document.form2.wizard4.selectedIndex == 2)
+		{
+			document.form1.param.value = document.form1.param.value + 'NO_NMR' + '\n';
+		}
+		if(document.form2.wizard4.selectedIndex == 3)
+		{
+			document.form1.param.value = document.form1.param.value + 'NO_XRAY' + '\n';
+		}
+		if(document.form2.wizard4.selectedIndex == 4)
+		{
+			document.form1.param.value = document.form1.param.value + 'NO_SEGMENTED' + '\n';
+		}
+		if(document.form2.wizard4.selectedIndex == 5)
+		{
+			document.form1.param.value = document.form1.param.value + 'MIN_YEAR\t' + document.form2.value4_1.value + '\n';
+		}
+		if(document.form2.wizard4.selectedIndex == 6)
+		{
+			document.form1.param.value = document.form1.param.value + 'MAX_YEAR\t' + document.form2.value4_1.value + '\n';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18035476-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; 
+ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 
+'http://www') + 
+'.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; 
+s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<title>TESE - Test Set Generator</title>
+</head>
+<body background="../img/3dfr-backgrnd.gif" bgcolor="#ffffff"><div id="ToolTip" style="position: absolute; z-index: 99;"></div>
+
+
+
+
+<table>
+<tbody>
+<tr><td width="400"><a href="http://protein.bio.unipd.it/">
+<img src="http://protein.cribi.unipd.it/img/strept_logo.jpg" heigth="120" alt="BioComputing" border="0" width="140"></a>
+&nbsp;<img src="./tese.gif"></td>
+<td>
+<font color="#0000b0"><h1 align="center">&nbsp;&nbsp;&nbsp; Test Set Generator</h1></font>
+<h2 align="center"><font color="#e00000">Version 1.2</font></h2>
+</td>
+</tr>
+</tbody></table>
+<hr>
+
+<table align="center" bgcolor="#e5e5ff" border="0" width="80%">
+<tbody>
+<tr>
+<td align="center">
+<a class="menuS" href="http://protein.cribi.unipd.it/tese/help.html" onclick="WinOpen('tese/help.html');return false;"><b>Quick Help</b></a>
+</td>
+<td align="center">
+<a class="menuS" href="http://protein.cribi.unipd.it/tese/help.html#examples" onclick="WinOpen('tese/help.html#examples');return false;"><b>Examples</b></a>
+</td>
+<td align="center">
+<a class="menuS" href="http://protein.cribi.unipd.it/tese/help.html#references" onclick="WinOpen('tese/help.html#references');return false;"><b>
+References</b></a>
+</td>
+<td align="center">
+<a class="menuS" href="http://protein.cribi.unipd.it/tese/methods.html" onclick="WinOpen('tese/methods.html');return false;"><b>
+Methods</b></a>
+</td>
+<td align="center">
+<a class="menuS" href="http://protein.cribi.unipd.it/tese/precompiled.html"><b>
+Precompiled sets</b></a>
+</td>
+
+</tr>
+</tbody>
+</table>
+<hr>
+<H4 align="center">
+Last update: &nbsp; <font color="#0000b0">21/DEC/2009</font>, &nbsp;&nbsp;
+using: &nbsp; <font color="#0000b0">CATH v3.3.0</font>
+</H4>
+
+<center><table width=80%><tr><td>
+<font color="#0000b0"><b>TESE</b></font> is a web server that can be used to derive curated sets 
+of protein structures to be used in a variety of situations. The most typical is to construct 
+representative non-redundant sets of protein sequences and/or structures for the benchmarking of novel methods.
+For a more detailed description, see the <a href="http://protein.cribi.unipd.it/tese/help.html" onclick="WinOpen('tese/help.html');return false;"><b>Quick Help</b></a> page.
+The server has been designed to make the selection process as easy as possible. It currently offers
+three different search modes to initiate the data collection process:
+<p>
+
+<table align="center" bgcolor="#e5e5ff" border="1" width="90%">
+<tbody>
+<tr>
+<td colspan="3">
+<b><center>Search Mode:</center></b>
+</td>
+</tr>
+<tr bgcolor="#ccccff">
+<td align="center">
+&nbsp; <a class="menuS" href="http://protein.cribi.unipd.it/tese/index.html#query">
+<b>Query</b></a> &nbsp;
+</td>
+<td align="center">
+<a class="menuS" href="http://protein.cribi.unipd.it/tese/index.html#ensemble"><b>
+PDB Ensemble</b></a>
+</td>
+<td align="center">
+<a class="menuS" href="http://protein.cribi.unipd.it/tese/index.html#keyword"><b>
+Key word</b></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+
+The <a href="http://protein.cribi.unipd.it/tese/index.html#query"><b>Query</b></a> mode allows the 
+user to select structural and quality filters to generate a test set at any given level of 
+residual sequence and structural similarity using the <a href="http://www.cathdb.info/"><i>CATH</i></a> 
+structural classification scheme. <i>CATH</i> defines several levels of structural as well as common 
+sequence similarity thresholds (e.g. less than 35% sequence identity). Additionally, the server 
+implements several quality checks for the structures to be included, e.g. X-ray resolution and R-free 
+cutoffs. The data can be visualized either interactively, for smaller sets, or simply downloaded.
+<p>
+
+The <a href="http://protein.cribi.unipd.it/tese/index.html#ensemble"><b>PDB Ensemble</b></a> mode 
+can be used to seed the structural search form a limited number of PDB codes of proteins sharing 
+the desired structural and/or sequence features. The server will then present a list of <i>CATH</i>
+codes from which to choose the desired set in analogy to the <b>Query</b> mode. This can be useful
+if the intention is to extend a previously published test set.
+<p>
+
+The <a href="http://protein.cribi.unipd.it/tese/index.html#ensemble"><b>Key word</b></a> mode
+initiates a structural search from key words contained in the header and compound records of all 
+PDB structures. A list of matching proteins is then presented and can be manipulated in analogy to 
+the <b>Query</b> mode. This can be useful if the user has no specific idea about the PDB codes of 
+relevant proteins or their structural classification.
+<p>
+
+<br>
+</tr></td></table>
+
+<center>
+<table border="1" cellspacing="1" width="75%">
+	<tbody><tr>
+		<td colspan="2" bgcolor="#e5e5ff" width="50%"><font color="#000070" size="+2"><b></b></font><center>
+<font color="#000070" size="+2"><b>		<a name="query">SEARCH BY QUERY</a></b></font></center></td>
+	</tr>
+	<tr>
+		<td bgcolor="#e5e5ff" width="50%">
+			<center><font color="#000070"><b>QUERY</b></font></center>
+		</td>
+		<td bgcolor="#e5e5ff">
+			<center><font color="#000070"><b>WIZARD</b></font></center>
+		</td>
+	</tr>
+
+	<tr>
+		<td bgcolor="#ccccff">
+			<br>
+			<center>
+			<form name="form1" method="post" action="../cgi-bin/tese/working1.cgi">
+			<textarea name="param" rows="15" cols="35"></textarea><br><br>
+			<font size="-1">
+			<input name="home_page" value="1" type="hidden">
+			<input name="email" value="1" type="hidden" value="@.">
+
+			<input name="submit" value="START SEARCH" type="submit"> 
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input name="reset" value="RESET" type="reset">
+			</center>
+
+			<center>
+			<table width=85%>
+				<tr>
+					<td colspan = 3><font size=-1 color="#000070"><hr><b>VISUALIZATION</b></td>				
+				</tr>
+				<tr>
+					<td valign = top width = 5%><br><input type=radio name=images value=1 checked></td>
+					<td colspan=2><br><font size=-1 color="#000070"><b>Interactive view <i>whith images</i></b> of protein domains, for visual validation.</td>
+				</tr>
+				<tr>
+					<td valign = top width = 5%><br><input type=radio name=images value=0></td>
+					<td colspan=2><br><font size=-1 color="#000070"><b>Interactive view <i>whithout images</i></b> of protein domains.</td>
+				</tr>
+				<tr>
+					<td valign = top width = 5%><br><input type=radio name=images value=2></td>
+					<td colspan=2><br><font size=-1 color="#000070"><b>Non interactive version:</b> Download the raw list, FASTA and PDB of protein domains. For large datasets.<br><br><br></td>
+				</tr>
+			</table>				
+
+			
+			</font></form></center>
+		<font size="-1"></font></td>
+		<td bgcolor="#ccccff">
+			<center>
+
+			<form name="form2">
+				<table border=0 width=80%>		
+				<tr>
+				<tr><td colspan=4><font size=-1 color="#000070"><b>SELECT BY CATH HIERARCHY CODE</b></td></tr>
+				<td valign = top >
+				<select name="wizard1" onchange="prepara1();">
+					<option value="0">Include all&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					<option value="1">Include node</option>
+					<option value="2">Exclude node</option>
+				</select>
+				</td><td valign = top><input value = "------" name = "value1_1" size = 5  onclick = "document.form2.value1_1.value = '';" onmouseover="toolTip(help1)" onmouseout="toolTip()" type="text"></td><td valign = top><input name=b1 value="INSERT" onclick="scrivi1();" type="button"><br><br></td><tr>
+
+				<tr><td colspan=4><font size=-1 color="#000070"><b>INCLUDE BY CATH DEFINITION</b></td></tr>
+				<td valign = top >
+				<select name="wizard5">
+				        <option value="1">Mainly Alpha (1)</option>
+				        <option value="2">Mainly Beta (2)</option>
+				        <option value="3">Alpha Beta (3)</option>
+				        <option value="4">Few Secondary Structures (4)</option>
+				        <option value="1.10">Orthogonal Bundle (1.10)</option>
+				        <option value="1.20">Up-down Bundle (1.20)</option>
+				        <option value="1.25">Alpha Horseshoe (1.25)</option>
+				        <option value="1.40">Alpha solenoid (1.40)</option>
+				        <option value="1.50">Alpha/alpha barrel (1.50)</option>
+				        <option value="2.10">Ribbon (2.10)</option>
+				        <option value="2.20">Single Sheet (2.20)</option>
+				        <option value="2.30">Roll (2.30)</option>
+				        <option value="2.40">Beta Barrel (2.40)</option>
+				        <option value="2.50">Clam (2.50)</option>
+				        <option value="2.60">Sandwich (2.60)</option>
+				        <option value="2.70">Distorted Sandwich (2.70)</option>
+				        <option value="2.80">Trefoil (2.80)</option>
+				        <option value="2.90">Orthogonal Prism (2.90)</option>
+				        <option value="2.100">Aligned Prism (2.100)</option>
+				        <option value="2.102">3-layer Sandwich (2.102)</option>
+				        <option value="2.105">3 Propellor (2.105)</option>
+				        <option value="2.110">4 Propellor (2.110)</option>
+				        <option value="2.115">5 Propellor (2.115)</option>
+				        <option value="2.120">6 Propellor (2.120)</option>
+				        <option value="2.130">7 Propellor (2.130)</option>
+				        <option value="2.140">8 Propellor (2.140)</option>
+				        <option value="2.150">2 Solenoid (2.150)</option>
+				        <option value="2.160">3 Solenoid (2.160)</option>
+				        <option value="2.170">Beta Complex (2.170)</option>
+				        <option value="3.10">Roll (3.10)</option>
+				        <option value="3.15">Super Roll (3.15)</option>
+				        <option value="3.20">Alpha-Beta Barrel (3.20)</option>
+				        <option value="3.30">2-Layer Sandwich (3.30)</option>
+				        <option value="3.40">3-Layer(aba) Sandwich (3.40)</option>
+				        <option value="3.50">3-Layer(bba) Sandwich (3.50)</option>
+				        <option value="3.55">3-Layer(bab) Sandwich (3.55)</option>
+				        <option value="3.60">4-Layer Sandwich (3.60)</option>
+				        <option value="3.65">Alpha-beta prism (3.65)</option>
+				        <option value="3.70">Box (3.70)</option>
+				        <option value="3.75">5-stranded Propeller (3.75)</option>
+				        <option value="3.80">Alpha-Beta Horseshoe (3.80)</option>
+				        <option value="3.90">Alpha-Beta Complex (3.90)</option>
+				        <option value="3.100">Ribosomal Protein L15 (3.100)</option>
+				        <option value="4.10">Irregular (4.10)</option>
+
+				</select>
+				</td><td valign = top>&nbsp;</td><td valign = top><input name=b1 value="INSERT" onclick="scrivi5();" type="button"><br><br></td><tr>
+
+				<tr><td colspan=4><font size=-1 color="#000070"><b>EXCLUDE BY CATH DEFINITION</b></td></tr>
+				<td valign = top >
+				<select name="wizard6">
+				        <option value="1">Mainly Alpha (1)</option>
+				        <option value="2">Mainly Beta (2)</option>
+				        <option value="3">Alpha Beta (3)</option>
+				        <option value="4">Few Secondary Structures (4)</option>
+				        <option value="1.10">Orthogonal Bundle (1.10)</option>
+				        <option value="1.20">Up-down Bundle (1.20)</option>
+				        <option value="1.25">Alpha Horseshoe (1.25)</option>
+				        <option value="1.40">Alpha solenoid (1.40)</option>
+				        <option value="1.50">Alpha/alpha barrel (1.50)</option>
+				        <option value="2.10">Ribbon (2.10)</option>
+				        <option value="2.20">Single Sheet (2.20)</option>
+				        <option value="2.30">Roll (2.30)</option>
+				        <option value="2.40">Beta Barrel (2.40)</option>
+				        <option value="2.50">Clam (2.50)</option>
+				        <option value="2.60">Sandwich (2.60)</option>
+				        <option value="2.70">Distorted Sandwich (2.70)</option>
+				        <option value="2.80">Trefoil (2.80)</option>
+				        <option value="2.90">Orthogonal Prism (2.90)</option>
+				        <option value="2.100">Aligned Prism (2.100)</option>
+				        <option value="2.102">3-layer Sandwich (2.102)</option>
+				        <option value="2.105">3 Propellor (2.105)</option>
+				        <option value="2.110">4 Propellor (2.110)</option>
+				        <option value="2.115">5 Propellor (2.115)</option>
+				        <option value="2.120">6 Propellor (2.120)</option>
+				        <option value="2.130">7 Propellor (2.130)</option>
+				        <option value="2.140">8 Propellor (2.140)</option>
+				        <option value="2.150">2 Solenoid (2.150)</option>
+				        <option value="2.160">3 Solenoid (2.160)</option>
+				        <option value="2.170">Beta Complex (2.170)</option>
+				        <option value="3.10">Roll (3.10)</option>
+				        <option value="3.15">Super Roll (3.15)</option>
+				        <option value="3.20">Alpha-Beta Barrel (3.20)</option>
+				        <option value="3.30">2-Layer Sandwich (3.30)</option>
+				        <option value="3.40">3-Layer(aba) Sandwich (3.40)</option>
+				        <option value="3.50">3-Layer(bba) Sandwich (3.50)</option>
+				        <option value="3.55">3-Layer(bab) Sandwich (3.55)</option>
+				        <option value="3.60">4-Layer Sandwich (3.60)</option>
+				        <option value="3.65">Alpha-beta prism (3.65)</option>
+				        <option value="3.70">Box (3.70)</option>
+				        <option value="3.75">5-stranded Propeller (3.75)</option>
+				        <option value="3.80">Alpha-Beta Horseshoe (3.80)</option>
+				        <option value="3.90">Alpha-Beta Complex (3.90)</option>
+				        <option value="3.100">Ribosomal Protein L15 (3.100)</option>
+				        <option value="4.10">Irregular (4.10)</option>
+
+				</select>
+				</td><td valign = top>&nbsp;</td><td valign = top><input name=b1 value="INSERT" onclick="scrivi6();" type="button"><br><br><br></td></tr>
+
+
+
+				<tr><td colspan=4><hr><font size=-1 color="#000070"><b>REDUNDANCY REDUCTION</b></td></tr>
+				<tr>
+				<td valign = top>
+				<select name="wizard2" onchange="prepara2();">
+					<option value="0">No filter</option>
+					<option value="1">C (Class)</option>
+					<option value="2">A (Architecture)</option>
+					<option value="3">T (Topology)</option>
+					<option value="4">H (Homologous superfamily)</option>
+					<option value="5">S (seq. cluster at 35%)</option>
+					<option value="6">O (seq. cluster at 60%)</option>
+					<option value="7">L (seq. cluster at 95%)</option>
+					<option value="8">I (seq. cluster at 100%)</option>
+				</select>
+				<br><center><input name = "random" type="checkbox" onmouseover="toolTip('Check this if you want <i>n</i> random sequences for this level')" onmouseout="toolTip()" DISABLED><i><font size=-2 color="#000070">&nbsp;Random selection</font></i></center>
+				</td><td valign = top><input value= "------" name = "value2_1" size=5  onclick="document.form2.value2_1.value = '';" onmouseover="toolTip(help2)" onmouseout="toolTip()" type="text"></td><td valign = top><input name=b2 value="INSERT" onclick="scrivi2();" type="button"><br><br><br><br></td>
+
+				</tr>
+
+
+
+
+
+				<tr><td colspan=4><hr><font size=-1 color="#000070"><b>QUALITY CONTROL</b></td></tr>
+				<tr>
+				<td valign = top>
+				<select name="wizard3" onchange="prepara3();">
+					<option value="0">Max resolution&nbsp;&nbsp;</option>
+					<option value="1">Min resolution</option>
+					<option value="2">Min Rfree</option>
+					<option value="3">Max Rfree</option>
+					<option value="4">Min TAP</option>
+					<option value="5">Max TAP</option>
+					<option value="6">Min Quality</option>
+					<option value="7">Max Quality</option>
+				</select>
+				</td><td valign = top><input value = 2 name = "value3_1" size=5  onclick="document.form2.value3_1.value = '';" onmouseover="toolTip(help3)" onmouseout="toolTip()" type="text"></td><td valign = top><input name=b3 value="INSERT" onclick="scrivi3();" type="button"><br><br></td></tr>
+
+				<tr><td colspan=4><font size=-1 color="#000070"><b>OTHER PARAMETERS (size, exp. type, ...)</b></td></tr>
+				<tr>
+				<td valign = top>
+				<select name="wizard4" onchange="prepara4();">
+					<option value="0">Min length</option>
+					<option value="1">Max length</option>
+					<option value="2">Exclude NMR &nbsp;&nbsp;&nbsp;</option>
+					<option value="3">Exclude X-RAY</option>
+					<option value="4">No segmented</option>
+					<option value="5">Min Year</option>
+					<option value="6">Max Year</option>
+				</select>
+				</td><td valign = top><input value= "120" name = "value4_1" size=5  onclick="document.form2.value4_1.value = '';" onmouseover="toolTip(help4)" onmouseout="toolTip()" type="text"></td><td><input name=b4 value="INSERT" onclick="scrivi4();" type="button"></td><tr>
+
+				</table>
+				<br><br>
+
+		
+
+			</form>
+
+			</center>
+		</td>
+	</tr>
+</tbody></table>
+
+<br><br><br>
+
+<table border="1" cellspacing="1" width="75%">
+	<tbody><tr>
+		<td colspan="2" bgcolor="#e5e5ff" width="50%"><font color="#000070" size="+2"><b></b></font><center>
+<font color="#000070" size="+2"><b>		<a name="ensemble">SEARCH FROM A PDB ENSEMBLE</a></b></font></center></td>
+	</tr>
+	<tr>
+		<td bgcolor="#e5e5ff" width="50%">
+			<center><font color="#000070"><b>Structural correlated proteins</b></font></center>
+		</td>
+		<td bgcolor="#e5e5ff">
+			<center><font color="#000070"><b>Explanation</b></font></center>
+		</td>
+	</tr>
+
+	<tr>
+		<td bgcolor="#ccccff">
+			<form method="post" action="../cgi-bin/tese/working2.cgi"><br>
+			<center><textarea name="pdb_list" rows="7" cols="30">1QSA
+1B89
+1QQE
+1FT1
+1BPO
+1B3U
+1D0B
+1PCL
+1GRE
+
+			</textarea>
+			<br><br>		
+			<input name="home_page" value="1" type="hidden">
+			<input name="email" value="1" type="hidden" value="@.">
+			<input name="submit" value="START SEARCH" type="submit">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input name="reset" value="RESET" type="reset">
+			</font></center>
+			<font size="-1">			
+		</font></form></td>
+		<td bgcolor="#ccccff">
+			<center>
+			<font color="#000070" size="-1">
+			Insert a valid PDB code (or CATH domain code) per line.
+			</font></center>
+<font color="#000070" size="-1">		</font></td>
+	</tr>
+</tbody></table>
+
+
+
+<br><br><br>
+
+<table border="1" cellspacing="1" width="75%">
+	<tbody><tr>
+		<td colspan="2" bgcolor="#e5e5ff" width="50%"><font color="#000070" size="+2">
+		<b></b></font><center><font color="#000070" size="+2"><b><a name="keyword">SEARCH BY KEY WORD</a></b></font></center></td>
+	</tr>
+	<tr>
+		<td bgcolor="#e5e5ff" width="50%">
+			<center><font color="#000070"><b>Key Words</b></font></center>
+		</td>
+		<td bgcolor="#e5e5ff">
+			<center><font color="#000070"><b>Explanation</b></font></center>
+		</td>
+	</tr>
+
+	<tr>
+		<td bgcolor="#ccccff">
+			<form method="post" action="../cgi-bin/tese/working3.cgi"><br>
+			<center><textarea name="key_word" rows="7" cols="30">AQUAPORIN OPEN
+LYSOZYME</textarea>
+
+			<br><br>
+			<select name="filter">
+				<option value="0">No filter</option>
+				<option value="C">Filter By C level</option>
+				<option value="A">Filter By A level</option>
+				<option value="T">Filter By T level</option>
+				<option value="H">Filter By H level</option>
+				<option value="S">Filter By S level</option>
+				<option value="O">Filter By O level</option>
+				<option value="L">Filter By L level</option>
+				<option value="I">Filter By I level</option>
+			</select>
+
+			<input name="email" value="1" type="hidden" value="@.">			
+			<input name="home_page" value="1" type="hidden">
+		<br><br>
+			<input name="submit" value="START SEARCH" type="submit">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input name="reset" value="RESET" type="reset">
+
+			</font></center>
+<font size="-1">			
+		</font></form></td>
+		<td bgcolor="#ccccff">
+			<center>
+			<font color="#000070" size="-1">
+			Key words on the same line are joined with AND.<br>
+			Different lines are read as boolean OR. </font><p>
+<font color="#000070" size="-1">			The filter level serves to limit the initial choice by CATH structural similarity.
+			</font></p></center>
+<font color="#000070" size="-1">		</font></td>
+	</tr>
+</tbody></table>
+
+<br><br>
+
+</center>
+<hr>
+<address><b>(c) &nbsp;
+<a class="homer" href="mailto:silvio.tosatto@unipd.it">Silvio Tosatto & Francesco G. Sirocco</a> for &nbsp; <a class="homer" href="http://protein.bio.unipd.it/">Biocomputing UP</a>,
+&nbsp;&nbsp; 03 / 2008 </b>
+
+</address>
+
+</body></html>

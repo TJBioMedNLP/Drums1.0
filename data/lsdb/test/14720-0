@@ -1,0 +1,62 @@
+<html><head><title>PATTERNFINDER</title></head>
+<body   
+      bgcolor    = "#FFFFFF" vlink="#0000FF">
+<CENTER>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0 WIDTH=450>
+<TR>
+<TD BGCOLOR="$LKJAAE" COLSPAN=4 align=center>
+<FONT SIZE=5 FACE="Helvetica,arial" color="#ffffff"><B>PATTERNFINDER</B></FONT>
+</TD>
+</TR>
+<TR>
+<TD ALIGN=Center BGCOLOR="$cceeee" COLSPAN=4><B><font size=3>
+<A HREF="README.html">README</A>|<A HREF="DEMO.html">DEMO</A>|<A HREF="admin.cgi">ADMINPAGE</A></td>
+</TR>
+</TABLE><P>
+<table bgcolor="#C0C0C0"><tr><td><B>FILL IN THE BLANKS BELOW TO FIND MATCHING PATTERNS IN A DNA SEQUENCE: <BR><A HREF="bfp.html">For a batch of pattern queries, click here.</A>  </B> <hr>
+<form  enctype="multipart/form-data" method="POST" action="pfp.cgi">
+<B><pre>Name of DNA: <input type=text name=molecule value=your_molecule size=15>    Shape of DNA Molecule: <select name="shape">
+<option>Linear
+<option>Circular<BR>
+</select></pre></B>
+</select>
+<INPUT TYPE="radio" NAME="inputmode" VALUE="loadfile" > Import From File: Format:<select name="FORMAT">
+<option>ASCII/TXT
+<option>GENBANK_HTML/TXT
+<option>FASTA_TXT
+<option>FASTA_HTML
+</select> Enter a file path below:
+<BR><CENTER><input type="file" size="40" name="UploadedFile"> </CENTER>
+<INPUT TYPE="radio" NAME="inputmode" VALUE="input" CHECKED > DNA Sequence Query (5' to 3' strand):<BR><CENTER>
+ <textarea COLS="50" ROWS="4" name="sequence"></textarea></CENTER>
+<HR width=660 align=left><B>Analysis Parameters:</B>
+<BR><INPUT TYPE="radio" NAME="allpart" VALUE="ALL" CHECKED > Analyze the Whole Molecule
+<BR><INPUT TYPE="radio" NAME="allpart" VALUE="PART"> Analyze Part of the Molecule From Position <input type=text name=start size=10> To Position<input type=text name=end size=10>
+<table width=400><tr><td><INPUT TYPE="checkbox" NAME="strand1" VALUE="upper" checked >Search the upper strand</td><td><INPUT TYPE="checkbox" NAME="strand2" VALUE="lower" checked>Search the lower strand</td><tr></table>
+Maximum Pattern Span (bps):<input type=text name=length size=4> Maximum length including N's and repeats
+<BR> <B>ENTER A PATTERN: <input type=text name=pattern size=60> 
+
+<table><tr><td><table border=2>
+<tr><td>A=Adenine</td><td>C=Cytosine</td><td>G=Guanine</td><td>T=Thymidine</td></tr>
+<tr><td>B=Not A</td><td>D=Not C</td><td>H=Not G</td><td>V=Not T</td></tr>
+<tr><td>N=A|G|C|T</td><td>R=A|G</td><td>Y=C|T</td><td>W=A|T</td></tr>
+<tr><td>S=C|G</td><td>K=G|T</td><td>M=A|C</td><td>EMPTY</td></tr></table></td><td><B>ANNOTATIONS: <FONT COLOR="$BLACKB"><BR>ATTN{3}G=ATTNNNG<BR>ATTN{3,}G=ATT(at least three repeats of N)G<BR>ATTN{3,6}=ATT(3 to 6 N repeats)G<BR>A(TTN){3}G=ATTNTTNTTNG<BR>A(TTN){3,6}G=A(3 to 6 TTN repeats)G<BR></FONT></B></td></table>
+<HR width="660" align=left ><CENTER><B>
+<input type=submit value="SUBMIT QUERY">  <input type=reset value="RESET">
+</B><HR width="660" align=left><INPUT TYPE="checkbox" NAME="PARTNER" VALUE="DWT">Enable HELIX STABILITY PROFILE: <FONT COLOR="$PURLPE">WEB-THERMODYN</FONT><table bgcolor="$GREENF"><tr><td>Temperature (&deg; C): <input type=text name=temperature value =37 size=2>        Salt Concentration (mM): <input type=text name=saltconc value=10  size=2> <BR> Start Position <input type=text name=P_start value=1 size=2> Step Size: <input type=text name=P_step value=1 size=2> Window Size: <input type=text value=10 name=P_windowsize size=2> Number of Markers:  <input type=text value=1 name=P_marknum size=3> <BR>Dataset: <select name="dataset">
+<option>Current: SantaLucia, 1998
+<option>Previous: Breslauer & Marky, 1986
+</select>  Max. Computing Time (sec): <select name="P_timelimit">
+<option>30
+<option>60
+<option>90
+</select></td></tr></table><INPUT TYPE="checkbox" NAME="PARTNER2" VALUE="DTC">Enable HELIX STABILITY RANK: <FONT COLOR="$PURLPE">THERMOCALC</FONT>
+
+
+</CENTER>
+</form><CENTER>
+<hr><B>&#169 Yanlin Huang, David Kowalski, Dept. of Cancer Genetics, Roswell Park Cancer Institute, Buffalo, NY 14263</B></CENTER></td></tr></table>
+
+</CENTER>
+
+</body></HTML>

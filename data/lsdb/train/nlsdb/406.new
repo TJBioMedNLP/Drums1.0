@@ -1,0 +1,209 @@
+<HTML>
+<HEAD>
+<TITLE>OnD-CRF</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+ <style type="text/css"><!--
+   .header {font-family:Tahoma, sans-serif; font-size: 12px; COLOR:#2FFFFF; padding-left:10; padding-right:5; font-weight:900 }
+   .text {font-family:Tahoma,sans-serif; font-size: 11px; color:#ffffff; padding-left:20; padding-right:10 }
+   .text2 {font-family:Verdana,sans-serif; font-size: 10px; color:#ffffff; padding-left:20; padding-right:10 }
+    .news {font-family:Arial, sans-serif; font-size: 9px; color:#ffffff; padding-left:10; padding-right:5; font-weight:900; }
+   a:link{text-decoration: none; color:#004FDF}
+  a:visited{text-decoration: none; color: #004FDF}
+  a:hover{text-decoration: underline; color: #004FDF}
+  a:active{text-decoration: none; color: #004FDF}
+li {
+	list-style : url(images/pic.jpg);
+}
+
+--></style>
+
+</HEAD>
+
+<script language=javascript>
+function myclick(form)
+{
+//if (form.evalue.value==""){
+    //                  alert("You must select or set a E-value!");
+  //                      }else {
+
+if (form.SEQSTR.value=="" && form.SEQFILE.value=="") 
+{
+        alert ("Please input or select a sequence!");
+}
+else if (form.SEQSTR.value=="")
+{
+        form.flag.value="0";
+	document.dis.submit();
+}
+else if (form.SEQFILE.value=="")
+{
+	form.flag.value="1";
+	document.dis.submit();
+}
+else
+{
+//alert "you can't submit a sequence string and a sequence file at one time!";
+        alert ("Don't submit a sequence and a sequence file at same time!");
+	//document.dis.reset();
+}
+
+//}
+}
+
+function emailchange(form)
+
+{
+	if(document.dis.maillist.checked){
+		document.dis.mailaddr.style.display=""; 
+	 	document.dis.mailaddr.value=""; 
+		
+		}
+		else{
+		document.dis.mailaddr.style.display="none"; 
+	 	document.dis.mailaddr.value=""; 
+		
+		}
+} 
+
+
+
+function mychange(form)
+
+{
+
+ if( document.dis.tmpSel.value==4) { 
+
+	 	document.dis.evalue.style.display=""; 
+	 	document.dis.evalue.value=""; 
+
+	 	} 
+
+	 else {
+	  document.dis.evalue.style.display="none"; 
+	  selE=form.tmpSel.options[form.tmpSel.selectedIndex].value;
+	  kkk=selE;
+	  switch(kkk)
+
+	  {
+		case "10": document.pfam.evalue.value="10.0";break;
+
+		case "5": document.pfam.evalue.value="5.0";break;
+
+	  	case "1": document.pfam.evalue.value="0.1";break;
+
+	  	case "2": document.pfam.evalue.value="0.01";break;
+
+		case "3": document.pfam.evalue.value="0.001";break;
+
+	  	case "0": document.pfam.evalue.value="1.0";break;
+
+	  	default : document.pfam.evalue.value="0.1";
+
+	  }
+
+	  //alert(selE);
+
+	  } 
+
+ 
+
+ }
+</script>
+
+<BODY BGCOLOR=#FFFFFF LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0  background="images/bg.jpg">
+	
+	<TABLE WIDTH=782 BORDER=0 CELLPADDING=0 CELLSPACING=0 align="center" height=100% bgcolor="ffffff">
+        <TR>
+                <td bgcolor=#000000 rowspan=10 width="1"><img src="images/spacer.gif" with=1>
+                </td>
+        <TD COLSPAN=11 background="images/4.jpg" WIDTH=780 HEIGHT=50 ALT="">
+                <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0 height=80><TBODY>
+                        <TR bgColor=#9999cc>
+                        <TD align=middle bgcolor="#FFFFFF">
+                        <img border="0" src="images/ond-crf.jpg" height="60" usemap="#title10"></TD>
+                        <map id="title10" name="title10">
+                                        <area shape="rect" coords="25,2,253,13" href="http://soul.ucmp.umu.se/" title="" target="_blank" />                                         <area shape="rect" coords="296,3,551,13" href="http://www.chemistry.umu.se/index.php?lang=en/" title="" target="_blank" />                                         <area shape="circle" coords="720,33,28" href="http://www.umu.se/" title="" target="_blank" />                                         <area shape="default" nohref="nohref" alt="" />
+                                        </map>
+                </TR>
+                </TBODY></TABLE>
+
+		<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0><TBODY>
+                        <TR bgColor=#EFEFEF>
+                        <TD align=middle width="35%"><a href="http://babel.ucmp.umu.se/ond-crf/"><font size=2 color="#5C5B5B"><b>OnD-CRF</b></font></a></TD>
+                        <TD align=middle width="30%"><A href="http://babel.ucmp.umu.se/ond-crf/about.php"><FONT size=2 color=#5C5B5B><B>About the server</B></FONT></A></TD>
+                        <!--<TD align=middle width="25%"><b><a href="http://babel.ucmp.umu.se/ond-crf/help.php"><font size=2 color="#5C5B5B">Help</font></a></b></font></TD>-->
+                        <TD align=middle width="35%"><b><a href="http://babel.ucmp.umu.se/ond-crf/contact.php"><font size=2 color="#5C5B5B">Contact us</font></a></b></font></TD>
+                        </TR>
+                </TBODY></TABLE>
+
+                </TD>
+
+                <td bgcolor=#000000 rowspan=10 width="1"><img src="images/spacer.gif" with=1>
+                </td>
+        </TR>
+	
+	<tr>
+		<td colspan="11" height="27">
+			<div class="text" style="color:000000; padding-left:25;padding-top:30; padding-right:0">
+			<h2>Predicting Order and Disorder in proteins using Conditional Random Fields</h3><BR>
+ <font size=5 color=red></font>
+			</div>
+		</td>
+	</tr>
+	
+	<form name="dis" method="POST" action="http://babel.ucmp.umu.se/sahmmcgi/tmpseq/onlyserver.cgi" enctype="multipart/form-data">
+	<input type=hidden name=flag value="2">		
+
+	<tr>
+		<td colspan="11" valign="top">
+		<table border=0><tr><td>
+			<div class="text" style="color:000000; padding-left:50;padding-top:15; padding-right:10; font-size:11px">
+				Paste your sequence here. FASTA format or raw sequence are accepted:	
+				<textarea rows="9" name="SEQSTR" cols="55"></textarea>
+				<BR>or<BR>Select the query sequence from a file :
+				<br><input type=file name="SEQFILE" size="55"><BR><br>
+				<INPUT TYPE=CHECKBOX NAME="maillist" onClick=emailchange(this.form)>Send me the results by Email: <input type=text name="mailaddr" size=25 style="display:none" value=""><br>
+				<p>
+
+				<input type="button" value="Submit query" onClick="myclick(this.form)"> <input type="reset"></p>
+				
+				</div>
+		</td>
+		<td valign="top">
+		
+			<div class="text" style="color:000000; padding-left:1;padding-top:15; padding-right:180; font-size:11px;visibility:hidden">
+				Option
+				</div>
+				
+			<div class="text" style="color:000000; padding-left:1;padding-top:15; padding-right:0; font-size:11px;visibility:hidden">
+				When you submit several sequences, do you want to show the curves in one plot:<br><input type=radio name=together checked value="yes">YES<input type=radio name=together value="no">NO
+<input typt=text name=evalue size=4 style="display:none" value=0.1>
+				</div>
+
+		</td>
+</tr></table>
+	</tr>
+
+
+	</form>
+	<TR>
+		<TD  COLSPAN=11 background="images/4.jpg" WIDTH=780 ALT="">
+		<table align=center>
+		<tr><td>
+		</td></tr>
+
+		<tr><td>
+<DIV class=text style="COLOR: #9b9b9b" align=center>Copyright Â© 2008 UCMP. All rights reserved.
+</div>		
+
+</td></tr>
+		
+		</table>
+		</TD>
+	</TR>
+	
+	
+</TABLE>
+
+</BODY>
+</HTML>

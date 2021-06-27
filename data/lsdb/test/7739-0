@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+  <title>::[Epistasis Tools]::</title>
+  <link rel="stylesheet" href="./style/style.css" type="text/css" media="screen"/>
+</head>
+
+<body id="home" class="log">
+  <div id="toprow"></div>
+  <div id="wrap">
+    <div id="top">
+      <div style='width: 78%; display:inline-block; vertical-align:top;'>
+        <h1 id="blogname">[Epistasis Tools]</h1>      
+      </div>
+        <img style='display:inline; height: 70px; border: 0 none;'src='./style/images/oldwelDNAl.png'/>
+        <img style='display:inline; height: 70px; border: 0 none;'src='./style/images/ram-tarheel-logo.jpg'/>       
+      <div class="description"><a href="http://compgen.unc.edu/">UNC Computational Genetics Working Group</a></div> 
+    </div>
+
+     
+
+<style>
+#content table {  
+  border: 2px solid;
+  border-collapse: collapse;
+}
+
+#content table th, #content table td{
+  border: 1px solid;
+  padding: 2px;
+}
+</style>
+
+<div id="content">
+
+<p style="padding: 15px">
+<b>Epistasis Tools</b> is a collection of efficient programs for epistasis detection in genome-wide data. 
+With user-provided genotype and phenotype data, as well as a few parameters, the 
+programs are able to return the significant SNP-pairs. The programs are implementations of efficient epistasis detection algorithms, which greatly speed up the computationally intensive process. 
+</p>
+
+<p style="padding: 15px">
+Currently, the collection consists of three main programs: FastANOVA[<a href="./download/FastANOVA_KDD08.pdf">paper</a>], COE[<a href="./download/COE_RECOMB09.pdf">paper</a>], and TEAM[<a href="./download/TEAM_ISMB10.pdf">paper</a>].
+The three programs are suitable for different problem settings. Please refer to the following table for the setting that is suitable for each program.
+
+<center>
+<table>
+  <tbody>
+    <tr>
+      <th>Algorithm</th>
+      <th>Genotype</th>
+      <th>Phenotype</th>
+      <th>Error Type</th>
+      <th>Sample Size</th>
+      <th>Supported Test</th>
+    </tr>       
+    <tr>
+      <td>FastANOVA</td>
+      <td>homozygous</td>
+      <td>quantitative</td> 
+      <td>FWER</td>
+      <td>less than a hundred</td>
+      <td>ANOVA test</td>
+    </tr>
+    <tr>
+      <td>COE</td>
+      <td>homozygous</td>
+      <td>binary</td>
+      <td>FWER</td>
+      <td>less than a hundred</td>
+      <td>convex tests</td>
+    </tr>
+    <tr>
+      <td>TEAM</td>
+      <td>heterozygous</td>
+      <td>binary</td>
+      <td>FWER & FDR</td>
+      <td>hundreds of thousands</td>
+      <td>tests based on <br/>contingency tables</td>
+    </tr>
+  </tbody>
+</table>
+</center>
+</p>
+
+<p style="padding: 15px">
+Besides source code(<a href="download.php">link</a>), we also provide a web-interface for the applications.
+To use the applications online, users need to follow the listed steps.
+</p>
+
+<p style="padding: 5px 30px">
+(1) Register a user name in <i><a href="register.php">Registration</a></i><br/>
+(2) Select an application on the left panel<br/>
+(3) Upload the datasets and set the parameters<br/>
+(4) Click the [Submit] button<br/>
+(5) Monitor the status and get the result in <i><a href="monitor_client.php">Progress Monitor</a></i><br/>
+</p>
+
+<p style="padding: 15px;">
+Please note that the size limit of the uploaded dataset is <b>3 Megabytes</b>. For analysis that involves 
+large or sensitive datasets, it is recommended to download and run the programs.
+</p>
+
+</div>
+<!-- end of <div id="content"> -->
+
+
+  <div id="sidebar">
+  <table>
+    <tbody>
+      <tr><td><h5>User:</h5></td><td><h5>[anonymous]</h5></td></tr>
+      <tr><td><h5>IP:</h5></td><td><h5>[129.89.57.69]</h5></td></tr>
+    </tbody>
+  </table>  
+  <ul class="button">
+    <li><a class="current">Home</a></li>
+    <li><a href="./register.php">Registration</a></li>
+    <li><a href="./client-fastanova2.php">FastANOVA</a></li>
+    <li><a href="./client-coe2.php">COE</a></li>
+    <li><a href="./client-team2.php">TEAM</a></li>
+    <li><a href="./monitor_client.php">Progress Monitor</a></li>
+    <li><a href="./download.php">Download</a></li>
+    <li><a href="./faqs.php">FAQs</a></li>
+  </ul>
+  <br/>
+  <ul>
+    <li><h2>News</h2></li>
+    <li>Beta Testing now...</li>
+  </ul>
+  <br/>
+  <hr/>
+  <ul>
+    <li><h2>Contact Us</h2></li>
+    <li><h5>xiang AT cs.unc.edu</h5></li>
+    <li><h5>sphuang AT cs.unc.edu</h5></li>
+    <li><h5>fzou AT bios.unc.edu</h5></li>
+    <li><h5>weiwang AT cs.unc.edu</h5></li>
+  </ul>
+</div>
+<!-- end of <div id="sidebar"> -->
+<div id="footer">
+  <p>
+    [ Epistasis Tools v0.6 ] @ <a href="http://compgen.unc.edu/">UNC Computational Genetics Working Group</a><br/>
+    June 8 2010<br/>
+    <h5>Recommended resolution: 1024 x 768 or higher. Recommended browser: Firefox 2.0 or higher, IE 7 or higher.</h5>
+  </p>
+</div>
+</div><!-- end of <div id="wrap"> -->
+<div id="bottrow"></div>
+</body>
+</html>

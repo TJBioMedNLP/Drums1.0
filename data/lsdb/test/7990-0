@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD><TITLE>SplicePredictor Online</TITLE>
+</HEAD><BODY><body bgcolor=white text=black link=blue><center>
+<table width=595 cellpadding=0 cellspacing=0>
+
+<tr>
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="//bioinformatics.iastate.edu/" title="Bioinformatics & Computational Biology at Iowa State University"><font color="white">
+BCB @ ISU</font></a>
+</font></td>
+
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000"><font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/" title="ISU Bioinformatics 2 Go"><font color=white>
+Bioinformatics 2 Go</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/download.html" title="Download SplicePredictor"><font color=white>
+Download</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html" title="SplicePredictor Help"><font color=white>
+Help</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 valign=middle height=20 align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/tutorial.html" title="SplicePredictor Tutorial"><font color=white>
+Tutorial</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td valign=middle width=84 height=20 align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/references.html" title="SplicePredictor References"><font color=white>
+References</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 valign=middle height=20 align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/contact.html" title="Contact information"><font color=white>
+Contact</font>
+</a></font></td>
+
+</tr>
+</table>
+</center>
+</body>
+<HR><H2 ALIGN="center"><A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SPLICEPREDICTOR">SplicePredictor</A></H2><P ALIGN="center"><B>- a method to identify potential splice sites in (plant) pre-mRNA by sequence inspection using Bayesian statistical models</B> <BR> <B>(click</B> <A HREF="http://bioinformatics.iastate.edu/cgi-bin/spLL.cgi">here</A> <B> to access the older method using logitlinear models)</B> <BR></P><HR><FORM METHOD="POST"  ENCTYPE="multipart/form-data" >
+<INPUT TYPE="hidden" NAME="ufname" VALUE="4939_1458">
+
+<H3>Sequences should be in the one-letter-code
+	    ({a,b,c,g,h,k,m,n,r,s,t,u,w,y}), upper or lower case; all other
+	    characters are ignored during input.
+	    Multiple sequence input is accepted in  <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#FASTA">FASTA</A>  format (sequences separated by
+	    identifier lines of the form &#147;>SQ;name_of_sequence
+	    comments&#148;) or in  <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#GENBANK">GenBank</A>  format.</H3><P>
+
+<I>Paste your genomic DNA sequence here:</I><BR><TEXTAREA NAME="-gdnap" ROWS=5 COLS=82></TEXTAREA><BR><I>... or upload your sequence file (specify file name):</I><BR><INPUT TYPE="file" NAME="gdnaf"  SIZE=60><BR><I>... or type in the GenBank accession number of your sequence:</I><BR><INPUT TYPE="text" NAME="acc"  SIZE=50><BR><A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#FORMAT">Select format</A>: <INPUT TYPE="radio" NAME="-l" VALUE="plain " CHECKED>plain <INPUT TYPE="radio" NAME="-l" VALUE="FASTA ">FASTA <INPUT TYPE="radio" NAME="-l" VALUE="GenBank">GenBank<BR>
+
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SNAME">Sequence name</A>: <INPUT TYPE="text" NAME="-f"  SIZE=30> (optional, used in <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#PLAIN">plain sequence format</A> only)<BR>
+
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#FROMTO">From position</A>: <INPUT TYPE="text" NAME="-a"  SIZE=10>
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#FROMTO">to position</A>: <INPUT TYPE="text" NAME="-b"  SIZE=10>
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#STRAND">Strand</A>: <INPUT TYPE="radio" NAME="-r" VALUE="original " CHECKED>original <INPUT TYPE="radio" NAME="-r" VALUE="reverse ">reverse <INPUT TYPE="radio" NAME="-r" VALUE="both">both<P>
+
+<A HREF="#SUBMITNOW"><H2>Scroll down to "submit" button</H2></A>
+
+<P>&nbsp;<P><H3>Parameters:</H3><P>
+
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SPECIES">Species</A> <SELECT NAME="-s">
+<OPTION SELECTED VALUE="human">human
+<OPTION  VALUE="mouse">mouse
+<OPTION  VALUE="rat">rat
+<OPTION  VALUE="chicken">chicken
+<OPTION  VALUE="Drosophila">Drosophila
+<OPTION  VALUE="nematode">nematode
+<OPTION  VALUE="yeast">yeast
+<OPTION  VALUE="Aspergillus">Aspergillus
+<OPTION  VALUE="Arabidopsis">Arabidopsis
+<OPTION  VALUE="maize">maize
+<OPTION  VALUE="rice">rice
+<OPTION  VALUE="Medicago">Medicago
+<OPTION  VALUE="generic">generic
+</SELECT>
+ <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#CUTOFF">Cutoff</A> <SELECT NAME="-c">
+<OPTION  VALUE="12.0">12.0
+<OPTION  VALUE="9.0">9.0
+<OPTION  VALUE="6.0">6.0
+<OPTION SELECTED VALUE="3.0">3.0
+<OPTION  VALUE="0.0">0.0
+<OPTION  VALUE="-99.9">-99.9
+</SELECT>
+ <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#PRUNING">Local pruning</A> <SELECT NAME="-p">
+<OPTION SELECTED VALUE="on">on
+<OPTION  VALUE="off">off
+</SELECT>
+ <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#CANONICAL">Score non-canonical sites</A> <SELECT NAME="-U">
+<OPTION  VALUE="on">on
+<OPTION SELECTED VALUE="off">off
+</SELECT>
+<P>
+
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#ORDER">Order</A> sites by <INPUT TYPE="radio" NAME="-o" VALUE="position " CHECKED>position <INPUT TYPE="radio" NAME="-o" VALUE="P-value ">P-value <INPUT TYPE="radio" NAME="-o" VALUE="*-value">*-value<BR>
+
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SPLICEPREDICTOR">P-value</A> threshold: <SELECT NAME="-pval">
+<OPTION  VALUE="0.9">0.9
+<OPTION  VALUE="0.75">0.75
+<OPTION  VALUE="0.50">0.50
+<OPTION  VALUE="0.25">0.25
+<OPTION  VALUE="0">0
+<OPTION SELECTED VALUE="not set">not set
+</SELECT>
+ (overrides Cutoff option)<BR><A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SVALUE">*-value</A> threshold: <SELECT NAME="-sval">
+<OPTION  VALUE="14 (highly likely sites)">14 (highly likely sites)
+<OPTION  VALUE="11 (likely sites)">11 (likely sites)
+<OPTION  VALUE="8 (possible sites)">8 (possible sites)
+<OPTION  VALUE="5 (uncertain sites)">5 (uncertain sites)
+<OPTION  VALUE="3 (all sites)">3 (all sites)
+<OPTION SELECTED VALUE="not set">not set
+</SELECT>
+ (restricts Cutoff and P-value threshold options)<BR>
+
+<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#DISPLAY">Display highest scoring sites only</A>. Set to: <SELECT NAME="-n">
+<OPTION  VALUE="4 highest scoring sites">4 highest scoring sites
+<OPTION  VALUE="10 highest scoring sites">10 highest scoring sites
+<OPTION  VALUE="20 highest scoring sites">20 highest scoring sites
+<OPTION  VALUE="50 highest scoring sites">50 highest scoring sites
+<OPTION  VALUE="100 highest scoring sites">100 highest scoring sites
+<OPTION  VALUE="all sites">all sites
+<OPTION SELECTED VALUE="not set">not set
+</SELECT>
+(you must select ordering by <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SPLICEPREDICTOR">P-value</A> or <A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SVALUE">*-value</A> above)
+
+<P>
+
+<A HREF="#SUBMITNOW"><H2>Scroll down to "submit" button</H2></A><P>
+
+&nbsp;<P><H3><A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#SALGNM">Spliced Alignment:</A> <P> The output will show an optimal threading of a cDNA/EST or protein
+	    sequence into the genomic DNA by aligning putative exons only and
+	    displaying putative introns as (long) gaps in the cDNA/EST or
+	    protein target.</H3><P><H3>Current limitations when using this option:
+	    genomic DNA <= 15,000 nucleotides, cDNA/EST <= 8,000 nucleotides,
+	    protein targets <= 3,000 amino acids.</H3><P><I>Paste your cDNA/EST sequence(s) here (<A HREF="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html#FORMAT">
+	   FASTA format</A> ):</I><BR><TEXTAREA NAME="-estp" ROWS=5 COLS=82></TEXTAREA><BR><I>... and/or upload your cDNA/EST sequence file (specify file
+           name):</I><BR>
+<INPUT TYPE="file" NAME="-e"  SIZE=60><BR>Strand to align: <INPUT TYPE="radio" NAME="-es" VALUE="+ strand only " CHECKED>+ strand only <INPUT TYPE="radio" NAME="-es" VALUE="both + and - strand">both + and - strand<P>
+
+<P>
+
+<A HREF="#SUBMITNOW"><H2>Scroll down to "submit" button</H2></A>
+
+&nbsp;<P><I>Paste your target protein sequence(s) here:</I><BR><TEXTAREA NAME="-trgpp" ROWS=5 COLS=82></TEXTAREA><BR><I>... and/or upload your target protein sequence file (specify file
+	   name):</I><BR>
+<INPUT TYPE="file" NAME="-q"  SIZE=60><P>
+
+&nbsp;<P><H3>Submit job:</H3><P>
+
+Select "Submit" to send the job to the server. By default,
+	 output will be posted to your browser. You may select to have the
+	 ouput sent to you by email instead. Selection of this option is
+	 advised in the rare case that output posting is slow due to server
+	 overload.<P><A NAME="SUBMITNOW"></A><INPUT TYPE="checkbox" NAME="Click" VALUE="on">Click
+ here to send the output to this email address: <INPUT TYPE="text" NAME="email"  SIZE=25><P>
+
+<INPUT TYPE="submit" NAME=".submit" VALUE="Submit"><INPUT TYPE="reset">
+
+&nbsp; &nbsp; &nbsp;<B>Is it taking too long? Then,  <A HREF="http://bioinformatics.iastate.edu/cgi-bin/watch-sp.cgi?ufname=4939_1458&rrate=60">watch</A>  your output in progress ... (you may have to click your browser's Stop function first)</B><INPUT TYPE="hidden" NAME=".cgifields" VALUE="-l"><INPUT TYPE="hidden" NAME=".cgifields" VALUE="-o"><INPUT TYPE="hidden" NAME=".cgifields" VALUE="-es"><INPUT TYPE="hidden" NAME=".cgifields" VALUE="Click"><INPUT TYPE="hidden" NAME=".cgifields" VALUE="-r"></FORM>
+
+<HR><P><body bgcolor=white text=black link=blue><center>
+<table width=595 cellpadding=0 cellspacing=0>
+
+<tr>
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="//bioinformatics.iastate.edu/" title="Bioinformatics & Computational Biology at Iowa State University"><font color="white">
+BCB @ ISU</font></a>
+</font></td>
+
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000"><font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/" title="ISU Bioinformatics 2 Go"><font color=white>
+Bioinformatics 2 Go</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/download.html" title="Download SplicePredictor"><font color=white>
+Download</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 height=20 valign=middle align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/help.html" title="SplicePredictor Help"><font color=white>
+Help</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 valign=middle height=20 align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/tutorial.html" title="SplicePredictor Tutorial"><font color=white>
+Tutorial</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td valign=middle width=84 height=20 align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/references.html" title="SplicePredictor References"><font color=white>
+References</font>
+</a></font></td>
+
+<td width=1 height=20></td>
+<td width=84 valign=middle height=20 align=center bgcolor="#000000">
+<font face="Verdana,Arial" style="font-size:10px">
+<a href="http://bioinformatics.iastate.edu/bioinformatics2go/sp/contact.html" title="Contact information"><font color=white>
+Contact</font>
+</a></font></td>
+
+</tr>
+</table>
+</center>
+</body>
+</html>

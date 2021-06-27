@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>POLYVIEW protein structure visualization server</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="author" content="A. Porollo, J. Meller">
+  <meta name="keywords" 
+        content="protein visualization,
+                 protein structure visualization,
+                 protein sequence annotation,
+                 protein sequence profile,
+                 protein secondary structure,
+                 relative solvent accessibility,
+                 protein interface idendification,
+                 molecular visualization">
+  <meta name="description" content="POLYVIEW is a protein structure annotation and visualization server.">
+
+  <link href="design.css" rel="stylesheet" type="text/css" media="screen,print" />
+</head>
+
+<script type="text/javascript">
+function ArbitraryInput() {
+  var str_link = document.getElementById('AIlink').innerHTML;
+  var action = (str_link.search(/show/i) >= 0) ? 1 : 0;
+  str_link = (action) ?
+             str_link.replace(/show/i, 'Hide') :
+             str_link.replace(/hide/i, 'Show');
+  document.getElementById('AIlink').innerHTML = str_link;
+  document.getElementById('ArbitInput').innerHTML = (action) ?
+    document.getElementById('ArbitInputTxt').innerHTML : '';
+}
+
+function ShowSettings(sender) {
+    var el_sender = document.getElementById(sender);
+    var div_name = 'div' + sender.substr(2);
+    var div_obj = document.getElementById(div_name);
+    if (div_obj)
+        if (el_sender.innerHTML.indexOf('Hide') >= 0) {
+            div_obj.style.display = 'none';
+       el_sender.innerHTML = 'Show options';
+   }
+        else {
+            div_obj.style.display = 'block';
+       el_sender.innerHTML = 'Hide options';
+   }
+}
+
+var win_data = null;
+function DataLookupOnClick() {
+    // close already opened window
+    if (win_data && win_data.open && !win_data.closed) {
+        win_data.close();
+        win_data = null;
+    }
+
+    var form = document.VisualForm;
+    // escape keywords
+    var keywords = escape(form.PDBkeywords.value);
+    if (keywords.length == 0) {
+        alert('No keywords specified!');
+        return;
+    }
+    // create a new window
+    win_data = window.open("", "POLYVIEW_PDBdata", "width=500,height=600,resizable=yes,status=no,toolbar=no,scrollbars=yes,menubar=no,titlebar=yes,left=10,top=10,screenX=10,screenY=10");
+    win_data.creator = self;
+    win_data.location.href = '/cgi-bin/get_pdb_data.cgi?Info=search\&Keywords=' + keywords;
+    win_data.focus();
+}
+
+function validateEntry() {
+  if (document.VisualForm.aaSeq != undefined)
+    document.VisualForm.aaSeq.value =   
+      document.VisualForm.aaSeq.value.replace(/[\n\r\s\t]/g, '');
+  if (document.VisualForm.ssSeq != undefined)
+    document.VisualForm.ssSeq.value = 
+      document.VisualForm.ssSeq.value.replace(/[\n\r\s\t]/g, '');
+  if (document.VisualForm.confSeq != undefined)
+    document.VisualForm.confSeq.value = 
+      document.VisualForm.confSeq.value.replace(/[\n\r\s\t]/g, '');
+  if (document.VisualForm.seaSeq != undefined)
+    document.VisualForm.seaSeq.value = 
+      document.VisualForm.seaSeq.value.replace(/[\n\r\s\t]/g, '');
+  if (document.VisualForm.seaConfSeq != undefined)
+    document.VisualForm.seaConfSeq.value = 
+      document.VisualForm.seaConfSeq.value.replace(/[\n\r\s\t]/g, '');
+  if (document.VisualForm.arbitSeq != undefined)
+    document.VisualForm.arbitSeq.value = 
+      document.VisualForm.arbitSeq.value.replace(/[\n\r\t]/g, '');
+
+  var query = 0;
+  if (document.VisualForm.PDBName.value.length == 4 ||
+      document.VisualForm.PDBFileName.value.length) query = 1;
+  if (document.VisualForm.FName.value.length ||
+      document.VisualForm.SABLE_FileName.value.length ||
+      document.VisualForm.CASP_FileName.value.length) query = query | 2;
+  if (document.VisualForm.aaSeq != undefined &&
+      document.VisualForm.aaSeq.value.length) query = query | 4;
+
+  if (!query) {
+    alert("No amino acid sequence specified!");
+    return false;
+  }
+
+  if (query & 4 &&
+      !document.VisualForm.ssSeq.value.length &&
+      !document.VisualForm.seaSeq.value.length &&
+      !document.VisualForm.arbitSeq.value.length) {
+    alert("No secondary structure or\nrelative solvent accessibility or\narbitrary sequence profile specified!");
+    return false;
+  }
+  if (query & 4 &&
+      document.VisualForm.ssSeq.value.length &&
+      document.VisualForm.ssSeq.value.length != document.VisualForm.aaSeq.value.length) {
+    alert("Amino acid sequence and secondary structure\nare inconsistent in length!");
+    return false;
+  }
+  if (query & 4 &&
+      document.VisualForm.confSeq.value.length &&
+      document.VisualForm.confSeq.value.length != document.VisualForm.aaSeq.value.length) {
+    alert("Amino acid sequence and SS prediction confidence\nare inconsistent in length!");
+    return false;
+  }
+  if (query & 4 &&
+      document.VisualForm.seaSeq.value.length &&
+      document.VisualForm.seaSeq.value.length != document.VisualForm.aaSeq.value.length)
+  {
+    alert("Amino acid sequence and solvent accessibility\nare inconsistent in length!");
+    return false;
+  }
+  if (query & 4 &&
+      document.VisualForm.seaConfSeq.value.length &&
+      document.VisualForm.seaConfSeq.value.length != document.VisualForm.aaSeq.value.length) {
+    alert("Amino acid sequence and RSA prediction confidence\nare inconsistent in length!");
+    return false;
+  }
+  if (query & 4 &&
+      document.VisualForm.arbitSeq.value.length &&
+      document.VisualForm.arbitSeq.value.length != document.VisualForm.aaSeq.value.length) {
+    alert("Amino acid sequence and arbitrary 1D profile\nare inconsistent in length!");
+    return false;
+  }
+
+  return true;
+}
+
+function UpdateSidebarInfo(id) {
+    var fr = document.getElementById(id);
+    fr.src = fr.src;
+}
+
+function DocInit() {
+    GetParameters();
+    UpdateSidebarInfo('ifLastRequest');
+    UpdateSidebarInfo('ifLastUpdate');
+}
+
+function GetParameters() {
+    var form = document.VisualForm;
+    var url = window.location.search.substring(1);
+    var param = url.split('&');
+    for (var i=0; i<param.length; i++) {
+        var pos = param[i].indexOf('=');
+        if (pos > 0) {
+            var key = param[i].substring(0, pos);
+            var value = unescape(param[i].substring(pos + 1));
+            if (key == 'PDBName' && value.length == 4)
+                form.PDBName.value = value;
+       }
+    }
+}
+
+function TrajOnClick() {
+    var form = document.VisualForm;
+    form.action =
+      (form.Trajectory.checked) ?
+        'http://polyview.cchmc.org/cgi-bin/pr_picture_conform.cgi' :
+        'http://polyview.cchmc.org/cgi-bin/pr_picture.cgi';
+}
+</script>
+                                   
+<body onload="DocInit()">
+<div class="noprint">
+<div id="logo">
+  <h1><a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/20/15/2460" target="_blank" title="Original publication">POLYVIEW-2D</a></h1>
+  <h2>
+    Protein structure annotation using sequence profiles
+  </h2>
+</div>                      
+<!-- CCHMC and UC logo at the top right corner -->
+<script type="text/javascript" src="http://sable.cchmc.org/logo.js"></script>
+<!-- posted news and updates regarding the server -->
+<script type="text/javascript" src="http://sable.cchmc.org/news.js"></script>
+
+<div id="menu">
+  <ul>
+    <li class="first"><a href="polyview_doc.html" accesskey="1" title="Documentation and protein sets" target="doc">Documentation</a></li>
+    <li><a href="http://sable.cchmc.org/cgi-bin/stat.cgi?SRC=POLYVIEW" accesskey="2" title="Usage: numbers and types of requests, geography of users" target="_blank">Statistics</a></li>
+    <li><a href="http://polyview.cchmc.org/gallery.html" title="User defined image gallery" target="_blank">Gallery</a></li>
+    <li><a href="http://sable.cchmc.org/acknowledge.html" accesskey="3" title="Acknowledgements to funding, hosting and other support" target="_blank">Credits</a></li>
+    <li><a href="javascript:ShowNews('POLYVIEW')" accesskey="4" title="Announcements, updates, news">News</a></li>
+    <li><a href="http://folding.cchmc.org" accesskey="5" title="Home site of our research group" target="_blank">About us</a></li>
+    <li><a href="http://sable.cchmc.org/cgi-bin/contact_page.cgi?Server=POLYVIEW" accesskey="6" title="Gateway to feedback" target="_blank">Contacts</a></li>
+    <li><a href="http://polyview.cchmc.org/polyview3d.html" title="POLYVIEW-3D: Protein structure annotation and visualization in 3D">P-3D</a></li>
+    <li><a href="http://polyview.cchmc.org/conform.html" title="POLYVIEW-MM: Analysis and visualization of the ensembles of molecular models">P-MM</a></li>
+  </ul>                          
+</div>
+
+<hr />
+<div id="banner" style="background: url(design/system/img05.png) no-repeat; height: 235px; margin-top: 8px">
+</div>
+
+<form name="VisualForm" method="post"
+      accept-charset="UTF-8" encTYPE="multipart/form-data"
+      action="http://polyview.cchmc.org/cgi-bin/pr_picture.cgi"
+      target="_blank" onsubmit="return validateEntry()">
+
+<!-- start page -->
+<div id="page_main">
+  <!-- start content -->
+  <div id="content">                               
+    <div class="post">
+      <div class="meta" title="Source of structural data: PDB deposited or custom coordinate file">
+        <div class="hide">
+          <a href="javascript:ShowSettings('cbStructureSource')" id="cbStructureSource" title="Toggle view of the settings below">Hide options</a>&nbsp;|&nbsp;<a href="javascript:{if (validateEntry()) document.VisualForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Structural Data in 3D Coordinates (<a class="help" href="http://polyview.cchmc.org/polyview_doc.html#InputPDB" target="doc">Help</a>)</div>
+      </div>
+
+      <div id="divStructureSource" style="display: block">
+      <table>
+      <tr>
+        <td>
+        <fieldset><legend><a href="http://www.rcsb.org/" title="Protein Data Bank - repository of 3D structures" target="_blank">PDB</a> deposited protein structure</legend>
+          <p>
+          <label title="4 letters ID, e.g. 1a4y">PDB ID
+          <input type="text" name="PDBName" value=""
+                 size="5" maxlength="4">
+          </label>
+          <label title="Available with PDB codes only" style="margin-right: 15px">considered as
+          <select name="BioUnit">
+            <option value="0">Asymmetric unit
+            <option value="1">Biological unit (PQS)
+          </select>
+          </label>
+          <i>Examples: 3ert, 1ttu, 1naq</i>
+          </p>
+          <p>
+          Get ID by keyword
+          <input type="text" name="PDBkeywords" value="" size="30"
+                 title="Enter keyword(s) to retrieve a list of PDB IDs">
+          <input type="button" name="btnPDBIDLookup" value="Find"
+                 title="Find protein structures available in PDB"
+                 onclick="DataLookupOnClick('search')">
+          </p>
+        </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <fieldset><legend>Custom structure in the <a href="http://www.wwpdb.org/docs.html" target="_blank">PDB format</a></legend>
+          <p>                                 
+          <label title="Specify a coordinate file">File
+            <input type="file" name="PDBFileName" size="40">
+          </label>
+          </p>
+        </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label title="Invoke a macromolecular motion analysis">
+          <input type="checkbox" name="Trajectory"
+                 onclick="TrajOnClick()"
+                 onchange="TrajOnClick()">
+          Given coordinate file represents a multi-model structure,
+          </label>
+          such as NMR (e.g., PDB ID 2kmv, 2kcj),
+	  morph
+          (<a href="http://polyview.cchmc.org/tutor/molmovdb.pdb"
+              target="_blank"
+              title="PDB file with MolMovDB morph">example</a>),
+          or low-frequency motion
+          (<a href="http://polyview.cchmc.org/tutor/ad-enm.pdb"
+              target="_blank"
+              title="PDB file with AD-ENM normal mode analysis">example</a>)
+        </td>
+      </tr>
+      </table>
+      </div>
+
+      <div class="meta" title="Source of prediction data: SABLE or CASP formatted file">
+        <div class="hide">
+          <a href="javascript:ShowSettings('cbStructurePrediction')" id="cbStructurePrediction" title="Toggle view of the settings below">Hide options</a>&nbsp;|&nbsp;<a href="javascript:{if (validateEntry()) document.VisualForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Structural Data from Predictions (<a class="help" href="http://polyview.cchmc.org/polyview_doc.html#InputSABLE" target="doc">Help</a>)</div>
+      </div>
+
+      <div id="divStructurePrediction" style="display: block">
+        <fieldset><legend><a href="http://sable.cchmc.org" target="_blank">SABLE</a> prediction</legend>
+          <p>
+            <label title="Reference number from the SABLE output">
+            <input type="text" name="FName" size="10">
+            Reference number from the link given in the SABLE email (<i>following the FName</i>)
+            </label>
+          </p>
+          <p>
+            <label>
+            File with the saved SABLE email message<br>
+            <input type="file" name="SABLE_FileName" size="50">
+            </label>
+          </p>
+        </fieldset>
+        <fieldset><legend><a href="http://predictioncenter.org/" target="_blank">CASP</a> prediction</legend>
+          <p>
+            <label>
+            File in the CASP format
+            (accepted formats:
+            <a class="help" href="http://predictioncenter.org/casp3/doc/casp3-format.html" title="Secondary structure" target="_blank">SS</a>,
+            <a class="help" href="http://polyview.cchmc.org/polyview_doc.html#InputSABLE" title="Solvent accessibility" target="doc">SA</a>,
+            <a class="help" href="http://predictioncenter.org/casp7/doc/casp7-format.html" title="Order-disorder regions" target="_blank">DR</a>,
+            <a class="help" href="http://predictioncenter.org/casp7/doc/casp7-format.html" title="Domain boundaries" target="_blank">DP</a>)<br>
+            <input type="file" name="CASP_FileName" size="50">
+            </label>
+          </p>
+          <i>Files in the CASP-<b>TS</b> format have to be submitted as PDB files in the section above</i>
+        </fieldset>
+      </div>
+
+      <div class="meta" title="Custom protein sequence profiles">
+        <div class="hide">
+          <a href="javascript:ShowSettings('cbStructureProfile')" id="cbStructureProfile" title="Toggle view of the settings below">Show options</a>&nbsp;|&nbsp;<a href="javascript:{if (validateEntry()) document.VisualForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Structural Data in Sequence Profiles (<a class="help" href="http://polyview.cchmc.org/polyview_doc.html#InputArbitrary" target="doc">Help</a>)</div>
+      </div>
+
+      <div id="divStructureProfile" style="display: none">
+        <p>
+          <label>
+          Sequence name
+          <input type="text" name="seqName" style="width: 400px">
+          </label>
+        </p>
+        <p>
+          <label>Amino acid sequence (<i>using one letter codes</i>)<br>
+          <textarea name="aaSeq" rows="4" style="width: 500px"></textarea>
+          </label>
+        </p>
+        <p>
+          <b>AND at least one</b> of the following profiles:<br>
+          <label>Secondary structure (SS) (<i>using H, E, C codes</i>)<br>
+          <textarea name="ssSeq" rows="4" style="width: 500px"></textarea>
+          </label>
+        </p>
+        <p>
+          <label>Confidence level of the SS prediction (<i>0-low confidence, 9-highly confident</i>)<br>
+          <textarea name="confSeq" rows="4" style="width: 500px"></textarea>
+          </label>
+        </p>
+        <p>
+          <label>Relative solvent accessibility (RSA) (<i>0-completely buried, 9-fully exposed</i>)<br> 
+          <textarea name="seaSeq" rows="4" style="width: 500px"></textarea>
+          </label>
+        </p>
+        <p>
+          <label>Confidence level of the RSA prediction (<i>0-low confidence, 9-highly confident</i>)<br>
+          <textarea name="seaConfSeq" rows="4" style="width: 500px"></textarea>
+          </label>
+        </p>
+        <p>
+          <label>Arbitrary sequence profile
+          <textarea name="arbitSeq" rows="4" style="width: 500px"></textarea>
+          </label>
+        </p>
+      </div>
+
+      <p>
+      <input type="Submit" value="Submit">
+      <input type="Reset" value="Reset">
+      </p>
+
+    </div>
+  </div>
+  <!-- end content -->
+  <!-- start sidebar -->
+  <div id="sidebar">
+    <ul>
+    <li>
+      <h2>Last request</h2>
+      <iframe id="ifLastRequest"
+              src="http://sable.cchmc.org/cgi-bin/get_server_info.cgi?Info=request&Server=POLYVIEW"
+              style="width: 230px; height: 280px; border: 0; margin-left: 10px"
+	      frameborder="no" scrolling="no"></iframe>
+      <a style="float: right" href="javascript:UpdateSidebarInfo('ifLastRequest')">Refresh</a>
+    </li>
+    <li>
+      <h2>Last update</h2>
+      <iframe id="ifLastUpdate"
+              src="http://sable.cchmc.org/cgi-bin/get_server_info.cgi?Info=update&Server=POLYVIEW"
+              style="width: 230px; height: 250px; border: 0; margin-left: 10px" frameborder="no"></iframe>
+      <a style="float: right" href="javascript:ShowNews('POLYVIEW')">More news</a>
+    </li>
+    <li>
+      <h2>Geography of users</h2>
+      <p style="text-align: center; margin: 0 auto 0 auto">
+        <a href="http://www2.clustrmaps.com/counter/maps.php?url=http://polyview.cchmc.org"
+           id="clustrMapsLink" target="_blank">
+        <img src="http://www2.clustrmaps.com/counter/index2.php?url=http://polyview.cchmc.org"
+             style="border:0px solid"
+             alt="Locations of visitors to this page"
+             title="Locations of visitors to this page" id="clustrMapsImg"
+             onError="this.onError=null; this.src='http://clustrmaps.com/images/clustrmaps-back-soon.jpg';
+                      document.getElementById('clustrMapsLink').href='http://clustrmaps.com'" />
+        </a>
+      </p>
+    </li>
+    </ul>
+  </div>
+  <!-- end sidebar -->
+  <div style="clear: both;">&nbsp;</div>
+  </div>
+<!-- end page -->
+</form>
+</div> <!-- no print -->
+
+<div class="print">
+<div id="logo" style="margin-top: 100px">
+  <h1>POLYVIEW-2D</h1>
+  <h2>
+    Protein structure annotation using sequence profiles
+  </h2>
+</div>                      
+<!-- CCHMC and UC logo at the top right corner -->
+<script type="text/javascript" src="http://sable.cchmc.org/logo.js"></script>
+<!-- POLYVIEW logo -->
+<div id="banner">
+  <img src="design/system/img05.png" alt="POLYVIEW-2D banner">
+</div>
+</div> <!-- print -->
+
+<div id="footer">
+<table style="width: 100%">
+<tr>
+  <td>
+  <p class="legal">
+    <script type="text/javascript" src="http://sable.cchmc.org/footer.js"></script>
+  </p>
+  </td>
+  <td style="text-align: right">
+  <p class="credit">
+    Developed by<br>
+    <a href="http://sable.cchmc.org/design/aleksey.jpg" target="_blank">A. Porollo</a><br>
+    <a href="http://sable.cchmc.org/design/rafal.jpg" target="_blank">R. Adamczak</a><br>
+    <a href="http://sable.cchmc.org/design/jarek.jpg" target="_blank">J. Meller</a>
+  </p>
+  </td>
+</tr>
+</table>
+</div>
+</body>
+</html>
+

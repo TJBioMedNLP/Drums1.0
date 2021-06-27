@@ -1,0 +1,2426 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<HTML>
+
+<HEAD>
+
+<link rel="stylesheet" type="text/css" href="/CMR/CSS/cmr_page.css">
+<link rel="stylesheet" type="text/css" href="/CMR/CSS/cmr_header.css">	
+<link rel="stylesheet" type="text/css" href="/CMR/CSS/menu_styles.css">
+
+<!--[if IE 7]>
+
+<style>
+
+UL#nav LI:hover UL {
+	DISPLAY: block; 
+	BACKGROUND: url("") no-repeat;
+	WIDTH: 160px;
+	LEFT: -120px;
+	POSITION: absolute;
+	padding: 0 0 0 0px;;
+	TEXT-ALIGN: left;
+}
+
+UL#nav LI:hover UL LI UL {
+	DISPLAY: none; 
+	LEFT: -200px;
+	POSITION: absolute; 
+	TOP: -1px;
+}
+
+UL#nav LI:hover UL LI UL LI UL {
+	DISPLAY: none !important; 
+	LEFT : -200px;  
+	POSITION: absolute; 
+	TOP: -1px;
+	list-style: none;
+}
+
+
+div#tab_position{
+	position: absolute; 
+	top: 34px; 
+	right:0; 
+	z-index: 1000
+}
+
+UL#nav_org LI:hover UL {
+	DISPLAY: block; 
+	WIDTH: 158px;
+	LEFT: -130px; 
+	POSITION: absolute;
+	padding: 0 0 0 0px;
+	TEXT-ALIGN: left;
+}
+
+UL#nav_org LI:hover UL LI UL {
+	DISPLAY: none; 
+	LEFT: -199px; 
+	POSITION: absolute;
+	TOP: -1px;
+}
+
+UL#nav_org LI:hover UL LI:hover UL LI UL {
+	DISPLAY: none; 
+	LEFT: -199px; 
+	POSITION: absolute;
+	TOP: -1px;
+}
+
+UL#nav_org LI:hover UL LI:hover UL LI:hover UL LI UL {
+	DISPLAY: none; 
+	LEFT : -199px; 
+	POSITION: absolute;
+	TOP: -1px;
+}
+
+UL#nav_org LI:hover UL LI:hover UL LI:hover {
+	BACKGROUND-COLOR: #ffffff !important; 
+}
+
+UL#nav_org LI:hover UL LI:hover UL LI:hover UL LI:hover {
+	BACKGROUND-COLOR: #ffffff !important; 
+}
+
+</style>
+
+<![endif]-->
+
+
+<!--[if lt IE 7]>
+
+<SCRIPT LANGUAGE=JAVASCRIPT >
+
+sfHover = function() {
+	// Find all unordered lists.
+	var ieNavs = document.getElementsByTagName('ul');
+
+	for(i=0; i<ieNavs.length; i++) {
+		var ul = ieNavs[i];
+		// If they have a class of nav add the menu hover.
+		if(ul.className == "nav"){
+			setHover(ul);
+		}
+	}
+}
+
+function setHover(nav) {
+	var ieULs = nav.getElementsByTagName('ul');
+	if (navigator.appVersion.substr(22,3)!="5.0") {
+		// IE script to cover <select> elements with <iframe>s
+		for (j=0; j<ieULs.length; j++) {
+			var ieMat=document.createElement('iframe');
+			if(document.location.protocol == "https:")
+				ieMat.src="//0";
+			else if(window.opera != "undefined")
+				ieMat.src="";
+			else
+				ieMat.src="javascript:false";
+			ieMat.scrolling="no";
+			ieMat.frameBorder="0";
+			ieMat.style.width=ieULs[j].offsetWidth+"px";
+			ieMat.style.height=ieULs[j].offsetHeight+"px";
+			ieMat.style.zIndex="-1";
+			ieULs[j].insertBefore(ieMat, ieULs[j].childNodes[0]);
+			ieULs[j].style.zIndex="101";
+		}
+		// IE script to change class on mouseover
+		var ieLIs = nav.getElementsByTagName('li');
+		for (var i=0; i<ieLIs.length; i++) if (ieLIs[i]) {
+			// Does this LI have children? If so add a sfnode class.
+			if (ieLIs[i].getElementsByTagName("UL").length>0){
+				ieLIs[i].className+=" sfnode";
+			}
+			
+			// Add a sfhover class to the li.
+			ieLIs[i].onmouseover=function() {this.className+=" sfhover";}
+			ieLIs[i].onmouseout=function() {this.className=this.className.replace(' sfhover', '');}
+		}
+		
+
+	} else {
+		// IE 5.0 doesn't support iframes so hide the select statements on hover and show on mouse out.
+		// IE script to change class on mouseover
+		var ieLIs = document.getElementById('nav').getElementsByTagName('li');
+		for (var i=0; i<ieLIs.length; i++) if (ieLIs[i]) {
+			ieLIs[i].onmouseover=function() {this.className+=" sfhover";hideSelects();}
+			ieLIs[i].onmouseout=function() {this.className=this.className.replace(' sfhover', '');showSelects()}
+		}
+	}
+}
+
+// If IE 5.0 hide and show the select statements.
+
+function hideSelects(){
+	var oSelects=document.getElementsByTagName("select");
+	for(var i=0;i<oSelects.length;i++)
+		oSelects[i].className+=" hide";
+}
+
+function showSelects(){
+	var oSelects=document.getElementsByTagName("select");
+	for(var i=0;i<oSelects.length;i++)
+		oSelects[i].className=oSelects[i].className.replace(" hide","");
+}
+
+// Run this only for IE.
+if (window.attachEvent) window.attachEvent('onload', sfHover);
+// end
+
+</script><![endif]-->
+
+
+<SCRIPT LANGUAGE=JAVASCRIPT 1.2>
+
+         var store = new Array();
+ var org_id_array = new Array();
+ var open_id_array = new Array();
+
+
+function test_onload(){
+
+  var id1 ="";
+  var id2 ="";
+  var id3 ="";
+  var id4 ="";
+  
+
+
+}
+
+function hideShow2(ident) {
+    if (document.getElementById(ident).style.display=='none') {
+    	document.getElementById(ident).style.display='';
+	document.images["i" + ident].src = "/CMR/images/minus.png";
+    } 
+
+   
+}
+
+function hideShow3(ident) {
+
+   document.getElementById(ident).style.display ='none'
+   document.images["i" + ident].src = "/CMR/images/plus.png";		
+    
+   
+}
+
+function closeTheOpenNodes(the_form){
+
+	for(var g in open_id_array){
+		
+                hideShow3(open_id_array[g]);
+	
+	}
+
+
+	
+}
+
+
+
+
+function search_and_select_tree(the_form){
+
+
+	closeTheOpenNodes(the_form);
+	
+	var search_str = the_form.test.value;
+	var rank2 = "";
+	var count =0;
+
+	var rank2_array = new Array();
+	
+	search_str = search_str.toLowerCase();
+	
+	
+	var new_html = "";
+	var prev_rank = "";
+	var first_time =1;
+	
+
+
+	var element_count = 0;
+	for(var i in rank2_array){
+
+
+		for(var j in store[rank2_array[i]]){
+		    //alert(store[rank2_array[i]][j]);
+	            if(j == 0){
+		    }else{
+
+		 	element_count++;
+		    }
+		    hideShow2(store[rank2_array[i]][j]);
+
+		}
+	}
+
+
+
+}
+
+        
+	browser_name = navigator.appName;
+	browser_version = parseFloat(navigator.appVersion); 
+	
+        function openWindow(url, new_window_name) { 
+    	
+	   //alert (url);
+	   //alert (new_window_name);
+	   //alert (window.name);
+
+           //if we are on the Gene Page do not rename the window.name!!
+           if (window.name != "bottom_panel") {
+              window.name = "main";
+           }
+
+           if (!(new_window_name)) {
+              new_window_name = "new_window";
+           }
+
+    	   win=window.open(url,new_window_name,'width=600,height=400,menubar,toolbar,resizable,scrollbars');
+        }
+
+        function openSmallWindow(url, new_window_name) { 
+ 
+	   //alert (url);
+	   //alert (new_window_name);
+	   //alert (window.name);
+
+           //if we are on the Gene Page do not rename the window.name!!
+           if (window.name != "bottom_panel") {
+              window.name = "main";
+           }
+
+           if (!(new_window_name)) {
+              new_window_name = "new_window";
+           }
+
+    	   win=window.open(url,new_window_name,'width=450,height=200,resizable,scrollbars');
+        }
+
+        function openBelvuWindow(url) { 
+ 
+           new_window_name = "belvu";
+
+	   //alert (url);
+	   //alert (new_window_name);
+	   //alert (window.name);
+
+    	   win=window.open(url,new_window_name,'width=450,height=200,resizable,scrollbars');
+
+           //want to close the other window when the Belvu window is opened
+
+	   setTimeout("win.close()",1000);
+
+        }
+
+ 
+
+
+	
+
+	
+
+	
+
+	
+	
+	
+
+if (typeof ol_fgcolor=='undefined') var ol_fgcolor="#FFFFFF";
+if (typeof ol_bgcolor=='undefined') var ol_bgcolor="#003366";
+if (typeof ol_textcolor=='undefined') var ol_textcolor="#003366";
+if (typeof ol_capcolor=='undefined') var ol_capcolor="#FFFFFF";
+
+
+//\/////
+//\  overLIB 4.17 - You may not remove or change this notice.
+//\  Copyright Erik Bosrup 1998-2004. All rights reserved.
+//\
+//\  Contributors are listed on the homepage.
+//\  This file might be old, always check for the latest version at:
+//\  http://www.bosrup.com/web/overlib/
+//\
+//\  Please read the license agreement (available through the link above)
+//\  before using overLIB. Direct any licensing questions to erik@bosrup.com.
+//\
+//\  Do not sell this as your own work or remove this copyright notice. 
+//\  For full details on copying or changing this script please read the
+//\  license agreement at the link above. Please give credit on sites that
+//\  use overLIB and submit changes of the script so other people can use
+//\  them as well.
+//   $Revision: 1.1 $                $Date: 2006/03/21 14:26:30 $
+//\/////
+//\mini
+
+////////
+// PRE-INIT
+// Ignore these lines, configuration is below.
+////////
+var olLoaded = 0;var pmStart = 10000000; var pmUpper = 10001000; var pmCount = pmStart+1; var pmt=''; var pms = new Array(); var olInfo = new Info('4.17', 1);
+var FREPLACE = 0; var FBEFORE = 1; var FAFTER = 2; var FALTERNATE = 3; var FCHAIN=4;
+var olHideForm=0;  // parameter for hiding SELECT and ActiveX elements in IE5.5+ 
+var olHautoFlag = 0;  // flags for over-riding VAUTO and HAUTO if corresponding
+var olVautoFlag = 0;  // positioning commands are used on the command line
+registerCommands('donothing,inarray,caparray,sticky,background,noclose,caption,left,right,center,offsetx,offsety,fgcolor,bgcolor,textcolor,capcolor,closecolor,width,border,cellpad,status,autostatus,autostatuscap,height,closetext,snapx,snapy,fixx,fixy,relx,rely,fgbackground,bgbackground,padx,pady,fullhtml,above,below,capicon,textfont,captionfont,closefont,textsize,captionsize,closesize,timeout,function,delay,hauto,vauto,closeclick,wrap,followmouse,mouseoff,closetitle,cssoff,compatmode,cssclass,fgclass,bgclass,textfontclass,captionfontclass,closefontclass');
+
+////////
+// DEFAULT CONFIGURATION
+// Settings you want everywhere are set here. All of this can also be
+// changed on your html page or through an overLIB call.
+////////
+if (typeof ol_fgcolor=='undefined') var ol_fgcolor="#CCCCFF";
+if (typeof ol_bgcolor=='undefined') var ol_bgcolor="#333399";
+if (typeof ol_textcolor=='undefined') var ol_textcolor="#000000";
+if (typeof ol_capcolor=='undefined') var ol_capcolor="#FFFFFF";
+if (typeof ol_closecolor=='undefined') var ol_closecolor="#9999FF";
+if (typeof ol_textfont=='undefined') var ol_textfont="Verdana,Arial,Helvetica";
+if (typeof ol_captionfont=='undefined') var ol_captionfont="Verdana,Arial,Helvetica";
+if (typeof ol_closefont=='undefined') var ol_closefont="Verdana,Arial,Helvetica";
+if (typeof ol_textsize=='undefined') var ol_textsize="1";
+if (typeof ol_captionsize=='undefined') var ol_captionsize="1";
+if (typeof ol_closesize=='undefined') var ol_closesize="1";
+if (typeof ol_width=='undefined') var ol_width="200";
+if (typeof ol_border=='undefined') var ol_border="1";
+if (typeof ol_cellpad=='undefined') var ol_cellpad=2;
+if (typeof ol_offsetx=='undefined') var ol_offsetx=10;
+if (typeof ol_offsety=='undefined') var ol_offsety=10;
+if (typeof ol_text=='undefined') var ol_text="Default Text";
+if (typeof ol_cap=='undefined') var ol_cap="";
+if (typeof ol_sticky=='undefined') var ol_sticky=0;
+if (typeof ol_background=='undefined') var ol_background="";
+if (typeof ol_close=='undefined') var ol_close="Close";
+if (typeof ol_hpos=='undefined') var ol_hpos=RIGHT;
+if (typeof ol_status=='undefined') var ol_status="";
+if (typeof ol_autostatus=='undefined') var ol_autostatus=0;
+if (typeof ol_height=='undefined') var ol_height=-1;
+if (typeof ol_snapx=='undefined') var ol_snapx=0;
+if (typeof ol_snapy=='undefined') var ol_snapy=0;
+if (typeof ol_fixx=='undefined') var ol_fixx=-1;
+if (typeof ol_fixy=='undefined') var ol_fixy=-1;
+if (typeof ol_relx=='undefined') var ol_relx=null;
+if (typeof ol_rely=='undefined') var ol_rely=null;
+if (typeof ol_fgbackground=='undefined') var ol_fgbackground="";
+if (typeof ol_bgbackground=='undefined') var ol_bgbackground="";
+if (typeof ol_padxl=='undefined') var ol_padxl=1;
+if (typeof ol_padxr=='undefined') var ol_padxr=1;
+if (typeof ol_padyt=='undefined') var ol_padyt=1;
+if (typeof ol_padyb=='undefined') var ol_padyb=1;
+if (typeof ol_fullhtml=='undefined') var ol_fullhtml=0;
+if (typeof ol_vpos=='undefined') var ol_vpos=BELOW;
+if (typeof ol_aboveheight=='undefined') var ol_aboveheight=0;
+if (typeof ol_capicon=='undefined') var ol_capicon="";
+if (typeof ol_frame=='undefined') var ol_frame=self;
+if (typeof ol_timeout=='undefined') var ol_timeout=0;
+if (typeof ol_function=='undefined') var ol_function=null;
+if (typeof ol_delay=='undefined') var ol_delay=0;
+if (typeof ol_hauto=='undefined') var ol_hauto=0;
+if (typeof ol_vauto=='undefined') var ol_vauto=0;
+if (typeof ol_closeclick=='undefined') var ol_closeclick=0;
+if (typeof ol_wrap=='undefined') var ol_wrap=0;
+if (typeof ol_followmouse=='undefined') var ol_followmouse=1;
+if (typeof ol_mouseoff=='undefined') var ol_mouseoff=0;
+if (typeof ol_closetitle=='undefined') var ol_closetitle='Close';
+if (typeof ol_compatmode=='undefined') var ol_compatmode=0;
+if (typeof ol_css=='undefined') var ol_css=CSSOFF;
+if (typeof ol_fgclass=='undefined') var ol_fgclass="";
+if (typeof ol_bgclass=='undefined') var ol_bgclass="";
+if (typeof ol_textfontclass=='undefined') var ol_textfontclass="";
+if (typeof ol_captionfontclass=='undefined') var ol_captionfontclass="";
+if (typeof ol_closefontclass=='undefined') var ol_closefontclass="";
+
+////////
+// ARRAY CONFIGURATION
+////////
+
+// You can use these arrays to store popup text here instead of in the html.
+if (typeof ol_texts=='undefined') var ol_texts = new Array("Text 0", "Text 1");
+if (typeof ol_caps=='undefined') var ol_caps = new Array("Caption 0", "Caption 1");
+
+////////
+// END OF CONFIGURATION
+// Don't change anything below this line, all configuration is above.
+////////
+
+
+
+
+
+////////
+// INIT
+////////
+// Runtime variables init. Don't change for config!
+var o3_text="";
+var o3_cap="";
+var o3_sticky=0;
+var o3_background="";
+var o3_close="Close";
+var o3_hpos=RIGHT;
+var o3_offsetx=2;
+var o3_offsety=2;
+var o3_fgcolor="";
+var o3_bgcolor="";
+var o3_textcolor="";
+var o3_capcolor="";
+var o3_closecolor="";
+var o3_width=100;
+var o3_border=1;
+var o3_cellpad=2;
+var o3_status="";
+var o3_autostatus=0;
+var o3_height=-1;
+var o3_snapx=0;
+var o3_snapy=0;
+var o3_fixx=-1;
+var o3_fixy=-1;
+var o3_relx=null;
+var o3_rely=null;
+var o3_fgbackground="";
+var o3_bgbackground="";
+var o3_padxl=0;
+var o3_padxr=0;
+var o3_padyt=0;
+var o3_padyb=0;
+var o3_fullhtml=0;
+var o3_vpos=BELOW;
+var o3_aboveheight=0;
+var o3_capicon="";
+var o3_textfont="Verdana,Arial,Helvetica";
+var o3_captionfont="Verdana,Arial,Helvetica";
+var o3_closefont="Verdana,Arial,Helvetica";
+var o3_textsize="1";
+var o3_captionsize="1";
+var o3_closesize="1";
+var o3_frame=self;
+var o3_timeout=0;
+var o3_timerid=0;
+var o3_allowmove=0;
+var o3_function=null; 
+var o3_delay=0;
+var o3_delayid=0;
+var o3_hauto=0;
+var o3_vauto=0;
+var o3_closeclick=0;
+var o3_wrap=0;
+var o3_followmouse=1;
+var o3_mouseoff=0;
+var o3_closetitle='';
+var o3_compatmode=0;
+var o3_css=CSSOFF;
+var o3_fgclass="";
+var o3_bgclass="";
+var o3_textfontclass="";
+var o3_captionfontclass="";
+var o3_closefontclass="";
+
+// Display state variables
+var o3_x = 0;
+var o3_y = 0;
+var o3_showingsticky = 0;
+var o3_removecounter = 0;
+
+// Our layer
+var over = null;
+var fnRef, hoveringSwitch = false;
+var olHideDelay;
+
+// Decide browser version
+var isMac = (navigator.userAgent.indexOf("Mac") != -1);
+var olOp = (navigator.userAgent.toLowerCase().indexOf('opera') > -1 && document.createTextNode);  // Opera 7
+var olNs4 = (navigator.appName=='Netscape' && parseInt(navigator.appVersion) == 4);
+var olNs6 = (document.getElementById) ? true : false;
+var olKq = (olNs6 && /konqueror/i.test(navigator.userAgent));
+var olIe4 = (document.all) ? true : false;
+var olIe5 = false; 
+var olIe55 = false; // Added additional variable to identify IE5.5+
+var docRoot = 'document.body';
+
+// Resize fix for NS4.x to keep track of layer
+if (olNs4) {
+	var oW = window.innerWidth;
+	var oH = window.innerHeight;
+	window.onresize = function() { if (oW != window.innerWidth || oH != window.innerHeight) location.reload(); }
+}
+
+// Microsoft Stupidity Check(tm).
+if (olIe4) {
+	var agent = navigator.userAgent;
+	if (/MSIE/.test(agent)) {
+		var versNum = parseFloat(agent.match(/MSIE[ ](\d\.\d+)\.*/i)[1]);
+		if (versNum >= 5){
+			olIe5=true;
+			olIe55=(versNum>=5.5&&!olOp) ? true : false;
+			if (olNs6) olNs6=false;
+		}
+	}
+	if (olNs6) olIe4 = false;
+}
+
+// Check for compatability mode.
+if (document.compatMode && document.compatMode == 'CSS1Compat') {
+	docRoot= ((olIe4 && !olOp) ? 'document.documentElement' : docRoot);
+}
+
+// Add window onload handlers to indicate when all modules have been loaded
+// For Netscape 6+ and Mozilla, uses addEventListener method on the window object
+// For IE it uses the attachEvent method of the window object and for Netscape 4.x
+// it sets the window.onload handler to the OLonload_handler function for Bubbling
+if(window.addEventListener) window.addEventListener("load",OLonLoad_handler,false);
+else if (window.attachEvent) window.attachEvent("onload",OLonLoad_handler);
+
+// Capture events, alt. diffuses the overlib function.
+var olCheckMouseCapture = true;
+if ((olNs4 || olNs6 || olIe4)) {
+	olMouseCapture();
+} else {
+	overlib = no_overlib;
+	nd = no_overlib;
+	ver3fix = true;
+}
+
+
+////////
+// PUBLIC FUNCTIONS
+////////
+
+// overlib(arg0,...,argN)
+// Loads parameters into global runtime variables.
+function overlib() {
+	if (!olLoaded || isExclusive(overlib.arguments)) return true;
+	if (olCheckMouseCapture) olMouseCapture();
+	if (over) {
+		over = (typeof over.id != 'string') ? o3_frame.document.all['overDiv'] : over;
+		cClick();
+	}
+
+	// Load defaults to runtime.
+  olHideDelay=0;
+	o3_text=ol_text;
+	o3_cap=ol_cap;
+	o3_sticky=ol_sticky;
+	o3_background=ol_background;
+	o3_close=ol_close;
+	o3_hpos=ol_hpos;
+	o3_offsetx=ol_offsetx;
+	o3_offsety=ol_offsety;
+	o3_fgcolor=ol_fgcolor;
+	o3_bgcolor=ol_bgcolor;
+	o3_textcolor=ol_textcolor;
+	o3_capcolor=ol_capcolor;
+	o3_closecolor=ol_closecolor;
+	o3_width=ol_width;
+	o3_border=ol_border;
+	o3_cellpad=ol_cellpad;
+	o3_status=ol_status;
+	o3_autostatus=ol_autostatus;
+	o3_height=ol_height;
+	o3_snapx=ol_snapx;
+	o3_snapy=ol_snapy;
+	o3_fixx=ol_fixx;
+	o3_fixy=ol_fixy;
+	o3_relx=ol_relx;
+	o3_rely=ol_rely;
+	o3_fgbackground=ol_fgbackground;
+	o3_bgbackground=ol_bgbackground;
+	o3_padxl=ol_padxl;
+	o3_padxr=ol_padxr;
+	o3_padyt=ol_padyt;
+	o3_padyb=ol_padyb;
+	o3_fullhtml=ol_fullhtml;
+	o3_vpos=ol_vpos;
+	o3_aboveheight=ol_aboveheight;
+	o3_capicon=ol_capicon;
+	o3_textfont=ol_textfont;
+	o3_captionfont=ol_captionfont;
+	o3_closefont=ol_closefont;
+	o3_textsize=ol_textsize;
+	o3_captionsize=ol_captionsize;
+	o3_closesize=ol_closesize;
+	o3_timeout=ol_timeout;
+	o3_function=ol_function;
+	o3_delay=ol_delay;
+	o3_hauto=ol_hauto;
+	o3_vauto=ol_vauto;
+	o3_closeclick=ol_closeclick;
+	o3_wrap=ol_wrap;	
+	o3_followmouse=ol_followmouse;
+	o3_mouseoff=ol_mouseoff;
+	o3_closetitle=ol_closetitle;
+	o3_css=ol_css;
+	o3_compatmode=ol_compatmode;
+	o3_fgclass=ol_fgclass;
+	o3_bgclass=ol_bgclass;
+	o3_textfontclass=ol_textfontclass;
+	o3_captionfontclass=ol_captionfontclass;
+	o3_closefontclass=ol_closefontclass;
+	
+	setRunTimeVariables();
+	
+	fnRef = '';
+	
+	// Special for frame support, over must be reset...
+	o3_frame = ol_frame;
+	
+	if(!(over=createDivContainer())) return false;
+
+	parseTokens('o3_', overlib.arguments);
+	if (!postParseChecks()) return false;
+
+	if (o3_delay == 0) {
+		return runHook("olMain", FREPLACE);
+ 	} else {
+		o3_delayid = setTimeout("runHook('olMain', FREPLACE)", o3_delay);
+		return false;
+	}
+}
+
+// Clears popups if appropriate
+function nd(time) {
+	if (olLoaded && !isExclusive()) {
+		hideDelay(time);  // delay popup close if time specified
+
+		if (o3_removecounter >= 1) { o3_showingsticky = 0 };
+		
+		if (o3_showingsticky == 0) {
+			o3_allowmove = 0;
+			if (over != null && o3_timerid == 0) runHook("hideObject", FREPLACE, over);
+		} else {
+			o3_removecounter++;
+		}
+	}
+	
+	return true;
+}
+
+// The Close onMouseOver function for stickies
+function cClick() {
+	if (olLoaded) {
+		runHook("hideObject", FREPLACE, over);
+		o3_showingsticky = 0;	
+	}	
+	return false;
+}
+
+// Method for setting page specific defaults.
+function overlib_pagedefaults() {
+	parseTokens('ol_', overlib_pagedefaults.arguments);
+}
+
+
+////////
+// OVERLIB MAIN FUNCTION
+////////
+
+// This function decides what it is we want to display and how we want it done.
+function olMain() {
+	var layerhtml, styleType;
+ 	runHook("olMain", FBEFORE);
+ 	
+	if (o3_background!="" || o3_fullhtml) {
+		// Use background instead of box.
+		layerhtml = runHook('ol_content_background', FALTERNATE, o3_css, o3_text, o3_background, o3_fullhtml);
+	} else {
+		// They want a popup box.
+		styleType = (pms[o3_css-1-pmStart] == "cssoff" || pms[o3_css-1-pmStart] == "cssclass");
+
+		// Prepare popup background
+		if (o3_fgbackground != "") o3_fgbackground = "background=\""+o3_fgbackground+"\"";
+		if (o3_bgbackground != "") o3_bgbackground = (styleType ? "background=\""+o3_bgbackground+"\"" : o3_bgbackground);
+
+		// Prepare popup colors
+		if (o3_fgcolor != "") o3_fgcolor = (styleType ? "bgcolor=\""+o3_fgcolor+"\"" : o3_fgcolor);
+		if (o3_bgcolor != "") o3_bgcolor = (styleType ? "bgcolor=\""+o3_bgcolor+"\"" : o3_bgcolor);
+
+		// Prepare popup height
+		if (o3_height > 0) o3_height = (styleType ? "height=\""+o3_height+"\"" : o3_height);
+		else o3_height = "";
+
+		// Decide which kinda box.
+		if (o3_cap=="") {
+			// Plain
+			layerhtml = runHook('ol_content_simple', FALTERNATE, o3_css, o3_text);
+		} else {
+			// With caption
+			if (o3_sticky) {
+				// Show close text
+				layerhtml = runHook('ol_content_caption', FALTERNATE, o3_css, o3_text, o3_cap, o3_close);
+			} else {
+				// No close text
+				layerhtml = runHook('ol_content_caption', FALTERNATE, o3_css, o3_text, o3_cap, "");
+			}
+		}
+	}	
+
+	// We want it to stick!
+	if (o3_sticky) {
+		if (o3_timerid > 0) {
+			clearTimeout(o3_timerid);
+			o3_timerid = 0;
+		}
+		o3_showingsticky = 1;
+		o3_removecounter = 0;
+	}
+
+	// Created a separate routine to generate the popup to make it easier
+	// to implement a plugin capability
+	if (!runHook("createPopup", FREPLACE, layerhtml)) return false;
+
+	// Prepare status bar
+	if (o3_autostatus > 0) {
+		o3_status = o3_text;
+		if (o3_autostatus > 1) o3_status = o3_cap;
+	}
+
+	// When placing the layer the first time, even stickies may be moved.
+	o3_allowmove = 0;
+
+	// Initiate a timer for timeout
+	if (o3_timeout > 0) {          
+		if (o3_timerid > 0) clearTimeout(o3_timerid);
+		o3_timerid = setTimeout("cClick()", o3_timeout);
+	}
+
+	// Show layer
+	runHook("disp", FREPLACE, o3_status);
+	runHook("olMain", FAFTER);
+
+	return (olOp && event && event.type == 'mouseover' && !o3_status) ? '' : (o3_status != '');
+}
+
+////////
+// LAYER GENERATION FUNCTIONS
+////////
+// These functions just handle popup content with tags that should adhere to the W3C standards specification.
+
+// Makes simple table without caption
+function ol_content_simple(text) {
+	txt='<table width="'+o3_width+ '" border="0" cellpadding="'+o3_border+'" cellspacing="0" '+(o3_bgclass ? 'class="'+o3_bgclass+'"' : o3_bgcolor+' '+o3_height)+'><tr><td><table width="100%" border="0" cellpadding="' + o3_cellpad + '" cellspacing="0" '+(o3_fgclass ? 'class="'+o3_fgclass+'"' : o3_fgcolor+' '+o3_fgbackground+' '+o3_height)+'><tr><td valign="TOP"'+(o3_textfontclass ? ' class="'+o3_textfontclass+'">' : '>')+(o3_textfontclass ? '' : wrapStr(0,o3_textsize,'text'))+text+(o3_textfontclass ? '' : wrapStr(1,o3_textsize))+'</td></tr></table></td></tr></table>';
+
+	set_background("");
+	return txt;
+}
+
+// Makes table with caption and optional close link
+function ol_content_caption(text,title,close) {
+	var nameId;
+	closing="";
+	closeevent="onmouseover";
+	if (o3_closeclick==1) closeevent= (o3_closetitle ? "title='" + o3_closetitle +"'" : "") + " onclick";
+	if (o3_capicon!="") {
+		nameId=' hspace=\"5\"'+' align=\"middle\" alt=\"\"';
+		if (typeof o3_dragimg!='undefined'&&o3_dragimg) nameId=' hspace=\"5\"'+' name=\"'+o3_dragimg+'\" id=\"'+o3_dragimg+'\" align=\"middle\" alt=\"Drag Enabled\" title=\"Drag Enabled\"';
+		o3_capicon='<img src=\"'+o3_capicon+'\"'+nameId+' />';
+	}
+
+	if (close != "") 
+		closing='<td '+(!o3_compatmode && o3_closefontclass ? 'class="'+o3_closefontclass : 'align="RIGHT')+'"><a href="javascript:return '+fnRef+'cClick();"'+((o3_compatmode && o3_closefontclass) ? ' class="' + o3_closefontclass + '" ' : ' ')+closeevent+'="return '+fnRef+'cClick();">'+(o3_closefontclass ? '' : wrapStr(0,o3_closesize,'close'))+close+(o3_closefontclass ? '' : wrapStr(1,o3_closesize,'close'))+'</a></td>';
+	txt='<table width="'+o3_width+ '" border="0" cellpadding="'+o3_border+'" cellspacing="0" '+(o3_bgclass ? 'class="'+o3_bgclass+'"' : o3_bgcolor+' '+o3_bgbackground+' '+o3_height)+'><tr><td><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td'+(o3_captionfontclass ? ' class="'+o3_captionfontclass+'">' : '>')+(o3_captionfontclass ? '' : '<b>'+wrapStr(0,o3_captionsize,'caption'))+o3_capicon+title+(o3_captionfontclass ? '' : wrapStr(1,o3_captionsize)+'</b>')+'</td>'+closing+'</tr></table><table width="100%" border="0" cellpadding="' + o3_cellpad + '" cellspacing="0" '+(o3_fgclass ? 'class="'+o3_fgclass+'"' : o3_fgcolor+' '+o3_fgbackground+' '+o3_height)+'><tr><td valign="TOP"'+(o3_textfontclass ? ' class="'+o3_textfontclass+'">' :'>')+(o3_textfontclass ? '' : wrapStr(0,o3_textsize,'text'))+text+(o3_textfontclass ? '' : wrapStr(1,o3_textsize)) + '</td></tr></table></td></tr></table>';
+
+	set_background("");
+	return txt;
+}
+
+// Sets the background picture,padding and lots more. :)
+function ol_content_background(text,picture,hasfullhtml) {
+	if (hasfullhtml) {
+		txt=text;
+	} else {
+		txt='<table width="'+o3_width+'" border="0" cellpadding="0" cellspacing="0" height="'+o3_height+'"><tr><td colspan="3" height="'+o3_padyt+'"></td></tr><tr><td width="'+o3_padxl+'"></td><td valign="TOP" width="'+(o3_width-o3_padxl-o3_padxr)+(o3_textfontclass ? '" class="'+o3_textfontclass : '')+'">'+(o3_textfontclass ? '' : wrapStr(0,o3_textsize,'text'))+text+(o3_textfontclass ? '' : wrapStr(1,o3_textsize))+'</td><td width="'+o3_padxr+'"></td></tr><tr><td colspan="3" height="'+o3_padyb+'"></td></tr></table>';
+	}
+
+	set_background(picture);
+	return txt;
+}
+
+// Loads a picture into the div.
+function set_background(pic) {
+	if (pic == "") {
+		if (olNs4) {
+			over.background.src = null; 
+		} else if (over.style) {
+			over.style.backgroundImage = "none";
+		}
+	} else {
+		if (olNs4) {
+			over.background.src = pic;
+		} else if (over.style) {
+			over.style.width=o3_width + 'px';
+			over.style.backgroundImage = "url("+pic+")";
+		}
+	}
+}
+
+////////
+// HANDLING FUNCTIONS
+////////
+var olShowId=-1;
+
+// Displays the popup
+function disp(statustext) {
+	runHook("disp", FBEFORE);
+	
+	if (o3_allowmove == 0) {
+		runHook("placeLayer", FREPLACE);
+		(olNs6&&olShowId<0) ? olShowId=setTimeout("runHook('showObject', FREPLACE, over)", 1) : runHook("showObject", FREPLACE, over);
+		o3_allowmove = (o3_sticky || o3_followmouse==0) ? 0 : 1;
+	}
+	
+	runHook("disp", FAFTER);
+
+	if (statustext != "") self.status = statustext;
+}
+
+// Creates the actual popup structure
+function createPopup(lyrContent){
+	runHook("createPopup", FBEFORE);
+	
+	if (o3_wrap) {
+		var wd,ww,theObj = (olNs4 ? over : over.style);
+		theObj.top = theObj.left = ((olIe4&&!olOp) ? 0 : -10000) + (!olNs4 ? 'px' : 0);
+		layerWrite(lyrContent);
+		wd = (olNs4 ? over.clip.width : over.offsetWidth);
+		if (wd > (ww=windowWidth())) {
+			lyrContent=lyrContent.replace(/\&nbsp;/g, ' ');
+			o3_width=ww;
+			o3_wrap=0;
+		} 
+	}
+
+	layerWrite(lyrContent);
+	
+	// Have to set o3_width for placeLayer() routine if o3_wrap is turned on
+	if (o3_wrap) o3_width=(olNs4 ? over.clip.width : over.offsetWidth);
+	
+	runHook("createPopup", FAFTER, lyrContent);
+
+	return true;
+}
+
+// Decides where we want the popup.
+function placeLayer() {
+	var placeX, placeY, widthFix = 0;
+	
+	// HORIZONTAL PLACEMENT, re-arranged to work in Safari
+	if (o3_frame.innerWidth) widthFix=18; 
+	iwidth = windowWidth();
+
+	// Horizontal scroll offset
+	winoffset=(olIe4) ? eval('o3_frame.'+docRoot+'.scrollLeft') : o3_frame.pageXOffset;
+
+	placeX = runHook('horizontalPlacement',FCHAIN,iwidth,winoffset,widthFix);
+
+	// VERTICAL PLACEMENT, re-arranged to work in Safari
+	if (o3_frame.innerHeight) {
+		iheight=o3_frame.innerHeight;
+	} else if (eval('o3_frame.'+docRoot)&&eval("typeof o3_frame."+docRoot+".clientHeight=='number'")&&eval('o3_frame.'+docRoot+'.clientHeight')) { 
+		iheight=eval('o3_frame.'+docRoot+'.clientHeight');
+	}			
+
+	// Vertical scroll offset
+	scrolloffset=(olIe4) ? eval('o3_frame.'+docRoot+'.scrollTop') : o3_frame.pageYOffset;
+	placeY = runHook('verticalPlacement',FCHAIN,iheight,scrolloffset);
+
+	// Actually move the object.
+	repositionTo(over, placeX, placeY);
+}
+
+// Moves the layer
+function olMouseMove(e) {
+	var e = (e) ? e : event;
+
+	if (e.pageX) {
+		o3_x = e.pageX;
+		o3_y = e.pageY;
+	} else if (e.clientX) {
+		o3_x = eval('e.clientX+o3_frame.'+docRoot+'.scrollLeft');
+		o3_y = eval('e.clientY+o3_frame.'+docRoot+'.scrollTop');
+	}
+	
+	if (o3_allowmove == 1) runHook("placeLayer", FREPLACE);
+
+	// MouseOut handler
+	if (hoveringSwitch && !olNs4 && runHook("cursorOff", FREPLACE)) {
+		(olHideDelay ? hideDelay(olHideDelay) : cClick());
+		hoveringSwitch = !hoveringSwitch;
+	}
+}
+
+// Fake function for 3.0 users.
+function no_overlib() { return ver3fix; }
+
+// Capture the mouse and chain other scripts.
+function olMouseCapture() {
+	capExtent = document;
+	var fN, str = '', l, k, f, wMv, sS, mseHandler = olMouseMove;
+	var re = /function[ ]*(\w*)\(/;
+	
+	wMv = (!olIe4 && window.onmousemove);
+	if (document.onmousemove || wMv) {
+		if (wMv) capExtent = window;
+		f = capExtent.onmousemove.toString();
+		fN = f.match(re);
+		if (fN == null) {
+			str = f+'(e); ';
+		} else if (fN[1] == 'anonymous' || fN[1] == 'olMouseMove' || (wMv && fN[1] == 'onmousemove')) {
+			if (!olOp && wMv) {
+				l = f.indexOf('{')+1;
+				k = f.lastIndexOf('}');
+				sS = f.substring(l,k);
+				if ((l = sS.indexOf('(')) != -1) {
+					sS = sS.substring(0,l).replace(/^\s+/,'').replace(/\s+$/,'');
+					if (eval("typeof " + sS + " == 'undefined'")) window.onmousemove = null;
+					else str = sS + '(e);';
+				}
+			}
+			if (!str) {
+				olCheckMouseCapture = false;
+				return;
+			}
+		} else {
+			if (fN[1]) str = fN[1]+'(e); ';
+			else {
+				l = f.indexOf('{')+1;
+				k = f.lastIndexOf('}');
+				str = f.substring(l,k) + '\n';
+			}
+		}
+		str += 'olMouseMove(e); ';
+		mseHandler = new Function('e', str);
+	}
+
+	capExtent.onmousemove = mseHandler;
+	if (olNs4) capExtent.captureEvents(Event.MOUSEMOVE);
+}
+
+////////
+// PARSING FUNCTIONS
+////////
+
+// Does the actual command parsing.
+function parseTokens(pf, ar) {
+	// What the next argument is expected to be.
+	var v, mode=-1, par = (pf != 'ol_');	
+	var fnMark = (par && !ar.length ? 1 : 0);
+
+	for (i = 0; i < ar.length; i++) {
+		if (mode < 0) {
+			// Arg is maintext,unless its a number between pmStart and pmUpper
+			// then its a command.
+			if (typeof ar[i] == 'number' && ar[i] > pmStart && ar[i] < pmUpper) {
+				fnMark = (par ? 1 : 0);
+				i--;   // backup one so that the next block can parse it
+			} else {
+				switch(pf) {
+					case 'ol_':
+						ol_text = ar[i].toString();
+						break;
+					default:
+						o3_text=ar[i].toString();  
+				}
+			}
+			mode = 0;
+		} else {
+			// Note: NS4 doesn't like switch cases with vars.
+			if (ar[i] >= pmCount || ar[i]==DONOTHING) { continue; }
+			if (ar[i]==INARRAY) { fnMark = 0; eval(pf+'text=ol_texts['+ar[++i]+'].toString()'); continue; }
+			if (ar[i]==CAPARRAY) { eval(pf+'cap=ol_caps['+ar[++i]+'].toString()'); continue; }
+			if (ar[i]==STICKY) { if (pf!='ol_') eval(pf+'sticky=1'); continue; }
+			if (ar[i]==BACKGROUND) { eval(pf+'background="'+ar[++i]+'"'); continue; }
+			if (ar[i]==NOCLOSE) { if (pf!='ol_') opt_NOCLOSE(); continue; }
+			if (ar[i]==CAPTION) { eval(pf+"cap='"+escSglQuote(ar[++i])+"'"); continue; }
+			if (ar[i]==CENTER || ar[i]==LEFT || ar[i]==RIGHT) { eval(pf+'hpos='+ar[i]); if(pf!='ol_') olHautoFlag=1; continue; }
+			if (ar[i]==OFFSETX) { eval(pf+'offsetx='+ar[++i]); continue; }
+			if (ar[i]==OFFSETY) { eval(pf+'offsety='+ar[++i]); continue; }
+			if (ar[i]==FGCOLOR) { eval(pf+'fgcolor="'+ar[++i]+'"'); continue; }
+			if (ar[i]==BGCOLOR) { eval(pf+'bgcolor="'+ar[++i]+'"'); continue; }
+			if (ar[i]==TEXTCOLOR) { eval(pf+'textcolor="'+ar[++i]+'"'); continue; }
+			if (ar[i]==CAPCOLOR) { eval(pf+'capcolor="'+ar[++i]+'"'); continue; }
+			if (ar[i]==CLOSECOLOR) { eval(pf+'closecolor="'+ar[++i]+'"'); continue; }
+			if (ar[i]==WIDTH) { eval(pf+'width='+ar[++i]); continue; }
+			if (ar[i]==BORDER) { eval(pf+'border='+ar[++i]); continue; }
+			if (ar[i]==CELLPAD) { i=opt_MULTIPLEARGS(++i,ar,(pf+'cellpad')); continue; }
+			if (ar[i]==STATUS) { eval(pf+"status='"+escSglQuote(ar[++i])+"'"); continue; }
+			if (ar[i]==AUTOSTATUS) { eval(pf +'autostatus=('+pf+'autostatus == 1) ? 0 : 1'); continue; }
+			if (ar[i]==AUTOSTATUSCAP) { eval(pf +'autostatus=('+pf+'autostatus == 2) ? 0 : 2'); continue; }
+			if (ar[i]==HEIGHT) { eval(pf+'height='+pf+'aboveheight='+ar[++i]); continue; } // Same param again.
+			if (ar[i]==CLOSETEXT) { eval(pf+"close='"+escSglQuote(ar[++i])+"'"); continue; }
+			if (ar[i]==SNAPX) { eval(pf+'snapx='+ar[++i]); continue; }
+			if (ar[i]==SNAPY) { eval(pf+'snapy='+ar[++i]); continue; }
+			if (ar[i]==FIXX) { eval(pf+'fixx='+ar[++i]); continue; }
+			if (ar[i]==FIXY) { eval(pf+'fixy='+ar[++i]); continue; }
+			if (ar[i]==RELX) { eval(pf+'relx='+ar[++i]); continue; }
+			if (ar[i]==RELY) { eval(pf+'rely='+ar[++i]); continue; }
+			if (ar[i]==FGBACKGROUND) { eval(pf+'fgbackground="'+ar[++i]+'"'); continue; }
+			if (ar[i]==BGBACKGROUND) { eval(pf+'bgbackground="'+ar[++i]+'"'); continue; }
+			if (ar[i]==PADX) { eval(pf+'padxl='+ar[++i]); eval(pf+'padxr='+ar[++i]); continue; }
+			if (ar[i]==PADY) { eval(pf+'padyt='+ar[++i]); eval(pf+'padyb='+ar[++i]); continue; }
+			if (ar[i]==FULLHTML) { if (pf!='ol_') eval(pf+'fullhtml=1'); continue; }
+			if (ar[i]==BELOW || ar[i]==ABOVE) { eval(pf+'vpos='+ar[i]); if (pf!='ol_') olVautoFlag=1; continue; }
+			if (ar[i]==CAPICON) { eval(pf+'capicon="'+ar[++i]+'"'); continue; }
+			if (ar[i]==TEXTFONT) { eval(pf+"textfont='"+escSglQuote(ar[++i])+"'"); continue; }
+			if (ar[i]==CAPTIONFONT) { eval(pf+"captionfont='"+escSglQuote(ar[++i])+"'"); continue; }
+			if (ar[i]==CLOSEFONT) { eval(pf+"closefont='"+escSglQuote(ar[++i])+"'"); continue; }
+			if (ar[i]==TEXTSIZE) { eval(pf+'textsize="'+ar[++i]+'"'); continue; }
+			if (ar[i]==CAPTIONSIZE) { eval(pf+'captionsize="'+ar[++i]+'"'); continue; }
+			if (ar[i]==CLOSESIZE) { eval(pf+'closesize="'+ar[++i]+'"'); continue; }
+			if (ar[i]==TIMEOUT) { eval(pf+'timeout='+ar[++i]); continue; }
+			if (ar[i]==FUNCTION) { if (pf=='ol_') { if (typeof ar[i+1]!='number') { v=ar[++i]; ol_function=(typeof v=='function' ? v : null); }} else {fnMark = 0; v = null; if (typeof ar[i+1]!='number') v = ar[++i];  opt_FUNCTION(v); } continue; }
+			if (ar[i]==DELAY) { eval(pf+'delay='+ar[++i]); continue; }
+			if (ar[i]==HAUTO) { eval(pf+'hauto=('+pf+'hauto == 0) ? 1 : 0'); continue; }
+			if (ar[i]==VAUTO) { eval(pf+'vauto=('+pf+'vauto == 0) ? 1 : 0'); continue; }
+			if (ar[i]==CLOSECLICK) { eval(pf +'closeclick=('+pf+'closeclick == 0) ? 1 : 0'); continue; }
+			if (ar[i]==WRAP) { eval(pf +'wrap=('+pf+'wrap == 0) ? 1 : 0'); continue; }
+			if (ar[i]==FOLLOWMOUSE) { eval(pf +'followmouse=('+pf+'followmouse == 1) ? 0 : 1'); continue; }
+			if (ar[i]==MOUSEOFF) { eval(pf +'mouseoff=('+pf+'mouseoff==0) ? 1 : 0'); v=ar[i+1]; if (pf != 'ol_' && eval(pf+'mouseoff') && typeof v == 'number' && (v < pmStart || v > pmUpper)) olHideDelay=ar[++i]; continue; }
+			if (ar[i]==CLOSETITLE) { eval(pf+"closetitle='"+escSglQuote(ar[++i])+"'"); continue; }
+			if (ar[i]==CSSOFF||ar[i]==CSSCLASS) { eval(pf+'css='+ar[i]); continue; }
+			if (ar[i]==COMPATMODE) { eval(pf+'compatmode=('+pf+'compatmode==0) ? 1 : 0'); continue; }
+			if (ar[i]==FGCLASS) { eval(pf+'fgclass="'+ar[++i]+'"'); continue; }
+			if (ar[i]==BGCLASS) { eval(pf+'bgclass="'+ar[++i]+'"'); continue; }
+			if (ar[i]==TEXTFONTCLASS) { eval(pf+'textfontclass="'+ar[++i]+'"'); continue; }
+			if (ar[i]==CAPTIONFONTCLASS) { eval(pf+'captionfontclass="'+ar[++i]+'"'); continue; }
+			if (ar[i]==CLOSEFONTCLASS) { eval(pf+'closefontclass="'+ar[++i]+'"'); continue; }
+			i = parseCmdLine(pf, i, ar);
+		}
+	}
+
+	if (fnMark && o3_function) o3_text = o3_function();
+	
+	if ((pf == 'o3_') && o3_wrap) {
+		o3_width = 0;
+		
+		var tReg=/<.*\n*>/ig;
+		if (!tReg.test(o3_text)) o3_text = o3_text.replace(/[ ]+/g, '&nbsp;');
+		if (!tReg.test(o3_cap))o3_cap = o3_cap.replace(/[ ]+/g, '&nbsp;');
+	}
+	if ((pf == 'o3_') && o3_sticky) {
+		if (!o3_close && (o3_frame != ol_frame)) o3_close = ol_close;
+		if (o3_mouseoff && (o3_frame == ol_frame)) opt_NOCLOSE(' ');
+	}
+}
+
+
+////////
+// LAYER FUNCTIONS
+////////
+
+// Writes to a layer
+function layerWrite(txt) {
+	txt += "\n";
+	if (olNs4) {
+		var lyr = o3_frame.document.layers['overDiv'].document
+		lyr.write(txt)
+		lyr.close()
+	} else if (typeof over.innerHTML != 'undefined') {
+		if (olIe5 && isMac) over.innerHTML = '';
+		over.innerHTML = txt;
+	} else {
+		range = o3_frame.document.createRange();
+		range.setStartAfter(over);
+		domfrag = range.createContextualFragment(txt);
+		
+		while (over.hasChildNodes()) {
+			over.removeChild(over.lastChild);
+		}
+		
+		over.appendChild(domfrag);
+	}
+}
+
+// Make an object visible
+function showObject(obj) {
+	runHook("showObject", FBEFORE);
+
+	var theObj=(olNs4 ? obj : obj.style);
+	theObj.visibility = 'visible';
+
+	runHook("showObject", FAFTER);
+}
+
+// Hides an object
+function hideObject(obj) {
+	runHook("hideObject", FBEFORE);
+
+	var theObj=(olNs4 ? obj : obj.style);
+	if (olNs6 && olShowId>0) { clearTimeout(olShowId); olShowId=0; }
+	theObj.visibility = 'hidden';
+	theObj.top = theObj.left = ((olIe4&&!olOp) ? 0 : -10000) + (!olNs4 ? 'px' : 0);
+
+	if (o3_timerid > 0) clearTimeout(o3_timerid);
+	if (o3_delayid > 0) clearTimeout(o3_delayid);
+
+	o3_timerid = 0;
+	o3_delayid = 0;
+	self.status = "";
+
+	if (obj.onmouseout || obj.onmouseover) {
+		if (olNs4) obj.releaseEvents(Event.MOUSEOUT || Event.MOUSEOVER);
+		obj.onmouseout = obj.onmouseover = null;
+	}
+
+	runHook("hideObject", FAFTER);
+}
+
+// Move a layer
+function repositionTo(obj, xL, yL) {
+	var theObj=(olNs4 ? obj : obj.style);
+	theObj.left = xL + (!olNs4 ? 'px' : 0);
+	theObj.top = yL + (!olNs4 ? 'px' : 0);
+}
+
+// Check position of cursor relative to overDiv DIVision; mouseOut function
+function cursorOff() {
+	var left = parseInt(over.style.left);
+	var top = parseInt(over.style.top);
+	var right = left + (over.offsetWidth >= parseInt(o3_width) ? over.offsetWidth : parseInt(o3_width));
+	var bottom = top + (over.offsetHeight >= o3_aboveheight ? over.offsetHeight : o3_aboveheight);
+
+	if (o3_x < left || o3_x > right || o3_y < top || o3_y > bottom) return true;
+
+	return false;
+}
+
+
+////////
+// COMMAND FUNCTIONS
+////////
+
+// Calls callme or the default function.
+function opt_FUNCTION(callme) {
+	o3_text = (callme ? (typeof callme=='string' ? (/.+\(.*\)/.test(callme) ? eval(callme) : callme) : callme()) : (o3_function ? o3_function() : 'No Function'));
+
+	return 0;
+}
+
+// Handle hovering
+function opt_NOCLOSE(unused) {
+	if (!unused) o3_close = "";
+
+	if (olNs4) {
+		over.captureEvents(Event.MOUSEOUT || Event.MOUSEOVER);
+		over.onmouseover = function () { if (o3_timerid > 0) { clearTimeout(o3_timerid); o3_timerid = 0; } }
+		over.onmouseout = function (e) { if (olHideDelay) hideDelay(olHideDelay); else cClick(e); }
+	} else {
+		over.onmouseover = function () {hoveringSwitch = true; if (o3_timerid > 0) { clearTimeout(o3_timerid); o3_timerid =0; } }
+	}
+
+	return 0;
+}
+
+// Function to scan command line arguments for multiples
+function opt_MULTIPLEARGS(i, args, parameter) {
+  var k=i, re, pV, str='';
+
+  for(k=i; k<args.length; k++) {
+		if(typeof args[k] == 'number' && args[k]>pmStart) break;
+		str += args[k] + ',';
+	}
+	if (str) str = str.substring(0,--str.length);
+
+	k--;  // reduce by one so the for loop this is in works correctly
+	pV=(olNs4 && /cellpad/i.test(parameter)) ? str.split(',')[0] : str;
+	eval(parameter + '="' + pV + '"');
+
+	return k;
+}
+
+// Remove &nbsp; in texts when done.
+function nbspCleanup() {
+	if (o3_wrap) {
+		o3_text = o3_text.replace(/\&nbsp;/g, ' ');
+		o3_cap = o3_cap.replace(/\&nbsp;/g, ' ');
+	}
+}
+
+// Escape embedded single quotes in text strings
+function escSglQuote(str) {
+  return str.toString().replace(/'/g,"\\'");
+}
+
+// Onload handler for window onload event
+function OLonLoad_handler(e) {
+	var re = /\w+\(.*\)[;\s]+/g, olre = /overlib\(|nd\(|cClick\(/, fn, l, i;
+
+	if(!olLoaded) olLoaded=1;
+
+  // Remove it for Gecko based browsers
+	if(window.removeEventListener && e.eventPhase == 3) window.removeEventListener("load",OLonLoad_handler,false);
+	else if(window.detachEvent) { // and for IE and Opera 4.x but execute calls to overlib, nd, or cClick()
+		window.detachEvent("onload",OLonLoad_handler);
+		var fN = document.body.getAttribute('onload');
+		if (fN) {
+			fN=fN.toString().match(re);
+			if (fN && fN.length) {
+				for (i=0; i<fN.length; i++) {
+					if (/anonymous/.test(fN[i])) continue;
+					while((l=fN[i].search(/\)[;\s]+/)) != -1) {
+						fn=fN[i].substring(0,l+1);
+						fN[i] = fN[i].substring(l+2);
+						if (olre.test(fn)) eval(fn);
+					}
+				}
+			}
+		}
+	}
+}
+
+// Wraps strings in Layer Generation Functions with the correct tags
+//    endWrap true(if end tag) or false if start tag
+//    fontSizeStr - font size string such as '1' or '10px'
+//    whichString is being wrapped -- 'text', 'caption', or 'close'
+function wrapStr(endWrap,fontSizeStr,whichString) {
+	var fontStr, fontColor, isClose=((whichString=='close') ? 1 : 0), hasDims=/[%\-a-z]+$/.test(fontSizeStr);
+	fontSizeStr = (olNs4) ? (!hasDims ? fontSizeStr : '1') : fontSizeStr;
+	if (endWrap) return (hasDims&&!olNs4) ? (isClose ? '</span>' : '</div>') : '</font>';
+	else {
+		fontStr='o3_'+whichString+'font';
+		fontColor='o3_'+((whichString=='caption')? 'cap' : whichString)+'color';
+		return (hasDims&&!olNs4) ? (isClose ? '<span style="font-family: '+quoteMultiNameFonts(eval(fontStr))+'; color: '+eval(fontColor)+'; font-size: '+fontSizeStr+';">' : '<div style="font-family: '+quoteMultiNameFonts(eval(fontStr))+'; color: '+eval(fontColor)+'; font-size: '+fontSizeStr+';">') : '<font face="'+eval(fontStr)+'" color="'+eval(fontColor)+'" size="'+(parseInt(fontSizeStr)>7 ? '7' : fontSizeStr)+'">';
+	}
+}
+
+// Quotes Multi word font names; needed for CSS Standards adherence in font-family
+function quoteMultiNameFonts(theFont) {
+	var v, pM=theFont.split(',');
+	for (var i=0; i<pM.length; i++) {
+		v=pM[i];
+		v=v.replace(/^\s+/,'').replace(/\s+$/,'');
+		if(/\s/.test(v) && !/['"]/.test(v)) {
+			v="\'"+v+"\'";
+			pM[i]=v;
+		}
+	}
+	return pM.join();
+}
+
+// dummy function which will be overridden 
+function isExclusive(args) {
+	return false;
+}
+
+// function will delay close by time milliseconds
+function hideDelay(time) {
+	if (time&&!o3_delay) {
+		if (o3_timerid > 0) clearTimeout(o3_timerid);
+
+		o3_timerid=setTimeout("cClick()",(o3_timeout=time));
+	}
+}
+
+// Was originally in the placeLayer() routine; separated out for future ease
+function horizontalPlacement(browserWidth, horizontalScrollAmount, widthFix) {
+	var placeX, iwidth=browserWidth, winoffset=horizontalScrollAmount;
+	var parsedWidth = parseInt(o3_width);
+
+	if (o3_fixx > -1 || o3_relx != null) {
+		// Fixed position
+		placeX=(o3_relx != null ? ( o3_relx < 0 ? winoffset +o3_relx+ iwidth - parsedWidth - widthFix : winoffset+o3_relx) : o3_fixx);
+	} else {  
+		// If HAUTO, decide what to use.
+		if (o3_hauto == 1) {
+			if ((o3_x - winoffset) > (iwidth / 2)) {
+				o3_hpos = LEFT;
+			} else {
+				o3_hpos = RIGHT;
+			}
+		}  		
+
+		// From mouse
+		if (o3_hpos == CENTER) { // Center
+			placeX = o3_x+o3_offsetx-(parsedWidth/2);
+
+			if (placeX < winoffset) placeX = winoffset;
+		}
+
+		if (o3_hpos == RIGHT) { // Right
+			placeX = o3_x+o3_offsetx;
+
+			if ((placeX+parsedWidth) > (winoffset+iwidth - widthFix)) {
+				placeX = iwidth+winoffset - parsedWidth - widthFix;
+				if (placeX < 0) placeX = 0;
+			}
+		}
+		if (o3_hpos == LEFT) { // Left
+			placeX = o3_x-o3_offsetx-parsedWidth;
+			if (placeX < winoffset) placeX = winoffset;
+		}  	
+
+		// Snapping!
+		if (o3_snapx > 1) {
+			var snapping = placeX % o3_snapx;
+
+			if (o3_hpos == LEFT) {
+				placeX = placeX - (o3_snapx+snapping);
+			} else {
+				// CENTER and RIGHT
+				placeX = placeX+(o3_snapx - snapping);
+			}
+
+			if (placeX < winoffset) placeX = winoffset;
+		}
+	}	
+
+	return placeX;
+}
+
+// was originally in the placeLayer() routine; separated out for future ease
+function verticalPlacement(browserHeight,verticalScrollAmount) {
+	var placeY, iheight=browserHeight, scrolloffset=verticalScrollAmount;
+	var parsedHeight=(o3_aboveheight ? parseInt(o3_aboveheight) : (olNs4 ? over.clip.height : over.offsetHeight));
+
+	if (o3_fixy > -1 || o3_rely != null) {
+		// Fixed position
+		placeY=(o3_rely != null ? (o3_rely < 0 ? scrolloffset+o3_rely+iheight - parsedHeight : scrolloffset+o3_rely) : o3_fixy);
+	} else {
+		// If VAUTO, decide what to use.
+		if (o3_vauto == 1) {
+			if ((o3_y - scrolloffset) > (iheight / 2) && o3_vpos == BELOW && (o3_y + parsedHeight + o3_offsety - (scrolloffset + iheight) > 0)) {
+				o3_vpos = ABOVE;
+			} else if (o3_vpos == ABOVE && (o3_y - (parsedHeight + o3_offsety) - scrolloffset < 0)) {
+				o3_vpos = BELOW;
+			}
+		}
+
+		// From mouse
+		if (o3_vpos == ABOVE) {
+			if (o3_aboveheight == 0) o3_aboveheight = parsedHeight; 
+
+			placeY = o3_y - (o3_aboveheight+o3_offsety);
+			if (placeY < scrolloffset) placeY = scrolloffset;
+		} else {
+			// BELOW
+			placeY = o3_y+o3_offsety;
+		} 
+
+		// Snapping!
+		if (o3_snapy > 1) {
+			var snapping = placeY % o3_snapy;  			
+
+			if (o3_aboveheight > 0 && o3_vpos == ABOVE) {
+				placeY = placeY - (o3_snapy+snapping);
+			} else {
+				placeY = placeY+(o3_snapy - snapping);
+			} 			
+
+			if (placeY < scrolloffset) placeY = scrolloffset;
+		}
+	}
+
+	return placeY;
+}
+
+// checks positioning flags
+function checkPositionFlags() {
+	if (olHautoFlag) olHautoFlag = o3_hauto=0;
+	if (olVautoFlag) olVautoFlag = o3_vauto=0;
+	return true;
+}
+
+// get Browser window width
+function windowWidth() {
+	var w;
+	if (o3_frame.innerWidth) w=o3_frame.innerWidth;
+	else if (eval('o3_frame.'+docRoot)&&eval("typeof o3_frame."+docRoot+".clientWidth=='number'")&&eval('o3_frame.'+docRoot+'.clientWidth')) 
+		w=eval('o3_frame.'+docRoot+'.clientWidth');
+	return w;			
+}
+
+// create the div container for popup content if it doesn't exist
+function createDivContainer(id,frm,zValue) {
+	id = (id || 'overDiv'), frm = (frm || o3_frame), zValue = (zValue || 1000);
+	var objRef, divContainer = layerReference(id);
+
+	if (divContainer == null) {
+		if (olNs4) {
+			divContainer = frm.document.layers[id] = new Layer(window.innerWidth, frm);
+			objRef = divContainer;
+		} else {
+			var body = (olIe4 ? frm.document.all.tags('BODY')[0] : frm.document.getElementsByTagName("BODY")[0]);
+			if (olIe4&&!document.getElementById) {
+				body.insertAdjacentHTML("beforeEnd",'<div id="'+id+'"></div>');
+				divContainer=layerReference(id);
+			} else {
+				divContainer = frm.document.createElement("DIV");
+				divContainer.id = id;
+				body.appendChild(divContainer);
+			}
+			objRef = divContainer.style;
+		}
+
+		with (objRef) {
+			position = 'absolute';
+			visibility = 'hidden';
+			top = left = -10000 + (!olNs4) ? 'px' : 0;
+			zIndex = zValue;
+		}
+	}
+
+	return divContainer;
+}
+
+// get reference to a layer with ID=id
+function layerReference(id) {
+	return (olNs4 ? o3_frame.document.layers[id] : (document.all ? o3_frame.document.all[id] : o3_frame.document.getElementById(id)));
+}
+////////
+//  PLUGIN ACTIVATION FUNCTIONS
+////////
+
+// Runs plugin functions to set runtime variables.
+function setRunTimeVariables(){
+	if (typeof runTime != 'undefined' && runTime.length) {
+		for (var k = 0; k < runTime.length; k++) {
+			runTime[k]();
+		}
+	}
+}
+
+// Runs plugin functions to parse commands.
+function parseCmdLine(pf, i, args) {
+	if (typeof cmdLine != 'undefined' && cmdLine.length) { 
+		for (var k = 0; k < cmdLine.length; k++) { 
+			var j = cmdLine[k](pf, i, args);
+			if (j >- 1) {
+				i = j;
+				break;
+			}
+		}
+	}
+
+	return i;
+}
+
+// Runs plugin functions to do things after parse.
+function postParseChecks(){
+	if (typeof postParse != 'undefined' && postParse.length) {
+		for (var k = 0; k < postParse.length; k++) {
+			if (postParse[k]()) continue;
+			return false;  // end now since have an error
+		}
+	}
+	return true;
+}
+
+
+////////
+//  PLUGIN REGISTRATION FUNCTIONS
+////////
+
+// Registers commands and creates constants.
+function registerCommands(cmdStr) {
+	if (typeof cmdStr!='string') return;
+
+	var pM = cmdStr.split(',');
+	pms = pms.concat(pM);
+
+	for (var i = 0; i< pM.length; i++) {
+		eval(pM[i].toUpperCase()+'='+pmCount++);
+	}
+}
+
+// Registers no-parameter commands
+function registerNoParameterCommands(cmdStr) {
+	if (!cmdStr && typeof cmdStr!='string') return;
+	pmt=(!pmt) ? cmdStr : pmt + ',' + cmdStr;
+}
+
+// Register a function to hook at a certain point.
+function registerHook(fnHookTo, fnRef, hookType, optPm) {
+	var hookPt, last = typeof optPm;
+	
+	if (fnHookTo == 'plgIn'||fnHookTo == 'postParse') return;
+	if (typeof hookPts == 'undefined') hookPts = new Array();
+	if (typeof hookPts[fnHookTo] == 'undefined') hookPts[fnHookTo] = new FunctionReference();
+
+	hookPt = hookPts[fnHookTo];
+
+	if (hookType != null) {
+		if (hookType == FREPLACE) {
+			hookPt.ovload = fnRef;  // replace normal overlib routine
+			if (fnHookTo.indexOf('ol_content_') > -1) hookPt.alt[pms[CSSOFF-1-pmStart]]=fnRef; 
+
+		} else if (hookType == FBEFORE || hookType == FAFTER) {
+			var hookPt=(hookType == 1 ? hookPt.before : hookPt.after);
+
+			if (typeof fnRef == 'object') {
+				hookPt = hookPt.concat(fnRef);
+			} else {
+				hookPt[hookPt.length++] = fnRef;
+			}
+
+			if (optPm) hookPt = reOrder(hookPt, fnRef, optPm);
+
+		} else if (hookType == FALTERNATE) {
+			if (last=='number') hookPt.alt[pms[optPm-1-pmStart]] = fnRef;
+		} else if (hookType == FCHAIN) {
+			hookPt = hookPt.chain; 
+			if (typeof fnRef=='object') hookPt=hookPt.concat(fnRef); // add other functions 
+			else hookPt[hookPt.length++]=fnRef;
+		}
+
+		return;
+	}
+}
+
+// Register a function that will set runtime variables.
+function registerRunTimeFunction(fn) {
+	if (isFunction(fn)) {
+		if (typeof runTime == 'undefined') runTime = new Array();
+		if (typeof fn == 'object') {
+			runTime = runTime.concat(fn);
+		} else {
+			runTime[runTime.length++] = fn;
+		}
+	}
+}
+
+// Register a function that will handle command parsing.
+function registerCmdLineFunction(fn){
+	if (isFunction(fn)) {
+		if (typeof cmdLine == 'undefined') cmdLine = new Array();
+		if (typeof fn == 'object') {
+			cmdLine = cmdLine.concat(fn);
+		} else {
+			cmdLine[cmdLine.length++] = fn;
+		}
+	}
+}
+
+// Register a function that does things after command parsing. 
+function registerPostParseFunction(fn){
+	if (isFunction(fn)) {
+		if (typeof postParse == 'undefined') postParse = new Array();
+		if (typeof fn == 'object') {
+			postParse = postParse.concat(fn);
+		} else {
+			postParse[postParse.length++] = fn;
+		}
+	}
+}
+
+////////
+//  PLUGIN REGISTRATION FUNCTIONS
+////////
+
+// Runs any hooks registered.
+function runHook(fnHookTo, hookType) {
+	var l = hookPts[fnHookTo], k, rtnVal, optPm, arS, ar = runHook.arguments;
+
+	if (hookType == FREPLACE) {
+		arS = argToString(ar, 2);
+
+		if (typeof l == 'undefined' || !(l = l.ovload)) return eval(fnHookTo+'('+arS+')');
+		else return eval('l('+arS+')');
+
+	} else if (hookType == FBEFORE || hookType == FAFTER) {
+		if (typeof l == 'undefined') return;
+		l=(hookType == 1 ? l.before : l.after);
+
+		if (!l.length) return;
+
+		arS = argToString(ar, 2);
+		for (var k = 0; k < l.length; k++) eval('l[k]('+arS+')'); 
+
+	} else if (hookType == FALTERNATE) {
+		optPm = ar[2];
+		arS = argToString(ar, 3);
+
+		if (typeof l == 'undefined' || (l = l.alt[pms[optPm-1-pmStart]]) == 'undefined') {
+			return eval(fnHookTo+'('+arS+')');
+		} else {
+			return eval('l('+arS+')');
+		}
+	} else if (hookType == FCHAIN) {
+		arS=argToString(ar,2);
+		l=l.chain;
+
+		for (k=l.length; k > 0; k--) if((rtnVal=eval('l[k-1]('+arS+')'))!=void(0)) return rtnVal;
+	}
+}
+
+////////
+//  UTILITY FUNCTIONS
+////////
+
+// Checks if something is a function.
+function isFunction(fnRef) {
+	var rtn = true;
+
+	if (typeof fnRef == 'object') {
+		for (var i = 0; i < fnRef.length; i++) {
+			if (typeof fnRef[i]=='function') continue;
+			rtn = false;
+			break;
+		}
+	} else if (typeof fnRef != 'function') {
+		rtn = false;
+	}
+	
+	return rtn;
+}
+
+// Converts an array into an argument string for use in eval.
+function argToString(array, strtInd, argName) {
+	var jS = strtInd, aS = '', ar = array;
+	argName=(argName ? argName : 'ar');
+	
+	if (ar.length > jS) {
+		for (var k = jS; k < ar.length; k++) aS += argName+'['+k+'], ';
+		aS = aS.substring(0, aS.length-2);
+	}
+	
+	return aS;
+}
+
+// Places a hook in the correct position in a hook point.
+function reOrder(hookPt, fnRef, order) {
+	if (!order || typeof order == 'undefined' || typeof order == 'number') return;
+	
+	var newPt = new Array(), match;
+
+	if (typeof order=='function') {
+		if (typeof fnRef=='object') {
+			newPt = newPt.concat(fnRef);
+		} else {
+			newPt[newPt.length++]=fnRef;
+		}
+		
+		for (var i = 0; i < hookPt.length; i++) {
+			match = false;
+			if (typeof fnRef == 'function' && hookPt[i] == fnRef) {
+				continue;
+			} else {
+				for(var j = 0; j < fnRef.length; j++) if (hookPt[i] == fnRef[j]) {
+					match = true;
+					break;
+				}
+			}
+			if (!match) newPt[newPt.length++] = hookPt[i];
+		}
+
+		newPt[newPt.length++] = order;
+
+	} else if (typeof order == 'object') {
+		if (typeof fnRef == 'object') {
+			newPt = newPt.concat(fnRef);
+		} else {
+			newPt[newPt.length++] = fnRef;
+		}
+		
+		for (var j = 0; j < hookPt.length; j++) {
+			match = false;
+			if (typeof fnRef == 'function' && hookPt[j] == fnRef) {
+				continue;
+			} else {
+				for (var i = 0; i < fnRef.length; i++) if (hookPt[j] == fnRef[i]) {
+					match = true;
+					break;
+				}
+			}
+			if (!match) newPt[newPt.length++]=hookPt[j];
+		}
+
+		for (i = 0; i < newPt.length; i++) hookPt[i] = newPt[i];
+		newPt.length = 0;
+		
+		for (var j = 0; j < hookPt.length; j++) {
+			match = false;
+			for (var i = 0; i < order.length; i++) {
+				if (hookPt[j] == order[i]) {
+					match = true;
+					break;
+				}
+			}
+			if (!match) newPt[newPt.length++] = hookPt[j];
+		}
+		newPt = newPt.concat(order);
+	}
+
+	for(i = 0; i < newPt.length; i++) hookPt[i] = newPt[i];
+
+	return hookPt;
+}
+
+////////
+// OBJECT CONSTRUCTORS
+////////
+
+// Object for handling hooks.
+function FunctionReference() {
+	this.ovload = null;
+	this.before = new Array();
+	this.after = new Array();
+	this.alt = new Array();
+	this.chain = new Array();
+}
+
+// Object for simple access to the overLIB version used.
+// Examples: simpleversion:351 major:3 minor:5 revision:1
+function Info(version, prerelease) {
+	this.version = version;
+	this.prerelease = prerelease;
+
+	this.simpleversion = Math.round(this.version*100);
+	this.major = parseInt(this.simpleversion / 100);
+	this.minor = parseInt(this.simpleversion / 10) - this.major * 10;
+	this.revision = parseInt(this.simpleversion) - this.major * 100 - this.minor * 10;
+	this.meets = meets;
+}
+
+// checks for Core Version required
+function meets(reqdVersion) {
+	return (!reqdVersion) ? false : this.simpleversion >= Math.round(100*parseFloat(reqdVersion));
+}
+
+
+////////
+// STANDARD REGISTRATIONS
+////////
+registerHook("ol_content_simple", ol_content_simple, FALTERNATE, CSSOFF);
+registerHook("ol_content_caption", ol_content_caption, FALTERNATE, CSSOFF);
+registerHook("ol_content_background", ol_content_background, FALTERNATE, CSSOFF);
+registerHook("ol_content_simple", ol_content_simple, FALTERNATE, CSSCLASS);
+registerHook("ol_content_caption", ol_content_caption, FALTERNATE, CSSCLASS);
+registerHook("ol_content_background", ol_content_background, FALTERNATE, CSSCLASS);
+registerPostParseFunction(checkPositionFlags);
+registerHook("hideObject", nbspCleanup, FAFTER);
+registerHook("horizontalPlacement", horizontalPlacement, FCHAIN);
+registerHook("verticalPlacement", verticalPlacement, FCHAIN);
+if (olNs4||(olIe5&&isMac)||olKq) olLoaded=1;
+registerNoParameterCommands('sticky,autostatus,autostatuscap,fullhtml,hauto,vauto,closeclick,wrap,followmouse,mouseoff,compatmode');
+
+
+		
+	function search_direct (){
+	   var search_type = document.Search.search_type.options[document.Search.search_type.selectedIndex].value;
+	   var search_for = document.Search.search_string.value;
+	      if(search_for != ""){		
+	         window.location = "/cgi-bin/CMR/shared/" + search_type + search_for;
+	      }
+	}
+
+</SCRIPT>
+
+<NOSCRIPT>This page requires Javascript 1.2</NOSCRIPT>
+
+</HEAD>
+
+
+	<BODY class = "genomes" >
+
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div><div id="header_container"><img src="/CMR/images/CMR_banner.jpg" border="0" alt="CMR logo"><div id="search_container">
+      <FORM class = "search_form" NAME="Search" ACTION="javascript:search_direct(document.Search);" METHOD="get" TARGET="_top">Search
+         <SELECT NAME="search_type" style="width:95px">
+	    <OPTION SELECTED value ="AnnotationSearch.cgi?search_type=nt_locus&match_type=exact&search_string=">Locus
+	    <OPTION value="AnnotationSearch.cgi?search_type=gene_sym&search_string=">Gene Symbol
+	    <OPTION value="AnnotationSearch.cgi?search_type=com_name&search_string=">Common Name
+	    <OPTION value = "AnnotationSearch.cgi?search_string=">All Annotation
+	    <OPTION value="Genomes.cgi?search_term=">Genomes
+	    <OPTION value="TextSearch.cgi?tools=1&search_string=">Tools 
+	    <OPTION value="GenomePropSearch.cgi?search_type=all&search_string=">Genome Prop
+	    <OPTION value="TextSearch.cgi?search_string=">Text Search
+	 </SELECT>&nbsp;for
+	 <INPUT type = "text" NAME="search_string" id="search_string" VALUE="" size=20>
+         <INPUT TYPE="submit" VALUE="Go">
+      </FORM>
+</div><DIV id="tab_position"><UL id=nav class="nav">
+
+   <LI id=nav_home><A href="/cgi-bin/CMR/CmrHomePage.cgi" target="_top">Home</A></LI>
+
+   <LI id="nav_genomes">
+
+      <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genome" target="_top"><span>Genome Tools</span></A> 
+
+      <UL>
+
+	<LI class=submenu>
+            <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genome" target="_top">Genome Lists</A> 
+    	    <UL>
+               <LI><A href="/cgi-bin/CMR/shared/Genomes.cgi?crumbs=genomes" target="_top">Genomes By Name</A></LI>
+               <LI><A href="/cgi-bin/CMR/shared/GenomesSortedByTaxonomy.cgi?crumbs=genomes" target="_top">Genomes By Taxonomy</A></LI>
+            </UL>
+    	 </LI>
+	 <LI class=submenu>
+	    <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genome" target="_top">Summary Information</A> 
+	    <UL>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=gene_list" target="_top">All Genes in a Genome</A></LI>  
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=GetNumAndPercentGenesInARoleFrontPage&crumbs=genomes" target="_top">Role Category Pie Chart</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=DnaMoleculeInfoFrontPage&crumbs=genomes" target="_top">DNA Molecule Info</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/GenomePropertiesHomePage.cgi" target="_top">Genome Properties</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=kegg_pathway&crumbs=genomes" target="_top">KEGG Pathway Display</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=intergenicregion&crumbs=genomes" target="_top">Intergenic Region</A></LI>
+               <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=interrnaregion&crumbs=genomes" target="_top">InterRNA Region</A></LI>
+            </UL>
+         </LI>
+
+         <LI class=submenu>
+            <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genome" target="_top">Graphical Displays</A> 
+     	    <UL>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=compactgenomedisplay&crumbs=genomes" target="_top">Compact Genome Display</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=circulargenomedisplay&crumbs=genomes" target="_top">Circular Genome Display</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=regionview&crumbs=genomes" target="_top">Region View</A></LI>
+            </UL>
+  	 </LI>
+
+	 <LI class=submenu>
+            <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genome" target="_top">Analysis Tools</A>
+	    <UL>
+	       <LI><A href="http://blast.jcvi.org/cmr-blast/" target="_top">CMR Blast</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=positionsearch&crumbs=genomes" target="_top">Get Seq/Gene By 
+	       Coords</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=cmr_search&search_type=motif&crumbs=genomes" target="_top">
+	       Protein Motif Search</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=restriction_digest&crumbs=genomes" target="_top">Restriction 
+	       Digest</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=pseudo2dgel&crumbs=genomes" target="_top">Pseudo 2D Gel</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=gc_content_display&crumbs=genomes" target="_top">%GC Content
+	        Display</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=codon_usage&crumbs=genomes" target="_top">Codon Usage</A></LI>
+	       <LI><A href="http://operondb.cbcb.umd.edu/cgi-bin/operondb/operons.cgi" target="_top">Operon Prediction</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=thirdposgcskew&crumbs=genomes" target="_top">Third Position GC 
+	       Skew</A></LI>
+	        <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=primer&crumbs=genomes" target="_top">Primer Search</A></LI>
+            </UL>
+         </LI>
+
+      </UL>
+
+   </LI>
+
+   <LI id=nav_searches>
+
+      <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=searches" target="_top">Searches</A>
+
+      <UL>
+
+         <LI >
+            <A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=searches&crumbs=searches" target="_top">Find Genes</A>
+
+
+	 </LI>
+
+         <LI >
+            <A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=genomesearch&crumbs=searches" target="_top">Find Genomes</A> 
+
+	 </LI>
+
+	 <LI class=submenu>
+	    <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=searches" target="_top">Find Sequences</A>
+	    <UL>
+	       <LI><A href="http://blast.jcvi.org/cmr-blast/" target="_top">CMR Blast</A></LI>
+	       <LI><A href="http://blast.jcvi.org/web-hmm/" target="_top">HMM Sequence Search</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=cmr_search&search_type=motif&crumbs=searches" target="_top">Protein Motif Search</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=regionview&crumbs=searches" target="_top">Region View</A></LI>
+	       <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=positionsearch&crumbs=searches" target="_top">Get Seq/Gene By Coords</A></LI>
+	    </UL>
+	 </LI>
+
+	 <LI >
+	    <A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=text_search&crumbs=searches" target="_top">Find Text</A>
+
+	 </LI>
+
+      </UL>
+
+   </LI>
+
+
+  <LI id="nav_compana">
+
+     <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=canalyses" target="_top"><span>Comparative Tools</span></A> 
+
+     <UL>
+
+        <LI class=submenu>
+	   <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=canalyses"
+	   target="_top">Protein Homology Tools</A> 
+	   <UL>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=circular_display" target="_top">Multi-Genome Homology</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=genomevstotalhitsallgenomes" target="_top">Genome Homology Graph</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=scatter_plot" target="_top">Protein Scatter Plot</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=gccomparison" target="_top">GC Comparison Graph</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=GenomeRegionComparison" target="_top">Region Comparison</A></LI>
+	   </UL>
+	</LI>
+
+	<LI class=submenu>
+	   <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=canalyses" target="_top">CMR Pathway Tools</A> 
+	   <UL>
+	      <LI><A href="/cgi-bin/CMR/shared/GenomePropertiesHomePage.cgi" target="_top">Genome Properties (GP)</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=genome_prop_pathway" target="_top">GP Detailed Comparison</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=kegg_pathway" target="_top">KEGG Pathway Display</A></LI>
+	   </UL>
+	</LI>
+
+	<LI class=submenu>
+	   <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=canalyses" target="_top">Alignment Tools</A> 
+	   <UL>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=genome_alignment" target="_top">Align Genomes-MUMmer</A></LI>
+	   </UL>
+	</LI>
+
+	<LI class=submenu>
+	   <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=canalyses" target="_top">Attribute Tools</A> 
+	   <UL>	
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=rolecategorybarchart" target="_top">Role Category Bar Chart</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=terminator" target="_top">Terminator Bar Chart</A></LI>
+	      <LI><A
+	      href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=multigenomequery" target="_top">Multi-Genome Query</A></LI>
+	   </UL>
+	</LI>
+
+     </UL>
+
+  </LI>
+
+  <LI id="nav_genes">
+
+     <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genelist" target="_top">Lists</A> 
+
+     <UL>
+
+        <LI class=submenu>
+	   <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genelist" target="_top">Gene Lists</A> 
+	   <UL>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=gene_list" target="_top">All Genes in a Genome</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/RoleList.cgi" target="_top">Genes by Role Category</A></LI>
+	   </UL>
+	</LI>
+
+	<LI class=submenu>
+	   <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genelist" target=_top>Evidence Lists</A> 
+	   <UL>
+	      <LI><A href="/cgi-bin/CMR/shared/EcList.cgi" target="_top">EC Numbers</A></LI>
+	       <LI class=submenu2>
+                  <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genelist"
+		  target="_top">HMM Lists</A>
+		  <UL>
+		     <LI><A href="/cgi-bin/CMR/shared/EvidenceList.cgi?ev_type=TIGRFAM&order_type=role" target="_top">TIGRFAMs by Role</A></LI>
+		     <LI><A href="/cgi-bin/CMR/shared/EvidenceList.cgi?ev_type=TIGRFAM" target="_top">TIGRFAMs</A></LI>
+		     <LI><A href="/cgi-bin/CMR/shared/EvidenceList.cgi?ev_type=PFAM" target="_top">Pfams</A></LI>
+		  </UL>
+	      </LI>		     
+	      <LI><A
+	      href="/cgi-bin/CMR/shared/EvidenceList.cgi?ev_type=COG"
+	      target="_top">NCBI COGs</A></LI>		     
+	      <LI><A
+	      href="/cgi-bin/CMR/shared/EvidenceList.cgi?ev_type=Interpro"
+	      target="_top">Interpro</A></LI>	     
+	      <LI><A
+	      href="/cgi-bin/CMR/shared/EvidenceList.cgi?ev_type=Prosite"
+	      target="_top">PROSITE</A></LI>	     
+	      <LI><A
+	      href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=go_term"
+	      target="_top">GO Terms</A></LI>	     
+	      <LI><A
+	      href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=paralogous_list"
+	      target="_top">Paralogous Families</A></LI>
+	   </UL>
+	</LI>
+
+	<LI class=submenu>
+	   <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=genelist" target="_top">Other Genomic Elements</A>  
+	   <UL>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=rna_list" target="_top">RNA List</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=terminator_list" target="_top">Terminator List</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=intergenicregion" target="_top">Intergenic Regions</A></LI>
+	      <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=interrnaregion" target="_top">InterRNA Regions</A></LI>
+	   </UL>
+	</LI>
+
+     </UL>
+
+   </LI>
+
+   <LI id="nav_downloads">
+      <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=downloads" target="_top">Downloads</A>
+      <UL>
+         <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=batchdownload" target="_top">Batch Download</A></LI>
+	 <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=geneattribute" target="_top">Gene Attribute Download</A></LI>
+	 <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=gene_evidence_download" target="_top">Gene Evidence Download</A></LI>
+	 <LI><A href="ftp://ftp.jcvi.org/pub/data/Microbial_Genomes/" target="_top">JCVI Genomes FTP</A></LI>
+	 <LI><A href="ftp://ftp.jcvi.org/pub/data/Omniome_Database/" target="_top">CMR Database FTP</A></LI>
+	 <LI><A href="ftp://ftp.jcvi.org/pub/data/CMR_scripts/" target="_top">CMR Perl Scripts FTP</A></LI>
+      </UL>
+   </LI>
+   
+   <LI id="nav_carts">
+      <A href="/cgi-bin/CMR/shared/Menu.cgi?menu=carts" target="_top"><span>Carts</span></A> 
+      <UL>
+         <LI><A href="/cgi-bin/CMR/shared/MakeFrontPages.cgi?page=genomecart" target="_top">Genome Cart</A></LI>
+	 <LI><A href="/cgi-bin/CMR/shared/GeneCart.cgi">Gene Cart</A></LI>
+      </UL>
+   </LI>	
+
+  </UL>
+
+</DIV></div><div id="sub_nav_container"><ul id="sub_nav_elements">
+   <li>
+      
+         
+            <table border=0 cellpadding=0 cellspacing=0 height=18px
+	    valign="middle">
+               <tr>
+                  <td><a href="/cgi-bin/CMR/CmrManual.cgi"
+		  target="_top">&nbsp;&nbsp;CMR Manual&nbsp;&nbsp;</a></td>
+		  <td valign=middle><img src="/CMR/images/pipe.gif"
+		  border=0></td>
+		  <td><a href="/cgi-bin/CMR/CmrHomePage.cgi"
+		  target="_top">&nbsp;&nbsp;Home</a></td>
+		  <td><font class='breadcrumbs'>&nbsp;>&nbsp;</font></td>
+		  <td><a href='Menu.cgi?menu=genome' target='_top'>Genome Tools</a></td><td><font class='breadcrumbs'>&nbsp;>&nbsp;Genome Properties Home Page</font></td>
+               </tr>
+	    </table>
+         
+      
+   </li>
+</ul>	
+
+
+</div>
+
+
+<div style="float: left; height: 100%;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<TITLE>Genome Properties Home Page</TITLE>
+
+<table class="whole_page_table" align=center border=0>
+<tr>
+   <td colspan=2><H1 class="primary_page_heading">Genome Properties<font size=-1>&nbsp;&nbsp;</font></H1></td>
+</tr>	
+ 
+<tr>
+   <td colspan=3>
+   <p>The Genome Properties system consists of a suite of "Properties" which are carefully defined attributes of prokaryotic organisms whose status can be described by numerical values or controlled vocabulary terms for individual completely sequenced genomes.
+
+   <p>The Genome Properties system has been designed to capture the widest possible range of attributes and currently encompasses taxonomic terms, genometric calculations, metabolic pathways, systems of interacting macromolecular components and quantitative and descriptive experimental observations (phenotypes) from the literature. For more information and an in depth description of Genome Properties please refer to the <a href = "http://bioinformatics.oxfordjournals.org/cgi/content/full/21/3/293" target = "_new">Publication</a>.</p>
+   </td>
+</tr>
+
+<tr>
+   <td><p><h2 class = "primary_page_heading">Choose one of the following three ways to search and explore the Genome Properties Database:</h2></td>
+</tr>
+
+   <table class="secondary_table_left" align=center width=800px border=0>
+   <tr>
+      <td><h1 class ="primary_page_heading">Search For Predicted Properties in the CMR</h1></td>
+   </tr>
+	
+   <tr>
+      <td>The Genome Property Search allows you to search the Genome Property database for state information for selected genomes and properties.</td>
+   </tr>
+	
+   <tr>
+      <td><span class='button'><a href="MakeFrontPages.cgi?page=genome_property">Search</a></span></td>
+   </tr>
+   </table>
+
+   <tr>
+      <td>&nbsp;&nbsp;</td>
+   </tr>
+ 
+   <table class="secondary_table_left" align=center width=800px border=0> 
+    <tr>
+            <td><h1 class ="primary_page_heading">Perform a Keyword Search for a Specific Property</h1></td>
+         </tr>
+	
+         <tr>
+            <td>Lists all Genome Properties that match a specific text string. You can choose to search All Fields within a genome property or the Property Name. The default is to search All Fields.
+            </td>
+         </tr>
+	
+         <form name="genome_prop_search" onSubmit="javascript:  return OnSubmitForm();" action = "GenomePropSearch.cgi" method=post>
+         <tr><th colspan=2><h2 class= "primary_page_heading">1.  Please enter the string to be searched:&nbsp;&nbsp;<input name=search_string type=text value="" size=40><br>&nbsp;&nbsp;&nbsp;&nbsp;<font class="tip">Example search strings: transcription </h2></font></th>
+         </tr>
+       
+	 <tr>
+	    <th colspan=2><h2 class= "primary_page_heading">2.Please choose search type: 
+	    <select name="search_type" class='select_box'>
+	    <option value="all"SELECTED >All Fields (Default)</option>
+	    <option value="name">Propert Name</option></th></tr>
+	    </select></h2>
+         </tr>
+
+	 <tr>
+	    <td><span class = 'button'><a href = "javascript:document.genome_prop_search.submit();">Search</a></span></td>
+         </tr>
+	 </form>
+     </table>
+
+    <tr>
+       <td>&nbsp;&nbsp;</td>
+    </tr>
+ 
+    <tr>
+       <td>
+	<table class="secondary_table_left" align=center border=0 width=800px> 
+	   <tr><td><h1 class ="primary_page_heading">Browse Top Level Genome Properties</H1></td></tr>
+	   <tr><td>Click on the properites below to see the specific genome property report page.</td></tr>
+	   <tr><td>
+	        <table class="primary_table" align=center>
+		   
+		      <tr>
+		      
+		      <th><font color="#ffffff">Property</a></th>
+		      
+		      <th><font color="#ffffff">Description</a></th>
+		      
+			
+                      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0017" target=_new>Metabolism</a></td>
+			 
+			      <td>Biosynthesis, catabolism and interconverison of biomolecules</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0064" target=_new>Biological niche</a></td>
+			 
+			      <td>Optimal environmental conditions, hosts</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0066" target=_new>Selfish genetic elements</a></td>
+			 
+			      <td>Stowaways on the ship of life: introns, inteins, phage, etc.</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0067" target=_new>Quantitative content</a></td>
+			 
+			      <td>Counts, abundances and other metrics</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0068" target=_new>Taxonomy</a></td>
+			 
+			      <td>Classification of organisms from superkingdom down to species</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0069" target=_new>Cell surface component</a></td>
+			 
+			      <td>Objects (membranes, complexes) localized at or near the surface of cells</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0071" target=_new>Transport</a></td>
+			 
+			      <td>Movement of molecules across biological membranes</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0073" target=_new>Cell motility</a></td>
+			 
+			      <td>Chemotaxis, flagella, etc.</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0074" target=_new>Virulence</a></td>
+			 
+			      <td>Host range and factors associated with pathogenesis</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0076" target=_new>DNA handling</a></td>
+			 
+			      <td>Exchange, repair and modification of DNA</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0167" target=_new>Cellular growth, organization and division</a></td>
+			 
+			      <td>Morphology, intercellular structures</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0475" target=_new>Unknown biological process</a></td>
+			 
+			      <td>&nbsp;</td>
+			 
+		      
+		      </tr>
+		    
+		      <tr>
+		      
+			
+                      
+		         
+			      <td><a href="GenomePropDefinition.cgi?prop_acc=GenProp0551" target=_new>Regulatory systems</a></td>
+			 
+			      <td>&nbsp;</td>
+			 
+		      
+		      </tr>
+		    
+	         </table>
+	   </td></tr>
+	</table>
+        </td>
+     </tr>
+</table>
+
+<p><p>
+
+<span class="footer" style="font-size: 10px; position: relative; bottom: 0;"> 
+
+<center>
+      <a href="http://cmr.jcvi.org/cgi-bin/CMR/CmrManual.cgi?contact=1">Contact Us</a> | &copy; J. Craig Venter Institute
+</center>
+
+<!--
+ <a href="http://cmr.jcvi.org/cgi-bin/CMR/CmrManual.cgi?contact=1">Contact Us</a> | <a href="http://cmr.jcvi.org/cgi-bin/CMR/CmrSurveyFrontPage.cgi">CMR Feedback</a> | &copy; J. Craig Venter Institute
+-->
+
+</span>
+
+<!-- used for google anayltics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3461504-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- end of google anyltics code -->
+
+<script type="text/javascript">
+ var is_production = true;
+ var dev_test = /(-dev)|(-test)/;
+ var hostname = location.hostname;
+
+if(hostname.search(dev_test) != -1) {
+	is_production = false;
+}
+    
+if(is_production) {
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+}
+</script>
+
+<script type="text/javascript">
+     if(is_production) {
+           try {
+                var pageTracker = _gat._getTracker("UA-9809410-3");
+                pageTracker._setDomainName(".jcvi.org");
+                pageTracker._trackPageview();
+           } catch(err) {}
+     }
+</script>
+
+</BODY>
+
+</HTML>
+
+

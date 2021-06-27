@@ -1,0 +1,242 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<link rel="stylesheet" type="text/css" href="css/ma-pd.css" />
+<title>Memetic Algorithm for Primer Design</title>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="css/methy-rflp.css" />
+<div align="center">
+  <table width="800" border="0">
+    <tr>
+      <td><div align="center" class="style_logo">Specific PCR product primer design using memetic algorithm <a href="http://bio.kuas.edu.tw/ma-pd" class="style_font">http://bio.kuas.edu.tw/ma-pd</a></div></td>
+    </tr>
+  </table>
+</div>
+
+<table width="760" border="0" align="center">
+  <tr>
+    <td class="style_title">Introduction</td>
+  </tr>
+  <tr>
+    <td class="style_font"><p align="justify"><span class="style_font_bold">Motivation:</span> In order to provide feasible primer set for performing a polymerase chain reaction (PCR) experiment, many primer design methods have been proposed. However, the majority of these methods require a long time to obtain an optimal solution since quantities of template DNA need to be analyzed, and the designed primer sets usually do not provide a specific PCR product size. In recent years, evolutionary computation has been applied to PCR primer design and appeared to yield good results.</p>
+      <div align="justify"><span class="style_font_bold">Results:</span> A memetic algorithm is proposed to solve primer design problems associated with providing a specific product size for PCR experiments. A formula of accuracy is employed for estimating the quality of the primer design using GA and MA. Overall fifty accession nucleotide sequences were sampled for the comparison of the accuracy of GA and MA for primer design. And five hundred runs of GA and MA primer design were performed with PCR product lengths in 150~300 bps and 500~800 bps, and with different ways of calculating Tm are performed for each accession nucleotide sequence. A comparison of the accuracy results for GA and MA primer design showed that the MA for primer design yields better than the GA for primer design. The results further indicated that the proposed method finds optimal or near-optimal primer sets and effective PCR products for a dry PCR experiment.</div></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style_title">Accession number for template sequence</td>
+  </tr>
+  <tr>
+    <td><table width="700" border="0" align="center">
+      <tr>
+        <td class="style_field"><div align="center">1</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=142378442">NM_001008274</a></td>
+        <td class="style_field"><div align="center">11</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_014213">NM_014213</a></td>
+        <td class="style_field"><div align="center">21</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_001024946">NM_001024946</a></td>
+        <td class="style_field"><div align="center">31</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_015934">NM_015934</a></td>
+        <td class="style_field"><div align="center">41</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_004054">NM_004054</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">2</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_144770">NM_144770</a></td>
+        <td class="style_field"><div align="center">12</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_199416">NM_199416</a></td>
+        <td class="style_field"><div align="center">22</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_003984">NM_003984</a></td>
+        <td class="style_field"><div align="center">32</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_001238">NM_001238</a></td>
+        <td class="style_field"><div align="center">42</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_175069">NM_175069</a></td>
+      </tr>
+      <tr>
+        <td height="18" class="style_field"><div align="center">3</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_080819">NM_080819</a></td>
+        <td class="style_field"><div align="center">13</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_033213">NM_033213</a></td>
+        <td class="style_field"><div align="center">23</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XM_374787">XM_374787</a></td>
+        <td class="style_field"><div align="center">33</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XM_927564">XM_927564</a></td>
+        <td class="style_field"><div align="center">43</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_002436">NM_002436</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">4</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_014305">NM_014305</a></td>
+        <td class="style_field"><div align="center">14</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_145899">NM_145899</a></td>
+        <td class="style_field"><div align="center">24</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_006107">NM_006107</a></td>
+        <td class="style_field"><div align="center">34</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_001001567">NM_001001567</a></td>
+        <td class="style_field"><div align="center">44</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_017692">NM_017692</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">5</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_016547">NM_016547</a></td>
+        <td class="style_field"><div align="center">15</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_005535">NM_005535</a></td>
+        <td class="style_field"><div align="center">25</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_016588">NM_016588</a></td>
+        <td class="style_field"><div align="center">35</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XR_015147">XR_015147</a></td>
+        <td class="style_field"><div align="center">45</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_017547">NM_017547</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">6</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_021194">NM_021194</a></td>
+        <td class="style_field"><div align="center">16</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_032230">NM_032230</a></td>
+        <td class="style_field"><div align="center">26</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XM_932529">XM_932529</a></td>
+        <td class="style_field"><div align="center">36</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_004805">NM_004805</a></td>
+        <td class="style_field"><div align="center">46</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_014227">NM_014227</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">7</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XM_001134073">XM_001134073</a></td>
+        <td class="style_field"><div align="center">17</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XR_015530">XR_015530</a></td>
+        <td class="style_field"><div align="center">27</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_001001417">NM_001001417</a></td>
+        <td class="style_field"><div align="center">37</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XR_015734">XR_015734</a></td>
+        <td class="style_field"><div align="center">47</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_032946">NM_032946</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">8</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_001009820">NM_001009820</a></td>
+        <td class="style_field"><div align="center">18</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_138797">NM_138797</a></td>
+        <td class="style_field"><div align="center">28</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_001967">NM_001967</a></td>
+        <td class="style_field"><div align="center">38</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_025030">NM_025030</a></td>
+        <td class="style_field"><div align="center">48</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_032974">NM_032974</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">9</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_003089">NM_003089</a></td>
+        <td class="style_field"><div align="center">19</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_002948">NM_002948</a></td>
+        <td class="style_field"><div align="center">29</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XM_001130380">XM_001130380</a></td>
+        <td class="style_field"><div align="center">39</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_003578">NM_003578</a></td>
+        <td class="style_field"><div align="center">49</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XM_294093">XM_294093</a></td>
+      </tr>
+      <tr>
+        <td class="style_field"><div align="center">10</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XR_018245">XR_018245</a></td>
+        <td class="style_field"><div align="center">20</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=XR_000194">XR_000194</a></td>
+        <td class="style_field"><div align="center">30</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_000274">NM_000274</a></td>
+        <td class="style_field"><div align="center">40</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_173649">NM_173649</a></td>
+        <td class="style_field"><div align="center">50</div></td>
+        <td class="style_link"><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nuccore&id=NM_014306">NM_014306</a></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td class="style_title">Results download</td>
+  </tr>
+  <tr>
+    <td><table width="700" border="0" align="center">
+      <tr>
+        <td width="216">&nbsp;</td>
+        <td width="260" class="style_option"><div align="center">GA</div></td>
+        <td width="260" class="style_option"><div align="center">MA</div></td>
+        </tr>
+      <tr>
+        <td rowspan="2" class="style_option"> <div align="right">Wallace formula</div></td>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ga/150%7E300Wallace500Gen.rar">150~300 bps &amp; 500 generation</a></div></td>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ma/150%7E300Wallace.rar">150~300 bps &amp; 500 generation</a></div></td>
+        </tr>
+      <tr>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ga/500%7E800Wallace500Gen.rar">500~800 bps &amp; 500 generation</a></div></td>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ma/500%7E800Wallace.rar">500~800 bps &amp; 500 generation</a></div></td>
+        </tr>
+      <tr>
+        <td rowspan="2" class="style_option"><div align="right">Bolton and McCarthy formula</div></td>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ga/150%7E300Bolton500Gen.rar">150~300 bps &amp; 500 generation</a></div></td>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ma/150%7E300Bolton.rar">150~300 bps &amp; 500 generation</a></div></td>
+        </tr>
+      <tr>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ga/500%7E800Bolton500Gen.rar">500~800 bps &amp; 500 generation</a></div></td>
+        <td class="style_field"><div align="center"><a href="ftp://ma-pd@bio.kuas.edu.tw/ma/500%7E800Bolton.rar">500~800 bps &amp; 500 generation</a></div></td>
+        </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style_title"> Accuracy and running time of two different PCR product lengths primer design using the different Tm formula for fifty accession nucleotide sequences</td>
+  </tr>
+  <tr>
+    <td><table width="750" border="0" align="center">
+      <tr>
+        <td colspan="2" class="style_field"> (a) Accuracy and running time of 150~300 bps PCR product length primer design using the Wallace formula for fifty accession nucleotide sequences.</td>
+        </tr>
+      <tr>
+        <td><img src="images/1.png" width="387" height="211">   </td>
+        <td><img src="images/2.png" width="387" height="210"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="style_field"> (b) Accuracy and running time of 150~300 bps PCR product length primer design using the Bolton and McCarthy formula for fifty accession nucleotide sequences.</td>
+        </tr>
+      <tr>
+        <td><img src="images/3.png" width="387" height="211"> </td>
+        <td><img src="images/4.png" width="387" height="210"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="style_field"> (c) Accuracy and running time of 500~800 bps PCR product length primer design using the Wallace formula for fifty accession nucleotide sequences.</td>
+        </tr>
+      <tr>
+        <td><img src="images/5.png" width="387" height="210"> </td>
+        <td><img src="images/6.png" width="387" height="210"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="style_field"> (d) Accuracy and running time of 500~800 bps PCR product length primer design using the Bolton and McCarthy formula for fifty accession nucleotide sequences.</td>
+        </tr>
+      <tr>
+        <td><img src="images/7.png" width="387" height="211"> </td>
+        <td><img src="images/8.png" width="387" height="210"></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td class="style_title"> The average accuracy and running time for GA and MA primer design using Wallace formula and Bolton and McCarthy formula with PCR product lengths in 150 ~ 300 bps and 500~800 bps. The number of iterations is 500 and 100 times for GA and MA, respectively. a, average accuracy for fifty accession nucleotide sequences (%); t, average running time for fifty accession nucleotide sequences (ms). Boldface indicates highest values.</td>
+  </tr>
+  <tr>
+    <td><img src="images/9.png" width="828" height="111"></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div align="right"><img src="counter.do"></div></td>
+  </tr>
+</table>
+<div align="center"><font size="-1" color="#999999" face="Arial, Helvetica, sans-serif"><hr width="600">kuas&amp;kmu&copy;2008 design by yuhuei</font></div>
+
+</body>
+</html>

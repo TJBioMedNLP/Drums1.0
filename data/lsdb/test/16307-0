@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Protein Peeling</title>
+<link rel="STYLESHEET" href="style.css" type="text/css" />
+<META NAME="Author" CONTENT="Jean-Christophe Gelly">
+<META NAME="Keywords" CONTENT="protein,analysis,structure,peeling,domain,protein unit,architecture">
+
+<script> 
+function clignotement(){ 
+if (document.getElementById("MonElement").style.display=="block") 
+document.getElementById("MonElement").style.display="none"; 
+else 
+document.getElementById("MonElement").style.display="block"; 
+} 
+// mise en place de l appel régulier de la fonction toutes les 0.5 secondes 
+setInterval("clignotement()", 1000); 
+</script> 
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-5678422-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+
+</script>
+
+</head>
+<body>
+    <div id="container">
+
+        <div id="banner">
+            <div id="bannertitle">
+                Protein Peeling 3 D
+                <h2>Splitting a protein structure into proteins units and domains</h2>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="outer">
+	        <div id="inner">
+		        <div id="left">
+			        <div class="verticalmenu">
+				        <h2>Menu</h2>
+				        <ul>
+				            <li>
+					        <a href="index.html">Home</a>
+				            </li>
+				            <li>
+					        <a href="about.html">About method</a>
+				            </li>
+				            <li>
+					        <a href="example.html">Example of output</a>
+				            </li>
+			                <li>
+					        <a href="contacts.html">Contacts</a>
+				            </li>
+				        </ul>
+			        </div>
+		            <br/>
+
+			        <div class="verticalmenu">
+				        <h2>Announcement</h2>
+				        <ul>
+                            <li>
+                            <p style="font-size: 8px;">08/2010<br/>
+                            &nbsp;&nbsp;-Peeling3D is launched<br/></p>
+                            </li>
+                            <li>
+                            <p style="font-size:8px;">25/02/2009 <br/>
+                            &nbsp;&nbsp;-Peeling2 is moved<br/></p>
+                            </li>
+                            <li>
+                            <p style="font-size:8px;">10/02/2006 <br/>
+                            &nbsp;&nbsp;-Peeling2 launched<br/></p>
+                            </li>
+                            <li>
+                            <p style="font-size:8px;">19/01/2005 <br/>
+                            &nbsp;&nbsp;-Peeling launched<br/></p>
+                            </li>
+                        </ul>
+			        </div>
+
+
+		        </div>
+
+
+
+
+                <div id="content">
+                    <h2> Peeling a protein </h2>
+
+                    <span>
+                        <p>This method take an input pdb file and peel it.
+                        <BR>
+                        <BR>
+                        <span>
+                            <TABLE STYLE="width:540px;background-color:#e8e8e8;">
+
+                                <TR STYLE="border-width:0px;">
+                                    <TD colspan="3" STYLE="border-width:0px;">
+
+                                        <CENTER>
+
+                                            <FORM name=Form 
+                                                action="http://www.dsimb.inserm.fr/dsimb_tools/peeling3/cgi-bin/peeling_v3.pl"
+                                                method=post encType=multipart/form-data><BR><BR>Browse for 
+                                                your 3D structure file (pdb file format): <BR><BR>
+                                                <INPUT style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        type=file size=30 name=file_pdb>
+
+						                        <BR><BR>
+						                        <INPUT style="BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; BORDER-LEFT: 0px; COLOR: #ffffff; PADDING-TOP: 0px; BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #ffba27; font-size:14px;" type=submit value="PEEL IT"> 
+						                    </CENTER>
+
+						                    <BR>
+
+                                            <BR/>
+                                            <BR/>
+                                        </TD>
+                                    </TR>
+                                    <TR STYLE="bgColor:#f0f0f0;">						
+                                    </TR>
+
+
+                                    <TR STYLE="border-width:0px;height:30px;">
+
+                                        <TD STYLE="border-width:0px;width:100px;text-align:left;">
+
+                                            <p style="font-size:13px;font-weight:bold;">Options</p>
+                                        </TR>
+                                        <TR STYLE="border-width:0px;height:30px;">
+                                            <TD STYLE="border-width:0px;width:100px;text-align:left;">
+
+
+						 						&nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Prune tree<span>
+						                                This parameter allow control the overall quality of splitting.<BR/>
+						                                With this parameter activated, program stop peeling if a splitting event produce only protein units (PUs) having a compaction index (CI) inferior to a given cut-off. CI is an entropy derived measure focuses on contacts intra PU vs extra PU. A weak value (&lt;0.2) specifie a PU unit extended, a high value (&gt;0.5)a unit of type compact  </span></a> :
+						                    </TD> 
+						                    <TD STYLE="border-width:0px;">
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="pruning" SIZE=2 TYPE=RADIO value="1">Yes<input type="radio" value="0" name="pruning" CHECKED>No
+                                                <BR/>
+
+                                            </TD>
+
+
+                                            <TD STYLE="border-width:0px;width:50px;">
+
+                                                CI cut-off:<INPUT style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px" NAME="pruning_cutoff" SIZE=2 TYPE=text value="0.2">
+                                            </TD>
+
+						                </TR>
+                                        <TR STYLE="border-width:0px;height:30px;">
+                                            <TD STYLE="border-width:0px;width:100px;text-align:left;">
+						                        &nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Choose a specific R-value :<span>Modify R value for increase or decrease the importance of splitting. A hight R value imply a hight level of splitting. R is an entropy derived correlation based on contat between PU. This index quantifies globally the dependance of PUs in terms of contact.</span></a>
+						                    </TD> 
+						                    <TD  STYLE="border-width:0px;">
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="R2" SIZE=2 TYPE=text value="95">
+
+				                            </TD>
+				                            <TD STYLE="border-width:0px;"></TD>
+				                        </TR>						
+
+
+                                        <TR STYLE="border-width:0px;height:30px;"> 
+                                            <TD STYLE="border-width:0px;width:100px;text-align:left;">
+						                        &nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Minimal size of protein unit :<span>Minimal size of protein unit allowed by algorithm.</span></a>
+						                    </TD>
+						                    <TD STYLE="border-width:0px;">
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="min_pu" SIZE=2 TYPE=text value="16">
+						                    </TD>
+						                    <TD STYLE="border-width:0px;"></TD>
+						                </TR>
+
+
+                                        <TR STYLE="border-width:0px;height:30px;"> 
+                                            <TD STYLE="border-width:0px;width:100px;text-align:left;">
+
+						                        &nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Minimal size of secondary structures :<span>This parameter allow to avoid cutting continuous secondary structure of a given lenght. Under this size value, continuous secondary structure were not splitted.</span></a>
+						                    </TD>
+						                    <TD STYLE="border-width:0px;">
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="min_s2d" SIZE=2 TYPE=text value="8">
+						                    </TD>
+				                            <TD STYLE="border-width:0px;"></TD>
+
+						                </TR>
+						                <!--<BR><BR>-->
+						                <TR STYLE="border-width:0px;height:30px;">
+						                    <TD STYLE="border-width:0px;text-align:left;">
+						                        &nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Take into account only regular<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;secondary
+						                            structure for Peeling :<span>With this parameter activated only contacts between regular secondary structure are taken into account in peeling process. Contribution of others contacts in computation of R-value and Partition Index are drastically reduced.</span></a>
+						                    </TD>
+						                    <TD STYLE="border-width:0px;" >
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="onlyss2" SIZE=2 TYPE=RADIO value="Yes">Yes<input type="radio" value="No" name="onlyss2" CHECKED>No
+
+						                    </TD>
+				                            <TD STYLE="border-width:0px;"></TD>
+						                </TR>
+						                <!--<BR><BR> -->
+						                <TR STYLE="border-width:0px;height:30px;">
+						                    <TD STYLE="border-width:0px;text-align:left;">					
+						                        &nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Cut-off distance between atom :<span>This value is the reference distance in Angstrom separating Calpha. This parameter D0 was used in logistic function to derive contact matrix into contact probability matrix used in peeling algrithm. High delfa value implied more distant contact taken into accounts to compute logistic fonction (see Gelly et al. 2006 for more explanation).</span></a>
+						                    </TD>
+						                    <TD STYLE="border-width:0px;" >
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="d0" SIZE=2 TYPE=text value="8.0">
+						                    </TD>
+	                                        <TD STYLE="border-width:0px;"></TD>					 
+                                        </TR>
+
+						                <TR STYLE="border-width:0px;height:30px;">
+                                            <TD STYLE="border-width:0px;text-align:left;">
+						                        &nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Delta parameter in logistic function :<span>Delta parameter used in logistic function (see Gelly et al. 2006 for more explanation).</span></a>
+						                    </TD>
+						                    <TD STYLE="border-width:0px;" >
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="delta" SIZE=2 TYPE=text value="1.5">
+						                    </TD>
+                                            <TD STYLE="border-width:0px;"></TD>
+	                                    </TR>
+
+						                <TR STYLE="border-width:0px;height:30px;">
+						                    <TD STYLE="border-width:0px;text-align:left;">
+						                        &nbsp;&nbsp;<a style="font-size:11px;" class=info onclick='return false' href="#">Maximal size of protein unit :<span>The peeling process is stopped if all PUs are smaller than this size. A value of <FONT face="arial">0</FONT> seems that this value is not used, i.e. the protein peeling is performed without constraints on the maximal size of protein unit.</span></a>
+						                    </TD>
+						                    <TD STYLE="border-width:0px;" >
+						                        <INPUT 
+						                        style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: light; FONT-SIZE: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                        NAME="max_size_pu" SIZE=2 TYPE=text value="0">
+						                    </TD>
+
+                                            <TD STYLE="border-width:0px;"></TD>
+						                </TR>
+						                <TR STYLE="border-width:0px;">
+                                            <TD colspan="3" STYLE="border-width:0px;text-align:left;">
+                                                &nbsp;&nbsp;
+                                            </TD>
+                                        </TR>
+						            </FORM>
+						        </TABLE>
+
+						    </span>
+
+						    <BR>
+						    </p>
+						</span>
+
+                        <BR>
+						<!--
+                        <h2>Search a pilled protein</h2>
+						<p> You can search throught our database a previous peeled protein.
+						<BR>
+						<BR>
+						<span>
+						    <TABLE cellSpacing=0 width="550" bgColor=#f0f0f0 border=0>
+						        <TBODY>
+						            <TR>
+						                <TD>
+						                    <CENTER>
+						                        <BR><BR>Enter a pdb code:<BR><BR> 
+						                        <FORM name=Form 
+						                            action="./cgi-bin/search.pl"
+						                            method=post encType=multipart/form-data>
+						                            <INPUT 
+						                            style="BORDER-RIGHT: 0px; PADDING-RIGHT: 1px; BORDER-TOP: 1px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px"
+						                            size=30 name=file_pdb>
+						                            <INPUT style="BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; BORDER-LEFT: 0px; WIDTH: 25px; COLOR: #ffffff; PADDING-TOP: 0px; BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #ffba27" type=submit value=GO> 
+						                            <BR><BR><BR> <BR>
+						                        </CENTER>
+						                    </TD>
+						                </TR>
+						            </TBODY>
+						        </TABLE>
+						        <BR>or access to directly the <a href="list.html">list</a>.<BR><BR>
+
+						    </span>
+						    <BR>
+						    </p>
+						    <BR>
+                            -->
+
+						    <H2>References</H2>
+						    <p>
+                            <br/>
+                            <a style="font-size:10px;" href="http://www.ncbi.nlm.nih.gov/pubmed/19383526?itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum&ordinalpos=9">Faure G., Bornot A., de Brevern A.G.<br/>Analysis of protein contacts into Protein Units<br/>Biochimie 2009 91(7):876-87.</a>
+                            <br/>
+						    <BR><a style="font-size:10px;" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=16301202&query_hl=1&itool=pubmed_DocSum">Gelly JC, de Brevern AG, Hazout S.<BR>
+						        'Protein Peeling': an approach for splitting a 3D protein structure into compact fragments.<BR>
+						        Bioinformatics. 2006 Jan 15;22(2):129-33. Epub 2005 Nov 14.</a>
+							<BR><BR>
+							<a style="font-size:10px;" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Retrieve&dopt=AbstractPlus&list_uids=16845113&query_hl=3&itool=pubmed_docsum">Gelly JC, Etchebest C, Hazout S, de Brevern AG.<BR>Protein Peeling 2: a web server to convert protein structures into series of protein units.<BR>Nucleic Acids Res. 2006 Jul 1;34(Web Server issue):W75-8.</a> 
+							<BR><BR></p>
+
+							<BR>
+                            <!--
+							<h2>Old versions  </h2>
+							<p>You can access to protein peeling version 2: <a href="../peeling/index.html">Peeling v2</a>.<br>
+							<p>You can access to protein peeling version:   <a href="index_PP1.html">Peeling v1</a>.<br>
+							<br>
+							</p>
+							<br>
+                            -->
+
+
+						</div>
+					</div>
+
+					<div id="footer">
+
+
+					</div>
+				</body>
+            </html>
+

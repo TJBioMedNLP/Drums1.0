@@ -1,0 +1,79 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Script-Type" CONTENT="text/javascript">
+<title>Smart Dictionary Lookup</title>
+<SCRIPT TYPE="text/javascript">
+<!--
+var count;
+function BoxChecked(check){
+  for(count = 0; count < document.form1.dicnames.length; count++) {
+    document.form1.dicnames[count].checked = check;
+  }
+}
+function BoxToggle(){
+  check = true;
+  if (document.form1.dicbutton.value == "None") {
+    check = false;
+  }
+  if (check == true) {
+    document.form1.dicbutton.value = "None";
+  } else {
+    document.form1.dicbutton.value = "All";
+  }
+  for(count = 0; count < document.form1.dicnames.length; count++) {
+    document.form1.dicnames[count].checked = check;
+  }
+}
+//-->
+</script>
+</head>
+<body onLoad="document.form1.elements[0].focus()">
+<br>
+<br>
+<center>
+<strong><font size = "6" color="0000dd">Smart Dictionary Lookup</font></strong>
+<br>
+<br>
+<br>
+<form name="form1" method="POST" action="a.cgi">
+<p>
+<!-- Please enter a gene/protein name, e.g. "Zfp294", "INF regulatory factor -->
+<!-- 1" or "Tmem proetin 57". -->
+<p>
+Please enter a gene/protein name.
+</p>
+<p>
+<input name="genename" size=50>
+</p>
+<p>
+Species:
+<input type="checkbox" name="dicnames" value = "human" checked>Human
+<input type="checkbox" name="dicnames" value = "mouse">Mouse
+<input type="checkbox" name="dicnames" value = "ecoli">E. coli
+<input type="checkbox" name="dicnames" value = "yeast">Yeast
+<input type="checkbox" name="dicnames" value = "drome">Drosophila
+<!-- <input type="button" size="50" name="dicbutton" onClick="BoxToggle();" value="All">-->
+<input type="button" onClick="BoxChecked(true);" value="All">
+<input type="button" onClick="BoxChecked(false);" value="Clear">
+</p>
+<p>
+<input type="submit" value="Submit Query">
+</p>
+</form>
+
+<br>
+<p>
+The system will retrieve relevant UniProt IDs from
+<a
+href="http://pir.georgetown.edu/pirwww/iprolink/biothesaurus.shtml">BioThesaurus</a>
+entries using a soft string matching algorithm.
+</p>
+
+<br>
+<p>
+Version 1.06 (3 June 2007)
+</p>
+
+</center>
+</body>
+</html>

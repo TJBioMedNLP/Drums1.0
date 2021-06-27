@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>MINNOU protein trans-membrane domain prediction server</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="author" content="B. Cao, A. Porollo, J. Meller">
+  <meta name="keywords" 
+        content="transmembrane domain prediction,
+                 transmembrane region prediction,
+                 transmembrane prediction,
+                 membrane protein prediction,
+                 relative lipid accessibility,
+                 alpha-helical transmembrane protein,
+                 beta-barrel transmembrane protein">
+  <meta name="description" content="
+    MINNOU is a server for sequence-based trans-membrane domain
+    and relative lipid accessibility prediction.">
+
+  <link href="design.css" rel="stylesheet" type="text/css" media="screen,print" />
+</head>
+
+<script type="text/javascript">
+function validateEntry()
+{
+    if (document.QueryForm.Email.value.length > 0 &&
+        (document.QueryForm.Email.value.length < 5 ||
+         document.QueryForm.Email.value.search(/@/) == -1)) {
+        alert("Invalid E-mail address!");
+        return false;
+    }
+    if (document.QueryForm.aaSeq.value.length == 0) {
+        alert("You have to specify amino acid sequence!");
+        return false;
+    }
+
+    return true;
+}
+
+function RLAonClick() {
+    document.QueryForm.RLAmodel.disabled = 
+        (document.QueryForm.RLApred.checked) ? false : true;
+
+    return true;
+}   
+
+function UpdateSidebarInfo(id) {
+    var fr = document.getElementById(id);
+    fr.src = fr.src;
+}
+
+function DocInit() {
+    UpdateSidebarInfo('ifLastRequest');
+    UpdateSidebarInfo('ifLastUpdate');
+}
+</script>
+                                   
+<body onload="DocInit()">
+<div class="noprint">
+<div id="logo">
+  <h1><a href="http://bioinformatics.oxfordjournals.org/cgi/content/full/22/3/303" target="_blank" title="Original publication">MINNOU</a></h1>
+  <h2>
+    <b>M</b>embrane protein <b>I</b>de<b>N</b>tificatio<b>N</b> with<b>OU</b>t explicit use of
+    hydropathy profiles and alignments.<br>
+    Sequence-based prediction of relative lipid accessibility.
+  </h2>
+</div>                      
+<!-- CCHMC and UC logo at the top right corner -->
+<script type="text/javascript" src="http://sable.cchmc.org/logo.js"></script>
+<!-- posted news and updates regarding the server -->
+<script type="text/javascript" src="http://sable.cchmc.org/news.js"></script>
+
+<div id="menu">
+  <ul>
+    <li class="first"><a href="minnou_doc.html" accesskey="1" title="Documentation and protein sets" target="doc">Documentation</a></li>
+    <li><a href="http://sable.cchmc.org/cgi-bin/stat.cgi?SRC=MINNOU" accesskey="2" title="Usage: numbers and types of requests, geography of users" target="_blank">Statistics</a></li>
+    <li><a href="http://sable.cchmc.org/acknowledge.html" accesskey="3" title="Acknowledgements to funding, hosting and other support" target="_blank">Credits</a></li>
+    <li><a href="javascript:ShowNews('MINNOU')" accesskey="4" title="Announcements, updates, news">News</a></li>
+    <li><a href="http://folding.cchmc.org" accesskey="5" title="Home site of our research group" target="_blank">About us</a></li>
+    <li><a href="http://sable.cchmc.org/cgi-bin/contact_page.cgi?Server=MINNOU" accesskey="6" title="Gateway to feedback" target="_blank">Contacts</a></li>
+  </ul>                          
+</div>
+
+<hr />
+<div id="banner" style="background: url(design/system/img05.png) no-repeat; height: 235px; margin-top: 8px">
+</div>
+
+<form name="QueryForm" method="post"
+      accept-charset="UTF-8" encTYPE="multipart/form-data"
+      action="http://minnou.cchmc.org/cgi-bin/predict.cgi"
+      target="_blank" onsubmit="return validateEntry()">
+
+<!-- start page -->
+<div id="page_main">
+  <!-- start content -->
+  <div id="content">
+    <div class="post">
+      <div class="meta" title="Protein amino acid sequence">
+        <div class="hide">
+          <a href="javascript:{if (validateEntry()) document.QueryForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Target protein</div>
+      </div>
+
+      <div id="divQueryProtein" style="display: block">
+        <p>
+          <label>
+          Sequence name
+          <input type="text" name="seqName" style="width: 300px">
+          </label>
+        </p>
+        <p>
+          <label>
+          Amino acid sequence <i>(using one letter codes)</i><br>
+          <textarea name="aaSeq" rows="10" style="width: 550px"></textarea>
+          </label>
+        </p>
+      </div>
+
+      <div class="meta" title="Input and output settings">
+        <div class="hide">
+          <a href="javascript:{if (validateEntry()) document.QueryForm.submit()}" title="Submit a request">Submit</a>
+        </div>
+        <div>Settings</div>
+      </div>
+
+      <div id="divSettings" style="display: block">
+        <p>
+          <label>
+          <input type="checkbox" name="RLApred" onclick="RLAonClick()">
+          Perform relative lipid accessibility prediction using
+          </label>
+          <label>                                                     
+          <select name="RLAmodel" disabled>
+            <option value="1" selected>Complex (PSE)</option>
+            <option value="2">Complex (CE)</option>
+            <option value="3">Chain (CE)</option>
+          </select>
+          model
+          </label>
+        </p>
+        <p>
+          <label>
+          <input type="checkbox" name="SABLEres">
+          Add SABLE prediction results to e-mail message
+          </label>
+        </p>
+      </div>
+
+      <p>
+        <label>
+        <input type="text" name="Email" value="" style="width: 300px"
+               title="Specify address to receive results"> E-mail address <i>(optional)</i>
+        </label>
+      </p>
+      <p>
+      <input type="Submit" value="Submit">
+      <input type="Reset" value="Reset">
+      </p>
+
+    </div>
+  </div>
+  <!-- end content -->
+  <!-- start sidebar -->
+  <div id="sidebar">
+    <ul>
+    <li>
+      <h2>Downloads</h2>
+      <p><a href="ftp://ftp.chmcc.org/pdi/jmeller/minnou/" target="_blank">Stand-alone version of <b>MINNOU</b></a></p>
+      <p><a href="ftp://ftp.chmcc.org/pdi/jmeller/sable/" target="_blank">Stand-alone version of <b>SABLE</b></a></p>
+      <p><a href="ftp://ftp.ncbi.nih.gov/blast/" target="_blank">NCBI <b>Psi-BLAST</b></a></p>
+      <p><a href="ftp://ftp.ncbi.nih.gov/blast/db/" target="_blank"><b>nr</b> and <b>Swiss-Prot</b> databases</a></p>
+    </li>
+    <li>
+      <h2>Last request</h2>
+      <iframe id="ifLastRequest"
+              src="http://sable.cchmc.org/cgi-bin/get_server_info.cgi?Info=request&Server=MINNOU"
+              style="width: 230px; height: 150px; border: 0; margin-left: 10px"></iframe>
+      <a style="float: right" href="javascript:UpdateSidebarInfo('ifLastRequest')">Refresh</a>
+    </li>
+    <li>
+      <h2>Last update</h2>
+      <iframe id="ifLastUpdate"
+              src="http://sable.cchmc.org/cgi-bin/get_server_info.cgi?Info=update&Server=MINNOU"
+              style="width: 230px; height: 250px; border: 0; margin-left: 10px"></iframe>
+      <a style="float: right" href="javascript:ShowNews('MINNOU')">More news</a>
+    </li>
+    <li>
+      <h2>Geography of users</h2>
+      <p style="text-align: center; margin: 0 auto 0 auto">
+        <a href="http://www2.clustrmaps.com/counter/maps.php?url=http://minnou.cchmc.org"
+           id="clustrMapsLink" target="_blank">
+        <img src="http://www2.clustrmaps.com/counter/index2.php?url=http://minnou.cchmc.org"
+             style="border:0px solid"
+             alt="Locations of visitors to this page"
+             title="Locations of visitors to this page" id="clustrMapsImg"
+             onError="this.onError=null; this.src='http://clustrmaps.com/images/clustrmaps-back-soon.jpg';
+                      document.getElementById('clustrMapsLink').href='http://clustrmaps.com'" />
+        </a>
+      </p>
+    </li>
+    </ul>
+  </div>
+  <!-- end sidebar -->
+  <div style="clear: both;">&nbsp;</div>
+  </div>
+<!-- end page -->
+</form>
+</div> <!-- no print -->
+<div class="print">
+<div id="logo" style="margin-top: 100px">
+  <h1>MINNOU</h1>
+  <h2>
+    <b>M</b>embrane protein <b>I</b>de<b>N</b>tificatio<b>N</b> with<b>OU</b>t explicit use of
+    hydropathy profiles and alignments.<br>
+    Sequence-based prediction of relative lipid accessibility.
+  </h2>
+</div>                      
+<!-- CCHMC and UC logo at the top right corner -->
+<script type="text/javascript" src="http://sable.cchmc.org/logo.js"></script>
+<!-- MINNOU logo -->
+<div id="banner">
+  <img src="design/system/img05.png" alt="MINNOU banner">
+</div>
+</div> <!-- print -->
+
+<div id="footer">
+<table style="width: 100%">
+<tr>
+  <td>
+  <p class="legal">
+    <script type="text/javascript" src="http://sable.cchmc.org/footer.js"></script>
+  </p>
+  </td>
+  <td style="text-align: right">
+  <p class="credit">
+    Developed by<br>
+    <a href="http://sable.cchmc.org/design/cao.jpg" target="_blank">B. Cao</a><br>
+    <a href="http://sable.cchmc.org/design/aleksey.jpg" target="_blank">A. Porollo</a><br>
+    <a href="http://sable.cchmc.org/design/jarek.jpg" target="_blank">J. Meller</a>
+  </p>
+  </td>
+</tr>
+</table>
+</div>
+</body>
+</html>
+

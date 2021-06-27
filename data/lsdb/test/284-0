@@ -1,0 +1,448 @@
+<html>
+    <head>
+        <title>PhenomiR</title>
+        <link rel="stylesheet" href="/phenomir/css/main.css" />
+        <link rel="shortcut icon" href="/phenomir/images/favicon.ico" type="image/x-icon" />
+        
+        
+		<meta name="layout" content="main"/>
+		
+		
+	<script type="text/javascript">
+		 var _gaq = _gaq || [];
+		 _gaq.push(['_setAccount', 'UA-12769137-9']);
+		 _gaq.push(['_trackPageview']);
+		
+		 (function() {
+		   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		 })();
+	</script>
+    
+        <script language="javascript" type="text/javascript">
+        	var counter = 0;
+
+			function moreFields() {
+				counter++;
+				if (counter > 1){
+					var newFields = document.getElementById('readroot2').cloneNode(true);
+				}else{
+					var newFields = document.getElementById('readroot').cloneNode(true);
+				}
+				newFields.id = '';
+				newFields.style.display = 'block';
+				var newField = newFields.childNodes;
+				for (var i=0;i<newField.length;i++) {
+					var theName = newField[i].name
+					if (theName)
+						newField[i].name = theName + counter;
+				}
+				var insertHere = document.getElementById('writeroot');
+				insertHere.parentNode.insertBefore(newFields,insertHere);
+			}
+
+			window.onload = moreFields;
+		</script>
+        <script type="text/javascript" src="/phenomir/js/application.js"></script>
+				
+    </head>
+    <body>
+        <div id="spinner" class="spinner" style="display:none;">
+            <img src="/phenomir/images/spinner.gif" alt="Spinner" />
+        </div>	
+        <div class="centerlogo"><img src="/phenomir/images/phenomir.png" onclick="window.location.href='/phenomir/index.gsp'" style="cursor: pointer" alt="Grails" /></div>	
+       <table class="noborder">
+		<tbody>
+			<tr valign="top">
+				<td width="400px" border="0"><!-- Table Header required -->
+					<table witdth="180" class = "noborder">
+						<tbody>
+							<tr>
+								<td>
+									<table  width="180" >
+										<tbody>
+											<tr>
+												<td>
+													<table cellspacing="1" cellpadding="2" bgcolor="#dfece2">
+														<thead>
+															<tr>
+																<th valign="top" height="20" align="left">
+																	<h2>General search</h2>
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	<form action="/phenomir/main/list/searchform2" method="post" name="SearchForm2" id="SearchForm2" >
+																		<span class="searchfield"><input type="text" name="query" id="query" accesskey="s" value=""></span>
+																		<br>
+																		List as:<br>
+																		<input type="radio" name="selectedview" value="articles" checked/> Entries
+																		<input type="radio" name="selectedview" value="mirs" /> miRNAs 
+																		<br>
+																		Search type:<br>
+																		<input type="radio" name="searchtype" value="fuzzy" checked/> Fuzzy
+																		<input type="radio" name="searchtype" value="strict" /> Strict
+																		<br>
+																		<span class="searchfield"><input type="submit" name="Submit" value="Submit" id="Submit" /></span>
+																		
+																	</form>
+																	<br>
+																	<br>
+																	<a href="javascript:void(window.open('/phenomir/main/general_help.gsp','mywin','left=20,top=20,width=342,height=175,toolbar=0,resizable=0,scrollbars=1'));">help</a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<table cellspacing="1" cellpadding="2" bgcolor="#dfece2">
+														<thead>
+														<tr>
+																<th valign="top" height="20" align="left">
+																	<h2>Specific search</h2>
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	<div id="readroot" style="display: none">
+																		
+																		<select name="searchscope" id="searchscope">
+																			<option  value="p.id">Database id</option>
+																			<option  value="d.name">Disease</option>
+																			<option  value="c.name">Disease class</option>
+																			<option selected value="m.name">miRNA name</option>
+																			<option  value="m.accession">miRNA accession id</option>
+																			<option  value="p.pmid">Pubmed id</option>
+																			<option  value="t.name">Tissue/Cell line</option>
+																			<option  value="p.bioprocess">Bioprocess</option>
+																			<option  value="sd.name">Study design</option>
+																			<option  value="p.samplesinfo">Sample info</option>
+																			<option  value="p.taxonid.name">Organism name</option>
+																			<option  value="pm.method">Method</option>
+																			<option  value="pm.evidence">Evidence</option>
+																			<option  value="g.name">Target gene</option>
+																			<option  value="p.diseasecomment">Disease comment</option>
+																			<option  value="p.tissuecomment">Tissue comment</option>
+																			<option  value="p.generalcomment">General comment</option>
+																			<option  value="pm.comment">miRNA comment</option>
+																		</select>
+																		<br>
+																		<input name="detailedquery" id="detailedquery" type="text" value="">
+																		<br>
+																	</div>
+																	<div id="readroot2" style="display: none">
+																		
+																		<select name="logic" id="logic">
+																			<option>and</option>
+																			<option>or</option>
+																			<option>and not</option>
+																		</select>
+																		<input type="button" value="x" style="float:right"
+																			onclick="this.parentNode.parentNode.removeChild(this.parentNode);" />
+																		<br>
+																			<select name="searchscope" id="searchscope">
+																			<option  value="p.id">Database id</option>
+																			<option  value="d.name">Disease</option>
+																			<option  value="c.name">Disease class</option>
+																			<option selected value="m.name">miRNA name</option>
+																			<option  value="m.accession">miRNA accession id</option>
+																			<option  value="p.pmid">Pubmed id</option>
+																			<option  value="t.name">Tissue/Cell line</option>
+																			<option  value="p.bioprocess">Bioprocess</option>
+																			<option  value="sd.name">Study design</option>
+																			<option  value="p.samplesinfo">Sample info</option>
+																			<option  value="p.taxonid.name">Organism name</option>
+																			<option  value="pm.method">Method</option>
+																			<option  value="pm.evidence">Evidence</option>
+																			<option  value="g.name">Target gene</option>
+																			<option  value="p.diseasecomment">Disease comment</option>
+																			<option  value="p.tissuecomment">Tissue comment</option>
+																			<option  value="p.generalcomment">General comment</option>
+																			<option  value="pm.comment">miRNA comment</option>
+																		</select>
+																		<br>
+																		<input name="detailedquery" id="detailedquery" type="text" value="">
+																		
+																		
+																	</div>
+																	<form action="/phenomir/main/list" method="post" name="detailedsearch" id="detailedsearch" >
+																		<span id="writeroot"></span>
+																		<input type="button" id="moreFieldsButton" value="Additional field" onClick="moreFields();"/>
+																		<br>
+																		List as:<br>
+																		<input type="radio" name="selectedview" value="articles" checked/> Entries
+																		<input type="radio" name="selectedview" value="mirs" /> miRNAs 
+																		<br>
+																		Search type:<br>
+																		<input type="radio" name="searchtype" value="fuzzy" checked/> Fuzzy
+																		<input type="radio" name="searchtype" value="strict" /> Strict
+																		<br>
+																		
+																		<input type="submit" name="Submit" value="Submit" id="Submit" />
+																	</form>
+																	<br>
+																	<a href="javascript:void(window.open('/phenomir/main/specific_help.gsp','mywin','left=20,top=20,width=342,height=175,toolbar=0,resizable=0,scrollbars=1'));">help
+					      										</td>
+					      									</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<table width="100%" cellspacing="1" cellpadding="1" bgcolor="#dfece2">
+														<tbody>
+															<tr>
+																<td>
+																	<a href="/phenomir/main/about.gsp">About phenomir</a> <br>
+																	<a href="/phenomir/main/download.gsp">Download</a> <br>
+																	<br>
+																	<a href="/phenomir/main/list?selectedview=papers">List all entries</a> <br>
+																	<a href="/phenomir/main/list?selectedview=diseases">List all diseases</a>	<br>																
+																	<a href="/phenomir/main/list?selectedview=mirs">List all miRNAs</a>
+																	<br>
+																	<br>
+																	<a class="list" href="/phenomir/index.gsp">Home</a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<br>
+					 
+				      <p><font color="#666666">&copy; 2009 - Helmholtz Zentrum M&uuml;nchen - German Research Center for Environmental Health (GmbH)
+							Ingolst&auml;dter Landstra&szlig;e 1, D-85764 Neuherberg, Germany</font></p>
+				      <br>
+				      <p><a href="http://www.helmholtz-muenchen.de/serviceline/impressum/index.html" target="_blank"><b>Imprint</b></a></p> 
+				      <br>
+				      <p><font color="#666666"><b>Disclaimer:</b><br><font size="1">MIPS Databases 
+				      and associated information are protected by copyright. This server and its 
+				      associated data and services are for academic, non-commercial use only. 
+				      The <a href="http://www.helmholtz-muenchen.de/" target="_blank"><font size="1" color="#666666">Helmholtz Zentrum M&uuml;nchen</font></a> has no liability for the use of results, data or 
+				      information which have been provided through this server. Neither the use 
+				      for commercial purposes, nor the redistribution of MIPS database files to 
+				      third parties nor the distribution of parts of files or derivative 
+				      products to any third parties is permitted. </font></font></p>
+	    	
+				</td>
+				<td width="100%" valign="top" height="100%">
+					
+	    <table class="noborder">
+		    <tbody>
+			    <tr>
+				    <td>
+				        <table>
+				        	<thead>
+					        	<tr>
+						        	<th>
+						        		<h2 align="center">Welcome to PhenomiR</h2>
+						        	</th>
+					        	</tr>
+				        	</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div align="center">
+											
+											<br>
+											<div class="indextext">
+												
+												The PhenomiR database provides information about differentially regulated miRNA expression in diseases and
+												other biological processes.
+												The content of PhenomiR is completely generated by manual curation of experienced annotators. Data was
+												extracted from more than 365 scientific articles and resulted in more than 632 database entries as 
+												of 02 2011.<br><br>
+												The design principle of PhenomiR is to use established ontologies and resources. For annotation of 
+												diseases we use information of the OMIM Morbid Map, bioprocesses are described with terms from Gene 
+												Ontology and for annotation of tissue/cell culture information the Tissue Ontology is used.<br><br>
+												<u>Publication:</u><br>
+
+												<font size=1>Ruepp A, Kowarsch A, Schmidl D, Buggenthin F, Brauner B, Dunger I, Fobo G, Frishman G, Montrone C, Theis FJ. <b>PhenomiR: a knowledgebase for microRNA expression in diseases and biological processes.</b> Genome Biology 2010, 11:R6</font><br>
+												<a href="http://www.ncbi.nlm.nih.gov/pubmed/20089154" target="_blank"><b>pubmed</b></a> | <a href="http://genomebiology.com/2010/11/1/R6" target="_blank"><b>pdf</b></a>
+												
+												
+											</div>
+											<br>
+											<div>
+												<!-- <img src="images/GraphFrontEnd.html"  alt="network" />  -->
+												<iframe name="xyz" src="images/GraphFrontEnd.gsp" frameborder="0" width="645" height="670"></iframe>
+											</div>
+											<br>
+											<div class="indextext">
+												The graph displays the connected part of the cancer network extracted from the PhenomiR database where
+												only miRNAs with a minimal degree of 2 and a maximal degree of 5 were taken into consideration. 
+												<br><br>
+												All miRNAs are shown as small color coded octagons; the color coding indicates the number of carcinomal
+												disorders a	specific miRNA is involved in and reaches from light blue for 2 disorders to dark blue for 5. 
+												<br><br>
+												Furthermore, the disorders, shown as green ellipses, are linked to the according entries within the database.
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</td>
+						<td>
+						<table>
+							<tbody>
+								<tr>
+									<td>
+										<table align="center">
+											<thead>
+												<tr>
+													<th colspan="2">
+														Statistics:
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+												<tr class="odd">
+													<td>Unique miRNAs:</td><td>675</td>
+												</tr>
+												<tr class="even">
+											    	<td>Articles:</td><td>365</td>
+												</tr>
+												<tr class="odd">
+													<td>Entries:</td><td>632</td>
+												</tr>
+												<tr class="even">
+													<td>Diseases:</td><td>145</td>
+												</tr>
+												<tr class="odd">
+													<td>Bioprocesses:</td><td>98</td>
+												</tr>
+												<tr class="even">
+													<td>Data points:</td><td>12192</td>
+											    </tr>
+												<tr class="odd">
+													<td>Last update:</td><td>2011-02-15</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table align="center">
+											<thead>
+												<tr>
+													<th colspan=3>
+													Most annotated miRNAs:
+													</th>
+												</tr>
+												<tr>
+													<th>
+														Rank
+													</th>
+													<th>
+														Name
+													</th>
+													<th>
+														No.
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+													<tr class="odd" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-21&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>1.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-21&searchscope1=m.name&selectedview=mirs">hsa-mir-21</a></td>
+							                           <td>172</td>
+							                    	</tr>
+												
+													<tr class="even" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-155&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>2.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-155&searchscope1=m.name&selectedview=mirs">hsa-mir-155</a></td>
+							                           <td>116</td>
+							                    	</tr>
+												
+													<tr class="odd" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-145&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>3.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-145&searchscope1=m.name&selectedview=mirs">hsa-mir-145</a></td>
+							                           <td>116</td>
+							                    	</tr>
+												
+													<tr class="even" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-221&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>4.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-221&searchscope1=m.name&selectedview=mirs">hsa-mir-221</a></td>
+							                           <td>111</td>
+							                    	</tr>
+												
+													<tr class="odd" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-17&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>5.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-17&searchscope1=m.name&selectedview=mirs">hsa-mir-17</a></td>
+							                           <td>105</td>
+							                    	</tr>
+												
+													<tr class="even" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-143&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>6.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-143&searchscope1=m.name&selectedview=mirs">hsa-mir-143</a></td>
+							                           <td>102</td>
+							                    	</tr>
+												
+													<tr class="odd" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-125b-1&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>7.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-125b-1&searchscope1=m.name&selectedview=mirs">hsa-mir-125b-1</a></td>
+							                           <td>99</td>
+							                    	</tr>
+												
+													<tr class="even" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-222&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>8.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-222&searchscope1=m.name&selectedview=mirs">hsa-mir-222</a></td>
+							                           <td>96</td>
+							                    	</tr>
+												
+													<tr class="odd" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-126&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>9.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-126&searchscope1=m.name&selectedview=mirs">hsa-mir-126</a></td>
+							                           <td>93</td>
+							                    	</tr>
+												
+													<tr class="even" onclick="window.location.href = '/phenomir/main/list?detailedquery1=hsa-mir-210&searchscope1=m.name&detailedquery2=&searchscope2=d.name&logic=or&selectedview=mirs'" style="cursor: pointer">
+							                       	   <td>10.</td>
+							                           <td><a href="/phenomir/main/list?detailedquery1=hsa-mir-210&searchscope1=m.name&selectedview=mirs">hsa-mir-210</a></td>
+							                           <td>90</td>
+							                    	</tr>
+													
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+    
+				</td>
+			</tr>
+			<tr>
+				
+			</tr>
+		</tbody>
+	</table>		
+   </body>	
+</html>

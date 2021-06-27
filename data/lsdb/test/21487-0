@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><title>UniProt</title><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/><link href="/" rel="home"/><link href="http://creativecommons.org/licenses/by-nd/3.0/" rel="license"/><link type="image/vnd.microsoft.icon" href="/favicon.ico" rel="shortcut icon"/><link href="/css-compr.css" type="text/css" rel="stylesheet"/>
+		<!--[if lt IE 7]>
+			<link href="/ie.css" type="text/css" rel="stylesheet"/>
+		<![endif]-->
+		<style type="text/css">#mission-statement {
+				margin-bottom: 2em;
+			}
+			
+			#welcome li {
+				padding-bottom: 0.5em;
+			}
+			
+			#news {
+                width:28em;
+            }
+			#blocks {
+				width: 72em;
+			}
+			
+			.warn {
+				font-weight: normal;
+			}
+					
+			#data-listing {
+				margin: 1em 0;
+				border-collapse: collapse;
+			}
+			
+			#data-listing td, #data-listing th {
+				border: 1px solid #C1D0DF;
+				padding: 0.5em;
+				text-align: left;
+				vertical-align: top;
+				font-weight: normal;
+			}
+			
+			#data-listing th {
+				white-space: nowrap;
+			}
+           
+			
+		</style><script type="text/javascript">
+			var BASE = '/';
+			var image_x_inverse = new Image();
+			image_x_inverse = '/images/x_inverse.png';
+		</script><script src="/js-compr.js" type="text/javascript"> </script><link href="microsummary" rel="microsummary"/><link media="print" href="/print.css" type="text/css" rel="stylesheet"/></head><body onkeyup="keyUp(event)" onkeydown="keyDown(event)" onload="document.forms[0].elements['query'].focus(); initCart();UniProt.mappingOptions()"><p style="display:none"><a accesskey="2" href="#content">Skip Header</a></p><table id="header"><tr><td id="logo"><a accesskey="1" href="/"><img alt="" src="/images/logo_small.gif"/></a></td><td id="trail"></td><td id="menu"><a href="/downloads">Downloads</a>
+						&middot;
+						<a accesskey="9" href="/contact">Contact</a>
+						&middot;
+						<a rel="help" href="/help/">Documentation/Help
+						</a></td></tr></table><div id="searchbar"><div style="" class="searchbar" id="search"><form id="search-form" method="get" action="/"><div class="tabs"><ul><li class="active-tab"><a>Search</a></li><li><a rel="nofollow" onclick="focusSearch('blast'); focusQuery('blast-form'); return false" href="/?tab=blast">Blast</a></li><li><a rel="nofollow" onclick="focusSearch('align'); focusQuery('align-form'); return false" href="/?tab=align">Align</a></li><li><a rel="nofollow" onclick="focusSearch('batch'); focusQuery('batch-form'); return false" href="/?tab=batch">Retrieve</a></li><li><a rel="nofollow" onclick="focusSearch('mapping'); focusQuery('mapping-form'); return false" href="/?tab=mapping">ID&nbsp;Mapping</a></li></ul></div><div class="topform"><table><tr><td><p class="label">Search in</p><p><select id="uniprotdatabases" name="dataset"><optgroup label="Core Data"><option value="uniprot" selected="selected">Protein Knowledgebase (UniProtKB)</option><option value="uniref">Sequence Clusters (UniRef)</option><option value="uniparc">Sequence Archive (UniParc)</option></optgroup><optgroup label="Supporting Data"><option value="citations">Literature citations</option><option value="taxonomy">Taxonomy</option><option value="keywords">Keywords</option><option value="locations">Subcellular locations</option></optgroup><optgroup label="Information"><option value="news">News</option><option value="docs">Documents</option><option value="manual">User manual</option><option value="faq">FAQ</option><option value="help">Help</option><option value="program">Annotation programs</option></optgroup></select></p></td><td><p class="label"><acronym onclick="dialog('text-search|text-search-syntax')">Query</acronym></p><p><input type="text" name="query" accesskey="4" size="41" value="" class="text" /><input value="score" name="sort" type="hidden"/><input type="text" name="url" style="display:none" /></p></td><td><p class="label">&nbsp;</p><p><input type="submit" value="Search" id="text-search-submit"/>&nbsp;<label for="text-search-clear">Reset button</label><input value="Clear" onclick="var element = getQueryField(); element.value = ''; element.focus()" type="button" id="text-search-clear"/><input value="no" name="lucky" type="hidden"/><input value="no" name="random" type="hidden"/><span id="query-builder-link">&nbsp;&nbsp;<a onclick="$('query-builder-link').hide(); showBuilder(); UniProt.analytics('AdvancedSearch', 'click', ''); return false" href="#">Advanced&nbsp;Search&nbsp;&raquo;</a></span></p></td></tr></table><div id="query-builder-container"> </div></div></form></div><div style="display:none" class="searchbar" id="blast"><form id="blast-form" method="post" action="/blast/" onsubmit="this.redirect.value = isCtrlPressed() ? 'no' : 'yes';"><div class="tabs"><ul><li><a rel="nofollow" onclick="focusSearch('search'); focusQuery('search-form'); return false" href="/?tab=search">Search</a></li><li class="active-tab"><a>Blast</a></li><li><a rel="nofollow" onclick="focusSearch('align'); focusQuery('align-form'); return false" href="/?tab=align">Align</a></li><li><a rel="nofollow" onclick="focusSearch('batch'); focusQuery('batch-form'); return false" href="/?tab=batch">Retrieve</a></li><li><a rel="nofollow" onclick="focusSearch('mapping'); focusQuery('mapping-form'); return false" href="/?tab=mapping">ID&nbsp;Mapping</a></li></ul></div><div class="topform"><table style="width: 100%"><tr><td style="width: 90%" class="no-pad"><table><tr><td rowspan="2"><p class="label">
+											Sequence or <acronym onclick="dialog('sequence-searches|blast-identifiers')">UniProt identifier</acronym></p><p><textarea name="query" rows="6" cols="61"></textarea></p></td><td style="padding-bottom: 0"><p class="label">&nbsp;</p><p><button type="submit" id="blast-submit">Blast</button></p><p><button onclick="var element = document.forms['blast-form'].elements['query']; element.value = ''; element.focus()" type="button" title="reset" id="blast-clear">Clear</button></p><input value="yes" name="redirect" type="hidden"/><input type="text" name="url" style="display:none" /></td></tr><tr><td style="vertical-align: bottom"><p style="display:none" class="blast-options-link" id="blast-options-hide"><a onclick="hideBlastOptions(); UniProt.analytics('hideBlastOptions', 'click', ''); return false;" href="#">&laquo;&nbsp;Options</a></p><p class="blast-options-link" id="blast-options-show"><a onclick="showBlastOptions(); UniProt.analytics('showBlastOptions', 'click', ''); return false;" href="#">Options&nbsp;&raquo;</a></p></td></tr></table></td><td class="no-pad"><fieldset class="tips"><legend>Help</legend><p>
+									For a sequence similarity search, enter:<br/>
+									&bull; a protein or nucleotide sequence<br/>
+									&bull; a UniProt identifier, e.g.<br/>
+									&nbsp;&nbsp; <code>P00750</code> or <code>A4_HUMAN</code> or <code>UPI0000000001</code><br/><a class="more" href="/help/sequence-searches">More... </a></p></fieldset></td></tr></table><table style="display: none; width: 100%" id="blast-options"><tr><td colspan="2"><table class="blast-options-table"><tr><td></td></tr></table></td></tr></table></div></form><script type="text/javascript">
+				initBlastOptions();
+			</script></div><div style="display:none" class="searchbar" id="align"><form id="align-form" method="post" action="/align/" onsubmit="this.redirect.value = isCtrlPressed() ? 'no' : 'yes';"><div class="tabs"><ul><li><a rel="nofollow" onclick="focusSearch('search'); focusQuery('search-form'); return false" href="/?tab=search">Search</a></li><li><a rel="nofollow" onclick="focusSearch('blast'); focusQuery('blast-form'); return false" href="/?tab=blast">Blast</a></li><li class="active-tab"><a>Align</a></li><li><a rel="nofollow" onclick="focusSearch('batch'); focusQuery('batch-form'); return false" href="/?tab=batch">Retrieve</a></li><li><a rel="nofollow" onclick="focusSearch('mapping'); focusQuery('mapping-form'); return false" href="/?tab=mapping">ID&nbsp;Mapping</a></li></ul></div><div class="topform"><table style="width:100%"><tr><td style="width: 90%" class="no-pad"><table><tr><td rowspan="2"><p class="label">
+											Sequences or <acronym onclick="dialog('sequence-alignments|sequence-alignments-identifiers')">UniProt identifiers</acronym></p><p><textarea id="alignQuery" name="query" rows="6" cols="61"></textarea></p></td><td><p class="label">&nbsp;</p><p><button type="submit" id="sequence-align-submit">Align</button></p><p><button onclick="var element = document.forms['align-form'].elements['query']; element.value = ''; element.focus()" type="button" id="sequence-align-clear">Clear</button></p><input value="yes" name="redirect" type="hidden"/><input type="text" name="url" style="display:none" /></td></tr></table></td><td rowspan="2" class="no-pad"><fieldset class="tips"><legend>Help</legend><p>
+								To align several protein sequences, enter:<br/>
+								&bull; two or more sequences in FASTA format<br/>
+								&bull; two or more UniProt identifiers, e.g.:<br/>
+								&nbsp;&nbsp; <code>TPA_HUMAN</code><br/>
+								&nbsp;&nbsp; <code>TPA_PIG</code><br/><a class="more" href="/help/sequence-alignments">More... </a></p></fieldset></td></tr></table></div></form></div><div style="display:none" class="searchbar" id="batch"><form id="batch-form" method="post" action="/batch/" enctype="multipart/form-data"><div class="tabs"><ul><li><a rel="nofollow" onclick="focusSearch('search'); focusQuery('search-form'); return false" href="/?tab=search">Search</a></li><li><a rel="nofollow" onclick="focusSearch('blast'); focusQuery('blast-form'); return false" href="/?tab=blast">Blast</a></li><li><a rel="nofollow" onclick="focusSearch('align'); focusQuery('align-form'); return false" href="/?tab=align">Align</a></li><li class="active-tab"><a>Retrieve</a></li><li><a rel="nofollow" onclick="focusSearch('mapping'); focusQuery('mapping-form'); return false" href="/?tab=mapping">ID&nbsp;Mapping</a></li></ul></div><div class="topform"><table style="width: 100%;"><tr><td style="width: 90%" class="no-pad"><table><tr><td><p class="label"><acronym onclick="dialog('batch|batch-identifiers')">UniProt identifiers</acronym></p><p><textarea name="query" rows="7" cols="21"></textarea><input type="text" name="url" style="display:none" /></p></td><td><p class="label"><strong>or file</strong></p><p><input name="file" class="file" type="file"/></p><p><button type="submit" id="batch-retrieval-submit">Retrieve</button></p><p><button onclick="var element = document.forms['batch-form'].elements['query']; element.value = ''; element.focus()" type="button" id="batch-retrieval-clear">Clear</button></p></td></tr></table></td><td class="no-pad"><fieldset class="tips"><legend>Help</legend><p>
+								Enter or upload a list of UniProt identifiers<br/>
+								to download the corresponding entries, e.g.<br/><code>P00750</code><br/><code>A4_HUMAN</code><br/><a class="more" href="/help/batch">More... </a></p></fieldset></td></tr></table></div></form></div><div style="display:none" class="searchbar" id="mapping"><form id="mapping-form" method="post" action="/mapping/" enctype="multipart/form-data"><div class="tabs"><ul><li><a rel="nofollow" onclick="focusSearch('search'); focusQuery('search-form'); return false" href="/?tab=search">Search</a></li><li><a rel="nofollow" onclick="focusSearch('blast'); focusQuery('blast-form'); return false" href="/?tab=blast">Blast</a></li><li><a rel="nofollow" onclick="focusSearch('align'); focusQuery('align-form'); return false" href="/?tab=align">Align</a></li><li><a rel="nofollow" onclick="focusSearch('batch'); focusQuery('batch-form'); return false" href="/?tab=batch">Retrieve</a></li><li class="active-tab"><a>ID&nbsp;Mapping</a></li></ul></div><div class="topform"><table style="width: 100%;"><tr><td style="width: 90%" class="no-pad"><table><tr><td><p class="label">Database identifiers</p><p><textarea name="query" rows="7" cols="21"></textarea><input type="text" name="url" style="display:none" /></p></td><td><p class="label"><strong>or file</strong></p><p><input name="file" class="file" type="file"/></p><table><tr><td><p from="EMBL_ID" id="map-from-label" class="label">From</p><p><select id="map-from" onchange="updateTo();" name="from"><option>Requires JavaScript</option></select></p><p to="ACC" id="map-to-label" class="label">To</p><p><select id="map-to" onchange="updateFrom();" name="to"><option>Requires JavaScript</option></select></p></td><td><p class="label">&nbsp;</p><p><button type="submit" id="mapping-submit">Map</button></p><p><button onclick="swapSelection('map-from', 'map-to')" type="button">Swap</button></p><p><button onclick="var element = document.forms['mapping-form'].elements['query']; element.value = ''; element.focus()" type="button" id="mapping-clear">Clear</button></p></td></tr></table></td></tr></table></td><td class="no-pad"><fieldset class="tips"><legend>Help</legend><p>
+								To map identifiers to or from UniProtKB:<br/>
+								&bull; enter identifiers, e.g. <code>1TTA 1FNS</code><br/>
+								&bull; select a source database, e.g. <code>PDB</code><br/>
+								&bull; select a target database, e.g. <code>UniProtKB</code><br/><a class="more" href="/help/mapping">More... </a></p></fieldset></td></tr></table></div></form></div><div class="searchbar-bottom">
+		&nbsp;
+		</div></div><div style="display:none" id="cart"><p id="cart-contents"><span id="cart-count">0</span> selected: <span id="cart-list">&nbsp;</span></p><p id="cart-actions"><button onclick="fetchCart(); return false" id="cart-retrieve">Retrieve</button>&nbsp;<button onclick="submitCart(); return false" id="cart-align">Align</button>&nbsp;<button onclick="blastCart(); return false" id="cart-blast">Blast</button>&nbsp;<button onclick="clearCart(); return false" id="cart-clear">Clear</button></p></div><div id="content"><div id="blocks"><div id="news"><p id="rss-icon"><a title="News Feed" href="/news/?format=rss"><img alt="" src="/images/feed.gif"/></a></p><h2>News</h2><div><h3><a href="/news/2011/02/08/release">UniProt release 2011_02</a>&nbsp;-&nbsp;Feb 8, 2011</h3><p class="summary">Automatic annotation of UniProtKB/TrEMBL using PDB-derived data ? Cross-references to neXtProt</p></div><div id="news-links"><p>&rsaquo; Statistics for UniProtKB: <br/>
+					&nbsp; <a href="http://www.expasy.org/sprot/relnotes/relstat.html">Swiss-Prot</a>
+					&#183; <a href="http://www.ebi.ac.uk/uniprot/TrEMBLstats/">TrEMBL</a></p><p>&rsaquo; <a href="/docs/sp_soon.htm">Forthcoming
+					changes</a></p><p>&rsaquo; <a href="/news/">News archives</a></p></div><br/><h2>Site tour</h2><div><a href="/demos/diabetes"><img style="border: 1pt solid gray; margin-top: 0.3em;" alt="" src="/images/screenshots/demo_diabetes_thumbnail.png"/></a><p>Learn how to make best use of the tools and data on this
+					site.</p></div><br/><h2>Protein&nbsp;Spotlight</h2><div><h3 style="white-space:normal"><a href="http://www.expasy.org/spotlight/back_issues/sptlt126.shtml">our hollow architecture</a><br />March 2011</h3><p class="summary">We get on with our day-to-day life largely unaware of the continuous battles that are being led within us. Indeed, it is thanks to unceasing cellular hostilities inside our bodies that we are able to get on with our lives as we do&hellip;</p></div></div><div id="welcome"><h2>Welcome</h2><div><p id="mission-statement">The mission of <a href="help/about">UniProt</a>
+				is to provide the scientific community with a comprehensive,
+				high-quality and freely accessible resource of protein sequence and
+				functional information.</p><h3>What we provide</h3><table id="data-listing"><tr><th><a href="help/uniprotkb">UniProtKB</a></th><td>Protein knowledgebase, consists of two sections:
+						<ul style="list-style-type: none; margin-bottom: 0"><li style="margin-left: -20px"><img alt="" src="./images/reviewed.gif"/> Swiss-Prot, which is
+							manually annotated and reviewed.</li><li style="margin-left: -20px"><img alt="" src="./images/unreviewed.gif"/> TrEMBL, which is
+							automatically annotated and is <strong>not</strong> reviewed.</li></ul>
+						Includes <a href="taxonomy/complete-proteomes">Complete
+						Proteome Sets</a>.</td></tr><tr><th><a href="help/uniref">UniRef</a></th><td>Sequence clusters, used to speed up sequence similarity searches.</td></tr><tr><th><a href="help/uniparc">UniParc</a></th><td>Sequence archive, used to keep track of sequences and
+						their identifiers.</td></tr><tr><th>Supporting data</th><td><a href="citations/">Literature citations</a>, <a href="taxonomy/">taxonomy</a>, <a href="keywords/">keywords</a>
+						and <a href="docs/#vocabulary">more</a>.</td></tr></table><h3>Getting started</h3><table id="tool-listing"><tr><td><ul><li><a href="help/text-search">Text search</a></li><li><a href="help/sequence-searches">Sequence similarity searches (BLAST)</a></li><li><a href="help/sequence-alignments">Sequence alignments</a></li><li><a href="help/batch">Batch retrieval</a></li><li><a href="help/mapping">Database identifier mapping (ID Mapping)</a></li></ul></td></tr></table><p style="text-align: center; margin: 1em"><img alt="" src="images/logo.gif"/></p></div></div></div></div><div style="clear:both"/><div id="footer"><div id="copyright">
+			&copy; 2002&ndash;2011 <a accesskey="9" href="/help/about">UniProt Consortium</a> |
+			<a href="/help/license">License &amp; Disclaimer</a> |
+			<a href="/contact">Contact</a></div><div id="logos"><a href="http://www.ebi.ac.uk/"><img alt="EBI logo" src="/images/logos/footer/logo_ebi.png" style="vertical-align: middle; padding-right: 10px; padding-left: 5px;"/></a><a href="http://pir.georgetown.edu/"><img alt="PIR logo" src="/images/logos/footer/logo_pir.png" style="vertical-align: middle; padding-right: 10px;"/></a><a href="http://www.isb-sib.ch/"><img alt="SIB logo" src="/images/logos/footer/logo_sib.png" style="vertical-align: middle; padding-right: 5px;"/></a></div></div><script type="text/javascript">
+				var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+				document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+			</script><script type="text/javascript">
+						var pageTracker = _gat._getTracker("UA-6228219-1");
+						pageTracker._trackPageview();
+					</script><script type="text/javascript">	 	
+					initDomainCart("uniprot.org");
+				</script></body></html>

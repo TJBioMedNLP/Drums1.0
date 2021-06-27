@@ -1,0 +1,538 @@
+<html><!-- #BeginTemplate "/Templates/utilities_template.dwt" --><!-- DW6 -->
+<head>
+<script language="JavaScript" type="text/javascript">
+if (top != self)
+   {
+    top.location.href = location.href;
+   }
+function messageReveal() { 
+		var messageindex = document.Form.threshold.selectedIndex 
+		document.Form.messageField.value = messages[messageindex]; 
+	}
+</script>
+<!-- #BeginEditable "doctitle" --> 
+<title>Immunomedicine Group: Tools >> Tapreg</title>
+<META name="Keywords" content="tools, utilities, bioinformatics, molecular, genetics, immunology software, databases, genomics, sequencing, protein, computational biology, nucleotide, FASTA, BLAST, SRS,ClustalW, ">
+<META name="Description" content="Bioinformatics">
+</script>
+<!-- #EndEditable -->
+<link rel="stylesheet" href="../../../../stylesheet.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="javascript" src="../../../../capas.js" type="text/javascript"></script>
+<script language="javascript" src="../../../../master.js" type="text/javascript"></script>
+<script language="javascript" src="misc.js" type="text/javascript"></script>
+	<script type="text/javascript" src="yahoo-dom-event.js"></script>
+	<script type="text/javascript" src="connection-min.js"></script>
+	<script type="text/javascript">
+	function replaceAll(text, strA, strB)
+	{
+    	while ( text.indexOf(strA) != -1)
+    	{
+        	text = text.replace(strA,strB);
+    	}
+    	return text;
+	}
+
+	function init(){
+	  document.getElementById('loader').style.visibility = 'hidden';
+	  miForm.protein.value = "";
+	  
+	  var onProteinUploadButtonClick = function(e){
+	        document.getElementById('loader').style.visibility = 'visible';	
+		    YAHOO.util.Connect.setForm('uploadForm', true);
+		    var uploadHandlerProtein = {
+		      upload: function(response) {
+		      	var content = replaceAll(response.responseText,"&gt;",">");
+		      	document.getElementById('loader').style.visibility = 'hidden';
+		        document.getElementById('txt_protein').value = content;
+			    document.miForm.protein.value = content;
+		      }
+		   };
+		   YAHOO.util.Connect.asyncRequest('POST', 'uploadProtein.php', uploadHandlerProtein);
+		};
+
+		  YAHOO.util.Event.on('uploadProtein', 'click', onProteinUploadButtonClick);
+	}
+	
+	YAHOO.util.Event.on(window, 'load', init);
+	</script>
+</head>
+
+<body onUnload="callUnLoadMethods()" onLoad="document.getElementById('task1').checked='true';verificaCapa(); verificaCapa2(); MM_preloadImages('../../images/dark_home3.jpg','../../images/dark_research3.jpg','../../images/dark_services3.jpg','../../images/dark_technology3.jpg','../../images/dark_support3.jpg','../../images/dark_spanish3.jpg')">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td align="left" valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabletop">
+<tr>
+	<td><a href="http://www.ucm.es" target="_new"><img src="/icons/ucm_logo.png" border="0" ></a></td>
+	<td><a href="http://www.ucm.es/centros/webs/fmed" target="_new"><img src="/icons/med_logo.png" border="0"></a></td>
+	<td width="440"><img alt="" src="/icons/ig_logo.png" width="440" height="85"></td>
+	<td valign="top" align="right" width="100%">
+	<table border="0" cellspacing="0" cellpadding="0" class = "tabletop" width = "100%">
+              <tr> 
+                <td valign = "top" align = "right" colspan="2"> 
+                  <table border="0" cellspacing="0" cellpadding="0" class="tablehead2">
+                    <tr> 		
+                      <td align="left" valign="bottom">
+                      <img alt="" src="../../images/top_corner_new3.jpg" width="28" height="28"></td>
+                      <td><img alt="" src="../../images/google.png" width="66" height="28"></td>
+                      
+                      <form action="http://www.google.com/search" method="GET" target="_new">
+                      <td align="center" valign="middle" class="small" nowrap>
+                      	<span class = "smallwhite">
+                      	<a HREF="http://www.google.com/" target="_new"></a>&nbsp;</span></td>
+                      <td align = "center" valign = "middle" class="small"><span class="small">
+                          <input TYPE="text" name="q" size="8" maxlength="255" value="">
+                  	  </span></td>
+                      <td align = "center" valign = "middle" class = "small" nowrap>
+                      	 <span class =" small">&nbsp;
+                      	  <input type="submit" name="btnG" VALUE="WWW Search" class="small">&nbsp;</span></td>
+                      </form>
+                        
+                      <form action="http://www.google.com/search" method="GET" target="_new">
+                      <td align = "center" valign = "middle" class = "small" nowrap>
+                     	 <span class = "smallwhite">
+                      	   <a HREF="http://www.google.com/" target="_new"></a>&nbsp;
+                      	 </span></td>
+                        </form>
+			
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+            </table>
+ 
+ </td>
+</tr>
+<tr><td colspan = "2"><img alt="" src="../../images/trans_new.jpg" width = "1" height = "5"></td></tr>
+</table> 
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width = "100%">
+<table width="645" border="0" cellspacing="0" cellpadding="0">
+        <td width="129" height="23"><a href="../../Home/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image8','','../../images/darkgreenhome.jpg',1)"><img alt="" name="Image8" border="0" src="../../images/button_greenhome.jpg" width="129" height="23"> </a></td>
+   
+        <td width="129" height="23"><a href="../../Research/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','../../images/darkgreenresearch.jpg',1)"><img alt="" name="Image10" border="0" src="../../images/button_greenresearch.jpg" width="129" height="23"></a></td>
+       <td width="129" height="23"><a href="../../Services/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image11','','../../images/darkgreenservices.jpg',1)"><img alt="" name="Image11" border="0" src="../../images/button_greenservices.jpg" width="129" height="23"></a></td>
+        <td width="129" height="23"><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image12','','../../images/button_greentechnology.jpg',1)"><img alt="" name="Image12" border="0" src="../../images/darkgreentechnology.jpg" width="129" height="23"></a></td>
+        <td width="129" height="23"><a href="../../Contact/index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image13','','../../images/darkgreencontact.jpg',1)"><img alt="" name="Image13" border="0" src="../../images/button_greencontact.jpg" width="129" height="23"></a></td>
+        </tr>
+                      
+</table></td></tr>
+      <tr>
+          <td width="100%" height="5" class="tablehead2">
+		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr> 
+                <td width = "100%" height="20" align="center"><!-- #BeginEditable "topnav" --> 
+                  <!-- TOP LINK HERE -->
+                  <a href="index.html" class="white">Tools</a> 
+                  <!-- TOP LINK HERE -->
+                  <!-- #EndEditable --></td>
+              </tr>
+            </table>
+		  </td>
+     </tr>
+	 <tr>
+	   <td  class = "tableborder"><img alt="" src="../../images/trans.gif" height =  "3" width = "1"></td>
+	 </tr>
+	 </table>
+      <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+    <td colspan = "6"  class = "tablebody3"  height = "6"><img alt="" src="../../images/trans.gif" width = "1" height = "6"></td>
+	</tr>
+  <tr>
+    <td class = "tablebody3"  width = "1%" height = "20" ><img alt="" src="../../images/trans.gif" height = "20" width = "160"></td>
+          <td width = "20" height = "20" valign = "top" align = "left" bgcolor = "#ffffff"><img alt="" src="../../images/corner_new2.gif" width="20" height="20"></td>
+    <td>&nbsp;</td>
+    <td width = "100%" colspan = "3"><img alt="" src="../../images/trans.gif" height = "1" width = "1"></td>
+
+  </tr>
+  <tr>
+    <td  width = "180" valign = "top" align = "left"> <!-- #BeginEditable "leftnav" -->
+    <table width="180" border="0" cellspacing="0" cellpadding="4"  class = "tablebody3"  >
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../analysis.html" class = "large">Alignment Analysis </a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../databases.html" class = "large">Databases </a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../immunology.html" class = "large">Computational Immunology</a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../structure.html" class = "large">Modeling & 3D-structure &nbsp;&nbsp;&nbsp;&nbsp;Analysis</a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../manipulation.html" class = "large">Sequence Manipulation & &nbsp;&nbsp;&nbsp;&nbsp;Analysis </a></td>
+              </tr>
+              <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../searches.html" class = "large">Similarity Searches</a></td> 
+              </tr>
+			  <tr valign = "top"> 
+                <td>&nbsp;<img alt="" src="../../images/bullet.gif" width="6" height="8">&nbsp;<a href = "../index.html" class = "large">View all Tools</a></td>
+              </tr>   </table>
+            <!-- #EndEditable -->
+<table width="180" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td  class = "tablebody3"  valign = "top" width="160" height="20"><img alt="" src="../../images/trans.gif" height = "20" width = "140"></td>
+    <td align = "right" valign = "top" width="20" height="20"><img alt="" src="../../images/right_new2.jpg" width="20" height="20"></td>
+  </tr>
+  <tr>
+    <td colspan = "2" bgcolor = "#ffffff"><!-- #BeginEditable "explanation" --><!-- #EndEditable --></td>
+</tr>
+</table>
+	</td>
+    <td width="20">&nbsp;</td>
+          <td align = "left" valign = "top" width="750"> 
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+ 		 <tr>
+                <td valign = "top"> <!-- #BeginEditable "content" --> 
+                 
+                  <table width="750" border="0" cellspacing="0" cellpadding="4">
+                     <tr> 
+                      <td class = "tablegreen" nowrap width="1%">&nbsp;<span class = "whitetitle">Tools</span>&nbsp;</td>
+                     <td> <span class="pagetitle2">&nbsp; >> Tapreg</span></td>
+                    </tr>
+                  </table>
+               
+                  <table width="750" border="0" cellspacing="0" cellpadding="0">
+                    <tr> 
+                      <td height="3" background="../../images/hor.gif"><img alt="" src="../../images/trans.gif" width="25" height="3"></td>
+                    </tr>
+                  </table>
+
+<!-- END OF FRAMES -->
+
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="375" align="left" bgcolor="#e6e6fa" valign="top"><img alt="" src="/icons/cornertl.gif"></td>
+	<td width="375" bgcolor="#e6e6fa" valign="top" align="right"><img alt="" src="/icons/cornertr.gif"></td>
+</tr>
+<tr>
+	<td width="750" bgcolor="#e6e6fa" colspan="2" align="center" valign="baseline">
+	<font face="" color="maroon" size="22">&nbsp;TAPREG&nbsp;</font>	
+	</td>
+</tr>
+<tr>
+	<td width="375" align="left" bgcolor="#e6e6fa" valign="top"><img alt="" src="/icons/cornerbl.gif"></td>
+	<td width="375" align=right bgcolor="#e6e6fa" valign="top"><img alt="" src="/icons/cornerbr.gif"></td>
+</tr>
+</table>
+<br><br>
+<script type="text/javascript" src="bio.js" ></script>
+<script type="text/javascript" src="validateTaprank_opt.js" ></script>
+<!-- Main Content Table -->
+<form name="miForm" id="miForm" method="POST" action="/cgi-bin/Tapreg/tapregmodels.cgi" enctype="multipart/form-data" target=_blank" onsubmit="return validate(this);">
+	<input type="hidden" id="protein" name="protein" />	
+	<input type="hidden" id="peptide9" name="peptide9" />
+	<input type="hidden" id="peptide916" name="peptide916" />
+	<input type="hidden" id="idtask" name="idtask" />
+	<input type="hidden" id="idmodel" name="idmodel" />
+<table width="750" cellspacing="0" width="100%" border="0">
+<tr>
+	<td width="750"  bgcolor="#e6e6fa" colSpan="2" align="left" style="padding:15px;color:#1A0022;">
+		This server computes binding affinity of peptides to TAP (Transporter Associated with Antigen Processing) using a Support Vector Machine Regression. 
+	</td>
+</tr>
+
+<!-- E-MAIL TABLE -->
+
+<tr>
+	<td colspan="2"  bgcolor="#e6e6fa" align="center">
+	<table width="720" border="1"  cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="center" BGCOLOR="darkseagreen" width="130" >
+    	<b>E-MAIL</b>
+    	<a class="red" href="tapreg-help.html#email" target="_new">
+    		<img alt="Help about email" src="/icons/info.gif" border="0">
+    	</a>
+    	</td>
+    	<td width="550" colspan=3 BGCOLOR="darkseagreen">
+    		<table width=100%>
+        	<tr><th>Enter your e-mail<font size="-1"> (optional)</font></th></tr>
+        	<tr><th><input name="mail" size="48"></th></tr>
+        	</table>
+     	</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+<tr> 
+	<td colspan="2" bgcolor="#e6e6fa" width="720" align="center"><p></p></td>
+</tr>
+</form>
+<!-- THRESHOLD TABLE -->
+<tr> 
+	<td bgcolor="#e6e6fa" align="center">
+	<table width="720" border="1" bgcolor="E4F0FE" cellpadding="0" cellspacing="0" id="table_threshold">
+	<tr> 
+		<td  width="130" bgcolor="lightsteelblue" align="center">
+			<b> THRESHOLD</b>
+			<a href="tapreg-help.html#threshold" target="_new">
+				<img alt="Help about threshold" src="/icons/info.gif" border="0">
+			</a>
+		</td>
+		<td style="padding:4px;">
+			<select name="threshold" OnChange="messageReveal()"> 
+					<option value="">----
+					<option value="1000">1000
+					<option value="1500">1500
+					<option value="2000">2000
+					<option value="2500">2500
+					<option value="3000">3000
+					<option value="3500">3500
+					<option value="4000">4000
+					<option value="5000">5000
+					<option value="6000">6000
+					<option value="7000">7000
+					<option value="8000">8000
+					<option value="9000">9000
+					<option value="10000">10000
+					<option value="20000">20000
+					<option value="50000">50000
+				</select>
+				<font size="-1">
+					<!-- Select binding score threshold -->
+					&nbsp;Affinity threshold (IC50)
+				</font>
+				
+		</td>
+  	</tr>
+	</table>
+	</td>
+</tr>
+<tr> 
+	<td colspan="2" bgcolor="#e6e6fa" width="720" align="center"><p></p></td>
+</tr>
+<!-- MODEL TABLE -->
+<tr> 
+	<td bgcolor="#e6e6fa" align="center">
+	<table width="720" border="1" bgcolor="E4F0FE" cellpadding="0" cellspacing="0" id="table_threshold">
+	<tr> 
+		<td  width="130" bgcolor="#CC99CC" align="center">
+			<b>MODELS</b>
+			<a href="tapreg-help.html#models" target="_new">
+				<img alt="Help about models" src="/icons/info.gif" border="0">
+			</a>
+		</td>
+		<td style="padding:4px;" bgcolor="#CC99CC">
+			<input type="radio" name="model" id="sparse" value="sparse" checked>DS_613 Sparse&nbsp;
+			<input type="radio" name="model" id="blosum" value="blosum">DS_613 Blosum&nbsp;
+			</a>
+		</td>
+  	</tr>
+	</table>
+	</td>
+</tr>
+<tr> 
+	<td colspan="2" bgcolor="#e6e6fa" width="720" align="center"><p></p></td>
+</tr>
+<SCRIPT SRC="js/inputs.js"></SCRIPT>
+
+	
+<!-- INPUT TABLE -->
+<form action="upload.php" enctype="multipart/form-data" method="post" id="uploadForm">
+	<td bgcolor="#e6e6fa" align="center">
+		<table width="720" border="1" cellpadding="0" cellspacing="0" bgcolor="#e6e6fa">
+		<tr>
+			<Th width="130" bgcolor="#F69B71">
+			<b>INPUT</b>
+			<a class="red" href="tapreg-help.html#input" target="_new">
+				<img alt="Help about input" src="/icons/info.gif" border="0">
+			</a>
+			</th>
+			<TH BGCOLOR="#f2e1d9">
+				<table width="100%" id="table_protein">
+					<tr>
+						<td colspan="2"><font size="-1"> </font>
+							<input type="radio" name="task" id="task1" value="1" onclick="document.getElementById('table_threshold').style.display = 'block';setInput (this.value)"/>Protein
+							<input type="radio" name="task" id="task2" value="2" onclick="document.getElementById('table_threshold').style.display = 'none';setInput (this.value)"/>Peptides
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><font size="-1"> 
+							Replace examples with  your sequence(s) (FASTA Format) 
+						</td>
+					</tr>
+					<tr>
+						<td>
+<textarea id="txt_protein" name="txt_protein" rows="6" cols="65">
+>gi|82503281|ref|YP_401725.1| BDLF3.5 [Human herpesvirus 4 type 1]
+MSAPGCSERQDKKRGTIGEREFGELLSWDPTDLPRTVARVYVAVGGLFEQEVSEVQRLENICTLLDLAGVECQTKAD						
+</textarea>
+</td>
+					</tr>
+					<tr>
+						<td colspan="2" ><font size="-1"> 
+						or Upload sequence(s) from local file.<br> 1. Browse file
+						<input type="file" size="15" id="proteinfile" name="proteinfile" />
+						2.Load file: <input type="button" id="uploadProtein" value="Upload" />
+						 <a class="red" href="tapreg-help.html#upload" target="_new">
+						 	<img alt="Help about upload" src="/icons/info.gif" border="0">
+						 </a>
+						<!--<input type="reset" value="Clear Input" />-->
+						</font>
+						</td>
+					</tr>
+				</table>
+				
+			</th>
+		</tr>
+		</table>
+	</td>
+</tr>
+</form>
+<tr> 
+	<td colspan="2" bgcolor="#e6e6fa" width="720" align="center"><p></p></td>
+</tr>
+
+
+
+<tr> 
+	<td colspan="2" bgcolor="#e6e6fa" width="720" align="center"><p></p></td>
+</tr>
+
+<!-- SUBMIT BUTTONS -->
+<style>
+	input.btn { 
+	  color:maroon; 
+	  font: bold 1.2em 'trebuchet ms',helvetica,sans-serif; 
+	  background-color: #F0EDF2;
+	  padding: 5px;
+	}
+</style>
+<tr>
+	<td bgcolor="#e6e6fa" colspan="2" align="center" style="padding:10px;">
+		<p>
+			<font color="white">
+				<input class="btn" type="submit" name="submit" value="Run Analysis">
+			</font>
+		</p>
+	</td>
+</tr>
+</table>
+</form>
+<table BORDER="0" WIDTH="670">
+<tr>
+<td colspan = 3><font size = -1><b>Citation:</b><br>
+              <ul><li>
+               Diez-Rivero CM, Chenlo B, Zuluzga P  and Reche PA (2010) 
+		Quantitative modeling of peptide binding to TAP using support vector machine.
+        	<i>Proteins</i>, <b>78</b>:63-72
+                </li>
+                </font> </ul>
+		<font size = -1><b>Credits & Complaints:</b>
+		Pedro A. Reche <img align ="absmiddle" src ="/icons/reche_email.png" width="110" height="20">
+<td>
+</tr>
+
+</table>
+
+
+
+<!--BOTTOM HEADER -->
+
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+<tr><td height="3" background="../../images/hor.gif"><img alt="" src="../../images/trans.gif" width="25" height="3"></td></tr>
+</table>	
+<table width="750" border="0">
+    <tr>
+    <td width="33%" colspan ="2">
+    	<font size=-1>Hits since Mar/2009 </font>
+	    <img alt="" src="../../cgi-bin/count.pl?countfile=counter/tapreg_job&style=digits" align="middle">
+    </td>
+    <td align="center" width="33%">
+    	<img src="loader.gif" id="loader">
+    </td>
+    <td  width="33%" align="right" valign="top"><font size = -1>Last updated:
+    <script language="JavaScript" type="text/javascript">
+    <!--  Copy this code into the BODY of your HTML document  -->
+    <!-- This script and many more are available free online at -->
+    <!-- The JavaScript Source!! http://javascript.internet.com -->
+    <!-- Begin
+        var days = new Array(8);
+        days[1] = "Sunday";
+        days[2] = "Monday";
+        days[3] = "Tuesday";
+        days[4] = "Wednesday";
+        days[5] = "Thursday";
+        days[6] = "Friday";
+        days[7] = "Saturday";
+        var months = new Array(13);
+        months[1] = "January";
+        months[2] = "February";
+        months[3] = "March";
+        months[4] = "April";
+        months[5] = "May";
+        months[6] = "June";
+        months[7] = "July";
+        months[8] = "August";
+        months[9] = "September";
+        months[10] = "October";
+        months[11] = "November";
+        months[12] = "December";
+        var dateObj = new Date(document.lastModified)
+        var wday = days[dateObj.getDay() + 1]
+        var lmonth = months[dateObj.getMonth() + 1]
+        var date = dateObj.getDate()
+        var fyear = dateObj.getYear()
+        if (fyear < 2000)
+        fyear = fyear + 1900
+        document.write(date + " " + lmonth + " " + fyear)
+        // End -->
+        </script>
+    </font> </td></tr>
+    <!-- mail icon
+    <tr><td align="middle" valign="top"><a href="mailto:parecheg@med.ucm.es"> <img SRC="/icons/anim_mail.gif" border="0"></a></td></tr>
+    -->
+    </table>
+           <br>
+</td>
+</tr>
+</table>
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td height="3" background="../../images/hor.gif">
+<img alt="" src="../../images/trans.gif" width="25" height="3"></td>
+</tr>
+</table>
+<table width="750" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="750" class = "tablebody3" background = "../../images/hor.gif" height="3"></td>
+<td colspan = "2"><img alt="" src="../../images/trans_new.jpg" height="1" width="1"></td>
+</tr>
+<tr>
+<td height="25" class = "tablehead2" align="center">
+<script language="javascript" type="text/javascript">
+<!--
+var Days = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+var d = new Date();
+var tmonth = "0" + (d.getMonth()+1).toString();
+var tmins = "0" + (d.getMinutes()).toString();
+var zmonth = tmonth.substring((tmonth.length-2), (tmonth.length))
+var zmins = tmins.substring((tmins.length-2), (tmins.length))
+var output = Days[d.getDay()] + ', ' + zmonth + '/'+ d.getDate() + '/' + d.getFullYear()+ ' ' +d.getHours()+ ':' +zmins;
+//-->
+</script>
+<span class="white">
+<a href="mailto:parecheg@med.ucm.es" class="footer"> Contact Us</a>
+&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp<a href="../../Home/" class="footer">Immunomedicine Group</a>
+&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp<script language="JavaScript" type="text/javascript"> document.write(output); 
+</script></span>
+</td></tr>
+<tr><td height="25"></td></tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+
+</center>
+</body>
+</html>

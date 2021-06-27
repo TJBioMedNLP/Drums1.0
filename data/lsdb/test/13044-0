@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>TRUST Server</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+<meta name="description" content="Bioinformatics Unit, Vrije Unversiteit Amsterdam">
+
+<meta name="keywords" content="VU, Vrije, Free, University, academic, research, learned, education, science, DNA, proteins, meetings, analysis tools, bioinformatics, unit, Amsterdam, database searches, database mining, secondary structure prediction, prediction, sequence alignment, genomics, quest, praline, repro, mathematical biology, bioinfo, mathbio, repeats, gene, rna, dna, protein, bioinformatics, molecular, genetics, software, databases, genomics, sequencing, protein, computational biology, nucleotide, FASTA, BLAST, SRS, ClustalW, DNA, RNA, BioInformer, science, leading edge, SD, PDB, Bioinformatics industry, Genomes, Proteomes, Embl-bank, Swissprot+swiss-prot, Trembl, Sptr, Webin, Autodep, Microarray, Pandit, Ensembl, Intact, Integr8, Intenz, Taxonomy, Interpro., Interproscan, Protein, nucleotide, Sequences">
+
+
+<SCRIPT TYPE="text/javascript">
+<!--
+function newImage (arg) {
+	if (document.images) {
+		rslt = new Image();
+		rslt.src = arg;
+		return rslt;
+	}
+}
+
+function changeImages () {
+    if (document.images ) {
+        for (var i=0; i<changeImages.arguments.length; i+=2) {
+            document[changeImages.arguments[i]].src = changeImages.arguments[i+1];
+        }
+    }
+}
+
+function MM_swapImgRestore () { //v3.0
+    var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages () { //v3.0
+    var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj (n, d) { //v4.01
+    var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+    if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+    for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+    if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage () { //v3.0
+    var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function addBookmark () {
+    var title = document.title;
+    var url = window.location.href;
+    if (window.sidebar) { // Mozilla Firefox Bookmark
+        window.sidebar.addPanel(title, url, "");
+    } else if (window.external) { // IE Favorite
+        window.external.AddFavorite( url, title);
+    } else if (navigator.userAgent.match('Safari')) {
+	    alert("Please press Command-D (Open-Apple-D) to bookmark a page in Safari.");
+	} else if (window.opera && window.print) { // Opera Hotlist
+        return true;
+    }
+}
+//-->
+</SCRIPT>
+
+
+<style type="text/css">
+<!--
+TABLE.blue {
+        color: black;
+		background-color: #003366;
+}
+TABLE.green {
+        color: black;
+        background-color: #005500;
+}
+TABLE.white {
+        color: black;
+        background-color: #FFFFFF;
+}
+A:LINK {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:VISITED {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:ACTIVE {
+	color: #3333FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+A:HOVER {
+	color: #FF0000;
+	font-weight: bold;
+	text-decoration: underline;
+}
+TR.blue {
+        color: #FFFFFF;
+        font-size: 14px;
+        background-color: #003366;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.green {
+        color: #FFFFFF;
+        font-size: 14px;
+        background-color: #005500;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.grey {
+        color: #FFFFFF;
+        font-size: 12px;
+        background-color: #666666;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.lightgrey {
+        color: #000000;
+        font-size: 13px;
+        background-color: #E4E4E4;
+        font-family: Arial, Helvetica, sans-serif;
+}
+TR.darkgrey {
+        color: #000000;
+        font-size: 13px;
+        background-color: #D2D2D2;
+        font-family: Arial, Helvetica, sans-serif;
+}
+-->
+</style>
+
+</head>	
+
+<body style="background-color:#FFFFFF; color:#000000; margin-left:0; margin-top:0;" onLoad="MM_preloadImages('/images/homeon.gif','/images/researchon.gif','/images/confon.gif','/images/progon.gif','/images/memon.gif','/images/pubon.gif','/images/vacon.gif','/images/linkon.gif')">
+
+<table width="100%"><tr valign="top"><td bgcolor="#000000" width="29"><a href="http://www.ibi.vu.nl"><img src="/images/sidebar-main.gif"  alt="sidebar-main" border="0"></a></td><td>
+
+<table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <TR valign="bottom"> 
+    <TD align="left" width="512"> <img src="/images/title.gif" alt="title" width="512" height="57" vspace="0" hspace="0" align="bottom"></TD>
+    <td rowspan="2" style="background-image:url(/images/back1.gif);" width="100%" height="113" align="left" valign="top"> 
+      <div align="center"><img src="/images/griff.gif" alt="griff" width="77" height="75" vspace="2" hspace="2"></div>
+    </td>
+    <td rowspan=2 width="35%" align="left"> 
+      <TABLE WIDTH=277 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+        <TR> 
+          <TD ROWSPAN=2> <IMG SRC="/images/banner-button_01.gif" WIDTH=67 HEIGHT=113 ALT="banner-button_0"></TD>
+          <TD> <A HREF="/contact"
+				ONMOUSEOVER="changeImages('banner_button_Layer_7', '/images/banner-button_Layer-7-over.gif', 'banner_button_03', '/images/banner-button_03-banner-but.gif', 'banner_button_Layer_4', '/images/banner-button_Layer-4-banne.gif', 'banner_button_05', '/images/banner-button_05-banner-but.gif',
+'banner_button_Layer_5', '/images/banner-button_Layer-5-banne.gif',
+'banner_button_07', '/images/banner-button_07-banner-but.gif'); return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_7', '/images/banner-button_Layer-7.gif', 'banner_button_03', '/images/banner-button_03.gif', 'banner_button_Layer_4', '/images/banner-button_Layer-4.gif', 'banner_button_05', '/images/banner-button_05.gif',
+'banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07',
+'/images/banner-button_07.gif'); return true;"> <IMG NAME="banner_button_Layer_7"
+SRC="/images/banner-button_Layer-7.gif" WIDTH=18 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-7"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_03" SRC="/images/banner-button_03.gif" WIDTH=17 HEIGHT=113 ALT="banner_button_03"></TD>
+          <TD> <A HREF="http://www.few.vu.nl/en/sitemap.asp"
+				ONMOUSEOVER="changeImages('banner_button_Layer_4', '/images/banner-button_Layer-4-over.gif', 'banner_button_05', '/images/banner-button_05-banner--11.gif', 'banner_button_Layer_5', '/images/banner-button_Layer-5-ba-14.gif', 'banner_button_07', '/images/banner-button_07-banner--18.gif');
+return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_4', '/images/banner-button_Layer-4.gif', 'banner_button_05', '/images/banner-button_05.gif', 'banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07', '/images/banner-button_07.gif');
+return true;"> <IMG NAME="banner_button_Layer_4" SRC="/images/banner-button_Layer-4.gif" WIDTH=17 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-4"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_05" SRC="/images/banner-button_05.gif" WIDTH=17 HEIGHT=113 ALT="banner-button_05"></TD>
+          <TD> <A HREF="mailto:ibivu@cs.vu.nl"
+				ONMOUSEOVER="changeImages('banner_button_Layer_5', '/images/banner-button_Layer-5-over.gif', 'banner_button_07', '/images/banner-button_07-banner--19.gif'); return true;"
+				ONMOUSEOUT="changeImages('banner_button_Layer_5', '/images/banner-button_Layer-5.gif', 'banner_button_07', '/images/banner-button_07.gif'); return true;"> 
+            <IMG NAME="banner_button_Layer_5" SRC="/images/banner-button_Layer-5.gif" WIDTH=17 HEIGHT=81 BORDER=0 ALT="banner-button_Layer-5"></A></TD>
+          <TD ROWSPAN=2> <IMG NAME="banner_button_07" SRC="/images/banner-button_07.gif" WIDTH=124 HEIGHT=113 ALT="banner-button_07"></TD>
+        </TR>
+        <TR> 
+          <TD> <IMG SRC="/images/banner-button_08.gif" WIDTH=18 HEIGHT=32 ALT="banner-button_08"></TD>
+          <TD> <IMG SRC="/images/banner-button_09.gif" WIDTH=17 HEIGHT=32 ALT="banner-button_09"></TD>
+          <TD> <IMG SRC="/images/banner-button_10.gif" WIDTH=17 HEIGHT=32 ALT="banner-button_10"></TD>
+        </TR>
+      </TABLE>
+    </td>
+  </tr>
+  <TR valign="bottom"> 
+    <TD height="56" width="512" align="left"><img src="/images/banner-left.gif" width="512" height="56" align="bottom" vspace="0" hspace="0" alt="Bioinformatics Unit banner"></TD>
+  </tr>
+</table>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="99%">
+  <tr> 
+    <td height="46">&nbsp;&nbsp;</td>
+    <td colspan="2" height="46" valign="bottom">
+
+<a href="/" onMouseOut="MM_swapImgRestore()"
+  onMouseOver="MM_swapImage('Home','','/images/homeon.gif',1)"><img name="Home" border="0" src="/images/homeoff.gif" alt="homeoff" width="97" height="46" align="bottom"></a><a href="/research" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Research','','/images/researchon.gif',1)"><img name="Research" border="0" src="/images/researchoff.gif" alt="researchoff" width="97" height="46" align="bottom"></a><a href="/teaching" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Teaching','','/images/confon.gif',1)"><img name="Teaching"  border="0" src="/images/confoff.gif" alt="confoff" width="97" height="46" align="bottom"></a><a href="/programs"><img src="/images/progon.gif" alt="progon" align="bottom" border="0"></a><a href="/members" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Members','','/images/memon.gif',1)"><img name="Members" border="0" src="/images/memoff.gif"  alt="memoff" width="97" height="46" align="bottom"></a><a href="/publications" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Pubs','','/images/pubon.gif',1)"><img name="Pubs" border="0" src="/images/puboff.gif" alt="puboff" width="97" height="46" align="bottom"></a><a href="/vacancies" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Vacancies','','/images/vacon.gif',1)"><img name="Vacancies" border="0" src="/images/vacoff.gif" alt="vacoff" width="97" height="46" align="bottom"></a><a href="/links" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Links','','/images/linkon.gif',1)"><img name="Links" border="0" src="/images/linkoff.gif" alt="linkoff" width="97" height="46" align="bottom"></a></td>
+  </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="90%">
+  <tr valign="top"> 
+    <td rowspan="2" nowrap>&nbsp;&nbsp;</td>
+    <td rowspan="2" width="32" nowrap><img src="/images/tabfoot.gif" alt="tabfoot" width="32" height="81" vspace="0" hspace="0" align="top" border="0"></td>
+    <td height=25 nowrap><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=52 height=25 align="top"><img src="/images/tabfoot-bg.gif" alt="tabfoot-bg" width=32 height=25 align="top"></td>
+  </tr>
+  <tr align="left"> 
+    <td nowrap> 
+    <h2 style="font-family:Arial,Helvetica,sans-serif;color:#003366;">TRUST repeat detection method </h2>
+ </td>
+  </tr>
+</table>
+
+
+<script type="text/javascript" language="JavaScript">
+<!-- 
+function paste_example()
+{
+document.seq_form.seq.value = ">TF3A_XENLA\nMAAKVASTSSEEAEGSLVTEGEMGEKALPVVYKRYICSFADCGAAYNKNWKLQAHLCKHT\nGEKPFPCKEEGCEKGFTSLHHLTRHSLTHTGEKNFTCDSDGCDLRFTTKANMKKHFNRFH\nNIKICVYVCHFENCGKAFKKHNQLKVHQFSHTQQLPYECPHEGCDKRFSLPSRLKRHEKV\nHAGYPCKKDDSCSFVGKTWTLYLKHVAECHQDLAVCDVCNRKFRHKDYLRDHQKTHEKER\nTVYLCPRDGCDRSYTTAFNLRSHIQSFHEEQRPFVCEHAGCGKCFAMKKSLERHSVVHDP\nEKRKLKEKCPRPKRSLASRLTGYIPPKSKEKNASVSGTEKTDSLVKNKPSGTETNGSLVL\nDKLTIQ";
+} 
+-->
+</script>
+
+<blockquote>
+<table BORDER=0 CELLPADDING=0 CELLSPACING=0 align="left">
+<tr VALIGN=TOP>
+<td width=150 valign=top>
+<br><img border=1 SRC="trust_frog_small.jpg" alt="frog_logo">
+<font face="Arial, Helvetica, sans-serif" size="2">
+<br>
+<!--
+<a href="help.php"><b>Options Help</b></a>
+<br><br>
+<a href="documentation.php"><b>Online Documentation</b></a>
+-->
+<br><br>
+<b>TRUST</b> is a method for <i>ab-initio</i> determination of internal repeats in proteins. 
+The high sensitivity and accuracy of the method is achieved by exploiting the concept
+of transitivity of alignments. 
+<br><br>
+<b>Reference:</b> 
+ISMB/ECCB 2004 conference (Glasgow, UK), appeared in <i>Bioinformatics. 2004 Aug 4;20 Suppl 1:i311-i317</i>. 
+<a href="http://www.ncbi.nlm.nih.gov/pubmed/15262814">PubMed</a>
+<a href="trust.pdf">Preprint</a>
+<br><br>
+<b>Source:</b> 
+Available to download <a href="trust.tgz">here</a>.
+</font>
+</td>
+<td valign=top width=30>&nbsp;</td>
+</tr>
+</table><form NAME=seq_form METHOD="POST" enctype='multipart/form-data' action=''>
+<table BORDER=0 CELLPADDING=0 CELLSPACING=3>
+<tr VALIGN=TOP> 
+<td colspan="2"><font face="Arial, Helvetica, sans-serif" size="2"><b>Paste in your sequences in FASTA format or </b> 
+<input type="button" value="use an example sequence" onClick="paste_example()">
+<br>
+
+<textarea NAME="seq" ROWS="10" COLS="80"></textarea>
+</font>
+<P>
+<br>
+</td>
+</tr>
+
+<tr>
+<td colspan="2" bgcolor="#003366"><font face="Arial, Helvetica, sans-serif" size="2" color="#FFFFFF">&nbsp;<b>Options</b></font></td>
+</tr>
+<tr> 
+<td width="50%" valign=top> <font face="Arial, Helvetica, sans-serif" size="2"><br><b>Select Gap Penalties:</b>
+<!-- <a href="help.php#gaps">Help</a> -->
+</font>
+<br>
+<INPUT TYPE="text" NAME="gapo" SIZE ="2" MAXLENGTH ="2" VALUE="8">&nbsp;Open&nbsp;&nbsp;&nbsp; 
+<INPUT TYPE="text" NAME="gapx" SIZE ="2" MAXLENGTH ="2" VALUE="2">&nbsp;Extension 
+</td>
+</tr>
+<tr>
+<td width="50%" valign=top> <font face="Arial, Helvetica, sans-serif" size="2"><br><b>Select a substitution matrix: </b>
+<!-- <a href="help.php#matrices">Help</a> --> </font> 
+<br>
+<SELECT NAME="matrix" SIZE=1>
+<OPTION SELECTED>BLOSUM62</OPTION>
+<OPTION>PAM250</OPTION>
+<OPTION>BLOSUM50</OPTION>
+<OPTION>GONNET</OPTION>
+</SELECT>
+        
+</td>
+</tr>
+
+<tr> 
+<td colspan=2 valign=top><font face="Arial, Helvetica, sans-serif" size="2">
+<br>
+<b>Force including local alinments in analysis <br>
+(relax statistical significance constraints):</b>  
+<!-- <a href="help.php#force">Help</a> -->
+
+<br>
+<SELECT NAME="force" SIZE ="1">
+<OPTION SELECTED>no</OPTION>
+<OPTION>yes</OPTION>
+</SELECT>
+<br>
+<br>
+</font>
+</td>
+</tr>
+
+<tr> 
+<td colspan=2 valign=top><font face="Arial, Helvetica, sans-serif" size="2">
+<b>Seg low-complexity filtering: </b>
+<!-- <a href="help.php#lowcplx">Help</a> -->
+<br>
+<SELECT NAME="lowcplx" SIZE ="1">
+<OPTION SELECTED>yes</OPTION>
+<OPTION>no</OPTION>
+</SELECT>
+<br>
+<br>
+</font>
+</td>
+</tr>
+
+<tr>
+<td colspan=2 bgcolor="#003366"><font face="Arial, Helvetica, sans-serif" size="2" color="#FFFFFF">&nbsp;<b>Submit your job</b></font></td>
+</tr>
+
+
+<tr> 
+<td colspan=2><font face="Arial, Helvetica, sans-serif" size=2> 
+<INPUT TYPE="submit" NAME="trust_run" VALUE="Run">
+&nbsp;
+&nbsp;
+<input type="reset" VALUE="Clear">
+<input type="hidden" name="mbjob[method]" value="trust">
+</font>
+</td>
+</tr>
+</table>
+</form>
+
+<br>
+<table>
+<tr>
+<td bgcolor="#003366" align="center"><font color="#FFFFFF" size=-1>Interface written by </font><a href="mailto:radek@cs.vu.nl"><font color="#FFFFCC" size=-1>Radek Szklarczyk</font></a><font color="#FFFFFF" size=-1>, </font><a href="mailto:vsimoss@cs.vu.nl"><font color="#FFFFCC" size=-1>Victor A. Simossis</font></a><font color="#FFFFFF" size=-1> and </font><a href="mailto:heringa@cs.vu.nl"><font color="#FFFFCC" size=-1>Jaap Heringa</font></a>
+</td>
+</tr>
+</table>
+</blockquote><br>
+
+<font style="font-family: Arial,Helvetica,sans-serif; font-size: 11px">
+(c) IBIVU 2011. If you are experiencing problems with the
+site, please contact the <a href="mailto:ibivu@cs.vu.nl">webmaster</a>.
+</font>
+
+</td></tr></table>
+
+
+</body></html>

@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta content="Microsoft FrontPage 4.0" name="GENERATOR">
+<title>TreeComplexity</title>
+</head>
+
+<body vLink="#800080" link="#0000ff" background="background.jpg">
+
+<h1 align="center" style="margin-bottom: 0"><font color="#800000">TreeComplexity</font></h1>
+
+<h2 align="center" style="margin-bottom: 0"><font color="#800000"><small>Estimation of
+genetic text complexity.&nbsp; Construction and </small><small>visualization</small><small>
+</small><small>of context tree source (VMM model)</small></font></h2>
+
+<!--webbot BOT="GeneratedScript" PREVIEW=" " startspan --><script Language="JavaScript"><!--
+function FrontPage_Form1_Validator(theForm)
+{
+
+  var checkOK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzЂЃѓЉЊЌЋЏђљњќћџЎўЈҐЁЄЇІіґёєјЅѕїАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя0123456789-[]";
+  var checkStr = theForm.user_string.value;
+  var allValid = true;
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+  }
+  if (!allValid)
+  {
+    alert("Please enter only letter, digit and \"[]\" characters in the \"user_string\" field.");
+    theForm.user_string.focus();
+    return (false);
+  }
+
+  var checkOK = "0123456789-";
+  var checkStr = theForm.length.value;
+  var allValid = true;
+  var decPoints = 0;
+  var allNum = "";
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+    allNum += ch;
+  }
+  if (!allValid)
+  {
+    alert("Please enter only digit characters in the \"length\" field.");
+    theForm.length.focus();
+    return (false);
+  }
+
+  var chkVal = allNum;
+  var prsVal = parseInt(allNum);
+  if (chkVal != "" && !(prsVal >= "2" && prsVal <= "11"))
+  {
+    alert("Please enter a value greater than or equal to \"2\" and less than or equal to \"11\" in the \"length\" field.");
+    theForm.length.focus();
+    return (false);
+  }
+
+  var checkOK = "0123456789-";
+  var checkStr = theForm.x.value;
+  var allValid = true;
+  var decPoints = 0;
+  var allNum = "";
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+    allNum += ch;
+  }
+  if (!allValid)
+  {
+    alert("Please enter only digit characters in the \"x\" field.");
+    theForm.x.focus();
+    return (false);
+  }
+
+  var chkVal = allNum;
+  var prsVal = parseInt(allNum);
+  if (chkVal != "" && !(prsVal >= "100" && prsVal <= "2048"))
+  {
+    alert("Please enter a value greater than or equal to \"100\" and less than or equal to \"2048\" in the \"x\" field.");
+    theForm.x.focus();
+    return (false);
+  }
+
+  var checkOK = "0123456789-";
+  var checkStr = theForm.y.value;
+  var allValid = true;
+  var decPoints = 0;
+  var allNum = "";
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+    allNum += ch;
+  }
+  if (!allValid)
+  {
+    alert("Please enter only digit characters in the \"y\" field.");
+    theForm.y.focus();
+    return (false);
+  }
+
+  var chkVal = allNum;
+  var prsVal = parseInt(allNum);
+  if (chkVal != "" && !(prsVal >= "100" && prsVal <= "1024"))
+  {
+    alert("Please enter a value greater than or equal to \"100\" and less than or equal to \"1024\" in the \"y\" field.");
+    theForm.y.focus();
+    return (false);
+  }
+  return (true);
+}
+//--></script><!--webbot BOT="GeneratedScript" endspan --><form action="/cgi-bin/mgs/common/startpromot.pl" method="POST" encType="multipart/form-data" onsubmit="return FrontPage_Form1_Validator(this)" name="FrontPage_Form1">
+ <input type="hidden" name="meth" value="complexity">
+  <input type="hidden" name="inpformat" value="fasta">
+  <b><p style="margin-top: 0; margin-bottom: 1"><font face="Arial"><u>DNA sequences:</u></font><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <u>Amino acid sequences:</u></font> </p>
+</b>
+  <p style="margin-top: 0; margin-bottom: 0"><font size="2" face="Arial">Standard alphabet
+  {A,T,G,C}<input type="radio" value="atgc" name="alphabet" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  2-lettered alphabet (<i>hydrophobic/hydrophilic</i>) <input type="radio" value="_p2" name="alphabet">&nbsp;</font></p>
+  <p style="margin-top: 0; margin-bottom: 0"><font size="2" face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  2-lettered alphabets:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  3-lettered charge </font><font size="2" face="Arial">alphabet </font><font size="2" face="Arial">(<i>base/neutral/acid</i>
+  )&nbsp;&nbsp; <input type="radio" value="_p3charge" name="alphabet">&nbsp;</font></p>
+  <p style="margin-top: 0; margin-bottom: 0"><font size="2" face="Arial">Weak/Strong&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  [AT][GC]<input type="radio" value="_WS" name="alphabet">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  3-lettered surface </font><font size="2" face="Arial">alphabet </font><font size="2" face="Arial">(<i>outer/ambivalent/inner</i>)
+  <input type="radio" value="_p3surface" name="alphabet">&nbsp;&nbsp;&nbsp;</font></p>
+  <p style="margin-top: 0; margin-bottom: 0"><font size="2" face="Arial">Purine/Pyrimidine&nbsp;&nbsp;&nbsp;
+  [AG][TC]<input type="radio" value="_RY" name="alphabet">&nbsp;</font><font size="2"><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </font></font><font face="Arial"><font size="2">(<i>For example, </i></font><i></i><font size="2"><i>hydrophobic
+  </i></font><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">[AILMFPWV]=0<i>,</i>
+  </span><font size="2"><i>hydrophilic </i></font><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">[RNDCQEGHKSTY]=1)</span></font></p>
+  <b>
+  <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial"><u>Text in
+  user-defined alphabet </u></font><input type="radio" value="atgcuser" name="alphabet">
+  <!--webbot bot="Validation" S-Data-Type="String" B-Allow-Letters="TRUE"
+  B-Allow-Digits="TRUE" S-Allow-Other-Chars="[]" --><input type="text" name="user_string" size="31" value="[ailmfpwv][rndcqeghksty]"></p>
+</b>
+  <p style="margin-top: 0; margin-bottom: 0"><font size="2" face="Arial">(<i>Type
+  DNA or amino acid symbols groups in brackets, like</i> [at][gc] <i>or</i>&nbsp;
+  <span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">[AILMFPWV][RNDCQEGHKSTY],
+  <i>case is not sensitive</i></span>)&nbsp;</font></p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2"><b>Legend
+  for user-defined alphabet</b>&nbsp;&nbsp; (<i>By default digits </i><b>01234...
+  </b><i>in the output</i> )&nbsp;</font></p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">(<i>Type
+  one symbol for every group, like for </i>[at][gc]:
+  <b> </b></font><font face="Arial" size="2"><b>+-&nbsp;</b></font><font face="Arial" size="2"><b>,
+  </b><i>or</i> <b>WS</b>)<b> </b></font><b><input size="20" name="user_legend"></p>
+  <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+  <p style="line-height: 100%; margin-top: 0; margin-bottom: 0"><!---  <textarea size="200" cols="75" maxlength="400" name="Screen" rows="2" nowrap></textarea> <br>  <input type="RADIO" name="FromWhat" value="Base"> <a href="../helps/ExplainDB.htm">from  DB: </a><input type="TEXT" name="Base" size="20"> <b>Bases Available: <select name="AvaBases" width="275" size="1">    <option selected value="SRSHEID1">EMBL by ID from Heidelberg (SRS5)</option>    <option value="SRSHEID2">GenBank by ID from Heidelberg (SRS5)</option>    <option value="SRSHEAC1">EMBL by AC from Heidelberg (SRS5)</option>    <option value="SRSHEAC1">GenBank by AC from Heidelberg (SRS5)</option>  </select> <br>  <b><input type="radio" name="FromWhat" value="FileUpload"></b> <a href="/cgi-bin/mgs/common/do_it.exe?s=Helps&amp;e=FileUpload">from File: </a></b><input type="File" cols="256" name="FileUpload" size="35"> <a href="/cgi-bin/mgs/common/do_it.exe?s=Helps&amp;e=FileFormats">File formats</a> here. </b></p> ---> 
+  Input sequences here (<i>FASTA format or plain text</i>)
+  </p>
+  <p style="line-height: 100%; margin-top: 0; margin-bottom: 0">
+  <input type="RADIO" name="from" checked value="screen">from Screen <i>(cut &amp;
+  paste)...
+  </i>
+  <br>
+  <textarea style="TEXT-ALIGN: left" name="Seq" rows="7" cols="62"></textarea>
+  </p>
+  <p style="line-height: 100%; margin-top: 0; margin-bottom: 0"><input type="radio" value="file" name="from">
+  or <a href="/mgs/programs/helps/ExplainFileUpload.htm">from
+  File:</a> <INPUT type=file size=32 name=from_file cols="256"> <br>
+  </b></p>
+  <p style="line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Arial"><b>Preceding
+  context length</b> (1&lt;n&lt;12) <!--webbot bot="Validation"
+  S-Data-Type="Integer" S-Number-Separators="x"
+  S-Validation-Constraint="Greater than or equal to" S-Validation-Value="2"
+  S-Validation-Constraint="Less than or equal to" S-Validation-Value="11" --><input size="4" value="6" name="length"></font></p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial"><b>Method of
+  pseudo counts calculation for absent contexts:</b></font>
+  </p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">Default
+  +0.5 for each absent context:<input type="radio" value="5" name="m" checked>&nbsp;&nbsp;&nbsp;&nbsp;</font>
+  </p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial" size="2">+1
+  count:<input type="radio" value="1" name="m">&nbsp; Old variant:<input type="radio" value="o" name="m">&nbsp;&nbsp;
+  No pseudocounts:<input type="radio" value="n" name="m"></font>
+  </p>
+ <p style="margin-bottom: 0"><font face="Arial"><b>Text output </b>of the tree source
+ (Optimized variable memory Markov model for <a href="http://wwwmgs.bionet.nsc.ru/mgs/programs/vmm/"> VMM
+ software</a>)</font>
+  </p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial">or</font></p>
+  <p style="margin-top: 0; margin-bottom: 0"><font face="Arial">&nbsp;<b>Graphic output
+  </b> <input type="checkbox" value="ON" name="Graf"></font></p>
+  <p style="line-height: 100%; margin-top: 3; margin-bottom: 0"><font face="Arial" size="2">Tree types
+  : Standard tree <input type="radio" value="t" name="p" checked>  &nbsp;or&nbsp;&nbsp;Round
+  tree&nbsp;<input type="radio" value="r" name="p"></font></p>
+  <p style="line-height: 100%; margin-top: 3; margin-bottom: 0"><font face="Arial" size="2"> Letters in image <input type="checkbox" CHECKED value="1" name="l"> 
+  (<i>uncheck if no place for letters in small image</i>)</font></p>
+  <p style="line-height: 100%; margin-top: 3; margin-bottom: 0"><font face="Arial" size="2">Width of picture (<i>in pixels,
+  100&lt;x&lt;2048</i>)<!--webbot bot="Validation" S-Data-Type="Integer"
+  S-Number-Separators="x" S-Validation-Constraint="Greater than or equal to"
+  S-Validation-Value="100" S-Validation-Constraint="Less than or equal to"
+  S-Validation-Value="2048" --><input size="7" value="600" name="x">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Height of picture (<i>in pixels, 100&lt;y&lt;1024</i>)<!--webbot
+  bot="Validation" S-Data-Type="Integer" S-Number-Separators="x"
+  S-Validation-Constraint="Greater than or equal to" S-Validation-Value="100"
+  S-Validation-Constraint="Less than or equal to" S-Validation-Value="1024" --><input size="7" value="300" name="y"></font></p>
+  <b>
+  <b><p style="line-height: 200%; margin-bottom: 0"><input type="submit" value="Execute" style="font-family: Arial">&nbsp;&nbsp;&nbsp;</b></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b><input type="reset" value="Reset form" style="font-family: Arial"> <br>
+  <a href="orlovhlp.html"><strong>Help</strong></a></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b><a href="orl_exam.html"><strong>Example</strong></a><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></b>&nbsp;
+  <b><a href="ComplexityPublications.htm"><strong>Publications</strong></a><strong>&nbsp;&nbsp;&nbsp;</strong></p>
+</form>
+
+  <p align="center"><font face="Arial" size="2">Related algorithms: <a href="http://wwwmgs.bionet.nsc.ru/mgs/programs/vmm/">Variable
+  memory Markov model prediction</a>, <a href="http://wwwmgs.bionet.nsc.ru/mgs/programs/low_complexity/">LowComplexity
+  regions search</a>,&nbsp; <a href="http://wwwmgs.bionet.nsc.ru/mgs/programs/lzcomposer/">Lempel-Ziv
+  complexity</a></font>
+</p>
+
+  <p align="center">Other related algorithms for genetic text analysis: <a href="/mgs/programs/oligorep/">OligoRep
+  system</a>, <a href="/mgs/programs/gc_net/">Complexity
+  profile</a>, <a href="http://wwwdbl.dei.unipd.it/Verbumculus/">Verbumculus</a>
+</p>
+
+<p align="center"><a href="http://www.bionet.nsc.ru/"><img src="icg_logo.gif" alt="The Institute of Cytology and Genetics (Russia)" border="0" width="92" height="85"></a>
+</p>
+
+ <p align="center"><strong>This resource has been developed in Institute of Cytology and
+Genetics, Novosibirsk, Russia <br>
+</strong>Authors: <font size="3"><a href="mailto:orlov@bionet.nsc.ru">Yu.L.Orlov</a></font>, V.P.Filippov, V.N.Potapov<br>
+Contributor: S.V.Lavryushev, D.A.Grigorovich<br>
+Leader: <a href="mailto:kol@bionet.nsc.ru">N.A.Kolchanov</a></p>
+
+<p align="left">The research was partially supported by the Russian Foundation
+for Basic Research (<a href="http://www.rfbr.ru/">RFBR</a>), INTAS.</p>
+</b>
+
+<p align="left"><font face="Arial" size="1">Last update 2005. </font></p>
+</body>
+</html>

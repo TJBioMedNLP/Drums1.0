@@ -1,0 +1,253 @@
+<html>
+  <head>
+    <title>The Cowpea Genomics Initiative (CGI)</title>
+    <link rel="stylesheet" href="cowpea00.css" type="text/css">
+  </head>
+  <body>
+    <!-- template file gene_space_read_cowpeagenomics -->
+<!--
+     Top heading and menu *** SEE MENU_SETUP.txt for how to create a new navigation link ***
+     THIS REQUIRES THE POPUPMENUS.HTML included
+-->
+<a name='topofpage'></a>
+<table width='95%' hieght='1024' align='center' cellpadding='0' cellspacing='0' border='0'>
+  <tr>
+    <td valign='top' align='right' bgcolor='#eeeeee'>
+      <a href='http://www.virginia.edu'><img src='IMG/uva-long-logo.gif' width='200' height='28' border='0' alt='University of Virginia' align='left'></a>
+      <a href='./'><img src='IMG/home.gif' width='15' height='15' border='0' alt='Cowpea Home' align='right'></a>
+      <font class='UVABLOCK'>CGKB: <i>Cowpea Genomics Knowledge Base&nbsp;&nbsp;&nbsp;</i></font>
+      <br clear='left'>
+      <table align='left' cellpadding='0' cellspacing='0' border='0' width='100%'>
+        <tr>
+          <!-- home -->
+          <td  class='linkbutt' align='center' onmouseout="if (lastname!='home'){this.className='linkbutt'}" onmouseover="if (this.className!='linkbutt2'){this.className='linkbutt3'}" onclick="document.location='index.pl'">Home</td>
+
+          <!-- Searches section -->
+          <td id='msearches' class='linkbutt' align='center' onmouseout="if (lastname!='searches'){this.className='linkbutt'}" onmouseover="if (this.className!='linkbutt2'){this.className='linkbutt3'}" onclick="javascript:show('searches',1)">Searches</td>
+
+	  <!-- Tools sections  -->
+	  <td id='mtools' class='linkbutt' align='center' onmouseout="if (lastname!='tools'){this.className='linkbutt'}" onmouseover="if (this.className!='linkbutt2'){this.className='linkbutt3'}"  onclick="javascript:show('tools',2)">Tools</td>
+          <!-- SSR's section  -->
+	  <td id='mssrs' class='linkbutt' align='center' onmouseout="if (lastname!='ssrs'){this.className='linkbutt'}" onmouseover="if (this.className!='linkbutt2'){this.className='linkbutt3'}" onclick="javascript:show('ssrs',3)">SSR's</td>
+
+          <!-- Statistics section -->
+	  <td id='mxstatistics' class='linkbutt' align='center' onmouseout="if (lastname!='xstatistics'){this.className='linkbutt'}" onmouseover="if (this.className!='linkbutt2'){this.className='linkbutt3'}" onclick="javascript:show('xstatistics',4)">Statistics</td>
+
+          <!-- Downloads section  -->
+	  <td class='linkbutt' align='center' onmouseout="if (lastname!='downloads'){this.className='linkbutt'}" onmouseover="if (this.className!='linkbutt2'){this.className='linkbutt3'}"  onclick="document.location='index.pl?gene_space_read_download'">Downloads</td>
+	  
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+</table>
+<table width='95%' align='center' cellpadding='0' cellspacing='0' border='0' style="z-index:0">
+  <tr>
+    <td with='100%' align='center'>
+      <font class='PAGEHEAD' size='2'>
+<!--
+  the end of the top heading and menu
+-->
+    
+    </font>
+    <div class='UVABLOCK' style='text-align:center;'>The Cowpea Genomics Knowledge Base (CGKB)</div>
+    <br>
+    <br>
+
+    <p>
+    Welcome to the Cowpea Genomics Knowledge Base. Please choose from the menus above.
+    </p>
+    
+    <p>
+      Searches: Find metabolic pathways, search our pathway database,
+      search for simple sequence repeats (SSRs), or use our annotated
+      genomics database.
+      </p>
+
+    <p>
+      Tools: BlastAll, sequence retrieval, contig building, multiple sequence alignment.
+      </p>
+
+    <p>
+      SSR's: Search SSRs, cowpea SSR statistics and distributions.
+      </p>
+
+    <p>
+      Statistics: Gene space read descriptive statistics.
+      </p>
+
+    <p>
+      Downloads: Get all GSRs, individual GSRs, retro elements, SSRs, mitochondria sequences, chloroplast sequences, retro-elements.
+    </p>
+    
+    <p>
+      <a href="../">Cowpea Genomics Home page</a>
+      </p>
+    <br clear=all>
+
+    <!-- Footer Information -->
+<br>
+<hr>
+<table align='center' width='100%' border='0' cellpadding='1'>
+  <tr>
+    <td align='center' class='UVALB'>
+      <font size='-2'>
+        Developed under the <a href="index.pl?gene_space_read_cowpeagenomics" style="font-size:1.0em">Cowpea Genomics Initiative</a>
+        <br>Maintained by <a href="http://faculty.virginia.edu/timko/" style="font-size:1.0em">Professor Dr. Michael P. Timko</a> of the Department of Biology at University of Virginia.
+	      <br>
+	      For technical support, please email <a href="index.pl?gene_space_read_contact" style="font-size:1.0em">Dr. Xianfeng Jeff Chen.</a>
+        <br>
+<!--
+The CGKB is distributed under the <a href="../gpl.html">GNU General Public License.</a>
+        <br>
+-->
+        Copyright (C) 2009 <a href="mailto:mpt9g@virginia.edu" style="font-size:1.0em">Dr. Michael P. Timko</a>
+      </font>
+    </td>
+  </tr>
+</table>
+    <a href='#topofpage'><small>[top]</small></a>
+    </TD>
+	</TR>
+</table>					
+<!-- end of footer  ( the final </td></tr></table> correspond with the topheading insert -->
+
+<!--
+    pop menu's controlled by menu.html See popupmenus.html.
+  -->
+<!--
+    Search Section
+  -->
+<div id='searches'  style="display:none" class="hidden">
+  <table cellpadding='4' cellspacing='4' border='4' bordercolor='#4b4b67'>
+    <tr>
+      <td class='UVAWOO'>
+        <img align='right' class='cpointer' onclick="javascript:clearmenu()" src="IMG/redx.jpg" hspace='0' vspace='0' width='12' height='12' border='0'>
+        <b>&nbsp;Searches&nbsp;</b>
+      </td>
+      <!-- drag version
+           <td class='UVAWOO' onmouseup="moverelease('searches')" onmousedown="setdragmenu('searches')">
+             <img align='right' onclick="javascript:clearmenu()" class='cpointer' src="IMG/redx.jpg" hspace='0' vspace='0' width='12' height='12' border='0'>
+             <b>&nbsp;Searches&nbsp;</b>
+           </td>
+	   -->
+    </tr>
+    <tr>
+      <td>
+        <a target='_top' href="index.pl?gene_space_read_primers">List of confirmed SSR's</a>
+       	<br><a target='_top' href="index.pl?gene_space_read_ssrsearch">Search all GSR's for potential SSR's</a>
+        <br><a target='_top' href="./vieger">Search annotated assembly for SSR's</a>
+        <br><a target='_top' href="index.pl?gene_space_read_pathways">Find a Metabolic Pathway</a>
+        <br><a target='_top' href="index.pl?gene_space_read_cgmpd">Cowpea Metabolic Pathway Database</a>
+        <br><a target='_top' href="./search">Cowpea Genomics Database Word Search</a>
+  <!--
+        <br><a target='_top' href="index.pl?gene_space_read_cgad">Cowpea Genomics Annotation Database</a>
+  -->
+	<!--
+	    <br><a target='_top' href="index.pl?gene_space_read_cgad">Cowpea Genomics Annotation Database</a>
+	    -->
+	<!--
+	    <br><a target='_top' href="index.pl?gene_space_read_seqleads">Global Search (Search Leads by GI, AC, Sequence ID)</a>
+	    -->
+      </td>
+    </tr>
+  </table>
+</div>
+<!--
+    Tools sections
+  -->
+<div id='tools' style="display:none" class="hidden">
+  <table cellpadding='4' cellspacing='4' border='4' bordercolor='#4b4b67'>
+    <tr><td class='UVAWOO'>
+        <img align='right' class='cpointer' src="IMG/redx.jpg" width='12' height='12' border='1' onclick='clearmenu()' align='left'>
+        <b>&nbsp;Tools</b>
+    </td></tr>
+    <tr><td>
+        <a target='_top' href="web_xml_blast">Blast All</a>
+        <br><a target='_top' href="index.pl?gene_space_read_seqretrieval">Sequence Retrieval by Sequence ID's</a>
+        <br><a target='_top' href="index.pl?gene_space_read_contig">Contig Building with Homology DNA Sequences</a>
+        <br><a target='_top' href="index.pl?gene_space_read_multiplealign">Multiple Sequence Alignment with Homology DNA</a>
+  </td></tr></table>
+</div>
+<!--
+    SSR's section
+  -->
+<div id='ssrs' style="display:none" class="hidden">
+  <table cellpadding='4' cellspacing='4' border='4' bordercolor='#4b4b67'>
+    <tr><td class='UVAWOO'>
+	
+        <img align='right' class='cpointer' src="IMG/redx.jpg" width='12' height='12' border='1' onclick='clearmenu()' align='left'>
+        <b>&nbsp;SSR's</b>
+    </td></tr>
+    <tr><td>
+        <a target='_top' href="lirdir/primer_reserve.html">Reserve a new SSR ID# (requires login)</a>
+
+	<br><a target='_top' href="index.pl?gene_space_read_ssrsearch">Search Simple Sequence Repeats (SSRs)</a>
+
+        <br><a target='_top' href="index.pl?gene_space_read_primers">List of confirmed SSR's</a>
+        <br><a target='_top' href="./vieger">Search annotated assembly for SSR's</a>
+
+        <br><a target='_top' href="index.pl?gene_space_read_ssrstatistics">Cowpea SSR Motif Statistics</a>
+        <br><a target='_top' href="file_wrapper.pl?wrap=ATGC_distribution.txt">Cowpea Total SSR ATGC Distribution</a>
+	
+        <br><a target='_top' href="file_wrapper.pl?wrap=ATGC_gene_distribution.txt">Cowpea Gene with SSR ATGC Distribution</a>
+        <br><a target='_top' href="file_wrapper.pl?wrap=SSR_size.txt">Cowpea Total SSR Size Statistics</a>
+        <br><a target='_top' href="file_wrapper.pl?wrap=SSR_size_gene.txt">Cowpea Gene With SSR Size Statistics</a>
+        <br><a target='_top' href="file_wrapper.pl?wrap=SSR_gene_statistics.txt">Cowpea Gene with SSR Statisticss</a>
+        <br><a target='_top' href="cgi-bin/trf.pl">Cowpea Genes with SSRs</a>
+        <br><a target='_top' href="Download/retro_element.fasta.zip">Download Cowpea Retro Elements</a>
+	
+        <br><a target='_top' href="Download/SSR.fasta.zip">Download Cowpea SSR Sequences</a>
+  </td></tr></table>
+</div>
+<!--
+    Statistics section
+  -->
+<div id='xstatistics' style="display:none" class="hidden">
+  <table cellpadding='4' cellspacing='4' border='4' bordercolor='#4b4b67'>
+    <tr><td class='UVAWOO'>
+        <img align='right' class='cpointer' src="IMG/redx.jpg" width='12' height='12' border='1' onclick='clearmenu()' align='left'>
+	
+        <b>&nbsp;Statistics</b>
+    </td></tr>
+    <tr><td>
+        <br><a target='_top' href="index.pl?gene_space_read_annotation">Annotation Statistics of Cowpea Genespace Sequences(GSS)</a>
+        <br><a target='_top' href="index.pl?gene_space_read_ssrstatistics">Cowpea SSR Motif Statistics</a>
+        <br><a target='_top' href="index.pl?gene_space_read_seqsummary">Summary of Library Statistics</a>
+        <br><a target='_top' href="statistic_parse.pl?filename=stats_2006_02_09.txt">Library Statistics Generated on Mon Sep 11 10:39:59 EDT 2006</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-1'>SSR Statistics of mono-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-2'>SSR Statistics of Di-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-3'>SSR Statistics of Tri-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-4'>SSR Statistics of Tetra-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-5'>SSR Statistics of penta-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-6'>SSR Statistics of hexa-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-7'>SSR Statistics of hept-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-8'>SSR Statistics of Octa-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-9'>SSR Statistics of Ennea-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-10'>SSR Statistics of deka-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=s-11'>SSR Statistics of over-10-nucleotide</a>              
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-1'>GSS Statistics of mono-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-2'>GSS Statistics of Di-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-3'>GSS Statistics of Tri-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-4'>GSS Statistics of Tetra-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-5'>GSS Statistics of penta-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-6'>GSS Statistics of hexa-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-7'>GSS Statistics of hept-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-8'>GSS Statistics of Octa-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-9'>GSS Statistics of Ennea-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-10'>GSS Statistics of deka-nucleotide</a>
+        <br><a target='_top' href='file_wrapper.pl?wrap=g-11'>GSS Statistics of over-10-nucleotide</a>              
+  </td></tr></table>
+</div>
+
+<!--
+    end of pop menu section
+  -->   
+    
+    
+<script language='Javascript' src='./templates/menu_controls.js'></script>
+<script language='Javascript' src='./templates/link_controls.js'></script>
+                 
+  </body>
+</html>

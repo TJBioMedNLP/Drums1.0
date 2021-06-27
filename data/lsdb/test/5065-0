@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="/gobe-app-static/trontastic/jquery-ui-1.8.2.custom.css" /> 
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script> 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <script type="text/javascript" src="/gobe-app-static/gobe.js"></script>
+    <script type="text/javascript">
+        ANNO_URL = '/gobe-app/annos/?locs=sorghum_v1.4..1..61840147..61850996&locs=rice_v6..3..10282728..10292920&locs=brachy_v1..Bd1..64381503..64391410';
+        HEIGHT = 495;
+    </script>
+    <script type="text/javascript" src="/gobe-app-static/gobe-app.js"> </script>
+<style type="text/css">
+#wrapper {
+    text-align: left;
+    margin: 0px auto;
+    padding: 0px;
+    border:0;
+    width: 1230px;
+}
+
+#header {
+    margin: 0 0 15px 0;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+#side-a {
+    float: left;
+    width: 130px;
+    /*position:relative; */
+}
+.button-holder {
+    position:relative;
+}
+
+#side-b {
+    float: right;
+    width: 150px;
+    position:relative; 
+}
+
+#content { 
+    float: left;
+    width: 950px;
+}
+
+#footer {
+    clear: both;
+    background: #A2A2A2;
+}
+</style>
+<title>Gobe | Example Application for Comparative Genomics</title>
+</head>
+<body><div>
+<h4>
+ <a style="font-size:19" href="#about">About This Application</a>
+</h4>
+
+With focus on the flash movie, press 'l' and 's' to toggle visibility of track and subtrack labels<br/>
+To limit load on the server, the window size for each panel is limited to a max of 100KB.
+<div id="wrapper">
+    <div id="header">
+            <button onclick="Gobe.switchcss()">Change Style</button> |
+            <button onclick="Gobe.clear()">Clear</button> |
+            <button onclick="Gobe.hide_labels()">Toggle Label Visibility</button> |
+<span style="color:#B8EC79;background-color:black">
+Mask CDS Sequence<input type="checkbox" id="mask_cds" />
+</span> |
+<br/>
+
+    </div>
+
+    <div id="container">
+        <div id="side-a" style="height:495px">
+            <div class="button-holder" style="top:0px">
+                <button id="0_left" class="move">&lt;&lt;</button>
+                <button id="0_rc" class="rc">reverse-complement</button>
+            </div>
+            <div class="button-holder" style="top:100px">
+                <button id="1_left" class="move">&lt;&lt;</button>
+                <button id="1_rc" class="rc">reverse-complement</button>
+            </div>
+            <div class="button-holder" style="top:200px">
+                <button id="2_left" class="move">&lt;&lt;</button>
+                <button id="2_rc" class="rc">reverse-complement</button>
+            </div>
+
+        </div> <!--side-a -->
+
+        <div id="content" name="content" style="height:495px;z-index=0;position:absolute:align:left;">
+    <strong>You need to install <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">Flash Player</a> (or turn it back on in your browser settings).</strong>
+</div><br/>
+        </div> <!-- content -->
+
+        <div id="side-b">
+
+            <div class="button-holder" style="top:0px">
+                <button id="0_right" class="move">&gt;&gt;</button>
+                <button id="0_out" class="zoom">-</button>
+                <button id="0_in" class="zoom">+</button>
+            </div>
+            <div class="button-holder" style="top:140px">
+                <button id="1_right" class="move">&gt;&gt;</button>
+                <button id="1_out" class="zoom">-</button>
+                <button id="1_in" class="zoom">+</button>
+            </div>
+            <div class="button-holder" style="top:280px">
+                <button id="2_right" class="move">&gt;&gt;</button>
+                <button id="2_out" class="zoom">-</button>
+                <button id="2_in" class="zoom">+</button>
+            </div>
+
+        </div> <!-- side-b -->
+    </div>
+    <div id="footer">
+
+<h4>Example Links</h4>
+<div id="example-links">
+    <a href="?locs=sorghum_v1.4..1..597180..604699&locs=rice_v6..3..36063098..36070508&">?locs=sorghum_v1.4..1..597180..604699&locs=rice_v6..3..36063098..36070508&</a><br/>
+    <a href="?locs=sorghum_v1.4..1..15384568..15392664&locs=rice_v6..3..21388404..21396549&locs=brachy_v1..Bd1..12439822..12447786&">?locs=sorghum_v1.4..1..15384568..15392664&locs=rice_v6..3..21388404..21396549&locs=brachy_v1..Bd1..12439822..12447786&</a><br/>
+    <a href="?locs=sorghum_v1.4..1..61840147..61850996&locs=rice_v6..3..10282728..10292920&locs=brachy_v1..Bd1..64381503..64391410&">?locs=sorghum_v1.4..1..61840147..61850996&locs=rice_v6..3..10282728..10292920&locs=brachy_v1..Bd1..64381503..64391410&</a><br/>
+
+    <a href="/gobe-app-static/sbr-2010-01-02-regions-gobe-demo.csv">List of Sorghum-Brachy-Rice Triplets that link to this view</a>
+</div>
+
+    </div> <!-- footer -->
+</div>
+<hr/>
+
+<div>
+    Input ranges in the specified format.<br/>
+    <span class="loc_div">
+        sorghum_v1.4:<input type="text" name="locs" id="0_loc" value="sorghum_v1.4..1..61840147..61850996" size="35"/> |
+    </span>
+    <span class="loc_div">
+        rice_v6:<input type="text" name="locs" id="1_loc" value="rice_v6..3..10282728..10292920" size="30"/> |
+    </span>
+    <span class="loc_div">
+        brachy_v1:<input type="text" name="locs" id="2_loc" value="brachy_v1..Bd1..64381503..64391410" size="34"/> 
+    </span>
+    <button id="go" >Go</button>
+</div>
+
+<div id="querybox"></div>
+<ul>
+    <li>click a gray HSP to see its pair.</li>
+    <li>shift-click in a track to draw lines to all HSPs</li>
+</ul>
+</div>
+<hr/>
+<div name="about">
+<h2><a name="about">About</a></h2>
+This application is created using <a href="http://github.com/brentp/gobe/">Gobe</a>, a tool for creating genomic visualization tools. The paper is titled: Gobe: an interactive, web-based tool for comparative genomic visualization in <i>Bioinformatics 2011</i>.
+<br/>
+This is a comparative viewer for <i>Sorghum bicolor</i>, <i>Brachypodium distachyon</i>, and <i>Oryza sativa</i> orthologs. Example links are provided for some example views of orthologous regions. The spreadsheet, <a href="/gobe-app-static/sbr-2010-01-02-regions-gobe-demo.csv">sbr-2010-01-02-regions-gobe-demo.csv</a>, lists all the orthologous pairs found using <a href="http://github.com/tanghaibao/quota-alignment">Quota Align</a>, a piece of software for finding synteny between duplicated genomes.
+<br/>
+These projects are part of the <a href="http://epmb.berkeley.edu/facPage/dispFP.php?I=10">Freeling Lab</a> research projects.
+</div><!-- about -->
+
+</body>
+</html>

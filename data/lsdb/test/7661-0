@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="google-site-verification" content="oKnO_5M9FwXPBWdO80920_8gZMRf3gRboTs7xtP4PQ4" />
+<title>RBPDB: The database of RNA-binding specificities</title>
+<link rel="stylesheet" type="text/css" href="reset-fonts-grids.css">
+<link rel="stylesheet" type="text/css" href="stylesheet-tables.css">
+<link rel="stylesheet" type="text/css" href="stylesheet-main.css">
+
+
+</head>
+<body>
+<div id="doc2" class="yui-t4">
+	<div id="hd">
+		<!-- PUT MASTHEAD CODE HERE -->
+		
+		<div class="content" >
+			
+			
+			<table class="menu"><tr>
+			<td class="menu"><a href='index.php'>Home</a></td>
+			<td class="menu"><a href='proteins.php'>Browse/Search Genes</a></td>
+			<td class="menu"><a href='experiments.php'>Browse/Search Experiments</a></td>
+			<td class="menu"><a href='download.php'>Bulk Downloads</a></td>
+			<td class="menu"><a href='help.php'>Help</a></td>
+			<td class="menu">
+			<FORM class="menu" name="searchform" action="proteins.php" method="get">
+				Search Proteins: <INPUT class="menu" type="text" name="search_term" />
+			<span class="tip"><a href="advanced_search.php">Advanced</a></span><BR>
+			</FORM>
+			</td>
+			<td class="menu">
+			<FORM class="menu" name="searchform" action="experiments.php" method="get">
+				Search Experiment types, sequences & PMIDs: <INPUT class="menu" type="text" name="search_term">
+				<span class="tip"><a href="advanced_search.php">Advanced</a></span><BR>
+			</FORM>
+			</td>
+			</tr>
+			</table>
+			
+			<img src="images/header_870px.png"/>
+			
+		</div>
+	</div>
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+			<div class="content" id="left">
+				<!-- PUT MAIN COLUMN CODE HERE -->
+				<H3><b>New!</b> Read the <a href="http://nar.oxfordjournals.org/content/early/2010/10/28/nar.gkq1069.abstract">RBPDB paper</a> at Nucleic Acids Research</H3><br/>
+				<h2>Browse by Domain</h2>
+				<p>
+				<a href="proteins.php?domain_filter=RRM"><img src="images/RRM_button_90px.png" /></a>
+				<a href="proteins.php?domain_filter=KH"><img src="images/KH_button_90px.png" /></a>
+				<a href="proteins.php?domain_filter=Znf_CCCH"><img src="images/ZnfCCCH_button_90px.png" /></a>
+				<a href="more_domains.php"><img src="images/more_button_90px.png" /></a>
+				</p>
+				
+				<h2>Browse by Species</h2>
+				<p>
+				<a href="proteins.php?species_filter=9606"><img src="images/human_button_90px.png" /></a>
+				<a href="proteins.php?species_filter=10090"><img src="images/mouse_button_90px.png" /></a>
+				<a href="proteins.php?species_filter=7227"><img src="images/fly_button_90px.png" /></a>
+				<a href="proteins.php?species_filter=6239"><img src="images/worm_button_90px.png" /></a>
+				</p>
+				
+				<h2>Search the Database</h2>
+				<p>
+				<FORM name="searchform" action="proteins.php" method="post"> 
+					Search genes: <INPUT type="text" name="search_term">
+					<input type="submit">
+					<span class="tip"><a href="advanced_search.php">Advanced</a></span>
+				</FORM> 
+				</p>
+				<h2>Predict Binding Sites from PWMs</h2>
+				<p>
+				<FORM action="cgi-bin/sequence_scan.pl" method="post"> 
+					Scan your sequence:<br/>
+					<textarea rows="5" cols="80" name="seq"></textarea><br/>
+					Threshold (between 0 and 1): <INPUT type="text" name="thresh" value="0.8"><br/>
+					The scan will return matches that are greater than X% of the maximum score for that PWM.<br/>
+					<input type="submit">
+				</FORM> 
+				</p>
+				<h2>Bulk Downloads</h2>
+				<p><a href="download.php">Go to downloads page</a></p>
+				
+				<h2>Submit your data</h2>
+				<p>Submit to RBPDB <a href="submit_experiment.php">here</a>.</p>
+
+				<h2>Contact</h2>
+				<p>We welcome comments, suggestions and any questions you might have. Please <a href="mailto:rbp.database@gmail.com">contact us</a> with your feedback.</p>
+
+			</div>
+			</div>
+		</div>
+		<div class="yui-b">
+		<div class="content" id="right">
+			<!-- PUT SECONDATY COLUMN CODE HERE -->	
+			<h2>Statistics</h2>
+			<table class="pme" summary="about_stats">
+				<tr class="pme-header" > <th class="pme-header" >Proteins</th> <th class="pme-header" >1171</th> </tr>
+				<tr> <td class="pme-cell-0">Human</td> <td class="pme-cell-0">424</td> </tr>
+				<tr> <td class="pme-cell-0">Mouse</td> <td class="pme-cell-0">413</td> </tr>
+				<tr> <td class="pme-cell-0">Fly</td> <td class="pme-cell-0">258</td> </tr>
+				<tr> <td class="pme-cell-0">Worm</td> <td class="pme-cell-0">244</td> </tr>
+				<tr class="pme-header"> <th class="pme-header">Experiments</th> <th class="pme-header">1456</th> </tr>
+				<tr class="pme-header"> <th class="pme-header">PWMs</th> <th class="pme-header">73</th> </tr>
+			</table>	
+			<p class="news">v1.2.1 release 25.01.2011</p>	
+			<h2>News</h2>
+			<p class="news"><b>25.01.2011</b><br>Bugfix to sequence scan: <a href="docs/RBPDB_release_notes.txt">release notes</a></p>
+			</br></br>
+			<p class="news"><b>24.11.2010</b><br>RBPDB updated to v1.2: <a href="docs/RBPDB_release_notes_v1.2.txt">release notes</a></p>
+			</br></br>
+			<p class="news"><b>08.10.2010</b><br>RBPDB updated to v1.1: C.elegans and TROVE domain proteins added</p>
+			</br></br>
+			<p class="news"><b>14.08.2010</b><br>v1.0 of RBPDB is online!</p>
+		</div>
+		</div>
+	</div>
+	<div id="ft">
+		<!-- PUT FOOTER CODE HERE -->
+	</div>
+</div>
+</body>
+</html>

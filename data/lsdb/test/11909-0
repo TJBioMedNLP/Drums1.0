@@ -1,0 +1,216 @@
+ 
+
+
+<HTML>
+<HEAD>
+ <TITLE>ZAIK - Gruppe Faigle/Schrader: Projekte/Bioinformatik/Dinkelbach</TITLE>
+<META name="description" content="">
+<META name="keywords" content="">
+</HEAD>
+<BODY TEXT="#280555" LINK="#000099"  VLINK="#000000" ALINK="#FF0000" 
+ BGCOLOR="#FFFFFF">
+<map name="nllmap"> 
+<area  coords="5,4,45,52" href="/">
+<area  coords="50,4,170,52" href="/AFS">
+</map>
+<map name="nlmmap"> 
+<area  coords="5,30,34,45" href="index.html" ALT="Previous Page">
+<area  coords="34,5,50,35" href="index.html" ALT="Up One Level">
+<area coords="49,30,79,45" href="index.html" ALT="Next Page">
+</map>
+<map name="nlrmap"> 
+<area  coords="4,2,50,48" href="/AFS/information/index.html" ALT="Allgemeine Informationen">
+<area  coords="52,2,100,48" href="/AFS/science/index.html" ALT="Grundlagenforschung">
+<area coords="102,2,150,48" href="/AFS/transfer/index.html" ALT="Forschungstransfer">
+<area coords="152,2,200,48" href="/AFS/teachings/index.html" ALT="Lehre" >
+<area coords="202,2,250,48" href="/AFS/publications/index.html" ALT="Veröffentlichungen">
+<area coords="252,2,300,48" href="/AFS/search/index.html" ALT="Suchen">
+<area coords="302,2,350,48" href="/AFS/help/index.html" ALT="Hilfe">
+<area coords="353,2,380,22" href="/AFS/sorry.html.en?url=/bioinformatik/fptm.html" ALT="English Pages">
+<area coords="353,30,380,48" href="/bioinformatik/fptm.html.de" ALT="Deutsche Seiten">
+</map>
+ 
+<TABLE WIDTH=100% BORDER=0 BGCOLOR="#000099" CELLPADDING=0 CELLSPACING=0>
+<TR VALIGN=BOTTOM>
+<TD ALIGN=LEFT VALIGN=BOTTOM>
+<IMG BORDER=0 SRC="/AFS/images_balken/zaik-nll.gif" ALIGN=Left ALT="Homepages" Border=0 usemap="#nllmap"></TD>
+<TD ALIGN=CENTER VALIGN=BOTTOM>
+<IMG BORDER=0 SRC="/AFS/images_balken/nlm.gif" ALT="Navigate Site" Border=0  usemap="#nlmmap"></TD>
+<TD ALIGN=RIGHT VALIGN=BOTTOM>
+<IMG BORDER=0 SRC="/AFS/images_balken/nlr.gif" ALIGN=Right Border=0  ALT="Buttons"  usemap="#nlrmap"></TD>
+</TD></TR>
+<TR VALIGN=TOP BGCOLOR="#000099"><TD VALIGN=TOP ALIGN=LEFT COLSPAN=3>
+<FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times" SIZE=+1 COLOR="#7B7BBD">
+<b>&#160; ZAIK - Gruppe Faigle/Schrader:</b></FONT>
+<FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times" SIZE=+1 COLOR="#B0B0CD">
+<b>Transfer/Bioinformatik/Dinkelbach</b></FONT></TD></TR>
+</TR></TABLE><p>
+ 
+<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=5>
+
+<script language="JavaScript">
+  function complete(){
+
+     // define some things
+     var seq1, seq2, character, x;
+     seq2 = "";
+
+     // get Sequenze 1, change to upper case and 
+     // wirte upper case back in form
+     seq1 = document.forms[0].seq1.value;
+     seq1 = seq1.toUpperCase();
+     document.forms[0].seq1.value=seq1;
+
+     // go through the sequenze
+     for (x=0; x < seq1.length; x++){
+	charakter = seq1.charAt(x);
+
+	// replace base with coresponding base	
+ 	switch(charakter){
+	  case "A":
+	     	seq2 = seq2 + "T";
+	    	 break;
+          case "C":
+	 	seq2 = seq2 + "G";
+		break;
+	  case "G":
+		seq2 = seq2 + "C";
+		break;
+	  case "T":
+		seq2 = seq2 + "A";
+		break;
+	  default:
+		alert("invalid input in sequence 1");
+		exit;
+	}
+     }
+	// write Sequenze 2 in form
+	document.forms[0].seq2.value=seq2;
+  }
+
+</script>
+
+<TR><TD VALIGN="TOP" ALIGN="RIGHT">
+<FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times"><H3>FractTM</H3></FONT></TD>
+<TD><FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times">
+ 
+
+<H3>- A Fractional Programming Approach to efficient DNA Melting Temperature Calculation</H3>
+
+<p>M. Leber, L. Kaderali, A. Schönhuth, R. Schrader
+
+<FONT FACE="Verdana, Arial, Helvetica">
+
+ <p><b>Motivation:</b> In a wide range of experimental techniques in
+   biology, there is a need for an efficient method to calculate the
+   melting temperature of pairings of two single DNA strands. Avoiding
+   crosshybridization when choosing primers for the polymerase chain
+   reaction or selecting probes for large-scale DNA assays are examples
+   where the exact determination of melting temperatures is of
+   fundamental importance. Beyond being exact, the method has to be
+   efficient, as these techniques often require the simultaneous
+   calculation of calculation of melting temperatures of up to millions
+   of possible pairings. The problem then is to simultaneously determine
+   the most stable alignment of two sequences, including potential loops
+   and bulges, and caluclate the corresponding melting temperature.
+
+ <p><b>Results:</b> As the melting temperature can be expressed as a fraction
+   in terms of enthalpy and entropy differences of the corresponding annealing
+   reaction, we propose a fractional programming algorithm, the Dinkelbach
+   algorithm, to solve the problem. To calculate the required differences of
+   enthalpy and entropy, the nearest neighbor model is applied. Using this
+   model, the substeps of the dinkelbach algorithm in our problem setting
+   turn out to be calculations of alignments which optimize an additive score
+   function. Thus, the usual dynamic programming techniques can be applied. The
+   result is a very efficient algorithm to determine exact melting temperatures
+   of two DNA strands, suitable for large scale applications such as primer or
+   probe design.
+
+ <p><b>FractTM</b> is a program to determine the melting temperature of two 
+	DNA sequences using a nearest-neighbor model. <br>
+
+	The version used here requires two DNA-sequences as input. The
+	program can be used with DNA-RNA and RNA-RNA duplexes if
+	the respective thermodynamic parameters are provided. Unpaired bases (bulges)
+	in the duplexes will be considered by the software.
+	</p>
+ <p>Please insert your data in the following form.</p>
+
+
+  <form action="fptm.php3" METHOD=POST name="form">
+   <table cellpadding=5 boarder=0>
+     <tr>
+ 	<td align="right">
+	 <b>Sequence 1</b><br>
+	    A sequence in 5' -> 3' direction
+	</td>
+   	<td>
+	<input type="text" name="seq1" size=40 maxlength=200 
+	onChange="complete();">
+	</td>
+      </tr>
+     <tr>
+ 	<td align="right">
+	 <b>Sequence 2</b><br>
+	    A sequence in 3' -> 5' direction
+	</td>
+   	<td>
+	  <input type="text" name="seq2" size=40 maxlength=200>
+	</td>
+      </tr>
+      <tr>
+       <td align=right><b>
+	Concentration of the probe</b>
+       </td>
+       <td>
+	<input type="text" name="con" value="0.000001" size=12 maxlength=10> 
+	Mol/L
+       </td>
+      </tr>
+      <tr>
+       <td align=right><b>
+        Concentration of Na<sup>+</sup></b>
+       </td>
+       <td>
+	<input type="text" name="salt" size=12 maxlength=10 value=1> 
+	Mol/L
+       </td>
+      </tr>
+      <tr>
+       <td>
+	<input type=submit>
+       </td>
+       <td>
+       </td>
+      </tr>
+   </table>
+   
+  </form>
+
+<!-- ToDo
+Konzentration der Probe lieber in mMol?
+Standardwerte fuer die Konzentrationen
+Verweise
+Komma durch Punkt in Zahlen ersetzen
+Was ist TM, dH ...
+//-->
+
+
+<TR><TD VALIGN="TOP" ALIGN="RIGHT">
+<FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times"><H3>Contact:</H3></FONT></TD>
+<TD><FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times">
+<b>Lars Kaderali</b><br>
+<A HREF="mailto:kaderali@zpr.uni-koeln.de">kaderali@zpr.uni-koeln.de</a>
+<p>
+</FONT></TD><p></TR>
+
+<TR><TD VALIGN="TOP" ALIGN="RIGHT">
+<FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times"><H3>Source Code</H3></FONT></TD>
+<TD><FONT FACE="Meta, Futura, Verdana, Arial, Helvetica, Times">
+The C++ source code is available on request from the authors.
+</FONT></TD><p></TR>
+
+ 
+</TABLE>
+ 
+</BODY></HTML>

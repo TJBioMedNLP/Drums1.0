@@ -1,0 +1,979 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/css">
+	<title>TMPDB</title>
+	<style type="text/css">
+		<!--
+			a:hover {color:#FF4030}
+			a:active {color:#FF00FF}
+			.textbox-1 {
+				margin-left: 20px;
+				margin-right: 20px;
+				border-color: aliceblue;
+				border-width: 0px;
+				border-style: hidden;
+				text-align: justify
+			}
+			.textbox-2 {
+				margin-left: 60px;
+				margin-right: 20px;
+				border-color: aliceblue;
+				border-width: 0px;
+				border-style: hidden;
+				text-align: justify
+			}
+			.line-height-1 {
+				line-height: 13pt
+			}
+			.line-height-2 {
+				line-height: 5pt
+			}
+			.empty-cell {
+				empty-cells: hide
+			}
+		-->
+	</style>
+</head>
+
+<body text="#000075">
+	<font size=3 color="#000075" face="Helvetica, Arial, sans-serif">
+		<center>
+			<a name="Back"></a><font color="#ffffff">1</font><br>
+			<img src="TMPDB_title.gif" border="0" height="78" width="453">
+			<br><br>
+			<b>
+				<font size="5">TransMembrane Protein DataBase</font><br><br>
+				<font size="4">Transmembrane Proteins with Experimentally-Characterized<br>
+						Transmembrane Topologies</font>
+			</b> 
+			<br><br>
+			<font color="#1822cd" size="3">
+				<b>Release 6.3</b> (Updated November, 2003)&nbsp;
+			</font>
+			<!--
+				<img src="new.gif" border="0" height="20" width="32">
+			-->
+			<br><br>
+
+			<hr size="1"> 
+
+			<br>
+			<a href="#WhatIsTMPDB"><img src="What_is_TMPDB.jpg" border="0" height="42" width="210"></a><br>
+			<a href="#ProcedureForConstructionOfTMPDB"><img src="Procedure_for_Construction.jpg" border="0" height="42" width="300"></a><br>
+			<a href="#TMPDBCurrentHoldings"><img src="TMPDB_Current_Holdings.jpg" border="0" height="42" width="300"></a><br>
+			<a href="http://bioinfo.si.hirosaki-u.ac.jp/%7ETMPDB/search.html"><img src="Database_Search.jpg" border="0" height="42" width="210"></a><br>
+			<a href="#DatabaseDescriptionFormat"><img src="Database_Format.jpg" border="0" height="42" width="210"></a><br>
+			<a href="#Download"><img src="Download.jpg" border="0" height="42" width="150"></a><br>
+			<a href="#References"><img src="References.jpg" border="0" height="42" width="150"></a><br>
+			<a href="#TellUs"><img src="Tell_us.jpg" border="0" height="42" width="150"></a><br>
+		</center>
+
+		<hr size="1">
+
+		<div class="textbox-1"><div class="line-height-1"><br>
+			<a name="WhatIsTMPDB"></a>
+			<font size="4" color="#000000"><b>What is TMPDB?</b></font>
+			<br><br>
+Transmembrane (TM) protein play extremely important functions in life as pump, channel, receptor, energy transducer, etc., and have been reported recently to share approximately 20-30% of genes in a whole genome.&nbsp; Nevertheless, the number of three dimensional (3D) TM protein structures with high-resolution is far below one hundred at present, in contrast to more than 18,000 3D structures for soluble proteins registered in <a href="http://www.rcsb.org/pdb/" target="_blank">PDB</a>.&nbsp; It is because TM protein molecules are difficult to crystallize due to their amphiphilic characteristics - hydrophobic TM segments (TMSs) and hydrophilic loops.&nbsp; The fuctions of TM proteins however can be inferred rather easily from their TM topology (i.e., the number of TMSs, TMS position and orientation of TMS to the membrane lipid bilayer) without knowing their 3D structures because of rather simple structural characteristics (<a
+ href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12915725&amp;dopt=Abstract" target="_blank">Sugiyama <i>et al</i>., 2003</a><a href="http://www.jsbi.org/journal/GIW00/GIW00P092.pdf" target="_blank"></a>).
+			<br>
+&nbsp;&nbsp;&nbsp; 
+In this context, a number of TM topology prediction methods have been developed to determine the structure and function of TM proteins from their amino acid sequences.&nbsp; However, the proposed prediction methods have not attained the desired accuracies for this purpose.&nbsp; The recent reports of evaluating prediction performance by using experimentally-characterized TM topology datasets have revealed that even the best methods predict the TM topology with accuracies of only around 60% (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=11448883&amp;dopt=Abstract" target="_blank">M&ouml;ller <i>et al</i>., 2001</a>; <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=11808871&amp;dopt=Abstract" target="_blank">Ikeda <i>et al</i>., 2002</a>; <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12441377&amp;dopt=Abstract" target="_blank">Chen <i>et al</i>., 2002</a>).&nbsp; This could be attributed mainly to the lack of well-characterized topology data to be used for training or tuning TM topology prediction methods.&nbsp; Thus, more number of high-quality TM topology data are required to evaluate the existing prediction methods more precisely.
+			<br>
+&nbsp;&nbsp;&nbsp; 
+For this reason, we have constructed a TransMembrane Protein DataBase, TMPDB (Shimizu and Nakai, 1994; <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=9876916&amp;dopt=Abstract" target="_blank">Kihara <i>et al</i>., 1997</a>; Ikeda <i>et al</i>., 2002) which is a collection of TM proteins with topologies based on definite experimental evidences such as X-ray crystallography, NMR, gene fusion technique, substituted cysteine
+accessibility method, Asp(<i>N</i>)-linked glycosylation experiment and other biochemical methods.&nbsp; TMPDB would serve the requirements of both bioinformaticians and biologists, as a test and/or training dataset, for improving the existing TM topology prediction methods and developing novel prediction methods with higher performance as well as for making better understanding of TM proteins physicochemically.
+			<br><br>
+			<div align="right">
+				<a href="#Back"><img src="Back_to_Top.jpg" border="0" height="38" width="128"></a> 
+			</div>
+		</div></div>
+
+		<hr size="1">
+
+		<div class="textbox-1"><div class="line-height-1"><br>
+			<a name="ProcedureForConstructionOfTMPDB"></a>
+			<font size="4" color="#000000"><b>The Procedure for Construction of TMPDB</b></font>
+			<br><br>
+We have collected 1,074 articles reporting TM topology, by using <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed" target="_blank">MEDLINE</a> search with the keywords, 'transmembrane'and 'topology' (895 articles), by searching directly without using MEDLINE (46 articles), and by referring to the reference position line (RP) of the entries with the annotations: 'X-RAY CRYSTALLOGRAPHY', 'STRUCTURE BY NEUTRON DIFFRACTION', 'STRUCTURE BY ELECTRON CRYO-MICROSCOPY', 'STRUCTURE BY NMR' or 'TOPOLOGY' in <a href="http://www.expasy.ch/sprot/" target="_blank">SWISS-PROT and TrEMBL</a> (133 articles).&nbsp; By checking the content of each collected article, we extracted the experimentally-characterized 302 TM topology models.&nbsp; To obtain the complete sequence annotation that the articles often lack, we crosschecked the sequences in question to public databases, using the protein name or the partial sequences as a clue.&nbsp; By combining the information contained in the articles and other information of the cross-referenced public databases, we constructed TMPDB in the SWISS-PROT format.
+			<br><br>
+			<div align="right">
+				<a href="#Back"><img src="Back_to_Top.jpg" border="0" height="38" width="128"></a>
+			</div>
+		</div></div>
+
+		<hr size="1">
+
+		<div class="textbox-1"><div class="line-height-1"><br>
+			<a name="TMPDBCurrentHoldings"></a>
+			<font size="4" color="#000000" size="4"><b>TMPDB Current Holdings</b></font>
+			<br><br>
+The latest of TMPDB (Release 6.3) contains 302 TM portein sequences: 276 alpha-helical  sequences (TMPDB_alpha dataset), 17 beta-stranded  sequences (TMPDB_beta dataset) and 9 alpha-helical sequences with short pore-forming alpha-helices buried in the membrane (e.g., aquaporin 1) (TMPDB_alpha-buried dataset).&nbsp; The dataset of TMPDB_alpha comprises of 165 prokaryotic and 111 eukaryotic sequences while the TMPDB_beta dataset includes only prokaryotic sequences with topologies determined by X-ray diffraction.&nbsp; The TMPDB_alpha-buried dataset includes 6 prokaryotic and 3 eukaryotic sequences, in which topologies are given by X-ray diffraction (7 entries) and <i>N</i>-linked glycosylation and protease-protection assays (1 entry each, respectively).
+			<br>
+&nbsp;&nbsp;&nbsp; 
+Futhermore, we subjected TMPDB_alpha, TMPDB_beta and TMPDB_alpha-buried datasets to a sequence similarity check (&lt;30%) using <a href="http://www2.ebi.ac.uk/clustalw/" target="_blank">CLUSTALW</a> version 1.81, and finally obtained non-redundant datasets - TMPDB_alpha_non-redundant with 231 entries (138 prokaryotic and 93 eukaryotic), TMPDB_beta_non-redundant with 15 entries, and TMPDB_alpha-buried_non-redundant with 7 entries (4 prokaryotic and 3 eukaryotic).&nbsp; Among the TMPDB_alpha_non-redundant  entries, 112 topology models are determined by gene fusion experiment, 47 by X-ray diffraction, 5 by NMR, 2 by substituted cysteine accessibility method (SCAM), 11 by <i>N</i>-linked glycosylation and 54 by other biochemical experiments.
+			<br><br>
+			<table border="1" width="100%">
+				<tbody>
+					<tr>
+					<td class="empty-cell"></td>
+						<td bgcolor="#ffccd1">TMPDB</td>
+						<td bgcolor="#ffe2cc">TMPDB_<br>alpha</td>
+						<td bgcolor="#ffffcc">TMPDB_<br>alpha_<br>non-redundant</td>
+						<td bgcolor="#cfcffc">TMPDB_<br>alpha-buried</td>
+						<td bgcolor="#cfeefd">TMPDB_<br>alpha-buried_<br>non-redundant</td>
+						<td bgcolor="#b3ffb9">TMPDB_<br>beta</td>
+						<td bgcolor="#e2ffcc">TMPDB_<br>beta_<br>non-redundant</td>
+					</tr>
+					<tr>
+						<td bgcolor="#000075"><font color="#FFFFFF">Organisms</font></td>
+					</tr>
+					<tr>
+						<td>Prokaryote</td>
+						<td align="right">188</td>
+						<td align="right">165</td>
+						<td align="right">138</td>
+						<td align="right">6</td>
+						<td align="right">4</td>
+						<td align="right">17</td>
+						<td align="right">15</td>
+					</tr>
+					<tr>
+						<td>Eukaryote</td>
+						<td align="right">114</td>
+						<td align="right">111</td>
+						<td align="right">93</td>
+						<td align="right">3</td>
+						<td align="right">3</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td align="right">302</td>
+						<td align="right">276</td>
+						<td align="right">231</td>
+						<td align="right">9</td>
+						<td align="right">7</td>
+						<td align="right">17</td>
+						<td align="right">15</td>
+					</tr>
+					<tr>
+						<td bgcolor="#000075"><font color="#FFFFFF">Experimental methods</font></td>
+					</tr>
+					<tr>
+						<td>X-ray diffraction</td>
+						<td align="right">83</td>
+						<td align="right">59</td>
+						<td align="right">47</td>
+						<td align="right">7</td>
+						<td align="right">6</td>
+						<td align="right">17</td>
+						<td align="right">15</td>
+					</tr>
+					<tr>
+						<td>NMR</td>
+						<td align="right">7</td>
+						<td align="right">7</td>
+						<td align="right">5</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>Gene fusion</td>
+						<td align="right">127</td>
+						<td align="right">127</td>
+						<td align="right">112</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>SCAM</td>
+						<td align="right">2</td>
+						<td align="right">2</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td><i>N</i>-linked glycosylation</td>
+						<td align="right">15</td>
+						<td align="right">14</td>
+						<td align="right">11</td>
+						<td align="right">1</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>Others</td>
+						<td align="right">68</td>
+						<td align="right">67</td>
+						<td align="right">54</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+&nbsp;&nbsp;&nbsp;
+The distribution of the number of TMSs included in TMPDB and its 6 subsets (TMPDB_alpha, TMPDB_alpha_non-redundant, TMPDB_alpha-buried, TMPDB_alpha-buried_non-redundant, TMPDB_beta and TMPDB_beta_non-redundant) are summarized in bellow.
+			<br><br>
+			<table border="1" width="100%">
+				<tbody>
+					<tr>
+						<td class="empty-cell"></td>
+						<td bgcolor="#000075" colspan="20"><font color="#FFFFFF"><center>Number of TMSs</center></font></td>
+					</tr>
+					<tr>
+						<td class="empty-cell"></td>
+						<td align="right">1</td>
+						<td align="right">2</td>
+						<td align="right">3</td>
+						<td align="right">4</td>
+						<td align="right">5</td>
+						<td align="right">6</td>
+						<td align="right">7</td>
+						<td align="right">8</td>
+						<td align="right">&nbsp;&nbsp;9</td>
+						<td align="right">10</td>
+						<td align="right">11</td>
+						<td align="right">12</td>
+						<td align="right">13</td>
+						<td align="right">14</td>
+						<td align="right">15</td>
+						<td align="right">16</td>
+						<td align="right">17</td>
+						<td align="right">18</td>
+						<td align="right">22</td>
+						<td align="right">24</td>
+					</tr>
+					<tr>
+						<td bgcolor="#ffccd1">TMPDB</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Prokaryote</td>
+						<td align="right">42</td>
+						<td align="right">20</td>
+						<td align="right">8</td>
+						<td align="right">13</td>
+						<td align="right">8</td>
+						<td align="right">17</td>
+						<td align="right">7</td>
+						<td align="right">13</td>
+						<td align="right">4</td>
+						<td align="right">9</td>
+						<td align="right">5</td>
+						<td align="right">25</td>
+						<td align="right">2</td>
+						<td align="right">2</td>
+						<td align="right">3</td>
+						<td align="right">5</td>
+						<td align="right">0</td>
+						<td align="right">3</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Eukaryote</td>
+						<td align="right">45</td>
+						<td align="right">12</td>
+						<td align="right">2</td>
+						<td align="right">10</td>
+						<td align="right">2</td>
+						<td align="right">8</td>
+						<td align="right">9</td>
+						<td align="right">7</td>
+						<td align="right">1</td>
+						<td align="right">8</td>
+						<td align="right">0</td>
+						<td align="right">6</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Total</td>
+						<td align="right">87</td>
+						<td align="right">32</td>
+						<td align="right">10</td>
+						<td align="right">23</td>
+						<td align="right">10</td>
+						<td align="right">25</td>
+						<td align="right">16</td>
+						<td align="right">20</td>
+						<td align="right">5</td>
+						<td align="right">17</td>
+						<td align="right">5</td>
+						<td align="right">31</td>
+						<td align="right">2</td>
+						<td align="right">3</td>
+						<td align="right">3</td>
+						<td align="right">5</td>
+						<td align="right">2</td>
+						<td align="right">3</td>
+						<td align="right">2</td>
+						<td align="right">1</td>
+					</tr>
+					<tr>
+						<td bgcolor="#ffe2cc">TMPDB_alpha</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Prokaryote</td>
+						<td align="right">41</td>
+						<td align="right">18</td>
+						<td align="right">8</td>
+						<td align="right">12</td>
+						<td align="right">8</td>
+						<td align="right">15</td>
+						<td align="right">7</td>
+						<td align="right">11</td>
+						<td align="right">4</td>
+						<td align="right">7</td>
+						<td align="right">5</td>
+						<td align="right">24</td>
+						<td align="right">2</td>
+						<td align="right">2</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Eukaryote</td>
+						<td align="right">45</td>
+						<td align="right">11</td>
+						<td align="right">2</td>
+						<td align="right">10</td>
+						<td align="right">2</td>
+						<td align="right">7</td>
+						<td align="right">8</td>
+						<td align="right">7</td>
+						<td align="right">1</td>
+						<td align="right">8</td>
+						<td align="right">0</td>
+						<td align="right">6</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Total</td>
+						<td align="right">86</td>
+						<td align="right">29</td>
+						<td align="right">10</td>
+						<td align="right">22</td>
+						<td align="right">10</td>
+						<td align="right">22</td>
+						<td align="right">15</td>
+						<td align="right">18</td>
+						<td align="right">5</td>
+						<td align="right">15</td>
+						<td align="right">5</td>
+						<td align="right">30</td>
+						<td align="right">2</td>
+						<td align="right">3</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+					</tr>
+					<tr>
+						<td bgcolor="#ffffcc">TMPDB_alpha_non-redundant</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Prokaryote</td>
+						<td align="right">33</td>
+						<td align="right">17</td>
+						<td align="right">8</td>
+						<td align="right">12</td>
+						<td align="right">6</td>
+						<td align="right">14</td>
+						<td align="right">6</td>
+						<td align="right">9</td>
+						<td align="right">4</td>
+						<td align="right">6</td>
+						<td align="right">2</td>
+						<td align="right">17</td>
+						<td align="right">2</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Eukaryote</td>
+						<td align="right">39</td>
+						<td align="right">10</td>
+						<td align="right">2</td>
+						<td align="right">6</td>
+						<td align="right">2</td>
+						<td align="right">7</td>
+						<td align="right">6</td>
+						<td align="right">7</td>
+						<td align="right">1</td>
+						<td align="right">4</td>
+						<td align="right">0</td>
+						<td align="right">6</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Total</td>
+						<td align="right">72</td>
+						<td align="right">27</td>
+						<td align="right">10</td>
+						<td align="right">18</td>
+						<td align="right">8</td>
+						<td align="right">21</td>
+						<td align="right">12</td>
+						<td align="right">16</td>
+						<td align="right">5</td>
+						<td align="right">10</td>
+						<td align="right">2</td>
+						<td align="right">23</td>
+						<td align="right">2</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+					</tr>
+					<tr>
+						<td bgcolor="#cfcffc">TMPDB_alpha-buried</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Prokaryote</td>
+						<td align="right">1</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Eukaryote</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Total</td>
+						<td align="right">1</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">3</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td bgcolor="#cfeefd">TMPDB_alpha-buried_non-redundant</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Prokaryote</td>
+						<td align="right">1</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Eukaryote</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Total</td>
+						<td align="right">1</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td bgcolor="#b3ffb9">TMPDB_beta</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Total (all prokaryote)</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">5</td>
+						<td align="right">0</td>
+						<td align="right">3</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+					</tr>
+					<tr>
+						<td bgcolor="#e2ffcc">TMPDB_beta_non-redundant</td>
+					</tr>
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;Total (all prokaryote)</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">1</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">0</td>
+						<td align="right">4</td>
+						<td align="right">0</td>
+						<td align="right">3</td>
+						<td align="right">2</td>
+						<td align="right">0</td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+&nbsp;&nbsp;&nbsp;
+The results of comparing TMPDB with other published TM topology datasets, i.e. MEMSAT 1.5 (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=8130217&amp;dopt=Abstract" target="_blank">Jones <i>et al</i>., 1994</a>), HTP (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=8670618&amp;dopt=Abstract" target="_blank">Fariselli and Casadio, 1996</a>), PHDhtm (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=8877519&amp;dopt=Abstract" target="_blank">Rost <i>et al</i>., 1996</a>), DAS (<a
+ href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=9278280&amp;dopt=Abstract" target="_blank">Cserz&ouml; <i>et al</i>., 1997</a>), SOSUI (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=9632836&amp;dopt=Abstract" target="_blank">Hirokawa <i>et al</i>., 1998</a>), HMMTOP 1.1 (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=9769220&amp;dopt=Abstract" target="_blank">Tusn&aacute;dy and Simon, 1998</a>), TMHMM 1.0 (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=9783223&amp;dopt=Abstract" target="_blank">Sonnhammer <i>et al</i>., 1998</a>), PRED-TMR (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10360978&amp;dopt=Abstract" target="_blank">Pasquier <i>et al</i>., 1999</a>), Moeller's (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=11159338&amp;dopt=Abstract" target="_blank">Moeller <i>et al</i>., 2000</a>) and MPtopo (<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=11266632&amp;dopt=Abstract" target="_blank">Jayasinghe <i>et al</i>., 2001</a>) are shown in bellow.
+			<br><br>
+			<table border="1" cols="8" width="100%">
+				<tbody>
+					<tr bgcolor="#000075">
+						<td valign="middle"><font color="#ffffff">Datasets</font></td>
+						<td><font color="#ffffff">Entries</font></td>
+						<td bgcolor="#ffe2cc">Entries<br>contained in<br>TMPDB_alpha<br>dataset,<br>276 entries</td>
+						<td bgcolor="#ffffcc">Entries<br>contained in<br>TMPDB_alpha_<br>non-redundant<br>dataset,<br>231 entries</td>
+						<td bgcolor="#cfcffc">Entries<br>contained in<br>TMPDB_alpha-<br>buried dataset,<br>9 entries</td>
+						<td bgcolor="#cfeefd">Entries<br>contained in<br>TMPDB_alpha-<br>buried_<br>non-redundant<br>dataset,<br>7 entries</td>
+						<td bgcolor="#b3ffb9">Entries<br>contained in<br>TMPDB_beta<br>dataset,<br>17 entries</td>
+						<td bgcolor="#e2ffcc">Entries<br>contained in<br>TMPDB_beta_<br>non-redundant<br>dataset,<br>15 entries</td>
+					</tr>
+					<tr>
+						<td valign="top">MEMSAT 1.5</td>
+						<td align="right">83</td>
+						<td align="right">29 (10.5%)</td>
+						<td align="right">22 (9.5%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>HTP</td>
+						<td align="right">92</td>
+						<td align="right">32 (11.6%)</td>
+						<td align="right">27 (11.7%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>PHDhtm</td>
+						<td align="right">68</td>
+						<td align="right">22 (8.0%)</td>
+						<td align="right">21 (9.1%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>DAS</td>
+						<td align="right">44</td>
+						<td align="right">41 (14.9%)</td>
+						<td align="right">38 (16.4%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>SOSUI</td>
+						<td align="right">97</td>
+						<td align="right">38 (13.8%)</td>
+						<td align="right">36 (15.6%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>HMMTOP 1.1</td>
+						<td align="right">158</td>
+						<td align="right">61 (22.1%)</td>
+						<td align="right">55 (23.8%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>TMHMM 1.0</td>
+						<td align="right">83</td>
+						<td align="right">28 (10.1%)</td>
+						<td align="right">24 (10.4%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>PRED-TMR</td>
+						<td align="right">101</td>
+						<td align="right">52 (18.8%)</td>
+						<td align="right">48 (20.1%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>M&ouml;ller's redundant</td>
+						<td align="right">198</td>
+						<td align="right">163 (59.1%)</td>
+						<td align="right">138 (59.3%)</td>
+						<td align="right">1 (11.1%)</td>
+						<td align="right">1 (14.3%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>M&ouml;ller's non-redundant</td>
+						<td align="right">148</td>
+						<td align="right">136 (59.1%)</td>
+						<td align="right">127 (59.3%)</td>
+						<td align="right">1 (11.1%)</td>
+						<td align="right">1 (14.3%)</td>
+						<td align="center">&mdash;</td>
+						<td align="center">&mdash;</td>
+					</tr>
+					<tr>
+						<td>MPtopo<sup>a, b</sup></td>
+						<td align="right">98</td>
+						<td align="right">76 (27.5%)</td>
+						<td align="right">63 (27.3%)</td>
+						<td align="right">4 (44.4%)</td>
+						<td align="right">4 (57.1%)</td>
+						<td align="right">10 (58.8%)</td>
+						<td align="right">9 (60.0%)</td>
+					</tr>
+				</tbody>
+			</table>
+			<font size=-1>
+				<sup>a </sup>Only Moeller's redundant and non-redundant  datasets, and MPtopo contain alpha-helical sequences  with short pore-forming helices or loops buried in the membrane.<br>
+				<sup>b </sup>Only MPtopo contains beta-stranded sequences.<br>
+			</font>
+			<div align="right"><a href="#Back"><img src="Back_to_Top.jpg" border="0" height="38" width="128"></a></div>
+		</div></div>
+
+		<hr size="1">
+
+		<div class="textbox-1"><div class="line-height-1"><br>
+			<a name="DatabaseDescriptionFormat"></a>
+			<font size="4" color="#000000"><b>Database Description Format</b></font>
+			<br><br>
+			<tt>
+ID&nbsp;&nbsp;&nbsp;Identification in other databases<br>
+AC&nbsp;&nbsp;&nbsp;Accession number(s) associated with an entry in other databases<br>
+NO&nbsp;&nbsp;&nbsp;Entry and article number(s)<br>
+DT&nbsp;&nbsp;&nbsp;Date of creation and last modification of the database entry<br>
+DE&nbsp;&nbsp;&nbsp;Description of the general descriptive information<br>
+GN&nbsp;&nbsp;&nbsp;Gene name(s)<br>
+OS&nbsp;&nbsp;&nbsp;Organism(s) of species<br>
+OG&nbsp;&nbsp;&nbsp;Organelle<br>
+OC&nbsp;&nbsp;&nbsp;Organism classification<br>
+ME&nbsp;&nbsp;&nbsp;Membrane in which the protein exists<br>
+RN&nbsp;&nbsp;&nbsp;Reference number(s)<br>
+RX&nbsp;&nbsp;&nbsp;Reference cross-reference(s)<br>
+RA&nbsp;&nbsp;&nbsp;Reference author(s)<br>
+RT&nbsp;&nbsp;&nbsp;Reference title<br>
+RL&nbsp;&nbsp;&nbsp;Reference location<br>
+DR&nbsp;&nbsp;&nbsp;Database cross-references<br>
+EM&nbsp;&nbsp;&nbsp;Experimental methods to determine transmembrane topologies<br>
+SS&nbsp;&nbsp;&nbsp;Secondary structure  of transmembrane segment(s)<br>
+NS&nbsp;&nbsp;&nbsp;Number of transmembrane  segment(s)<br>
+TP&nbsp;&nbsp;&nbsp;Topology (<a href="http://bioinfo.si.hirosaki-u.ac.jp/%7ETMPDB/terminology.html" target="_blank">Terminology</a>)<br>
+FT&nbsp;&nbsp;&nbsp;Feature table data<br>
+SQ&nbsp;&nbsp;&nbsp;Sequence header and its length<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(blanks) sequence data<br>
+//&nbsp;&nbsp;&nbsp;Termination line</font></font>
+			</tt>
+			<div align="right">
+				<a href="#Back"><img src="Back_to_Top.jpg" border="0" height="38" width="128"></a>
+			</div>
+		</div></div>
+
+		<hr size="1">
+
+		<div class="textbox-1"><div class="line-height-1"><br>
+			<a name="Download"></a>
+			<font size="4" color="#000000"><b>Download</b></font>
+			<br><br>
+TMPDB and its subsets (TMPDB_alpha, TMPDB_alpha_non-redundant, TMPDB_alpha-buried, TMPDB_alpha-buried_non-redundant, TMPDB_beta and TMPDB_beta_non-redundant) are available for anonymous ftp download as a plain text file from <b><a href="ftp://bioinfo.si.hirosaki-u.ac.jp/TMPDB/"_blank">here</a></b>.&nbsp;&nbsp;Please, users of TMPDB and its subsets are kindly asked to cite the above reference in publications (or other types of presentation).
+			<div align="right">
+				<a href="#Back"><img src="Back_to_Top.jpg" border="0" height="38" width="128"></a>
+			</div>
+		</div></div>
+
+		<hr size="1">
+
+		<div class="textbox-1"><div class="line-height-1"><br>
+			<a name="References"></a>
+			<font size="4" color="#000000"><b>References</b></font>
+			<br>
+			<ul>
+				<li>
+Shimizu, T. and Nakai, K. (1994) Construction of a membrane protein database and an evaluation of several prediction methods of transmembrane segments. In Miyano, S., Akutsu, T., Imai, H., Gotoh, O. and Takagi, T. (eds), <i>Proc. Genome Informatics Workshop 1994</i>. Universal Academy Press, Tokyo, pp. 148-149.&nbsp;&nbsp;[<a href="http://www.genome.ad.jp/manuscripts/GIW94/Poster/GIW94P06.pdf" target="_blank"><img src="PDF_mark.gif" border="0" height="16" width="25"></a><a href="http://www.genome.ad.jp/manuscripts/GIW94/Poster/GIW94P06.pdf" target="_blank">PDF</a>]&nbsp;&nbsp;<font color="#1822cd">(Release 1.0)</font>
+				</li>
+				<br>
+				<li>
+Kihara, D., Shimizu, T. and Kanehisa, M. (1998) Prediction of membrane proteins based on classification of transmembrane segments. <i>Protein Eng</i>., <b>11</b>, 961-970.&nbsp;&nbsp;[<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&amp;db=pubmed&amp;list_uids=9876916&amp;dopt=Abstract" target="_blank">PubMed</a>]&nbsp;&nbsp;<font color="#1822cd">(Release 2.0)</font>
+				</li>
+				<br>
+				<li>
+Ito, H., Lao, D. M. and Shimizu, T. (2000) A transmembrane topology prediction method based on integration mechanism. In: Dunker, A. K., Konagaya, A., Miyano,&nbsp; S. and Takagi, T. (eds) <i>Genome Informatics 2000</i>. Universal Academy Press, Tokyo, pp. 424-425.&nbsp;&nbsp;[<a href="http://www.jsbi.org/journal/GIW00/GIW00P093.pdf" target="_blank"><img src="PDF_mark.gif" border="0" height="16" width="25"></a><a href="http://www.jsbi.org/journal/GIW00/GIW00P093.pdf" target="_blank">PDF</a>]&nbsp;&nbsp;<font color="#1822cd">(Release 3.2)</font>
+				</li>
+				<br>
+				<li>
+Ikeda, M., Arai, M. and Shimizu, T. (2000) Evaluation of transmembrane topology prediction methods by using an experimentally characterized topology dataset. In Dunker, A. K., Konagaya, A., Miyano, S. and Takagi, T. (eds), <i>Genome Informatics 2000</i>. Universal Academy Press, Tokyo, pp. 426-427.&nbsp;&nbsp;[<a href="http://www.jsbi.org/journal/GIW00/GIW00P094.pdf" target="_blank"><img src="PDF_mark.gif" border="0" height="16" width="25"></a><a href="http://www.jsbi.org/journal/GIW00/GIW00P094.pdf" target="_blank">PDF</a>]&nbsp;&nbsp;<font color="#1822cd">(Release 4.0)</font>
+				</li>
+				<br>
+				<li>
+Ikeda, M., Arai, M., Okuno, T. and Shimizu, T. (2001) The prediction accuracy of transmembrane topology is improved by a consensus method: An application to genome-wide analysis. <i>4th International Conference on Biological Physics</i> (<i>ICBP 2001</i>), pp. 60.&nbsp;&nbsp;<font color="#1822cd">(Release 4.1 and <a href="http://bioinfo.si.hirosaki-u.ac.jp/%7EConPred/" target="_blank">ConPred</a>)</font>
+				</li>
+				<br>
+				<li>
+Ikeda, M., Arai, M., Lao, D. M. and Shimizu, T. (2002) Transmembrane topology prediction methods: A re-assessment and improvement by a consensus method using a dataset of experimentally-characterized transmembrane topologies. <i>In Silico Biol</i>., <b>2</b>, 19-33.&nbsp;&nbsp;[<a href="ftp://bioinfo.si.hirosaki-u.ac.jp/reprint/InSilicoBiol_2_019_2002.pdf" target="_blank"><img src="PDF_mark.gif" border="0" height="16" width="25"></a><a href="ftp://bioinfo.si.hirosaki-u.ac.jp/reprint/InSilicoBiol_2_019_2002.pdf" target="_blank">PDF</a>, <a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=11808871&amp;dopt=Abstract" target="_blank">PubMed</a>]&nbsp;&nbsp;<font color="#1822cd">(Release 4.2 and <a href="http://bioinfo.si.hirosaki-u.ac.jp/%7EConPred/" target="_blank">ConPred</a>)</font>
+				</li>
+				<br>
+				<li>
+Lao, D. M., Arai, M., Ikeda,  M. and Shimizu, T. (2002) The presence of signal peptide significantly affects transmembrane topology prediction. <i>Bioinformatics</i>, <b>18</b>, 1562-1566.&nbsp;&nbsp;[<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12490439&amp;dopt=Abstract" target="_blank">PubMed</a>] &nbsp;&nbsp;<font color="#1822cd">(Release 4.2)</font>
+				</li>
+				<br>
+				<li>
+Ikeda, M., Arai, M., Okuno, T. and Shimizu, T. (2003) TMPDB: a database of experimentally-characterized transmembrane topologies. <i>Nucleic Acids Res</i>., <b>31</b>, 406-409.<font color="#000075">&nbsp;&nbsp;[<a href="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12520035&amp;dopt=Abstract" target="_blank">PubMed</a>] &nbsp;&nbsp;<font color="#1822cd">(Release 6.2 and <a href="http://bioinfo.si.hirosaki-u.ac.jp/%7EConPred/" target="_blank">ConPred</a>)</font>
+				</li>
+			</ul>
+			<div align="right">
+				<a href="#Back"><img src="Back_to_Top.jpg" border="0" height="38" width="128"></a>
+			</div>
+		</div></div>
+
+		<hr size="1">
+
+		<div class="textbox-1"><div class="line-height-1"><br>
+			<a name="TellUs"></a>
+			<font size="4" color="#000000"><b>Tell us</b></font>
+			<br><br>
+TMPDB will be updated continuously for increasing the number of entries.&nbsp;&nbsp;We would be also pleased to accept a kind offer of experimentally-characterized TM topology models to be added to TMPDB.&nbsp;&nbsp;Feel free to contact us at:
+		<br><br>
+		</div></div>
+		<div class="textbox-2">
+			<b>
+				Masami Ikeda<br>
+			</b>
+			<div class="line-height-2"><br></div>
+				Department of Electronic and  Information System Engineering<br>
+				Faculty of Science and Technology<br>
+				Hirosaki University<br>
+				Hirosaki 036-8561<br>
+				Japan<br>
+			<div class="line-height-2"><br></div>
+				Science of Bioresources Program<br>
+				The United Graduate School of Agricultural Sciences<br>
+				Iwate University<br>
+				Morioka 020-8550<br>
+				Japan<br>
+			<div class="line-height-2"><br></div>
+				E-mail: <a href="mailto:srikeda@cc.hirosaki-u.ac.jp">srikeda@cc.hirosaki-u.ac.jp</a><br>
+				Fax: +81-172-39-3646<br>
+			<br>
+			<b>
+				Masafumi Arai<br>
+			</b>
+			<div class="line-height-2"><br></div>
+				Department of Electronic and  Information System Engineering<br>
+				Faculty of Science and Technology<br>
+				Hirosaki University<br>
+				Hirosaki 036-8561<br>
+				Japan<br>
+			<div class="line-height-2"><br></div>
+				Department of Developmental Biology and Neuroscience<br>
+				Graduate School of Life Sciences<br>
+				Tohoku University<br>
+				Sendai 980-8577<br>
+				Japan<br>
+			<div class="line-height-2"><br></div>
+				E-mail: <a href="mailto:d01603@si.hirosaki-u.ac.jp">d01603@si.hirosaki-u.ac.jp</a><br>
+				Fax: +81-172-39-3646<br>
+			<br>
+			<b>
+				Toshio Shimizu, Prof.<br>
+			</b>
+			<div class="line-height-2"><br></div>
+				Department of Electronic and  Information System Engineering<br>
+				Faculty of Science and Technology<br>
+				Hirosaki University<br>
+				Hirosaki 036-8561<br>
+				Japan<br>
+			<div class="line-height-2"><br></div>
+				E-mail: <a href="mailto:slsimi@si.hirosaki-u.ac.jp">slsimi@si.hirosaki-u.ac.jp</a><br>
+				Fax: +81-172-39-3638<br><br>
+		</div>
+		<div align="right">
+			<a href="#Back"><img src="Back_to_Top.jpg" border="0" height="38" width="128"></a>
+		</div>
+
+		<hr size="1">
+
+		<div class="textbox-1">
+			<font size=-1>
+				Page last update: November 15, 2003
+			</font>
+		</div>
+
+	</font>
+</body>
+
+</html>

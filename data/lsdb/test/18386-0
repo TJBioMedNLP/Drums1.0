@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta name="author" content="Andy Secker" />
+	<meta name="keywords" content="biasprofs, gpcr, protien" />
+	<meta name="description" content="" />
+	<meta name="robots" content="all" />
+	<title>BIASPROFS</title>
+
+	<!-- to correct the unsightly Flash of Unstyled Content. http://www.bluerobot.com/web/css/fouc.asp -->
+	
+<script type='text/javascript' src='popup.js'></script>
+<script language="JavaScript">
+
+var base64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split("");
+var base64inv = {}; for (var i = 0; i < base64chars.length; i++) { base64inv[base64chars[i]] = i; }
+
+function base64_encode (s)
+ {
+   var r = ""; var p = ""; var c = s.length % 3;
+   if (c > 0) { for (; c < 3; c++) { p += '='; s += "\0"; } }
+   for (c = 0; c < s.length; c += 3) {
+     if (c > 0 && (c / 3 * 4) % 76 == 0) { r += "\r\n"; }
+     var n = (s.charCodeAt(c) << 16) + (s.charCodeAt(c+1) << 8) + s.charCodeAt(c+2);
+     n = [(n >>> 18) & 63, (n >>> 12) & 63, (n >>> 6) & 63, n & 63];
+     r += base64chars[n[0]] + base64chars[n[1]] + base64chars[n[2]] + base64chars[n[3]];
+   }
+ 
+   return r.substring(0, r.length - p.length) + p;
+ }
+
+
+function SymError()
+{
+  return true;
+}
+
+window.onerror = SymError;
+
+function isDefined(variable)
+{
+return (!(!( variable||false )))
+}
+
+function removeGPCR() {
+	var thetext = document.getElementById('seq').value;
+	if(thetext == "Enter GPCR sequence here.") {
+		document.getElementById('seq').value = "";;
+	}
+}
+
+function runJob() {
+        document.getElementById('resultDiv').innerHTML = '';
+        popup_manual_open('progress');
+        var seq = document.getElementById('seq').value;
+	var temp = seq.split("\n") 
+	if(temp.length>1 && temp[0].indexOf('>') == 0) {
+		temp[0] = "";
+	}
+	seq = temp.join("");
+	//seq = seq.replace(/'/g,"")
+	//seq = seq.replace(/"/g,"")
+	seq = base64_encode(seq);
+	var url = "runClient.php?seq="+seq;
+	timedReloadContents(url, 'resultDiv');
+}
+
+function timedReloadContents(url, which) {
+        if (window.XMLHttpRequest) { req = new XMLHttpRequest();
+        } else if (window.ActiveXObject) { req = new ActiveXObject("Microsoft.XMLHTTP"); }
+        if (req != undefined) {
+                req.onreadystatechange = function() { listenTo(which);};
+                req.open("GET", url, true);
+                req.send("");
+        }
+}
+
+function listenTo(which) {
+        if (req.readyState == 4) { // only if req is "loaded"
+                popup_manual_close('progress');
+                if (req.status == 200) { // only if "OK"
+                	document.getElementById(which).innerHTML = req.responseText;
+		}
+	}
+}
+
+function popup_manual_open(which) {
+        document.getElementById(which).style.display = ''; document.getElementById(which).style.visibility = '';
+}
+
+function popup_manual_close(which) {
+        var element = document.getElementById(which);
+        if(isDefined(element)) {
+                element.style.visibility = 'hidden';
+                element.style.display    = 'none';
+        }
+}
+</script>
+
+<script type="text/javascript"></script>
+	
+	<style type="text/css" title="currentStyle" media="screen">
+		@import "main.css";
+		@import "popup.css";
+	</style>
+</head>
+<style type="text/css" title="currentStyle" media="screen">
+		@import "http://www.cs.kent.ac.uk/projects/biasprofs/main.css";
+</style>
+
+
+<div id="container">
+
+		<div id="pageHeader">
+			<h1>BIAS-PROFS</h1>
+			<h2><u>B</u>ioinformatics, <u>I</u>mmunology and <u>A</u>lgorithms make <u>S</u>hort work of <u>PRO</u>tein <u>F</u>unction cla<u>S</u>sification</h2>
+		</div>
+
+    <div id="login">
+      <a href="http://www.cs.kent.ac.uk/projects/securedir">Members login</a>
+    </div>
+
+		<div id="text">
+      <h3><img src='i/tree.jpg' style="float: left; margin-right: 7px; margin-bottom: 7px;">GPCRTree: a classifier for G Protein coupled receptors</h3>
+		</div>
+		<font color='red'>There is an error with the server. The administrator has been notified. Please check back later.</font>
+    <div style="clear:both;"></div>
+
+		<div id="text">
+	<p>
+			<textarea cols='60' rows='10' id='seq' wrap="hard" onclick='removeGPCR();'>Enter GPCR sequence here.</textarea><br />
+			<input type='submit' value='Submit' onclick='runJob();'>
+      	</p>
+	<div id='resultDiv'></div>
+
+	      <p>
+       <b>Important:</b> GPCRtree will always make a best guess at a GPCR class even if the sequence is not a GPCR.  Entering a sequence known not to be a GPCR will generate misleading results. The classifier accepts only protein sequences, not nucleic acid sequences.<br />
+  <ul>
+      <li><a href="help.html" onclick="popup_show('help', 'draghelp', 'exithelp', 'screen-center', 10, 0);return false;" target="newWin">Help and technical information</a></li>
+      <li><a href="#" onclick="popup_show('example', 'dragexample', 'exitexample', 'screen-center', 10, 0);return false;" target="newWin">Example Protein Sequence</a></li>
+  </ul>
+      <br>
+      This classifier is an implementation of the algorithm described in:<br />
+        Matthew N. Davies, Andrew Secker, Alex A. Freitas, Miguel Mendao, Jon Timmis and Darren R. Flower. (2007)<I> On the hierarchical classification of G Protein-Coupled Receptors.</I> (pp. 3113-3118). Bioinformatics 23(23), December 2007: Oxford Journals. <a href="http://www.cs.kent.ac.uk/projects/biasprofs/pubs.html">Publications</a><br />
+
+      </p>
+
+	</div>
+
+		<div id="footer">
+			 <a href="mailto:aaf@kent.ac.uk">Contact</a>.<br />
+			&copy;2006-2008 BIASPROFS project.
+		</div>
+
+	<div id="links_short">
+    Links:
+		<ul class="short">
+			<li><a href="http://www.cs.kent.ac.uk/projects/biasprofs/index.html">Home</a></li>
+			<li><a href="http://www.cs.kent.ac.uk/projects/biasprofs/pubs.html">Publications</a></li>
+			<li><a href="http://www.cs.kent.ac.uk/projects/biasprofs/downloads.html">Download dataset</a></li>
+			<li><a href="http://igrid-ext.cryst.bbk.ac.uk/gpcrtree/">GPCRTree classification server</a></li>
+		</ul>
+	</div>
+
+	<div id='progress' style="visibility: hidden; display: none; background: #FFFFFF; border: 1px dashed black; width:120px; height:120px; top: 50%; left: 50%; text-align:center; position:absolute;margin-left: -50px; margin-top: -50px;">        <b>Working</b><br /><img src='i/ajax.gif'></div>
+</div>
+
+<div class='sample_popup'  id='example' style='visibility: hidden; display: none;'>
+        <div class='menu_form_header' id='dragexample'>
+                <img class='menu_form_exit'   id='exitexample' src='i/form_exit.png' alt='Exit' />
+		Example Sequence
+        </div>
+        <div class='menu_form_body' id='helpBody' >
+	<div class="quote-box"><pre id='exampleseq'>
+MPGPLRLLCFFALGLLGSAGPSGAAPPLCAAPCSCDGDRRVDCSGKGLTAVPEGLSAFTQALDISMNNITQLPEDAFKNF
+PFLEELQLAGNDLSFIHPKALSGLKELKVLTLQNNQLKTVPSEAIRGLSALQSLRLDANHITSVPEDSFEGLVQLRHLWL
+DDNILTEVPVRPLSNLPTLQALTLALNNISSIPDFAFTNLSSLVVLHLHNNKIKSLSQHCFDGLDNLETLDLNYNNLDEF
+PQAIKALPSLKELGFHSNSISVIPDGAFAGNPLLRTIHLYDNPLSFVGNSAFHNLSDLHSLVIRGASLVQWFPNLAGTVH
+LESLTLTGTKISSIPDDLCQNQKMLRTLDLSYNDIRDLPSFNGCRALEEISLQRNQISLIKETTFQGLTSLRILDLSRNL
+IREIHSGAFAKLGTITNLDVSFNELTSFPTEGLNGLNQLKLVGNFQLKDALAARDFANLRSLSVPYAYQCCAFWGCDSYA
+NLNTEDNSPQDHSVTKEKGATDAANATSTAESEEHSQIIIHCTPSTGAFKPCEYLLGSWMIRLTVWFIFLVALLFNLLVI
+LTVFASCSSLPASKLFIGLISVSNLLMGIYTGILTFLDAVSWGRFAEFGIWWETGSGCKVAGSLAVFSSESAVFLLTLAA
+VERSVFAKDVMKNGKSSHLRQFQVAALVALLGAAIAGCFPLFHGGQYSASPLCLPFPTGETPSLGFTVTLVLLNSLAFLL
+MAIIYTKLYCNLEKEDPSENSQSSMIKHVAWLIFTNCIFFCPVAFFSFAPLITAISISPEIMKSVTLIFFPLPACLNPVL
+YVFFNPKFKDDWKLLKRRVTRKHGSVSVSISSQGGCGEQDFYYDCGMYSHLQGNLTVCDCCESFLLTKPVSCKHLIKSHS
+CPVLTVASCQRPEAYWSDCGTQSAHSDYADEEDSFVSDSSDQVQACGRACFYQSRGFPLVRYAYNLPRVRD
+	</pre></div>
+	<b>Run this example sequence through the classifier</b><br />
+	<input type='button' value='Run' onclick="document.getElementById('seq').value=document.getElementById('exampleseq').innerHTML; popup_manual_close('example'); runJob();">
+	</div>
+</div>
+
+<div class='sample_popup'  id='help' style='visibility: hidden; display: none;'>
+        <div class='menu_form_header' id='draghelp'>
+                <img class='menu_form_exit'   id='exithelp' src='i/form_exit.png' alt='Exit' />
+		Help and Technical Information
+                
+        </div>
+        <div class='menu_form_body' id='helpBody' >
+		<div id="container" style='overflow:auto;height:500px;'>
+		<div id="help" style='overflow:auto;'>
+      <p>
+         &nbsp;<br />
+        <B>Notes for use:</B><br />
+        Please only enter the sequence, do not include any header information. The classifier accepts only protein sequences, not nucleic acid sequences. A minimum sequence length of 200 amino acids and a maximum length of 900 amino acids is enforced. The system recognises the non-amino acids X, Z, B and U (X->A, U->C, B->N, Z->Q) and will deal with them appropriately but no other characters should be entered.<br />
+<br />
+        Important: GPCRtree assumes that you have entered a GPCR sequence. As it is designed to classify GPCRs, GPCRtree will always make a best guess at a GPCR class even if the sequence is not a GPCR. You should not enter a sequence known not to be a GPCR, since you will obtain misleading results.
+         <br />&nbsp;
+
+      </p>
+      <p>
+			  <b>References</b><br />
+        This classifier is an implementation of the algorithm described in:<br />
+        Matthew N. Davies, Andrew Secker, Alex A. Freitas, Miguel Mendao, Jon Timmis and Darren R. Flower. (2007)<I> On the hierarchical classification of G Protein-Coupled Receptors.</I> (pp. 3113-3118). Bioinformatics 23(23), December 2007: Oxford Journals.<br />
+
+         <br />
+        and<br />
+        <br />
+        Andrew Secker, Matthew N. Davies, Alex A. Freitas, Jon Timmis, Miguel Mendao and Darren R. Flower (2007). <I>An Experimental Comparison of Classification Algorithms for the Hierarchical Prediction of Protein Function.</I> (pp. 17-22). Expert Update (Magazine of the British Computer Society's Specialist Group on AI), Special Issue on the 3rd UK KDD (Knowledge Discovery and Data Mining) Symposium 9(3), Autumn 2007. ISSN: 1465-4091. <a href="http://www.cs.kent.ac.uk/projects/biasprofs/pubs/ukkdd.pdf">Download publication</a>.<br />
+        <br />
+
+        See <a href="http://www.cs.kent.ac.uk/projects/biasprofs/pubs.html">our publications page</a> for more information.
+         <br />&nbsp;
+
+			</p>
+		  <p>
+        <b>Technical notes</b><br />
+        Our own experiments have shown that the following accuracies are typical:
+        <table cellpadding=3>
+
+        <TR>
+        	<TD>Class level</TD>
+        	<TD>(ClassX)</TD>
+        	<TD>92%-100%</TD>
+        </TR>
+        <TR>
+        	<TD>Sub-family level</TD>
+
+        	<TD>(ClassX_Y)</TD>
+        	<TD>76%-91%</TD>
+        </TR>
+        <TR>
+        	<TD>Sub-sub-family level</TD>
+        	<TD>(ClassX_Y_Z)</TD>
+        	<TD>57%-87%</TD>
+
+        </TR>
+        </table>
+        Information taken from <I> On the hierarchical classification of G Protein-Coupled Receptors</I>.
+         <br />&nbsp;
+      </p>
+      <p>
+      The classifier will predict one of 87 classes for the input protein. For a breakdown of these classes and for more information on the training dataset, please see <a href="http://www.cs.kent.ac.uk/projects/biasprofs/downloads.html">dataset information</a>.
+      <br />&nbsp;
+
+      <br />
+      </p>
+  </div>
+</div>
+        </div>
+</div>
+
+</body>
+</html>
+

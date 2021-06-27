@@ -1,0 +1,124 @@
+This file contains the positive and fallible patterns used in Extractor of MUtations (EMU).  
+
+The patterns are written using regular expressions.
+For details see the source perl code of EMU at the FTP site.
+
+
+A. 
+Positive Patterns
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Regular Expression for Positive Patterns
+patt1  = "$left_border"."(p\\.$residue_set2(\\d+)$residue_set2)"."$right_border";
+patt2  = "$left_border"."(p\\.($residue_set1)(\\d+)($residue_set1))"."$right_border";
+patt3  = "$left_border"."(([cgmr])\\.([+-\\d]+)($residue_set1)($symbol_connective)($residue_set1))"."$right_border";
+patt4 =    # analyzing pattern for one letter code
+  "$left_border"
+  . "(($position1)"
+  . "($residue_set1)"
+  . "($position23)"
+  . "($symbol_connective)"
+  . "($position23)"
+  . "($residue_set1)"
+  . "($position4))"
+  . "$right_border";
+patt5 = "(?i)"
+  . "$left_border"
+  . "(($position1)"
+  . "($residue_set2)"
+  . "($position23)"
+  . "($symbol_connective|$word_connective)"
+  . "($position23)"
+  . "($residue_set2)"
+  . "($position4))"
+  . "$right_border";  
+patt6 = "(?i)"
+  . "$left_border"
+  . "(($residue_set4)"
+  . "($position23)"
+  . "($symbol_connective)"
+  . "($position23)"
+  . "($residue_set4))"
+  . "$right_border";  
+patt7 = "(?i)" . "$left_border" . "($rs_connective)" . "$right_border";
+
+B. 
+Regular Expression for Fallible Patterns:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1) The fallible patterns include Cell Line names (from Cell_line_list_short.txt from ftp).
+Example: 
+H69V 
+L5178Y 
+L89M 
+T-47D 
+
+2) Filtering of phrases recognized with the patterns patt4, patt5, patt6:
+A phrase is eliminated if more than one numerical positions have been captured with any of the patterns patt4, patt5 or patt6.
+
+
+C. List of terms:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+		# Variations of possible left border characters
+		$left_border =
+	"(?:(?:\\s+)|(?:,)|(?:\\.)|(?:-)|(?:\\/)|(?:;)|(?:=)|(?::)|(?:\\*)|(?:\\[)|(?:\\])|(?:\\{)|(?:\\})|(?:\\()|(?:\\)))";
+
+		# Variations of possible right border characters
+		$right_border =
+	 "(?:(?:\\s+)|(?:,)|(?:-)|(?:\\.)|(?:;)|(?::)|(?:\\/)|(?:\\*)|(?:\\])|(?:\\})|(?:\\)))";
+
+	# Variations of possible connectives linking wild type and mutation
+		$symbol_connective =
+	"(?:|(?:\\s*)|(?:\\s+to\\s+)|(?:-+to-+)|(?:\\s+(?:to|into|for|of|by)\\s+(?:a\\s+))|(?:\\s*-*(?:>)\\s*)|(?:---+))";
+
+		# Specific RS id number for known mutations
+		$rs_connective = "(?:[r|s]s\\d+(?:[a-zA-Z])*)";
+
+		$position_patterns =
+	"(?:amino acid|position|base pair|residue|nucleotide|codon)\\s*(\\d{2,})|((?:intron|exon)\\s*\\d{1,})";
+		$position_patterns2 =
+	"(?:amino acid|position|base pair|residue|nucleotide|codon|)\\s*((?:intron|exon|)\\s*\\d{2,})";
+
+		# Templates for positions.
+		$position23 = "[-\\(\\{\\[\\s]*(\\d{2,})[\\)\\}\\]\\-\\s]*|";
+
+		$position1 = "\\W*$position_patterns2(\\W*)|";
+		$position4 = "(\\W*)(\\d{2,})\\W*|";
+
+
+		# Amino Acid match set assignments
+		$residue_set1 = "[ARNDCQEGHILKMFPSTWYV]";
+		$residue_set2 =
+	"(Ala|Arg|Asn|Asp|Cys|Gln|Glu|Gly|His|Ile|Leu|Lys|Met|Phe|Pro|Ser|Thr|Trp|Tyr|Val|Alanine|Arginine|Asparagine|Aspartic Acid|Cysteine|Glutamic Acid|Glutamine|Glycine|Histidine|Isoleucine|Leucine|Lysine|Methionine|Phenylalanine|Proline|Serine|Threonine|Tryptophan|Tyrosine|Valine)";
+
+		$residue_set4 = "([ACGT]{3})";
+
+	 # List of possible words and adverbs used for connecting wild type and mutation
+		my @verb_List = (
+			"substit\\w*", "lead\\w*",   "replac\\w*", "chang\\w*",
+			"mutat\\w*",   "devia\\w*",  "modif\\w*",  "alter\\w*",
+			"switch\\w*",  "exhang\\w*", "variat\\w*", "instead\\w*"
+		);
+		my @adverb_List = ( "to", "into", "for", "of", "by", "with" );
+		my $verb_List   = join( "|", @verb_List );
+		my $adverb_List = join( "|", @adverb_List );
+
+	# Variations of possible words and phrases linking wild type and mutation
+		$word_connective =
+			"(?:\\s+)" . "(?:"
+		  . "(?:(?:\\w+\\s*){0,5}(?:$verb_List)\\s+)" . "|"
+		  . "(?:(?:\\w+\\s*){0,5}(?:$adverb_List)(?:\\s+a)?\\s+)" . "|"
+		  . "(?:(?:\\w+\\s*){0,5}(?:$verb_List)\\s+(?:$adverb_List)(?:\\s+a)?\\s+)"
+		  . "|"
+		  . "(?:\\s+(?:$verb_List)\\s+(?:$adverb_List)(?:\\s+a)?\\s+)" . ")";
+
+C. Pattern examples:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+patt1: Arg53Glu
+patt2: A110R
+patt3: c.54A>T
+patt4: (A54-->Q)
+patt5: Ala94 replaced with Lys;
+patt6: AAG25 to GGT
+patt7: rs253452
+

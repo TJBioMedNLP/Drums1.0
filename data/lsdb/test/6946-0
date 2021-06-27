@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="Author" content="David Salgado, Gregory Gimenez" />
+<meta name="description" content="Multi organism system for cross-species data comparison and transfer of information." />
+<meta name="keywords"
+	content="COMPARE, salgado, gimenez, marcelle, depaule, drula, myores, afm, cordis, ibdm, ibdml, cnrs, marseille, muscle, muscular diseases, muscle gene, bioinformatic, genome, research, science, scientific, gene, protein, pathways, gbrowse, genome browser, annotation, database, embryology, development, anatomy, in situ, expression pattern, staining, interpro, gene ontology, GO, kegg, ensembl, omim, mgi,zfin, ncbi" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" type="image/x-icon" HREF="pics/icon_mb.png" />
+<title>COMPARE --Multi organism Database--</title>
+<!-- Ajout Marc -->
+<link href="css/general.css" rel="stylesheet" type="text/css" />
+<link href="css/navigate.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function popup(mylink, windowname)
+{
+	if (! window.focus)
+		return true;
+	var href;
+	if (typeof(mylink) == 'string')
+	   href=mylink;
+	else
+	   href=mylink.href;
+	window.open(href, windowname, 'width=600,height=400,scrollbars=yes,toolbar=no,resizable=yes');
+	return false;
+}
+
+function popupform(frm,link)
+{
+	window.open(""+link+"", frm, 'width=800,height=560,scrollbars=yes,toolbar=no,resizable=yes');
+}
+
+function popuprefine()
+{
+	window.open("pop_up/refine.php", "gene_pool", 'width=800,height=560,scrollbars=yes,toolbar=no,resizable=yes');
+}
+
+function resolution() 
+{ 
+	var head=document.getElementById("header_table");
+	if(screen.width>1200)
+		head.style.width="1190px";
+}
+
+function species_control(el_species)
+{
+	with(window.document.formulaire)
+	{
+		var optionChoisie="";
+		var refine_val="";
+		for(j=0; j<elements["refine_mode"].length; j++)
+		{
+			if (elements["refine_mode"][j].checked)
+				refine_val=elements["refine_mode"][j].value;
+		}
+
+		if(refine_val=="y")
+		{
+			for(j=0; j<elements[el_species].options.length; j++)
+			{
+				 if (elements[el_species].options[j].selected)
+				 {
+				 	var valeur=elements[el_species].options[j].value;
+					if(valeur.indexOf("_")>-1)
+					{
+						var tab=elements[el_species].options[j].value.split("_");
+				 		optionChoisie=tab[1];
+					}
+					else
+						optionChoisie=elements[el_species].options[j].value;
+				 }
+			}
+			//alert(optionChoisie);
+			if(optionChoisie=="")
+				return true;
+			for(j=0; j<nb_species; j++)
+			{
+				if (optionChoisie==arr_spe[j])
+					return true;
+			}
+			//alert("ee");
+			var txt="Problem with species...";
+			var error_div=window.document.getElementById("error");
+			if(node=document.getElementById('err_span'))
+				error_div.removeChild(node);
+			var err_node=document.createTextNode(txt);
+			var span_erreur=document.createElement("span");
+			span_erreur.style.background="#ff0000";
+			span_erreur.style.padding="4px";
+			span_erreur.setAttribute("id","err_span");
+			span_erreur.appendChild(err_node);
+			error_div.appendChild(span_erreur);
+			error_div.style.display="block";
+			
+			return false;
+		}
+		return true;
+	}
+}
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17086940-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- Fin Ajout Marc -->
+</head>
+<body>
+<div id="header_pic">
+<img src="pics/bandeau_gauche.jpg" id="header_pic_left" />
+<img src="pics/bandeau_droit.jpg" id="header_pic_right" />
+</div>
+<script type="text/javascript">
+//resolution();
+</script>
+<div id="main">
+	<div id="menu">
+		<script type="text/javascript" language="javascript1.1" src="javascript/store_page.js"></script>
+<script type="text/javascript" language="javascript1.1" src="javascript/store_gene.js"></script>
+	<div class="menu_block">
+		<div class="menu_title">Navigate</div> 
+			<a href="navigate_template.php?part=index" class="menu_link">. Go home</a>
+			<a href="navigate_template.php?part=compare" class="menu_link">. About Compare</a>
+			<a href="navigate_template.php?part=more_info" class="menu_link">. More information</a>
+			<a href="navigate_template.php?part=lab" class="menu_link">. Who we are ?</a>
+			<a href="navigate_template.php?part=tutorial" class="menu_link">. Tutorial</a>
+			<a href="navigate_template.php?part=exchange_format" class="menu_link">. Exchange format</a>
+			<br />
+		</div>
+		<div class="menu_block">
+			<div class="menu_title">Search tools</div> 
+			<a href="molecule-gene_template.php?part=molecule_search" class="menu_link">. Molecule Search<br />
+			 &nbsp; Genes<br />
+			 &nbsp; Clones</a>
+			<a href="search-tools_template.php?part=ish_search" class="menu_link">. In situ Search</a>
+			<a href="search-tools_template.php?part=pathway_search" class="menu_link">. (KEGG) Pathway Search</a>
+			<a href="search-tools_template.php?part=GO_search" class="menu_link">. Gene Ontology Search</a>
+			<a href="search-tools_template.php?part=IP_search" class="menu_link">. Protein Domain Search</a>
+			<a href="search-tools_template.php?part=omim_search" class="menu_link">. Disease search</a>
+			<!--<a href="search-tools_template.php?part=blast_search" class="menu_link">. BLAST Search</a>-->
+			<a href="search-tools_template.php?part=unigene_cluster_search" class="menu_link">. Unigene profiles</a>
+			<br />
+		</div>
+		<div class="menu_block">
+			<div class="menu_title">Data Analysis Tools</div> 
+	<a href="data-analysis-tools_template.php?part=comparator_search" class="menu_link" style="padding-bottom:6px;">. Batch query</a>
+			<br />
+		</div>
+		
+	<div class="menu_block">
+		<div class="menu_title">Stored pages</div>
+		<div id="stored_pages">
+&nbsp; &nbsp;0 stored page<br clear="all" />	
+			<br clear="all" />
+		</div>
+	</div>
+	<div class="menu_block">
+		<div class="menu_title">Set of genes to refine</div>
+		<div id="stored_genes">
+&nbsp; &nbsp;0 stored gene<br clear="all" />	
+			<br clear="all" />
+		</div>
+	</div>
+		<div class="menu_block">
+			<div class="menu_title">Compare is supported by :</div>
+			<div id="logos">
+				<div id="logos_white">
+	<a href="http://www.myores.org" target="_blank"><img class="menu_logo" src="pics/logos/myores.jpg" border="0" alt="Myores" /></a>			</div>
+				<div id="logos_white">
+				<a href="http://www.med.monash.edu.au/armi/" target="_blank"><img class="menu_logo" src="./pics/logos/ARMI.jpg" border="0" alt="ARMI" /></a>
+				</div>
+				<div id="logos_white">
+	<a href="http://www.afm-france.org" target="_blank"><img class="menu_logo" src="pics/logos/afm.jpg" border="0" alt="AFM"/></a>
+		</div>
+				<div id="logos_white">
+	<a href="http://fp6.cordis.lu" target="_blank"><img class="menu_logo" src="pics/logos/6fp.jpg" border="0" alt="eu6" /></a></div>
+				<div id="logos_white">
+	<a href="http://www.cnrs.fr" target="_blank"><img class="menu_logo" src="pics/logos/cnrs.jpg" border="0" alt="CNRS"  /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="javascript/utils.js"></script>
+<script type="text/javascript" src="javascript/molecule_search.js"></script>
+	<div id="center">
+		<div id="main_header">&nbsp;</div>
+		<div class="main_title">Welcome to COMPARE, version 3.0!</div>
+		<div class="title">What is COMPARE ?</div>
+			<br />
+			<div>
+	COMPARE is a resource system that integrates diverse data from widely studied animal models: zebrafish, drosophila, mouse, chick and from human. Other species (Caenorhabditis elegans, Ciona intestinalis) will be added shortly. By providing access within a single integrated system to the most relevant information for each species, we believe that COMPARE represents a unique tool that will not only greatly facilitates interspecies comparisons, but also will provide novel information generated through orthology predictions.  <a href="navigate_template.php?part=more_info"> [more]</a>
+	<br />
+	<br />
+			</div>
+		<div class="title">Basic search box : </div>
+		<div id="error"> </div><br />
+			<div class="form">
+			<form onsubmit="return form_control()" name="formulaire" action="molecule-gene_template.php" method="get">
+				<input type="hidden" name="part" value="molecule_result" />
+				Find information about your gene or EST of interest.<br /><br />
+				Choose a species
+				<select name="species" size="1">
+				<option value="">All</option>
+				<option value="Caenorhabditis elegans_6">Caenorhabditis elegans (Nematode)</option><option value="Ciona intestinalis_7">Ciona intestinalis (Ciona)</option><option value="Danio rerio_1">Danio rerio (Zebrafish)</option><option value="Drosophila melanogaster_3">Drosophila melanogaster (Fruitfly)</option><option value="Gallus gallus_5">Gallus gallus (Chicken)</option><option value="Homo sapiens_4">Homo sapiens (Human)</option><option value="Mus musculus_2">Mus musculus (Mouse)</option>				</select>	
+				<br /><br />	
+				Enter the name or the identifier : <input name="name" type="text" size="20" /> (e.g. ENSDARG00000008487, dmd... for a gene, IMAGE:5410142, BC053281.. for an EST)<br />
+				I want it to match perfectly with the ID or name in Compare <input name="query_type" type="checkbox" value="1" /><br />
+				Is it an EST or a gene  ?
+				<input name="type" type="radio" value="2" checked="checked" /> Gene  <input name="type" type="radio" value="1" /> EST <br />
+				
+
+				<input name="submit" type="image" align="right" style="margin-bottom:4px" src="pics/search.jpg" onclick="submit" />
+				<br />
+				<br />
+				<br />
+				</form>
+			</div>
+			<div class="title">New from April, 2010</div>
+			<div>
+				<br /> - OMIM, a database of human genes and genetic disorders, now available.
+				<br /> - Chick, Ciona and C.elegans genome available.
+				<br /> - New coexpressed gene tool.
+				<br /> - Compare is optimized for all browsers.
+				<br /> - Navigation is more user-friendly.
+				<br /> - New Tutorial for Batch Query tool.
+				<br /> - Improvement of the in situ staining simple search tool.
+				<br /> - New page storing tool that allows the storing of results.
+				<br /> - New refine tool that can be utilized for a set of selected genes.
+				<br /> - Modification of the batch &amp; download tool.
+			</div>
+			
+	</div>
+	<div id="source">
+		<div id="source_title">
+	&nbsp; Sources
+		</div>
+		<div id="partner_div">
+	<a href="http://www.ensembl.org" target="_blank"><img class="partner_logo" src="pics/logos/ensembl.png" border="0"  alt="Ensembl" title="Ensembl" style="background:#FFFFFF" /></a>
+	<a href="http://www.ncbi.nlm.nih.gov/" target="_blank">
+	<img src="pics/logos/ncbi.png" class="partner_logo" border="0" title="NCBI" alt="NCBI" /></a>
+	<br />
+	<a href="http://www.genome.jp/kegg/" target="_blank"><img class="partner_logo" src="pics/logos/kegg.png" border="0"  alt="Kegg" title="Kegg" /></a>
+	<br />
+	<a href="http://www.ihop-net.org/UniPub/iHOP/" target="_blank"><img class="partner_logo" src="pics/logos/iHOP.png" border="0" title="iHOP" alt="iHOP" /></a>
+	<br />
+	<a href="http://www.treefam.org/" target="_blank"><img class="partner_logo" src="pics/logos/treefam.jpg" border="0" title="TreeFam" alt="TreeFam" /></a>
+	<a href="http://www.geneontology.org/" target="_blank"><img class="partner_logo" src="pics/logos/go2.png" border="0" alt="Gene Ontology" title="Gene Ontology" /></a>
+	<a href="http://www.ncbi.nlm.nih.gov/geo/" target="_blank"><img class="partner_logo" src="pics/logos/entrez_geo.png" border="0" alt="Gene Expression Omnibus" title="Gene Expression Omnibus" /></a>
+	<a href="http://www.ncbi.nlm.nih.gov/geo/" target="_blank"><img class="partner_logo" src="pics/logos/entrez_omim.png" border="0" alt="OMIM" title="OMIM" /></a>
+	<a href="http://www.informatics.jax.org/" target="_blank"><img class="partner_logo" src="pics/logos/mgi2.png" border="0" title="MGI" alt="MGI" /></a>
+	<br />
+	<a href="http://zfin.org/cgi-bin/webdriver?MIval=aa-ZDB_home.apg" target="_blank"><img class="partner_logo" src="pics/logos/zfin.png" border="0" title="Zfin" alt="Zfin" /></a>
+	<br />
+	<a href="http://www.fruitfly.org/cgi-bin/ex/insitu.pl" target="_blank"><img style="background:#FFFFFF" class="partner_logo" src="pics/logos/bdgp.png" border="0" alt="BDGP" title="BDGP" /></a>
+	<br />
+	<a href="http://crfb.univ-mrs.fr/aniseed/" target="_blank"><img class="partner_logo" src="pics/logos/aniseed.png" border="0" alt="Aniseed" title="Aniseed" /></a>
+	<a href="http://www.wormbase.org/" target="_blank"><img class="partner_logo" src="pics/logos/wormbase.png" border="0" alt="Wormbase" title="Wormbase" /></a>
+		</div>
+		<br />
+		<div style="font-size:9px; font-style:italic;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+Adapted from <a href="http://crfb.univ-mrs.fr/aniseed" target="_blank" style="font-size: 9px;color:#FFFFFF">ANISEED</a>&copy; 2006
+</div>
+<br />
+	</div>
+</div>
+</body>
+</html>
+</div>
+<br clear="all" />
+</div>
+</div>

@@ -1,0 +1,98 @@
+<HTML>
+<BODY bgcolor='#FFFFFF'>
+<H2>Supplementary material for:</H2> 
+<H3>"Correlation of Amino Acid preference and Mammalian Viral Genome Type"</H3>
+
+<A HREF="SupplementaryData/classificationFilesUsed.htm">
+The list of viruses included in the dataset </A><BR>
+
+<A HREF="SupplementaryData/300ResultsAllVersions.xls">
+Detailed table data for bootstrapped sequences and distribitutions for Figures 1 and 3</A><BR>
+
+<A HREF="SupplementaryData/660ResultsAllVersions.xls">
+Detailed table data for bootstrapped sequences and distribitutions for Figures 2 and 4</A><BR>
+
+<A HREF="SupplementaryData/InterestingTriplesInformation.xls">
+The complete listing of amino acids triples with p-values < 0.01</A><BR>
+
+<HR>
+
+<H2>Amino Acid Preference Toolkit in Java</H2>
+Pathogen Project<BR>
+Department of Computer Science and Engineering<BR>
+University of South Carolina<BR>
+Columbia, SC 29208<BR>
+Contact Email: rose@cse.sc.edu<P>
+<HR>
+<H3>Support Vector Machine Implementation</H3>
+<A HREF="http://svmlight.joachims.org/">SVMLight toolkit</A> - Developed by Thorsten Joachims, Department of Computer Science, Cornell University; Not included in tar and zip files below; Written in C<BR>
+
+
+
+<H3>Amino Acid Preference Toolkit</H3>
+This toolkit is designed to be used in a Unix environment, taking advantage of Unix features such as shell files and gzip.  It is possible to migrate these to a Windows environment, however, by replacing calls to gzip with the appropriate zip command and updating shell files to be batch files.<P>
+<A HREF="aaptoolkit.tar.gz">Download the entire toolkit in tarred, gzipped format</A><BR>
+<A HREF="aaptoolkit.zip">Download the entire toolkit in zip format</A><P>
+<H3>Notes on Running Tests</H3>
+<A HREF="windowsHowto.html">Notes on Using the Amino Acid Preference Toolkit in a Windows Environment</A>.<BR>
+<A HREF="baseDataHowto.html">Notes on Generating Base Data Used in Evaluating Amino Acid Preferences [1st step to perform]</A><BR>
+<A HREF="crossValidationHowto.html">Notes on Running Cross Validation with the Amino Acid Preference Toolkit</A><BR>
+<A HREF="parallelHowto.html">Notes on Parallelizing the Cross Validation Process</A><BR>
+<A HREF="sequenceBootstrappingHowto.html">Notes on Bootstrapping Random Amino Preference Profiles from Gene Sequences (sequence bootstrapping)</A><BR>
+<A HREF="distributionBootstrappingHowto.html">Notes on Bootstrapping Random Amino Preference Profiles from Genome-Wide Amino Distributions (distribution bootstrapping)</A><BR>
+<A HREF="decimatedHowto.html">Notes on Generating Decimated Training and Test Sets to Work With Hypothesized Important Amino Acids</A><P>
+<H3>File List</H3>
+The directory structure does not relate to any type of Java package structure, but is rather used as a simple organization technique.  Proper use of the toolkit may require files from multiple directories.  Compilation of a given file may also required combining files from multiple directories (usually grabbing something from the <I>utils/</I> directory).<P>
+
+<I>baseData/ directory</I> - Algorithms that generate the base data used for computing and comparing amino acid preference profiles.<BR>
+<A HREF=baseData/SinglePreference.java>SinglePreference.java</A> - Compute the whole genome amino acid preference profile, given an input fasta file and input gene notation file.<BR>
+<A HREF=baseData/SinglePreferenceMultiSegment.java>SinglePreferenceMultiSegment.java</A> - Compute the whole genome amino acid preference profile for a multi-segmented genome, given an input multi-segment fasta file and input multi-segment gene notation file.<BR>
+<A HREF=baseData/PairPreference.java>PairPreference.java</A> -  Compute the whole genome amino acid pair preference profile, given an input fasta file and input gene notation file.<BR>
+<A HREF=baseData/PairPreferenceMultiSegment.java>PairPreferenceMultiSegment.java</A> - Compute the whole genome amino acid pair preference profile for a multi-segmented genome, given an input multi-segment fasta file and input multi-segment gene notation file.<BR>
+<A HREF=baseData/TriplePreference.java>TriplePreference.java</A> -  Compute the whole genome amino acid triple preference profile, given an input fasta file and input gene notation file.<BR>
+<A HREF=baseData/TriplePreferenceMultiSegment.java>TriplePreferenceMultiSegment.java</A> - Compute the whole genome amino acid triple preference profile for a multi-segmented genome, given an input multi-segment fasta file and input multi-segment gene notation file.<P>
+
+<I>utils/ directory</I> - Utility classes used by other programs.<BR>
+<A HREF=utils/SequenceReader.java>SequenceReader.java</A> - Parses a fasta file to extract the sequence information.<BR> 
+<A HREF=utils/AminoAcidSinglePreference.java>AminoAcidSinglePreference.java</A> - Compute an amino acid preference profile for an input amino acid string<BR>
+<A HREF=utils/AminoAcidPairPreference.java>AminoAcidPairPreference.java</A> - Compute an amino acid pair preference profile for an input amino acid string<BR>
+<A HREF=utils/AminoAcidTriplePreference.java>AminoAcidTriplePreference.java</A> - Compute an amino acid triple preference profile for an input amino acid string<BR>
+<A HREF=utils/SequenceUtilities.java>SequenceUtilities.java</A> - A collection of various utilities for manipulating sequences.  Includes commonly used functions for finding the reverse and complement of a sequence.<BR> 
+<A HREF=utils/ExtractGenes.java>ExtractGenes.java</A> - A tool that parses a genes file formatted as found below (see the <I>dataFiles/</I>) directory and that provides a simple function interface for reading that format.</A><BR>
+<A HREF=utils/ParseGenbankFile.java>ParseGenbankFile.java</A> - A tool to parse a Genbank genome data file, extracting the CDS (coding regions) into the proper format required for the toolkit. Not completely fool-proof (mainly, can't handle extraneous CDS used in descriptions instead of representing coding regions; these errors are easily detected when trying to use the output file, however, as ExtractGenes will complain and point out the line it can't understand.).<P>
+
+<I>crossValidation/ directory</I> - Classes useful in generating training and testing data for performing cross validation.<BR>
+<A HREF=crossValidation/ValidationSelectTrainingSets.java>ValidationSelectTrainingSets.java</A> - This tool, given a list of data files belonging to each type under study and parameters of how to select training sets (percentage to leave out, proportioned or uniform sets, and smallest set size), generates an appropriate set of training and testing data for cross validation.  This tool also generates several scripts used for running the training and testing phases.  This file will need to be updated to incorporate local pointers to the svm toolkit.<BR>
+<A HREF=crossValidation/ValidationFormatFileForSVMTesting.java>ValidationFormatFileForSVMTesting.java</A> - Taking as input a file with a list of amino preference data filenames, this tool generates a single output file containing the amino preference data from all of the input list files, formatted as testing data for the <I>SVMLight</I> tool.<BR>
+<A HREF=crossValidation/ValidationFormatForSVM.java>ValidationFormatForSVM.java</A> - Given as input a list of the types of genomes under study and a list of filename and type combinations, this tool generates an SVM-formatted training file for each type, with examples belonging to a given type labeled as positive examples and examples not of the given type labeled as negative examples as appropriate.<BR>
+<A HREF=crossValidation/ValidationCombineSVMResults.java>ValidationCombineSVMResults.java</A> - Taking as input a file containing pointers to the filenames of the cross validation SVM outputs, the number of testing samples used, and an output filename, this program returns a file containing the believed classification as provided by the SVM.  Essentially, this program determines the most likely class for a sample by finding the maximum score among all scores returned from the different SVM models.  The output of this program is fed into <I>AnalyzeClassificationResults</I><BR>
+<A HREF=crossValidation/AnalyzeClassificationResults.java>AnalyzeClassificationResults.java</A> - This tool, taking as input a file listing the set of types under study, the true classifications of a set of testing examples, the classification tool (such as <I>SVMLight</I>) output classifications for the same set of examples, and the number of types under study, returns a confusion matrix representing the performance of the classifier.<BR>
+<A HREF=crossValidation/CumulateScores.java>CumulateScores.java</A> - This tool, taking as input a file listing the set of types under study and a file pointing to analysis results generated by <I>AnalyzeClassificationResults</I> returns a global confusion matrix for the entire 10-fold cross validation process.<BR>
+<A HREF=crossValidation/makeDirectories.sh>makeDirectories.sh</A> - This tool is a Unix shell script which automatically creates the ten directories required for storing training and testing data in the 10-fold cross validation process.  <P>
+
+<I>boostrap/ directory</I> - Classes useful in generating testing sets that are bootstrapped from gene and genome data.<BR>
+<A HREF=bootstrap/distribution/NewSelectRandomSingles.java>NewSelectRandomSingles.java</A> - Given a database (flat files) of fasta files, genes files, and type files, bootstraps a set of sequences from genome wide amino preference distributions per specified size constraints.<BR>
+<A HREF=bootstrap/distribution/NewSelectRandomPairs.java>NewSelectRandomPairs.java</A> - Same as above program but bootstraps amino pair preference profiles.<BR>
+<A HREF=bootstrap/distribution/NewSelectRandomTriples.java>NewSelectRandomTriples.java</A> - Same as above but bootstraps amino triple preference profiles.<BR>
+<A HREF=bootstrap/sequence/NewSelectRandomGenesSingles.java>NewSelectRandomGenesSingles.java</A> - Same as above for single amino preference, but bootstraps by randomly sampling genes instead of the whole genome distribution.<BR>
+<A HREF=bootstrap/sequence/NewSelectRandomGenesPairs.java>NewSelectRandomGenesPairs.java</A> - Same as above for pair amino preference, sampling from genes.<BR>
+<A HREF=bootstrap/sequence/NewSelectRandomGenesTriples.java>NewSelectRandomGenesTriples.java</A>- Same as above for triple amino preference, sampling from genes.<P>
+
+<I>subset/ directory</I> - Classes useful in generating training and testing data sets that use a decimated group of amino preferences for separating types.<BR>
+<A HREF=subset/GenerateSVMSubsetRenormalize.java>GenerateSVMSubsetRenormalize.java</A> - Given a standard svm formatted file and a list of indexes to use as a decimated set of features for separation, this tool generates a new svm formatted file representing the values of just those features, normalized relative to each other.<P>
+
+<I>parallel/ directory</I> - Classes useful in parallelizing the various processes above, such as cross validation.<BR>
+<A HREF=parallel/ReformatForParallel.java>ReformatForParallel.java</A> - This program takes in a single processor testing or training script for cross validation (generated by ValidationSelectTrainingSets) and the type of file being input (train or test) and returns the appropriate scripts to implement the process on a multi-processor machine.<P>
+
+
+<I>dataFiles/ directory</I> - Various examples of text files used as inputs to programs in the toolkit.<BR>
+<A HREF=dataFiles/svmTypeList>svmTypeList</A> - This file contains a list of the genome types under study and is commonly fed in to tools in the crossValidation and bootstrap analysis directories.<BR>
+<A HREF=dataFiles/DSDNA>DSDNA type file</A> - This file contains a list of all of the files under study of the type DSDNA.  It is used as input to the ValidationSelectTrainingSets class for cross validation (that program currently reads svmTypeList to see what types are under study and expects each type to be associated with a file of the same name that contains a list of the data files of that type).<BR>
+<A HREF=dataFiles/NC_004812.1.fasta>NC_004812.1.fasta</A> - An example FASTA formatted sequence.<BR>
+<A HREF=dataFiles/NC_004812.genes>NC_004812.genes</A> - An example genes file that corresponds to the above example FASTA sequence file.  The format of this file is: <I>gene start</I>,<I>gene stop</I>,<I>gene strand</I>,<I>continues</I> (without the commas).  The continues field says whether or not the next line of start,stop information is also related to the same gene [the same semantics as <I>join</I> in a Genbank description].<BR>
+<A HREF=dataFiles/importantTriples.01>importantTriples.01</A> - An example input file for GenerateSVMSubsetRenormalize.java, containing the indexes of the subset of features one is interested in using for decimated tests.<BR>
+<A HREF=dataFiles/analysisInput>analysisInput</A> - An example input file for CumulateScores, a tool that will generate an overall confusion matrix for 10-fold cross validation.  The data in this file is the filenames of the individual <I>AnalysisResults</I> output files generated by running <I>analyzeSVM.sh</I> after cross validation.
+
+
+</BODY>
+</HTML>

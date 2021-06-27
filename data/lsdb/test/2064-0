@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+	<head>
+		<title>Graph Based Algorithm </title>
+		<meta name="keywords" content="Graph Based Algorithm, low complexity regions, protein sequence"
+		<meta name="description" content="An Online Version of Graph Based Algorithm (GBA)"
+		
+		<link type="text/css" rel="stylesheet" href="style.css">
+
+		</head>
+	<body>
+		<h1 align="center"> Graph Based Algorithm </h1>
+		<hr />
+		<p> <h2> Description: </h2>
+		<table border="0" cellpadding=10>
+		  <td><img src="../images/gba-small.jpg" alt=""></td> <td>GBA is a novel algorithm for identifying low complexity
+		regions in a protein sequence.<A HREF ="#original-work"><sup>[1]</sup></A><br />
+		<A HREF ="lcr.zip">Download the source code of GBA</A></p>
+
+
+</td>
+</table>
+
+		<form enctype="multipart/form-data" action="lcr/executeGBApri.php" method='post'>
+		<hr />
+		<table border="0" cellpadding=10>
+		  <tr>
+			<td valign="center">
+			<b>Print proteins in fasta format</b>
+				<TEXTAREA align="center" NAME="sequence" COLS=63 ROWS=10></TEXTAREA>
+			</td>
+			<td align="center">
+				<img src="1-1.gif" width="2" height="20" border="0" alt="" />
+			</td>
+			<td align="center"><strong>OR</strong></td>
+			<td align="center">
+				<img src="1-1.gif" width="2" height="20" border="0" alt="" />
+			</td>
+			<td valign="center">
+			<b>Upload proteins in fasta format</b>
+				<input type="hidden" name="MAX_FILE_SIZE" value=" 1000000">
+				<input align="center" type="file" name="datafile">
+			</td>
+		  </tr>
+		  <tr>
+		  <h2>Mode of input</h2>
+		  <input type="radio" name="inputMode" value="text" checked> Text Area
+		  <br>
+		  <input type="radio" name="inputMode" value="file"> File Upload
+		  </tr>
+		</table>
+		<table border="0" cellpadding=5>
+		<tr>
+			<td>
+				<b><A HREF ="lcr/Help.htm#alpha">Forget rate for R and NR matrices (&alpha;)</A></b>
+				<select name="swiss">
+					<option value="combinedMatricesRowByRow095">0.95</option>
+					<option value="combinedMatricesRowByRow090">0.90</option>
+					<option value="combinedMatricesRowByRow085">0.85</option>
+				</select>
+			</td>
+			<td>
+			<p halign="center"> </p>
+			</td>
+			<td>
+				<p halign="center"> </p>
+
+			</td>
+			<td>
+				<p halign="center"> </p>
+			</td>
+			<td>
+				<p halign="center"> </p>
+			</td>
+
+		</tr>
+		<tr>
+			<td>
+				<b align=center><A HREF ="lcr/Help.htm#t1">Window Size (t1)</A></b>
+				<input type="text" name="t1" value=15></input>
+			</td>
+
+			<td>
+				<b align=center><A HREF ="lcr/Help.htm#t23">Max number of indels in tandem repeats (t2)</A></b>
+				<input type="text" name="t2" value=3></input>
+			</td>
+			<td>
+				<b align=center><A HREF ="lcr/Help.htm#t23">Max number of indels in cryptic repeats (t3)</A></b>
+				<input type="text" name="t3" value=5></input>
+			</td>
+		</tr>
+		</table>
+		<p>
+		<b align=left>Email Address:</A></b>
+			<input type="text" name="eaddr"></input>
+		<p>
+		<hr />
+		<input type="submit" value="Send" />
+		<input type="reset" value="Clear" />
+
+
+		</form>
+		<hr />
+		<A NAME = "original-work" />[1] Xuehui Li and Tamer Kahveci (2006) A Novel algorithm for identifying low-complexity regions in a protein sequence.
+		<i>Bioinformatics,</i> 22(24):2980-2987,2006.
+	</body>
+</html>

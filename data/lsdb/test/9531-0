@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<title>Noisy a program find homo-plastic characters in MSAs</title>
+<meta name="description"
+      content= "Noisy is software to identify homo-plastic characters in
+                multiple sequence alignments">
+<style type="text/css">
+<!--
+ body { background-color:#F8F8FF;
+        font-family:sans-serif;
+        font-size: medium; }
+ h1 { font-family:sans-serif;
+      font-size:x-large;
+      font-weight:bolder;
+      text-align:left; }
+ h3 { font-family:sans-serif;
+      font-size:medium;
+      font-weight:bold;
+      text-align:left; }
+ .footer { font-size:x-small;
+           font-style:normal; }
+-->
+</style>
+</head>
+<body>
+  
+<h1>Noisy - identify homo-plastic characters in multiple sequence
+alignments</h1>
+
+<h3>Description</h3>
+<p>
+In a first phase the rows of the input multiple sequence alignment (MSA) in
+multi fasta format are reordered to conform to a circular ordering. For
+this purpose <code>noisy</code> includes the corresponding subset of
+routines from David Bryant and Vincent Moulton's <code>NeighborNet</code>
+and Stefan Gr&uuml;newald's <code>QNet</code> packages. Subsequently, a
+reliability score for each column of the reordered MSA is
+calculated. Essentially, the number of character state alterations in an
+alignment column is counted and compared to the observed count in random
+shufflings of the column. The uniform pseudo-random number generator
+Mersenne Twister is used to generate the random shufflings of alignment
+columns.
+</p>
+
+<p>
+<code>Noisy</code> exports a <code>PostScript</code> file, visualizing the
+quality of the columns of the reordered input MSA, the reliability score of
+all columns of the reordered input MSA as <code>xy</code>-data and a
+modified alignment in which columns with a reliability smaller then a
+cutoff value (set via option --cutoff) are removed. The program noisy is
+written in <code>ISO C++</code>.
+</p>
+
+<h3>Man Page</h3>
+Take a look at <code>Noisy's<code> <a href="noisy.1.html">man page</a>.
+
+<h3>Download</h3>
+<a href="Noisy-1.5.11.tar.gz">source code</a>
+of program <code>&nbsp;Noisy&nbsp;</code> release 1.5.11
+
+<h3>Literature</h3>
+If you use the program <code>Noisy</code> in your work please cite:
+<p>
+Andreas W. M.Dress, Christoph Flamm, Guido Fritzsch, Stefan Gr&uuml;newald,
+Matthias Kruspe, Sonja J. Prohaska, Peter F. Stadler
+<br>
+<strong><code>Noisy</code>: identification of problematic columns in
+multiple sequence alignments.</strong>
+<br>
+<em>Algorithms Mol Biol</em>, <strong>3</strong>:7 (2008).
+<br>
+<a href="http://dx.doi.org/10.1186/1748-7188-3-7">doi:10.1186/1748-7188-3-7</a>
+</p>
+
+<p> 
+Stefan Gr&uuml;newald, Kristoffer Forslund, Andreas W. M.Dress, Vincent Moulton
+<br>
+<strong><code>QNet</code>: An Agglomerative Method for the Construction of
+Phylogenetic Networks from Weighted Quartets.</strong> 
+<br>
+<em>Mol Biol Evol</em>, <strong>24</strong>(2):532-538 (2007).
+<br>
+<a href="http://dx.doi.org/10.1093/molbev/msl180">doi:10.1093/molbev/msl180</a>
+</p>
+
+<p>
+David Bryant, Vincent Moulton
+<br>
+<strong><code>Neighbor-Net</code>: An Agglomerative Method for the
+Construction of Phylogenetic Networks</strong>
+<br>
+<em>Mol Biol Evol</em>, <strong>21</strong>(2):255-265 (2004).
+<a href="http://dx.doi.org/10.1093/molbev/msh018">doi:10.1093/molbev/msh018s</a>
+</p>
+
+<h3>Contact</h3>
+Christoph Flamm <a href="mailto:xtof@tbi.univie.ac.at">
+&lt;xtof@tbi.univie.ac.at&gt;</a>
+<p>
+<hr>
+<p class="footer">
+Last modified: 2010-11-11 00:30:21 xtof
+</p>
+</body>
+</html>

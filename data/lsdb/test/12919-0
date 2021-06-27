@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>DRYGIN - Data Repository of Yeast Genetic INteractions</title>
+<link href="./CSS/style.css" rel="stylesheet" type="text/css">
+<script language="JavaScript">
+<!--
+function quicksearchForm(){
+    if (document.searchForm.keys.value.length == 0) {
+	alert("Enter gene name to search!");
+    }
+    else {
+	document.searchForm.action = "VISUALIZATION/getInteractions.pl"
+	document.searchForm.encoding ="multipart/form-data"
+	document.searchForm.submit();
+    }
+    return false;
+
+}
+	
+//-->
+</script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<FORM NAME=searchForm METHOD=POST onSubmit='return quicksearchForm()'>
+<INPUT TYPE=hidden name=genetype value="genes">
+<INPUT TYPE=hidden name=stpvalue value="0.05">
+<INPUT TYPE=hidden name=edpvalue value="0.05">
+<INPUT TYPE=hidden name=stscore value="-0.08">
+<INPUT TYPE=hidden name=edscore value="0.08">
+<INPUT TYPE=hidden name=dlen value="5000">
+<INPUT TYPE=hidden name=sortkey value="i.repsilon">
+<input type=hidden name=cbsig value="checked"> 
+<input type=hidden name=cbcsig value="checked"> 
+<INPUT TYPE=hidden name=cdatasource value="SGA scores - FULL GENOME">
+
+	<table width="900" border="0" align="center">
+	<tr> 
+	<td height="120" align="center" valign="top"><div align="center"><img src="./IMAGES/drygin.jpg" height=120></div></td>
+	<td width="300" align=right><font class="words"><B>Quick gene search: </b><br><i>enter gene names or orfs</i><p><INPUT TYPE="TEXT" NAME="keys" SIZE="10">&nbsp;<INPUT TYPE=submit NAME="submit" value="submit" onClick='return quicksearchForm()'></font><p><a href="./DRYGIN_help.html#quicksearch" target=_blank class="bbutton"><font class="bbutton">Problem with searching</font></a><img src="./IMAGES/dryginhelp.jpg" height=20></td>
+	</tr>
+  </FORM>
+	<tr> 
+	<td height="16" colspan="2" bgcolor="black"><div align="center">
+	<span class="button">      
+	<a href="." class="button"><font class="redbutton">Home</font></a> 
+	| <a href="VISUALIZATION/Interactions.html" class="button"><font class="button">Search genes</font></a> 
+	| <a href="CLUSTERS/Clusters.html" class="button"><font class="button">Sub-networks</font></a> 
+	| <a href="ADVANCED/AdvSearch.html" class="button"><font class="button">Search complexes/Pathways</font></a> 
+	| <a href="INTEGRATED/Integrated.html" class="button"><font class="button">Overlap with BIOGRID</font></a> 
+	| <a href="DOWNLOAD/Download.html" class="button"><font class="button">Download</font></a> 
+	| <a href="DRYGIN_help.html" class="button"><font class="button">About DRYGIN</font></a> 
+	</span></div></td>
+	</tr>
+	  
+	<tr> 
+	<td height="400" colspan="2" valign="top" bgcolor="#FFFFFF"><div align="right"></div>
+
+<TABLE style="BORDER-COLLAPSE: collapse" height="420" cellSpacing="0" cellPadding="0" width="900"
+border=0 ALIGN=center>
+	<TBODY>
+	<TR><TD height=25 colSpan=2 valign="top"><hr color="#3333CC"></TD></TR>
+		  
+	<TR>
+	<TD height=354 colSpan=2 valign="top"><P class="words">
+<B><font color=red>DRYGIN</font> is a database of quantitative genetic interactions of <I>S. Cerevisiae</I> derived from the SGA double-mutant arrays conducted in <a href=http://www.utoronto.ca/boonelab/index.shtml target=_blank>Boone lab</a> at <a href=http://tdccbr.med.utoronto.ca target=_blank>Terrence Donnelly Centre for Cellular and Biochemical Research</a>, <a href="http://www.utoronto.ca" target=_blank>University of Toronto</a>. <BR><BR>Current version of DRYGIN is 1.0 (<A href="DRYGIN_help.html" target=_blank>DRYGIN documentation</A>).</B></font></P>
+              
+	<table>
+	<TR height=50><td colspan=2 bgcolor=#CCCCFF><font class=words><font color = darkred><B>&nbsp;&nbsp;Latest Database statistics</B>
+	<!--<ul><li>Total SGA genetic interactions in DRYGIN: 5,486,458 -->
+	<ul><li>Total SGA genetic interactions in DRYGIN: 5,482,948
+	<!--<li>Total genes screened: 1,712 query (1,673 ORFs) X 3,885 array (3,885 ORFs)-->
+	<li>Total genes screened: 1,711 query (1,672 ORFs) X 3,885 array (3,885 ORFs)
+	<li><b>Updates:</b></br>
+2010-02-10:&#9;The database was updated with the latest values from Costanzo et al., 2010.</br>
+2010-11-18:&#9;The <i>clc1&Delta;</i> screen was removed because an allele discrepancy was noticed.</br>
+
+	<!--<li>Update (February 10th, 2010). The database was updated with the latest values from <a href=http://www.sciencemag.org/cgi/content/abstract/327/5964/425" target=_blank STYLE="TEXT-DECORATION: NONE">Costanzo <I>et al.</I>, 2010</a></ul> -->
+	</font></font></td></tr>
+	<tr><td colspan=2 height=10><font class=words>For description of the database content, please refer to <a href="http://nar.oxfordjournals.org/cgi/content/abstract/gkp820" target=_blank STYLE="TEXT-DECORATION: NONE">Judice L.Y. Koh, Huiming Ding, Michael Costanzo, Anastasia Baryshnikova, Kiana Toufighi, Gary D. Bader, Chad L. Myers, Brenda J. Andrews, and Charles Boone. DRYGIN: a database of quantitative genetic interaction networks in yeast. <I>Nucleic Acids Research</I>, 2010, Vol. 38, Database issue D502-D507.</a></font></td></tr>
+
+	<tr height=50><td><img src="../IMAGES/searchgene.jpg" height=40></td><td><font class=words>&nbsp;<B><A onclick="return top.js.OpenExtLink(window,event,this)" href="./VISUALIZATION/Interactions.html" target=_self>Search genes</A></B> - Query SGA genetic interactions using gene names or orfs. Download interactions or visualize network or clustergram, with genes color-coded according to functional annotations.</font></td></tr>
+	<tr height=50><td><img src="../IMAGES/subnetwork.jpg" height=40></td><td><font class=words>&nbsp;<B><A onclick="return top.js.OpenExtLink(window,event,this)" href="./CLUSTERS/Clusters.html" target=_self>Sub-networks</A></B> - Search and visualize sub-networks of genetic interactions between a group of genes.</font></td></tr>
+	<tr height=50><td><img src="../IMAGES/complex.jpg" height=40></td><td><font class=words>&nbsp;<B><A onclick="return top.js.OpenExtLink(window,event,this)" href="./ADVANCED/AdvSearch.html"	target=_self>Search complexes/pathways</A></B> - Search and visualize SGA genetic interactions in known protein complexes and pathways.</font></td></tr>
+	<tr height=50><td><img src="../IMAGES/integrated.jpg" height=40></td><td><font class=words>&nbsp;<B><A onclick="return top.js.OpenExtLink(window,event,this)" href="./INTEGRATED/Integrated.html" target=_self>Overlap with BIOGRID</A></B> - Search for SGA genetic interactions that overlap with BIOGRID genetic and physical interactions.</font></td></tr>
+	<tr height=50><td><img src="../IMAGES/download.jpg" height=40></td><td>&nbsp;<font class=words><B><A onclick="return top.js.OpenExtLink(window,event,this)" href="./DOWNLOAD/Download.html" target=_self>Download</A></B> - Download latest SGA genetic interactions in Cytoscape SIF, tab-delimited, or Java Treeview CDT formats.</font></td></tr>
+	</table>
+	<p align=center>
+	</TD>
+	</TR>
+					
+	<TR>
+	<TD height=19 colSpan=2 valign="top"><hr width="70" color="#3333CC"></TD>
+	</TR>
+					
+	<TR>
+	<TD height=13 colSpan=2 valign="top"><div align="center">
+	<P align=center><I><span class="copyright"><span class="copyright"><FONT class = "copyright">Copyright &copy; </FONT><FONT 
+	class = "copyright"><A href="http://www.utoronto.ca/boonelab/" target=_blank class="copyright">Boone Lab</a> at CCBR, University of Toronto</FONT><FONT class = "copyright">, 2009</FONT></I></P>
+	</div>
+	</TD>
+	</TR>
+	</TBODY>
+</TABLE>
+	</td>
+	</tr>
+</table>
+<div align="center"></div>
+<br>
+</body>
+</html>
+

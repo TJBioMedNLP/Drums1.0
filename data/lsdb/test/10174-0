@@ -1,0 +1,1475 @@
+
+<!DOCTYPE html PUBLIC
+  "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+    
+    
+    
+    
+    
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Forces IE8+ into newest rendering engine even if on an intranet. This has to be defined before any script/style tags. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+
+    
+        <base href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/" /><!--[if lt IE 7]></base><![endif]-->
+    
+
+    
+        <meta content="Please Note:  FindPeaks is now being maintained as part of the open source Vancouver Short Read Analysis Package  Project at SourceForge  - Please go to http://vancouvershortr.sourceforge.net/ for the project's new web page. ***
+
+" name="description" />
+<link rel="kss-base-url" href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/" />
+
+  
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/base.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/public.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/columns.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/authoring.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/portlets.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/controlpanel.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/deprecated.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/invisibles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/forms.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/ploneKss.css" />
+    <link rel="stylesheet" type="text/css" media="print" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/print.css" />
+    <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/mobile.css" />
+        <!--[if lt IE 8]>    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/IEFixes.css" />
+        <![endif]-->
+    
+    <style type="text/css" media="screen">@import url(http://www.bcgsc.ca/portal_css/bcgsc%20Theme/++resource++bcgsc.theme.stylesheets/main.css);</style>
+    <style type="text/css" media="print">@import url(http://www.bcgsc.ca/portal_css/bcgsc%20Theme/++resource++bcgsc.theme.stylesheets/print.css);</style>
+    <style type="text/css" media="screen">@import url(http://www.bcgsc.ca/portal_css/bcgsc%20Theme/atgooglemaps.css);</style>
+    <link rel="stylesheet" type="text/css" media="all" href="http://www.bcgsc.ca/portal_css/bcgsc%20Theme/ploneCustom.css" />
+
+  
+    <link rel="kinetic-stylesheet" type="text/css" href="http://www.bcgsc.ca/portal_kss/bcgsc%20Theme/++resource++tinymce.kss/tinymce.kss" />
+    <link rel="kinetic-stylesheet" type="text/css" href="http://www.bcgsc.ca/portal_kss/bcgsc%20Theme/at.kss" />
+    <link rel="kinetic-stylesheet" type="text/css" href="http://www.bcgsc.ca/portal_kss/bcgsc%20Theme/plone.kss" />
+    <link rel="kinetic-stylesheet" type="text/css" href="http://www.bcgsc.ca/portal_kss/bcgsc%20Theme/++resource++plone.app.form.kss" />
+  
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/jquery.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/jquery-integration.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/++resource++plone.app.jquerytools.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/++resource++plone.app.jquerytools.form.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/++resource++plone.app.jquerytools.overlayhelpers.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/register_function.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/plone_javascript_variables.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/nodeutilities.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/cookie_functions.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/livesearch.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/select_all.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/dragdropreorder.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/collapsiblesections.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/form_tabbing.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/popupforms.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/input-label.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/jquery.highlightsearchterms.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/first_input_focus.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/accessibility.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/styleswitcher.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/toc.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/collapsibleformfields.js"></script>
+       <!--[if lt IE 8]>
+     
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/iefixes.js"></script>
+       <![endif]-->
+     
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/++resource++Products.PloneSoftwareCenter.fancyzoom.javascript/fancyzoom.min.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/++resource++Products.PloneSoftwareCenter.fancyzoom.js"></script>
+    <script type="text/javascript" src="http://www.bcgsc.ca/portal_javascripts/bcgsc%20Theme/atgooglemaps.js"></script>
+
+
+<title>FindPeaks &mdash; Canada's Michael Smith Genome Sciences Centre</title>
+        
+    <link rel="author" href="http://www.bcgsc.ca/author/Anthony P Fejes" title="Author information" />
+
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="http://www.bcgsc.ca/favicon.ico" />
+    <link rel="apple-touch-icon" href="http://www.bcgsc.ca/touch_icon.png" />
+
+
+
+    <link rel="home" href="http://www.bcgsc.ca" title="Front page" />
+
+    <link rel="contents" href="http://www.bcgsc.ca/sitemap" title="Site Map" />
+
+
+
+
+
+
+    <link rel="search" href="http://www.bcgsc.ca/search_form" title="Search this site" />
+
+
+
+        
+        
+        
+        
+      <style type="text/css" media="all">@import url(http://www.bcgsc.ca/plonesoftwarecenter.css);</style>
+    
+        
+
+        <meta name="viewport" content="width=device-width; initial-scale=0.6666; maximum-scale=1.0; minimum-scale=0.6666" />
+        <meta name="generator" content="Plone - http://plone.org" />
+    
+</head>
+
+<body class="template-psc_project_view portaltype-pscproject section-content icons-on" dir="ltr">
+
+<div id="visual-portal-wrapper">
+
+        <div id="portal-top" class="row">
+<div class="cell width-full position-0"> <!-- TODO: Temporary, this one should be in the template that is inserted -->
+            <div id="portal-header">
+    <p class="hiddenStructure">
+  <a accesskey="2" href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks#content">Skip to content.</a> |
+
+  <a accesskey="6" href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks#portlet-navigation-tree">Skip to navigation</a>
+</p>
+
+<div id="portal-personaltools-wrapper">
+
+<h5 class="hiddenStructure">Personal tools</h5>
+
+
+
+<dl class="actionMenu" id="portal-personaltools">
+  <dt id="anon-personalbar">
+    
+        <a href="https://www.bcgsc.ca/one/login.cgi">Log in</a>
+    
+  </dt>
+</dl>
+
+</div>
+
+<div id="portal-searchbox">
+    <form name="searchform" action="http://www.bcgsc.ca/search">
+
+        <label class="hiddenStructure" for="searchGadget">Search Site</label>
+
+        <div class="LSBox">
+        <input name="SearchableText" type="text" size="18" title="Search Site" accesskey="4" class="searchField inputLabel" id="searchGadget" />
+
+        <input class="searchButton" type="submit" value="Search" />
+
+        <div class="searchSection">
+            <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" value="/gsc/content/platform/bioinfo/software/findpeaks" />
+            <label for="searchbox_currentfolder_only" style="cursor: pointer">
+                only in current section
+            </label>
+        </div>
+
+        <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
+        </div>
+    </form>
+
+    <div id="portal-advanced-search" class="hiddenStructure">
+        <a href="http://www.bcgsc.ca/search_form" accesskey="5">
+            Advanced Search&hellip;
+        </a>
+    </div>
+
+</div>
+
+<a id="portal-logo" accesskey="1" href="http://www.bcgsc.ca">
+    <img alt="BC Cancer Agency | Canada's Michael Smith Genome Sciences Centre" src="http://www.bcgsc.ca/++resource++bcgsc.theme.images/cmsgsc-logo2.png" /></a>
+
+
+
+    <h5 class="hiddenStructure">Sections</h5>
+
+    <ul id="portal-globalnav"><li id="portaltab-index_html" class="plain"><a href="http://www.bcgsc.ca" title="">Home</a></li><li id="portaltab-platform" class="selected"><a href="http://www.bcgsc.ca/platform" title="Canada's Michael Smith Genome Sciences Centre particpates in a diverse number of areas within the field of genomic science.">Platforms</a></li><li id="portaltab-project" class="plain"><a href="http://www.bcgsc.ca/project" title="">Projects</a></li><li id="portaltab-data" class="plain"><a href="http://www.bcgsc.ca/data" title="Information about Databases and Data Assets generated by the GSC">Data</a></li><li id="portaltab-training" class="plain"><a href="http://www.bcgsc.ca/training" title="">Training</a></li><li id="portaltab-services" class="plain"><a href="http://www.bcgsc.ca/services" title="">Services</a></li><li id="portaltab-faculty" class="plain"><a href="http://www.bcgsc.ca/faculty" title="">Faculty</a></li><li id="portaltab-career" class="plain"><a href="http://www.bcgsc.ca/career"
+    title="">Careers</a></li><li id="portaltab-about" class="plain"><a href="http://www.bcgsc.ca/about" title="">About</a></li></ul>
+
+
+
+<div id="portal-breadcrumbs">
+
+    <span id="breadcrumbs-you-are-here">You
+are here:</span>
+    <span id="breadcrumbs-home">
+        <a href="http://www.bcgsc.ca">Home</a>
+        <span class="breadcrumbSeparator">
+            &rsaquo;
+            
+        </span>
+    </span>
+    <span id="breadcrumbs-1" dir="ltr">
+        
+            <a href="http://www.bcgsc.ca/platform">Platforms</a>
+            <span class="breadcrumbSeparator">
+                &rsaquo;
+                
+            </span>
+            
+         
+    </span>
+    <span id="breadcrumbs-2" dir="ltr">
+        
+            <a href="http://www.bcgsc.ca/platform/bioinfo">Bioinformatics</a>
+            <span class="breadcrumbSeparator">
+                &rsaquo;
+                
+            </span>
+            
+         
+    </span>
+    <span id="breadcrumbs-3" dir="ltr">
+        
+            <a href="http://www.bcgsc.ca/platform/bioinfo/software">GSC Software Centre</a>
+            <span class="breadcrumbSeparator">
+                &rsaquo;
+                
+            </span>
+            
+         
+    </span>
+    <span id="breadcrumbs-4" dir="ltr">
+        
+            
+            
+            <span id="breadcrumbs-current">FindPeaks</span>
+         
+    </span>
+
+</div>
+
+</div>
+
+</div>
+        </div>
+    <div id="portal-columns" class="row">
+
+        <div id="portal-column-content" class="cell width-1:2 position-1:4">
+
+            <div id="viewlet-above-content"></div>
+            
+            
+                <div class="">
+
+                    
+
+                    
+
+    <dl class="portalMessage info" id="kssPortalMessage" style="display:none">
+        <dt>Info</dt>
+        <dd></dd>
+    </dl>
+
+
+
+                    
+                        <div id="content">
+
+                            
+
+                            <div>
+
+  <div>
+
+        <h1 class="documentFirstHeading">
+            FindPeaks
+        </h1>
+
+
+        <p class="documentDescription">Please Note:  FindPeaks is now being maintained as part of the open source Vancouver Short Read Analysis Package  Project at SourceForge  - Please go to http://vancouvershortr.sourceforge.net/ for the project's new web page. ***
+
+</p>
+        
+        
+
+        
+
+        
+        <div class="pane">
+           <h2>
+              Current release <br />
+              <a href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases/3.1.9.2" title="Current release for the project">FindPeaks 3.1.9.2</a>
+            </h2>
+
+            <p class="discreet">
+                
+                    Released May 09, 2008
+                
+                
+                
+            </p>
+
+                <p>
+                Bug fix and manual update.<br />
+                <a href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases/3.1.9.2">More about this release&hellip;</a>
+                </p>
+                
+                <dl>
+                  
+                  <dt>
+                      <a class="link-plain" title="Download file" href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases/3.1.9.2/findpeaks3-1-9-2-tar.gz">
+                        <img src="http://www.bcgsc.ca/platform_all_platforms.gif" alt="Download file" style="float: left; clear:left; display: block; margin: 0 0.5em 0.5em 0;" />
+                      </a>
+                      
+                      <a class="link-plain" href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases/3.1.9.2/findpeaks3-1-9-2-tar.gz">
+                        <span>Get</span>
+                        FindPeaks
+                        for
+                        all platforms</a>
+                      
+                        <span class="discreet">
+                              
+                                   (165.8 kB)
+                              
+                              
+                        </span>
+                        </dt>
+
+                  <dd class="discreet">FindPeaks 3.1.9 and Supporting Files</dd>
+
+                  
+                  
+                  <dt>
+                      <a class="link-plain" title="Download file" href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases/3.1.9.2/separateelandsortedreads.jar">
+                        <img src="http://www.bcgsc.ca/platform_all_platforms.gif" alt="Download file" style="float: left; clear:left; display: block; margin: 0 0.5em 0.5em 0;" />
+                      </a>
+                      
+                      <a class="link-plain" href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases/3.1.9.2/separateelandsortedreads.jar">
+                        <span>Get</span>
+                        FindPeaks
+                        for
+                        all platforms</a>
+                      
+                        <span class="discreet">
+                              
+                                   (9.8 kB)
+                              
+                              
+                        </span>
+                        </dt>
+
+                  <dd class="discreet">Replacement for SeparateElandReads to allow use of s_x_sorted.txt files from Eland 0.4+. </dd>
+
+                  
+                </dl>
+        </div>
+        
+
+        <div class="visualClear"></div>
+
+        <h2>Project Description</h2>
+
+    
+
+
+        
+<p>FindPeaks performs two functions: <br /></p>
+<p>1) analysis of short-read sequencing (Solexa/Illumina) experiments to identify areas of enrichment, <br />2) generating wig files for use with the UCSC browser.&nbsp; <br /><br /></p>
+<p>Findpeaks was developed to perform analysis of ChIP-Seq experiments. It uses a naive algorithm for identifying regions of high coverage, which represent Chromatin Immunoprecipitation enrichment of sequence fragments, indicating the location of a bound protein of interest.&nbsp; A minimum height threshold is used to determine which "peaks" are shown in the UCSC compatible wig file - if no threshold is use, all reads are shown.&nbsp; It collects and sorts the reads along each chromosomes, and identifies
+areas of enrichment, termed "Peaks".&nbsp; These peaks are particularly
+important in Chromatin Immunoprecipiation experiments (ChIP-Seq or
+ChIP-Solexa experiments), as they indicate the location of a bound
+protein of interest. <br /></p>
+<h2>Dependencies:</h2>
+<p>Findpeaks uses several utilities to process Eland alignment files. These programs exist as stand alone java files created by Matthew Bainbridge, which result in the creation of "coord" files. In addition, The current version of Findpeaks also depends on several coord processing libraries.   These dependencies are expected to be removed  in future releases.</p>
+<h2>Errata:<br /></h2>
+<ul><li>In some cases, the FDR file for version 3.1.9.2 contains an extra column header "Rand", after "Rand.sum", which should be removed.</li></ul>
+<br /><br />
+<h2>History:</h2>
+<p>Version 1.0 was written by Matthew Bainbridge, and provided "good enough" location finding of peaks.</p>
+<p>Version 2.0 is a complete rewrite of the code in Java (written and maintained by Anthony Fejes), following Sun Java coding standards, and has been extensively QA'd for accuracy and completeness.  It provides a significant speed improvement, as well as improved documentation and maintainability.  There are no outstanding bugs in this release.</p>
+<p>Version 3.1.x provides many updates in functionality, including creation of banners, directional peak finding, customized peak trimming and subpeak identification.&nbsp;&nbsp;</p>
+<p>Version 3.2.x is now being developed under the GPL at sourceforge.&nbsp; Please visit http://vancouvershortr.sourceforge.net/ for current versions, news support.<br /></p>
+
+
+        <div class="visualClear"></div>
+        
+        
+        
+         
+        
+        <div class="visualClear"></div>
+
+
+    </div>
+
+</div>
+                        </div>
+                    
+
+                    
+                </div>
+            
+        
+            <div id="viewlet-below-content"><div id="category" class="documentByLine">
+  Filed under:
+  <span>
+    <a href="http://www.bcgsc.ca/search?Subject%3Alist=Peak%20Finder" class="link-category" rel="tag">Peak Finder</a><span class="separator">,</span>
+  </span>
+  <span>
+    <a href="http://www.bcgsc.ca/search?Subject%3Alist=Transcription%20Factor" class="link-category" rel="tag">Transcription Factor</a><span class="separator">,</span>
+  </span>
+  <span>
+    <a href="http://www.bcgsc.ca/search?Subject%3Alist=Illumina" class="link-category" rel="tag">Illumina</a><span class="separator">,</span>
+  </span>
+  <span>
+    <a href="http://www.bcgsc.ca/search?Subject%3Alist=FindPeaks" class="link-category" rel="tag">FindPeaks</a><span class="separator">,</span>
+  </span>
+  <span>
+    <a href="http://www.bcgsc.ca/search?Subject%3Alist=genome" class="link-category" rel="tag">genome</a><span class="separator">,</span>
+  </span>
+  <span>
+    <a href="http://www.bcgsc.ca/search?Subject%3Alist=Histones" class="link-category" rel="tag">Histones</a><span class="separator">,</span>
+  </span>
+  <span>
+    <a href="http://www.bcgsc.ca/search?Subject%3Alist=Enrichment" class="link-category" rel="tag">Enrichment</a>
+  </span>
+</div>
+
+
+
+
+
+    
+
+</div>
+        </div>
+
+        
+        <div id="portal-column-one" class="cell width-1:4 position-0">
+            
+                
+<div id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f6773632f636f6e74656e740a6e617669676174696f6e" class="portletWrapper kssattr-portlethash-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f6773632f636f6e74656e740a6e617669676174696f6e">
+<dl class="portlet portletNavigationTree">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="http://www.bcgsc.ca/sitemap" class="tile">Navigation</a>
+       
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem lastItem">
+        <ul class="navTree navTreeLevel0">
+            
+            
+
+
+
+<li class="navTreeItem visualNoMarker navTreeItemInPath navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform" class="state-published navTreeItemInPath navTreeFolderish" title="Canada's Michael Smith Genome Sciences Centre particpates in a diverse number of areas within the field of genomic science.">
+            
+            <span>Platforms</span>
+        </a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel1">  
+        
+
+
+
+<li class="navTreeItem visualNoMarker navTreeItemInPath navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo" class="state-published navTreeItemInPath navTreeFolderish" title="">
+            
+            <span>Bioinformatics</span>
+        </a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel2">  
+        
+
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/license" class="state-published navTreeFolderish" title="">
+            
+            <span>Bioinformatics Licenses</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeItemInPath navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software" class="state-published navTreeItemInPath navTreeFolderish" title="Bioinformatic Software, Scripts and Tools">
+            
+            <span>GSC Software Centre</span>
+        </a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel3">  
+        
+
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/spark" class="state-published navTreeFolderish" title="An interactive cluster visualization tool">
+            
+            <span>Spark</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/tasr" class="state-published navTreeFolderish" title="Targeted Assembly of Sequence Reads">
+            
+            <span>TASR</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/XpressAlign" class="state-published navTreeFolderish" title="A short DNA read aligner which runs on FPGA hardware.">
+            
+            <span>XpressAlign: FPGA Short Read Aligner</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/mirna-profiling" class="state-published navTreeFolderish" title="Profile the content of a miRNA sequencing run.">
+            
+            <span>MiRNA Profiling</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/ORegAnno" class="state-published navTreeFolderish" title="Open database for the curation of known regulatory elements from scientific literature.">
+            
+            <span>ORegAnno: Open Regulatory Annotation</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/SNVMix" class="state-published navTreeFolderish" title="Detecting single nucleotide variants from next generation sequencing data.">
+            
+            <span>SNVMix</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/SliderII" class="state-published navTreeFolderish" title="High quality SNP calling using Illumina data at minimal coverage">
+            
+            <span>SliderII</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/abyss" class="state-published navTreeFolderish" title="Assembly By Short Sequences - a de novo, parallel, paired-end sequence assembler ">
+            
+            <span>ABySS</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/abyss-explorer" class="state-published navTreeFolderish" title="A sequence assembly visualization tool">
+            
+            <span>ABySS-Explorer</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/chinook" class="state-published navTreeFolderish" title="Chinook is a peer-to-peer (P2P) bioinformatics service.">
+            
+            <span>Chinook</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/circos" class="state-published navTreeFolderish" title="Visualize comparative genomic data such as alignments, conservation, homology, synteny and other positional n-tuples in an attractive and informative circular layout.">
+            
+            <span>Circos</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/cnaseq" class="state-published navTreeFolderish" title="cnaseq is a matlab program for inferring copy number segments from short 
+sequence read alignments.  The input will contain alignment coordinates 
+for each read,  and the output will have segmented the genome into regions 
+of constant copy number state.">
+            
+            <span>cnaseq</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/coral" class="state-published navTreeFolderish" title="An algorithm has been developed to order fingerprinted clones within contigs.">
+            
+            <span>CORAL (Contig Ordering Algorithm)</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/ds" class="state-published navTreeFolderish" title="DiscoverySpace is a graphical software application that intends to free the biologist from the micro-level, syntactic detail of the underlying data structures to concentrate on the &quot;big picture&quot; and the meaning of experimental results. Originally designed to support SAGE gene expression analysis, DiscoverySpace is particularly aimed at the non-technical biologist who wishes to utilize high-thoughput bioinformatic techniques without the learning curve associated with scripting languages and database queries.">
+            
+            <span>DiscoverySpace</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/fassi" class="state-published navTreeFolderish" title="A stand-alone Perl application, that calculates BAC end and BAC overlap length constraints from clone fingerprint map contigs created by the FPC package to improve the contiguity of whole-genome shotgun sequence (WGS) assemblies. ">
+            
+            <span>FASSI - Fingerprint and Assembly Incorporation</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeCurrentNode navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks" class="state-published navTreeCurrentItem navTreeCurrentNode navTreeFolderish" title="Please Note:  FindPeaks is now being maintained as part of the open source Vancouver Short Read Analysis Package  Project at SourceForge  - Please go to http://vancouvershortr.sourceforge.net/ for the project's new web page. ***
+
+">
+            
+            <span>FindPeaks</span>
+        </a>
+        
+    </div>
+
+    <ul class="navTree navTreeLevel4">  
+        
+
+
+
+<li class="navTreeItem visualNoMarker">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases" class="state-missing-value" title="Existing and upcoming releases for this project.">
+            
+            <span>Releases</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/gum" class="state-published navTreeFolderish" title="Web-based application for managing user accounts and groups stored in LDAP.">
+            
+            <span>GUM: Group, User Manager</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/ice" class="state-published navTreeFolderish" title="iCE is used for viewing fingerprint maps and associated data.">
+            
+            <span>Internet Contig Explorer (iCE)</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/laneruler" class="state-published navTreeFolderish" title="LaneRuler will identify lanes in a gel image.   The core module is a command line c program, whose result can be reviewed and corrected using a java interface.  ">
+            
+            <span>LaneRuler</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/novel-mirna-detection" class="state-published navTreeFolderish" title="Identification of novel miRNA genes">
+            
+            <span>Novel miRNA detection</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/sam" class="state-published navTreeFolderish" title="SAM is a Whole Genome Assembly (WGA) Management and Visualization Tool. It provides a generic platform for manipulating, analyzing and viewing WGA data, regardless of input type.">
+            
+            <span>SAM - Sequence Assembly Manager</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/slider" class="state-published navTreeFolderish" title="Maximum use of probability information for alignment of short sequence reads and SNP detection.">
+            
+            <span>Slider</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/sockeye" class="state-published navTreeFolderish" title="Genome visualization application.">
+            
+            <span>Sockeye</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/ssake" class="state-published navTreeFolderish" title="SSAKE is a genomics application for assembling millions of very short DNA sequences.
+
+">
+            
+            <span>SSAKE</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/thor" class="state-published navTreeFolderish" title="THOR, the Targeted High-throughput Ortholog Reconstructor, is a Java application designed to assemble target genomic sequence orthologs in low-coverage genomes.">
+            
+            <span>THOR</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/trans-abyss" class="state-published navTreeFolderish" title="Analyze ABySS multi-k-assembled shotgun transcriptome data.">
+            
+            <span>Trans-ABySS</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/treebuilder" class="state-published navTreeFolderish" title="TreeBuilder3D is an interactive viewer that allows organization of SAGE and other types of gene expression data such as microarrays into hierarchical dendrograms, or phenetic networks (the term 'phenetic' used as the analysis relies on principals, used in phylogenetic analysis by system biology). Might be used as a visual aid when analyzing differences in expression profiles of SAGE libraries, serves as an alternative to Venn diagrams.">
+            
+            <span>TreeBuilder3D</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/software/xmatchview" class="state-published navTreeFolderish" title="XMatchView is a python application designed to visualize DNA sequence alignments.">
+            
+            <span>XMatchView</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/bioinfo/docs" class="state-published navTreeFolderish" title="">
+            
+            <span>Documentation</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/dd" class="state-published navTreeFolderish" title="The drug discovery platform performs high-throughput virtual screening using leading molecular docking software and high performance computing resources to find novel therapeutics for human diseases.">
+            
+            <span>Drug Discovery</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/proteomics" class="state-published navTreeFolderish" title="">
+            
+            <span>Proteomics</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/sequencing" class="state-published navTreeFolderish" title="High-throughput large-scale DNA analysis.">
+            
+            <span>Sequencing</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/solexa" class="state-published navTreeFolderish" title="">
+            
+            <span>Illumina Sequencing</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/platform/solid-sequencing-platform" class="state-published navTreeFolderish" title="">
+            
+            <span>SOLiD Sequencing Platform</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+    </ul>
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/project" class="state-published navTreeFolderish" title="">
+            
+            <span>Projects</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/data" class="state-published navTreeFolderish" title="Information about Databases and Data Assets generated by the GSC">
+            
+            <span>Data</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/training" class="state-published navTreeFolderish" title="">
+            
+            <span>Training</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/services" class="state-published navTreeFolderish" title="">
+            
+            <span>Services</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/faculty" class="state-published navTreeFolderish" title="">
+            
+            <span>Faculty</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/career" class="state-published navTreeFolderish" title="">
+            
+            <span>Careers</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+<li class="navTreeItem visualNoMarker navTreeFolderish">
+
+    
+
+      <div>
+
+        <a href="http://www.bcgsc.ca/about" class="state-published navTreeFolderish" title="">
+            
+            <span>About</span>
+        </a>
+        
+    </div>
+
+    
+    
+</li>
+
+
+
+
+        </ul>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+
+</div>
+
+
+
+
+            
+        </div>
+
+        <div id="portal-column-two" class="cell width-1:4 position-3:4">
+            
+                
+<div id="portletwrapper-706c6f6e652e7269676874636f6c756d6e0a636f6e746578740a2f6773632f636f6e74656e742f706c6174666f726d2f62696f696e666f2f736f6674776172650a706f72746c65745f70726f6a6563745f7265736f7572636573" class="portletWrapper kssattr-portlethash-706c6f6e652e7269676874636f6c756d6e0a636f6e746578740a2f6773632f636f6e74656e742f706c6174666f726d2f62696f696e666f2f736f6674776172650a706f72746c65745f70726f6a6563745f7265736f7572636573">
+
+
+  
+    <div>
+
+    <dl class="portlet">
+        <dt class="portletHeader">Project Resources</dt>
+        <dd class="portletItem">
+
+
+            <ul>
+                <li>
+                    <a href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/releases" class="link-plain" title="Existing and upcoming releases for this project.">
+                       Releases</a>
+                </li>
+                <li>
+                    <a href="http://vancouvershortr.wiki.sourceforge.net/" title="Documentation for this project" class="link-plain">
+                        <span> Documentation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="http://vancouvershortr.sourceforge.net/" class="link-plain" title="Additional home page for this project">
+                        <span> External project page</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://vancouvershortr.svn.sourceforge.net/viewvc/vancouvershortr/" class="link-plain" title="Version control repository location for this project">
+                       <span> Code repository</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://sourceforge.net/tracker/?group_id=232586&amp;atid=1087198" class="link-plain" title="A place to submit bug reports and feature requests for this project">
+                       <span> Issue tracker</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://sourceforge.net/mailarchive/forum.php?forum_name=vancouvershortr-findpeaks" class="link-plain" title="Support options for this product">
+                       <span> Support</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mailto:afejes@bcgsc.ca" class="link-plain" title="Contact address for this project">
+                       <span> Contact address</span>
+                    </a>
+                </li>
+            </ul>
+
+
+        <p style="text-align: center">
+            Project owner:
+          Anthony P Fejes
+        </p>
+
+        <p style="text-align: center;">
+               <a href="http://www.bcgsc.ca/platform/bioinfo/software/findpeaks/search_rss?portal_type=PSCRelease&amp;sort_on=Date&amp;sort_order=reverse&amp;path=/gsc/content/platform/bioinfo/software/findpeaks" title="Subscribe to updates for this project">
+                  <img alt="Subscribe to updates for this project" src="http://www.bcgsc.ca/rss.gif" title="title_portlet_project_resources_subscribe_updates" />
+                  <span> Subscribe to updates for this project</span>
+               </a>
+        </p>
+
+
+        </dd>
+    </dl>
+
+        
+
+
+</div>
+  
+
+  
+
+</div>
+
+
+
+
+            
+        </div>
+        
+    </div>
+
+
+    
+        <div id="portal-footer">
+
+    <p>
+      <a href="http://www.bcgsc.ca/about/contacts">Contacts</a>
+     | <a href="http://www.bcgsc.ca/about/gsc_map">Locations</a>
+     | <a href="http://www.bcgsc.ca/sitemap">Site Map</a>
+
+     | <a href="http://www.bcgsc.ca/about/about_web_site">About this Web Site</a>
+     | Phone: 604 707-5900
+    </p>
+
+    <p>
+      Funded by <a href="http://www.bccancerfoundation.com/">BC Cancer Foundation</a> donors.
+    </p>
+
+</div>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+var pageTracker = _gat._getTracker("UA-1396678-1");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+    
+
+</div>
+</body>
+</html>
+
+

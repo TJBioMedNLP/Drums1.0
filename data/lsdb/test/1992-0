@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+<head>
+<meta content="text/html;charset=gb2312" http-equiv="Content-Type">
+<title>物种检索,中国植物志,高等植物图鉴</title>
+<style>
+body {
+	margin: 4px 0;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
+img {
+	border: 0;
+}
+td, p, #u {
+	font-size: 12px;
+}
+#b, #u, #l td, a {
+	font-family: arial;
+}
+#b {
+	height: 30px;
+	padding-top: 4px;
+}
+#b, #b a {
+	color: #77c;
+}
+#u {
+	padding-right: 10px;
+	line-height: 19px;
+	text-align: right;
+	margin: 0 0 3px !important;
+	margin: 0 0 10px;
+}
+#sb {
+	height: 2em;
+	width: 5.6em;
+}
+#km {
+	height: 50px;
+}
+#l {
+	margin: 0 0 5px 15px;
+}
+#l td {
+	padding-left: 107px;
+}
+p, table {
+	width: 490px;
+	border: 0;
+}
+#l td, #sb, #km {
+	font-size: 14px;
+}
+#l a, #l b {
+	margin-right: 1.14em;
+}
+a {
+	color: #00c;
+}
+a:active {
+	color: #f60;
+}
+#hp {
+	position: absolute;
+	margin-left: 6px;
+}
+#lg {
+	margin: -26px 0 -44px;
+}
+#lk {
+	width: auto;
+	line-height: 18px;
+	vertical-align: top;
+}
+    .style1
+    {
+        text-align: left;
+    }
+</style>
+ <script src="http://mnh.scu.edu.cn/count/mystat.aspx"></script>
+    <link href="css/NewIndex.CSS" type="text/css" rel="stylesheet" />
+<style type="text/css" media="all" title="Default">
+      @import "css/autocomplete.css";
+      #loading { position:absolute; z-index:99; padding:2px 5px 2px 5px; background-color:#990000; color:#fff; font-size:9pt; font-family:Arial; display:none; }
+        .style1
+        {
+            width: 880px;
+            float: left;
+        }
+        </style>
+    <script type="text/javascript" src="autocom/neverModules-autoComplete.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        /* 兼容IE 7.0以前版本 XMLHttpRequest */
+        if (window.ActiveXObject) {
+            window.XMLHttpRequest = function() {
+                var x = null; var progIds = [
+            'MSXML3.XMLHTTP.5.0',
+            'MSXML3.XMLHTTP.4.0',
+            'MSXML3.XMLHTTP.3.0',
+            'MSXML3.XMLHTTP.2.0',
+            'MSXML3.XMLHTTP',
+            'MSXML2.XMLHTTP.5.0',
+            'MSXML2.XMLHTTP.4.0',
+            'MSXML2.XMLHTTP.3.0',
+            'MSXML2.XMLHTTP',
+            'Microsoft.XMLHTTP'];
+                for (var i = 0; i < progIds.length; i++) {
+                    try { x = new ActiveXObject(progIds[i]); break; } catch (ex) { };
+                }; if (!x) throw new Error([0, "Can not create XMLHttpRequest Object"]);
+                return x;
+            };
+        };
+
+        /* Global XMLHttpRequest and autoComplete object */
+        /* 全局的XMLHttpRequest对象和autoComplete对象 */
+        var http = callbackHttp = null; var autoComplete = null;
+
+       function pageLoadHdle() {
+
+            var completeConfiguration = {
+                instanceName: "autoComplete",
+                textbox: document.getElementById("kw"),
+                height: 100
+            };
+
+            /* Create a new instance of autoComplete */
+            /* 创建自动完成的实例 */
+            autoComplete = new neverModules.modules.autocomplete(completeConfiguration);
+
+            autoComplete.useContent = true;
+
+            /* 以下为可选项，这里的示例都是默认值 { */
+
+            /* 当useContent为false时，此功能生效，确定是否忽略速度，
+            如果不忽略速度，则效率提高30%左右，（没测试过，估计的）
+            ，也就是没有高亮功能，适合纯DHTML的匹配 */
+            autoComplete.ignoreSpeed = false;
+
+            /* 开启方向键（小键盘） */
+            autoComplete.useArrow = true;
+
+            /* 当数据量较大时，自动截取前部分的数据，提高效率 */
+            autoComplete.autoSlice = true;
+
+            /* 无论输入字符串在dataSource的何处，始终匹配 */
+            autoComplete.ignoreWhere = false ;
+
+            /* 一个空格代表一个或多个字符（串） */
+            autoComplete.useSpaceMatch = false ;
+
+            /* 忽略大小写 */
+            autoComplete.ignoreCase = true;
+            /* 以上为可选项，这里的示例都是默认值 } */
+
+
+            autoComplete.callback = callbackHdle;
+
+            /* Create autoComplete */
+            /* 创建自动完成 */
+            autoComplete.create();
+
+        }
+        function gosearch() {
+             if (event.keyCode == 13 && document.all["kw"].value != "") {
+             document.all["Button1"].click();
+            }
+        }
+        function AjaxHdle(evt, x) {
+           
+            if (document.getElementById(x).value.length > 1) {
+                /* If the keycode is not a valid key or the query value in the cache, show autocomplete */
+                /* 如果输入的键是有效的，即非方向键等无效键，或是在缓存中有该值，则显示自动完成 */
+                if ((autoComplete.isValidKey(evt) == false || autoComplete.isRequireAjax() == false)) {
+                    showAutocomplete(evt);
+                    if (document.getElementById(x).value.length > 1) {
+                        return;
+                    }
+                }
+
+                /* 显示loading图像 */
+                autoComplete.showAnimateImage("images/indicator.gif");
+
+                /* 异步获取数据 */
+                http = new XMLHttpRequest();
+                http.onreadystatechange = function() { loadCompleteData(evt) };
+                http.open("GET", "autocom/" + document.getElementById(x).value.substring(0, 2) + "-sp.xml?tmp=" + Math.random(), true);
+                http.send(null);
+            }
+            else {
+                if ((autoComplete.isValidKey(evt) == false || autoComplete.isRequireAjax() == false)) {
+                    showAutocomplete(evt);
+                    
+                    return;
+                  
+                }
+
+                /* 显示loading图像 */
+                autoComplete.showAnimateImage("images/indicator.gif");
+
+                /* 异步获取数据 */
+                http = new XMLHttpRequest();
+                http.onreadystatechange = function() { loadCompleteData(evt) };
+                http.open("GET", "autocom/genus.xml?tmp=" + Math.random(), true);
+                http.send(null);
+            }
+        }
+
+        /* 异步得到数据后加载dataSource */
+        function loadCompleteData(evt) {
+
+            if (http.readyState != 4) { return; }
+
+            var dataSource = []; var _document = http.responseXML;
+            var dataValue = _document.documentElement.
+                         getElementsByTagName("dataSource")[0].firstChild.nodeValue;
+            dataSource = window.eval(dataValue);
+            autoComplete.setDataSource(dataSource);
+            showAutocomplete(evt); http = null;
+        }
+
+        /* 显示autoComplete */
+        function showAutocomplete(evt) {
+            autoComplete.hdleEvent(evt);
+            window.setTimeout(function() {
+                autoComplete.closeAnimateImage();
+            }, 1000);
+        }
+
+        /* callback 回调函数 */
+        function callbackHdle(autocompleteValue, autocompleteContent) {
+            document.getElementById("tx").value = autocompleteValue + " Loading...";
+            document.getElementById("loading").style.display = "block";
+            callbackHttp = new XMLHttpRequest();
+            callbackHttp.onreadystatechange = loadCallbackData;
+            callbackHttp.open("GET", "callback.asp?act=" + autocompleteValue + "&tmp=" + Math.random(), true);
+            callbackHttp.send(null);
+        }
+
+        function loadCallbackData() {
+            if (callbackHttp.readyState != 4) { return; }
+
+            window.setTimeout(function() {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("tx").value = callbackHttp.responseText;
+                callbackHttp = null;
+            }, 1000);
+        }
+        //]]>
+
+    </script>
+   
+</head>
+
+<body onload="pageLoadHdle()" onkeypress="gosearch()">
+
+<center>
+<img id="lg" src="images/slogo.gif" usemap="#mp"><br>
+<br><br><br>
+<table cellpadding="0" cellspacing="0" style="margin-left: 15px">
+	<tr valign="top">
+		<td nowrap style="height: 62px; padding-left: 92px" class="style1">
+		    <form name="form1" method="post" action="MutiSearch.aspx?404%3bhttp%3a%2f%2fmnh.scu.edu.cn%3a80%2fS-DIVA." id="form1">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMTM2OTY3NTI3D2QWAgIBD2QWAgIBDw9kFgIeB29uZm9jdXMFGWphdmFzY3JpcHQ6dGhpcy5zZWxlY3QoKTtkZH4zb5uiiq7pq7LlEXfJNgjUIvSE" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAwKQnI7lAgLF787vDAKM54rGBnzCEoxB/W4mBDlKIi2HnfyJPQrD" />
+</div>
+                    <input name="kw" type="text" value="请输入要查询物种的拉丁学名!" id="kw" onkeyup="AjaxHdle(event,this.id)" ondblclick="autoComplete.expandAllItem();" onclick="return Species_onclick()" onfocus="javascript:this.select();" style="background-color:#FFFF66;width:500px" />
+		    &nbsp;<input type="submit" name="Button1" value="搜索物种" id="Button1" />
+            </form>
+		<div style="width: 552px">
+			1.本检索囊括了中国最权威的两部植物分类学巨著：《中国植物志》和《中国高等植物图鉴》的电子版。<br />
+			<br />
+			2.本检索可以同时查寻包括NCBI在内的几乎所有和植物学有关的网站。<br />
+			<br />
+			3.要使用本检索，请直接在搜索框中输入中文名或拉丁学名，部分俗名可能不被支持。<br />
+			<br />
+			4.本检索暂时只提供植物检索功能，动物检索功能将稍后加入。<br />
+			<br />
+			免责声明：<br />
+			1.《中国植物志》和《中国高等植物图鉴》的电子版仅供教学和科研参考，严禁批量下载及用于任何商业用途。<br />
+			2.对于其他网站的检索都已提供链接，如您不希望您的网站被列在结果中,请与平台管理员联系。</div>
+		</td>
+	</tr>
+</table>
+</center>
+</body>
+</html>

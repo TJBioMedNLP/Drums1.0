@@ -1,0 +1,716 @@
+<html>
+  <head>
+    <title>
+      Bioinformatics Toolkit
+    </title>
+    
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta content="no-cache" http-equiv="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="author" content="Michael Remmert">
+    
+    
+    
+      <link href="/stylesheets/styles_tuebingen.css?1295621270" media="all" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/navisection_tuebingen.css?1219319307" media="all" rel="stylesheet" type="text/css" />
+      
+      
+    
+    <link href="/stylesheets/tabsection.css?1219319307" media="all" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/form.css?1250775431" media="all" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/genomes.css?1219319307" media="all" rel="stylesheet" type="text/css" />
+    
+    
+    
+    
+    
+    <script src="/javascripts/toolkit.js?1280766386" type="text/javascript"></script>
+<script src="/javascripts/browser_sniffer.js?1219319306" type="text/javascript"></script>
+<script src="/javascripts/overlib.js?1219319306" type="text/javascript"></script>
+<script src="/javascripts/overlib_cssstyle.js?1219319306" type="text/javascript"></script>
+    <script src="/javascripts/prototype.js?1259238362" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1259238362" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1259238362" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1259238362" type="text/javascript"></script>
+<script src="/javascripts/application.js?1219319307" type="text/javascript"></script>    
+    <script src="/javascripts/scriptaculous.js?1260894703" type="text/javascript"></script>
+
+        	
+    
+        
+  </head>
+  
+  <body onload="show_sitereq();">
+    <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+    <div id="container"> 
+      <div id="header">
+	
+	<a href="http://www.mpg.de" id="minerva"><img src="/images/minerva_logo.gif" alt="Minerva"/></a>
+	<a href="/"><img id="mpilogo" src="/images/mpi_logo.gif" alt="Toolkit" /></a>
+	
+	<select id="quickstart" name="quickstart" onchange="window.location = this.value;">
+	  <option value="">Quickfinder</option>
+	  
+
+	
+		<option value="/sixframe">
+			6FrameTranslation
+		</option>
+	
+
+
+
+	
+		<option value="/ancescon">
+			ANCESCON
+		</option>
+	
+
+
+
+	
+		<option value="/ali2d">
+			Ali2D
+		</option>
+	
+
+
+
+	
+		<option value="/alnviz">
+			AlignmentViewer
+		</option>
+	
+
+
+
+	
+		<option value="/aln2plot">
+			Aln2Plot
+		</option>
+	
+
+
+
+	
+		<option value="/blastclust">
+			BLASTclust
+		</option>
+	
+
+
+
+	
+		<option value="/backtrans">
+			Backtranslator
+		</option>
+	
+
+
+
+	
+		<option value="/blammer">
+			Blammer
+		</option>
+	
+
+
+
+	
+		<option value="/clans">
+			CLANS
+		</option>
+	
+
+
+
+	
+		<option value="/pcoils">
+			COILS/PCOILS
+		</option>
+	
+
+
+
+	
+		<option value="/cs_blast">
+			CS-BLAST
+		</option>
+	
+
+
+
+	
+		<option value="/clubsubp">
+			ClubSub-P
+		</option>
+	
+
+
+
+	
+		<option value="/clustalw">
+			ClustalW
+		</option>
+	
+
+
+
+	
+
+
+
+	
+		<option value="/seq2gi">
+			Extract GIs
+		</option>
+	
+
+
+
+	
+		<option value="/fast_hmmer">
+			FHMMER
+		</option>
+	
+
+
+
+	
+		<option value="/frpred">
+			FRpred
+		</option>
+	
+
+
+
+	
+		<option value="/gcview">
+			GCView
+		</option>
+	
+
+
+
+	
+		<option value="/gi2pro">
+			GI2Promoter
+		</option>
+	
+
+
+
+	
+		<option value="/hhalign">
+			HHalign
+		</option>
+	
+
+
+
+	
+		<option value="/hhblits">
+			HHblits
+		</option>
+	
+
+
+
+	
+		<option value="/hhcluster">
+			HHcluster
+		</option>
+	
+
+
+
+	
+		<option value="/hhfilter">
+			HHfilter
+		</option>
+	
+
+
+
+	
+		<option value="/hhomp">
+			HHomp
+		</option>
+	
+
+
+
+	
+		<option value="/hhpred">
+			HHpred
+		</option>
+	
+
+
+
+	
+		<option value="/hhrep">
+			HHrep
+		</option>
+	
+
+
+
+	
+		<option value="/hhrepid">
+			HHrepID
+		</option>
+	
+
+
+
+	
+		<option value="/hhsenser">
+			HHsenser
+		</option>
+	
+
+
+
+	
+		<option value="/kalign">
+			Kalign
+		</option>
+	
+
+
+
+	
+		<option value="/mafft">
+			MAFFT
+		</option>
+	
+
+
+
+	
+		<option value="/muscle">
+			MUSCLE
+		</option>
+	
+
+
+
+	
+		<option value="/modeller">
+			Modeller
+		</option>
+	
+
+
+
+	
+		<option value="/nuc_blast">
+			NucBLAST
+		</option>
+	
+
+
+
+	
+		<option value="/phylip">
+			PHYLIP-NEIGHBOR
+		</option>
+	
+
+
+
+	
+		<option value="/psi_blast">
+			PSI-BLAST
+		</option>
+	
+
+
+
+	
+		<option value="/patsearch">
+			PatternSearch
+		</option>
+	
+
+
+
+	
+
+
+
+	
+		<option value="/probcons">
+			ProbCons
+		</option>
+	
+
+
+
+	
+		<option value="/prot_blast">
+			ProtBLAST
+		</option>
+	
+
+
+
+	
+		<option value="/quick2_d">
+			Quick2D
+		</option>
+	
+
+
+
+	
+		<option value="/repper">
+			REPPER
+		</option>
+	
+
+
+
+	
+		<option value="/reformat">
+			Reformat
+		</option>
+	
+
+
+
+	
+		<option value="/gi2seq">
+			RetrieveSeq
+		</option>
+	
+
+
+
+	
+		<option value="/samcc">
+			SamCC
+		</option>
+	
+
+
+
+	
+		<option value="/simshift">
+			SimShiftDB
+		</option>
+	
+
+
+
+	
+		<option value="/t_coffee">
+			TCoffee
+		</option>
+	
+
+
+
+	
+		<option value="/tprpred">
+			TPRpred
+		</option>
+	
+
+
+
+	
+		<option value="/bfit">
+			bFit
+		</option>
+	
+
+
+
+	
+		<option value="/dataa">
+			daTAA
+		</option>
+	
+
+
+
+	</select>
+	
+	<div id="sitereq">This website is optimized for <a target="_blank" href="http://www.mozilla.org">Mozilla</a>, <a target="_blank" href="http://channels.netscape.com/ns/browsers/default.jsp">Netscape 8</a> and <a target="_blank" href="http://www.opera.com">Opera 8</a>.</div>
+	
+	<ul id="metanav">
+	  <li><a href="#" onClick="openHelpWindow('/common/helpindex');">Help</a></li>
+	  
+	  <li  ><a target="_blank" href="/common/disclaimer_tuebingen">Disclaimer</a></li>
+          <li  ><a target="_blank" href="http://www.eb.tuebingen.mpg.de/impressum/index.html">Imprint</a></li>
+	  
+	  
+	  
+	  <li  ><a href="/common/contact">Contact</a></li> 
+	  <li  ><a href="/userdb/admin_userdbs">Personal Databases</a></li> 
+	  <li  ><a href="/pdbalert">PDBalert</a></li>
+	  
+	  <li  ><a href="/user/login">Login</a></li> 
+	  
+	  
+	  <li id="home"  class="current" ><a href="/">Home</a></li>
+	  
+	</ul>
+	<ul id="tabsection">
+	  	  <li id="ocker"  ><a href="/sections/search">Search</a></li>
+	  	  <li id="orange"  ><a href="/sections/alignment">Alignment</a></li>
+	  	  <li id="green"  ><a href="/sections/seqanal">Sequence Analysis</a></li>
+	  	  <li id="blue"  ><a href="/sections/secstruct">2ary Structure</a></li>
+	  	  <li id="violett"  ><a href="/sections/tertstruct">3ary Structure</a></li>
+	  	  <li id="red"  ><a href="/sections/classification">Classification</a></li>
+	  	  <li id="darkred"  ><a href="/sections/utils">Utils</a></li>
+	  	</ul>
+      </div>
+      
+      <div id="navisection" class="std">
+	<ul>
+	  
+	  <li><a>&nbsp;</a></li>
+	  
+	</ul>
+      </div>
+      
+      <div id="sidebar">
+  
+    <div style="background-color: #7CA6A6; color: #FFFFFF; font-size: 12px; font-weight: bold; padding: 1px 2px 2px 2px;">
+  
+    Show results of job:
+  </div>
+  <div class="section">
+    <form action="/common/check" method="post">
+    
+    <input id="jobid" name="jobid" style="width: 100%;" type="text" value="" />
+    <input class="checkbutton" name="showres" type="submit" value="Show results" style="width: 100%;" />
+  </form>
+  </div>
+  
+    <div style="background-color: #7CA6A6; color: #FFFFFF; font-size: 12px; font-weight: bold; padding: 1px 2px 2px 2px; margin-bottom: 5px; margin-top: 15px;">
+  
+    Recent jobs:
+  </div>
+  <form action="/common/clear" id="clearrecentjobs" method="post" name="clearrecentjobs">
+  <table id="jobtable">
+    
+      </table>
+
+  <div class="section">
+    <input type="hidden" id="clear_checkboxes" value="0">
+    <a href="#" onclick="selectjobs();">Select all</a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="deselectjobs();">Deselect all</a>
+    <input class="stopbutton" name="clearjobs" type="submit" style="float: none; width: 100%; margin-top: 5px;" value="Clear sel. Jobs" style="width: 100%;" />
+    <br/>
+    <input class="stopbutton" name="removejobs" type="submit" style="float: none; width: 100%; margin-top: 5px;" value="Delete sel. Jobs" style="width: 100%;" onClick="setAction('clearrecentjobs', '/common/removeJobs');" />
+  </div>
+
+  </form>
+  
+  <table id="jobtable">
+    <tr>
+      <td class="q"></td>
+      <td style="width: auto; border-right-width: 0px;">queued</td>
+    </tr>
+    <tr>
+      <td class="r"></td>
+      <td style="width: auto; border-right-width: 0px;">running</td>
+    </tr>
+    <tr>
+      <td class="d"></td>
+      <td style="width: auto; border-right-width: 0px;">done</td>
+    </tr>
+    <tr>
+      <td class="e"></td>
+      <td style="width: auto; border-right-width: 0px;">error</td>
+    </tr>
+  </table>
+</div> 	
+
+      
+      
+      <div id="content">
+	
+<h2>Welcome to the  Bioinformatics Toolkit</h2>
+
+<p class="message" align="justify">
+  The  Bioinformatics Toolkit is a platform that integrates a great variety of 
+  tools for protein sequence analysis. Many tools are developed in-house, and serveral
+  public tools are offered with extended functionality. 
+
+</p>
+<p class="message" align="justify">
+  The toolkit includes, among others: NucleotideBLAST, ProteinBLAST, PSI-BLAST, fastHMMER, HHsenser;
+  ClustalW, MUSCLE, Mafft, ProbCons; HHrep, PCOILS, REPPER; Quick2D; HHpred, Modeller;
+  CLANS, ANCESCON, PHYLIP; Reformat, RetrieveSeq, gi2promoter. For a short description of the tools, click the section tabs.  
+</p>
+
+<div id="sitereqfull">This website is optimized for <a target="_blank" href="http://www.mozilla.org">Mozilla</a>, <a target="_blank" href="http://channels.netscape.com/ns/browsers/default.jsp">Netscape 7</a> and <a target="_blank" href="http://www.opera.com">Opera 7</a>.</div>
+
+<div class="hr" style="margin-bottom: 20px;">&nbsp;</div>
+
+<div class="sub">     
+  <h1>Job submission</h1>
+</div>
+<div class="main">
+  <p align="justify">
+    Each tool has a
+    separate input page with a web form in which the user can input sequence data,
+    upload sequence files, and specify options. All tools that take alignments
+    as input accept the most widely used formats (FASTA, CLUSTAL, Stockholm and
+    A3M). You may also choose your own job-names to organize your work.  
+    Snail symbols inside the submit buttons inform you about tools that
+    typically run for more than 10 minutes. 
+  </p>
+</div>
+
+<div class="clearall">&nbsp;</div>
+
+<div class="sub">     
+  <h1>Job management</h1>
+</div>
+<div class="main">
+  <p align="justify">
+    Located on the left of the screen is a sidebar pane that holds a status
+    and section-coded list of all recent jobs in the current session. You can click
+    on previously submitted jobs to check their status and view their results.
+  </p>
+  <p style="margin-top: 10px;" align="justify">
+    In general a session will last until the web browser is closed. However,
+    because of different session implementations by the various browser types, jobs
+    may occasionally disappear from the joblist. Therefore, noting down the job ids is
+    recommended. Anonymous job results are stored <strong>two 
+      weeks</strong>, whereas jobs of logged-in users are stored at least <strong>two months</strong>. 
+  </p>
+</div>
+
+<div class="clearall">&nbsp;</div>
+
+<div class="sub">     
+  <h1>Interconnectivity</h1>
+</div>
+<div class="main">
+  <p align="justify">
+    Most of the tools in the Toolkit are
+    interconnected, allowing job results of one tool to be forwarded as input to
+    others. For example, you could run PSI-BLAST, parse out a multiple alignment of selected
+    hits and send the results to a cluster analysis tool. 
+  </p>
+</div>
+
+<div class="clearall">&nbsp;</div>
+
+<div class="sub">     
+  <h1>User databases</h1>
+</div>
+<div class="main">
+  <p align="justify">
+    You may upload customized databases which are then accessible throughout the whole toolkit (upload once, use many times).
+  </p>
+</div>
+
+<div class="hr" style="margin-bottom: 20px;">&nbsp;</div>
+<div class="row">
+  Reference:
+  Biegert A, Mayer C, Remmert M, S&ouml;ding J and Lupas A. The 
+  MPI Toolkit for protein sequence analysis <em>Nucleic Acids Res.</em> 
+  <strong>34</strong>, W335-339
+  <a 
+     href="http://nar.oxfordjournals.org/cgi/reprint/34/suppl_2/W335">(download 
+    pdf)</a>
+</div>
+
+<div class="row">
+<a href="http://www.webwatch4u.com"><img src="http://monitor.webwatch4u.com/status.php?id=6240&button=3" title="WebWatch4u.com :: Serverüberwachung kostenlos" border="0" width="80" height="15"></><br>
+<a href="http://www.webwatch4u.com"><img src="http://monitor.webwatch4u.com/status.php?id=5799&button=3" title="WebWatch4u.com :: Serverüberwachung kostenlos" border="0" width="80" height="15"></a>
+</div>
+	
+      </div>
+      
+      <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+	_uacct = "UA-783534-1";
+	urchinTracker();
+      </script>
+      
+      <!--		
+			<div id="footer">
+			  <span style="float: right; margin-right: 3px;">Release-0.0.1 (Rails)</span>
+			  &#169; 2005, <a href="http://www.eb.tuebingen.mpg.de/dept1/home.html">Dep. of Protein Evolution at the Max-Planck Institute for Developmental Biology</a>, T&#252;bingen 	
+			</div>
+			-->
+    
+    <script>
+      
+
+      var th3=0; // Height of the Table
+      var th=0; // Height of the body
+      var th2=0; // Height of the Window
+      
+      //document.write(navigator.appName);
+      
+      // The Routine for Firefox and Mozilla
+      if (navigator.appCodeName == "Mozilla")
+      {
+      
+      //  th=document.all.content.offsetHeight;
+      th = $('content').offsetHeight;
+      
+      th2=window.innerHeight;
+      th3= th2-th-150;
+      
+      }
+      if (navigator.appName == "Opera") // If check has to be fixed
+      {
+      //The Routine for Opera
+      //  th=document.all.content.offsetHeight;
+      th=$('content').offsetHeight;
+      th2=window.innerHeight;
+      th3= th2-th-160;
+      } 
+      if (navigator.appName == "Microsoft Internet Explorer") // If check has to be fixed
+      {
+      
+      //The Routine for The Internet Explorer
+      //  th=document.all.content.offsetHeight;
+      th = $('content').offsetHeight;
+      th2=document.body.clientHeight;
+      
+      th3= th2-th-150;
+      }
+      
+      
+      // Writing of the table and Div of the Footer
+      if (th < th2) {
+	       document.write('<table width="750px"');
+	       document.write('height="');
+	       document.write(th3);
+	       document.write('px">');
+	       
+	       document.write('<tr valign="bottom"><td align="center" height="');
+	       document.write(th3-30);
+	       document.write('px"></td></tr>');
+	       }
+	       else
+	       {
+	       document.write('<table width="730px">');
+	       }
+	       
+	       
+	       document.write('<tr top-border="1px" valign="bottom"><td valign="bottom"><div id="footer"><span style="float: right; margin-right: 3px;">Release-2.13.14</span>&#169; 2008, <a href="http://www.eb.tuebingen.mpg.de/departments/1-protein-evolution">Dep. of Protein Evolution at the Max-Planck Institute for Developmental Biology</a>, T&#252;bingen</div></td></tr>');
+	       
+	       document.write('</table>');
+	       
+	       
+	       </script>
+  </div>
+</body>
+</html>

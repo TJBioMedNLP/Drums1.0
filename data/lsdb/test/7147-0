@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>Percentile Analysis for Differential Gene Expression</title>
+
+<style type="text/css">
+body {
+margin:0; 
+padding:0; 
+font-size:13px; 
+color:#000000;
+text-align:center; 
+font-family:Verdana, Arial, Helvetica, sans-serif;  
+}
+div {
+  margin:0; 
+  padding:0; 
+  width:100%;
+}
+
+p {
+  margin:0.2em 0 1.2em 0; padding:0.3em;
+  }
+input {
+border:1px solid #000033;
+font-size:13px;
+padding:2px;
+}
+a {
+color: #0000cc;
+}
+h1 {
+  padding:6; margin:0; font-size:150%; font-weight:normal; 
+  color:#0066CC;
+   font-family: verdana, arial, "Trebuchet MS",sans-serif;
+  }
+h2 {
+color: #333333;
+font-size: 144%;
+}
+h3 {
+color: #0066CC;
+padding:0; margin:0;
+font-size: 120%;
+font-weight:normal; 
+}
+h4 {
+color: #0066CC;
+font-size: 144%;
+font-family: verdana, arial, "Trebuchet MS",sans-serif;
+padding:6; margin:0;
+font-weight:normal; 
+}
+table {
+}
+table tr {
+}
+table th {
+background-color: #c3d9ff;
+text-align: left;
+}
+table th a {
+color: #000000;
+}
+table tr {
+}
+table tr.even {
+background-color: #e8eef7;
+}
+table tr.odd {
+}
+table td {
+padding: 0 2px 0 2px;
+}
+table td.even {
+}
+table td.odd {
+}
+table td.id {
+text-align: center;
+}
+ul {
+list-style: none;
+text-align: right;
+}
+ul li {
+display: inline;
+vertical-align: middle;
+padding: 5px;
+}
+ul li.selected {
+font-weight: bold;
+}
+td {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 16px;
+}
+div.space {
+height:10px;
+}
+
+</style>
+</head>
+
+<body>
+<div>
+<center>
+<table width="1250" bgcolor="#ddeeee">
+<tr><td align="left">&nbsp;<span><h1>PADGE: Percentile Analysis for Differential Gene Expression</h1></span></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td>
+<span>
+  &nbsp;<a href="/Research/genentech/padge/index.html">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp; 
+  <a href="/Research/genentech/padge/menu.html">Help</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="/Research/genentech/padge/code.zip">Download</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="mailto:li.li@gene.com">Contact</a>
+  </span>
+</td></tr>
+</table>
+</center>
+</div>
+
+<form name="form" action="/cgi-bin/genentech/padge/padge.cgi" method="POST" enctype='multipart/form-data'>
+<p><table width="800" cellspacing="6" bgcolor="#EFEFEF">
+<tr><td height="30" colspan="2" align="left" valign="middle"><h3>View example</h3></td></tr>
+<tr><td colspan="3"><a href="/cgi-bin/genentech/padge/view_table.cgi">Human lung adenocarcinoma</a> (Bhattacharjee et al, PNAS, 2001)</td></tr>
+<tr><td></td></tr>
+
+<tr><td height="30" colspan="2" align="left" valign="middle"><h3>Analyze data</h3></td></tr> 
+<tr><td colspan="2"><strong>Step 1: Upload files</td></tr>     
+<tr><td>Upload expression data </td><td><input type=file name=expfile value="data_ex.txt"></td><td><a href="data_ex.txt">example data file</td></tr>
+<tr><td>Upload sample info </td><td><input type=file name=samplefile value="sample_ex.txt"></td><td><a href="sample_ex.txt">example sample file</td></tr>
+
+<tr><td height="30" colspan="2"><strong>Step 2: Specify methods and parameters</td></tr> 
+<tr><td><strong><input type="checkbox" name="padge" value="1" checked>&nbsp;PADGE</td></tr>
+<tr><td>Percentiles</td><td><input type=text name="p_percentiles" value="50,55,60,65,70,75,80,85,90,95"></td></tr>
+<tr><td>Statistical test</td><td><input type=text name=method value="wilcox"></td></tr>
+<tr><td>q value cutoff</td><td><input type=text name=p_qcut value="0.01"></td></tr>
+<tr><td>Fold change cutoff</td><td><input type=text name=p_rcut value="1.5" ></td></tr>
+<tr><td># top genes to plot</td><td><input type=text name=nplot value="100" ></td></tr>
+
+<tr><td><strong><input type="checkbox" name="copa" value="1" checked>&nbsp;COPA</td></tr>
+<tr><td>Percentiles</td><td><input type=text name=c_percentiles value="50,55,60,65,70,75,80,85,90,95"></td></tr>
+<tr><td>Fold change cutoff</td><td><input type=text name=c_rcut value="1.5" ></td></tr>
+
+<tr><td><strong><input type="checkbox" name="kurt" value="1" checked>&nbsp;Kurtosis</td></tr>
+<tr><td>Fold change cutoff</td><td><input type=text name=k_rcut value="1.5" ></td></tr>
+
+<tr><td><strong><input type="checkbox" name="t" value="1" checked>&nbsp;t test</td></tr>
+<tr><td>q value cutoff</td><td><input type=text name=t_qcut value="0.01"></td></tr>
+<tr><td>Fold change cutoff</td><td><input type=text name=t_rcut value="1.5" ></td></tr>
+
+<tr><td height="30" colspan="2"><strong>Step 3: Enter email address for result notification</td></tr> 
+<tr><td>Email address</td><td><input type=text name=email></td></tr>
+<tr><td>
+<input type=submit value=Submit><input type=reset value="Reset"></td></tr></table>
+</form>
+
+<p><table width="800" border="0" align="left" cellpadding="1" cellspacing="0">
+    <tr align="left" valign="top"> 
+      <td width="11%" class="subsection">Help</td>
+      <td width="89%"><a href="menu.html">User guide</a><strong></strong></td>
+    </tr>
+    <tr align="left" valign="top"> 
+      <td class="subsection">Download</td>
+      <td><a href="code.zip">source code</a>&nbsp;<a href="SuppTable1.xls">Supplementary Table 1</a>&nbsp;<a href="SuppTable2.xls">Supplementary Table 2</a>&nbsp;<a href="SuppTable3.xls">Supplementary Table 3</a></td>
+    </tr>
+    <tr align="left" valign="top"> 
+      <td class="subsection">Contact</td>
+      <td>Please send <a href="mailto:li.li@gene.com">Li Li</a> your questions and/or feedback.</td>
+    </tr>
+    <tr align="left" valign="top"> 
+      <td class="subsection">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+ <tr align="left" valign="top"> 
+      <td colspan="2">This site is hosted by Dr. Tom Ferrin's group at UCSF.</td></tr>
+    <tr align="left" valign="top"> 
+      <td colspan="2">&nbsp;</td></tr>
+    <tr align="left" valign="top"> 
+      <td colspan="2">Last updated: 
+        <script language="JavaScript">
+<!--//Date Stamp
+		var dayArray = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+		var monthArray = new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+		var lastUpdate = new Date(document.lastModified);
+		var thisDay=dayArray[lastUpdate.getDay()];
+		var thisDate=lastUpdate.getDate() < 10 ? '0'+lastUpdate.getDate() : lastUpdate.getDate();
+		var thisMonth=monthArray[lastUpdate.getMonth()];
+		var thisMonthNum=lastUpdate.getMonth()+1 < 10 ? '0'+ (lastUpdate.getMonth()+1) : lastUpdate.getMonth()+1;
+		var thisFullYear=String(lastUpdate.getFullYear());
+		var thisYear= thisFullYear.charAt(2) + thisFullYear.charAt(3);
+
+		document.write(thisMonth + ' ' + thisDate + ', ' + thisFullYear);
+//-->
+</script></td>
+    </tr>
+  </table>
+</div>
+</body>
+ </html>

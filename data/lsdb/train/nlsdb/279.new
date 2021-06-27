@@ -1,0 +1,670 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" href="common/styles.css" rel="stylesheet" />
+
+<script type="text/javascript">var topref = unescape('undefined');</script>
+<script type="text/javascript" src="common/scripts.js"></script>
+
+<!-- <script type="text/javascript" src="/stats/stats_js.asp"></script> -->
+
+
+
+<link rel="stylesheet" href="common/ml_styles.css" type="text/css" />
+<link rel="stylesheet" href="common/phenomicdb.css" type="text/css" />
+
+
+<style type="text/css">
+
+
+.allelefootnote
+{
+	margin-left:20px;
+	margin-bottom:5px;
+	list-style-type:circle;
+	font: 9pt verdana;
+}
+
+
+</style>
+
+<script type="text/javascript" src="common/scripts.js"></script>
+
+
+<script language="JavaScript" type="text/javascript" >
+<!--
+
+var top_menu_cats = new Array("metalife","online_services","phenomic_db","description","downloads","cite_us","contact", "help"	);
+var path_pre = "";
+
+function switch_img(link)
+{
+	
+	for (var i =0; i < link.childNodes.length; i++)
+	{
+		if (link.childNodes[i].tagName == "IMG")
+		break;
+	}
+		
+	var img = null;
+	
+	if (i < link.childNodes.length)	
+	{
+		img = link.childNodes[i];
+	}
+	
+	var t = "";
+	
+	if (img.src.indexOf("_over.gif") > 0)
+	{
+		img.src = img.src.replace("_over.gif",".gif");
+	}
+	else 
+	{
+		img.src = img.src.replace(".gif","_over.gif");	
+	}
+		
+	return;
+}
+
+ 	window.onresize = onresize_handler;
+	//alert("bbb");
+ document.onresize = onresize_handler;
+//	alert("ccc");
+			
+	
+  var original_window_width=null;
+  function onresize_handler()
+	{
+		
+	var oIframe = document.getElementById("iframe_holder");
+		
+	var oDoc = oIframe.contentWindow || oIframe.contentDocument;
+    if (oDoc.document) 
+		{ oDoc = oDoc.document; }
+	
+	var oBaseURI = oDoc.URL;
+	
+	if (oBaseURI.match(/search\.asp$/)) 
+		{	
+		  var window_dimensions = getWindowDimensions();
+		  
+		  var divscroll = oDoc.getElementById("divscroll");
+		  if (divscroll)
+			{
+			divscroll.style.height=(window_dimensions.height-161)+"px";
+		  
+			var subheader = oDoc.getElementById("subheader");
+			var div2fixed = oDoc.getElementById("div2fixed");
+			
+			oIframe.style.overflow="hidden";			
+			oIframe.style.height=subheader.clientHeight + div2fixed.clientHeight + divscroll.offsetHeight + 9 + "px";
+			var middle_table = oDoc.getElementById("heading_table");
+			var main_container = document.getElementById("main_container");
+			var top_menu_middle = document.getElementById("top_menu_middle");
+			if (middle_table.offsetWidth > main_container.offsetWidth)
+				{
+				//oIframe.style.width = window_dimensions.width-20+"px";
+				///top_menu_middle.style.width = window_dimensions.width-20 - 4 - 142 +"px";
+				//main_container.style.width=window_dimensions.width-20+"px";				
+				}
+			}
+		}
+	else 
+		{
+		var main_container = document.getElementById("main_container");
+		var top_menu_middle = document.getElementById("top_menu_middle");
+		
+		if (original_window_width == null ) 
+			{ original_window_width = main_container.offsetWidth; }
+		else 
+			{
+			//oIframe.style.width = original_window_width -8 +"px";
+			//main_container.style.width = original_window_width +"px";
+			//top_menu_middle.style.width = original_window_width -4 -142+"px";
+			}
+		
+		oIframe.style.height=oDoc.body.offsetHeight+"px";	  
+		if (oBaseURI.match(/final\.asp$/) && oDoc.scroll_parent > 0)
+			{
+			var tm = document.getElementById("top_menu_phenomic");
+			var margin = document.body.offsetTop + tm.offsetHeight+ tm.offsetTop + 16 ;
+			window.scrollTo(0,oDoc.scroll_parent + margin  );
+			}
+		//alert(oBaseURI+" "+oDoc.body.offsetHeight);
+		}
+	
+	}
+	
+function scroll_y_position (pos)
+	{
+	window.scrollTo(0,pos);
+	alert("scroll_y");
+	}
+	
+
+	
+function openClusterStats()
+{
+	window.open("/ReportViewer/");
+}
+
+function preload_images(images_names,images_array)
+{
+	images_array = new Array(images_names.length);
+	for (var i = 0;i < images_names.length; i++)
+		{	
+		images_array[i] = new Image();
+		images_array[i].src = images_names[i];		
+		}
+
+}
+
+
+function preload_over_images(path,names,images_array)
+{
+	images_array = new Array(names.length*2);
+	for (var i = 0;i < names.length; i++)
+		{	
+		images_array[i*2] = new Image();
+		images_array[i*2].src = path+names[i]+".gif";
+		
+		images_array[i*2 + 1] = new Image();	
+		images_array[i*2 + 1].src = path+names[i]+"_over.gif";	
+		}
+}
+
+//-->
+
+</script>
+
+
+</head>
+<body>
+<div id="justifier" align="center">
+	<div id="main_container" style="padding-top:10px;">
+    
+		<div id="top_menu_phenomic">
+			<div id="top_menu_left"> </div>
+			<div id="top_menu_middle">
+				<a href="http://www.metalife.de/" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+				<img style="margin-left:3px;" border="0" src="common/images/top_menu/metalife.gif" alt="metalife" />
+				</a>
+				<img border="0" src="common/images/top_menu/arrow.gif" alt="arrow" />
+
+				<a href="http://www.metalife.de/online_services/index.html" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+				<img border="0" src="common/images/top_menu/online_services.gif" alt="online_services" />
+				</a>
+				<img border="0" src="common/images/top_menu/arrow.gif" alt="arrow" />
+
+				
+				<div id="phenomicdb_link">
+				<a href="index.asp" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+				<img border="0" src="common/images/top_menu/phenomic_db.gif" alt="phenomicdb" />
+				</a>
+				</div>
+				<img border="0" src="common/images/top_menu/arrow.gif" alt="arrow" />
+				
+				<div id="home_link">
+				<img border="0" src="common/images/top_menu/home_over.gif" alt="home" />
+				</div>
+				
+				<img border="0" src="common/images/top_menu/line.gif" alt="line" />
+				
+				<a href="description.asp" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+				<img border="0" src="common/images/top_menu/description.gif" alt="description" />
+				</a>
+
+				<img border="0" src="common/images/top_menu/line.gif" alt="line" />
+				<a href="downloads.asp" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+					<img border="0" src="common/images/top_menu/downloads.gif" alt="downloads" />
+				</a>
+
+				<img border="0" src="common/images/top_menu/line.gif" alt="line" />
+				<a href="cite_us.asp" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+					<img border="0" src="common/images/top_menu/cite_us.gif" alt="cite us" />
+				</a>
+
+				<!--
+				<img border="0" src="../../common/images/top_menu/line.gif" alt="line" />
+				<a href="contact.html" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+					<img border="0" src="../../common/images/top_menu/contact.gif" alt="contact" />
+				</a>
+				-->
+				<img border="0" src="common/images/top_menu/line.gif" alt="line" />
+				<a href="help.asp" onmouseover="javascript:switch_img(this);" onmouseout="javascript:switch_img(this);">
+					<img border="0" src="common/images/top_menu/help.gif" alt="help" />
+				</a>
+			</div>
+			<div id="top_menu_right"> </div>
+
+		</div>
+
+		<div id="page_content">
+			<div id="column_container" style="overflow:hidden;">
+
+
+			
+            
+				<script type="text/javascript">
+		var examples = new String('apoptosis,BAG1,chemokine receptor,MGI:1913838,12367,NP_033724,mesoderm development,GO:0042386,MP:0005386,lethal,Bacterial feeding,ethyl methanesulfonate,KC167,embryonic lethality,WBRNAi00013692,6546606,6239,Danio rerio').split(",");
+	</script>
+
+	<script type="text/javascript">
+		if (document.all) {
+			window.document.body.scroll = "auto";
+		}
+		window.onload = sf;
+	</script>
+<!--	<div id="header">
+		<h1><span style="display:none">PhenomicDB</span></h1>
+		
+	</div> -->
+    
+	<form id="search" action="search.asp" method="post" onsubmit='parent.document.getElementById("phenomicdb_link").setAttribute("class", "selected");parent.document.getElementById("phenomicdb_link").setAttribute("className", "selected");return true;'>
+
+	<table id="homegrid" cellspacing="0" cellpadding="0" border="0" style="width:978px;">
+		<tr>
+			<td class="column1">
+
+			<table cellspacing="0" cellpadding="0" border="0" style="width:978px;">
+				<tr>
+				
+					
+					<td valign="top" style="background:#C0EE92;">
+				
+				<div id="main" style="background:#FFF; width:977px;"> 
+
+<div style="background:url(common/okoto.jpg) no-repeat; width:977px; height:200px;">
+
+	<div style=" float:left; height:200px; width:250px;"></div>
+    
+	<div style=" float:left; height:200px; width:727px;">
+    
+    	<div style=" font-weight:bold; vertical-align:baseline; margin-top:10px; float:left; width:617px; height:14px; text-align:center; color:#000000; font-size-adjust:none; font-style:normal;">
+		Enter term(s) or part of a term:
+	</div>
+        
+        
+        
+        <div style="float:left; width:727px;">
+        
+        <div style=" float:left; vertical-align:top; width:617px; height:25px; text-align:center;color:#000000; font-size-adjust:none; font-style:normal;">
+        <input id="term" type="text" style="width:610px;" name="term"/>
+        </div>
+        
+        <div style=" padding-top:10px; float:left; width:107px; height:21px; text-align:center; color:#000000; font-size-adjust:none; font-style:normal;">
+        
+        <a onclick="return help(this, 'howto')" href="help.asp" style="color:#000000;">How to search</a>
+        
+        </div>
+        
+        
+        </div>
+                
+        <div style="float:left; padding-bottom:3px; width:617px; height:20px; text-align:center; color:#000000; font-size-adjust:none; font-style:normal;">
+        Example:
+        <a href="javascript:se()" id="exampleLink">apoptosis</a>
+        </div>
+        
+        <div style="float:left; width:617px; height:17px; vertical-align:baseline; font-weight:bold; text-align:center; color:#000000;font-size-adjust:none; font-style:normal;">
+        in these sections:
+        </div>
+        
+        <div style="float:left; width:727px;">
+        
+        <div style="float:left; width:617px; vertical-align:top; height:25px; text-align:center; font-weight:bold; color:#000000; font-size-adjust:none; font-style:normal;">
+        
+        <select id="sections" class="combo" onchange="ce()" style="width: 617px; height:20px;" name="sections">
+        								<option value="All">All</option>
+						<option value="Symbol and name">Symbol and name</option>
+						<option value="Description">Description</option>
+						<option value="External IDs">External IDs</option>
+						<option value="NCBI Gene IDs">NCBI Gene IDs</option>
+						<option value="Gene product ID">Gene product ID</option>
+						<option value="GO term">GO term</option>
+						<option value="GO ID">GO ID</option>
+						<option value="Phenotype Ontology ID">Phenotype Ontology ID</option>
+						<option value="Phenotype keyword">Phenotype keyword</option>
+						<option value="Experiment name">Experiment name</option>
+						<option value="Experiment description">Experiment description</option>
+						<option value="Cell line">Cell line</option>
+						<option value="Phenotype description">Phenotype description</option>
+						<option value="RNAi accession">RNAi accession</option>
+						<option value="Reference ID">Reference ID</option>
+						<option value="Taxonomy ID">Taxonomy ID</option>
+						<option value="Organism name">Organism name</option>
+
+        </select>
+        
+        </div>
+        
+        </div>
+        
+        <div style="float:left; width:727px; padding-top:2px;">
+        
+        <div style="float:left; width:617px; height:25px; text-align:left; color:#000000;font-size-adjust:none; font-style:normal;">
+        
+        
+        <label for="wildcard">
+<input id="wildcard" class="checkbox" type="checkbox" value="wildcard" name="wildcard"/>
+Use wildcard (If unselected wildcard can be used with *)
+</label>
+        
+        
+        
+        </div>
+        
+        </div>
+        
+        <div style="float:left; width:727px; padding-top:2px;">
+        
+        <div style="float:left; width:617px; height:22px; text-align:left; color:#000000; font-size-adjust:none; font-style:normal;">
+        
+        <div style="float:left; width:250px; height:20px;"></div>
+        
+        <div style="float:left; height:20px; width:367px;">
+			<input type="hidden" id="page" name="page" value="1" />
+                  <input type="hidden" id="prevsize" name="prevsize" value="20" />
+                  <input type="hidden" id="pagesize" name="pagesize" value="20" />
+        		<input id="submit" class="button" type="submit" value="Search" name="submit"/>
+			<input id="reset" class="button" type="reset" value="Clear" name="submit"/>
+        </div>
+        
+        
+        
+        </div>
+        
+        </div>
+        
+        
+        
+        
+	</div>
+
+
+</div>
+
+
+<div style=" width:977px; height:180px; margin-top:10px; ">
+
+	<div style="float:left; width:10px; height:180px; background:#FFF;">
+    </div>
+    
+    <div style="background:#C0EE92; float:left; width:967px; height:150px; padding-top:10px;">
+    
+    <div style="float:left; width:320px; ">
+    	<div style="float:left; width:320px; height:20px; font-weight:bold;">
+        	<div style="float:left; width:20px; height:20px;"></div>
+            <div style="float:left; height:20px;  font-weight:bold;">
+        		Select Organisms:
+            </div>
+        </div>
+        <div style="float:left; width:320px; height:100px;">
+        	<div style="float:left; width:20px; height:100px;"></div>
+            <div style="float:left;">
+        	<select id="organisms" class="list" multiple="multiple" size="8" name="organisms">
+									<option value="All" selected="selected">All</option>
+						<option value="Caenorhabditis elegans">Caenorhabditis elegans</option>
+						<option value="Dictyostelium discoideum">Dictyostelium discoideum</option>
+						<option value="Fruit fly">Fruit fly</option>
+						<option value="Human">Human</option>
+						<option value="Mouse">Mouse</option>
+						<option value="Yeast">Yeast</option>
+						<option value="Zebrafish">Zebrafish</option>
+						<option value="Other">Other</option>
+
+            </select>
+            </div>
+        </div>
+    </div>
+    
+    <div style="float:left; width:447px;">
+    	<div style="float:left; width:327px; height:20px; text-align:center; font-weight:bold;">
+        	Restrict query to:
+        </div>
+        <div style="float:left; width:327px; height:100px;">
+		<p class="list">
+			<label for="radio1"><input id="radio1" type="radio" name="gp" value="1" class="radio" />genotypes</label>
+			<label for="radio2"><input id="radio2" type="radio" name="gp" value="2" class="radio" />phenotypes</label>
+			<label for="radio3"><input id="radio3" type="radio" name="gp" value="3" class="radio" />only genotypes with associated phenotypes</label>
+			<label for="radio4"><input id="radio4" type="radio" name="gp" value="4" class="radio" />only phenotypes with associated genotypes</label>
+			<label for="radio5"><input id="radio5" type="radio" name="gp" value="0" class="radio" checked="checked" />no restriction</label>
+		</p>
+
+        </div>
+    </div>
+    
+    <div style="float:left; width:190px; ">
+    	<div style="float:left; width:190px; height:20px; text-align:center;  ">
+        	
+            <div style="float:left;font-weight:bold;">
+        		Select data fields to show:
+            </div>
+        </div>
+        <div style="float:left; width:190px;">
+        	<div style="float:left; width:0px; height:100px;"></div>
+            <div style="float:left;">
+        	<select id="fields" class="list" multiple="multiple" size="8" name="fields">
+							<option value="Default" selected="selected">Default</option>
+						<option value="Official gene symbol">Official gene symbol</option>
+						<option value="Gene description">Gene description</option>
+						<option value="External genotype ID">External genotype ID</option>
+						<option value="NCBI Gene ID">NCBI Gene ID</option>
+						<option value="mRNA ID">mRNA ID</option>
+						<option value="GO term">GO term</option>
+						<option value="GO ID">GO ID</option>
+						<option value="Alias gene symbols">Alias gene symbols</option>
+						<option value="Official gene name">Official gene name</option>
+						<option value="Alias gene names">Alias gene names</option>
+						<option value="Organism name">Organism name</option>
+						<option value="Protein ID">Protein ID</option>
+						<option value="Genomic ID">Genomic ID</option>
+						<option value="Chromosome">Chromosome</option>
+						<option value="Localization">Localization</option>
+						<option value="Phenotype keyword">Phenotype keyword</option>
+						<option value="Phenotype name">Phenotype name</option>
+						<option value="Phenotype symbol">Phenotype symbol</option>
+						<option value="Phenotype description">Phenotype description</option>
+						<option value="External phenotype ID">External phenotype ID</option>
+						<option value="Experiment description">Experiment description</option>
+						<option value="RNAi accession">RNAi accession</option>
+						<option value="sh/siRNA sequence">sh/siRNA sequence</option>
+
+            </select>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    
+    
+
+</div>
+
+<div style="width:977px; height:80px; padding:0px 0px 10px 10px; text-align:left;">
+
+PhenomicDB is a multi-organism phenotype-genotype database including human, mouse, fruit fly, C.elegans, and other model organisms.
+<br>
+The inclusion of gene indeces (<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=gene" onClick="return blank(this)">NCBI Gene</a>) and orthologues (same gene in different organisms) from <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=homologene" onClick="return blank(this)">HomoloGene</a> allows to compare phenotypes of a given gene over many organisms simultaneously.
+<br>
+
+PhenomicDB contains data from publicly available primary databases: FlyBase, Flyrnai.org, WormBase, Phenobank, CYGD, MatDB, OMIM, MGI, ZFIN, SGD, DictyBase, NCBI Gene, and HomoloGene.
+<br />
+<div style="padding:5px 0px 0px 0px; text-decoration:underline; cursor:pointer;" onclick="openClusterStats();">View cluster statistics</div>
+</div>
+
+
+
+
+              </div>
+
+
+
+					
+					</td>
+				</tr>
+			</table>
+			
+
+			<!-- </td>
+			<td class="column2" rowspan="2">
+				<h2>Latest News</h2>
+				<p>PhenomicDB version 2.4 2007-11-05 has for 10258 human genes a human phenotype or a phenotype from an orthologous gene.</p>
+				<p>PhenomicDB 2.0 release contains an extended database schema featuring RNAi data from genome-wide functional screens.</p>
+				<br /><h2></h2>
+				<p><a href="help1.html" onClick="return help(this, 'query')">How to link to PhenomicDB</a><br />using e.g. RefSeq identifiers</p>
+				<p>PhenomicDB in Science:<a href="http://dx.doi.org/10.1126/science.306.5695.383a" onClick="return blank(this)"><br />From Gene To Flesh</a></p>
+				<p><a href="citing.html" target="_parent">Citing PhenomicDB</a></p>
+				<p><a href="releases.asp" onClick="return releases(this)">Database release notes</a></p>
+
+			</td>
+
+-->
+		</tr>
+		<tr>
+		
+		</tr>
+		<tr>
+			<td class="column1">
+			
+			</td>
+
+<!--
+<td class="column2">
+				<h2>Biobar features PhenomicDB</h2>
+				<a href="http://biobar.mozdev.org" onClick="return blank(this)"><img src="common/biobar.gif" alt="Biobar" border="0" /></a>
+
+			</td>
+-->
+
+
+		</tr>
+		<tr>
+			<td class="column1">
+
+<div style="float:left; width:977px; margin-top:10px; background:#C0EE92;">
+        	
+            <div style="float:left; padding-bottom:10px; width:977px; text-align:center; font-weight:bold; background:#FFF; font-size:16px;">
+            	Statistics
+            </div>
+            
+            <div style="float:left; width:10px; text-align:center;">
+            	<div style="float:left; width:10px; height:34px; font-weight:bold; padding-top:10px;"></div>
+            </div>
+            
+            <div style="float:left; width:317px; text-align:center;">
+            	<div style="float:left; width:315px; border-right:2px solid #FFF; height:34px; font-weight:bold; padding-top:10px;">Organism</div>
+            </div>
+            
+            <div style="float:left; width:325px; text-align:center;">
+            	<div style="float:left; width:323px; border-right:2px solid #FFF; height:34px; font-weight:bold; padding-top:10px;">Phenotypes</div>
+            </div>
+            
+            <div style="float:left; width:325px; text-align:center;">
+
+            	<div style="float:left; width:325px; height:19px; font-weight:bold; padding-top:3px;">Genotypes</div>
+
+
+                <div style="float:left; width:325px; height:15px; border-top:1px solid #FFF; font-weight:bold; padding-top:3px;">
+                	<div style="float:left; width:164px; height:15px; border-right:1px solid #FFF;">
+                    	all
+                    </div>
+                    <div style="float:left; width:160px; height:15px;">
+                    	with orthologues
+                    </div>
+                </div>
+
+            </div>
+            
+        
+        </div>
+        
+
+
+
+
+
+        <div style="float:left; width:977px; background:#FFFFFF;">
+        	
+
+<div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Caenorhabditis elegans</div><div style='float:left; width:325px; text-align:center;height:19px;'>119448</div><div style='float:left; width:165px; text-align:center;height:19px;'>41719</div><div style='float:left; width:160px; text-align:center;height:19px;'>18990</div><div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Dictyostelium discoideum</div><div style='float:left; width:325px; text-align:center;height:19px;'>4449</div><div style='float:left; width:165px; text-align:center;height:19px;'>13968</div><div style='float:left; width:160px; text-align:center;height:19px;'>0</div><div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Fruit fly</div><div style='float:left; width:325px; text-align:center;height:19px;'>115833</div><div style='float:left; width:165px; text-align:center;height:19px;'>33204</div><div style='float:left; width:160px; text-align:center;height:19px;'>15624</div><div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Human</div><div style='float:left; width:325px; text-align:center;height:19px;'>8093</div><div style='float:left; width:165px; text-align:center;height:19px;'>41033</div><div style='float:left; width:160px; text-align:center;height:19px;'>23760</div><div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Mouse</div><div style='float:left; width:325px; text-align:center;height:19px;'>23059</div><div style='float:left; width:165px; text-align:center;height:19px;'>87795</div><div style='float:left; width:160px; text-align:center;height:19px;'>38379</div><div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Yeast</div><div style='float:left; width:325px; text-align:center;height:19px;'>42465</div><div style='float:left; width:165px; text-align:center;height:19px;'>7088</div><div style='float:left; width:160px; text-align:center;height:19px;'>4853</div><div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Zebrafish</div><div style='float:left; width:325px; text-align:center;height:19px;'>4806</div><div style='float:left; width:165px; text-align:center;height:19px;'>47131</div><div style='float:left; width:160px; text-align:center;height:19px;'>21086</div><div style='float:left; width:10px;  text-align:center;'><div style='float:left; width:10px; font-weight:bold; height:19px;'></div></div><div style='float:left; width:317px; text-align:center; font-weight:bold; height:19px;'>Other</div><div style='float:left; width:325px; text-align:center;height:19px;'>20163</div><div style='float:left; width:165px; text-align:center;height:19px;'>5399281</div><div style='float:left; width:160px; text-align:center;height:19px;'>152508</div>                	
+                    
+                 
+            <div style="float:left; text-align:left; width:977px; height:80px; padding-top:5px; margin:20px 0px 10px 0px; border-top:1px solid #666;">
+
+<div style="float:left; width:500px; height:80px; ">
+
+			<a style="text-decoration:underline;" href="help.asp#query">How to link to PhenomicDB</a> using e.g. RefSeq identifiers
+<br />
+PhenomicDB in Science: <a style="text-decoration:underline;" href="http://dx.doi.org/10.1126/science.306.5695.383a" onClick="return blank(this)">From Gene To Flesh</a>,<BR /> <a style="text-decoration:underline;" href="cite_us.asp" target="_parent">Citing PhenomicDB</a>
+<br />
+<br />
+Last Updated: 30 July 2009; freeze date: 20 June 2009<br>PhenomicDB Version 3.1  <a style="text-decoration:underline;" href="releases.asp" onClick="return releases(this)">Database release notes</a>
+</div>
+
+<div style="float:left; width:477px; height:80px; text-align:right; ">
+Biobar features PhenomicDB
+<br />
+<a href="http://biobar.mozdev.org" onClick="return blank(this)">
+<img src="common/biobar.gif" alt="Biobar" border="0" />
+</a>
+
+</div>
+		</div>
+            
+        
+        </div>
+
+
+			
+
+			</td>
+<!--
+			<td class="column2">
+				<br /><br />
+				<h2>Powered by</h2>
+				<img src="common/poweredby.gif" alt="Microsoft, Intel, Unisys" />
+
+			</td>
+-->
+		</tr>
+		<tr>
+			<td colspan="2">
+			
+			</td>
+		</tr>
+	</table>
+
+
+	
+
+
+
+	</form>
+
+
+
+			
+			</div>
+		</div>
+
+
+		
+	</div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3856721-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Robust Motion Segmentation via Lossy Compression</title>
+<style type="text/css">
+#toc,
+.toc,
+.mw-warning {
+	border: 1px solid #aaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+	font-size: 95%;
+}
+#toc h2,
+.toc h2 {
+	display: inline;
+	border: none;
+	padding: 0;
+	font-size: 100%;
+	font-weight: bold;
+}
+#toc #toctitle,
+.toc #toctitle,
+#toc .toctitle,
+.toc .toctitle {
+	text-align: center;
+}
+#toc ul,
+.toc ul {
+	margin-left: 0;
+	padding-left: 1em;
+	text-align: left;
+}
+#toc ul ul,
+.toc ul ul {
+	margin: 0 0 0 2em;
+}
+#toc .toctoggle,
+.toc .toctoggle {
+	font-size: 94%;
+}
+.toccolours {
+	border: 1px solid #aaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+	font-size: 95%;
+}
+</style>
+</head>
+
+<body>
+<table border="0" cellpadding="0" cellspacing="0" height="709" width="844">
+<tbody>
+    <tr>
+      <td colspan="3" bgcolor="#000080" height="49">
+      <p align="center"><font color="#ffffff"><span style="font-weight: 700;"> <font style="font-size: 20pt;" face="Times New Roman">Robust Motion Segmentation</font><font style="font-size: 20pt; font-weight: 700;" face="Times New Roman"> via Lossy Compression</font></font></p></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3" bgcolor="#000000" height="8"></td>
+    </tr>
+    <tr>
+      <td colspan="3" bgcolor="#808080" height="4"></td>
+    </tr>
+    <tr>
+      <td colspan="3" height="30">
+      </td>
+    </tr>	
+	<tr><td valign="top">
+	<center><img src="images/three-cars_preview.jpg"  /></center><br />
+	<table id="toc" class="toc" summary="Contents" cellpadding="5">
+	  <tbody><tr><td><div id="toctitle"><h2>Contents</h2></div><ul><li><a href="../"> Back to Lossy Compression Home Page</a></li>
+	<li><a href="#Abstract">Abstract</a></li>
+	<li><a href="#Formulation">Problem Formulation</a></li>
+	<li><a href="#Robust">Robust Segmentation</a></li>
+	<li><a href="#Results">Results on Hopkins 155 Database</a></li>
+	<li><a href="#Software">MATLAB Software</a></li>
+	<li><a href="#Publications">Publications</a></li>
+	<li><a href="#References">References</a></li>
+	</ul></td></tr></tbody></table>
+	<a name="Abstract" id="Abstract"></a><h1>Abstract</h1><hr />
+	We examine the problem of segmenting tracked feature point trajectories of multiple moving objects in an image sequence. Using the affine camera model, this motion segmentation problem can be cast as the problem of segmenting samples drawn from a union of linear subspaces. In practice, due to limitations of the tracker, occlusions and the presence of nonrigid objects in the scene, obtained motion trajectories may contain grossly mistracked features, missing entries, or not correspond to any valid motion model. We develop a robust subspace separation scheme that can deal with all of these practical issues in a unified framework. Our methods draw strong connections between lossy compression, rank minimization, and sparse representation.  We test our methods extensively and compare their performance to several extant methods with experiments on the Hopkins 155 database. Our results are on par with state-of-the-art results, and in many cases exceed them. <hr /> 
+	<p><a name="Formulation" id="Formulation"></a><h1> Problem Formulation</h1><hr />
+	Suppose we are given trajectories of <i>P</i> tracked feature points of a rigid object <img align="bottom" height="28px" src="equations/xfp_yfp.png" /> from <i>F</i> 2-D image frames of a rigidly moving camera. The affine camera model stipulates that these tracked feature points are related to their 3-D coordinates <img height="28px" src="equations/XfpYfpZfp.png" /> by the matrix equation:<br />
+	<br/>
+<center><img height="150px" src="equations/YeqAX.png" /></center>
+	
+<p>where <img height="25px" src="equations/AinR2x4.png" /> is the <i>affine motion matrix</i> at frame <i>f</i>. The affine motion matrix is parameterized by the camera calibration matrix <img height="19px" src="equations/KinR2x3.png" /> and the relative orientation of the rigid object <i>w.r.t.</i> the camera <img height="19px" src="equations/RtinSE3.png" />. From this formulation we see that<br />
+<center><img height="25px" src="equations/rankYle4.png" /></center><br/>
+
+Thus the affine camera model postulates that trajectories of feature points from a single rigid motion will all lie in a linear subspace of <img height="17px" src="equations/R2F.png" /> of dimension at most four. 
+
+A dynamic scene can contain multiple moving objects, in which case the affine camera model for a single rigid motion cannot be directly applied. Now let us assume that the given <i>P</i> trajectories correspond to <i>N</i> moving objects. In this case, the set of all trajectories will lie in a <i>union of </i>N<i> linear subspaces</i> in <img height="17px" src="equations/R2F.png" />, but we do not know which trajectory belongs to which subspace. Thus, the problem of  assigning each trajectory to its corresponding motion is reduces to a problem of segmenting data drawn from multiple subspaces, and so we can apply our Lossy Compression-based clustering techniques.<hr />
+<p><a name="Robust" id="Robust"></a><h1>Robust Segmentation</h1><hr />
+ Real motion trajectories acquired by a tracker can have many kinds of problems that can severely afffect the quality of segmentation. For example:
+<ul>
+<li>A trajectory may correspond to certain nonrigid or random motions that do not obey the affine camera model (an <i>outlying trajectory</i>).</li> 
+<li>Some of the features may be missing in some frames, causing a trajectory to have some missing entries (an <i>incomplete trajectory</i>).</li>
+<li> Even worse, some feature points may be mistracked (with the tracker unaware), causing a trajectory to have some entries with gross errors (a <i> corrupted trajectory</i>).</li>
+</ul>
+	
+	
+By combining our Lossy Compression-based clustering with techniques from sparse representation, we can make our motion segmentation method robust to these three kinds of pathological trajectories.
+<ol><li><h3>Outlying trajectories</h3>
+The Lossy Compression-based clustering method deals with outliers in an elegant fashion. In low dimensions a sufficient number of outliers will cover the entire space, and so the algorithm tends to group all outliers into a single group [<a href="#References">1</a>]. Such a group can be easily detected, because the number of bits per vector in that group will be very large relative to other groups. However, in higher-dimensional spaces, such as in our motion segmentation problem, it would require an enormous number of outliers to fill the space. If outliers are thinly scattered in the ambient space, they will be most efficiently encoded when each outlier is its own group. Such small groups are also easily detectable.</li>
+<li><h3>Incomplete trajectories</h3>
+Using techniques drawn from sparse representation, it is possible to fill in the missing entries in incomplete trajectories <i>prior</i> to segmentation.
+Samples drawn from a low-dimensional subspace are <i>self-expressive</i>, meaning that a sample can be expressed in terms of a few other samples from the same subspace. More precisely, if the given sample is <img height="19px" src="equations/yinRD.png" /> and <img height="19px" src="equations/YinRDxP.png" /> is the data matrix whose columns are all of the <i>other</i> samples in the dataset, then there exists a coefficient vector <img height="19px" src="equations/cinRP.png"/> that satisfies<br/>
+<br />
+<center><img src="equations/yeqYc.png"/></center>
+
+<p>This equation is highly underdetermined, as typically <i>P >> D</i>, and thus <b>c</b> is not unique. However, if <b>y</b> lies in a low-dimensional subspace <i>S</i>, it can be linearly represented by a few vectors from <i>S</i>. Hence, the <b>c</b> we seek should be <i>sparse</i>, having few nonzero entries. If <b>c</b> is sufficently sparse, then <b>c</b> is unique and can be recovered via the following linear program:<br/>
+<br />
+<center><img src="equations/ceqamcstyeqYc.png"/></center>
+<p>The sparse representation of <b>y</b> induced by <b>c</b> is highly robust. In particular, with probability one, <b>c</b> is preserved by an arbitrary orthogonal projection, provided the dimension of the projection is larger that the dimension of  any of the subspaces. Now suppose <b>y</b> has some missing entries  and <tt>Y</tt> is the subset of the data having <i>no</i> missing entries. Removing the rows of the missing entries from both <b>y</b> and <tt>Y</tt> is a projection, and so will preserve <b>c</b> if the number of missing entries is not too large. Thus we can obtain <b>c</b> in the projected space and use it in the above linear program to complete <b>y</b>. </li>
+<li><h3>Corrupted trajectories</h3>
+Using techniques from sparse representation we can also detect and repair vectors with corrupted entries <i>prior</i> to segmentation. 
+
+A corrupted vector <img src="equations/yhat.png" height="19px" /> can be modeled as</p><br />
+<center><img src="equations/yhateqype.png" /></center>
+<p>where <b>y</b> is the uncorrupted vector, and <img height="19px" src="equations/einRD.png" /> is a vector that contains all of the gross errors. As long as there are enough uncorrupted vectors in the dataset, we can express <b>y</b> as a linear combination of the other vectors in the dataset as before.  If <img height="19px" src="equations/YinRDxP.png" /> is a matrix whose columns are the other vectors in the dataset, then this equation becomes</p>
+<center><img src="equations/yhateqBw.png" /></center>
+<p>If the true <b>c</b> and <b>e</b> are sufficiently sparse, we can simultaneously find the sparsest <b>c</b> and <b>e</b> by solving the linear program [<a href="#References">3</a>]:</p>
+<center><img src="equations/weqamwstyhateqBw.png" /></center>
+<p>Once <b>w</b> is computed, we decompose it into <b>c</b> and <b>e</b>, and use <b>c</b> to recover <b>y</b>.</p>
+</li>
+</ol><hr />
+<a name="Results" id="Results"></a><h1>Results on Hopkins 155 database</h1>
+<hr />
+<p>We tested the performance of our algorithm on the publicly available <a href="http://www.vision.jhu.edu/data/hopkins155/">Hopkins 155 database</a>. The results of these experiments are detailed below: </p>
+<h1><a href="hopkins.html">Overall Statistics</a></h1>
+
+<h1>Results for each Experiment</h1>
+<h2>
+<ul>
+<li><a href="lin_raw_5_d.html">Projection to 5-D</a></li>
+<li><a href="lin_raw_spa.html">Projection to 'sparsity preserving' dimension</a></li>
+</ul></h2>
+Coming soon: Results for sequences with incomplete/corrupted trajectories.
+<h1>MATLAB Software</h1><a name="Software" id="Software"></a>
+<hr />
+<a href="../code/motion_1.0.zip">Robust Motion Segmentation via Lossy Compression 1.0</a>
+
+<h4>Example Usage:</h4> 
+The 'arm' sequence with projection down to <strong>R</strong><sup>5</sup></p>
+
+<pre>
+> addpath 'helpers';
+> epsilon = logspace(-5,3,101);
+> [rawData, trueLabels] = load_sequence('arm');
+> processedData = process_sequence(rawData, true);
+> result = try_sequence('arm', processedData, epsilon);
+> computedLabels = find_best_segmentation(result, processedData, 2, epsilon);
+> err = compare_labels(trueLabels, computedLabels);</pre>
+
+<p>Note: To use our L1-based methods for entry completion and error correction, the <a href="http://www.stanford.edu/~boyd/cvx/">CVX package</a> by Stephen Boyd must be installed and in the MATLAB path.</p>
+<a name="Publications" id="Publications"></a><h1> Publications</h1><hr />
+<ul>
+<li><i><a href="../papers/RaoS2010-PAMI.pdf">Motion Segmentation in the Presence of Outlying, Incomplete or Corrupted Trajectories</a></i>. Shankar Rao, Roberto Tron, Rene Vidal and Yi Ma.  in IEEE Transactions on Pattern Analysis and Machine Intelligence, 2010</li>
+<li><i><a href="../papers/RaoS2008-CVPR.pdf">Motion Segmentation via Robust Subspace Separation in the Presence of Outlying, Incomplete or Corrupted Trajectories</a></i>. Shankar Rao, Roberto Tron, Rene Vidal and Yi Ma. in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2008</li></ul>
+<hr />
+<a name="References" id="References"></a><h1> References</h1>
+<hr /><ol><li><i>Segmentation of Multivariate Mixed Data via Lossy Coding and Compression</i>. Yi Ma, Harm Derksen, Wei Hong and John Wright. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2007. </li>
+<li><i>A Benchmark for the Comparison of 3-D Motion Segmentation Algorithms</i>. Roberto Tron and Rene Vidal, Proceedings of the IEEE International Conference on Computer Vision and Pattern Recognition, 2007.</li>
+<li><i>Robust Face Recognition via Sparse Representation</i>. John Wright, Allen Yang, Arvind Ganesh, S. Shankar Sastry, and Yi Ma. To appear in IEEE Transactions on Pattern Analysis and Machine Intelligence, 2008.</ol>
+<hr />
+Comments? Questions? Contact Shankar Rao at: <tt>srrao</tt> <b>AT</b> <tt>UIUC</tt> <b>DOT </b> <tt>EDU</tt>
+	</td>
+	</tr>	
+	</tbody>
+	</table>
+</body>
+</html>

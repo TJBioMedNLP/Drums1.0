@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>
+The Systematic Platform for Identifying Mutated Proteins
+</title>
+<meta http-equiv="Content-Type" content="text/html;">
+<link href="http://pimp.kr.starflr.info//css/pimp_new.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="http://pimp.kr.starflr.info//js/pimp.js"></script>
+<script language="javascript">
+<!--
+	function checkKey(form) {
+		if (event.keyCode == 13) {
+			checkData(form);
+		}
+	}
+
+	function checkData(form) {
+		if (form.id.value == '') {
+			alert('Please insert your ID');
+			form.id.focus();
+			return;
+		}
+		if (form.pw.value == '') {
+			alert('Please insert your password');
+			form.pw.focus();
+			return;
+		}
+		form.submit();
+	}
+//-->
+</script>
+</head>
+<body>
+<div id="header">
+	<form name=login action="http://passport.kr.starflr.info/login.php" method=post>
+	<div id="loginContainer">
+	 	
+<input type=hidden name=a value=login>
+<input type=hidden name=t value="OPEN_PIMP">
+<input type=hidden name=r value="http://pimp.kr.starflr.info/">
+ID : <input type=text name=id size=8> Password : <input type=password name=pw size=8 onKeyPress="return submitenter(this, event);"> <a href="javascript:checkLoginData(document.login)">Login</a> &nbsp; <a href="javascript:go_signup()"><b>Register</b></a> &nbsp;&nbsp;
+
+		<a href="http://pimp.kr.starflr.info//task.php">Tasks</a> &nbsp;
+		<a href="http://pimp.kr.starflr.info//guide.php"><b>Guide</b></a> &nbsp;
+		<a href="http://pimp.kr.starflr.info//sitemap.php">Sitemap</a> &nbsp;
+		<a href="mailto:yxli@sibs.ac.cn">Contact Us</a> &nbsp;
+	</div>
+	</form>
+
+	<div class="wrap1">
+		<h1><a href="http://pimp.kr.starflr.info//">SysPIMP</a></h1>
+		<h2>the Systematical Platform for Identifying Mutated Proteins</h2>
+	</div>
+
+	<div class="wrap2">
+
+		<form name=keyword action=http://pimp.kr.starflr.info/index.php>
+		<input type=hidden name=a value=search>
+		<select name=sf>
+			<option value=SWISSPROT>SwissProt accessions</option>
+			<option value=IHPNAME>IHP Name</option>
+			<option value=IMSNAME>IMS Name</option>
+			</select>
+		<input type=text name=sv size=20> <b>[ </b><a href="javascript:checkKeywordSearchData(document.keyword)" onclick='parent.onLoadingLayer()'>Search</a><b> ]</b>
+		</form>
+	</div>
+
+	<br class="clear">
+
+	<ul id="mainMenu">
+		<li id="mainMenu1" onmouseover="showSubmenu(1)"><a href="#">SysPIMP</a></li>
+		<li id="mainMenu2" onmouseover="showSubmenu(2)"><a href="#">OMIM</a></li>
+		<li id="mainMenu3" onmouseover="showSubmenu(3)"><a href="#">PMD</a></li>
+		<li id="mainMenu4" onmouseover="showSubmenu(4)"><a href="#">SWISSPROT/MSIPI</a></li>
+		<li id="mainMenu5" onmouseover="showSubmenu(5)"><a href="#">Integrated Mutated Sequences</a></li>
+		<li id="mainMenu6" class="type2" onmouseover="showSubmenu(6)"><a href="#">X!TANDEM</a></li>
+		<li id="mainMenu7" class="type2"><a href="http://pimp.kr.starflr.info/blast.php">BLAST</a></li>
+		<li id="mainMenu8" class="type2"><a href="http://pimp.kr.starflr.info/download.php">Download</a></li>
+	</ul>
+
+	<ul id="subMenu1" class="subMenu">
+		<li><a href="http://pimp.kr.starflr.info//board2.php?nu=58">SysPIMP Notices</a></li>
+		<li><a href="http://pimp.kr.starflr.info//intro.php">Introduction of SysPIMP</a></li>
+		<li><a href="http://pimp.kr.starflr.info//intro.php?a=structure">Structure of SysPIMP</a></li>
+		<li><a href="http://pimp.kr.starflr.info//intro.php?a=statistics">Statistics</a></li>
+	</ul>
+	<ul id="subMenu2" class="subMenu"> 
+		<li><a href="http://pimp.kr.starflr.info//omim.php">OMIM Browser</a></li>
+		<li><a href="http://pimp.kr.starflr.info//omim.php?a=mutated">OMIM Mutated Sequence Browser</a></li>
+		<li><a href="http://pimp.kr.starflr.info//omim.php?a=class">OMIM Classification</a></li>
+	</ul>	
+	<ul id="subMenu3" class="subMenu">
+		<li><a href="http://pimp.kr.starflr.info//pmd.php">PMD Entry Browser</a></li>
+		<li><a href="http://pimp.kr.starflr.info//pmd.php?a=disease">PMD Disease Browser</a></li>
+		<li><a href="http://pimp.kr.starflr.info//pmd.php?a=statistics">Statistics</a></li>
+	</ul>
+	<ul id="subMenu4" class="subMenu">
+		<li><a href="http://pimp.kr.starflr.info//swissprot.php">SwissProt Browser</a></li>
+		<li><a href="http://pimp.kr.starflr.info//msipi.php">MSIPI Entry Browser</a></li>
+	</ul>
+	<ul id="subMenu5" class="subMenu">
+		<li><a href="http://pimp.kr.starflr.info//contig.php">Human Genomes</a></li>
+		<li><a href="http://pimp.kr.starflr.info//ihp.php">Integrated annotated Human normal Protein Browser</a></li>
+		<li><a href="http://pimp.kr.starflr.info//ihp.php?a=statistics">IHP Statistics</a></li>
+		<li><a href="http://pimp.kr.starflr.info//ims.php">Integrated Mutated Sequence Browser</a></li>
+		<li><a href="http://pimp.kr.starflr.info//chromosome.php">Chromosomal Distribution</a></li>
+		<li><a href="http://pimp.kr.starflr.info//ims.php?a=statistics">IMS Statistics</a></li>
+	</ul>
+	<ul id="subMenu6" class="subMenu">
+		<li class="type2"><a href="http://pimp.kr.starflr.info//xtandem.php?a=search">Run X!Tandem</a></li>
+		<li class="type2"><a href="http://pimp.kr.starflr.info//xtandem.php">X!Tandem History Browser</a></li>
+	</ul>
+	<ul id="subMenu7" class="subMenu">
+		<li><a href="http://pimp.kr.starflr.info//blast.php">Run BLAST</a></li>
+	</ul>
+</div>
+
+<div id="content" onmouseover="closeSubmenu()">
+<h1>Login page</h1>
+<h3>We require the login process for seeing the web page. Please enter your ID and password.</h3>
+<h3>If you do not have any ID, please join in this web site freely via [<a href="javascript:go_signup()">Register</a>].</h3>
+<h3>Or you can log in as guest again. [ <a href="http://pimp.kr.starflr.info/index.php">Guest Login</a> ]</h3>
+<br>
+	<table class=noBorder>
+        <form name=login2 method=post action="login.php">
+	<input type=hidden name=a value=login>
+	<input type=hidden name=r value="http://pimp.kr.starflr.info/">
+	<input type=hidden name=b value="starflr.info">
+	<tr>
+		<td>ID</td>
+		<td><input type=text tabindex=1 name=id size=20></td>
+	</tr>
+	<tr>
+		<td>Password</td>
+		<td><input type=password tabindex=2 name=pw size=20 onKeyDown="checkKey(document.login2)"></td>
+	</tr>
+	<tr>
+		<td colspan=2 align=center>
+		<b>[ </b><a href="javascript:checkData(document.login2)" >Login</a><b> ]</b>
+		</td>
+	</tr>
+	</form>
+	</table>
+</div>
+<div id="footer">
+<table width=100% class=noBorder>
+<tr><td width=70%>
+	Copyright &copy; 2007-2008 Shanghai Jiao Tong University & Bioinformatics Center, Shanghai Institutes for Biological Sciences, Chinese Academy of Sciences in China, and <a href="http://fbl.riceblast.snu.ac.kr/" target="_blank">Fungal Bioinformatics Laboratory</a> in Seoul National University, Korea, All Right Reserved.
+</td><td>
+<a href="http://www.sjtu.edu.cn/english/index/index.htm" target="_blank"><img src="http://pimp.kr.starflr.info//img/sjtu.jpg" border=0></a>
+<a href="http://www.sibs.ac.cn/en/index.asp" target="_blank"><img src="http://pimp.kr.starflr.info//img/sibs.jpg" border=0></a>
+<a href="http://www.useoul.edu/" target="_blank"><img src="http://pimp.kr.starflr.info//img/snu.jpg" border=0></a><br>
+</td>
+</tr>
+</table>
+	This site is compatible to Microsft Internet Explorer 7, Mozilla Firefox and Safari 3 at 1024x768 resolution.
+</div>
+</body>
+</html>

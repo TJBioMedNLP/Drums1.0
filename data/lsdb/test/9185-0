@@ -1,0 +1,98 @@
+<html>
+<head>
+  <!--link rel="stylesheet" type="text/css" href="http://partnerpage.google.com/ig/f/JoL1Q17C9jM/ig.css"/-->
+  <link rel="stylesheet" type="text/css" href="./index.css"/>
+  <!--link rel="stylesheet" type="text/css" href="./isn.css"/-->
+  <link rel="shortcut icon" href="http://www.asu.edu/asuthemes/current/images/favicon.ico" type="image/x-icon" />
+  <title>GNAT - Inter-species gene mention normalization</title>
+</head>
+
+<body>
+
+<div id=header>
+<div style="clear:both; height:1px;"></div>
+<div style="margin:0pt;overflow:auto;background-color:rgb(255, 204, 102);width:100%;display:block">
+  <div style="margin:0pt;padding:20px 0pt 0pt 28px;float:left;width:234px">
+
+    <a href="http://www.asu.edu"><img alt="ASU logo" src="http://www.asu.edu/asuthemes/current/images/asu_logo.gif" title="Arizona State University | Click to Return to ASU Homepage" style="border:medium none" height="37" width="234"></a>
+  </div>
+  <!-- original: width:374px ... img h=99 w=374 -->
+  <div style="margin:0pt;float:right;width:301px">
+    <img src="http://www.asu.edu/asuthemes/current/images/asu_hdr_sunburst.gif" alt="ASU Sunburst" style="border:medium none" height="80" width="301">
+  </div>
+</div>
+
+<!--div style="margin:0pt;overflow:auto;background-color:rgb(153, 0, 51);display:block;width:100%;font-size:12pt;"-->
+<div class="tab">
+<ul style="margin:0pt;padding:0pt 0pt 0pt 25px">
+  <li class="tab"><a href="./." title="Go to the start page" class="tab" taret="_top">GNAT home</a></li>
+  <li class="tab"><a href="start.html" title="Submit a new query" class="tab">Submit query</a>
+  <li class="tab"><a href="test/readme.html" title="Benchmark" class="tab">Benchmark</a>
+
+  <li class="tab"><a href="http://cbioc.eas.asu.edu/" title="CBioC" class="tab">CBioC</a></li>
+  <li class="tab"><a href="http://cbioc.eas.asu.edu/banner/" title="BANNER - Named entity recognition" class="tab">BANNER</a></li>
+  <li class="tab"><a href="http://cbioc.eas.asu.edu/gnn/" title="GNN - Normalization of gene names" class="tab">GNN</a></li>
+  <li class="tab"><a href="publications.html" title="Publications" class="tab">Publications</a></li>
+  <li class="tab"><a href="http://www.fulton.asu.edu/~bioai/" title="BioAI Lab" class="tabr">BioAI Lab</a></li>
+</ul>
+</div>
+
+<h1>GNAT - Inter-species gene mention normalization (ISGN)</h1>
+
+
+<p>
+Text mining in the biomedical domain aims at helping researchers to access information contained in scientific publications in a faster, easier, and more complete way. One step towards this aim is the recognition and subsequent identification of named entities; for instance, mapping mentions of genes to databases such as <a href="http://www.ncbi.nlm.nih.gov/sites/entrez/?db=gene">Entrez Gene</a> facilitates sophisticated indexing and querying, and hyperlinking publications to more detailed information on genes etc.
+</p>
+
+<hr size="1" width="50%" align="center" style="color: #ffcc66; background-color: #990033; border: 1px solid #990033;"/>
+
+<div align="center">
+<p style="xheight: 413px; height=312px; xmargin-bottom: 0px; margin-bottom: 122px;" align="left">
+<img src="mappingP21.png" alt="Mapping the gene mention 'p21' to the human genome" title="Mapping the gene mention 'p21' to the human genome" style="float: right; margin-left: 10px; margin-bottom: 10px;" xwidth="470" xheight="403" width="353" height="302"/>
+An example best describes what the task of gene mention normalization is about. Consider that you find an article that mentions the word &quot;p21&quot;. After having successfully determined that this mention indeed refers to a gene or protein (and is not an abbreviation for &quot;page 21&quot;), you want to find out which entry, for instance, in EntrezGene, the article talks about. EntrezGene contains 370 entries that have &quot;p21&quot; as a valid name or in the name.<br>
+A first problem you have to solve is to which species the gene mention refers to. If you can decide that the authors talk about a human gene, you are left with 75 candidates. In the figure, we consider three candidates, with the official symbols &quot;CDKN1A&quot;, &quot;HRAS&quot;, and &quot;RHOA&quot;, respectively. As you can rule out RHOA (bovine gene), you're left (in this example) with two human candidate genes.<br>
+To further disambiguate between the two candidates, we consider the context the gene name was found in (that is, the abstract, paragraph, full-text.) If the gene is discussed together with &quot;an inhibition of the activity of cyclin-CDK2 or -CDK4 complexes&quot;, or &quot;negative regulation of cell cycle&quot;, this points towards CDKN1A; if the text mentions the chromosomal location &quot;11p15.5&quot;, the mutation G12S in the protein, or &quot;cell surface receptor linked signal transduction&quot;, this points towards HRAS.
+</p>
+</div>
+
+<hr size="1" width="50%" align="center" style="color: #ffcc66; background-color: #990033; border: 1px solid #990033;"/> 
+
+<p>GNAT searches text for mentions of genes and maps each gene to <a href="http://www.ncbi.nlm.nih.gov/sites/entrez/?db=gene">Entrez Gene</a> identifiers. GNAT currently includes more than 3.5 million genes from ca. 4700 species. The online version (see "Submit query") handles a subset that consists of ca. 36,500 human genes (135,000 different gene names). Please refer to <a href="publications.html#1">[Hakenberg et al., 2008]</a> for further information.
+</p>
+
+<hr size="1" width="50%" align="center" style="color: #ffcc66; background-color: #990033; border: 1px solid #990033;" />
+
+
+
+<h3>Submitting queries</h3>
+<ul>
+<li><a href="start.html">Submit a new query through the web-interface</a>
+<!--li><ahref=""><em>Use GNAT as a BCMS meta-service</em> (not available yet)</a> - see <a href="http://bcms.bioinfo.cnio.es/">BCMS server</a-->
+<li>Download and install a local copy of GNAT from <a href="http://gnat.sourceforge.net/">Sourceforge</a>
+</ul>
+<!--br><br>
+<li><a href="10072425.html">Example - what the output might look like in the future</a>
+<li><a href="inputform.html">Submit a query - the future interface</a>
+<li><a href="askalibaba.html">Things that work already can be seen here</a>
+<br><br-->
+<h3>Benchmarks and supplementary information</h3>
+<ul>
+<li><a href="test/readme.html">Test collection for the ISGN task</a>
+<li><a href="test/data.html">Further remarks on the data set</a>
+<li><a href="suppl.html">Supplementary information</a> on related publications
+</ul>
+
+<hr size="1" width="50%" align="center" style="color: #ffcc66; background-color: #990033; border: 1px solid #990033;"/>
+
+<h3>Developers</h3>
+<p>GNAT is being developed and hosted by the BioAI lab at Arizona State University's Computer Science Department (J&ouml;rg Hakenberg, project leader), ASU's DIEGO lab at the Biomedical Informatics Department (Prof. Graciela Gonzalez, group leader; Bob Leaman, developer, PhD student), and the Bioinformatics group of the Technical University Dresden (Prof. Michael Schroeder, group leader; Conrad Plake, developer, PhD student).
+</p>
+
+<hr size="1" width="50%" align="center" style="color: #ffcc66; background-color: #990033; border: 1px solid #990033;"/>
+
+<p align="center"><font color="#7f7f7f">(c)2007-2010 BioAI</font></p>
+
+
+
+</body>
+</html>

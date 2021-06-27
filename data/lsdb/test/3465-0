@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Beagle Dog Tissue Archive</title>
+	<LINK rel='stylesheet' type='text/css' href='beagle_style.css' />
+    <LINK rel='stylesheet' type='text/css' href='../tissues/tissue_style.css' />
+	<link rel="icon" type="image/jpg" href="images/favicon.ico">
+	<script type='text/javascript' src='scripts/beagle_javascript.js'></script>
+	<meta name="description" content="Search for and request the tissues of animals irradiated by the US Department of Energy.  A service of Wololab and Northwestern University.">
+	<meta name="keywords" content="Radiation, radiology, radiation oncology, radiosensitivity, cancer, pathology, tissue toxicity, Woloschak, Paunesku, Northwestern, neutron, irradiation, irradiated">
+    <SCRIPT LANGUAGE="JAVASCRIPT" type="text/javascript" SRC="scripts/sort_table.js"></SCRIPT>
+    <SCRIPT LANGUAGE="JAVASCRIPT" type="text/javascript" SRC="scripts/update_select.js"></SCRIPT>
+    <SCRIPT LANGUAGE="JAVASCRIPT" type="text/javascript" SRC="scripts/sorttable.js"></SCRIPT>
+    <SCRIPT LANGUAGE="JAVASCRIPT" type="text/javascript" SRC="scripts/saveRestoreForm.js"></SCRIPT>
+    <SCRIPT language="JavaScript" type="text/javascript" SRC="scripts/formReset.js"></SCRIPT> 
+    <SCRIPT language="JavaScript" type="text/javascript" SRC="scripts/saveRestoreHidden.js"></SCRIPT> 
+    <SCRIPT language="JavaScript" type="text/javascript" SRC="scripts/resetChronic.js"></SCRIPT> 
+    <SCRIPT language="JavaScript" type="text/javascript" SRC="scripts/resetFractionated.js"></SCRIPT> 
+    <SCRIPT language="JavaScript"> function submitform() {  document.getElementById('search_form').submit(); } </SCRIPT> 
+    <STYLE type='text/css'>
+       .rel {POSITION: relative; width:100%;}
+       .abs {POSITION: absolute; width:100%;}
+       .right { text-align:right; }
+       .left { text-align:left; }
+       .center { text-align:center; }
+        a.header:link, a.header:visited { text-decoration:none; font-style:italic; color:blue;}
+        a.header:hover, a.header:active { text-decoration:none; font-style:italic; color:red;}
+        a.mouse:link, a.mouse:visited { text-decoration:none; font-style:italic; color:blue;}
+    </STYLE>
+	
+	<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+	_uacct = "UA-2699466-1";
+	urchinTracker();
+	</script>
+    <script LANGUAGE="JAVASCRIPT" type="text/javascript" SRC="scripts/recoverform.js"></script>
+    <meta name="verify-v1" content="9xxyaYZIceo61LGM8afTuIvQKuA24L4DTHPKcCL40OM=" /></head>
+
+<body onload="search_load()">
+	<div id="container">
+				<div id="top_div">
+            <div class="header_img">
+                <a href="../dog_tissues"> 
+                    <img class="header_img" id="title_picture" src="images/top_bar.jpg" /> 
+                </a>
+            </div>
+			<div id="top_menu_div">
+				<h4 class="top_menu_text">
+					<a class="top_menu_text" href="http://janus.northwestern.edu/wololab">Wololab</a> |<br />
+                    <a class="top_menu_text" href="../">Mice</a> |<br />
+				</h4>
+			</div>
+        </div>
+        <div class = "top_bar_navigation">
+            <a href="introduction.php">Introduction</a>
+            <a href="request_form.php">Sample Requests</a>
+            <a href="documentation.php">Documentation</a>
+            <a href="data.php" title="Download data for statistical analysis">Data</a>
+            <a href="faq.php">FAQ</a>
+        </div>		<div id="bottom_div">
+			<div id="search_bar">
+				
+Search for dog data and tissues.
+<form id='lookup_by_dog_id' action="dog.php" method="get" class="by_id">
+    Dog # 
+    <input type="text" class="min_max" name="dog_number">
+    <input type="submit" id="by_id" value="Lookup">
+</form>
+<b> Advanced Search </b>
+<form id='search_form' action="dogs.php" method="get" name="return_dogs" onload="frm.elements['submit'].value = 'search'">
+        <div id="dog" class="searchdiv">
+            <a href="javascript:openBox('dog_details');" title="Specify, lifespan, gender, cause of death, and observations">
+               <h4>
+                    <img class="display_image" src="images/beagle_icon.jpg" />
+                    Dog Details
+                    <img src="images/expand_icon.gif" />
+                </h4>
+            </a>
+            <div class="hidden" id="dog_details">
+                <table>
+                    <tr>
+                        <td width="100px"> Gender </td>
+                        <td> <input type="checkbox" name="male" value="yes" /> Male
+                             <input type="checkbox" name="female" value="yes" /> Female
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Lifespan </td>
+                        <td> <input type="text" name="age_at_death_min" class="min_max" /> to <input type="text" name="age_at_death_max" class="min_max" /> days </td>
+                        </tr>
+                    </table>
+                </p>
+                <p>
+
+                </p>
+                <p>
+                    <select class='search_select' id='cause_of_death' name='cause_of_death'>
+                        <option value="Any">Any Cause of Death</option>
+                        <option value='Accident' >Accident</option>
+<option value='Age' >Age</option>
+<option value='Control Sacrifice' >Control Sacrifice</option>
+<option value='Euthanized for Disease' >Euthanized for Disease</option>
+<option value='Euthanized for Non-Conformance' >Euthanized for Non-Conformance</option>
+<option value='Experimental Conditions' >Experimental Conditions</option>
+<option value='Experimental Sacrifice' >Experimental Sacrifice</option>
+<option value='less than 7 days old' >less than 7 days old</option>
+<option value='Lost' >Lost</option>
+<option value='Parturition' >Parturition</option>
+<option value='Radiation' >Radiation</option>
+<option value='Sacrificed Moribund' >Sacrificed Moribund</option>
+<option value='Serial Sacrifice' >Serial Sacrifice</option>
+<option value='Stillborn' >Stillborn</option>
+<option value='Transferred' >Transferred</option>
+                    </select> 
+                </p>
+                <p>
+                    <select class='search_select' id='pathology_type' name='pathology_type'>
+                        <option value="Any">Any Pathology Observation</option>
+                        <option value='Cardiac and Pulmonary' >Cardiac and Pulmonary</option>
+<option value='Congenital and Developmental Abnormalities' >Congenital and Developmental Abnormalities</option>
+<option value='Gastrointestinal' >Gastrointestinal</option>
+<option value='Hematology and Oncology' >Hematology and Oncology</option>
+<option value='None' >None</option>
+<option value='Skin, Hair, Body Habitus, and Other' >Skin, Hair, Body Habitus, and Other</option>
+<option value='Tissue Histology and Inflammation' >Tissue Histology and Inflammation</option>
+<option value='Trauma' >Trauma</option>
+                    </select> 
+                </p>
+                <p>
+                    <select class='search_select' id='pathology_location' name='pathology_location'>
+                        <option value="Any">Any Pathology Observation Location</option>
+                        <option value='Blood and Lymph' >Blood and Lymph</option>
+<option value='Cardiopulmonary' >Cardiopulmonary</option>
+<option value='Extremity or Other' >Extremity or Other</option>
+<option value='Gastrointestinal' >Gastrointestinal</option>
+<option value='Genitourinary and Gynecologic' >Genitourinary and Gynecologic</option>
+<option value='Head and Throat' >Head and Throat</option>
+<option value='Hepatobiliary and exocrine pancreas' >Hepatobiliary and exocrine pancreas</option>
+<option value='Muscle and Tissue' >Muscle and Tissue</option>
+<option value='Nervous System' >Nervous System</option>
+<option value='None' >None</option>
+<option value='Skin and Bone' >Skin and Bone</option>
+                    </select> 
+                </p>
+                <p>
+                    <select class='search_select' id='clinical_type' name='clinical_type'>
+                        <option value="Any">Any Clinical Observation</option>
+                        <option value='Cardiac and Pulmonary' >Cardiac and Pulmonary</option>
+<option value='Congenital and Developmental Abnormalities' >Congenital and Developmental Abnormalities</option>
+<option value='Eye' >Eye</option>
+<option value='Gastrointestinal' >Gastrointestinal</option>
+<option value='Gynecological and Pregnancy Related' >Gynecological and Pregnancy Related</option>
+<option value='Hematology and Oncology' >Hematology and Oncology</option>
+<option value='Infectious' >Infectious</option>
+<option value='Neurological and Psychiatric' >Neurological and Psychiatric</option>
+<option value='None' >None</option>
+<option value='Skin, Hair, Body Habitus, and Other' >Skin, Hair, Body Habitus, and Other</option>
+<option value='Tissue Histology and Inflammation' >Tissue Histology and Inflammation</option>
+<option value='Trauma' >Trauma</option>
+                    </select>
+                </p>
+                <p>
+                    <select class='search_select' id='clinical_location' name='clinical_location'>
+                        <option value="Any">Any Clinical Observation Location</option>
+                        <option value='Blood and Lymph' >Blood and Lymph</option>
+<option value='Cardiopulmonary' >Cardiopulmonary</option>
+<option value='Extremity or Other' >Extremity or Other</option>
+<option value='Gastrointestinal' >Gastrointestinal</option>
+<option value='Genitourinary and Gynecologic' >Genitourinary and Gynecologic</option>
+<option value='Head and Throat' >Head and Throat</option>
+<option value='Hepatobiliary and exocrine pancreas' >Hepatobiliary and exocrine pancreas</option>
+<option value='Muscle and Tissue' >Muscle and Tissue</option>
+<option value='Nervous System' >Nervous System</option>
+<option value='Skin and Bone' >Skin and Bone</option>
+                    </select>    
+                </p>
+            </div>
+        </div>
+        <div id="organ" class="searchdiv">
+            <h4>
+                <img class="display_image" src="images/organ_icon.gif" />       
+                Organs & Tissues 
+            </h4>
+            <div class="search_details">
+                <select class='search_select' id='organ_types' name='organ_types' 
+                        onchange="if(this.value=='Any')
+                                    {javascript:closeDiv('organ_div');} 
+                                else
+                                    {
+                                    javascript:openDiv('organ_div');
+                                    javascript:selectOptions( 'organ_select', 'organ_types', 'organ', 'organ_type', this.value);
+                                    }">
+                    <option value="Any"> Only Include Results with Tissues </option>
+                    <option value="Include Dogs w/o tissues"> Include Dogs w/o tissues </option>
+                    <option value='Blood and Lymph' >Blood and Lymph</option>
+<option value='Cardiopulmonary' >Cardiopulmonary</option>
+<option value='Endocrine' >Endocrine</option>
+<option value='Gastrointestinal' >Gastrointestinal</option>
+<option value='Genitourinary and Gynecologic' >Genitourinary and Gynecologic</option>
+<option value='Head and Throat' >Head and Throat</option>
+<option value='Hepatobiliary and exocrine pancreas' >Hepatobiliary and exocrine pancreas</option>
+<option value='Muscle and Tissue' >Muscle and Tissue</option>
+<option value='Nervous System' >Nervous System</option>
+<option value='Other' >Other</option>
+<option value='Skin and Bone' >Skin and Bone</option>
+                </select> 
+                <div id='organ_div' class="hidden">
+                    <select class='search_select' id='organ_select' name='organ'>
+                        <option value="Any"> Any </option>
+                    </select> 
+                </div>
+            </div>
+        </div>
+        <div id="experiments" class="searchdiv">
+            <h4>
+                <img class='display_image' src='images/radioactive_icon.png' /> 
+                Experiments 
+            </h4>
+            <div class="search_details">            
+                <select class='search_select' id='study_name' name='study_name'>
+                    <option value="Any"> All Experiments </option>
+                    <option value='Life-Span: Whole Life Gamma-Irradiation' >Life-Span: Whole Life Gamma-Irradiation</option>
+<option value='Life-Span: Varioious continous Gamma-Irradiations' >Life-Span: Varioious continous Gamma-Irradiations</option>
+<option value='Leukemogenesis: Whole Life Gamma-Irradiation' >Leukemogenesis: Whole Life Gamma-Irradiation</option>
+<option value='Gamma-Irradiation during Pregnancy' >Gamma-Irradiation during Pregnancy</option>
+<option value='Gamma-Irradiation until Death' >Gamma-Irradiation until Death</option>
+<option value='Lithium and Potassium Study' >Lithium and Potassium Study</option>
+<option value='Hematological Changes' >Hematological Changes</option>
+<option value='Acute Exposure and Reticuloendothelial System' >Acute Exposure and Reticuloendothelial System</option>
+<option value='RadioIodine Effects on Thyroid and Adrenal Gland' >RadioIodine Effects on Thyroid and Adrenal Gland</option>
+<option value='Development of Techniques and Proceedures' >Development of Techniques and Proceedures</option>
+<option value='Stocks, Breeders, etc.' >Stocks, Breeders, etc.</option>
+                </select> <br/>
+                <input type="checkbox" name="cobalt_chronic" value="yes" onchange="javascript:openBox('cobalt_chronic_details'); javascript:resetChronic(document.getElementById('search_form'));"> 
+                Cobalt Chronic Exposures (1167) 
+                <div class="hidden" id="cobalt_chronic_details">
+                    <select class='search_selectII' id='cobalt_chronic_dose_rate' name='cobalt_chronic_dose_rate'>
+                        <option value="Any"> Any Dose Rate </option>
+                        <option value=' 0 - 2 ' > 0 - 2 </option>
+<option value='2 - 4 ' >2 - 4 </option>
+<option value='4 - 8 ' >4 - 8 </option>
+<option value='8 - 15 ' >8 - 15 </option>
+<option value='15 - 30 ' >15 - 30 </option>
+<option value=' 30 - 230 ' > 30 - 230 </option>
+                    </select>
+                    cGy at midline/day <br/>
+                    <select class='search_selectII' id='cobalt_chronic_exposure' name='cobalt_chronic_exposure'>
+                        <option value="Any"> Any Exposure Time </option>
+                        <option value=' 0 - 40 ' > 0 - 40 </option>
+<option value=' 40 - 60 ' > 40 - 60 </option>
+<option value=' 60 - 120 ' > 60 - 120 </option>
+<option value=' 120 - 300 ' > 120 - 300 </option>
+<option value=' 300 - 2500 ' > 300 - 2500 </option>
+<option value=' 2500 - 5500 ' > 2500 - 5500 </option>
+                    </select>
+                    days <br/>
+                    <select class='search_selectII' id='cobalt_chronic_dose' name='cobalt_chronic_dose'>
+                        <option value="Any"> Any Total Dose </option>
+                        <option value=' 0 - 500 ' > 0 - 500 </option>
+<option value=' 500 - 1000 ' > 500 - 1000 </option>
+<option value=' 1000 - 1500 ' > 1000 - 1500 </option>
+<option value=' 1500 - 3000 ' > 1500 - 3000 </option>
+<option value=' 3000 - 15000' > 3000 - 15000</option>
+                    </select>
+                    cGy at midline <br/>
+                    Limit to dogs exposed <i>in utero</i>? <input type="checkbox" name="in_utero" value="yes"/>
+                </div>
+                <br/>
+                <input type="checkbox" name="cobalt_fractionated" value="yes" onclick="javascript:openBox('cobalt_fractionated_details'); javascript:resetFractionated(document.getElementById('search_form'));"> 
+                Cobalt Acute and Fractionated Exposures (128) 
+                <div class="hidden" id="cobalt_fractionated_details">
+                    <select class='search_selectII' id='cobalt_fractionated_dose_rate' name='cobalt_fractionated_dose_rate'>
+                        <option value="Any"> Any Dose Rate </option>
+                        <option value=' 0 - 10 ' > 0 - 10 </option>
+<option value='10 - 17 ' >10 - 17 </option>
+<option value=' 17 - 200 ' > 17 - 200 </option>
+                    </select>
+                    cGy at midline/min <br/>
+                    <select class='search_selectII' id='cobalt_fractionated_exposure' name='cobalt_fractionated_exposure'>
+                        <option value="Any"> Any Exposure Time </option>
+                        <option value=' 0 - 17 ' > 0 - 17 </option>
+<option value='17 - 23 ' >17 - 23 </option>
+<option value=' 23 - 75 ' > 23 - 75 </option>
+                    </select>                
+                    min<br/>
+                    <select class='search_selectII' id='cobalt_fractionated_dose' name='cobalt_fractionated_dose'>
+                        <option value="Any"> Any Total Dose </option>
+                        <option value=' 0 - 250 ' > 0 - 250 </option>
+<option value='300 - 600 ' >300 - 600 </option>
+<option value=' 600 - 1300 ' > 600 - 1300 </option>
+                    </select>
+                    cGy at midline
+                </div>
+                <br/>
+                <input type="checkbox" name="control" value="yes"> 
+                Controls (175)
+                <div class="hidden"> <input type="textbox" name="start" value="0"/> </div>
+            </div>
+        </div>
+        <a href="javascript:void(0)" title="Submit Search" ><input type="submit" id="submit" value="loading" 
+            onclick="saveSelections(document.getElementById('search_form')); 
+                    saveHiddenDivs(['cobalt_fractionated_details', 'cobalt_chronic_details', 'dog_details', 'organ_div'])"></a>
+        <a href="javascript:void(0)" title="Reset Search Parameters" 
+            onclick="formReset(document.getElementById('search_form'));
+                    saveSelections(document.getElementById('search_form')); 
+                    saveHiddenDivs(['cobalt_fractionated_details', 'cobalt_chronic_details', 'dog_details', 'organ_div'])"> reset </a>
+        
+</form>
+
+			</div>
+			<div id="content">
+                <h3> <a href="../dog_tissues">Home</a> - <a href="introduction.php"> Introduction </a> </h3>
+                <br/>
+                <a name="overview"></a><h3>Overview</h3>
+				<p>
+                    Following the advent of the atomic age, many nations have investigated the effects of radioactive exposure in animal models.  Some of these investigations involved costly and unique experiments that produced tissue and data archives which are unlikely to be reproduced.  In an effort to extract the value from these collections, programs have started in Japan, <a href="http://www.bfs.de/en/bfs/forschung/Era_pro.html" title="European Radiobiological Archive" target="_blank">Europe</a>, and <a href="http://www.ustur.wsu.edu/NRA/radioarchive.html" title="National Radiobio" target="_blank">America</a> to preserve and make public the data and tissues from these studies for further investigation.
+                    <br/><br/>The Beagle Dog Experiments, carried out at Argonne National Laboratory from 1952 to 1991 by Thomas Fritz, William Norris, and Tom Seed and supported by grants from the Atomic Energy Commission, investigated the effects of Cobalt-60 radiation on beagle dogs.  <a href="reports/abridged_grey_book.pdf">Documentation</a> from these studies is availible in pdf form.  
+                    <br/><br/>This web portal seeks to make accessible the animal tissues and study data from the Beagle Dog Experiments using data organized by Charles Watson.  Use the search form to the left to look for dog data from particular experimental conditions.  Click on a section with the expansion icon <img src="images/expand_icon.gif" /> to specify search criteria in more detail.  
+                    Each search will return a list of matching dogs.  Click a dog number to return the full dog record.  Use the dog record to find tissues of interest and make a sample tissue request.
+                </p>
+                <br/>
+				<a name="dog_details_help"></a><h3>Dog Details</h3>
+				<p>
+                    The Dog Details section allows the user to specify the dog number, gender, lifespan, cause of death, and types of pathological and clinical observations.  Click 'Dog Details' to reveal the hidden search options.  Details of the cause of death and observations are noted in each individual dog's record.
+                </p>
+                <Blockquote>
+				<table>    
+                    <tr><th>Dog #</th><td>The unique numerical identifier used to reference the dog throughout the study. </td></tr>
+                    <tr><th>Cause of Death</th><td> The observed COD was divided into broad categories defined by the original study. </td></tr>
+                    <tr><th>Observations</th><td> Our categorization of the clinical and pathological observations recorded in the original study.</td></tr>
+                    <tr><th>Locations</th><td> Our categorization of the locations in which clinical or pathological observations were recorded in the original study.</td></tr>
+                </table>
+                </Blockquote>
+				<a name="tissues_help"></a><h3>Organs & Tissues</h3>
+                <p>
+                    Many of the Dog's tissue samples were embedded in paraffin blocks.  Select the organ system of interest to find the corresponding tissues.  
+                    Each individual dog record shows the exact tissues avaliable.
+                    By default, the search excludes dogs from which no tissue samples were recovered.  Click 'Include Dogs w/o Tissues' to veiw all dogs.
+                </p>
+                <br/>
+                <a name="experiments_help"></a><h3>Experiments</h3>
+                <p>
+                    Experimental Beagle Dogs were subjected to either chronic gamma irradiation exposure (22 hours/day) by cobalt-60 reactor or to more intense fractionated exposure using this same reactor.  
+                    To limit conditions check the box corresponding to the treatment.  
+                    From the new options select the dose rate, exposure time, total dose, or the <i>in utero</i> only option.
+                </p>
+ 			</div>
+		</div>
+
+	</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-8795073-1");
+pageTracker._trackPageview();
+} catch(err) {}</script></body>
+</html>

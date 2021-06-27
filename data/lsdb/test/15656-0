@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>PALM -- Phylogenetic reconstruction by Automatic Likelihood Model selector</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style type="text/css">
+	<!--
+	div.Section1
+	{}
+	span.GramE
+	{}
+	-->
+</style>
+
+<link rel="stylesheet" type="text/css" href="sdmenu.css" />
+<script type="text/javascript" src="prototype.js"></script>
+<script type="text/javascript" src="mouse_tip.js"></script>
+<script type="text/javascript" src="sdmenu.js"></script>
+
+<script type="text/javascript">
+
+	var mExampleResult = "";
+
+	function checkSubmit()
+	{		
+		if( document.options.email.value == "" )
+		{
+			window.alert( "Please fill email" );
+			return;
+		}		
+		document.options.submit();
+	}
+	
+	function checkUsingExampleFile()
+	{
+		var isExample = $("isExample").checked;
+		if( isExample != null && isExample == true )
+		{
+			loadData();
+		}		
+	}
+	
+	function loadData()
+	{
+		
+		var clustalw1 = $("clustalw1").checked;
+		var clustalw2 = $("clustalw2").checked;
+		if( clustalw1 != true && clustalw2 != true )
+		{
+			alert( "Please select your input type!");
+			return;
+		}
+		
+		var seqtype1 = $("seqtype1").checked;
+		var seqtype2 = $("seqtype2").checked;
+		if( seqtype1 != true && seqtype2 != true )
+		{
+			alert( "Please select your sequence type!");
+			return;
+		}
+		
+		var fileName = "";
+		mExampleResult = "";
+		
+		if( seqtype1 == true && clustalw1 == true ) {
+			fileName = "DNA_small.txt";
+			mExampleResult = "result.php?ID=20080807205214047";
+		}
+			
+		if( seqtype1 == true && clustalw2 == true ) {
+			fileName = "DNA_small_aligned.phy";
+			mExampleResult = "result.php?ID=20080807205229157";
+		}
+		
+		if( seqtype2 == true && clustalw1 == true ) {
+			fileName = "protein_small.txt";
+			mExampleResult = "result.php?ID=20080807205258611";
+		}
+			
+		if( seqtype2 == true && clustalw2 == true ) {
+			fileName = "protein_small_aligned.phy";
+			mExampleResult = "result.php?ID=20080807205244398";
+		}
+			
+		if( fileName == "" )
+		{
+			alert( "Please select correct type!");
+			return;
+		}
+		
+		new Ajax.Request( fileName, { method: "get", onComplete: displayData });
+	}
+	
+	function displayData(httpObj)
+	{
+	    $("example_result").innerHTML = "&nbsp;&nbsp;( <a href='" + mExampleResult + "'>Shortcut to the Result</a> )";
+		$("S1").value = httpObj.responseText;
+	}
+	
+	function checkTreeFile()
+	{		
+		if( $( "start_tree" ).checked == true )
+		{
+			$( "upload_tree" ).disabled = true;
+		}
+				
+		if( $( "start_tree1" ).checked == true )
+		{
+			$( "upload_tree" ).disabled = false;
+		}
+	}
+
+</script>
+</meta>
+<style type="text/css">
+<!--
+.style1 {font-family: Georgia, "Times New Roman", Times, serif}
+.style7 {font-family: "Lucida Sans"}
+.style11 {font-size: 20px}
+-->
+</style>
+</head>
+
+<body>
+
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:0; left:200; top:200;"></div>
+
+<form name="options" onsubmit="return validar()" action="insert_p.php"
+      method="post" encType="multipart/form-data">
+<table width="699" border="0" align="center">
+  <tr>
+    <td><table width="100%" border="0">
+      <tr>
+			<td colspan="2" align="center">
+			<img border="0" src="PALM_logo_1.gif" width="699" height="208" usemap="#FPMap0" alt="logo"/>
+			<map name="FPMap0" id="FPMap0">
+			<area href="demo.html" shape="rect" coords="429, 141, 484, 202" alt="demo"/>
+			<area href="index.html" shape="rect" coords="349, 144, 405, 204" alt="index"/>
+			<area href="help.html" shape="rect" coords="518, 138, 569, 207" alt="help"/>
+			<area href="contact.html" shape="rect" coords="596, 141, 664, 204" alt="contact"/>
+			</map>
+			</td>
+      </tr><tr><td>
+<table style="background:#e4e4e4" width="100%" border="0">
+      <tr>
+        <td height="43" colspan="2" bgcolor="#CFE7EE"><span class="style11"><font face="Lucida Sans">Input Sequence</font></span></td>
+      </tr>
+      <tr>
+        <td width="36%" align="left" valign="middle" bgcolor="#C4CCD5"><blockquote class="style1"><a class="style7" onmouseover="ShowMouseTip2(this,event,'inputtype', 1)" onmouseout="HideMouseTip()">Input Type</a></blockquote></td>
+        <td width="64%" bgcolor="#C4CCD5">
+                  <input name="clustalw" id="clustalw1" value="Y" type="radio" onclick="checkUsingExampleFile()"/>
+                  <span class="style7">Sequence in FASTA format </span><br clear="right"/>
+                  <input name="clustalw" id="clustalw2" value="N" type="radio" onclick="checkUsingExampleFile()"/>
+                  <span class="style7">Aligned sequence in PHYLIP format</span></td>
+      </tr>
+      <tr>
+        <td align="left" valign="middle" bgcolor="#e0e0e0"><blockquote class="style7"><a onmouseover="ShowMouseTip2(this,event,'seqtype', 2)" onmouseout="HideMouseTip()">Sequence Type</a></blockquote></td>
+        <td bgcolor="#e0e0e0"><input name="seqtype" id="seqtype1" value="D" type="radio" onclick="checkUsingExampleFile()"/>
+                  <span class="style7">DNA&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input name="seqtype" id="seqtype2" value="P" type="radio" onclick="checkUsingExampleFile()"/>
+                  <span class="style7">Protein</span> &nbsp;</td>
+      </tr>
+      <tr>
+        <td align="left" valign="middle" bgcolor="#C4CCD5"><blockquote class="style7"><a onmouseover="ShowMouseTip2(this,event,'seq', 3)" onmouseout="HideMouseTip()">Sequences</a></blockquote></td>
+        <td bgcolor="#C4CCD5">
+              		<table>
+				<tr><td>
+				<input name="isExample" type="checkbox" id="isExample" value="1" onclick="checkUsingExampleFile()" />
+				<span class="style7">Example File </span><br />
+				</td>
+				<td>
+				<div id="example_result"></div>
+				</td>
+				</table>
+                <p align="left">
+                  <textarea rows="5" name="S1" id="S1" cols="50"></textarea>
+                  <br/>
+                  <br/>
+                  <input type="reset" value="Clear Input" name="reset2" />
+			&nbsp;&nbsp;<font size="2">(size limit: 300 sequences and 50000 bases per seq.)</font>
+                  <br />
+                  <br />
+                  <input style="FONT-SIZE: 11px; COLOR: rgb(21,21,42)" type="file" maxlength="64" size="30" name="sequence" />
+                  <span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span >
+                    <input type="hidden" name="example_file" value="N"/>
+                  </span></span></p></td>
+      </tr>
+      <tr>
+        <td align="left" valign="middle" bgcolor="#E0E0E0"><blockquote class="style7"><a onmouseover="ShowMouseTip2(this,event,'bootstrap', 4)" onmouseout="HideMouseTip()">Number of Bootstrap Data Sets</a></blockquote></td>
+        <td bgcolor="#E0E0E0"><select name="num_bootstrap">
+                    <option value="100" 
+              selected="selected">100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                  </select></td>
+      </tr>
+      <tr>
+        <td align="left" valign="middle" bgcolor="#C4CCD5"><blockquote class="style7"><a  onmouseover="ShowMouseTip2(this,event,'jobnote',5)" onmouseout="HideMouseTip()"> Job Note</a></blockquote></td>
+        <td bgcolor="#C4CCD5"><textarea rows="1" name="S2" cols="40"></textarea>&nbsp;</td>
+      </tr>
+      <tr>
+        <td align="left" valign="middle" bgcolor="#E0E0E0"><blockquote class="style7"><a onmouseover="ShowMouseTip2(this,event,'email',6)" onmouseout="HideMouseTip()">Enter Your Email* </a></blockquote></td>
+        <td bgcolor="#E0E0E0"><p>
+          <input
+            style="FONT-SIZE: 14px; COLOR: rgb(21,21,42)" size="52" 
+            name="email"/>
+        </p>
+          <p>* : email is REQUIRED. Users also can receive the notification immediately via mail when jobs are done.</p></td>
+      </tr>
+      <tr>
+        <td height="43" colspan="2" bgcolor="#CFE7EE"><span class="style11"><font face="Lucida Sans">Advanced Option</font></span></td>
+        </tr>
+
+          <tr>
+            <td height="58" align="left" valign="middle" bgcolor="#C4CCD5"><a class="style7" onmouseover="ShowMouseTip2(this,event,'ratecat', 7)" onmouseout="HideMouseTip()">Number of Substitution Rate Categories</a></td>
+            <td bgcolor="#C4CCD5"><select name="num_rate">
+                            <option value="4" selected="selected">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                  </select></td>
+          </tr>
+          <tr>
+            <td height="45" align="left" valign="middle" bgcolor="#E0E0E0"><a class="style7" onmouseover="ShowMouseTip2(this,event,'tree', 8)" onmouseout="HideMouseTip()">Starting Tree (Newick Format)</a></td>
+            <td bgcolor="#E0E0E0"><input onclick="checkTreeFile()" type="radio" checked="checked" id="start_tree" value="BIONJ" name="start_tree"/>
+                      <span class="style1">Build BioNJ tree </span>&nbsp;&nbsp;&nbsp;
+                      <input onclick="checkTreeFile()" type="radio" value="user_tree" id="start_tree1" name="start_tree"/>
+                      <span class="style1">User tree</span> &nbsp;
+                  <input style="FONT-SIZE: 11px; COLOR: rgb(21,21,42)" onclick="checkTreeFile()" id="upload_tree" disabled="disabled" type="file" maxlength="64" size="14" name="upload_tree"/>&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="42" align="left" valign="middle" bgcolor="#C4CCD5"><a class="style7" onmouseover="ShowMouseTip2(this,event,'criterion', 9)" onmouseout="HideMouseTip()">Model Selection Criterion</a></td>
+            <td bgcolor="#C4CCD5"><select name="criterion">
+                          <option value="AIC" selected="selected">AIC</option>
+                          <option value="AICc">AICc</option>
+                          <option value="BIC">BIC</option>
+                          <option value="LnL">LnL</option>
+                  </select></td>
+          </tr>
+          <tr>
+            <td height="59" align="left" valign="middle" bgcolor="#E0E0E0"><a class="style7" onmouseover="ShowMouseTip2(this,event,'opt', 10)" onmouseout="HideMouseTip()">Optimize Tree Topology and Branch Lengths</a></td>
+            <td bgcolor="#E0E0E0"><input type="radio" checked="checked" value="y" name="opt_topology_length"/>
+                      <span class="style1">Yes&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="radio" value="n" name="opt_topology_length"/>
+                      <span class="style1">No </span>&nbsp;</td>
+          </tr>
+                  <tr>
+                    <td colspan="2" align="center" bgcolor="#C4CCD5">
+                      <input type="Submit" value="Submit" name="submit"/>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="Reset" name="reset"/></td>
+                </tr>        </table></td></tr></table></td>
+        </tr>
+      <tr>
+        <td colspan="2"><hr/>
+
+Current Status in Queue: <strong>   3   </strong>   job(s) remaining in the queue.
+          <hr/>          </td>
+        </tr>
+      <tr>
+        <td colspan="3" align="center"><p>&copy; 2009, <a href="http://eln.iis.sinica.edu.tw">Laboratory of Systems Biology and Network Biology, </a> </p>
+          <p><a href="http://www.iis.sinica.edu.tw">Institute of Information Science</a>, <a href="http://www.sinica.edu.tw">Academia Sinica, TAIWAN</a>. </p>
+          <p>Lastest update 2009/07/07 19:26 </p></td>
+        </tr>
+
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,200 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head><Title>MtbRegList Index</Title>
+
+		<!-- FONCTIONS POUR MENUS -->
+		<script type="text/javascript">
+		<!--
+		//function that display the submenus
+		function PopSubMenu(subMenu, parentPos) {
+			//Call to the function that hide all the submenus
+			HideAllSubMenu();
+			//if the element exists
+			if(element = document.getElementById(subMenu)) {
+				//sets the visibility and display attributes
+				element.style.visibility = "visible";
+				element.style.display = "inline";
+				//if parentPos variable exists
+				if(parentPos) {
+					//calculates the correct location of the submenu to display
+					element.style.left = (parentPos.offsetLeft - document.body.scrollLeft) + "px";
+				}
+			}
+		}
+
+		//function that catches the mouseOver event and calls the function that display the submenu
+		function MoveOverSubMenu(subMenu) {
+			//if the subMenu element exists
+			if(element = document.getElementById(subMenu)) {
+				var visible = false;
+				var i = 0;
+				//while there are other subMenu elements existing
+				while(subMtmp = document.getElementById("subMenu" + i)) {
+					//test if the display attribute of that element is set to visible
+					if(subMtmp.style.display == "visible") {
+								visible = true;
+								break;
+					}
+					//next element to test
+					i++;
+				}
+
+				//if true
+				if(visible) {
+					//Call the function that display the submenu
+					PopSubMenu(subMenu);
+				}
+			}
+		}
+
+		//function that hides the submenu element
+		function HideSubMenu(subMenu) {
+			//test if the element exists
+			if(element = document.getElementById(subMenu)) {
+				//sets the visibility and display attributes of the submenu element
+				element.style.visibility = "hidden";
+				element.style.display = "none";
+				return true;
+			} else return false;
+		}
+
+		//function that initialize all submenus to be hiden
+		function HideAllSubMenu() {
+			//hide all element starting by subMenu
+			var i = 0;
+			while(HideSubMenu("subMenu" + i)) i++;
+
+		}
+
+		//initialization when the document is clicked anywhere
+		document.onclick = HideAllSubMenu;
+		-->
+		</script>
+<link rel='stylesheet' type='text/css' href='styles.css'></head><body >
+	<div class="header">
+    <table width="100%">
+
+	<!-- SITE NAME -->
+    <tr>
+	<td><h1><a href='http://www.usherbrooke.ca/vers/MtbRegList'>MtbRegList</a></h1></td>
+
+	<!-- LOGIN/LOGOUT link -->
+	<td align=right>
+	<a style="font-size: 10pt;"href="http://pages.usherbrooke.ca/gaudreau/MtbRegList/www/login.php">Internal user</a>	</td>
+	</tr>
+
+	<!-- MENU -->
+	<tr>
+	<td>
+		<!-- MENU PRINCIPAL -->
+		<div id="div_menu" class="menu">
+		<table>
+		<tr>
+		<td  onMouseOver='PopSubMenu("subMenu0",this); '
+ onClick='PopSubMenu("subMenu0",this);'>
+<a href='#' >Search</a></td>
+<td  onMouseOver='PopSubMenu("subMenu1",this); '
+ onClick='PopSubMenu("subMenu1",this);'>
+<a href='#' >Navigate</a></td>
+<td  onMouseOver='PopSubMenu("subMenu2",this); '
+ onClick='PopSubMenu("subMenu2",this);'>
+<a href='#' >Help</a></td>
+		</tr>
+		</table>
+		</div>
+		<!-- FIN MENU PRINCIPAL -->
+
+		<!-- DEBUT SOUS-MENUS -->
+		<div id=subMenu0 class='submenu'>
+<table><tr><td><a href="/gaudreau/MtbRegList/www/genome_search.php">Genome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td></tr>
+<tr><td><a href="/gaudreau/MtbRegList/www/pattern_search.php">Annotated motifs</a></td></tr>
+</table></div>
+<div id=subMenu1 class='submenu'>
+<table><tr><td><a href="/gaudreau/MtbRegList/www/genome_view.php">Genome</a></td></tr>
+</table></div>
+<div id=subMenu2 class='submenu'>
+<table><tr><td><a href="javascript:void window.open('/gaudreau/MtbRegList/www/help/help_public.php','Help','width=500,height=400,scrollbars=yes,resizable=yes')">Help</a></td></tr>
+<tr><td><a href="/gaudreau/MtbRegList/www/export.php">Exporting data</a></td></tr>
+<tr><td><a href="/gaudreau/MtbRegList/www/about.php">About</a></td></tr>
+<tr><td><a href="/gaudreau/MtbRegList/www/credits.php">Credits</a></td></tr>
+</table></div>
+		<!-- FIN SOUS-MENUS -->
+	</td>
+	<td align=right>
+		<form action="genome_view.php" method=get>
+		<p>Quickfind: <input type=text name="region"></p>
+		</form>
+	</td>
+	</tr>
+    </table>
+    </div>
+<table>
+<tr>
+	<td><img src="images/tb5.gif" alt="MtbRegList"></td>
+
+	<td align=right>
+	<table>
+		<tr><p style="font-size:18pt;"><br></p></tr>
+		<tr>
+			<td style="width: 200px; vertical-align: bottom;">
+				<p style="font-size:18pt; margin-bottom: 0px;">
+				Bienvenue sur</p>
+			</td>
+			<td rowspan=2><p style="font-size:36pt;"><a href=http://www.usherbrooke.ca/vers/MtbRegList>Mtb<b>Reg</b>List</a> R1.1</p></td>
+		</tr>
+		<tr>
+			<td align=right style="vertical-align: top;">
+				<p style="font-size:18pt; margin-top: 0px;">
+				Welcome to</p>
+			</td>
+		</tr>
+
+		<tr><td align=right colspan=2>
+			<p style="font-size:11pt;" class="front_page_notice"><i>
+			A database dedicated to the analysis of gene expression <br>
+			and regulation data in </i>Mycobacterium tuberculosis<i>. <br>
+			It is designed to contain most of the characterized <br>
+			transcription start sites and DNA binding sites cross-<br>
+			referenced with their respective transcription factor, <br>
+			along with some predicted regulatory motifs.</i></p>
+		</td></tr>
+	</table>
+	</td>
+
+	<tr>
+	<td colspan="2" align="right" style="font-size:14pt;">
+		<br>Genome annotation from <a href='http://genolist.pasteur.fr/TubercuList/' onclick='javascript:window.open("http://genolist.pasteur.fr/TubercuList/");return false;'>TubercuList</a> R6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</td>
+	</tr>
+
+</table>
+
+<hr width="70%">
+<br>
+
+<!-- FOOTER -->
+<font size="-1">Application optimised for:</font>
+<table width="100%"><tr>
+	<td><font size="-1">
+	<ul>
+	<li>Opera v7.01
+	<li>Mozilla v1.x
+	<li>Netscape v7.1
+	<li>Explorer v6.0
+	</ul>
+<!--	Screen resolution: 1024 x 768-->
+	</font></td>
+
+	<td align=center><br><br><br><br><br>
+	<i>10534 visitors since February 1st 2005</i>
+	</td>
+
+
+	<td align=right>
+	<a href='http://www.usherbrooke.ca/biologie/' onclick='javascript:window.open("http://www.usherbrooke.ca/biologie/");return false;'>Département de Biologie</a>	<br><a href='http://www.usherbrooke.ca/sciences/' onclick='javascript:window.open("http://www.usherbrooke.ca/sciences/");return false;'>Faculté des Sciences</a>	<br><a href='http://www.usherbrooke.ca' onclick='javascript:window.open("http://www.usherbrooke.ca");return false;'><img src='images/udes.gif' alt='UdeS' style='border-style: none;'></a>	</td>
+</tr></table>
+
+</body></html>
+
+
+
+

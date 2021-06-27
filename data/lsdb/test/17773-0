@@ -1,0 +1,177 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SmashCell &mdash; SmashCell v0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SmashCell v0.1.0 documentation" href="#" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; font-size: 3.2em; font-color: #0e232e; text-align: left; padding: 10px 10px 15px 15px">
+SmashCell
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="#">Home</a>|&nbsp;</li>
+        <li><a href="gallery.html">Gallery</a>|&nbsp;</li>
+        <li><a href="intro.html">Introduction</a>|&nbsp;</li>
+        <li><a href="tutorial.html">Tutorial</a>|&nbsp;</li>
+        <li><a href="contents.html">Manual</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+<h1>Introduction</h1>
+
+SmashCell is a software framework that  automates the major steps in the analysis
+of microbial genome sequences: assembly, gene prediction and functional annotation. It
+is designed to facilitate parameter and algorithm exploration at each of these steps and
+generates graphs to compare the results of each combination. SmashCell was been developed
+to analyse single-cell amplified genomes, however is also suitable ordinary microbial genomes
+and low-complexity metagenomes. For more complex metagenomes you should check out 
+<a href="http://bork.embl.de/software/SmashCommunity">SmashCommunity</a>.You can get a better idea of what SmashCell is by reading
+the <a href="intro.html">introduction</a> and what it does by reading the 
+<a href="tutorial.html">tutorial</a>.
+
+<h1>Documentation</h1>
+The  <a href="contents.html">Manual</a>  is divided into the following sections:
+<dl>
+        <dt><a href="intro.html">Introduction</a></dt>
+	  <dd>An overview of SmashCell, describing the data model and some of the conventions used in SmashCell. 
+	      It also contains detailed  <a href="installation.html">installation</a> instructions. You should read this first.</dd>
+        <dt><a href="tutorial.html">Tutorial</a></dt>
+	  <dd>A series of worked examples that demonstrate the features of SmashCell.</dd>
+        <dt><a href="components/component_index.html">Framework Components</a></dt>
+	  <dd>Documentation on some of the code used in SmashCell including automatically generated schema graphs for the databases used by SmashCell</dd>
+</dl>
+
+The documentation is designed to be viewed in a browser, however you can also get a <a href="http://asiago.stanford.edu/SmashCellReleases/download/Smash-0.1.0.pdf">pdf</a> version of the documentation from the <a href="http://asiago.stanford.edu/SmashCellReleases/download">downloads</a> page. This documentation is for the <em>0.1.0</em> version  of SmashCell, you can view the development version  <a href="http://asiago.stanford.edu/SmashCellReleases/dev">here</a>.
+
+<h1>Getting SmashCell</h1>
+
+SmashCell is can be downloaded for local installation and is also 
+available for download as a virtual machine, please see  the <a href="installation.html">installation</a>
+section for details.
+
+
+<h1>Using SmashCell</h1>
+<h2>From the command line</h2>
+The following command calculates the 4-mer frequences in the contigs of an assembled genome, carries
+out PCA on the resulting matrix and saves the results as a graph:
+
+<div class="highlight-python"><pre>(SmashCell)[user@localhost:~/smash_tutorial]&gt; ass_composition_analysis.py \
+	--plot_components 1:2 \
+	-R calculate_nmer_data  \
+	-R calculate_nmer_pca \
+	--smashdb_url "sqlite:///./smash_pipeline/test.smashdb" \
+	--label_observations_a 10 \
+	--marker_size 5 \
+	--marker_linewidth 0.3 \
+	--ass_accessions mgB_tiny_nblr \
+	--overwrite_data  \
+	--nmer_len 4 \
+	--formats pdf  \
+	--formats png \
+	--plot_variables </pre>
+</div>
+
+
+<h2>Using the python library</h2>
+
+<blockquote> 
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> 
+<span class="kn">from</span> <span class="nn">Smash.Databases.SmashDB.DB</span> <span class="kn">import</span> <span class="n">SmashDB</span> 
+ 
+<span class="c"># connect to the sqlite3 pipeline database </span> 
+<span class="n">smashdb</span> <span class="o">=</span> <span class="n">SmashDB</span><span class="p">(</span><span class="n">db_url</span><span class="o">=</span><span class="s">&#39;smash_pipeline/test.smashdb&#39;</span><span class="p">)</span>
+
+<span class="c"># iterate of the GenePredictions for this MetaGenomeCollection</span> 
+<span class="c"># and calculate the mean gene length</span> 
+<span class="k">for</span> <span class="n">mg_acc</span><span class="p">,</span><span class="n">mg</span> <span class="ow">in</span> <span class="n">mc</span><span class="o">.</span><span class="n">metagenomes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+    <span class="k">for</span> <span class="n">ass_acc</span><span class="p">,</span><span class="n">ass</span> <span class="ow">in</span> <span class="n">mg</span><span class="o">.</span><span class="n">assemblies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+        <span class="k">for</span> <span class="n">gp_acc</span><span class="p">,</span><span class="n">gp</span> <span class="ow">in</span> <span class="n">ass</span><span class="o">.</span><span class="n">gene_predictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> 
+            <span class="c">#connect to the GenomeDB associated with this GenePrediction</span> 
+            <span class="n">gdb</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">genomedb</span> 
+            <span class="n">gene_lengths</span> <span class="o">=</span> <span class="p">[]</span> 
+            <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">gdb</span><span class="o">.</span><span class="n">gene_iter</span><span class="p">():</span> 
+                <span class="n">gene_lengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gene</span><span class="p">))</span> 
+            <span class="n">num_genes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gene_lengths</span><span class="p">)</span> 
+            <span class="n">mean_length</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gene_lengths</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> 
+            <span class="k">print</span> <span class="s">&#39;Mean gene length: </span><span class="si">%s</span><span class="s"> -&gt; </span><span class="si">%s</span><span class="s"> -&gt; </span><span class="si">%s</span><span class="s"> : </span><span class="si">%.2f</span><span class="s"> nt (n=</span><span class="si">%d</span><span class="s">)&#39;</span><span class="o">%</span>\
+                    <span class="p">(</span><span class="n">mg_acc</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mf">12</span><span class="p">),</span> <span class="n">ass_acc</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mf">17</span><span class="p">),</span><span class="n">gp_acc</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mf">25</span><span class="p">),</span> 
+                     <span class="n">mean_length</span><span class="p">,</span><span class="n">num_genes</span><span class="p">)</span> 
+</pre></div> 
+</div> 
+</blockquote> 
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="#">Home</a>|&nbsp;</li>
+        <li><a href="gallery.html">Gallery</a>|&nbsp;</li>
+        <li><a href="intro.html">Introduction</a>|&nbsp;</li>
+        <li><a href="tutorial.html">Tutorial</a>|&nbsp;</li>
+        <li><a href="contents.html">Manual</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Eoghan Harrington.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.
+    </div>
+  </body>
+</html>

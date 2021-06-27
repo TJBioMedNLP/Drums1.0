@@ -1,0 +1,215 @@
+<HTML>
+
+<HEAD>
+<TITLE>BLAST2GENE</TITLE>
+</HEAD>
+
+<BODY BGCOLOR='#ddffff' TEXT='#006400'>
+<A NAME='Top'></A>
+<H1>BLAST2GENE</H1>
+
+<TABLE BORDER='0' CELLPADDING='10'>
+  <TR>
+    <TD>
+      <A HREF='#Whatis'>What is BLAST2GENE?</A>
+    </TD>
+    <TD>
+      <A HREF='#RunBL2G'>Run BLAST2GENE</A>
+    </TD>
+    <TD>
+      <A HREF='#Examples'>Examples</A>
+    </TD>
+    <TD>
+      <A HREF='#Contact'>Contact</A>
+    </TD>
+  </TR>
+</TABLE>
+
+<HR ALIGN='left' NOSHADE WIDTH='100%' SIZE='1'>
+<A NAME='Whatis'></A>
+<BR>
+<TABLE BORDER='0' CELLSPACING='0' WIDTH='100%'>
+<TR>
+  <TD>
+    <H4>What is BLAST2GENE?</H4>
+  </TD>
+  <TD ALIGN='right'>
+    <A HREF='#Top'>Top</A>
+  </TD>
+</TR>
+</TABLE><BR>
+BLAST2GENE is a program that allows a detailed analysis of genomic regions
+containing completely or partially duplicated genes. From a BLAST (or BL2SEQ)
+comparison of a protein or nucleotide query sequence with any genomic region
+of interest, BLAST2GENE processed all high scoring pairwise alignments (HSPs)
+and provides the disposition of all independent copies along the genomic
+fragment. The results are provided in text and graphical outputs to allow
+an automatic and visual evaluation of the respective region.
+<BR><BR>
+
+<HR ALIGN='left' NOSHADE WIDTH='100%' SIZE='1'>
+
+<A NAME='RunBL2G'></A>
+<BR>
+<TABLE BORDER='0' CELLSPACING='0' CELLPADDING='0' WIDTH='100%'>
+<TR>
+  <TD>
+    <H4>Run BLAST2GENE</H4>
+  </TD>
+  <TD ALIGN='right'>
+    <A HREF='#Top'>Top</A>
+  </TD>
+</TR>
+</TABLE>
+
+<TABLE BORDER='0' CELLSPACING='0' CELLPADDING='12' WIDTH='100%'>
+  <TR BGCOLOR='#ffc4e1'>
+    <TD>
+      METHOD 1.<BR>Run from your BLAST (or BL2SEQ) output (takes a few seconds)
+    </TD>
+  </TR>
+  <TR BGCOLOR='99ffff'>
+    <TD>
+      <FORM METHOD='post' ENCTYPE='multipart/form-data' ACTION='blast2gene.cgi'>
+
+        Put your BLAST (or BL2SEQ) output<BR>
+        <TEXTAREA NAME='blout' COLS=72 ROWS=8></TEXTAREA><BR>
+        <BR>
+
+        or upload your BLAST (or BL2SEQ) output<BR>
+        <INPUT TYPE='file' NAME='bloutfile' SIZE='25' ACCEPT='text/*' MAXLENGTH='100000'>
+        <BR><BR>
+
+        <INPUT TYPE='submit' VALUE='Submit'>
+        <INPUT TYPE='reset' VALUE='Clear'>
+      </FORM>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER='0' CELLSPACING='0' CELLPADDING='12' WIDTH='100%'>
+  <TR BGCOLOR='#ffc4e1'>
+    <TD>
+      METHOD 2.<BR>Run from BLAST with your sequence against human chromosome region (takes a few minutes)
+    </TD>
+  </TR>
+  <TR BGCOLOR='99ffff'>
+    <TD>
+      <FORM METHOD='post' ENCTYPE='multipart/form-data' ACTION='fromblast.cgi'>
+
+        Put your sequence<BR>
+        <TEXTAREA NAME='seq' COLS=72 ROWS=8></TEXTAREA><BR><BR>
+        Search against human
+        <SELECT NAME='chrname'>
+          <OPTION VALUE='chr1' SELECTED>chr1
+          <OPTION VALUE='chr2'>chr2
+          <OPTION VALUE='chr3'>chr3
+          <OPTION VALUE='chr4'>chr4
+          <OPTION VALUE='chr5'>chr5
+          <OPTION VALUE='chr6'>chr6
+          <OPTION VALUE='chr7'>chr7
+          <OPTION VALUE='chr8'>chr8
+          <OPTION VALUE='chr9'>chr9
+          <OPTION VALUE='chr10'>chr10
+          <OPTION VALUE='chr11'>chr11
+          <OPTION VALUE='chr12'>chr12
+          <OPTION VALUE='chr13'>chr13
+          <OPTION VALUE='chr14'>chr14
+          <OPTION VALUE='chr15'>chr15
+          <OPTION VALUE='chr16'>chr16
+          <OPTION VALUE='chr17'>chr17
+          <OPTION VALUE='chr18'>chr18
+          <OPTION VALUE='chr19'>chr19
+          <OPTION VALUE='chr20'>chr20
+          <OPTION VALUE='chr21'>chr21
+          <OPTION VALUE='chr22'>chr22
+          <OPTION VALUE='chrX'>chrX
+          <OPTION VALUE='chrY'>chrY
+        </SELECT>,
+        from
+        <INPUT TYPE='text' NAME='pos1' SIZE=10>
+        to
+        <INPUT TYPE='text' NAME='pos2' SIZE=10>
+        (max range: 10 Mb)
+        <BR><BR>
+
+        <INPUT TYPE='submit' VALUE='Submit'>
+        <INPUT TYPE='reset' VALUE='Clear'>
+      </FORM>
+    </TD>
+  </TR>
+</TABLE>
+
+
+<HR ALIGN='left' NOSHADE WIDTH='100%' SIZE='1'>
+<A NAME='Examples'></A>
+<BR>
+<TABLE BORDER='0' CELLSPACING='0' WIDTH='100%'>
+<TR>
+  <TD>
+    <H4>Examples</H4>
+  </TD>
+  <TD ALIGN='right'>
+    <A HREF='#Top'>Top</A>
+  </TD>
+</TR>
+</TABLE><BR>
+
+<UL TYPE='disk'>
+  <LI>P450 protein subfamily 2C (human; RefSeq ID: NP_000760) on human chromosome 10 (from 95 Mb to 100 Mb).
+
+  <BR>
+  <IMG ALIGN='middle' BORDER='0' SRC='img/NP_000760.png'>
+
+  <BR><BR>
+
+  <LI>Nuclear pore complex interacting protein (human; RefSeq ID: NP_008916) on human chromosome 16 (from 10 Mb to 20 Mb).
+
+  <BR>
+  <IMG ALIGN='middle' BORDER='0' SRC='img/NP_008916.png'>
+
+  <BR><BR>
+
+  <LI>Glutathione S-transferase A2 (human; RefSeq ID: NP_000837) on human chromosome 6 (from 50Mb to 55 Mb).
+
+  <BR>
+  <IMG ALIGN='middle' BORDER='0' SRC='img/NP_000837.png'>
+
+  <BR><BR>
+
+  <LI>RNA binding motif protein (human; RefSeq ID: NP_005049) on human chromosome Y (from 20Mb to 30Mb).
+
+  <BR>
+  <IMG ALIGN='middle' BORDER='0' SRC='img/NP_005049.png'>
+
+  <BR><BR>
+</UL>
+
+<HR ALIGN='left' NOSHADE WIDTH='100%' SIZE='1'>
+<A NAME='Contact'></A>
+<BR>
+<TABLE BORDER='0' CELLSPACING='0' WIDTH='100%'>
+<TR>
+  <TD>
+    <H4>Contact</H4>
+  </TD>
+  <TD ALIGN='right'>
+    <A HREF='#Top'>Top</A>
+  </TD>
+</TR>
+</TABLE><BR>
+The distribution version of BLAST2GENE is also available upon
+request from the <A HREF="mailto:mikita@genome.med.kyoto-u.ac.jp">authors</A>.
+<BR>
+<BR>
+For comments and questions, send a message to
+<!--  <A HREF="mailto:suyama@embl.de">suyama@embl.de</A>  -->
+<A HREF="mailto:mikita@genome.med.kyoto-u.ac.jp">Mikita Suyama</A>
+<BR><BR>
+
+<HR ALIGN='left' NOSHADE WIDTH='100%' SIZE='1'>
+Last modification: 20 April 2009<BR><BR>
+
+
+</BODY>
+</HTML>

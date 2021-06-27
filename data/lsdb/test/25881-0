@@ -1,0 +1,181 @@
+<HTML>
+<TITLE>A statistical framework for genomic data fusion</TITLE>
+<BODY>
+
+<TABLE WIDTH="700">
+<TR><TD>
+
+<CENTER>
+<H1>
+A statistical framework for genomic data fusion
+</H1>
+
+Gert R. G. Lanckriet, Tijl De Bie, Nello Cristianini, Michael
+I. Jordan and William Stafford Noble.
+</CENTER>
+
+
+<H3><A HREF="supplementary.pdf">Supplement</A> (PDF)</H3>
+
+<H3>Data and kernel matrices</H3>
+
+In the following table, the data and kernel matrices are provided as
+tab-delimited text files, with string IDs in the first row and
+column.  <B>Warning:</B> Some of the kernel matrices are quite large
+and may cause your browser to hang if you try to load them directly.
+You can save them to your local disk by right clicking on the link.
+
+<P>
+The links marked "PNG" are heat map representations of the
+corresponding matrices, generated using <A
+HREF="http://microarray.cpmc.columbia.edu/matrix2png">matrix2png</A>.
+For the data matrices, the color range is selected to span the middle
+98% of the values in the matrix.
+
+<CENTER>
+<BR>
+<TABLE BORDER>
+<TD>K<SUB>B</SUB></TD>
+<TD>BLAST</TD>
+<TD><A HREF="data/yorf.yorf.blast.mtx.gz">Data</A>
+(<A HREF="data/yorf.yorf.blast.mtx.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_blast.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_blast.png">PNG</A>)</TD>
+<TD>CN</TD>
+</TR>
+<TR>
+<TD>K<SUB>SW</SUB></TD>
+<TD>Smith-Waterman</TD>
+<TD><A HREF="data/yorf.yorf.sw.mtx.gz">Data</A>
+(<A HREF="data/yorf.yorf.sw.mtx.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_sw.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_sw.png">PNG</A>)</TD>
+<TD>CN</TD>
+</TR>
+<TR>
+<TD>K<SUB>Pfam</SUB></TD>
+<TD>Pfam HMM</TD>
+<TD><A HREF="data/yorf.pfam-7.2.mtx.gz">Data</A>
+(<A HREF="data/yorf.pfam-7.2.mtx.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_pfam_hmm.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_pfam_hmm.png">PNG</A>)</TD>
+<TD> N</TD>
+</TR>
+<TR>
+<TD>K<SUB>FFT</SUB></TD>
+<TD>Hydrophobicity FFT</TD>
+<TD><A HREF="data/fft_features.txt.gz">Data</A>
+(<A HREF="data/fft_features.txt.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_fft.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_fft.png">PNG</A>)</TD>
+<TD>CN</TD>
+</TR>
+<TR>
+<TD>K<SUB>LI</SUB></TD>
+<TD>Linear interactions</TD>
+<TD><A HREF="data/vonmering.mtx.gz">Data</A>
+(<A HREF="data/vonmering.mtx.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_lin_int.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_lin_int.png">PNG</A>)</TD>
+<TD>CN</TD>
+</TR>
+<TR>
+<TD>K<SUB>D</SUB></TD>
+<TD>Diffusion kernel</TD>
+<TD><A HREF="data/vonmering.all.mtx.gz">Data</A>
+(<A HREF="data/vonmering.all.mtx.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_diff.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_diff.png">PNG</A>)</TD>
+<TD> N</TD>
+</TR>
+<TR>
+<TD>K<SUB>E</SUB></TD>
+<TD>Gene expression</TD>
+<TD><A HREF="data/smd-yeast.mtx.gz">Data</A>
+(<A HREF="data/smd-yeast.mtx.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_expr.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_expr.png">PNG</A>)</TD>
+<TD>CN</TD>
+</TR>
+<TR>
+<TD>K<SUB>RND</SUB></TD>
+<TD>Random</TD>
+<TD><A HREF="data/rand_data.txt.gz">Data</A>
+(<A HREF="data/rand_data.txt.png">PNG</A>)</TD>
+<TD><A HREF="kernels/kernel_matrix_rand.gz">Kernel</A>
+(<A HREF="kernels/kernel_matrix_rand.png">PNG</A>)</TD>
+<TD> N</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+
+<P>
+In order to evaluate the kernel matrices for the prediction problems
+further on, the relevant submatrices (corresponding to the genes with
+known classification) need to be selected, and then either normalized
+(N) or centered and then normalized (CN), as indicated in the last
+column of the table. When predicting unannotated genes or proteins,
+the full kernel matrices are needed and should accordingly be centered
+or not and then normalized.
+
+<P>
+Matlab code to center a kernel matrix can be found <A
+HREF="center.m">here</A> and Matlab code for normalization <A
+HREF="normalize.m">here</A>.
+
+
+
+<H3>Ribosomal proteins</H3>
+
+<CENTER>
+<IMG SRC="all-results-ribosomal-large.png" BORDER=0>
+</CENTER>
+
+
+
+<UL>
+<LI><A HREF="known-genes.complexes.txt">List of 1150 yeast ORF IDs</A>
+corresponding to genes known to participate in complexes
+
+<LI>The corresponding <A HREF="known-genes.complexes.fa">FASTA
+file</A> of sequences.
+
+<LI><A HREF="yeast.ribosomal.txt">Annotations</A> of each gene as
+ribosomal (1), non-ribosomal (-1), or unknown (0).
+</UL>
+
+<H3>Membrane proteins</H3>
+
+<CENTER>
+<IMG SRC="all-results-membrane-large.png" BORDER=0>
+</CENTER>
+
+
+<UL>
+<LI><A HREF="known-genes.locations.txt">List of 2318 yeast ORF IDs</A>
+corresponding to genes with known locations.
+
+<LI>The corresponding <A HREF="known-genes.locations.fa">FASTA file</A> of
+sequences.
+
+<LI><A HREF="yeast.membrane.txt">Annotations</A> of each gene as
+membrane (1), non-membrane (-1) or unknown (0).
+</UL>
+
+<CENTER>
+<IMG SRC="pSRII_mem.jpg">
+</CENTER>
+<BR>
+<B>An example membrane protein</B>.  pSR II is a photoreceptor in the
+plasma membrane of <I>archaeon Natronobacteriumpharaonis</I> and
+functions as a sensor for phototactic avoidance.
+
+<BR>
+<BR>
+
+</TD></TR></TABLE>
+
+
+</BODY>
+</HTML>

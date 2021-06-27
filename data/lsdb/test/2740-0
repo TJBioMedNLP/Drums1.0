@@ -1,0 +1,123 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Website for PSB 2010 SDC Paper</title>
+</head>
+
+<body>
+
+<p align="center"><font face="Arial" size="5">Subspace Differential Coexpression Analysis: Problem Definitions and 
+A General Approach<br></font><font face="Arial">
+<a href="http://www.cs.umn.edu/~gangfang/">Gang Fang</a>, 
+<a href="http://www.cs.umn.edu/~kuang/">Rui Kuang</a>,
+<a href="http://www.cs.umn.edu/~gaurav/">Gaurav Pandey</a>,
+<a href="http://www.cs.umn.edu/~steinbac/">Michael Steinbach</a>,
+<a href="http://www.cs.umn.edu/~cmyers/">Chad L. Myers</a> and
+<a href="http://www.cs.umn.edu/~kumar/">Vipin Kumar</a></font></p>
+<p align="center"><font face="Arial">Proceedings of the 15th
+<a href="http://psb.stanford.edu/">Pacific Symposium 
+on Biocomputing</a>, 15:145-156, Jan 2010. (<a href="http://psb.stanford.edu/psb-online/proceedings/psb10/fang.pdf">paper</a>, <a href="GangFangPSB2010SDC.ppt">slides</a>)&nbsp; <br> Also highlighted&nbsp; by
+<a href="http://compbio.mit.edu/recombsat/">RECOMB Satellite Meeting on Systems Biology</a> for oral 
+presentation (video (TBA))</font></p>
+<p align="center"><i><font face="Arial">Correspondence: Gang Fang (gangfang cs umn edu)<br>Last updated:&nbsp; 
+<span style="background-color: #FFFF00">01/18/2010</span></font></i><br></p>
+<p align="left"><font face="Arial"><b>Source codes, sample datasets and detailed 
+instructions : </b>[<a href="sdc_0p21.zip">sdc_0p21.zip (6.87MB)</a>]<b><br></b>
+<u>Pre-processing:</u> <br> &nbsp;&nbsp;&nbsp; Conversion from 
+standard microarray data files to the input format required by the SDC mining 
+	algorithm<br><u>Mining algorithm:</u> (currently only linux version for now)<br>&nbsp;&nbsp;&nbsp; An 
+Apriori-based SDC pattern mining algorithm: because 
+of the antimonotonicity of Refined-SDC, given a threshold <i>d</i>, this Apriori-based 
+framework guarantees to discover ALL and ONLY the patterns with RSDC &gt;= <i>d</i>, 
+i.e. with guaranteed power of subspace differential coexpression.
+<br> <u>Post-processing:</u> <b> <br>&nbsp;&nbsp;&nbsp; </b> </font>
+<font face="Arial">Visualization of SDC patterns as used in the paper<br>&nbsp;&nbsp;&nbsp; Summarization from a set 
+of patterns to a less redundant set<br>&nbsp;&nbsp;&nbsp; Conversion of SDC 
+patterns into <a href="http://www.cytoscape.org/">Cytoscape</a> network format 
+for global visualization of SDC patterns.</font></p>
+<p align="left"><b><font face="Arial">Other files and information:</font></b><font face="Arial"><br>
+<u>Detailed data information:<br></u>&nbsp;&nbsp;&nbsp; The RMA normalized and Combined Gene Expression Data can be downloaded from here:
+<a href="RMA_combined_value">Expression value version</a> (a 169 by 8787 matrix, 
+8MB), <a href="RMA_combined_rank">Rank-converted version</a> (a 169 by 8787 
+matrix, 5MB), <a href="combined_labels">Class labels</a> (0: cancer class, 1: 
+normal class) and <a href="gene_symbols">Gene Symbols</a>. <span class="SpellE"><span style="font-weight: normal;">Links to the original formats of the three  </span></span><span style="font-weight: normal;"><span 
+class="SpellE">lung 
+cancer </span>datasets: (</span><a href="http://www.ncbi.nlm.nih.gov/projects/geo/query/acc.cgi?acc=GSE2514">Stearman 
+et al. 2005</a>,
+<a href="http://www.ncbi.nlm.nih.gov/projects/geo/query/acc.cgi?acc=GSE7670">Su 
+et al. 2007</a>, <a href="http://www.broadinstitute.org/mpr/lung/">Bhattacharjee 
+et al. 2001</a><span style="font-weight: normal;">) </span>
+<u><br>Cancer-gene list:<br></u>&nbsp;&nbsp;&nbsp; The 2622 known cancer-related genes can be 
+downloaded from here: <a href="canceGeneNames2622.txt">CancerGeneList2622</a>. 
+(This is the union of the two lists respectively downloaded from
+<a href="http://cbio.mskcc.org/cancergenes/Select.action">
+http://cbio.mskcc.org/cancergenes/Select.action</a> on October 2008 and June 
+2009)</font></p>
+<p align="left">　</p>
+<p align="left">　</p>
+<p align="center">
+<img border="0" src="ccs.jpg" width="359" height="197">&nbsp;&nbsp;
+<img border="0" src="tts.jpg" width="634" height="199"></p>
+<p align="left"><font face="Arial" size="4">Abstract</font></p>
+<p align="left"><font face="Arial">In this paper, we study methods to identify 
+differential coexpression patterns in case-control gene expression data. A 
+differential coexpression pattern consists of a set of genes that have 
+substantially different levels of coherence of their expression profiles across 
+the two sample-classes, i.e., highly coherent in one class, but not in the 
+other. Biologically, a differential coexpression patterns may indicate the 
+disruption of a regulatory mechanism possibly caused by disregulation of 
+pathways or mutations of transcription factors. A common feature of all the 
+existing approaches for differential coexpression analysis is that the 
+coexpression of a set of genes is measured on all the samples in each of the two 
+classes, i.e., over the full-space of samples. Hence, these approaches may miss 
+patterns that only cover a subset of samples in each class, i.e., subspace 
+patterns, due to the heterogeneity of the subject population and disease causes. 
+In this paper, we extend differential coexpression analysis by defining a 
+subspace differential coexpression pattern, i.e., a set of genes that are 
+coexpressed in a relatively large percent of samples in one class, but in a much 
+smaller percent of samples in the other class. We propose a general approach 
+based upon association analysis framework that allows exhaustive yet efficient 
+discovery of subspace differential coexpression patterns. This approach can be 
+used to adapt a family of biclustering algorithms to obtain their corresponding 
+differential versions that can directly discover differential coexpression 
+patterns. Using a recently developed biclustering algorithm as illustration, we 
+perform experiments on cancer datasets which demonstrates the existence of 
+subspace differential coexpression patterns. Permutation tests demonstrate the 
+statistical significance for a large number of discovered subspace patterns, 
+many of which can not be discovered if they are measured over all the samples in 
+each of the classes. Interestingly, in our experiments, some discovered subspace 
+patterns have significant overlap with known cancer pathways, and some are 
+enriched with the target gene sets of cancer-related microRNA and transcription 
+factors. The source codes and datasets used in this paper are available at
+<a href="http://vk.cs.umn.edu/SDC/">http://vk.cs.umn.edu/SDC/</a> .</font></p>
+<p align="left"></p>
+<p align="left"><font face="Arial">The quantitative enrichment results 
+are <a href="detailedenrich.htm">here</a>.</font></p>
+<p align="left"><font face="Arial">In the paper, we discussed the patterns 
+discovered on the rank-converted data, while the patterns discovered on 
+expression value data is presented <a href="patt_gep_value.genenames">here</a>.</font></p>
+<p align="left"><font face="Arial">Parameters details are provided in the 
+paper.
+
+<br>
+<br>
+If any questions, please email : Gang Fang, gangfang cs umn edu
+
+</font></p>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3532643-4");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+</html>
+

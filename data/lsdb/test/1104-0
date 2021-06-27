@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="eng" xml:lang=
+"eng">
+<head>
+  <meta http-equiv="content-type" content=
+  "text/html; charset=utf-8" />
+  <meta name="description" content=
+  "The European Bioinformatics Institute" />
+  <meta name="author" content="Nicolas Rodriguez" />
+  <meta http-equiv="Content-Language" content="en-GB" />
+  <meta http-equiv="Window-target" content="_top" />
+  <meta name="no-email-collection" content=
+  "http://www.unspam.com/noemailcollection/" />
+  <!-- ===================================== -->
+  <!-- TemplateBeginEditable name="doctitle" -->
+  <!-- ===================================== -->
+
+  <title>Stochastic simulation of particle dynamics</title>
+  <!-- ===================================== -->
+  <!-- TemplateEndEditable -->
+  <!-- ===================================== -->
+  <link rel="stylesheet" href=
+  "http://www.ebi.ac.uk/inc/css/contents.css" type="text/css" />
+  <link rel="stylesheet" href=
+  "http://www.ebi.ac.uk/inc/css/userstyles.css" type="text/css" />
+<script src="http://www.ebi.ac.uk/inc/js/contents.js" type=
+"text/javascript">
+</script>
+  <link rel="stylesheet" href=
+  "http://www.ebi.ac.uk/inc/css/sidebars.css" type="text/css" />
+  <link rel="SHORTCUT ICON" href=
+  "http://www.ebi.ac.uk/bookmark.ico" />
+<style type="text/css">
+/*<![CDATA[*/
+@media print { body, .contents, .header, .contentsarea, .head { position: relative;
+} }
+/*]]>*/</style>
+  <!-- ===================================== -->
+  <!-- TemplateBeginEditable name="head" -->
+  <!-- ===================================== -->
+  <!-- start meta tags, css , javascript here -->
+  <!-- ===================================== -->
+  <meta name="keywords" content=
+  "Nicolas Le Novere, EBI, EMBL, bioinformatics, software, databases, genomics, computational neurobiology, neuroinformatics, systems biology" />
+  <!-- ===================================== -->
+  <!-- end meta tags, css , javascript here -->
+  <!-- ===================================== -->
+  <!-- TemplateEndEditable -->
+  <!-- ===================================== -->
+</head>
+
+<body onload=
+"if(navigator.userAgent.indexOf('MSIE') != -1) {document.getElementById('head').allowTransparency = true;}">
+<!-- ===================================== -->
+
+  <div class="headerdiv" id="headerdiv" style=
+  "position: absolute; z-index: 1;">
+    <iframe src="/inc/head.html" name="head"
+    id="head" marginwidth="0" marginheight="0" style=
+    "position: absolute; z-index: 1; height: 57px;" frameborder="0"
+    scrolling="no" width="100%"></iframe>
+  </div><!-- ===================================== -->
+
+  <div class="contents" id="contents">
+    <table class="contentspane" id="contentspane" summary=
+    "The main content pane of the page">
+      <tbody>
+        <tr>
+          <td class="leftmargin"><img src=
+          "http://www.ebi.ac.uk/inc/images/spacer.gif" class=
+          "spacer" alt="spacer" /></td>
+          <!-- ===================================== -->
+
+          <td class="leftmenucell" id="leftmenucell">
+    <div class="leftmenu" id="leftmenu" style="width: 145px; visibility: visible; display: block;">
+      <!-- InstanceBeginEditable name="leftnav" -->
+
+      <!-- start left menu here  -->
+<!-- NB. Please note if left menu gets bigger than 600px in height it will not fully display on the page  -->
+<iframe src="iframe_leftmenu_compneur.html" name="leftmenu2" id="leftmenu2" marginwidth="0" marginheight="0"
+  style="width: 145px; visibility: visible; display: block; z-index: 2;"
+  frameborder="0" height="1200" scrolling="no" width="100%">
+</iframe>
+    <!-- end left menu here -->
+            <!-- ===================================== -->
+            <!-- TemplateEndEditable -->
+            <script type="text/javascript" src=
+            "http://www.ebi.ac.uk/inc/js/sidebars.js">
+</script> <img src="http://www.ebi.ac.uk/inc/images/spacer.gif"
+            class="spacer" alt="spacer" />
+            </div>
+          </td><!-- TemplateBeginEditable name="contents" -->
+          <!-- ===================================== -->
+          <!-- start contents here -->
+          <!-- ===================================== -->
+<td class="contentsarea" id="contentsarea">
+            <div class="breadcrumbs">
+              <a href="http://www.ebi.ac.uk/" class=
+              "firstbreadcrumb">EBI</a> <a href=
+              "http://www.ebi.ac.uk/Groups/">Groups</a> <a href=
+              "http://www.ebi.ac.uk/compneur/">Computational
+              Neurobiology</a> <a href=
+              "http://www.ebi.ac.uk/compneur-srv/meredys.html">Meredys</a>
+            </div><!-- ===================================== -->
+
+            <h1>Stochastic simulation of particle dynamics</h1>
+            <!-- ===================================== -->
+    
+
+<p>
+Numerous frameworks can be employed to create computational models of biological systems. Which framework to chose is
+heavily dependent on the particular problem one is interested in solving. Often there are trade-offs between what is realistic in terms of the underlying biology of the model and what is realistic in terms of the resources  available to the researcher, such as computational power and biological data.
+</p>
+<p>
+We are currently developing a simulation software in our laboratory to create and run simulations for chemical reaction-diffusion systems at the mesoscopic scale.  Any biological entity of interest, such as a protein molecule, is represented by a software object which propagates in
+continuous simulation space according to Brownian Dynamics algorithms. Several diffusion spaces can be defined (static, free diffusion, within membrane, above membrane, blow membrane). Brownian motion describes movement of the particles in two or three dimensions.  The mobility of freely diffusing particles is calculated according to Stokes' law, whereas the mobility of particles
+in the membrane is calculated according to a model by <a  href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=1059096&query_hl=7&itool=pubmed_docsum">Saffman and Delbruck</a>.
+</p>
+<p>
+Simulations occur in a three dimensional simulation volume, the boundaries of which can be reflective, toroidal or
+absorbing.  The simulated entities contain crude geometric information such as the concept of protein domains and active sites and the relative position of reactive surfaces to the entities centre of mass.  Entities can bond, forming transient aggregations (clusters), while still maintining their identities.  The simulation allows for zero-order (creation), unimolecular (e.g. conversion, destruction) and bimolecular (e.g. association) reactions to occur in solution, according to stochastic algorithms based on the set of <a href="http://www.smoldyn.org">Smoldyn</a> algorithms.  This molecular resolution allows us to address questions found in the field of molecular interactions and signal transduction of biological systems, where local concentration effects and the
+geometry of interactions are often important
+</p>
+<p>The Simulation software written in JAVA using the <a href="http://java.sun.com/products/java-media/3D/">Java 3D API</a>. Currently input files for the simulator are written in the <a href="http://www.neuroml.org/">NeuroML</a> format.</p>
+<p>The current version and example model files can be downloaded <a href="meredys/">here</a>.  </p>
+<p>The source code is available <a href="http://sourceforge.net/projects/meredys">here</a>.  </p>
+<p>The Simulation software is distributed under the <a href="http://www.gnu.org/licenses/gpl.html">General Public Licence</a>.</p>
+<h2>Screenshots</h2>
+
+<table>
+<tr>
+<td><a href="GRAPHICS/PartEntClust2.png"><img src="GRAPHICS/PartEntClust2.png" width="150" alt="Particles, Entities and Clusters" /></a></td>
+<td>Particles, Entities and Clusters.</td>
+</tr>
+<tr>
+<td><a href="GRAPHICS/PartEntClust.png"><img src="GRAPHICS/PartEntClust.png" width="150" alt="Stoke's radii" /></a></td>
+<td>Stoke's radii of particles, entities and clusters.</td>
+</tr>
+<tr>
+<td><a href="GRAPHICS/trace_angle.png"><img src="GRAPHICS/trace_angle.png" width="150" alt="Glutamate receptor diffusion" /></a></td>
+<td>Glutamate receptor diffusion in the post-synaptic membrane.</td>
+</tr>
+<tr>
+<td><a href="GRAPHICS/closeup.png"><img src="GRAPHICS/closeup.png" width="150" alt="Simulation of glutamate signaling" /></a></td>
+<td>Simulation of glutamate signaling.</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="ACK">
+<tr>
+<td height="3" class="rule"><img src="http://www.ebi.ac.uk/compneur-srv/GRAPHICS/trans.gif" width="25" height="3"alt="" /></td>
+</tr>
+</table>
+<h2>Acknowledgments</h2>
+<p>
+The original idea for the simulation software is based on the <a href="http://www.anc.ed.ac.uk/~fwh/protsim/index.php">Abstracted Protein Simulator</a>, developed by Dan Mossop and Fred Howell of Edinburgh University.
+While much of the original code dealing with object rendering still persists in the simulator, the overall simulation
+engine and the code dealing with simulation volume has been entirely rewritten</p> 
+<p> This simulator is developed by <a
+href="mailto:dominic@ebi.ac.uk">Dominic Tolle</a> from the group <a
+href="http://www.ebi.ac.uk/compneur/">Computational Neurobiology</a>
+of the <a href="http://www.ebi.ac.uk/">EMBL-EBI</a>. The author is
+grateful to Dan Mossop, Fred Howell (fwh at inf.ed.ac.uk) and Eilidh
+Grant (egrant1 at inf.ed.ac.uk) for their initial work.
+</p>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+                    <td height="3" class="rule"><img src="GRAPHICS/trans.gif" width="25" height="3" alt="" /></td>
+		  </tr>
+	        </table>
+
+              <br/>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="rule" height="3" colspan="3"></td>
+                </tr>
+                <tr>
+                  <td align="left" style="font-size:7pt;padding-top:5px;padding-bottom:5px;">
+                    <a style="font-size:7pt;" href="#">Top</a>
+                  </td>
+                <td align="center" style="font-size:7pt;padding-top:5px;padding-bottom:5px;">
+                  Last modification: Last Modified Wed Apr 11 15:41:01 BST 2007
+                </td>
+                <td align="right" style="font-size:7pt;padding-top:5px;padding-bottom:5px;">
+                  <a style="font-size:7pt;" href="http://www.ebi.ac.uk/compneur-srv/contact.html">Contact</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="rule" height="3" colspan="3"></td>
+              </tr>
+            </table>
+
+
+              </td>
+            </tr>
+          </table>
+
+<!-- ################################################################ -->
+<!-- ##########          END central column content        ########## -->
+<!-- ################################################################ -->
+
+        </td>
+        <td width="16"><img src="GRAPHICS/trans.gif" height="8" width="6" alt="" />
+
+
+            <!-- ===================================== -->
+            <!-- end contents here -->
+            <!-- ===================================== -->
+            <!-- TemplateEndEditable -->
+            <img src="http://www.ebi.ac.uk/inc/images/spacer.gif"
+            class="spacer" alt="spacer" />
+          </td>
+
+          <td class="rightmenucell" id="rightmenucell">
+            <div class="rightmenu" id="rightmenu">
+              <img src="http://www.ebi.ac.uk/inc/images/spacer.gif"
+              class="spacer" alt="spacer" />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="footerpane" id="footerpane" summary=
+    "The main footer pane of the page">
+      <tbody>
+        <tr>
+          <td colspan="4" class="footerrow">
+            <div class="footerdiv" id="footerdiv" style=
+            "z-index: 2;">
+              <iframe src="/inc/foot.html"
+              name="foot" marginwidth="0" marginheight="0" style=
+              "z-index: 2;" frameborder="0" height="22" scrolling=
+              "no" width="100%" id="foot"></iframe>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table><script src="http://www.ebi.ac.uk/inc/js/footer.js"
+    type="text/javascript">
+</script>
+  </div>
+</body>
+</html>

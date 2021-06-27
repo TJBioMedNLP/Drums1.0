@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+	<head>
+		<link rel="stylesheet" type="text/css" href="http://kiharalab.org/web/assets/template.css" media="screen">
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>Kihara Bioinformatics Laboratory, Purdue University</title>
+		<script type="text/JavaScript">
+		<!--
+		function timedRefresh(timeoutPeriod) {
+			setTimeout("location.reload(true);",timeoutPeriod);
+		}
+
+		function addtext() {
+			var newtext = ">sp|P56851|EP3B_HUMAN\nMASSLKIWGTLLALLCILCTLLVQSKEVSWREFMKQHYLSPSREFREYKCDVLMRENEAL\nKDKSSHMFIYISWYKIEHICTSDNWMDRFRNAYVWVQNPLKVLKCHQENSKNSYTESRSF\nNYIEFHCSMDGYVDSIEDLKMVEPIGN";
+	
+			document.fori.sequence.value = newtext;
+		}
+		//   -->
+		</script>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<!-- Wrapper div holds all html stuff -->
+			<div id="header">
+				<!-- header div holds the header graphic -->
+				<img alt="" src="assets/images/header.png">
+			</div>
+			<div id="topnav">
+				<!-- topnav div holds the tap nav bar -->
+				<ul>
+					<li ><a href="index.php" title="Home" >Home</a></li>
+					<li ><a href="projects.php" title="Projects" >Projects</a></li>
+					<li ><a href="people.php" title="People" >People</a></li>
+					<li ><a href="publications.php" title="Publications" >Publications</a></li>
+					<li class="active"><a href="software.php" title="Software" >Software</a></li>
+					<li ><a href="presentations.php" title="Presentations" >Presentations</a></li>
+					<li ><a href="resources.php" title="Resources" >Resources</a></li>
+					<li ><a href="contact.php" title="Contact" >Contact</a></li>
+				</ul>
+			</div>
+<div id="body_div">
+<div id="contentL">
+<!-- content div holds everything in the content area -->
+<div class="prop"><!-- This div enables a min height hack for the content div --></div>
+<div>
+<h2>PFP: Automated Protein Function Prediction Job Submission</h2>
+
+
+
+
+
+
+<form METHOD="POST" ENCTYPE="multipart/form-data" ACTION="/web/pfp.php" name=fori>
+
+<fieldset>
+<legend>Enter Query Sequence(s)</legend>
+Enter your protein sequence here: 
+<a href="javascript:;" onclick="toggle('seq_help');" title="Query Sequence Help"><span>[?]</span></a>
+<a href="javascript:;" onclick="document.fori.reset();" title="Clear Query Sequence(s)"><span>Clear</span></a>
+<a href="javascript:;" onclick="addtext();" title="Load Sample"<span>Load Sample</span></a>
+<br>
+<div id="seq_help" style="display:none">
+One or more query sequence(s) in <a href="http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml">fasta</a> format should go in this text box for annotation prediction. The identifiers on first line of fasta formatted sequence will be accessible with the results for identifying the sequences.
+</div>
+<i>Limit 100 sequences</i>
+<textarea name="sequence" class="formField" rows="6"></textarea>
+<p>or</p>
+Upload your FASTA File: <a href="javascript:;" onclick="toggle('file_help');" title="Query Sequence File Upload Help"><span>[?]</span></a><br>
+<div id="file_help" style="display:none">
+Use browse button to select <a href="http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml">fasta</a> file which contains one or more query sequences. Currently we support maximum 1000 sequences per job.
+</div>
+
+
+<input type="file" name="sequenceFile" size="30">
+</fieldset>
+
+
+<fieldset>
+<legend>Email Notifications</legend>
+			<p>To receive email notifications you must first login or create a new account</p>
+		</fieldset>
+<fieldset>
+<legend>Submit</legend>
+<p>This website is free and open to all users and there is no login requirement. </p>
+<input name="submit" type="submit" value="Submit"/>
+</fieldset>
+</form>
+
+</div>
+
+<div class="clear"><!-- This div enables a min height hack for the content div --></div>
+</div>
+<div id="rightBar">
+<h2>Kihara Lab Software</h2>
+<p>Thank you for using Kihara Lab Web Servers. Please refer to the tutorials below
+for getting started with our servers. You can register with 
+the lab and enjoy additional features free of cost. We would be delighted
+to receive <a href="mailto:info@kiharalab.org">feedback</a> from you.</p>
+<h3>Tutorials</h3>
+
+<form>
+<fieldset>
+<a href="esg_tutorial.pdf">ESG Tutorial</a><br>
+<a href="pfp_tutorial.pdf">PFP Tutorial</a><br>
+</fieldset>
+</form>
+
+<h3>Member Portal Access</h3>
+<form METHOD="POST" action="/web/pfp.php">
+<fieldset>
+Username:<br>
+<input name="username" type="text" class="inputa" value=""/><br>
+Password:<br>
+<input name="password" type="password" class="inputa"/><br>
+<input type="submit" value="Login"/><br>
+<!--a href="#">Forgot your password?</a><br-->
+<a href="register.php">Register</a>
+</fieldset>
+</form>
+<h3>Job Retrival</h3>
+<form METHOD="GET" action="results.php">
+<fieldset>
+Job ID#:<br>
+<input name="job_id" type="text" class="inputa"/><br>
+<input type="submit" value="Fetch Job"/>
+</fieldset>
+</form>
+	
+</div>
+<div class="clear"></div>
+</div>
+
+<script language="JavaScript" type="text/javascript">
+function toggle(x) {
+        if (document.getElementById(x).style.display == 'none') {
+                document.getElementById(x).style.display = '';
+        } else {
+                document.getElementById(x).style.display = 'none';
+        }
+}
+function clear(x) {
+        document.getElementById(x).value='';
+}
+</script>
+
+
+			<div id="footer">
+				<!-- footer div holds the bottom footer bar -->
+				&copy;2011 Kihara Bioinformatics Laboratory - For technical issues please contact the <a href="mailto:webmaster@kiharalab.org">administrator</a> 
+			</div>
+		</div>
+		<div>
+			<br>
+			<br>
+		</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+	var pageTracker = _gat._getTracker("UA-11363394-1");
+	pageTracker._setDomainName(".kiharalab.org");
+	pageTracker._trackPageview();
+} catch(err) {}</script>
+
+	</body>
+</html>
+

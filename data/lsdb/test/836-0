@@ -1,0 +1,307 @@
+<HTML><HEAD><TITLE>TranspoGene</TITLE>
+<!--<a href="microTranspoGene.html">microTranspoGene Homepage</a>-->
+<!--<align="right">microTranspoGene</align>-->
+<!-- <SCRIPT LANGUAGE="JavaScript">
+function CheckCheckBox(frm)
+ {
+     if (!frm.CheckThis.checked)
+     frm.CheckThis.focus()
+  } 
+</script> -->
+<SCRIPT LANGUAGE="javascript" src="list.js"></script> 
+</HEAD>
+<BODY BGCOLOR="FFFFCC">
+<br><script menumaker src="MENU23OCT/tabs2002.js"></script>
+<H2 ALIGN="CENTER">TranspoGene</H2>
+<H4 align="center"><i>The influence of Transposed Elements (TEs) on the transcriptome of 7 species</i></H4>
+
+<FORM name="transpogene_form" METHOD="POST" ACTION="/cgi-bin/tg/alugene/transpogene.pl">
+
+
+
+<!-- <input type="CHECKBOX" name="CheckThis"> -->
+<!--To enter your name below, activate (check) this box. -->
+<!--<p> -->
+<!--Name: -->
+<!--<input type="text" name="UserName" onfocus="CheckCheckBox(this.form)"> -->
+
+<!-- <H3>Select organism of interest:</H3>-->
+<!-- <INPUT TYPE=checkbox  NAME="human" CHECKED> human<BR>-->
+<!-- <INPUT TYPE=checkbox  NAME="mouse"> mouse <BR>-->
+<!--<p>-->
+
+<H3><font color="#15317E">Select gene, protein or genomic area of interest (at least one of the followings) :</font></H3>
+<TABLE>
+<TR><Td ALIGN = "left"><a href="FAQ.html#gene_name" title="Press this link for advanced Gene Symbol search options">Gene symbol:</a> <!-- <font size="2">(examples: NADK, %CA%1% OR multiple genes - NADK, CA1) --><TD> <INPUT TYPE=text NAME="gene_name" SIZE=30 title="Multiple genes separated by comma can be inserted. '%' can be used as wildcard"> 
+<!--<TD> <INPUT TYPE=text NAME="gene_name" SIZE=30> <font size ="2">multiple genes separated by comma can be inserted, '%' can be used as wildcard -->
+<TR><Td ALIGN = "left">Swissprot entry name: (e.g: PPNK_HUMAN)<TD> <INPUT TYPE=text NAME="sp_protein" SIZE=30> Human and mouse only
+<TR><Td ALIGN = "left">Refseq mRNA accession: (e.g: NM_021050)<TD> <INPUT TYPE=text NAME="refseq" SIZE=30>
+<TR><Td ALIGN = "left">
+<TR><Td ALIGN = "left">Refseq protein accession: (e.g: NP_620830)<TD> <INPUT TYPE=text NAME="refseq_protein" SIZE=30>
+<TR><Td ALIGN = "left">
+All <u>TEs</u> located between the selected genomic positions:
+<!-- </TABLE> --> 
+
+<!-- <br> --> 
+<td>
+<!-- Organism: -->
+<SELECT NAME="organism" onChange="Selectchr();">
+    <OPTION VALUE="choose" SELECTED> Select organism
+    <OPTION VALUE="human">            Human 
+    <OPTION VALUE="mouse">            Mouse
+ <OPTION VALUE="chicken">            Chicken
+    <OPTION VALUE="zebrafish">        Zebrafish
+ <OPTION VALUE="fruit_fly">           Fruit fly (D. melanogaster)
+    <OPTION VALUE="nematode">            Nematode (C. elegans)
+ <OPTION VALUE="sea_squirt">            Sea squirt (C. intestinalis)
+
+</SELECT>
+<!-- Chromosome: -->&nbsp
+<SELECT NAME="chr">
+    <OPTION VALUE="choose" SELECTED> Select chromosome
+</SELECT>
+
+
+<tr><td><td>
+Strand:
+<SELECT NAME="strand">
+    <OPTION VALUE="both" SELECTED> both strands
+    <OPTION VALUE="+">            +
+    <OPTION VALUE="-">            -
+</SELECT>
+Start:  <INPUT TYPE=text NAME="dna_chr_start"  SIZE=10>
+End:  <INPUT TYPE=text NAME="dna_chr_end"  SIZE=10>
+</TABLE>
+
+<br>
+<i><font size="2">Positions in TranspoGene database are from the following genome versions:
+ <b>Human:</b> NCBI build 36.1 (UCSC hg18),<b> Mouse:</b> NCBI build 37 (UCSC mm9), <b>Zebrafish:</b> Zv6 assembly (UCSC danRer4), <b>Chicken:</b> draft assmebly v2.1 (UCSC galGal3), <b>Fruit fly:</b> UCSC dm3, Nematode: WS170 (UCSC ce4), <b>Sea squirt:</b> draft assembly v2.0 (UCSC ci2)</font></i>
+<P>
+
+
+<table border="0"><TR><td>
+<H3><font color="#15317E">Select Transposed Element families of interest:</font></H3>
+<TABLE border="0" cellpadding="0" cellspacing="1%">
+<tr><TD><b><u><font size="2">All organisms:</font></b></u><td><INPUT TYPE=checkbox  NAME="all_TEs"><font size="2">All TEs
+              <TR><td><b><u><font size="2">Human:</b></u>
+		   <TD><INPUT TYPE=checkbox  NAME="human_all"><font size="2">All TEs
+<TR><td><font size="2">SINE: <TD><INPUT TYPE=checkbox  NAME="human_all_SINE"><font size="2">All SINE
+	    <TD><INPUT TYPE=checkbox  NAME="human_Alu"><font size="2">Alu
+	      <TD><INPUT TYPE=checkbox  NAME="human_MIR"><font size="2">MIR
+<TR><td><font size="2">LINE:  <TD><INPUT TYPE=checkbox  NAME="human_all_LINE"><font size="2">All LINE
+		<TD><INPUT TYPE=checkbox  NAME="human_L1"> <font size="2">L1
+		  <TD><INPUT TYPE=checkbox  NAME="human_L2"><font size="2"> L2
+		    <TD><INPUT TYPE=checkbox  NAME="human_CR1"><font size="2"> CR1 (L3)
+<TR><td><font size="2">DNA: <TD><INPUT TYPE=checkbox  NAME="human_all_DNA"><font size="2"> All DNA
+		 <TD><INPUT TYPE=checkbox  NAME="human_MER1"> <font size="2">MER1
+		 <TD><INPUT TYPE=checkbox  NAME="human_MER2"> <font size="2">MER2
+		 <TD><INPUT TYPE=checkbox  NAME="human_other_DNA" title="Other DNA TEs: Tip100, Mariner, AcHobo..."><font size="2">Other DNA
+<TR><td><font size="2">LTR: <TD><INPUT TYPE=checkbox  NAME="human_all_LTR"><font size="2"> All LTR
+		<TD><INPUT TYPE=checkbox  NAME="human_MaLR"><font size="2"> MaLR
+		 <TD><INPUT TYPE=checkbox  NAME="human_ERV1"><font size="2"> ERV1
+		<TD><INPUT TYPE=checkbox  NAME="human_ERVL"><font size="2"> ERVL						<TD><INPUT TYPE=checkbox  NAME="human_other_LTR" title="Other LTR TEs: ERV, ERVK"><font size="2">Other LTR 
+
+<TR><Td><b><u><font size="2">Mouse:</b></u> <TD><INPUT TYPE=checkbox  NAME="mouse_all"><font size="2"> All TEs
+<TR><td><font size="2">SINE: <TD><INPUT TYPE=checkbox  NAME="mouse_all_SINE"><font size="2"> All SINE
+	    <TD><INPUT TYPE=checkbox  NAME="mouse_B1"><font size="2"> B1
+	      <TD><INPUT TYPE=checkbox  NAME="mouse_B2"><font size="2"> B2
+	 <TD><INPUT TYPE=checkbox  NAME="mouse_B4"><font size="2"> B4
+	      <TD><INPUT TYPE=checkbox  NAME="mouse_ID"><font size="2"> ID
+	<TD><INPUT TYPE=checkbox  NAME="mouse_MIR"><font size="2"> MIR	
+<TR><td><font size="2">LINE: <TD><INPUT TYPE=checkbox  NAME="mouse_all_LINE"><font size="2"> All LINE
+	    <TD><INPUT TYPE=checkbox  NAME="mouse_L1"><font size="2"> L1
+	      <TD><INPUT TYPE=checkbox  NAME="mouse_L2"><font size="2"> L2
+	 <TD><INPUT TYPE=checkbox  NAME="mouse_CR1"><font size="2"> CR1 (L3)
+	      <TD><INPUT TYPE=checkbox  NAME="mouse_RTE"><font size="2"> RTE
+<TR><td><font size="2">DNA: <TD><INPUT TYPE=checkbox  NAME="mouse_all_DNA"><font size="2"> All DNA
+		 <TD><INPUT TYPE=checkbox  NAME="mouse_MER1"><font size="2"> MER1
+		 <TD><INPUT TYPE=checkbox  NAME="mouse_MER2"><font size="2"> MER2
+		 <TD><INPUT TYPE=checkbox  NAME="mouse_other_DNA" title="Other DNA TEs: Tip100, Mariner, AcHobo..."><font size="2">Other DNA
+<TR><td><font size="2">LTR: <TD><INPUT TYPE=checkbox  NAME="mouse_all_LTR"><font size="2"> All LTR
+		<TD><INPUT TYPE=checkbox  NAME="mouse_MaLR"><font size="2"> MaLR
+		 <TD><INPUT TYPE=checkbox  NAME="mouse_ERV1"><font size="2"> ERV1
+		<TD><INPUT TYPE=checkbox  NAME="mouse_ERVL"><font size="2"> ERVL						<TD><INPUT TYPE=checkbox  NAME="mouse_other_LTR" title="Other LTR TEs: ERVK..."><font size="2">Other LTR 
+<TR><Td><b><u><font size="2">Zebrafish:</b></u> <TD><INPUT TYPE=checkbox  NAME="zebrafish_all"><font size="2"> All TEs
+<TR><td><font size="2">SINE: <TD><INPUT TYPE=checkbox  NAME="zebrafish_all_SINE"><font size="2"> All SINE
+	    <TD><INPUT TYPE=checkbox  NAME="zebrafish_V"><font size="2"> V
+	      <TD><INPUT TYPE=checkbox  NAME="zebrafish_5S"><font size="2"> 5S
+	 <TD><INPUT TYPE=checkbox  NAME="zebrafish_SINE"><font size="2"> SINE
+<TR><td><font size="2">LINE: <TD><INPUT TYPE=checkbox  NAME="zebrafish_all_LINE"><font size="2"> All LINE
+	    <TD><INPUT TYPE=checkbox  NAME="zebrafish_L1"><font size="2"> L1
+	      <TD><INPUT TYPE=checkbox  NAME="zebrafish_L2"><font size="2"> L2
+	 <TD><INPUT TYPE=checkbox  NAME="zebrafish_Rex-Babar"><font size="2">Rex-Babar
+	      <TD><INPUT TYPE=checkbox  NAME="zebrafish_RTE"><font size="2"> RTE
+	<TD><INPUT TYPE=checkbox  NAME="zebrafish_I"><font size="2"> I
+<TR><td><font size="2">DNA: <TD><INPUT TYPE=checkbox  NAME="zebrafish_all_DNA"><font size="2"> All DNA
+	    <TD><INPUT TYPE=checkbox  NAME="zebrafish_hAT"><font size="2"> hAT
+	      <TD><INPUT TYPE=checkbox  NAME="zebrafish_DNA"><font size="2"> DNA
+	 <TD><INPUT TYPE=checkbox  NAME="zebrafish_Harbinger"><font size="2">Harbinger
+	      <TD><INPUT TYPE=checkbox  NAME="zebrafish_Tc1"><font size="2">Tc1
+	<TD><INPUT TYPE=checkbox  NAME="zebrafish_other_DNA" title="Other DNA TEs: PiggyBac, Charlie, En-Spm..."><font size="2">Other DNA
+<TR><td><font size="2">LTR: <TD><INPUT TYPE=checkbox  NAME="zebrafish_all_LTR"><font size="2"> All LTR
+	    <TD><INPUT TYPE=checkbox  NAME="zebrafish_Gypsy"><font size="2"> Gypsy
+	      <TD><INPUT TYPE=checkbox  NAME="zebrafish_Ngaro"><font size="2">Ngaro
+	 <TD><INPUT TYPE=checkbox  NAME="zebrafish_LTR"><font size="2">LTR
+	      <TD><INPUT TYPE=checkbox  NAME="zebrafish_DIRS1"><font size="2">DIRS1
+	<TD><INPUT TYPE=checkbox  NAME="zebrafish_other_LTR" title="Other LTR TEs: ERV1, Pao..."><font size="2">Other LTR
+<TR><Td><b><u><font size="2">Chicken:</b></u> <TD><INPUT TYPE=checkbox  NAME="chicken_all"><font size="2"> All TEs
+<TR><td><font size="2">SINE: <TD><INPUT TYPE=checkbox  NAME="chicken_MIR"><font size="2"> MIR
+	   <!--THIS IS THE ONLY ONE: <TD><INPUT TYPE=checkbox  NAME="chicken_MIR"> MIR -->
+<TR><td><font size="2">LINE: <TD><INPUT TYPE=checkbox  NAME="chicken_CR1"><font size="2"> CR1
+	  <!--THIS IS THE ONLY ONE:  <TD><INPUT TYPE=checkbox  NAME="chicken_CR1"> CR1 -->
+<TR><td><font size="2">DNA: <TD><INPUT TYPE=checkbox  NAME="chicken_all_DNA"><font size="2"> All DNA
+	    <TD><INPUT TYPE=checkbox  NAME="chicken_Mariner"><font size="2"> Mariner
+	<TD><INPUT TYPE=checkbox  NAME="chicken_Charlie"><font size="2"> Charlie
+<TR><td><font size="2">LTR: <TD><INPUT TYPE=checkbox  NAME="chicken_all_LTR"><font size="2"> All LTR
+	    <TD><INPUT TYPE=checkbox  NAME="chicken_ERVL"><font size="2"> ERVL
+	<TD><INPUT TYPE=checkbox  NAME="chicken_ERV1"><font size="2"> ERV1
+	<TD><INPUT TYPE=checkbox  NAME="chicken_ERVK"><font size="2"> ERVK
+<TR><Td><b><u><font size="2">Fruit fly:</b></u> <TD><INPUT TYPE=checkbox  NAME="fruit_fly_all"><font size="2"> All TEs
+<TR><td><font size="2">LINE: <TD><INPUT TYPE=checkbox  NAME="fruit_fly_all_LINE"><font size="2"> All LINE
+	   <TD><INPUT TYPE=checkbox  NAME="fruit_fly_CR1"><font size="2"> CR1
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_R1"><font size="2"> R1
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_Jockey"><font size="2"> Jockey
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_LINE"><font size="2"> LINE
+	<TD><INPUT TYPE=checkbox  NAME="fruit_fly_other_LINE" title="Other LINE TEs: LOA, I, Telomere..."><font size="2"> other LINE
+<TR><td><font size="2">DNA: <TD><INPUT TYPE=checkbox  NAME="fruit_fly_all_DNA"><font size="2"> All DNA
+	   <TD><INPUT TYPE=checkbox  NAME="fruit_fly_DNA"><font size="2"> DNA
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_P"><font size="2"> P
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_Tc1"><font size="2"> Tc1
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_HAT"><font size="2"> HAT
+	<TD><INPUT TYPE=checkbox  NAME="fruit_fly_other_DNA" title="Other DNA TEs: Transib, Pogo, PiggyBac..."><font size="2"> other DNA
+<TR><td><font size="2">LTR: <TD><INPUT TYPE=checkbox  NAME="fruit_fly_all_LTR"><font size="2"> All LTR
+	   <TD><INPUT TYPE=checkbox  NAME="fruit_fly_Gypsy"><font size="2"> Gypsy
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_Pao"><font size="2"> Pao
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_Copia"><font size="2"> Copia
+           <TD><INPUT TYPE=checkbox  NAME="fruit_fly_LTR"><font size="2"> LTR
+<TR><Td><b><u><font size="2">Nematode:</b></u> <TD><INPUT TYPE=checkbox  NAME="nematode_all"><font size="2"> All TEs
+<TR><td><font size="2">SINE: <TD><INPUT TYPE=checkbox  NAME="nematode_SINE"><font size="2"> SINE
+<tr><td><font size="2">LINE: <TD><INPUT TYPE=checkbox  NAME="nematode_all_LINE"><font size="2"> All LINE
+      <TD><INPUT TYPE=checkbox  NAME="nematode_CR1"><font size="2"> CR1
+      <TD><INPUT TYPE=checkbox  NAME="nematode_RTE"><font size="2"> RTE
+<tr><td><font size="2">DNA: <TD><INPUT TYPE=checkbox  NAME="nematode_all_DNA"><font size="2"> All DNA
+      <TD><INPUT TYPE=checkbox  NAME="nematode_DNA"><font size="2"> DNA
+      <TD><INPUT TYPE=checkbox  NAME="nematode_HAT"><font size="2"> HAT
+<TD><INPUT TYPE=checkbox  NAME="nematode_PiggyBac?"><font size="2"> PiggyBac?
+<TD><INPUT TYPE=checkbox  NAME="nematode_Pogo"><font size="2"> Pogo
+<TD><INPUT TYPE=checkbox  NAME="nematode_other_DNA" title="Other DNA TEs: Tc1, MuDR..."><font size="2"> Other DNA
+<TR><td><font size="2">LTR: <TD><INPUT TYPE=checkbox  NAME="nematode_all_LTR"><font size="2"> All LTR
+	   <TD><INPUT TYPE=checkbox  NAME="nematode_Gypsy"><font size="2"> Gypsy
+           <TD><INPUT TYPE=checkbox  NAME="nematode_Pao"><font size="2"> Pao
+           <TD><INPUT TYPE=checkbox  NAME="nematode_LTR"><font size="2"> LTR
+<TR><Td><b><u><font size="2">Sea squirt:</b></u> <TD><INPUT TYPE=checkbox  NAME="sea_squirt_all"><font size="2"> All TEs
+<TR><td><font size="2">SINE: <TD><INPUT TYPE=checkbox  NAME="sea_squirt_SINE"><font size="2"> SINE
+<tr><td><font size="2">LINE: <TD><INPUT TYPE=checkbox  NAME="sea_squirt_all_LINE"><font size="2"> All LINE
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_L1"><font size="2"> L1
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_L2"><font size="2"> L2
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_Penelope"><font size="2"> Penelope
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_I"><font size="2"> I	
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_LOA"><font size="2"> LOA
+<tr><td><font size="2">DNA: <TD><INPUT TYPE=checkbox  NAME="sea_squirt_all_DNA"><font size="2"> All DNA
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_Tc1"><font size="2"> Tc1
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_hAT"><font size="2"> hAT
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_Merlin"><font size="2"> Merlin
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_P"><font size="2"> P	
+      <TD><INPUT TYPE=checkbox  NAME="sea_squirt_piggyBac"><font size="2"> piggyBac	
+<tr><td><font size="2">LTR: <TD><INPUT TYPE=checkbox  NAME="sea_squirt_Gypsy"><font size="2"> Gypsy								
+
+              </TABLE>
+<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<!-- ORIGINAL WIDTH=250 AND HEIGHT= 450 FOR BEST VIEW-->
+<td><IMAGE SRC="transpogene_big_new.jpg" alt="Welcome to TranspoGene Homepage" width=250 height=450>
+</TABLE>
+
+<H3><font color="#15317E">Select location of transposed elements in genes:</font></H3>
+
+<INPUT TYPE=checkbox  NAME="all_TE_locations">All - TEs located on all types of gene regions<BR>
+<INPUT TYPE=checkbox  NAME="exonized_TE" title="No exonizations exist for fruit fly and sea squirt"> Exonized TEs: Exon derived from TE insertion<BR>
+<INPUT TYPE=checkbox  NAME="exonic_TE" > Exonic TEs: TE insertion into an existing exon<BR>
+<INPUT TYPE=checkbox  NAME="intronic_TE"> Intronic TEs<BR>
+<INPUT TYPE=checkbox  NAME="promoter_TE"> TEs located in putative gene promoter regions<BR>
+<br>
+<br>
+<INPUT TYPE=checkbox  NAME="seq_cols" CHECKED>TEs and exons Sequence data are included in the results tables.<br><font size="2">cancelling this option will substantially reduce the size of results tables.</font>
+<BR>
+<br>
+<!--
+<H3><font color="#15317E">Select gene, protein or genomic area of interest: (at least one of the followings)</font></H3>
+<TABLE>
+<TR><Td ALIGN = "left">Gene symbol: <font size="2">(examples: NADK, %CA%1% OR multiple genes - NADK, CA1)<TD> <INPUT TYPE=text NAME="gene_name" SIZE=30 title="Multiple genes separated by comma can be inserted. '%' can be used as wildcard"> 
+<TR><Td ALIGN = "left">Swissprot entry name: (e.g: PPNK_HUMAN)<TD> <INPUT TYPE=text NAME="sp_protein" SIZE=30> Human and mouse only
+<TR><Td ALIGN = "left">Refseq mRNA accession: (e.g: NM_021050)<TD> <INPUT TYPE=text NAME="refseq" SIZE=30>
+<TR><Td ALIGN = "left">
+<TR><Td ALIGN = "left">Refseq protein accession: (e.g: NP_620830)<TD> <INPUT TYPE=text NAME="refseq_protein" SIZE=30>
+<TR><Td ALIGN = "left">
+All <u>TEs</u> located between the selected genomic positions:
+</TABLE> 
+
+<br> 
+Organism:
+<SELECT NAME="organism" onChange="Selectchr();">
+    <OPTION VALUE="choose" SELECTED> Select organism
+    <OPTION VALUE="human">            Human 
+    <OPTION VALUE="mouse">            Mouse
+ <OPTION VALUE="chicken">            Chicken
+    <OPTION VALUE="zebrafish">        Zebrafish
+ <OPTION VALUE="fruit_fly">           Fruit fly (D. melanogaster)
+    <OPTION VALUE="nematode">            Nematode (C. elegans)
+ <OPTION VALUE="sea_squirt">            Sea squirt (C. intestinalis)
+
+</SELECT>
+Chromosome:
+<SELECT NAME="chr">
+    <OPTION VALUE="choose" SELECTED> Select chromosome
+</SELECT>
+Strand:
+<SELECT NAME="strand">
+    <OPTION VALUE="both" SELECTED> both strands
+    <OPTION VALUE="+">            +
+    <OPTION VALUE="-">            -
+</SELECT>
+Start:  <INPUT TYPE=text NAME="dna_chr_start"  SIZE=10>
+End:  <INPUT TYPE=text NAME="dna_chr_end"  SIZE=10>
+<br>
+<i>Positions in TranspoGene database are from the following genome versions - <br>
+Human: NCBI build 35 (UCSC hg17), Mouse: NCBI build 34 (UCSC mm6), Zebrafish: Zv6 assembly (UCSC danRer4), Chicken: draft assmebly v2.1 (UCSC galGal3), Fruit fly: UCSC dm2, Nematode: WS120 (UCSC ce2), Sea squirt: draft assembly v2.0 (UCSC ci2)</i>
+<P>
+
+-->
+
+<!--<H3>SUBMIT AND RESET BUTTONS</H3>-->
+
+<INPUT TYPE=submit VALUE="Submit query">
+
+<INPUT TYPE=reset VALUE="Reset all entries">
+
+
+</FORM>
+
+<HR>
+<b>TranspoGene</b> is a publicly available database of Transposed elements (TEs) which are located within protein-coding genes of 7 organisms: human, mouse, chicken, zebrafish, fruilt fly, nematode and sea squirt.
+<br> 
+Using <b>TranspoGene</b> the user can learn about the many aspects of the effect these TEs have on their hosting genes, such as: exonization events (including alternative splicing-related data), insertion of TEs into introns, exons, and promoters, specific location of the TE over the gene, evolutionary divergence of the TE from its consensus sequence and involvement in diseases. 
+<br>
+<!--<b>TranspoGene</b> is linked to many other databases such as: the UCSC genome browser, Swissprot, Refseq and OMIM. -->
+<b>TranspoGene</b> database is quickly searchable through its website, enables many kinds of searches and is available for download.  
+<br>
+<a href="FAQ.html">FAQ</a><br>
+<a href="download.html">Download TranspoGene</a><br>
+<a href="microTranspoGene.html">microTranspoGene Homepage</a><br>
+<!--<A HREF="11.html">Next</A>.-->
+
+
+
+
+<address><a href="mailto:asaflev1@post.tau.ac.il">Send us questions, suggestions and comments</a></address>
+
+<br>
+
+<!-- easycounter code: a hits counter that saves statistics -->
+<!-- statistics is viewed in http://www.eastcounter.com/user/ with username asaf, pwd hurumgurum-->
+<a href="http://www.easycounter.com">
+<img src="http://www.easycounter.com/counter.php?asaf" border="0" alt="HTML counter"></a>
+<!-- <br><a href="http://www.easycounter.com/FreeCounter3.html">stats counter</a> -->
+<!-- end of eacycounter script -->
+
+
+</BODY></HTML>

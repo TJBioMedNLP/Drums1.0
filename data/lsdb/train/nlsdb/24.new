@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- DHTI SIGMBI-412.2323 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head profile="http://www.w3.org/2000/08/w3c-synd/#">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Darby Tien-Hao Chang, dirty" />
+	<meta name="keyword" content="bioinformatics, data mining, machine learning" />
+	<meta name="description" content="data mining and machine leaning on bioinformatics" />
+	<meta name="copyright" content="Copyright (c) 2003-2005 Special Interest Group on Molecular Biomedical Informatics" />
+	<title>Special Interest Group on Molecular Biomedical Informatics</title>
+	<link rel="stylesheet" href="css/cssswt.css" type="text/css" />
+	<link rel="stylesheet" href="css/layout.css" type="text/css" />
+	<link rel="stylesheet" href="css/miniflex.css" type="text/css" />
+	<!-- DHTV head -->
+	<script type="text/javascript">
+	<!--
+	function proceed() {
+		var type  = new Array( "pdbid_protein", "file_protein", "text_protein ");
+		var field = new Array( "protein_pdbid", "protein_file", "protein_text" );
+		for ( var i = 0; i < type.length; ++i ) {
+			if ( false == document.step1.elements["checkbox_"+type[i]].checked ) continue;
+			if ( "" == document.step1.elements[field[i]].value )
+				alert( "Please specify the query protein!" );
+			else
+				document.step1.submit();
+			break;
+		}
+	}
+	function check_protein_type(checkbox) {
+		var type = new Array("pdbid_protein", "file_protein", "text_protein");
+		for (var i = 0; i < type.length; i++) {
+			var checked	= checkbox == document.step1.elements["checkbox_"+type[i]];
+			document.step1.elements["checkbox_"+type[i]].checked	= checked;
+			document.getElementById(type[i]).style.display = checked ? "block" : "none";
+		}
+	}
+	// -->
+	</script>
+	<!-- /DHTV -->
+</head>
+<body>
+<div id="wrapper">
+
+<div id="banner">
+	<h1>Special Interest Group on Molecular Biomedical Informatics</h1>
+</div>
+<div id="navbar">
+	<div id="fancy">
+		<a class="cssswt" id="mistyrose" href="javascript:setCSS('color', 'mistyrose')" title="mistyrose"></a><span class="invisible">|</span>
+		<a class="cssswt" id="honeydew" href="javascript:setCSS('color', 'honeydew')" title="honeydew"></a><span class="invisible">|</span>
+		<a class="cssswt" id="cornsilk" href="javascript:setCSS('color', 'cornsilk')" title="cornsilk"></a><span class="invisible">|</span>
+		<a class="cssswt" id="aliceblue" href="javascript:setCSS('color', 'aliceblue')" title="aliceblue"></a><span class="invisible">|</span>
+		<!-- DHTV service -->
+		<!-- DHTI service_protemot -->
+<span><a href="http://mbi.csie.ntu.edu.tw/" title="Special Interest Group on Molecular Biomedical Informatics">MBI</a></span><span class="invisible">|</span>
+<span><a href="http://cap.csie.ntu.edu.tw/" title="Clustering Analysis of Proteins">CAP</a></span><span class="invisible">|</span>
+<span><a href="http://proteminer.csie.ntu.edu.tw/" title="ProteMiner">ProteMiner</a></span><span class="invisible">|</span>
+<span><a href="http://protanno.csie.ntu.edu.tw/" title="ProtAnno">ProtAnno</a></span><span class="invisible">|</span>
+<span><a href="http://medock.csie.ntu.edu.tw/" title="MEDock">MEDock</a></span><span class="invisible">|</span>
+<span class="active"><a href="http://protemot.csie.ntu.edu.tw/" title="Protemot">Protemot</a></span><span class="invisible">|</span>
+		<!-- /DHTI -->
+		<!-- /DHTV -->
+	</div>
+</div>
+<div id="preamble">
+	<h2>Special Interest Group on Molecular Biomedical Informatics</h2>
+</div>
+
+<div id="base">
+<div id="content">
+	<div id="tipbar">
+		<span>Tip</span>
+	</div>
+	<!-- DHTV content -->
+<form name="step1" method="post" action="step2.cgi" enctype="multipart/form-data">
+	<h3>Query Specification</h3>
+	<p>You can specify the query protein either by providing the PDB ID or by
+	uploading a file in the PDB format.</p>  
+	<p>If "substructure of interest" is left blank, then the entire protein will
+	be examined.</p>
+
+	<h3>Protein</h3>
+	<div class="row"><label for="protein_type">Specify protein by:</label><span class="field">
+		<input type="checkbox" name="checkbox_pdbid_protein" onclick="javascript:check_protein_type(this)" />PDB ID
+		|<input type="checkbox" name="checkbox_file_protein" onclick="javascript:check_protein_type(this)" />Upload
+		|<input type="checkbox" name="checkbox_text_protein" onclick="javascript:check_protein_type(this)" />Copy &amp; Paste
+	</span></div>
+	<div id="pdbid_protein"><div class="row"><label for="protein_pdbid">PDB ID:</label><span class="field">
+		<input type="text" name="protein_pdbid" size="8" />
+	</span></div></div>
+	<div id="file_protein"><div class="row"><label for="protein_file">File to upload:</label><span class="field">
+		<input type="file" name="protein_file" size="30" />
+	</span></div></div>
+	<div id="text_protein"><div class="row"><label for="protein_text">Please paste your input here</label><span class="field">
+		<textarea name="protein_text" cols="35" rows="5"></textarea>
+	</span></div></div>
+	<div id="substructure_protein"><div class="row"><label for="protein_substructure">Substructure of interest:</label><span class="field">
+		<input type="text" name="protein_substructure" size="32" /><!--br />(This field is optional but can increase the performance of Protemot.  The syntax is like RasMol, e.g. *:A, *1:A, *1,2:A, *1-9:A, *LEU)-->
+		<div class="tip">
+			<b>Tip</b><br />
+			This field is optional but can increase the performance of Protemot.  The
+			syntax of substructure descripion is like RasMol, e.g. *:A, *1:A, *1,2:A,
+			*1-9:A, *LEU.
+		</div>
+	</span></div></div>
+	<div class="right">
+		<a href="javascript:proceed()" title="">proceed</a>
+	</div>
+</form>
+<script type="text/javascript">
+<!--
+	check_protein_type( document.step1.checkbox_pdbid_protein );
+// -->
+</script>
+	<!-- /DHTV -->
+</div>
+<div id="sidebar">
+	<!-- DHTV sidebar -->
+	<!-- DHTI sidebar_protemot -->
+<ul>
+	<li><a href="index.html">Home</a></li>
+	<li><a href="step1.html">Service</a></li>
+	<li><a href="documentation.html">Documentation</a></li>
+	<li><a href="tutorial.html">Tutorial</a></li>
+	<li><a href="mailto:protemot@mars.csie.ntu.edu.tw?subject=[Protemot]">Contact</a></li>
+	<p></p>
+	<li class="outer"><a href="http://protemot.csie.ntu.edu.tw/">Protemot at NTU</a></li>
+	<li class="outer"><a href="http://bioinfo.mc.ntu.edu.tw/protemot/">Protemot at NTU Medicine</a></li>
+</ul>
+	<!-- /DHTI -->
+	<!-- /DHTV -->
+</div>
+<div style="clear: both;"></div>
+</div>	<!-- End of <div id="base"> -->
+
+<div id="footer">
+	<p>The page layout was inspired by discoverthecoast.com.<br />
+	Copyright &copy; 2003-2006 <a href="http://mbi.csie.ntu.edu.tw/" title="Special Interest Group on Molecular Biomedical Informatics">SIGMBI</a>. All rights reserved.</p>
+</div>
+
+</div>	<!-- End of <div id="wrapper"> -->
+</body>
+</html>
+<!--
+vi:nowrap:sw=2:ts=2
+-->
+<!-- /DHTI -->

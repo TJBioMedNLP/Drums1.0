@@ -1,0 +1,279 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>FuncBase: Gene Predictive Functional Annotation Browser</title>
+        <script type="text/javascript" src="/ext-3.1.1/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="/ext-3.1.1/ext-all.js"></script>
+        <link rel="stylesheet" href="/ext-3.1.1/resources/css/ext-all.css" type="text/css" />
+        <link rel="stylesheet" href="/ext-3.1.1/xtheme-gray-extend/xtheme-gray-extend.css" type="text/css" />
+        <meta name="verify-v1" content="xbGXJWCkBk9VPS+QZ5EYDSiRCjFkKYAOpvhSO73FeKI=" />
+        <style type="text/css">
+	    	p {
+	      		padding-left: 8px;
+	      		padding-bottom: 5px;
+	    	}
+	    	.real-list {
+	    		list-style-position: inside;
+	    		list-style-type: disc;
+	    		padding-left: 8px;
+	    	}
+	    	.bolded-row .x-grid3-cell-inner{
+	      		font-weight: bolder;
+	      		font-style: italic;
+	      		color: #333399;
+	    	}
+	    	.bolded-row .greenquestion {
+	    		background-image: url(/images/greenquestionmark_small.jpg);
+	    		background-repeat: no-repeat;
+	    		background-position: 6px 1px;
+	    	}
+    	</style>
+        <style type="text/css">
+	    .x-panel-body p {
+	        margin:10px;
+	    }
+    </style>
+    </head>
+<body style="background: #909990;" onresize="Ext.getCmp('main_window').center();">
+    <script type="text/javascript" id="main_script">
+  //<![CDATA[
+        // set state provider as a client-side cookie-based provider
+        //Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
+        //	path: '/startPage/index'
+        //	}));
+        // reference local blank image
+        Ext.BLANK_IMAGE_URL = '/ext-3.1.1/resources/images/default/s.gif';
+        // create namespace
+        Ext.namespace('myNameSpace');
+        Ext.QuickTips.init();
+	    Ext.override(Ext.grid.GridView, {
+		    getColumnWidth : function(col){
+	            var w = this.cm.getColumnWidth(col);
+	            if(typeof w == 'number'){
+	                return (Ext.isBorderBox || Ext.isSafari3 || Ext.isSafari4 || Ext.isChrome ? w : (w-this.borderWidth > 0 ? w-this.borderWidth:0)) + 'px';
+	            }
+	            return w;
+	        }
+        });
+	 // quick-fix for a problem in Firefox 3.5 which causes a "permission denied" error to occur occasionally. Try removing in the future.
+	    /*Ext.override(Ext.Element, {
+	        contains: function() {
+	    	   var isXUL = Ext.isGecko ? function(node) {
+	    		    return Object.prototype.toString.call(node) == '[object XULElement]';
+	    	   } : Ext.emptyFn;
+	    	   return function(el) {
+	    		    return !this.dom.firstChild || // if this Element has no children, return false immediately
+	                              !el ||
+	                              isXUL(el) ? false : Ext.lib.Dom.isAncestor(this.dom, el.dom ? el.dom : el);
+	    	   };
+	    	}(),
+	    });*/
+        // cause the tooltip to wait 100 seconds before autohiding (unless the user moves the mouse)
+        Ext.onReady(function(){
+	       Ext.apply(Ext.QuickTips.getQuickTip(), {
+	           dismissDelay: 100000
+	       });
+        });
+        // create application
+        myNameSpace.app = function() {
+            // do NOT access DOM from here; elements don't exist yet
+            // private variables
+            // private functions
+            // public space
+            return {
+                // public properties, e.g. strings to translate
+                // public methods
+                init: function() {
+                	var initialSearchUrl = '//search/by/';
+                    var searchDs = this.createSearchDataSource(initialSearchUrl);
+    	instructions = new Ext.Panel({
+    		region: 'center',
+    		html: '<h1 style="font-size:150%; margin-bottom:10px; margin-top: 5px; text-align: center">Gene Predictive Functional Annotation Browsers</h1>' +
+    			  '<p>Computational gene function prediction can serve to focus experimental resources on high-priority experimental tasks. Below are several species-specific browsers for quantitative gene function predictions, gene function linkage predictions, and the evidence behind the predictions. Quantitative annotations of genes with Gene Ontology (GO) terms are exhaustively displayed in tabular form. Evidence underlying function annotations is also shown.</p>' +
+    			  '<h1>To get started, choose a browser:</h1>' +
+	                  '<p> <i>Homo sapiens</i>: <a href="/human">HumanFunc</a></p>' +
+	                  '<p> <i>Mus musculus</i>: <a href="/mouse">MouseFunc</a></p>' +
+	                  '<p> <i>Drosophila melanogaster</i>: <a href="/fly">FlyFunc</a></p>' +
+	                  '<p> <i>Saccaromyces cerevisiae</i>: <a href="/yeast">YeastFunc</a></p>',
+    		bodyStyle: 'padding: 5px;',
+    		autoScroll: true
+    	});
+    	bottomImage = new Ext.Panel({
+    		region: 'south',
+    		html: '<a href="http://llama.med.harvard.edu"><img width="760" height="52" border="0" src="http://llama.med.harvard.edu/images/homefooter.gif" /></a>',
+    		height: 52
+    	});
+    	win = new Ext.Window({
+            layout:'border',
+            width:680,
+            height:350,
+            id: 'main_window',
+            closeAction:'hide',
+            items: [instructions, bottomImage],
+            collapsible: false,
+            resizable: false,
+            closable: false,
+            draggable: false
+        });
+        win.show(this);
+                },
+                createTitlePanel: function(search) {
+                	var title = new Ext.Panel({
+                        x: 5,
+                        y: 20,
+                        bodyStyle: {background: 'transparent', border: 'none', color: 'white', font: '25px arial'},
+                        html: 'FuncBase: Gene Predictive Functional Annotation Browser'
+                     });
+                     var funcHomeAction = this.createMenuItem('HOME', '/');
+                     var funcDocumentationAction = this.createMenuItem('DOCUMENTATION', '/documentation/showManual/');
+                     var funcRawDataAction = this.createMenuItem('DOWNLOAD DATA', '/rawData/list/');
+                     var funcContactAction = this.createMenuItem('CONTACT US', '/documentation/showContacts/');
+                     var rothAction = this.createMenuItem('ROTH LAB', 'http://llama.med.harvard.edu/');
+                     var harvardAction = this.createMenuItem('<img src="/images/hms_logo.gif" style="height: 15px"/>', 'http://hms.harvard.edu/');
+ 				    var menuBar = new Ext.Toolbar({
+ 				    	height: 25,
+ 				    	style: 'background-color: black; background-image: none; color: white;'
+ 				    });
+                	var titlePanel = new Ext.Panel({
+                        layout: 'absolute',
+                        items: [title, search[1], search[2]],
+                        bodyStyle: {background: 'url(/images/roth_header_repeated_center.png) repeat-x'},
+                        html: '<img src="/images/roth_header_left.png" alt="" style="float: left"/><img src="/images/roth_header_right.png" alt="" style="float: right"/>',
+                        height: 73,
+                        region: 'north',
+                        bbar: menuBar
+                    });
+                    // ensure that the search box is always at the right edge of the screen.
+                    titlePanel.on('resize', function() {
+                        search[1].setPosition(titlePanel.getSize()['width'] - search[1].width, 0);
+                        search[2].setPosition(titlePanel.getSize()['width'] - search[1].width - search[2].width, 0);
+                        });
+                    // due to ideosyncracies with the menu bar, the menu buttons need to be added after the first render
+                    titlePanel.on('render', function() {
+                    	titlePanel.getBottomToolbar().add(funcHomeAction, funcDocumentationAction, funcRawDataAction);
+                    	titlePanel.getBottomToolbar().addFill();
+                    	titlePanel.getBottomToolbar().add(funcContactAction, rothAction, harvardAction);
+                    });
+                    return titlePanel;
+                },
+                createMenuItem: function(title, url) {
+                	var button = new Ext.Button({
+				        text: '<div style="color: white;">' + title + '</div>',
+				        handler: function() {
+				        	window.location = url;
+				        }
+				    });
+				    return button;
+                },
+	            createSearch: function(searchDataSource, initialSearchUrl, includeSpeciesDropdown) {
+    	            var availableSpecies = [["human"],["mouse"],["fly"],["yeast"]]
+	            	var store = new Ext.data.SimpleStore({
+				        fields: ['organism'],
+				        data : availableSpecies
+				    });
+				    var selectedSpecies = '';
+				    if(!selectedSpecies) {
+					    selectedSpecies = availableSpecies[0];
+				    }
+				    var organismCombo = new Ext.form.ComboBox({
+				        store: store,
+				        displayField:'organism',
+				        mode: 'local',
+				        triggerAction: 'all',
+				        selectOnFocus:true,
+				        //region: 'west',
+				        lazyInit: false,
+				        forceSelection: true,
+				        editable: false,
+	                    x: 0,
+				        y: 0,
+				        width: 100,
+				        style: 'padding-left: 7px;',
+				        autoCreate: {tag: "input", type: "text", autocomplete: "off"},
+				        value: selectedSpecies
+				    });
+				    var searchFieldWidth = 564;
+				    var searchFieldX = 100;
+				    if(!includeSpeciesDropdown) {
+				    	searchFieldWidth = 664;
+				    	searchFieldX = 0;
+				    }
+	            	var searchField = new Ext.form.ComboBox({
+		            		id: 'search_field',
+	                        store: searchDataSource,
+	                        resizable: true,
+	                        displayField:'html',
+	                        emptyText: 'Search...',
+	                        typeAhead: false,
+	                        loadingText: 'Searching...',
+	                        autoCreate: {tag: "input", type: "text", autocomplete: "off"},
+	                        //style: 'padding: 5px; height: 28px;',
+	                        pageSize:10,
+	                        hideTrigger:true,
+	                        minChars:2,
+	                        x: searchFieldX,
+	                        y: 0,
+	                        width: searchFieldWidth,
+	                        onSelect: function(record){ // override default onSelect to do redirect
+	                            window.location = record.data.url;
+	                        },
+	                        listeners: {
+		                        'beforequery' : function(queryEvent) {
+		                        	queryEvent.combo.store.proxy.setUrl(queryEvent.combo.searchUrl, true);
+	                        	}
+	                        }
+	                    });
+                   	searchField.searchUrl = initialSearchUrl;
+                    organismCombo.on('select', function(combo, record, index) {
+                        var searchField = Ext.getCmp('search_field');
+                        searchField.searchUrl = '/' + record.get('organism') + '/search/by/';
+                        searchField.clearValue();
+                        delete searchField.lastQuery;
+                    });
+                    var searchItems = [searchField];
+                    if(includeSpeciesDropdown) {
+                        searchItems.push(organismCombo);
+                    }
+	                var searchPanel = new Ext.Panel({
+	                	layout: 'absolute',
+	                	height: 24,
+	                	items: searchItems
+	                });
+	            	return [searchPanel, searchField, organismCombo];
+	            },
+	            createSearchDataSource: function(initialSearchUrl) {
+	            	return new Ext.data.Store({
+                        proxy: new Ext.data.HttpProxy(new Ext.data.Connection({
+                            method: 'GET',
+                            url: initialSearchUrl
+                        })),
+                        reader: new Ext.data.JsonReader({
+                            root: 'topics',
+                            totalProperty: 'total_count',
+                            id: 'post_id',
+                            fields: [
+                                {name: 'html'},
+                                {name: 'url'},
+                            ]
+                        })
+                    });
+	            }
+            };
+        }(); // end of app
+        Ext.onReady(myNameSpace.app.init, myNameSpace.app);
+      //]]>
+    </script>
+    <script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-4614147-1");
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+</body>
+</html>

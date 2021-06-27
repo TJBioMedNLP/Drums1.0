@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!--base url-->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta content="Jiang Du" name="author" />
+<meta content="Thomas Royce" name="author" />
+<meta content="Yale University, Gerstein lab, Bioinformatics" name="keywords" />
+<link rel="stylesheet" type="text/css" href="../home/style.css" />
+<title>Tiling group @ Gerstein lab: An Efficient Pseudomedian Filter for Tiling Microrrays</title>
+</head>
+<body>
+
+	<script language="JavaScript">
+	function getNextSibling(startBrother){ /* to deal with firefox issues */
+		  endBrother=startBrother.nextSibling;
+		    while(endBrother.nodeType!=1){
+				    endBrother = endBrother.nextSibling;
+					  }
+			  return endBrother;
+	}
+	function toggleDisplay(node) {
+		var node2 = getNextSibling(node);
+		if (node2.style.display!="none") {
+			node2.style.display="none";
+		}
+		else {
+			node2.style.display="block";
+		}
+	}
+	</script>
+
+	<div id="bg">
+		<div id="sadrzaj">
+			<div id="toplinks">
+			</div>
+
+			<div id="zaglavlje">
+				<div id="title">
+					<a href = "../home/index.html">Tiling group @ Gerstein lab</a><br />
+
+				</div>
+				<div id="title_info">
+					<p><small><i><a href = "http://www.gersteinlab.org/">Gerstein Lab</a></i></small></p>
+					<p><small><i>affiliated at <a href = "http://www.yale.edu/">Yale University</a>: <a href = "http://www.mbb.yale.edu/">MB&amp;B</a>, <a href = "http://www.cs.yale.edu/">CS</a>, <a href = "http://cbb.yale.edu/">CBB</a>, <a href = "http://www.csb.yale.edu/">CSB</a>, <a href = "http://cgp.yale.edu/">CGP</a>, <a href = "http://bioinfo.mbb.yale.edu/array">CEGS</a>, <a href = "http://www.med.yale.edu/microarray">YMD</a>, <a href = "http://info.med.yale.edu/nhlbi-proteomics">NHLBI Proteomics</a>; beyond Yale: <a href = "http://www.nesg.org/">NESG</a>, <a href = "http://www.dmi.columbia.edu/lussier/BIC">NBC</a>, <a href = "http://www.genome.gov/10005107">ENCODE</a></i></small></p>
+
+				</div>
+			</div>
+
+			<div id="navigacija">
+				<ul>
+					<li><a href="../home/home.html">Home</a></li>
+					<li><a href="../home/projects.html">Software & Servers</a></li>
+					<li><a href="../home/analyses.html">Analyses</a></li>
+
+					<li><a href="../home/datasets.html">Databases & Datasets</a></li>
+					<li><a href="../home/publications.html">Publications</a></li>
+				</ul>
+	
+				<div class="lijevo">
+				</div>
+			</div>
+
+<div id="clanci">
+
+	<h2>An Efficient Pseudomedian Filter for Tiling Microrrays</h2>
+	<h3>Thomas E. Royce, Nicholas J. Carriero, Mark B. Gerstein</h3>
+	<h4>Source Code</h4>
+	<a href='running_pseudomedian.c'>running_pseudomedian.c</a>
+	<h4>Binaries</h4>
+	<a href='binaries/linux/running_pseudomedian'>Linux / Macintosh</a>	
+	<br>
+	<a href='binaries/windows/running_pseudomedian.exe'>Microsoft Windows</a>
+	<h4>Usage</h4>
+	./running_pseudomedian -i &lt;input file&gt; -b &lt;span&gt; -o &lt;output file&gt; -a &lt;algorithm&gt;
+	<p><p>
+	&lt;input file&gt; := tab delimited text file - first column is chromosome (eg chr1), second column is genomic position, third, fourth, etc are data columns. The file must be sorted by chromosome and position. <br>
+	&lt;span&gt; := number of nucleotides on either side of probe being smoothed <br>
+	&lt;output file&gt; := smoothed result <br>
+	&lt;algorithm&gt; := either def, monahan, or msl <br>
+	def := naive implementation <br>
+	monahan := Monahan modification <br>
+	msl := Monahan modification + skip list 
+	<h4>Example Datasets</h4>
+	<a href='data/1M.data'>synthetic data</a>
+	<p>
+	<a href='data/stat1.txt'>ENCODE ChIP-chip data</a> 
+</div>
+
+</body>
+</html>
+

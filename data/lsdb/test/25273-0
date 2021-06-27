@@ -1,0 +1,761 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD> <TITLE>Longest Biased Interval and Longest Non-Negative Sum Interval, Bioinformatics 2003</TITLE>
+<META NAME="description" Content="Longest Biased Interval and Longest Non-Negative Sum Interval, J. Bioinformatics, Volume 19, Issue 10, pp.1294-1295, 1 July, 2003">
+<META NAME="keywords"    Content="Bioinformatics 2003 July Longest Biased Interval LBI L. Allison Longest Non-Negative Sum Interval LNNSI nonnegative positive total substring subsequence subarray segment array Plasmodium falciparum centromeres ATrich AT-rich regions Malaria chromosomes Sanger PLASMODB low information content repeats skewed skew Bias computer programming algorithm Molecular Biology DNA RNA protein sequence analysis">
+<!-- DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN" -->
+<!--        GENERATOR = vi (Linux + Solaris) -->
+<META NAME="GENERATOR" CONTENT="vi (Linux + Solaris)">
+<SCRIPT LANGUAGE="JavaScript">
+var REMOTE_HOST="(none)";
+</SCRIPT>
+<!-- L.Allison, School of Comp. Sci. and SWE, Monash Uni, Australia 3168 -->
+<!--              Content-Type = text/html;         charset=iso-8859-1 -->
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+
+</HEAD>
+
+<BODY BGCOLOR="#DDDDDD" TEXT="#000000" LINK="#0000FF" VLINK="#400090" ONLOAD="if(top!=self)top.location=self.location;">
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="100%">
+<TR><TD ALIGN="center">
+
+
+
+<H2>Longest Biased Interval and Longest Non-Negative Sum Interval,<BR>
+<NOBR>J. Bioinformatics, 2003</NOBR></H2>
+
+
+</TD></TR>
+</TABLE>
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="100%">
+<TR><TD ALIGN="center" VALIGN="top" WIDTH="10%">
+
+  <TABLE BORDER="1" CELLSPACING="0" CELLPADDING="1"> <!-- left column -->
+  <TR><TD>
+
+    <A HREF="http://www.allisons.org/ll/" TARGET="_top">LA&nbsp;home</A><BR>
+
+<!-- Left  extras for children  NB. relative to children -->
+<A HREF="../../" TARGET="_top">Prog'Lang'</A><BR>
+&nbsp;<A HREF="../../../links/lloyd/ProgLang/Glossary/" TARGET="_top">glossary</A><BR>
+&nbsp;<A HREF="../../../links/lloyd/ProgLang/Java/" TARGET="_top">Java</A><BR>
+
+
+<!-- Left Extras Here -->
+&nbsp;&nbsp;<B>L'B'I'</B><BR>
+&nbsp;&nbsp;<A HREF="../../../tildeAlgDS/1D/Biased/" TARGET="_top">*more</A><BR>
+<BR>
+also&nbsp;see...<BR>
+<A HREF="../../../tildeStrings/">Bioinformatics</A><BR>
+  <!-- Lloyd Allison -->
+  </TD></TR>
+  </TABLE>
+
+</TD><TD ALIGN="left" VALIGN="top" WIDTH="80%">
+
+
+
+
+<DIV ALIGN="center"><TABLE BORDER="1" CELLSPACING="0" CELLPADDING="2"><TR><TD>
+<P>L. Allison.
+<I>Longest Biased Interval and Longest Non-Negative Sum Interval</I>,
+<NOBR>J. Bioinformatics, <B>19</B>(10), pp1294-1295, 1 July 2003</NOBR>,
+[<A HREF="http://dx.doi.org/10.1093/bioinformatics/btg135">doi:10.1093/bioinformatics/btg135</A>]['05]
+[<A HREF="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/19/10/1294?ijkey=27YoYEoJWlDcs&keytype=ref">.pdf@bioinformatics</A>][7/'03] or
+[<A HREF="http://bioinformatics.oxfordjournals.org/cgi/reprint/19/10/1294">.pdf@bioinformatics</A>][7/'03].<BR>
+Also see
+<NOBR>[<A HREF="../../../tildeAlgDS/1D/Biased/" TARGET="_top">more (click)</A>]</NOBR>
+discussion on the algorithm and on related algorithms.
+</P>
+</TD></TR></TABLE></DIV>
+
+<DL>
+<DT><B>Java source file</B>:
+    [<A HREF="Biased.java">Biased.java</A>], and <B>class files</B>:
+    <A HREF="Biased.class">[1]</A>, <A HREF="Biased$indexPair.class">[2]</A>
+<DT><B>To run</B>, e.g.
+<DD><TT>java Biased "AT" 0.77 dataFileName</TT>
+<DD>for a particular figure (here 0.77 "AT"), or ...
+<DD><TT>java Biased "AT" -1 dataFileName</TT>
+<DD>to run through a range of values.
+<DD><B>NB.</B> Make sure that you have a just-in-time compiler if you want to
+    analyse long sequences.
+<DD><B>NB.</B> Characters other than acgtuACGTUrnyRNY are skipped but
+    this is trivial to change.
+<DD>Example of running [<A HREF="#time">time (click)</A>].
+</DL>
+
+<DIV ALIGN="center">
+<IMG SRC="200301figure1b.gif" ALT="graph"><BR>
+--<SUP>&nbsp;</SUP>Figure: cummulative sum, first-below &amp; last-above --
+</DIV>
+<BR>
+
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="2"><TR><TD>
+  Sung Kwon Kim suggested a 3-pass, (always) linear-time algorithm
+  (personnal communication, 28/7/2003).
+  I have coded this up in a program that runs <EM>both</EM> algorithms:
+  [<A HREF="200309/Biased.java">new&nbsp;code&nbsp;.java</A>].
+</TD></TR></TABLE>
+<BR>
+
+
+
+<HR SIZE="2" NOSHADE>
+
+<H3>21/10/2002: Examples from PlasmoDB C.D.,
+<NOBR>seq's dated 2002.8.19 &nbsp;[19/8/2002]</NOBR></H3>
+
+<P><B>NB.</B> <I>Plasmodium falciparum</I> causes malaria.
+Its DNA is 80% AT, contains repetitive patterns and is highly
+[<A HREF="../../../tildeStrings/Compress/2001MBP/">compressible</A>]
+compared to ``most'' other DNA.
+The data files of chromosome sequences 10, 11, 14 contain
+some non-{A,C,G,T} characters, e.g. M={A,C}, W={A,T}, K={G,T} etc..
+For these experiments,
+a read-routine was used that <EM>does read these characters</EM>
+(to maintain position numbering),
+but they were treated as ``regular'' characters,
+not contributing to AT-richness, say, because
+(i)&nbsp;it makes only a little difference unless
+there are many occurrences of such characters, and
+(ii)&nbsp;it is not quite clear what is the <EM>best</EM> way
+to treat some of them anyway
+<NOBR>(e.g. does</NOBR> M count <NOBR>towards AT or not?)</NOBR>.
+In any case, the matter is orthogonal to the algorithm;
+the ``special characters'' can be included in the list of
+desired characters, e.g. <TT>&quot;ATW&quot;</TT>, at your choice.
+</P>
+<P>Running time, on a 900MHz Pentium, Java, Linux,
+for the largest sequence (chr14) is 7 or 8 seconds
+for five passes with different values of f
+and this includes reading the data.
+</P>
+
+<DL>
+<DT><B>Key:</B> &nbsp;
+    &gt;=&lt;min_frac&gt;:
+    [&lt;start&gt;..&lt;end&gt;]
+    (&lt;length&gt;)
+    &lt;beginning&gt;...&lt;ending&gt;
+<DD> &nbsp;
+
+<DT><B>chr1</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr01-2002-8-19-Sanger
+<DD># 643292bp CTAAACCTAAACCTAA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[459134..459485]</TD><TD>(352)</TD><TD>AAAATAATAA...AATAAATAAA</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[458479..461841]</TD><TD>(3363)</TD><TD>TTAACATTTT...TTTATTATAT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[458757..465678]</TD><TD>(6922)</TD><TD>ATGTTTCTAA...TTTATTTAAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[439465..465974]</TD><TD>(26510)</TD><TD>TTAATTGTAA...TCTTTTGATT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[8596..625720]</TD><TD>(617125)</TD><TD>ATTTCTACAC...TATATTAAGA</TD></TR>
+<TR><TD>&gt;=0.75:</TD><TD>[0..643291]</TD><TD>(643292)</TD><TD>CTAAACCTAA...GGAATAGGGT</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr2</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr02-200208019-TIGR
+<DD># 947102bp AACCCTAAACCCTAAACCCTAAACCCTA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[449263..449686]</TD><TD>(424)</TD><TD>TTATTTTAAT...TATATTATTT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[447292..450582]</TD><TD>(3291)</TD><TD>TACAAAATAA...AAAAAAAATA</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[445946..451647]</TD><TD>(5702)</TD><TD>TATATTTTAT...GGAAAAAAAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[807673..840316]</TD><TD>(32644)</TD><TD>ATGAAAATTA...ATTTATCATA</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..947101]</TD><TD>(947102)</TD><TD>AACCCTAAAC...TCAGGGTTCA</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr3</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr03-2002-8-19-Sanger
+<DD># 1060087bp TAAACCCTGAACCCTAAACCCT...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[594855..595306]</TD><TD>(452)</TD><TD>AAAATAAATT...ATTAATAATT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[594084..597349]</TD><TD>(3266)</TD><TD>AAATAAATAA...TTTTGTTAAA</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[590628..597388]</TD><TD>(6761)</TD><TD>AATACTAAAG...ATATACTTAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[76744..100990]</TD><TD>(24247)</TD><TD>AATATTAAAC...AACTCATAAA</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..1060086]</TD><TD>(1060087)</TD><TD>TAAACCCTGA...TCAGGTTTTA</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr4</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr04-2002-8-19-Sanger
+<DD># 1204112bp AACCCTAAACCCTGA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[650061..650262]</TD><TD>(202)</TD><TD>TTTTAATAAT...ATAATTAAAA</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[648539..651828]</TD><TD>(3290)</TD><TD>TATAAACATT...TTTTATATTT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[647731..654304]</TD><TD>(6574)</TD><TD>AACATTTAAA...AATAAAAAAA</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[639114..665595]</TD><TD>(26482)</TD><TD>CAATTTCTAA...TATATTTTTT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[41709..1188699]</TD><TD>(1146991)</TD><TD>TTATTTTTTT...AGTTAAGTTA</TD></TR>
+<TR><TD>&gt;=0.75:</TD><TD>[0..1204111]</TD><TD>(1204112)</TD><TD>AACCCTAAAC...TTAGGGTTTA</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr5</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr05-2002-8-19-Sanger
+<DD># 1343552bp CTAAACCCTGAACCCT...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[208403..208597]</TD><TD>(195)</TD><TD>AAAAAAAAAT...AATAAAATAA</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[454931..458053]</TD><TD>(3123)</TD><TD>CAAATTTTTG...TGGAATATAA</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[453877..459351]</TD><TD>(5475)</TD><TD>TTTATTTTAT...TATAAGAAAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[1304498..1321991]</TD><TD>(17494)</TD><TD>TTTAAAAATG...TGTTTTAATT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..1343551]</TD><TD>(1343552)</TD><TD>CTAAACCCTG...GGTTCAGGGT</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr6</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr06-2002-8-19-Sanger
+<DD># 1377956bp CCTAAACCCTGAACCCTAA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[39936..40118]</TD><TD>(183)</TD><TD>ATAAAATAAA...AAAATTTTAT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[528479..529541]</TD><TD>(1063)</TD><TD>ATTAAAATAA...ATTTTTAGAT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[1015753..1019942]</TD><TD>(4190)</TD><TD>TTATTATTAA...TTAGTTTTAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[1012661..1025787]</TD><TD>(13127)</TD><TD>CAAAACCACC...TTTATGGATT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..1377955]</TD><TD>(1377956)</TD><TD>CCTAAACCCT...AGGGTTTAGG</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr7</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr07-2002-8-19-Sanger
+<DD># 1350452bp AAACCCCAACCCTAAACCCTA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[714118..714370]</TD><TD>(253)</TD><TD>TTATTTTTAA...TAATTAATAT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[713290..715097]</TD><TD>(1808)</TD><TD>AATATATTTA...ATCTTAATTT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[105239..108481]</TD><TD>(3243)</TD><TD>AACATAAATA...ATATTAAAAA</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[67481..86120]</TD><TD>(18640)</TD><TD>TTCACAATTT...AAAATATATT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..1350451]</TD><TD>(1350452)</TD><TD>AAACCCCAAC...TAAGACAGTA</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr8</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr08-2002-08-19-Sanger
+<DD># 1323195bp TCAAATATTCCGAAAACCCTAA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[344230..344437]</TD><TD>(208)</TD><TD>ATTATTTATA...TTTTTTTTTT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[1022302..1023765]</TD><TD>(1464)</TD><TD>TTTTATATGA...ATTTAAAAAA</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[378658..381469]</TD><TD>(2812)</TD><TD>ATTTTGATAA...TTTTTAGTTT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[500245..516452]</TD><TD>(16208)</TD><TD>TATTAATTTA...AATATATATT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..1323194]</TD><TD>(1323195)</TD><TD>TCAAATATTC...TTAGGGTTGA</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr9</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr09-2002-8-19-Sanger
+<DD># 1541723bp AACCCTGAACCCTAAA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[1130660..1130874]</TD><TD>(215)</TD><TD>ATAAATTAAT...TATATTAATA</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[1241781..1244923]</TD><TD>(3143)</TD><TD>TAATTATAAA...AATACATTTA</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[323390..329864]</TD><TD>(6475)</TD><TD>TAATTATATG...TTATCATAAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[1373697..1416898]</TD><TD>(43202)</TD><TD>TATATTTTGA...TATTTATTTT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..1541722]</TD><TD>(1541723)</TD><TD>AACCCTGAAC...GTTTAGGGTT</TD></TR>
+</TABLE>
+#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr10</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr10-2002-8-19-TIGR
+<DD># 1694445bp CTAAACCCTGAACCC...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[937258..937557]</TD><TD>(300)</TD><TD>TATATAATTT...ATATTATATT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[936412..938559]</TD><TD>(2148)</TD><TD>ATTTATTAAT...TAAAACTTAA</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[934530..938484]</TD><TD>(3955)</TD><TD>AATAAAATAT...TTTTTATGAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[87704..106686]</TD><TD>(18983)</TD><TD>AATATGAACA...ACCATATAAA</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..1694444]</TD><TD>(1694445)</TD><TD>CTAAACCCTG...TTTTAGGGTT</TD></TR>
+</TABLE>
+#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr11</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr11-2002-8-19-TIGR
+<DD># 2035250bp AACCCTAAACCC...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[829543..830061]</TD><TD>(519)</TD><TD>TATTAAATAT...TAAATATTTA</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[829012..831558]</TD><TD>(2547)</TD><TD>AATGTAAATA...TACTTATATT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[827029..831902]</TD><TD>(4874)</TD><TD>ATAAACAAAT...AAATATATAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[114132..140968]</TD><TD>(26837)</TD><TD>TATTTGATAA...TATTTTTTAA</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..2035249]</TD><TD>(2035250)</TD><TD>AACCCTAAAC...TTGGGTTTAG</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr12</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr12-2002-8-19-Stanford
+<DD># 2271477bp CTGAACCCTAAACCCTA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[1282796..1283108]</TD><TD>(313)</TD><TD>AAATAAATAA...AAATAATATT
+<TR><TD>&gt;=0.95:</TD><TD>[1281883..1285109]</TD><TD>(3227)</TD><TD>AAAAAAAACG...ATATATATTT
+<TR><TD>&gt;=0.9:</TD><TD>[1279598..1285959]</TD><TD>(6362)</TD><TD>ATTTTTTTTA...ATTTTAAATA
+<TR><TD>&gt;=0.85:</TD><TD>[2156101..2180543]</TD><TD>(24443)</TD><TD>TAATTAGAAG...TATATTGTAT
+<TR><TD>&gt;=0.8:</TD><TD>[0..2271476]</TD><TD>(2271477)</TD><TD>CTGAACCCTA...AGAGTAAGTA
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr13_1</B> (NB)
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr13_1-2002-8-19-Sanger
+<DD># 2729159bp AACCCTAAACCTAAACCCTAA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[918090..918461]</TD><TD>(372)</TD><TD>AAATATTATA...TAAATATATA</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[1766404..1767423]</TD><TD>(1020)</TD><TD>ATATTATATT...TTATTATTAT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[1817357..1822403]</TD><TD>(5047)</TD><TD>AATTAATATA...ATAATTTTTA</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[1809128..1827314]</TD><TD>(18187)</TD><TD>ATTTTTACTT...TACCGTAATT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..2729158]</TD><TD>(2729159)</TD><TD>AACCCTAAAC...GTTTAGGGTT</TD></TR>
+</TABLE>
+<DD>#--- end --
+<DD> &nbsp;
+
+<DT><B>chr13_2</B> (NB)
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr13_2-2002-8-19-Sanger
+<DD># 18168bp TATTTTAGTTTATATTTATTACA...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[10716..10816]</TD><TD>(101)</TD><TD>TTAATTATAA...ATTAAAATAT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[10604..10816]</TD><TD>(213)</TD><TD>AAAAGTATTT...ATTAAAATAT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[9293..9869]</TD><TD>(577)</TD><TD>AATAAAAAAA...TATATAAATT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[9070..12951]</TD><TD>(3882)</TD><TD>TTACTATATA...AATAAGATAT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[8084..18162]</TD><TD>(10079)</TD><TD>AATGCCCCCA...TAAAAAAATA</TD></TR>
+<TR><TD>&gt;=0.75:</TD><TD>[0..18167]</TD><TD>(18168)</TD><TD>TATTTTAGTT...AAATAGCAAC</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>chr14</B>
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = chr14-2002-8-19-TIGR
+<DD># 3291006bp CTGAACCCTAAACCCTAAAC...
+<TABLE CELLSPACING="0" CELLPADDING="2">
+<TR><TD>&gt;=1.0:</TD><TD>[1072223..1072590]</TD><TD>(368)</TD><TD>TATATTAATA...AAATATAATT</TD></TR>
+<TR><TD>&gt;=0.95:</TD><TD>[1071769..1073716]</TD><TD>(1948)</TD><TD>TATAAAATAT...TTGTTTTATT</TD></TR>
+<TR><TD>&gt;=0.9:</TD><TD>[2716237..2720216]</TD><TD>(3980)</TD><TD>TTTTTAATAA...CTCACAGAAT</TD></TR>
+<TR><TD>&gt;=0.85:</TD><TD>[2792750..2814996]</TD><TD>(22247)</TD><TD>ATCTAAAATG...TTTTTTTTTT</TD></TR>
+<TR><TD>&gt;=0.8:</TD><TD>[0..3291005]</TD><TD>(3291006)</TD><TD>CTGAACCCTA...GTTTAGGGTT</TD></TR>
+</TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+</DL>
+
+
+
+<HR SIZE="2" NOSHADE>
+<H3>17/10/2002: Examples from Malaria Information Resource (CD) Release 5</H3>
+
+<DL>
+<DT><B>Key:</B> &gt;=&lt;min_frac&gt;: [&lt;start&gt;..&lt;end&gt;]
+                (&lt;length&gt;) &lt;beginning&gt;...&lt;ending&gt;
+<DD> &nbsp;
+
+<DT><B>Example chr5</B>: /mnt/cdrom1/genome/sanger/<B>chr5</B>/z010701f.txt
+    of 26 Aug 2001
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = c5-z010701f.txt
+<DD># 1343552bp CTAAACCCTGAACCCTA...
+ <TABLE CELLSPACING="0" CELLPADDING="2">
+ <TR><TD>&gt;=1.0:</TD><TD>[208403..208597]</TD><TD>(195)</TD><TD>AAAAAAAAAT...AATAAAATAA</TD></TR>
+ <TR><TD>&gt;=0.95:</TD><TD>[454931..458053]</TD><TD>(3123)</TD><TD>CAAATTTTTG...TGGAATATAA</TD></TR>
+ <TR><TD>&gt;=0.9:</TD><TD>[453877..459351]</TD><TD>(5475)</TD><TD>TTTATTTTAT...TATAAGAAAT</TD></TR>
+ <TR><TD>&gt;=0.85:</TD><TD>[1304498..1321991]</TD><TD>(17494)</TD><TD>TTTAAAAATG...TGTTTTAATT</TD></TR>
+ <TR><TD>&gt;=0.8:</TD><TD>[0..1343551]</TD><TD>(1343552)</TD><TD>CTAAACCCTG...GGTTCAGGGT</TD></TR>
+ </TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+
+<DT><B>Example chr10</B>: /mnt/cdrom1/genome/tigr/<B>chr10</B>/pfa1_10.txt
+    of 26 Aug 2001
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = pfa1_10.txt
+<DD># 1694401bp CTAAACCCTGAACC...
+ <TABLE CELLSPACING="0" CELLPADDING="2">
+ <TR><TD>&gt;=1.0:</TD><TD>[937258..937557]</TD><TD>(300)</TD><TD>TATATAATTT...ATATTATATT</TD></TR>
+ <TR><TD>&gt;=0.95:</TD><TD>[936412..938559]</TD><TD>(2148)</TD><TD>ATTTATTAAT...TAAAACTTAA</TD></TR>
+ <TR><TD>&gt;=0.9:</TD><TD>[934530..938484]</TD><TD>(3955)</TD><TD>AATAAAATAT...TTTTTATGAT</TD></TR>
+ <TR><TD>&gt;=0.85:</TD><TD>[87704..106686]</TD><TD>(18983)</TD><TD>AATATGAACA...ACCATATAAA</TD></TR>
+ <TR><TD>&gt;=0.8:</TD><TD>[0..1694400]</TD><TD>(1694401)</TD><TD>CTAAACCCTG...TTTTAGGGTT</TD></TR>
+ </TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>Example chr11</B>: /mnt/cdrom1/genome/tigr/<B>chr11</B>/pfa1_11.txt
+    of 26 Aug 2001
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[1] = -1
+<DD># argv[2] = pfa1_11.txt
+<DD># 2035244bp <FONT SIZE="2">AACCCTAAACCCTGAACCCTGAACCCTGAA...</FONT>
+ <TABLE CELLSPACING="0" CELLPADDING="2">
+ <TR><TD>&gt;=1.0:</TD><TD>[829539..830057]</TD><TD>(519)</TD><TD>TATTAAATAT...TAAATATTTA</TD></TR>
+ <TR><TD>&gt;=0.95:</TD><TD>[829008..831554]</TD><TD>(2547)</TD><TD>AATGTAAATA...TACTTATATT</TD></TR>
+ <TR><TD>&gt;=0.9:</TD><TD>[827025..831898]</TD><TD>(4874)</TD><TD>ATAAACAAAT...AAATATATAT</TD></TR>
+ <TR><TD>&gt;=0.85:</TD><TD>[114130..140966]</TD><TD>(26837)</TD><TD>TATTTGATAA...TATTTTTTAA</TD></TR>
+ <TR><TD>&gt;=0.8:</TD><TD>[0..2035243]</TD><TD>(2035244)</TD><TD>AACCCTAAAC...TTGGGTTTAG</TD></TR>
+ </TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+<DT><B>Example chr12</B>: /mnt/cdrom1/genome/stanford/<B>chr12</B>/z010524.txt
+    (&gt;Chr12Contig01.010524 2270790 bp) of 26 Aug 2001
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = c12-z010524f.txt
+<DD># 2270790bp CTAAACCCTGAACCCTAAAC...
+ <TABLE CELLSPACING="0" CELLPADDING="2">
+ <TR><TD>&gt;=1.0:</TD><TD>[1281901..1282213]</TD><TD>(313)</TD><TD>AAATAAATAA...AAATAATATT</TD></TR>
+ <TR><TD>&gt;=0.95:</TD><TD>[1280988..1284214]</TD><TD>(3227)</TD><TD>AAAAAAAACG...ATATATATTT</TD></TR>
+ <TR><TD>&gt;=0.9:</TD><TD>[1278703..1285042]</TD><TD>(6340)</TD><TD>ATTTTTTTTA...TTAGAAGAAA</TD></TR>
+ <TR><TD>&gt;=0.85:</TD><TD>[2155396..2179822]</TD><TD>(24427)</TD><TD>TAATTAGAAG...GAAAATGAAT</TD></TR>
+ <TR><TD>&gt;=0.8:</TD><TD>[0..2270789]</TD><TD>(2270790)</TD><TD>CTAAACCCTG...GTAAGGAATG</TD></TR>
+ </TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+
+
+<DT><B>Example chr14</B>: /mnt/cdrom1/genome/tigr/<B>chr14</B>/pfa1_14.txt
+    of 26 Aug 2001
+<DD>#--- Biased.java, L.A., CSSE, Monash, .au ---
+<DD># argv[0] = AT
+<DD># argv[1] = -1
+<DD># argv[2] = pf-chr14.txt
+<DD># 3290890bp <FONT SIZE="2">CTGAACCCTAAACCCTAAACCCTAAACCCTAA...</FONT>
+ <TABLE CELLSPACING="0" CELLPADDING="2">
+ <TR><TD> &gt;=1.0 : </TD><TD> [1072219..1072586] </TD><TD> (368) </TD><TD> TATATTAATA...AAATATAATT </TD></TR>
+ <TR><TD> &gt;=0.95: </TD><TD> [1071765..1073712] </TD><TD> (1948) </TD><TD> TATAAAATAT...TTGTTTTATT </TD></TR>
+ <TR><TD> &gt;=0.9 : </TD><TD> [2716123..2720102] </TD><TD> (3980) </TD><TD> TTTTTAATAA...CTCACAGAAT </TD></TR>
+ <TR><TD> &gt;=0.85: </TD><TD> [2792661..2814887] </TD><TD> (22227) </TD><TD> ATCTTGTAAA...TTTCCCCATA </TD></TR>
+ <TR><TD> &gt;=0.8 : </TD><TD> [0..3290889] </TD><TD> (3290890) </TD><TD> CTGAACCCTA...GTTTAGGGTT </TD></TR>
+ </TABLE>
+<DD>#--- end ---
+<DD> &nbsp;
+<DD><B><A NAME="time">Time</A></B>
+    (chr14, bayes&nbsp; 900mHz Intel + Linux):
+    <NOBR>real 0m7.799s;</NOBR>
+    <NOBR>user 0m7.250s;</NOBR>
+    <NOBR>sys  0m0.340s.</NOBR>
+    Note that the time to read the input file was
+    a significant part of the elapsed time.
+</DL>
+
+
+
+</TD><TD ALIGN="center" VALIGN="top" WIDTH="10%">
+
+
+
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="1"> <!-- right column -->
+<TR><TD>
+<FONT SIZE="-1">window on the wide world:</FONT><BR>
+
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3" BGCOLOR="#AAFFAA" WIDTH="100%">
+<TR><TD>
+
+<SCRIPT LANGUAGE="JavaScript">
+function locale()
+ { var len=REMOTE_HOST.length;
+   if(len>0 && REMOTE_HOST.lastIndexOf('.')==len-1)
+   REMOTE_HOST=REMOTE_HOST.substring(0,len-1);
+   if(REMOTE_HOST.lastIndexOf('.')==REMOTE_HOST.length-3)
+   return REMOTE_HOST.substring(REMOTE_HOST.length-2).toLowerCase();
+   else return 'us';
+ }//locale
+
+function showAmaz2007(str)
+ { var part = str.split('|'), // part[0] should be keyw's
+   usTemplate = '<' + 'a href="http://www.amazon.com/gp/product/XXX?ie=UTF8&tag=fourwheeldrivein&linkCode=as2&camp=1789&creative=9325&creativeASIN=XXX">YYY<' + '/a>',
+   ukTemplate = '<' + 'a href="http://www.amazon.co.uk/gp/product/XXX?ie=UTF8&tag=fourwheeldriv-21&linkCode=as2&camp=1634&creative=6738&creativeASIN=XXX">YYY<' + '/a>';
+   if(part.length < 4) part[3] = ''; // post link
+   if(part.length < 5) part[4] = ''; // locale
+   var template = usTemplate;
+   if(locale() == 'uk')template = ukTemplate;  // ?
+   if(part[4] == 'uk') template = ukTemplate;  // overrides
+   if(part[4] == 'us') template = usTemplate;  // overrides
+   while(true)
+    { var p=template.indexOf('XXX'); if(p < 0) break;
+      template=template.substring(0,p)+part[1]+template.substring(p+3);
+   }
+   while(true)
+    { var p=template.indexOf('YYY'); if(p < 0) break;
+      template=template.substring(0,p)+part[2]+template.substring(p+3);
+    }
+   document.writeln(template + '<' + 'BR><'
+     + 'FONT SIZE="-1">' + part[3] + '<' + '/FONT>');
+ }//showAmaz2007
+
+function doAmaz2007()
+{var url=document.URL+"$",
+     dflt="zzz|0525951911|The Darwin Awards:|Countdown to Extinction";
+ var items = new Array( "/csse/$,"+dflt,
+ "/AI/,MDL,Stat|0387261095|The Basics of S-Plus|Krause and Olson",
+ "/AI/,MML,MDL,Stat|1584883871|Bayesian Artificial Intelligence|Korb and Nicholson",
+ "/AI/,MML,MDL,Stat|0387954570|Modern Applied Statistics with S|Venables",
+ "AlgDS,Algorithm,/CSC,/csse/,BIB|0201485419|The Art of Computer Programming, Vols.1-3|Donald Knuth",
+ "AlgDS,/CSC,/csse/|0201000237|Data Structures and Algorithms|Aho et al|us",
+ "AlgDS,Algorithm,BIB,/C/,/CSC,CSE2304|0201756080|Algorithms in C|Sedgwick",
+ "AlgDS,Algorithm,BIB,/C/,/CSC,CSE2304|0201657880|Programming Pearls|Jon Bentley",
+ "AlgDS,Algorithm|0262032937|Introduction to Algorithms|Cormen et al",
+ "AlgDS,Algorithm,Java/,Java2,CSE2304|0321370139|Data Structures and Algorithm Analysis in Java|M.A.Weiss",
+ "Bioinf,deString|1584886420|An Introduction to Systems Biology|U.Alon",
+ "Bioinf,deString,AlgDS,Algorithm|0262101068|An Introduction to Bioinformatics Algorithms|Jones and Pevzner",
+ "Bioinf,deString,DP/|0199277877|Introduction to Bioinformatics|Arthur Lesk",
+ "Computers,BIB|019284055X|Colossus: The Secrets of Bletchley Park's Code Breaking Computers|Jack Copeland",
+ "FP,Lambda|0954300653|An Introduction To Lambda Calculi|C.Hankin",
+ "Haskell,FP,Lambda|0521692695|Programming in Haskell|Graham Hutton",
+ "Java/,Java2,InterNet,/CSC|0596007736|Java in a Nutshell|David Flanagan",
+ "JavaScript,InterNet|0596101996|JavaScript: The Definitive Guide|David Flanagan",
+ "Lang,Syntax,Compil,Interp,CSE3322|0201100886|Compilers: Principles, Techniques, and Tools|Aho, Sethi and Ullman",
+ "Lang,Syntax,Compil,Java/,Java2|052182060X|Modern Compiler Implementation in Java|Appel and Palsberg",
+ "Logic,Prolog,/AI/|3540629718|Clause and Effect: Prolog Programming|W.F.Clocksin",
+ "Math,AlgDS,Logic|1930190867|Discrete Mathematics for Computer Science|K.P.Bogart",
+ "Math,Numer,/csse/,AlgDS,Logic|0201558025|Concrete Mathematics: A Foundation for Computer Science|Graham, Knuth, Patashnik",
+ "MML,MDL,Stats,Wallace,CSC4,/Gas/,Bayes,Fisher,Ockham/|038723795X|Statistical and Inductive Inference by Minimum Message Length|Chris Wallace",
+ "MDL,Stats|0262072815|The Minimum Description Length Principle|Grunwald",
+ "Prolog,/AI/|0201403757|Prolog Programming for Artificial Intelligence|Ivan Bratko",
+ "Propositional,Boolean,Digital,Wff|013198926X|Logic and Computer Design Fundamentals|Mano and Kime",
+ "SML,FP/$,Lambda|052156543X|ML for the Working programmer|Larry Paulson",
+ "Film|B0007TKNOM|Quatermass|BBC DVD|uk",
+ "Film,Andromeda|B000JLTE5C|A for Andromeda|BBC DVD|uk",
+ "Film,Andromeda|B000FPV8IS|The Andromeda Anthology|(1961) DVD|uk",
+ "tildeLand,/4/|B0001Y4LBY|The Gods Must Be Crazy|DVD|us",
+ "tildeLand,/4/|1859604374|Land Rover: Simply the Best|Martin Hodder",
+ "tildeLand,/4/|1861265581|Land Rover, Series-1 to Freelander|Graham Robson",
+ "/csse/,Semantic,Publication,Seminar,BIB,Interp,Lambda|0521314232|A Practical Introduction to Denotational Semantics|L.Allison"
+ );
+ // document.writeln(items.length + "_items");  //debug
+ var i, numMatch = 0, candidate = new Array();
+ for(i = 0; i < items.length; i++)
+  { var the_item = items[i].split("|");
+    var keys     = the_item[0].split(",");
+    var j;
+    for(j = 0; j < keys.length; j++)
+     { if(url.indexOf(keys[j]) >= 0)
+        { candidate[numMatch]=i; numMatch++;  break; }
+  }  }//for j, for i
+ // document.writeln(numMatch + "_match");  //debug
+ if(numMatch <= 0) showAmaz2007(dflt);
+ else
+  { var nM=numMatch, nth;
+    var numShow=numMatch > 4 ? 3 : 2;
+    for(nth=1; nth <= Math.min(numShow,numMatch); nth++)
+     { var choice = Math.floor((nM - 0.0001) * Math.random());
+       // document.writeln(' choice_' + choice ); // debug
+       if(choice < 0) choice = 0;
+       else if(choice >= nM) choice = nM - 1;
+       if(nth>1) document.writeln('<'+'HR SIZE="1" NOSHADE>');
+       showAmaz2007(items[candidate[choice]]);
+       nM--; candidate[choice]=candidate[nM]; // !
+  } }
+    document.write( ' <' + 'FONT COLOR="#999999" SIZE="1">' + numMatch + '<' + '/FONT>');
+    //  document.write( ' <' + 'FONT COLOR="#999999" SIZE="1">' + locale() + '<' + '/FONT>');
+}//doAmaz2007
+
+doAmaz2007();
+</SCRIPT>
+
+<NOSCRIPT>
+<!-- 3/2009 -->
+<FONT SIZE="+1">
+<A HREF="http://www.amazon.com/gp/product/0143010336?ie=UTF8&tag=fourwheeldrivein&linkCode=as2&camp=1789&creative=9325&creativeASIN=0143010336">The Darwin Awards V:</A>
+</FONT>
+Next Evolution<BR>
+</NOSCRIPT>
+
+<!--
+0143010336 The Darwin Awards V:Next Evolution      (2008)
+0525949607 The Darwin Awards 4: Intelligent Design (2006)
+0618680004 The God Delusion, Richard Dawkins
+0761122745 Non Campus Mentis, including Florence of Arabia
+-->
+
+<!-- ====================================================================== -->
+</TD></TR></TABLE>
+<BR>
+
+
+
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3" WIDTH="100%">
+<TR><TD BGCOLOR="#FFFFCC">
+<B>
+<A HREF="http://www.allisons.org/ll/Computing/Misc/2008-rankings/" TARGET="_top"
+>Computer Science Education Week</A>
+</B>
+</TD></TR>
+</TABLE>
+<BR>
+
+
+
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3" WIDTH="100%">
+<TR><TD>
+<A HREF="http://www.linux.org/" TARGET="_top">Linux</A><BR>
+<FONT SIZE="-1">free op. sys.</FONT><BR>
+
+<A HREF="http://www.openoffice.org/" TARGET="_top">OpenOffice</A><BR>
+<FONT SIZE="-1">free office suite,<BR>
+ver&nbsp;3.1+</FONT><BR>
+
+<A HREF="http://www.gimp.org/" TARGET="_top">The GIMP</A><BR>
+<FONT SIZE="-1">~ free photoshop</FONT><BR>
+
+<A HREF="http://www.mozilla.com/" TARGET="_top">Firefox</A><BR>
+<FONT SIZE="-1">web browser</FONT><BR>
+
+<A HREF="http://flashblock.mozdev.org/" TARGET="_top">FlashBlock</A><BR>
+<FONT SIZE="-1">like it says!</FONT><BR>
+</TD></TR></TABLE>
+
+
+
+
+
+    <!-- check for a recent-enough web-browser version -->
+    <B><SCRIPT LANGUAGE="JavaScript">
+    <!--
+       var isOldBrowser = true,
+           versionStr   = navigator.appVersion,
+           appCodeName  = navigator.appCodeName.toLowerCase();
+       if( appCodeName.indexOf('mozilla') >= 0  &&
+           versionStr != null && versionStr.length > 0 )
+        { var criticalVersion = 4.7; // recommended by m0n@sh uni .au
+          var version = criticalVersion-0.001,  i,  numDot = 0,  stillOK = true;
+          for( i = 0; i < versionStr.length; i++ ) // seek a number
+           { if( versionStr.charAt(i) == '.' )
+              { numDot ++ ;  stillOK = numDot < 2; }
+             else
+                stillOK = versionStr.charAt(i) >= '0' && versionStr.charAt(i) <= '9';
+             if( ! stillOK ) break; // ...charAt(i) is bad
+           }//for
+          if( i > numDot ) // i>0, have a valid number in version[0..i-1]
+             version = new Number( versionStr.substring(0,i) ) - 0;
+          isOldBrowser = version < criticalVersion;
+        }//if
+       if( isOldBrowser )
+        { document.writeln( '<' + 'BR>' );
+          document.writeln( '<' + 'TABLE BORDER="1" CELLSPACING="0" WIDTH="100%"> ' );
+          document.writeln( '<' + 'TR><' + 'TD BGCOLOR="#FFCCCC">' );
+          document.writeln( '<' + 'FONT SIZE="+1">Upgrade your old web ' );
+          document.writeln( '<' + 'A HREF="http://browsers.net' + 'scape.com/">[browser]<' + '/A>' );
+          document.writeln( '<' + 'A HREF="http://www.moz' + 'illa.org/">[now]<' + '/A>!<' + '/FONT>' );
+          document.writeln( '<' + '/TR> <' + '/TD> <' + '/TABLE>' );
+        }//if
+    // -->
+    </SCRIPT></B>
+
+
+
+<!-- Right extras for children  NB. relative to children -->
+
+<BR>
+<TABLE WIDTH="100%" BORDER="1" CELLSPACING="0" CELLPADDING="3">
+<TR><TD BGCOLOR="#CCCC99"><FONT SIZE="+2">
+   <A HREF="http://java.sun.com/">Java</A></FONT><BR>
+   &nbsp;<A HREF="http://java.sun.com/javase/reference/api.jsp">API</A><BR>
+</TD></TR></TABLE>
+
+
+<!-- Right Extras Here -->
+  </TD></TR>
+  </TABLE>
+
+</TD></TR>
+</TABLE>
+
+
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="2" WIDTH="100%">
+<TR><TD ALIGN="center">
+<HR SIZE="4" NOSHADE> <!-- --------------------------------------subtable--->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="1">
+<TR><TD><FONT SIZE="-1">
+
+<ADDRESS><A HREF="http://www.csse.monash.edu.au/~lloyd/README.html" TARGET="_top">&copy;</A>
+L. Allison &nbsp;
+<A HREF="http://www.allisons.org/ll/" TARGET="_top">http://www.allisons.org/ll/</A> &nbsp;
+<NOBR>(<U>or as otherwise indicated</U>),</NOBR><BR>
+Faculty of Information Technology (Clayton),
+<NOBR>Monash University,</NOBR>
+<NOBR>Australia 3800</NOBR>
+(6/'05&nbsp;was
+<NOBR>School of Computer Science</NOBR> and Software Engineering,
+<NOBR>Fac. Info. Tech.,</NOBR>
+<NOBR>Monash University,</NOBR>
+</FONT><FONT SIZE="-2">was
+<NOBR>Department of Computer Science,</NOBR>
+<NOBR>Fac. Comp. &amp; Info. Tech.,</NOBR>
+'89&nbsp;was
+<NOBR>Department of Computer Science</NOBR>,
+<NOBR>Fac. Sci.,</NOBR>
+'68-'71&nbsp;was
+<NOBR>Department of Information Science,</NOBR>
+<NOBR>Fac. Sci<A HREF="./">.</A>)</NOBR></FONT>
+</ADDRESS>
+
+<FONT SIZE="-1">
+Created with &quot;vi (Linux + Solaris)&quot;,&nbsp;
+charset=iso-8859-1,&nbsp;
+<NOBR>fetched Friday, 04-Mar-2011 20:03:16 EST.</NOBR>
+</FONT>
+</TD></TR>
+</TABLE>
+<HR SIZE="4" NOSHADE> <!-- --------------------------------------subtable--->
+</TD></TR>
+</TABLE>
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,413 @@
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>i-GSEA4GWAS Input</title>
+		<link href='css/style_original.css' rel='stylesheet' type='text/css' />
+		<link href='css/methycancer.css' rel='stylesheet' type='text/css' />
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script language='JavaScript' src='js/overlib.js'
+			type='text/javascript'></script>
+		<script language="javascript" type="text/javascript">
+	$(document).ready(
+			function() {
+				var shows = $(".show").css("border", "1px solid black").width(
+						"250px").css("z-index", "99").css("background-color",
+						"#255255200").css("color", "black");
+				shows.hide();
+				var images = $(".image");
+				var spanNode;
+				images.mouseover( function() {
+					var image = $(this);
+					spanNode = image.parent().next(".show");
+					spanNode.show("slow");
+				})
+
+				images.mouseout( function() {
+
+					spanNode.hide();
+				})
+			})
+
+	function nonSnp() {
+		if (document.run.datatype[1].checked == true
+				|| document.run.datatype[2].checked == true) {
+			var obj = document.getElementsByName("annotation");
+			obj[0].disabled = true;
+			obj[1].disabled = true;
+			obj[2].disabled = true;
+			obj[3].disabled = true;
+			obj[4].disabled = true;
+			obj[5].disabled = true;
+			document.run.example.checked = false;
+			document.run.example.disabled = true;
+		}
+		if (document.run.datatype[0].checked == true) {
+			var obj = document.getElementsByName("annotation");
+			obj[0].disabled = false;
+			obj[1].disabled = false;
+			obj[2].disabled = false;
+			obj[3].disabled = false;
+			obj[4].disabled = false;
+			obj[5].disabled = false;
+			document.run.example.checked = true;
+			document.run.example.disabled = false;
+		}
+	}
+	function lock() {
+		document.run.action = "input.do";
+		document.run.submit();
+		//document.run.submit1.disabled = true;
+		//document.run.submit2.disabled = true;
+		var obj1 = $("#submit1");
+		obj1.html("The data is uploading...");
+		var obj2 = $("#submit2");
+		obj2.html("The data is uploading...");
+	}
+
+	function unableExample() {
+		document.run.example.checked = false;
+	}
+</script>
+	</head>
+	<body>
+		
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>i-GSEA4GWAS Home</title>
+        <link href='css/style_original.css' rel='stylesheet' type='text/css' />	
+    </head>
+    <body>
+    <table width="960" border="0" cellpadding="0" cellspacing="0" align="center" class="header">
+        <tr bgcolor="#5081BE" >
+            <td align="left" height="25">		
+			&nbsp;&nbsp;&nbsp;
+		<a href="/index.jsp">Home</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/docs/documents.jsp">Documents</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/api.jsp">Template Program</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/citation.jsp">Citation</a>
+            </td>
+        </tr>
+        <tr><td colspan="4" align="center"><img src="/images/title_bar.jpg"></td></tr>
+    </table>    
+    </body>
+</html>
+
+		<TABLE height="100%" cellSpacing=0 cellPadding=0 width="975"
+			ALIGN="center" border=0 CLASS="methycancer">
+			<TR>
+				<TD vAlign=top>
+					<FORM name=run method="post" encType="multipart/form-data">
+						<IMG src="images/divider.gif" border=0>
+						<DIV style="PADDING-BOTTOM: 8px; MARGIN: 5px; WIDTH: 100%; PADDING-TOP: 1px">
+							
+							&nbsp;&nbsp;
+							<font color="#0D608A" size="3"><b><label id="submit1"></label>
+							</b> </font>
+							<TABLE width="99%" BORDER="0">
+								<TR>
+									<TD class=sect_td_class colSpan=2>
+										<DIV id=blastall_input>
+											<TABLE width="99%" border=0>
+                                                                                            <tr><td><font size="2" color="#0D608A"><b>Demo Run</b></font></td></tr>
+												<TR>
+													<TD class=param_left_class>
+														<FONT class=param_nam_class><input type="checkbox"
+																name="example" value="example" checked> Load demo
+															data</FONT>
+														<a href="docs/checkExampleData.jsp" target="_blank"
+															title="Help you to understand the result"><img
+														class="image" src="images/help2.png" border="0"></a>
+														<BR>
+													</TD>
+													
+												</TR>
+												<TR>
+													<TD class=param_left_class>
+														<FONT class=param_nam_class>Job name: </FONT><input type="text" name="jobname" class="gseainput" value="untitled">
+													</TD>
+													<TD class=param_right_class>
+														<FONT class=param_nam_class>Email</FONT> (links for result
+											will be sent to your email)<b>:</b> <input type="input" name="email" value="">
+														<br><br>
+													</TD>
+												</TR>
+                                <tr><td class=param_left_class><INPUT class=param_input_class type=submit value=" RUN "
+								name=submit1 onclick=lock();>
+							&nbsp;&nbsp;
+							<INPUT class=param_input_class type=reset value=" CLEAR "
+								name=reset></td></tr>
+											</TABLE>
+										</DIV>
+									</TD>
+								</TR>
+								<tr>
+									<td>
+										&nbsp;
+									</td>
+								</tr>
+								<TR>
+									<TD class=sect_td_class colSpan=2>
+										<DIV id=blastall_input>
+											<FONT class=sect_des_class>Upload your GWAS data <a
+												href="docs/tutorial.jsp?#input_data" target="_blank"><img
+														class="image" src="images/help2.png" border="0"
+														alt="Input File Format"> </a> </FONT>
+											<BR>
+											<TABLE width="99%" border=0>
+												<TR>
+													<TD class=param_left_class>
+														Select data type:
+														<input type="radio" name="datatype" value="SNP" checked
+															onclick=
+	nonSnp();
+>
+														SNP &nbsp;&nbsp;
+														<input type="radio" name="datatype" value="CNV"
+															onclick=
+	nonSnp();
+>
+														CNV &nbsp;&nbsp;
+														<input type="radio" name="datatype" value="Gene"
+															onclick=
+	nonSnp();
+>
+														Gene
+														<br>
+														<BR>
+													</TD>
+												</tr>
+												<tr>
+													<TD class=param_left_class>
+														GWAS file:
+														<input type="file" name="datatypefile" value="" size="30"
+															onclick=
+	unableExample();;
+/>
+														&nbsp;&nbsp;
+														<BR>
+													</TD>
+													<TD class=param_right_class>
+														<FONT class=param_des_class> <input type="checkbox"
+																name="logtrans"> -logarithm transformation (necessary ONLY
+															for <i>P</i>-value data) </FONT>
+														<BR>
+													</TD>
+												</TR>
+												<!---->
+											</TABLE>
+										</DIV>
+									</TD>
+								</TR>
+								<tr>
+									<td>
+										&nbsp;
+									</td>
+								</tr>
+								<TR>
+									<TD class=sect_td_class colSpan=2>
+										<DIV id=blastall_input>
+											<FONT class=sect_des_class>Select mapping rules of SNPs->genes<a href="docs/tutorial.jsp?#annotation"
+												target="_blank"><img class="image"
+														src="images/help2.png" border="0" alt="Annotation Notes">
+											</a> </FONT>
+											<BR>
+											<TABLE width="99%" border=0>
+												<TR>
+													<TD class=param_left_class>
+														<FONT class=param_des_class> <input type="radio"
+																name="annotation" value="500kbgene" checked>
+															500kb upstream and downstream of gene </FONT>
+														<BR>
+													</TD>
+													<TD class=param_left_class>
+														<FONT class=param_des_class> <input type="radio"
+																name="annotation" value="100kbgene">
+															100kb upstream and downstream of gene </FONT>
+														<BR>
+													</TD>
+												</TR>
+												<TR>
+													<TD class=param_left_class>
+														<FONT class=param_des_class> <input type="radio"
+																name="annotation" value="20kbgene">
+																20kb upstream and downstream of gene </FONT>
+														</FONT>
+													</TD>
+													<TD class=param_right_class>
+														<FONT class=param_des_class> <input type="radio"
+																name="annotation" value="5kbgene"> 5kb upstream
+															and downstream of gene </FONT>
+													</TD>
+													
+												</TR>
+												<TR>
+													<TD class=param_left_class>
+														<FONT class=param_des_class> <input type="radio"
+																name="annotation" value="withingene">
+																within gene 
+														</FONT>
+													</TD>
+													<TD class=param_right_class colspan="2">
+														<FONT class=param_des_class> <input type="radio"
+																name="annotation" value="functional">
+															functional SNP (nonsynonymous, stop gained/lost, frame shift,
+															essential splice site, regulatory region) </FONT>
+													</TD>
+												</TR>
+											</TABLE>
+										</DIV>
+									</TD>
+								</TR>
+								<tr>
+									<td>
+										&nbsp;
+									</td>
+								</tr>
+								<TR>
+									<TD class=sect_td_class colSpan=2>
+										<DIV id=blastall_input>
+											<FONT class=sect_des_class>Gene set database <a
+												href="docs/tutorial.jsp?#geneSet" target="_blank"><img
+														class="image" src="images/help2.png" border="0"
+														alt="Gene Set Notes"> </a> </FONT>
+											<BR>
+											<TABLE width="99%" border=0>
+												<TR>
+													<TD COLSPAN="2">
+														<input type="checkbox" name="geneset" value="pathway"
+															checked>
+														canonical pathways &nbsp;&nbsp;
+														<input type="checkbox" name="geneset" value="gobg">
+														GO biological process &nbsp;&nbsp;
+														<input type="checkbox" name="geneset" value="gomf">
+														GO molecular function &nbsp;&nbsp;
+														<input type="checkbox" name="geneset" value="gocc">
+														GO cellular component &nbsp;&nbsp;
+														<!--<input type="checkbox" name="geneset" value="bands"> cytogenetic bands &nbsp;&nbsp;-->
+														<br>
+														<br>
+														<b>OR</b> upload your own gene sets file:
+														<a href="docs/tutorial.jsp?#uploadGeneSet" target="_blank"><img
+																class="images" src="images/help2.png" border="0">
+														</a>
+														<input type="file" name="genesetfile" value="">
+														&nbsp;
+														<BR>
+													</TD>
+												</tr>
+												<!---->
+												<tr>
+													<td colspan="2">
+														<br>
+														<b>Options for gene set database</b>
+														<br>
+														<br>
+														<table width="95%" border="1" cellpadding="3"
+															cellspacing="0" align="center">
+															<tr>
+																<TD class=param_left_class>
+																	<b>Limit gene sets by keyword (e.g. immune). The keyword can be gene name (e.g. CD4)</b>
+																	<br>
+																	<br>
+																	Keyword:
+																	<input type="input" name="keywords" value=""
+																		class="gseainput" />
+																	<input type="radio" name="keywordsinex" value="include"
+																		checked>
+																	include &nbsp;&nbsp;
+																	<input type="radio" name="keywordsinex" value="exclude">
+																	exclude
+																	<br>
+																	
+																	<BR>
+																</TD>
+																<TD class=param_right_class ROWSPAN="2" VALIGN="top">
+																	<FONT class=param_des_class> <b>Number of
+																			genes in gene set</b>
+                                                               <a href="docs/tutorial.jsp?#genesetSize" target="_blank"><img src="images/help2.png" border="0"></a> <br><br>
+																		&nbsp;&nbsp;&nbsp; Minimum (typical 5-20): <input
+																			type="input" name="minGeneNumber" value="20"
+																			class="gseainput"> <br> Maximum (typical
+																		200-inf): <input type="input" name="maxGeneNumber"
+																			value="200" class="gseainput"> </FONT>
+																	<BR>
+																</TD>
+															</tr>
+															<tr>
+																<td class="param_left_class">
+																	<b>Mask MHC/xMHC region<a href="docs/tutorial.jsp?#mhc" target="_blank"><img src="images/help2.png" border="0"></a></b>
+																	<br>
+																	<br>
+																	<input type="radio" name="mhc" value="no" checked>
+																	NO &nbsp;&nbsp;
+																	<input type="radio" name="mhc" value="maskMHC">
+																	mask MHC &nbsp;&nbsp;
+																	<input type="radio" name="mhc" value="maskxMHC">
+																	mask xMHC &nbsp;&nbsp;
+																</td>
+															</tr>
+														</table>
+													</td>
+												</TR>
+											</TABLE>
+										</DIV>
+									</TD>
+								</TR>
+							</TABLE>
+							<br>
+							<INPUT class=param_input_class type=submit value=" RUN "
+								name=submit2 onclick=
+	lock();
+>
+							&nbsp;&nbsp;
+							<INPUT class=param_input_class type=reset value=" CLEAR "
+								name=reset>
+							&nbsp;&nbsp
+                                                        
+                                                        <font color="#0D608A" size="3"><b><label id="submit2"></label>
+							</b> </font>
+                                                        
+                                                   </DIV>
+                                               </form>
+                                           </td></tr>
+                 </TABLE>                     
+                 
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+    <table width="980" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr><td align="center">
+            <font color="#6F7378">Copyright: Bioinformatics Lab, Institute of Psychology, Chinese Academy of Sciences
+            <a href="mailto:g4g@psych.ac.cn">Feedback</a><br>
+			Last update: June 23, 2010
+            </font>
+        </td></tr>
+    </table>        
+    </body>
+</html>
+
+	</body>
+</html>

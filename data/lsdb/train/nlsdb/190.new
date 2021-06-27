@@ -1,0 +1,577 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Plant Expression Database</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="www.plexdb.org">
+<meta name="COPYRIGHT" content="Copyright (c) 2005 by www.plexdb.org">
+<meta name="KEYWORDS" content="Barleybase, Plexdb, Microarray, www.barleybase.org, www.plexdb.org, Iowa State University, Barley, Arabidopsis, Citrus, Fusarium, Grape, Maiz, Maize, Cornchip0 8k, Maize 18K, Maize 58K NSF Array, Medicago, Rice, Soybean, Sugarcane, Tomato, Wheat, AraPLEX, CitrusPLEX, FusariumPLEX, GrapePLEX, MedicagoPLEX, PoplarPLEX, RicePLEX, SoyPLEX, SugarPLEX, TomPLEX, WheatPLEX, Download, Submission, Blast, Gene lists, Experiment, Hybridization, Sample, Visualization, Arabidopsis ATH1 22K, Barley1 22k ">
+<meta name="DESCRIPTION" content=" PLEXdb (Plant Expression Database) is a unified public resource for large-scale plant gene expression. PLEXdb serves as a bridge to integrate new and rapidly expanding gene expression profile data sets with traditional structural genomics and phenotypic data. Integrated portals to genetic and physical map positions, spliced alignments in PlantGDB, as well as protein pages in Gramene, GrainGenes, Legume Information System (LIS), SoyBase, MetNetDB, TIGR, and TAIR facilitates the use of whole-genome reference resources and parallel expression profiling for system-wide analysis of gene networks to facilitate crop improvement.">
+
+<link rel="StyleSheet" href="theme/style/style.css" type="text/css">
+</head>
+
+<body bgcolor="#ffffff" text="#222222" link="#660000" vlink="#222222"
+              leftmargin=0 topmargin=0>
+<table cellpadding=0 cellspacing=0 border=0 width=99%>
+          <tr><td align='left' valign='top'>
+<a href="http://www.plexdb.org/index.php">
+<img src="http://www.plexdb.org/images/plex_logo.jpg" border=0 width=600 height=80>
+</a>
+          </td>
+          <td width='100%'>
+            <form action='http://www.plexdb.org/modules/PD_general/searchcgi.php' 
+                  method='get' name='searchFormTop'>
+            <table width='100%' height='100%' cellpadding=1 cellspacing=1 border=0>
+              <tr>
+                <td align='right'>
+                   Search&nbsp;
+                   <SELECT name='search_type'>
+                     <option value='experiment'> Experiment </option>
+                     <option value='probeset'> Probe Set </option>
+                     <option value='website' selected='selected'> Website </option>
+                   </SELECT>
+                   &nbsp;for&nbsp;<input type='text' name='q' size='20' />
+                   <img name='ImageGoTop' src='http://www.plexdb.org/images/go.png' 
+                        onMouseDown='document["ImageGoTop"].src="http://www.plexdb.org/images/go_pressed.png";' \ 
+                        onMouseOut='document["ImageGoTop"].src="http://www.plexdb.org/images/go.png";' 
+                        onMouseUp='document["ImageGoTop"].src="http://www.plexdb.org/images/go.png";' \
+                        onClick='document["searchFormTop"].submit();' style='vertical-align:middle;'>
+                   <input type='hidden' name='name' value='PD_general'/>
+                   <input type='hidden' name='page' value='searchcgi.php'/>
+                 </td>
+               </tr>
+               <tr>
+                 <td align='center'>
+                   <font class="content"><b><a href="http://www.plexdb.org/modules/tools/plexdb_blast.php">Find Your Gene</a>&nbsp;&middot;&nbsp
+          <a href="http://www.plexdb.org/modules/PD_general/publications.php">Publications</a>&nbsp;&middot;&nbsp
+          <A href="http://www.plexdb.org/modules/PD_general/tools.php">Tools</a>&nbsp;&middot;&nbsp
+          <a href="http://www.plexdb.org/modules/PD_general/atlas.php">Expression&nbsp;Atlases</a>&nbsp;&middot;&nbsp
+          <A href="http://www.plexdb.org/modules/PD_general/feedback.php" target="_blank">Feedback</a>
+          </b></font>
+          </td>
+          </tr>
+          </table>
+          </form>
+          </td>
+</td></tr>
+        <tr height=2><td></td></tr>
+        </table>
+<table width=99% align=center cellpadding=0 cellspacing=0 border=0>
+        <tr>
+          <td valign=top rowspan=5>
+
+    <table width="100%" cellpadding=0 cellspacing=0 border=0>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftup.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightup.JPG"/></td> 
+      </tr>
+      <tr bgcolor="#ffffff">
+        <td width="100%" colspan=3 class="blockbox">
+          
+        <table width='100%' border=0>
+          <form action="http://www.plexdb.org/plex.php?database=Barley" 
+                method="post" name="block_login_form">
+
+          <tr>
+            <td align="right" class="blocktext">
+               Login ID:
+            </td>
+
+            <td>
+              <input name="username" size=15 type="text"' value=""/> 
+            </td>
+          </tr>
+
+          <tr>
+            <td align="right" class="blocktext">
+              Password:
+            </td>
+
+            <td>
+              <input type="password"  size=15 name="user_password"/>
+            </td>
+          </tr>
+
+        <tr>
+          <td colspan=2 align="center">
+            <input type="submit" name="submit" value="Login">
+          </td>
+        </tr>
+
+          <tr>
+            <td colspan=2 align="center"> 
+              <input type="hidden" name="loginAction" value="validate"/>
+              <a href="http://www.plexdb.org/modules//Your_Account/index.php?op=new_user"
+                 class="blockmenu">Create a new account</a> 
+            </td>
+          </tr>
+
+          </form>
+        </table>
+        </td>
+      </tr>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftdown.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightdown.JPG"/></td>
+      </tr>
+      <tr height=4>
+        <td>
+          <img src="http://www.plexdb.org/images/pix.gif" height=4 alt="">
+        </td>
+      </tr>
+    </table>
+
+<!--block-Action-->
+    <table width="100%" cellpadding=0 cellspacing=0 border=0>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftup.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightup.JPG"/></td> 
+      </tr>
+      <tr bgcolor="#ffffff">
+        <td width="100%" colspan=3 class="blockbox">
+          
+
+<table cellspacing=0 cellpadding=0 border=0 cols=7 width=100%>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_collapse.png" border=no></a></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/PD_general/species_list.php" 
+                       target="" class="blockmenu"><nobr>Species</nobr></a></td>
+</tr>
+<tr>
+<td><a name='1'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|1|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Arabidopsis" 
+                       target="" class="blockmenu"><nobr>Arabidopsis</nobr></a></td>
+</tr>
+<tr>
+<td><a name='4'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|4|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Barley" 
+                       target="" class="blockmenu"><nobr>Barley</nobr></a></td>
+</tr>
+<tr>
+<td><a name='7'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|7|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Citrus" 
+                       target="" class="blockmenu"><nobr>Citrus</nobr></a></td>
+</tr>
+<tr>
+<td><a name='10'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|10|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Cotton" 
+                       target="" class="blockmenu"><nobr>Cotton</nobr></a></td>
+</tr>
+<tr>
+<td><a name='13'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|13|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Fusarium" 
+                       target="" class="blockmenu"><nobr>Fusarium</nobr></a></td>
+</tr>
+<tr>
+<td><a name='16'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|16|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Grape" 
+                       target="" class="blockmenu"><nobr>Grape</nobr></a></td>
+</tr>
+<tr>
+<td><a name='19'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|19|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Corn" 
+                       target="" class="blockmenu"><nobr>Maize</nobr></a></td>
+</tr>
+<tr>
+<td><a name='24'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|24|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Medicago" 
+                       target="" class="blockmenu"><nobr>Medicago</nobr></a></td>
+</tr>
+<tr>
+<td><a name='29'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|29|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Poplar" 
+                       target="" class="blockmenu"><nobr>Poplar</nobr></a></td>
+</tr>
+<tr>
+<td><a name='32'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|32|33|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Rice" 
+                       target="" class="blockmenu"><nobr>Rice</nobr></a></td>
+</tr>
+<tr>
+<td><a name='36'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|36|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Soybean" 
+                       target="" class="blockmenu"><nobr>Soybean</nobr></a></td>
+</tr>
+<tr>
+<td><a name='41'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|41|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Sugarcane" 
+                       target="" class="blockmenu"><nobr>Sugarcane</nobr></a></td>
+</tr>
+<tr>
+<td><a name='44'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|44|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Tomato" 
+                       target="" class="blockmenu"><nobr>Tomato</nobr></a></td>
+</tr>
+<tr>
+<td><a name='47'></a><img src="http://www.plexdb.org/blocks/treemenu/tree_vertline.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_end.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|47|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=2>
+                    <a href="http://www.plexdb.org/plex.php?database=Wheat" 
+                       target="" class="blockmenu"><nobr>Wheat</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_leaf.png"></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/submission/index.php" 
+                       target="" class="blockmenu"><nobr>Submit Experiment Data</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_leaf.png"></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/PD_browse/queryExperiments.php" 
+                       target="" class="blockmenu"><nobr>Search Experiments</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_leaf.png"></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/PD_general/download.php" 
+                       target="" class="blockmenu"><nobr>Download Data</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|53|63|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/PD_general/tools.php" 
+                       target="" class="blockmenu"><nobr>Tools</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|63|64|65|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/Your_Account/index.php" 
+                       target="" class="blockmenu"><nobr>Your Account</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|63|65|69|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/documentation/documentation.php" 
+                       target="" class="blockmenu"><nobr>Documentation</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_leaf.png"></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/PD_general/news.php" 
+                       target="" class="blockmenu"><nobr>News</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_split.png"></td>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_leaf.png"></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/PD_general/links.php" 
+                       target="" class="blockmenu"><nobr>Links</nobr></a></td>
+</tr>
+<tr>
+<td><img src="http://www.plexdb.org/blocks/treemenu/tree_end.png"></td>
+<td><a href="/plex.php?database=Barley&tmva=0|33|63|65|76|"><img src="http://www.plexdb.org/blocks/treemenu/tree_expand.png" border=no></a></td>
+<td colspan=3>
+                    <a href="http://www.plexdb.org/modules/PD_general/misc.php" 
+                       target="" class="blockmenu"><nobr>Miscellaneous</nobr></a></td>
+</tr>
+</table>
+        </td>
+      </tr>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftdown.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightdown.JPG"/></td>
+      </tr>
+      <tr height=4>
+        <td>
+          <img src="http://www.plexdb.org/images/pix.gif" height=4 alt="">
+        </td>
+      </tr>
+    </table>
+
+	
+    <table width="100%" cellpadding=0 cellspacing=0 border=0>
+      <tr valign="top" bgcolor="#660000">
+        <td bgcolor="#fffff">
+          <img src="http://www.plexdb.org/images/pix.gif" width=8 height=10 alt="">
+        </td>
+        <td>
+          <img src="http://www.plexdb.org/images/cl.gif" width=7 height=10 alt="">
+        </td>
+        <td width="100%" align="center" valign="bottom">
+          <span class="tiny" style="color: #ffffff">
+            <b>&nbsp;Data&nbsp;Release&nbsp;Policy&nbsp;</b>
+          </span>
+        </td>
+        <td align="right">
+          <img src="http://www.plexdb.org/images/cr.gif" width=7 height=10 alt="">
+        </td>
+        <td bgcolor="#fffff" align="right">
+          <img src="http://www.plexdb.org/images/pix.gif" width=8 height=10 alt="">
+        </td>
+      </tr>
+    </table>
+    <table width="100%" cellpadding=0 cellspacing=0 border=0>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftup.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightup.JPG"/></td> 
+      </tr>
+      <tr bgcolor="#ffffff">
+        <td width="100%" colspan=3 class="blockbox">
+          
+  <table width="100%" align="center" border=0>
+    <tr>
+      <td colspan=2 align="left" class="blocktext">
+        PLEXdb is committed to making 
+        microarray data publicly available to researchers world-wide...<br/>
+	<a href="http://www.plexdb.org//modules/Your_Account/index.php?op=policy"
+           class="blockmenu">complete policy </a>
+      </td>
+    </tr>
+  </table>
+        </td>
+      </tr>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftdown.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightdown.JPG"/></td>
+      </tr>
+      <tr height=4>
+        <td>
+          <img src="http://www.plexdb.org/images/pix.gif" height=4 alt="">
+        </td>
+      </tr>
+    </table>
+</td><td>&nbsp;</td><td valign="top" width=100%>
+<table width="100%" border="0" cellspacing="1" cellpadding="0" 
+               bgcolor="#ffffff"><tr><td>
+<table width="100%" border="0" cellspacing="1" cellpadding="2" 
+               bgcolor="#FFFFFF"><tr><td>
+<div align="center"><font class="option"><b></b></font></div><br>
+
+          <div align="center"><h2>BarleyBase</h2></div>
+          <p>MIAME/Plant-compliant and Plant Ontology enhanced expression
+          database for Barley microarray data. 
+          (<a href="http://nar.oupjournals.org/cgi/content/full/33/suppl_1/D614"
+              target="_blank">Shen et al. 2004</a>).
+          </p>
+          <p>The Affymetrix 22K Barley1 GeneChip was developed in collaboration
+          with the international barley community and funding from the 
+          USDA-IFAFS program (grant #01-52100-11346). Learn more about this 
+          GeneChip <a 
+            href='http://www.plexdb.org/modules/PD_general/barley1Content.php'>here</a>.
+          </p>
+          <p>
+          <a href="http://www.harvest-web.org/hweb/bin/wc.dll?hwebProcess~hmain~&versid=2"
+             target="_blank">HarvEST:Barley assembly #25</a> provided the 
+          list of exemplars and is a subset of <a 
+             href="http://www.harvest-web.org/hweb/bin/wc.dll?hwebProcess~hmain~&versid=1"
+             target="_blank">assembly #21</a>, which is the source of 
+          Barley1 GeneChip content. 
+          </p>
+          <p>
+            <a href="http://www.plexdb.org/modules/PD_general/bbacknowledge.php">Acknowledgements</a>
+          </p>
+          <ul>
+            <li>
+              <a href="http://www.affymetrix.com/products/arrays/specific/barley.affx"
+                 target="_blank">Barley1 Genome Array information from Affymetrix<a/>
+            </li>
+            <li>
+              <a href="http://www.plexdb.org/modules/PD_general/download_barley.php">Barley1
+                GeneChip downloads</a>
+            </li>
+            <li>
+              <a href="http://contigcomp.acpfg.com.au" target="_blank">WebComparator</a>,
+              expression profiles of homologous genes across wheat and barley 
+              tissue. From Australian Centre for Plant Functional Genomics
+            </li>
+            <li>
+              <a href="http://www.plexdb.org/modules/PD_browse/experiment_browser.php?experiment=BB3"><b>Gene Expression Atlas</b></a>
+            </li>
+            <li>
+              <a href="http://www.plexdb.org/modules/PD_probeset/annotation.php?genechip=Barley1">Barley1 Array Annotation</a></li>
+            <li>
+              <a href="http://www.plexdb.org/modules/PD_browse/experiment_browser.php?plex_name=BarleyBase">Experiments</a>
+            </li>
+          </ul>
+         </td></tr></table></td></tr></table>
+<table width="100%" border="0" cellspacing="1" cellpadding="0" 
+               bgcolor="#ffffff"><tr><td>
+<table width="100%" border="0" cellspacing="1" cellpadding="2" 
+               bgcolor="#FFFFFF"><tr><td>
+<div align="center"><font class="option"><b>Photo of the day</b></font></div><br>
+<div style='text-align:center'>
+<table width='100%' align='center'>
+<tr><td align='center'>
+<a href="http://www.plexdb.org/modules/PD_general/gallery.php?organism=Barley"><img hspace=5 src="http://www.plexdb.org/images/gallery/barley10_small.jpg" align='center' border='0'/></a>
+</td>
+</tr>
+<tr>
+<td align='center' >Thanks to Dr Pat Hayes for providing the photo.
+<br>For more pictures, please visit the <a href="http://www.plexdb.org/modules/PD_general/gallery.php?organism=Barley">photo gallery</a>.</td></tr>
+</table></div>
+</td></tr></table></td></tr></table>
+
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" 
+               bgcolor="#ffffff"><tr><td>
+<table width="100%" border="0" cellspacing="1" cellpadding="2" 
+               bgcolor="#FFFFFF"><tr><td>
+<div align="center"><font class="option"><b>Sponsors</b></font></div><br>
+
+<table cellpadding=0 width="100%" align="center" border=1>
+  <tr>
+    <td align="center" valign="middle">
+      <a href="http://www.iastate.edu"><img
+         border=0 src="images/sponsor/isulogo.gif" alt="ISU"></a><a 
+         href="http://www.csrees.usda.gov/funding/nri/nri_about.html"><img 
+         border=0 src="images/sponsor/CSREES_logo.jpg" height=52  
+         hspace=2 vspace=14 alt="CSREES" /></a><!--<a 
+         href="http://www.csrees.usda.gov/funding/nri/nri_about.html"><img 
+         border=0 src="images/sponsor/NRI_logo.png" height=52
+         hspace=2 vspace=14 alt="NRI" /></a><a
+         href="http://www.csrees.usda.gov/funding/nri/nri_about.html"><img
+         border=0 src="images/sponsor/NRI_logo2.png" height=80
+         hspace=2 vspace=11 alt="NRI" /></a>--><a
+         href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0543441"><img
+         border=0 src="images/sponsor/NSF_logo.png" height=70 
+         hspace=2 vspace=10 alt="NSF"></a><a 
+         href="http://www.ars.usda.gov/"><img
+         border=0 src="images/sponsor/arslogo.jpg" height=33 
+         hspace=2 vspace=20 alt="ARS">
+    </td>
+  </tr>
+</table></td></tr></table></td></tr></table>
+</td>
+<td>&nbsp;</td><td valign="top">
+	
+    <table width="100%" cellpadding=0 cellspacing=0 border=0>
+      <tr valign="top" bgcolor="#660000">
+        <td bgcolor="#fffff">
+          <img src="http://www.plexdb.org/images/pix.gif" width=8 height=10 alt="">
+        </td>
+        <td>
+          <img src="http://www.plexdb.org/images/cl.gif" width=7 height=10 alt="">
+        </td>
+        <td width="100%" align="center" valign="bottom">
+          <span class="tiny" style="color: #ffffff">
+            <b>&nbsp;News&nbsp;</b>
+          </span>
+        </td>
+        <td align="right">
+          <img src="http://www.plexdb.org/images/cr.gif" width=7 height=10 alt="">
+        </td>
+        <td bgcolor="#fffff" align="right">
+          <img src="http://www.plexdb.org/images/pix.gif" width=8 height=10 alt="">
+        </td>
+      </tr>
+    </table>
+    <table width="100%" cellpadding=0 cellspacing=0 border=0>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftup.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightup.JPG"/></td> 
+      </tr>
+      <tr bgcolor="#ffffff">
+        <td width="100%" colspan=3 class="blockbox">
+          
+    <table width="100%" border=0>
+      <tr>
+        <td align="left" class="blocktext"> <b>2010 Apr<br/></b> More Experiments Released at PLEXdb including a new and large Rice
+         Expression Atlas.<a href="http://www.plexdb.org/modules/PD_browse/experiment_browser.php?experiment=OS32">OS32</a><br/><br/>
+         Explore the <a href="http://www.plexdb.org/modules/PD_general/atlas.php">Expression Atlases</a> at PLEXdb from
+         nine different species (23 data sets).<br/></td>
+      </tr><tr>
+        <td align="center" class="blocktext">
+          <a href="http://www.plexdb.org/modules/PD_general/news.php" 
+             class="blockmenu"> more news</a>...
+        </td>
+      </tr>
+    </table>        </td>
+      </tr>
+      <tr bgcolor="#7b91ac">
+        <td ><img src="http://www.plexdb.org/images/leftdown.JPG"/></td>
+        <td></td>
+        <td align='right'><img src="http://www.plexdb.org/images/rightdown.JPG"/></td>
+      </tr>
+      <tr height=4>
+        <td>
+          <img src="http://www.plexdb.org/images/pix.gif" height=4 alt="">
+        </td>
+      </tr>
+    </table>
+</td>
+</tr></table></td></tr></table>
+
+  <div>
+  <table width="100%" border=0 align="center">
+    <tr>
+      <td colspan=3>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="40%" colspan=2>
+        Copyright@2001-2009 The 
+        <a href="http://www.plexdb.org/modules/PD_general/personnel.php">PLEXdb Group</a><br>
+        All rights reserved.</td>
+      <td width="60%">
+        <p style="text-align: right;">For problems with the webpages contact
+        <a href="http://www.plexdb.org/modules/PD_general/contact.php">PLEXdb webmasters</a><br>
+Page last updated: November 14 2007 10:44:24
+        </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan=3 align="right"></td>
+    </tr>
+  </table>
+  </div></body>
+</html>

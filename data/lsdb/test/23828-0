@@ -1,0 +1,74 @@
+<html>
+
+<BODY BGCOLOR='#719179' link='#e1e6e0'   vlink='#ffff00'>
+<CENTER><h1>MUTAGEN</h1></CENTER>
+
+<P> 
+<B>
+MUTAGEN have recently been re-implemented from scratch. So it now
+contains more functionality and features. </B> If you have any
+enquires regarding this new version please email: dbs [at]
+dac.molbio.ku.dk. 
+<A HREF='http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15995215&query_hl=1'>The
+original paper can be found here </A>.
+
+
+
+<p>
+MUTAGEN is a system for handling information for functional annotation of 
+microbial genomes. The system has five main parts; 1) gene finding and 
+collection of data for identification of function, 2) storage of sequence 
+and collected data, 3) a webbased user interface for presentation of 
+collected data and for manual annotations, 4) a database system for storing 
+and retrieving the annotations, and 5) a sequence comparison tool which can 
+compare genomic neighbourhoods of genes from different organisms, to 
+improve the quality of annotations.
+MUTAGEN can be used simultaneously on several gapped genomes, each with 
+different assembly versions, making it possible to start the annotation 
+process before the sequencing and assembly is finished. In MUTAGEN, it is 
+easy to navigate with the graphical sequence browsers and search 
+facilities. The data for functional annotation of each entry is presented 
+in a comprehensible way and new entries can easily be added through the 
+user interface.
+
+<p>
+
+MUTAGEN is released as open source under GLP. The code available for
+<a href="http://dac.molbio.ku.dk/bioinformatics/MUTAGEN/download.html">download here</A>, and we
+currently have <a HREF='https://dac.molbio.ku.dk/dbs/Sulfolobus/'>a demo version</A> of the system running so you can test it.</a>
+
+<h3>The data collection</h3>
+<p>
+The strength of automatic annotation is of course its speed while the 
+problem is that organism specific knowledge is lost, and that the 
+assignment of function is not debated in questionable cases. An alternative 
+to automatic annotations is to go through all the genes manually, this is a 
+time consuming task, but can be made much faster and more thorough by 
+automatic collection and presentation of relevant data to the annotator.
+The current setup in MUTAGEN relies on automatic data collection, but due 
+to the nature of the system, it could easily be altered to display gene 
+information derived from an automatic annotation system.
+The information collected in MUTAGEN can be divided into 3 groups; gene 
+finding, functional identification through homology and ab initio 
+prediction of protein features.
+The protein coding genes can be identified by a prokaryotic gene finder 
+such as EasyGene [7] or the build-in ORF finder that finds all open reading 
+frames. MUTAGEN uses tRNA-scan [8] and the Ribosomal Database Project [5]to 
+identify tRNA and rRNA coding genes.
+Similarity to known proteins are used to identify the putative functions of 
+the genes. Similarities are found by BLASTing [1] against databases such as 
+SWISS-PROT [4], COG [11], NCBI [3], and by creating custom databases. 
+EUCLID [10] is used to assign a functional category based on keywords in 
+matching SWISS-PROT entries. Functional categories from the COG system are 
+linked to genes and stored in the database. Sequences are also searched 
+against the Pfam [2] protein profile database, in order to locate 
+relationships to protein families.
+If no matching sequences are found, ab initio prediction methods are the 
+only way to gain a potential functional assignment based on sequence. 
+Therefore we have included the methods TMHMM [6] for predicting 
+transmembrane segments in proteins, and signalP [9] for predicting signal 
+peptides and membrane anchors.
+
+
+</body>
+</html>

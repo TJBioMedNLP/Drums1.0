@@ -1,0 +1,171 @@
+<HTML><HEAD><TITLE>PhoScan</TITLE></head>
+<BODY topmargin="10" leftmargin="10" bgProperties=fixed bgcolor=#FFF0F5>
+<center>
+<font size=8 color=purple><br>PhoScan<br></font>
+
+<hr size=3>
+<br>
+<br><h2 ><font color=purple>Input single protein sequence:</font></h2>
+<form action="predict_phoscan.php" method=POST>
+
+<font size=3 color=purple>please inpute your protein sequence here<br>
+<textarea name=sequence rows=3 cols=60></textarea><br>
+Example protein sequence:<br>
+PKSKELVSSSSSGSDSDSEVDKKLKRKKQVAPEKPVKKQKTGETSRALSSSKQSSSSRDDNMFQIGKMRYVSVRDFKGKVLIDIREYWMDPEGEMKPGRKGISLNPEQWSQLKEQISDIDDAVRKL<br>
+</center>
+<br>
+<br>
+<br>
+<table border width=100%>
+<tr><th><font size=5 color=purple><input type=checkbox name=type[] value=1 checked>Prediction by log-odds ratio
+</th><th><font size=5 color=purple><input type=checkbox name=type[] value=2 >Prediction by consensus sequences
+</th>
+
+<tr><td align=center><font size=4 color=purple><br>Choose protein kinase families:<br>
+
+<select multiple name=kinase1[] size=7>
+
+        <option value=1 selected>PKA (protein kinase A)
+        <option value=2 >CDK (cyclin-dependent kinase)
+        <option value=3 >CK2 (casein kinase 2)
+        <option value=4 >PKC (protein kinase C)
+        <option value=5 >PKB (protein kinase B)
+        <option value=6 >MAPK (mitogen-activated protein kianse)
+        <option value=7 >ATM (Ataxia telangiectasia mutated)     
+
+</select><p>
+
+<font size=4 color=purple>Choose stringency level:
+
+<select name=stringency>
+
+        <option value=1 selected>High
+
+        <option value=2 >Low       
+
+</select><br>
+
+<font size=3 color=purple>(High = more selective, Low = more sensitive)
+</td><td align=center><font size=4 color=purple>Choose protein kinase families:<br>
+
+<select multiple name=kinase2[] size=7>
+
+	<option value=1 selscted>MLCK (myosin light chain kinase)
+	<option value=2 >PKG (cGMP-dependent protein kinase)
+	<option value=3 >p70S6K (70 kDa kinase that phosphorylate s6 protein)
+	<option value=4 >betaARK (beta adrenergic receptor kinase)
+	<option value=5 >ROCK (Rho-associated Kinase)
+	<option value=6 >PDHK (pyruvate dehydrogenase kinase)
+	<option value=7 >CaM1 (calmodulin-dependent protein kinase 1)
+	<option value=8 >CaM2 (calmodulin-dependent protein kinase 2)
+	<option value=9 >PhK (phosphorylase kinase)
+	<option value=10 >AMP-K (AMP-activated protein kinase)
+	<option value=11 >ERK (extracellular signal-regulated kinase)
+	<option value=12 >PLK1 (Polo-like kinase 1)
+	<option value=13 >PKR (RNA-dependent protein kinase)
+	<option value=14 >PAK (p21-activated kinase)
+	<option value=15 >Abl
+	<option value=16 >c-Fps/Fes
+	<option value=17 >CSK (C-teminal Src protein kinase)
+	<option value=18 >EGFR (epidermal growth factor receptor)
+	<option value=19 >FGFR (fibroblast growth factor receptor)
+	<option value=20 >IR (insulin receptor)
+	<option value=21 >PDGFR (platelet deribed growth factor receptor)
+	<option value=22 >c-FGR
+	<option value=23 >c-Src
+	<option value=24 >v-Src
+	<option value=25 >Lck (Lymphocyte cell-specific protein-tyrosine kinase)
+	<option value=26 >Lyn (Tyrosine-protein kinase Lyn)
+	<option value=27 >FAK (Focal adhesion kinase)
+	<option value=28 >Syk (Tyrosine-protein kinase SYK)
+	<option value=29 >TGFR (TGF-beta receptor)
+	<option value=30 >HRI (haem-regulated inhibitory kinase)
+	<option value=31 >PRV-PK (Pseudorabies virus associated protein kinase)
+	<option value=32>HSV-PK (herpes simplex virus protein kinase)
+	<option value=33 >HRK-A (HMG-CoA reductase kinase)
+	<option value=34 >SNF-1 PK (sucrose non-fermenting protein kinase )
+	<option value=35 >TGFbeta receptor PK (transforming growth factor beta receptor protein kinase)
+	<option value=36 >Bck1 (BCK1_YEAST/SLK1/SSP31)
+	<option value=37 >MAPKAP-2 (MAP kinase activated protein kinase 2)
+	<option value=38 >MAPKAP-1 (MAP kinase activated protein kinase 1)
+	<option value=39 >NIMA (never in mitosis protein kinase)
+	<option value=40 >RhK (rhodopsin kinase)
+	<option value=41 >DNA-PK (DNA-dependent protein kinase)
+
+
+</select><p></td>      
+
+</table>
+<center>
+<p><input type=submit value="submit"><input type=reset value="reset">
+</p>
+</center>
+</form>
+
+<table border="0" width="100%">
+	<tr align="center" >
+    	<td colspan="2">
+        <font size="5" color="purple">
+        Download:
+        </font>
+        </td>
+    </tr>
+	<tr align="justify" >
+    	<td colspan="2">
+        <font size="3" color="purple">
+        &nbsp;&nbsp;&nbsp;&nbsp;The following are PhoScan packages developed for local machine installation based on different platform. The users can choose to download the package according to their platform conditions.
+        </font>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td align="center" width="20%">
+        <a href="phoscan-lin-release.zip">
+        <img src="zip.png" border="0" height="48" width="48" alt="User Manual" />
+        </a>
+        </td>
+        
+        <td align="justify" rowspan="2">
+        	<font size="3" color="purple">
+            &nbsp;&nbsp;&nbsp;&nbsp; This is a package developed for linux platform. The service background engine has been compiled to distributable execute format for local install. Please follow the instructions in the package.
+            </font>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" width="20%">
+        <a href="UserManual.pdf">
+            PhoScan Linux Edition
+        </a>
+        </td>
+    </tr>
+
+    <tr>
+        <td align="center" width="20%">
+        <a href="phoscan-exe-release.zip">
+        <img src="zip.png" border="0" height="48" width="48" alt="User Manual" />
+        </a>
+        </td>
+        
+        <td align="justify" rowspan="2">
+        	<font size="3" color="purple">
+            &nbsp;&nbsp;&nbsp;&nbsp; This is a package developed for windows platform. Please follow the instructions in the package to install the PhoScan on local machine.
+            </font>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" width="20%">
+        <a href="UserManual.pdf">
+            PhoScan Windows Edition
+        </a>
+        </td>
+    </tr>
+   
+</table>
+<hr size="3">
+
+<font size=5 color=purple>Contact: </font>
+<font size=3 color=purple>li-tt03@mails.tsinghua.edu.cn</font>
+
+</body>
+</html>

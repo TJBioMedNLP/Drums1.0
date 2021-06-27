@@ -1,0 +1,480 @@
+<HTML><HEAD>
+<TITLE>HUMAN FAMSD-BASE</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<SCRIPT LANGUAGE="JavaScript">
+var action="/cgi-bin/human_famsd"
+//////////////////////////////////////////////////////
+//                                                  //
+//   common.js                                      //
+//                                                  //
+//   (application 非依存 の) JavaScript 関数群      //
+//                                                  //
+//  この common.js は、Windows版 Netscape 4.04で    //
+//  動作確認をしています。                          //
+//                                                  //
+//                                                  //
+//////////////////////////////////////////////////////
+
+/////////////////////////////////////////////
+//
+//
+//  フォーム関係全般
+//
+//
+////////////////////////////////////////////
+
+////////////////////////////////////
+//
+//
+// select box 関係
+//
+//
+////////////////////////////////////
+
+//
+//
+// value 値を持つ select box をチェックする 
+//
+//
+
+function check_select(o,value)
+{
+  for (var i = 0; i < o.length; i++){
+    if(o.options[i].value == value){
+      o.options[i].selected = true;
+    }
+  }
+   return false;
+}
+
+
+////////////////////////////////////
+//
+//
+// radio box 関係
+//
+//
+////////////////////////////////////
+
+
+//
+// value 値をもつラジオボックスにチェックをつける
+//
+          
+function check_radio(o,value)
+{
+  var obj;
+
+  for (var i = 0; i < o.length; i++){       
+    if(o[i].value == value){
+      o[i].checked = true;
+      return true;
+    }
+  }
+  return false;
+}
+
+
+//
+//
+//  チェックされているラジオボックスをみつけて、値を返す。
+//
+//
+
+function find_checked_radio(o)
+{
+  var obj;
+
+  for (var i = 0; i < o.length; i++){
+    if(o[i].checked){
+      return o[i].value;
+    }
+  }
+  return "";
+}
+
+////////////////////////////////////
+//
+// check box 関係
+//
+////////////////////////////////////
+
+//
+//
+// チェックされている checkbox の値を配列で返す
+//
+//
+
+function find_checked_checkbox(o)
+{
+  var array;
+  var len = 0;
+  var j = 0;
+
+  for (var i = 0; i < o.length; i++){    
+    if(o[i].checked == true){ len++; }
+  }
+
+  array = new Array(len);
+
+  for (var i = 0; i < o.length; i++){
+    if(o[i].checked == true){
+      array[j] = o[i].value;
+      j++;
+    }
+  }
+  return array;
+}
+
+//
+//  checkbox の値をチェックする
+// 
+//  引数:
+//    1番目:チェックボックスオブジェクト
+//    2番目以降:チェックする値(可変個の引数)
+//
+
+function check_checkbox()
+{
+  var argv = check_checkbox.arguments;
+  var argc = check_checkbox.arguments.length;
+  var o = argv[0];
+  var i,j;
+
+  for (i = 1; i < argc; i++){
+    for (j = 0; j < o.length; j++){
+      if(o[j].value == argv[i]){
+	o[j].checked = true;
+      }
+    }  
+  }
+}
+
+
+
+
+
+
+////////////////////////////////////////////////
+//                                            //
+//  index.js                                  //
+//                                            //
+//     検索画面用のJavaScript                 //
+//                                            //
+////////////////////////////////////////////////
+var push_search=0;
+
+function search()
+{
+
+  if(push_search==0){
+   push_search=1;
+  }
+  else{
+   alert("Searching now, Please wait minutes.");
+   return;
+  }
+  
+
+  var where_array = new Array(0);
+  var where,from,last_num;
+  
+  from = 'human_famsd';
+
+  if(document.main.gene_ids.value){
+    last_num = where_array.length;
+    where_array[last_num] = search1(document.main.gene_ids.value);
+  }
+  if(document.main.pdb_ids.value){
+    last_num = where_array.length;
+    where_array[last_num] = search2(document.main.pdb_ids.value);
+  }
+  if(document.main.evll.value){
+    last_num = where_array.length;
+    where_array[last_num] = " ev >= " + document.main.evll.value + " ";
+  }
+  if(document.main.evul.value){
+    last_num = where_array.length;
+    where_array[last_num] = " ev <= " + document.main.evul.value + " ";
+  }
+  if(document.main.homll.value){
+    last_num = where_array.length;
+    where_array[last_num] = " hom >= " + document.main.homll.value + " ";
+  }
+  if(document.main.homul.value){
+    last_num = where_array.length;
+    where_array[last_num] = " hom <= " + document.main.homul.value + " ";
+  }
+  if(document.main.product.value){
+    last_num = where_array.length;
+    where_array[last_num] = search3(document.main.product.value);
+  }
+
+  this_where = search4(document.main.organism);
+  if(this_where){
+    last_num = where_array.length;
+    where_array[last_num] = this_where;
+  }
+  where = 'where ' + where_array.join(" and ");
+
+  document.main.from.value = from;
+  document.main.where.value = where;
+  document.main.action = "/cgi-bin/human_famsd/putArg";
+  document.main.submit();
+}
+
+//
+//  search1
+//    (orf.gene_idで検索)
+//
+
+function search1(gene_ids)
+{
+  var orf_array;
+  var in_stmt,where_stmt;
+
+  if(!gene_ids){ return ''; }
+  orf_array = gene_ids.split(/\s+/);
+  in_stmt = "like '";
+  in_stmt += orf_array.join("%' and gene_id like '" ) ;
+  where_stmt = "gene_id " + in_stmt + "%'";
+  return where_stmt; 
+}
+
+//
+//  search2
+//    (orf.ref_fasta,orf.ref_psiblastで検索)
+//
+
+function search2(pdb_ids)
+{
+  var pdb_array;
+  var where_stmt;
+
+  if(!pdb_ids){ return ''; }
+  pdb_ids = pdb_ids.toUpperCase();
+  pdb_array = pdb_ids.split(/\s+/);
+  where_stmt = "(ref like '";
+  where_stmt += pdb_array.join("%' or ref like '");
+  where_stmt += "%')";
+
+  return where_stmt; 
+}
+
+//
+//  search3
+//    (productで検索)
+//
+
+function search3(product)
+{
+  var in_stmt,where_stmt,product_array;
+
+  if(!product){ return ''; }
+  product = product.toUpperCase();
+  product_array = product.split(/\s+/);
+  product = product_array.join("%' and product ilike '%");
+  where_stmt = "(product ilike '%" + product + "%')";
+  return (where_stmt);
+}
+
+
+//
+// search4
+//    (生物種毎の分類で検索)
+// 
+
+function search4(organism)
+{
+  var organism_array;
+  var in_stmt,where_stmt;
+
+  organism_array = find_checked_checkbox(organism);
+  if(organism_array.length == 0){ return ''; }
+  in_stmt = "'" + organism_array.join("' or genome_id = '") + "'";
+  where_stmt = "(genome_id = " + in_stmt + ")" ;
+  return (where_stmt);
+}
+
+function help()
+{
+  window.open('/human_famsd/docs/manual.pdf');
+}
+</SCRIPT></HEAD>
+<BODY BGCOLOR=WHITE>
+
+<CENTER>
+
+<FORM NAME=main METHOD=post>
+
+<TABLE WIDTH=580 BGCOLOR=#008000 BORDER=0 CELLSPACING=0 CELLPADDING=3>
+
+<TR>
+<TD ALIGN=center NOWRAP>
+<FONT SIZE=+3 COLOR=#ffffff><B>HUMAN FAMSD-BASE</B></FONT>
+<!--
+<FONT SIZE=+1 COLOR=#ffffff><B>last updated </B></FONT>
+-->
+</TD>
+</TR>
+
+</TABLE>
+
+<TABLE WIDTH=580 BGCOLOR=#daffd2 BORDER=0 CELLSPACING=0 CELLPADDING=3>
+
+<TR>
+<TD ALIGN=center COLSPAN=4 NOWRAP>
+<FONT SIZE=-1>
+Clicking 'Search' button invokes 'AND' search<br>
+ for models satisfying six conditions described below
+</FONT>
+</TD>
+<TD ALIGN=CENTER>
+<INPUT TYPE=button VALUE='Help' onClick=help()>
+</TD>
+</TR>
+
+<TR>
+<TD NOWRAP ALIGN=CENTER>
+<STRONG>Order by </STRONG>
+<SELECT NAME="sortItem">
+<OPTION VALUE='rank'>Score Ranking
+<OPTION VALUE='gene_id'>Gene Name
+<OPTION VALUE='orflen'>Query Length
+<OPTION VALUE='mdllen'>Model Length
+<OPTION VALUE='ev'>E-Value
+<OPTION VALUE='hom'>Homology %
+</SELECT>
+</TD>
+<TD ALIGN=CENTER>
+<INPUT TYPE=radio NAME=sortOrder VALUE=asc CHECKED><STRONG>ascending</STRONG>
+</TD>
+<TD ALIGN=CENTER>
+<INPUT TYPE=radio NAME=sortOrder VALUE=desc><STRONG>descending</STRONG>
+</TD>
+<TD ALIGN=CENTER>
+<INPUT TYPE=button onClick=search() VALUE='Search'>
+</TD>
+<TD ALIGN=CENTER>
+<INPUT TYPE="reset" NAME="Reset">
+</TD>
+</TABLE> 
+
+<P>
+
+<TABLE WIDTH=580 BGCOLOR=#daffd2 BORDER=0 CELLSPACING=0 CELLPADDING=3>
+
+<TR>
+<TH WIDTH=5%></TH>
+<TH WIDTH=10%></TH>
+<TH WIDTH=85%></TH>
+</TR>
+
+<TR BGCOLOR=#66cc99>
+<TD COLSPAN=3>
+<FONT SIZE=+1><B>1. Select Species Code</B></FONT>
+</TD>
+</TR>
+
+<TR>
+<TD><BR></TD>
+<TD NOWRAP ALIGN=right>Species Code :</TD>
+<TD>
+	<INPUT TYPE=radio NAME=organism VALUE=hsap2 checked><B><a href=http://spock.genes.nig.ac.jp/~genome/cgi-bin/org.pl.cgi?org=hsap2 target="_blank">hsap2</a></B>
+	<INPUT TYPE=radio NAME=organism VALUE=hsap2membrane ><B><a href=http://spock.genes.nig.ac.jp/~genome/cgi-bin/org.pl.cgi?org=hsap2 target="_blank">hsap2membrane</a></B>
+</TD>
+</TR>
+
+
+<TR BGCOLOR=#66cc99>
+<TD COLSPAN=3>
+<FONT SIZE=+1><B>2. Search for models by Gene(ORF) Name</B></FONT>
+</TD>
+</TR>
+
+<TR>
+<TD><BR></TD>
+<TD NOWRAP ALIGN=right>Gene Name :</TD>
+<TD><INPUT NAME=gene_ids SIZE=35><br>(Ex. NP_001340.2)</TD>
+</TR>
+
+<TR BGCOLOR=#66cc99>
+<TD COLSPAN=3><FONT SIZE=+1><B>3. Search for models by PDB ID of Reference Protein</B></FONT></TD>
+</TR>
+
+<TR>
+<TD><BR></TD>
+<TD NOWRAP ALIGN=right>PDB ID :</TD>
+<TD><INPUT NAME=pdb_ids SIZE=35><BR>(Ex. 1ASY_A)</TD>
+</TR>
+
+<TR BGCOLOR=#66cc99>
+<TD COLSPAN=3>
+<FONT SIZE=+1><B>4. Search for models by Keywords in annotation</B></FONT>
+</TD>
+</TR>
+
+<TR>
+<TD><BR></TD>
+<TD NOWRAP ALIGN=right>Keywords :</TD>
+<TD><INPUT NAME=product SIZE=35><br>(Ex. Zinc finger, kinase, aspartyl-tRNA synthetase)</TD>
+</TR>
+
+
+<TR BGCOLOR=#66cc99>
+<TD COLSPAN=3><FONT SIZE=+1><B> Option 1. Setting of E-Value range</B></FONT></TD>
+</TR>
+
+<TR>
+<TD><BR></TD>
+<TD NOWRAP ALIGN=right>E-value :</TD>
+<TD>Lower Limit<INPUT NAME=evll SIZE=10 value="-1"> Upper Limit<INPUT NAME=evul SIZE=10 value="10"></TD>
+</TR>
+</TD>
+
+<TR BGCOLOR=#66cc99>
+<TD COLSPAN=3><FONT SIZE=+1><B> Option 2. Setting of Homology range</B></FONT></TD>
+</TR>
+
+<TR>
+<TD><BR></TD>
+<TD NOWRAP ALIGN=right>Homology :</TD>
+<TD>Lower Limit<INPUT NAME=homll SIZE=10 value="0"> Upper Limit<INPUT NAME=homul SIZE=10 value="100"></TD>
+</TR>
+</TD>
+
+</TABLE>
+
+<INPUT TYPE=hidden NAME=template_html value="../html/orf.html">
+<INPUT TYPE=hidden NAME=from>
+<INPUT TYPE=hidden NAME=where>
+<INPUT TYPE=hidden NAME=sortItem VALUE="rank">
+<INPUT TYPE=hidden NAME=sortOrder VALUE="asc">
+<INPUT TYPE=hidden NAME=startNo VALUE=1>
+<INPUT TYPE=hidden NAME=pageSize VALUE=100>
+
+</FORM>
+<hr>
+
+<TABLE WIDTH=580 BGCOLOR=#008000 BORDER=0 CELLSPACING=0 CELLPADDING=3>
+<TD><CENTER>Sequence Search (BLAST)</CENTER></B></TD></TR>
+<FORM ACTION="search.php" NAME="bNin" METHOD="POST">
+<TR>
+<INPUT TYPE=hidden NAME=hsap2 VALUE=0>
+<INPUT TYPE=hidden NAME=hsap2membrane VALUE=0>
+<TABLE WIDTH=580 BGCOLOR=#daffd2 BORDER=0 CELLSPACING=0 CELLPADDING=3>
+Select Species Code :
+<INPUT TYPE="radio" NAME="org" VALUE="hsap2" checked><B><a href=http://spock.genes.nig.ac.jp/~genome/cgi-bin/org.pl.cgi?org=hsap2 target="_blank">hsap2</a></B>
+<INPUT TYPE="radio" NAME="org" VALUE="hsap2membrane" ><B><a href=http://spock.genes.nig.ac.jp/~genome/cgi-bin/org.pl.cgi?org=hsap2 target="_blank">hsap2membrane</a></B>
+<TD>e-value<br><input NAME="eval" size=10 value="1e-3"><p></TD>
+<TD>amino acid sequence<br><TEXTAREA NAME="seq" ROWS="10" COLS="40" WRAP="soft" value="please input"></TEXTAREA></TD>
+</TABLE>
+<INPUT TYPE="submit" NAME="cmd" VALUE="BLAST search">
+</TR>
+</TABLE>
+</FORM>
+
+</CENTER>
+
+</BODY>
+</HTML>
